@@ -1,0 +1,11 @@
+pair,pearson_r
+C2_movement_death x C4_action_poverty,0.735
+C3_isolation_reliance x C5_shot_quality_decay,0.708
+C3_isolation_reliance x C4_action_poverty,0.684
+C1_ball_stickiness x C3_isolation_reliance,0.627
+C1_ball_stickiness x C4_action_poverty,0.599
+C1_ball_stickiness x C2_movement_death,0.471
+C2_movement_death x C3_isolation_reliance,0.463
+C1_ball_stickiness x C5_shot_quality_decay,0.356
+C4_action_poverty x C5_shot_quality_decay,0.34
+C2_movement_death x C5_shot_quality_decay,0.059

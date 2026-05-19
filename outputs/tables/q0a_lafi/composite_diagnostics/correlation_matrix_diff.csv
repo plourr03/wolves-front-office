@@ -1,0 +1,6 @@
+,C1_ball_stickiness_z,C2_movement_death_z,C3_isolation_reliance_z,C4_action_poverty_z,C5_shot_quality_decay_z
+C1_ball_stickiness_z,0.0,-0.547,-0.341,-0.103,0.376
+C2_movement_death_z,-0.547,0.0,-0.408,-0.187,-0.279
+C3_isolation_reliance_z,-0.341,-0.408,0.0,-0.225,0.019
+C4_action_poverty_z,-0.103,-0.187,-0.225,0.0,0.129
+C5_shot_quality_decay_z,0.376,-0.279,0.019,0.129,0.0

@@ -1,0 +1,56 @@
+player,archetype,guarantee_end,season_year,season_start_year,age,tier,production_multiplier,contract_status
+Edwards,star_guard,2028-29,2025-26,2025,24,rising,1.0,guaranteed
+Edwards,star_guard,2028-29,2026-27,2026,25,rising_peak,1.1,guaranteed
+Edwards,star_guard,2028-29,2027-28,2027,26,peak,1.15,guaranteed
+Edwards,star_guard,2028-29,2028-29,2028,27,peak,1.15,guaranteed
+Edwards,star_guard,2028-29,2029-30,2029,28,peak,1.15,option/decision_point
+Gobert,defensive_anchor_center,2026-27,2025-26,2025,33,declining_visible,0.95,guaranteed
+Gobert,defensive_anchor_center,2026-27,2026-27,2026,34,declining,0.85,guaranteed
+Gobert,defensive_anchor_center,2026-27,2027-28,2027,35,late_decline,0.7,option/decision_point
+Gobert,defensive_anchor_center,2026-27,2028-29,2028,36,late_decline,0.7,FA_or_beyond
+Gobert,defensive_anchor_center,2026-27,2029-30,2029,37,out_of_curve,0.5,FA_or_beyond
+Randle,combo_big,2026-27,2025-26,2025,31,stable_post_peak,1.05,guaranteed
+Randle,combo_big,2026-27,2026-27,2026,32,declining,0.85,guaranteed
+Randle,combo_big,2026-27,2027-28,2027,33,declining,0.85,option/decision_point
+Randle,combo_big,2026-27,2028-29,2028,34,late_decline,0.7,FA_or_beyond
+Randle,combo_big,2026-27,2029-30,2029,35,out_of_curve,0.5,FA_or_beyond
+McDaniels,wing,2028-29,2025-26,2025,25,rising_peak,1.1,guaranteed
+McDaniels,wing,2028-29,2026-27,2026,26,peak,1.15,guaranteed
+McDaniels,wing,2028-29,2027-28,2027,27,peak,1.15,guaranteed
+McDaniels,wing,2028-29,2028-29,2028,28,peak,1.15,guaranteed
+McDaniels,wing,2028-29,2029-30,2029,29,peak,1.15,option/decision_point
+Naz Reid,stretch_big,2028-29,2025-26,2025,26,peak,1.15,guaranteed
+Naz Reid,stretch_big,2028-29,2026-27,2026,27,peak,1.15,guaranteed
+Naz Reid,stretch_big,2028-29,2027-28,2027,28,peak,1.15,guaranteed
+Naz Reid,stretch_big,2028-29,2028-29,2028,29,peak,1.15,guaranteed
+Naz Reid,stretch_big,2028-29,2029-30,2029,30,stable_post_peak,1.05,option/decision_point
+DiVincenzo,two_way_guard,2026-27,2025-26,2025,29,peak,1.15,guaranteed
+DiVincenzo,two_way_guard,2026-27,2026-27,2026,30,stable_post_peak,1.05,guaranteed
+DiVincenzo,two_way_guard,2026-27,2027-28,2027,31,stable_post_peak,1.05,option/decision_point
+DiVincenzo,two_way_guard,2026-27,2028-29,2028,32,declining,0.85,FA_or_beyond
+DiVincenzo,two_way_guard,2026-27,2029-30,2029,33,declining,0.85,FA_or_beyond
+Dosunmu,wing_guard,2025-26,2025-26,2025,26,rising_peak,1.1,guaranteed
+Dosunmu,wing_guard,2025-26,2026-27,2026,27,peak,1.15,option/decision_point
+Dosunmu,wing_guard,2025-26,2027-28,2027,28,peak,1.15,FA_or_beyond
+Dosunmu,wing_guard,2025-26,2028-29,2028,29,peak,1.15,FA_or_beyond
+Dosunmu,wing_guard,2025-26,2029-30,2029,30,stable_post_peak,1.05,FA_or_beyond
+Conley,veteran_pg,2025-26,2025-26,2025,38,late_decline,0.7,guaranteed
+Conley,veteran_pg,2025-26,2026-27,2026,39,retire_zone,0.3,option/decision_point
+Conley,veteran_pg,2025-26,2027-28,2027,40,out_of_curve,0.5,FA_or_beyond
+Conley,veteran_pg,2025-26,2028-29,2028,41,out_of_curve,0.5,FA_or_beyond
+Conley,veteran_pg,2025-26,2029-30,2029,42,out_of_curve,0.5,FA_or_beyond
+Clark,wing,2025-26,2025-26,2025,24,rising,1.0,guaranteed
+Clark,wing,2025-26,2026-27,2026,25,rising_peak,1.1,option/decision_point
+Clark,wing,2025-26,2027-28,2027,26,peak,1.15,FA_or_beyond
+Clark,wing,2025-26,2028-29,2028,27,peak,1.15,FA_or_beyond
+Clark,wing,2025-26,2029-30,2029,28,peak,1.15,FA_or_beyond
+Beringer,young_big,2028-29,2025-26,2025,19,rookie,0.6,guaranteed
+Beringer,young_big,2028-29,2026-27,2026,20,rookie,0.6,guaranteed
+Beringer,young_big,2028-29,2027-28,2027,21,rising,1.0,guaranteed
+Beringer,young_big,2028-29,2028-29,2028,22,rising,1.0,guaranteed
+Beringer,young_big,2028-29,2029-30,2029,23,rising,1.0,option/decision_point
+Shannon,wing_guard,2027-28,2025-26,2025,25,rising,1.0,guaranteed
+Shannon,wing_guard,2027-28,2026-27,2026,26,rising_peak,1.1,guaranteed
+Shannon,wing_guard,2027-28,2027-28,2027,27,peak,1.15,guaranteed
+Shannon,wing_guard,2027-28,2028-29,2028,28,peak,1.15,option/decision_point
+Shannon,wing_guard,2027-28,2029-30,2029,29,peak,1.15,FA_or_beyond
