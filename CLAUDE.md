@@ -70,12 +70,14 @@ Documented in detail in the master plan. The short version:
 
 **Production warehouse, the only Postgres instance with project data:**
 
-- Host: `192.168.1.236`
+- Host: `100.69.186.94` (the server's Tailscale IP, `bobbys-server`). Works from any network. On the home LAN, `192.168.1.236` also works and gives a lower-latency direct path.
 - Port: `5432`
 - Database: `nba_warehouse`
 - User: `bobby`
 - Schema: `nba`
 - Password: in `wolves-front-office/.env` (gitignored). Copy `.env.example` to `.env` and fill in.
+
+**The warehouse is reachable over Tailscale.** Any machine running analysis code must have Tailscale installed and be logged into the tailnet (`plourr03@`); without it the host is unreachable. New-machine setup: install and join Tailscale, clone this repo, `cp .env.example .env`, fill in the password. Do not rely on a User-scope `POSTGRES_HOST` env var; it is machine-local and does not travel. `.env` is the portable source of connection config.
 
 **Never connect to `localhost:4101` (database `postgres`).** That was the original local dev instance; it is decommissioned, stale, and no longer in use. Any code or doc that points there is a bug. Analysis scripts must load `POSTGRES_*` env vars from `.env` via `python-dotenv` and fail loudly if the file is missing or the password is the placeholder. No silent fallbacks to localhost, ever.
 
