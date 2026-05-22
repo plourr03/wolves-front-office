@@ -59,20 +59,20 @@ The five-component evolution from 2022-23 through 2025-26 reads as a four-act st
 |---|---|---|---|---|---|---|---|
 | 2022-23 (Gobert year 1) | 14 | 64 | 44 | 31 | 47 | 34 | 53 |
 | 2023-24 (WCF year) | 35 | 43 | 49 | 27 | 39 | 35 | 45 |
-| 2024-25 (Randle year 1) | 69 | 56 | 71 | 36 | 72 | 63 | 71 |
+| 2024-25 (Randle year 1) | 69 | 55 | 71 | 36 | 72 | 63 | 71 |
 | **2025-26 (Randle year 2)** | **31** | **72** | **90** | **45** | **83** | **65** | **90** |
 
 **Act 1, Gobert integration:** the offense had not figured out how to play with him. Already a bodies-do-not-move team but not yet an iso team.
 
 **Act 2, WCF year:** the most-designed version of the Edwards-era offense and the deepest playoff run. The data validates that 2023-24 was the high-water mark not just in record but in offensive structure.
 
-**Act 3, Randle integration:** Q3-leaning. Randle dominated possessions as the new hub. Stickiness rose sharply (69), iso rose (71), shot quality cratered (72). They reached the conference finals but the architecture was already different.
+**Act 3, Randle integration:** Q3-leaning. [CORRECTED 2026-05-22: the original text read "Randle dominated possessions as the new hub." Player-grain verification shows the 2024-25 hub was Anthony Edwards, not Randle. Edwards held the ball more than twice as long as Randle and ran 1,128 on-ball creation possessions to Randle's 423; Randle ranked third on the team in time of possession. The stickiness spike (69) came from Edwards consolidating the lead-guard role as Conley declined, not from Randle. See `14_hub_attribution_correction.md`.] Stickiness rose sharply (69), iso rose (71), shot quality cratered (72). They reached the conference finals but the architecture was already different.
 
 **Act 4, current season:** Q4. Stickiness fell back (Randle no longer dominating; iso load decentralized). Motion died worse. Iso reached extreme. Shot quality continued its decline.
 
 Three components moved in lockstep across the recent three seasons:
 
-- C2 motion-death: 43 → 56 → 72
+- C2 motion-death: 43 → 55 → 72
 - C3 iso-reliance: 49 → 71 → 90
 - C5 shot-quality-decay: 39 → 72 → 83
 
