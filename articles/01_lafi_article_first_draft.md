@@ -58,30 +58,30 @@ Including the 2025-26 Wolves, eight team-seasons match this offensive fingerprin
 
 Sample size matters. With seven teams the right read isn't "this configuration cannot reach the conference finals." It's "this configuration has not, and the two cohort members with the most talent both came up short." Article 4 in this series spends its time on exactly that question. For now the simpler observation is enough: nobody who plays offense like this has gotten close.
 
-## What this measures, and what it does not
+## The obvious objection
 
-Before going further, I want to be honest about what LAFI is and is not.
+If you are skeptical of all this, good. Here is the objection I would raise if someone handed me this analysis: the Wolves scored fine. Their offensive rating in 2025-26 was middle of the pack, not the bottom of the league. If the architecture were really this broken, wouldn't the points have dried up?
 
-LAFI measures offensive architecture, not offensive quality. A team can have high LAFI and still score plenty of points; the Wolves' offensive rating in 2025-26 was middle of the pack, not bottom of the league. The metric captures how a team produces points, not how many points they produce. Two teams can score 115 per 100 possessions with very different architectures.
+The objection is correct on the facts, and chasing down why it doesn't sink the argument is the fastest way to understand what LAFI actually measures.
 
-LAFI also does not measure defense. The Wolves had a top-ten defense in 2025-26, eighth in the league, anchored by Rudy Gobert. None of what LAFI captures touches that. Other analytical work in this project addresses defense; this article is specifically about offense.
+LAFI measures how a team produces points, not how many. Individual shotmaking can paper over bad structure for months at a time. Edwards is good enough to hit contested pullups at a rate that keeps the offensive rating respectable, and a respectable offensive rating is exactly the thing that hides a broken structure from anyone reading only the scoreboard. Two teams can both score 115 per 100 possessions with completely different architectures, and one of those architectures holds up against a locked-in playoff defense while the other comes apart. Telling those two teams apart is the entire job LAFI was built to do. Offensive rating cannot do it.
 
-LAFI is also not predictive on its own. It describes a structural pattern. Whether that pattern matters depends on what happens when the structural pattern meets specific opponents in the playoffs. The next several articles in this series get into exactly that question.
+What LAFI does not touch at all is defense. The Wolves had a top-ten defense in 2025-26, eighth in the league, anchored by Rudy Gobert. Nothing in the five components reaches that side of the floor. That is scope, not oversight. This article is about offense, and other work in this project handles the rest.
 
-What LAFI does measure, well, is the structural shape of a team's offense. Whether the team is running designed actions or watching one player figure it out. Whether the off-ball players are working or standing. Whether possessions end in advantage plays or one-on-one contests. The metric makes these structural distinctions visible and comparable across teams.
+And LAFI is not, on its own, a prediction. It describes a structural pattern, and whether that pattern costs you a series depends on who you draw and what they are built to do to you. A 90 Sharp LAFI is not a death sentence by itself. It is a structural vulnerability that some opponents can pry open and others cannot. Which opponents, and how, is what the next several articles are about.
+
+So the objection stands: the Wolves scored fine. The point of LAFI is that scoring fine in March tells you almost nothing about May, when the defense across from you has had six days to scheme and a roster built to switch every action you run. The metric makes the structure visible while the scoreboard is still busy hiding it.
 
 ## The question this raises
 
-The Wolves had a 49-33 regular season. They beat the Nuggets in the first round of the playoffs. Anthony Edwards was an All-NBA caliber player. Rudy Gobert anchored one of the best defenses in the league. The roster had no obvious holes.
+The Wolves had a 49-33 regular season. They beat the Nuggets in the first round. Anthony Edwards was an All-NBA caliber player, the kind of franchise star who is genuinely fun to watch and easy to root for. Rudy Gobert anchored one of the best defenses in the league. The supporting cast looked real, too. Ayo Dosunmu had turned into a sturdy role player. Mike Conley had chosen Minnesota. Terrence Shannon Jr. was an explosive young scorer off the bench. And let's not forget: they might have Wembanyama, but we have Jaden McDaniels. On paper this should have been exciting to watch. On paper this deserved more faith than I gave it, and it should have been a lot closer than it was.
 
-And yet the architecture was the architecture of a pickup offense, distributed across the lineup, producing bad shots through isolation creation. The team that played the Spurs in the second round was structurally one of the most pickup-style offenses in modern NBA history.
+In your gut, though, you knew better. Even in the best case, even if the Wolves had somehow found a way past the Spurs, nobody who actually watched this team believed they were beating OKC. The roster read like a contender. Watching it did not.
 
-This is the question the rest of this project tries to answer. How did a team this talented end up playing offense this way. Whether the architectural state matters in the playoffs. Whether teams with this profile can break through. What, specifically, the Wolves can do about it.
+What you were watching was a pickup offense, distributed across the lineup, producing bad shots through isolation creation. The team that played the Spurs in the second round was structurally one of the most pickup-style offenses in modern NBA history.
 
-I do not know whether anyone with influence over the Wolves' front office will ever read this work. The goal of writing it publicly is to make the case where the case can be made. The team has never won a championship in its franchise history. I have been a fan since 2004, since the conference finals run that turned into a long stretch of disappointing seasons. My brother-in-law's casual observation became this analytical project because the question of why this specific team plays this specific way kept feeling like a question worth answering.
+That is the question the rest of this project tries to answer. How a team this talented ended up playing offense this way. Whether the architecture matters once the playoffs start. Whether any team with this profile can break through. What, specifically, the Wolves can do about it. The next article starts at the beginning of that chain, tracing how the Wolves drifted into this architecture from a 2023-24 team that looked nothing like it.
 
-The next article in this series traces how the Wolves got to this architectural state from a very different one just two years ago. The trajectory matters. The team in 2023-24 looked nothing like the team in 2025-26. Understanding how the drift happened sets up everything that comes after.
+I do not know whether anyone with influence over the Wolves will ever read this work. I am writing it publicly anyway, to make the case where the case can be made. The franchise has never won a championship. I have been a fan since 2004, through the conference finals run and the long stretch of disappointing seasons that followed it. My brother-in-law's offhand comment became a project because the question underneath it, why this specific team plays this specific way, kept feeling like one worth answering.
 
-For now, the diagnosis is the foundation. The Wolves are playing distributed pickup. The ball moves but the bodies don't. The shots are bad. The architecture is rare, and the rarity matters in ways we will spend the rest of this project working out.
-
-It started with a comment on the couch. It ended up here.
+For now the diagnosis is the foundation. The ball moves, the bodies don't, and the shots are bad. It started with a simple comment. It ended up here.
