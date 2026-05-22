@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The LAFI Four-Quadrant Framework</title>
+<style>
+  :root {
+    --wolves-blue: #0C2340;
+    --wolves-green: #78BE20;
+    --wolves-green-glow: rgba(120, 190, 32, 0.35);
+    --cohort-amber: #D97706;
+    --cohort-amber-bg: #FEF3C7;
+    --anchor-grey: #475569;
+    --contender-teal: #0D9488;
+    --contender-teal-bg: #CCFBF1;
+    --background-grey: #94A3B8;
+    --axis-grey: #64748B;
+    --bg: #FAFAF9;
+    --bg-q1: rgba(34, 197, 94, 0.025);
+    --bg-q2: rgba(99, 102, 241, 0.025);
+    --bg-q3: rgba(244, 63, 94, 0.025);
+    --bg-q4: rgba(217, 119, 6, 0.045);
+    --text: #1E293B;
+    --muted: #64748B;
+    --result-good: #16A34A;
+    --result-mid: #CA8A04;
+    --result-bad: #DC2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .chart-wrap {
+    max-width: 880px; margin: 0 auto;
+  }
+  .chart-header { margin-bottom: 8px; }
+  h1 { font-size: 21px; margin: 0 0 4px 0; font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle-wrap {
+    position: relative; min-height: 42px; margin-bottom: 18px;
+  }
+  .subtitle {
+    font-size: 13px; color: var(--muted); margin: 0; line-height: 1.5;
+    transition: opacity 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .subtitle.narrative {
+    color: var(--text); font-weight: 500;
+  }
+  .subtitle .narrative-year {
+    display: inline-block; padding: 1px 7px; border-radius: 4px;
+    background: var(--wolves-blue); color: white; font-weight: 700;
+    font-variant-numeric: tabular-nums; margin-right: 6px;
+    font-size: 12px; letter-spacing: 0.01em;
+  }
+  .subtitle.narrative.final .narrative-year { background: var(--wolves-green); }
+  .onboard-hint {
+    margin-top: 6px; font-size: 12px; color: var(--muted);
+    opacity: 0; transition: opacity 500ms ease;
+  }
+  .onboard-hint.visible { opacity: 1; }
+  svg { width: 100%; height: auto; display: block; background: var(--bg); }
+  .quad-bg { transition: fill 300ms ease; }
+  .quad-bg.q4-highlight { fill: var(--bg-q4); }
+  .axis text { font-size: 11px; fill: var(--axis-grey); }
+  .axis path, .axis line { stroke: var(--axis-grey); stroke-opacity: 0.25; }
+  .axis-label {
+    font-size: 12px; fill: var(--text); font-weight: 600; letter-spacing: 0.005em;
+  }
+  .quad-line {
+    stroke: var(--axis-grey); stroke-opacity: 0.35; stroke-dasharray: 3 4; stroke-width: 1;
+  }
+  .quad-label {
+    font-size: 12.5px; font-weight: 700; fill: var(--axis-grey); letter-spacing: 0.01em;
+    cursor: pointer; user-select: none;
+    transition: fill 220ms ease, opacity 220ms ease;
+  }
+  .quad-label.q4 { fill: var(--cohort-amber); }
+  .quad-label:hover { fill: var(--wolves-blue); }
+  .quad-label.active { fill: var(--wolves-blue); }
+  .dot { cursor: pointer; transition: stroke 200ms ease; }
+  .bg-dot { fill: var(--background-grey); fill-opacity: 0.28; }
+  .bg-dot:hover { fill-opacity: 0.95; stroke: var(--wolves-blue); stroke-width: 1.5; }
+  .anchor-dot { fill: var(--anchor-grey); fill-opacity: 0.7; stroke: white; stroke-width: 1; }
+  .anchor-dot:hover { fill-opacity: 1; }
+  .anchor-dot.contender {
+    fill: var(--contender-teal); fill-opacity: 0.92; stroke-width: 1.75;
+    filter: drop-shadow(0 1px 2px rgba(13, 148, 136, 0.25));
+  }
+  .anchor-label {
+    font-size: 10.5px; fill: var(--anchor-grey); pointer-events: none; font-weight: 500;
+  }
+  .anchor-label.contender {
+    fill: var(--contender-teal); font-weight: 700; font-size: 10.75px;
+  }
+  .cohort-dot {
+    fill: var(--cohort-amber); fill-opacity: 0.88;
+    stroke: white; stroke-width: 1.75;
+    filter: drop-shadow(0 1px 2px rgba(217, 119, 6, 0.25));
+  }
+  .cohort-dot:hover { fill-opacity: 1; }
+  .cohort-label {
+    font-size: 10.5px; fill: var(--cohort-amber); font-weight: 700; pointer-events: none;
+    letter-spacing: 0.01em;
+  }
+  .wolves-dot {
+    fill: var(--wolves-blue); stroke: white; stroke-width: 2;
+    filter: drop-shadow(0 2px 3px rgba(12, 35, 64, 0.3));
+  }
+  .wolves-dot.current {
+    fill: var(--wolves-green); stroke-width: 2.5;
+    filter: drop-shadow(0 0 12px var(--wolves-green-glow));
+  }
+  .wolves-label {
+    font-size: 11px; font-weight: 700; fill: var(--wolves-blue); pointer-events: none;
+    letter-spacing: 0.01em;
+  }
+  .wolves-label.current {
+    fill: var(--wolves-green); font-size: 12.5px;
+  }
+  .wolves-arrow { stroke: var(--wolves-blue); stroke-width: 2; fill: none; opacity: 0.85; }
+  .pulse-ring { fill: none; stroke: var(--wolves-green); stroke-width: 2; opacity: 0; }
+  .controls {
+    display: flex; gap: 14px; align-items: center; margin-top: 14px;
+    font-size: 13px; flex-wrap: wrap;
+  }
+  button {
+    background: white; border: 1px solid #CBD5E1; border-radius: 8px;
+    padding: 7px 14px; font-size: 13px; cursor: pointer; color: var(--text);
+    font-family: inherit; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: background 180ms ease, border-color 180ms ease, transform 80ms ease;
+  }
+  button:hover { background: #F1F5F9; border-color: #94A3B8; }
+  button:active { transform: scale(0.97); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button svg { width: 13px; height: 13px; }
+  .legend {
+    display: flex; gap: 18px; align-items: center; font-size: 12px;
+    color: var(--muted); flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    cursor: pointer; padding: 3px 7px; border-radius: 6px;
+    transition: background 160ms ease, opacity 160ms ease;
+    user-select: none;
+  }
+  .legend-item:hover { background: #F1F5F9; }
+  .legend-item.legend-dim { opacity: 0.4; }
+  .legend-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .legend-dot.glow {
+    background: var(--wolves-green); box-shadow: 0 0 0 2px white, 0 0 8px var(--wolves-green-glow);
+  }
+  #tooltip {
+    position: absolute; pointer-events: none; opacity: 0;
+    background: white; border: 1px solid #E2E8F0; border-radius: 8px;
+    padding: 11px 13px; font-size: 12px; line-height: 1.5;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.06);
+    transition: opacity 160ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 160ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(4px);
+    max-width: 260px; z-index: 10;
+  }
+  #tooltip.visible { opacity: 1; transform: translateY(0); }
+  #tooltip .tt-team {
+    font-weight: 700; font-size: 13.5px; margin-bottom: 5px;
+    letter-spacing: -0.005em;
+  }
+  #tooltip .tt-result {
+    display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  #tooltip .tt-result.good { background: #DCFCE7; color: var(--result-good); }
+  #tooltip .tt-result.mid  { background: #FEF9C3; color: var(--result-mid); }
+  #tooltip .tt-result.bad  { background: #FEE2E2; color: var(--result-bad); }
+  #tooltip table { border-collapse: collapse; margin-top: 4px; width: 100%; }
+  #tooltip td { padding: 2px 0; }
+  #tooltip td.lbl { color: var(--muted); padding-right: 14px; }
+  #tooltip td.val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .dim-target { transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1); }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 50ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="chart-wrap">
+  <div class="chart-header">
+    <h1>The four-quadrant framework: where every NBA team sits since 2014</h1>
+    <div class="subtitle-wrap">
+      <p class="subtitle" id="subtitle">Each dot is one team-season. Ball stickiness on x, motion death on y. The 2025-26 Wolves are deep in Q4 (distributed pickup), and they got there by walking across three quadrants in four years.</p>
+    </div>
+  </div>
+
+  <svg id="chart" viewBox="0 0 860 760" aria-label="LAFI quadrant scatter"></svg>
+
+  <div class="controls">
+    <button id="replay" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+      Replay trajectory
+    </button>
+    <button id="reset" type="button">Reset view</button>
+    <div class="legend">
+      <span class="legend-item" data-group="wolves-current"><span class="legend-dot glow"></span>Wolves 2025-26</span>
+      <span class="legend-item" data-group="wolves-traj"><span class="legend-dot" style="background: var(--wolves-blue);"></span>Wolves trajectory</span>
+      <span class="legend-item" data-group="cohort"><span class="legend-dot" style="background: var(--cohort-amber);"></span>Cohort (7 historical comps)</span>
+      <span class="legend-item" data-group="contender"><span class="legend-dot" style="background: var(--contender-teal);"></span>Contender (reached CF or further)</span>
+      <span class="legend-item" data-group="archetype"><span class="legend-dot" style="background: var(--anchor-grey);"></span>Iso archetype landmark</span>
+      <span class="legend-item" data-group="background"><span class="legend-dot" style="background: var(--background-grey); opacity: 0.5;"></span>Other team-seasons</span>
+    </div>
+  </div>
+  <p class="onboard-hint" id="onboard">Hover any dot to see team-season detail. Click a quadrant label to focus on just that quadrant. Hover a legend item to highlight that group.</p>
+</div>
+
+<div id="tooltip"></div>
+
+<script id="lafi-data" type="application/json">[{"team":"ATL","year":2023,"season":"'23-24","C1":76.1,"C2":75.5,"C3":68.9,"C4":44.2,"C5":69.7,"full_lafi":73.3,"sharp_lafi":78.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2023,"season":"'23-24","C1":73.0,"C2":83.0,"C3":83.6,"C4":84.2,"C5":73.9,"full_lafi":88.8,"sharp_lafi":88.8,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2023,"season":"'23-24","C1":69.1,"C2":77.3,"C3":63.3,"C4":63.3,"C5":44.5,"full_lafi":68.8,"sharp_lafi":67.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2023,"season":"'23-24","C1":50.9,"C2":24.2,"C3":59.2,"C4":83.3,"C5":68.2,"full_lafi":58.2,"sharp_lafi":49.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2023,"season":"'23-24","C1":24.5,"C2":99.7,"C3":57.8,"C4":97.8,"C5":47.3,"full_lafi":68.2,"sharp_lafi":76.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2023,"season":"'23-24","C1":15.5,"C2":5.5,"C3":12.8,"C4":18.3,"C5":19.4,"full_lafi":5.2,"sharp_lafi":3.0,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2023,"season":"'23-24","C1":94.2,"C2":93.3,"C3":98.3,"C4":82.8,"C5":97.9,"full_lafi":99.4,"sharp_lafi":99.4,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2023,"season":"'23-24","C1":27.3,"C2":25.8,"C3":20.6,"C4":7.8,"C5":57.6,"full_lafi":18.2,"sharp_lafi":26.4,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2023,"season":"'23-24","C1":90.3,"C2":58.2,"C3":55.8,"C4":83.1,"C5":77.0,"full_lafi":81.8,"sharp_lafi":66.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2023,"season":"'23-24","C1":10.0,"C2":0.9,"C3":19.2,"C4":0.8,"C5":80.6,"full_lafi":7.9,"sharp_lafi":19.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2023,"season":"'23-24","C1":90.0,"C2":94.2,"C3":77.2,"C4":86.9,"C5":73.6,"full_lafi":94.5,"sharp_lafi":90.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2023,"season":"'23-24","C1":7.6,"C2":43.9,"C3":15.8,"C4":72.8,"C5":30.0,"full_lafi":25.8,"sharp_lafi":20.9,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2023,"season":"'23-24","C1":97.3,"C2":45.8,"C3":98.6,"C4":80.8,"C5":98.8,"full_lafi":93.9,"sharp_lafi":86.4,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2023,"season":"'23-24","C1":67.9,"C2":97.0,"C3":34.7,"C4":84.7,"C5":34.8,"full_lafi":71.2,"sharp_lafi":60.3,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2023,"season":"'23-24","C1":22.7,"C2":29.4,"C3":16.7,"C4":21.9,"C5":5.2,"full_lafi":9.1,"sharp_lafi":9.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2023,"season":"'23-24","C1":28.2,"C2":12.4,"C3":31.1,"C4":24.2,"C5":56.1,"full_lafi":20.6,"sharp_lafi":23.9,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2023,"season":"'23-24","C1":87.3,"C2":91.2,"C3":78.3,"C4":78.6,"C5":80.0,"full_lafi":93.0,"sharp_lafi":92.7,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2023,"season":"'23-24","C1":34.8,"C2":43.0,"C3":49.2,"C4":27.2,"C5":39.1,"full_lafi":34.5,"sharp_lafi":44.5,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":true,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2023,"season":"'23-24","C1":6.1,"C2":59.4,"C3":43.1,"C4":35.3,"C5":14.2,"full_lafi":23.3,"sharp_lafi":40.3,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2023,"season":"'23-24","C1":87.6,"C2":58.8,"C3":87.5,"C4":62.2,"C5":75.5,"full_lafi":84.2,"sharp_lafi":80.9,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2023,"season":"'23-24","C1":81.5,"C2":54.8,"C3":76.7,"C4":89.4,"C5":30.3,"full_lafi":76.7,"sharp_lafi":59.4,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2023,"season":"'23-24","C1":70.0,"C2":26.1,"C3":49.4,"C4":59.2,"C5":11.5,"full_lafi":47.0,"sharp_lafi":22.4,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2023,"season":"'23-24","C1":55.8,"C2":57.0,"C3":90.8,"C4":53.9,"C5":76.7,"full_lafi":72.1,"sharp_lafi":82.1,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2023,"season":"'23-24","C1":46.7,"C2":73.9,"C3":78.6,"C4":34.2,"C5":90.0,"full_lafi":65.5,"sharp_lafi":87.6,"po_result":"Lost R1 (0-4)","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2023,"season":"'23-24","C1":66.4,"C2":50.9,"C3":66.1,"C4":67.2,"C5":39.4,"full_lafi":61.2,"sharp_lafi":55.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2023,"season":"'23-24","C1":8.8,"C2":37.9,"C3":28.6,"C4":6.4,"C5":56.4,"full_lafi":17.3,"sharp_lafi":38.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2023,"season":"'23-24","C1":14.8,"C2":29.7,"C3":0.3,"C4":15.8,"C5":7.6,"full_lafi":4.8,"sharp_lafi":5.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2023,"season":"'23-24","C1":7.3,"C2":24.5,"C3":2.8,"C4":13.1,"C5":6.4,"full_lafi":3.0,"sharp_lafi":2.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2023,"season":"'23-24","C1":56.1,"C2":6.1,"C3":14.2,"C4":11.9,"C5":13.9,"full_lafi":13.3,"sharp_lafi":1.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2023,"season":"'23-24","C1":36.1,"C2":31.8,"C3":24.2,"C4":41.1,"C5":23.3,"full_lafi":24.8,"sharp_lafi":17.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2024,"season":"'24-25","C1":73.6,"C2":51.8,"C3":3.6,"C4":33.6,"C5":16.1,"full_lafi":34.8,"sharp_lafi":13.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2024,"season":"'24-25","C1":75.2,"C2":81.2,"C3":89.4,"C4":77.8,"C5":84.2,"full_lafi":91.8,"sharp_lafi":94.8,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2024,"season":"'24-25","C1":16.7,"C2":12.1,"C3":6.7,"C4":7.5,"C5":2.1,"full_lafi":2.7,"sharp_lafi":0.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2024,"season":"'24-25","C1":53.6,"C2":13.9,"C3":55.3,"C4":68.9,"C5":69.1,"full_lafi":53.3,"sharp_lafi":43.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2024,"season":"'24-25","C1":7.0,"C2":95.5,"C3":3.1,"C4":85.3,"C5":2.4,"full_lafi":35.2,"sharp_lafi":31.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2024,"season":"'24-25","C1":72.4,"C2":41.8,"C3":46.4,"C4":83.9,"C5":52.7,"full_lafi":63.6,"sharp_lafi":47.3,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2024,"season":"'24-25","C1":74.8,"C2":53.9,"C3":94.2,"C4":63.9,"C5":89.1,"full_lafi":83.6,"sharp_lafi":84.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2024,"season":"'24-25","C1":28.8,"C2":20.0,"C3":6.4,"C4":9.2,"C5":21.5,"full_lafi":6.7,"sharp_lafi":7.3,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2024,"season":"'24-25","C1":92.1,"C2":63.6,"C3":52.2,"C4":49.2,"C5":50.0,"full_lafi":67.0,"sharp_lafi":58.8,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2024,"season":"'24-25","C1":1.2,"C2":0.3,"C3":5.3,"C4":1.1,"C5":38.8,"full_lafi":0.9,"sharp_lafi":4.4,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2024,"season":"'24-25","C1":93.0,"C2":94.8,"C3":90.0,"C4":81.9,"C5":75.2,"full_lafi":96.1,"sharp_lafi":97.6,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2024,"season":"'24-25","C1":3.3,"C2":87.9,"C3":36.7,"C4":85.0,"C5":78.8,"full_lafi":55.8,"sharp_lafi":73.0,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2024,"season":"'24-25","C1":95.8,"C2":84.5,"C3":97.2,"C4":88.1,"C5":93.0,"full_lafi":99.1,"sharp_lafi":98.8,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2024,"season":"'24-25","C1":40.3,"C2":71.5,"C3":72.2,"C4":64.7,"C5":61.2,"full_lafi":63.9,"sharp_lafi":74.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2024,"season":"'24-25","C1":33.6,"C2":50.6,"C3":30.3,"C4":57.2,"C5":10.0,"full_lafi":32.4,"sharp_lafi":26.1,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2024,"season":"'24-25","C1":44.5,"C2":34.2,"C3":38.6,"C4":27.5,"C5":45.8,"full_lafi":33.3,"sharp_lafi":37.0,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2024,"season":"'24-25","C1":73.3,"C2":91.5,"C3":79.4,"C4":74.2,"C5":80.3,"full_lafi":88.5,"sharp_lafi":93.0,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2024,"season":"'24-25","C1":68.8,"C2":55.5,"C3":70.8,"C4":35.8,"C5":71.5,"full_lafi":63.3,"sharp_lafi":70.9,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":true,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2024,"season":"'24-25","C1":37.9,"C2":12.7,"C3":62.2,"C4":44.4,"C5":61.5,"full_lafi":41.8,"sharp_lafi":43.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2024,"season":"'24-25","C1":90.9,"C2":35.2,"C3":63.1,"C4":38.6,"C5":59.7,"full_lafi":60.9,"sharp_lafi":53.3,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2024,"season":"'24-25","C1":83.9,"C2":64.2,"C3":85.3,"C4":80.3,"C5":59.1,"full_lafi":85.5,"sharp_lafi":77.4,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Thunder","is_contender":true},{"team":"ORL","year":2024,"season":"'24-25","C1":64.5,"C2":15.5,"C3":66.7,"C4":61.4,"C5":47.0,"full_lafi":53.6,"sharp_lafi":41.5,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2024,"season":"'24-25","C1":67.0,"C2":76.7,"C3":93.9,"C4":81.7,"C5":66.4,"full_lafi":86.4,"sharp_lafi":87.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2024,"season":"'24-25","C1":20.0,"C2":20.6,"C3":56.9,"C4":27.8,"C5":89.4,"full_lafi":35.8,"sharp_lafi":54.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2024,"season":"'24-25","C1":51.2,"C2":90.6,"C3":63.9,"C4":78.3,"C5":14.8,"full_lafi":64.8,"sharp_lafi":63.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2024,"season":"'24-25","C1":38.5,"C2":78.8,"C3":77.8,"C4":36.9,"C5":94.8,"full_lafi":65.8,"sharp_lafi":91.2,"po_result":"Missed playoffs","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2024,"season":"'24-25","C1":32.4,"C2":74.8,"C3":23.6,"C4":36.7,"C5":25.5,"full_lafi":35.5,"sharp_lafi":41.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2024,"season":"'24-25","C1":9.7,"C2":7.6,"C3":1.7,"C4":10.3,"C5":1.2,"full_lafi":0.6,"sharp_lafi":0.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2024,"season":"'24-25","C1":78.5,"C2":6.4,"C3":48.9,"C4":13.6,"C5":43.6,"full_lafi":36.7,"sharp_lafi":25.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2024,"season":"'24-25","C1":27.9,"C2":57.9,"C3":26.4,"C4":47.5,"C5":52.4,"full_lafi":38.8,"sharp_lafi":45.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2021,"season":"'21-22","C1":98.2,"C2":83.6,"C3":83.9,"C4":94.7,"C5":95.5,"full_lafi":98.8,"sharp_lafi":97.3,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2021,"season":"'21-22","C1":35.2,"C2":75.2,"C3":55.0,"C4":49.7,"C5":37.3,"full_lafi":51.8,"sharp_lafi":60.6,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2021,"season":"'21-22","C1":63.9,"C2":56.7,"C3":95.6,"C4":39.2,"C5":96.4,"full_lafi":75.5,"sharp_lafi":90.0,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2021,"season":"'21-22","C1":20.9,"C2":64.8,"C3":8.9,"C4":19.7,"C5":8.8,"full_lafi":17.6,"sharp_lafi":19.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2021,"season":"'21-22","C1":80.9,"C2":93.9,"C3":82.5,"C4":95.0,"C5":80.9,"full_lafi":95.5,"sharp_lafi":95.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2021,"season":"'21-22","C1":41.8,"C2":10.9,"C3":15.0,"C4":25.3,"C5":12.1,"full_lafi":13.0,"sharp_lafi":4.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2021,"season":"'21-22","C1":89.7,"C2":67.3,"C3":80.6,"C4":90.3,"C5":81.5,"full_lafi":92.4,"sharp_lafi":83.3,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2021,"season":"'21-22","C1":4.8,"C2":35.5,"C3":2.5,"C4":12.2,"C5":13.6,"full_lafi":4.2,"sharp_lafi":8.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2021,"season":"'21-22","C1":15.2,"C2":46.7,"C3":24.4,"C4":26.9,"C5":9.1,"full_lafi":16.4,"sharp_lafi":18.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2021,"season":"'21-22","C1":3.9,"C2":0.6,"C3":7.8,"C4":0.6,"C5":45.5,"full_lafi":2.1,"sharp_lafi":7.0,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2021,"season":"'21-22","C1":71.2,"C2":65.2,"C3":36.4,"C4":38.3,"C5":3.3,"full_lafi":47.3,"sharp_lafi":36.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2021,"season":"'21-22","C1":17.6,"C2":42.1,"C3":30.0,"C4":37.8,"C5":33.9,"full_lafi":24.2,"sharp_lafi":30.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2021,"season":"'21-22","C1":71.8,"C2":72.1,"C3":84.2,"C4":75.8,"C5":92.4,"full_lafi":87.3,"sharp_lafi":90.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2021,"season":"'21-22","C1":70.9,"C2":94.5,"C3":79.2,"C4":71.9,"C5":34.5,"full_lafi":79.1,"sharp_lafi":79.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2021,"season":"'21-22","C1":59.1,"C2":49.1,"C3":31.4,"C4":33.1,"C5":27.0,"full_lafi":39.4,"sharp_lafi":32.4,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2021,"season":"'21-22","C1":13.3,"C2":2.4,"C3":28.9,"C4":5.0,"C5":66.7,"full_lafi":10.0,"sharp_lafi":20.3,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2021,"season":"'21-22","C1":82.4,"C2":79.1,"C3":87.2,"C4":70.6,"C5":69.4,"full_lafi":87.6,"sharp_lafi":86.1,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2021,"season":"'21-22","C1":29.4,"C2":69.1,"C3":40.8,"C4":28.1,"C5":19.7,"full_lafi":32.7,"sharp_lafi":46.4,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2021,"season":"'21-22","C1":10.9,"C2":34.8,"C3":17.2,"C4":33.9,"C5":27.6,"full_lafi":15.2,"sharp_lafi":16.7,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2021,"season":"'21-22","C1":70.3,"C2":80.0,"C3":90.3,"C4":93.1,"C5":87.0,"full_lafi":92.7,"sharp_lafi":95.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2021,"season":"'21-22","C1":23.6,"C2":66.1,"C3":53.1,"C4":94.2,"C5":18.2,"full_lafi":52.7,"sharp_lafi":49.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2021,"season":"'21-22","C1":54.5,"C2":49.4,"C3":7.2,"C4":32.5,"C5":13.3,"full_lafi":27.3,"sharp_lafi":13.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2021,"season":"'21-22","C1":48.5,"C2":93.6,"C3":72.5,"C4":87.2,"C5":73.0,"full_lafi":82.4,"sharp_lafi":88.5,"po_result":"Lost R2","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2021,"season":"'21-22","C1":92.7,"C2":61.2,"C3":45.6,"C4":63.6,"C5":94.5,"full_lafi":78.5,"sharp_lafi":69.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2021,"season":"'21-22","C1":63.0,"C2":13.0,"C3":61.1,"C4":23.9,"C5":44.2,"full_lafi":40.0,"sharp_lafi":37.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2021,"season":"'21-22","C1":50.0,"C2":51.2,"C3":60.3,"C4":58.3,"C5":74.5,"full_lafi":60.0,"sharp_lafi":63.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2021,"season":"'21-22","C1":38.8,"C2":18.2,"C3":5.6,"C4":20.8,"C5":25.8,"full_lafi":12.7,"sharp_lafi":7.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2021,"season":"'21-22","C1":62.4,"C2":62.7,"C3":97.8,"C4":62.8,"C5":83.0,"full_lafi":80.3,"sharp_lafi":89.4,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2021,"season":"'21-22","C1":91.5,"C2":60.0,"C3":74.2,"C4":93.6,"C5":78.5,"full_lafi":90.3,"sharp_lafi":77.0,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2021,"season":"'21-22","C1":40.0,"C2":4.5,"C3":45.0,"C4":29.7,"C5":47.6,"full_lafi":26.1,"sharp_lafi":23.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2019,"season":"'19-20","C1":95.2,"C2":96.4,"C3":45.8,"C4":78.1,"C5":53.6,"full_lafi":85.8,"sharp_lafi":72.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2019,"season":"'19-20","C1":48.8,"C2":35.8,"C3":86.1,"C4":74.7,"C5":92.1,"full_lafi":70.6,"sharp_lafi":75.5,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2019,"season":"'19-20","C1":74.2,"C2":26.7,"C3":53.6,"C4":56.1,"C5":29.1,"full_lafi":51.2,"sharp_lafi":33.9,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2019,"season":"'19-20","C1":47.0,"C2":32.4,"C3":21.4,"C4":17.8,"C5":31.2,"full_lafi":22.4,"sharp_lafi":17.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2019,"season":"'19-20","C1":43.6,"C2":63.0,"C3":29.4,"C4":60.0,"C5":4.8,"full_lafi":40.3,"sharp_lafi":28.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2019,"season":"'19-20","C1":53.0,"C2":59.1,"C3":59.4,"C4":58.9,"C5":49.4,"full_lafi":57.6,"sharp_lafi":60.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2019,"season":"'19-20","C1":80.0,"C2":73.0,"C3":54.7,"C4":57.8,"C5":64.2,"full_lafi":72.7,"sharp_lafi":67.9,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2019,"season":"'19-20","C1":18.2,"C2":11.2,"C3":31.9,"C4":5.6,"C5":58.8,"full_lafi":14.2,"sharp_lafi":25.2,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2019,"season":"'19-20","C1":58.8,"C2":14.8,"C3":12.2,"C4":31.1,"C5":6.7,"full_lafi":19.7,"sharp_lafi":2.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2019,"season":"'19-20","C1":0.6,"C2":3.6,"C3":38.1,"C4":4.7,"C5":85.8,"full_lafi":12.1,"sharp_lafi":36.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2019,"season":"'19-20","C1":98.8,"C2":100.0,"C3":99.2,"C4":98.6,"C5":37.6,"full_lafi":97.6,"sharp_lafi":90.9,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2019,"season":"'19-20","C1":46.1,"C2":6.7,"C3":45.3,"C4":26.7,"C5":62.7,"full_lafi":30.6,"sharp_lafi":31.4,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2019,"season":"'19-20","C1":64.8,"C2":68.8,"C3":76.1,"C4":95.3,"C5":67.6,"full_lafi":83.0,"sharp_lafi":77.9,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2019,"season":"'19-20","C1":52.1,"C2":67.9,"C3":52.5,"C4":46.9,"C5":32.1,"full_lafi":53.0,"sharp_lafi":54.2,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2019,"season":"'19-20","C1":21.8,"C2":80.3,"C3":19.7,"C4":41.7,"C5":29.4,"full_lafi":33.9,"sharp_lafi":44.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2019,"season":"'19-20","C1":40.9,"C2":4.2,"C3":15.6,"C4":8.9,"C5":40.9,"full_lafi":11.8,"sharp_lafi":9.7,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2019,"season":"'19-20","C1":33.0,"C2":79.7,"C3":56.7,"C4":34.4,"C5":46.4,"full_lafi":50.6,"sharp_lafi":65.8,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2019,"season":"'19-20","C1":14.5,"C2":76.1,"C3":29.7,"C4":16.9,"C5":5.5,"full_lafi":20.9,"sharp_lafi":38.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2019,"season":"'19-20","C1":2.7,"C2":27.6,"C3":26.7,"C4":17.5,"C5":20.9,"full_lafi":7.6,"sharp_lafi":15.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2019,"season":"'19-20","C1":22.4,"C2":40.6,"C3":67.5,"C4":49.4,"C5":40.6,"full_lafi":43.9,"sharp_lafi":51.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2019,"season":"'19-20","C1":61.8,"C2":98.2,"C3":91.4,"C4":97.5,"C5":84.8,"full_lafi":95.2,"sharp_lafi":99.1,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2019,"season":"'19-20","C1":85.2,"C2":5.2,"C3":30.8,"C4":25.8,"C5":63.0,"full_lafi":43.6,"sharp_lafi":21.5,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2019,"season":"'19-20","C1":34.2,"C2":46.4,"C3":17.8,"C4":37.5,"C5":24.5,"full_lafi":25.2,"sharp_lafi":21.2,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2019,"season":"'19-20","C1":51.5,"C2":11.8,"C3":6.9,"C4":8.3,"C5":21.2,"full_lafi":11.2,"sharp_lafi":4.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2019,"season":"'19-20","C1":99.7,"C2":97.3,"C3":99.4,"C4":99.4,"C5":99.1,"full_lafi":100.0,"sharp_lafi":100.0,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2019,"season":"'19-20","C1":66.7,"C2":10.0,"C3":58.1,"C4":45.8,"C5":62.4,"full_lafi":50.0,"sharp_lafi":41.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2019,"season":"'19-20","C1":67.6,"C2":82.1,"C3":73.9,"C4":58.6,"C5":96.7,"full_lafi":82.7,"sharp_lafi":91.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2019,"season":"'19-20","C1":31.5,"C2":64.5,"C3":14.4,"C4":40.6,"C5":8.2,"full_lafi":26.4,"sharp_lafi":23.3,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2019,"season":"'19-20","C1":44.2,"C2":44.2,"C3":75.0,"C4":89.2,"C5":82.1,"full_lafi":69.7,"sharp_lafi":71.8,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2019,"season":"'19-20","C1":13.6,"C2":23.3,"C3":57.5,"C4":42.5,"C5":77.3,"full_lafi":36.4,"sharp_lafi":51.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2018,"season":"'18-19","C1":48.2,"C2":10.6,"C3":60.8,"C4":54.7,"C5":35.5,"full_lafi":42.1,"sharp_lafi":30.9,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2018,"season":"'18-19","C1":65.5,"C2":88.5,"C3":8.6,"C4":52.8,"C5":9.7,"full_lafi":49.1,"sharp_lafi":36.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2018,"season":"'18-19","C1":25.8,"C2":65.5,"C3":54.4,"C4":23.1,"C5":67.9,"full_lafi":45.5,"sharp_lafi":65.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2018,"season":"'18-19","C1":86.4,"C2":54.5,"C3":70.6,"C4":73.3,"C5":73.3,"full_lafi":79.7,"sharp_lafi":71.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2018,"season":"'18-19","C1":65.2,"C2":65.8,"C3":70.3,"C4":75.3,"C5":45.2,"full_lafi":70.3,"sharp_lafi":64.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2018,"season":"'18-19","C1":83.6,"C2":57.3,"C3":93.3,"C4":76.7,"C5":91.8,"full_lafi":89.7,"sharp_lafi":87.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2018,"season":"'18-19","C1":30.9,"C2":17.3,"C3":50.6,"C4":35.0,"C5":56.7,"full_lafi":31.5,"sharp_lafi":39.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2018,"season":"'18-19","C1":19.1,"C2":37.0,"C3":11.7,"C4":10.6,"C5":28.2,"full_lafi":10.3,"sharp_lafi":15.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2018,"season":"'18-19","C1":49.7,"C2":48.8,"C3":49.7,"C4":48.1,"C5":42.4,"full_lafi":49.4,"sharp_lafi":48.2,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2018,"season":"'18-19","C1":2.4,"C2":1.8,"C3":42.8,"C4":1.4,"C5":87.3,"full_lafi":13.6,"sharp_lafi":39.1,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2018,"season":"'18-19","C1":100.0,"C2":98.8,"C3":100.0,"C4":99.7,"C5":89.7,"full_lafi":99.7,"sharp_lafi":99.7,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2018,"season":"'18-19","C1":31.8,"C2":7.9,"C3":24.7,"C4":16.7,"C5":48.8,"full_lafi":17.0,"sharp_lafi":14.8,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2018,"season":"'18-19","C1":28.5,"C2":49.7,"C3":62.5,"C4":91.9,"C5":50.6,"full_lafi":57.0,"sharp_lafi":57.6,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2018,"season":"'18-19","C1":52.4,"C2":27.0,"C3":47.2,"C4":64.2,"C5":13.0,"full_lafi":42.4,"sharp_lafi":22.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2018,"season":"'18-19","C1":12.7,"C2":8.8,"C3":25.8,"C4":22.5,"C5":43.9,"full_lafi":10.6,"sharp_lafi":14.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2018,"season":"'18-19","C1":29.1,"C2":33.0,"C3":18.9,"C4":16.4,"C5":20.0,"full_lafi":14.8,"sharp_lafi":13.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2018,"season":"'18-19","C1":44.8,"C2":82.4,"C3":42.5,"C4":37.2,"C5":3.9,"full_lafi":44.8,"sharp_lafi":47.6,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2018,"season":"'18-19","C1":41.5,"C2":73.3,"C3":48.1,"C4":80.0,"C5":38.2,"full_lafi":58.8,"sharp_lafi":57.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2018,"season":"'18-19","C1":12.1,"C2":43.3,"C3":27.2,"C4":15.0,"C5":18.8,"full_lafi":13.9,"sharp_lafi":23.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2018,"season":"'18-19","C1":41.2,"C2":69.4,"C3":85.0,"C4":70.3,"C5":70.6,"full_lafi":72.4,"sharp_lafi":83.0,"po_result":"Missed playoffs","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2018,"season":"'18-19","C1":96.7,"C2":99.4,"C3":78.1,"C4":96.9,"C5":32.4,"full_lafi":93.6,"sharp_lafi":80.6,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2018,"season":"'18-19","C1":85.8,"C2":19.7,"C3":18.3,"C4":20.3,"C5":62.1,"full_lafi":40.9,"sharp_lafi":22.7,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2018,"season":"'18-19","C1":19.4,"C2":30.0,"C3":13.9,"C4":9.7,"C5":31.5,"full_lafi":9.7,"sharp_lafi":14.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2018,"season":"'18-19","C1":35.5,"C2":60.3,"C3":55.6,"C4":76.9,"C5":65.8,"full_lafi":59.4,"sharp_lafi":62.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2018,"season":"'18-19","C1":93.9,"C2":11.5,"C3":88.9,"C4":28.6,"C5":86.7,"full_lafi":65.2,"sharp_lafi":63.0,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2018,"season":"'18-19","C1":42.4,"C2":72.4,"C3":67.2,"C4":72.2,"C5":84.5,"full_lafi":71.5,"sharp_lafi":81.4,"po_result":"Missed playoffs","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2018,"season":"'18-19","C1":74.5,"C2":53.0,"C3":90.6,"C4":86.7,"C5":100.0,"full_lafi":89.1,"sharp_lafi":86.7,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2018,"season":"'18-19","C1":32.7,"C2":70.9,"C3":33.3,"C4":65.0,"C5":22.1,"full_lafi":45.8,"sharp_lafi":43.3,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2018,"season":"'18-19","C1":24.2,"C2":30.6,"C3":5.8,"C4":30.0,"C5":14.5,"full_lafi":11.5,"sharp_lafi":8.5,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2018,"season":"'18-19","C1":43.9,"C2":88.2,"C3":32.2,"C4":29.4,"C5":27.9,"full_lafi":45.2,"sharp_lafi":52.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2017,"season":"'17-18","C1":16.1,"C2":16.7,"C3":18.6,"C4":47.8,"C5":32.7,"full_lafi":17.9,"sharp_lafi":11.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2017,"season":"'17-18","C1":45.5,"C2":68.2,"C3":60.6,"C4":31.9,"C5":57.9,"full_lafi":54.2,"sharp_lafi":67.0,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2017,"season":"'17-18","C1":27.0,"C2":50.3,"C3":23.9,"C4":32.8,"C5":16.7,"full_lafi":22.1,"sharp_lafi":24.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2017,"season":"'17-18","C1":90.6,"C2":50.0,"C3":74.4,"C4":71.1,"C5":90.3,"full_lafi":84.8,"sharp_lafi":76.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2017,"season":"'17-18","C1":21.5,"C2":54.2,"C3":36.9,"C4":40.8,"C5":71.2,"full_lafi":41.2,"sharp_lafi":54.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2017,"season":"'17-18","C1":85.5,"C2":70.6,"C3":74.7,"C4":66.4,"C5":46.1,"full_lafi":77.6,"sharp_lafi":70.6,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2017,"season":"'17-18","C1":68.5,"C2":19.4,"C3":79.7,"C4":51.1,"C5":86.1,"full_lafi":62.7,"sharp_lafi":62.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2017,"season":"'17-18","C1":37.0,"C2":63.3,"C3":20.0,"C4":10.8,"C5":17.9,"full_lafi":22.7,"sharp_lafi":29.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2017,"season":"'17-18","C1":50.6,"C2":40.9,"C3":46.7,"C4":9.4,"C5":41.2,"full_lafi":34.2,"sharp_lafi":42.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2017,"season":"'17-18","C1":3.6,"C2":1.2,"C3":26.1,"C4":2.5,"C5":88.8,"full_lafi":9.4,"sharp_lafi":27.7,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2017,"season":"'17-18","C1":99.1,"C2":97.6,"C3":98.1,"C4":97.2,"C5":49.1,"full_lafi":98.2,"sharp_lafi":93.6,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Rockets","is_contender":false},{"team":"IND","year":2017,"season":"'17-18","C1":47.6,"C2":66.4,"C3":69.2,"C4":76.1,"C5":74.8,"full_lafi":70.9,"sharp_lafi":75.8,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2017,"season":"'17-18","C1":36.4,"C2":90.9,"C3":68.3,"C4":93.9,"C5":40.3,"full_lafi":71.8,"sharp_lafi":74.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2017,"season":"'17-18","C1":39.4,"C2":66.7,"C3":26.9,"C4":51.4,"C5":4.2,"full_lafi":36.1,"sharp_lafi":29.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2017,"season":"'17-18","C1":11.2,"C2":44.5,"C3":33.9,"C4":71.7,"C5":29.7,"full_lafi":32.1,"sharp_lafi":32.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2017,"season":"'17-18","C1":63.3,"C2":42.4,"C3":13.6,"C4":8.6,"C5":6.1,"full_lafi":21.2,"sharp_lafi":12.1,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2017,"season":"'17-18","C1":64.2,"C2":77.0,"C3":62.8,"C4":69.7,"C5":33.3,"full_lafi":66.4,"sharp_lafi":62.4,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2017,"season":"'17-18","C1":82.7,"C2":87.3,"C3":82.2,"C4":95.6,"C5":91.5,"full_lafi":95.8,"sharp_lafi":96.1,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2017,"season":"'17-18","C1":23.0,"C2":74.5,"C3":23.3,"C4":25.6,"C5":22.4,"full_lafi":27.9,"sharp_lafi":40.9,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2017,"season":"'17-18","C1":11.8,"C2":20.3,"C3":64.7,"C4":43.3,"C5":77.9,"full_lafi":37.0,"sharp_lafi":53.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2017,"season":"'17-18","C1":99.4,"C2":99.1,"C3":95.0,"C4":96.7,"C5":53.3,"full_lafi":98.5,"sharp_lafi":95.2,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2017,"season":"'17-18","C1":55.5,"C2":26.4,"C3":13.1,"C4":21.1,"C5":26.1,"full_lafi":21.5,"sharp_lafi":11.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2017,"season":"'17-18","C1":6.4,"C2":28.2,"C3":0.6,"C4":3.6,"C5":3.6,"full_lafi":1.2,"sharp_lafi":2.1,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2017,"season":"'17-18","C1":53.3,"C2":20.9,"C3":61.4,"C4":50.0,"C5":41.5,"full_lafi":46.7,"sharp_lafi":40.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2017,"season":"'17-18","C1":97.6,"C2":36.1,"C3":97.5,"C4":81.4,"C5":90.9,"full_lafi":90.9,"sharp_lafi":80.3,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2017,"season":"'17-18","C1":21.2,"C2":30.3,"C3":71.1,"C4":47.2,"C5":92.7,"full_lafi":50.3,"sharp_lafi":65.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2017,"season":"'17-18","C1":29.7,"C2":39.1,"C3":44.7,"C4":75.0,"C5":70.0,"full_lafi":50.9,"sharp_lafi":50.3,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2017,"season":"'17-18","C1":50.3,"C2":53.3,"C3":21.9,"C4":60.3,"C5":10.9,"full_lafi":39.1,"sharp_lafi":21.8,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2017,"season":"'17-18","C1":35.8,"C2":18.8,"C3":47.8,"C4":59.7,"C5":55.5,"full_lafi":41.5,"sharp_lafi":37.6,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2017,"season":"'17-18","C1":62.1,"C2":17.0,"C3":42.2,"C4":8.1,"C5":79.7,"full_lafi":37.9,"sharp_lafi":42.4,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2016,"season":"'16-17","C1":30.0,"C2":41.2,"C3":16.9,"C4":21.7,"C5":22.7,"full_lafi":19.4,"sharp_lafi":17.3,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2016,"season":"'16-17","C1":17.3,"C2":48.2,"C3":6.1,"C4":3.9,"C5":23.9,"full_lafi":8.8,"sharp_lafi":16.4,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2016,"season":"'16-17","C1":9.1,"C2":71.2,"C3":27.5,"C4":56.9,"C5":4.5,"full_lafi":28.2,"sharp_lafi":34.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2016,"season":"'16-17","C1":77.6,"C2":9.4,"C3":29.2,"C4":53.1,"C5":83.6,"full_lafi":51.5,"sharp_lafi":33.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2016,"season":"'16-17","C1":26.1,"C2":81.8,"C3":51.9,"C4":73.6,"C5":75.8,"full_lafi":61.5,"sharp_lafi":75.2,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2016,"season":"'16-17","C1":79.1,"C2":90.0,"C3":91.7,"C4":87.8,"C5":54.2,"full_lafi":92.1,"sharp_lafi":89.1,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2016,"season":"'16-17","C1":57.0,"C2":16.4,"C3":91.1,"C4":55.8,"C5":93.6,"full_lafi":64.2,"sharp_lafi":69.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2016,"season":"'16-17","C1":37.3,"C2":38.5,"C3":16.4,"C4":12.5,"C5":12.4,"full_lafi":16.1,"sharp_lafi":12.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2016,"season":"'16-17","C1":72.7,"C2":79.4,"C3":83.1,"C4":94.4,"C5":93.9,"full_lafi":93.3,"sharp_lafi":93.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2016,"season":"'16-17","C1":6.7,"C2":1.5,"C3":3.9,"C4":1.7,"C5":37.9,"full_lafi":1.5,"sharp_lafi":3.9,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2016,"season":"'16-17","C1":88.8,"C2":96.1,"C3":41.9,"C4":88.3,"C5":10.6,"full_lafi":76.4,"sharp_lafi":55.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2016,"season":"'16-17","C1":78.2,"C2":36.4,"C3":51.4,"C4":43.9,"C5":64.8,"full_lafi":57.3,"sharp_lafi":50.9,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2016,"season":"'16-17","C1":51.8,"C2":82.7,"C3":95.3,"C4":61.9,"C5":93.3,"full_lafi":84.5,"sharp_lafi":98.2,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2016,"season":"'16-17","C1":34.5,"C2":39.4,"C3":81.4,"C4":71.4,"C5":88.2,"full_lafi":63.0,"sharp_lafi":73.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2016,"season":"'16-17","C1":53.9,"C2":33.9,"C3":33.6,"C4":25.0,"C5":35.2,"full_lafi":31.8,"sharp_lafi":27.7,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2016,"season":"'16-17","C1":88.2,"C2":42.7,"C3":44.4,"C4":45.0,"C5":15.8,"full_lafi":52.1,"sharp_lafi":31.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2016,"season":"'16-17","C1":49.4,"C2":45.2,"C3":8.3,"C4":18.6,"C5":0.6,"full_lafi":19.1,"sharp_lafi":10.0,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2016,"season":"'16-17","C1":75.8,"C2":78.2,"C3":37.8,"C4":63.1,"C5":57.3,"full_lafi":66.7,"sharp_lafi":60.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2016,"season":"'16-17","C1":30.3,"C2":80.9,"C3":50.3,"C4":66.9,"C5":60.6,"full_lafi":57.9,"sharp_lafi":68.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2016,"season":"'16-17","C1":5.2,"C2":28.8,"C3":88.3,"C4":36.4,"C5":72.1,"full_lafi":42.7,"sharp_lafi":66.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2016,"season":"'16-17","C1":96.1,"C2":92.7,"C3":63.6,"C4":91.7,"C5":28.5,"full_lafi":87.0,"sharp_lafi":69.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2016,"season":"'16-17","C1":49.1,"C2":43.6,"C3":22.5,"C4":14.2,"C5":50.3,"full_lafi":30.0,"sharp_lafi":35.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2016,"season":"'16-17","C1":4.2,"C2":27.3,"C3":9.2,"C4":7.2,"C5":7.3,"full_lafi":3.6,"sharp_lafi":6.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2016,"season":"'16-17","C1":42.1,"C2":81.5,"C3":84.7,"C4":96.4,"C5":83.9,"full_lafi":85.2,"sharp_lafi":92.4,"po_result":"Missed playoffs","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2016,"season":"'16-17","C1":94.5,"C2":23.6,"C3":80.0,"C4":40.3,"C5":74.2,"full_lafi":67.3,"sharp_lafi":61.5,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2016,"season":"'16-17","C1":17.0,"C2":22.7,"C3":47.5,"C4":19.2,"C5":36.1,"full_lafi":20.0,"sharp_lafi":30.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2016,"season":"'16-17","C1":22.1,"C2":29.1,"C3":33.1,"C4":39.4,"C5":81.2,"full_lafi":33.0,"sharp_lafi":45.2,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2016,"season":"'16-17","C1":87.9,"C2":86.4,"C3":92.8,"C4":100.0,"C5":72.4,"full_lafi":96.4,"sharp_lafi":94.5,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2016,"season":"'16-17","C1":17.9,"C2":3.9,"C3":65.3,"C4":38.1,"C5":54.5,"full_lafi":28.5,"sharp_lafi":39.4,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2016,"season":"'16-17","C1":96.4,"C2":47.3,"C3":61.9,"C4":51.9,"C5":53.9,"full_lafi":68.5,"sharp_lafi":57.0,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2014,"season":"'14-15","C1":13.9,"C2":18.5,"C3":1.1,"C4":15.6,"C5":3.0,"full_lafi":3.9,"sharp_lafi":1.2,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2014,"season":"'14-15","C1":25.2,"C2":78.5,"C3":25.3,"C4":11.1,"C5":49.7,"full_lafi":31.2,"sharp_lafi":52.4,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2014,"season":"'14-15","C1":83.0,"C2":38.2,"C3":66.4,"C4":68.3,"C5":48.5,"full_lafi":66.1,"sharp_lafi":52.1,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2014,"season":"'14-15","C1":57.9,"C2":51.5,"C3":73.1,"C4":90.6,"C5":97.6,"full_lafi":79.4,"sharp_lafi":78.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2014,"season":"'14-15","C1":39.1,"C2":14.5,"C3":35.3,"C4":15.3,"C5":36.4,"full_lafi":20.3,"sharp_lafi":17.6,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2014,"season":"'14-15","C1":69.4,"C2":91.8,"C3":81.7,"C4":98.1,"C5":57.0,"full_lafi":90.0,"sharp_lafi":85.5,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2014,"season":"'14-15","C1":26.4,"C2":87.0,"C3":51.1,"C4":93.3,"C5":43.3,"full_lafi":61.8,"sharp_lafi":64.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2014,"season":"'14-15","C1":91.8,"C2":87.6,"C3":65.8,"C4":56.4,"C5":30.6,"full_lafi":77.0,"sharp_lafi":68.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2014,"season":"'14-15","C1":87.0,"C2":52.7,"C3":23.1,"C4":75.6,"C5":28.8,"full_lafi":58.5,"sharp_lafi":30.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2014,"season":"'14-15","C1":13.0,"C2":7.0,"C3":15.3,"C4":3.1,"C5":60.0,"full_lafi":6.4,"sharp_lafi":13.6,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2014,"season":"'14-15","C1":45.8,"C2":95.2,"C3":39.2,"C4":67.5,"C5":1.5,"full_lafi":53.9,"sharp_lafi":50.0,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2014,"season":"'14-15","C1":23.9,"C2":8.5,"C3":21.7,"C4":24.7,"C5":63.6,"full_lafi":18.5,"sharp_lafi":18.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2014,"season":"'14-15","C1":72.1,"C2":85.8,"C3":60.0,"C4":34.7,"C5":90.6,"full_lafi":73.6,"sharp_lafi":84.5,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2014,"season":"'14-15","C1":78.8,"C2":37.6,"C3":94.7,"C4":66.7,"C5":99.4,"full_lafi":83.3,"sharp_lafi":82.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2014,"season":"'14-15","C1":45.2,"C2":21.8,"C3":35.6,"C4":62.5,"C5":38.5,"full_lafi":38.2,"sharp_lafi":24.5,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2014,"season":"'14-15","C1":43.3,"C2":61.5,"C3":64.2,"C4":28.9,"C5":37.0,"full_lafi":48.2,"sharp_lafi":59.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2014,"season":"'14-15","C1":67.3,"C2":15.2,"C3":40.6,"C4":11.4,"C5":20.3,"full_lafi":26.7,"sharp_lafi":16.1,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2014,"season":"'14-15","C1":70.6,"C2":19.1,"C3":65.6,"C4":31.7,"C5":87.6,"full_lafi":55.5,"sharp_lafi":57.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2014,"season":"'14-15","C1":93.6,"C2":40.0,"C3":66.9,"C4":54.4,"C5":16.4,"full_lafi":60.3,"sharp_lafi":42.7,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2014,"season":"'14-15","C1":0.3,"C2":8.2,"C3":56.4,"C4":6.9,"C5":81.8,"full_lafi":18.8,"sharp_lafi":46.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2014,"season":"'14-15","C1":79.4,"C2":93.0,"C3":88.6,"C4":90.0,"C5":68.5,"full_lafi":94.2,"sharp_lafi":94.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2014,"season":"'14-15","C1":79.7,"C2":89.1,"C3":41.4,"C4":96.1,"C5":17.6,"full_lafi":74.2,"sharp_lafi":53.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2014,"season":"'14-15","C1":4.5,"C2":39.7,"C3":17.5,"C4":26.4,"C5":0.9,"full_lafi":7.0,"sharp_lafi":10.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2014,"season":"'14-15","C1":61.2,"C2":95.8,"C3":93.6,"C4":79.2,"C5":65.2,"full_lafi":87.9,"sharp_lafi":96.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2014,"season":"'14-15","C1":86.1,"C2":84.8,"C3":68.6,"C4":67.8,"C5":87.9,"full_lafi":88.2,"sharp_lafi":87.0,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2014,"season":"'14-15","C1":60.3,"C2":55.8,"C3":71.9,"C4":64.4,"C5":41.8,"full_lafi":62.1,"sharp_lafi":61.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2014,"season":"'14-15","C1":10.3,"C2":5.8,"C3":10.8,"C4":14.4,"C5":33.6,"full_lafi":4.5,"sharp_lafi":6.4,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2014,"season":"'14-15","C1":84.5,"C2":31.2,"C3":96.1,"C4":69.4,"C5":95.2,"full_lafi":83.9,"sharp_lafi":79.1,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2014,"season":"'14-15","C1":1.8,"C2":34.5,"C3":37.2,"C4":19.4,"C5":24.2,"full_lafi":12.4,"sharp_lafi":26.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2014,"season":"'14-15","C1":69.7,"C2":13.3,"C3":19.4,"C4":35.6,"C5":61.8,"full_lafi":37.3,"sharp_lafi":19.1,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2022,"season":"'22-23","C1":98.5,"C2":74.2,"C3":92.2,"C4":90.8,"C5":96.1,"full_lafi":97.9,"sharp_lafi":96.7,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2022,"season":"'22-23","C1":52.7,"C2":70.0,"C3":34.4,"C4":48.3,"C5":26.4,"full_lafi":48.8,"sharp_lafi":46.1,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2022,"season":"'22-23","C1":65.8,"C2":61.8,"C3":86.4,"C4":36.1,"C5":91.2,"full_lafi":73.0,"sharp_lafi":85.8,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2022,"season":"'22-23","C1":31.2,"C2":28.5,"C3":31.7,"C4":42.2,"C5":47.9,"full_lafi":29.5,"sharp_lafi":28.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2022,"season":"'22-23","C1":19.7,"C2":98.5,"C3":71.7,"C4":98.9,"C5":67.0,"full_lafi":76.1,"sharp_lafi":88.2,"po_result":"Missed playoffs","is_cohort":true,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2022,"season":"'22-23","C1":89.1,"C2":25.2,"C3":54.2,"C4":55.3,"C5":70.9,"full_lafi":62.4,"sharp_lafi":49.1,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2022,"season":"'22-23","C1":94.8,"C2":92.4,"C3":95.8,"C4":91.1,"C5":67.3,"full_lafi":97.3,"sharp_lafi":97.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Mavericks","is_contender":false},{"team":"DEN","year":2022,"season":"'22-23","C1":12.4,"C2":25.5,"C3":10.3,"C4":11.7,"C5":36.7,"full_lafi":7.3,"sharp_lafi":12.4,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Nuggets","is_contender":true},{"team":"DET","year":2022,"season":"'22-23","C1":91.2,"C2":60.6,"C3":75.8,"C4":86.1,"C5":85.2,"full_lafi":89.4,"sharp_lafi":80.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2022,"season":"'22-23","C1":1.5,"C2":2.1,"C3":1.9,"C4":0.3,"C5":51.8,"full_lafi":1.8,"sharp_lafi":7.6,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2022,"season":"'22-23","C1":56.7,"C2":83.9,"C3":64.4,"C4":72.5,"C5":43.0,"full_lafi":69.1,"sharp_lafi":71.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2022,"season":"'22-23","C1":9.4,"C2":55.2,"C3":9.7,"C4":57.5,"C5":30.9,"full_lafi":23.9,"sharp_lafi":25.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2022,"season":"'22-23","C1":60.0,"C2":62.4,"C3":89.2,"C4":76.4,"C5":82.4,"full_lafi":80.6,"sharp_lafi":84.2,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2022,"season":"'22-23","C1":86.7,"C2":90.3,"C3":61.7,"C4":85.6,"C5":26.7,"full_lafi":81.2,"sharp_lafi":66.7,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2022,"season":"'22-23","C1":57.6,"C2":41.5,"C3":25.6,"C4":50.3,"C5":18.5,"full_lafi":37.6,"sharp_lafi":20.0,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2022,"season":"'22-23","C1":8.5,"C2":7.3,"C3":58.9,"C4":18.1,"C5":76.1,"full_lafi":21.8,"sharp_lafi":45.5,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2022,"season":"'22-23","C1":63.6,"C2":89.7,"C3":52.8,"C4":52.2,"C5":60.9,"full_lafi":67.6,"sharp_lafi":73.9,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2022,"season":"'22-23","C1":14.2,"C2":63.9,"C3":43.6,"C4":30.6,"C5":46.7,"full_lafi":33.6,"sharp_lafi":53.0,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":true,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2022,"season":"'22-23","C1":16.4,"C2":62.1,"C3":14.7,"C4":20.6,"C5":7.0,"full_lafi":15.8,"sharp_lafi":20.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2022,"season":"'22-23","C1":93.3,"C2":72.7,"C3":91.9,"C4":84.4,"C5":53.0,"full_lafi":91.5,"sharp_lafi":81.8,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2022,"season":"'22-23","C1":61.5,"C2":57.6,"C3":53.9,"C4":92.2,"C5":1.8,"full_lafi":59.1,"sharp_lafi":40.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2022,"season":"'22-23","C1":62.7,"C2":47.9,"C3":56.1,"C4":59.4,"C5":35.8,"full_lafi":55.2,"sharp_lafi":48.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2022,"season":"'22-23","C1":59.4,"C2":89.4,"C3":82.8,"C4":91.4,"C5":58.2,"full_lafi":86.1,"sharp_lafi":85.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2022,"season":"'22-23","C1":54.8,"C2":21.2,"C3":43.3,"C4":32.2,"C5":95.8,"full_lafi":48.5,"sharp_lafi":50.6,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2022,"season":"'22-23","C1":73.9,"C2":38.8,"C3":69.7,"C4":43.1,"C5":58.5,"full_lafi":59.7,"sharp_lafi":58.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2022,"season":"'22-23","C1":18.5,"C2":27.9,"C3":11.9,"C4":4.4,"C5":12.7,"full_lafi":5.5,"sharp_lafi":9.1,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2022,"season":"'22-23","C1":40.6,"C2":22.4,"C3":3.3,"C4":12.8,"C5":9.4,"full_lafi":8.5,"sharp_lafi":3.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2022,"season":"'22-23","C1":27.6,"C2":47.6,"C3":75.6,"C4":60.8,"C5":72.7,"full_lafi":56.1,"sharp_lafi":69.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2022,"season":"'22-23","C1":47.3,"C2":3.3,"C3":20.8,"C4":5.8,"C5":23.0,"full_lafi":10.9,"sharp_lafi":6.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2022,"season":"'22-23","C1":37.6,"C2":9.7,"C3":48.6,"C4":26.1,"C5":60.3,"full_lafi":29.1,"sharp_lafi":35.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2015,"season":"'15-16","C1":11.5,"C2":32.7,"C3":1.4,"C4":30.8,"C5":2.7,"full_lafi":5.8,"sharp_lafi":5.8,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2015,"season":"'15-16","C1":23.3,"C2":92.1,"C3":10.6,"C4":6.7,"C5":24.8,"full_lafi":23.6,"sharp_lafi":44.2,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2015,"season":"'15-16","C1":59.7,"C2":23.9,"C3":40.0,"C4":56.7,"C5":52.1,"full_lafi":47.9,"sharp_lafi":35.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2015,"season":"'15-16","C1":81.8,"C2":37.3,"C3":34.2,"C4":43.6,"C5":51.2,"full_lafi":52.4,"sharp_lafi":38.5,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2015,"season":"'15-16","C1":25.5,"C2":52.1,"C3":39.7,"C4":53.6,"C5":50.9,"full_lafi":43.3,"sharp_lafi":47.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2015,"season":"'15-16","C1":57.3,"C2":70.3,"C3":73.3,"C4":83.6,"C5":59.4,"full_lafi":75.2,"sharp_lafi":74.2,"po_result":"Champion","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2015,"season":"'15-16","C1":20.3,"C2":14.2,"C3":38.9,"C4":38.9,"C5":66.1,"full_lafi":27.0,"sharp_lafi":34.8,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2015,"season":"'15-16","C1":66.1,"C2":59.7,"C3":25.0,"C4":45.6,"C5":21.8,"full_lafi":46.4,"sharp_lafi":33.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2015,"season":"'15-16","C1":97.0,"C2":96.7,"C3":80.3,"C4":98.3,"C5":68.8,"full_lafi":97.0,"sharp_lafi":92.1,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2015,"season":"'15-16","C1":8.2,"C2":3.0,"C3":8.1,"C4":1.9,"C5":33.0,"full_lafi":2.4,"sharp_lafi":5.5,"po_result":"Lost Finals","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Warriors","is_contender":true},{"team":"HOU","year":2015,"season":"'15-16","C1":58.2,"C2":97.9,"C3":65.0,"C4":77.2,"C5":15.5,"full_lafi":69.4,"sharp_lafi":67.6,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2015,"season":"'15-16","C1":33.9,"C2":22.1,"C3":67.8,"C4":23.6,"C5":86.4,"full_lafi":44.5,"sharp_lafi":59.7,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2015,"season":"'15-16","C1":84.2,"C2":80.6,"C3":94.4,"C4":48.6,"C5":97.0,"full_lafi":90.6,"sharp_lafi":97.9,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2015,"season":"'15-16","C1":76.7,"C2":76.4,"C3":98.9,"C4":99.2,"C5":99.7,"full_lafi":96.7,"sharp_lafi":98.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2015,"season":"'15-16","C1":39.7,"C2":36.7,"C3":46.9,"C4":53.3,"C5":25.2,"full_lafi":38.5,"sharp_lafi":34.5,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2015,"season":"'15-16","C1":71.5,"C2":53.6,"C3":59.7,"C4":46.4,"C5":31.8,"full_lafi":56.4,"sharp_lafi":51.2,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2015,"season":"'15-16","C1":36.7,"C2":9.1,"C3":39.4,"C4":18.9,"C5":11.8,"full_lafi":15.5,"sharp_lafi":10.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2015,"season":"'15-16","C1":81.2,"C2":52.4,"C3":37.5,"C4":24.4,"C5":79.1,"full_lafi":56.7,"sharp_lafi":56.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2015,"season":"'15-16","C1":42.7,"C2":68.5,"C3":68.1,"C4":88.6,"C5":83.3,"full_lafi":74.5,"sharp_lafi":79.4,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2015,"season":"'15-16","C1":2.1,"C2":17.6,"C3":85.6,"C4":41.9,"C5":85.5,"full_lafi":40.6,"sharp_lafi":63.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2015,"season":"'15-16","C1":97.9,"C2":77.6,"C3":76.4,"C4":79.7,"C5":65.5,"full_lafi":91.2,"sharp_lafi":81.4,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2015,"season":"'15-16","C1":43.0,"C2":47.0,"C3":11.1,"C4":31.4,"C5":27.3,"full_lafi":25.5,"sharp_lafi":18.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2015,"season":"'15-16","C1":32.1,"C2":48.5,"C3":44.2,"C4":30.3,"C5":5.8,"full_lafi":27.6,"sharp_lafi":29.7,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2015,"season":"'15-16","C1":15.8,"C2":56.1,"C3":53.3,"C4":40.0,"C5":51.5,"full_lafi":39.7,"sharp_lafi":56.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2015,"season":"'15-16","C1":95.5,"C2":32.1,"C3":87.8,"C4":54.2,"C5":79.4,"full_lafi":77.3,"sharp_lafi":70.3,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2015,"season":"'15-16","C1":80.6,"C2":67.0,"C3":21.1,"C4":20.0,"C5":8.5,"full_lafi":43.0,"sharp_lafi":28.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2015,"season":"'15-16","C1":20.6,"C2":16.1,"C3":22.8,"C4":52.5,"C5":71.8,"full_lafi":28.8,"sharp_lafi":27.3,"po_result":"Lost R2","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"TOR","year":2015,"season":"'15-16","C1":77.0,"C2":44.8,"C3":83.3,"C4":85.8,"C5":44.8,"full_lafi":75.8,"sharp_lafi":61.8,"po_result":"Lost CF","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2015,"season":"'15-16","C1":3.0,"C2":21.5,"C3":69.4,"C4":22.8,"C5":54.8,"full_lafi":24.5,"sharp_lafi":48.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2015,"season":"'15-16","C1":60.9,"C2":58.5,"C3":18.1,"C4":77.5,"C5":42.7,"full_lafi":54.5,"sharp_lafi":37.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ATL","year":2025,"season":"'25-26","C1":26.7,"C2":15.8,"C3":4.4,"C4":16.1,"C5":17.3,"full_lafi":6.1,"sharp_lafi":3.6,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BOS","year":2025,"season":"'25-26","C1":77.9,"C2":23.0,"C3":96.9,"C4":65.8,"C5":98.5,"full_lafi":78.2,"sharp_lafi":77.4,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"BKN","year":2025,"season":"'25-26","C1":18.8,"C2":10.3,"C3":11.4,"C4":3.3,"C5":7.9,"full_lafi":3.3,"sharp_lafi":1.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHA","year":2025,"season":"'25-26","C1":75.5,"C2":30.9,"C3":38.3,"C4":69.2,"C5":42.1,"full_lafi":54.8,"sharp_lafi":33.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CHI","year":2025,"season":"'25-26","C1":5.5,"C2":85.2,"C3":0.8,"C4":87.5,"C5":0.3,"full_lafi":30.3,"sharp_lafi":24.2,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"CLE","year":2025,"season":"'25-26","C1":55.2,"C2":33.3,"C3":41.7,"C4":50.8,"C5":34.2,"full_lafi":44.2,"sharp_lafi":32.1,"po_result":"In CF (0-1)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DAL","year":2025,"season":"'25-26","C1":88.5,"C2":46.1,"C3":72.8,"C4":73.9,"C5":78.2,"full_lafi":80.0,"sharp_lafi":68.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DEN","year":2025,"season":"'25-26","C1":68.2,"C2":40.3,"C3":30.6,"C4":23.3,"C5":64.5,"full_lafi":46.1,"sharp_lafi":43.0,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"DET","year":2025,"season":"'25-26","C1":76.4,"C2":13.6,"C3":28.3,"C4":28.3,"C5":23.6,"full_lafi":30.9,"sharp_lafi":11.5,"po_result":"Lost R2 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"GSW","year":2025,"season":"'25-26","C1":0.9,"C2":2.7,"C3":4.7,"C4":2.8,"C5":19.1,"full_lafi":0.3,"sharp_lafi":0.9,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"HOU","year":2025,"season":"'25-26","C1":80.3,"C2":77.9,"C3":85.8,"C4":55.0,"C5":63.9,"full_lafi":81.5,"sharp_lafi":83.9,"po_result":"Lost R1 (2-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"IND","year":2025,"season":"'25-26","C1":5.8,"C2":24.8,"C3":16.1,"C4":46.7,"C5":39.7,"full_lafi":16.7,"sharp_lafi":15.8,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAC","year":2025,"season":"'25-26","C1":84.8,"C2":73.6,"C3":96.4,"C4":92.5,"C5":77.6,"full_lafi":94.8,"sharp_lafi":91.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"LAL","year":2025,"season":"'25-26","C1":89.4,"C2":33.6,"C3":88.1,"C4":82.5,"C5":94.2,"full_lafi":86.7,"sharp_lafi":76.4,"po_result":"Lost R2 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MEM","year":2025,"season":"'25-26","C1":10.6,"C2":84.2,"C3":20.3,"C4":73.1,"C5":55.8,"full_lafi":47.6,"sharp_lafi":55.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIA","year":2025,"season":"'25-26","C1":7.9,"C2":83.3,"C3":35.0,"C4":41.4,"C5":10.3,"full_lafi":29.5,"sharp_lafi":47.0,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIL","year":2025,"season":"'25-26","C1":46.4,"C2":88.8,"C3":50.8,"C4":65.3,"C5":76.4,"full_lafi":67.9,"sharp_lafi":78.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"MIN","year":2025,"season":"'25-26","C1":30.6,"C2":71.8,"C3":89.7,"C4":45.3,"C5":82.7,"full_lafi":64.5,"sharp_lafi":89.7,"po_result":"Lost R2 (2-4)","is_cohort":true,"is_wolves_traj":true,"anchor_label":null,"is_contender":false},{"team":"NOP","year":2025,"season":"'25-26","C1":82.1,"C2":85.5,"C3":73.6,"C4":70.0,"C5":15.2,"full_lafi":74.8,"sharp_lafi":64.5,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"NYK","year":2025,"season":"'25-26","C1":83.3,"C2":75.8,"C3":58.3,"C4":39.7,"C5":63.3,"full_lafi":70.0,"sharp_lafi":72.4,"po_result":"In CF (1-0)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"OKC","year":2025,"season":"'25-26","C1":92.4,"C2":69.7,"C3":84.4,"C4":68.6,"C5":40.0,"full_lafi":82.1,"sharp_lafi":73.3,"po_result":"In CF (0-1)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"ORL","year":2025,"season":"'25-26","C1":33.3,"C2":60.9,"C3":46.1,"C4":50.6,"C5":55.2,"full_lafi":49.7,"sharp_lafi":56.4,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHI","year":2025,"season":"'25-26","C1":54.2,"C2":86.1,"C3":93.1,"C4":66.1,"C5":70.3,"full_lafi":80.9,"sharp_lafi":93.3,"po_result":"Lost R2 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"PHX","year":2025,"season":"'25-26","C1":56.4,"C2":45.5,"C3":86.9,"C4":78.9,"C5":98.2,"full_lafi":77.9,"sharp_lafi":82.4,"po_result":"Lost R1 (0-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"POR","year":2025,"season":"'25-26","C1":60.6,"C2":86.7,"C3":51.7,"C4":65.6,"C5":17.0,"full_lafi":60.6,"sharp_lafi":58.2,"po_result":"Lost R1 (1-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAC","year":2025,"season":"'25-26","C1":77.3,"C2":31.5,"C3":76.9,"C4":61.1,"C5":97.3,"full_lafi":73.9,"sharp_lafi":72.1,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"SAS","year":2025,"season":"'25-26","C1":38.2,"C2":56.4,"C3":27.8,"C4":14.7,"C5":11.2,"full_lafi":23.0,"sharp_lafi":27.0,"po_result":"In CF (1-0)","is_cohort":false,"is_wolves_traj":false,"anchor_label":"Spurs","is_contender":true},{"team":"TOR","year":2025,"season":"'25-26","C1":24.8,"C2":17.9,"C3":10.0,"C4":21.4,"C5":20.6,"full_lafi":8.2,"sharp_lafi":8.2,"po_result":"Lost R1 (3-4)","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"UTA","year":2025,"season":"'25-26","C1":47.9,"C2":4.8,"C3":13.3,"C4":5.3,"C5":48.2,"full_lafi":14.5,"sharp_lafi":10.3,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false},{"team":"WAS","year":2025,"season":"'25-26","C1":58.5,"C2":67.6,"C3":77.5,"C4":74.4,"C5":88.5,"full_lafi":78.8,"sharp_lafi":83.6,"po_result":"Missed playoffs","is_cohort":false,"is_wolves_traj":false,"anchor_label":null,"is_contender":false}]</script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(() => {
+  const raw = JSON.parse(document.getElementById('lafi-data').textContent);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Per-season narrative for the Wolves trajectory ----------
+  const SEASON_STORY = {
+    2022: "Gobert's first year. Already dead off-ball, not yet an iso team.",
+    2023: "The WCF year. Designed offense. Right next to the Spurs in Q1.",
+    2024: "Randle's first year. Stickier ball, more iso, shot quality drops.",
+    2025: "Distributed pickup. Iso load decentralizes. The shots get worse.",
+  };
+  const DEFAULT_SUBTITLE = "Each dot is one team-season. Ball stickiness on x, motion death on y. The 2025-26 Wolves are deep in Q4 (distributed pickup), and they got there by walking across three quadrants in four years.";
+  const subtitleEl = document.getElementById('subtitle');
+  const onboardEl = document.getElementById('onboard');
+
+  function setSubtitleNarrative(season, isFinal) {
+    const story = SEASON_STORY[season];
+    if (!story) return;
+    subtitleEl.style.opacity = 0;
+    setTimeout(() => {
+      const label = `MIN '${(season % 100).toString().padStart(2,'0')}-${((season+1) % 100).toString().padStart(2,'0')}`;
+      subtitleEl.innerHTML = `<span class="narrative-year">${label}</span>${story}`;
+      subtitleEl.className = 'subtitle narrative' + (isFinal ? ' final' : '');
+      subtitleEl.style.opacity = 1;
+    }, 200);
+  }
+  function setSubtitleDefault() {
+    subtitleEl.style.opacity = 0;
+    setTimeout(() => {
+      subtitleEl.textContent = DEFAULT_SUBTITLE;
+      subtitleEl.className = 'subtitle';
+      subtitleEl.style.opacity = 1;
+    }, 200);
+  }
+
+  // ---------- Layout ----------
+  const W = 860, H = 760;
+  const margin = { top: 60, right: 50, bottom: 70, left: 70 };
+  const innerW = W - margin.left - margin.right;
+  const innerH = H - margin.top - margin.bottom;
+
+  const svg = d3.select('#chart').attr('viewBox', `0 0 ${W} ${H}`);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 100]).range([0, innerW]);
+  const y = d3.scaleLinear().domain([0, 100]).range([innerH, 0]); // y inverted
+
+  // ---------- Quadrant background tints (very subtle) ----------
+  const quadBgLayer = g.append('g').attr('class', 'quad-bg-layer');
+  const quadBgs = [
+    { id: 'Q1', x: 0,        y: y(50),   w: x(50),         h: innerH - y(50),  fill: 'var(--bg-q1)' },
+    { id: 'Q2', x: x(50),    y: y(50),   w: innerW - x(50), h: innerH - y(50), fill: 'var(--bg-q2)' },
+    { id: 'Q3', x: x(50),    y: 0,       w: innerW - x(50), h: y(50),          fill: 'var(--bg-q3)' },
+    { id: 'Q4', x: 0,        y: 0,       w: x(50),         h: y(50),           fill: 'var(--bg-q4)' },
+  ];
+  quadBgLayer.selectAll('rect').data(quadBgs).enter()
+    .append('rect')
+    .attr('class', d => `quad-bg quad-bg-${d.id}`)
+    .attr('x', d => d.x).attr('y', d => d.y)
+    .attr('width', d => d.w).attr('height', d => d.h)
+    .attr('fill', d => d.fill);
+
+  // ---------- Axes ----------
+  g.append('g').attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + ''))
+    .style('opacity', 0)
+    .transition().delay(50).duration(500).style('opacity', 1);
+  g.append('g').attr('class', 'axis')
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d => d + ''))
+    .style('opacity', 0)
+    .transition().delay(50).duration(500).style('opacity', 1);
+
+  g.append('text').attr('class', 'axis-label')
+    .attr('x', innerW / 2).attr('y', innerH + 44).attr('text-anchor', 'middle')
+    .text('Ball Stickiness percentile  →  one player dominating possession');
+  g.append('text').attr('class', 'axis-label')
+    .attr('transform', `translate(-46,${innerH / 2}) rotate(-90)`)
+    .attr('text-anchor', 'middle')
+    .text('Motion Death percentile  →  bodies standing still');
+
+  // ---------- Quadrant lines ----------
+  g.append('line').attr('class', 'quad-line')
+    .attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', innerH);
+  g.append('line').attr('class', 'quad-line')
+    .attr('x1', 0).attr('x2', innerW).attr('y1', y(50)).attr('y2', y(50));
+
+  // ---------- Quadrant labels (clickable) ----------
+  // Placement note: y-axis is inverted, so high motion death (C2) renders at the
+  // TOP of the chart. Q1/Q2 are low-C2 (bottom); Q3/Q4 are high-C2 (top).
+  const quadDefs = [
+    { id: 'Q1', text: 'Q1 · Designed offense',          tx: 8,   ty: 4,  anchor: 'start' },
+    { id: 'Q2', text: 'Q2 · Star-anchored design',       tx: 92,  ty: 4,  anchor: 'end'   },
+    { id: 'Q3', text: 'Q3 · Single-star pickup',         tx: 92,  ty: 96, anchor: 'end'   },
+    { id: 'Q4', text: 'Q4 · Distributed pickup',         tx: 8,   ty: 96, anchor: 'start' },
+  ];
+  let isolatedQuad = null;
+
+  g.selectAll('.quad-label').data(quadDefs).enter()
+    .append('text')
+    .attr('class', d => `quad-label ${d.id === 'Q4' ? 'q4' : ''}`)
+    .attr('x', d => x(d.tx)).attr('y', d => y(d.ty))
+    .attr('text-anchor', d => d.anchor)
+    .text(d => d.text)
+    .on('click', (event, d) => toggleQuadrant(d.id));
+
+  function inQuadrant(d, q) {
+    if (q === 'Q1') return d.C1 <  50 && d.C2 <  50;
+    if (q === 'Q2') return d.C1 >= 50 && d.C2 <  50;
+    if (q === 'Q3') return d.C1 >= 50 && d.C2 >= 50;
+    if (q === 'Q4') return d.C1 <  50 && d.C2 >= 50;
+  }
+
+  function toggleQuadrant(q) {
+    isolatedQuad = (isolatedQuad === q) ? null : q;
+    g.selectAll('.quad-label').classed('active', false);
+    if (isolatedQuad) g.selectAll('.quad-label').filter(d => d.id === isolatedQuad).classed('active', true);
+
+    g.selectAll('.dot.dim-target, .label-group.dim-target')
+      .transition().duration(280).ease(d3.easeCubicInOut)
+      .style('opacity', d => isolatedQuad && !inQuadrant(d, isolatedQuad) ? 0.08 : 1);
+
+    // Special handling for Wolves trajectory: dim entire layer unless Q4 selected or no isolation
+    g.select('.wolves-layer')
+      .transition().duration(280).ease(d3.easeCubicInOut)
+      .style('opacity', (isolatedQuad && isolatedQuad !== 'Q4') ? 0.08 : 1);
+  }
+
+  // ---------- Partition the data ----------
+  const background = raw.filter(d => !d.is_cohort && !d.is_wolves_traj && !d.anchor_label);
+  const anchors    = raw.filter(d => d.anchor_label && !d.is_cohort && !d.is_wolves_traj);
+  const cohort     = raw.filter(d => d.is_cohort && !d.is_wolves_traj);
+  const wolves     = raw.filter(d => d.is_wolves_traj).sort((a, b) => a.year - b.year);
+
+  // ---------- Layers (order matters for z-stacking) ----------
+  const bgLayer       = g.append('g').attr('class', 'bg-layer');
+  const anchorLayer   = g.append('g').attr('class', 'anchor-layer');
+  const cohortLayer   = g.append('g').attr('class', 'cohort-layer');
+  const wolvesLayer   = g.append('g').attr('class', 'wolves-layer');
+
+  // ---------- Tooltip ----------
+  const tt = d3.select('#tooltip');
+  let tipTimer = null;
+
+  function resultClass(po) {
+    if (!po) return 'mid';
+    // Reached or won the Finals
+    if (po === 'Champion' || po.startsWith('Won Finals') || po.startsWith('In Finals')) return 'good';
+    // Made the conference finals (eliminated there, won there, or currently there)
+    if (po.startsWith('Lost CF') || po.startsWith('Won CF') || po.startsWith('In CF')
+        || po.startsWith('Lost Finals') || po.startsWith('Won R2')) return 'good';
+    // Made round 2 (eliminated there or currently there)
+    if (po.startsWith('Lost R2') || po.startsWith('In R2') || po.startsWith('Won R1')) return 'mid';
+    return 'bad';
+  }
+  function showTip(event, d) {
+    clearTimeout(tipTimer);
+    const team_year = `${d.team} ${d.season}`;
+    tt.html(`
+      <div class="tt-team">${team_year}</div>
+      <div class="tt-result ${resultClass(d.po_result)}">${d.po_result}</div>
+      <table>
+        <tr><td class="lbl">Sharp LAFI</td><td class="val">${d.sharp_lafi}</td></tr>
+        <tr><td class="lbl">Full LAFI</td><td class="val">${d.full_lafi}</td></tr>
+        <tr><td class="lbl">Ball Stickiness</td><td class="val">${d.C1}</td></tr>
+        <tr><td class="lbl">Motion Death</td><td class="val">${d.C2}</td></tr>
+        <tr><td class="lbl">Iso Reliance</td><td class="val">${d.C3}</td></tr>
+        <tr><td class="lbl">Action Poverty</td><td class="val">${d.C4}</td></tr>
+        <tr><td class="lbl">Shot Quality Decay</td><td class="val">${d.C5}</td></tr>
+      </table>
+    `);
+    moveTip(event);
+    tt.classed('visible', true);
+  }
+  function moveTip(event) {
+    const pad = 16;
+    const ttNode = tt.node();
+    const ttRect = ttNode.getBoundingClientRect();
+    let left = event.clientX + pad;
+    let top  = event.clientY + pad;
+    if (left + ttRect.width  > window.innerWidth)  left = event.clientX - ttRect.width  - pad;
+    if (top  + ttRect.height > window.innerHeight) top  = event.clientY - ttRect.height - pad;
+    tt.style('left', `${left + window.scrollX}px`).style('top', `${top + window.scrollY}px`);
+  }
+  function hideTip() {
+    tipTimer = setTimeout(() => tt.classed('visible', false), 60);
+  }
+
+  function bindTip(sel, scaleOnHover) {
+    sel
+      .on('mouseover', function(event, d) {
+        showTip(event, d);
+        if (scaleOnHover) {
+          d3.select(this).transition().duration(160).ease(d3.easeCubicOut)
+            .attr('r', scaleOnHover.hover);
+        }
+      })
+      .on('mousemove', moveTip)
+      .on('mouseout', function() {
+        hideTip();
+        if (scaleOnHover) {
+          d3.select(this).transition().duration(220).ease(d3.easeCubicOut)
+            .attr('r', scaleOnHover.base);
+        }
+      });
+  }
+
+  // ---------- Background dots (cascade in by distance from center) ----------
+  const bgDots = bgLayer.selectAll('circle').data(background).enter()
+    .append('circle')
+    .attr('class', 'dot dim-target bg-dot')
+    .attr('cx', d => x(d.C1)).attr('cy', d => y(d.C2)).attr('r', 0);
+  bindTip(bgDots, { base: 3.2, hover: 5.5 });
+
+  if (reducedMotion) {
+    bgDots.attr('r', 3.2);
+  } else {
+    bgDots
+      .transition()
+      .delay((d, i) => {
+        // Stagger by distance from (50, 50): center dots first, outer last.
+        const dx = d.C1 - 50, dy = d.C2 - 50;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        return 150 + dist * 9;
+      })
+      .duration(420).ease(d3.easeCubicOut)
+      .attr('r', 3.2);
+  }
+
+  // ---------- Anchor dots + labels ----------
+  const anchorDots = anchorLayer.selectAll('circle').data(anchors).enter()
+    .append('circle')
+    .attr('class', d => `dot dim-target anchor-dot ${d.is_contender ? 'contender' : ''}`)
+    .attr('cx', d => x(d.C1)).attr('cy', d => y(d.C2)).attr('r', 0);
+  bindTip(anchorDots, { base: 5.5, hover: 7.5 });
+
+  const anchorLabels = anchorLayer.selectAll('text').data(anchors).enter()
+    .append('text')
+    .attr('class', d => `anchor-label label-group dim-target ${d.is_contender ? 'contender' : ''}`)
+    .attr('x', d => x(d.C1) + 8).attr('y', d => y(d.C2) + 3)
+    .text(d => `${d.anchor_label} ${d.season}`)
+    .style('opacity', 0);
+
+  if (reducedMotion) {
+    anchorDots.attr('r', 5.5);
+    anchorLabels.style('opacity', 1);
+  } else {
+    anchorDots
+      .transition().delay((d, i) => 1500 + i * 60).duration(380).ease(d3.easeBackOut.overshoot(1.4))
+      .attr('r', 5.5);
+    anchorLabels
+      .transition().delay((d, i) => 1700 + i * 60).duration(380).ease(d3.easeCubicOut)
+      .style('opacity', 1);
+  }
+
+  // ---------- Cohort dots + labels ----------
+  const cohortDots = cohortLayer.selectAll('circle').data(cohort).enter()
+    .append('circle')
+    .attr('class', 'dot dim-target cohort-dot')
+    .attr('cx', d => x(d.C1)).attr('cy', d => y(d.C2)).attr('r', 0);
+  bindTip(cohortDots, { base: 7.5, hover: 10 });
+
+  const cohortLabels = cohortLayer.selectAll('text').data(cohort).enter()
+    .append('text')
+    .attr('class', 'cohort-label label-group dim-target')
+    .attr('x', d => x(d.C1) + 11).attr('y', d => y(d.C2) + 4)
+    .text(d => `${d.team} ${d.season}`)
+    .style('opacity', 0);
+
+  if (reducedMotion) {
+    cohortDots.attr('r', 7.5);
+    cohortLabels.style('opacity', 1);
+  } else {
+    cohortDots
+      .transition().delay((d, i) => 2100 + i * 80).duration(460).ease(d3.easeBackOut.overshoot(1.8))
+      .attr('r', 7.5);
+    cohortLabels
+      .transition().delay((d, i) => 2350 + i * 80).duration(380).ease(d3.easeCubicOut)
+      .style('opacity', 1);
+  }
+
+  // ---------- Wolves trajectory setup ----------
+  // Arrow marker definition (drop-in)
+  svg.append('defs').append('marker')
+    .attr('id', 'arrow').attr('viewBox', '0 0 10 10').attr('refX', 8).attr('refY', 5)
+    .attr('markerWidth', 7).attr('markerHeight', 7).attr('orient', 'auto-start-reverse')
+    .append('path').attr('d', 'M 0 0 L 10 5 L 0 10 z').attr('fill', 'var(--wolves-blue)');
+
+  const arrowPaths = wolvesLayer.selectAll('path').data(d3.pairs(wolves)).enter()
+    .append('path')
+    .attr('class', 'wolves-arrow')
+    .attr('d', ([a, b]) => {
+      const x1 = x(a.C1), y1 = y(a.C2), x2 = x(b.C1), y2 = y(b.C2);
+      const dx = x2 - x1, dy = y2 - y1;
+      const len = Math.sqrt(dx*dx + dy*dy);
+      const pad = 14;
+      const ux = dx / len, uy = dy / len;
+      return `M ${x1 + ux * pad} ${y1 + uy * pad} L ${x2 - ux * pad} ${y2 - uy * pad}`;
+    })
+    .attr('marker-end', 'url(#arrow)')
+    .style('opacity', 0);
+
+  const wolvesDots = wolvesLayer.selectAll('circle.wolves-dot').data(wolves).enter()
+    .append('circle')
+    .attr('class', (d, i) => `dot wolves-dot ${i === wolves.length - 1 ? 'current' : ''}`)
+    .attr('cx', d => x(d.C1)).attr('cy', d => y(d.C2))
+    .attr('r', 0);
+
+  const baseRadius = (d, i) => i === wolves.length - 1 ? 10 : 6.5;
+  const hoverRadius = (d, i) => i === wolves.length - 1 ? 13 : 9;
+  wolvesDots.each(function(d, i) {
+    d3.select(this).datum({...d, _i: i});
+  });
+  wolvesDots
+    .on('mouseover', function(event, d) {
+      showTip(event, d);
+      d3.select(this).transition().duration(160).ease(d3.easeCubicOut).attr('r', hoverRadius(d, d._i));
+    })
+    .on('mousemove', moveTip)
+    .on('mouseout', function(event, d) {
+      hideTip();
+      d3.select(this).transition().duration(220).ease(d3.easeCubicOut).attr('r', baseRadius(d, d._i));
+    });
+
+  const wolvesLabels = wolvesLayer.selectAll('text').data(wolves).enter()
+    .append('text')
+    .attr('class', (d, i) => `wolves-label label-group ${i === wolves.length - 1 ? 'current' : ''}`)
+    .attr('x', d => x(d.C1) + 13)
+    .attr('y', d => y(d.C2) - 9)
+    .text(d => `MIN ${d.season}`)
+    .style('opacity', 0);
+
+  // Continuous pulse ring around the current dot (added once, reused)
+  const currentWolves = wolves[wolves.length - 1];
+  const pulseRing = wolvesLayer.append('circle')
+    .attr('class', 'pulse-ring')
+    .attr('cx', x(currentWolves.C1)).attr('cy', y(currentWolves.C2))
+    .attr('r', 10);
+
+  let pulseActive = false;
+  function startPulse() {
+    if (pulseActive || reducedMotion) return;
+    pulseActive = true;
+    const tick = () => {
+      if (!pulseActive) return;
+      pulseRing
+        .attr('r', 10).style('opacity', 0.6).attr('stroke-width', 2)
+        .transition().duration(1600).ease(d3.easeCubicOut)
+        .attr('r', 26).style('opacity', 0).attr('stroke-width', 0.5)
+        .on('end', tick);
+    };
+    tick();
+  }
+  function stopPulse() {
+    pulseActive = false;
+    pulseRing.interrupt().style('opacity', 0);
+  }
+
+  // ---------- Trajectory animation ----------
+  const replayBtn = d3.select('#replay');
+
+  function runTrajectoryAnimation() {
+    stopPulse();
+    replayBtn.attr('disabled', true);
+
+    wolvesDots.interrupt().attr('r', 0);
+    wolvesLabels.interrupt().style('opacity', 0);
+    arrowPaths.interrupt()
+      .style('opacity', 0)
+      .attr('stroke-dashoffset', null)
+      .attr('stroke-dasharray', null);
+
+    const dwell = reducedMotion ? 150 : 850;  // ms per Wolves season
+    const totalMs = wolves.length * dwell + 600;
+
+    wolves.forEach((d, i) => {
+      const isCurrent = i === wolves.length - 1;
+
+      // Dot pops in with overshoot
+      wolvesDots.filter((_, idx) => idx === i)
+        .transition().delay(i * dwell).duration(reducedMotion ? 60 : 520)
+        .ease(d3.easeBackOut.overshoot(2))
+        .attr('r', baseRadius(d, i));
+
+      // Label fades in slightly after the dot
+      wolvesLabels.filter((_, idx) => idx === i)
+        .transition().delay(i * dwell + (reducedMotion ? 20 : 160)).duration(reducedMotion ? 60 : 420)
+        .ease(d3.easeCubicOut)
+        .style('opacity', 1);
+
+      // Arrow draws from previous dot to this one
+      if (i > 0) {
+        const path = arrowPaths.filter((_, idx) => idx === i - 1);
+        const node = path.node();
+        if (node) {
+          const total = node.getTotalLength();
+          path
+            .attr('stroke-dasharray', `${total} ${total}`)
+            .attr('stroke-dashoffset', total)
+            .style('opacity', 1)
+            .transition().delay(i * dwell - (reducedMotion ? 0 : 300)).duration(reducedMotion ? 60 : 600)
+            .ease(d3.easeCubicInOut)
+            .attr('stroke-dashoffset', 0);
+        }
+      }
+
+      // Synchronize the subtitle narrative with this season landing.
+      const narrativeDelay = i * dwell + (reducedMotion ? 30 : 240);
+      setTimeout(() => setSubtitleNarrative(d.year, isCurrent), narrativeDelay);
+    });
+
+    // After all dots in, emphasize the current dot, start pulse, show onboard hint
+    setTimeout(() => {
+      replayBtn.attr('disabled', null);
+      startPulse();
+      if (onboardEl) onboardEl.classList.add('visible');
+    }, totalMs);
+  }
+
+  // ---------- Initial choreography ----------
+  // Background dots cascade ~150ms - 1500ms
+  // Anchors enter ~1500ms - 1900ms
+  // Cohort enters ~2100ms - 2800ms
+  // Trajectory begins ~3000ms
+  setTimeout(runTrajectoryAnimation, reducedMotion ? 100 : 3000);
+
+  replayBtn.on('click', () => {
+    if (replayBtn.attr('disabled')) return;
+    runTrajectoryAnimation();
+  });
+
+  d3.select('#reset').on('click', () => {
+    isolatedQuad = null;
+    g.selectAll('.quad-label').classed('active', false);
+    g.selectAll('.dot.dim-target, .label-group.dim-target')
+      .transition().duration(240).ease(d3.easeCubicInOut)
+      .style('opacity', 1);
+    g.select('.wolves-layer')
+      .transition().duration(240).ease(d3.easeCubicInOut)
+      .style('opacity', 1);
+  });
+
+  // Subtle quadrant highlight on label hover
+  g.selectAll('.quad-label')
+    .on('mouseenter', function(event, d) {
+      g.select(`.quad-bg-${d.id}`).classed('q4-highlight', true);
+    })
+    .on('mouseleave', function(event, d) {
+      g.select(`.quad-bg-${d.id}`).classed('q4-highlight', false);
+    });
+
+  // ---------- Legend hover-to-highlight ----------
+  // Each legend item gets data-group; map group to selector + label predicate.
+  const GROUP_DOT_PREDICATE = {
+    'wolves-current': d => d.is_wolves_traj && d.year === 2025,
+    'wolves-traj':    d => d.is_wolves_traj,
+    'cohort':         d => d.is_cohort && !d.is_wolves_traj,
+    'contender':      d => d.is_contender,
+    'archetype':      d => d.anchor_label && !d.is_contender,
+    'background':     d => !d.is_cohort && !d.is_wolves_traj && !d.anchor_label,
+  };
+  const legendItems = document.querySelectorAll('.legend-item');
+  legendItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const group = item.dataset.group;
+      const pred = GROUP_DOT_PREDICATE[group];
+      if (!pred) return;
+      legendItems.forEach(li => {
+        if (li !== item) li.classList.add('legend-dim');
+      });
+      g.selectAll('.dot').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', d => pred(d) ? 1 : 0.08);
+      g.selectAll('.label-group').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', d => pred(d) ? 1 : 0.08);
+      // The wolves layer overall - keep visible if any wolves match
+      const wolvesMatch = group === 'wolves-traj' || group === 'wolves-current';
+      g.select('.wolves-layer').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', (group === 'background' || group === 'cohort' || group === 'contender' || group === 'archetype') ? 0.08 : 1);
+    });
+    item.addEventListener('mouseleave', () => {
+      legendItems.forEach(li => li.classList.remove('legend-dim'));
+      // Restore (respect any active quadrant isolation)
+      const restorePredicate = isolatedQuad
+        ? d => inQuadrant(d, isolatedQuad)
+        : () => true;
+      g.selectAll('.dot').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', d => restorePredicate(d) ? 1 : 0.08);
+      g.selectAll('.label-group').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', d => restorePredicate(d) ? 1 : 0.08);
+      g.select('.wolves-layer').transition().duration(200).ease(d3.easeCubicInOut)
+        .style('opacity', (isolatedQuad && isolatedQuad !== 'Q4') ? 0.08 : 1);
+    });
+  });
+
+  // ---------- Reset button also resets subtitle ----------
+  d3.select('#reset').on('click.subtitle', () => {
+    setSubtitleDefault();
+  });
+
+  // ---------- Replay also resets subtitle to default before animating ----------
+  replayBtn.on('click.subtitle', () => {
+    if (replayBtn.attr('disabled')) return;
+    setSubtitleDefault();
+    if (onboardEl) onboardEl.classList.remove('visible');
+  });
+
+  // ---------- Cohort label collision avoidance (simple vertical offset) ----------
+  // After cohort labels are placed, walk through pairs and offset any that overlap.
+  function resolveCohortLabelCollisions() {
+    const labels = cohortLayer.selectAll('text.cohort-label').nodes();
+    if (labels.length === 0) return;
+    const boxes = labels.map(n => {
+      const b = n.getBBox();
+      return { node: n, x: b.x, y: b.y, w: b.width, h: b.height };
+    });
+    const overlap = (a, b) =>
+      a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+
+    // Multi-pass: sort by y, push overlapping pairs downward by 14px
+    for (let pass = 0; pass < 6; pass++) {
+      boxes.sort((a, b) => a.y - b.y);
+      let moved = false;
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          if (overlap(boxes[i], boxes[j])) {
+            const shift = (boxes[i].y + boxes[i].h) - boxes[j].y + 2;
+            boxes[j].y += shift;
+            const cy = parseFloat(boxes[j].node.getAttribute('y'));
+            boxes[j].node.setAttribute('y', cy + shift);
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
+    }
+  }
+  // Run after the cohort labels are rendered (post initial animation).
+  setTimeout(resolveCohortLabelCollisions, reducedMotion ? 100 : 2900);
+})();
+</script>
+</body>
+</html>
