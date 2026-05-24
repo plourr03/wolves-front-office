@@ -20,11 +20,11 @@ The metric driving this article is LAFI, a 0-to-100 score for how pickup-style a
 
 ## The team that looked nothing like this
 
-Start with the baseline, and be honest about it. The 2023-24 Wolves were a great team, but not because of their offense. They had the best defense in the league and the third-best net rating in the NBA. The offense ranked 17th of 30 in points per possession, a touch below the league median. The conference finals run was built on that defense and on Anthony Edwards, not on an offensive machine.
+Start with the baseline. The 2023-24 Wolves were a great team, but not because of their offense. They had the best defense in the league and the third-best net rating in the NBA. The offense ranked 17th of 30 in points per possession, a touch below the league median. The conference finals run was built on that defense and on Anthony Edwards, not on an offensive machine.
 
-What the offense was, architecturally, was ordinary. A Full LAFI of 35 and a Sharp LAFI of 45, both modestly below average, which put the Wolves around 13th of 30 in how designed their offense was. Middle of the pack. On the three playoff-relevant traits they were unremarkable: motion death 43, isolation reliance 49, shot quality decay 39, none of them extreme. The team ran designed actions on 61.9 percent of its possessions. Towns at the four next to Gobert, Edwards rising into stardom, Conley organizing the floor, McDaniels and the supporting pieces in their roles. The ball moved, the bodies moved, the shots were fine. And man was it fun to watch.
+Architecturally, the offense was ordinary. Full LAFI of 35, Sharp LAFI of 45, both modestly below average. That put them around 13th of 30 in how designed their offense was. Middle of the pack. Same on the three playoff-relevant traits: motion death 43, isolation reliance 49, shot quality decay 39. The team ran designed actions on 61.9 percent of its possessions. Towns at the four next to Gobert, Edwards rising into stardom, Conley organizing the floor, McDaniels and the supporting pieces in their roles. The ball moved, the bodies moved, the shots were fine. And man was it fun to watch.
 
-The point of laying this out is simple. The same building, mostly the same core, ran a normal NBA offense as recently as two years ago. Not a great one. A normal one. Whatever happened next did not have to happen.
+The same building, mostly the same core, ran a normal NBA offense as recently as two years ago. Not a great one. A normal one. Whatever happened next did not have to happen.
 
 ## The first wrong turn
 
