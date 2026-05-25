@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edwards Conley trajectory, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  /* Dev harness only. Production supplies these tokens via /tokens.css. */
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:960px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-stage { max-width:960px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is edwards_conley_trajectory_fragment.html.</div>
+<div class="harness-stage">
+<div id="viz-edwards-conley-trajectory"></div>
+<script>
+(function () {
+  var seasons = ["2023-24", "2024-25", "2025-26"];
+
+  var metrics = [
+    {
+      key: "conley",
+      label: "Conley's minutes per game",
+      labelFull: "Conley minutes per game",
+      unit: "",
+      values: [29, 25, 18],
+      color: "var(--dataviz-3)",
+      width: 3,
+      deltaText: "29 down to 18 minutes"
+    },
+    {
+      key: "assist",
+      label: "Edwards's assist rate",
+      labelFull: "Edwards assist rate",
+      unit: "%",
+      values: [24, 21, 18],
+      color: "var(--accent-default)",
+      width: 3,
+      deltaText: "24% down to 18%"
+    }
+  ];
+
+  var root = d3.select("#viz-edwards-conley-trajectory");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+
+    var height = compact ? 500 : 440;
+
+    var margin = {
+      top: compact ? 104 : 92,
+      right: compact ? 16 : 180,
+      bottom: 56,
+      left: compact ? 16 : 16
+    };
+
+    var svg = root.append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block")
+      .style("max-width", "100%")
+      .style("margin", "0 auto");
+
+    var head = svg.append("g");
+
+    head.append("text")
+      .attr("x", margin.left)
+      .attr("y", 24)
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 17px var(--family-sans)")
+      .text("Edwards used 31% of possessions every year.");
+
+    head.append("text")
+      .attr("x", margin.left)
+      .attr("y", 48)
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 17px var(--family-sans)")
+      .text("These two fell anyway.");
+
+    head.append("text")
+      .attr("x", margin.left)
+      .attr("y", 70)
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "12px var(--family-sans)")
+      .text("Same scoring load. Different team around him.");
+
+    var innerW = width - margin.left - margin.right;
+    var innerH = height - margin.top - margin.bottom;
+
+    var g = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var xScale = d3.scalePoint()
+      .domain(seasons)
+      .range([28, innerW - 28])
+      .padding(0);
+
+    var allValues = metrics.reduce(function (arr, m) {
+      return arr.concat(m.values);
+    }, []);
+    var yMin = d3.min(allValues);
+    var yMax = d3.max(allValues);
+
+    var yScale = d3.scaleLinear()
+      .domain([yMin - 4, yMax + 3])
+      .range([innerH, 0]);
+
+    g.append("line")
+      .attr("x1", 0).attr("y1", innerH)
+      .attr("x2", innerW).attr("y2", innerH)
+      .style("stroke", "var(--border-subtle)")
+      .style("stroke-width", 1);
+
+    g.selectAll(".season-label").data(seasons).join("text")
+      .attr("class", "season-label")
+      .attr("x", function (d) { return xScale(d); })
+      .attr("y", innerH + 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "13px var(--family-sans)")
+      .text(function (d) { return d; });
+
+    g.selectAll(".guide").data(seasons).join("line")
+      .attr("class", "guide")
+      .attr("x1", function (d) { return xScale(d); })
+      .attr("y1", 0)
+      .attr("x2", function (d) { return xScale(d); })
+      .attr("y2", innerH)
+      .style("stroke", "var(--border-subtle)")
+      .style("stroke-dasharray", "2,4")
+      .style("opacity", 0.5);
+
+    metrics.forEach(function (metric, i) {
+      var lineData = seasons.map(function (s, idx) {
+        return { season: s, value: metric.values[idx], metric: metric };
+      });
+
+      var area = d3.area()
+        .x(function (d) { return xScale(d.season); })
+        .y0(innerH)
+        .y1(function (d) { return yScale(d.value); });
+
+      g.append("path")
+        .datum(lineData)
+        .attr("d", area)
+        .style("fill", metric.color)
+        .style("opacity", reduceMotion ? 0.12 : 0)
+        .transition()
+        .duration(800)
+        .delay(200 + i * 220 + 600)
+        .style("opacity", 0.12);
+
+      var line = d3.line()
+        .x(function (d) { return xScale(d.season); })
+        .y(function (d) { return yScale(d.value); });
+
+      var path = g.append("path")
+        .datum(lineData)
+        .attr("d", line)
+        .style("fill", "none")
+        .style("stroke", metric.color)
+        .style("stroke-width", metric.width)
+        .style("stroke-linecap", "round")
+        .style("stroke-linejoin", "round");
+
+      if (!reduceMotion) {
+        var totalLen = path.node().getTotalLength();
+        path
+          .attr("stroke-dasharray", totalLen + " " + totalLen)
+          .attr("stroke-dashoffset", totalLen)
+          .transition()
+          .duration(900)
+          .delay(200 + i * 220)
+          .ease(d3.easeCubicOut)
+          .attr("stroke-dashoffset", 0);
+      }
+
+      var points = g.selectAll(".pt-" + metric.key).data(lineData).join("g")
+        .attr("class", "pt-" + metric.key)
+        .attr("transform", function (d) {
+          return "translate(" + xScale(d.season) + "," + yScale(d.value) + ")";
+        })
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+
+      points.append("circle")
+        .attr("r", 6)
+        .style("fill", metric.color)
+        .style("stroke", "var(--bg-inset)")
+        .style("stroke-width", 2);
+
+      points.append("title")
+        .text(function (d) {
+          return metric.labelFull + ", " + d.season + ": " +
+            d.value + metric.unit;
+        });
+
+      points
+        .on("mouseenter", function () {
+          d3.select(this).select("circle")
+            .style("fill", "var(--accent-hover)")
+            .attr("r", 9);
+        })
+        .on("mouseleave", function () {
+          d3.select(this).select("circle")
+            .style("fill", metric.color)
+            .attr("r", 6);
+        });
+
+      if (!reduceMotion) {
+        points.transition()
+          .duration(400)
+          .delay(function (_, idx) {
+            return 200 + i * 220 + 200 + idx * 200;
+          })
+          .style("opacity", 1);
+      }
+
+      var valueLabels = g.selectAll(".val-" + metric.key).data(lineData).join("text")
+        .attr("class", "val-" + metric.key)
+        .attr("x", function (d) { return xScale(d.season); })
+        .attr("y", function (d) { return yScale(d.value) - 14; })
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-primary)")
+        .style("font", "600 13px var(--family-mono)")
+        .style("opacity", reduceMotion ? 1 : 0)
+        .text(function (d) { return d.value + metric.unit; });
+
+      if (!reduceMotion) {
+        valueLabels.transition()
+          .duration(400)
+          .delay(function (_, idx) {
+            return 200 + i * 220 + 400 + idx * 200;
+          })
+          .style("opacity", 1);
+      }
+
+      if (!compact) {
+        var lastPoint = lineData[lineData.length - 1];
+        var labelYOffset = 0;
+        if (metric.key === "conley") labelYOffset = -18;
+        if (metric.key === "assist") labelYOffset = 18;
+
+        var labelG = g.append("g")
+          .attr(
+            "transform",
+            "translate(" + (xScale(lastPoint.season) + 18) + "," +
+              (yScale(lastPoint.value) + labelYOffset) + ")"
+          )
+          .style("opacity", reduceMotion ? 1 : 0);
+
+        if (labelYOffset !== 0) {
+          labelG.append("line")
+            .attr("x1", -12)
+            .attr("y1", -labelYOffset)
+            .attr("x2", -4)
+            .attr("y2", 0)
+            .style("stroke", metric.color)
+            .style("stroke-width", 1)
+            .style("opacity", 0.6);
+        }
+
+        labelG.append("text")
+          .attr("x", 0).attr("y", 0)
+          .style("fill", metric.color)
+          .style("font", "700 13px var(--family-sans)")
+          .text(metric.label);
+
+        labelG.append("text")
+          .attr("x", 0).attr("y", 16)
+          .style("fill", "var(--text-secondary)")
+          .style("font", "12px var(--family-sans)")
+          .text(metric.deltaText);
+
+        if (!reduceMotion) {
+          labelG.transition()
+            .duration(400)
+            .delay(200 + i * 220 + 900)
+            .style("opacity", 1);
+        }
+      }
+    });
+
+    if (compact) {
+      var legend = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + (height - 30) + ")");
+
+      metrics.forEach(function (m, i) {
+        var row = legend.append("g")
+          .attr("transform", "translate(0," + (i * 16 - 10) + ")");
+
+        row.append("line")
+          .attr("x1", 0).attr("y1", 0)
+          .attr("x2", 22).attr("y2", 0)
+          .style("stroke", m.color)
+          .style("stroke-width", m.width)
+          .style("stroke-linecap", "round");
+
+        row.append("text")
+          .attr("x", 30).attr("y", 0).attr("dy", "0.35em")
+          .style("fill", "var(--text-secondary)")
+          .style("font", "12px var(--family-sans)")
+          .text(m.label + ", " + m.deltaText);
+      });
+    }
+  }
+
+  render();
+  if (window.ResizeObserver) {
+    new ResizeObserver(render).observe(root.node());
+  }
+})();
+</script>
+</div>
+</body>
+</html>

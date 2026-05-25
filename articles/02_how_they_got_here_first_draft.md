@@ -30,7 +30,7 @@ Structurally, the offense was ordinary. Full LAFI of 35, Sharp LAFI of 45, both 
 
 The same building, mostly the same core (with some role-player turnover at the edges), ran a normal NBA offense as recently as two years ago. Not a great one. A normal one. Whatever happened next did not have to happen.
 
-## The first wrong turn (Bobby Notes: this is where we left off)
+## The first wrong turn 
 
 Here is the part I did not expect when I started pulling the data. The Wolves did not drift directly toward the offense they play now. In 2024-25, the first year of the Julius Randle era, they became a different kind of "broken".
 
@@ -44,15 +44,19 @@ Randle did not match the "new guy hogs the ball" pattern either. He used possess
 
 That driver was Mike Conley. In 2023-24, even at 36, Conley ran long stretches of the offense the way old point guards do, with almost no mistakes. His assist-to-turnover ratio that season was 4.4. He kept things organized whenever Edwards rested or played off the ball. Then Conley got old, fast. His minutes fell from 29 a game to 25 to 18. His scoring from 11 points to 8 to 5. I'm not trying to blame this on Conley. In fact the Wolves had seen it coming. They spent a 2024 first-round pick on Rob Dillingham, a young lead guard, as the bet on life after Conley. Two seasons in, that bet has not paid off. Dillingham played 49 games, then 35, under 11 minutes a night, his role shrinking rather than growing. The Wolves traded him at this year's deadline.
 
-The playmaker left the floor and nobody replaced him. Running the offense fell to Edwards by default. He held the ball longer. His dribbles per touch climbed from 3.9 to 4.5. The ball stickiness number is registering Edwards handling more, not Edwards shooting more. And the more the offense ran through him, the less the ball moved. His assist rate fell from 24 percent to 21 to 18 across the three seasons.
+The distributor left the floor and nobody replaced him. Running the offense fell to Edwards by default. He held the ball longer. His dribbles per touch climbed from 3.9 to 4.5. The ball stickiness number is registering Edwards handling more, not Edwards shooting more. And the more the offense ran through him, the less the ball moved. His assist rate fell from 24 percent to 21 to 18 across the three seasons.
 
-Here is where the comparison gets pointed. As a playmaker, Edwards is not Conley and never has been. His assist-to-turnover ratio has sat between 1.3 and 1.7. Conley's stayed above 4.2 every year of the same stretch. The gap is not subtle. Edwards is a brilliant scorer, a dangerous pick-and-roll threat and one of the highest-potential players in the entire NBA, maybe even a top 5 player now. However, he is not a low-mistake playmaker. In 2024-25 the Wolves needed one and no longer had one, and they handed the role to the player they had.
+{{viz:edwards-conley-trajectory}}
+
+*Three player-level metrics across three seasons. Edwards's usage rate stayed flat at 31 percent. Conley's minutes collapsed, and Edwards's assist rate collapsed alongside them.*
+
+Here is where the comparison gets pointed. As a playmaker, Edwards is not Conley and never has been. His assist-to-turnover ratio has sat between 1.3 and 1.7. Conley's stayed above 4.2 every year of the same stretch. The gap is not subtle. Edwards is a brilliant scorer, a dangerous offensive threat and one of the highest-potential players in the entire NBA, maybe even a top 5 player now. However, he is not a low-mistake playmaker. In 2024-25 the Wolves needed one and no longer had one, and they handed the role to the player they had.
 
 And they reached the conference finals again.
 
 That is the uncomfortable thing about 2024-25. The architecture had already gone wrong, and the record did not show it. A team can play structurally compromised offense and still win two playoff rounds, because individual talent and a top-tier defense can carry a lot of weight in a given spring. The drift was real. The results just had not caught up to it yet.
 
-## Arrival
+## Arrival 
 
 Then came 2025-26, and a number that looks like good news until you understand it. Ball stickiness fell back down, from 69 to 31. On its own, that reads like the offense decluttered. It did not.
 
