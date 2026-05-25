@@ -20,13 +20,17 @@ The metric driving this article is LAFI, a 0-to-100 score for how pickup-style a
 
 ## The team that looked nothing like this
 
-Start with the baseline. The 2023-24 Wolves were a great team, but not because of their offense. They had the best defense in the league and the third-best net rating in the NBA. The offense ranked 17th of 30 in points per possession, a touch below the league median. The conference finals run was built on that defense and on Anthony Edwards, not on an offensive machine.
+Start with the baseline. The 2023-24 Wolves were a great team, but not because of their offense. They went 56-26, had the best defense in the league, and the third-best net rating in the NBA. The offense ranked 17th of 30 in points per possession, a touch below the league median. The conference finals run was built on that defense, on Anthony Edwards, and on a roster that fit. Not on an offensive machine.
 
-Architecturally, the offense was ordinary. Full LAFI of 35, Sharp LAFI of 45, both modestly below average. That put them around 13th of 30 in how designed their offense was. Middle of the pack. Same on the three playoff-relevant traits: motion death 43, isolation reliance 49, shot quality decay 39. The team ran designed actions on 61.9 percent of its possessions. Towns at the four next to Gobert, Edwards rising into stardom, Conley organizing the floor, McDaniels and the supporting pieces in their roles. The ball moved, the bodies moved, the shots were fine. And man was it fun to watch.
+Structurally, the offense was ordinary. Full LAFI of 35, Sharp LAFI of 45, both modestly below average. That put them around 13th of 30 in how designed their offense was. Middle of the pack. Same on the three playoff-relevant traits: motion death 43, isolation reliance 49, shot quality decay 39. The team ran designed actions on 61.9 percent of its possessions. Towns at the four next to Gobert, Edwards rising into stardom, Conley organizing the floor, McDaniels and the supporting pieces in their roles. The ball moved, the bodies moved, the shots were fine. And man was it fun to watch.
 
-The same building, mostly the same core, ran a normal NBA offense as recently as two years ago. Not a great one. A normal one. Whatever happened next did not have to happen.
+{{viz:lafi-2023-24-league-ranking}}
 
-## The first wrong turn
+*All 30 teams in 2023-24 plotted on Full LAFI, most designed on the left, most pickup on the right. The Wolves sit just below league average at 35, 13th of 30 in offensive design. Hover any dot for that team's component breakdown.*
+
+The same building, mostly the same core (with some role-player turnover at the edges), ran a normal NBA offense as recently as two years ago. Not a great one. A normal one. Whatever happened next did not have to happen.
+
+## The first wrong turn (Bobby Notes: this is where we left off)
 
 Here is the part I did not expect when I started pulling the data. The Wolves did not drift directly toward the offense they play now. In 2024-25, the first year of the Julius Randle era, they became a different kind of broken.
 
