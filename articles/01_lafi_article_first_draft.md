@@ -4,7 +4,7 @@ dek: My brother-in-law watched the Wolves lose to the Spurs and said they were p
 tags: [Timberwolves, LAFI, Offensive Architecture, Basketball Analytics, Anthony Edwards, 2025-26 Postmortem]
 ---
 
-# The LA Fitness Game
+# The LA Fitness Game (Bobby notes: do not change this section, love it)
 
 I've been a Timberwolves fan ever since my dad took me and my sister to a Timberwolves game back in 2004. I was 6 years old, and I remember watching KG get introduced with the loudest crowd I'd ever heard. Since then I've been a huge Wolves fan through it all. This year, however, something felt off.
 
@@ -16,7 +16,7 @@ He was right. I knew it the second he said it. Then I thought: how would I actua
 
 That question turned into intense analytical work. This article is the first piece of what that work produced. The short version: my brother-in-law was right (sorry Scott, I'll never say it to your face), and the data lets us be specific about exactly what kind of pickup ball the Wolves are playing.
 
-## What pickup ball actually looks like
+## What pickup ball actually looks like (Bobby notes: Good)
 
 If you have ever played at LA Fitness, you know the fingerprint. One person dribbles up the floor and decides whether to shoot, drive, or call out a vague action that nobody actually executes. The other four players stand and watch. The offense is whatever the ball-handler creates in the moment.
 
@@ -34,17 +34,17 @@ Now Edwards has it. He surveys. The other three Wolves on the floor stand still.
 
 That sequence is the architecture. The Wolves pass the ball. They stop moving once the pass arrives. The possession resolves the only way it can after that, which is whoever has the ball trying to make something happen alone.
 
-LAFI puts five numbers on this. Each component is a percentile against every team-season in the league since 2014-15. A 50 is league average. A 90 is the kind of extreme you would name a team for. The Wolves' five numbers tell the story I just described.
+LAFI puts five numbers on the possession we just watched. Each is a percentile against every team-season since 2014-15. A 50 is league average. A 90 is the kind of extreme you would name a team for.
 
-They pass the ball, sort of. At the 31st percentile in stickiness, no single player hogs it. The off-ball motion ranks 72nd percentile in deadness, top third of the league for standing still. Isolation reliance is 90th, top tenth. Shot quality decay is 83rd, top tenth again, possessions ending in worse shots than the team is capable of generating. And action poverty sits at the 45th percentile, dead average. The playbook is normal. The team has screens and cuts and designed sets. The actions exist. They just do not lead anywhere.
+Conley to Edwards counts. Ball movement is fine. 31st percentile in stickiness, which is just to say no one player has the ball glued to him. The Wolves move it.
 
-That last point is the diagnosis hiding inside the others. A team with motion death and isolation reliance might just be a team with no plays. The Wolves have plays. They run plays. The plays end with someone standing still and watching, and the possession resolves in iso. The architecture is not absence. It is a habit.
+The four other Wolves going still the second Edwards catches: 72nd percentile in motion deadness, top third of the league for standing around. The seven seconds of jabs ending in a contested pullup from 11 feet that nobody on this roster shoots well: 90th percentile in isolation reliance, 83rd in shot quality decay. Top tenth in both.
 
-Two composites compress this. Sharp LAFI weights the three components most predictive of playoff failure. The Wolves ranked third in the league at 90, behind only the 76ers (93) and the Clippers (92).
+Then the twist. The fifth number, action poverty, asks whether the team has designed plays in the book at all. The Wolves rank 45th. Dead average. They have plays. They run plays. The plays end where the possession we just watched ended, with someone standing still and watching, and one guy trying to make something happen alone. The architecture is not absence. It is a habit.
 
-Full LAFI weights all five components. The Wolves came out 13th, at 65, dead middle of the pack.
+Roll the five numbers into two composites. Full LAFI weights them equally. The Wolves come out at 65, 13th in the league. Dead middle. Sharp LAFI weights only the three components that predict playoff failure. The Wolves come out at 90, third in the league, behind only the 76ers and the Clippers.
 
-The gap between those two ranks is the diagnosis. They are extreme on the components that matter in May. Average on the ones that hide the problem in March.
+The gap is the diagnosis. The Wolves are extreme on the things that matter in May. Average on the ones that hide the problem in March.
 
 {{viz:lafi-fingerprint-2025-26}}
 
@@ -62,7 +62,7 @@ Two of them are not forgettable.
 
 The 2021-22 Sixers had Joel Embiid finishing second in MVP voting. In February they traded Ben Simmons for James Harden, the most ball-dominant guard of the previous decade. On paper, that team had a creator at every level. In practice it scored its way into the second round and got bounced by the Heat. Embiid played hurt. Harden disappeared. The architecture that made them so weird in the regular season, a team with two MVP-tier creators that still played isolation-heavy distributed pickup, gave them nothing to fall back on when the offense seized up.
 
-The 2023-24 Suns had Kevin Durant, Devin Booker, and Bradley Beal. Three All-Stars, all healthy when the playoffs started. They drew the Wolves in the first round and got swept. The Suns' answer for everything was for one of their three stars to take a tough shot, and the Wolves, who had a different roster that year (more on that in the next article), made every one of those shots harder than it needed to be. Three stars, four games, no structure to fall back on when individual brilliance was not enough.
+The 2023-24 Suns had Kevin Durant, Devin Booker, and Bradley Beal. Three All-Stars, all healthy when the playoffs started. They drew the Wolves in the first round and got swept. The Suns' answer for everything was for one of their three stars to take a tough shot. The Wolves had a different roster that year, and they made every one of those shots harder than it needed to be. Three stars, four games, no structure to fall back on when individual brilliance was not enough.
 
 Those are the two cohort members the 2025-26 Wolves should be looking at hardest. Both had real talent. Both had star creators. Both ran an architecture that depended on shotmaking to cover for the absence of structure. Both lost early.
 
@@ -94,9 +94,9 @@ The Wolves had a 49-33 regular season. They beat the Nuggets in the first round.
 
 In your gut, though, you knew better. Even in the best case, even if the Wolves had somehow found a way past the Spurs, nobody who actually watched this team believed they were beating OKC. The roster read like a contender. Watching it did not.
 
-What you were watching was a pickup offense, distributed across the lineup, producing bad shots through isolation creation. And by the playoffs you were watching it without Donte DiVincenzo, the player who most reliably broke that pattern, lost to a torn Achilles. The team that played the Spurs in the second round was structurally one of the most pickup-style offenses in modern NBA history.
+What you were watching was a pickup offense, distributed across the lineup, producing bad shots through isolation creation. By the playoffs you were watching it without Donte DiVincenzo, the player who most reliably broke that pattern, lost to a torn Achilles. Every Wolves fan knew this was bad. What none of us realized was how much of the architecture itself was being held up by the specific kind of player Donte is. The team that played the Spurs in the second round was one of the most pickup-style offenses the modern NBA has produced.
 
-That is the question the rest of this project tries to answer. How a team this talented ended up playing offense this way. Whether the architecture matters once the playoffs start. Whether any team with this profile can break through. What DiVincenzo was actually doing on the floor, and what the offense lost without him. What, specifically, the Wolves can do about it. The next article starts at the beginning of that chain, tracing how the Wolves drifted into this architecture from a 2023-24 team that looked nothing like it.
+That is what the rest of this project tries to figure out. Where this team came from, what they can do about it, and whether anyone built this way ever has a real chance. The next article picks up the trail. Two years ago the Wolves were one win away from the Finals. Same coach, same franchise star. A different team in almost every other way. How they drifted from there to here is the next piece.
 
 I do not know whether anyone with influence over the Wolves will ever read this work. I am writing it publicly anyway, to make the case where the case can be made. The franchise has never won a championship. I have been a fan since 2004, through the conference finals run and the long stretch of disappointing seasons that followed it. My brother-in-law's offhand comment became a project because the question underneath it, why this specific team plays this specific way, kept feeling like one worth answering.
 
