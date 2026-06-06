@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edwards shot shift, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is edwards_shot_shift_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-edwards-shot-shift">
+  <div class="ess-phase" role="status">
+    <span class="ess-phase-dot"></span>
+    <span class="ess-phase-label">Regular season</span>
+    <span class="ess-phase-sep">·</span>
+    <span class="ess-phase-sub">1,231 attempts</span>
+  </div>
+  <p class="ess-caption" aria-live="polite"></p>
+  <div class="ess-court-host"></div>
+  <div class="ess-hero">
+    <div class="ess-hero-line">
+      <span class="ess-hero-num">15.3</span>
+      <span class="ess-hero-unit">ft</span>
+    </div>
+    <div class="ess-hero-label">average shot distance</div>
+  </div>
+  <div class="ess-controls" role="group" aria-label="Phase controls">
+    <button class="ess-pill ess-pill-replay" type="button" data-state="anim">Replay the story</button>
+    <button class="ess-pill" type="button" data-state="rs">Regular season</button>
+    <button class="ess-pill" type="button" data-state="sas">Spurs series</button>
+  </div>
+</div>
+<style>
+  #viz-edwards-shot-shift, #viz-edwards-shot-shift * { touch-action: manipulation; }
+  #viz-edwards-shot-shift {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-edwards-shot-shift .ess-phase {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 12px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    transition: opacity 220ms ease, transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  }
+  #viz-edwards-shot-shift .ess-phase.is-pulse {
+    transform: scale(1.06);
+  }
+  #viz-edwards-shot-shift .ess-phase-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+    box-shadow: 0 0 0 0 var(--accent-default);
+    transition: box-shadow 600ms ease;
+  }
+  #viz-edwards-shot-shift .ess-phase.is-pulse .ess-phase-dot {
+    box-shadow: 0 0 0 6px rgba(0, 132, 61, 0);
+  }
+  #viz-edwards-shot-shift .ess-phase-sep {
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+  #viz-edwards-shot-shift .ess-phase-sub {
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+  #viz-edwards-shot-shift .ess-caption {
+    font: 600 16px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 24px;
+    line-height: 1.4;
+    opacity: 1;
+    transition: opacity 220ms ease;
+  }
+  #viz-edwards-shot-shift .ess-court-host { position: relative; }
+  #viz-edwards-shot-shift .ess-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+  }
+  #viz-edwards-shot-shift .ess-hero-line {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  #viz-edwards-shot-shift .ess-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-shot-shift.is-landed .ess-hero-num,
+  #viz-edwards-shot-shift.is-landed .ess-hero-unit {
+    color: var(--accent-default);
+  }
+  #viz-edwards-shot-shift .ess-hero-unit {
+    font: 700 22px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-shot-shift .ess-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+  #viz-edwards-shot-shift.is-compact .ess-hero-num { font-size: 48px; }
+  #viz-edwards-shot-shift.is-compact .ess-hero-unit { font-size: 18px; }
+  #viz-edwards-shot-shift .ess-controls {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px;
+  }
+  #viz-edwards-shot-shift .ess-pill {
+    background: var(--bg-surface); color: var(--text-secondary);
+    border: 1px solid var(--border-subtle); border-radius: 999px;
+    padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+  }
+  #viz-edwards-shot-shift .ess-pill:hover {
+    color: var(--text-primary); border-color: var(--border-default);
+  }
+  #viz-edwards-shot-shift .ess-pill.is-on {
+    color: var(--accent-default); border-color: var(--accent-default);
+    background: var(--accent-subtle);
+  }
+  #viz-edwards-shot-shift .ess-pill-replay {
+    color: var(--accent-default); border-color: var(--accent-default);
+  }
+</style>
+<script>
+fetch('edwards_shot_shift_fragment.html')
+  .then(function(r){ return r.text(); })
+  .then(function(html){
+    var m = html.match(/<script>([\s\S]*?)<\/script>/);
+    if (m && m[1]) {
+      var s = document.createElement('script');
+      s.textContent = m[1];
+      document.body.appendChild(s);
+    }
+  })
+  .catch(function(err){
+    console.error('Failed to load fragment script', err);
+    document.querySelector('.ess-caption').textContent = 'Failed to load fragment script.';
+  });
+</script>
+</div>
+</body>
+</html>

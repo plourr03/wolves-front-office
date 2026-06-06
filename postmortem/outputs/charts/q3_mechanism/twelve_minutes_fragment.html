@@ -1,0 +1,620 @@
+<div id="viz-twelve-minutes">
+  <div class="tm-chip" role="status">
+    <span class="tm-chip-dot"></span>
+    <span class="tm-chip-label">Game 2 · second quarter</span>
+    <span class="tm-chip-sep">·</span>
+    <span class="tm-chip-sub">May 6, 2026</span>
+  </div>
+  <p class="tm-caption" aria-live="polite"></p>
+  <div class="tm-stage">
+    <div class="tm-tooltip" role="tooltip">
+      <div class="tm-tip-clock"></div>
+      <div class="tm-tip-desc"></div>
+      <div class="tm-tip-score"></div>
+    </div>
+  </div>
+  <div class="tm-hero">
+    <div class="tm-hero-line">
+      <span class="tm-hero-num">5</span>
+      <span class="tm-hero-unit">point Spurs lead</span>
+    </div>
+    <div class="tm-hero-label">From a five-point game to a twenty-four-point half</div>
+    <button class="tm-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="tm-foot">Minnesota's deficit through the second quarter of Game 2, reconstructed from play-by-play. From the moment the Wolves cut it to five, San Antonio outscored them 35 to 16.</p>
+  <div class="tm-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-twelve-minutes, #viz-twelve-minutes * { touch-action: manipulation; }
+  #viz-twelve-minutes {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-twelve-minutes .tm-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-error);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-twelve-minutes .tm-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-error);
+  }
+  #viz-twelve-minutes .tm-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-twelve-minutes .tm-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-twelve-minutes .tm-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-twelve-minutes .tm-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  #viz-twelve-minutes .tm-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-twelve-minutes .tm-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 150px;
+    max-width: 240px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-twelve-minutes .tm-tooltip.is-on { opacity: 1; }
+  #viz-twelve-minutes .tm-tip-clock {
+    font: 700 12px var(--family-mono);
+    color: var(--status-error);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  #viz-twelve-minutes .tm-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+  #viz-twelve-minutes .tm-tip-score {
+    font: 700 12px var(--family-mono);
+    color: var(--text-secondary);
+  }
+  #viz-twelve-minutes .tm-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-twelve-minutes .tm-hero-line { display: flex; align-items: baseline; gap: 8px; }
+  #viz-twelve-minutes .tm-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-twelve-minutes.is-landed .tm-hero-num,
+  #viz-twelve-minutes.is-landed .tm-hero-unit { color: var(--status-error); }
+  #viz-twelve-minutes .tm-hero-unit {
+    font: 700 15px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.1;
+    transition: color 320ms ease;
+  }
+  #viz-twelve-minutes .tm-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-twelve-minutes.is-compact .tm-hero-num { font-size: 50px; }
+  #viz-twelve-minutes .tm-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-twelve-minutes .tm-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-twelve-minutes .tm-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-twelve-minutes .tm-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-twelve-minutes .tm-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Minnesota's deficit through the second quarter of Game 2 (MIN @ SAS,
+  // 2026-05-06), reconstructed from nba_play_by_play. t = seconds remaining
+  // in the quarter, m = Minnesota margin (negative = trailing). Each point
+  // is a scoring event; the path is a step function, true to the scoreboard.
+  var PTS = [
+    {t:720,m:-7},{t:701,m:-5},{t:680,m:-7},{t:632,m:-9},{t:618,m:-6},
+    {t:611,m:-7},{t:589,m:-9},{t:569,m:-11},{t:551,m:-9},{t:481,m:-12},
+    {t:415,m:-14},{t:392,m:-12},{t:385,m:-14},{t:352,m:-17},{t:318,m:-15},
+    {t:308,m:-15},{t:281,m:-13},{t:274,m:-14},{t:229,m:-12},{t:221,m:-14},
+    {t:183,m:-16},{t:165,m:-14},{t:147,m:-16},{t:125,m:-18},{t:103,m:-20},
+    {t:69,m:-23},{t:24,m:-25},{t:8,m:-24}
+  ];
+
+  // The three beats that carry the story. clock is for the tooltip/label.
+  var PEAK = {t:701,m:-5,clock:"11:41",
+    desc:"McDaniels pullup. The Wolves cut it to five.",
+    score:"MIN 19, SAS 24",label:"Cut it to five",short:"Cut to 5"};
+  var WEMBY = {t:352,m:-17,clock:"5:52",
+    desc:"Wembanyama, a step-back from 26 feet.",
+    score:"MIN 26, SAS 43",label:"Wembanyama, 26 feet",short:"Wemby 26 ft"};
+  var HARPER = {t:69,m:-23,clock:"1:09",
+    desc:"Harper, a three from 25 feet. The second dagger.",
+    score:"MIN 34, SAS 57",label:"Harper, 25 feet",short:"Harper 25 ft"};
+  var HALF = {t:8,m:-24,clock:"0:08",
+    desc:"Halftime. Minnesota trails by 24.",
+    score:"MIN 35, SAS 59"};
+
+  var Q = 720;
+  var FINAL_DEFICIT = 24;
+  var DRAW_MS = 6200;
+
+  var CAPTIONS = [
+    "Early in the second, the Wolves had cut it to five.",
+    "Then Wembanyama stepped back from twenty-six feet.",
+    "Harper rose from twenty-five. The bleeding never stopped.",
+    "Halftime: down twenty-four. The series was over."
+  ];
+
+  var root = d3.select("#viz-twelve-minutes");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  // ---- Helpers -------------------------------------------------------
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function marginAt(c) {
+    // PTS is descending in t (clock counting down). The live margin at
+    // clock c remaining is the last event that has already happened.
+    var cur = PTS[0].m;
+    for (var i = 0; i < PTS.length; i++) {
+      if (PTS[i].t >= c) cur = PTS[i].m; else break;
+    }
+    return cur;
+  }
+
+  function fmtClock(t) {
+    var mm = Math.floor(t / 60);
+    var ss = Math.round(t % 60);
+    return mm + ":" + (ss < 10 ? "0" : "") + ss;
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".tm-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function setHero(val) {
+    root.select(".tm-hero-num").node().textContent = Math.round(val);
+  }
+  function tickHero(from, to, duration) {
+    var node = root.select(".tm-hero-num").node();
+    if (duration <= 0) { node.textContent = Math.round(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = Math.round(interp(t)); };
+      });
+  }
+
+  function showTooltip(beat, cx, cy) {
+    var tip = root.select(".tm-tooltip");
+    tip.select(".tm-tip-clock").text("Q2 · " + beat.clock + " left");
+    tip.select(".tm-tip-desc").text(beat.desc);
+    tip.select(".tm-tip-score").text(beat.score);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".tm-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 14, y = cy + 14;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 14;
+    if (y + th > sh - 8) y = cy - th - 14;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".tm-tooltip").classed("is-on", false); }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".tm-stage");
+    stage.selectAll("*").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    // Glow for the line and dagger marks.
+    var glow = defs.append("filter").attr("id", "tm-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.3 : 1.9).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = {
+      top: compact ? 18 : 24,
+      right: compact ? 14 : 20,
+      bottom: compact ? 36 : 44,
+      left: compact ? 34 : 44
+    };
+
+    var x = d3.scaleLinear().domain([Q, 0]).range([pad.left, W - pad.right]);
+    var y = d3.scaleLinear().domain([-27, 1]).range([H - pad.bottom, pad.top]);
+
+    // Vertical gradient: faint at the tie line, deep red at the bottom.
+    var grad = defs.append("linearGradient").attr("id", "tm-fill")
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", 0).attr("y1", y(0)).attr("x2", 0).attr("y2", y(-27));
+    grad.append("stop").attr("offset", "0%").style("stop-color", "var(--status-error)").style("stop-opacity", 0.06);
+    grad.append("stop").attr("offset", "100%").style("stop-color", "var(--status-error)").style("stop-opacity", 0.42);
+
+    // ---- Axes --------------------------------------------------------
+    var axisG = svg.append("g").attr("class", "tm-axes");
+
+    // Y gridlines + margin ticks.
+    [0, -5, -10, -15, -20, -25].forEach(function (m) {
+      var isZero = m === 0;
+      axisG.append("line")
+        .attr("x1", pad.left).attr("x2", W - pad.right)
+        .attr("y1", y(m)).attr("y2", y(m))
+        .style("stroke", isZero ? "var(--border-default)" : "var(--border-subtle)")
+        .style("stroke-width", isZero ? 1.5 : 1)
+        .style("stroke-dasharray", isZero ? "none" : "2,4");
+      axisG.append("text")
+        .attr("x", pad.left - 7).attr("y", y(m) + 4)
+        .attr("text-anchor", "end")
+        .style("fill", isZero ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("font", (isZero ? "700 " : "") + "11px var(--family-mono)")
+        .text(isZero ? "Tie" : m);
+    });
+
+    // X clock ticks.
+    var xticks = compact ? [720, 480, 240, 0] : [720, 540, 360, 180, 0];
+    xticks.forEach(function (t) {
+      axisG.append("text")
+        .attr("x", x(t)).attr("y", H - pad.bottom + 16)
+        .attr("text-anchor", t === 720 ? "start" : (t === 0 ? "end" : "middle"))
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "11px var(--family-mono)")
+        .text(fmtClock(t));
+    });
+    axisG.append("text")
+      .attr("x", (pad.left + W - pad.right) / 2).attr("y", H - 8)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "600 12px var(--family-sans)")
+      .text(compact ? "2nd quarter, clock" : "Second quarter, game clock remaining");
+
+    // ---- The collapse curve (clipped for the reveal sweep) -----------
+    var clipId = "tm-clip";
+    var clipRect = defs.append("clipPath").attr("id", clipId).append("rect")
+      .attr("x", pad.left).attr("y", 0)
+      .attr("width", reduceMotion ? (W - pad.right - pad.left) : 0)
+      .attr("height", H);
+
+    var curveG = svg.append("g").attr("clip-path", "url(#" + clipId + ")");
+
+    var area = d3.area()
+      .x(function (d) { return x(d.t); })
+      .y0(y(0))
+      .y1(function (d) { return y(d.m); })
+      .curve(d3.curveStepAfter);
+    var line = d3.line()
+      .x(function (d) { return x(d.t); })
+      .y(function (d) { return y(d.m); })
+      .curve(d3.curveStepAfter);
+
+    curveG.append("path").datum(PTS)
+      .attr("d", area).attr("fill", "url(#tm-fill)");
+    curveG.append("path").datum(PTS)
+      .attr("d", line)
+      .style("fill", "none")
+      .style("stroke", "var(--status-error)")
+      .style("stroke-width", compact ? 2 : 2.5)
+      .style("filter", "url(#tm-glow)");
+
+    var chartW = W - pad.right - pad.left;
+
+    // ---- Beat markers (not clipped; popped on schedule) --------------
+    var markG = svg.append("g").attr("class", "tm-marks");
+
+    function makeBeat(beat, color, side) {
+      var g = markG.append("g").style("opacity", reduceMotion ? 1 : 0);
+      var cx = x(beat.t), cy = y(beat.m);
+      var r = compact ? 5 : 6.5;
+      var dot = g.append("circle")
+        .attr("cx", cx).attr("cy", cy)
+        .attr("r", reduceMotion ? r : 0)
+        .style("fill", color)
+        .style("filter", "url(#tm-glow)")
+        .style("cursor", "pointer");
+      dot.on("mouseenter", function () { showTooltip(beat, cx, cy); })
+         .on("mousemove", function () { showTooltip(beat, cx, cy); })
+         .on("mouseleave", hideTooltip);
+      dot.append("title").text("Q2 " + beat.clock + " left: " + beat.desc + " (" + beat.score + ")");
+      // Leader + label. side -1 puts label above, +1 below.
+      var labelText = compact ? beat.short : beat.label;
+      var ly = side < 0 ? cy - 20 : cy + 26;
+      g.append("line")
+        .attr("x1", cx).attr("y1", cy + (side < 0 ? -r - 1 : r + 1))
+        .attr("x2", cx).attr("y2", side < 0 ? ly + 5 : ly - 11)
+        .style("stroke", color).style("stroke-width", 1).style("opacity", 0.6);
+      // Keep label inside the frame horizontally.
+      var anchor = "middle";
+      var lx = cx;
+      if (cx - 60 < pad.left) { anchor = "start"; lx = cx - 4; }
+      else if (cx + 60 > W - pad.right) { anchor = "end"; lx = cx + 4; }
+      g.append("text")
+        .attr("x", lx).attr("y", ly)
+        .attr("text-anchor", anchor)
+        .style("fill", "var(--text-primary)")
+        .style("font", "700 12px var(--family-sans)")
+        .text(labelText);
+      g.append("text")
+        .attr("x", lx).attr("y", ly + 13)
+        .attr("text-anchor", anchor)
+        .style("fill", color)
+        .style("font", "600 10px var(--family-mono)")
+        .text("down " + (-beat.m));
+      return { g: g, dot: dot, r: r };
+    }
+
+    // Peak in green (the last flicker of hope), daggers in red.
+    var peakBeat = makeBeat(PEAK, "var(--accent-default)", -1);
+    var wembyBeat = makeBeat(WEMBY, "var(--status-error)", -1);
+    var harperBeat = makeBeat(HARPER, "var(--status-error)", -1);
+
+    // Halftime end cap.
+    var endG = markG.append("g").style("opacity", reduceMotion ? 1 : 0);
+    endG.append("circle")
+      .attr("cx", x(HALF.t)).attr("cy", y(HALF.m)).attr("r", compact ? 4 : 5)
+      .style("fill", "var(--text-primary)");
+    endG.append("text")
+      .attr("x", x(HALF.t)).attr("y", y(HALF.m) + (compact ? 20 : 22))
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "700 11px var(--family-mono)")
+      .text("35-59");
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · May 2026");
+
+    var ctx = {
+      clipRect: clipRect, chartW: chartW,
+      peakBeat: peakBeat, wembyBeat: wembyBeat, harperBeat: harperBeat, endG: endG
+    };
+    lastRender = { svg: svg, ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function popBeat(beat, delay) {
+    beat.g.transition().delay(delay).duration(260).style("opacity", 1);
+    beat.dot.transition().delay(delay).duration(520).ease(d3.easeBackOut.overshoot(1.7))
+      .attr("r", beat.r);
+  }
+
+  function finalState(ctx) {
+    ctx.clipRect.attr("width", ctx.chartW);
+    ctx.peakBeat.g.style("opacity", 1); ctx.peakBeat.dot.attr("r", ctx.peakBeat.r);
+    ctx.wembyBeat.g.style("opacity", 1); ctx.wembyBeat.dot.attr("r", ctx.wembyBeat.r);
+    ctx.harperBeat.g.style("opacity", 1); ctx.harperBeat.dot.attr("r", ctx.harperBeat.r);
+    ctx.endG.style("opacity", 1);
+    setCaption(3);
+    setHero(FINAL_DEFICIT);
+    root.classed("is-landed", true);
+    root.select(".tm-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".tm-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.clipRect.attr("width", 0);
+    [ctx.peakBeat, ctx.wembyBeat, ctx.harperBeat].forEach(function (b) {
+      b.g.style("opacity", 0); b.dot.attr("r", 0);
+    });
+    ctx.endG.style("opacity", 0);
+    setHero(7);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Reveal sweep. The clip grows left to right; the hero number tracks
+    // the live margin at the swept clock, so the count follows the line.
+    ctx.clipRect.transition("sweep").duration(DRAW_MS).ease(d3.easeLinear)
+      .attr("width", ctx.chartW)
+      .tween("hero", function () {
+        var node = root.select(".tm-hero-num").node();
+        return function (t) {
+          var clock = Q * (1 - t);
+          node.textContent = Math.round(-marginAt(clock));
+        };
+      });
+
+    function fracFor(tRemain) { return (Q - tRemain) / Q; }
+
+    // Beats pop as the sweep reaches them.
+    popBeat(ctx.peakBeat, fracFor(PEAK.t) * DRAW_MS);
+    popBeat(ctx.wembyBeat, fracFor(WEMBY.t) * DRAW_MS);
+    popBeat(ctx.harperBeat, fracFor(HARPER.t) * DRAW_MS);
+
+    // Captions track the daggers.
+    playTimers.push(setTimeout(function () { setCaption(1); }, fracFor(WEMBY.t) * DRAW_MS - 200));
+    playTimers.push(setTimeout(function () { setCaption(2); }, fracFor(HARPER.t) * DRAW_MS - 200));
+
+    // Landing.
+    playTimers.push(setTimeout(function () {
+      ctx.endG.transition().duration(300).style("opacity", 1);
+      setCaption(3);
+      tickHero(-marginAt(8), FINAL_DEFICIT, 300);
+      root.classed("is-landed", true);
+      // One closing pulse on the halftime cap area: redraw daggers steady.
+    }, DRAW_MS));
+
+    playTimers.push(setTimeout(function () {
+      root.select(".tm-replay").classed("is-shown", true);
+    }, DRAW_MS + 500));
+  }
+
+  root.select(".tm-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart the animation on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes (was the restart loop)
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

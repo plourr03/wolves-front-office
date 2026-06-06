@@ -1,0 +1,535 @@
+<div id="viz-wemby-wall">
+  <div class="ww-chip" role="status">
+    <span class="ww-chip-dot"></span>
+    <span class="ww-chip-label">Round 2 · Spurs vs Wolves</span>
+    <span class="ww-chip-sep">·</span>
+    <span class="ww-chip-sub">six games</span>
+  </div>
+  <p class="ww-caption" aria-live="polite"></p>
+  <div class="ww-stage">
+    <div class="ww-tooltip" role="tooltip">
+      <div class="ww-tip-shooter"></div>
+      <div class="ww-tip-when"></div>
+      <div class="ww-tip-dist"></div>
+    </div>
+  </div>
+  <div class="ww-hero">
+    <div class="ww-hero-line">
+      <span class="ww-hero-num">0</span>
+      <span class="ww-hero-unit">shots erased</span>
+    </div>
+    <div class="ww-hero-label">Wembanyama's blocks, the whole series</div>
+    <button class="ww-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ww-foot">Every shot Wembanyama blocked against Minnesota in the second round, by location. Twelve of them came in Game 1 alone. When he was the primary defender, the Wolves shot 34 percent (33 of 96).</p>
+  <div class="ww-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-wemby-wall, #viz-wemby-wall * { touch-action: manipulation; }
+  #viz-wemby-wall {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-wemby-wall .ww-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-error);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-wemby-wall .ww-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-error);
+  }
+  #viz-wemby-wall .ww-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-wemby-wall .ww-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-wemby-wall .ww-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-wemby-wall .ww-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  #viz-wemby-wall .ww-stage svg { display: block; width: 100%; height: auto; }
+  #viz-wemby-wall .ww-tooltip {
+    position: absolute; top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 140px; max-width: 230px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-wemby-wall .ww-tooltip.is-on { opacity: 1; }
+  #viz-wemby-wall .ww-tip-shooter {
+    font: 700 13px var(--family-sans); color: var(--text-primary); margin-bottom: 2px;
+  }
+  #viz-wemby-wall .ww-tip-when {
+    font: 500 11px var(--family-mono); color: var(--text-tertiary); margin-bottom: 4px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  #viz-wemby-wall .ww-tip-dist {
+    font: 700 12px var(--family-mono); color: var(--status-error);
+  }
+  #viz-wemby-wall .ww-hero {
+    display: flex; flex-direction: column; align-items: center;
+    margin: 18px 0 4px 0; position: relative;
+  }
+  #viz-wemby-wall .ww-hero-line { display: flex; align-items: baseline; gap: 8px; }
+  #viz-wemby-wall .ww-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1; letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-wemby-wall.is-landed .ww-hero-num,
+  #viz-wemby-wall.is-landed .ww-hero-unit { color: var(--status-error); }
+  #viz-wemby-wall .ww-hero-unit {
+    font: 700 15px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.1; transition: color 320ms ease;
+  }
+  #viz-wemby-wall .ww-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-top: 8px; text-align: center;
+  }
+  #viz-wemby-wall.is-compact .ww-hero-num { font-size: 50px; }
+  #viz-wemby-wall .ww-replay {
+    margin-top: 12px;
+    background: var(--bg-surface); color: var(--text-secondary);
+    border: 1px solid var(--border-subtle); border-radius: 999px;
+    padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-wemby-wall .ww-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-wemby-wall .ww-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-wemby-wall .ww-foot {
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+    margin: 14px 0 0 0; text-align: center; line-height: 1.45;
+  }
+  #viz-wemby-wall .ww-watermark {
+    font: 9px var(--family-sans); color: var(--text-tertiary);
+    opacity: 0.55; text-align: right; margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Every shot Wembanyama blocked against Minnesota in the 2026 round 2
+  // series, located from play-by-play joined to the shooter's shot
+  // coordinates. x,y in tenths of a foot, hoop at (0,0). band: rim /
+  // floater (4 ft and out, inside the arc) / perim. Sorted rim -> out so
+  // the wall fills from the basket and ends on the corner three.
+  var BLOCKS = [
+    {x:0,y:0,d:0,band:"rim",p:"Julius Randle",per:2,clk:"8:02"},
+    {x:0,y:0,d:0,band:"rim",p:"Julius Randle",per:3,clk:"3:22"},
+    {x:15,y:10,d:1,band:"rim",p:"Rudy Gobert",per:2,clk:"1:03"},
+    {x:-5,y:10,d:1,band:"rim",p:"Terrence Shannon Jr.",per:1,clk:"11:38"},
+    {x:-5,y:17,d:1,band:"rim",p:"Terrence Shannon Jr.",per:1,clk:"11:20"},
+    {x:2,y:12,d:1,band:"rim",p:"Rudy Gobert",per:1,clk:"9:34"},
+    {x:-4,y:13,d:1,band:"rim",p:"Naz Reid",per:2,clk:"0:22"},
+    {x:6,y:16,d:1,band:"rim",p:"Bones Hyland",per:3,clk:"2:54"},
+    {x:-10,y:26,d:2,band:"rim",p:"Rudy Gobert",per:2,clk:"7:25"},
+    {x:-22,y:0,d:2,band:"rim",p:"Naz Reid",per:2,clk:"10:02"},
+    {x:22,y:19,d:2,band:"rim",p:"Rudy Gobert",per:3,clk:"10:14"},
+    {x:-9,y:37,d:3,band:"rim",p:"Rudy Gobert",per:2,clk:"1:30"},
+    {x:29,y:25,d:3,band:"rim",p:"Anthony Edwards",per:4,clk:"8:26"},
+    {x:-6,y:38,d:3,band:"rim",p:"Julius Randle",per:2,clk:"0:36"},
+    {x:-40,y:17,d:4,band:"floater",p:"Julius Randle",per:1,clk:"9:21"},
+    {x:36,y:33,d:4,band:"floater",p:"Jaden McDaniels",per:4,clk:"5:42"},
+    {x:32,y:29,d:4,band:"floater",p:"Ayo Dosunmu",per:2,clk:"5:41"},
+    {x:-32,y:35,d:4,band:"floater",p:"Jaden McDaniels",per:3,clk:"8:00"},
+    {x:-51,y:27,d:5,band:"floater",p:"Jaden McDaniels",per:1,clk:"10:34"},
+    {x:4,y:52,d:5,band:"floater",p:"Jaden McDaniels",per:3,clk:"6:53"},
+    {x:53,y:22,d:5,band:"floater",p:"Naz Reid",per:2,clk:"9:27"},
+    {x:21,y:62,d:6,band:"floater",p:"Jaden McDaniels",per:4,clk:"8:52"},
+    {x:86,y:31,d:9,band:"floater",p:"Terrence Shannon Jr.",per:4,clk:"4:46"},
+    {x:-25,y:113,d:11,band:"floater",p:"Anthony Edwards",per:3,clk:"1:09"},
+    {x:-238,y:53,d:24,band:"perim",p:"Terrence Shannon Jr.",per:4,clk:"8:33"}
+  ];
+  var TOTAL = BLOCKS.length; // 25
+
+  var CAPTIONS = [
+    "Twenty-five blocks in six games.",
+    "Most came at the rim. No surprise there.",
+    "Ten of them did not. The floater zone was his too.",
+    "And one he chased all the way to the corner."
+  ];
+  var LAND = "He did not protect the rim. He protected everywhere.";
+
+  // Court frame, tenths of a foot. Cropped to the area where the action
+  // happened so the marks read large.
+  var COURT_X = [-250, 250];
+  var COURT_Y = [-45, 215];
+  var ASPECT = (COURT_Y[1] - COURT_Y[0]) / (COURT_X[1] - COURT_X[0]);
+
+  var DROP_RIM = 200, DROP_RIM_END = 2200;
+  var DROP_FLOAT = 2500, DROP_FLOAT_END = 4500;
+  var DROP_PERIM = 4900;
+  var LAND_AT = 5600, REPLAY_AT = 6200;
+
+  var root = d3.select("#viz-wemby-wall");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var yy = e.touches[0].clientY;
+      var dy = lastTouchY - yy;
+      lastTouchY = yy;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+
+  function setCaption(idx, text) {
+    var c = root.select(".ww-caption");
+    var t = text || CAPTIONS[idx];
+    if (idx === 0 && !text) { c.style("opacity", 1).text(t); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(t).style("opacity", 1); }, 220);
+  }
+  function setHero(v) { root.select(".ww-hero-num").node().textContent = Math.round(v); }
+  function tickHero(from, to, dur) {
+    var node = root.select(".ww-hero-num").node();
+    if (dur <= 0) { node.textContent = Math.round(to); return; }
+    d3.select(node).transition("hero").duration(dur).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = Math.round(interp(t)); };
+      });
+  }
+
+  function showTooltip(d, cx, cy) {
+    var tip = root.select(".ww-tooltip");
+    tip.select(".ww-tip-shooter").text(d.p);
+    tip.select(".ww-tip-when").text("Q" + d.per + " · " + d.clk + " left");
+    tip.select(".ww-tip-dist").text(d.d === 0 ? "At the rim" : (d.d + " ft, blocked"));
+    tip.classed("is-on", true);
+    var tipEl = tip.node(), stageEl = root.select(".ww-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 14, y = cy + 14, tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 14;
+    if (y + th > sh - 8) y = cy - th - 14;
+    if (x < 4) x = 4; if (y < 4) y = 4;
+    tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".ww-tooltip").classed("is-on", false); }
+
+  // ---- Court geometry (adapted, tenths of a foot, hoop at origin) -----
+  function drawCourt(g, xS, yS) {
+    var lineCol = "var(--border-default)", lineWeak = "var(--border-subtle)";
+    g.append("rect")
+      .attr("x", xS(-80)).attr("y", yS(-47.5))
+      .attr("width", xS(80) - xS(-80)).attr("height", yS(142.5) - yS(-47.5))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1);
+    g.append("circle")
+      .attr("cx", xS(0)).attr("cy", yS(142.5)).attr("r", Math.abs(xS(60) - xS(0)))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1)
+      .style("stroke-dasharray", "3,3");
+    var raR = Math.abs(xS(40) - xS(0));
+    g.append("path")
+      .attr("d", "M " + xS(-40) + " " + yS(0) + " A " + raR + " " + raR + " 0 0 1 " + xS(40) + " " + yS(0))
+      .style("fill", "none").style("stroke", lineWeak).style("stroke-width", 1);
+    var threeY = Math.sqrt(237.5 * 237.5 - 220 * 220);
+    var arcR = Math.abs(xS(237.5) - xS(0));
+    g.append("path")
+      .attr("d", "M " + xS(-220) + " " + yS(threeY) + " A " + arcR + " " + arcR + " 0 0 1 " + xS(220) + " " + yS(threeY))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line").attr("x1", xS(-220)).attr("y1", yS(-47.5)).attr("x2", xS(-220)).attr("y2", yS(threeY))
+      .style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line").attr("x1", xS(220)).attr("y1", yS(-47.5)).attr("x2", xS(220)).attr("y2", yS(threeY))
+      .style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line").attr("x1", xS(-30)).attr("y1", yS(-7.5)).attr("x2", xS(30)).attr("y2", yS(-7.5))
+      .style("stroke", lineCol).style("stroke-width", 2);
+    g.append("circle").attr("cx", xS(0)).attr("cy", yS(0)).attr("r", Math.abs(xS(7.5) - xS(0)))
+      .style("fill", "none").style("stroke", "var(--text-tertiary)").style("stroke-width", 1.5);
+  }
+
+  var lastCtx = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".ww-stage");
+    stage.selectAll("*").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+    var height = Math.round(width * ASPECT);
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "ww-glow")
+      .attr("x", "-60%").attr("y", "-60%").attr("width", "220%").attr("height", "220%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.5 : 2.2).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = compact ? 6 : 10;
+    var xS = d3.scaleLinear().domain(COURT_X).range([pad, width - pad]);
+    var yS = d3.scaleLinear().domain(COURT_Y).range([height - pad, pad]);
+
+    svg.append("rect")
+      .attr("x", 0).attr("y", 0).attr("width", width).attr("height", height)
+      .style("fill", "var(--bg-inset)");
+
+    // Deterrence band shading: rim arc fill and floater ring, faint.
+    var floatR = Math.abs(xS(160) - xS(0));
+    var rimBandR = Math.abs(xS(40) - xS(0));
+    svg.append("circle").attr("cx", xS(0)).attr("cy", yS(0)).attr("r", floatR)
+      .style("fill", "var(--status-error)").style("opacity", 0.05);
+    svg.append("circle").attr("cx", xS(0)).attr("cy", yS(0)).attr("r", rimBandR)
+      .style("fill", "var(--status-error)").style("opacity", 0.07);
+
+    var courtG = svg.append("g");
+    drawCourt(courtG, xS, yS);
+
+    // Zone labels.
+    svg.append("text").attr("x", xS(0)).attr("y", yS(78))
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 " + (compact ? 9 : 10) + "px var(--family-sans)")
+      .style("letter-spacing", "0.1em").style("text-transform", "uppercase")
+      .style("pointer-events", "none")
+      .text("Floater zone");
+
+    // Blocks layer.
+    var markLayer = svg.append("g").attr("class", "ww-marks");
+    var rBase = compact ? 5.5 : 6.8;
+    var marks = markLayer.selectAll("g.ww-mark").data(BLOCKS).join("g")
+      .attr("class", "ww-mark")
+      .attr("transform", function (d) { return "translate(" + xS(d.x) + "," + yS(d.y) + ")"; });
+
+    marks.each(function (d) {
+      var g = d3.select(this);
+      var isPerim = d.band === "perim";
+      var r = isPerim ? rBase * 1.25 : rBase;
+      // Outer ring for the corner-three block so it reads as the kicker.
+      if (isPerim) {
+        g.append("circle").attr("class", "ww-ring").attr("r", reduceMotion ? r + 5 : 0)
+          .style("fill", "none").style("stroke", "var(--status-error)")
+          .style("stroke-width", 1.2).style("opacity", reduceMotion ? 0.7 : 0);
+      }
+      g.append("circle").attr("class", "ww-dot")
+        .attr("r", reduceMotion ? r : 0)
+        .style("fill", "var(--status-error)")
+        .style("filter", "url(#ww-glow)")
+        .style("opacity", reduceMotion ? 0.95 : 0)
+        .style("cursor", "pointer")
+        .datum(d);
+      g.append("title").text(d.p + ", Q" + d.per + " " + d.clk + ", " + (d.d === 0 ? "at the rim" : d.d + " ft") + ", blocked by Wembanyama.");
+    });
+
+    marks.select(".ww-dot")
+      .on("mouseenter", function (event, d) {
+        d3.select(this).interrupt("hov").transition("hov").duration(120)
+          .attr("r", rBase * 1.5).style("opacity", 1).style("fill", "var(--accent-hover)");
+        var m = this.parentNode.transform.baseVal.consolidate().matrix;
+        showTooltip(d, m.e, m.f);
+      })
+      .on("mouseleave", function (event, d) {
+        var isPerim = d.band === "perim";
+        d3.select(this).interrupt("hov").transition("hov").duration(180)
+          .attr("r", isPerim ? rBase * 1.25 : rBase).style("opacity", 0.95).style("fill", "var(--status-error)");
+        hideTooltip();
+      });
+
+    // Corner-three annotation.
+    var cornerLabel = svg.append("g").attr("class", "ww-corner-note").style("opacity", reduceMotion ? 1 : 0);
+    var cd = BLOCKS[BLOCKS.length - 1];
+    var clx = xS(cd.x), cly = yS(cd.y);
+    cornerLabel.append("text")
+      .attr("x", clx + 10).attr("y", cly - 8)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 " + (compact ? 10 : 12) + "px var(--family-sans)")
+      .text("24 feet.");
+    cornerLabel.append("text")
+      .attr("x", clx + 10).attr("y", cly + (compact ? 6 : 7))
+      .attr("text-anchor", "start")
+      .style("fill", "var(--status-error)")
+      .style("font", "600 " + (compact ? 9 : 10) + "px var(--family-mono)")
+      .text("a corner three");
+
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · May 2026");
+
+    lastCtx = { marks: marks, rBase: rBase, cornerLabel: cornerLabel };
+    if (triggerPlay !== false) play(lastCtx);
+    else finalState(lastCtx);
+  }
+
+  function finalState(ctx) {
+    ctx.marks.select(".ww-dot").attr("r", function () {
+      return d3.select(this).datum().band === "perim" ? ctx.rBase * 1.25 : ctx.rBase;
+    }).style("opacity", 0.95);
+    ctx.marks.select(".ww-ring").attr("r", ctx.rBase * 1.25 + 5).style("opacity", 0.7);
+    ctx.cornerLabel.style("opacity", 1);
+    setCaption(0, LAND);
+    setHero(TOTAL);
+    root.classed("is-landed", true);
+    root.select(".ww-replay").classed("is-shown", true);
+  }
+
+  function dropBand(ctx, band, startDelay, totalDur) {
+    var sel = ctx.marks.filter(function (d) { return d.band === band; });
+    var n = sel.size();
+    var per = n > 1 ? totalDur / n : 0;
+    sel.select(".ww-dot")
+      .interrupt()
+      .style("opacity", 0).attr("r", 0)
+      .transition().delay(function (_, i) { return startDelay + i * per; })
+      .duration(360).ease(d3.easeBackOut.overshoot(1.8))
+      .attr("r", function (d) { return d.band === "perim" ? ctx.rBase * 1.25 : ctx.rBase; })
+      .style("opacity", 0.95);
+    return startDelay + n * per;
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".ww-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    ctx.marks.select(".ww-dot").style("opacity", 0).attr("r", 0);
+    ctx.marks.select(".ww-ring").style("opacity", 0).attr("r", 0);
+    ctx.cornerLabel.style("opacity", 0);
+    setHero(0);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Rim wave.
+    dropBand(ctx, "rim", DROP_RIM, DROP_RIM_END - DROP_RIM);
+    playTimers.push(setTimeout(function () { tickHero(0, 14, DROP_RIM_END - DROP_RIM); }, DROP_RIM));
+
+    // Floater wave.
+    playTimers.push(setTimeout(function () { setCaption(1); }, DROP_RIM_END - 100));
+    playTimers.push(setTimeout(function () { setCaption(2); }, DROP_FLOAT + 200));
+    dropBand(ctx, "floater", DROP_FLOAT, DROP_FLOAT_END - DROP_FLOAT);
+    playTimers.push(setTimeout(function () { tickHero(14, 24, DROP_FLOAT_END - DROP_FLOAT); }, DROP_FLOAT));
+
+    // Corner three, the kicker.
+    playTimers.push(setTimeout(function () { setCaption(3); }, DROP_PERIM - 100));
+    dropBand(ctx, "perim", DROP_PERIM, 200);
+    playTimers.push(setTimeout(function () {
+      tickHero(24, 25, 300);
+      ctx.cornerLabel.transition().duration(360).style("opacity", 1);
+      ctx.marks.filter(function (d) { return d.band === "perim"; }).select(".ww-ring")
+        .attr("r", ctx.rBase * 1.25)
+        .style("opacity", 0.8)
+        .transition().duration(1400).ease(d3.easeCubicOut)
+        .attr("r", ctx.rBase * 1.25 + 16).style("opacity", 0);
+    }, DROP_PERIM + 150));
+
+    // Land.
+    playTimers.push(setTimeout(function () {
+      setCaption(0, LAND);
+      root.classed("is-landed", true);
+    }, LAND_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".ww-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".ww-replay").on("click", function () { if (lastCtx) play(lastCtx); });
+
+  // ---- Autoplay only when in full view; never restart the animation on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastCtx) return;
+    __resetOnly = true;
+    play(lastCtx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var rt = null;
+    var ro = new ResizeObserver(function () {
+      if (rt) clearTimeout(rt);
+      rt = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes (was the restart loop)
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

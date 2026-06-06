@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAFI quadrant migration, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  /* Dev harness only. Production supplies these tokens via /tokens.css. */
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is lafi_quadrant_migration_fragment.html.</div>
+<div class="harness-stage">
+<div id="viz-lafi-quadrant-migration"></div>
+<script>
+(function () {
+  var path = [
+    { season: "2023-24", stick: 35, iso: 49, label: "Designed", note: "Conley running offense, KAT at the 4. A normal NBA offense." },
+    { season: "2024-25", stick: 69, iso: 71, label: "Single-star pickup", note: "Edwards held the ball when Conley sat. One player became the whole offense." },
+    { season: "2025-26", stick: 31, iso: 90, label: "Distributed pickup", note: "Five Wolves taking turns iso-ing. The isolation load decentralized but did not improve." }
+  ];
+
+  var quadrants = [
+    { id: "bl", xMin: 0,  xMax: 50, yMin: 0,  yMax: 50, label: "Designed offense", tone: "good"   },
+    { id: "br", xMin: 50, xMax: 100, yMin: 0, yMax: 50, label: "One handler, team offense", tone: "neutral" },
+    { id: "tl", xMin: 0,  xMax: 50, yMin: 50, yMax: 100, label: "Distributed pickup", tone: "bad" },
+    { id: "tr", xMin: 50, xMax: 100, yMin: 50, yMax: 100, label: "Single-star pickup", tone: "bad" }
+  ];
+
+  var root = d3.select("#viz-lafi-quadrant-migration");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function dotStyle(i, total) {
+    if (i === total - 1) {
+      return { fill: "var(--accent-default)", stroke: "var(--accent-hover)", r: 11 };
+    }
+    if (i === 0) {
+      return { fill: "var(--text-tertiary)", stroke: "rgba(255,255,255,.18)", r: 8 };
+    }
+    return { fill: "var(--status-warning)", stroke: "rgba(245,166,35,.55)", r: 9 };
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+    if (typeof d3 === "undefined") return;
+    root.style("position", "relative");
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(720, raw));
+    var compact = width < 480;
+
+    var margin = {
+      top: compact ? 92 : 80,
+      right: compact ? 18 : 28,
+      bottom: compact ? 84 : 64,
+      left: compact ? 42 : 52
+    };
+
+    var plotSize = width - margin.left - margin.right;
+    var height = margin.top + margin.bottom + plotSize;
+
+    var svg = root.append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block")
+      .style("max-width", "100%")
+      .style("margin", "0 auto");
+
+    var head = svg.append("g");
+    head.append("text")
+      .attr("x", margin.left).attr("y", 24)
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 17px var(--family-sans)")
+      .text("The path is two moves, not one.");
+    head.append("text")
+      .attr("x", margin.left).attr("y", 46)
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "12px var(--family-sans)")
+      .text("Ball Stickiness vs Isolation Reliance, each on a 0 to 100 scale. Hover a season for context.");
+
+    var tooltip = root.append("div")
+      .attr("class", "viz-tooltip")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
+      .style("opacity", 0)
+      .style("transition", "opacity 140ms ease-out")
+      .style("background", "var(--bg-surface)")
+      .style("border", "1px solid var(--border-subtle)")
+      .style("border-radius", "var(--radius-md)")
+      .style("padding", "10px 12px")
+      .style("min-width", "200px")
+      .style("max-width", "240px")
+      .style("box-shadow", "0 4px 16px rgba(0,0,0,.4)")
+      .style("z-index", 10)
+      .style("left", "0px")
+      .style("top", "0px");
+
+    function buildTooltipHTML(d) {
+      var qTone = d.label === "Designed"
+        ? "var(--accent-default)"
+        : "var(--status-error)";
+      return (
+        '<div style="font:700 13px var(--family-sans); color:var(--text-primary); margin-bottom:2px;">' + d.season + '</div>' +
+        '<div style="font:600 12px var(--family-sans); color:' + qTone + '; margin-bottom:8px;">' + d.label + '</div>' +
+        '<div style="font:12px var(--family-sans); color:var(--text-secondary); line-height:1.45; margin-bottom:10px;">' + d.note + '</div>' +
+        '<div style="display:flex; gap:12px; padding-top:8px; border-top:1px solid var(--border-subtle);">' +
+        '<div><div style="font:10px var(--family-sans); color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">Ball Stickiness</div>' +
+        '<div style="font:700 14px var(--family-mono); color:var(--text-primary);">' + d.stick + '</div></div>' +
+        '<div><div style="font:10px var(--family-sans); color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">Iso Reliance</div>' +
+        '<div style="font:700 14px var(--family-mono); color:var(--text-primary);">' + d.iso + '</div></div>' +
+        '</div>'
+      );
+    }
+
+    var x = d3.scaleLinear().domain([0, 100]).range([0, plotSize]);
+    var y = d3.scaleLinear().domain([0, 100]).range([plotSize, 0]);
+
+    var g = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    g.selectAll(".q-bg").data(quadrants).join("rect")
+      .attr("class", "q-bg")
+      .attr("x", function (d) { return x(d.xMin); })
+      .attr("y", function (d) { return y(d.yMax); })
+      .attr("width", function (d) { return x(d.xMax) - x(d.xMin); })
+      .attr("height", function (d) { return y(d.yMin) - y(d.yMax); })
+      .style("fill", function (d) {
+        if (d.tone === "good") return "var(--accent-subtle)";
+        if (d.tone === "bad") return "rgba(255,92,92,.06)";
+        return "rgba(255,255,255,.02)";
+      })
+      .style("stroke", "none");
+
+    g.append("rect")
+      .attr("x", 0).attr("y", 0)
+      .attr("width", plotSize).attr("height", plotSize)
+      .style("fill", "none")
+      .style("stroke", "var(--border-subtle)")
+      .style("stroke-width", 1);
+
+    g.append("line")
+      .attr("x1", x(50)).attr("x2", x(50))
+      .attr("y1", 0).attr("y2", plotSize)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-dasharray", "3,3")
+      .style("stroke-width", 1);
+    g.append("line")
+      .attr("x1", 0).attr("x2", plotSize)
+      .attr("y1", y(50)).attr("y2", y(50))
+      .style("stroke", "var(--border-default)")
+      .style("stroke-dasharray", "3,3")
+      .style("stroke-width", 1);
+
+    var inset = compact ? 8 : 12;
+    quadrants.forEach(function (q) {
+      var labelX, labelY, anchor;
+      if (q.id === "bl") { labelX = x(q.xMin) + inset; labelY = y(q.yMin) - inset; anchor = "start"; }
+      if (q.id === "br") { labelX = x(q.xMax) - inset; labelY = y(q.yMin) - inset; anchor = "end"; }
+      if (q.id === "tl") { labelX = x(q.xMin) + inset; labelY = y(q.yMax) + inset + 12; anchor = "start"; }
+      if (q.id === "tr") { labelX = x(q.xMax) - inset; labelY = y(q.yMax) + inset + 12; anchor = "end"; }
+      g.append("text")
+        .attr("x", labelX).attr("y", labelY)
+        .attr("text-anchor", anchor)
+        .style("fill", q.tone === "good"
+          ? "var(--accent-default)"
+          : (q.tone === "bad" ? "var(--status-error)" : "var(--text-tertiary)"))
+        .style("font", "600 12px var(--family-sans)")
+        .style("opacity", 0.85)
+        .text(q.label);
+    });
+
+    [0, 50, 100].forEach(function (v) {
+      g.append("text")
+        .attr("x", x(v)).attr("y", plotSize + 18)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(v);
+      g.append("text")
+        .attr("x", -8).attr("y", y(v))
+        .attr("text-anchor", "end").attr("dy", "0.35em")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(v);
+    });
+
+    g.append("text")
+      .attr("x", plotSize / 2).attr("y", plotSize + 40)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "12px var(--family-sans)")
+      .text("Ball Stickiness, more →");
+
+    g.append("text")
+      .attr("transform", "translate(" + (-margin.left + 14) + "," + (plotSize / 2) + ") rotate(-90)")
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "12px var(--family-sans)")
+      .text("Isolation Reliance, more →");
+
+    var defs = svg.append("defs");
+    defs.append("marker")
+      .attr("id", "viz-quad-arrow")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8).attr("refY", 0)
+      .attr("markerWidth", 7).attr("markerHeight", 7)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .style("fill", "var(--text-secondary)");
+
+    var DOT_DELAYS = [0, 1200, 2200];
+    var SEG_DELAYS = [500, 1500];
+
+    function drawSegment(from, to, delay) {
+      var x1 = x(from.stick), y1 = y(from.iso);
+      var x2 = x(to.stick),   y2 = y(to.iso);
+      var dx = x2 - x1, dy = y2 - y1;
+      var len = Math.sqrt(dx * dx + dy * dy);
+      var trim = 14;
+      var x2t = x2 - (dx / len) * trim;
+      var y2t = y2 - (dy / len) * trim;
+
+      var line = g.append("line")
+        .attr("x1", x1).attr("y1", y1)
+        .attr("x2", reduceMotion ? x2t : x1)
+        .attr("y2", reduceMotion ? y2t : y1)
+        .style("stroke", "var(--text-secondary)")
+        .style("stroke-width", 2)
+        .style("stroke-linecap", "round")
+        .style("opacity", 0.85)
+        .attr("marker-end", "url(#viz-quad-arrow)");
+
+      if (!reduceMotion) {
+        line.transition()
+          .duration(700).delay(delay).ease(d3.easeCubicOut)
+          .attr("x2", x2t).attr("y2", y2t);
+      }
+    }
+
+    function drawDot(d, i) {
+      var style = dotStyle(i, path.length);
+      var isCurrent = (i === path.length - 1);
+
+      var node = g.append("g")
+        .attr("transform", "translate(" + x(d.stick) + "," + y(d.iso) + ")")
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+
+      if (isCurrent) {
+        var halo = node.append("circle")
+          .attr("r", style.r)
+          .style("fill", "none")
+          .style("stroke", "var(--accent-default)")
+          .style("stroke-width", 2)
+          .style("pointer-events", "none");
+
+        if (!reduceMotion) {
+          function pulse() {
+            halo
+              .attr("r", style.r)
+              .style("opacity", 0.7)
+              .transition()
+              .duration(1800)
+              .ease(d3.easeQuadOut)
+              .attr("r", style.r + 14)
+              .style("opacity", 0)
+              .on("end", pulse);
+          }
+          setTimeout(pulse, DOT_DELAYS[i] + 600);
+        }
+      }
+
+      node.append("circle")
+        .attr("class", "dot-solid")
+        .attr("r", style.r)
+        .style("fill", style.fill)
+        .style("stroke", style.stroke)
+        .style("stroke-width", 2);
+
+      var labelOffsets = {
+        "2023-24": { dx: 12, dy: 4, anchor: "start" },
+        "2024-25": { dx: 12, dy: 4, anchor: "start" },
+        "2025-26": { dx: -12, dy: 4, anchor: "end" }
+      };
+      var off = labelOffsets[d.season] || { dx: 12, dy: 4, anchor: "start" };
+      node.append("text")
+        .attr("x", off.dx).attr("y", off.dy)
+        .attr("text-anchor", off.anchor)
+        .style("fill", "var(--text-primary)")
+        .style("font", "700 13px var(--family-sans)")
+        .text(d.season);
+
+      if (isCurrent) {
+        node.append("text")
+          .attr("x", off.dx).attr("y", off.dy + 14)
+          .attr("text-anchor", off.anchor)
+          .style("fill", "var(--accent-default)")
+          .style("font", "600 10px var(--family-sans)")
+          .style("text-transform", "uppercase")
+          .style("letter-spacing", "0.6px")
+          .text("Now");
+      }
+
+      var baseR = style.r;
+      node
+        .on("mouseenter", function () {
+          d3.select(this).select(".dot-solid")
+            .style("fill", "var(--accent-hover)")
+            .attr("r", baseR + 3);
+          tooltip.html(buildTooltipHTML(d)).style("opacity", 1);
+        })
+        .on("mousemove", function (event) {
+          var rect = root.node().getBoundingClientRect();
+          var cx = event.clientX - rect.left;
+          var cy = event.clientY - rect.top;
+          var ttNode = tooltip.node();
+          var tw = ttNode.offsetWidth || 220;
+          var th = ttNode.offsetHeight || 140;
+          var leftPos = cx + 14;
+          if (leftPos + tw > rect.width) leftPos = cx - tw - 14;
+          if (leftPos < 0) leftPos = 4;
+          var topPos = cy + 14;
+          if (topPos + th > rect.height) topPos = cy - th - 14;
+          if (topPos < 0) topPos = 4;
+          tooltip.style("left", leftPos + "px").style("top", topPos + "px");
+        })
+        .on("mouseleave", function () {
+          d3.select(this).select(".dot-solid")
+            .style("fill", style.fill)
+            .attr("r", baseR);
+          tooltip.style("opacity", 0);
+        });
+
+      if (!reduceMotion) {
+        node.transition()
+          .duration(400).delay(DOT_DELAYS[i])
+          .style("opacity", 1);
+      }
+    }
+
+    for (var i = 0; i < path.length - 1; i++) {
+      drawSegment(path[i], path[i + 1], SEG_DELAYS[i]);
+    }
+    for (var j = 0; j < path.length; j++) {
+      drawDot(path[j], j);
+    }
+  }
+
+  render();
+  if (window.ResizeObserver) {
+    new ResizeObserver(render).observe(root.node());
+  }
+})();
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<div id="viz-edwards-conley-card">
+  <div class="ec-headline">Edwards is not Conley.</div>
+  <div class="ec-subtitle">The simplest measure of a playmaker is assists per turnover. Higher means more passing, fewer mistakes.</div>
+  <div class="ec-row">
+    <div class="ec-card" data-player="conley">
+      <div class="ec-name">Mike Conley</div>
+      <div class="ec-meta">The point guard the Wolves had</div>
+      <div class="ec-stat">4.4</div>
+      <div class="ec-label">Assists per turnover</div>
+      <div class="ec-detail">Held above 4.2 every season the Wolves had him. The kind of guard who runs an offense without ever losing the ball.</div>
+    </div>
+    <div class="ec-card" data-player="edwards">
+      <div class="ec-name">Anthony Edwards</div>
+      <div class="ec-meta">The point guard the Wolves used</div>
+      <div class="ec-stat">1.4</div>
+      <div class="ec-label">Assists per turnover</div>
+      <div class="ec-detail">Between 1.3 and 1.7 each of the last three seasons. A brilliant scorer being asked to do something he isn't built for.</div>
+    </div>
+  </div>
+  <div class="ec-foot">The Wolves asked the bottom player to do the top player's job. Then the offense started looking like pickup.</div>
+  <div class="ec-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-conley-card, #viz-edwards-conley-card * { touch-action: manipulation; }
+  #viz-edwards-conley-card {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    padding: 4px 0;
+    position: relative;
+  }
+  #viz-edwards-conley-card .ec-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 12px;
+  }
+  #viz-edwards-conley-card .ec-headline {
+    font: 700 22px var(--family-sans);
+    margin-bottom: 6px;
+  }
+  #viz-edwards-conley-card .ec-subtitle {
+    font: 13px/1.5 var(--family-sans);
+    color: var(--text-secondary);
+    margin-bottom: 22px;
+    max-width: 620px;
+  }
+  #viz-edwards-conley-card .ec-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  #viz-edwards-conley-card .ec-card {
+    flex: 1 1 280px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 22px 26px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  #viz-edwards-conley-card .ec-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  #viz-edwards-conley-card .ec-card[data-player="conley"]::before {
+    background: var(--dataviz-3);
+  }
+  #viz-edwards-conley-card .ec-card[data-player="edwards"]::before {
+    background: var(--accent-default);
+  }
+  #viz-edwards-conley-card .ec-name {
+    font: 700 17px var(--family-sans);
+    margin-bottom: 4px;
+  }
+  #viz-edwards-conley-card .ec-meta {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin-bottom: 18px;
+  }
+  #viz-edwards-conley-card .ec-stat {
+    font: 800 64px/1 var(--family-mono);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  #viz-edwards-conley-card .ec-card[data-player="conley"] .ec-stat {
+    color: var(--dataviz-3);
+  }
+  #viz-edwards-conley-card .ec-card[data-player="edwards"] .ec-stat {
+    color: var(--accent-default);
+  }
+  #viz-edwards-conley-card .ec-label {
+    font: 600 11px var(--family-sans);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  #viz-edwards-conley-card .ec-detail {
+    font: 13px/1.55 var(--family-sans);
+    color: var(--text-secondary);
+  }
+  #viz-edwards-conley-card .ec-foot {
+    margin-top: 18px;
+    font: italic 13px/1.5 var(--family-sans);
+    color: var(--text-tertiary);
+    text-align: center;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #viz-edwards-conley-card .ec-card {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: ecFadeIn 600ms ease-out forwards;
+    }
+    #viz-edwards-conley-card .ec-card[data-player="conley"] {
+      animation-delay: 100ms;
+    }
+    #viz-edwards-conley-card .ec-card[data-player="edwards"] {
+      animation-delay: 340ms;
+    }
+    #viz-edwards-conley-card .ec-stat {
+      opacity: 0;
+      animation: ecFadeIn 500ms ease-out forwards;
+    }
+    #viz-edwards-conley-card .ec-card[data-player="conley"] .ec-stat {
+      animation-delay: 500ms;
+    }
+    #viz-edwards-conley-card .ec-card[data-player="edwards"] .ec-stat {
+      animation-delay: 740ms;
+    }
+    @keyframes ecFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>

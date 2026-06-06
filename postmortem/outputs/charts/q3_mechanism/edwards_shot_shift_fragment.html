@@ -1,0 +1,777 @@
+<div id="viz-edwards-shot-shift">
+  <div class="ess-phase" role="status">
+    <span class="ess-phase-dot"></span>
+    <span class="ess-phase-label">Regular season</span>
+    <span class="ess-phase-sep">·</span>
+    <span class="ess-phase-sub">1,231 attempts</span>
+  </div>
+  <p class="ess-caption" aria-live="polite"></p>
+  <div class="ess-court-host"></div>
+  <div class="ess-hero">
+    <div class="ess-hero-line">
+      <span class="ess-hero-num">15.3</span>
+      <span class="ess-hero-unit">ft</span>
+    </div>
+    <div class="ess-hero-label">average shot distance</div>
+  </div>
+  <div class="ess-controls" role="group" aria-label="Phase controls">
+    <button class="ess-pill ess-pill-replay" type="button" data-state="anim">Replay the story</button>
+    <button class="ess-pill" type="button" data-state="rs">Regular season</button>
+    <button class="ess-pill" type="button" data-state="sas">Spurs series</button>
+  </div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-shot-shift, #viz-edwards-shot-shift * { touch-action: manipulation; }
+  #viz-edwards-shot-shift {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-edwards-shot-shift .ess-phase {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 12px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    transition: opacity 220ms ease, transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  }
+  #viz-edwards-shot-shift .ess-phase.is-pulse {
+    transform: scale(1.06);
+  }
+  #viz-edwards-shot-shift .ess-phase-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+    box-shadow: 0 0 0 0 var(--accent-default);
+    transition: box-shadow 600ms ease;
+  }
+  #viz-edwards-shot-shift .ess-phase.is-pulse .ess-phase-dot {
+    box-shadow: 0 0 0 6px rgba(0, 132, 61, 0);
+  }
+  #viz-edwards-shot-shift .ess-phase-sep {
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+  #viz-edwards-shot-shift .ess-phase-sub {
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+  #viz-edwards-shot-shift .ess-caption {
+    font: 600 16px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 24px;
+    line-height: 1.4;
+    opacity: 1;
+    transition: opacity 220ms ease;
+  }
+  #viz-edwards-shot-shift .ess-court-host { position: relative; }
+  #viz-edwards-shot-shift .ess-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+  }
+  #viz-edwards-shot-shift .ess-hero-line {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  #viz-edwards-shot-shift .ess-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-shot-shift.is-landed .ess-hero-num,
+  #viz-edwards-shot-shift.is-landed .ess-hero-unit {
+    color: var(--accent-default);
+  }
+  #viz-edwards-shot-shift .ess-hero-unit {
+    font: 700 22px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-shot-shift .ess-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+  #viz-edwards-shot-shift.is-compact .ess-hero-num { font-size: 48px; }
+  #viz-edwards-shot-shift.is-compact .ess-hero-unit { font-size: 18px; }
+  #viz-edwards-shot-shift .ess-controls {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px;
+  }
+  #viz-edwards-shot-shift .ess-pill {
+    background: var(--bg-surface); color: var(--text-secondary);
+    border: 1px solid var(--border-subtle); border-radius: 999px;
+    padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+  }
+  #viz-edwards-shot-shift .ess-pill:hover {
+    color: var(--text-primary); border-color: var(--border-default);
+  }
+  #viz-edwards-shot-shift .ess-pill.is-on {
+    color: var(--accent-default); border-color: var(--accent-default);
+    background: var(--accent-subtle);
+  }
+  #viz-edwards-shot-shift .ess-pill-replay {
+    color: var(--accent-default); border-color: var(--accent-default);
+  }
+</style>
+<script>
+(function () {
+  var COURT_X = [-250, 250];
+  var COURT_Y = [-40, 360];
+  var ASPECT = (COURT_Y[1] - COURT_Y[0]) / (COURT_X[1] - COURT_X[0]);
+
+  var ZONE = {
+    atb3: { rs: 37.5, sas: 27.4 },
+    mid:  { rs: 19.3, sas: 30.1 }
+  };
+  var AVG_DIST = { rs: 15.3, sas: 13.2 };
+
+  var PHASE = {
+    rs:  { label: "Regular season", sub: "1,231 attempts" },
+    sas: { label: "Spurs series",   sub: "113 attempts" }
+  };
+
+  // ATB lost ~10 pp, mid gained ~11 pp. Model the shift as 11 dots
+  // arcing out of ATB and landing in mid.
+  var MIGRATORS = 11;
+
+  // Cinematic timing. Each act has room to breathe.
+  var STORY = [
+    { caption: "The arc was where he lived.",
+      hold: 2400, zone: null, phase: "rs" },
+    { caption: "The Spurs took the three away.",
+      hold: 3400, zone: "atb3", phase: "sas" },
+    { caption: "And funneled him into the mid-range.",
+      hold: 3400, zone: "mid", phase: "sas" },
+    { caption: "Two feet closer to the rim. The wrong two feet.",
+      hold: 3200, zone: null, phase: "sas" }
+  ];
+  var TRANSITION_MS = 2400;
+
+  var root = d3.select("#viz-edwards-shot-shift");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*");
+      }
+    }, { passive: true });
+  }
+
+  function shareOpacity(share) {
+    var s = Math.max(0, share) / 40;
+    var op = Math.pow(s, 1.25);
+    return Math.max(0.08, Math.min(0.93, op));
+  }
+  function fmtPct(v) { return v.toFixed(1) + "%"; }
+  function fmtFt(v)  { return v.toFixed(1); }
+
+  function seedRng(seed) {
+    var s = (seed >>> 0) || 1;
+    return function () {
+      s = (s * 1664525 + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  }
+
+  function inAtb(x, y) {
+    if (Math.abs(x) > 215) return false;
+    if (y > 335) return false;
+    return (x*x + y*y) >= 237.5 * 237.5;
+  }
+  function inMid(x, y) {
+    if (Math.abs(x) > 215) return false;
+    var d2 = x*x + y*y;
+    if (d2 < 50*50 || d2 > 230*230) return false;
+    // Avoid the FT-circle label collision area.
+    if (Math.abs(x) < 70 && y > 170 && y < 220) return false;
+    return true;
+  }
+
+  function sampleZone(checkFn, n, seed, minDist) {
+    var rng = seedRng(seed);
+    var pts = [];
+    var attempts = 0;
+    var maxAttempts = n * 300;
+    while (pts.length < n && attempts < maxAttempts) {
+      var x = -220 + rng() * 440;
+      var y = -20 + rng() * 350;
+      attempts++;
+      if (!checkFn(x, y)) continue;
+      var ok = true;
+      for (var i = 0; i < pts.length; i++) {
+        var dx = pts[i].x - x, dy = pts[i].y - y;
+        if (dx*dx + dy*dy < minDist * minDist) { ok = false; break; }
+      }
+      if (ok) pts.push({ x: x, y: y });
+    }
+    return pts;
+  }
+
+  // ---- State + orchestration -----------------------------------------
+
+  var currentState = "rs";
+  var currentPhase = "rs";
+  var hasIntroPlayed = false;
+  var storyTimers = [];
+
+  function clearStoryTimers() {
+    storyTimers.forEach(function (t) { clearTimeout(t); });
+    storyTimers = [];
+  }
+
+  function pillButtons() { return root.selectAll(".ess-pill"); }
+  function updatePills() {
+    pillButtons().classed("is-on", function () {
+      return this.getAttribute("data-state") === currentState;
+    });
+  }
+
+  function setCaption(text, animated) {
+    var c = root.select(".ess-caption");
+    if (!animated) { c.style("opacity", 1).text(text); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(text).style("opacity", 1); }, 180);
+  }
+
+  function setPhase(state, animated) {
+    if (state === currentPhase && !animated) {
+      root.select(".ess-phase-label").text(PHASE[state].label);
+      root.select(".ess-phase-sub").text(PHASE[state].sub);
+      return;
+    }
+    currentPhase = state;
+    var phase = root.select(".ess-phase");
+    if (!animated) {
+      root.select(".ess-phase-label").text(PHASE[state].label);
+      root.select(".ess-phase-sub").text(PHASE[state].sub);
+      return;
+    }
+    phase.style("opacity", 0);
+    setTimeout(function () {
+      root.select(".ess-phase-label").text(PHASE[state].label);
+      root.select(".ess-phase-sub").text(PHASE[state].sub);
+      phase.style("opacity", 1).classed("is-pulse", true);
+      setTimeout(function () {
+        phase.classed("is-pulse", false);
+      }, 600);
+    }, 200);
+  }
+
+  function setHero(value, duration) {
+    var node = root.select(".ess-hero-num").node();
+    if (!node) return;
+    if (duration <= 0) {
+      node.textContent = fmtFt(value);
+      return;
+    }
+    var curText = node.textContent;
+    var curNum = parseFloat(curText);
+    if (isNaN(curNum)) curNum = value;
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicInOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(curNum, value);
+        return function (t) { node.textContent = fmtFt(interp(t)); };
+      });
+  }
+
+  function driveZone(key, share, duration, pulse) {
+    if (!svgState) return;
+    var zoneEl = svgState.zones[key];
+    var labelEl = svgState.labels[key];
+    if (duration > 0) {
+      zoneEl.transition("op").duration(duration).ease(d3.easeCubicInOut)
+        .style("opacity", shareOpacity(share));
+      if (pulse) {
+        zoneEl
+          .style("stroke", "var(--accent-default)")
+          .style("stroke-width", 1.5)
+          .style("stroke-opacity", 0.9);
+        zoneEl.transition("stroke").duration(duration).ease(d3.easeCubicOut)
+          .style("stroke-opacity", 0);
+      }
+      var curText = labelEl.text();
+      var curNum = parseFloat(curText);
+      if (isNaN(curNum)) curNum = share;
+      labelEl.transition("text").duration(duration).ease(d3.easeCubicInOut)
+        .tween("text", function () {
+          var interp = d3.interpolateNumber(curNum, share);
+          var node = this;
+          return function (t) { node.textContent = fmtPct(interp(t)); };
+        });
+    } else {
+      zoneEl.interrupt("op").interrupt("stroke")
+        .style("opacity", shareOpacity(share))
+        .style("stroke-opacity", 0);
+      labelEl.interrupt("text").text(fmtPct(share));
+    }
+  }
+
+  function setStateTo(state, duration) {
+    clearStoryTimers();
+    currentState = state;
+    updatePills();
+    if (!svgState) return;
+    driveZone("atb3", ZONE.atb3[state], duration, false);
+    driveZone("mid",  ZONE.mid[state],  duration, false);
+    setPhase(state, duration > 0);
+    setHero(AVG_DIST[state], duration);
+    root.classed("is-landed", state === "sas");
+    var caption = state === "rs"
+      ? "The arc was where he lived."
+      : "The arc went cold. The mid-range lit up.";
+    setCaption(caption, duration > 0);
+    placeMigratorsForState(state, duration);
+  }
+
+  // Migrator handling: each dot has a start (in ATB) and an end (in mid).
+  // During RS state the dots sit at their start. During SAS state they
+  // sit at their end. The story animates the journey across acts 2-3.
+  function placeMigratorsForState(state, duration) {
+    if (!svgState || !svgState.migrators) return;
+    svgState.migrators.each(function (d) {
+      var sel = d3.select(this);
+      var target = state === "rs" ? d.start : d.end;
+      var screenX = svgState.xScale(target.x);
+      var screenY = svgState.yScale(target.y);
+      if (duration > 0) {
+        sel.transition("mig").duration(duration).ease(d3.easeCubicInOut)
+          .attr("transform", "translate(" + screenX + "," + screenY + ")");
+        sel.select("circle").transition("migR").duration(duration)
+          .attr("r", svgState.migR);
+      } else {
+        sel.interrupt("mig").interrupt("migR")
+          .attr("transform", "translate(" + screenX + "," + screenY + ")");
+        sel.select("circle").attr("r", svgState.migR);
+      }
+    });
+  }
+
+  function animateMigratorJourneys(startDelay, totalDuration) {
+    if (!svgState || !svgState.migrators) return;
+    var migs = svgState.migrators;
+    var n = migs.size();
+    var perDelay = totalDuration / n;
+    var travelMs = 1800;
+    migs.each(function (d, i) {
+      var sel = d3.select(this);
+      var startScreen = { x: svgState.xScale(d.start.x), y: svgState.yScale(d.start.y) };
+      var endScreen   = { x: svgState.xScale(d.end.x),   y: svgState.yScale(d.end.y)   };
+      // Quadratic bezier control: lateral bias toward x=0 + slight pull
+      // toward the rim (smaller y in court = smaller screen y) so the
+      // path arcs gently inward.
+      var ctrl = {
+        x: (startScreen.x + endScreen.x) / 2 + (d.bend - 0.5) * 80,
+        y: Math.min(startScreen.y, endScreen.y) - 40
+      };
+      sel.transition("journey")
+        .delay(startDelay + i * perDelay)
+        .duration(travelMs)
+        .ease(d3.easeCubicInOut)
+        .attrTween("transform", function () {
+          return function (t) {
+            var u = 1 - t;
+            var x = u*u*startScreen.x + 2*u*t*ctrl.x + t*t*endScreen.x;
+            var y = u*u*startScreen.y + 2*u*t*ctrl.y + t*t*endScreen.y;
+            return "translate(" + x + "," + y + ")";
+          };
+        });
+      // Small radius pulse mid-flight for life.
+      sel.select("circle").transition("journeyR")
+        .delay(startDelay + i * perDelay)
+        .duration(travelMs / 2)
+        .ease(d3.easeCubicOut)
+        .attr("r", svgState.migR * 1.35)
+        .transition()
+        .duration(travelMs / 2)
+        .ease(d3.easeCubicIn)
+        .attr("r", svgState.migR);
+    });
+  }
+
+  function playStory() {
+    clearStoryTimers();
+    currentState = "anim";
+    updatePills();
+    root.classed("is-landed", false);
+    if (!svgState) return;
+
+    driveZone("atb3", ZONE.atb3.rs, 0, false);
+    driveZone("mid",  ZONE.mid.rs,  0, false);
+    setPhase("rs", false);
+    setCaption("", false);
+    setHero(AVG_DIST.rs, 0);
+    placeMigratorsForState("rs", 0);
+
+    var elapsed = 0;
+    STORY.forEach(function (act, i) {
+      storyTimers.push(setTimeout(function () {
+        if (act.phase !== currentPhase) setPhase(act.phase, true);
+        setCaption(act.caption, true);
+        var zoneDelay = (act.phase !== STORY[Math.max(0, i - 1)].phase) ? 320 : 0;
+        if (act.zone) {
+          storyTimers.push(setTimeout(function () {
+            driveZone(act.zone, ZONE[act.zone].sas, TRANSITION_MS, true);
+          }, zoneDelay));
+        }
+      }, elapsed));
+      elapsed += act.hold;
+    });
+
+    // Migrators journey across acts 2 and 3.
+    var migJourneyStart = STORY[0].hold + 600;
+    var migJourneyDuration = STORY[1].hold + STORY[2].hold - 1200;
+    animateMigratorJourneys(migJourneyStart, migJourneyDuration);
+
+    // Hero number ticks from 15.3 to 13.2 across acts 2-4.
+    storyTimers.push(setTimeout(function () {
+      setHero(AVG_DIST.sas, STORY[1].hold + STORY[2].hold + STORY[3].hold - 600);
+    }, STORY[0].hold + 200));
+
+    // Final landing.
+    storyTimers.push(setTimeout(function () {
+      currentState = "sas";
+      updatePills();
+      root.classed("is-landed", true);
+      // Synchronized landing pulse on both zones.
+      [svgState.zones.atb3, svgState.zones.mid].forEach(function (z) {
+        z.style("stroke", "var(--accent-default)")
+          .style("stroke-width", 1.5)
+          .style("stroke-opacity", 0.9);
+        z.transition("landing").duration(900).ease(d3.easeCubicOut)
+          .style("stroke-opacity", 0);
+      });
+    }, elapsed));
+  }
+
+  function bindControls() {
+    pillButtons().on("click", function () {
+      var state = this.getAttribute("data-state");
+      if (state === "anim") { playStory(); return; }
+      setStateTo(state, 900);
+    });
+  }
+
+  // ---- Court geometry ------------------------------------------------
+
+  function atbZonePath(xS, yS) {
+    var threeY = 89.5;
+    var deepY = 345;
+    var arcR = Math.abs(xS(237.5) - xS(0));
+    return "M " + xS(-220) + " " + yS(threeY) +
+           " A " + arcR + " " + arcR + " 0 0 0 " + xS(220) + " " + yS(threeY) +
+           " L " + xS(220) + " " + yS(deepY) +
+           " L " + xS(-220) + " " + yS(deepY) +
+           " Z";
+  }
+
+  function midZonePath(xS, yS) {
+    var raR = Math.abs(xS(40) - xS(0));
+    var arcR = Math.abs(xS(237.5) - xS(0));
+    var threeY = 89.5;
+    return "M " + xS(-40) + " " + yS(0) +
+           " A " + raR + " " + raR + " 0 0 0 " + xS(40) + " " + yS(0) +
+           " L " + xS(220) + " " + yS(0) +
+           " L " + xS(220) + " " + yS(threeY) +
+           " A " + arcR + " " + arcR + " 0 0 1 " + xS(-220) + " " + yS(threeY) +
+           " L " + xS(-220) + " " + yS(0) +
+           " Z";
+  }
+
+  function drawCourt(g, xScale, yScale) {
+    var lineCol = "var(--border-default)";
+    var lineWeak = "var(--border-subtle)";
+    g.append("rect")
+      .attr("x", xScale(COURT_X[0])).attr("y", yScale(COURT_Y[0]))
+      .attr("width", xScale(COURT_X[1]) - xScale(COURT_X[0]))
+      .attr("height", yScale(COURT_Y[1]) - yScale(COURT_Y[0]))
+      .style("fill", "none").style("stroke", lineWeak);
+    g.append("rect")
+      .attr("x", xScale(-80)).attr("y", yScale(-47.5))
+      .attr("width", xScale(80) - xScale(-80))
+      .attr("height", yScale(142.5) - yScale(-47.5))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1);
+    g.append("circle")
+      .attr("cx", xScale(0)).attr("cy", yScale(142.5))
+      .attr("r", Math.abs(xScale(60) - xScale(0)))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1)
+      .style("stroke-dasharray", "3,3");
+    var raR = Math.abs(xScale(40) - xScale(0));
+    g.append("path")
+      .attr("d", "M " + xScale(-40) + " " + yScale(0) +
+                 " A " + raR + " " + raR + " 0 0 0 " + xScale(40) + " " + yScale(0))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1);
+    var threeY = Math.sqrt(237.5 * 237.5 - 220 * 220);
+    var arcR = Math.abs(xScale(237.5) - xScale(0));
+    g.append("path")
+      .attr("d", "M " + xScale(-220) + " " + yScale(threeY) +
+                 " A " + arcR + " " + arcR + " 0 0 0 " + xScale(220) + " " + yScale(threeY))
+      .style("fill", "none").style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line")
+      .attr("x1", xScale(-220)).attr("y1", yScale(-47.5))
+      .attr("x2", xScale(-220)).attr("y2", yScale(threeY))
+      .style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line")
+      .attr("x1", xScale(220)).attr("y1", yScale(-47.5))
+      .attr("x2", xScale(220)).attr("y2", yScale(threeY))
+      .style("stroke", lineCol).style("stroke-width", 1.5);
+    g.append("line")
+      .attr("x1", xScale(-30)).attr("y1", yScale(-7.5))
+      .attr("x2", xScale(30)).attr("y2", yScale(-7.5))
+      .style("stroke", lineCol).style("stroke-width", 2);
+    var rimR = Math.abs(xScale(7.5) - xScale(0));
+    g.append("circle")
+      .attr("cx", xScale(0)).attr("cy", yScale(0))
+      .attr("r", rimR)
+      .style("fill", "none")
+      .style("stroke", "var(--accent-default)")
+      .style("stroke-width", 1.5);
+  }
+
+  var svgState = null;
+
+  function render() {
+    var host = root.select(".ess-court-host");
+    host.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(720, raw));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+    var height = Math.round(width * ASPECT);
+
+    var svg = host.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block")
+      .style("max-width", "100%")
+      .style("margin", "0 auto");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter")
+      .attr("id", "ess-glow")
+      .attr("x", "-50%").attr("y", "-50%")
+      .attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.0 : 1.4).attr("result", "b");
+    var merge = glow.append("feMerge");
+    merge.append("feMergeNode").attr("in", "b");
+    merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = compact ? 4 : 8;
+    var xScale = d3.scaleLinear().domain(COURT_X).range([pad, width - pad]);
+    var yScale = d3.scaleLinear().domain(COURT_Y).range([pad, height - pad]);
+
+    svg.append("rect")
+      .attr("x", xScale(COURT_X[0])).attr("y", yScale(COURT_Y[0]))
+      .attr("width", xScale(COURT_X[1]) - xScale(COURT_X[0]))
+      .attr("height", yScale(COURT_Y[1]) - yScale(COURT_Y[0]))
+      .style("fill", "var(--bg-inset)");
+
+    var initState = currentState === "anim" ? "rs" : currentState;
+
+    var atbZone = svg.append("path")
+      .attr("d", atbZonePath(xScale, yScale))
+      .style("fill", "var(--accent-default)")
+      .style("stroke", "var(--accent-default)")
+      .style("stroke-width", 1.5)
+      .style("stroke-opacity", 0)
+      .style("opacity", shareOpacity(ZONE.atb3[initState]));
+
+    var midZone = svg.append("path")
+      .attr("d", midZonePath(xScale, yScale))
+      .style("fill", "var(--accent-default)")
+      .style("stroke", "var(--accent-default)")
+      .style("stroke-width", 1.5)
+      .style("stroke-opacity", 0)
+      .style("opacity", shareOpacity(ZONE.mid[initState]));
+
+    var courtG = svg.append("g").attr("class", "court");
+    drawCourt(courtG, xScale, yScale);
+
+    // Migrator dots. Sampled deterministically from inside each zone so
+    // the layout is consistent across replays.
+    var atbStarts = sampleZone(inAtb, MIGRATORS, 31, 30);
+    var midEnds   = sampleZone(inMid, MIGRATORS, 47, 32);
+    var migrators = atbStarts.slice(0, Math.min(MIGRATORS, midEnds.length))
+      .map(function (start, i) {
+        return {
+          start: start,
+          end: midEnds[i],
+          bend: (i * 0.181 + 0.07) % 1 // deterministic per-dot bezier bend
+        };
+      });
+
+    var migR = compact ? 3.6 : 4.6;
+    var migLayer = svg.append("g").attr("class", "migrators");
+    var migSel = migLayer.selectAll("g").data(migrators).join("g")
+      .attr("transform", function (d) {
+        var sp = initState === "rs" ? d.start : d.end;
+        return "translate(" + xScale(sp.x) + "," + yScale(sp.y) + ")";
+      });
+    migSel.append("circle")
+      .attr("r", migR)
+      .style("fill", "var(--accent-default)")
+      .style("filter", "url(#ess-glow)")
+      .style("opacity", 0.95);
+    migSel.append("title").text("One percentage point of shot share that moved from above-the-break to mid-range.");
+
+    var bigSize = compact ? 22 : 28;
+    var subSize = compact ? 10 : 11;
+    var subOffset = bigSize * 0.7;
+
+    var atbLabelG = svg.append("g").attr("class", "atb-label");
+    var atbBigText = atbLabelG.append("text")
+      .attr("x", xScale(0)).attr("y", yScale(298))
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 " + bigSize + "px var(--family-mono)")
+      .style("filter", "url(#ess-glow)")
+      .style("pointer-events", "none")
+      .text(fmtPct(ZONE.atb3[initState]));
+    atbLabelG.append("text")
+      .attr("x", xScale(0)).attr("y", yScale(298) + subOffset)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 " + subSize + "px var(--family-sans)")
+      .style("letter-spacing", "0.08em")
+      .style("text-transform", "uppercase")
+      .style("pointer-events", "none")
+      .text("Above the break 3");
+
+    var midLabelG = svg.append("g").attr("class", "mid-label");
+    var midBigText = midLabelG.append("text")
+      .attr("x", xScale(0)).attr("y", yScale(193))
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 " + bigSize + "px var(--family-mono)")
+      .style("filter", "url(#ess-glow)")
+      .style("pointer-events", "none")
+      .text(fmtPct(ZONE.mid[initState]));
+    midLabelG.append("text")
+      .attr("x", xScale(0)).attr("y", yScale(193) + subOffset)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 " + subSize + "px var(--family-sans)")
+      .style("letter-spacing", "0.08em")
+      .style("text-transform", "uppercase")
+      .style("pointer-events", "none")
+      .text("Mid-range");
+
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · May 2026");
+
+    svgState = {
+      svg: svg,
+      xScale: xScale,
+      yScale: yScale,
+      zones: { atb3: atbZone, mid: midZone },
+      labels: { atb3: d3.select(atbBigText.node()), mid: d3.select(midBigText.node()) },
+      migrators: migSel,
+      migR: migR
+    };
+
+    bindControls();
+    updatePills();
+
+    if (!hasIntroPlayed && introAllowed) {
+      hasIntroPlayed = true;
+      if (reduceMotion) {
+        setStateTo("sas", 0);
+      } else {
+        setStateTo("rs", 0);
+        storyTimers.push(setTimeout(playStory, 900));
+      }
+    } else if (currentState === "anim") {
+      clearStoryTimers();
+      setStateTo("sas", 0);
+    } else {
+      setStateTo(currentState, 0);
+    }
+  }
+
+  // ---- Hold the intro until the chart is in full view ----
+  var introAllowed = false;
+  var __ssLastW = root.node().clientWidth || 0;
+
+  function __ssTryIntro() {
+    if (hasIntroPlayed) return;
+    introAllowed = true;
+    render();
+  }
+
+  render();                       // resting state (intro gated off)
+
+  if (reduceMotion) {
+    introAllowed = true;
+    render();                     // jump straight to the final state
+  } else if ("IntersectionObserver" in window) {
+    var __ssIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && e.intersectionRatio >= 0.6) __ssTryIntro();
+      });
+    }, { threshold: [0, 0.6, 1] });
+    __ssIo.observe(rootNode);
+  } else {
+    __ssTryIntro();
+  }
+
+  if (window.ResizeObserver) {
+    var __ssRt = null;
+    new ResizeObserver(function () {
+      if (__ssRt) clearTimeout(__ssRt);
+      __ssRt = setTimeout(function () {
+        var w = root.node().clientWidth || 0;
+        if (Math.abs(w - __ssLastW) < 2) return;   // ignore height-only changes
+        __ssLastW = w;
+        render();
+      }, 150);
+    }).observe(root.node());
+  }
+})();
+</script>

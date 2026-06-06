@@ -1,0 +1,522 @@
+<div id="viz-edwards-catch-and-shoot">
+  <p class="ecs-title">Catch-and-shoot rate, per 100 attempts</p>
+  <p class="ecs-caption" aria-live="polite"></p>
+  <div class="ecs-stage"></div>
+  <div class="ecs-counter">
+    <span class="ecs-counter-num">0</span>
+    <span class="ecs-counter-sub">catch &amp; shoots per 100 shots</span>
+    <button class="ecs-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ecs-foot">Each dot is one of every 100 Edwards FGAs. The green ones are catch-and-shoots. The grey ones are everything else.</p>
+  <div class="ecs-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-catch-and-shoot, #viz-edwards-catch-and-shoot * { touch-action: manipulation; }
+  #viz-edwards-catch-and-shoot {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-edwards-catch-and-shoot .ecs-title {
+    font: 700 12px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 14px 0;
+  }
+  #viz-edwards-catch-and-shoot .ecs-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 24px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-edwards-catch-and-shoot .ecs-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 280px;
+    overflow: hidden;
+  }
+  #viz-edwards-catch-and-shoot.is-compact .ecs-stage {
+    height: 220px;
+  }
+  #viz-edwards-catch-and-shoot .ecs-stage svg {
+    display: block; width: 100%; height: 100%;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 14px;
+    margin: 18px 0 0 0;
+    position: relative;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter-num {
+    font: 800 80px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-catch-and-shoot.is-landed .ecs-counter-num {
+    color: var(--accent-default);
+  }
+  #viz-edwards-catch-and-shoot.is-compact .ecs-counter-num {
+    font-size: 62px;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter-sub {
+    font: 700 12px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    max-width: 120px;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay {
+    position: absolute;
+    right: 0; top: 50%; transform: translateY(-50%);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay.is-shown {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay:hover {
+    color: var(--text-primary); border-color: var(--border-default);
+  }
+  #viz-edwards-catch-and-shoot .ecs-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+  #viz-edwards-catch-and-shoot .ecs-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Per 100 attempts. RS catch-and-shoot share = 13.8%, so 14 of every 100.
+  // SAS catch-and-shoot share = 6.2%, so 6 of every 100.
+  var TOTAL_DOTS = 100;
+  var RS_HIGHLIGHTED = 14;
+  var SAS_HIGHLIGHTED = 6;
+  var FADE_COUNT = RS_HIGHLIGHTED - SAS_HIGHLIGHTED; // 8
+
+  var CAPTIONS = [
+    "In the regular season, 14 of every 100 Edwards FGAs were clean catch-and-shoots.",
+    "Then came the Spurs.",
+    "Six. They cut his rate by more than half."
+  ];
+
+  var GRAY_APPEAR_START = 300;
+  var GRAY_APPEAR_TOTAL = 1400;
+  var GREEN_LIGHT_START = 1900;
+  var GREEN_LIGHT_TOTAL = 1200;
+  var CAP2_AT          = 3500;
+  var FADE_START       = 4000;
+  var FADE_TOTAL       = 2700;
+  var CAP3_AT          = 6900;
+  var PULSE_START      = 7400;
+  var REPLAY_AT        = 8500;
+
+  var root = d3.select("#viz-edwards-catch-and-shoot");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough.
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*");
+      }
+    }, { passive: true });
+  }
+
+  function seedRng(seed) {
+    var s = (seed >>> 0) || 1;
+    return function () {
+      s = (s * 1664525 + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  }
+
+  // 100 dots laid out in a soft 10x10 grid with light jitter so the field
+  // feels organic rather than rigid. Returns 100 positions plus a jitter
+  // value used to vary motion later.
+  function buildPositions(w, h, seed) {
+    var rng = seedRng(seed);
+    var cols = 10, rows = 10;
+    var pad = 18;
+    var cellW = (w - 2 * pad) / cols;
+    var cellH = (h - 2 * pad) / rows;
+    var positions = [];
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var jx = (rng() - 0.5) * cellW * 0.45;
+        var jy = (rng() - 0.5) * cellH * 0.45;
+        positions.push({
+          idx: r * cols + c,
+          x: pad + cellW * (c + 0.5) + jx,
+          y: pad + cellH * (r + 0.5) + jy,
+          jitter: rng()
+        });
+      }
+    }
+    return positions;
+  }
+
+  function pickRandom(n, total, seed) {
+    var rng = seedRng(seed);
+    var idx = [];
+    for (var i = 0; i < total; i++) idx.push(i);
+    for (var i2 = idx.length - 1; i2 > 0; i2--) {
+      var j = Math.floor(rng() * (i2 + 1));
+      var t = idx[i2]; idx[i2] = idx[j]; idx[j] = t;
+    }
+    return idx.slice(0, n);
+  }
+
+  function tickCount(node, from, to, duration) {
+    if (duration <= 0) { node.textContent = String(to); return; }
+    d3.select(node).transition().duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = String(Math.round(interp(t))); };
+      });
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".ecs-caption");
+    if (idx === 0) {
+      c.style("opacity", 1).text(CAPTIONS[0]);
+      return;
+    }
+    c.style("opacity", 0);
+    setTimeout(function () {
+      c.text(CAPTIONS[idx]).style("opacity", 1);
+    }, 220);
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function styleGray(sel, dotR) {
+    sel
+      .style("fill", "var(--text-tertiary)")
+      .style("opacity", 0.35)
+      .style("filter", null)
+      .attr("r", dotR);
+  }
+  function styleGreen(sel, greenR) {
+    sel
+      .style("fill", "var(--accent-default)")
+      .style("opacity", 1)
+      .style("filter", "url(#ecs-glow)")
+      .attr("r", greenR);
+  }
+
+  function play(svg, positions, greenSet, survivorSet, fadeOrder, dotR, greenR, countNode) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".ecs-replay").classed("is-shown", false);
+
+    var dotG = svg.select("g.dots");
+    if (dotG.empty()) dotG = svg.append("g").attr("class", "dots");
+    dotG.selectAll("*").remove();
+
+    var groups = dotG.selectAll("g").data(positions).join("g")
+      .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+    var circles = groups.append("circle")
+      .attr("r", 0)
+      .style("opacity", 0)
+      .style("fill", "var(--text-tertiary)");
+
+    circles.append("title").text(function (_, i) {
+      if (survivorSet[i]) return "A catch-and-shoot Edwards still got against the Spurs";
+      if (greenSet[i]) return "A catch-and-shoot the Spurs took away";
+      return "One of Edwards's other shot attempts";
+    });
+
+    countNode.textContent = "0";
+
+    if (reduceMotion) {
+      circles.each(function (d, i) {
+        var c = d3.select(this);
+        if (survivorSet[i]) styleGreen(c, greenR);
+        else styleGray(c, dotR);
+      });
+      countNode.textContent = String(SAS_HIGHLIGHTED);
+      setCaption(2);
+      root.classed("is-landed", true);
+      return;
+    }
+
+    // Phase 1: caption + 100 gray dots appear in waves.
+    setCaption(0);
+    if (__resetOnly) return;
+    var grayStagger = GRAY_APPEAR_TOTAL / positions.length;
+    circles.transition("gray-in")
+      .delay(function (_, i) { return GRAY_APPEAR_START + i * grayStagger; })
+      .duration(380)
+      .ease(d3.easeCubicOut)
+      .attr("r", dotR)
+      .style("opacity", 0.35);
+
+    // Phase 1b: the 14 catch-and-shoot dots light up green.
+    var greenIndices = [];
+    for (var i = 0; i < TOTAL_DOTS; i++) if (greenSet[i]) greenIndices.push(i);
+    var greenStagger = GREEN_LIGHT_TOTAL / Math.max(1, greenIndices.length);
+    greenIndices.forEach(function (i, k) {
+      var c = d3.select(circles.nodes()[i]);
+      c.transition("light")
+        .delay(GREEN_LIGHT_START + k * greenStagger)
+        .duration(520)
+        .ease(d3.easeBackOut.overshoot(1.4))
+        .style("fill", "var(--accent-default)")
+        .style("opacity", 1)
+        .style("filter", "url(#ecs-glow)")
+        .attr("r", greenR);
+    });
+    playTimers.push(setTimeout(function () {
+      tickCount(countNode, 0, RS_HIGHLIGHTED, GREEN_LIGHT_TOTAL);
+    }, GREEN_LIGHT_START));
+
+    // Phase 2: caption flip, 8 greens dim back to gray (more honest than
+    // "evaporating": the shot still happened, it just wasn't a clean
+    // catch-and-shoot anymore).
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP2_AT));
+
+    var fadeStagger = FADE_TOTAL / Math.max(1, fadeOrder.length);
+    fadeOrder.forEach(function (i, k) {
+      var c = d3.select(circles.nodes()[i]);
+      // Tiny bump up first, then deflate, like a look opening then closing.
+      c.transition("fade-bump")
+        .delay(FADE_START + k * fadeStagger)
+        .duration(260)
+        .ease(d3.easeCubicOut)
+        .attr("r", greenR * 1.25);
+      c.transition("fade-down")
+        .delay(FADE_START + k * fadeStagger + 260)
+        .duration(620)
+        .ease(d3.easeCubicIn)
+        .attr("r", dotR)
+        .style("fill", "var(--text-tertiary)")
+        .style("opacity", 0.35)
+        .style("filter", "none");
+    });
+    playTimers.push(setTimeout(function () {
+      tickCount(countNode, RS_HIGHLIGHTED, SAS_HIGHLIGHTED, FADE_TOTAL);
+    }, FADE_START));
+
+    // Phase 3: final caption, counter color shift, survivor pulse.
+    playTimers.push(setTimeout(function () {
+      setCaption(2);
+      root.classed("is-landed", true);
+    }, CAP3_AT));
+
+    var survivorIndices = [];
+    for (var s = 0; s < TOTAL_DOTS; s++) if (survivorSet[s]) survivorIndices.push(s);
+    survivorIndices.forEach(function (i, k) {
+      var c = d3.select(circles.nodes()[i]);
+      c.transition("pulse")
+        .delay(PULSE_START + k * 130)
+        .duration(700)
+        .ease(d3.easeCubicInOut)
+        .attr("r", greenR * 1.45)
+        .style("opacity", 1)
+        .transition()
+        .duration(700)
+        .attr("r", greenR)
+        .style("opacity", 1);
+    });
+
+    playTimers.push(setTimeout(function () {
+      root.select(".ecs-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".ecs-stage");
+    stage.selectAll("*").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var hostW = stageNode.clientWidth;
+    var hostH = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + hostW + " " + hostH)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    // Glow filter for the green catch-and-shoot dots.
+    var defs = svg.append("defs");
+    var f = defs.append("filter")
+      .attr("id", "ecs-glow")
+      .attr("x", "-50%").attr("y", "-50%")
+      .attr("width", "200%").attr("height", "200%");
+    f.append("feGaussianBlur").attr("stdDeviation", compact ? 1.1 : 1.5).attr("result", "b");
+    var m = f.append("feMerge");
+    m.append("feMergeNode").attr("in", "b");
+    m.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var dotR   = compact ? 3.6 : 4.6;
+    var greenR = compact ? 6.0 : 8.0;
+
+    var positions = buildPositions(hostW, hostH, 71);
+
+    // Pick which 14 positions are catch-and-shoots, and which 6 of those
+    // are survivors. Deterministic so the visual layout is consistent.
+    var greenChoices = pickRandom(RS_HIGHLIGHTED, TOTAL_DOTS, 41);
+    var survivorOfGreens = pickRandom(SAS_HIGHLIGHTED, RS_HIGHLIGHTED, 19);
+    var greenSet = new Array(TOTAL_DOTS);
+    var survivorSet = new Array(TOTAL_DOTS);
+    var survivorMark = {};
+    survivorOfGreens.forEach(function (k) { survivorMark[greenChoices[k]] = true; });
+    greenChoices.forEach(function (idx) {
+      greenSet[idx] = true;
+      if (survivorMark[idx]) survivorSet[idx] = true;
+    });
+    var fadeOrder = greenChoices.filter(function (idx) { return !survivorMark[idx]; });
+    // Shuffle fade order so the deaths cascade across the field, not
+    // sequentially along one row.
+    (function () {
+      var rng = seedRng(7);
+      for (var k = fadeOrder.length - 1; k > 0; k--) {
+        var j = Math.floor(rng() * (k + 1));
+        var t = fadeOrder[k]; fadeOrder[k] = fadeOrder[j]; fadeOrder[j] = t;
+      }
+    })();
+
+    var countNode = root.select(".ecs-counter-num").node();
+
+    lastRender = {
+      svg: svg, positions: positions, greenSet: greenSet,
+      survivorSet: survivorSet, fadeOrder: fadeOrder,
+      dotR: dotR, greenR: greenR, countNode: countNode
+    };
+
+    if (triggerPlay !== false) {
+      play(svg, positions, greenSet, survivorSet, fadeOrder, dotR, greenR, countNode);
+    } else {
+      // Land directly on final state for resize.
+      var dotG = svg.append("g").attr("class", "dots");
+      var groups = dotG.selectAll("g").data(positions).join("g")
+        .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+      groups.append("circle")
+        .each(function (d, i) {
+          var c = d3.select(this);
+          if (survivorSet[i]) styleGreen(c, greenR);
+          else styleGray(c, dotR);
+        });
+      countNode.textContent = String(SAS_HIGHLIGHTED);
+      setCaption(2);
+      root.classed("is-landed", true);
+      root.select(".ecs-replay").classed("is-shown", true);
+    }
+  }
+
+  root.select(".ecs-replay").on("click", function () {
+    if (lastRender) {
+      play(lastRender.svg, lastRender.positions, lastRender.greenSet,
+           lastRender.survivorSet, lastRender.fadeOrder,
+           lastRender.dotR, lastRender.greenR, lastRender.countNode);
+    }
+  });
+
+  // ---- Autoplay only when in full view; never restart the animation on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.svg, lastRender.positions, lastRender.greenSet,
+         lastRender.survivorSet, lastRender.fadeOrder,
+         lastRender.dotR, lastRender.greenR, lastRender.countNode);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes (was the restart loop)
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

@@ -1,0 +1,531 @@
+<div id="viz-lafi-trajectory"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-lafi-trajectory, #viz-lafi-trajectory * { touch-action: manipulation; }
+</style>
+<script>
+(function () {
+  // The article's story has two beats:
+  //   1) Three LAFI components moved upward together (motion death,
+  //      isolation reliance, shot quality decay).
+  //   2) Ball stickiness is the outlier: it spiked then fell, because the
+  //      isolation load decentralized.
+  // The chart matches that by collapsing the three rising components into
+  // a single shaded envelope with a median line, and showing ball
+  // stickiness as a distinct second series. Action poverty stays in the
+  // caption rather than on the chart so the visual stays sharp.
+  var seasons = ["2023-24", "2024-25", "2025-26"];
+
+  // Rising components, individual values per season.
+  var risingValues = {
+    "2023-24": { iso: 49, motion: 43, sqd: 39 },
+    "2024-25": { iso: 71, motion: 55, sqd: 72 },
+    "2025-26": { iso: 90, motion: 72, sqd: 83 }
+  };
+
+  // Pre-compute envelope (min, max, median) for each season.
+  var rising = seasons.map(function (s) {
+    var v = risingValues[s];
+    var arr = [v.iso, v.motion, v.sqd].sort(function (a, b) { return a - b; });
+    return {
+      season: s,
+      min: arr[0],
+      median: arr[1],
+      max: arr[2],
+      iso: v.iso,
+      motion: v.motion,
+      sqd: v.sqd
+    };
+  });
+
+  var stickValues = [35, 69, 31];
+  var stick = seasons.map(function (s, i) {
+    return { season: s, value: stickValues[i] };
+  });
+
+  var root = d3.select("#viz-lafi-trajectory");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Let the page scroll past this viz. Without this, mobile swipes and
+  // mouse-wheel ticks can get trapped by interactive marks inside the
+  // chart. touch-action handles mobile; in an iframe context we also
+  // forward wheel events to the parent (same-origin scroll, fallback to
+  // postMessage so a cross-origin host can listen and scroll itself).
+  if (root.node()) {
+    root.node().style.touchAction = "manipulation";
+    if (window.parent !== window) {
+      root.node().addEventListener("wheel", function (e) {
+        if (e.ctrlKey || e.metaKey) return;
+        try {
+          window.parent.scrollBy(e.deltaX, e.deltaY);
+        } catch (err) {
+          window.parent.postMessage({
+            type: "viz-scroll",
+            deltaX: e.deltaX,
+            deltaY: e.deltaY
+          }, "*");
+        }
+      }, { passive: true });
+      // Touchmove fallback: also forward vertical drags to the parent so
+      // mobile swipes scroll the article even if the iframe consumes them.
+      var lastTouchY = null;
+      root.node().addEventListener("touchstart", function (e) {
+        if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+      }, { passive: true });
+      root.node().addEventListener("touchmove", function (e) {
+        if (e.touches.length !== 1 || lastTouchY === null) return;
+        var y = e.touches[0].clientY;
+        var dy = lastTouchY - y;
+        lastTouchY = y;
+        try {
+          window.parent.scrollBy(0, dy);
+        } catch (err) {
+          window.parent.postMessage({
+            type: "viz-scroll",
+            deltaX: 0,
+            deltaY: dy
+          }, "*");
+        }
+      }, { passive: true });
+    }
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+    if (typeof d3 === "undefined") return;
+    root.style("position", "relative");
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(760, raw));
+    var compact = width < 480;
+
+    var margin = {
+      top: compact ? 96 : 100,
+      right: compact ? 16 : 200,
+      bottom: compact ? 120 : 64,
+      left: compact ? 30 : 36
+    };
+
+    var height = compact ? 500 : 440;
+    var innerW = width - margin.left - margin.right;
+    var innerH = height - margin.top - margin.bottom;
+
+    var svg = root.append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block")
+      .style("max-width", "100%")
+      .style("margin", "0 auto");
+
+    // Headline. Compact uses shorter copy so the longer line fits at 320px.
+    var head = svg.append("g");
+    var headFontSize = compact ? 15 : 17;
+    var line1 = compact
+      ? "Three climbed together."
+      : "Three components climbed together.";
+    var line2 = compact
+      ? "Ball stickiness fooled us."
+      : "Ball stickiness only looked like it broke ranks.";
+
+    head.append("text")
+      .attr("x", margin.left).attr("y", 22)
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 " + headFontSize + "px var(--family-sans)")
+      .text(line1);
+    head.append("text")
+      .attr("x", margin.left).attr("y", 22 + headFontSize + 6)
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 " + headFontSize + "px var(--family-sans)")
+      .text(line2);
+    head.append("text")
+      .attr("x", margin.left).attr("y", 22 + (headFontSize + 6) * 2)
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "12px var(--family-sans)")
+      .text(compact
+        ? "0 to 100. Higher means more pickup."
+        : "Each LAFI component on a 0 to 100 scale. Higher means more pickup.");
+
+    // Tooltip overlay
+    var tooltip = root.append("div")
+      .attr("class", "viz-tooltip")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
+      .style("opacity", 0)
+      .style("transition", "opacity 140ms ease-out")
+      .style("background", "var(--bg-surface)")
+      .style("border", "1px solid var(--border-subtle)")
+      .style("border-radius", "var(--radius-md)")
+      .style("padding", "10px 12px")
+      .style("min-width", "200px")
+      .style("max-width", "240px")
+      .style("box-shadow", "0 4px 16px rgba(0,0,0,.4)")
+      .style("z-index", 10)
+      .style("left", "0px")
+      .style("top", "0px");
+
+    function risingTooltip(d) {
+      return (
+        '<div style="font:700 13px var(--family-sans); color:var(--text-primary); margin-bottom:2px;">' + d.season + '</div>' +
+        '<div style="font:600 11px var(--family-sans); color:var(--status-error); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:8px;">Three rising components</div>' +
+        '<div style="display:flex; flex-direction:column; gap:4px;">' +
+        '<div style="display:flex; justify-content:space-between; gap:14px;"><span style="color:var(--text-secondary); font:12px var(--family-sans);">Isolation Reliance</span><span style="color:var(--text-primary); font:600 12px var(--family-mono);">' + d.iso + '</span></div>' +
+        '<div style="display:flex; justify-content:space-between; gap:14px;"><span style="color:var(--text-secondary); font:12px var(--family-sans);">Motion Death</span><span style="color:var(--text-primary); font:600 12px var(--family-mono);">' + d.motion + '</span></div>' +
+        '<div style="display:flex; justify-content:space-between; gap:14px;"><span style="color:var(--text-secondary); font:12px var(--family-sans);">Shot Quality Decay</span><span style="color:var(--text-primary); font:600 12px var(--family-mono);">' + d.sqd + '</span></div>' +
+        '</div>'
+      );
+    }
+
+    function stickTooltip(d) {
+      var blurbs = {
+        "2023-24": "Conley running offense.",
+        "2024-25": "Spiked when Edwards became the whole offense.",
+        "2025-26": "Fell when the iso load spread across five hands."
+      };
+      return (
+        '<div style="font:700 13px var(--family-sans); color:var(--text-primary); margin-bottom:2px;">' + d.season + '</div>' +
+        '<div style="font:600 11px var(--family-sans); color:var(--dataviz-3); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:8px;">Ball Stickiness</div>' +
+        '<div style="font:12px var(--family-sans); color:var(--text-secondary); line-height:1.45; margin-bottom:8px;">' + blurbs[d.season] + '</div>' +
+        '<div style="display:flex; justify-content:space-between; gap:14px; padding-top:8px; border-top:1px solid var(--border-subtle);"><span style="color:var(--text-tertiary); font:10px var(--family-sans); text-transform:uppercase; letter-spacing:0.5px;">Score</span><span style="color:var(--text-primary); font:700 14px var(--family-mono);">' + d.value + '</span></div>'
+      );
+    }
+
+    function positionTooltip(event) {
+      var rect = root.node().getBoundingClientRect();
+      var cx = event.clientX - rect.left;
+      var cy = event.clientY - rect.top;
+      var ttNode = tooltip.node();
+      var tw = ttNode.offsetWidth || 220;
+      var th = ttNode.offsetHeight || 120;
+      var leftPos = cx + 14;
+      if (leftPos + tw > rect.width) leftPos = cx - tw - 14;
+      if (leftPos < 0) leftPos = 4;
+      var topPos = cy + 14;
+      if (topPos + th > rect.height) topPos = cy - th - 14;
+      if (topPos < 0) topPos = 4;
+      tooltip.style("left", leftPos + "px").style("top", topPos + "px");
+    }
+
+    var g = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var xScale = d3.scalePoint()
+      .domain(seasons)
+      .range([28, innerW - 28])
+      .padding(0);
+
+    var yScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([innerH, 0]);
+
+    // Light gridlines at 25, 50, 75
+    [25, 50, 75].forEach(function (v) {
+      g.append("line")
+        .attr("x1", 0).attr("x2", innerW)
+        .attr("y1", yScale(v)).attr("y2", yScale(v))
+        .style("stroke", "var(--border-subtle)")
+        .style("stroke-dasharray", "2,4")
+        .style("opacity", v === 50 ? 0.5 : 0.25);
+    });
+
+    // Y axis tick labels
+    [0, 50, 100].forEach(function (v) {
+      g.append("text")
+        .attr("x", -8).attr("y", yScale(v))
+        .attr("text-anchor", "end").attr("dy", "0.35em")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(v);
+    });
+
+    // Baseline
+    g.append("line")
+      .attr("x1", 0).attr("x2", innerW)
+      .attr("y1", innerH).attr("y2", innerH)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-width", 1);
+
+    // Season labels
+    g.selectAll(".season-label").data(seasons).join("text")
+      .attr("class", "season-label")
+      .attr("x", function (d) { return xScale(d); })
+      .attr("y", innerH + 24)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "13px var(--family-sans)")
+      .text(function (d) { return d; });
+
+    // Vertical season guides
+    g.selectAll(".season-guide").data(seasons).join("line")
+      .attr("class", "season-guide")
+      .attr("x1", function (d) { return xScale(d); })
+      .attr("x2", function (d) { return xScale(d); })
+      .attr("y1", 0).attr("y2", innerH)
+      .style("stroke", "var(--border-subtle)")
+      .style("stroke-dasharray", "2,4")
+      .style("opacity", 0.4);
+
+    // ----- Rising-components envelope (filled area between min and max) -----
+    var envelope = d3.area()
+      .x(function (d) { return xScale(d.season); })
+      .y0(function (d) { return yScale(d.min); })
+      .y1(function (d) { return yScale(d.max); })
+      .curve(d3.curveMonotoneX);
+
+    var envPath = g.append("path")
+      .datum(rising)
+      .attr("d", envelope)
+      .style("fill", "var(--status-error)")
+      .style("fill-opacity", 0.18)
+      .style("stroke", "none")
+      .style("opacity", reduceMotion ? 1 : 0);
+
+    if (!reduceMotion) {
+      envPath.transition().duration(700).delay(300).style("opacity", 1);
+    }
+
+    // ----- Rising median line (representative trajectory) -----
+    var medianLine = d3.line()
+      .x(function (d) { return xScale(d.season); })
+      .y(function (d) { return yScale(d.median); })
+      .curve(d3.curveMonotoneX);
+
+    var medianPath = g.append("path")
+      .datum(rising)
+      .attr("d", medianLine)
+      .style("fill", "none")
+      .style("stroke", "var(--status-error)")
+      .style("stroke-width", 3)
+      .style("stroke-linecap", "round")
+      .style("stroke-linejoin", "round");
+
+    if (!reduceMotion) {
+      var medLen = medianPath.node().getTotalLength();
+      medianPath
+        .attr("stroke-dasharray", medLen + " " + medLen)
+        .attr("stroke-dashoffset", medLen)
+        .transition().duration(1000).delay(200).ease(d3.easeCubicOut)
+        .attr("stroke-dashoffset", 0);
+    }
+
+    // ----- Hit areas over the band (drawn BEFORE BS markers so BS hover wins) -----
+    var risingHits = g.selectAll(".rising-hit").data(rising).join("rect")
+      .attr("class", "rising-hit")
+      .attr("x", function (d) { return xScale(d.season) - 24; })
+      .attr("y", function (d) { return yScale(d.max) - 8; })
+      .attr("width", 48)
+      .attr("height", function (d) { return yScale(d.min) - yScale(d.max) + 16; })
+      .style("fill", "transparent")
+      .style("cursor", "pointer");
+
+    risingHits.append("title").text(function (d) {
+      return d.season + ": iso " + d.iso + ", motion " + d.motion +
+        ", shot quality decay " + d.sqd;
+    });
+
+    risingHits
+      .on("mouseenter", function (event, d) {
+        envPath.style("fill-opacity", 0.28);
+        tooltip.html(risingTooltip(d)).style("opacity", 1);
+      })
+      .on("mousemove", positionTooltip)
+      .on("mouseleave", function () {
+        envPath.style("fill-opacity", 0.18);
+        tooltip.style("opacity", 0);
+      });
+
+    // ----- Ball Stickiness line -----
+    var stickLine = d3.line()
+      .x(function (d) { return xScale(d.season); })
+      .y(function (d) { return yScale(d.value); });
+
+    var stickPath = g.append("path")
+      .datum(stick)
+      .attr("d", stickLine)
+      .style("fill", "none")
+      .style("stroke", "var(--dataviz-3)")
+      .style("stroke-width", 3)
+      .style("stroke-linecap", "round")
+      .style("stroke-linejoin", "round");
+
+    if (!reduceMotion) {
+      var stickLen = stickPath.node().getTotalLength();
+      stickPath
+        .attr("stroke-dasharray", stickLen + " " + stickLen)
+        .attr("stroke-dashoffset", stickLen)
+        .transition().duration(1000).delay(500).ease(d3.easeCubicOut)
+        .attr("stroke-dashoffset", 0);
+    }
+
+    // Markers on Ball Stickiness, drawn LAST so they sit on top of the band hits
+    var stickPts = g.selectAll(".stick-pt").data(stick).join("g")
+      .attr("class", "stick-pt")
+      .attr("transform", function (d) {
+        return "translate(" + xScale(d.season) + "," + yScale(d.value) + ")";
+      })
+      .style("cursor", "pointer")
+      .style("opacity", reduceMotion ? 1 : 0);
+
+    stickPts.append("circle")
+      .attr("r", 7)
+      .style("fill", "var(--dataviz-3)")
+      .style("stroke", "var(--bg-inset)")
+      .style("stroke-width", 2);
+
+    stickPts.append("title").text(function (d) {
+      return "Ball Stickiness, " + d.season + ": " + d.value;
+    });
+
+    stickPts
+      .on("mouseenter", function (event, d) {
+        d3.select(this).select("circle")
+          .attr("r", 10)
+          .style("fill", "var(--accent-hover)");
+        tooltip.html(stickTooltip(d)).style("opacity", 1);
+      })
+      .on("mousemove", positionTooltip)
+      .on("mouseleave", function () {
+        d3.select(this).select("circle")
+          .attr("r", 7)
+          .style("fill", "var(--dataviz-3)");
+        tooltip.style("opacity", 0);
+      });
+
+    // Value labels above Ball Stickiness markers
+    var stickLabels = g.selectAll(".stick-val").data(stick).join("text")
+      .attr("class", "stick-val")
+      .attr("x", function (d) { return xScale(d.season); })
+      .attr("y", function (d) { return yScale(d.value) - 16; })
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--dataviz-3)")
+      .style("font", "700 13px var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text(function (d) { return d.value; });
+
+    if (!reduceMotion) {
+      stickPts.transition()
+        .duration(360)
+        .delay(function (_, idx) { return 700 + idx * 220; })
+        .style("opacity", 1);
+      stickLabels.transition()
+        .duration(360)
+        .delay(function (_, idx) { return 900 + idx * 220; })
+        .style("opacity", 1);
+    }
+
+    // ----- End-of-line label callouts (desktop only) -----
+    if (!compact) {
+      var riseEnd = rising[rising.length - 1];
+      var stickEnd = stick[stick.length - 1];
+
+      var riseLabel = g.append("g")
+        .attr("transform",
+          "translate(" + (xScale(riseEnd.season) + 16) + "," +
+          yScale(riseEnd.median) + ")")
+        .style("opacity", reduceMotion ? 1 : 0);
+
+      riseLabel.append("text")
+        .attr("x", 0).attr("y", -8)
+        .style("fill", "var(--status-error)")
+        .style("font", "700 13px var(--family-sans)")
+        .text("Climbed together");
+      riseLabel.append("text")
+        .attr("x", 0).attr("y", 10)
+        .style("fill", "var(--text-secondary)")
+        .style("font", "11px var(--family-sans)")
+        .text("Iso, motion death,");
+      riseLabel.append("text")
+        .attr("x", 0).attr("y", 24)
+        .style("fill", "var(--text-secondary)")
+        .style("font", "11px var(--family-sans)")
+        .text("shot quality decay");
+
+      var stickLabel = g.append("g")
+        .attr("transform",
+          "translate(" + (xScale(stickEnd.season) + 16) + "," +
+          yScale(stickEnd.value) + ")")
+        .style("opacity", reduceMotion ? 1 : 0);
+
+      stickLabel.append("text")
+        .attr("x", 0).attr("y", 0).attr("dy", "0.35em")
+        .style("fill", "var(--dataviz-3)")
+        .style("font", "700 13px var(--family-sans)")
+        .text("Ball stickiness");
+      stickLabel.append("text")
+        .attr("x", 0).attr("y", 18)
+        .style("fill", "var(--text-secondary)")
+        .style("font", "11px var(--family-sans)")
+        .text("Spiked, then fell");
+
+      if (!reduceMotion) {
+        riseLabel.transition().duration(400).delay(1300).style("opacity", 1);
+        stickLabel.transition().duration(400).delay(1500).style("opacity", 1);
+      }
+    }
+
+    // ----- Compact mode: inline legend + caption -----
+    var captionY;
+    if (compact) {
+      // Reserve space at the bottom of the SVG for the legend, then the
+      // caption underneath. innerH + margin.top is the plot's bottom edge.
+      var legendY = innerH + margin.top + 56;
+      var legend = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + legendY + ")");
+
+      legend.append("rect")
+        .attr("x", 0).attr("y", -8).attr("width", 22).attr("height", 12)
+        .style("fill", "var(--status-error)")
+        .style("fill-opacity", 0.45);
+      legend.append("text")
+        .attr("x", 30).attr("y", 0).attr("dy", "0.35em")
+        .style("fill", "var(--text-secondary)")
+        .style("font", "12px var(--family-sans)")
+        .text("Iso, motion death, shot quality decay");
+
+      legend.append("line")
+        .attr("x1", 0).attr("y1", 22).attr("x2", 22).attr("y2", 22)
+        .style("stroke", "var(--dataviz-3)").style("stroke-width", 3);
+      legend.append("circle")
+        .attr("cx", 11).attr("cy", 22).attr("r", 4)
+        .style("fill", "var(--dataviz-3)")
+        .style("stroke", "var(--bg-inset)")
+        .style("stroke-width", 1.5);
+      legend.append("text")
+        .attr("x", 30).attr("y", 22).attr("dy", "0.35em")
+        .style("fill", "var(--text-secondary)")
+        .style("font", "12px var(--family-sans)")
+        .text("Ball Stickiness");
+
+      captionY = legendY + 50;
+    } else {
+      captionY = height - 18;
+    }
+
+    svg.append("text")
+      .attr("x", margin.left)
+      .attr("y", captionY)
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "11px var(--family-sans)")
+      .style("font-style", "italic")
+      .text("Action Poverty, the fifth component, stayed moderate: 27, 36, 45.");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · May 2026");
+  }
+
+  render();
+  if (window.ResizeObserver) {
+    new ResizeObserver(render).observe(root.node());
+  }
+})();
+</script>

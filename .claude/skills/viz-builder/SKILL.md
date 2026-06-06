@@ -121,13 +121,39 @@ implemented in the worked template below:
 - **Breakpoint at 480px.** Below it, simplify on purpose: move category
   labels above the marks instead of beside them, thin out axis ticks,
   shrink margins. Width-only reflow is not enough; the layout itself has
-  to change or the chart is cramped on a phone.
+  to change or the chart is cramped on a phone. The specific traps are
+  in "Phone-width pitfalls" below.
 - **Height comes from the data.** Bar charts: `rowCount * rowHeight`.
   Scatter or line: an aspect ratio of the width. Always with a sensible
   minimum, never a hardcoded pixel height. The iframe auto-sizes to
   whatever height you compute.
 
 Reuse the template's `render()` shape; it wires up all four.
+
+### Phone-width pitfalls
+
+The wide chart that looks great at 700px is the one most likely to break
+at 360px. Three traps come up over and over:
+
+- **Shrinking the left margin is not the fix.** A multi-word 13px label
+  ("Isolation Reliance", "Shot Quality Decay") is 130 to 170px wide. Any
+  left margin small enough to leave usable bar space cannot fit the
+  label, so the label gets clipped off the left edge. The fix is to move
+  the label above the bar at the breakpoint, not to compress the margin
+  it lives in.
+- **Anything that lived above the bar must relocate below in phone
+  mode.** Comparison markers, callout values, secondary stats. They
+  occupied the space the category label now claims, and they will
+  collide unless you move them. Send them below the bar.
+- **Bar-end labels can cross visual boundaries at narrow widths.** A
+  label sitting just past the bar's right edge can extend through a
+  wall, target line, or threshold zone and undercut the visual story.
+  Provide a short variant for compact mode ("Lost in Round 2" becomes
+  "Lost R2", "Missed the playoffs" becomes "Missed").
+
+Resize the preview HTML to about 360px before saving. Every label should
+render fully, no label should cross a wall or target line, and the
+layout should look reflowed rather than scaled.
 
 ## Interactivity
 
@@ -147,6 +173,157 @@ Every chart should reward a cursor. Defaults:
   var reduceMotion =
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   ```
+
+## Scroll passthrough
+
+A chart trapped between the article and the footer is broken. By default,
+interactive marks inside an SVG capture wheel events on desktop and touch
+gestures on mobile, so the reader's vertical scroll dies the moment the
+cursor or thumb crosses the chart. Every fragment must explicitly let the
+page scroll through it.
+
+Three things together. None of them alone is enough.
+
+**1. CSS rule on the container and every descendant.** `touch-action`
+does not inherit, so setting it on the container alone leaves the SVG and
+its interactive marks with their defaults. Put a CSS rule at the top of
+the fragment that covers all descendants:
+
+```html
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-<id>, #viz-<id> * { touch-action: manipulation; }
+</style>
+```
+
+This is the single biggest fix for mobile. Without it, phone swipes die
+inside the chart even if the JS is perfect. `manipulation` keeps pinch
+zoom and single-finger pan and only suppresses double-tap-to-zoom.
+
+**2. JS wheel forwarder for iframe embeds.** When the fragment runs
+inside an iframe (the Flutter app and the composer preview), wheel events
+don't bubble to the outer article. Forward them to the parent:
+
+```js
+if (window.parent !== window) {
+  root.node().addEventListener("wheel", function (e) {
+    if (e.ctrlKey || e.metaKey) return; // pinch-zoom intent on trackpads
+    try {
+      window.parent.scrollBy(e.deltaX, e.deltaY);
+    } catch (err) {
+      window.parent.postMessage({
+        type: "viz-scroll",
+        deltaX: e.deltaX,
+        deltaY: e.deltaY
+      }, "*");
+    }
+  }, { passive: true });
+}
+```
+
+**3. JS touchmove forwarder for iframe embeds.** Same logic for mobile,
+in case the iframe still consumes touch events despite the CSS rule:
+
+```js
+if (window.parent !== window) {
+  var lastTouchY = null;
+  root.node().addEventListener("touchstart", function (e) {
+    if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+  }, { passive: true });
+  root.node().addEventListener("touchmove", function (e) {
+    if (e.touches.length !== 1 || lastTouchY === null) return;
+    var y = e.touches[0].clientY;
+    var dy = lastTouchY - y;
+    lastTouchY = y;
+    try {
+      window.parent.scrollBy(0, dy);
+    } catch (err) {
+      window.parent.postMessage({
+        type: "viz-scroll",
+        deltaX: 0,
+        deltaY: dy
+      }, "*");
+    }
+  }, { passive: true });
+}
+```
+
+All three blocks go right after the `var root = d3.select(...)` line, so
+they run once when the fragment loads. When the fragment uses a
+`var container = document.getElementById(ID)` pattern (cohort ladder,
+fingerprint), swap `root.node()` for `container`.
+
+### Why all three
+
+`touch-action` alone is the right idea on paper, but in practice the
+SVG inside `.fp-host` or `.cl-host` does not inherit container styles,
+so the rule must explicitly target descendants. The wheel and touchmove
+forwarders cover the iframe case where the gesture has nowhere natural
+to bubble to.
+
+### Host-side responsibility
+
+`scrollBy` on `window.parent` works when the iframe is same-origin. When
+it is cross-origin (the Flutter web app may load fragments from a CDN),
+`scrollBy` throws and the fragment falls through to `postMessage`. For
+that path to actually scroll the article, the iframe wrapper
+(`lib/shared/widgets/viz_embed_web.dart`) must add a `message` listener
+that calls `window.scrollBy` on `{ type: 'viz-scroll' }` events. If you
+change the wrapper, keep it in sync with this contract.
+
+Pure-HTML fragments (no D3, no script) only need the CSS rule. Touch and
+wheel forwarders depend on the script being there.
+
+## Watermark and date stamp
+
+Every chart carries a small credit line that ships with it, so a
+screenshot lifted from the site still names where it came from and when
+it was made. The line sits in the bottom-right of the SVG (or the
+bottom-right of the container, for pure-HTML fragments) in
+`--text-tertiary` at low opacity. Visible to a deliberate eye, ignorable
+during normal reading.
+
+Format: `@WolvesToaT · MMM YYYY` (handle, middle dot, month-year). Use the
+publication month of the article that hosts the chart, not the current
+runtime date, so the stamp is a true provenance marker rather than a
+moving target. Month-year granularity is enough; day-level precision
+reads as fussy and dates the work artificially.
+
+Snippet, appended at the end of `render()` after all chart elements so
+it draws on top:
+
+```js
+// Watermark + date stamp. Travels with the chart in screenshots.
+svg.append("text")
+  .attr("x", width - 6)
+  .attr("y", height - 6)
+  .attr("text-anchor", "end")
+  .style("fill", "var(--text-tertiary)")
+  .style("font", "9px var(--family-sans)")
+  .style("opacity", 0.55)
+  .style("pointer-events", "none")
+  .text("@WolvesToaT · May 2026");
+```
+
+For pure-HTML fragments (no SVG), add a small div instead:
+
+```html
+<div class="<viz-id>-watermark">@WolvesToaT · May 2026</div>
+```
+
+```css
+#<viz-id> .<viz-id>-watermark {
+  font: 9px var(--family-sans);
+  color: var(--text-tertiary);
+  opacity: 0.55;
+  text-align: right;
+  margin-top: 12px;
+}
+```
+
+Do not use the @ as a literal email or social handle hyperlink. It is a
+credit mark, not a navigational element. Pointer-events on the SVG text
+are disabled so it never steals a hover from the chart.
 
 ## Accessibility
 
@@ -187,6 +364,10 @@ real `vizId`, and replace the `data` literal.
 
 ```html
 <div id="viz-CHANGEME"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-CHANGEME, #viz-CHANGEME * { touch-action: manipulation; }
+</style>
 <script>
 (function () {
   // Data: embed it here as a JS literal. label drives the row, value the bar.
@@ -199,6 +380,43 @@ real `vizId`, and replace the `data` literal.
   var root = d3.select("#viz-CHANGEME");
   var reduceMotion =
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough. The CSS rule above handles touch on every
+  // descendant; these forwarders handle the iframe-embedded cases for
+  // both wheel (desktop) and touchmove (mobile fallback).
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try {
+        window.parent.scrollBy(e.deltaX, e.deltaY);
+      } catch (err) {
+        window.parent.postMessage({
+          type: "viz-scroll",
+          deltaX: e.deltaX,
+          deltaY: e.deltaY
+        }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try {
+        window.parent.scrollBy(0, dy);
+      } catch (err) {
+        window.parent.postMessage({
+          type: "viz-scroll",
+          deltaX: 0,
+          deltaY: dy
+        }, "*");
+      }
+    }, { passive: true });
+  }
 
   function render() {
     root.selectAll("*").remove();
@@ -292,6 +510,17 @@ real `vizId`, and replace the `data` literal.
       .style("fill", "var(--text-primary)")
       .style("font", "600 13px var(--family-mono)")
       .text(function (d) { return d.value; });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · May 2026");
   }
 
   render();
@@ -328,6 +557,15 @@ real `vizId`, and replace the `data` literal.
 - [ ] Redraws from a `ResizeObserver`.
 - [ ] Hover state and `<title>` tooltips on every mark.
 - [ ] Enter transition with a `prefers-reduced-motion` branch.
+- [ ] Scroll passthrough: a CSS rule
+      `#viz-<id>, #viz-<id> * { touch-action: manipulation; }` plus, for
+      iframe embeds, JS forwarders for both `wheel` (desktop) and
+      `touchmove` (mobile fallback). The page must scroll vertically
+      through the chart on phone (swipe) and desktop (wheel) while
+      hover/tap interactions still work.
+- [ ] Watermark + date stamp in the bottom-right of the SVG (or the
+      container for pure-HTML fragments). Format: `@WolvesToaT · MMM YYYY`,
+      using the article's publication month.
 - [ ] No meaning encoded by color alone.
 - [ ] No em or en dashes anywhere in the fragment.
 - [ ] `altText` written on the visualization doc.

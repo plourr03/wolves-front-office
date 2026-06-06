@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edwards catch-and-shoot, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is edwards_catch_and_shoot_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-edwards-catch-and-shoot">
+  <p class="ecs-title">Catch-and-shoot rate, per 100 attempts</p>
+  <p class="ecs-caption" aria-live="polite"></p>
+  <div class="ecs-stage"></div>
+  <div class="ecs-counter">
+    <span class="ecs-counter-num">0</span>
+    <span class="ecs-counter-sub">catch &amp; shoots per 100 shots</span>
+    <button class="ecs-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ecs-foot">Each dot is one of every 100 Edwards FGAs. The green ones are catch-and-shoots. The grey ones are everything else.</p>
+  <div class="ecs-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  #viz-edwards-catch-and-shoot, #viz-edwards-catch-and-shoot * { touch-action: manipulation; }
+  #viz-edwards-catch-and-shoot {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-edwards-catch-and-shoot .ecs-title {
+    font: 700 12px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 14px 0;
+  }
+  #viz-edwards-catch-and-shoot .ecs-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 24px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-edwards-catch-and-shoot .ecs-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 300px;
+    overflow: hidden;
+  }
+  #viz-edwards-catch-and-shoot.is-compact .ecs-stage {
+    height: 240px;
+  }
+  #viz-edwards-catch-and-shoot .ecs-stage svg {
+    display: block; width: 100%; height: 100%;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 12px;
+    margin: 18px 0 0 0;
+    position: relative;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter-num {
+    font: 800 76px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    transition: color 320ms ease;
+  }
+  #viz-edwards-catch-and-shoot.is-landed .ecs-counter-num {
+    color: var(--accent-default);
+  }
+  #viz-edwards-catch-and-shoot.is-compact .ecs-counter-num {
+    font-size: 58px;
+  }
+  #viz-edwards-catch-and-shoot .ecs-counter-sub {
+    font: 700 13px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay {
+    position: absolute;
+    right: 0; top: 50%; transform: translateY(-50%);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay.is-shown {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #viz-edwards-catch-and-shoot .ecs-replay:hover {
+    color: var(--text-primary); border-color: var(--border-default);
+  }
+  #viz-edwards-catch-and-shoot .ecs-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 12px 0 0 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+  #viz-edwards-catch-and-shoot .ecs-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+fetch('edwards_catch_and_shoot_fragment.html')
+  .then(function(r){ return r.text(); })
+  .then(function(html){
+    var m = html.match(/<script>([\s\S]*?)<\/script>/);
+    if (m && m[1]) {
+      var s = document.createElement('script');
+      s.textContent = m[1];
+      document.body.appendChild(s);
+    }
+  })
+  .catch(function(err){
+    console.error('Failed to load fragment script', err);
+  });
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,829 @@
+<div id="viz-wemby-unicorn">
+  <p class="wu-title">2025-26 NBA bigs, regular season</p>
+  <p class="wu-caption" aria-live="polite"></p>
+  <div class="wu-stage">
+    <div class="wu-tooltip" role="tooltip">
+      <div class="wu-tip-name"></div>
+      <div class="wu-tip-pos"></div>
+      <div class="wu-tip-stats">
+        <div class="wu-tip-row"><span class="wu-tip-val wu-tip-blk"></span><span class="wu-tip-key">blk per 36</span></div>
+        <div class="wu-tip-row"><span class="wu-tip-val wu-tip-c3"></span><span class="wu-tip-key">3PT contests per 36</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wu-hero">
+    <div class="wu-hero-line">
+      <span class="wu-hero-num">0.00</span>
+      <span class="wu-hero-unit">blk per 36</span>
+    </div>
+    <div class="wu-hero-label">Wembanyama leads every big in the league</div>
+    <button class="wu-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="wu-foot">Each dot is a player who logged at least 600 regular-season minutes and lines up at forward or center. X = blocks per 36 minutes. Y = three-point shots contested per 36.</p>
+  <div class="wu-watermark">@WolvesToaT · May 2026</div>
+</div>
+<style>
+  #viz-wemby-unicorn, #viz-wemby-unicorn * { touch-action: manipulation; }
+  #viz-wemby-unicorn {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-wemby-unicorn .wu-title {
+    font: 700 12px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 14px 0;
+  }
+  #viz-wemby-unicorn .wu-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 24px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-wemby-unicorn .wu-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  #viz-wemby-unicorn .wu-stage svg {
+    display: block; width: 100%; height: 100%;
+  }
+  #viz-wemby-unicorn .wu-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 10px 12px 11px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 240px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-wemby-unicorn .wu-tooltip.is-on { opacity: 1; }
+  #viz-wemby-unicorn .wu-tip-name {
+    font: 700 13px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 1px;
+    line-height: 1.25;
+  }
+  #viz-wemby-unicorn .wu-tip-pos {
+    font: 500 10px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  #viz-wemby-unicorn .wu-tip-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  #viz-wemby-unicorn .wu-tip-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  #viz-wemby-unicorn .wu-tip-val {
+    font: 700 13px var(--family-mono);
+    color: var(--accent-default);
+    min-width: 38px;
+  }
+  #viz-wemby-unicorn .wu-tip-key {
+    font: 500 11px var(--family-sans);
+    color: var(--text-secondary);
+  }
+  #viz-wemby-unicorn .wu-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-wemby-unicorn .wu-hero-line {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  #viz-wemby-unicorn .wu-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-wemby-unicorn.is-landed .wu-hero-num,
+  #viz-wemby-unicorn.is-landed .wu-hero-unit {
+    color: var(--accent-default);
+  }
+  #viz-wemby-unicorn .wu-hero-unit {
+    font: 700 16px var(--family-mono);
+    color: var(--text-secondary);
+    line-height: 1;
+    transition: color 320ms ease;
+  }
+  #viz-wemby-unicorn .wu-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-wemby-unicorn.is-compact .wu-hero-num { font-size: 50px; }
+  #viz-wemby-unicorn .wu-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-wemby-unicorn .wu-replay.is-shown {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #viz-wemby-unicorn .wu-replay:hover {
+    color: var(--text-primary); border-color: var(--border-default);
+  }
+  #viz-wemby-unicorn .wu-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+  #viz-wemby-unicorn .wu-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // 2025-26 regular season. Bigs (forwards and centers) with 30+ games
+  // and 600+ minutes. b = blocks per 36, c = 3-point contests per 36.
+  // Pulled from nba_player_tracking_season (Defense measure) joined to
+  // nba_player_hustle_stats_season.
+  var BIGS = [{n:"Dylan Cardwell",p:"C",b:2.66,c:1.84},{n:"Evan Mobley",p:"C",b:1.96,c:3.56},{n:"Franz Wagner",p:"F",b:0.39,c:2.23},{n:"GG Jackson",p:"F",b:1.34,c:2.92},{n:"Kyle Kuzma",p:"F",b:0.56,c:1.91},{n:"Wendell Carter Jr.",p:"C",b:0.77,c:2.38},{n:"Brandon Ingram",p:"F",b:0.76,c:2.36},{n:"Brandon Miller",p:"F",b:0.8,c:1.98},{n:"Brice Sensabaugh",p:"F",b:0.25,c:2.13},{n:"Brook Lopez",p:"C",b:1.92,c:2.47},{n:"Caleb Martin",p:"F",b:0.63,c:1.26},{n:"Isaac Okoro",p:"F",b:0.62,c:2.53},{n:"Isaiah Hartenstein",p:"C",b:1.14,c:2.88},{n:"Isaiah Jackson",p:"F",b:1.94,c:3.46},{n:"Ronald Holland II",p:"F",b:0.63,c:1.87},{n:"Royce O'Neale",p:"F",b:0.52,c:1.56},{n:"Rudy Gobert",p:"C",b:1.88,c:2.84},{n:"Rui Hachimura",p:"F",b:0.39,c:1.59},{n:"Ryan Dunn",p:"F",b:0.77,c:3.21},{n:"Ryan Kalkbrenner",p:"C",b:2.46,c:3.46},{n:"Sam Hauser",p:"F",b:0.43,c:2.22},{n:"Sandro Mamukelashvili",p:"F",b:0.84,c:2.86},{n:"Tobias Harris",p:"F",b:0.54,c:2.38},{n:"Derik Queen",p:"C",b:1.32,c:3.42},{n:"Derrick Jones Jr.",p:"F",b:1.33,c:1.95},{n:"Dominick Barlow",p:"F",b:1.13,c:2.96},{n:"Donovan Clingan",p:"C",b:2.23,c:4.81},{n:"Dorian Finney-Smith",p:"F",b:0.35,c:1.87},{n:"Draymond Green",p:"F",b:0.81,c:3.52},{n:"Matas Buzelis",p:"F",b:1.86,c:3.41},{n:"Maxime Raynaud",p:"C",b:0.71,c:3.34},{n:"Micah Potter",p:"C",b:0.59,c:3.25},{n:"Michael Porter Jr.",p:"F",b:0.28,c:1.41},{n:"Miles Bridges",p:"F",b:0.51,c:3.12},{n:"Mitchell Robinson",p:"C",b:2.14,c:3.0},{n:"Mohamed Diawara",p:"F",b:0.34,c:1.82},{n:"Giannis Antetokounmpo",p:"F",b:0.83,c:2.15},{n:"Goga Bitadze",p:"C",b:2.26,c:3.3},{n:"Grant Williams",p:"F",b:0.91,c:3.39},{n:"Guerschon Yabusele",p:"F",b:0.57,c:1.74},{n:"Gui Santos",p:"F",b:0.57,c:3.03},{n:"Harrison Barnes",p:"F",b:0.22,c:2.16},{n:"Jalen Duren",p:"C",b:1.07,c:3.41},{n:"Jalen Johnson",p:"F",b:0.44,c:2.0},{n:"Jalen Smith",p:"F",b:1.38,c:3.09},{n:"Jalen Wilson",p:"F",b:0.08,c:2.13},{n:"Jamir Watkins",p:"F",b:0.87,c:2.58},{n:"Jarace Walker",p:"F",b:0.48,c:1.71},{n:"Jerami Grant",p:"F",b:0.76,c:1.66},{n:"Karlo Matkovic",p:"F",b:2.13,c:3.59},{n:"Kawhi Leonard",p:"F",b:0.47,c:2.42},{n:"Santi Aldama",p:"F",b:0.93,c:3.1},{n:"Scottie Barnes",p:"F",b:1.56,c:1.97},{n:"Steven Adams",p:"C",b:0.99,c:2.52},{n:"Tari Eason",p:"F",b:0.65,c:2.32},{n:"Anthony Gill",p:"F",b:0.79,c:3.8},{n:"Bam Adebayo",p:"C",b:0.75,c:3.04},{n:"Bobby Portis",p:"F",b:0.27,c:3.82},{n:"Cameron Johnson",p:"F",b:0.46,c:2.32},{n:"Carter Bryant",p:"F",b:1.01,c:3.19},{n:"Jarrett Allen",p:"C",b:1.11,c:2.18},{n:"Jaxson Hayes",p:"C",b:1.55,c:3.85},{n:"Jay Huff",p:"C",b:3.2,c:3.5},{n:"Paolo Banchero",p:"F",b:0.58,c:2.59},{n:"Simone Fontecchio",p:"F",b:0.28,c:2.14},{n:"Spencer Jones",p:"F",b:0.74,c:2.39},{n:"Chet Holmgren",p:"C",b:2.36,c:3.12},{n:"Clint Capela",p:"C",b:2.45,c:2.98},{n:"Cody Williams",p:"F",b:0.57,c:1.62},{n:"Aaron Gordon",p:"F",b:0.36,c:1.22},{n:"Ace Bailey",p:"F",b:0.89,c:2.82},{n:"Adem Bona",p:"F",b:2.39,c:3.35},{n:"Nikola Jokic",p:"C",b:0.84,c:2.13},{n:"Nikola Jovic",p:"F",b:0.76,c:2.99},{n:"Nikola Vucevic",p:"C",b:0.81,c:3.33},{n:"Noah Clowney",p:"F",b:0.91,c:3.11},{n:"Jock Landale",p:"C",b:0.86,c:1.6},{n:"Zeke Nnaji",p:"F",b:1.38,c:3.73},{n:"Ziaire Williams",p:"F",b:0.59,c:3.16},{n:"Zion Williamson",p:"F",b:0.66,c:2.68},{n:"Herbert Jones",p:"F",b:0.61,c:2.38},{n:"Isaiah Stewart",p:"F",b:2.54,c:3.85},{n:"Ivica Zubac",p:"C",b:1.0,c:2.46},{n:"Jabari Smith Jr.",p:"F",b:0.94,c:2.13},{n:"Jabari Walker",p:"F",b:0.61,c:1.98},{n:"Jaden McDaniels",p:"F",b:1.13,c:2.7},{n:"Jake LaRavia",p:"F",b:0.66,c:2.36},{n:"Jakob Poeltl",p:"C",b:1.0,c:2.57},{n:"Jericho Sims",p:"C",b:0.46,c:2.35},{n:"Jimmy Butler III",p:"F",b:0.24,c:1.46},{n:"Joel Embiid",p:"C",b:1.38,c:2.13},{n:"John Collins",p:"F",b:0.98,c:3.56},{n:"Jonas Valanciunas",p:"C",b:1.53,c:2.0},{n:"Jonathan Kuminga",p:"F",b:0.48,c:2.25},{n:"Josh Minott",p:"F",b:1.04,c:2.95},{n:"Julian Champagnie",p:"F",b:0.6,c:1.94},{n:"Julius Randle",p:"F",b:0.25,c:2.03},{n:"Justin Edwards",p:"F",b:0.41,c:1.72},{n:"Jusuf Nurkic",p:"C",b:0.73,c:3.32},{n:"Karl-Anthony Towns",p:"C",b:0.62,c:2.14},{n:"Kel'el Ware",p:"C",b:1.77,c:2.66},{n:"Keldon Johnson",p:"F",b:0.21,c:1.85},{n:"Kelly Oubre Jr.",p:"F",b:0.55,c:2.01},{n:"Kevin Durant",p:"F",b:0.9,c:2.67},{n:"Khris Middleton",p:"F",b:0.23,c:1.93},{n:"Kobe Brown",p:"F",b:0.45,c:1.87},{n:"Kris Murray",p:"F",b:0.59,c:1.33},{n:"Kristaps Porzingis",p:"F",b:1.78,c:3.56},{n:"Kyle Anderson",p:"F",b:1.1,c:2.62},{n:"Kyle Filipowski",p:"C",b:0.78,c:3.73},{n:"Kyshawn George",p:"F",b:1.11,c:3.57},{n:"Lauri Markkanen",p:"F",b:0.52,c:1.77},{n:"LeBron James",p:"F",b:0.63,c:1.29},{n:"Leonard Miller",p:"F",b:0.75,c:3.79},{n:"Luka Doncic",p:"F",b:0.53,c:2.66},{n:"Luka Garza",p:"C",b:0.9,c:2.16},{n:"Luke Kornet",p:"C",b:1.64,c:3.57},{n:"Mark Williams",p:"C",b:1.4,c:3.89},{n:"Marvin Bagley III",p:"F",b:1.29,c:3.33},{n:"Mouhamed Gueye",p:"F",b:1.19,c:3.29},{n:"Moussa Diabate",p:"F",b:1.36,c:3.43},{n:"Myles Turner",p:"C",b:2.17,c:2.62},{n:"Nae'Qwan Tomlin",p:"F",b:1.22,c:2.91},{n:"Naji Marshall",p:"F",b:0.1,c:2.42},{n:"Naz Reid",p:"C",b:1.4,c:3.06},{n:"Neemias Queta",p:"C",b:1.87,c:2.95},{n:"Nic Claxton",p:"C",b:1.44,c:3.26},{n:"Nick Richards",p:"C",b:1.64,c:2.67},{n:"OG Anunoby",p:"F",b:0.78,c:3.3},{n:"Olivier-Maxence Prosper",p:"F",b:0.48,c:2.39},{n:"Onyeka Okongwu",p:"F",b:1.24,c:2.74},{n:"Oso Ighodaro",p:"F",b:1.13,c:2.29},{n:"Ousmane Dieng",p:"F",b:0.56,c:3.33},{n:"P.J. Washington",p:"F",b:1.24,c:3.13},{n:"Pascal Siakam",p:"F",b:0.44,c:2.15},{n:"Patrick Williams",p:"F",b:0.64,c:2.64},{n:"Paul George",p:"F",b:0.51,c:2.7},{n:"Paul Reed",p:"F",b:2.4,c:3.55},{n:"Pete Nance",p:"F",b:0.68,c:2.2},{n:"Precious Achiuwa",p:"F",b:1.03,c:3.16},{n:"Quinten Post",p:"C",b:1.09,c:3.09},{n:"RJ Barrett",p:"F",b:0.4,c:2.46},{n:"Rasheer Fleming",p:"F",b:1.12,c:2.23},{n:"Robert Williams III",p:"C",b:3.11,c:3.36},{n:"Taylor Hendricks",p:"F",b:0.97,c:2.9},{n:"Thomas Bryant",p:"C",b:1.28,c:1.55},{n:"Toumani Camara",p:"F",b:0.46,c:2.28},{n:"Trey Murphy III",p:"F",b:0.37,c:2.18},{n:"Victor Wembanyama",p:"F",b:3.8,c:3.2},{n:"Will Riley",p:"F",b:0.2,c:1.77},{n:"Yves Missi",p:"C",b:2.8,c:4.47},{n:"Zaccharie Risacher",p:"F",b:0.86,c:2.51},{n:"Collin Murray-Boyles",p:"F",b:1.53,c:3.18},{n:"Cooper Flagg",p:"F",b:0.98,c:3.46},{n:"Corey Kispert",p:"F",b:0.3,c:2.37},{n:"Daniel Gafford",p:"F",b:2.08,c:2.35},{n:"Danny Wolf",p:"F",b:0.97,c:2.7},{n:"Day'Ron Sharpe",p:"C",b:0.81,c:2.7},{n:"De'Andre Hunter",p:"F",b:0.18,c:1.93},{n:"Dean Wade",p:"F",b:0.63,c:2.21},{n:"Deandre Ayton",p:"C",b:1.29,c:2.68},{n:"Deni Avdija",p:"F",b:0.67,c:1.6},{n:"Duncan Robinson",p:"F",b:0.37,c:1.96},{n:"Dwight Powell",p:"F",b:0.84,c:2.0},{n:"Kevin Love",p:"F",b:0.53,c:2.07},{n:"Al Horford",p:"C",b:1.89,c:4.12},{n:"Jaren Jackson Jr.",p:"F",b:1.71,c:3.64},{n:"Jarred Vanderbilt",p:"F",b:0.61,c:1.36},{n:"Jaylen Wells",p:"F",b:0.18,c:2.21},{n:"Jaylin Williams",p:"F",b:1.18,c:4.51},{n:"Tristan Vukcevic",p:"F",b:1.77,c:3.3},{n:"Tristan da Silva",p:"F",b:0.47,c:2.05},{n:"Tyrese Martin",p:"F",b:0.28,c:2.26},{n:"Andrew Wiggins",p:"F",b:1.2,c:4.24},{n:"Alex Sarr",p:"C",b:2.62,c:2.79},{n:"Alperen Sengun",p:"C",b:1.16,c:2.94},{n:"Andre Drummond",p:"C",b:1.43,c:2.64}];
+
+  var WEMBY = "Victor Wembanyama";
+  var HOLMGREN = "Chet Holmgren";
+  var GOBERT = "Rudy Gobert";
+  var WEMBY_BLK = 3.80;
+
+  var CAPTIONS = [
+    "NBA bigs come in two flavors.",
+    "Rim protectors do one thing.",
+    "Perimeter contesters do the other.",
+    "A few do both. Wembanyama does it the most. Holmgren is the closest peer."
+  ];
+
+  var T = {
+    CAP1: 0,
+    AXES: 350,
+    DOTS_IN: 1000,
+    DOTS_TOTAL: 1600,
+    CAP2: 2800,
+    CAP3: 3700,
+    QUAD_IN: 4400,
+    CAP4: 5400,
+    WEMBY_POP: 5900,
+    HOLM_POP: 6400,
+    GOBERT_POP: 6800,
+    HERO_TICK: 7100,
+    LANDED: 8400,
+    REPLAY: 9000
+  };
+
+  var root = d3.select("#viz-wemby-unicorn");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*");
+      }
+    }, { passive: true });
+  }
+
+  // ---- State + helpers ----------------------------------------------
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".wu-caption");
+    if (idx === 0) {
+      c.style("opacity", 1).text(CAPTIONS[0]);
+      return;
+    }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function posName(p) {
+    return p === "C" ? "Center" : "Forward";
+  }
+  function showTooltip(d, event) {
+    var tip = root.select(".wu-tooltip");
+    tip.select(".wu-tip-name").text(d.n);
+    tip.select(".wu-tip-pos").text(posName(d.p));
+    tip.select(".wu-tip-blk").text(d.b.toFixed(2));
+    tip.select(".wu-tip-c3").text(d.c.toFixed(2));
+    tip.classed("is-on", true);
+    moveTooltip(event);
+  }
+  function moveTooltip(event) {
+    var tipEl = root.select(".wu-tooltip").node();
+    var stageEl = root.select(".wu-stage").node();
+    if (!tipEl || !stageEl) return;
+    var rect = stageEl.getBoundingClientRect();
+    var localX = event.clientX - rect.left;
+    var localY = event.clientY - rect.top;
+    var x = localX + 14;
+    var y = localY + 14;
+    var tipW = tipEl.offsetWidth;
+    var tipH = tipEl.offsetHeight;
+    if (x + tipW > rect.width - 8) x = localX - tipW - 14;
+    if (y + tipH > rect.height - 8) y = localY - tipH - 14;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() {
+    root.select(".wu-tooltip").classed("is-on", false);
+  }
+
+  function tickHero(from, to, duration) {
+    var node = root.select(".wu-hero-num").node();
+    if (duration <= 0) { node.textContent = to.toFixed(2); return; }
+    d3.select(node).transition().duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = interp(t).toFixed(2); };
+      });
+  }
+
+  // ---- Rendering -----------------------------------------------------
+
+  var lastRender = null;
+
+  function play(svg, ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".wu-replay").classed("is-shown", false);
+
+    // Reset hero
+    root.select(".wu-hero-num").node().textContent = "0.00";
+
+    if (reduceMotion) {
+      // Final state immediately.
+      ctx.axisGroup.style("opacity", 1);
+      ctx.dotG.selectAll("circle").style("opacity", 0.4);
+      ctx.quadG.style("opacity", 1);
+      ctx.wembyDot.attr("r", ctx.wembyR).style("opacity", 1);
+      ctx.holmDot.attr("r", ctx.holmR).style("opacity", 0.95);
+      ctx.gobertDot.attr("r", ctx.gobertR).style("opacity", 0.9);
+      ctx.wembyLabel.style("opacity", 1);
+      ctx.holmLabel.style("opacity", 1);
+      ctx.gobertLabel.style("opacity", 1);
+      setCaption(3);
+      root.classed("is-landed", true);
+      tickHero(0, WEMBY_BLK, 0);
+      return;
+    }
+
+    // Initial hidden state
+    ctx.axisGroup.style("opacity", 0);
+    ctx.dotG.selectAll("circle").style("opacity", 0).attr("r", 0);
+    ctx.quadG.style("opacity", 0);
+    ctx.wembyDot.attr("r", 0).style("opacity", 0);
+    ctx.holmDot.attr("r", 0).style("opacity", 0);
+    ctx.gobertDot.attr("r", 0).style("opacity", 0);
+    ctx.wembyLabel.style("opacity", 0);
+    ctx.holmLabel.style("opacity", 0);
+    ctx.gobertLabel.style("opacity", 0);
+
+    setCaption(0);
+    if (__resetOnly) return;
+
+    playTimers.push(setTimeout(function () {
+      ctx.axisGroup.transition().duration(500).ease(d3.easeCubicOut).style("opacity", 1);
+    }, T.AXES));
+
+    // Stagger 175ish dots across DOTS_TOTAL ms
+    playTimers.push(setTimeout(function () {
+      var dots = ctx.dotG.selectAll("circle");
+      var n = dots.size();
+      var perDelay = T.DOTS_TOTAL / Math.max(1, n);
+      dots.transition()
+        .delay(function (_, i) { return i * perDelay; })
+        .duration(420)
+        .ease(d3.easeBackOut.overshoot(1.3))
+        .attr("r", ctx.dotR)
+        .style("opacity", 0.4);
+    }, T.DOTS_IN));
+
+    playTimers.push(setTimeout(function () { setCaption(1); }, T.CAP2));
+    playTimers.push(setTimeout(function () { setCaption(2); }, T.CAP3));
+
+    // Quadrant overlay
+    playTimers.push(setTimeout(function () {
+      ctx.quadG.transition().duration(800).ease(d3.easeCubicOut).style("opacity", 1);
+    }, T.QUAD_IN));
+
+    playTimers.push(setTimeout(function () { setCaption(3); }, T.CAP4));
+
+    // Wemby pops with overshoot
+    playTimers.push(setTimeout(function () {
+      ctx.wembyDot
+        .style("opacity", 1)
+        .transition().duration(680).ease(d3.easeBackOut.overshoot(1.7))
+        .attr("r", ctx.wembyR);
+      ctx.wembyLabel
+        .transition().delay(280).duration(420).ease(d3.easeCubicOut)
+        .style("opacity", 1);
+    }, T.WEMBY_POP));
+
+    // Holmgren pops a beat later
+    playTimers.push(setTimeout(function () {
+      ctx.holmDot
+        .style("opacity", 0.95)
+        .transition().duration(620).ease(d3.easeBackOut.overshoot(1.5))
+        .attr("r", ctx.holmR);
+      ctx.holmLabel
+        .transition().delay(220).duration(380).ease(d3.easeCubicOut)
+        .style("opacity", 1);
+    }, T.HOLM_POP));
+
+    // Gobert pops as the rim-protector reference point
+    playTimers.push(setTimeout(function () {
+      ctx.gobertDot
+        .style("opacity", 0.9)
+        .transition().duration(560).ease(d3.easeBackOut.overshoot(1.4))
+        .attr("r", ctx.gobertR);
+      ctx.gobertLabel
+        .transition().delay(200).duration(360).ease(d3.easeCubicOut)
+        .style("opacity", 1);
+    }, T.GOBERT_POP));
+
+    // Hero ticks 0 -> 3.80
+    playTimers.push(setTimeout(function () {
+      tickHero(0, WEMBY_BLK, 1500);
+    }, T.HERO_TICK));
+
+    // Final color shift
+    playTimers.push(setTimeout(function () {
+      root.classed("is-landed", true);
+      // Pulse Wemby once more
+      ctx.wembyDot.transition().duration(600).ease(d3.easeCubicInOut)
+        .attr("r", ctx.wembyR * 1.35)
+        .transition().duration(600)
+        .attr("r", ctx.wembyR);
+    }, T.LANDED));
+
+    playTimers.push(setTimeout(function () {
+      root.select(".wu-replay").classed("is-shown", true);
+    }, T.REPLAY));
+  }
+
+  function render(triggerPlay) {
+    var stage = root.select(".wu-stage");
+    stage.selectAll("*").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var hostW = stageNode.clientWidth;
+    var hostH = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + hostW + " " + hostH)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    // Glow filter for the Wemby and Holmgren dots
+    var defs = svg.append("defs");
+    var f = defs.append("filter")
+      .attr("id", "wu-glow")
+      .attr("x", "-50%").attr("y", "-50%")
+      .attr("width", "200%").attr("height", "200%");
+    f.append("feGaussianBlur").attr("stdDeviation", compact ? 1.4 : 2.0).attr("result", "b");
+    var m = f.append("feMerge");
+    m.append("feMergeNode").attr("in", "b");
+    m.append("feMergeNode").attr("in", "SourceGraphic");
+
+    // Padding for axes and labels
+    var pad = {
+      top: compact ? 26 : 32,
+      right: compact ? 16 : 24,
+      bottom: compact ? 42 : 50,
+      left: compact ? 42 : 56
+    };
+
+    var xMax = 4.0;
+    var yMin = 1.0, yMax = 5.0;
+    var x = d3.scaleLinear().domain([0, xMax]).range([pad.left, hostW - pad.right]);
+    var y = d3.scaleLinear().domain([yMin, yMax]).range([hostH - pad.bottom, pad.top]);
+
+    // Axes group
+    var axisG = svg.append("g").attr("class", "axes");
+
+    // X-axis line
+    axisG.append("line")
+      .attr("x1", x(0)).attr("x2", x(xMax))
+      .attr("y1", y(yMin)).attr("y2", y(yMin))
+      .style("stroke", "var(--border-default)").style("stroke-width", 1);
+    // Y-axis line
+    axisG.append("line")
+      .attr("x1", x(0)).attr("x2", x(0))
+      .attr("y1", y(yMin)).attr("y2", y(yMax))
+      .style("stroke", "var(--border-default)").style("stroke-width", 1);
+
+    // X ticks
+    [1, 2, 3, 4].forEach(function (t) {
+      axisG.append("line")
+        .attr("x1", x(t)).attr("x2", x(t))
+        .attr("y1", y(yMin)).attr("y2", y(yMin) + 4)
+        .style("stroke", "var(--border-default)").style("stroke-width", 1);
+      axisG.append("text")
+        .attr("x", x(t)).attr("y", y(yMin) + 16)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "11px var(--family-mono)")
+        .text(t.toFixed(0));
+    });
+    axisG.append("text")
+      .attr("x", (x(0) + x(xMax)) / 2)
+      .attr("y", hostH - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "600 12px var(--family-sans)")
+      .text(compact ? "Blocks per 36" : "Blocks per 36 minutes (rim deterrence) →");
+
+    // Y ticks
+    [2, 3, 4, 5].forEach(function (t) {
+      axisG.append("line")
+        .attr("x1", x(0)).attr("x2", x(0) - 4)
+        .attr("y1", y(t)).attr("y2", y(t))
+        .style("stroke", "var(--border-default)").style("stroke-width", 1);
+      axisG.append("text")
+        .attr("x", x(0) - 8).attr("y", y(t) + 4)
+        .attr("text-anchor", "end")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "11px var(--family-mono)")
+        .text(t.toFixed(0));
+    });
+    axisG.append("text")
+      .attr("transform", "translate(" + (compact ? 12 : 16) + "," + ((y(yMin) + y(yMax)) / 2) + ") rotate(-90)")
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "600 12px var(--family-sans)")
+      .text(compact ? "3PT contests/36 →" : "3-point contests per 36 (perimeter activity) →");
+
+    // Quadrant overlay (drawn under dots but appears after them)
+    var quadG = svg.append("g").attr("class", "quadrant").style("opacity", 0);
+    var qx = 2.0;
+    var qy = 3.0;
+    // Subtle accent rect for "RIM + PERIMETER" quadrant
+    quadG.append("rect")
+      .attr("x", x(qx)).attr("y", y(yMax))
+      .attr("width", x(xMax) - x(qx))
+      .attr("height", y(qy) - y(yMax))
+      .style("fill", "var(--accent-default)")
+      .style("opacity", 0.08);
+    // Vertical and horizontal threshold lines
+    quadG.append("line")
+      .attr("x1", x(qx)).attr("x2", x(qx))
+      .attr("y1", y(yMin)).attr("y2", y(yMax))
+      .style("stroke", "var(--accent-default)").style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4").style("opacity", 0.4);
+    quadG.append("line")
+      .attr("x1", x(0)).attr("x2", x(xMax))
+      .attr("y1", y(qy)).attr("y2", y(qy))
+      .style("stroke", "var(--accent-default)").style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4").style("opacity", 0.4);
+    // Quadrant label
+    quadG.append("text")
+      .attr("x", x(xMax) - 8).attr("y", y(yMax) + 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--accent-default)")
+      .style("font", "700 10px var(--family-sans)")
+      .style("letter-spacing", "0.1em")
+      .style("text-transform", "uppercase")
+      .text(compact ? "Both" : "Rim + perimeter");
+
+    // Dots layer (background bigs)
+    var dotR = compact ? 3.2 : 4.0;
+    var dotG = svg.append("g").attr("class", "dots");
+    var nonStars = BIGS.filter(function (d) { return d.n !== WEMBY && d.n !== HOLMGREN && d.n !== GOBERT; });
+    var bgDots = dotG.selectAll("circle").data(nonStars).join("circle")
+      .attr("cx", function (d) { return x(d.b); })
+      .attr("cy", function (d) { return y(d.c); })
+      .attr("r", reduceMotion ? dotR : 0)
+      .style("fill", "var(--text-tertiary)")
+      .style("opacity", reduceMotion ? 0.4 : 0)
+      .style("cursor", "pointer");
+    bgDots.append("title").text(function (d) {
+      return d.n + ", " + posName(d.p) + ": " + d.b.toFixed(2) + " blk/36, " + d.c.toFixed(2) + " 3PT contests/36";
+    });
+    bgDots
+      .on("mouseenter", function (event, d) {
+        d3.select(this).interrupt("hov").transition("hov").duration(120)
+          .attr("r", dotR * 1.9)
+          .style("opacity", 1)
+          .style("fill", "var(--accent-hover)");
+        showTooltip(d, event);
+      })
+      .on("mousemove", function (event) { moveTooltip(event); })
+      .on("mouseleave", function () {
+        d3.select(this).interrupt("hov").transition("hov").duration(180)
+          .attr("r", dotR)
+          .style("opacity", 0.4)
+          .style("fill", "var(--text-tertiary)");
+        hideTooltip();
+      });
+
+    // Wemby and Holmgren dots
+    var wembyData = BIGS.find(function (d) { return d.n === WEMBY; });
+    var holmData = BIGS.find(function (d) { return d.n === HOLMGREN; });
+    var gobertData = BIGS.find(function (d) { return d.n === GOBERT; });
+    var wembyR = compact ? 8.5 : 11;
+    var holmR = compact ? 6 : 8;
+    var gobertR = compact ? 5.5 : 7;
+
+    var starG = svg.append("g").attr("class", "stars");
+    var wembyDot = starG.append("circle")
+      .attr("cx", x(wembyData.b)).attr("cy", y(wembyData.c))
+      .attr("r", reduceMotion ? wembyR : 0)
+      .style("fill", "var(--accent-default)")
+      .style("filter", "url(#wu-glow)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .style("cursor", "pointer");
+    wembyDot.append("title").text("Victor Wembanyama: 3.80 blk/36, 3.20 3PT contests/36");
+    wembyDot
+      .on("mouseenter", function (event) {
+        showTooltip(wembyData, event);
+        d3.select(this).interrupt("hov").transition("hov").duration(140)
+          .attr("r", wembyR * 1.15);
+      })
+      .on("mousemove", function (event) { moveTooltip(event); })
+      .on("mouseleave", function () {
+        hideTooltip();
+        d3.select(this).interrupt("hov").transition("hov").duration(180)
+          .attr("r", wembyR);
+      });
+
+    var holmDot = starG.append("circle")
+      .attr("cx", x(holmData.b)).attr("cy", y(holmData.c))
+      .attr("r", reduceMotion ? holmR : 0)
+      .style("fill", "var(--accent-default)")
+      .style("filter", "url(#wu-glow)")
+      .style("opacity", reduceMotion ? 0.95 : 0)
+      .style("cursor", "pointer");
+    holmDot.append("title").text("Chet Holmgren: 2.36 blk/36, 3.12 3PT contests/36");
+    holmDot
+      .on("mouseenter", function (event) {
+        showTooltip(holmData, event);
+        d3.select(this).interrupt("hov").transition("hov").duration(140)
+          .attr("r", holmR * 1.2)
+          .style("opacity", 1);
+      })
+      .on("mousemove", function (event) { moveTooltip(event); })
+      .on("mouseleave", function () {
+        hideTooltip();
+        d3.select(this).interrupt("hov").transition("hov").duration(180)
+          .attr("r", holmR)
+          .style("opacity", 0.95);
+      });
+
+    var gobertDot = starG.append("circle")
+      .attr("cx", x(gobertData.b)).attr("cy", y(gobertData.c))
+      .attr("r", reduceMotion ? gobertR : 0)
+      .style("fill", "var(--text-primary)")
+      .style("filter", "url(#wu-glow)")
+      .style("opacity", reduceMotion ? 0.9 : 0)
+      .style("cursor", "pointer");
+    gobertDot.append("title").text("Rudy Gobert: 1.88 blk/36, 2.84 3PT contests/36");
+    gobertDot
+      .on("mouseenter", function (event) {
+        showTooltip(gobertData, event);
+        d3.select(this).interrupt("hov").transition("hov").duration(140)
+          .attr("r", gobertR * 1.25)
+          .style("opacity", 1);
+      })
+      .on("mousemove", function (event) { moveTooltip(event); })
+      .on("mouseleave", function () {
+        hideTooltip();
+        d3.select(this).interrupt("hov").transition("hov").duration(180)
+          .attr("r", gobertR)
+          .style("opacity", 0.9);
+      });
+
+    // Labels for Wemby and Holmgren
+    var labelG = svg.append("g").attr("class", "labels");
+
+    // Wemby label sits below the dot to avoid going off the top
+    var wembyLabel = labelG.append("g").style("opacity", reduceMotion ? 1 : 0);
+    var wlx = x(wembyData.b);
+    var wly = y(wembyData.c);
+    var wembyLabelX = wlx - 12;
+    var wembyLabelY = wly + 26;
+    wembyLabel.append("line")
+      .attr("x1", wlx - 1).attr("y1", wly + wembyR + 1)
+      .attr("x2", wembyLabelX + 4).attr("y2", wembyLabelY - 11)
+      .style("stroke", "var(--accent-default)").style("stroke-width", 1).style("opacity", 0.7);
+    wembyLabel.append("text")
+      .attr("x", wembyLabelX).attr("y", wembyLabelY)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-primary)")
+      .style("font", "700 14px var(--family-sans)")
+      .text("Wembanyama");
+    wembyLabel.append("text")
+      .attr("x", wembyLabelX).attr("y", wembyLabelY + 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--accent-default)")
+      .style("font", "600 11px var(--family-mono)")
+      .text("3.80 blk · 3.20 contests");
+
+    // Holmgren label sits to the left
+    var holmLabel = labelG.append("g").style("opacity", reduceMotion ? 1 : 0);
+    var hlx = x(holmData.b);
+    var hly = y(holmData.c);
+    var holmLabelX = hlx - 12;
+    var holmLabelY = hly - 14;
+    holmLabel.append("line")
+      .attr("x1", hlx - holmR).attr("y1", hly)
+      .attr("x2", holmLabelX + 4).attr("y2", holmLabelY + 3)
+      .style("stroke", "var(--text-secondary)").style("stroke-width", 1).style("opacity", 0.5);
+    holmLabel.append("text")
+      .attr("x", holmLabelX).attr("y", holmLabelY)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-primary)")
+      .style("font", "600 12px var(--family-sans)")
+      .text("Holmgren");
+    holmLabel.append("text")
+      .attr("x", holmLabelX).attr("y", holmLabelY + 12)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 10px var(--family-mono)")
+      .text("2.36 · 3.12");
+
+    // Gobert label sits below-right of his dot (he's in the middle of the
+    // chart so the label has space to the lower-right without colliding).
+    var gobertLabel = labelG.append("g").style("opacity", reduceMotion ? 1 : 0);
+    var glx = x(gobertData.b);
+    var gly = y(gobertData.c);
+    var gobertLabelX = glx + 14;
+    var gobertLabelY = gly + 16;
+    gobertLabel.append("line")
+      .attr("x1", glx + gobertR - 1).attr("y1", gly + 1)
+      .attr("x2", gobertLabelX - 4).attr("y2", gobertLabelY - 4)
+      .style("stroke", "var(--text-primary)").style("stroke-width", 1).style("opacity", 0.4);
+    gobertLabel.append("text")
+      .attr("x", gobertLabelX).attr("y", gobertLabelY)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-primary)")
+      .style("font", "600 12px var(--family-sans)")
+      .text("Gobert");
+    gobertLabel.append("text")
+      .attr("x", gobertLabelX).attr("y", gobertLabelY + 12)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 10px var(--family-mono)")
+      .text("1.88 · 2.84");
+
+    var ctx = {
+      axisGroup: axisG,
+      dotG: dotG,
+      quadG: quadG,
+      wembyDot: wembyDot,
+      holmDot: holmDot,
+      gobertDot: gobertDot,
+      wembyLabel: wembyLabel,
+      holmLabel: holmLabel,
+      gobertLabel: gobertLabel,
+      dotR: dotR,
+      wembyR: wembyR,
+      holmR: holmR,
+      gobertR: gobertR
+    };
+
+    lastRender = { svg: svg, ctx: ctx };
+
+    if (triggerPlay !== false) {
+      play(svg, ctx);
+    } else {
+      // Final state for resize
+      ctx.dotG.selectAll("circle").style("opacity", 0.4);
+      ctx.quadG.style("opacity", 1);
+      ctx.wembyDot.attr("r", wembyR).style("opacity", 1);
+      ctx.holmDot.attr("r", holmR).style("opacity", 0.95);
+      ctx.gobertDot.attr("r", gobertR).style("opacity", 0.9);
+      ctx.wembyLabel.style("opacity", 1);
+      ctx.holmLabel.style("opacity", 1);
+      ctx.gobertLabel.style("opacity", 1);
+      root.select(".wu-hero-num").node().textContent = WEMBY_BLK.toFixed(2);
+      setCaption(3);
+      root.classed("is-landed", true);
+      root.select(".wu-replay").classed("is-shown", true);
+    }
+  }
+
+  root.select(".wu-replay").on("click", function () {
+    if (lastRender) play(lastRender.svg, lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart the animation on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.svg, lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes (was the restart loop)
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
