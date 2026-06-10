@@ -100,9 +100,10 @@ TEAM_DIRECTORY = {
 SEASON_COLS = [f"salary_{s}_{(s + 1) % 100:02d}" for s in FUTURE_SEASONS]
 
 FIELDNAMES = (
-    ["team_abbr", "player", "player_id", "position"]
+    ["team_abbr", "player", "player_id", "nba_player_id", "position"]
     + SEASON_COLS
     + [
+        "salary_is_estimate",
         "future_total_2026_plus", "years_remaining",
         "player_option_flag", "player_option_year", "player_option_amount",
         "team_option_flag", "team_option_year", "team_option_amount",

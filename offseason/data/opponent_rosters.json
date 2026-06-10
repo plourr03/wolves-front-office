@@ -1,0 +1,839 @@
+[
+  {
+    "team_abbr": "OKC",
+    "assumed_moves": [
+      "Stands pat on the championship core (SGA, Jalen Williams, Holmgren, Hartenstein) with only depth/margin moves, consistent with the board's 'Buyer with surplus, not selling anyone of consequence' tag.",
+      "Re-tools at the very bottom of the roster around the two 2026 first-rounders; the board notes that keeping both firsts likely forces out two rotation pieces, so the deep bench (Kenrich Williams / Topic / Sorber / McCain tier) is the churn zone, not the top 9.",
+      "No star added or subtracted; Hartenstein's $28.5M team option assumed picked up to preserve the twin-tower rim-protection structure."
+    ],
+    "rotation": [
+      {
+        "name": "Shai Gilgeous-Alexander",
+        "nba_player_id": "1628983",
+        "role": "starter"
+      },
+      {
+        "name": "Jalen Williams",
+        "nba_player_id": "1631114",
+        "role": "starter"
+      },
+      {
+        "name": "Chet Holmgren",
+        "nba_player_id": "1631096",
+        "role": "starter"
+      },
+      {
+        "name": "Isaiah Hartenstein",
+        "nba_player_id": "1628392",
+        "role": "starter"
+      },
+      {
+        "name": "Luguentz Dort",
+        "nba_player_id": "1629652",
+        "role": "starter"
+      },
+      {
+        "name": "Alex Caruso",
+        "nba_player_id": "1627936",
+        "role": "sixth"
+      },
+      {
+        "name": "Cason Wallace",
+        "nba_player_id": "1641717",
+        "role": "rotation"
+      },
+      {
+        "name": "Isaiah Joe",
+        "nba_player_id": "1630198",
+        "role": "rotation"
+      },
+      {
+        "name": "Aaron Wiggins",
+        "nba_player_id": "1630598",
+        "role": "rotation"
+      },
+      {
+        "name": "Jaylin Williams",
+        "nba_player_id": "1631119",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "An SGA-engine offense (off RAPM +6.81, consensus off +6.62, hc_creation 1.00) built on mid-range pressure, foul-drawing rim gravity, and the best half-court shot-creation in the league. Jalen Williams is the genuine secondary creator (hc_creation 0.881, secondary_playmaking 0.803) so the system survives when SGA rests or gets blitzed. Holmgren spaces as a stretch five and Joe/Wiggins/Caruso supply 3-and-D off-ball shooting (Joe off_ball_shooting 0.991). Not a heavy 3PA-volume team; they generate efficiency through turnovers-to-transition (an elite-percentile transition group) and SGA's two-point shot quality rather than barrage shooting.",
+      "defense": "The best defense in basketball and the spine of the title. It takes away the ball: a swarming, multi-handler point-of-attack wall (Dort, Caruso 1.00 def_versatility_poa, Wallace 0.981, J.Williams 0.945) that turns opposing guards over and converts live-ball steals into easy offense. They blow up the primary action, force the ball out of stars' hands, and make every catch contested. Caruso and Dort can each erase the opponent's best perimeter scorer for a series.",
+      "rim_protection": "Elite and, unusually, doubled. Holmgren (rim_protect_reb 0.987, def RAPM -3.41) is a long shot-deterring backline, and Hartenstein (rim_protect_reb 0.938, def RAPM -2.93) is a bruising, rebounding interior anchor, so the rim is protected in both starter and bench units. They can play Holmgren-and-Hartenstein together for a true twin-big wall or stagger them to never lose the paint.",
+      "switchability": "Extremely high, the highest in the league. The 1-through-4 perimeter group (Dort, Caruso, Wallace, J.Williams, Wiggins) all switch credibly, and Holmgren is a unicorn who can switch onto guards and still protect the rim, letting them defend almost any action without help. The only switch they protect is keeping a center home against a true post hub; otherwise they can match almost any lineup's positional versatility.",
+      "where_they_crack": "Half-court scoring droughts. When the game slows and the turnover-to-transition tap shuts off, the offense narrows to SGA isolation and mid-range, and against a disciplined, low-turnover, drop-or-switch defense that walls the paint and lives with contested twos, points can come hard. They are reliant on SGA's foul-drawing being officiated consistently; a series called tight-to-the-defense raises the floor on their scoring variance. Size on the wing can be tested by a true power forward hub, and youth at the back of the rotation means a thin-margin game can hinge on whether the supporting shooters (Joe, Wiggins) are hitting that night."
+    },
+    "confidence": "High. OKC is the defending champion explicitly tagged 'Buyer with surplus, not selling anyone of consequence,' so the top-9 structure is essentially locked; the only real uncertainty is the identity of the 10th-through-12th men given the two-first-rounders roster crunch, which does not move the structural profile.",
+    "key_assumption": "OKC stands pat on its entire championship core, with the only churn at the bottom of the roster around keeping both 2026 first-round picks (per the board's 'keep both firsts, move two rotation pieces' note). This preserves the SGA-engine plus twin-rim-protection plus league-best POA-swarm identity intact for 2026-27."
+  },
+  {
+    "team_abbr": "SAS",
+    "assumed_moves": [
+      "Stands pat on the core per the trade board (Tier 3: loaded, selectively flexible, not desperate). Both Stephon Castle and Dylan Harper retained despite the board noting one could be semi-expendable in a blockbuster that did not materialize.",
+      "Re-signs Jeremy Sochan using Bird rights to keep the young defensive forward core intact (depth move, consistent with stand-pat).",
+      "Lets aging veteran FAs walk or fill at the margins (Harrison Barnes, Kelly Olynyk, Bismack Biyombo, Mason Plumlee not assumed back as rotation pieces); roster skews young and cost-controlled.",
+      "Retains Luke Kornet (under contract) as the backup-center insurance behind Wembanyama."
+    ],
+    "rotation": [
+      {
+        "name": "De'Aaron Fox",
+        "nba_player_id": "1628368",
+        "role": "starter"
+      },
+      {
+        "name": "Stephon Castle",
+        "nba_player_id": "1642264",
+        "role": "starter"
+      },
+      {
+        "name": "Devin Vassell",
+        "nba_player_id": "1630170",
+        "role": "starter"
+      },
+      {
+        "name": "Jeremy Sochan",
+        "nba_player_id": "1631110",
+        "role": "starter"
+      },
+      {
+        "name": "Victor Wembanyama",
+        "nba_player_id": "1641705",
+        "role": "starter"
+      },
+      {
+        "name": "Dylan Harper",
+        "nba_player_id": "1642844",
+        "role": "sixth"
+      },
+      {
+        "name": "Keldon Johnson",
+        "nba_player_id": "1629640",
+        "role": "rotation"
+      },
+      {
+        "name": "Luke Kornet",
+        "nba_player_id": "1628436",
+        "role": "rotation"
+      },
+      {
+        "name": "Carter Bryant",
+        "nba_player_id": "1642868",
+        "role": "deep"
+      },
+      {
+        "name": "Julian Champagnie",
+        "nba_player_id": "1630577",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "A two-engine attack built around the Fox-Wembanyama high pick-and-roll and Wembanyama's gravity as both a roller and a pop/face-up threat. Fox provides downhill rim pressure and tempo (97th-pct transition, 97th hc creation), with Wembanyama as the most unguardable hub in the league: he can post, pop for threes, short-roll into 4-on-3 passing reads, and self-create. Castle and Harper add young secondary shot-creation (both 90th-pct+ secondary playmaking) so the offense does not stall when Fox sits, and Vassell is the steady off-ball movement shooter. The half-court ceiling is high but shooting is the swing variable: outside Vassell and Champagnie, this is a team of slashers and developing shooters, so floor spacing around Wembanyama can get spotty when defenses load up.",
+      "defense": "Elite, switch-heavy, length-everywhere scheme that funnels everything into Wembanyama at the rim and dares teams to beat them over the top. Point-of-attack is suffocating: Castle, Sochan, Vassell and even Fox can pressure ball-handlers, and the wing length (Bryant, Sochan, Vassell) lets them switch 1 through 4 and erase passing lanes. They take away easy paint touches, force pull-up midrange and contested late-clock looks, and generate live-ball turnovers that fuel the transition game.",
+      "rim_protection": "Wembanyama anchors elite rim deterrence as the defensive identity: a 7-4 shot-blocker with a -7.07 defensive RAPM (best in the value file) and 100th-pct rim-protect/rebound dimension. He turns the entire halfcourt into a no-fly zone, alters shots he doesn't block, and lets the perimeter defenders gamble knowing the back line is sealed. Kornet (84th-pct rim protect) is a credible drop-coverage backup so the rim doesn't collapse when Wembanyama rests, but the gap between Wembanyama and any replacement is enormous.",
+      "switchability": "Among the most switchable defenses in the league. The Castle-Vassell-Sochan-Bryant wing/forward group is interchangeable across 1 through 4, and Wembanyama is uniquely able to switch onto guards on the perimeter and recover, so they can play full switch-everything coverage that few teams can punish. The one seam is the small backcourt: a Fox-plus-second-guard alignment can be hunted in the post or on cross-matches, which is where opponents will try to force a non-Wembanyama switch.",
+      "where_they_crack": "Half-court shooting and shot-creation depth in a grind-it-out playoff series. When a disciplined defense walls off Wembanyama, ices the Fox pick-and-roll, and refuses to help off shooters, San Antonio can go cold from three and lean too hard on contested two-point creation. The guard rotation is young (Castle, Harper) and can be sped up or targeted defensively by veteran playoff backcourts, and the offense is over-reliant on Fox's rim pressure: take that away (or if Fox has an off night or gets hurt) and the bench creation thins out fast. Foul trouble or any absence for Wembanyama is the catastrophe scenario, since the whole defensive structure is built on him."
+    },
+    "confidence": "High. SAS is explicitly a stand-pat team on the board (loaded, not desperate), and the entire projected starting five plus Harper, Kornet, Keldon, Bryant and Champagnie are already under contract for 2026-27, so the rotation requires little speculation. The only soft spots are the Sochan re-sign assumption and whether one of Castle/Harper gets dealt in a blockbuster that the board says is only conditional and has not happened.",
+    "key_assumption": "San Antonio stands pat and keeps both young guards (Castle and Harper) rather than packaging one in a star trade, so the rotation is the existing under-contract core maturing together around Wembanyama, not a reconfigured roster."
+  },
+  {
+    "team_abbr": "NYK",
+    "assumed_moves": [
+      "Stands pat per the block board (Buyer, mostly standing pat). Core of Brunson, Bridges, Hart, Anunoby, and Towns returns intact; KAT gets floated in hypotheticals but there is no real indication he is available.",
+      "Re-sign Mitchell Robinson (listed as FA in the contracts file but treated as a standing-pat retention; he is the team's only true rim deterrent and has usable impact/dimension data).",
+      "Retain guard depth (Miles McBride, Jose Alvarado) and expect only marginal tweaks (MLE-level wing/big depth), no star-altering move."
+    ],
+    "rotation": [
+      {
+        "name": "Jalen Brunson",
+        "nba_player_id": "1628973",
+        "role": "starter"
+      },
+      {
+        "name": "Mikal Bridges",
+        "nba_player_id": "1628969",
+        "role": "starter"
+      },
+      {
+        "name": "OG Anunoby",
+        "nba_player_id": "1628384",
+        "role": "starter"
+      },
+      {
+        "name": "Josh Hart",
+        "nba_player_id": "1628404",
+        "role": "starter"
+      },
+      {
+        "name": "Karl-Anthony Towns",
+        "nba_player_id": "1626157",
+        "role": "starter"
+      },
+      {
+        "name": "Mitchell Robinson",
+        "nba_player_id": "1629011",
+        "role": "sixth"
+      },
+      {
+        "name": "Miles McBride",
+        "nba_player_id": "1630540",
+        "role": "rotation"
+      },
+      {
+        "name": "Jose Alvarado",
+        "nba_player_id": "1630631",
+        "role": "rotation"
+      },
+      {
+        "name": "Pacome Dadiet",
+        "nba_player_id": "1642359",
+        "role": "deep"
+      },
+      {
+        "name": "Tyler Kolek",
+        "nba_player_id": "1642278",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "A top-tier half-court offense funneled through Jalen Brunson, one of the league's best isolation and pick-and-roll shot creators (elite primary creation, off RAPM +5.32). Karl-Anthony Towns is the rare 5 who spaces the floor and creates out of the post and on the perimeter, giving them a true two-man inverted pick-and-roll and 5-out spacing. Mikal Bridges and OG Anunoby provide catch-and-shoot floor balance and secondary attacking; Josh Hart supplies relentless transition offense, offensive rebounding, and connective passing. Miles McBride and Jose Alvarado bring pull-up and movement shooting plus secondary playmaking off the bench. It is a heavy-usage, Brunson-centric, half-court-grinding attack that punishes mismatches and can pour in points without much margin, but it leans on iso and PnR shotmaking rather than a deep collective playmaking tree.",
+      "defense": "On the perimeter this is one of the best wing-defense units in the league. OG Anunoby (POA defense ~92nd pct) and Mikal Bridges are elite, versatile point-of-attack stoppers who take away an opponent's primary ballhandler and wing scorers, with Josh Hart and Jose Alvarado adding pesky, physical on-ball pressure and McBride a sturdy combo defender. They strip ballhandlers, jump passing lanes, and shrink the floor on the perimeter, taking away clean wing catch-and-shoot looks and forcing the ball out of star creators' hands.",
+      "rim_protection": "The soft spot of the profile. Their best rim protection comes from Mitchell Robinson (elite rim-protect/rebound percentile and a genuine vertical deterrent) and Towns' size on the glass, but Robinson's availability and conditioning have historically been shaky and Towns is a rebound-and-positioning big, not a true shot-blocking anchor. When Robinson sits and Towns is the lone big, interior deterrence and verticality drop sharply; Brunson at the point of the defense (bottom-tier POA and rim percentiles) is a target attackers hunt to collapse the paint.",
+      "switchability": "Very switchable 1 through 4 thanks to the Anunoby-Bridges-Hart wing wall and capable guard defenders, which lets them switch most ballscreens and stay attached on the perimeter. The limit is the 5: Towns is not a confident switch-onto-quick-guards defender and can be attacked in space, while Robinson is a drop-coverage rim protector who does not switch onto perimeter ballhandlers. So they switch the wings cleanly but have to scheme (drop or hedge) at the center spot, which sophisticated PnR offenses can exploit.",
+      "where_they_crack": "In a playoff series they crack at the rim and at the point of attack. Elite downhill creators and lob-threat bigs can pressure the paint when Robinson is off the floor or in foul trouble, and opponents will relentlessly hunt Brunson and Towns in pick-and-roll to either pull Robinson into space or attack a smaller/slower defender. Offensively they are over-reliant on Brunson's shotmaking and can stall against a defense that walls off his drives and forces secondary creators (Bridges, Anunoby) to make plays off the dribble, where they are merely good not great. Depth and frontcourt rim deterrence are the thinnest points; a series against a physical, paint-dominant or high-end PnR team is where their margin disappears."
+    },
+    "confidence": "High. NYK is one of the clearest stand-pat profiles on the board: the named core (Brunson, Bridges, Hart, Anunoby, Towns) is locked under contract through 2027-28 and beyond, and the board explicitly tags them 'Buyer, mostly standing pat' with no real indication KAT is available. The only genuine assumption is re-signing Mitchell Robinson and the exact shape of marginal depth additions, which do not move the structural identity.",
+    "key_assumption": "NYK stands pat and keeps Karl-Anthony Towns. KAT is the swing variable: he gets floated in hypotheticals, and a deeper-than-expected playoff disappointment could prompt a rethink, but absent that the board reads him as staying, which preserves their elite-spacing-plus-wing-defense identity (and its rim-protection vulnerability when Robinson is off the floor)."
+  },
+  {
+    "team_abbr": "HOU",
+    "assumed_moves": [
+      "Stands pat on the core. Houston is a buyer/contender, not a seller. Kevin Durant (acquired last summer 2025 for a package headlined by the No. 10 pick, Jalen Green, and Dillon Brooks) is already on the books, so no new star move is assumed.",
+      "Fred VanVleet (player option, ~$25M) assumed to opt in / be retained at his current number as the veteran lead guard.",
+      "Depth moves only at the margins (minimum-level guard/wing fill behind the top 10), consistent with the snapshot's 'stand pat on stars, depth moves only' instruction.",
+      "No subtraction of any rotation player assumed; the only roster mechanic baked in is keeping the existing young core plus Durant intact."
+    ],
+    "rotation": [
+      {
+        "name": "Fred VanVleet",
+        "nba_player_id": "1627832",
+        "role": "starter"
+      },
+      {
+        "name": "Amen Thompson",
+        "nba_player_id": "1641708",
+        "role": "starter"
+      },
+      {
+        "name": "Kevin Durant",
+        "nba_player_id": "201142",
+        "role": "starter"
+      },
+      {
+        "name": "Jabari Smith Jr.",
+        "nba_player_id": "1631095",
+        "role": "starter"
+      },
+      {
+        "name": "Alperen Sengun",
+        "nba_player_id": "1630578",
+        "role": "starter"
+      },
+      {
+        "name": "Reed Sheppard",
+        "nba_player_id": "1642263",
+        "role": "sixth"
+      },
+      {
+        "name": "Tari Eason",
+        "nba_player_id": "1631106",
+        "role": "rotation"
+      },
+      {
+        "name": "Dorian Finney-Smith",
+        "nba_player_id": "1627827",
+        "role": "rotation"
+      },
+      {
+        "name": "Steven Adams",
+        "nba_player_id": "203500",
+        "role": "rotation"
+      },
+      {
+        "name": "Clint Capela",
+        "nba_player_id": "203991",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Two-hub, inside-out offense that runs through Sengun in the post and at the elbows and Durant on the wing. Sengun is a genuine offensive engine for a big (elite hub-creation and secondary-playmaking grades), so a lot of the half-court flows through his passing and dribble-handoffs. Durant is the bail-out shot-maker and isolation scorer who raises the half-court ceiling when actions stall. VanVleet adds pick-and-roll creation and the team's most reliable pull-up/spacing threat; Amen Thompson is a downhill slasher and transition terror but a non-shooter, so Houston is at its best playing fast, attacking the glass, and generating second-chance and transition points rather than living off five-out spacing. Reed Sheppard is the designated bench floor-spacer (top-tier off-ball shooting) brought in to solve the standing spacing problem.",
+      "defense": "Elite, switch-heavy, physically overwhelming perimeter defense. Amen Thompson, Tari Eason, and (when needed) Jabari Smith give them multiple long, versatile point-of-attack stoppers who take away the ballhandler's airspace, blow up handoffs, and feast on turnovers and deflections. They take away easy rim attempts for opposing guards by walling off the paint with size and switchability, and they crush teams that turn the ball over. Top-five defensive identity built on length, motor, and rebounding rather than scheme trickery.",
+      "rim_protection": "Above-average to good, by committee and by size rather than by a single elite shot-blocking anchor. Sengun is a strong defensive rebounder and contests at the rim but is not a rim-deterrence specialist; Steven Adams and Clint Capela are the heavy-minutes/situational backup-center answers who clean the glass and wall up the paint (both elite rim-and-rebound grades). Amen Thompson and Eason add weakside help and chase-down blocks from the wing. Solid, but a clear notch below a Wembanyama/Gobert-type single-anchor deterrent.",
+      "switchability": "Very high, and it is their defensive signature. Thompson, Eason, Jabari Smith, and Finney-Smith can all credibly guard 1 through 4 (and Smith/Eason can survive small-ball 5 for stretches), letting Houston switch nearly everything on the perimeter and keep bigs out of space. Sengun is the lone switch limitation; against high pick-and-roll teams he can be hunted in space, which is the one place their switch scheme has a seam.",
+      "where_they_crack": "Half-court shot creation and shooting in a grind-it-out playoff series. When the pace slows and transition/second-chance points dry up, the offense leans heavily on Durant to manufacture buckets, and the surrounding non-shooting (Thompson, Adams/Capela, and Sengun's limited range) lets defenses pack the paint and live with the kick-outs. A disciplined defense that takes care of the ball (denying Houston's turnover-fueled offense), drops or zones up to wall the paint against Sengun, and attacks Sengun in the pick-and-roll can turn it into a Durant-iso-or-bust series. Their youth (Thompson, Sheppard, Eason) is also a late-game half-court execution and free-throw/decision-making risk against veteran playoff defenses."
+    },
+    "confidence": "High. Houston is explicitly tagged a buyer/contender that already made its big addition (Durant) last summer, so the 'stands pat, depth moves only' baseline is well supported by the snapshot. The starting five and the top-of-rotation roles are high-confidence; the exact ordering of the bench (Sheppard vs Eason as the first guard/wing off the bench, and how Adams/Capela split backup-center minutes) is the main source of lower-confidence variance.",
+    "key_assumption": "The single biggest driver is that Houston keeps its full young core (Thompson, Sengun, Smith, Eason, Sheppard) AND Kevin Durant together and does not cash any of it in for another star, i.e. the Durant trade is already baked in and they stand pat this offseason. If a deal moved one of the young pieces (or VanVleet opts out and walks) the offensive shot-creation and spacing profile would shift materially."
+  },
+  {
+    "team_abbr": "CLE",
+    "assumed_moves": [
+      "Stands pat on core (depth moves only per the trade board's 'Buyer' tag). The Harden-for-Garland trade already happened last summer; no new star moves projected.",
+      "James Harden ($42.3M player option for 2026-27) is assumed to opt in and return, keeping the Mitchell-Harden backcourt intact.",
+      "Donovan Mitchell stays (his player option is 2027-28, so he is under contract for 2026-27 regardless).",
+      "Jarrett Allen retained despite occasionally surfacing in fit-driven hypotheticals; the board says CLE is 'not selling.'",
+      "Minor depth/free-agent retention at the back end (Schroder, Merrill under contract; assume standard veteran-minimum churn)."
+    ],
+    "rotation": [
+      {
+        "name": "Donovan Mitchell",
+        "nba_player_id": "1628378",
+        "role": "starter"
+      },
+      {
+        "name": "James Harden",
+        "nba_player_id": "201935",
+        "role": "starter"
+      },
+      {
+        "name": "Max Strus",
+        "nba_player_id": "1629622",
+        "role": "starter"
+      },
+      {
+        "name": "Evan Mobley",
+        "nba_player_id": "1630596",
+        "role": "starter"
+      },
+      {
+        "name": "Jarrett Allen",
+        "nba_player_id": "1628386",
+        "role": "starter"
+      },
+      {
+        "name": "Dennis Schroder",
+        "nba_player_id": "203471",
+        "role": "sixth"
+      },
+      {
+        "name": "Sam Merrill",
+        "nba_player_id": "1630241",
+        "role": "rotation"
+      },
+      {
+        "name": "Jaylon Tyson",
+        "nba_player_id": "1642281",
+        "role": "rotation"
+      },
+      {
+        "name": "Craig Porter Jr.",
+        "nba_player_id": "1641854",
+        "role": "deep"
+      },
+      {
+        "name": "Tyrese Proctor",
+        "nba_player_id": "1642878",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Top-tier halfcourt offense built on two elite shot-creating guards. Mitchell (hc_creation 0.97) is the volume scorer and shot-maker who wins the late-clock and series-defining possessions; Harden (hc_creation 0.99, secondary_playmaking 0.97, off_rapm +3.24) is the organizing engine who runs pick-and-roll, manipulates the defense, and lifts everyone's efficiency. Around them is heavy floor-spacing (Strus, Merrill, Schroder all spot-up shooters) and a unicorn frontcourt where Mobley is an emerging hub-passer and rim-runner. They generate offense through guard creation plus dual-big interior gravity, with elite spacing keeping the paint open. Pace and transition are not the calling card; this is a precision halfcourt team.",
+      "defense": "Genuinely elite, anchored by the Mobley-Allen frontcourt. They take away the paint and rim entirely: opponents get walled off at the basket, drives get met by two seven-footers, and the defense funnels everything into contested mid-range and forces help-and-recover scrambles where Cleveland's length recovers. Mobley is a DPOY-tier roamer (rim_protect_reb 0.96, def_versatility_poa 0.70, def_rapm -3.63) who can switch onto guards and protect the rim on the same possession. Allen (rim_protect_reb 0.92) holds down the dunker spot and the glass. The scheme suffocates interior efficiency and rebounding.",
+      "rim_protection": "Among the very best in the league, the structural strength of the roster. Two plus rim protectors in Mobley (elite, mobile, can defend in space) and Allen (strong vertical contest, elite defensive rebounder) give Cleveland the ability to keep a rim deterrent on the floor at all times, and to play them together for a true twin-tower wall. Rim deterrence is high whether one or both bigs are on the court.",
+      "switchability": "Good but not unlimited. Mobley is the rare big who switches 1-through-5 cleanly, which is the key to their versatility. Allen is a more traditional drop center who is exploitable in space, so lineups featuring both bigs sacrifice some perimeter switchability for rim size. On the wing, Strus and Tyson are passable but not lockdown POA defenders, and the Mitchell-Harden backcourt is a defensive target: Harden (def_rapm +2.42, a negative defender) can be hunted in isolation, and Mitchell is average-at-best on the ball. Cleveland switches well at the 3-4-5 but has attackable points of attack at the 1-2.",
+      "where_they_crack": "Playoff defenses hunt the Mitchell-Harden backcourt, both of whom can be targeted on defense and both of whom are now on the older side (Harden's age and the Harden/Mitchell ball-dominance can stall into iso-heavy, low-movement possessions when the halfcourt bogs down). The dual-big lineups can be played off the floor by elite spacing fives that drag Allen away from the rim, forcing CLE to downsize and surrender its rim-protection edge. Regular-season dominance has not translated to deep playoff runs: shot-making variance from the guards and Mobley's still-developing offensive aggression (off_rapm -0.19, box_off below average) mean the offense can go cold against a disciplined, switch-everything defense that takes away the paint and dares the role players to beat them. Lack of a third high-end perimeter shot-creator is the recurring failure point in elimination games.",
+      "secondary": "see notes"
+    },
+    "confidence": "High. CLE is one of the most stable rosters in the league: four max/near-max contracts locked into the Mitchell-Harden-Mobley-Allen core, the board explicitly tags them a 'Buyer' that is 'not selling,' and there is no credible reporting of a roster shakeup. The only real uncertainty is Harden's player-option decision (assumed: opts in) and minor back-end depth churn, neither of which changes the team's structural identity.",
+    "key_assumption": "James Harden opts into his $42.3M player option (or re-signs) and the Mitchell-Harden-Mobley-Allen core returns fully intact, with Cleveland making depth-only moves. This is the single decision that keeps CLE's projected identity (elite halfcourt offense plus elite twin-big rim protection) consistent with the 'stand pat' league snapshot."
+  },
+  {
+    "team_abbr": "DEN",
+    "assumed_moves": [
+      "Stands pat on stars: Jokic is untouchable and the rest of the title core (Murray, Gordon) returns intact.",
+      "Michael Porter Jr. for Cam Johnson swap is already executed (reflected in the contract file); Johnson is treated as the incumbent starting 3.",
+      "Tim Hardaway Jr. and Bruce Brown are off the books as free agents (listed FA-derived), so the bench is left noticeably thinner than its title-era version.",
+      "Per the board, DEN is a thin buyer with limited picks: they hunt cheap depth at the margins but do not add a rotation-changing piece for this projection."
+    ],
+    "rotation": [
+      {
+        "name": "Nikola Jokic",
+        "nba_player_id": "203999",
+        "role": "starter"
+      },
+      {
+        "name": "Jamal Murray",
+        "nba_player_id": "1627750",
+        "role": "starter"
+      },
+      {
+        "name": "Aaron Gordon",
+        "nba_player_id": "203932",
+        "role": "starter"
+      },
+      {
+        "name": "Cameron Johnson",
+        "nba_player_id": "1629661",
+        "role": "starter"
+      },
+      {
+        "name": "Christian Braun",
+        "nba_player_id": "1631128",
+        "role": "starter"
+      },
+      {
+        "name": "Peyton Watson",
+        "nba_player_id": "1631212",
+        "role": "sixth"
+      },
+      {
+        "name": "Jonas Valanciunas",
+        "nba_player_id": "202685",
+        "role": "rotation"
+      },
+      {
+        "name": "Julian Strawther",
+        "nba_player_id": "1631124",
+        "role": "rotation"
+      },
+      {
+        "name": "Jalen Pickett",
+        "nba_player_id": "1629618",
+        "role": "rotation"
+      },
+      {
+        "name": "Zeke Nnaji",
+        "nba_player_id": "1630192",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Jokic is the entire offensive engine: the best passing big in history runs everything through the elbow and post, where his read-and-react playmaking (hc_creation .989, secondary_playmaking .998, off_rapm +5.93) turns the half-court into a constant two-man-game and cutting carousel. Murray is the secondary creator and shot-maker (off_rapm +4.46), elite in the Jokic two-man game and in the clutch. Gordon is the lob/dunker-spot finisher and connective screener; Cam Johnson replaces MPJ's gravity as a movement and spot-up shooter (off_ball_shooting .825); Braun is a high-motor cutter and transition runner. This is a top-tier, league-best half-court offense built on spacing the floor around Jokic and punishing any help with his passing.",
+      "defense": "Scheme-and-IQ defense rather than an athletic wall. Gordon is the do-everything stopper who takes the toughest forward/wing assignment; Watson adds length and shot-blocking off the bench; Braun competes at the point of attack (def_versatility_poa .654). They take away easy transition and force opponents into a grinding half-court, daring you to score over set positioning. Jokic is a smart, low-mistake team defender (def_versatility .835 reflects IQ/positioning) but not a vertical rim deterrent, so the unit relies on funneling and gang rebounding, not rim intimidation.",
+      "rim_protection": "Below the contender standard. Jokic protects the rim through positioning, verticality and elite defensive rebounding (rim_protect_reb .861) but is not a leaper or true shot-blocker; he gets attacked in space and on rolls. Valanciunas off the bench is a big body and strong rebounder (rim_protect_reb .96) but slow-footed and a worse deterrent in pick-and-roll. Watson is the team's best vertical shot-blocker but plays the 3/4. Net: rim deterrence is a real soft spot, propped up by rebounding rather than blocks.",
+      "switchability": "Moderate. The Gordon-Watson-Braun-Cam Johnson group can switch 1-through-4 reasonably well, and Gordon can credibly switch onto smaller players. The constraint is the 5: teams hunt Jokic (and especially Valanciunas) in switches and ball-screens, forcing Denver to drop and live with the resulting pull-up threes and rim attacks. So they can switch the perimeter but not truly switch everything, and the center is the lever opponents pull.",
+      "where_they_crack": "Three places. First, depth: with Hardaway and Brown gone the bench is dangerously thin, so any Jokic or Murray foul trouble or injury in a seven-game series caves the margin (non-Jokic minutes are a known disaster). Second, rim protection and pick-and-roll containment: a fast, downhill guard plus a vertical roller pulls Jokic into space and gets clean rim looks, and there is no rim-protecting safety net behind him. Third, Murray's health and the absence of a third shot-creator: if a defense walls off the Jokic-Murray two-man game and forces lesser players (Braun, Strawther, Pickett) to create, the half-court can stall. The formula is to make Denver's role players win the series."
+    },
+    "confidence": "High. DEN is a clean stand-pat case: the title core is locked and the only roster mechanics are the already-executed MPJ-for-Cam-Johnson swap and the loss of two bench veterans to free agency. The starting five is essentially certain; the only soft edges are exactly which thin-bench bodies fill the 8th-10th spots and whether DEN scrapes together a minimum-level depth add.",
+    "key_assumption": "Denver stands pat around an untouchable Jokic, with the MPJ-for-Cam-Johnson trade already baked in and no further upgrade, which means the team enters 2026-27 with an elite Jokic-Murray-anchored offense but a thinner-than-title-era bench and an unaddressed rim-protection/depth vulnerability."
+  },
+  {
+    "team_abbr": "ORL",
+    "assumed_moves": [
+      "Stands pat. The block board flags Orlando as a buyer wanting shooting and a reserve playmaker, but it explicitly notes their pick capital is thin (control of their own first is murky until 2031 after the Bane trade), which caps aggression. With no completed ORL move documented in the snapshot, hold them at the current roster.",
+      "Desmond Bane (acquired pre-snapshot via the Bane trade) is treated as an in-place starter, not a new addition.",
+      "No further additions modeled; minimum-level depth fill assumed but not roster-altering."
+    ],
+    "rotation": [
+      {
+        "name": "Paolo Banchero",
+        "nba_player_id": "1631094",
+        "role": "starter"
+      },
+      {
+        "name": "Franz Wagner",
+        "nba_player_id": "1630532",
+        "role": "starter"
+      },
+      {
+        "name": "Desmond Bane",
+        "nba_player_id": "1630217",
+        "role": "starter"
+      },
+      {
+        "name": "Jalen Suggs",
+        "nba_player_id": "1630591",
+        "role": "starter"
+      },
+      {
+        "name": "Wendell Carter Jr.",
+        "nba_player_id": "1628976",
+        "role": "starter"
+      },
+      {
+        "name": "Anthony Black",
+        "nba_player_id": "1641710",
+        "role": "sixth"
+      },
+      {
+        "name": "Jonathan Isaac",
+        "nba_player_id": "1628371",
+        "role": "rotation"
+      },
+      {
+        "name": "Goga Bitadze",
+        "nba_player_id": "1629048",
+        "role": "rotation"
+      },
+      {
+        "name": "Tristan da Silva",
+        "nba_player_id": "1641783",
+        "role": "rotation"
+      },
+      {
+        "name": "Jase Richardson",
+        "nba_player_id": "1642859",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Two-forward downhill creation. Banchero (96th-pct half-court creation, 87th-pct secondary playmaking) and Franz Wagner (91st-pct creation, 75th-pct secondary) are the engine, generating offense by attacking closeouts, posting smaller defenders, and bullying their way to the rim and the line rather than out of a quick-trigger 3-point system. Desmond Bane is the swing piece that fixes their chronic spacing problem: 78th-pct off-ball shooting plus 79th-pct secondary playmaking gives them a genuine third self-creator and a release valve who can punish help. Suggs adds 78th-pct catch-and-shoot. This is a paint-and-line, mismatch-hunting offense more than a pace-and-space one, and it leans on Banchero and Wagner making tough mid-range and post reads when the floor tightens.",
+      "defense": "This is the identity. A switch-everything, ball-pressure monster that takes away easy half-court entries. Suggs (99th-pct POA defense) and Franz Wagner (87th-pct) hound the primary ball-handler 94 feet, Anthony Black (83rd-pct) and Isaac (98th-pct) extend the wall of long, switchable, multi-positional defenders, and the team funnels everything into traffic. It strips opponents of clean catch-and-shoot looks and rhythm dribble-handoffs, turns possessions into contested late-clock isolations, and feasts in transition off the live-ball turnovers it forces (Banchero, Wagner, Suggs, Bane all 84th-pct or better in transition).",
+      "rim_protection": "Strong and layered. Wendell Carter Jr. anchors the starting unit (81st-pct rim protect/rebound) and the bench rotates two genuine deterrents in Goga Bitadze (97th-pct) and Jonathan Isaac (97th-pct rim protect, the rare forward who can rotate as a true backline shot-blocker). Not a single-anchor elite-deterrence team like San Antonio, but the committee gives them rim coverage in nearly every lineup.",
+      "switchability": "Elite, arguably the best in the league. Suggs, Wagner, Black, Isaac, da Silva and Banchero form a daisy chain of 6-foot-5 to 6-foot-11 wings who can credibly guard 1 through 4, letting Orlando switch screens without surrendering size or compromising rim coverage. The only true non-switch piece is the center spot (Carter/Bitadze), and even there Isaac lets them downsize into a fully switchable five-out defense in stretches.",
+      "where_they_crack": "Half-court offense and shooting variance in a seven-game series. When the game slows and a disciplined defense walls off the paint, Orlando can go cold from three and bog down into Banchero/Wagner tough twos, and stretches of empty possessions are how good defenses beat them. Even with Bane, their margin for a poor shooting night is thin. Layer on injury fragility (Suggs and Isaac both carry real durability questions, and Isaac is the structural key to the switchable death lineups) and a series can tip if their two best perimeter defenders or their secondary creation get dinged."
+    },
+    "confidence": "High. Orlando is one of the easiest profiles in the league to project: no documented offseason move, a settled five with three building-block contracts (Banchero, Wagner, Bane) locked in, and a clearly defined defense-first identity backed by full impact and 6-dimension data on every rotation player. The only mild uncertainty is the exact bench ordering (Black sixth vs. a Bitadze/Isaac role split) and whether they sneak in a minimum shooter, neither of which changes the structural read.\"",
+    "key_assumption": "That Orlando stands pat rather than cashing thin pick capital for the shooting/secondary-creator upgrade the board says they want. The roster is good enough to be a top-tier defense and a fringe contender as-is, but their ceiling is gated by half-court offense, and the no-trade assumption is what locks them into the contender-but-flawed tier rather than a potential leap if they found a real floor-spacer.\""
+  },
+  {
+    "team_abbr": "DET",
+    "assumed_moves": [
+      "Stands pat on the core (depth moves only), consistent with the league snapshot. DET is a buyer on the rise but holds only the No. 21 pick and no second-rounder, so no impactful incoming trade is assumed.",
+      "Re-sign key 2025-26 contributors who show as FA-derived in the contracts file: Tobias Harris (nba_player_id 202699) returns as the veteran combo forward and Kevin Huerter (nba_player_id 1628989) returns for bench shooting. These are continuity re-signs, not external additions.",
+      "No star or rotation upgrade acquired; the Markkanen / Porter Jr. targets on the board are NOT assumed to land per the snapshot's stand-pat default."
+    ],
+    "rotation": [
+      {
+        "name": "Cade Cunningham",
+        "nba_player_id": "1630595",
+        "role": "starter"
+      },
+      {
+        "name": "Caris LeVert",
+        "nba_player_id": "1627747",
+        "role": "starter"
+      },
+      {
+        "name": "Ausar Thompson",
+        "nba_player_id": "1641709",
+        "role": "starter"
+      },
+      {
+        "name": "Tobias Harris",
+        "nba_player_id": "202699",
+        "role": "starter"
+      },
+      {
+        "name": "Jalen Duren",
+        "nba_player_id": "1631105",
+        "role": "starter"
+      },
+      {
+        "name": "Isaiah Stewart",
+        "nba_player_id": "1630191",
+        "role": "sixth"
+      },
+      {
+        "name": "Duncan Robinson",
+        "nba_player_id": "1629130",
+        "role": "rotation"
+      },
+      {
+        "name": "Ron Holland II",
+        "nba_player_id": "1641842",
+        "role": "rotation"
+      },
+      {
+        "name": "Marcus Sasser",
+        "nba_player_id": "1631204",
+        "role": "rotation"
+      },
+      {
+        "name": "Kevin Huerter",
+        "nba_player_id": "1628989",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Cade Cunningham is the engine and one of the league's heaviest on-ball creators (hc_creation 0.987, secondary_playmaking 0.989, off_rapm +2.26). The offense runs through his pick-and-roll: he reads the floor, manipulates two defenders, and either finishes, lobs to Duren as a vertical-spacing roll man, or kicks to shooters. Duncan Robinson and Huerter provide gravity-bending movement and catch-and-shoot volume; Harris and LeVert give secondary shot creation and connective passing. It is a downhill, drive-and-kick, paint-touch offense with real spacing when the shooting bench is on the floor, but it is heavily Cade-dependent: when he sits or is blitzed off the ball, half-court creation drops sharply.",
+      "defense": "A long, switchy, athletic perimeter group that thrives on disruption and turnovers. Ausar Thompson is an elite point-of-attack and multi-positional stopper (def_versatility_poa 0.996, def_rapm -2.73) who can guard 1 through 4 and ignite transition. Stewart is a physical, foul-drawing-resistant bruiser who walls up the paint, and the unit takes away straight-line drives and clean rhythm threes by switching screens and using length to contest. They funnel ball-handlers into help and force live-ball turnovers that fuel their best offense (transition).",
+      "rim_protection": "Solid but not elite or dominant. Jalen Duren is a strong vertical athlete and good rebounder (rim_protect_reb 0.947) who deters at the rim without being a true shot-blocking anchor (def_rapm essentially neutral at +0.06). Stewart and Paul Reed (rim_protect_reb 0.947) add physical interior bodies and second-jump rebounding. There is no rangy, weak-side erasing rim protector of the Wembanyama or Gobert class, so the deterrence is more about physicality and contesting than altering everything inside.",
+      "switchability": "High on the perimeter, capped at the rim. Thompson, Cunningham, Harris, LeVert and Holland can all switch 1 through 4 with size and length, making them one of the more switch-comfortable wing groups in the league. The ceiling is that switching onto smalls with Duren or Stewart invites attacks, and switching everything leaves no true help eraser behind the play, so elite guards can still hunt the bigs in space.",
+      "where_they_crack": "Half-court shot creation when Cunningham is contained. A disciplined playoff defense (the SAS or OKC archetype) can trap Cade off the ball, wall off the paint, and dare the supporting cast to create and shoot under pressure. Without a reliable second star creator, the offense bogs into tough mid-range and contested looks, and the lack of a true rim-deterrent anchor means a physical interior team can score in the paint and on the offensive glass. The youth of Thompson and Holland and Cade's limited deep playoff reps add half-court-execution and shot-variance risk in a seven-game series.",
+      "team_abbr": "DET"
+    },
+    "confidence": "Medium-high. The contracted core (Cunningham, LeVert, Thompson, Duren, Stewart, Robinson, Holland, Sasser) is locked and all carry impact/dimension data, so the spine of the rotation is reliable. The main uncertainty is the FA-derived veterans (Harris, Huerter): assuming both return as continuity re-signs is the standard stand-pat read, but Detroit could replace one in free agency, and as a buyer on the rise there is real (un-modeled) upside that they trade for a Markkanen/Porter Jr.-type, which the snapshot tells me to exclude.",
+    "key_assumption": "DET stands pat and runs back its young, ascending core around Cade Cunningham (re-signing FA-derived vets Tobias Harris and Kevin Huerter for continuity), rather than landing one of the Markkanen / Porter Jr. upgrade targets it is hunting. This single assumption defines them as a Cunningham-led, perimeter-versatile playoff team with no acquired second star, which is the structural feature that most determines their championship-simulation ceiling."
+  },
+  {
+    "team_abbr": "MIA",
+    "assumed_moves": [
+      "Acquires Giannis Antetokounmpo (203507) from Milwaukee, the block-board frontrunner outcome.",
+      "Sends out Tyler Herro (1629639), Andrew Wiggins (203952), and Kel'el Ware (1642276) plus a pile of picks/swaps as the headline outgoing package.",
+      "Otherwise stands pat; fills out the back of the rotation with returning minimum/young pieces (Jakucionis, Larsson, Dru Smith, Jahmir Young) since the trade strips most movable depth.",
+      "Norman Powell, Terry Rozier, and Simone Fontecchio treated as uncertain free agents and left out of the projected core; Powell in particular has no impact data downstream."
+    ],
+    "rotation": [
+      {
+        "name": "Giannis Antetokounmpo",
+        "nba_player_id": "203507",
+        "role": "starter"
+      },
+      {
+        "name": "Bam Adebayo",
+        "nba_player_id": "1628389",
+        "role": "starter"
+      },
+      {
+        "name": "Davion Mitchell",
+        "nba_player_id": "1630558",
+        "role": "starter"
+      },
+      {
+        "name": "Jaime Jaquez Jr.",
+        "nba_player_id": "1631170",
+        "role": "starter"
+      },
+      {
+        "name": "Nikola Jovic",
+        "nba_player_id": "1631107",
+        "role": "starter"
+      },
+      {
+        "name": "Kasparas Jakucionis",
+        "nba_player_id": "1642857",
+        "role": "sixth"
+      },
+      {
+        "name": "Pelle Larsson",
+        "nba_player_id": "1641796",
+        "role": "rotation"
+      },
+      {
+        "name": "Dru Smith",
+        "nba_player_id": "1630696",
+        "role": "rotation"
+      },
+      {
+        "name": "Simone Fontecchio",
+        "nba_player_id": "1631323",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Reorganized around Giannis as the downhill engine: rim pressure, transition, and short-roll/handoff actions paired with Adebayo's elbow/DHO hub. With Herro shipped out, this is no longer a perimeter-shooting team. It is a two-big paint-and-pressure offense that needs Giannis to manufacture half-court advantages because the supporting shot-creation (Mitchell, a young Jakucionis, Jaquez, Jovic) is thin. Spacing is a real concern: Giannis (off-ball shooting 0.10) and Adebayo (0.19) both grade as non-shooters, so floor balance leans on Jovic (0.71), Fontecchio (0.86) and Larsson to stretch the floor. Transition is a genuine weapon (Giannis 1.0, Jaquez 0.89, Adebayo 0.77).",
+      "defense": "Elite-projecting on paper and the clearest reason to make this trade. Giannis (def_versatility_poa 0.75, rim/reb 0.92) next to Adebayo (POA 0.86, rim/reb 0.85) gives Miami two All-Defense-caliber frontcourt switchers, plus Davion Mitchell (point-of-attack pest) and Dru Smith (POA 0.98) on the ball. This is a unit that takes away the paint, switches 1 through 5 in the Heat's zone-and-switch scheme, and erases driving lanes. Forces opponents into contested mid-range and over-the-top shot-making.",
+      "rim_protection": "Strong, but vertical-anchor rather than shot-blocking elite. Adebayo and Giannis are both high-end help-and-recover, mobile rim deterrents (rim/reb 0.85 and 0.92) rather than a stationary 7-foot eraser. With Ware traded away, Miami loses its only true above-the-rim drop center, so interior coverage becomes scheme-dependent (switch, gap, and Bam-at-the-level) instead of a single backline shot-swatter. Very good, a tier below a Wembanyama/Gobert pure-deterrence backline.",
+      "switchability": "Among the best in the league. The Giannis-Adebayo frontcourt is the whole point: two bigs who can switch onto guards, plus Jaquez and Jovic as positionally flexible forwards and Mitchell/Smith as multi-guard defenders. Miami can play almost entirely switch-everything lineups without a coverage liability, which is the structural edge that travels into a playoff series.",
+      "where_they_crack": "Half-court shot creation and spacing when the game slows down. Strip out Herro and Wiggins and the only proven off-the-dribble shotmaking belongs to Giannis; a playoff defense that walls off the paint, sends help, and dares Miami's non-shooters (Giannis 0.10, Adebayo 0.19, Mitchell, Jaquez) to beat them from three can choke the offense. The Giannis-Bam pairing also clogs the paint on offense, and free-throw and late-clock execution become the pressure points. Depth is genuinely thin post-trade (the documented Giannis worry: not enough talent left), so injury or foul trouble to Giannis or Bam exposes a shallow, low-creation bench."
+    },
+    "confidence": "Medium. The roster mechanics (who stays, who has usable impact data) are well-grounded, but the entire profile hinges on the Giannis-to-Miami assumption, which the block board itself rates as 'High likelihood' yet sourced 'from around the league' rather than from either team, and Giannis controls his own destination.",
+    "key_assumption": "Giannis Antetokounmpo lands in Miami (block-board frontrunner) in exchange for Herro, Wiggins, Ware and picks. Everything about this profile, the defensive ceiling, the spacing crack, and the thin post-trade depth, flows from that single landing."
+  },
+  {
+    "team_abbr": "LAL",
+    "assumed_moves": [
+      "Stands pat on the core: no star trade modeled (no done deal in reporting).",
+      "Re-sign LeBron James (free-agent/opt-out decision resolved as a return, the board's open question).",
+      "Retain Austin Reaves (board explicitly says they want to keep him).",
+      "Re-sign Rui Hachimura to hold the starting-forward spot.",
+      "Their documented need is a center (Gafford/Claxton floated), but since no acquisition is a done deal, the baseline keeps Ayton as the starting 5 with Hayes behind him."
+    ],
+    "rotation": [
+      {
+        "name": "Luka Doncic",
+        "nba_player_id": "1629029",
+        "role": "starter"
+      },
+      {
+        "name": "Austin Reaves",
+        "nba_player_id": "1630559",
+        "role": "starter"
+      },
+      {
+        "name": "LeBron James",
+        "nba_player_id": "2544",
+        "role": "starter"
+      },
+      {
+        "name": "Rui Hachimura",
+        "nba_player_id": "1629060",
+        "role": "starter"
+      },
+      {
+        "name": "Deandre Ayton",
+        "nba_player_id": "1629028",
+        "role": "starter"
+      },
+      {
+        "name": "Marcus Smart",
+        "nba_player_id": "203935",
+        "role": "sixth"
+      },
+      {
+        "name": "Jarred Vanderbilt",
+        "nba_player_id": "1629020",
+        "role": "rotation"
+      },
+      {
+        "name": "Jaxson Hayes",
+        "nba_player_id": "1629637",
+        "role": "rotation"
+      },
+      {
+        "name": "Jake LaRavia",
+        "nba_player_id": "1631222",
+        "role": "rotation"
+      },
+      {
+        "name": "Dalton Knecht",
+        "nba_player_id": "1642261",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "A two-hub, half-court creation machine run through Luka Doncic and LeBron James. Doncic is the offensive engine (elite on-ball creation, elite secondary playmaking, elite off-ball shooting in our dimensions), and LeBron is a second initiator who still grades elite as a passer and in transition. They manufacture offense via pick-and-roll, mismatch hunting, and slow, methodical half-court reads, surrounded by movement shooting (Reaves, LaRavia, Knecht) and a vertical-spacing rim-runner (Ayton/Hayes) finishing lobs. Reaves is a real third creator who can run the second unit. The offense is high-IQ, high-volume isolation/pick-and-roll, not a pace-and-space transition team beyond LeBron's outlet bursts.",
+      "defense": "Point-of-attack containment is built around Marcus Smart (elite POA defender in our data) and Jarred Vanderbilt (high defensive versatility, the switchable forward who can guard 2 through 4 and rebound out of position). Vanderbilt and Smart let them blitz, switch on the perimeter, and load to the ball. What the defense takes away best is a single on-ball creator they can wall off with Smart plus a help wall. The scheme is more disruption and switching on the wings than rim-walling.",
+      "rim_protection": "Below the championship bar. Ayton is the lone true rim anchor (top-decile rim-protection/rebounding in our dimensions) but is a drop-only, low-mobility 5 who gets pulled out of the paint when forced to switch. Hayes offers more lateral mobility but is a smaller, foul-prone backup, and Vanderbilt is an undersized small-ball 5 in a pinch. There is no secondary shot-blocker, so when Ayton sits or is dragged to the level of the screen, the paint opens up. This is precisely why the board flags center as their clear need.",
+      "switchability": "Mixed. The wing/forward group (Vanderbilt, Smart, LaRavia, Hachimura) is genuinely switchable and can flip a possession 1 through 4. The problem is the bookends: Doncic and Reaves are both target-able defenders (Reaves' defensive-versatility grade is poor), and Ayton cannot survive switched onto guards in space. So they can switch 1 through 4 in their best lineups but cannot switch 1 through 5, and any switch that ends with Doncic, Reaves, or Ayton on an island is hunted.",
+      "where_they_crack": "In a seven-game series, opponents hunt the Doncic/Reaves/Ayton matchups relentlessly. Speed and rim pressure are the kill switch: a fast, downhill team that drags Ayton into space and attacks the Doncic/Reaves point of attack collapses the interior, because there is no rim-protection backstop behind the play. The half-court offense can stagnate into Luka/LeBron isolation when the third-creator shooting goes cold, and LeBron's age plus a thin, defense-light bench means the margin shrinks late in games and late in a series. Against an elite rim deterrent or a switch-everything wing army, the Lakers' lack of a mobile, two-way center is the structural crack."
+    },
+    "confidence": "Medium. The core five (Doncic, Reaves, LeBron, Hachimura, Ayton) and the Smart/Vanderbilt/Hayes support cast are well-sourced from the contracts file, and all rotation players carry usable value+dimension data. The uncertainty is the center spot and LeBron: the board explicitly flags an unmet center need (Gafford/Claxton floated) and an open LeBron opt-out/free-agent decision, so an actual roster could differ at the 5 and at the top of the bench. Holding to a stand-pat baseline per the snapshot, but a center add is the most likely deviation.",
+    "key_assumption": "That LeBron James returns and the Lakers do NOT land a starting-caliber two-way center this offseason, leaving Deandre Ayton as the rim anchor. The board documents center as their clear need; whether they fill it is the single biggest swing on this profile's playoff rim-protection and switchability ceiling."
+  },
+  {
+    "team_abbr": "BOS",
+    "assumed_moves": [
+      "Core stands pat: per the trade board, a RealGM insider has heard 'not one iota' of Jaylen Brown or Derrick White being genuinely available, so no core trade is assumed.",
+      "Jayson Tatum returns and is healthy/reintegrated for 2026-27 after missing most of 2025-26 with an Achilles injury. This is the central swing of the projection.",
+      "Already-completed cost cuts are baked in: Jrue Holiday and Kristaps Porzingis are gone, and Nikola Vucevic reads as a free agent (not under contract), leaving Boston thin and cheap at center.",
+      "Center is filled from within (Neemias Queta starts, Luka Garza backs up) rather than via a new acquisition, consistent with 'retooling on cost.'",
+      "Minor depth: assume a minimum-level veteran or two-way bodies fill the back end; no rotation-altering addition assumed."
+    ],
+    "rotation": [
+      {
+        "name": "Jayson Tatum",
+        "nba_player_id": "1628369",
+        "role": "starter"
+      },
+      {
+        "name": "Jaylen Brown",
+        "nba_player_id": "1627759",
+        "role": "starter"
+      },
+      {
+        "name": "Derrick White",
+        "nba_player_id": "1628401",
+        "role": "starter"
+      },
+      {
+        "name": "Payton Pritchard",
+        "nba_player_id": "1630202",
+        "role": "starter"
+      },
+      {
+        "name": "Neemias Queta",
+        "nba_player_id": "1629674",
+        "role": "starter"
+      },
+      {
+        "name": "Sam Hauser",
+        "nba_player_id": "1630573",
+        "role": "sixth"
+      },
+      {
+        "name": "Baylor Scheierman",
+        "nba_player_id": "1631248",
+        "role": "rotation"
+      },
+      {
+        "name": "Jordan Walsh",
+        "nba_player_id": "1641775",
+        "role": "rotation"
+      },
+      {
+        "name": "Luka Garza",
+        "nba_player_id": "1630568",
+        "role": "rotation"
+      },
+      {
+        "name": "Hugo Gonzalez",
+        "nba_player_id": "1642864",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "A perimeter-heavy, five-out, three-point-volume machine built around two big wing creators. Tatum is the engine (94th-pct-ish on-ball creation, plus real secondary playmaking and off-ball shooting) and Brown is the co-star slasher and second shot-creator; both can win a possession one-on-one, attack closeouts, and post mismatches. White and Pritchard add a second and third ballhandler, so Boston rarely has a possession without a creator on the floor, and Pritchard is a movement-shooting flamethrower off the bench. The whole roster spaces: Hauser and Scheierman are pure catch-and-shoot snipers, White and Pritchard shoot it at volume, even Garza stretches the floor at backup center. They generate offense through drive-and-kick, switch-hunting in isolation, and an avalanche of threes rather than through a post hub or a dominant pick-and-roll center.",
+      "defense": "Switch-everything, no-easy-shots half-court defense anchored on the perimeter. White is an elite point-of-attack and help defender (strong off-ball-events profile, shot-blocking for a guard), Walsh is a long, versatile wing stopper, and Brown and Tatum are big, switchable wing defenders who can guard 1 through 4. The scheme takes away straight-line drives and clean catch-and-shoot looks by switching screens and walling off the paint with size on the perimeter, funneling offenses into contested mid-range and late-clock isolations. They turn defense into transition, where Brown (99th-pct transition) and Tatum punish.",
+      "rim_protection": "The clear soft spot relative to the rest of the profile. With Porzingis gone and Vucevic not retained, Boston has no rim-deterrence anchor; Neemias Queta is a solid, mobile starting-caliber center (high rim-protect/rebound dimension and strongly positive defensive impact in his minutes) but he is a good rotation big, not a Gobert- or Wembanyama-tier deterrent. Behind him it gets thin fast: Garza is a scoring big who does not protect the rim. Boston compensates schematically with switching, length, and gang rebounding rather than with a vertical wall at the basket.",
+      "switchability": "Among the best in the league, and the foundation of the whole identity. White, Brown, Tatum, Walsh, and Hauser give them four-to-five interchangeable, long defenders who can switch 1 through 4 without a glaring mismatch, and Queta is mobile enough to hold up on the perimeter in short stints. The only switch they truly want to avoid is putting their center on a quick guard for a full possession, but their wing depth lets them switch almost everything else and erase the advantage actions most offenses rely on.",
+      "where_they_crack": "Two ways. First, interior force: a dominant low-post scorer or a vertical-spacing roll-man (a Jokic, an Embiid, a big two-man game) can attack Queta and the absence of a rim protector, drawing fouls and collapsing the no-help, switch-heavy scheme. Second, variance: an offense this dependent on three-point volume can go cold in a playoff series, and when the threes stop falling there is no bail-out post hub or free-throw-generating big to keep the offense afloat. Layer in injury risk to Tatum's surgically repaired Achilles or to Brown, and a team built on two skilled, switchable wings can be reduced to a one-creator outfit that opponents load up against."
+    },
+    "confidence": "Medium-high on the roster shape (core is reported as not for sale and the supporting cast is locked in), medium on the on-court ceiling because it hinges almost entirely on Tatum's health and form returning from a torn Achilles, which is the single largest uncertainty.",
+    "key_assumption": "Jayson Tatum returns healthy and close to his pre-injury level for 2026-27. If he is limited or out, this is a good-but-flawed Brown-led team rather than a top-tier contender, and the entire offensive ceiling and switchable two-wing identity change."
+  },
+  {
+    "team_abbr": "MIN",
+    "assumed_moves": [
+      "Stands pat on the core (no Wolves trade, per study constraint): Edwards, Gobert, Randle, McDaniels, Naz Reid all retained.",
+      "Re-sign Ayo Dosunmu (RFA) to reclaim the starting backcourt partner spot left open by the DiVincenzo injury.",
+      "Donte DiVincenzo OUT for all of 2026-27 (torn Achilles), removed from the rotation entirely.",
+      "Retain veteran FA Mike Conley on a minimum/Bird-rights deal as the backup-PG/closer-lineup stabilizer, given the backcourt is thin without DiVincenzo.",
+      "Internal development bets fill the back of the bench: Terrence Shannon Jr. and rookie-scale C Joan Beringer grow into rotation minutes; Julian Phillips and Jaylen Clark as deep wing/defensive depth."
+    ],
+    "rotation": [
+      {
+        "name": "Anthony Edwards",
+        "nba_player_id": "1630162",
+        "role": "starter"
+      },
+      {
+        "name": "Ayo Dosunmu",
+        "nba_player_id": "1630245",
+        "role": "starter"
+      },
+      {
+        "name": "Jaden McDaniels",
+        "nba_player_id": "1630183",
+        "role": "starter"
+      },
+      {
+        "name": "Julius Randle",
+        "nba_player_id": "203944",
+        "role": "starter"
+      },
+      {
+        "name": "Rudy Gobert",
+        "nba_player_id": "203497",
+        "role": "starter"
+      },
+      {
+        "name": "Naz Reid",
+        "nba_player_id": "1629675",
+        "role": "sixth"
+      },
+      {
+        "name": "Mike Conley",
+        "nba_player_id": "201144",
+        "role": "rotation"
+      },
+      {
+        "name": "Terrence Shannon Jr.",
+        "nba_player_id": "1630545",
+        "role": "rotation"
+      },
+      {
+        "name": "Joan Beringer",
+        "nba_player_id": "1642866",
+        "role": "rotation"
+      },
+      {
+        "name": "Julian Phillips",
+        "nba_player_id": "1641763",
+        "role": "deep"
+      }
+    ],
+    "identity": {
+      "offense": "Edwards-centric half-court creation flanked by a genuine second-side hub in Randle, with Gobert-Reid screening and rolling. Edwards is the engine (hc_creation 0.994, off-ball shooting 0.896) and the lone bankable shot-maker against set defenses; Randle is the secondary creator/post-and-bully outlet (hc_creation 0.942, secondary_playmaking 0.797). Naz Reid is the offensive multiplier off the bench, a stretch-5/4 who can shoot (off-ball 0.827) and self-create. Real spacing concern: with DiVincenzo out, the team loses its highest-volume movement shooter (DiVincenzo off-ball 0.981), so floor spacing leans heavily on Reid and Edwards. Dosunmu and Conley provide connective secondary playmaking (Conley sec-pm 0.874) but little gravity, so defenses can load to Edwards. The offense is elite in transition (Edwards 0.985, Randle 0.918, McDaniels 0.897) and tends to bog into iso/floater diets when the game slows.",
+      "defense": "A top-tier, length-and-rim defense built around taking away the paint and the rim. Gobert anchors drop coverage and erases shots at the basket (rim_protect_reb 0.978, def RAPM -5.36 i.e. elite suppression); McDaniels is the do-everything point-of-attack stopper who travels with the opponent's best perimeter scorer (def_versatility_poa 0.732). The scheme takes away straight-line rim pressure, transition leak-outs, and forces opponents into contested midrange and tougher pull-up threes. Reid gives them a switchier second-unit big who can defend in space (def_versatility 0.792). The weak links are the offensive-minded bigs and guards: Randle (def_versatility 0.09) and Dosunmu (0.364) are targets, and without DiVincenzo's connective wing defense the bench perimeter D thins.",
+      "rim_protection": "Elite and the defining strength. Gobert is the league-tier rim deterrent (rim_protect_reb 0.978) and Reid is a quality secondary rim/rebound presence behind him (0.868), so the rim stays protected across both units. Rookie Beringer adds a long, mobile shot-blocking project as a third-string rim option. This is a defense that wins by funneling everything into Gobert and daring opponents to beat them from the perimeter.",
+      "switchability": "Mixed, and this is the structural tension. Up front it is a drop-coverage, non-switching scheme: Gobert does not switch onto guards, and Randle is a defensive minus, so the base starting front is exploitable in switch hunts. They have switchy pieces (McDaniels can guard 1 through 4; Reid can switch as a small-ball 5; Clark and Phillips are plus point-of-attack defenders), so the bench/closing units can go more versatile small-ball, but doing so pulls Gobert's rim protection off the floor. The team must choose between rim protection (Gobert) and switchability (Reid-at-5), and cannot have both at once.",
+      "where_they_crack": "Two ways. (1) Pick-and-roll/ball-screen switch-hunting and skilled offensive bigs that drag Gobert out of the paint, neutralizing the rim deterrence the whole defense is built on, while attacking Randle in space. (2) Half-court scoring droughts: this roster is dangerously dependent on Edwards generating efficient shot-making against a set defense, and the DiVincenzo injury strips away the movement shooting and connective playmaking that eased that burden in 2025-26. Against an elite defense that walls off the rim, ices the Gobert pick-and-roll, and forces Edwards into the 11-16ft floater zone (the Spurs blueprint), the offense has no reliable secondary half-court bucket-getter and bogs down. Backcourt creation and playoff shot-making are the crack; the floor and the rim are not."
+    },
+    "confidence": "Medium-high. The core five and Naz Reid sixth-man role are locked by the stand-pat constraint and are high-confidence. The starting backcourt partner (Dosunmu re-signed) is mandated by the prompt and confident. Lower confidence on the back-of-rotation specifics: whether Conley is actually retained vs. a minimum-vet replacement, and how fast Shannon Jr. and rookie Beringer earn real minutes, are projections, not locks. The DiVincenzo-out assumption is given, and it is the swing variable for the offense.",
+    "key_assumption": "DiVincenzo is out for all of 2026-27 (torn Achilles) and Dosunmu is re-signed to take the open starting backcourt spot. This is the single most consequential assumption: it removes the team's best movement shooter and a key connective defender, shifting the perimeter creation and shooting burden almost entirely onto Edwards and converting an offense-stabilizing depth piece into a hole the rotation fills with lower-gravity guards (Dosunmu, Conley). It is the reason the half-court offense, not the rim or the floor defense, is where this team cracks in a playoff series."
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "alpha": -5.4365,
+  "beta": 1.067,
+  "wins_a": 41.0,
+  "wins_b": 2.239,
+  "sigma_record": 2.932,
+  "sigma_unobs": 5.5,
+  "persist_slope": 0.7086,
+  "persist_int": 0.1191,
+  "munc_w": 0.35,
+  "scale_anchor": "actual win totals 2023-24..2025-26",
+  "shape_anchor": "de-vigged preseason boards 2023-24, 2024-25, 2025-26",
+  "persist_anchor": "realized net -> next-year preseason O/U-implied net (2 transitions)",
+  "source": "build_e_calibration"
+}

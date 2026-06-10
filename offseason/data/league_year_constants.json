@@ -1,0 +1,482 @@
+{
+  "built": "2026-06-09",
+  "growth_assumption_outyears": 1.07,
+  "notes": "2025-26 final; 2026-27 researched projection; 2027-28+ scaled. Confirm flags mark figures the rules reference says need a primary-source check before publication.",
+  "seasons": {
+    "2025-26": {
+      "season": "2025-26",
+      "salary_cap": 154647000,
+      "luxury_tax": 187895000,
+      "first_apron": 195945000,
+      "second_apron": 207824000,
+      "min_team_salary": 139182000,
+      "full_mle": 14104000,
+      "taxpayer_mle": 5685000,
+      "room_exception": 8781000,
+      "bae": 5134000,
+      "match_t1": 7500000,
+      "match_t2": 29000000,
+      "min_salary_by_yos": {
+        "0": 1272870,
+        "1": 2048494,
+        "2": 2296274,
+        "3": 2378870,
+        "4": 2461463,
+        "5": 2667947,
+        "6": 2874436,
+        "7": 3080921,
+        "8": 3287409,
+        "9": 3303774,
+        "10+": 3634153
+      },
+      "trade_matching": {
+        "under_first_apron_brackets": [
+          {
+            "outgoing_max": "match_t1",
+            "take_back": "2.00x + 250000"
+          },
+          {
+            "outgoing_max": "match_t2",
+            "take_back": "1.00x + match_t1"
+          },
+          {
+            "outgoing_max": null,
+            "take_back": "1.25x + 250000"
+          }
+        ],
+        "first_apron_pct": 1.1,
+        "first_apron_pct_confirm": true,
+        "second_apron_pct": 1.0,
+        "second_apron_no_aggregation": true
+      },
+      "hard_cap_triggers": {
+        "first_apron": [
+          "full_mle",
+          "bae",
+          "sign_and_trade_acquire",
+          "use_any_tpe_MIN"
+        ],
+        "second_apron": [
+          "taxpayer_mle"
+        ]
+      },
+      "repeater_lookback_years": 4,
+      "repeater_threshold_years": 3,
+      "frozen_pick": {
+        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+        "counting_window_candidates": [
+          "2_of_4",
+          "3_of_5"
+        ],
+        "confirm": true
+      },
+      "tax_brackets_nonrepeater_approx": [
+        {
+          "over_by_max": 5000000,
+          "rate": 1.5
+        },
+        {
+          "over_by_max": 10000000,
+          "rate": 1.75
+        },
+        {
+          "over_by_max": 15000000,
+          "rate": 2.5
+        },
+        {
+          "over_by_max": 20000000,
+          "rate": 4.75
+        },
+        {
+          "over_by_max": null,
+          "rate": 5.75
+        }
+      ],
+      "tax_brackets_confirm": true,
+      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+      "is_projection": false,
+      "source": "NBA PR (2025-26 final); Hoops Rumors / reporting (2026-27 proj)",
+      "as_of_date": "2026-06-09"
+    },
+    "2026-27": {
+      "season": "2026-27",
+      "salary_cap": 165000000,
+      "luxury_tax": 201000000,
+      "first_apron": 209100000,
+      "second_apron": 222000000,
+      "min_team_salary": 147000000,
+      "full_mle": 15048000,
+      "taxpayer_mle": 6065000,
+      "room_exception": 9369000,
+      "bae": 5478000,
+      "match_t1": 8000000,
+      "match_t2": 30940000,
+      "min_salary_by_yos": {
+        "0": 1358000,
+        "1": 2186000,
+        "2": 2450000,
+        "3": 2538000,
+        "4": 2626000,
+        "5": 2847000,
+        "6": 3067000,
+        "7": 3287000,
+        "8": 3507000,
+        "9": 3525000,
+        "10+": 3877000
+      },
+      "trade_matching": {
+        "under_first_apron_brackets": [
+          {
+            "outgoing_max": "match_t1",
+            "take_back": "2.00x + 250000"
+          },
+          {
+            "outgoing_max": "match_t2",
+            "take_back": "1.00x + match_t1"
+          },
+          {
+            "outgoing_max": null,
+            "take_back": "1.25x + 250000"
+          }
+        ],
+        "first_apron_pct": 1.1,
+        "first_apron_pct_confirm": true,
+        "second_apron_pct": 1.0,
+        "second_apron_no_aggregation": true
+      },
+      "hard_cap_triggers": {
+        "first_apron": [
+          "full_mle",
+          "bae",
+          "sign_and_trade_acquire",
+          "use_any_tpe_MIN"
+        ],
+        "second_apron": [
+          "taxpayer_mle"
+        ]
+      },
+      "repeater_lookback_years": 4,
+      "repeater_threshold_years": 3,
+      "frozen_pick": {
+        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+        "counting_window_candidates": [
+          "2_of_4",
+          "3_of_5"
+        ],
+        "confirm": true
+      },
+      "tax_brackets_nonrepeater_approx": [
+        {
+          "over_by_max": 5000000,
+          "rate": 1.5
+        },
+        {
+          "over_by_max": 10000000,
+          "rate": 1.75
+        },
+        {
+          "over_by_max": 15000000,
+          "rate": 2.5
+        },
+        {
+          "over_by_max": 20000000,
+          "rate": 4.75
+        },
+        {
+          "over_by_max": null,
+          "rate": 5.75
+        }
+      ],
+      "tax_brackets_confirm": true,
+      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+      "is_projection": true,
+      "source": "NBA PR (2025-26 final); Hoops Rumors / reporting (2026-27 proj)",
+      "as_of_date": "2026-06-09"
+    },
+    "2027-28": {
+      "season": "2027-28",
+      "salary_cap": 176550000,
+      "luxury_tax": 215070000,
+      "first_apron": 223737000,
+      "second_apron": 237540000,
+      "min_team_salary": 157290000,
+      "full_mle": 16101000,
+      "taxpayer_mle": 6490000,
+      "room_exception": 10025000,
+      "bae": 5861000,
+      "match_t1": 8560000,
+      "match_t2": 33106000,
+      "min_salary_by_yos": {
+        "0": 1453000,
+        "1": 2339000,
+        "2": 2622000,
+        "3": 2716000,
+        "4": 2810000,
+        "5": 3046000,
+        "6": 3282000,
+        "7": 3517000,
+        "8": 3752000,
+        "9": 3772000,
+        "10+": 4148000
+      },
+      "trade_matching": {
+        "under_first_apron_brackets": [
+          {
+            "outgoing_max": "match_t1",
+            "take_back": "2.00x + 250000"
+          },
+          {
+            "outgoing_max": "match_t2",
+            "take_back": "1.00x + match_t1"
+          },
+          {
+            "outgoing_max": null,
+            "take_back": "1.25x + 250000"
+          }
+        ],
+        "first_apron_pct": 1.1,
+        "first_apron_pct_confirm": true,
+        "second_apron_pct": 1.0,
+        "second_apron_no_aggregation": true
+      },
+      "hard_cap_triggers": {
+        "first_apron": [
+          "full_mle",
+          "bae",
+          "sign_and_trade_acquire",
+          "use_any_tpe_MIN"
+        ],
+        "second_apron": [
+          "taxpayer_mle"
+        ]
+      },
+      "repeater_lookback_years": 4,
+      "repeater_threshold_years": 3,
+      "frozen_pick": {
+        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+        "counting_window_candidates": [
+          "2_of_4",
+          "3_of_5"
+        ],
+        "confirm": true
+      },
+      "tax_brackets_nonrepeater_approx": [
+        {
+          "over_by_max": 5000000,
+          "rate": 1.5
+        },
+        {
+          "over_by_max": 10000000,
+          "rate": 1.75
+        },
+        {
+          "over_by_max": 15000000,
+          "rate": 2.5
+        },
+        {
+          "over_by_max": 20000000,
+          "rate": 4.75
+        },
+        {
+          "over_by_max": null,
+          "rate": 5.75
+        }
+      ],
+      "tax_brackets_confirm": true,
+      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+      "is_projection": true,
+      "source": "projected from 2026-27 at 1.07x/yr growth",
+      "as_of_date": "2026-06-09"
+    },
+    "2028-29": {
+      "season": "2028-29",
+      "salary_cap": 188908000,
+      "luxury_tax": 230125000,
+      "first_apron": 239399000,
+      "second_apron": 254168000,
+      "min_team_salary": 168300000,
+      "full_mle": 17228000,
+      "taxpayer_mle": 6944000,
+      "room_exception": 10727000,
+      "bae": 6271000,
+      "match_t1": 9159000,
+      "match_t2": 35423000,
+      "min_salary_by_yos": {
+        "0": 1555000,
+        "1": 2503000,
+        "2": 2806000,
+        "3": 2906000,
+        "4": 3007000,
+        "5": 3259000,
+        "6": 3512000,
+        "7": 3763000,
+        "8": 4015000,
+        "9": 4036000,
+        "10+": 4438000
+      },
+      "trade_matching": {
+        "under_first_apron_brackets": [
+          {
+            "outgoing_max": "match_t1",
+            "take_back": "2.00x + 250000"
+          },
+          {
+            "outgoing_max": "match_t2",
+            "take_back": "1.00x + match_t1"
+          },
+          {
+            "outgoing_max": null,
+            "take_back": "1.25x + 250000"
+          }
+        ],
+        "first_apron_pct": 1.1,
+        "first_apron_pct_confirm": true,
+        "second_apron_pct": 1.0,
+        "second_apron_no_aggregation": true
+      },
+      "hard_cap_triggers": {
+        "first_apron": [
+          "full_mle",
+          "bae",
+          "sign_and_trade_acquire",
+          "use_any_tpe_MIN"
+        ],
+        "second_apron": [
+          "taxpayer_mle"
+        ]
+      },
+      "repeater_lookback_years": 4,
+      "repeater_threshold_years": 3,
+      "frozen_pick": {
+        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+        "counting_window_candidates": [
+          "2_of_4",
+          "3_of_5"
+        ],
+        "confirm": true
+      },
+      "tax_brackets_nonrepeater_approx": [
+        {
+          "over_by_max": 5000000,
+          "rate": 1.5
+        },
+        {
+          "over_by_max": 10000000,
+          "rate": 1.75
+        },
+        {
+          "over_by_max": 15000000,
+          "rate": 2.5
+        },
+        {
+          "over_by_max": 20000000,
+          "rate": 4.75
+        },
+        {
+          "over_by_max": null,
+          "rate": 5.75
+        }
+      ],
+      "tax_brackets_confirm": true,
+      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+      "is_projection": true,
+      "source": "projected from 2026-27 at 1.07x/yr growth",
+      "as_of_date": "2026-06-09"
+    },
+    "2029-30": {
+      "season": "2029-30",
+      "salary_cap": 202132000,
+      "luxury_tax": 246234000,
+      "first_apron": 256157000,
+      "second_apron": 271960000,
+      "min_team_salary": 180081000,
+      "full_mle": 18434000,
+      "taxpayer_mle": 7430000,
+      "room_exception": 11478000,
+      "bae": 6710000,
+      "match_t1": 9800000,
+      "match_t2": 37903000,
+      "min_salary_by_yos": {
+        "0": 1664000,
+        "1": 2678000,
+        "2": 3002000,
+        "3": 3109000,
+        "4": 3217000,
+        "5": 3487000,
+        "6": 3758000,
+        "7": 4026000,
+        "8": 4296000,
+        "9": 4319000,
+        "10+": 4749000
+      },
+      "trade_matching": {
+        "under_first_apron_brackets": [
+          {
+            "outgoing_max": "match_t1",
+            "take_back": "2.00x + 250000"
+          },
+          {
+            "outgoing_max": "match_t2",
+            "take_back": "1.00x + match_t1"
+          },
+          {
+            "outgoing_max": null,
+            "take_back": "1.25x + 250000"
+          }
+        ],
+        "first_apron_pct": 1.1,
+        "first_apron_pct_confirm": true,
+        "second_apron_pct": 1.0,
+        "second_apron_no_aggregation": true
+      },
+      "hard_cap_triggers": {
+        "first_apron": [
+          "full_mle",
+          "bae",
+          "sign_and_trade_acquire",
+          "use_any_tpe_MIN"
+        ],
+        "second_apron": [
+          "taxpayer_mle"
+        ]
+      },
+      "repeater_lookback_years": 4,
+      "repeater_threshold_years": 3,
+      "frozen_pick": {
+        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+        "counting_window_candidates": [
+          "2_of_4",
+          "3_of_5"
+        ],
+        "confirm": true
+      },
+      "tax_brackets_nonrepeater_approx": [
+        {
+          "over_by_max": 5000000,
+          "rate": 1.5
+        },
+        {
+          "over_by_max": 10000000,
+          "rate": 1.75
+        },
+        {
+          "over_by_max": 15000000,
+          "rate": 2.5
+        },
+        {
+          "over_by_max": 20000000,
+          "rate": 4.75
+        },
+        {
+          "over_by_max": null,
+          "rate": 5.75
+        }
+      ],
+      "tax_brackets_confirm": true,
+      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+      "is_projection": true,
+      "source": "projected from 2026-27 at 1.07x/yr growth",
+      "as_of_date": "2026-06-09"
+    }
+  }
+}

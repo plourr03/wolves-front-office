@@ -1,0 +1,10 @@
+{
+  "b0": 0.5018,
+  "b1": 0.1345,
+  "b0_se": 0.0441,
+  "b1_se": 0.0108,
+  "n_games": 2366,
+  "seasons": "1997-2025",
+  "model": "P(home win)=sigmoid(b0 + b1*(net_home-net_away)); net on RS per-100 scale",
+  "source": "build_series_calibration"
+}

@@ -51,8 +51,8 @@ FA_TYPE_LABELS = {
 }
 
 FIELDNAMES = [
-    "player", "player_id", "position",
-    "fa_type", "fa_type_label",
+    "player", "player_id", "nba_player_id", "position",
+    "fa_type", "fa_type_label", "counts_on_books_until_declined",
     "previous_team", "years_experience", "age",
     "previous_aav",
     "player_url", "source", "last_verified",

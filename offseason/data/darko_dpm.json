@@ -1,0 +1,11 @@
+{
+  "_provenance": "HAND-ENTERED from darko.app (DARKO DPM, Kostya Medvedovsky), retrieved 2026-06-10 via two consistent WebFetch reads (identical both times). A third, independent methodology used ONLY as a tiebreaker for metric-divergent players. Corroboration: Gobert's D-DPM (+4.0) matched an independent web search, the top-8 leaderboard was plausible (Jokic +7.4, Kawhi, Wemby...), and the fetch's 'Trae Young (WAS)' label proved CORRECT (he is on Washington in the 2026 snapshot per the contracts file). Values are O-DPM / D-DPM (D-DPM positive = better defense) and total DPM (points per 100). Not a calibrated pipeline input; an external sanity check.",
+  "_retrieved": "2026-06-10",
+  "darko": {
+    "203497": {"name": "Rudy Gobert",    "o": -1.5, "d": 4.0,  "total": 2.5},
+    "203076": {"name": "Anthony Davis",  "o": 1.0,  "d": 1.5,  "total": 2.5},
+    "1630162": {"name": "Anthony Edwards","o": 4.3,  "d": -0.1, "total": 4.2},
+    "1629027": {"name": "Trae Young",     "o": 2.9,  "d": -2.0, "total": 1.0},
+    "203944": {"name": "Julius Randle",   "o": 0.2,  "d": -0.3, "total": -0.1}
+  }
+}
