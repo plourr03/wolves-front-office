@@ -20,7 +20,7 @@
     <div class="fv-hero-label">Between his lowest number and his highest</div>
     <button class="fv-replay" type="button" aria-label="Replay">↺ Replay</button>
   </div>
-  <p class="fv-foot">Four real measurements of the same season. The box score counts what he does. DARKO splits offense from defense. The on-court numbers watch the scoreboard with him on and off. Hover any marker for what that number can see and what it is blind to.</p>
+  <p class="fv-foot">All four numbers speak the same language: how many points per 100 possessions better the team is with him on the floor. Zero is a league-average player; a good starter is plus 1 to plus 2, All-NBA is around plus 4. The box score counts what he does. DARKO splits offense from defense. The on-court numbers watch the scoreboard with him on and off. Hover any marker for what each one can see and what it is blind to.</p>
   <div class="fv-watermark">@WolvesToaT · Jun 2026</div>
 </div>
 <style>
@@ -183,7 +183,7 @@
   var LO = 1.48, HI = 5.76, SPREAD = HI - LO;   // 4.28 ~ 4.3
 
   var CAPTIONS = [
-    "One player. Four real numbers. All from this past season.",
+    "One player, four numbers, one scale: points added per 100 possessions. Zero is a league-average player.",
     "The box score sees a good starter: +1.5. It cannot see what never happens.",
     "DARKO sees +2, and the split underneath is the story: +4 defense, -2 offense.",
     "The on-court math sees +5.3 and +5.8. The scoreboard does not lie with him out there.",
@@ -315,6 +315,16 @@
         .style("font", "10px var(--family-mono)")
         .text("+" + t);
     });
+    // The unit, spelled out where a screenshot can't lose it.
+    axisG.append("text")
+      .attr("x", (pad.left + W - pad.right) / 2)
+      .attr("y", axisY + (compact ? 32 : 36) + 44)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "600 " + (compact ? "9px" : "10px") + " var(--family-sans)")
+      .text(compact
+        ? "team impact, points per 100 · 0 = average player"
+        : "team impact, points per 100 possessions · 0 = a league-average player");
 
     // Spread band (drawn behind markers, revealed at the end).
     var band = svg.append("rect")

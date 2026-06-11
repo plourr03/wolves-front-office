@@ -22,6 +22,8 @@ Fair warning before we start: the parenthetical in the title is load-bearing. If
 
 Here's Rudy Gobert, four ways, all from this past season.
 
+Quick word on the scale first, because "plus 2" means nothing on its own. All four numbers speak the same language: points per 100 possessions of team impact. Plus 2 means the Wolves are about 2 points better per 100 trips with him on the floor than without him. Zero is a league-average player. A good starter lives around plus 1 to plus 2. All-NBA guys live around plus 4. The MVP argument starts somewhere past plus 6. Okay, now the spread.
+
 {{viz:gobert-four-view}}
 
 *Four real numbers, one player. Hover each for what that number can see and what it's blind to. The spread is the whole argument.*
