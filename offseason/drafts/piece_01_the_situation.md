@@ -26,7 +26,13 @@ The CBA draws three lines above the salary cap, and each one takes something awa
 
 *The three lines and the room under each one, on a single scale. The stair-step is the real shape of the summer. Hover any line for exactly what crossing it takes away.*
 
-(Numbers, because this series shows its work. Nine players are under contract: Edwards, Gobert, Randle, McDaniels, Reid, DiVincenzo, Beringer, Shannon, and Julian Phillips on a $2.4M team option, roughly $188M of real money. The apron math then adds about $1.4M per empty roster slot below twelve, which takes the books to the $194.0M I use everywhere. So if you pull up HoopsHype and see $188M, you're both right. ESPN's Bobby Marks pegs the first-apron gap near $14M instead of my $15.1M, same roster-charge accounting, and nothing in this piece changes either way.)
+(Numbers, because this series shows its work. Nine players are under contract for roughly $188M of real money. The apron math then adds about $1.4M per empty roster slot below twelve, which takes the books to the $194.0M I use everywhere. So if you pull up HoopsHype and see $188M, you're both right. ESPN's Bobby Marks pegs the first-apron gap near $14M instead of my $15.1M, same roster-charge accounting, and nothing in this piece changes either way.)
+
+And here are the nine, line by line, because the shape of the books matters as much as the total.
+
+{{viz:the-books}}
+
+*The whole payroll, stacked. Hover any row for the years and the options: the twin player options coming due in 2027, Donte's expiring $12.5M while he rehabs, Phillips's team option that's due for a decision this month. The free agents (Ayo, Conley) aren't on here, which is the whole point.*
 
 The tax line costs the owners money. Annoying, survivable, and the Wolves have paid it two years running. The aprons are different. The aprons cost the basketball operation its hands.
 

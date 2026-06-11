@@ -1,0 +1,520 @@
+<div id="viz-the-books">
+  <div class="tb-chip" role="status">
+    <span class="tb-chip-dot"></span>
+    <span class="tb-chip-label">The books, line by line</span>
+    <span class="tb-chip-sep">·</span>
+    <span class="tb-chip-sub">2026-27 cap hits</span>
+  </div>
+  <p class="tb-caption" aria-live="polite"></p>
+  <div class="tb-stage">
+    <div class="tb-rows"></div>
+    <div class="tb-tooltip" role="tooltip">
+      <div class="tb-tip-head"></div>
+      <div class="tb-tip-desc"></div>
+    </div>
+  </div>
+  <div class="tb-hero">
+    <div class="tb-hero-line">
+      <span class="tb-hero-num">$0.0M</span>
+      <span class="tb-hero-unit">on the books</span>
+    </div>
+    <div class="tb-hero-label">Before a single signing</div>
+    <button class="tb-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="tb-foot">Cap hits per HoopsHype via our cap model (June 9 run), apron basis. Not shown because they are not on the apron books: the two-ways (Zikarsky, Pullin) and every free agent, including Dosunmu and Conley. Which is the whole point.</p>
+  <div class="tb-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-the-books, #viz-the-books * { touch-action: manipulation; }
+  #viz-the-books {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-the-books .tb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-the-books .tb-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+  }
+  #viz-the-books .tb-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-books .tb-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-the-books .tb-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-the-books .tb-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  #viz-the-books .tb-row {
+    display: grid;
+    grid-template-columns: 138px 1fr 78px;
+    gap: 10px;
+    align-items: center;
+    padding: 5px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 360ms ease, background 150ms ease;
+  }
+  #viz-the-books .tb-row.is-on { opacity: 1; transform: none; }
+  #viz-the-books .tb-row:hover { background: var(--bg-surface); }
+  #viz-the-books.is-compact .tb-row { grid-template-columns: 102px 1fr 62px; gap: 7px; }
+  #viz-the-books .tb-name {
+    font: 600 12px var(--family-sans);
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #viz-the-books.is-compact .tb-name { font-size: 10.5px; }
+  #viz-the-books .tb-badge {
+    display: inline-block;
+    font: 700 8.5px var(--family-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid;
+    border-radius: 999px;
+    padding: 1px 6px;
+    margin-left: 6px;
+    vertical-align: 1px;
+    white-space: nowrap;
+  }
+  #viz-the-books .tb-badge-po { color: var(--status-warning); border-color: var(--status-warning); }
+  #viz-the-books .tb-badge-to { color: var(--status-info); border-color: var(--status-info); }
+  #viz-the-books .tb-badge-exp { color: var(--text-tertiary); border-color: var(--border-default); }
+  #viz-the-books .tb-track {
+    position: relative;
+    height: 14px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  #viz-the-books .tb-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent-default);
+    border-radius: 4px;
+    transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #viz-the-books .tb-row.is-charge .tb-track { border-style: dashed; background: transparent; }
+  #viz-the-books .tb-row.is-charge .tb-fill {
+    background: transparent;
+    border: 1px dashed var(--text-tertiary);
+  }
+  #viz-the-books .tb-row.is-charge .tb-name { color: var(--text-tertiary); font-style: italic; }
+  #viz-the-books .tb-sal {
+    font: 700 12px var(--family-mono);
+    color: var(--text-secondary);
+    text-align: right;
+    white-space: nowrap;
+  }
+  #viz-the-books.is-compact .tb-sal { font-size: 10.5px; }
+  #viz-the-books .tb-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 170px;
+    max-width: 270px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-the-books .tb-tooltip.is-on { opacity: 1; }
+  #viz-the-books .tb-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-the-books .tb-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+  #viz-the-books .tb-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-the-books .tb-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-the-books .tb-hero-num {
+    font: 800 56px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  #viz-the-books.is-compact .tb-hero-num { font-size: 42px; }
+  #viz-the-books .tb-hero-unit {
+    font: 700 14px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.15;
+    max-width: 110px;
+  }
+  #viz-the-books .tb-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+    transition: color 320ms ease;
+  }
+  #viz-the-books.is-landed .tb-hero-label { color: var(--accent-hover); }
+  #viz-the-books .tb-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-the-books .tb-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-the-books .tb-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-the-books .tb-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-the-books .tb-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // The Wolves' 2026-27 books, line by line, HoopsHype figures via our cap
+  // model (apron basis, June 9 run). sal in $M. Badges: PO = player option
+  // ahead, TO = team option, EXP = expiring. The three empty roster slots
+  // below twelve carry a league-mandated charge (~$1.358M each), shown as
+  // one combined dashed row. Total = $194.0M, $15.1M under the first apron.
+  var ROWS = [
+    { name: "Anthony Edwards", sal: 48.9, badge: null,
+      tip: "Under contract through 2028-29: $48.9M, then $52.3M, then $55.7M. The franchise." },
+    { name: "Rudy Gobert", sal: 36.5, badge: "PO '27",
+      tip: "$36.5M this year, then a $38.0M player option for 2027-28, his age-35 season. No trade kicker, no no-trade clause." },
+    { name: "Julius Randle", sal: 33.3, badge: "PO '27",
+      tip: "$33.3M this year, then a $35.8M player option for 2027-28." },
+    { name: "Jaden McDaniels", sal: 25.8, badge: null,
+      tip: "Under contract through 2028-29: $25.8M, $28.0M, $29.8M." },
+    { name: "Naz Reid", sal: 23.3, badge: "PO '29",
+      tip: "Under contract through 2029-30, $23.3M rising to $28.4M, with a player option on the final year." },
+    { name: "Donte DiVincenzo", sal: 12.5, badge: "EXP",
+      tip: "Expiring: $12.5M on the books while he rehabs the Achilles. Expected to miss most or all of the season." },
+    { name: "Joan Beringer", sal: 4.4, badge: "TO",
+      tip: "Rookie scale through 2029-30 ($4.4M, $4.6M, $7.1M, $10.7M), team option on 2027-28." },
+    { name: "Terrence Shannon Jr.", sal: 2.8, badge: "TO",
+      tip: "Rookie scale: $2.8M, then a $5.1M team option for 2027-28." },
+    { name: "Julian Phillips", sal: 2.4, badge: "TO now",
+      tip: "This season IS the team option year, $2.4M, decision due before the season. The model counts it until it is declined." },
+    { name: "Roster charges (3 empty slots)", sal: 4.1, badge: null, charge: true,
+      tip: "The league adds a placeholder charge, about $1.358M, for every empty roster slot below twelve. Three empty slots today." }
+  ];
+  var TOTAL = 194.0;
+  var MARGIN = 15.1;
+  var MAXSAL = 48.9;
+
+  var CAPTIONS = [
+    "Nine contracts. Watch them stack.",
+    "Five of them are $23 million or more. That's the core, and the core is expensive.",
+    "Don't forget Donte: $12.5M on the books while he rehabs, expiring next summer.",
+    "The kids are cheap, and Phillips is a team option the model counts until it's declined.",
+    "Then the league adds a $1.4M placeholder for every empty seat below twelve.",
+    "$194.0M before a single signing. The whole summer happens in what's left."
+  ];
+
+  var ROW_AT = 500, ROW_STAG = 360;
+  var CAP1_AT = 2100, CAP2_AT = 2750, CAP3_AT = 3400;
+  var CHARGE_EXTRA = 500;
+  var REPLAY_AT = 7000;
+
+  var root = d3.select("#viz-the-books");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".tb-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  var heroVal = 0;
+  function tickHeroTo(to, duration) {
+    var node = root.select(".tb-hero-num").node();
+    if (reduceMotion || duration <= 0) {
+      heroVal = to;
+      node.textContent = "$" + to.toFixed(1) + "M";
+      return;
+    }
+    var from = heroVal;
+    heroVal = to;
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = "$" + interp(t).toFixed(1) + "M"; };
+      });
+  }
+
+  function setHeroLabel(landed) {
+    root.select(".tb-hero-label").text(landed
+      ? "Leaves $" + MARGIN.toFixed(1) + "M under the first apron"
+      : "Before a single signing");
+    root.classed("is-landed", landed);
+  }
+
+  function showTooltip(head, desc, anchorEl) {
+    var tip = root.select(".tb-tooltip");
+    tip.select(".tb-tip-head").text(head);
+    tip.select(".tb-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select(".tb-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var cRect = anchorEl.getBoundingClientRect();
+    var cx = cRect.left - sRect.left + cRect.width / 2;
+    var cy = cRect.top - sRect.top;
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var x = cx - tw / 2, y = cy - th - 8;
+    if (x < 4) x = 4;
+    if (x + tw > sRect.width - 4) x = sRect.width - tw - 4;
+    if (y < 4) y = cy + cRect.height + 8;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".tb-tooltip").classed("is-on", false); }
+
+  // ---- Build -----------------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var host = root.select(".tb-rows");
+    host.selectAll("*").remove();
+
+    var rows = [];
+    ROWS.forEach(function (r) {
+      var row = host.append("div")
+        .attr("class", "tb-row" + (r.charge ? " is-charge" : ""))
+        .attr("title", r.name + ": " + r.tip);
+      var nameCell = row.append("div").attr("class", "tb-name");
+      nameCell.append("span").text(compact && !r.charge ? r.name.replace("Anthony ", "A. ").replace("Terrence ", "T. ").replace("Julian ", "J. ").replace("Julius ", "J. ").replace("Jaden ", "J. ").replace("Donte ", "D. ").replace("Rudy ", "R. ").replace("Joan ", "J. ") : (compact && r.charge ? "Roster charges (3)" : r.name));
+      if (r.badge) {
+        var cls = r.badge.indexOf("PO") === 0 ? "po" : (r.badge === "EXP" ? "exp" : "to");
+        nameCell.append("span").attr("class", "tb-badge tb-badge-" + cls)
+          .text(compact ? r.badge.split(" ")[0] : r.badge);
+      }
+      var fill = row.append("div").attr("class", "tb-track")
+        .append("div").attr("class", "tb-fill");
+      row.append("div").attr("class", "tb-sal").text("$" + r.sal.toFixed(1) + "M");
+      row.on("mouseenter", function () { showTooltip(r.name, r.tip, this); })
+         .on("mouseleave", hideTooltip);
+      rows.push({ r: r, el: row, fill: fill });
+    });
+
+    lastBuilt = { rows: rows, compact: compact };
+    return lastBuilt;
+  }
+
+  function fillPct(s) { return Math.round(s / MAXSAL * 100) + "%"; }
+
+  function allOn(built) {
+    built.rows.forEach(function (x) {
+      x.el.classed("is-on", true);
+      x.fill.style("width", fillPct(x.r.sal));
+    });
+    heroVal = TOTAL;
+    root.select(".tb-hero-num").text("$" + TOTAL.toFixed(1) + "M");
+    setHeroLabel(true);
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".tb-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(5);
+      root.select(".tb-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    built.rows.forEach(function (x) {
+      x.el.classed("is-on", false);
+      x.fill.style("width", "0%");
+    });
+    heroVal = 0;
+    root.select(".tb-hero-num").text("$0.0M");
+    setHeroLabel(false);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Rows land one at a time; the running total climbs with them.
+    var running = 0;
+    built.rows.forEach(function (x, i) {
+      var isCharge = !!x.r.charge;
+      var at = ROW_AT + i * ROW_STAG + (isCharge ? CHARGE_EXTRA : 0);
+      running += x.r.sal;
+      var target = Math.min(running, TOTAL);
+      playTimers.push(setTimeout(function () {
+        x.el.classed("is-on", true);
+        x.fill.style("width", fillPct(x.r.sal));
+        tickHeroTo(target, 420);
+        if (isCharge) setCaption(4);
+      }, at));
+    });
+
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+
+    var landAt = ROW_AT + (built.rows.length - 1) * ROW_STAG + CHARGE_EXTRA + 700;
+    playTimers.push(setTimeout(function () {
+      tickHeroTo(TOTAL, 250);
+      setHeroLabel(true);
+      setCaption(5);
+    }, landAt));
+    playTimers.push(setTimeout(function () {
+      root.select(".tb-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".tb-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(5);
+    root.select(".tb-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(5);
+          root.select(".tb-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
