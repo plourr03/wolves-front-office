@@ -86,6 +86,10 @@ I promised the misuse claim publishes only as measured, and measurement cuts bot
 
 First, his dunk attempts barely moved. Down 8 percent, against a 37 percent collapse in roll possessions. If Minnesota had truly stopped using him, the dunks die with the rolls. They didn't, which means Ant's lobs and the transition rim runs still found him. What disappeared is narrower and more specific: the structured half-court possession that ends with him rolling out of a screen. They never stopped feeding his rim gravity. They stopped building the offense through it.
 
+{{viz:dunks-vs-rolls}}
+
+*Both lines indexed to his Utah prime. If they'd buried him, the lines fall together. Only the red one falls. That gap is the difference between "they stopped using Rudy" and what actually happened.*
+
 Second, the collapse wasn't a straight line. His roll volume actually ticked up in 2023-24 and 2024-25 before cratering this season, the same season the feeder count hit one. The structural problem spans all four years. The acute version is this past season specifically.
 
 Third, my own outline for this piece overclaimed twice, and I'm printing the corrections because that's the deal. I had written that he led the league in screen assists every tracked Utah year. He didn't: three of six, top four in all of them. I had also written "most efficient roll man in basketball" as if it held continuously. The honest version is elite then, above average now. And here's the correction that sharpens the story instead of softening it: he led the entire league in screen assists again this past season. The screens still generate points for everyone else. He just finishes fewer of them himself.
@@ -110,7 +114,7 @@ It's not all his fault. It's not none of it either. The parenthetical is doing r
 
 <!-- Production notes, do not publish:
 - Vizzes BUILT (fragments + previews in outputs/charts/piece2_gobert/): gobert-four-view,
-  feeder-count, roll-man-collapse, scheme-was-his. All four tags placed in this draft. Load into
+  feeder-count, roll-man-collapse, scheme-was-his, dunks-vs-rolls. All five tags placed in this draft. Load into
   /admin/visualizations/new with the matching ids on publish.
 - The "can't catch" composite voice in the open and the elbow-possession scene are composites,
   clearly framed as such; no fabricated quotes or specific games.

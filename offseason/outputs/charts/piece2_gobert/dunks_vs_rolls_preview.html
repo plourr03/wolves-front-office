@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The contradiction, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is dunks_vs_rolls_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-dunks-vs-rolls">
+  <div class="dv-chip" role="status">
+    <span class="dv-chip-dot"></span>
+    <span class="dv-chip-label">The contradiction</span>
+    <span class="dv-chip-sep">·</span>
+    <span class="dv-chip-sub">dunks vs rolls, indexed to Utah</span>
+  </div>
+  <p class="dv-caption" aria-live="polite"></p>
+  <div class="dv-stage">
+    <div class="dv-tooltip" role="tooltip">
+      <div class="dv-tip-head"></div>
+      <div class="dv-tip-desc"></div>
+    </div>
+  </div>
+  <div class="dv-legend">
+    <span class="dv-leg dv-leg-dunk">dunk attempts (held)</span>
+    <span class="dv-leg dv-leg-roll">roll-man possessions (collapsed)</span>
+    <button class="dv-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="dv-foot">Both series indexed to his Utah prime average (2016-17 through 2021-22 = 100). If Minnesota had simply buried him, both lines fall together. They don't. The lobs and rim runs kept finding him. The structured roll out of a screen is what disappeared. Hover any dot for the raw rates.</p>
+  <div class="dv-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-dunks-vs-rolls, #viz-dunks-vs-rolls * { touch-action: manipulation; }
+  #viz-dunks-vs-rolls {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-dunks-vs-rolls .dv-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-error);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-dunks-vs-rolls .dv-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-error);
+  }
+  #viz-dunks-vs-rolls .dv-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-dunks-vs-rolls .dv-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-dunks-vs-rolls .dv-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-dunks-vs-rolls .dv-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 252px;
+    overflow: hidden;
+  }
+  #viz-dunks-vs-rolls.is-compact .dv-stage { height: 224px; }
+  #viz-dunks-vs-rolls .dv-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-dunks-vs-rolls .dv-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-dunks-vs-rolls .dv-tooltip.is-on { opacity: 1; }
+  #viz-dunks-vs-rolls .dv-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-dunks-vs-rolls .dv-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  #viz-dunks-vs-rolls .dv-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 12px 0 0 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #viz-dunks-vs-rolls .dv-leg {
+    font: 600 11px var(--family-sans);
+    color: var(--text-tertiary);
+    padding-left: 18px;
+    position: relative;
+  }
+  #viz-dunks-vs-rolls .dv-leg::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 13px; height: 3px;
+    border-radius: 2px;
+  }
+  #viz-dunks-vs-rolls .dv-leg-dunk::before { background: var(--accent-default); }
+  #viz-dunks-vs-rolls .dv-leg-roll::before { background: var(--status-error); }
+  #viz-dunks-vs-rolls .dv-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-dunks-vs-rolls .dv-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-dunks-vs-rolls .dv-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-dunks-vs-rolls .dv-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-dunks-vs-rolls .dv-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Gobert's dunk attempts per game vs his roll-man possessions per game,
+  // each indexed to his Utah prime average (2016-17 through 2021-22 = 100).
+  // raw values ride in the tooltips. The point: if Minnesota had simply
+  // buried him, both lines fall together. Only the roll line collapses.
+  var SEASONS = ["14-15","15-16","16-17","17-18","18-19","19-20","20-21","21-22","22-23","23-24","24-25","25-26"];
+  var ROLL = { idx: [41, 53, 78, 88, 103, 108, 118, 104, 63, 76, 69, 45],
+               raw: [1.35, 1.74, 2.54, 2.88, 3.36, 3.54, 3.86, 3.41, 2.07, 2.47, 2.25, 1.46] };
+  var DUNK = { idx: [51, 49, 86, 84, 120, 100, 101, 109, 87, 102, 100, 80],
+               raw: [1.79, 1.72, 3.02, 2.93, 4.21, 3.49, 3.52, 3.80, 3.03, 3.57, 3.50, 2.78] };
+  var TRADE_I = 8;   // index of 22-23
+
+  var CAPTIONS = [
+    "Two of his numbers, indexed to his Utah prime. 100 is the Utah level.",
+    "The rolls. Down 37 percent in Minnesota, bottoming at less than half the Utah level. The misuse claim in one line.",
+    "Now the dunks. Down 8 percent. They barely moved.",
+    "They never stopped feeding his rim gravity. They stopped building the half-court through it. The claim survives, but only the precise version of it."
+  ];
+
+  var AXIS_AT = 200;
+  var ROLL_AT = 700, ROLL_MS = 1700;
+  var DUNK_AT = 3300, DUNK_MS = 1700;
+  var CAP3_AT = 5600;
+  var REPLAY_AT = 6400;
+
+  var root = d3.select("#viz-dunks-vs-rolls");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".dv-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".dv-tooltip");
+    tip.select(".dv-tip-head").text(head);
+    tip.select(".dv-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".dv-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12;
+    if (y + th > sh - 8) y = sh - th - 8;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".dv-tooltip").classed("is-on", false); }
+
+  function fullSeason(s) { return "20" + s.split("-")[0] + "-" + s.split("-")[1]; }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".dv-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "dv-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.2 : 1.6).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = { left: 34, right: compact ? 52 : 72, top: 26, bottom: 32 };
+    var x = d3.scalePoint().domain(SEASONS).range([pad.left + 8, W - pad.right]);
+    var y = d3.scaleLinear().domain([30, 130]).range([H - pad.bottom, pad.top]);
+
+    // Gridlines, the 100 reference emphasized.
+    [40, 70, 100, 130].forEach(function (t) {
+      var isRef = t === 100;
+      svg.append("line")
+        .attr("x1", pad.left).attr("x2", W - pad.right + (compact ? 40 : 56))
+        .attr("y1", y(t)).attr("y2", y(t))
+        .style("stroke", isRef ? "var(--border-default)" : "var(--border-subtle)")
+        .style("stroke-width", isRef ? 1.5 : 1)
+        .style("stroke-dasharray", isRef ? "none" : "2,4");
+      svg.append("text")
+        .attr("x", pad.left - 7).attr("y", y(t) + 3)
+        .attr("text-anchor", "end")
+        .style("fill", isRef ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("font", (isRef ? "700 " : "") + "10px var(--family-mono)")
+        .text(t);
+    });
+    svg.append("text")
+      .attr("x", pad.left + 2).attr("y", y(100) - 6)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9px var(--family-sans)")
+      .text(compact ? "UTAH PRIME = 100" : "HIS UTAH PRIME LEVEL = 100");
+
+    // Trade divider.
+    var tradeX = (x(SEASONS[TRADE_I - 1]) + x(SEASONS[TRADE_I])) / 2;
+    svg.append("line")
+      .attr("x1", tradeX).attr("x2", tradeX)
+      .attr("y1", pad.top - 8).attr("y2", H - pad.bottom)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", tradeX).attr("y", pad.top - 12)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9.5px var(--family-sans)")
+      .text(compact ? "TRADE" : "THE TRADE");
+
+    // X labels.
+    SEASONS.forEach(function (s, i) {
+      if (compact && i % 3 !== 0 && i !== SEASONS.length - 1) return;
+      if (!compact && i % 2 === 1 && i !== SEASONS.length - 1) return;
+      svg.append("text")
+        .attr("x", x(s)).attr("y", H - pad.bottom + 16)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "9.5px var(--family-mono)")
+        .text("'" + s);
+    });
+
+    function lineGen() {
+      return d3.line()
+        .x(function (d, i) { return x(SEASONS[i]); })
+        .y(function (d) { return y(d); })
+        .curve(d3.curveMonotoneX);
+    }
+
+    function drawSeries(vals, stroke, w) {
+      var p = svg.append("path").datum(vals)
+        .attr("d", lineGen())
+        .style("fill", "none")
+        .style("stroke", stroke)
+        .style("stroke-width", w)
+        .style("filter", "url(#dv-glow)");
+      var len = p.node().getTotalLength();
+      if (!reduceMotion) p.attr("stroke-dasharray", len + " " + len).attr("stroke-dashoffset", len);
+      return { p: p, len: len };
+    }
+
+    var rollPath = drawSeries(ROLL.idx, "var(--status-error)", compact ? 2.0 : 2.4);
+    var dunkPath = drawSeries(DUNK.idx, "var(--accent-default)", compact ? 2.2 : 2.6);
+
+    // Dots + tooltips.
+    function drawDots(series, vals, raws, color, name, unit) {
+      var dots = [];
+      vals.forEach(function (v, i) {
+        var s = SEASONS[i];
+        var dot = svg.append("circle")
+          .attr("cx", x(s)).attr("cy", y(v))
+          .attr("r", reduceMotion ? (compact ? 2.6 : 3.1) : 0)
+          .style("fill", color)
+          .style("cursor", "pointer");
+        var head = fullSeason(s) + " · " + name;
+        var desc = raws[i].toFixed(2) + " " + unit + " per game, index " + v + " against his Utah prime average.";
+        dot.on("mouseenter mousemove", function () { showTooltip(head, desc, x(s), y(v)); })
+           .on("mouseleave", hideTooltip);
+        dot.append("title").text(head + ": " + desc);
+        dots.push({ dot: dot, i: i, r: compact ? 2.6 : 3.1 });
+      });
+      return dots;
+    }
+    var rollDots = drawDots("roll", ROLL.idx, ROLL.raw, "var(--status-error)", "roll-man possessions", "rolls");
+    var dunkDots = drawDots("dunk", DUNK.idx, DUNK.raw, "var(--accent-default)", "dunk attempts", "dunks");
+
+    // End-of-line callouts.
+    var lastX = x(SEASONS[SEASONS.length - 1]);
+    var rollEnd = svg.append("text")
+      .attr("x", lastX + 8).attr("y", y(ROLL.idx[ROLL.idx.length - 1]) + 3)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--status-error)")
+      .style("font", "700 " + (compact ? "10px" : "11px") + " var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text("-37%");
+    var dunkEnd = svg.append("text")
+      .attr("x", lastX + 8).attr("y", y(DUNK.idx[DUNK.idx.length - 1]) + 3)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--accent-hover)")
+      .style("font", "700 " + (compact ? "10px" : "11px") + " var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text("-8%");
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = { rollPath: rollPath, dunkPath: dunkPath, rollDots: rollDots, dunkDots: dunkDots,
+                rollEnd: rollEnd, dunkEnd: dunkEnd };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.rollPath.p.attr("stroke-dashoffset", 0);
+    ctx.dunkPath.p.attr("stroke-dashoffset", 0);
+    ctx.rollDots.forEach(function (d) { d.dot.attr("r", d.r); });
+    ctx.dunkDots.forEach(function (d) { d.dot.attr("r", d.r); });
+    ctx.rollEnd.style("opacity", 1);
+    ctx.dunkEnd.style("opacity", 1);
+    setCaption(3);
+    root.select(".dv-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.select(".dv-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.rollPath.p.attr("stroke-dashoffset", ctx.rollPath.len);
+    ctx.dunkPath.p.attr("stroke-dashoffset", ctx.dunkPath.len);
+    ctx.rollDots.forEach(function (d) { d.dot.attr("r", 0); });
+    ctx.dunkDots.forEach(function (d) { d.dot.attr("r", 0); });
+    ctx.rollEnd.style("opacity", 0);
+    ctx.dunkEnd.style("opacity", 0);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // The roll line collapses first.
+    playTimers.push(setTimeout(function () {
+      setCaption(1);
+      ctx.rollPath.p.transition().duration(ROLL_MS).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
+      ctx.rollDots.forEach(function (d) {
+        d.dot.transition().delay((d.i / (SEASONS.length - 1)) * ROLL_MS).duration(280)
+          .ease(d3.easeBackOut.overshoot(1.5)).attr("r", d.r);
+      });
+      ctx.rollEnd.transition().delay(ROLL_MS).duration(300).style("opacity", 1);
+    }, ROLL_AT));
+
+    // Then the dunk line holds.
+    playTimers.push(setTimeout(function () {
+      setCaption(2);
+      ctx.dunkPath.p.transition().duration(DUNK_MS).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
+      ctx.dunkDots.forEach(function (d) {
+        d.dot.transition().delay((d.i / (SEASONS.length - 1)) * DUNK_MS).duration(280)
+          .ease(d3.easeBackOut.overshoot(1.5)).attr("r", d.r);
+      });
+      ctx.dunkEnd.transition().delay(DUNK_MS).duration(300).style("opacity", 1);
+    }, DUNK_AT));
+
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".dv-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".dv-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>
