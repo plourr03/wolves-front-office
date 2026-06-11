@@ -95,6 +95,12 @@ free agent and use their best tools unless a big salary leaves first.** That is 
 whole summer hangs on. Every Gobert column, every Randle rumor, every draft-night consolidation
 idea is downstream of it.
 
+{{viz:apron-runway}}
+
+*The whole squeeze in one runway: the books at $194.0M, the three lines, and the re-sign that
+spends the margin. Watch the toolbox die at the crossing. Hover the lines and the chips for what
+each one does.*
+
 ## The chest
 
 The trade columns will spend July sketching packages, so it is worth stating exactly what
@@ -121,16 +127,12 @@ playoff offenses and defenses are actually constructed, then recomputed under ea
 because what the Wolves need depends entirely on who leaves. The full method is on the
 [methodology page](#methodology). The shape of the answer:
 
-| dimension | as-is | Randle out | Gobert out | both out |
-|---|---|---|---|---|
-| On-ball creation | surplus | fine | fine | gap |
-| Secondary playmaking | gap | **largest gap** | fine | gap |
-| Off-ball shooting | **largest gap** | gap | gap | gap |
-| Point-of-attack defense | gap | gap | **largest gap** | gap |
-| Rim protection / rebounding | fine | gap | gap | **largest gap** |
-| Transition | surplus | surplus | surplus | surplus |
+{{viz:needs-by-exit}}
 
-Two things in that table cut against the loudest versions of the discourse.
+*Six dimensions against a contender benchmark, recomputed for each exit door. The columns land one
+at a time; the red cell is each scenario's largest hole. Hover any cell for the underlying numbers.*
+
+Two things in that grid cut against the loudest versions of the discourse.
 
 First, the model does not ask for more on-ball creation. Edwards covers it; as-is, it is a
 surplus. What the roster lacks is everything that should surround a primary like him: shooting

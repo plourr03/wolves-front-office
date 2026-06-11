@@ -1,0 +1,534 @@
+<div id="viz-needs-by-exit">
+  <div class="ne-chip" role="status">
+    <span class="ne-chip-dot"></span>
+    <span class="ne-chip-label">The need, by exit door</span>
+    <span class="ne-chip-sep">·</span>
+    <span class="ne-chip-sub">playoff-calibrated benchmark</span>
+  </div>
+  <p class="ne-caption" aria-live="polite"></p>
+  <div class="ne-stage">
+    <div class="ne-grid"></div>
+    <div class="ne-tooltip" role="tooltip">
+      <div class="ne-tip-head"></div>
+      <div class="ne-tip-desc"></div>
+      <div class="ne-tip-num"></div>
+    </div>
+  </div>
+  <div class="ne-legend">
+    <span class="ne-leg ne-leg-surplus">surplus</span>
+    <span class="ne-leg ne-leg-fine">fine</span>
+    <span class="ne-leg ne-leg-gap">gap</span>
+    <span class="ne-leg ne-leg-worst">largest gap</span>
+    <button class="ne-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ne-foot">Six dimensions of the returning roster measured against a contender benchmark calibrated to playoff conditions, then recomputed for each exit scenario. DiVincenzo's absence is baked into every column. Hover any cell for the numbers.</p>
+  <div class="ne-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-needs-by-exit, #viz-needs-by-exit * { touch-action: manipulation; }
+  #viz-needs-by-exit {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-needs-by-exit .ne-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-warning);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-needs-by-exit .ne-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-warning);
+  }
+  #viz-needs-by-exit .ne-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-needs-by-exit .ne-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-needs-by-exit .ne-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-needs-by-exit .ne-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  #viz-needs-by-exit .ne-grid {
+    display: grid;
+    grid-template-columns: 158px repeat(4, 1fr);
+    gap: 6px;
+  }
+  #viz-needs-by-exit.is-compact .ne-grid { grid-template-columns: 88px repeat(4, 1fr); gap: 4px; }
+  #viz-needs-by-exit .ne-head {
+    font: 700 11.5px var(--family-sans);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 6px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 360ms ease, color 150ms ease;
+  }
+  #viz-needs-by-exit .ne-head:hover { color: var(--text-primary); }
+  #viz-needs-by-exit.is-compact .ne-head { font-size: 10px; padding: 4px 1px; }
+  #viz-needs-by-exit .ne-rowlab {
+    font: 600 11.5px var(--family-sans);
+    color: var(--text-secondary);
+    text-align: right;
+    padding: 10px 10px 0 0;
+    line-height: 1.25;
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+  #viz-needs-by-exit.is-compact .ne-rowlab { font-size: 10px; padding: 8px 6px 0 0; }
+  #viz-needs-by-exit .ne-head.is-on,
+  #viz-needs-by-exit .ne-rowlab.is-on { opacity: 1; transform: none; }
+  #viz-needs-by-exit .ne-cell {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 7px 6px 6px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 360ms ease, border-color 150ms ease;
+    overflow: hidden;
+  }
+  #viz-needs-by-exit .ne-cell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ne-tint, transparent);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  #viz-needs-by-exit .ne-cell.is-on { opacity: 1; transform: none; }
+  #viz-needs-by-exit .ne-cell.is-dim { opacity: 0.28; }
+  #viz-needs-by-exit .ne-cell:hover { border-color: var(--border-default); }
+  #viz-needs-by-exit .ne-word {
+    position: relative;
+    font: 700 12px var(--family-sans);
+    line-height: 1.2;
+    display: block;
+  }
+  #viz-needs-by-exit.is-compact .ne-word { font-size: 10px; }
+  #viz-needs-by-exit .ne-delta {
+    position: relative;
+    font: 600 10px var(--family-mono);
+    color: var(--text-tertiary);
+    display: block;
+    margin-top: 2px;
+  }
+  #viz-needs-by-exit.is-compact .ne-delta { display: none; }
+  #viz-needs-by-exit .ne-cell.st-surplus { --ne-tint: var(--status-success); }
+  #viz-needs-by-exit .ne-cell.st-surplus .ne-word { color: var(--status-success); }
+  #viz-needs-by-exit .ne-cell.st-fine .ne-word { color: var(--text-tertiary); font-weight: 600; }
+  #viz-needs-by-exit .ne-cell.st-gap { --ne-tint: var(--status-warning); }
+  #viz-needs-by-exit .ne-cell.st-gap .ne-word { color: var(--status-warning); }
+  #viz-needs-by-exit .ne-cell.st-worst {
+    --ne-tint: var(--status-error);
+    border-color: var(--status-error);
+  }
+  #viz-needs-by-exit .ne-cell.st-worst .ne-word { color: var(--status-error); }
+  @keyframes viz-ne-pulse {
+    0% { transform: scale(1); }
+    38% { transform: scale(1.07); }
+    100% { transform: scale(1); }
+  }
+  #viz-needs-by-exit .ne-cell.is-pulse { animation: viz-ne-pulse 800ms ease; }
+  #viz-needs-by-exit .ne-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-needs-by-exit .ne-tooltip.is-on { opacity: 1; }
+  #viz-needs-by-exit .ne-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-needs-by-exit .ne-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+  #viz-needs-by-exit .ne-tip-num {
+    font: 700 12px var(--family-mono);
+    color: var(--text-primary);
+  }
+  #viz-needs-by-exit .ne-legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 0 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #viz-needs-by-exit .ne-leg {
+    font: 600 11px var(--family-sans);
+    color: var(--text-tertiary);
+    padding-left: 14px;
+    position: relative;
+  }
+  #viz-needs-by-exit .ne-leg::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+  #viz-needs-by-exit .ne-leg-surplus::before { background: var(--status-success); }
+  #viz-needs-by-exit .ne-leg-fine::before { background: var(--text-tertiary); }
+  #viz-needs-by-exit .ne-leg-gap::before { background: var(--status-warning); }
+  #viz-needs-by-exit .ne-leg-worst::before { background: var(--status-error); }
+  #viz-needs-by-exit .ne-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-needs-by-exit .ne-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-needs-by-exit .ne-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-needs-by-exit .ne-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-needs-by-exit .ne-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Returning-roster profile vs a playoff-calibrated contender benchmark,
+  // per dimension, recomputed for each exit scenario (need_vectors.csv,
+  // built from the warehouse June 2026). delta = benchmark minus profile:
+  // positive = short of the benchmark (a gap), negative = above it.
+  // States follow the model's is_need flags; "worst" is the largest gap
+  // within each scenario column.
+  var SCEN = ["As is", "Randle out", "Gobert out", "Both out"];
+  var BENCH = { creation: 0.62, playmaking: 0.55, shooting: 0.60, poa: 0.60, rim: 0.58, transition: 0.52 };
+  var DIMS = [
+    { key: "creation", l: "On-ball creation", s: "On-ball",
+      prof: [0.776, 0.664, 0.676, 0.564], st: ["surplus", "fine", "fine", "gap"] },
+    { key: "playmaking", l: "Secondary playmaking", s: "Playmaking",
+      prof: [0.485, 0.397, 0.513, 0.424], st: ["gap", "worst", "fine", "gap"] },
+    { key: "shooting", l: "Off-ball shooting", s: "Shooting",
+      prof: [0.470, 0.450, 0.504, 0.485], st: ["worst", "gap", "gap", "gap"] },
+    { key: "poa", l: "Point-of-attack defense", s: "POA defense",
+      prof: [0.478, 0.504, 0.426, 0.452], st: ["gap", "gap", "worst", "gap"] },
+    { key: "rim", l: "Rim protection, rebounding", s: "Rim",
+      prof: [0.533, 0.501, 0.425, 0.393], st: ["fine", "gap", "gap", "worst"] },
+    { key: "transition", l: "Transition", s: "Transition",
+      prof: [0.765, 0.657, 0.711, 0.603], st: ["surplus", "surplus", "surplus", "surplus"] }
+  ];
+
+  var CAPTIONS = [
+    "Six dimensions, measured for the returning roster against a contender benchmark. The columns are the exit doors.",
+    "As is, the holes are shooting, the point of attack, and a second playmaker. Creation is a surplus. The team does not need another hero.",
+    "Move Randle and secondary playmaking becomes the largest gap on the team.",
+    "Move Gobert and the defense blows open: the point of attack, and a rim with one 19-year-old behind it.",
+    "Move both and five of six dimensions are holes. Subtraction unlocks the tools, and manufactures the needs."
+  ];
+
+  var COL_AT = [800, 2500, 4200, 5900];
+  var ROW_STAG = 55;
+  var REPLAY_AT = 7600;
+
+  var root = d3.select("#viz-needs-by-exit");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".ne-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function deltaText(d, prof, bench) {
+    var delta = bench - prof;
+    return delta > 0
+      ? delta.toFixed(2).replace("0.", ".") + " short"
+      : Math.abs(delta).toFixed(2).replace("0.", ".") + " over";
+  }
+
+  function stateWord(st, compact) {
+    if (st === "worst") return compact ? "worst" : "largest gap";
+    return st;
+  }
+
+  function showTooltip(head, desc, num, anchorEl) {
+    var tip = root.select(".ne-tooltip");
+    tip.select(".ne-tip-head").text(head);
+    tip.select(".ne-tip-desc").text(desc);
+    tip.select(".ne-tip-num").text(num);
+    tip.classed("is-on", true);
+    var stageEl = root.select(".ne-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var cRect = anchorEl.getBoundingClientRect();
+    var cx = cRect.left - sRect.left + cRect.width / 2;
+    var cy = cRect.top - sRect.top;
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var x = cx - tw / 2, y = cy - th - 10;
+    if (x < 4) x = 4;
+    if (x + tw > sRect.width - 4) x = sRect.width - tw - 4;
+    if (y < 4) y = cy + cRect.height + 10;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".ne-tooltip").classed("is-on", false); }
+
+  // ---- Build the grid ------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var grid = root.select(".ne-grid");
+    grid.selectAll("*").remove();
+
+    // Header row: corner + four scenario headers.
+    grid.append("div");
+    SCEN.forEach(function (s, k) {
+      var h = grid.append("div")
+        .attr("class", "ne-head")
+        .attr("data-col", k)
+        .text(s);
+      h.on("mouseenter", function () { focusCol(k, true); })
+       .on("mouseleave", function () { focusCol(k, false); });
+    });
+
+    // Dimension rows.
+    var cells = [];
+    DIMS.forEach(function (d, r) {
+      grid.append("div")
+        .attr("class", "ne-rowlab")
+        .attr("data-col", 0)
+        .text(compact ? d.s : d.l);
+      d.st.forEach(function (st, k) {
+        var cell = grid.append("div")
+          .attr("class", "ne-cell st-" + st)
+          .attr("data-col", k)
+          .attr("data-row", r);
+        cell.append("span").attr("class", "ne-word").text(stateWord(st, compact));
+        cell.append("span").attr("class", "ne-delta").text(deltaText(d, d.prof[k], BENCH[d.key]));
+        var tipHead = d.l + " · " + SCEN[k];
+        var tipDesc = "Returning-roster profile " + d.prof[k].toFixed(2) +
+          " against a contender benchmark of " + BENCH[d.key].toFixed(2) + ".";
+        var tipNum = deltaText(d, d.prof[k], BENCH[d.key]) +
+          (st === "worst" ? " · the largest hole in this scenario" : " · " + stateWord(st, false));
+        cell.attr("title", tipHead + ". " + tipDesc + " " + tipNum + ".");
+        cell.on("mouseenter", function () { showTooltip(tipHead, tipDesc, tipNum, this); })
+            .on("mouseleave", hideTooltip);
+        cells.push({ el: cell, col: k, row: r, st: st });
+      });
+    });
+
+    lastBuilt = { cells: cells, compact: compact };
+    return lastBuilt;
+  }
+
+  function focusCol(k, on) {
+    if (!lastBuilt) return;
+    lastBuilt.cells.forEach(function (c) {
+      c.el.classed("is-dim", on && c.col !== k && c.el.classed("is-on"));
+    });
+  }
+
+  function allOn(built) {
+    root.selectAll(".ne-rowlab, .ne-head").classed("is-on", true);
+    built.cells.forEach(function (c) { c.el.classed("is-on", true); });
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".ne-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(4);
+      root.select(".ne-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    root.selectAll(".ne-rowlab, .ne-head").classed("is-on", false);
+    built.cells.forEach(function (c) { c.el.classed("is-on", false).classed("is-pulse", false); });
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Row labels in first.
+    playTimers.push(setTimeout(function () {
+      root.selectAll(".ne-rowlab").classed("is-on", true);
+    }, 350));
+
+    // Columns land one at a time, caption tracking.
+    SCEN.forEach(function (_, k) {
+      playTimers.push(setTimeout(function () {
+        root.selectAll(".ne-head").filter(function () {
+          return +this.getAttribute("data-col") === k;
+        }).classed("is-on", true);
+        built.cells.filter(function (c) { return c.col === k; }).forEach(function (c) {
+          playTimers.push(setTimeout(function () {
+            c.el.classed("is-on", true);
+          }, c.row * ROW_STAG));
+        });
+        setCaption(k + 1);
+        // Pulse the worst cell once the column has landed.
+        playTimers.push(setTimeout(function () {
+          built.cells.filter(function (c) { return c.col === k && c.st === "worst"; })
+            .forEach(function (c) {
+              c.el.classed("is-pulse", true);
+              playTimers.push(setTimeout(function () { c.el.classed("is-pulse", false); }, 900));
+            });
+        }, DIMS.length * ROW_STAG + 250));
+      }, COL_AT[k]));
+    });
+
+    playTimers.push(setTimeout(function () {
+      root.select(".ne-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".ne-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(4);
+    root.select(".ne-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(4);
+          root.select(".ne-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

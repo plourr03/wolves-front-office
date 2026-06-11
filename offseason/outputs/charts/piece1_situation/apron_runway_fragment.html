@@ -1,0 +1,735 @@
+<div id="viz-apron-runway">
+  <div class="ar-chip" role="status">
+    <span class="ar-chip-dot"></span>
+    <span class="ar-chip-label">The 2026-27 books</span>
+    <span class="ar-chip-sep">·</span>
+    <span class="ar-chip-sub">cap model, June 9, 2026</span>
+  </div>
+  <p class="ar-caption" aria-live="polite"></p>
+  <div class="ar-stage">
+    <div class="ar-tooltip" role="tooltip">
+      <div class="ar-tip-head"></div>
+      <div class="ar-tip-desc"></div>
+      <div class="ar-tip-num"></div>
+    </div>
+  </div>
+  <div class="ar-toolbox">
+    <div class="ar-toolbox-head">The toolbox · each use hard-caps the team at $209.1M</div>
+    <div class="ar-chips">
+      <span class="ar-tool" data-tool="mle"><span class="ar-tool-dot"></span>Full MLE · $15.0M</span>
+      <span class="ar-tool" data-tool="tpe1"><span class="ar-tool-dot"></span>TPE · $10.8M</span>
+      <span class="ar-tool" data-tool="tpe2"><span class="ar-tool-dot"></span>TPE · $6.6M</span>
+      <span class="ar-tool" data-tool="snt"><span class="ar-tool-dot"></span>Sign-and-trade</span>
+      <span class="ar-tool ar-tool-survivor" data-tool="tmle"><span class="ar-tool-dot"></span>Taxpayer MLE · $6.1M</span>
+    </div>
+  </div>
+  <div class="ar-hero">
+    <div class="ar-hero-line">
+      <span class="ar-hero-num">+$15.1M</span>
+      <span class="ar-hero-unit">to the first apron</span>
+    </div>
+    <div class="ar-hero-label">The margin the whole summer lives in</div>
+    <button class="ar-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ar-foot">Wolves 2026-27 books per our cap model (apron basis, eight guaranteed deals plus roster charges). The re-sign is shown at $16.5M, the mid-teens market number our gate tested. Bird rights make it legal. The geometry is what it costs.</p>
+  <div class="ar-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-apron-runway, #viz-apron-runway * { touch-action: manipulation; }
+  #viz-apron-runway {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-apron-runway .ar-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-apron-runway .ar-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+  }
+  #viz-apron-runway .ar-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-apron-runway .ar-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-apron-runway .ar-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-apron-runway .ar-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 236px;
+    overflow: hidden;
+  }
+  #viz-apron-runway.is-compact .ar-stage { height: 212px; }
+  #viz-apron-runway .ar-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-apron-runway .ar-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 150px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-apron-runway .ar-tooltip.is-on { opacity: 1; }
+  #viz-apron-runway .ar-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-apron-runway .ar-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+  #viz-apron-runway .ar-tip-num {
+    font: 700 12px var(--family-mono);
+    color: var(--text-primary);
+  }
+  #viz-apron-runway .ar-toolbox { margin: 14px 0 0 0; }
+  #viz-apron-runway .ar-toolbox-head {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  #viz-apron-runway .ar-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  #viz-apron-runway .ar-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font: 600 12px var(--family-sans);
+    color: var(--text-secondary);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 320ms ease, transform 320ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  #viz-apron-runway .ar-tool.is-in { opacity: 1; transform: translateY(0); }
+  #viz-apron-runway .ar-tool-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent-default);
+    transition: background 200ms ease;
+  }
+  #viz-apron-runway .ar-tool.is-dead {
+    opacity: 0.4;
+    text-decoration: line-through;
+    color: var(--text-tertiary);
+  }
+  #viz-apron-runway .ar-tool.is-dead .ar-tool-dot { background: var(--status-error); }
+  #viz-apron-runway .ar-tool-survivor { border-color: var(--border-subtle); }
+  #viz-apron-runway .ar-tool-survivor.is-alive {
+    border-color: var(--status-info);
+    color: var(--text-primary);
+  }
+  #viz-apron-runway .ar-tool-survivor.is-alive .ar-tool-dot { background: var(--status-info); }
+  #viz-apron-runway .ar-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-apron-runway .ar-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-apron-runway .ar-hero-num {
+    font: 800 56px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-apron-runway.is-landed .ar-hero-num,
+  #viz-apron-runway.is-landed .ar-hero-unit { color: var(--status-error); }
+  #viz-apron-runway .ar-hero-unit {
+    font: 700 14px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.15;
+    max-width: 110px;
+    transition: color 320ms ease;
+  }
+  #viz-apron-runway .ar-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+    transition: color 320ms ease;
+  }
+  #viz-apron-runway.is-compact .ar-hero-num { font-size: 42px; }
+  #viz-apron-runway .ar-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-apron-runway .ar-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-apron-runway .ar-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-apron-runway .ar-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-apron-runway .ar-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Wolves 2026-27 apron geometry. Books = $194.0M (our cap model, apron
+  // basis, 2026-06-09: eight guaranteed deals plus roster charges). Lines
+  // are the 2026-27 thresholds. The re-sign is modeled at $16.5M, the
+  // mid-teens market number the feasibility gate tested (Bird rights, no
+  // hard cap by itself). 194.0 + 16.5 = 210.5, which is $1.4M over the
+  // first apron, where the full MLE, both TPEs, and sign-and-trades die.
+  var BOOKS = 194.0;
+  var DOS = 16.5;
+  var END = BOOKS + DOS;        // 210.5
+  var TAX = 201.0;
+  var APRON1 = 209.1;
+  var APRON2 = 222.0;
+  var DOM_LO = 185, DOM_HI = 226;
+
+  var WALLS = [
+    { v: TAX, name: "Luxury tax", short: "Tax", cost: "costs money",
+      desc: "Crossing it costs ownership money and starts repeater history. It does not remove any tools." },
+    { v: APRON1, name: "First apron", short: "1st apron", cost: "kills the toolbox",
+      desc: "The line that matters. The full MLE, both trade exceptions, and any sign-and-trade acquisition hard-cap the team here. Over it, those tools are dead." },
+    { v: APRON2, name: "Second apron", short: "2nd apron", cost: "kills team-building",
+      desc: "No aggregating salaries in trades, no cash, a future first freezes. The taxpayer MLE hard-caps the team here." }
+  ];
+
+  var CAPTIONS = [
+    "Three lines decide the summer. The one that matters is $209.1M.",
+    "The books today: $194.0M. The margin is $15.1M, and the whole toolbox lives inside it.",
+    "Now re-sign Ayo Dosunmu, the team's own free-agent priority, at a mid-teens number.",
+    "Over by $1.4M. The full MLE and both trade exceptions are sealed. What is left: the $6.1M taxpayer MLE and minimums.",
+    "Keep your best free agent or keep your toolbox. Unless a big salary leaves first."
+  ];
+
+  var WALLS_AT = 200, WALL_STAG = 260, WALL_MS = 480;
+  var BOOKS_AT = 1600, BOOKS_MS = 1100;
+  var CHIPS_AT = 2850, CHIP_STAG = 100;
+  var CAP1_AT = 2800;
+  var CAP2_AT = 4300;
+  var DOS_AT = 4900, DOS_MS = 1700;
+  var CROSS_FRAC = (APRON1 - BOOKS) / DOS;   // ~0.915 of the extension
+  var CROSS_AT = DOS_AT + DOS_MS * CROSS_FRAC;
+  var CAP3_AT = CROSS_AT + 250;
+  var SURV_AT = CROSS_AT + 650;
+  var CAP4_AT = 7600;
+  var REPLAY_AT = 8200;
+
+  var root = d3.select("#viz-apron-runway");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  // ---- Helpers -------------------------------------------------------
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function fmtMargin(m) {
+    var s = m >= 0 ? "+" : "-";
+    return s + "$" + Math.abs(m).toFixed(1) + "M";
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".ar-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function setHero(margin) {
+    root.select(".ar-hero-num").node().textContent = fmtMargin(margin);
+  }
+  function setHeroLabel(landed) {
+    root.select(".ar-hero-label").text(landed
+      ? "Over the line. The toolbox is dead."
+      : "The margin the whole summer lives in");
+  }
+
+  function chipsIn(on) {
+    root.selectAll(".ar-tool:not(.ar-tool-survivor)").classed("is-in", on);
+  }
+  function chipsDead(on) {
+    root.selectAll(".ar-tool:not(.ar-tool-survivor)").classed("is-dead", on);
+  }
+  function survivor(on) {
+    root.select(".ar-tool-survivor").classed("is-in", on).classed("is-alive", on);
+  }
+
+  function showTooltip(head, desc, num, cx, cy) {
+    var tip = root.select(".ar-tooltip");
+    tip.select(".ar-tip-head").text(head);
+    tip.select(".ar-tip-desc").text(desc);
+    tip.select(".ar-tip-num").text(num);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".ar-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 14, y = cy + 14;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 14;
+    if (y + th > sh - 8) y = cy - th - 14;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".ar-tooltip").classed("is-on", false); }
+
+  // Tool chip tooltips via title attributes.
+  var TOOL_TITLES = {
+    mle: "Full midlevel exception, $15.0M. Sign a real free agent with it and the team is hard-capped at $209.1M all season.",
+    tpe1: "Trade exception from the February Conley trade, $10.8M. Absorb a player into it and the first-apron hard cap snaps on.",
+    tpe2: "Trade exception from the Dillingham trade, $6.6M. Same trigger, same ceiling.",
+    snt: "Acquiring a player by sign-and-trade hard-caps the team at the first apron.",
+    tmle: "Taxpayer midlevel, $6.1M. The tool you are left with over the first apron. Using it hard-caps the team at the second apron, $222M."
+  };
+  root.selectAll(".ar-tool").each(function () {
+    var el = d3.select(this);
+    el.attr("title", TOOL_TITLES[el.attr("data-tool")] || "");
+  });
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".ar-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "ar-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.2 : 1.7).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = { left: 14, right: 14 };
+    var x = d3.scaleLinear().domain([DOM_LO, DOM_HI]).range([pad.left, W - pad.right]);
+
+    var labelTop = 16;
+    var wallTop = compact ? 52 : 58;
+    var barH = compact ? 24 : 30;
+    var barY = H - (compact ? 88 : 96);
+    var wallBot = barY + barH + (compact ? 26 : 30);
+
+    // Baseline under the runway.
+    svg.append("line")
+      .attr("x1", pad.left).attr("x2", W - pad.right)
+      .attr("y1", wallBot).attr("y2", wallBot)
+      .style("stroke", "var(--border-subtle)").style("stroke-width", 1);
+
+    // ---- Walls -------------------------------------------------------
+    var wallG = svg.append("g");
+    var wallSel = [];
+    WALLS.forEach(function (w, i) {
+      var wx = x(w.v);
+      var isApron1 = w.v === APRON1;
+      var g = wallG.append("g").style("opacity", reduceMotion ? 1 : 0);
+
+      var line = g.append("line")
+        .attr("x1", wx).attr("x2", wx)
+        .attr("y1", wallTop).attr("y2", reduceMotion ? wallBot : wallTop)
+        .style("stroke", isApron1 ? "var(--text-secondary)" : "var(--border-default)")
+        .style("stroke-width", isApron1 ? 2 : 1.5)
+        .style("stroke-dasharray", isApron1 ? "none" : "4,4")
+        .style("cursor", "pointer");
+
+      // Label block above the wall, clamped inside the frame.
+      var anchor = "middle", lx = wx;
+      if (wx - 56 < pad.left) { anchor = "start"; lx = wx - 2; }
+      else if (wx + 56 > W - pad.right) { anchor = "end"; lx = wx + 2; }
+      g.append("text")
+        .attr("x", lx).attr("y", labelTop)
+        .attr("text-anchor", anchor)
+        .style("fill", isApron1 ? "var(--text-primary)" : "var(--text-secondary)")
+        .style("font", "700 " + (compact ? "10.5px" : "11.5px") + " var(--family-sans)")
+        .text(compact ? w.short : w.name);
+      g.append("text")
+        .attr("x", lx).attr("y", labelTop + 14)
+        .attr("text-anchor", anchor)
+        .style("fill", isApron1 ? "var(--text-primary)" : "var(--text-tertiary)")
+        .style("font", "600 " + (compact ? "10px" : "11px") + " var(--family-mono)")
+        .text("$" + w.v.toFixed(1) + "M");
+      if (!compact) {
+        g.append("text")
+          .attr("x", lx).attr("y", labelTop + 28)
+          .attr("text-anchor", anchor)
+          .style("fill", "var(--text-tertiary)")
+          .style("font", "9.5px var(--family-sans)")
+          .text(w.cost);
+      }
+
+      // Fat invisible hover target along the wall.
+      g.append("line")
+        .attr("x1", wx).attr("x2", wx)
+        .attr("y1", labelTop - 10).attr("y2", wallBot)
+        .style("stroke", "transparent").style("stroke-width", 18)
+        .style("cursor", "pointer")
+        .on("mouseenter mousemove", function () {
+          showTooltip(w.name + " · $" + w.v.toFixed(1) + "M", w.desc, "", wx, wallTop + 24);
+        })
+        .on("mouseleave", hideTooltip)
+        .append("title").text(w.name + ", $" + w.v.toFixed(1) + "M. " + w.desc);
+
+      wallSel.push({ g: g, line: line, isApron1: isApron1, x: wx });
+    });
+
+    // ---- Axis break glyph at the left edge (truncated money axis) ----
+    var brk = svg.append("g");
+    [0, 4].forEach(function (off) {
+      brk.append("line")
+        .attr("x1", pad.left + 2 + off).attr("y1", barY + barH + 4)
+        .attr("x2", pad.left + 8 + off).attr("y2", barY - 4)
+        .style("stroke", "var(--text-tertiary)").style("stroke-width", 1.2);
+    });
+    svg.append("text")
+      .attr("x", pad.left).attr("y", wallBot + 16)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9.5px var(--family-mono)")
+      .text("axis starts at $185M");
+
+    // ---- Books bar ---------------------------------------------------
+    var booksW = x(BOOKS) - x(DOM_LO);
+    var booksBar = svg.append("rect")
+      .attr("x", x(DOM_LO)).attr("y", barY)
+      .attr("height", barH).attr("rx", 3)
+      .style("fill", "var(--accent-default)")
+      .style("filter", "url(#ar-glow)")
+      .style("cursor", "pointer")
+      .attr("width", reduceMotion ? booksW : 0);
+    booksBar
+      .on("mouseenter mousemove", function (e) {
+        showTooltip("The books today", "Eight guaranteed contracts plus roster charges, apron basis, before any free agency.", "$194.0M", x(BOOKS) - 40, barY);
+      })
+      .on("mouseleave", hideTooltip)
+      .append("title").text("Wolves 2026-27 books today: $194.0M.");
+
+    var booksLabel = svg.append("text")
+      .attr("x", x(DOM_LO) + 1).attr("y", barY + barH + 18)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "700 " + (compact ? "10.5px" : "12px") + " var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text("today $194.0M");
+
+    // ---- Dosunmu segment ---------------------------------------------
+    var dosW = x(END) - x(BOOKS);
+    var dosBar = svg.append("rect")
+      .attr("x", x(BOOKS) - 2).attr("y", barY)
+      .attr("height", barH).attr("rx", 3)
+      .style("fill", "var(--status-warning)")
+      .style("opacity", 0.92)
+      .style("cursor", "pointer")
+      .attr("width", reduceMotion ? dosW + 2 : 0);
+    dosBar
+      .on("mouseenter mousemove", function () {
+        showTooltip("Dosunmu re-sign", "Modeled at the mid-teens market number. Bird rights make it legal over the cap with no hard cap by itself. It just spends the margin.", "+$16.5M", x(BOOKS) + dosW / 2, barY);
+      })
+      .on("mouseleave", hideTooltip)
+      .append("title").text("Dosunmu re-sign, modeled at $16.5M. Legal via Bird rights; it spends the first-apron margin.");
+
+    var dosLabel = svg.append("text")
+      .attr("x", x(END)).attr("y", barY + barH + 18)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--status-warning)")
+      .style("font", "700 " + (compact ? "10.5px" : "12px") + " var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text(compact ? "+ Dosunmu $16.5M" : "+ Dosunmu re-sign $16.5M");
+
+    var overLabel = svg.append("text")
+      .attr("x", x(END) + 7).attr("y", barY + barH / 2 + 4)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--status-error)")
+      .style("font", "700 " + (compact ? "10px" : "11.5px") + " var(--family-mono)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text("over by $1.4M");
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = {
+      wallSel: wallSel, wallTop: wallTop, wallBot: wallBot,
+      booksBar: booksBar, booksW: booksW, booksLabel: booksLabel,
+      dosBar: dosBar, dosW: dosW, dosLabel: dosLabel, overLabel: overLabel,
+      x: x
+    };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function pulseApron1(ctx) {
+    var w = ctx.wallSel[1];
+    w.line
+      .style("stroke", "var(--status-error)")
+      .style("filter", "url(#ar-glow)")
+      .transition("pulse").duration(280).ease(d3.easeCubicOut)
+      .style("stroke-width", 4)
+      .transition().duration(420)
+      .style("stroke-width", 2.5);
+  }
+
+  function finalState(ctx) {
+    ctx.wallSel.forEach(function (w) {
+      w.g.style("opacity", 1);
+      w.line.attr("y2", ctx.wallBot);
+    });
+    ctx.booksBar.attr("width", ctx.booksW);
+    ctx.booksLabel.style("opacity", 1);
+    ctx.dosBar.attr("width", ctx.dosW + 2);
+    ctx.dosLabel.style("opacity", 1);
+    ctx.overLabel.style("opacity", 1);
+    var w1 = ctx.wallSel[1];
+    w1.line.style("stroke", "var(--status-error)").style("stroke-width", 2.5).style("filter", "url(#ar-glow)");
+    chipsIn(true); chipsDead(true); survivor(true);
+    setCaption(4);
+    setHero(APRON1 - END);
+    setHeroLabel(true);
+    root.classed("is-landed", true);
+    root.select(".ar-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".ar-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.wallSel.forEach(function (w) {
+      w.g.style("opacity", 0);
+      w.line.attr("y2", ctx.wallTop)
+        .style("stroke", w.isApron1 ? "var(--text-secondary)" : "var(--border-default)")
+        .style("stroke-width", w.isApron1 ? 2 : 1.5)
+        .style("filter", null);
+    });
+    ctx.booksBar.attr("width", 0);
+    ctx.booksLabel.style("opacity", 0);
+    ctx.dosBar.attr("width", 0);
+    ctx.dosLabel.style("opacity", 0);
+    ctx.overLabel.style("opacity", 0);
+    chipsIn(false); chipsDead(false); survivor(false);
+    setHero(APRON1 - DOM_LO);
+    setHeroLabel(false);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Phase 1: walls draw in.
+    ctx.wallSel.forEach(function (w, i) {
+      w.g.transition().delay(WALLS_AT + i * WALL_STAG).duration(260).style("opacity", 1);
+      w.line.transition().delay(WALLS_AT + i * WALL_STAG).duration(WALL_MS)
+        .ease(d3.easeCubicOut).attr("y2", ctx.wallBot);
+    });
+
+    // Phase 2: the books bar grows to $194.0M; the hero margin counts down.
+    ctx.booksBar.transition("grow").delay(BOOKS_AT).duration(BOOKS_MS)
+      .ease(d3.easeCubicOut)
+      .attr("width", ctx.booksW)
+      .tween("hero", function () {
+        var node = root.select(".ar-hero-num").node();
+        var interp = d3.interpolateNumber(DOM_LO, BOOKS);
+        return function (t) { node.textContent = fmtMargin(APRON1 - interp(t)); };
+      });
+    playTimers.push(setTimeout(function () {
+      ctx.booksLabel.transition().duration(300).style("opacity", 1);
+    }, BOOKS_AT + BOOKS_MS - 200));
+
+    // Toolbox chips appear, alive.
+    playTimers.push(setTimeout(function () {
+      var chips = root.selectAll(".ar-tool:not(.ar-tool-survivor)").nodes();
+      chips.forEach(function (el, i) {
+        playTimers.push(setTimeout(function () {
+          d3.select(el).classed("is-in", true);
+        }, i * CHIP_STAG));
+      });
+    }, CHIPS_AT));
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+
+    // Phase 3: the re-sign.
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    ctx.dosBar.transition("dos").delay(DOS_AT).duration(DOS_MS)
+      .ease(d3.easeCubicInOut)
+      .attr("width", ctx.dosW + 2)
+      .tween("hero", function () {
+        var node = root.select(".ar-hero-num").node();
+        var interp = d3.interpolateNumber(BOOKS, END);
+        return function (t) { node.textContent = fmtMargin(APRON1 - interp(t)); };
+      });
+    playTimers.push(setTimeout(function () {
+      ctx.dosLabel.transition().duration(300).style("opacity", 1);
+    }, DOS_AT + 500));
+
+    // The crossing: wall pulses red, hero flips, the toolbox dies.
+    playTimers.push(setTimeout(function () {
+      pulseApron1(ctx);
+      root.classed("is-landed", true);
+      setHeroLabel(true);
+      chipsDead(true);
+    }, CROSS_AT));
+    playTimers.push(setTimeout(function () {
+      ctx.overLabel.transition().duration(300).style("opacity", 1);
+      setCaption(3);
+    }, CAP3_AT));
+    playTimers.push(setTimeout(function () { survivor(true); }, SURV_AT));
+
+    // Landing.
+    playTimers.push(setTimeout(function () { setCaption(4); }, CAP4_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".ar-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".ar-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
