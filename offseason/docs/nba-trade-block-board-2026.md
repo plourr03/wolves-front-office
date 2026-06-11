@@ -78,6 +78,8 @@ A note on the league state: there has been heavy movement since the February dea
 
 **San Antonio Spurs [Loaded, selectively flexible].** Wembanyama, De'Aaron Fox, Devin Vassell, plus the young guard pair of Stephon Castle and Dylan Harper. With Fox and Vassell in place, one of Castle or Harper could be viewed as semi-expendable in the right blockbuster. The team that just bounced you; not desperate, but has real surplus young talent.
 
+**WATCH-LIST, NOT PRICED. De'Aaron Fox to Minnesota [Speculative · Speculative · fan-site tier].** Fox surfaces in fan and trade-machine Wolves-target lists as a lead-guard fit next to Edwards, and he would address the Finch-confirmed playmaking need. But there is NO reporting that San Antonio is shopping him (he was their February 2025 acquisition alongside the Castle/Harper youth, and the Spurs are building, not selling their veteran guard). Treat as fan-driven until a credible source says otherwise. CONDITION: if post-Finals reporting materializes on Fox availability, he goes through the full acquisition-metric and Component F/G treatment immediately; until then he stays Speculative and unpriced.
+
 **Atlanta Hawks [Retooling, flexible].** Post-Trae Young, built around Jalen Johnson, Dyson Daniels, Onyeka Okongwu, and a flexible cap sheet with picks. Jonathan Kuminga (on a large team-option-style number) is an interesting movable young piece. Could be a buyer or a mover depending on direction.
 
 **Los Angeles Lakers [Buyer with cap room].** Luka is the centerpiece, LeBron's future (a free-agent or opt-out decision) is the big question, and they want to keep Austin Reaves. One of the few teams with real money. Their clear need is a center (Gafford and Claxton have been floated).
@@ -87,6 +89,8 @@ A note on the league state: there has been heavy movement since the February dea
 **Toronto Raptors [Retooling-ish].** Scottie Barnes core, with Brandon Ingram, Immanuel Quickley, and Jakob Poeltl. Quickley has surfaced as a matching piece in Gobert frameworks. Could move a veteran for fit.
 
 **Minnesota Timberwolves [you].** Covered in the Phase 1 board: Randle and Gobert are the outgoing-salary question, McDaniels the swing chip if you go big, Edwards untouchable.
+
+**Wolves-internal reporting (June 11, 2026) [Reported].** Chris Finch, on KFAN (picked up by Yahoo and ClutchPoints), said directly that the Wolves "definitely need another ball handler and playmaker" to take the load off Edwards, who carried a 31.4% usage rate and missed a career-high 21 games. This is coach-level confirmation of the needs vector's number-one dimension (creation / secondary playmaking, the `status_quo` need at +0.065 secondary-playmaking and the largest hole by exit scenario) and the explicit hook for Piece 5 (the point-guard problem). Tag it Reported: it is a direct, sourced quote, not analyst projection. In the same availability Finch floated an INTERNAL piece of the answer (Terrence Shannon Jr. taking on-ball reps alongside Edwards, with Finch conceding the earlier off-ball deployment was a misuse); that branch is priced as a labeled scenario in `outputs/gobert_usage_audit.md` (Addendum B), where Shannon's actual pick-and-roll ball-handler history is shown to sit below the meaningful-feeder bar on a small sample.
 
 ---
 

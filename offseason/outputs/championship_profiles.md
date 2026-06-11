@@ -167,7 +167,17 @@ pick. It lands under the first apron, anchors at +1.6-1.75 on the conservative D
 backup-five behind an aging Gobert (the groomed-backup cone, ~46% rotation-rim+ by 2027-28) and
 add NO veteran big who blocks him, and hand Shannon the bench-creator minutes that Randle's exit
 and DiVincenzo's absence open (his runway cone, ~63% dependable-or-better). The cones confirm the
-kids develop inside the recommendation without paying the both-out path's present-title cost. It
+kids develop inside the recommendation without paying the both-out path's present-title cost.
+**The Piece 2 to Piece 7 bridge (delivery system):** the Gobert usage audit
+(`gobert_usage_audit.md`) found Minnesota fielded just ONE meaningful live-dribble pick-and-roll
+feeder around him in 2025-26 (Edwards), down from four to six in Utah. Projecting each addition's
+PnR ball-handler volume onto a full season, **A/C move that feeder count from 1 to 3** (Edwards +
+Dosunmu re-signed ~208 poss + Mitchell ~357 in C; A reaches 3 only if the MLE is a PnR guard like
+McCollum ~472 or Powell ~264, not a spot-up shooter like Huerter, since McBride ~133 does not clear
+the bar). So the same conversion that raises the floor also rebuilds the delivery environment that
+makes Gobert a weapon, restoring it toward Utah levels WITHOUT trading him, though realizing the
+roll-man volume also requires running more pick-and-roll than Minnesota's below-average 2025-26 rate.
+It
 beats the fragile-star path (negative risk-adjusted), the higher-ceiling-but-DARKO-skeptical and
 inflexible Markkanen build (B), and the apron-choked patience fallback (D). If no counterparty
 materializes, D is the honest floor: run it back, the youth limits decay, and strike in 2027 when
@@ -237,8 +247,8 @@ A/C; the reverse option is real at the FEBRUARY 2027 DEADLINE but largely gone b
 depreciation curve (`gobert_depreciation_curve.md`) makes this precise: his contract surplus crosses
 NEGATIVE this coming season (+$4.7M today to about -$1.3M in 2026-27 as the salary steps to $36.5M
 and age 34 bites), and reaches about -$8M on the $38M age-35 option year, so the realistic return
-falls from a real package now, to a contender's deadline premium, to paying-to-move (the Horford-35
-case) by summer 2027. Holding past the deadline destroys more value than any summer-2027 return
+falls from a real package now, to a contender's deadline premium, to paying-to-move (the Horford 2020
+case, where PHI attached a first to dump the contract) by summer 2027. Holding past the deadline destroys more value than any summer-2027 return
 adds. Under the box and DARKO views the depreciation SOFTENS the hold into a sell-at-the-deadline
 lean; under consensus and RAPM the hold-and-contend verdict survives. The both-out playbook is the
 contingency you keep on the shelf, and the deadline is the moment you re-decide.

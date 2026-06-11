@@ -116,6 +116,84 @@ The audit does not absolve him, and three measured facts keep the piece honest:
   sits at the 73rd in Minnesota. Elite is the right word for the Utah peak seasons; "still a
   clearly positive roll finisher" is the right word for now.
 
+## Addendum A: scheme choice vs feeder scarcity (separating the two causes)
+
+The roll-man collapse has two distinct causes, and the team-level data separates them. Pulling each
+team's offensive share run as a pick-and-roll BALL-HANDLER action (the scheme-frequency measure, from
+`nba_synergy_team_play_types`) against the league average:
+
+| era | team PnR ball-handler frequency | total team PnR poss |
+|---|---|---|
+| Utah prime (2016-17 to 2021-22) | **+3.2 to +6.8 pp ABOVE league** every year | 1,719 to 2,046 |
+| Minnesota (2022-23 to 2025-26) | **at or BELOW league** (-0.6 to -2.2 pp) | 1,180 to 1,482 |
+| Minnesota 2025-26 specifically | 13.1%, **-2.2 pp below league, the lowest of the era** | 1,180 (lowest) |
+
+This is the load-bearing nuance. **Minnesota does not just lack the feeders; it runs a fundamentally
+less pick-and-roll-heavy scheme than Utah did.** Quin Snyder's Utah built an offense around Gobert's
+screen and ran 4 to 7 percentage points more PnR ball-handler than the league; Finch's Minnesota
+runs an Edwards-on-ball, transition, and isolation offense that sits below league average in PnR
+frequency. (Telling corroboration: once Utah traded Gobert, its own PnR frequency fell to
+league-average, the scheme was his.) So the diminished roll diet is scheme AND personnel, and the two
+compound. The misuse reading is partly an indictment of an offensive design that structurally
+underuses the action that makes him a weapon, not just of a thin roster.
+
+And the 2025-26 acute year has a named mechanism on the feeder side too: **Edwards' own PnR
+ball-handler volume nearly halved, from 688 possessions in 2024-25 to 353 in 2025-26** (33.3% of his
+offense down to 23.5%), as he shifted toward isolation, transition, and off-ball work. His PnR
+efficiency held (about 1.00 points per possession), so this is a role/scheme shift, not a decline,
+but it starved Gobert's roll in the one season the delivery count also fell to one.
+
+## Addendum B: the Piece 2 to Piece 7 bridge (does the plan restore the delivery system?)
+
+Projecting each Portfolio A/C addition's historical PnR ball-handler volume onto a full Wolves season
+(poss per game times 72, against the same 150-possession "meaningful feeder" bar the audit uses):
+
+| player | role in plan | projected full-season PnR ball-handler poss | clears 150 bar? |
+|---|---|---|---|
+| Anthony Edwards | incumbent | 353 (2025-26 actual) | yes |
+| Ayo Dosunmu | re-sign, full season | ~208 | yes |
+| Ajay Mitchell | Portfolio C flier | ~357 | yes |
+| CJ McCollum | MLE tier | ~472 | yes |
+| Norman Powell | MLE tier | ~264 | yes |
+| Miles McBride | Portfolio A flier | ~133 | no (connector / spot-up) |
+| Kevin Huerter | MLE tier | ~105 | no (spot-up wing) |
+| Jalen Smith | stretch five | none (not an initiator) | no, and correctly so |
+
+**The plan moves the delivery-system count from 1 (2025-26) toward 3.** Portfolio C (the Mitchell
+flier) lands at Edwards plus Dosunmu plus Mitchell, **three feeders**, and reaches four if the MLE is
+a pick-and-roll guard like McCollum. Portfolio A (the McBride flier) lands at two on its own, because
+McBride does not clear the bar, and reaches **three** only if the MLE slot is a ball-handler
+(McCollum or Powell) rather than a spot-up shooter (Huerter). So the choice WITHIN the MLE tier is a
+delivery-system decision, not just a shooting one: a McCollum-type restores a feeder, a Huerter-type
+does not.
+
+This is the bridge from Piece 2 to Piece 7. The usage audit diagnoses the disease (one live-dribble
+feeder around Gobert in 2025-26, down from four to six in Utah); the capstone plan's prescription
+restores the delivery environment to roughly Utah levels (three feeders) WITHOUT trading him. **Two
+honest caveats:** (1) restoring the feeders raises the CEILING for his roll-man volume but does not
+guarantee it, because the team-frequency data shows Minnesota runs below-average PnR by design, so
+the personnel is necessary and a scheme shift toward more pick-and-roll is also required; and (2) the
+projections lean on health (Dosunmu and McCollum have missed time, Conley at 39 and a
+post-Achilles DiVincenzo no longer backfill the bar), so three is the plan's target, not a guarantee.
+
+**The Finch-floated internal branch (Shannon on the ball), priced as the labeled scenario it is.**
+On June 11, 2026 (KFAN, via Yahoo/ClutchPoints) Finch confirmed the playmaking need directly ("we
+definitely need another ball handler and playmaker" to take load off Edwards, 31.4% usage, 21 games
+missed) and floated an internal piece of the answer: Terrence Shannon Jr. taking on-ball reps in the
+starting unit, conceding the earlier off-ball deployment was a misuse. The data says this is a
+small-sample bet, not a solution. Shannon's actual pick-and-roll ball-handler history: ZERO meaningful
+reps as a 2024-25 rookie (his diet was spot-up 39% and transition 30%), then 41 possessions in
+2025-26 (18.5% of his offense, 0.951 points per possession), which projects to about **70 over a full
+season, well below the 150 feeder bar**. And the efficiency is unstable on the sample: 41 possessions
+puts a roughly plus-or-minus 0.32 band on that 0.951 PPP, so it cannot be distinguished from
+below-average. So in the delivery-system count he is a **fourth, developmental feeder to watch, not a
+counted one**: he does not yet clear the bar, and the Finch-floated co-primary-handler role sits one
+full rung ABOVE the cone's bench-creator ladder (which projects him as a dependable bench scorer with
+a Sixth-Man ceiling, not a starting-unit on-ball creator). The honest framing for Piece 5: the
+committee (Dosunmu plus a Mitchell-type plus a PnR-capable MLE) is the real answer to the feeder
+problem, and Shannon-on-the-ball is a labeled internal-upside branch that the coach likes and the
+data has not yet earned.
+
 ## Data provenance and caveats
 
 - All figures are warehouse pulls (schema `nba`): synergy `PRRollMan`/`PRBallHandler`

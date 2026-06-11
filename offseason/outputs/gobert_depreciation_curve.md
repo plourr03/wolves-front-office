@@ -41,20 +41,24 @@ the contract math is unchanged because the salary step-up is contractual.)
 
 The trade-comp database and the public record agree, and the pattern is steep. There is no comp in
 which a defense-first center on a $30M-plus salary fetched a first-round haul after age 33. The
-returns collapse from "a useful player plus a second" to "you attach an asset to move him":
+returns collapse from "a useful player plus a second" to "you attach an asset to move him." The set
+is aging veterans on big salaries; the four CENTERS (Gasol, Porzingis, Horford, Howard) are the
+position-matched comps that carry the weight, with Hayward shown because the salary dynamic
+generalizes to any aging $30M expiring:
 
-| comp | age at trade | what the elite/good big returned |
+| comp | age at trade | what the aging big-salary veteran returned |
 |---|---|---|
-| Rudy Gobert (2022) | 30 | four firsts plus a swap (the CEILING; not repeatable, and it is his own deal) |
+| Rudy Gobert, UTA to MIN (2022) | 30 | four firsts plus a swap (the CEILING; not repeatable, and it is his own deal) |
 | Marc Gasol, MEM to TOR (2019) | 34 | a younger starting center (Valanciunas) plus two role players plus a 2nd; a deadline contender buying defense for a title run |
-| Kristaps Porzingis (2026 deadline) | 30 | role players and salary, ZERO picks in the deal |
-| Gordon Hayward (2024 deadline) | 34 | moved as a big expiring for filler plus minor seconds |
-| Al Horford, OKC to BOS (2021) | 35 | a NEGATIVE-value contract: a 2nd and a young body were ATTACHED to move him |
+| Kristaps Porzingis, GSW to ATL (2026 deadline) | 30 | a young forward (Kuminga, team option) plus a vet shooter (Hield), ZERO picks in the deal |
+| Gordon Hayward, CHA to OKC (2024 deadline) | 34 | a wing, not a center, but a $31.5M expiring that returned only young filler plus two seconds |
+| Al Horford, PHI to OKC (Nov/Dec 2020) | 34 | a NEGATIVE-value contract: Philadelphia ATTACHED a lightly-protected 2025 first AND the No. 34 pick to move Horford plus his $27M salary, taking back Danny Green |
 | Dwight Howard (early 30s) | 31-33 | a former three-time DPOY passed around for salary filler, then waived |
 
 The lesson the comps teach is the lesson the surplus curve predicts: **a $35-38M defense-only
 center in his mid-30s is priced by the league as a salary-matching piece, not as an asset, and the
-moment the salary outruns the production you pay to move him (Horford at 35), you do not get paid.**
+moment the salary outruns the production you pay to move him (the Horford 2020 case, where the
+seller attached a first to dump the contract), you do not get paid.**
 
 ## The three windows, priced
 
@@ -78,9 +82,9 @@ moved. **This is the best risk-adjusted moment to trade him if you trade him at 
 **Window 3, summer 2027 (age-35 $38M expiring, opt-in modeled as near-certain).** He opts in: $38M
 at age 35 for a defense-only center is far above any market he could reach in free agency, so the
 opt-in is as close to certain as these things get, and the asset becomes a one-year expiring at a
-**-$8M contract surplus**. The realistic return is **negative**: this is the Horford-35 case, where
-you attach a second (the target) or a lightly-protected first (the ceiling concession) to move him
-for cap relief. The war-chest rationale that was the entire case for trading him has evaporated,
+**-$8M contract surplus**. The realistic return is **negative**: this is the Horford 2020 case,
+where you attach a second (the target) or a lightly-protected first (the ceiling concession) to move
+him for cap relief. The war-chest rationale that was the entire case for trading him has evaporated,
 because there is no war chest in a negative return.
 
 ## The time-dependent reservation price (by view)
@@ -120,9 +124,15 @@ So the branch ranking, against "sell now" and "hold to 2027":
 1. **Hold now, re-price at the deadline (BEST).** Preserves 2026-27 title equity (every both-out
    portfolio prices negative now), banks half a season of Beringer development and half a season of
    evidence on which Gobert view is real, and hits the one moment his defensive value commands a
-   premium while his contract is still an asset. If a contender overpays at the deadline, you sell
-   into strength. If no one does, you have lost nothing and you keep a still-useful +1.4 anchor for
-   your own playoff run.
+   premium while his contract is still an asset. **The sell rule at the deadline is a conditional,
+   not a default:** sell in February ONLY IF (a) Beringer's first half confirms the groomed branch
+   is tracking (the internal rim answer is materializing, so you can afford to move the external
+   one), OR (b) the return includes playable rim minutes (the Gasol-for-Valanciunas pattern, a
+   usable center comes back, not just picks and salary filler). If NEITHER condition holds, you hold
+   Gobert through the playoff run: a still-useful +1.4 anchor with no internal replacement and no
+   rim coming back is worth more on the floor in May than as a deadline salary-match. Selling into a
+   pick-only return while Beringer is still a question would recreate the rim trap the both-out
+   playbook rejects.
 2. **Sell now (SECOND, and only conditionally).** Justified only if you believe the box or DARKO
    read AND you are committed to the 2027 reset, because it banks the war chest before further
    depreciation. It costs present title equity (-0.4 to -1.2pp) under every view.
