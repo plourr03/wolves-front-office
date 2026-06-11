@@ -233,6 +233,12 @@ you genuinely believe the box read (+1.48, a good-not-irreplaceable center) does
 CHA-type package (two-to-three firsts plus a young rim-running big like Kalkbrenner) clear the bar,
 and even then only if you are optimizing 2027 over 2026-27. Under DARKO, consensus, and RAPM the
 rim is too costly to give up for any realistic return. **Verdict: hold Gobert and run Portfolio
-A/C; the reverse option (trade at the deadline or in 2027, when his value clears or a contender
-overpays) is worth more than any summer return short of a box-view believer's CHA harvest.** The
-both-out playbook is the contingency you keep on the shelf, not the plan.
+A/C; the reverse option is real at the FEBRUARY 2027 DEADLINE but largely gone by summer 2027.** The
+depreciation curve (`gobert_depreciation_curve.md`) makes this precise: his contract surplus crosses
+NEGATIVE this coming season (+$4.7M today to about -$1.3M in 2026-27 as the salary steps to $36.5M
+and age 34 bites), and reaches about -$8M on the $38M age-35 option year, so the realistic return
+falls from a real package now, to a contender's deadline premium, to paying-to-move (the Horford-35
+case) by summer 2027. Holding past the deadline destroys more value than any summer-2027 return
+adds. Under the box and DARKO views the depreciation SOFTENS the hold into a sell-at-the-deadline
+lean; under consensus and RAPM the hold-and-contend verdict survives. The both-out playbook is the
+contingency you keep on the shelf, and the deadline is the moment you re-decide.
