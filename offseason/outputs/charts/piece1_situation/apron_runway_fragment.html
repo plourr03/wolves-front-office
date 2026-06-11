@@ -31,7 +31,7 @@
     <div class="ar-hero-label">The margin the whole summer lives in</div>
     <button class="ar-replay" type="button" aria-label="Replay">↺ Replay</button>
   </div>
-  <p class="ar-foot">Wolves 2026-27 books per our cap model (apron basis, eight guaranteed deals plus roster charges). The re-sign is shown at $16.5M, the mid-teens market number our gate tested. Bird rights make it legal. The geometry is what it costs. The runway zooms into the last $41M; the strip below it is the same money at true scale, so the $16.5M reads at its real size next to the $194M.</p>
+  <p class="ar-foot">Wolves 2026-27 books per our cap model (apron basis: nine contracts, eight guaranteed plus a team option, plus roster charges). The re-sign is shown at $16.5M, the mid-teens market number our gate tested. Bird rights make it legal. The geometry is what it costs. The runway zooms into the last $41M; the strip below it is the same money at true scale, so the $16.5M reads at its real size next to the $194M.</p>
   <div class="ar-watermark">@WolvesToaT · Jun 2026</div>
 </div>
 <style>
@@ -561,10 +561,10 @@
       .attr("width", reduceMotion ? booksW : 0);
     booksBar
       .on("mouseenter mousemove", function (e) {
-        showTooltip("The books today", "Eight guaranteed contracts plus roster charges, apron basis, before any free agency.", "$194.0M", x(BOOKS) - 40, barY);
+        showTooltip("The books today", "Nine contracts (eight guaranteed plus Phillips's team option) and roster charges, apron basis, before any free agency.", "$194.0M", x(BOOKS) - 40, barY);
       })
       .on("mouseleave", hideTooltip)
-      .append("title").text("Wolves 2026-27 books today: $194.0M.");
+      .append("title").text("Wolves 2026-27 books today: $194.0M, apron basis.");
 
     var booksLabel = svg.append("text")
       .attr("x", x(DOM_LO) + 1).attr("y", barY + barH + 18)
