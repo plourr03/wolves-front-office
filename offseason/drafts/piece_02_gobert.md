@@ -6,11 +6,13 @@ tags: [Timberwolves, Rudy Gobert, Pick-and-Roll, Four Views, 2026 Offseason, Off
 
 # It's Not (All) Gobert's Fault
 
-For a stretch of years in Utah, Rudy Gobert was one of the most efficient roll men in basketball. Not "good for a center." The most efficient kind of basketball play, run through him, over and over, at the top of the league. Today the discourse's word for that same player is some version of: a massive detriment catching the ball out of the pick-and-roll.
+There's an argument every Wolves fan has been having since the summer of 2022. I've had it at bars. I've had it at family gatherings where it had no business coming up. I've had it alone in the car, running both sides myself, which is a weird thing to admit in print.
 
-Same hands. Different passes.
+One side says Rudy Gobert was the most efficient roll man in basketball for years, anchors everything this team does on defense, and gets blamed for an offense that was never built for him. The other side says he's a 34-year-old center who can't catch, can't create, can't shoot, and soaks up $36.5 million while doing it. You've heard both. Depending on the night, you've probably been both.
 
-I've had the Rudy argument so many times since 2022 that I can run both sides of it by myself in the car. And here's what I finally figured out after building the models for this series: everyone in that argument is holding a real number. The argument never resolves because the numbers are measuring different things, and almost nobody says which one they're holding.
+Same player. Same hands. Different passes.
+
+Here's what I finally figured out after building the models for this series: everyone in that argument is holding a real number. The argument never resolves because the numbers are measuring different things, and almost nobody says which one they're holding.
 
 So this piece does two jobs. First it lays the four numbers on the table and tells you what each one can and cannot see. Then it does the thing the argument actually needs, which is to measure what changed between Utah and here. Not vibes. Possessions, touches, screens, feeds. The misuse claim, the one Wolves fans mutter and Gobert defenders shout, turns out to be checkable. I checked it.
 
@@ -28,17 +30,17 @@ The box-score read has him around plus 1.5, a good starter. The box counts what 
 
 DARKO, the public machine-learning metric, has him at plus 2 overall, and the split is the honest part: plus 4 on defense, elite, top of the league for a center his age, and minus 2 on offense. Genuinely negative. Hold that minus 2, because the back half of this piece is about where it comes from.
 
-And the on-court math, both my regularized plus-minus model and the consensus blend this series uses, has him between plus 5 and plus 6, which is second-most-important-player-on-the-team territory. Those metrics watch the scoreboard move with him out there against him off, across every lineup, and they keep concluding the same thing: the whole defense organizes around him, and the team is massively better with him.
+And the on-court math, both my adjusted plus-minus model and the consensus blend this series uses, has him between plus 5 and plus 6, which is second-most-important-player-on-the-team territory. Those metrics watch the scoreboard move with him out there against him off, across every lineup, and they keep concluding the same thing: the whole defense organizes around him, and the team is massively better with him.
 
-That spread is not measurement error. That spread IS the Gobert discourse in miniature. The guy yelling that Rudy is a liability is holding the box score. The guy yelling that Rudy is a top-20 player is holding the on-court math. Neither of them is lying. You don't settle this argument by picking your favorite number. You settle it by asking why a player can be elite and negative at the same time, and the answer lives in what Utah built and Minnesota didn't.
+That spread is not measurement error. That spread IS the Gobert argument in miniature. The guy yelling that Rudy is a liability is holding the box score. The guy yelling that Rudy is a top-20 player is holding the on-court math. Neither of them is lying. You don't settle this by picking your favorite number. You settle it by asking why a player can be elite and negative at the same time, and the answer lives in what Utah built and Minnesota didn't.
 
 ## The machine Utah built
 
-Utah in Gobert's prime was an offense designed around a specific physical fact: if you deliver him the ball on time, on target, rolling downhill, almost nobody on Earth can stop the result.
+If you ever flipped on a Jazz game in those years, you know what the machine looked like. Conley or Mitchell comes off the screen with his defender two steps behind, Rudy is already rolling with a hand up, and the defense gets to choose which bad thing happens next. Lob. Layup. Or a corner three when the help panics. Run that two thousand times a season and you have an offense.
 
-The numbers from those years are honestly kind of absurd. From 2016-17 through 2021-22 he ran the pick-and-roll as the finisher about three and a half times a game, peaking at 3.9, and the roll was as much as 31.7 percent of his entire offensive diet. His efficiency on those possessions sat between the 80th and 95th percentile in the league at its peak. He was top four in the NBA in screen assists six seasons straight, and led the league outright in three of them. And the team results followed: Utah built the number-one offense in basketball in 2021-22, a top-five offense the year before, on his screen and his roll.
+The numbers from those years are honestly kind of absurd. From 2016-17 through 2021-22 he ran the pick-and-roll as the finisher about three and a half times a game, peaking at 3.9, and the roll was as much as 31.7 percent of his entire offensive diet. His efficiency on those possessions sat between the 80th and 95th percentile at its peak. He was top four in the NBA in screen assists six seasons straight, and led the league outright in three of them. And the team results followed: Utah built the number-one offense in basketball in 2021-22, a top-five offense the year before, on his screen and his roll.
 
-None of that happened by accident, and this is the part the trade-era discourse forgets. Utah surrounded him with live-dribble passers, plural. The audit counts every teammate with at least 150 pick-and-roll ball-handler possessions in a season, which is my proxy for a guard who can actually deliver the ball out of a live dribble. Utah gave him three to six of those every single year. Donovan Mitchell ran more than 800 such possessions a season at the peak. Behind Mitchell: Conley, Joe Ingles, Jordan Clarkson, Rodney Hood, Ricky Rubio. The deliveries came from everywhere.
+None of that happened by accident, and it's the part everyone forgets when they argue about him now. Utah surrounded him with live-dribble passers, plural. The audit counts every teammate with at least 150 pick-and-roll ball-handler possessions in a season, my proxy for a guard who can actually deliver the ball out of a live dribble. Utah gave him three to six of those every single year. Donovan Mitchell ran more than 800 such possessions a season at the peak. Behind Mitchell: Conley, Joe Ingles, Jordan Clarkson, Rodney Hood, Ricky Rubio. The deliveries came from everywhere.
 
 {{viz:feeder-count}}
 
@@ -52,15 +54,17 @@ And the scheme itself was built to feed him. Utah ran pick-and-roll ball-handler
 
 ## What Minnesota ran instead
 
-Now the audit, Utah prime against the four Minnesota years. Every number below is from the same sources, same methods, side by side.
+You know the Minnesota version of the possession too, because you've been groaning at it for four years. Ant gets blitzed thirty-five feet from the rim. The bail-out pass goes to Rudy at the elbow with a four-on-three behind it, the one read he was never built to make, and the whole arena does the sharp inhale. Sometimes it ends in a dunk. Sometimes it ends with the ball rolling toward the scorer's table. What it almost never was here is the Utah play, the catch on the move with the runway already cleared.
+
+That difference is measurable, so here's the audit, Utah prime against the four Minnesota years. Same sources, same methods, side by side.
 
 {{viz:roll-man-collapse}}
 
-*Roll-man possessions per game by season, Utah blue-collar years in gray, Minnesota in green, with his efficiency line riding on top. The volume collapses. The efficiency never does.*
+*Roll-man possessions per game by season, Utah in gray, Minnesota in green, with his efficiency line riding on top. The volume collapses. The efficiency never does.*
 
 His roll-man volume fell 37 percent, from 3.27 possessions a game in the Utah prime to 2.06 here, and this past season it hit a career low as a starter: 1.46 a game, 15.7 percent of his offensive diet. His touches fell 25 percent. His screen assists fell 26 percent. And the delivery system got cut in half and then half again: three feeders in 2022-23, two the next two years, and in 2025-26 exactly one. Anthony Edwards, and nobody else. Conley at 39 fell below the bar. Donte, for all his shooting gravity, is not a live-dribble pick-and-roll guy. The proxy that returned three to six names a year in Utah returned one name here.
 
-It gets one layer worse. The one feeder also changed his own game: Edwards' pick-and-roll ball-handler volume nearly halved this season, from 688 possessions to 353, as his diet shifted toward isolation and transition. And the team-level scheme finding is the quiet headline of the whole audit: Minnesota has run pick-and-roll ball-handler offense at or below the league average in every one of Gobert's four years here, bottoming out this past season at the lowest rate of the era. Utah fed the machine 3 to 7 points above league average. Minnesota runs it below average by design.
+It gets one layer worse. The one feeder also changed his own game: Edwards' pick-and-roll ball-handler volume nearly halved this season, from 688 possessions to 353, as his diet shifted toward isolation and transition. And the team-level scheme finding is the quiet headline of the whole audit: Minnesota has run pick-and-roll ball-handler offense at or below the league average in every one of Gobert's four years here, bottoming out this past season at the lowest rate of the era. Utah fed the machine 3 to 7 points above league average. Minnesota runs it below average. By design.
 
 Meanwhile, the part of the job he controls never declined. His points per roll possession in Minnesota: 1.21 to 1.27, still comfortably above league average, 73rd percentile this past season. His dunk conversion held near 90 percent in both uniforms. He didn't get worse at the thing. He got a third less of it, from half the feeders, in a scheme that runs it less than the league does.
 
@@ -70,7 +74,7 @@ So the offense around the most efficient roll finisher of his generation ranked 
 
 Now the part where I don't give him absolution, because the data doesn't either.
 
-Gobert is a finish-only player. Across his whole career, his assist-to-pass rate sits between 3 and 5 percent. He moves the ball fine, 2,500-plus passes a season, but he creates almost nothing off it: one to two assists a game, career, every year. That's not a slander, it's an archetype. And it's exactly why a thin delivery system is so expensive for him specifically. A big who can attack a closeout or make a short-roll read has somewhere for his offense to go when the clean feeds dry up. Rudy doesn't. Cut his deliveries and his offensive value has no fallback at all, which is precisely why DARKO's minus 2 is correct in this environment. A center whose offense must be manufactured by the system, playing in a system that stopped manufacturing it, is a negative offensive player here. Both halves of that sentence matter.
+Gobert is a finish-only player. Across his whole career, his assist-to-pass rate sits between 3 and 5 percent. He moves the ball fine, 2,500-plus passes a season, but he creates almost nothing off it: one to two assists a game, every year, forever. That's not an insult. It's an archetype, and it's his. And it's exactly why a thin delivery system is so expensive for him specifically. A big who can attack a closeout or make a short-roll read has somewhere for his offense to go when the clean feeds dry up. Rudy doesn't. Cut his deliveries and his offensive value has no fallback at all, which is precisely why DARKO's minus 2 is correct in this environment. A center whose offense must be manufactured by the system, playing in a system that stopped manufacturing it, is a negative offensive player here. Both halves of that sentence matter.
 
 The hands thing is also real, just not the way it gets said. His turnover rate on roll possessions has been normal for the role his whole career, 8 to 11 percent, because Utah's deliveries arrived on time and on target. The limitation was always managed rather than absent: he converts clean catches at an elite rate and does not bail out bad ones. Utah built around that. Minnesota, mostly, did not, and the bobbles you remember are what an unmanaged limitation looks like.
 
@@ -80,7 +84,7 @@ And the defense, the thing his whole price rests on: still elite by every impact
 
 I promised the misuse claim publishes only as measured, and measurement cuts both ways. Three things in the audit push against the clean "they buried him" story, and they print too.
 
-First, his dunk attempts barely moved. Down 8 percent, against a 37 percent collapse in roll possessions. If Minnesota had truly stopped using him, the dunks die with the rolls. They didn't, which means Edwards' lobs and the transition rim runs still found him. What disappeared is narrower and more specific: the structured half-court possession that ends with him rolling out of a screen. They never stopped feeding his rim gravity. They stopped building the offense through it.
+First, his dunk attempts barely moved. Down 8 percent, against a 37 percent collapse in roll possessions. If Minnesota had truly stopped using him, the dunks die with the rolls. They didn't, which means Ant's lobs and the transition rim runs still found him. What disappeared is narrower and more specific: the structured half-court possession that ends with him rolling out of a screen. They never stopped feeding his rim gravity. They stopped building the offense through it.
 
 Second, the collapse wasn't a straight line. His roll volume actually ticked up in 2023-24 and 2024-25 before cratering this season, the same season the feeder count hit one. The structural problem spans all four years. The acute version is this past season specifically.
 
@@ -90,7 +94,7 @@ Third, my own outline for this piece overclaimed twice, and I'm printing the cor
 
 So what is this piece actually claiming? Not that Rudy is secretly a top-10 player. Not that he's cooked. Something more specific: the two loudest positions in the Gobert argument are both priced off real numbers, and the gap between those numbers is mostly a description of the roster and scheme around him, not of him. Build the machine and the on-court math is what you get. Don't build it, and the box score and that minus 2 are what you get. Minnesota, for four years, did not build it.
 
-That cuts both directions, and I want to be honest about the direction Wolves fans like less. He turns 34 this month. He makes $36.5 million next season with a $38 million player option behind it, and if you read the first piece in this series, you know his contract is one of exactly two doors out of the apron squeeze. A team that was never going to build the machine around him has a fair case that someone else should pay for the parts of his game it wasn't using. The case to keep him is real. So is the case that he can restock the war chest. This piece does not promise he stays. It corrects the price.
+That cuts both directions, and I want to be honest about the direction Wolves fans like less. He turns 34 this month. He makes $36.5 million next season with a $38 million player option behind it, and if you read the first piece in this series, you know his contract is one of exactly two doors out of the apron squeeze. And a front office that was never going to build the machine around him can fairly ask why it's paying machine prices for parts it doesn't use. The case to keep him is real. So is the case that he can restock the war chest. This piece does not promise he stays. It corrects the price.
 
 Because here's the thing the audit leaves you with. The fix for the delivery system, it turns out, looks a lot like the fix for the point guard problem this team already has, and the coach already named. Same hole. Same summer. That's a later piece.
 
@@ -108,8 +112,8 @@ It's not all his fault. It's not none of it either. The parenthetical is doing r
 - Vizzes BUILT (fragments + previews in outputs/charts/piece2_gobert/): gobert-four-view,
   feeder-count, roll-man-collapse, scheme-was-his. All four tags placed in this draft. Load into
   /admin/visualizations/new with the matching ids on publish.
-- The "massive detriment catching out of the pick-and-roll" line is presented as the discourse's
-  composite voice, no quote marks. If we want it as a quote, source it first.
+- The "can't catch" composite voice in the open and the elbow-possession scene are composites,
+  clearly framed as such; no fabricated quotes or specific games.
 - Four-view figures: box +1.48, DARKO +2.0 (ODPM -2 / DDPM +4, rank 32), consensus +5.28, RAPM
   +5.76. DARKO surplus +$4.7M not used here (Piece 8 material).
 - Offense ranks verified vs warehouse June 11 (per-game ORtg averages): UTA 2021-22 #1, 2020-21
