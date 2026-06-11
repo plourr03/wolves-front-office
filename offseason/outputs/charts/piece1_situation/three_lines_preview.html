@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three lines one margin, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is three_lines_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-three-lines">
+  <div class="tl-chip" role="status">
+    <span class="tl-chip-dot"></span>
+    <span class="tl-chip-label">Three lines, one margin</span>
+    <span class="tl-chip-sep">·</span>
+    <span class="tl-chip-sub">2026-27 thresholds</span>
+  </div>
+  <p class="tl-caption" aria-live="polite"></p>
+  <div class="tl-stage">
+    <div class="tl-rows"></div>
+    <div class="tl-tooltip" role="tooltip">
+      <div class="tl-tip-head"></div>
+      <div class="tl-tip-desc"></div>
+    </div>
+  </div>
+  <div class="tl-legend">
+    <span class="tl-leg">books today: <span class="tl-leg-num">$194.0M</span></span>
+    <button class="tl-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="tl-foot">The Wolves' distance to each 2026-27 line, from $194.0M of apron-basis salary (our cap model, June 9). Hover any line for exactly what crossing it takes away. The bars share one scale, so the stair-step is the real shape of the room.</p>
+  <div class="tl-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-three-lines, #viz-three-lines * { touch-action: manipulation; }
+  #viz-three-lines {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-three-lines .tl-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-three-lines .tl-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+  }
+  #viz-three-lines .tl-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-three-lines .tl-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-three-lines .tl-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-three-lines .tl-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  #viz-three-lines .tl-row {
+    display: grid;
+    grid-template-columns: 168px 86px 1fr;
+    gap: 12px;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 420ms ease, transform 420ms ease, border-color 150ms ease;
+  }
+  #viz-three-lines .tl-row:last-child { margin-bottom: 0; }
+  #viz-three-lines .tl-row.is-on { opacity: 1; transform: none; }
+  #viz-three-lines .tl-row:hover { border-color: var(--border-default); }
+  #viz-three-lines .tl-row.is-key { border-color: var(--accent-default); }
+  #viz-three-lines.is-compact .tl-row {
+    grid-template-columns: 1fr 86px;
+    gap: 6px 12px;
+    padding: 10px 12px;
+  }
+  #viz-three-lines .tl-name {
+    font: 700 13px var(--family-sans);
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  #viz-three-lines .tl-cost {
+    display: block;
+    font: 600 10px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 3px;
+  }
+  #viz-three-lines .tl-row.is-key .tl-cost { color: var(--status-error); }
+  #viz-three-lines .tl-key-tag {
+    display: inline-block;
+    font: 700 9px var(--family-sans);
+    color: var(--accent-hover);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 1px;
+  }
+  #viz-three-lines .tl-fig {
+    font: 700 15px var(--family-mono);
+    color: var(--text-secondary);
+    text-align: right;
+    white-space: nowrap;
+  }
+  #viz-three-lines.is-compact .tl-fig { font-size: 13px; }
+  #viz-three-lines .tl-gauge { min-width: 0; }
+  #viz-three-lines.is-compact .tl-gauge { grid-column: 1 / -1; }
+  #viz-three-lines .tl-track {
+    position: relative;
+    height: 10px;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  #viz-three-lines .tl-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent-default);
+    border-radius: 5px;
+    transition: width 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #viz-three-lines .tl-row.is-key .tl-fill { background: var(--accent-hover); }
+  #viz-three-lines .tl-dist {
+    font: 700 12px var(--family-mono);
+    color: var(--text-primary);
+    margin-top: 5px;
+    white-space: nowrap;
+  }
+  #viz-three-lines .tl-dist-sub {
+    font: 500 10px var(--family-sans);
+    color: var(--text-tertiary);
+    margin-left: 6px;
+  }
+  #viz-three-lines .tl-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 260px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-three-lines .tl-tooltip.is-on { opacity: 1; }
+  #viz-three-lines .tl-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-three-lines .tl-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+  #viz-three-lines .tl-legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 0 0;
+    position: relative;
+  }
+  #viz-three-lines .tl-leg {
+    font: 600 11px var(--family-sans);
+    color: var(--text-tertiary);
+  }
+  #viz-three-lines .tl-leg-num {
+    font: 700 11px var(--family-mono);
+    color: var(--accent-hover);
+  }
+  #viz-three-lines .tl-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-three-lines .tl-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-three-lines .tl-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-three-lines .tl-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-three-lines .tl-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // The three 2026-27 lines above the cap and the Wolves' distance to each,
+  // from $194.0M of apron-basis team salary (our cap model, June 9). The
+  // gauge bars share one scale (max distance = the second apron's $28.0M)
+  // so the stair-step shape is the honest proportion.
+  var BOOKS_LABEL = "$194.0M";
+  var MAXD = 28.0;
+  var LINES = [
+    { name: "Luxury tax", fig: 201.0, dist: 7.0, cost: "costs money", key: false,
+      desc: "Crossing it costs ownership money and starts the repeater clock. It does not remove any tools. The Wolves have paid it two years running." },
+    { name: "First apron", fig: 209.1, dist: 15.1, cost: "kills the toolbox", key: true,
+      desc: "The line that matters. The full MLE ($15.0M), both trade exceptions ($10.8M and $6.6M), the BAE, and any sign-and-trade acquisition hard-cap the team here. Over it, the toolbox is sealed." },
+    { name: "Second apron", fig: 222.0, dist: 28.0, cost: "kills team-building", key: false,
+      desc: "No aggregating salaries in trades, no cash in deals, and a future first freezes. The taxpayer MLE ($6.1M) hard-caps the team here. Nobody plans to visit." }
+  ];
+
+  var CAPTIONS = [
+    "Three lines above the cap. Each one takes something away.",
+    "The tax line costs money. $7.0M of room.",
+    "The first apron kills the toolbox. $15.1M of room, and every tool the Wolves own is a trigger.",
+    "The second apron kills team-building itself. $28.0M of room, and nobody is going near it.",
+    "Every move this summer is a move against these three numbers."
+  ];
+
+  var ROW_AT = [600, 1900, 3300];
+  var CAP_FINAL_AT = 4900;
+  var REPLAY_AT = 5600;
+
+  var root = d3.select("#viz-three-lines");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".tl-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function tickDist(node, to, duration) {
+    if (reduceMotion || duration <= 0) {
+      node.textContent = "$" + to.toFixed(1) + "M";
+      return;
+    }
+    d3.select(node).transition("tick").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(0, to);
+        return function (t) { node.textContent = "$" + interp(t).toFixed(1) + "M"; };
+      });
+  }
+
+  function showTooltip(head, desc, anchorEl) {
+    var tip = root.select(".tl-tooltip");
+    tip.select(".tl-tip-head").text(head);
+    tip.select(".tl-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select(".tl-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var cRect = anchorEl.getBoundingClientRect();
+    var cx = cRect.left - sRect.left + cRect.width / 2;
+    var cy = cRect.top - sRect.top;
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var x = cx - tw / 2, y = cy - th - 10;
+    if (x < 4) x = 4;
+    if (x + tw > sRect.width - 4) x = sRect.width - tw - 4;
+    if (y < 4) y = cy + cRect.height + 10;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".tl-tooltip").classed("is-on", false); }
+
+  // ---- Build -----------------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var host = root.select(".tl-rows");
+    host.selectAll("*").remove();
+
+    var rows = [];
+    LINES.forEach(function (l) {
+      var row = host.append("div")
+        .attr("class", "tl-row" + (l.key ? " is-key" : ""))
+        .attr("title", l.name + ", $" + l.fig.toFixed(1) + "M. " + l.desc);
+      var nameCell = row.append("div");
+      var nm = nameCell.append("div").attr("class", "tl-name").text(l.name);
+      if (l.key) nm.append("span").attr("class", "tl-key-tag").text("the one that matters");
+      nameCell.append("span").attr("class", "tl-cost").text(l.cost);
+      row.append("div").attr("class", "tl-fig").text("$" + l.fig.toFixed(1) + "M");
+      var gauge = row.append("div").attr("class", "tl-gauge");
+      var fill = gauge.append("div").attr("class", "tl-track")
+        .append("div").attr("class", "tl-fill");
+      var dist = gauge.append("div").attr("class", "tl-dist");
+      var distNum = dist.append("span").text("$0.0M");
+      dist.append("span").attr("class", "tl-dist-sub").text("of room under it");
+      row.on("mouseenter", function () {
+        showTooltip(l.name + " · $" + l.fig.toFixed(1) + "M", l.desc, this);
+      }).on("mouseleave", hideTooltip);
+      rows.push({ l: l, el: row, fill: fill, distNum: distNum.node() });
+    });
+
+    lastBuilt = { rows: rows, compact: compact };
+    return lastBuilt;
+  }
+
+  function fillPct(d) { return Math.round(d / MAXD * 100) + "%"; }
+
+  function allOn(built) {
+    built.rows.forEach(function (r) {
+      r.el.classed("is-on", true);
+      r.fill.style("width", fillPct(r.l.dist));
+      r.distNum.textContent = "$" + r.l.dist.toFixed(1) + "M";
+    });
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".tl-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(4);
+      root.select(".tl-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    built.rows.forEach(function (r) {
+      r.el.classed("is-on", false);
+      r.fill.style("width", "0%");
+      r.distNum.textContent = "$0.0M";
+    });
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Rows land one line at a time, gauge filling, distance counting.
+    built.rows.forEach(function (r, i) {
+      playTimers.push(setTimeout(function () {
+        r.el.classed("is-on", true);
+        r.fill.style("width", fillPct(r.l.dist));
+        tickDist(r.distNum, r.l.dist, 850);
+        setCaption(i + 1);
+      }, ROW_AT[i]));
+    });
+
+    playTimers.push(setTimeout(function () { setCaption(4); }, CAP_FINAL_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".tl-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".tl-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(4);
+    root.select(".tl-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(4);
+          root.select(".tl-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>

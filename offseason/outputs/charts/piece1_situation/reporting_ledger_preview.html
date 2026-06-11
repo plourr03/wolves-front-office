@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The reporting ledger, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is reporting_ledger_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-reporting-ledger">
+  <div class="rl-chip" role="status">
+    <span class="rl-chip-dot"></span>
+    <span class="rl-chip-label">The reporting climate</span>
+    <span class="rl-chip-sep">·</span>
+    <span class="rl-chip-sub">June 11, 2026 ledger</span>
+  </div>
+  <p class="rl-caption" aria-live="polite"></p>
+  <div class="rl-stage">
+    <div class="rl-cards"></div>
+    <div class="rl-tooltip" role="tooltip">
+      <div class="rl-tip-head"></div>
+      <div class="rl-tip-desc"></div>
+    </div>
+  </div>
+  <div class="rl-legend">
+    <span class="rl-leg rl-leg-rep">Reported · insider sourcing</span>
+    <span class="rl-leg rl-leg-ana">Analyst · credible read</span>
+    <span class="rl-leg rl-leg-spec">Speculative · no sourcing</span>
+    <button class="rl-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="rl-foot">Every availability claim this series leans on, tagged by sourcing quality. The tags are the same ones the internal boards use, and they apply to our own ideas too. Hover any card for the integrity note that travels with it.</p>
+  <div class="rl-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-reporting-ledger, #viz-reporting-ledger * { touch-action: manipulation; }
+  #viz-reporting-ledger {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-reporting-ledger .rl-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-info);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-reporting-ledger .rl-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-info);
+  }
+  #viz-reporting-ledger .rl-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-reporting-ledger .rl-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-reporting-ledger .rl-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-reporting-ledger .rl-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  #viz-reporting-ledger .rl-card {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 420ms ease, transform 420ms ease, border-color 150ms ease;
+  }
+  #viz-reporting-ledger .rl-card:last-child { margin-bottom: 0; }
+  #viz-reporting-ledger .rl-card.is-on { opacity: 1; transform: none; }
+  #viz-reporting-ledger .rl-card:hover { border-color: var(--border-default); }
+  #viz-reporting-ledger .rl-card.is-spec {
+    border-style: dashed;
+  }
+  #viz-reporting-ledger .rl-card.is-spec .rl-who,
+  #viz-reporting-ledger .rl-card.is-spec .rl-claim { color: var(--text-secondary); }
+  #viz-reporting-ledger.is-compact .rl-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+  #viz-reporting-ledger .rl-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font: 700 10px var(--family-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    border-radius: 999px;
+    padding: 4px 10px;
+    border: 1px solid;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: opacity 260ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #viz-reporting-ledger .rl-tag.is-stamped { opacity: 1; transform: scale(1); }
+  #viz-reporting-ledger .rl-tag-rep {
+    color: var(--status-success);
+    border-color: var(--status-success);
+  }
+  #viz-reporting-ledger .rl-tag-spec {
+    color: var(--status-error);
+    border-color: var(--status-error);
+  }
+  #viz-reporting-ledger.is-compact .rl-tag { justify-self: start; }
+  #viz-reporting-ledger .rl-body { min-width: 0; }
+  #viz-reporting-ledger .rl-who {
+    font: 700 13px var(--family-sans);
+    color: var(--text-primary);
+    line-height: 1.25;
+  }
+  #viz-reporting-ledger .rl-claim {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  #viz-reporting-ledger .rl-src {
+    font: 600 10px var(--family-mono);
+    color: var(--text-tertiary);
+    text-align: right;
+    white-space: nowrap;
+  }
+  #viz-reporting-ledger.is-compact .rl-src { text-align: left; }
+  #viz-reporting-ledger .rl-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 170px;
+    max-width: 270px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-reporting-ledger .rl-tooltip.is-on { opacity: 1; }
+  #viz-reporting-ledger .rl-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-reporting-ledger .rl-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+  #viz-reporting-ledger .rl-legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 0 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #viz-reporting-ledger .rl-leg {
+    font: 600 10.5px var(--family-sans);
+    color: var(--text-tertiary);
+    padding-left: 13px;
+    position: relative;
+  }
+  #viz-reporting-ledger .rl-leg::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  #viz-reporting-ledger .rl-leg-rep::before { background: var(--status-success); }
+  #viz-reporting-ledger .rl-leg-ana::before { background: var(--status-info); }
+  #viz-reporting-ledger .rl-leg-spec::before { background: var(--status-error); }
+  #viz-reporting-ledger .rl-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-reporting-ledger .rl-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-reporting-ledger .rl-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-reporting-ledger .rl-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-reporting-ledger .rl-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // The June 11 reporting ledger behind the piece, with the same sourcing
+  // tags the internal boards use (Reported / Analyst / Speculative). The
+  // integrity note on each card is part of the record, not decoration.
+  var ITEMS = [
+    { tag: "rep", tagWord: "Reported", who: "Connelly's posture",
+      claim: "The team is “not good enough right now.” Likes the sub-26 core. Open to change, no teardown committed.",
+      src: "multiple outlets",
+      note: "The five-name “core” lists going around are media interpretation, not his enumeration. Represent the posture as mixed because it is." },
+    { tag: "rep", tagWord: "Reported", who: "Randle market",
+      claim: "Viewed around the league as the likeliest big salary to move.",
+      src: "widely reported",
+      note: "Reported direction, not a done deal. The apron math in this piece is most of the reason it keeps coming up." },
+    { tag: "rep", tagWord: "Reported", who: "Gobert fit questions",
+      claim: "Long-term-fit questions inside the building.",
+      src: "The Athletic / Krawczynski",
+      note: "The honest counter prints with it: he was their best Jokic defender in April. The next piece is about exactly this gap." },
+    { tag: "rep", tagWord: "Reported", who: "Edwards frustration",
+      claim: "Frustration after the exit.",
+      src: "ESPN / Windhorst",
+      note: "Sourced dissatisfaction, not a trade request. Anyone selling it as more is selling." },
+    { tag: "rep", tagWord: "Reported", who: "Finch, on the radio",
+      claim: "“We definitely need another ball handler and playmaker.”",
+      src: "KFAN / June 11",
+      note: "The coach naming the same need the model ranks first: 31.4% usage on Edwards, a career-high 21 games missed. Sets up the point-guard piece." },
+    { tag: "spec", tagWord: "Speculative", who: "De'Aaron Fox chatter",
+      claim: "Wolves-target chatter with zero credible sourcing.",
+      src: "fan-site tier",
+      note: "On the watch list, unpriced. If post-Finals reporting materializes, he gets the full model treatment immediately. Until then this tag is the whole story." }
+  ];
+
+  var CAPTIONS = [
+    "Every availability claim this series uses, tagged by sourcing quality.",
+    "Five items are Reported: insider sourcing, named outlets, on the record.",
+    "And one is not. It stays on the board, labeled exactly what it is.",
+    "A name with no sourcing is speculation no matter how good the fit sounds. Ours included."
+  ];
+
+  var CARD_AT = 600, CARD_STAG = 340;
+  var CAP1_AT = 1300;
+  var SPEC_EXTRA = 700;          // dramatic beat before the Fox card
+  var CAP3_AT = 5300;
+  var REPLAY_AT = 6000;
+
+  var root = d3.select("#viz-reporting-ledger");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".rl-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function showTooltip(head, desc, anchorEl) {
+    var tip = root.select(".rl-tooltip");
+    tip.select(".rl-tip-head").text(head);
+    tip.select(".rl-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select(".rl-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var cRect = anchorEl.getBoundingClientRect();
+    var cx = cRect.left - sRect.left + cRect.width / 2;
+    var cy = cRect.top - sRect.top;
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var x = cx - tw / 2, y = cy - th - 10;
+    if (x < 4) x = 4;
+    if (x + tw > sRect.width - 4) x = sRect.width - tw - 4;
+    if (y < 4) y = cy + cRect.height + 10;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".rl-tooltip").classed("is-on", false); }
+
+  // ---- Build -----------------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var host = root.select(".rl-cards");
+    host.selectAll("*").remove();
+
+    var cards = [];
+    ITEMS.forEach(function (it) {
+      var card = host.append("div")
+        .attr("class", "rl-card" + (it.tag === "spec" ? " is-spec" : ""))
+        .attr("title", it.tagWord + ": " + it.who + ". " + it.note);
+      var tag = card.append("span")
+        .attr("class", "rl-tag rl-tag-" + it.tag)
+        .text(it.tagWord);
+      var body = card.append("div").attr("class", "rl-body");
+      body.append("div").attr("class", "rl-who").text(it.who);
+      body.append("div").attr("class", "rl-claim").text(it.claim);
+      card.append("div").attr("class", "rl-src").text(it.src);
+      card.on("mouseenter", function () {
+        showTooltip(it.tagWord + " · " + it.who, it.note, this);
+      }).on("mouseleave", hideTooltip);
+      cards.push({ it: it, el: card, tag: tag });
+    });
+
+    lastBuilt = { cards: cards, compact: compact };
+    return lastBuilt;
+  }
+
+  function allOn(built) {
+    built.cards.forEach(function (c) {
+      c.el.classed("is-on", true);
+      c.tag.classed("is-stamped", true);
+    });
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".rl-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(3);
+      root.select(".rl-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    built.cards.forEach(function (c) {
+      c.el.classed("is-on", false);
+      c.tag.classed("is-stamped", false);
+    });
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // The feed lands card by card, each tag stamping in just after.
+    built.cards.forEach(function (c, i) {
+      var isSpec = c.it.tag === "spec";
+      var at = CARD_AT + i * CARD_STAG + (isSpec ? SPEC_EXTRA : 0);
+      playTimers.push(setTimeout(function () {
+        c.el.classed("is-on", true);
+        if (isSpec) setCaption(2);
+      }, at));
+      playTimers.push(setTimeout(function () {
+        c.tag.classed("is-stamped", true);
+      }, at + 240));
+    });
+
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".rl-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".rl-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(3);
+    root.select(".rl-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(3);
+          root.select(".rl-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>

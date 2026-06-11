@@ -31,11 +31,10 @@ So before anyone argues names, here is the board the argument happens on.
 
 The CBA draws three lines above the salary cap, and each one takes something away.
 
-| line | 2026-27 figure | Wolves' distance | what crossing it costs |
-|---|---|---|---|
-| Luxury tax | $201.0M | $7.0M under | money (and repeater history later) |
-| **First apron** | **$209.1M** | **$15.1M under** | **the toolbox: full midlevel, trade exceptions, sign-and-trades** |
-| Second apron | $222.0M | $28.0M under | team-building itself: no aggregating salaries, no cash, a frozen future first |
+{{viz:three-lines}}
+
+*The three lines and the room under each one, on a shared scale. The stair-step is the real shape
+of the summer. Hover any line for exactly what crossing it takes away.*
 
 (Books at $194.0M per our model as of June 9, eight guaranteed contracts plus roster charges.
 ESPN's Bobby Marks pegs the first-apron gap near $14M; the difference is roster-charge accounting,
@@ -164,16 +163,12 @@ is probably real.
 This series tags every availability claim by sourcing quality (Reported, Analyst, Speculative),
 including our own ideas. The June 11 ledger:
 
-| item | status |
-|---|---|
-| Connelly: team "not good enough right now," likes the sub-26 core, open to change without committing to a teardown | Reported (multiple outlets; the five-name "core" lists are media interpretation, not his enumeration) |
-| Randle viewed as the likeliest big salary to move | Reported (widely) |
-| Gobert long-term-fit questions inside the building | Reported (The Athletic / Krawczynski), against the honest counter that he was their best Jokic defender in April |
-| Edwards frustration after the exit | Reported (ESPN / Windhorst), and it is sourced dissatisfaction, not a trade request; treat anyone selling it as more as selling |
-| Finch: "definitely need another ball handler and playmaker" | Reported (KFAN, June 11) |
-| De'Aaron Fox to Minnesota chatter | Speculative (fan-site tier, zero credible sourcing; on the watch list, unpriced until real reporting exists) |
+{{viz:reporting-ledger}}
 
-That last row is there on purpose. A name with no sourcing is speculation no matter how good the
+*Six claims, six tags. Hover any card for the integrity note that travels with it: the Connelly
+"core" caveat, the Gobert counter, the line between Ant's frustration and a trade request.*
+
+That last card is there on purpose. A name with no sourcing is speculation no matter how good the
 fit sounds, and the discipline applies to our own boards too.
 
 ## How to watch the summer
