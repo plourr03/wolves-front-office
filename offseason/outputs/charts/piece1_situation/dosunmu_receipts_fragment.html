@@ -1,0 +1,424 @@
+<div id="viz-dosunmu-receipts">
+  <div class="dr-chip" role="status">
+    <span class="dr-chip-dot"></span>
+    <span class="dr-chip-label">Exhibit A</span>
+    <span class="dr-chip-sep">·</span>
+    <span class="dr-chip-sub">the player the margin is for</span>
+  </div>
+  <p class="dr-caption" aria-live="polite"></p>
+  <div class="dr-stage">
+    <div class="dr-blocks"></div>
+    <div class="dr-subline">10 playoff games · 28.8 minutes a night · 50.0% from the field</div>
+  </div>
+  <div class="dr-legend">
+    <span class="dr-leg dr-leg-rs">regular season as a Wolf</span>
+    <span class="dr-leg dr-leg-po">playoffs</span>
+    <button class="dr-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="dr-foot">Per-game figures from the warehouse: 24 regular-season games in Minnesota after the February deadline, then 10 playoff games. Deal terms per the league transaction ledger. He is unrestricted on July 1.</p>
+  <div class="dr-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-dosunmu-receipts, #viz-dosunmu-receipts * { touch-action: manipulation; }
+  #viz-dosunmu-receipts {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-dosunmu-receipts .dr-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-warning);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-dosunmu-receipts .dr-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-warning);
+  }
+  #viz-dosunmu-receipts .dr-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-dosunmu-receipts .dr-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-dosunmu-receipts .dr-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-dosunmu-receipts .dr-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 18px 16px 14px;
+  }
+  #viz-dosunmu-receipts .dr-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  #viz-dosunmu-receipts.is-compact .dr-blocks { gap: 10px; }
+  #viz-dosunmu-receipts .dr-block {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 420ms ease, transform 420ms ease;
+  }
+  #viz-dosunmu-receipts .dr-block.is-on { opacity: 1; transform: none; }
+  #viz-dosunmu-receipts .dr-stat-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  #viz-dosunmu-receipts .dr-num {
+    font: 800 44px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-dosunmu-receipts.is-landed .dr-num { color: var(--accent-default); }
+  #viz-dosunmu-receipts.is-compact .dr-num { font-size: 30px; }
+  #viz-dosunmu-receipts .dr-bars { margin-top: 12px; }
+  #viz-dosunmu-receipts .dr-rowlab {
+    font: 600 9px var(--family-sans);
+    color: var(--text-tertiary);
+    text-align: left;
+    margin: 5px 0 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  #viz-dosunmu-receipts .dr-track {
+    height: 7px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  #viz-dosunmu-receipts .dr-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 4px;
+    transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #viz-dosunmu-receipts .dr-fill-rs { background: var(--text-tertiary); }
+  #viz-dosunmu-receipts .dr-fill-po { background: var(--accent-default); }
+  #viz-dosunmu-receipts .dr-subline {
+    font: 600 11px var(--family-mono);
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 16px;
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+  #viz-dosunmu-receipts .dr-subline.is-on { opacity: 1; }
+  #viz-dosunmu-receipts.is-compact .dr-subline { font-size: 9.5px; }
+  #viz-dosunmu-receipts .dr-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 12px 0 0 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #viz-dosunmu-receipts .dr-leg {
+    font: 600 11px var(--family-sans);
+    color: var(--text-tertiary);
+    padding-left: 14px;
+    position: relative;
+  }
+  #viz-dosunmu-receipts .dr-leg::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+  #viz-dosunmu-receipts .dr-leg-rs::before { background: var(--text-tertiary); }
+  #viz-dosunmu-receipts .dr-leg-po::before { background: var(--accent-default); }
+  #viz-dosunmu-receipts .dr-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-dosunmu-receipts .dr-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-dosunmu-receipts .dr-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-dosunmu-receipts .dr-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-dosunmu-receipts .dr-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Ayo Dosunmu with the Wolves, 2025-26, from the warehouse: 24 regular
+  // season games after the February deadline (28.5 mpg), then 10 playoff
+  // games (28.8 mpg). The point of the card: the playoff version got
+  // BETTER, which is the receipts behind treating his re-sign as the
+  // team's own free-agent priority.
+  var STATS = [
+    { key: "pts", label: "Points", rs: 14.4, po: 15.6, max: 18, fmt: function (v) { return v.toFixed(1); },
+      tip: "Points per game: 14.4 in the regular season as a Wolf, 15.6 in the playoffs." },
+    { key: "ast", label: "Assists", rs: 3.5, po: 4.1, max: 5, fmt: function (v) { return v.toFixed(1); },
+      tip: "Assists per game: 3.5 in the regular season as a Wolf, 4.1 in the playoffs." },
+    { key: "fg3", label: "3P%", rs: 41.4, po: 42.5, max: 50, fmt: function (v) { return v.toFixed(1) + "%"; },
+      tip: "Three-point percentage: 41.4% in the regular season as a Wolf, 42.5% in the playoffs." }
+  ];
+
+  var CAPTIONS = [
+    "February: Conley, Dillingham and four seconds to Chicago. Ayo Dosunmu to Minnesota.",
+    "As a Wolf he gave them 14.4 a night on 41% from three.",
+    "Then the playoffs, where he got better, not worse.",
+    "He is unrestricted on July 1. The $15.1M margin is, in practice, his."
+  ];
+
+  var BLOCKS_AT = 500, BLOCK_STAG = 140;
+  var RS_AT = 1100, RS_MS = 900;
+  var CAP1_AT = 1100;
+  var PO_AT = 2900, PO_MS = 1000;
+  var CAP2_AT = 2800;
+  var SUB_AT = 4100;
+  var CAP3_AT = 4900;
+  var REPLAY_AT = 5700;
+
+  var root = d3.select("#viz-dosunmu-receipts");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".dr-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function tickNum(node, from, to, fmt, duration) {
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("tick").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(from, to);
+        return function (t) { node.textContent = fmt(interp(t)); };
+      });
+  }
+
+  // ---- Build -----------------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var host = root.select(".dr-blocks");
+    host.selectAll("*").remove();
+
+    var blocks = [];
+    STATS.forEach(function (s) {
+      var b = host.append("div").attr("class", "dr-block").attr("title", s.tip);
+      b.append("div").attr("class", "dr-stat-label").text(s.label);
+      var num = b.append("div").attr("class", "dr-num").text(s.fmt(0));
+      var bars = b.append("div").attr("class", "dr-bars");
+      bars.append("div").attr("class", "dr-rowlab").text(compact ? "RS" : "regular season");
+      var rsFill = bars.append("div").attr("class", "dr-track")
+        .append("div").attr("class", "dr-fill dr-fill-rs");
+      bars.append("div").attr("class", "dr-rowlab").text(compact ? "PO" : "playoffs");
+      var poFill = bars.append("div").attr("class", "dr-track")
+        .append("div").attr("class", "dr-fill dr-fill-po");
+      blocks.push({ s: s, el: b, num: num.node(), rsFill: rsFill, poFill: poFill });
+    });
+
+    lastBuilt = { blocks: blocks, compact: compact };
+    return lastBuilt;
+  }
+
+  function pct(v, max) { return Math.round(v / max * 100) + "%"; }
+
+  function allOn(built) {
+    built.blocks.forEach(function (b) {
+      b.el.classed("is-on", true);
+      b.num.textContent = b.s.fmt(b.s.po);
+      b.rsFill.style("width", pct(b.s.rs, b.s.max));
+      b.poFill.style("width", pct(b.s.po, b.s.max));
+    });
+    root.select(".dr-subline").classed("is-on", true);
+    root.classed("is-landed", true);
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".dr-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(3);
+      root.select(".dr-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    root.classed("is-landed", false);
+    built.blocks.forEach(function (b) {
+      b.el.classed("is-on", false);
+      b.num.textContent = b.s.fmt(0);
+      b.rsFill.style("width", "0%");
+      b.poFill.style("width", "0%");
+    });
+    root.select(".dr-subline").classed("is-on", false);
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Phase 1: blocks land; the regular-season story fills.
+    built.blocks.forEach(function (b, i) {
+      playTimers.push(setTimeout(function () { b.el.classed("is-on", true); }, BLOCKS_AT + i * BLOCK_STAG));
+      playTimers.push(setTimeout(function () {
+        b.rsFill.style("width", pct(b.s.rs, b.s.max));
+        tickNum(b.num, 0, b.s.rs, b.s.fmt, RS_MS);
+      }, RS_AT + i * BLOCK_STAG));
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+
+    // Phase 2: the playoff bars overtake; the numbers climb to the playoff line.
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    built.blocks.forEach(function (b, i) {
+      playTimers.push(setTimeout(function () {
+        b.poFill.style("width", pct(b.s.po, b.s.max));
+        tickNum(b.num, b.s.rs, b.s.po, b.s.fmt, PO_MS);
+      }, PO_AT + i * BLOCK_STAG));
+    });
+    playTimers.push(setTimeout(function () {
+      root.classed("is-landed", true);
+      root.select(".dr-subline").classed("is-on", true);
+    }, SUB_AT));
+
+    // Landing.
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".dr-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".dr-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(3);
+    root.select(".dr-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(3);
+          root.select(".dr-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

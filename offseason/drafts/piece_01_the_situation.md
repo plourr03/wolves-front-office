@@ -74,6 +74,11 @@ the other team's best guard. On a roster missing DiVincenzo and now missing Conl
 returning answer at the position, and he is an unrestricted free agent the Wolves paid four
 seconds to rent.
 
+{{viz:dosunmu-receipts}}
+
+*The receipts. Regular season as a Wolf in gray, playoffs in green. The playoff version was the
+better one, which is exactly what you want from the player you are about to pay.*
+
 Re-signing him is the easy part, mechanically. Minnesota holds his Bird rights, which let a team
 exceed the cap to keep its own free agent, no hard cap attached. The trap is what his new salary
 does to the geometry. Pay Dosunmu a market number in the mid-teens and the books climb from
@@ -106,12 +111,12 @@ each one does.*
 The trade columns will spend July sketching packages, so it is worth stating exactly what
 Minnesota has to put in them. The pick chest, verified against the league ledger:
 
-- **No. 28** in this draft, tradable only on or after draft night.
-- **The 2028 first**, their own, clean and tradable outright.
-- **The 2033 first**, their own, clean and tradable outright.
-- The 2029 and 2030 firsts exist but are tangled in conditional swap rights from the Gobert and
-  Conley trade trees, not cleanly movable. The second-round shelf is nearly bare; four seconds
-  just went to Chicago in the Dosunmu deal.
+{{viz:pick-chest}}
+
+*Every first-round slot on the ledger, 2026 through 2033, with its real status. Hover any card for
+the condition. The bars underneath are all 30 teams' cleanly tradable future firsts; the green one
+is Minnesota, 29th of 30. The second-round shelf is nearly bare too; four seconds just went to
+Chicago in the Dosunmu deal.*
 
 Two clean firsts, one late pick, and conditional scraps. ESPN's league-wide asset rankings put the
 Wolves near the bottom for tradable draft capital, and our ledger agrees. This is not a chest that

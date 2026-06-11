@@ -1,0 +1,602 @@
+<div id="viz-pick-chest">
+  <div class="pc-chip" role="status">
+    <span class="pc-chip-dot"></span>
+    <span class="pc-chip-label">The chest</span>
+    <span class="pc-chip-sep">·</span>
+    <span class="pc-chip-sub">league pick ledger, June 2026</span>
+  </div>
+  <p class="pc-caption" aria-live="polite"></p>
+  <div class="pc-stage">
+    <div class="pc-shelf"></div>
+    <div class="pc-divider"></div>
+    <div class="pc-league">
+      <div class="pc-league-head">Tradable future firsts, all 30 teams</div>
+      <div class="pc-bars"></div>
+      <div class="pc-league-min">Wolves: 2 · 29th of 30</div>
+    </div>
+    <div class="pc-tooltip" role="tooltip">
+      <div class="pc-tip-head"></div>
+      <div class="pc-tip-desc"></div>
+    </div>
+  </div>
+  <div class="pc-hero">
+    <div class="pc-hero-line">
+      <span class="pc-hero-num">0</span>
+      <span class="pc-hero-unit">clean future firsts</span>
+    </div>
+    <div class="pc-hero-label">Plus No. 28 on draft night, and a tangle of conditions</div>
+    <button class="pc-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="pc-foot">Every first-round slot on the Wolves' ledger, 2026 through 2033, with its real status. Hover any card for the condition. League counts from the same verified ledger; the bars are each team's cleanly tradable future firsts.</p>
+  <div class="pc-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-pick-chest, #viz-pick-chest * { touch-action: manipulation; }
+  #viz-pick-chest {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-pick-chest .pc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-info);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-pick-chest .pc-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-info);
+  }
+  #viz-pick-chest .pc-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-pick-chest .pc-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-pick-chest .pc-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-pick-chest .pc-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  #viz-pick-chest .pc-shelf {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+  }
+  #viz-pick-chest.is-compact .pc-shelf { grid-template-columns: repeat(4, 1fr); }
+  #viz-pick-chest .pc-yearcol { min-width: 0; }
+  #viz-pick-chest .pc-year {
+    font: 700 10.5px var(--family-mono);
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-bottom: 5px;
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+  #viz-pick-chest .pc-card {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 7px 3px 6px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 360ms ease, border-color 150ms ease;
+    overflow: hidden;
+  }
+  #viz-pick-chest .pc-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--pc-tint, transparent);
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  #viz-pick-chest .pc-card.is-on { opacity: 1; transform: none; }
+  #viz-pick-chest .pc-year.is-on { opacity: 1; }
+  #viz-pick-chest .pc-card:hover { border-color: var(--border-default); }
+  #viz-pick-chest .pc-word {
+    position: relative;
+    display: block;
+    font: 700 10.5px var(--family-sans);
+    line-height: 1.15;
+  }
+  #viz-pick-chest .pc-origin {
+    position: relative;
+    display: block;
+    font: 600 9px var(--family-mono);
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+  #viz-pick-chest .pc-empty {
+    border-style: dashed;
+    cursor: default;
+  }
+  #viz-pick-chest .pc-empty .pc-word { color: var(--text-tertiary); font-weight: 600; }
+  #viz-pick-chest .pc-card.st-now { --pc-tint: var(--accent-default); border-color: var(--accent-default); }
+  #viz-pick-chest .pc-card.st-now .pc-word { color: var(--accent-hover); }
+  #viz-pick-chest .pc-card.st-clean { --pc-tint: var(--status-success); border-color: var(--status-success); }
+  #viz-pick-chest .pc-card.st-clean .pc-word { color: var(--status-success); }
+  #viz-pick-chest .pc-card.st-cond .pc-word { color: var(--text-secondary); font-weight: 600; }
+  #viz-pick-chest .pc-card.st-enc { --pc-tint: var(--status-warning); }
+  #viz-pick-chest .pc-card.st-enc .pc-word { color: var(--status-warning); }
+  #viz-pick-chest .pc-card.st-frozen { --pc-tint: var(--status-error); border-color: var(--status-error); }
+  #viz-pick-chest .pc-card.st-frozen .pc-word { color: var(--status-error); }
+  @keyframes viz-pc-pulse {
+    0% { transform: scale(1); }
+    38% { transform: scale(1.09); }
+    100% { transform: scale(1); }
+  }
+  #viz-pick-chest .pc-card.is-pulse { animation: viz-pc-pulse 800ms ease; }
+  #viz-pick-chest .pc-divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 13px 0;
+  }
+  #viz-pick-chest .pc-league-head {
+    font: 700 10.5px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  #viz-pick-chest .pc-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 64px;
+  }
+  #viz-pick-chest .pc-bar {
+    flex: 1 1 0;
+    min-width: 3px;
+    background: var(--border-default);
+    border-radius: 2px 2px 0 0;
+    height: 0;
+    cursor: pointer;
+    transition: height 600ms cubic-bezier(0.22, 1, 0.36, 1), background 150ms ease;
+  }
+  #viz-pick-chest .pc-bar:hover { background: var(--text-tertiary); }
+  #viz-pick-chest .pc-bar.is-min { background: var(--accent-default); }
+  #viz-pick-chest .pc-bar.is-min:hover { background: var(--accent-hover); }
+  #viz-pick-chest .pc-league-min {
+    font: 700 10px var(--family-mono);
+    color: var(--accent-hover);
+    text-align: right;
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+  #viz-pick-chest .pc-league-min.is-on { opacity: 1; }
+  #viz-pick-chest .pc-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 150px;
+    max-width: 240px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-pick-chest .pc-tooltip.is-on { opacity: 1; }
+  #viz-pick-chest .pc-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-pick-chest .pc-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+  #viz-pick-chest .pc-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-pick-chest .pc-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-pick-chest .pc-hero-num {
+    font: 800 56px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-pick-chest.is-landed .pc-hero-num { color: var(--accent-default); }
+  #viz-pick-chest .pc-hero-unit {
+    font: 700 14px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.15;
+    max-width: 120px;
+  }
+  #viz-pick-chest .pc-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-pick-chest.is-compact .pc-hero-num { font-size: 42px; }
+  #viz-pick-chest .pc-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-pick-chest .pc-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-pick-chest .pc-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-pick-chest .pc-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-pick-chest .pc-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // The Wolves' first-round ledger, 2026-2033, from the verified league
+  // pick database (Spotrac/RealGM reconciliation, June 2026). Status:
+  // now = this year's No. 28 (tradable on or after draft night only);
+  // clean = own pick, outright and tradable; cond = conditional or
+  // incoming route, not cleanly tradable; enc = own pick encumbered by
+  // swap rights; frozen = flagged untradeable in the ledger.
+  var PICKS = [
+    { yr: 2026, origin: "own", st: "now", word: "No. 28",
+      cond: "This month's pick. Tradable only on or after draft night (Stepien mechanics), so it is a draft-week chip, not a June one." },
+    { yr: 2027, origin: "via UTA", st: "cond", word: "conditional",
+      cond: "A route in the Utah tree: the two most favorable of Cleveland, Minnesota and Utah land here, the other goes to Phoenix. Not cleanly tradable." },
+    { yr: 2028, origin: "own", st: "clean", word: "clean",
+      cond: "Their own first, outright and tradable. One of the two real chips." },
+    { yr: 2029, origin: "via UTA", st: "cond", word: "conditional",
+      cond: "If it lands 6 through 30: the two most favorable of Cleveland, Minnesota and Utah, the other to Phoenix." },
+    { yr: 2029, origin: "own", st: "cond", word: "top-5 only",
+      cond: "Their own 2029 stays only if it lands top five; otherwise it routes through the Utah stack." },
+    { yr: 2030, origin: "own", st: "enc", word: "swap-bound",
+      cond: "The least favorable of Minnesota, Dallas and San Antonio via stacked swap rights. The Wolves pick last of the three." },
+    { yr: 2031, origin: "via SAS", st: "cond", word: "conditional",
+      cond: "An incoming Sacramento route via San Antonio. Real, but not cleanly tradable." },
+    { yr: 2032, origin: "own", st: "frozen", word: "frozen",
+      cond: "Flagged frozen and untradeable in the league ledger." },
+    { yr: 2033, origin: "own", st: "clean", word: "clean",
+      cond: "Their own first, outright and tradable. The distant chip." }
+  ];
+  var YEARS = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033];
+
+  // Cleanly tradable future firsts per team, same ledger, sorted.
+  var LEAGUE = [
+    ["BKN",8],["CHA",6],["CHI",6],["DET",6],["MEM",6],["NOP",6],["TOR",6],
+    ["ATL",5],["GSW",5],["HOU",5],["IND",5],["LAC",5],["LAL",5],["MIA",5],
+    ["OKC",5],["PHI",5],["SAC",5],["CLE",4],["DAL",4],["UTA",4],["WAS",4],
+    ["BOS",3],["MIL",3],["NYK",3],["ORL",3],["POR",3],["SAS",3],
+    ["DEN",2],["MIN",2],["PHX",1]
+  ];
+
+  var CAPTIONS = [
+    "Eight years of first-round slots. Most are not what they look like.",
+    "Two are clean: their own 2028 and their own 2033.",
+    "Plus No. 28 this month, tradable on or after draft night.",
+    "The rest is the Gobert and Conley trade trees: conditional routes, a swap-bound 2030, a frozen 2032.",
+    "League context: 29th of 30 in tradable future firsts. This chest funds a consolidation, not a bidding war."
+  ];
+
+  var SHELF_AT = 500, YEAR_STAG = 95;
+  var CAP1_AT = 1900, CAP2_AT = 3100, CAP3_AT = 4300;
+  var LEAGUE_AT = 5700, BAR_STAG = 28;
+  var REPLAY_AT = 7300;
+
+  var root = d3.select("#viz-pick-chest");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".pc-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function tickHero(to, duration) {
+    var node = root.select(".pc-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = String(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(+node.textContent || 0, to);
+        return function (t) { node.textContent = String(Math.round(interp(t))); };
+      });
+  }
+
+  function showTooltip(head, desc, anchorEl) {
+    var tip = root.select(".pc-tooltip");
+    tip.select(".pc-tip-head").text(head);
+    tip.select(".pc-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select(".pc-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var cRect = anchorEl.getBoundingClientRect();
+    var cx = cRect.left - sRect.left + cRect.width / 2;
+    var cy = cRect.top - sRect.top;
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var x = cx - tw / 2, y = cy - th - 10;
+    if (x < 4) x = 4;
+    if (x + tw > sRect.width - 4) x = sRect.width - tw - 4;
+    if (y < 4) y = cy + cRect.height + 10;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".pc-tooltip").classed("is-on", false); }
+
+  // ---- Build -----------------------------------------------------------
+
+  var lastBuilt = null;
+
+  function build() {
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var shelf = root.select(".pc-shelf");
+    shelf.selectAll("*").remove();
+
+    var cards = [];
+    YEARS.forEach(function (yr, yi) {
+      var col = shelf.append("div").attr("class", "pc-yearcol");
+      col.append("div").attr("class", "pc-year").attr("data-yi", yi).text(yr);
+      var entries = PICKS.filter(function (p) { return p.yr === yr; });
+      entries.forEach(function (p) {
+        var card = col.append("div")
+          .attr("class", "pc-card st-" + p.st)
+          .attr("data-yi", yi)
+          .attr("title", yr + " (" + p.origin + "): " + p.cond);
+        card.append("span").attr("class", "pc-word").text(p.word);
+        card.append("span").attr("class", "pc-origin").text(p.origin);
+        card.on("mouseenter", function () {
+          showTooltip(yr + " first · " + p.origin, p.cond, this);
+        }).on("mouseleave", hideTooltip);
+        cards.push({ el: card, yi: yi, st: p.st });
+      });
+    });
+
+    var barsHost = root.select(".pc-bars");
+    barsHost.selectAll("*").remove();
+    var bars = [];
+    LEAGUE.forEach(function (t, i) {
+      var bar = barsHost.append("div")
+        .attr("class", "pc-bar" + (t[0] === "MIN" ? " is-min" : ""))
+        .attr("title", t[0] + ": " + t[1] + " tradable future firsts");
+      bar.on("mouseenter", function () {
+        showTooltip(t[0], t[1] + " cleanly tradable future firsts" + (t[0] === "MIN" ? " · 29th of 30" : ""), this);
+      }).on("mouseleave", hideTooltip);
+      bars.push({ el: bar, count: t[1], i: i });
+    });
+
+    lastBuilt = { cards: cards, bars: bars, compact: compact };
+    return lastBuilt;
+  }
+
+  function barH(count) { return 6 + count * 7; }
+
+  function allOn(built) {
+    root.selectAll(".pc-year").classed("is-on", true);
+    built.cards.forEach(function (c) { c.el.classed("is-on", true); });
+    built.bars.forEach(function (b) { b.el.style("height", barH(b.count) + "px"); });
+    root.select(".pc-league-min").classed("is-on", true);
+    root.select(".pc-hero-num").text("2");
+    root.classed("is-landed", true);
+  }
+
+  function play(built) {
+    clearPlayTimers();
+    root.select(".pc-replay").classed("is-shown", false);
+
+    if (reduceMotion) {
+      allOn(built);
+      setCaption(4);
+      root.select(".pc-replay").classed("is-shown", true);
+      return;
+    }
+
+    // Reset.
+    root.classed("is-landed", false);
+    root.selectAll(".pc-year").classed("is-on", false);
+    built.cards.forEach(function (c) { c.el.classed("is-on", false).classed("is-pulse", false); });
+    built.bars.forEach(function (b) { b.el.style("height", "0px"); });
+    root.select(".pc-league-min").classed("is-on", false);
+    root.select(".pc-hero-num").text("0");
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Phase 1: the shelf lands, year by year.
+    YEARS.forEach(function (_, yi) {
+      playTimers.push(setTimeout(function () {
+        root.selectAll(".pc-year").filter(function () {
+          return +this.getAttribute("data-yi") === yi;
+        }).classed("is-on", true);
+        built.cards.filter(function (c) { return c.yi === yi; }).forEach(function (c, k) {
+          playTimers.push(setTimeout(function () { c.el.classed("is-on", true); }, k * 70));
+        });
+      }, SHELF_AT + yi * YEAR_STAG));
+    });
+
+    // Phase 2: the clean pair pulses; the hero counts to two.
+    playTimers.push(setTimeout(function () {
+      setCaption(1);
+      tickHero(2, 700);
+      root.classed("is-landed", true);
+      built.cards.filter(function (c) { return c.st === "clean"; }).forEach(function (c) {
+        c.el.classed("is-pulse", true);
+        playTimers.push(setTimeout(function () { c.el.classed("is-pulse", false); }, 900));
+      });
+    }, CAP1_AT));
+
+    // Phase 3: No. 28.
+    playTimers.push(setTimeout(function () {
+      setCaption(2);
+      built.cards.filter(function (c) { return c.st === "now"; }).forEach(function (c) {
+        c.el.classed("is-pulse", true);
+        playTimers.push(setTimeout(function () { c.el.classed("is-pulse", false); }, 900));
+      });
+    }, CAP2_AT));
+
+    // Phase 4: the tangle.
+    playTimers.push(setTimeout(function () {
+      setCaption(3);
+      built.cards.filter(function (c) { return c.st === "frozen" || c.st === "enc"; }).forEach(function (c) {
+        c.el.classed("is-pulse", true);
+        playTimers.push(setTimeout(function () { c.el.classed("is-pulse", false); }, 900));
+      });
+    }, CAP3_AT));
+
+    // Phase 5: league context bars.
+    playTimers.push(setTimeout(function () {
+      setCaption(4);
+      built.bars.forEach(function (b) {
+        playTimers.push(setTimeout(function () {
+          b.el.style("height", barH(b.count) + "px");
+        }, b.i * BAR_STAG));
+      });
+      playTimers.push(setTimeout(function () {
+        root.select(".pc-league-min").classed("is-on", true);
+      }, LEAGUE.length * BAR_STAG + 250));
+    }, LEAGUE_AT));
+
+    playTimers.push(setTimeout(function () {
+      root.select(".pc-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".pc-replay").on("click", function () {
+    if (lastBuilt) play(lastBuilt);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    var built = build();
+    __resetOnly = true;
+    play(built);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    play(lastBuilt || build());
+  }
+
+  if (reduceMotion) {
+    var b = build();
+    allOn(b);
+    setCaption(4);
+    root.select(".pc-replay").classed("is-shown", true);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        var built = build();
+        if (__played) {
+          allOn(built);
+          setCaption(4);
+          root.select(".pc-replay").classed("is-shown", true);
+        } else {
+          __idle();
+        }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

@@ -79,7 +79,7 @@
     <div class="ar-hero-label">The margin the whole summer lives in</div>
     <button class="ar-replay" type="button" aria-label="Replay">↺ Replay</button>
   </div>
-  <p class="ar-foot">Wolves 2026-27 books per our cap model (apron basis, eight guaranteed deals plus roster charges). The re-sign is shown at $16.5M, the mid-teens market number our gate tested. Bird rights make it legal. The geometry is what it costs.</p>
+  <p class="ar-foot">Wolves 2026-27 books per our cap model (apron basis, eight guaranteed deals plus roster charges). The re-sign is shown at $16.5M, the mid-teens market number our gate tested. Bird rights make it legal. The geometry is what it costs. The runway zooms into the last $41M; the strip below it is the same money at true scale, so the $16.5M reads at its real size next to the $194M.</p>
   <div class="ar-watermark">@WolvesToaT · Jun 2026</div>
 </div>
 <style>
@@ -126,10 +126,10 @@
     background: var(--bg-inset);
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    height: 236px;
+    height: 280px;
     overflow: hidden;
   }
-  #viz-apron-runway.is-compact .ar-stage { height: 212px; }
+  #viz-apron-runway.is-compact .ar-stage { height: 256px; }
   #viz-apron-runway .ar-stage svg { display: block; width: 100%; height: 100%; }
   #viz-apron-runway .ar-tooltip {
     position: absolute;
@@ -443,11 +443,15 @@
 
     var pad = { left: 14, right: 14 };
     var x = d3.scaleLinear().domain([DOM_LO, DOM_HI]).range([pad.left, W - pad.right]);
+    // True-scale axis for the context strip: $0 to $226M, same pixel range.
+    var xs = d3.scaleLinear().domain([0, DOM_HI]).range([pad.left, W - pad.right]);
 
     var labelTop = 16;
     var wallTop = compact ? 52 : 58;
     var barH = compact ? 24 : 30;
-    var barY = H - (compact ? 88 : 96);
+    var stripH = 8;
+    var stripY = H - (compact ? 32 : 36);
+    var barY = stripY - (compact ? 104 : 116);
     var wallBot = barY + barH + (compact ? 26 : 30);
 
     // Baseline under the runway.
@@ -455,6 +459,79 @@
       .attr("x1", pad.left).attr("x2", W - pad.right)
       .attr("y1", wallBot).attr("y2", wallBot)
       .style("stroke", "var(--border-subtle)").style("stroke-width", 1);
+
+    // Gradient fill for the books bar: fades out toward the cut left edge so
+    // the truncated bar never reads as a full quantity at the zoomed scale.
+    var bookGrad = defs.append("linearGradient").attr("id", "ar-books-grad")
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", x(DOM_LO)).attr("y1", 0).attr("x2", x(BOOKS)).attr("y2", 0);
+    bookGrad.append("stop").attr("offset", "0%")
+      .style("stop-color", "var(--accent-default)").style("stop-opacity", 0.10);
+    bookGrad.append("stop").attr("offset", "26%")
+      .style("stop-color", "var(--accent-default)").style("stop-opacity", 0.80);
+    bookGrad.append("stop").attr("offset", "100%")
+      .style("stop-color", "var(--accent-default)").style("stop-opacity", 0.95);
+
+    // ---- True-scale context strip (the honest proportions) ------------
+    // Zoom-window connectors from the runway frame down to the strip.
+    [[pad.left, xs(DOM_LO)], [W - pad.right, xs(DOM_HI)]].forEach(function (p) {
+      svg.append("line")
+        .attr("x1", p[0]).attr("y1", wallBot + 2)
+        .attr("x2", p[1]).attr("y2", stripY - 4)
+        .style("stroke", "var(--border-default)")
+        .style("stroke-width", 1)
+        .style("stroke-dasharray", "3,3");
+    });
+    svg.append("rect")
+      .attr("x", xs(DOM_LO) - 1).attr("y", stripY - 3)
+      .attr("width", xs(DOM_HI) - xs(DOM_LO) + 2).attr("height", stripH + 6)
+      .attr("rx", 2)
+      .style("fill", "none")
+      .style("stroke", "var(--border-default)")
+      .style("stroke-dasharray", "3,3");
+
+    svg.append("rect")
+      .attr("x", xs(0)).attr("y", stripY)
+      .attr("width", xs(DOM_HI) - xs(0)).attr("height", stripH)
+      .attr("rx", 2)
+      .style("fill", "var(--bg-surface)")
+      .style("stroke", "var(--border-subtle)");
+    var stripBooks = svg.append("rect")
+      .attr("x", xs(0)).attr("y", stripY)
+      .attr("height", stripH).attr("rx", 2)
+      .style("fill", "var(--accent-default)")
+      .style("opacity", 0.9)
+      .attr("width", reduceMotion ? xs(BOOKS) - xs(0) : 0);
+    var stripDos = svg.append("rect")
+      .attr("x", xs(BOOKS)).attr("y", stripY)
+      .attr("height", stripH)
+      .style("fill", "var(--status-warning)")
+      .style("opacity", 0.92)
+      .attr("width", reduceMotion ? xs(END) - xs(BOOKS) : 0);
+    [TAX, APRON1, APRON2].forEach(function (v) {
+      svg.append("line")
+        .attr("x1", xs(v)).attr("x2", xs(v))
+        .attr("y1", stripY - 2).attr("y2", stripY + stripH + 2)
+        .style("stroke", v === APRON1 ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("stroke-width", v === APRON1 ? 1.6 : 1);
+    });
+    svg.append("text")
+      .attr("x", pad.left).attr("y", stripY + stripH + 14)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9.5px var(--family-mono)")
+      .text(compact ? "true scale · $0 to $226M" : "the same money at true scale · $0 to $226M");
+    // One fat hover target over the whole strip.
+    svg.append("rect")
+      .attr("x", pad.left).attr("y", stripY - 8)
+      .attr("width", W - pad.left - pad.right).attr("height", stripH + 18)
+      .style("fill", "transparent")
+      .style("cursor", "pointer")
+      .on("mouseenter mousemove", function () {
+        showTooltip("True scale", "The books are $194.0M. The re-sign adds $16.5M, about a twelfth of the books. The runway above zooms into the last $41M, where the lines live.", "$194.0M + $16.5M", W / 2, stripY - 12);
+      })
+      .on("mouseleave", hideTooltip)
+      .append("title").text("The same money at true scale, zero to $226M. The runway above is a zoom into the last $41M.");
 
     // ---- Walls -------------------------------------------------------
     var wallG = svg.append("g");
@@ -520,19 +597,13 @@
         .attr("x2", pad.left + 8 + off).attr("y2", barY - 4)
         .style("stroke", "var(--text-tertiary)").style("stroke-width", 1.2);
     });
-    svg.append("text")
-      .attr("x", pad.left).attr("y", wallBot + 16)
-      .attr("text-anchor", "start")
-      .style("fill", "var(--text-tertiary)")
-      .style("font", "9.5px var(--family-mono)")
-      .text("axis starts at $185M");
 
     // ---- Books bar ---------------------------------------------------
     var booksW = x(BOOKS) - x(DOM_LO);
     var booksBar = svg.append("rect")
       .attr("x", x(DOM_LO)).attr("y", barY)
       .attr("height", barH).attr("rx", 3)
-      .style("fill", "var(--accent-default)")
+      .style("fill", "url(#ar-books-grad)")
       .style("filter", "url(#ar-glow)")
       .style("cursor", "pointer")
       .attr("width", reduceMotion ? booksW : 0);
@@ -597,6 +668,8 @@
       wallSel: wallSel, wallTop: wallTop, wallBot: wallBot,
       booksBar: booksBar, booksW: booksW, booksLabel: booksLabel,
       dosBar: dosBar, dosW: dosW, dosLabel: dosLabel, overLabel: overLabel,
+      stripBooks: stripBooks, stripBooksW: xs(BOOKS) - xs(0),
+      stripDos: stripDos, stripDosW: xs(END) - xs(BOOKS),
       x: x
     };
     lastRender = { ctx: ctx };
@@ -626,6 +699,8 @@
     ctx.dosBar.attr("width", ctx.dosW + 2);
     ctx.dosLabel.style("opacity", 1);
     ctx.overLabel.style("opacity", 1);
+    ctx.stripBooks.attr("width", ctx.stripBooksW);
+    ctx.stripDos.attr("width", ctx.stripDosW);
     var w1 = ctx.wallSel[1];
     w1.line.style("stroke", "var(--status-error)").style("stroke-width", 2.5).style("filter", "url(#ar-glow)");
     chipsIn(true); chipsDead(true); survivor(true);
@@ -656,6 +731,8 @@
     ctx.dosBar.attr("width", 0);
     ctx.dosLabel.style("opacity", 0);
     ctx.overLabel.style("opacity", 0);
+    ctx.stripBooks.attr("width", 0);
+    ctx.stripDos.attr("width", 0);
     chipsIn(false); chipsDead(false); survivor(false);
     setHero(APRON1 - DOM_LO);
     setHeroLabel(false);
@@ -670,6 +747,8 @@
     });
 
     // Phase 2: the books bar grows to $194.0M; the hero margin counts down.
+    // The true-scale strip fills in lockstep so the honest proportion is
+    // always on screen next to the zoomed runway.
     ctx.booksBar.transition("grow").delay(BOOKS_AT).duration(BOOKS_MS)
       .ease(d3.easeCubicOut)
       .attr("width", ctx.booksW)
@@ -678,6 +757,9 @@
         var interp = d3.interpolateNumber(DOM_LO, BOOKS);
         return function (t) { node.textContent = fmtMargin(APRON1 - interp(t)); };
       });
+    ctx.stripBooks.transition("grow").delay(BOOKS_AT).duration(BOOKS_MS)
+      .ease(d3.easeCubicOut)
+      .attr("width", ctx.stripBooksW);
     playTimers.push(setTimeout(function () {
       ctx.booksLabel.transition().duration(300).style("opacity", 1);
     }, BOOKS_AT + BOOKS_MS - 200));
@@ -703,6 +785,9 @@
         var interp = d3.interpolateNumber(BOOKS, END);
         return function (t) { node.textContent = fmtMargin(APRON1 - interp(t)); };
       });
+    ctx.stripDos.transition("dos").delay(DOS_AT).duration(DOS_MS)
+      .ease(d3.easeCubicInOut)
+      .attr("width", ctx.stripDosW);
     playTimers.push(setTimeout(function () {
       ctx.dosLabel.transition().duration(300).style("opacity", 1);
     }, DOS_AT + 500));
