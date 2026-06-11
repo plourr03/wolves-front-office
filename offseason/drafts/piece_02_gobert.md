@@ -16,13 +16,11 @@ Here's what I finally figured out after building the models for this series: eve
 
 So this piece does two jobs. First it lays the four numbers on the table and tells you what each one can and cannot see. Then it does the thing the argument actually needs, which is to measure what changed between Utah and here. Not vibes. Possessions, touches, screens, feeds. The misuse claim, the one Wolves fans mutter and Gobert defenders shout, turns out to be checkable. I checked it.
 
-Fair warning before we start: the parenthetical in the title is load-bearing. If you came here for absolution, you're going to be mad at me by the end. If you came here to dunk on him, same.
+Fair warning before we start: the parenthetical in the title is load-bearing, and so is the order of the evidence. The trail starts in Utah, which means the first half of this piece is going to sound like I have a Rudy poster over my bed. I don't. The case against him is real, it arrives in the back half, and it comes out of the same data. If you came here for absolution, you're going to be mad at me by the end. If you came here to dunk on him, same.
 
 ## The four numbers
 
-Here's Rudy Gobert, four ways, all from this past season.
-
-Quick word on the scale first, because "plus 2" means nothing on its own. All four numbers speak the same language: points per 100 possessions of team impact. Plus 2 means the Wolves are about 2 points better per 100 trips with him on the floor than without him. Zero is a league-average player. A good starter lives around plus 1 to plus 2. All-NBA guys live around plus 4. The MVP argument starts somewhere past plus 6. Okay, now the spread.
+Here's Rudy Gobert points per 100 possessions, four ways, all from this past season.
 
 {{viz:gobert-four-view}}
 
