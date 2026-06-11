@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The scheme was him, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is scheme_was_his_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-scheme-was-his">
+  <div class="sw-chip" role="status">
+    <span class="sw-chip-dot"></span>
+    <span class="sw-chip-label">The scheme was him</span>
+    <span class="sw-chip-sep">·</span>
+    <span class="sw-chip-sub">team pick-and-roll rate vs league</span>
+  </div>
+  <p class="sw-caption" aria-live="polite"></p>
+  <div class="sw-stage">
+    <div class="sw-tooltip" role="tooltip">
+      <div class="sw-tip-head"></div>
+      <div class="sw-tip-desc"></div>
+    </div>
+  </div>
+  <div class="sw-legend">
+    <span class="sw-leg sw-leg-him">Gobert's team</span>
+    <span class="sw-leg sw-leg-uta">Utah after him</span>
+    <span class="sw-leg sw-leg-min">Minnesota before him</span>
+    <button class="sw-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="sw-foot">Each team's share of offense run as a pick-and-roll ball-handler action, in percentage points above or below the league average that season. Zero is league average. Hover any dot for the raw rates. The green line follows Gobert from Utah to Minnesota.</p>
+  <div class="sw-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-scheme-was-his, #viz-scheme-was-his * { touch-action: manipulation; }
+  #viz-scheme-was-his {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-scheme-was-his .sw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-info);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-scheme-was-his .sw-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-info);
+  }
+  #viz-scheme-was-his .sw-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-scheme-was-his .sw-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-scheme-was-his .sw-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-scheme-was-his .sw-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 262px;
+    overflow: hidden;
+  }
+  #viz-scheme-was-his.is-compact .sw-stage { height: 232px; }
+  #viz-scheme-was-his .sw-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-scheme-was-his .sw-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-scheme-was-his .sw-tooltip.is-on { opacity: 1; }
+  #viz-scheme-was-his .sw-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-scheme-was-his .sw-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  #viz-scheme-was-his .sw-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 12px 0 0 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #viz-scheme-was-his .sw-leg {
+    font: 600 11px var(--family-sans);
+    color: var(--text-tertiary);
+    padding-left: 18px;
+    position: relative;
+  }
+  #viz-scheme-was-his .sw-leg::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 13px; height: 3px;
+    border-radius: 2px;
+  }
+  #viz-scheme-was-his .sw-leg-him::before { background: var(--accent-default); }
+  #viz-scheme-was-his .sw-leg-uta::before { background: var(--text-tertiary); }
+  #viz-scheme-was-his .sw-leg-min::before {
+    background: transparent;
+    border-top: 2px dashed var(--text-tertiary);
+    height: 0;
+  }
+  #viz-scheme-was-his .sw-replay {
+    margin-left: auto;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-scheme-was-his .sw-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-scheme-was-his .sw-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-scheme-was-his .sw-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-scheme-was-his .sw-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Team share of offense run as pick-and-roll BALL-HANDLER actions, in
+  // percentage points vs that season's league average (warehouse synergy,
+  // team play types, Regular Season). pct = raw team rate for tooltips.
+  // Gobert: UTA 2013-14 through 2021-22, MIN 2022-23 on.
+  var SEASONS = ["13-14","14-15","15-16","16-17","17-18","18-19","19-20","20-21","21-22","22-23","23-24","24-25","25-26"];
+  var UTA = { vs: [1.5, 1.2, 1.4, 3.2, 5.0, 4.1, 6.8, 4.4, 6.0, -0.6, -0.8, -1.0, -2.8],
+              pct: [16.5, 16.5, 18.0, 20.5, 21.9, 21.5, 25.4, 22.4, 22.9, 16.4, 15.6, 15.0, 12.5] };
+  var MIN = { vs: [-1.9, -3.9, -1.6, -0.7, 2.1, -0.5, -1.6, -1.6, -2.9, -1.7, -2.0, 0.3, -2.2],
+              pct: [13.1, 11.4, 15.0, 16.6, 19.0, 16.9, 17.0, 16.4, 14.0, 15.3, 14.4, 16.3, 13.1] };
+  var TRADE_I = 9;   // index of 22-23, his first MIN season
+
+  var CAPTIONS = [
+    "Share of offense run as pick-and-roll, relative to league average. Zero is an average team.",
+    "Wherever he was, Utah ran it 3 to 7 points above the league. The offense was built to his screen.",
+    "Then the trade. His new team has run it below league average in all four of his years. The faint line says Minnesota was like this before him too.",
+    "And Utah without him fell to average overnight. The scheme was him."
+  ];
+
+  var AXIS_AT = 200;
+  var HIS_UTA_AT = 700, HIS_UTA_MS = 1500;
+  var PLUNGE_AT = 2900, PLUNGE_MS = 600;
+  var HIS_MIN_AT = 3500, HIS_MIN_MS = 800;
+  var GHOST_MIN_AT = 3600;
+  var UTA_AFTER_AT = 5200, UTA_AFTER_MS = 900;
+  var REPLAY_AT = 6800;
+
+  var root = d3.select("#viz-scheme-was-his");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".sw-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".sw-tooltip");
+    tip.select(".sw-tip-head").text(head);
+    tip.select(".sw-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".sw-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12;
+    if (y + th > sh - 8) y = sh - th - 8;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".sw-tooltip").classed("is-on", false); }
+
+  function fullSeason(s) { return "20" + s.split("-")[0] + "-" + s.split("-")[1]; }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".sw-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "sw-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.2 : 1.7).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = { left: 34, right: 16, top: 26, bottom: 32 };
+    var x = d3.scalePoint().domain(SEASONS).range([pad.left + 8, W - pad.right - 8]);
+    var y = d3.scaleLinear().domain([-5, 8]).range([H - pad.bottom, pad.top]);
+
+    // Gridlines.
+    [-4, 0, 4, 8].forEach(function (t) {
+      var isZero = t === 0;
+      svg.append("line")
+        .attr("x1", pad.left).attr("x2", W - pad.right)
+        .attr("y1", y(t)).attr("y2", y(t))
+        .style("stroke", isZero ? "var(--border-default)" : "var(--border-subtle)")
+        .style("stroke-width", isZero ? 1.5 : 1)
+        .style("stroke-dasharray", isZero ? "none" : "2,4");
+      svg.append("text")
+        .attr("x", pad.left - 7).attr("y", y(t) + 3)
+        .attr("text-anchor", "end")
+        .style("fill", isZero ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("font", (isZero ? "700 " : "") + "10px var(--family-mono)")
+        .text(t > 0 ? "+" + t : t);
+    });
+    svg.append("text")
+      .attr("x", W - pad.right).attr("y", y(0) - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9px var(--family-sans)")
+      .text("LEAGUE AVERAGE");
+
+    // X labels.
+    SEASONS.forEach(function (s, i) {
+      if (compact && i % 3 !== 0 && i !== SEASONS.length - 1) return;
+      if (!compact && i % 2 === 1) return;
+      svg.append("text")
+        .attr("x", x(s)).attr("y", H - pad.bottom + 16)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "9.5px var(--family-mono)")
+        .text("'" + s);
+    });
+
+    // Trade divider.
+    var tradeX = (x(SEASONS[TRADE_I - 1]) + x(SEASONS[TRADE_I])) / 2;
+    svg.append("line")
+      .attr("x1", tradeX).attr("x2", tradeX)
+      .attr("y1", pad.top - 8).attr("y2", H - pad.bottom)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", tradeX).attr("y", pad.top - 12)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9.5px var(--family-sans)")
+      .text(compact ? "TRADE" : "THE TRADE");
+
+    function lineGen() {
+      return d3.line()
+        .x(function (d) { return x(d.s); })
+        .y(function (d) { return y(d.v); })
+        .curve(d3.curveMonotoneX);
+    }
+    function seriesData(vals, from, to) {
+      var out = [];
+      for (var i = from; i <= to; i++) out.push({ s: SEASONS[i], v: vals[i] });
+      return out;
+    }
+    function drawPath(g, data, stroke, width_, dash, glowOn) {
+      var p = g.append("path").datum(data)
+        .attr("d", lineGen())
+        .style("fill", "none")
+        .style("stroke", stroke)
+        .style("stroke-width", width_)
+        .style("stroke-dasharray", dash || "none");
+      if (glowOn) p.style("filter", "url(#sw-glow)");
+      var len = p.node().getTotalLength();
+      return { p: p, len: len };
+    }
+
+    // Ghost: Minnesota before him (faint dashed).
+    var ghostMin = svg.append("g").style("opacity", reduceMotion ? 0.45 : 0);
+    drawPath(ghostMin, seriesData(MIN.vs, 0, TRADE_I - 1), "var(--text-tertiary)", 1.4, "3,4", false);
+
+    // Utah after him (gray, from his last UTA point onward).
+    var utaAfterG = svg.append("g");
+    var utaAfter = drawPath(utaAfterG, seriesData(UTA.vs, TRADE_I - 1, SEASONS.length - 1), "var(--text-tertiary)", 1.8, null, false);
+    if (!reduceMotion) utaAfter.p.attr("stroke-dasharray", utaAfter.len + " " + utaAfter.len).attr("stroke-dashoffset", utaAfter.len);
+
+    // His team: Utah years (accent).
+    var hisG = svg.append("g");
+    var hisUta = drawPath(hisG, seriesData(UTA.vs, 0, TRADE_I - 1), "var(--accent-default)", compact ? 2.2 : 2.6, null, true);
+    if (!reduceMotion) hisUta.p.attr("stroke-dasharray", hisUta.len + " " + hisUta.len).attr("stroke-dashoffset", hisUta.len);
+
+    // The plunge connector across the trade.
+    var plungeData = [{ s: SEASONS[TRADE_I - 1], v: UTA.vs[TRADE_I - 1] }, { s: SEASONS[TRADE_I], v: MIN.vs[TRADE_I] }];
+    var plunge = drawPath(hisG, plungeData, "var(--accent-default)", compact ? 2.0 : 2.4, "5,5", true);
+    if (!reduceMotion) plunge.p.attr("stroke-dasharray", "5,5").style("opacity", 0);
+
+    // His team: Minnesota years (accent).
+    var hisMin = drawPath(hisG, seriesData(MIN.vs, TRADE_I, SEASONS.length - 1), "var(--accent-default)", compact ? 2.2 : 2.6, null, true);
+    if (!reduceMotion) hisMin.p.attr("stroke-dasharray", hisMin.len + " " + hisMin.len).attr("stroke-dashoffset", hisMin.len);
+
+    // Dots on his path, with tooltips.
+    var dotsG = svg.append("g");
+    var hisDots = [];
+    SEASONS.forEach(function (s, i) {
+      var isUta = i < TRADE_I;
+      var v = isUta ? UTA.vs[i] : MIN.vs[i];
+      var pct = isUta ? UTA.pct[i] : MIN.pct[i];
+      var team = isUta ? "Utah" : "Minnesota";
+      var dot = dotsG.append("circle")
+        .attr("cx", x(s)).attr("cy", y(v))
+        .attr("r", reduceMotion ? (compact ? 2.8 : 3.4) : 0)
+        .style("fill", "var(--accent-default)")
+        .style("cursor", "pointer");
+      var head = fullSeason(s) + " " + team + " (his team)";
+      var desc = pct.toFixed(1) + " percent of offense as pick-and-roll ball-handler, " + (v > 0 ? "+" + v.toFixed(1) : v.toFixed(1)) + " points vs the league average.";
+      dot.on("mouseenter mousemove", function () { showTooltip(head, desc, x(s), y(v)); })
+         .on("mouseleave", hideTooltip);
+      dot.append("title").text(head + ": " + desc);
+      hisDots.push({ dot: dot, i: i, r: compact ? 2.8 : 3.4 });
+    });
+    // Dots on Utah-after path.
+    var utaDots = [];
+    for (var i = TRADE_I; i < SEASONS.length; i++) {
+      (function (i) {
+        var s = SEASONS[i];
+        var dot = dotsG.append("circle")
+          .attr("cx", x(s)).attr("cy", y(UTA.vs[i]))
+          .attr("r", reduceMotion ? (compact ? 2.4 : 2.8) : 0)
+          .style("fill", "var(--text-tertiary)")
+          .style("cursor", "pointer");
+        var head = fullSeason(s) + " Utah (after him)";
+        var desc = UTA.pct[i].toFixed(1) + " percent of offense as pick-and-roll ball-handler, " + UTA.vs[i].toFixed(1) + " points vs the league average.";
+        dot.on("mouseenter mousemove", function () { showTooltip(head, desc, x(s), y(UTA.vs[i])); })
+           .on("mouseleave", hideTooltip);
+        dot.append("title").text(head + ": " + desc);
+        utaDots.push({ dot: dot, i: i, r: compact ? 2.4 : 2.8 });
+      })(i);
+    }
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = {
+      ghostMin: ghostMin, utaAfter: utaAfter, hisUta: hisUta, plunge: plunge, hisMin: hisMin,
+      hisDots: hisDots, utaDots: utaDots
+    };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.ghostMin.style("opacity", 0.45);
+    ctx.utaAfter.p.attr("stroke-dashoffset", 0);
+    ctx.hisUta.p.attr("stroke-dashoffset", 0);
+    ctx.plunge.p.style("opacity", 1);
+    ctx.hisMin.p.attr("stroke-dashoffset", 0);
+    ctx.hisDots.forEach(function (d) { d.dot.attr("r", d.r); });
+    ctx.utaDots.forEach(function (d) { d.dot.attr("r", d.r); });
+    setCaption(3);
+    root.select(".sw-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.select(".sw-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.ghostMin.style("opacity", 0);
+    ctx.utaAfter.p.attr("stroke-dashoffset", ctx.utaAfter.len);
+    ctx.hisUta.p.attr("stroke-dashoffset", ctx.hisUta.len);
+    ctx.plunge.p.style("opacity", 0);
+    ctx.hisMin.p.attr("stroke-dashoffset", ctx.hisMin.len);
+    ctx.hisDots.forEach(function (d) { d.dot.attr("r", 0); });
+    ctx.utaDots.forEach(function (d) { d.dot.attr("r", 0); });
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // His Utah years draw left to right; dots pop along the way.
+    playTimers.push(setTimeout(function () {
+      setCaption(1);
+      ctx.hisUta.p.transition().duration(HIS_UTA_MS).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
+      ctx.hisDots.filter(function (d) { return d.i < TRADE_I; }).forEach(function (d, k) {
+        d.dot.transition().delay((k / (TRADE_I - 1)) * HIS_UTA_MS).duration(300)
+          .ease(d3.easeBackOut.overshoot(1.5)).attr("r", d.r);
+      });
+    }, HIS_UTA_AT));
+
+    // The plunge.
+    playTimers.push(setTimeout(function () {
+      setCaption(2);
+      ctx.plunge.p.transition().duration(PLUNGE_MS).style("opacity", 1);
+    }, PLUNGE_AT));
+
+    // His Minnesota years + the ghost context.
+    playTimers.push(setTimeout(function () {
+      ctx.hisMin.p.transition().duration(HIS_MIN_MS).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
+      ctx.hisDots.filter(function (d) { return d.i >= TRADE_I; }).forEach(function (d, k) {
+        d.dot.transition().delay((k / 3) * HIS_MIN_MS).duration(300)
+          .ease(d3.easeBackOut.overshoot(1.5)).attr("r", d.r);
+      });
+    }, HIS_MIN_AT));
+    playTimers.push(setTimeout(function () {
+      ctx.ghostMin.transition().duration(600).style("opacity", 0.45);
+    }, GHOST_MIN_AT));
+
+    // Utah after him falls to average.
+    playTimers.push(setTimeout(function () {
+      setCaption(3);
+      ctx.utaAfter.p.transition().duration(UTA_AFTER_MS).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
+      ctx.utaDots.forEach(function (d, k) {
+        d.dot.transition().delay((k / 3) * UTA_AFTER_MS).duration(300)
+          .ease(d3.easeBackOut.overshoot(1.5)).attr("r", d.r);
+      });
+    }, UTA_AFTER_AT));
+
+    playTimers.push(setTimeout(function () {
+      root.select(".sw-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".sw-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>

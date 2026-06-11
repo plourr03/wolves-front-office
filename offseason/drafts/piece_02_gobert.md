@@ -46,6 +46,10 @@ None of that happened by accident, and this is the part the trade-era discourse 
 
 And the scheme itself was built to feed him. Utah ran pick-and-roll ball-handler offense 3 to 7 percentage points above the league average every year of his prime. Here's the detail that settles whose scheme it was: the year Utah traded him, their pick-and-roll frequency fell straight back to league average. The machine wasn't Quin Snyder's whiteboard in the abstract. It was him.
 
+{{viz:scheme-was-his}}
+
+*The green line is Gobert's team, whichever one it was. Utah ran the league's heaviest pick-and-roll diets with him, fell to average the year he left, and Minnesota has been below average his whole time here. The faint line shows Minnesota was like this before him too.*
+
 ## What Minnesota ran instead
 
 Now the audit, Utah prime against the four Minnesota years. Every number below is from the same sources, same methods, side by side.
@@ -101,10 +105,9 @@ It's not all his fault. It's not none of it either. The parenthetical is doing r
 *[Methodology: the four views, the feeder proxy, the audit sources, and the sourcing tags](#methodology)*
 
 <!-- Production notes, do not publish:
-- Vizzes TK (ids reserved, to build): gobert-four-view (the spread with per-number blind spots),
-  feeder-count (delivery system by season with names on hover), roll-man-collapse (volume bars +
-  PPP line, UTA vs MIN), scheme-was-his (team PnR-BH frequency vs league avg, UTA/MIN, with the
-  post-trade Utah dropoff highlighted). Data: outputs/gobert_usage_audit.md + cache CSVs.
+- Vizzes BUILT (fragments + previews in outputs/charts/piece2_gobert/): gobert-four-view,
+  feeder-count, roll-man-collapse, scheme-was-his. All four tags placed in this draft. Load into
+  /admin/visualizations/new with the matching ids on publish.
 - The "massive detriment catching out of the pick-and-roll" line is presented as the discourse's
   composite voice, no quote marks. If we want it as a quote, source it first.
 - Four-view figures: box +1.48, DARKO +2.0 (ODPM -2 / DDPM +4, rank 32), consensus +5.28, RAPM

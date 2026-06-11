@@ -1,0 +1,493 @@
+<div id="viz-feeder-count">
+  <div class="fc-chip" role="status">
+    <span class="fc-chip-dot"></span>
+    <span class="fc-chip-label">The delivery system</span>
+    <span class="fc-chip-sep">·</span>
+    <span class="fc-chip-sub">live-dribble feeders by season</span>
+  </div>
+  <p class="fc-caption" aria-live="polite"></p>
+  <div class="fc-stage">
+    <div class="fc-tooltip" role="tooltip">
+      <div class="fc-tip-head"></div>
+      <div class="fc-tip-desc"></div>
+    </div>
+  </div>
+  <div class="fc-hero">
+    <div class="fc-hero-line">
+      <span class="fc-hero-num">6</span>
+      <span class="fc-hero-unit">meaningful feeders, 2025-26</span>
+    </div>
+    <div class="fc-hero-label">Utah gave him three to six, every single year</div>
+    <button class="fc-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="fc-foot">A feeder is any teammate with at least 150 pick-and-roll ball-handler possessions in a season, the proxy for a guard who can deliver the ball out of a live dribble. Hover any bar for the names. Gray is Utah, green is Minnesota, and the red bar is this past season.</p>
+  <div class="fc-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-feeder-count, #viz-feeder-count * { touch-action: manipulation; }
+  #viz-feeder-count {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-feeder-count .fc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--status-warning);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-feeder-count .fc-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-warning);
+  }
+  #viz-feeder-count .fc-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-feeder-count .fc-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-feeder-count .fc-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-feeder-count .fc-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 250px;
+    overflow: hidden;
+  }
+  #viz-feeder-count.is-compact .fc-stage { height: 220px; }
+  #viz-feeder-count .fc-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-feeder-count .fc-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-feeder-count .fc-tooltip.is-on { opacity: 1; }
+  #viz-feeder-count .fc-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-feeder-count .fc-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  #viz-feeder-count .fc-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-feeder-count .fc-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-feeder-count .fc-hero-num {
+    font: 800 64px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-feeder-count.is-landed .fc-hero-num { color: var(--status-error); }
+  #viz-feeder-count.is-compact .fc-hero-num { font-size: 48px; }
+  #viz-feeder-count .fc-hero-unit {
+    font: 700 14px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.15;
+    max-width: 130px;
+  }
+  #viz-feeder-count .fc-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-feeder-count .fc-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-feeder-count .fc-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-feeder-count .fc-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-feeder-count .fc-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-feeder-count .fc-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Teammates with >= 150 offensive pick-and-roll ball-handler possessions
+  // per season (warehouse synergy, Regular Season). Names with possession
+  // counts ride in the tooltips. era: u = Utah, m = Minnesota.
+  var SEASONS = [
+    { s: "13-14", era: "u", n: 3, names: "Trey Burke (408), Alec Burks (380), Gordon Hayward (380)" },
+    { s: "14-15", era: "u", n: 2, names: "Trey Burke (455), Gordon Hayward (431)" },
+    { s: "15-16", era: "u", n: 5, names: "Gordon Hayward (392), Rodney Hood (347), Trey Burke (259), Raul Neto (155), Shelvin Mack (150)" },
+    { s: "16-17", era: "u", n: 4, names: "Gordon Hayward (419), George Hill (325), Rodney Hood (210), Shelvin Mack (198)" },
+    { s: "17-18", era: "u", n: 4, names: "Donovan Mitchell (660), Ricky Rubio (453), Joe Ingles (219), Rodney Hood (179)" },
+    { s: "18-19", era: "u", n: 3, names: "Donovan Mitchell (857), Ricky Rubio (337), Joe Ingles (329)" },
+    { s: "19-20", era: "u", n: 6, names: "Donovan Mitchell (798), Mike Conley (327), Joe Ingles (308), Bojan Bogdanovic (167), Emmanuel Mudiay (162), Jordan Clarkson (162)" },
+    { s: "20-21", era: "u", n: 4, names: "Donovan Mitchell (594), Mike Conley (362), Jordan Clarkson (345), Joe Ingles (300)" },
+    { s: "21-22", era: "u", n: 3, names: "Donovan Mitchell (806), Mike Conley (493), Jordan Clarkson (364)" },
+    { s: "22-23", era: "m", n: 3, names: "Anthony Edwards (541), D'Angelo Russell (322), Jaylen Nowell (182)" },
+    { s: "23-24", era: "m", n: 2, names: "Anthony Edwards (576), Mike Conley (269)" },
+    { s: "24-25", era: "m", n: 2, names: "Anthony Edwards (688), Mike Conley (169)" },
+    { s: "25-26", era: "m", n: 1, last: true, names: "Anthony Edwards (353). Nobody else cleared the bar." }
+  ];
+
+  var CAPTIONS = [
+    "Every teammate who could feed him out of a live dribble, season by season.",
+    "Utah kept the cupboard full: three to six feeders every year. Mitchell ran 800-plus possessions at the peak.",
+    "Minnesota: three, then two, then two...",
+    "...then one. Anthony Edwards, and nobody else.",
+    "A roll man with one feeder gets fewer clean feeds. That is not a take. It is arithmetic."
+  ];
+
+  var UTA_AT = 500, UTA_STAG = 130;
+  var CAP1_AT = 1500;
+  var MIN_AT = 2900, MIN_STAG = 420;
+  var LAST_EXTRA = 500;
+  var CAP4_AT = 6200;
+  var REPLAY_AT = 6900;
+
+  var root = d3.select("#viz-feeder-count");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".fc-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function setHero(n) {
+    root.select(".fc-hero-num").node().textContent = String(n);
+  }
+
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".fc-tooltip");
+    tip.select(".fc-tip-head").text(head);
+    tip.select(".fc-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".fc-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12;
+    if (y + th > sh - 8) y = sh - th - 8;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".fc-tooltip").classed("is-on", false); }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".fc-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var pad = { left: 30, right: 14, top: 26, bottom: 34 };
+    var x = d3.scaleBand().domain(SEASONS.map(function (d) { return d.s; }))
+      .range([pad.left, W - pad.right]).paddingInner(0.32).paddingOuter(0.12);
+    var y = d3.scaleLinear().domain([0, 6.4]).range([H - pad.bottom, pad.top]);
+
+    // Gridlines + y labels.
+    [0, 2, 4, 6].forEach(function (t) {
+      svg.append("line")
+        .attr("x1", pad.left).attr("x2", W - pad.right)
+        .attr("y1", y(t)).attr("y2", y(t))
+        .style("stroke", t === 0 ? "var(--border-default)" : "var(--border-subtle)")
+        .style("stroke-width", 1)
+        .style("stroke-dasharray", t === 0 ? "none" : "2,4");
+      svg.append("text")
+        .attr("x", pad.left - 7).attr("y", y(t) + 3)
+        .attr("text-anchor", "end")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(t);
+    });
+
+    // The trade divider.
+    var tradeX = (x("21-22") + x.bandwidth() + x("22-23")) / 2;
+    svg.append("line")
+      .attr("x1", tradeX).attr("x2", tradeX)
+      .attr("y1", pad.top - 8).attr("y2", H - pad.bottom)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", tradeX).attr("y", pad.top - 12)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9.5px var(--family-sans)")
+      .text(compact ? "TRADE" : "THE TRADE");
+
+    // X labels (every other in compact).
+    SEASONS.forEach(function (d, i) {
+      if (compact && i % 2 === 1 && !d.last) return;
+      svg.append("text")
+        .attr("x", x(d.s) + x.bandwidth() / 2).attr("y", H - pad.bottom + 16)
+        .attr("text-anchor", "middle")
+        .style("fill", d.last ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("font", (d.last ? "700 " : "") + "9.5px var(--family-mono)")
+        .text("'" + d.s);
+    });
+
+    // Bars.
+    var barSel = [];
+    SEASONS.forEach(function (d) {
+      var color = d.last ? "var(--status-error)" : (d.era === "u" ? "var(--text-tertiary)" : "var(--accent-default)");
+      var hover = d.last ? "var(--status-error)" : (d.era === "u" ? "var(--text-secondary)" : "var(--accent-hover)");
+      var bar = svg.append("rect")
+        .attr("x", x(d.s)).attr("width", x.bandwidth())
+        .attr("y", reduceMotion ? y(d.n) : y(0))
+        .attr("height", reduceMotion ? (y(0) - y(d.n)) : 0)
+        .attr("rx", 3)
+        .style("fill", color)
+        .style("opacity", d.era === "u" ? 0.75 : 1)
+        .style("cursor", "pointer");
+      bar.on("mouseenter mousemove", function () {
+        d3.select(this).style("fill", hover);
+        showTooltip(("20" + d.s.split("-")[0]) + "-" + d.s.split("-")[1] + " · " + d.n + (d.n === 1 ? " feeder" : " feeders"), d.names, x(d.s) + x.bandwidth() / 2, y(d.n));
+      }).on("mouseleave", function () {
+        d3.select(this).style("fill", color);
+        hideTooltip();
+      });
+      bar.append("title").text("20" + d.s.split("-")[0] + "-" + d.s.split("-")[1] + ": " + d.n + " meaningful feeders. " + d.names);
+      barSel.push({ d: d, bar: bar });
+    });
+
+    // "Just Ant" annotation on the final bar.
+    var lastD = SEASONS[SEASONS.length - 1];
+    var annot = svg.append("text")
+      .attr("x", x(lastD.s) + x.bandwidth() / 2)
+      .attr("y", y(1) - 10)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--status-error)")
+      .style("font", "700 10.5px var(--family-sans)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text(compact ? "just Ant" : "just Ant, nobody else");
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = { barSel: barSel, annot: annot, y: y };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.barSel.forEach(function (s) {
+      s.bar.attr("y", ctx.y(s.d.n)).attr("height", ctx.y(0) - ctx.y(s.d.n));
+    });
+    ctx.annot.style("opacity", 1);
+    setCaption(4);
+    setHero(1);
+    root.classed("is-landed", true);
+    root.select(".fc-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".fc-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.barSel.forEach(function (s) {
+      s.bar.attr("y", ctx.y(0)).attr("height", 0);
+    });
+    ctx.annot.style("opacity", 0);
+    setHero(6);
+    root.select(".fc-hero-unit").text("meaningful feeders at the Utah peak");
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Utah bars sweep in.
+    ctx.barSel.filter(function (s) { return s.d.era === "u"; }).forEach(function (s, i) {
+      s.bar.transition().delay(UTA_AT + i * UTA_STAG).duration(450).ease(d3.easeCubicOut)
+        .attr("y", ctx.y(s.d.n)).attr("height", ctx.y(0) - ctx.y(s.d.n));
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+
+    // Minnesota bars, slower, the count stepping down in the hero.
+    var minBars = ctx.barSel.filter(function (s) { return s.d.era === "m"; });
+    minBars.forEach(function (s, i) {
+      var at = MIN_AT + i * MIN_STAG + (s.d.last ? LAST_EXTRA : 0);
+      s.bar.transition().delay(at).duration(450).ease(d3.easeCubicOut)
+        .attr("y", ctx.y(s.d.n)).attr("height", ctx.y(0) - ctx.y(s.d.n));
+      playTimers.push(setTimeout(function () {
+        setHero(s.d.n);
+        root.select(".fc-hero-unit").text("meaningful feeders, 20" + s.d.s.split("-")[0] + "-" + s.d.s.split("-")[1]);
+        if (i === 0) setCaption(2);
+        if (s.d.last) {
+          setCaption(3);
+          root.classed("is-landed", true);
+          ctx.annot.transition().delay(300).duration(300).style("opacity", 1);
+        }
+      }, at));
+    });
+
+    playTimers.push(setTimeout(function () { setCaption(4); }, CAP4_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".fc-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".fc-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>

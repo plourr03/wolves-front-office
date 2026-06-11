@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One player four numbers, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is gobert_four_view_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-gobert-four-view">
+  <div class="fv-chip" role="status">
+    <span class="fv-chip-dot"></span>
+    <span class="fv-chip-label">One player, four numbers</span>
+    <span class="fv-chip-sep">·</span>
+    <span class="fv-chip-sub">2025-26 impact, points per 100</span>
+  </div>
+  <p class="fv-caption" aria-live="polite"></p>
+  <div class="fv-stage">
+    <div class="fv-tooltip" role="tooltip">
+      <div class="fv-tip-head"></div>
+      <div class="fv-tip-desc"></div>
+    </div>
+  </div>
+  <div class="fv-hero">
+    <div class="fv-hero-line">
+      <span class="fv-hero-num">0.0</span>
+      <span class="fv-hero-unit">points of daylight</span>
+    </div>
+    <div class="fv-hero-label">Between his lowest number and his highest</div>
+    <button class="fv-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="fv-foot">Four real measurements of the same season. The box score counts what he does. DARKO splits offense from defense. The on-court numbers watch the scoreboard with him on and off. Hover any marker for what that number can see and what it is blind to.</p>
+  <div class="fv-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-gobert-four-view, #viz-gobert-four-view * { touch-action: manipulation; }
+  #viz-gobert-four-view {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-gobert-four-view .fv-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-gobert-four-view .fv-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+  }
+  #viz-gobert-four-view .fv-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-gobert-four-view .fv-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-gobert-four-view .fv-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-gobert-four-view .fv-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 216px;
+    overflow: hidden;
+  }
+  #viz-gobert-four-view.is-compact .fv-stage { height: 196px; }
+  #viz-gobert-four-view .fv-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-gobert-four-view .fv-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 170px;
+    max-width: 260px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-gobert-four-view .fv-tooltip.is-on { opacity: 1; }
+  #viz-gobert-four-view .fv-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-gobert-four-view .fv-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+  #viz-gobert-four-view .fv-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-gobert-four-view .fv-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-gobert-four-view .fv-hero-num {
+    font: 800 56px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-gobert-four-view.is-landed .fv-hero-num { color: var(--accent-default); }
+  #viz-gobert-four-view.is-compact .fv-hero-num { font-size: 42px; }
+  #viz-gobert-four-view .fv-hero-unit {
+    font: 700 14px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.15;
+    max-width: 110px;
+  }
+  #viz-gobert-four-view .fv-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-gobert-four-view .fv-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-gobert-four-view .fv-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-gobert-four-view .fv-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-gobert-four-view .fv-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-gobert-four-view .fv-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Rudy Gobert, 2025-26, by four measurement systems (points per 100
+  // possessions of team impact). box = box-score composite; DARKO = public
+  // ML metric (ODPM -2 / DDPM +4); consensus = this series' blended rating;
+  // rapm = our regularized adjusted plus-minus. The spread between them is
+  // the subject of the chart.
+  var MARKS = [
+    { key: "box", label: "Box score", v: 1.48, side: 1,
+      sees: "Counts what he does: points, rebounds, blocks.",
+      blind: "Blind to what never happens (the drives not attempted) and to screening, which is most of his offensive job." },
+    { key: "darko", label: "DARKO", v: 2.0, side: -1, split: "o -2 · d +4",
+      sees: "Machine-learning blend. The split is the honest part: +4 defense, elite. -2 offense, genuinely negative.",
+      blind: "A career-curve model: it prices his age into everything, and it cannot see scheme context either way." },
+    { key: "cons", label: "Consensus", v: 5.28, side: -1,
+      sees: "This series' blended on-court rating: the scoreboard moves with him out there.",
+      blind: "On-court math can credit him for teammates' work; lineup confounds are real and stated." },
+    { key: "rapm", label: "RAPM", v: 5.76, side: 1,
+      sees: "Our regularized plus-minus: with him on the floor, the whole defense organizes.",
+      blind: "Wide error bars by construction. Treat as the upside read, not gospel." }
+  ];
+  var LO = 1.48, HI = 5.76, SPREAD = HI - LO;   // 4.28 ~ 4.3
+
+  var CAPTIONS = [
+    "One player. Four real numbers. All from this past season.",
+    "The box score sees a good starter: +1.5. It cannot see what never happens.",
+    "DARKO sees +2, and the split underneath is the story: +4 defense, -2 offense.",
+    "The on-court math sees +5.3 and +5.8. The scoreboard does not lie with him out there.",
+    "4.3 points of daylight. That spread is not an error. It IS the Gobert argument."
+  ];
+
+  var AXIS_AT = 200;
+  var MARK_AT = [700, 1700, 2900, 3500];
+  var BAND_AT = 4700;
+  var REPLAY_AT = 6200;
+
+  var root = d3.select("#viz-gobert-four-view");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".fv-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function tickHero(to, duration) {
+    var node = root.select(".fv-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = to.toFixed(1); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(0, to);
+        return function (t) { node.textContent = interp(t).toFixed(1); };
+      });
+  }
+
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".fv-tooltip");
+    tip.select(".fv-tip-head").text(head);
+    tip.select(".fv-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".fv-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 14, y = cy + 14;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 14;
+    if (y + th > sh - 8) y = cy - th - 14;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".fv-tooltip").classed("is-on", false); }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".fv-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "fv-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.2 : 1.7).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = { left: 26, right: 26 };
+    var x = d3.scaleLinear().domain([0, 6.5]).range([pad.left, W - pad.right]);
+    var axisY = H / 2 + (compact ? 4 : 0);
+
+    // Axis + ticks.
+    var axisG = svg.append("g").style("opacity", reduceMotion ? 1 : 0);
+    axisG.append("line")
+      .attr("x1", x(0)).attr("x2", x(6.5))
+      .attr("y1", axisY).attr("y2", axisY)
+      .style("stroke", "var(--border-default)").style("stroke-width", 1.5);
+    [0, 1, 2, 3, 4, 5, 6].forEach(function (t) {
+      axisG.append("line")
+        .attr("x1", x(t)).attr("x2", x(t))
+        .attr("y1", axisY - 4).attr("y2", axisY + 4)
+        .style("stroke", "var(--border-default)").style("stroke-width", 1);
+      axisG.append("text")
+        .attr("x", x(t)).attr("y", axisY + (compact ? 32 : 36) + 26)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text("+" + t);
+    });
+
+    // Spread band (drawn behind markers, revealed at the end).
+    var band = svg.append("rect")
+      .attr("x", x(LO)).attr("y", axisY - 9)
+      .attr("width", reduceMotion ? (x(HI) - x(LO)) : 0)
+      .attr("height", 18)
+      .attr("rx", 4)
+      .style("fill", "var(--accent-subtle)");
+
+    // Markers.
+    var markSel = [];
+    MARKS.forEach(function (m) {
+      var mx = x(m.v);
+      var g = svg.append("g").style("opacity", reduceMotion ? 1 : 0);
+      var labY = m.side < 0 ? axisY - (compact ? 30 : 36) : axisY + (compact ? 30 : 36);
+      g.append("line")
+        .attr("x1", mx).attr("x2", mx)
+        .attr("y1", axisY + (m.side < 0 ? -8 : 8))
+        .attr("y2", labY + (m.side < 0 ? 12 : -12))
+        .style("stroke", "var(--border-default)").style("stroke-width", 1);
+      var dot = g.append("circle")
+        .attr("cx", mx).attr("cy", axisY)
+        .attr("r", reduceMotion ? (compact ? 6 : 7.5) : 0)
+        .style("fill", "var(--accent-default)")
+        .style("filter", "url(#fv-glow)")
+        .style("cursor", "pointer");
+      var anchor = "middle", lx = mx;
+      if (mx - 52 < pad.left) { anchor = "start"; lx = mx - 6; }
+      else if (mx + 52 > W - pad.right) { anchor = "end"; lx = mx + 6; }
+      g.append("text")
+        .attr("x", lx).attr("y", labY + (m.side < 0 ? 0 : 4))
+        .attr("text-anchor", anchor)
+        .style("fill", "var(--text-primary)")
+        .style("font", "700 " + (compact ? "11px" : "12.5px") + " var(--family-sans)")
+        .text(m.label);
+      g.append("text")
+        .attr("x", lx).attr("y", labY + (m.side < 0 ? 14 : 18))
+        .attr("text-anchor", anchor)
+        .style("fill", "var(--accent-hover)")
+        .style("font", "700 " + (compact ? "10px" : "11px") + " var(--family-mono)")
+        .text("+" + (m.key === "darko" ? m.v.toFixed(1) : m.v.toFixed(2)));
+      if (m.split) {
+        g.append("text")
+          .attr("x", lx).attr("y", labY + (m.side < 0 ? 27 : 31))
+          .attr("text-anchor", anchor)
+          .style("fill", "var(--text-tertiary)")
+          .style("font", "600 " + (compact ? "9px" : "10px") + " var(--family-mono)")
+          .text(m.split);
+      }
+      var tipText = m.sees + " " + m.blind;
+      dot.on("mouseenter mousemove", function () {
+        showTooltip(m.label + " · +" + m.v.toFixed(2), m.sees + " Blind spot: " + m.blind, mx, axisY);
+      }).on("mouseleave", hideTooltip);
+      dot.append("title").text(m.label + ", +" + m.v.toFixed(2) + ". " + tipText);
+      markSel.push({ m: m, g: g, dot: dot, r: compact ? 6 : 7.5 });
+    });
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = { axisG: axisG, band: band, markSel: markSel, bandW: x(HI) - x(LO) };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.axisG.style("opacity", 1);
+    ctx.markSel.forEach(function (s) { s.g.style("opacity", 1); s.dot.attr("r", s.r); });
+    ctx.band.attr("width", ctx.bandW);
+    setCaption(4);
+    tickHero(SPREAD + 0.02, 0);
+    root.classed("is-landed", true);
+    root.select(".fv-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".fv-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.axisG.style("opacity", 0);
+    ctx.markSel.forEach(function (s) { s.g.style("opacity", 0); s.dot.attr("r", 0); });
+    ctx.band.attr("width", 0);
+    root.select(".fv-hero-num").text("0.0");
+    setCaption(0);
+    if (__resetOnly) return;
+
+    ctx.axisG.transition().delay(AXIS_AT).duration(400).style("opacity", 1);
+
+    ctx.markSel.forEach(function (s, i) {
+      var at = MARK_AT[i];
+      s.g.transition().delay(at).duration(260).style("opacity", 1);
+      s.dot.transition().delay(at).duration(520).ease(d3.easeBackOut.overshoot(1.6))
+        .attr("r", s.r);
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, MARK_AT[0]));
+    playTimers.push(setTimeout(function () { setCaption(2); }, MARK_AT[1]));
+    playTimers.push(setTimeout(function () { setCaption(3); }, MARK_AT[2]));
+
+    playTimers.push(setTimeout(function () {
+      ctx.band.transition().duration(700).ease(d3.easeCubicOut).attr("width", ctx.bandW);
+      tickHero(SPREAD + 0.02, 900);
+      setCaption(4);
+      root.classed("is-landed", true);
+    }, BAND_AT));
+
+    playTimers.push(setTimeout(function () {
+      root.select(".fv-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".fv-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>

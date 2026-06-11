@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The roll-man diet, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note {
+    max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4);
+    font:12px var(--family-sans);
+  }
+  .harness-toolbar {
+    max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center;
+    color:rgba(255,255,255,.6); font:11px var(--family-sans);
+  }
+  .harness-toolbar button {
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px;
+    font:11px var(--family-sans); cursor:pointer;
+  }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is roll_man_collapse_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-roll-man-collapse">
+  <div class="rc-chip" role="status">
+    <span class="rc-chip-dot"></span>
+    <span class="rc-chip-label">The roll-man diet</span>
+    <span class="rc-chip-sep">·</span>
+    <span class="rc-chip-sub">volume vs efficiency, by season</span>
+  </div>
+  <p class="rc-caption" aria-live="polite"></p>
+  <div class="rc-stage">
+    <div class="rc-tooltip" role="tooltip">
+      <div class="rc-tip-head"></div>
+      <div class="rc-tip-desc"></div>
+    </div>
+  </div>
+  <div class="rc-hero">
+    <div class="rc-hero-line">
+      <span class="rc-hero-num">0%</span>
+      <span class="rc-hero-unit">roll-man volume, Utah prime to Minnesota</span>
+    </div>
+    <div class="rc-hero-label">Efficiency held: 1.31 then, 1.24 now</div>
+    <button class="rc-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="rc-foot">Bars are his pick-and-roll roll-man possessions per game (gray Utah, green Minnesota). The white line is his points per possession on those plays, on the right-hand scale. Hover any season for the detail. The bars collapse. The line never does.</p>
+  <div class="rc-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-roll-man-collapse, #viz-roll-man-collapse * { touch-action: manipulation; }
+  #viz-roll-man-collapse {
+    font-family: var(--family-sans);
+    color: var(--text-primary);
+    position: relative;
+  }
+  #viz-roll-man-collapse .rc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-default);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    font: 700 12px var(--family-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+  #viz-roll-man-collapse .rc-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-default);
+  }
+  #viz-roll-man-collapse .rc-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-roll-man-collapse .rc-chip-sub {
+    font-weight: 500; color: var(--text-secondary);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  #viz-roll-man-collapse .rc-caption {
+    font: 600 17px var(--family-sans);
+    color: var(--text-primary);
+    margin: 0 0 14px 0;
+    min-height: 48px;
+    line-height: 1.4;
+    transition: opacity 260ms ease;
+  }
+  #viz-roll-man-collapse .rc-stage {
+    position: relative;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    height: 256px;
+    overflow: hidden;
+  }
+  #viz-roll-man-collapse.is-compact .rc-stage { height: 226px; }
+  #viz-roll-man-collapse .rc-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-roll-man-collapse .rc-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 10;
+    min-width: 160px;
+    max-width: 250px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-roll-man-collapse .rc-tooltip.is-on { opacity: 1; }
+  #viz-roll-man-collapse .rc-tip-head {
+    font: 700 12px var(--family-sans);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  #viz-roll-man-collapse .rc-tip-desc {
+    font: 500 12px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  #viz-roll-man-collapse .rc-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0 4px 0;
+    position: relative;
+  }
+  #viz-roll-man-collapse .rc-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-roll-man-collapse .rc-hero-num {
+    font: 800 56px var(--family-mono);
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: color 320ms ease;
+  }
+  #viz-roll-man-collapse.is-landed .rc-hero-num { color: var(--status-error); }
+  #viz-roll-man-collapse.is-compact .rc-hero-num { font-size: 42px; }
+  #viz-roll-man-collapse .rc-hero-unit {
+    font: 700 13px var(--family-sans);
+    color: var(--text-secondary);
+    line-height: 1.2;
+    max-width: 160px;
+  }
+  #viz-roll-man-collapse .rc-hero-label {
+    font: 700 11px var(--family-sans);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-align: center;
+  }
+  #viz-roll-man-collapse .rc-replay {
+    margin-top: 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font: 600 12px var(--family-sans);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-roll-man-collapse .rc-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-roll-man-collapse .rc-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-roll-man-collapse .rc-foot {
+    font: 12px var(--family-sans);
+    color: var(--text-tertiary);
+    margin: 14px 0 0 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+  #viz-roll-man-collapse .rc-watermark {
+    font: 9px var(--family-sans);
+    color: var(--text-tertiary);
+    opacity: 0.55;
+    text-align: right;
+    margin-top: 8px;
+  }
+</style>
+<script>
+(function () {
+  // Gobert as the pick-and-roll roll man, Regular Season, warehouse synergy.
+  // rpg = roll possessions per game, ppp = points per possession on those
+  // plays, pct = league percentile that season, poss = total possessions,
+  // share = % of his own offensive diet. era: u = Utah, m = Minnesota.
+  var SEASONS = [
+    { s: "14-15", era: "u", rpg: 1.35, ppp: 1.072, pct: 72, poss: 111, share: 16.7 },
+    { s: "15-16", era: "u", rpg: 1.74, ppp: 1.085, pct: 68, poss: 106, share: 17.5 },
+    { s: "16-17", era: "u", rpg: 2.54, ppp: 1.379, pct: 95, poss: 206, share: 20.9 },
+    { s: "17-18", era: "u", rpg: 2.88, ppp: 1.280, pct: 87, poss: 161, share: 23.8 },
+    { s: "18-19", era: "u", rpg: 3.36, ppp: 1.349, pct: 93, poss: 272, share: 25.3 },
+    { s: "19-20", era: "u", rpg: 3.54, ppp: 1.216, pct: 72, poss: 241, share: 27.4 },
+    { s: "20-21", era: "u", rpg: 3.86, ppp: 1.339, pct: 87, poss: 274, share: 31.7 },
+    { s: "21-22", era: "u", rpg: 3.41, ppp: 1.320, pct: 82, poss: 225, share: 27.1 },
+    { s: "22-23", era: "m", rpg: 2.07, ppp: 1.255, pct: 73, poss: 145, share: 17.7 },
+    { s: "23-24", era: "m", rpg: 2.47, ppp: 1.239, pct: 66, poss: 188, share: 20.8 },
+    { s: "24-25", era: "m", rpg: 2.25, ppp: 1.210, pct: 75, poss: 162, share: 22.3 },
+    { s: "25-26", era: "m", rpg: 1.46, ppp: 1.270, pct: 79, poss: 111, share: 15.7, last: true }
+  ];
+  var DROP = 37; // percent, Utah prime (3.27) to Minnesota (2.06)
+
+  var CAPTIONS = [
+    "His roll-man possessions per game, every season since 2014.",
+    "Utah fed the machine: nearly 4 a game at the peak, a third of his entire diet.",
+    "Minnesota cut the diet 37 percent, down to a career-low 1.46 a game this season.",
+    "Now the white line, his points per possession. It never followed the volume down.",
+    "He didn't get worse at the job. He got less of it."
+  ];
+
+  var UTA_AT = 500, UTA_STAG = 120;
+  var CAP1_AT = 1400;
+  var MIN_AT = 2500, MIN_STAG = 300;
+  var LINE_AT = 4400, LINE_MS = 1400;
+  var CAP4_AT = 6200;
+  var REPLAY_AT = 7000;
+
+  var root = d3.select("#viz-roll-man-collapse");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll passthrough for iframe embeds (wheel + touch).
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY;
+      var dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() {
+    playTimers.forEach(function (t) { clearTimeout(t); });
+    playTimers = [];
+  }
+
+  function setCaption(idx) {
+    var c = root.select(".rc-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+
+  function tickHero(to, duration) {
+    var node = root.select(".rc-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = "-" + to + "%"; return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () {
+        var interp = d3.interpolateNumber(0, to);
+        return function (t) { node.textContent = "-" + Math.round(interp(t)) + "%"; };
+      });
+  }
+
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".rc-tooltip");
+    tip.select(".rc-tip-head").text(head);
+    tip.select(".rc-tip-desc").text(desc);
+    tip.classed("is-on", true);
+    var tipEl = tip.node();
+    var stageEl = root.select(".rc-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10;
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12;
+    if (y + th > sh - 8) y = sh - th - 8;
+    if (x < 4) x = 4;
+    if (y < 4) y = 4;
+    tipEl.style.left = x + "px";
+    tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".rc-tooltip").classed("is-on", false); }
+
+  function fullSeason(s) { return "20" + s.split("-")[0] + "-" + s.split("-")[1]; }
+
+  // ---- Render --------------------------------------------------------
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".rc-stage");
+    stage.selectAll("svg").remove();
+
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+
+    var stageNode = stage.node();
+    var W = stageNode.clientWidth;
+    var H = stageNode.clientHeight;
+
+    var svg = stage.append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img");
+
+    var defs = svg.append("defs");
+    var glow = defs.append("filter").attr("id", "rc-glow")
+      .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    glow.append("feGaussianBlur").attr("stdDeviation", compact ? 1.1 : 1.5).attr("result", "b");
+    var gm = glow.append("feMerge");
+    gm.append("feMergeNode").attr("in", "b");
+    gm.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var pad = { left: 30, right: 40, top: 26, bottom: 34 };
+    var x = d3.scaleBand().domain(SEASONS.map(function (d) { return d.s; }))
+      .range([pad.left, W - pad.right]).paddingInner(0.34).paddingOuter(0.1);
+    var y = d3.scaleLinear().domain([0, 4.3]).range([H - pad.bottom, pad.top]);
+    var y2 = d3.scaleLinear().domain([0.9, 1.5]).range([H - pad.bottom, pad.top]);
+
+    // Left gridlines (volume).
+    [0, 1, 2, 3, 4].forEach(function (t) {
+      svg.append("line")
+        .attr("x1", pad.left).attr("x2", W - pad.right)
+        .attr("y1", y(t)).attr("y2", y(t))
+        .style("stroke", t === 0 ? "var(--border-default)" : "var(--border-subtle)")
+        .style("stroke-width", 1)
+        .style("stroke-dasharray", t === 0 ? "none" : "2,4");
+      svg.append("text")
+        .attr("x", pad.left - 7).attr("y", y(t) + 3)
+        .attr("text-anchor", "end")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(t);
+    });
+    // Right axis ticks (PPP).
+    [1.0, 1.2, 1.4].forEach(function (t) {
+      svg.append("text")
+        .attr("x", W - pad.right + 6).attr("y", y2(t) + 3)
+        .attr("text-anchor", "start")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", "10px var(--family-mono)")
+        .text(t.toFixed(1));
+    });
+    svg.append("text")
+      .attr("x", W - pad.right + 6).attr("y", pad.top - 10)
+      .attr("text-anchor", "start")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9px var(--family-sans)")
+      .text("PPP");
+
+    // Trade divider.
+    var tradeX = (x("21-22") + x.bandwidth() + x("22-23")) / 2;
+    svg.append("line")
+      .attr("x1", tradeX).attr("x2", tradeX)
+      .attr("y1", pad.top - 8).attr("y2", H - pad.bottom)
+      .style("stroke", "var(--border-default)")
+      .style("stroke-width", 1)
+      .style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", tradeX).attr("y", pad.top - 12)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "700 9.5px var(--family-sans)")
+      .text(compact ? "TRADE" : "THE TRADE");
+
+    // X labels.
+    SEASONS.forEach(function (d, i) {
+      if (compact && i % 2 === 1 && !d.last) return;
+      svg.append("text")
+        .attr("x", x(d.s) + x.bandwidth() / 2).attr("y", H - pad.bottom + 16)
+        .attr("text-anchor", "middle")
+        .style("fill", d.last ? "var(--text-secondary)" : "var(--text-tertiary)")
+        .style("font", (d.last ? "700 " : "") + "9.5px var(--family-mono)")
+        .text("'" + d.s);
+    });
+
+    // Bars.
+    var barSel = [];
+    SEASONS.forEach(function (d) {
+      var color = d.era === "u" ? "var(--text-tertiary)" : "var(--accent-default)";
+      var hover = d.era === "u" ? "var(--text-secondary)" : "var(--accent-hover)";
+      var bar = svg.append("rect")
+        .attr("x", x(d.s)).attr("width", x.bandwidth())
+        .attr("y", reduceMotion ? y(d.rpg) : y(0))
+        .attr("height", reduceMotion ? (y(0) - y(d.rpg)) : 0)
+        .attr("rx", 3)
+        .style("fill", color)
+        .style("opacity", d.era === "u" ? 0.7 : 1)
+        .style("cursor", "pointer");
+      var tipHead = fullSeason(d.s) + " · " + d.rpg.toFixed(2) + " rolls per game";
+      var tipDesc = d.poss + " roll possessions, " + d.share + " percent of his offensive diet. " +
+        d.ppp.toFixed(2) + " points per possession, " + d.pct + "th percentile.";
+      bar.on("mouseenter mousemove", function () {
+        d3.select(this).style("fill", hover);
+        showTooltip(tipHead, tipDesc, x(d.s) + x.bandwidth() / 2, y(d.rpg));
+      }).on("mouseleave", function () {
+        d3.select(this).style("fill", color);
+        hideTooltip();
+      });
+      bar.append("title").text(tipHead + ". " + tipDesc);
+      barSel.push({ d: d, bar: bar });
+    });
+
+    // Career-low annotation.
+    var lastD = SEASONS[SEASONS.length - 1];
+    var annot = svg.append("text")
+      .attr("x", x(lastD.s) + x.bandwidth() / 2)
+      .attr("y", y(lastD.rpg) - 8)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-secondary)")
+      .style("font", "700 10px var(--family-sans)")
+      .style("opacity", reduceMotion ? 1 : 0)
+      .text(compact ? "career low" : "career low as a starter");
+
+    // PPP line + dots (clipped for the reveal sweep).
+    var clipId = "rc-clip";
+    var clipRect = defs.append("clipPath").attr("id", clipId).append("rect")
+      .attr("x", pad.left).attr("y", 0)
+      .attr("width", reduceMotion ? (W - pad.right - pad.left) : 0)
+      .attr("height", H);
+    var lineG = svg.append("g").attr("clip-path", "url(#" + clipId + ")");
+    var line = d3.line()
+      .x(function (d) { return x(d.s) + x.bandwidth() / 2; })
+      .y(function (d) { return y2(d.ppp); })
+      .curve(d3.curveMonotoneX);
+    lineG.append("path").datum(SEASONS)
+      .attr("d", line)
+      .style("fill", "none")
+      .style("stroke", "var(--dataviz-2)")
+      .style("stroke-width", compact ? 1.8 : 2.2)
+      .style("filter", "url(#rc-glow)");
+    SEASONS.forEach(function (d) {
+      var dot = lineG.append("circle")
+        .attr("cx", x(d.s) + x.bandwidth() / 2).attr("cy", y2(d.ppp))
+        .attr("r", compact ? 2.6 : 3.2)
+        .style("fill", "var(--dataviz-2)")
+        .style("cursor", "pointer");
+      dot.on("mouseenter mousemove", function () {
+        showTooltip(fullSeason(d.s) + " efficiency", d.ppp.toFixed(2) + " points per roll possession, " + d.pct + "th percentile league-wide.", x(d.s) + x.bandwidth() / 2, y2(d.ppp));
+      }).on("mouseleave", hideTooltip);
+      dot.append("title").text(fullSeason(d.s) + ": " + d.ppp.toFixed(2) + " PPP, " + d.pct + "th percentile.");
+    });
+
+    // Watermark.
+    svg.append("text")
+      .attr("x", W - 6).attr("y", H - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55)
+      .style("pointer-events", "none")
+      .text("@WolvesToaT · Jun 2026");
+
+    var ctx = { barSel: barSel, annot: annot, y: y, clipRect: clipRect, chartW: W - pad.right - pad.left };
+    lastRender = { ctx: ctx };
+
+    if (triggerPlay !== false) play(ctx);
+    else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.barSel.forEach(function (s) {
+      s.bar.attr("y", ctx.y(s.d.rpg)).attr("height", ctx.y(0) - ctx.y(s.d.rpg));
+    });
+    ctx.annot.style("opacity", 1);
+    ctx.clipRect.attr("width", ctx.chartW);
+    setCaption(4);
+    tickHero(DROP, 0);
+    root.classed("is-landed", true);
+    root.select(".rc-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers();
+    root.classed("is-landed", false);
+    root.select(".rc-replay").classed("is-shown", false);
+
+    if (reduceMotion) { finalState(ctx); return; }
+
+    // Reset.
+    ctx.barSel.forEach(function (s) {
+      s.bar.attr("y", ctx.y(0)).attr("height", 0);
+    });
+    ctx.annot.style("opacity", 0);
+    ctx.clipRect.attr("width", 0);
+    root.select(".rc-hero-num").text("0%");
+    setCaption(0);
+    if (__resetOnly) return;
+
+    // Utah bars.
+    ctx.barSel.filter(function (s) { return s.d.era === "u"; }).forEach(function (s, i) {
+      s.bar.transition().delay(UTA_AT + i * UTA_STAG).duration(450).ease(d3.easeCubicOut)
+        .attr("y", ctx.y(s.d.rpg)).attr("height", ctx.y(0) - ctx.y(s.d.rpg));
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+
+    // Minnesota bars + the hero drop.
+    var minBars = ctx.barSel.filter(function (s) { return s.d.era === "m"; });
+    minBars.forEach(function (s, i) {
+      var at = MIN_AT + i * MIN_STAG;
+      s.bar.transition().delay(at).duration(450).ease(d3.easeCubicOut)
+        .attr("y", ctx.y(s.d.rpg)).attr("height", ctx.y(0) - ctx.y(s.d.rpg));
+      if (i === 0) playTimers.push(setTimeout(function () { setCaption(2); }, at));
+      if (s.d.last) playTimers.push(setTimeout(function () {
+        root.classed("is-landed", true);
+        tickHero(DROP, 700);
+        ctx.annot.transition().duration(300).style("opacity", 1);
+      }, at + 200));
+    });
+
+    // The PPP line sweeps across everything.
+    playTimers.push(setTimeout(function () {
+      setCaption(3);
+      ctx.clipRect.transition().duration(LINE_MS).ease(d3.easeLinear).attr("width", ctx.chartW);
+    }, LINE_AT));
+
+    playTimers.push(setTimeout(function () { setCaption(4); }, CAP4_AT));
+    playTimers.push(setTimeout(function () {
+      root.select(".rc-replay").classed("is-shown", true);
+    }, REPLAY_AT));
+  }
+
+  root.select(".rc-replay").on("click", function () {
+    if (lastRender) play(lastRender.ctx);
+  });
+
+  // ---- Autoplay only when in full view; never restart on resize ----
+  var __resetOnly = false;
+  var __played = false;
+  var __lastW = rootNode.clientWidth || 0;
+
+  function __idle() {
+    render(false);
+    if (!lastRender) return;
+    __resetOnly = true;
+    play(lastRender.ctx);
+    __resetOnly = false;
+  }
+  function __startOnce() {
+    if (__played) return;
+    __played = true;
+    render(true);
+  }
+
+  if (reduceMotion) {
+    render(false);
+    __played = true;
+  } else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce();
+        });
+      }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else {
+      __startOnce();
+    }
+  }
+
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var w = rootNode.clientWidth || 0;
+        if (Math.abs(w - __lastW) < 2) return;   // ignore height-only changes
+        __lastW = w;
+        if (__played) { render(false); } else { __idle(); }
+      }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+</div>
+</body>
+</html>
