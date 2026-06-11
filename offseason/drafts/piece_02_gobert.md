@@ -6,7 +6,7 @@ tags: [Timberwolves, Rudy Gobert, Pick-and-Roll, Four Views, 2026 Offseason, Off
 
 # It's Not (All) Gobert's Fault
 
-There's an argument every Wolves fan has been having since the summer of 2022. I've had it at bars. I've had it at family gatherings where it had no business coming up. I've had it alone in the car, running both sides myself, which is a weird thing to admit in print.
+There's an argument every Wolves fan has been having since the summer of 2022. I've had it at bars. I've had it in the group chat at one in the morning. I've had it alone in the car, running both sides myself, which is a weird thing to admit in print.
 
 One side says Rudy Gobert was the most efficient roll man in basketball for years, anchors everything this team does on defense, and gets blamed for an offense that was never built for him. The other side says he's a 34-year-old center who can't catch, can't create, can't shoot, and soaks up $36.5 million while doing it. You've heard both. Depending on the night, you've probably been both.
 
