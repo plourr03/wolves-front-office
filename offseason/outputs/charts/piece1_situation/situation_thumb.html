@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;background:#050505;width:1280px;height:720px;overflow:hidden}</style></head><body>
+<!-- Piece 1 thumbnail, 16:9. True scale: $0 to $230M across 1280px (5.5652 px per $M).
+     The bar is the real 2026-27 books, nine contracts plus the roster charge stub,
+     each segment at its true width. Walls: tax $201M (faint), first apron $209.1M
+     (the one that matters), second apron $222M (dim). Gap = $15.1M.
+     Glows are layered strokes, not filters: a filter on a zero-width line collapses
+     its bounding box and the element disappears. -->
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="amb-red" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FF5C5C" stop-opacity="0.11"/>
+    <stop offset="60%" stop-color="#FF5C5C" stop-opacity="0.05"/>
+    <stop offset="100%" stop-color="#FF5C5C" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="amb-green" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#00843D" stop-opacity="0.07"/>
+    <stop offset="100%" stop-color="#00843D" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect x="0" y="0" width="1280" height="720" fill="#050505"/>
+
+<!-- ambient depth, soft falloff -->
+<circle cx="380" cy="380" r="460" fill="url(#amb-green)"/>
+<circle cx="1164" cy="360" r="380" fill="url(#amb-red)"/>
+
+<!-- tax line, $201M, faint dashed -->
+<line x1="1118.6" y1="185" x2="1118.6" y2="450" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="5,5"/>
+<!-- second apron, $222M, dim -->
+<line x1="1235.5" y1="185" x2="1235.5" y2="450" stroke="#FF5C5C" stroke-width="2" opacity="0.22"/>
+<!-- first apron, $209.1M, the one that matters: layered manual glow -->
+<line x1="1163.7" y1="150" x2="1163.7" y2="470" stroke="#FF5C5C" stroke-width="16" opacity="0.12"/>
+<line x1="1163.7" y1="150" x2="1163.7" y2="470" stroke="#FF5C5C" stroke-width="8" opacity="0.28"/>
+<line x1="1163.7" y1="150" x2="1163.7" y2="470" stroke="#FF5C5C" stroke-width="3.5" opacity="0.95"/>
+
+<text x="1163.7" y="128" text-anchor="middle" fill="#FF5C5C" opacity="0.92"
+  font-family="Segoe UI, Inter, sans-serif" font-size="15" font-weight="600" letter-spacing="2.5">FIRST APRON &#183; $209.1M</text>
+
+<!-- the books: nine contracts plus the roster charge stub, true widths, 2px seams -->
+<!-- Edwards 48.9 -->
+<rect x="0" y="300" width="271.1" height="140" fill="#00843D"/>
+<!-- Gobert 36.5 -->
+<rect x="273.1" y="300" width="201.2" height="140" fill="#00763A"/>
+<!-- Randle 33.3 -->
+<rect x="476.3" y="300" width="183.3" height="140" fill="#00843D"/>
+<!-- McDaniels 25.8 -->
+<rect x="661.6" y="300" width="141.6" height="140" fill="#00763A"/>
+<!-- Naz 23.3 -->
+<rect x="805.2" y="300" width="127.6" height="140" fill="#00843D"/>
+<!-- DiVincenzo 12.5 -->
+<rect x="934.8" y="300" width="67.6" height="140" fill="#00763A"/>
+<!-- Beringer 4.4 -->
+<rect x="1004.4" y="300" width="22.5" height="140" fill="#00843D"/>
+<!-- Shannon 2.8 -->
+<rect x="1028.9" y="300" width="13.6" height="140" fill="#00763A"/>
+<!-- Phillips 2.4 -->
+<rect x="1044.5" y="300" width="11.3" height="140" fill="#00843D"/>
+<!-- roster charges 4.1, a placeholder not a contract -->
+<rect x="1057.8" y="300" width="21.9" height="140" fill="#00843D" fill-opacity="0.30"
+  stroke="rgba(0,196,87,0.45)" stroke-width="1" stroke-dasharray="4,3"/>
+
+<!-- leading edge of the money, manual glow -->
+<rect x="1073.7" y="300" width="9" height="140" fill="#00C457" opacity="0.25"/>
+<rect x="1076.7" y="300" width="3" height="140" fill="#00C457"/>
+
+<!-- the gap: bracket plus the only big number -->
+<path d="M 1081 462 L 1081 470 L 1162 470 L 1162 462" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
+<text x="1121.5" y="516" text-anchor="middle" fill="#FFFFFF"
+  font-family="JetBrains Mono, Consolas, monospace" font-size="40" font-weight="700">$15.1M</text>
+
+<!-- watermark -->
+<text x="1264" y="700" text-anchor="end" fill="rgba(255,255,255,0.30)"
+  font-family="Segoe UI, Inter, sans-serif" font-size="12">@WolvesToaT &#183; Jun 2026</text>
+</svg></body></html>

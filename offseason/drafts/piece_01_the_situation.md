@@ -82,7 +82,7 @@ Two clean firsts, 2028 and 2033. One late pick this month that can't even be tra
 
 This is the section where I expected the data to flatter my trade-machine habits, and it didn't.
 
-I rebuilt the need analysis from the warehouse instead of from vibes: six dimensions, measured for the returning roster with DiVincenzo's absence baked in, benchmarked against how contending playoff rosters are actually built, then recomputed under each exit scenario. Because what the Wolves need depends entirely on who leaves. (The model, the benchmark, and all the tags in this series live on the [methodology page](#methodology).)
+I rebuilt the need analysis from my data warehouse instead of from vibes: six dimensions, measured for the returning roster with DiVincenzo's absence baked in, benchmarked against how contending playoff rosters are actually built, then recomputed under each exit scenario. Because what the Wolves need depends entirely on who leaves. (The model, the benchmark, and all the tags in this series live on the [methodology page](#methodology).)
 
 {{viz:needs-by-exit}}
 
@@ -94,7 +94,7 @@ The model does not ask for more on-ball creation. At all. Edwards covers it; as 
 
 The second thing: the needs are conditional, and the conditions are the trade decision itself. Move Randle and secondary playmaking becomes the single largest gap on the team. Move Gobert and the defense blows open instead, point of attack and rim protection at once, on a roster whose only internal rim answer is a 19-year-old. Move both and five of the six dimensions are holes. Subtraction is how the Wolves unlock their tools. Subtraction is also how they manufacture brand-new needs. That tension does not resolve in this piece. That tension IS the series.
 
-And if the model's top line sounds abstract, the head coach said it out loud this week. Finch went on KFAN and said the Wolves "definitely need another ball handler and playmaker" to take the load off Edwards. The coach watched the same season the warehouse did: 31.4 percent usage, 21 games missed, one live dribble too few. When my gut, the coach, and the model all land on the same column of the grid, I trust the column.
+And if the model's top line sounds abstract, the head coach said it out loud this week. Finch went on KFAN and said the Wolves "definitely need another ball handler and playmaker" to take the load off Edwards. The coach watched the same season my data warehouse did: 31.4 percent usage, 21 games missed, one live dribble too few. When my gut, the coach, and the model all land on the same column of the grid, I trust the column.
 
 ## What's real and what's noise
 
@@ -145,4 +145,7 @@ Watch the line, not the names.
   distances vs the latest ESPN update, fresh pickups of the Finch KFAN quote (Yahoo /
   ClutchPoints). Books figure $194.0M is apron-basis from our cap model, June 9 run; re-run on
   publish day.
+- Thumbnail: offseason/outputs/charts/piece1_situation/situation_thumb.png (2560x1440, 16:9).
+  Source HTML alongside it; true-scale books bar (nine contracts + charge stub) vs the first
+  apron wall, $15.1M gap. Re-render if the books figure moves before publish.
 -->
