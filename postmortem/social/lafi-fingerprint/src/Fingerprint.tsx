@@ -98,9 +98,6 @@ export const Fingerprint: React.FC<{
         <text x={STAGE.x} y={STAGE.y + 52} fill={COLORS.good} fontFamily={FONT.family} fontSize={FONT.title} fontWeight={800} opacity={named}>
           THE LA FITNESS INDEX
         </text>
-        <text x={STAGE.x} y={STAGE.y + 92} fill={COLORS.subtext} fontFamily={FONT.family} fontSize={FONT.desc} fontWeight={500}>
-          Every component scored 0 to 100, vs the NBA since 2014
-        </text>
         {/* 0 and 100 scale endpoints */}
         <text x={BAR_X0} y={CHART_BOTTOM + 30} textAnchor="start" fill={COLORS.tertiary} fontFamily={FONT.mono} fontSize={22} fontWeight={700}>0</text>
         <text x={BAR_X1} y={CHART_BOTTOM + 30} textAnchor="end" fill={COLORS.tertiary} fontFamily={FONT.mono} fontSize={22} fontWeight={700}>100</text>
@@ -139,6 +136,9 @@ export const Fingerprint: React.FC<{
         // intro: the number counts up and rises into place, staggered.
         const numEnter = ramp(frame, fps, 0.6 + i * 0.5, 0.7);
         const labelEnter = ramp(frame, fps, 0.95 + i * 0.5, 0.6);
+        // the empty rail fades in with each number so the chart reads as a
+        // finished skeleton during the hook, not a void where the bars go.
+        const railEnter = ramp(frame, fps, 0.6 + i * 0.5, 0.6);
         const numTy = (1 - numEnter) * 16;
         const shown = Math.round(d.value * numEnter);
 
@@ -178,7 +178,7 @@ export const Fingerprint: React.FC<{
               fill={COLORS.inset}
               stroke={COLORS.insetEdge}
               strokeWidth={1}
-              opacity={furniture}
+              opacity={Math.max(furniture, railEnter)}
             />
             <g transform={snap !== 0 ? `translate(${snap} 0)` : undefined}>
               <rect
