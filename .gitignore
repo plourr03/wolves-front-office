@@ -5,3 +5,8 @@
 *.local
 .DS_Store
 Thumbs.db
+
+# Remotion downloaded browser binaries + webpack build caches: rebuildable, and they exceed
+# GitHub's hard 100MB-per-file limit (a 202MB chrome-headless-shell.exe would reject the push).
+.remotion/
+**/node_modules/.cache/

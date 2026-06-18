@@ -1,0 +1,67 @@
+partner-untouchables override: 45 hard / 1 speculative resolved across 24 teams
+=== Pass 1 screen: MIN baseline title 1.88% | NS=2500 | 29 partners ===
+
+  ATL: dP +0.40 risk-adj +0.27 | MIN sends Randle+filler + the 2026 first (slot locked draft night) | MIN gets Nickeil Alexander-Walker $14M, Corey Kispert $14M
+        accept via cap_relief (mid) | flex MODERATE | model-surfaced
+  BKN: dP +0.40 risk-adj +0.01 | MIN sends Randle+filler + the 2026 first (slot locked draft night) | MIN gets Terance Mann $16M, Nic Claxton $23M
+        accept via value (rebuilder) | flex MODERATE | model-surfaced
+  BOS: NO DEAL (near-miss: partner can't match/absorb the salary)
+  CHA: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  CHI: dP +3.24 risk-adj +1.55 | MIN sends Randle+filler + the 2026 first (slot locked draft night) + the 2028 own first | MIN gets Josh Giddey $25M, Isaac Okoro $12M
+        accept via value (rebuilder) | flex LOW | model-surfaced
+  CLE: NO DEAL (near-miss: partner can't match/absorb the salary)
+  DAL: dP +2.32 risk-adj +1.06 | MIN sends Randle+Naz + the 2026 first (slot locked draft night) + the 2033 own first | MIN gets Daniel Gafford $17M, Kyrie Irving $39M
+        accept via value (retooler) | flex LOW | Speculative (conditional on partner pivot)
+  DEN: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  DET: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  GSW: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  HOU: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  IND: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  LAC: NO DEAL (near-miss: partner can't match/absorb the salary)
+  LAL: dP +0.92 risk-adj -0.12 | MIN sends Randle + the 2026 first (slot locked draft night) + the 2033 own first | MIN gets Jarred Vanderbilt $12M, Austin Reaves $15M
+        accept via value (retooler) | flex MODERATE | model-surfaced
+  MEM: dP +1.20 risk-adj +0.72 | MIN sends Randle+filler + the 2026 first (slot locked draft night) + the 2028 own first | MIN gets Kentavious Caldwell-Pope $22M, Santi Aldama $17M
+        accept via value (retooler) | flex MODERATE | model-surfaced
+  MIA: NO DEAL (near-miss: partner can't match/absorb the salary)
+  MIL: dP +2.68 risk-adj +1.93 | MIN sends Randle+filler + the 2026 first (slot locked draft night) + the 2028 own first | MIN gets Myles Turner $27M, A.J. Green $10M
+        accept via value (retooler) | flex LOW | model-surfaced
+  NOP: NO DEAL (near-miss: partner can't match/absorb the salary)
+  NYK: dP +0.88 risk-adj +0.55 | MIN sends Randle (no sweetener) | MIN gets Mikal Bridges $33M
+        accept via need (contender) | flex LOW | model-surfaced
+  OKC: NO DEAL (near-miss: partner can't match/absorb the salary)
+  ORL: NO DEAL (near-miss: partner can't match/absorb the salary)
+  PHI: NO DEAL (no positive-dP deal clears both sides)
+  PHX: NO DEAL (near-miss: no acceptance channel fires even at MIN's full chest)
+  POR: dP +0.56 risk-adj -0.11 | MIN sends Randle + the 2026 first (slot locked draft night) + the 2028 own first | MIN gets Jrue Holiday $35M
+        accept via value (mid) | flex MODERATE | model-surfaced
+  SAC: dP +2.84 risk-adj +1.11 | MIN sends Randle+filler + the 2026 first (slot locked draft night) + the 2033 own first | MIN gets Keegan Murray $24M, Malik Monk $20M
+        accept via value (retooler) | flex LOW | model-surfaced
+  SAS: dP +1.12 risk-adj +0.34 | MIN sends Randle+filler + the 2026 first (slot locked draft night) | MIN gets Devin Vassell $27M, Keldon Johnson $18M
+        accept via value (contender) | flex LOW | model-surfaced
+  TOR: NO DEAL (near-miss: partner can't match/absorb the salary)
+  UTA: dP +1.04 risk-adj -0.35 | MIN sends Randle+Naz + the 2026 first (slot locked draft night) | MIN gets Lauri Markkanen $46M, John Konchar $6M
+        accept via value (rebuilder) | flex LOW | Speculative (conditional on partner pivot)
+  WAS: NO DEAL (no positive-dP deal clears both sides)
+
+=== RANKED (risk-adjusted dP) -- 12 partners with a deal, 17 no-deal ===
+  risk-adj +1.93 anchor -0.67  MIL  Randle+filler  flex LOW      model-surfa | Myles Turner, A.J. Green
+  risk-adj +1.55 anchor +0.05  CHI  Randle+filler  flex LOW      model-surfa | Josh Giddey, Isaac Okoro
+  risk-adj +1.11 anchor -0.97  SAC  Randle+filler  flex LOW      model-surfa | Keegan Murray, Malik Monk
+  risk-adj +1.06 anchor +1.53  DAL  Randle+Naz     flex LOW      Speculative | Daniel Gafford, Kyrie Irving
+  risk-adj +0.72 anchor -0.50  MEM  Randle+filler  flex MODERATE model-surfa | Kentavious Caldwell-Pope, Santi Aldama
+  risk-adj +0.55 anchor -0.73  NYK  Randle         flex LOW      model-surfa | Mikal Bridges
+  risk-adj +0.34 anchor -0.23  SAS  Randle+filler  flex LOW      model-surfa | Devin Vassell, Keldon Johnson
+  risk-adj +0.27 anchor -0.42  ATL  Randle+filler  flex MODERATE model-surfa | Nickeil Alexander-Walker, Corey Kispert
+  risk-adj +0.01 anchor -1.45  BKN  Randle+filler  flex MODERATE model-surfa | Terance Mann, Nic Claxton
+  risk-adj -0.11 anchor -0.12  POR  Randle         flex MODERATE model-surfa | Jrue Holiday
+  risk-adj -0.12 anchor -1.47  LAL  Randle         flex MODERATE model-surfa | Jarred Vanderbilt, Austin Reaves
+  risk-adj -0.35 anchor -0.45  UTA  Randle+Naz     flex LOW      Speculative | Lauri Markkanen, John Konchar
+
+=== Pass 2: targeted three-team (dump-absorbers: CHI, BKN, WAS, UTA, LAL, MEM, ATL) ===
+  (no near-miss resolved into a legal, accepted three-team deal)
+
+=== cross-validation: the Gobert-out harvest the search finds vs the hand-built both-out ===
+  NO Gobert-out deal won its partner -- keep-Gobert (Randle conversion) dominates everywhere.
+
+emit -> data/trade_board.csv (29 partners)
+wrote outputs/optimal_trade_board.md  (7 worthwhile deals, 22 no-fit (17 no-deal + 5 marginal), 0 three-team)

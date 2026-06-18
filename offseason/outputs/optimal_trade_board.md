@@ -19,14 +19,13 @@ The board is measured against the two recommended no-blockbuster portfolios. A s
 
 | # | Partner | MIN sends | MIN gets | Asset bill (own picks only) | Accept | Views cons/box/rapm/DARKO | Anchor | Risk-adj dP | 2027 flex | Sourcing |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | **MIL** | Randle+filler | Myles Turner ($27M), AJ Green ($10M) | the 2026 first (slot locked draft night); the 2028 own first | value (retooler) | 2.37/-0.63/3.02/1.08 | -0.63 | **+1.98** | LOW | model |
-| 2 | **CHI** | Randle+filler | Josh Giddey ($25M), Isaac Okoro ($12M) | the 2026 first (slot locked draft night); the 2028 own first | value (rebuilder) | 2.93/1.35/2.4/0.03 | 0.03 | **+1.60** | LOW | model |
-| 3 | **SAC** | Randle+filler | Keegan Murray ($24M), Malik Monk ($20M) | the 2026 first (slot locked draft night); the 2033 own first | value (retooler) | 2.53/-0.93/3.07/0.52 | -0.93 | **+1.15** | LOW | model |
-| 4 | **DAL** | Randle+Naz | Daniel Gafford ($17M), Kyrie Irving ($39M) | the 2028 own first | value (retooler) | 2.2/2.97/3.22/1.58 | 1.58 | **+1.11** | LOW | Speculative |
-| 5 | **MEM** | Randle+filler | Kentavious Caldwell-Pope ($22M), Santiago Aldama ($17M) | the 2026 first (slot locked draft night); the 2033 own first | value (retooler) | 1.2/-0.28/2.07/-0.5 | -0.5 | **+0.77** | MODERATE | model |
-| 6 | **ORL** | Naz+filler | Jonathan Isaac ($14M), Wendell Carter ($18M) | the 2026 first (slot locked draft night); the 2028 own first | value (mid) | 1.48/0.73/1.25/1.28 | 0.73 | **+0.65** | LOW | model |
-| 7 | **IND** | Randle+filler | Obi Toppin ($15M), Andrew Nembhard ($20M) | the 2028 own first | value (retooler) | 1.58/0.93/1.33/0.97 | 0.93 | **+0.56** | MODERATE | model |
-| 8 | **NYK** | Randle | Mikal Bridges ($33M) | none | need (contender) | 0.67/-0.7/0.82/-0.3 | -0.7 | **+0.54** | LOW | model |
+| 1 | **MIL** | Randle+filler | Myles Turner ($27M), A.J. Green ($10M) | the 2026 first (slot locked draft night); the 2028 own first | value (retooler) | 2.32/-0.67/2.93/1.07 | -0.67 | **+1.93** | LOW | model |
+| 2 | **CHI** | Randle+filler | Josh Giddey ($25M), Isaac Okoro ($12M) | the 2026 first (slot locked draft night); the 2028 own first | value (rebuilder) | 2.87/1.33/2.35/0.05 | 0.05 | **+1.55** | LOW | model |
+| 3 | **SAC** | Randle+filler | Keegan Murray ($24M), Malik Monk ($20M) | the 2026 first (slot locked draft night); the 2033 own first | value (retooler) | 2.48/-0.97/3.0/0.53 | -0.97 | **+1.11** | LOW | model |
+| 4 | **DAL** | Randle+Naz | Daniel Gafford ($17M), Kyrie Irving ($39M) | the 2026 first (slot locked draft night); the 2033 own first | value (retooler) | 2.13/2.9/3.13/1.53 | 1.53 | **+1.06** | LOW | Speculative |
+| 5 | **MEM** | Randle+filler | Kentavious Caldwell-Pope ($22M), Santi Aldama ($17M) | the 2026 first (slot locked draft night); the 2028 own first | value (retooler) | 1.15/-0.32/2.02/-0.5 | -0.5 | **+0.72** | MODERATE | model |
+| 6 | **NYK** | Randle | Mikal Bridges ($33M) | none | need (contender) | 0.68/-0.73/0.82/-0.28 | -0.73 | **+0.55** | LOW | model |
+| 7 | **SAS** | Randle+filler | Devin Vassell ($27M), Keldon Johnson ($18M) | the 2026 first (slot locked draft night) | value (contender) | 0.87/-0.23/0.68/3.2 | -0.23 | **+0.34** | LOW | model |
 
 **Versus the portfolios:** 0 surfaced deal(s) match or beat Portfolio C's +1.62 risk-adjusted while preserving HIGH 2027 flexibility (none). Deals that beat the portfolios on dP but carry LOW/MODERATE flex are Pareto trade-offs: more title equity now for a clogged 2027, the same tension Portfolio B carries.
 
@@ -37,26 +36,27 @@ These partners return no realistic two-team deal that improves both sides. The r
 | Partner | Posture | Why no worthwhile deal |
 |---|---|---|
 | BOS | contender | partner can't match/absorb the salary |
-| CHA | mid | no acceptance channel fires even at MIN's full chest |
+| CHA | mid | no acceptance channel fires even at MIN's full chest; core held (manual_untouchable_reported_core): Brandon Miller |
 | CLE | mid | partner can't match/absorb the salary |
+| DEN | mid | no acceptance channel fires even at MIN's full chest |
 | DET | contender | no acceptance channel fires even at MIN's full chest |
 | GSW | mid | no acceptance channel fires even at MIN's full chest |
 | HOU | mid | no acceptance channel fires even at MIN's full chest |
+| IND | mid | no acceptance channel fires even at MIN's full chest; core held (manual_untouchable_reported_core): Andrew Nembhard, Obi Toppin |
 | LAC | mid | partner can't match/absorb the salary |
 | MIA | contender | partner can't match/absorb the salary |
-| NOP | mid | partner can't match/absorb the salary |
+| NOP | mid | partner can't match/absorb the salary; core held (manual_untouchable_reported_core): Trey Murphy III |
 | OKC | contender | partner can't match/absorb the salary |
+| ORL | mid | partner can't match/absorb the salary |
 | PHI | mid | no positive-dP deal clears both sides |
-| PHX | mid | partner can't match/absorb the salary |
-| POR | mid | no positive-dP deal clears both sides |
-| SAS | contender | no positive-dP deal clears both sides |
+| PHX | mid | no acceptance channel fires even at MIN's full chest |
 | TOR | mid | partner can't match/absorb the salary |
 | WAS | rebuilder | no positive-dP deal clears both sides |
-| DEN | mid | best legal+accepted deal (Cameron Johnson ($23M), Peyton Watson ($7M)) is net-negligible for MIN (risk-adj -0.35) -- not worth the assets |
-| UTA | rebuilder | best legal+accepted deal (Lauri Markkanen ($46M), John Konchar ($6M)) is net-negligible for MIN (risk-adj -0.31) -- not worth the assets |
-| LAL | retooler | best legal+accepted deal (Jarred Vanderbilt ($12M), Austin Reaves ($15M)) is net-negligible for MIN (risk-adj -0.11) -- not worth the assets |
-| BKN | rebuilder | best legal+accepted deal (Terance Mann ($16M), Nicolas Claxton ($23M)) is net-negligible for MIN (risk-adj +0.01) -- not worth the assets |
-| ATL | mid | best legal+accepted deal (Nickeil Alexander-Walker ($14M), Corey Kispert ($14M)) is net-negligible for MIN (risk-adj +0.25) -- not worth the assets |
+| UTA | rebuilder | best legal+accepted deal (Lauri Markkanen ($46M), John Konchar ($6M)) is net-negligible for MIN (risk-adj -0.35) -- not worth the assets |
+| LAL | retooler | best legal+accepted deal (Jarred Vanderbilt ($12M), Austin Reaves ($15M)) is net-negligible for MIN (risk-adj -0.12) -- not worth the assets |
+| POR | mid | best legal+accepted deal (Jrue Holiday ($35M)) is net-negligible for MIN (risk-adj -0.11) -- not worth the assets |
+| BKN | rebuilder | best legal+accepted deal (Terance Mann ($16M), Nic Claxton ($23M)) is net-negligible for MIN (risk-adj +0.01) -- not worth the assets |
+| ATL | mid | best legal+accepted deal (Nickeil Alexander-Walker ($14M), Corey Kispert ($14M)) is net-negligible for MIN (risk-adj +0.27) -- not worth the assets |
 
 ## Targeted three-team deals (Pass 2)
 
@@ -65,6 +65,7 @@ _No Pass-1 near-miss resolved into a legal, accepted three-team deal. The salary
 ## Caveats carried into the writeup
 
 - **Acceptance is a model of willingness, not reporting.** Deals involving a $38M+ star (AD, Kyrie, Morant, Trae) are CONDITIONAL on that team choosing to pivot; they are surfaced because the posture math allows it, not because the player is reported available.
+- **The acceptance model is Minnesota-acquisition-scoped with hand-set coefficients.** Its Phase 2-C knobs are not calibrated against realized trades (a realized-trade backtest proved it does not generalize to arbitrary trades; see `docs/acceptance_model_scope_and_limitation.md`). Trust the strong deals over the exact MARGINAL ranking.
 - **Salary matching is exact-number sensitive.** Any surfaced player's precise 2026-27 cap hit (and `salary_is_estimate` contracts) needs a Spotrac verify before a deal is called real.
 - **The conservative anchor is the lowest available view** (usually DARKO, which is bearish on role players); headline the anchor and risk-adjusted EV, never the consensus/RAPM top.
 - **Incumbent-default lineups:** the acquired player inherits the traded player's role, which can pair two centers; a real deal would re-optimize the rotation.
