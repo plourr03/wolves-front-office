@@ -1,0 +1,86 @@
+[
+  {
+    "id": "rs_3pa_pg",
+    "claim": "Edwards 3PA per game, 2025-26 regular season",
+    "display": "8.4",
+    "query": "SELECT ROUND(SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' THEN 1 ELSE 0 END)::numeric / COUNT(DISTINCT scd.game_id), 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_3pa_pg",
+    "claim": "Edwards 3PA per game, 2025-26 playoffs Round 2 vs San Antonio",
+    "display": "5.3",
+    "query": "SELECT ROUND(SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' THEN 1 ELSE 0 END)::numeric / COUNT(DISTINCT scd.game_id), 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_3pa_rate",
+    "claim": "Share of Edwards FGA from three, 2025-26 regular season (percent)",
+    "display": "42",
+    "query": "SELECT ROUND(100.0 * SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' THEN 1 ELSE 0 END) / COUNT(*), 0) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_3pa_rate",
+    "claim": "Share of Edwards FGA from three, R2 vs San Antonio (percent)",
+    "display": "28",
+    "query": "SELECT ROUND(100.0 * SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' THEN 1 ELSE 0 END) / COUNT(*), 0) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_floater_share",
+    "claim": "Share of Edwards FGA from the 11-16 ft floater zone, regular season (percent)",
+    "display": "15",
+    "query": "SELECT ROUND(100.0 * SUM(CASE WHEN scd.shot_distance BETWEEN 11 AND 16 THEN 1 ELSE 0 END) / COUNT(*), 0) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_floater_share",
+    "claim": "Share of Edwards FGA from the 11-16 ft floater zone, R2 vs San Antonio (percent)",
+    "display": "21",
+    "query": "SELECT ROUND(100.0 * SUM(CASE WHEN scd.shot_distance BETWEEN 11 AND 16 THEN 1 ELSE 0 END) / COUNT(*), 0) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_fg_pct",
+    "claim": "Edwards field goal percentage, 2025-26 regular season",
+    "display": "48.9",
+    "query": "SELECT ROUND(100.0 * SUM(scd.shot_made_flag) / COUNT(*), 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_fg_pct",
+    "claim": "Edwards field goal percentage, R2 vs San Antonio",
+    "display": "46.9",
+    "query": "SELECT ROUND(100.0 * SUM(scd.shot_made_flag) / COUNT(*), 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_efg",
+    "claim": "Edwards effective field goal percentage (as a rate), 2025-26 regular season",
+    "display": "0.572",
+    "query": "SELECT ROUND((SUM(scd.shot_made_flag) + 0.5 * SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' AND scd.shot_made_flag = 1 THEN 1 ELSE 0 END))::numeric / COUNT(*), 3) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_efg",
+    "claim": "Edwards effective field goal percentage (as a rate), R2 vs San Antonio",
+    "display": "0.522",
+    "query": "SELECT ROUND((SUM(scd.shot_made_flag) + 0.5 * SUM(CASE WHEN scd.shot_type LIKE '%%3PT%%' AND scd.shot_made_flag = 1 THEN 1 ELSE 0 END))::numeric / COUNT(*), 3) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_avg_dist",
+    "claim": "Edwards average shot distance (ft), 2025-26 regular season",
+    "display": "15.3",
+    "query": "SELECT ROUND(AVG(scd.shot_distance)::numeric, 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_avg_dist",
+    "claim": "Edwards average shot distance (ft), R2 vs San Antonio",
+    "display": "13.2",
+    "query": "SELECT ROUND(AVG(scd.shot_distance)::numeric, 1) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  },
+  {
+    "id": "rs_games",
+    "claim": "Edwards regular-season games with shot data, 2025-26",
+    "display": "61",
+    "query": "SELECT COUNT(DISTINCT scd.game_id) FROM nba_shot_chart_detail scd WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Regular Season'"
+  },
+  {
+    "id": "sas_games",
+    "claim": "Edwards games in R2 vs San Antonio, 2025-26 playoffs",
+    "display": "6",
+    "query": "SELECT COUNT(DISTINCT scd.game_id) FROM nba_shot_chart_detail scd LEFT JOIN nba_games g ON g.game_id = scd.game_id AND g.team_id = scd.team_id WHERE scd.player_id = 1630162 AND scd.season_year = '2025-26' AND scd.season_type = 'Playoffs' AND g.matchup LIKE '%%SAS%%'"
+  }
+]

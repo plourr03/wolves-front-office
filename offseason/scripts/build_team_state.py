@@ -37,11 +37,15 @@ import re
 import csv
 import json
 import time
+import collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
 CONSTANTS = os.path.join(DATA, "league_year_constants.json")
-CONTRACTS = os.path.join(DATA, "nba_contracts_2026_27.csv")
+# Prefer the verified warehouse contracts (per-season salary + option_type + waive-and-stretch dead
+# money). Falls back to the legacy Pass-1 scrape only if the verified file is absent.
+_VERIFIED = os.path.join(DATA, "nba_contracts_2026_27_verified.csv")
+CONTRACTS = _VERIFIED if os.path.exists(_VERIFIED) else os.path.join(DATA, "nba_contracts_2026_27.csv")
 FREE_AGENTS = os.path.join(DATA, "nba_free_agents_2026.csv")
 PICKS = os.path.join(DATA, "nba_draft_picks_future.csv")
 TAX_HISTORY = os.path.join(DATA, "tax_history.csv")
@@ -51,6 +55,7 @@ OUT_JSON = os.path.join(DATA, "team_state.json")
 
 SEASONS = ["2026-27", "2027-28", "2028-29", "2029-30"]
 SEASON_COL = {s: "salary_" + s.replace("-", "_") for s in SEASONS}
+OPT_COL = {s: "option_" + s.replace("-", "_") for s in SEASONS}     # verified per-season option_type
 ROSTER_TARGET = 12
 TRADE_WINDOW = [str(y) for y in range(2026, 2034)]
 TEAM_FIX = {"NO": "NOP", "NY": "NYK", "GS": "GSW", "SA": "SAS", "PHO": "PHX",
@@ -96,43 +101,63 @@ def load_csv(path):
 # ----------------------------------------------------------------------------- #
 # Salary build-up
 # ----------------------------------------------------------------------------- #
-def team_salary(rows, team, season, const, removed_ids=frozenset()):
-    """Salary roll-up for one team-season under base assumptions."""
-    col = SEASON_COL[season]
+def dead_money_by_team(rows):
+    """team_abbr -> 2026-27 waive-and-stretch dead money, charged to the WAIVING team(s). Read from
+    the verified file's dead_money_teams / dead_money_2026_27 (the active team carries the live
+    salary; the team that waived him carries the cap charge)."""
+    out = collections.defaultdict(int)
+    for r in rows:
+        teams = [t for t in (r.get("dead_money_teams") or "").split(";") if t]
+        amt = _int(r.get("dead_money_2026_27"))
+        if teams and amt:
+            share = amt // len(teams)
+            for t in teams:
+                out[t] += share
+    return out
+
+
+def team_salary(rows, team, season, const, removed_ids=frozenset(), dead_by_team=None):
+    """Salary roll-up for one team-season from the VERIFIED contracts. Each season row carries an
+    option_type (guaranteed / player_option / team_option / non_guaranteed); player options count at
+    value, team options count unless curated likely-declined, guaranteed and non-guaranteed count.
+    2026-27 also charges the team's waive-and-stretch dead money (apron basis only)."""
+    col, ocol = SEASON_COL[season], OPT_COL[season]
     guaranteed = po = to_counted = to_declined = 0
     n_contract = n_guaranteed = 0
     for r in rows:
-        if r["team_abbr"] != team or r["two_way_flag"] == "TRUE":
+        if r["team_abbr"] != team:
             continue
-        if r["nba_player_id"] and r["nba_player_id"] in removed_ids:
+        if r.get("nba_player_id") and r["nba_player_id"] in removed_ids:
             continue
-        sal = _int(r[col])
+        sal = _int(r.get(col))
         if sal <= 0:
             continue
-        if r["player_option_flag"] == "TRUE" and r["player_option_year"] == season:
+        opt = (r.get(ocol) or "").strip().lower()
+        if opt == "player_option":
             po += sal
             n_contract += 1
-        elif r["team_option_flag"] == "TRUE" and r["team_option_year"] == season:
-            if r["nba_player_id"] in TEAM_OPTION_LIKELY_DECLINED:
+        elif opt == "team_option":
+            if r.get("nba_player_id") in TEAM_OPTION_LIKELY_DECLINED:
                 to_declined += sal              # curated likely-decline (analyst input)
             else:
                 to_counted += sal               # default: team option exercised, on the books
                 n_contract += 1
-        else:
+        else:                                   # guaranteed or non_guaranteed (treated as guaranteed)
             guaranteed += sal
             n_guaranteed += 1
             n_contract += 1
 
     rookie_min = const["min_salary_by_yos"]["0"]
     apron_charges = max(0, ROSTER_TARGET - n_contract) * rookie_min
-    apron_team_salary = guaranteed + po + to_counted + apron_charges
+    dead = (dead_by_team or {}).get(team, 0) if season == "2026-27" else 0
+    apron_team_salary = guaranteed + po + to_counted + apron_charges + dead
     return {
         "guaranteed_salary": guaranteed,
         "player_option_salary_counted": po,
         "team_option_salary_counted": to_counted,
         "team_option_declined_excluded": to_declined,
         "nonguaranteed_salary_counted": 0,
-        "dead_money": 0,
+        "dead_money": dead,
         "incentives_likely": 0,
         "incentives_unlikely": 0,
         "incomplete_roster_charges": apron_charges,
@@ -276,8 +301,8 @@ BASE_ASSUMPTIONS = {
 
 
 def build_row(team, season, scenario_id, scenario_label, removed_ids,
-              contracts, fa_rows, pick_rows, const, tpe_rows, taxpayer_flags):
-    sb = team_salary(contracts, team, season, const, removed_ids)
+              contracts, fa_rows, pick_rows, const, tpe_rows, taxpayer_flags, dead_by_team):
+    sb = team_salary(contracts, team, season, const, removed_ids, dead_by_team)
     apron = sb["apron_team_salary"]
     cap = const["salary_cap"]
 
@@ -329,6 +354,7 @@ def main():
     tax_rows = load_csv(TAX_HISTORY)
     tpe_rows = load_csv(TPES)
     teams = sorted({r["team_abbr"] for r in contracts})
+    dead_by_team = dead_money_by_team(contracts)
 
     # Combined taxpayer-flag map: historical (tax_history) + projected (apron > tax)
     # for the modeled seasons. Drives repeater across the out-year cascade.
@@ -338,14 +364,14 @@ def main():
             taxpayer_flags[(r["team_abbr"], r["season"])] = r.get("paid_luxury_tax", "").upper() == "TRUE"
     for team in teams:
         for season in SEASONS:
-            apron = team_salary(contracts, team, season, const_all[season])["apron_team_salary"]
+            apron = team_salary(contracts, team, season, const_all[season], dead_by_team=dead_by_team)["apron_team_salary"]
             taxpayer_flags[(team, season)] = apron > const_all[season]["luxury_tax"]
 
     rows = []
     for team in teams:
         for season in SEASONS:
             rows.append(build_row(team, season, "base", "base case", frozenset(),
-                                  contracts, fa_rows, pick_rows, const_all[season], tpe_rows, taxpayer_flags))
+                                  contracts, fa_rows, pick_rows, const_all[season], tpe_rows, taxpayer_flags, dead_by_team))
 
     GOBERT, RANDLE = "203497", "203944"
     for sid, label, removed in [
@@ -355,7 +381,7 @@ def main():
     ]:
         for season in SEASONS:
             rows.append(build_row("MIN", season, sid, label, removed,
-                                  contracts, fa_rows, pick_rows, const_all[season], tpe_rows, taxpayer_flags))
+                                  contracts, fa_rows, pick_rows, const_all[season], tpe_rows, taxpayer_flags, dead_by_team))
 
     flat_skip = {"assumptions", "tradeable_firsts", "repeater_window"}
     fieldnames = list(rows[0].keys())

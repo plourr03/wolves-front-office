@@ -267,6 +267,19 @@ TATUM_DIMINISH = 0.5   # baseline Boston uses a diminished Year-1 Achilles-retur
 # rollup instead of the injured realized net, then regress like any expectation.
 HEALTH_REBOUND = {"ORL"}
 
+# Fix 2: returning-star health correction (see docs/trade_model_spec_untouchables_and_health.md).
+# A star who missed all/most of 2025-26 and is expected back, on a team NOT in the projected
+# (opponent_rosters) contender set. The gap-year net is the WRONG anchor: losing a franchise engine
+# collapses the whole season (IND fell to -7.85, a tank, not the roster's true level), so anchoring
+# on it understates a healthy roster ACROSS THE BOARD, not just at one position. Instead anchor on
+# the team's PRE-INJURY net (the season before the lost one, when the star was healthy: IND made a
+# Finals at +2.19), then apply the SAME post-Achilles diminish the BOS/Tatum baseline uses, removing
+# (1 - TATUM_DIMINISH) of the returning star's marginal value. Visible via src="returning-star-health".
+# BOS/Tatum itself is handled by MOVED + TATUM_DIMINISH and so is intentionally NOT listed here.
+RETURNING_STARS = {
+    "IND": {"player_id": "1630169", "pre_injury_year": 2024, "role": "starter"},   # Haliburton (Achilles)
+}
+
 
 def regress_to_expectation(net):
     """Realized net -> forward-looking expectation, the scale the title sim was calibrated
@@ -329,6 +342,28 @@ def build_2026_27_league(imp):
                              "munc": proj_roll["method_uncertainty"], "conf": TEAM_CONF.get(ab, "W"),
                              "profile": op_profiles.get(ab), "src": "health-rebound",
                              "delta": round(exp - regress_to_expectation(a25), 2),
+                             "exp": round(exp, 2), "actual25": a25}
+        elif ab in RETURNING_STARS and ab not in MOVED:             # star returning from a lost season
+            rs = RETURNING_STARS[ab]
+            base_rot = rot or []
+            present = {p["nba_player_id"] for p in base_rot}
+            inj_rot = base_rot + ([{"nba_player_id": rs["player_id"], "role": rs["role"]}]
+                                  if rs["player_id"] not in present else [])
+            # the returning star's full marginal value (talent rollup with vs without him)
+            base_net = deflate(A.rollup(roster_to_mpg(base_rot), imp, "rs")["net"]) if base_rot else 0.0
+            star_lift = deflate(A.rollup(roster_to_mpg(inj_rot), imp, "rs")["net"]) - base_net
+            # anchor on the PRE-INJURY net (healthy season), then dock the post-Achilles diminish, the
+            # same fraction the BOS/Tatum baseline applies: remove (1 - TATUM_DIMINISH) of his value.
+            pre_net = BH.actual_team_net(rs["pre_injury_year"]).get(ab, a25)
+            exp = regress_to_expectation(pre_net)
+            net = exp - (1.0 - TATUM_DIMINISH) * star_lift
+            proj_roll = A.rollup(roster_to_mpg(inj_rot), imp, "rs")
+            strengths[ab] = {"net": round(net, 2), "net_sd": proj_roll["net_sd"],
+                             "munc": proj_roll["method_uncertainty"], "conf": TEAM_CONF.get(ab, "W"),
+                             "profile": BH.team_dim_profile(inj_rot, dims),
+                             "src": "returning-star-health",
+                             "delta": round(net - regress_to_expectation(a25), 2),
+                             "star_lift": round(star_lift, 2), "pre_injury_net": round(pre_net, 2),
                              "exp": round(exp, 2), "actual25": a25}
         elif ab in projected:                                       # stand-pat contender
             roll = A.rollup(roster_to_mpg(rot), imp, "rs") if rot else None

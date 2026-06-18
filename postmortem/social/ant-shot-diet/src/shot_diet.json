@@ -1,0 +1,98 @@
+{
+  "rs": {
+    "label": "2025-26 regular season",
+    "total": 1231,
+    "bands": [
+      {
+        "key": "rim",
+        "name": "At the rim",
+        "range": "0-3 ft",
+        "count": 272,
+        "share": 0.221
+      },
+      {
+        "key": "paint",
+        "name": "Paint",
+        "range": "4-10 ft",
+        "count": 158,
+        "share": 0.1284
+      },
+      {
+        "key": "floater",
+        "name": "Floater zone",
+        "range": "11-16 ft",
+        "count": 180,
+        "share": 0.1462
+      },
+      {
+        "key": "longmid",
+        "name": "Long mid",
+        "range": "17-22 ft",
+        "count": 124,
+        "share": 0.1007
+      },
+      {
+        "key": "three",
+        "name": "Three",
+        "range": "23-25 ft",
+        "count": 318,
+        "share": 0.2583
+      },
+      {
+        "key": "deep",
+        "name": "Deep three",
+        "range": "26+ ft",
+        "count": 179,
+        "share": 0.1454
+      }
+    ]
+  },
+  "sas": {
+    "label": "R2 vs San Antonio",
+    "total": 113,
+    "bands": [
+      {
+        "key": "rim",
+        "name": "At the rim",
+        "range": "0-3 ft",
+        "count": 30,
+        "share": 0.2655
+      },
+      {
+        "key": "paint",
+        "name": "Paint",
+        "range": "4-10 ft",
+        "count": 19,
+        "share": 0.1681
+      },
+      {
+        "key": "floater",
+        "name": "Floater zone",
+        "range": "11-16 ft",
+        "count": 24,
+        "share": 0.2124
+      },
+      {
+        "key": "longmid",
+        "name": "Long mid",
+        "range": "17-22 ft",
+        "count": 8,
+        "share": 0.0708
+      },
+      {
+        "key": "three",
+        "name": "Three",
+        "range": "23-25 ft",
+        "count": 19,
+        "share": 0.1681
+      },
+      {
+        "key": "deep",
+        "name": "Deep three",
+        "range": "26+ ft",
+        "count": 13,
+        "share": 0.115
+      }
+    ]
+  }
+}

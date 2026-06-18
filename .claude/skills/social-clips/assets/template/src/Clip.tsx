@@ -4,6 +4,7 @@ import { LafiBarChart, Row } from "./LafiBarChart";
 import { Captions } from "./Captions";
 import { Background } from "./Background";
 import { ProgressBar } from "./ProgressBar";
+import { ramp } from "./animation";
 import { BEATS, activeBeatIndex, focusRows } from "./timeline";
 import { COLORS, FONT, SAFE } from "./config";
 
@@ -35,18 +36,23 @@ export const Clip: React.FC<ClipProps> = ({
   const focus = focusRows(cur);
   const ruleColor = focus && focus.includes(highlightIndex) ? COLORS.highlight : COLORS.chalk;
 
+  // Recede the chart behind the centered CTA card so the closing line reads clean.
+  const chartOpacity = cur.cta ? 1 - 0.78 * ramp(frame, fps, cur.startSec, 0.4) : 1;
+
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.bg }}>
       <Background />
 
-      <LafiBarChart
-        frame={frame}
-        fps={fps}
-        data={data}
-        beats={BEATS}
-        highlightIndex={highlightIndex}
-        growDelaySec={growDelaySec}
-      />
+      <AbsoluteFill style={{ opacity: chartOpacity }}>
+        <LafiBarChart
+          frame={frame}
+          fps={fps}
+          data={data}
+          beats={BEATS}
+          highlightIndex={highlightIndex}
+          growDelaySec={growDelaySec}
+        />
+      </AbsoluteFill>
 
       {/* Brand wordmark, top-left, inside the safe area. */}
       {handle ? (

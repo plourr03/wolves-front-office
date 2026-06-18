@@ -1,0 +1,8 @@
+NS=9000  baseline MIN title = 1.92%
+IND deal (Randle -> Nembhard + Toppin), four-view dP (pts of title):
+  consensus  -0.52pp -> after 1.40%
+  box        -0.99pp -> after 0.93%
+  rapm       -0.64pp -> after 1.28%
+  darko      -0.79pp -> after 1.13%
+  anchor(min) -0.99 -> 0.93%   consensus -0.52 -> 1.40%
+(board IND filler-version: cons +1.58 / box +0.93 / rapm +1.33 / darko +0.97 / risk-adj +0.56)

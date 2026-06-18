@@ -1,0 +1,9 @@
+NS=8000 K=6 replications  (CHI: Randle+filler -> Giddey+Okoro)
+
+view                   base%             post%              dP(pp)
+consensus     1.91 +/-0.00       4.69 +/-0.00     -2.78 +/-0.00  [-2.78,-2.78]
+box           1.56 +/-0.00       2.83 +/-0.00     -1.26 +/-0.00  [-1.26,-1.26]
+rapm          1.90 +/-0.00       4.25 +/-0.00     -2.35 +/-0.00  [-2.35,-2.35]
+darko         1.95 +/-0.00       1.99 +/-0.00     -0.04 +/-0.00  [-0.04,-0.04]
+
+(committed board CHI: cons +2.93 / box +1.35 / rapm +2.40 / DARKO +0.03)

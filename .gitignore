@@ -15,3 +15,6 @@ Thumbs.db
 
 # Large rebuildable intermediate (regenerate via build_possessions_league.py from the warehouse)
 offseason/data/cache/possessions_league/
+
+# Node deps in social / Remotion projects (rebuildable via npm install)
+node_modules/

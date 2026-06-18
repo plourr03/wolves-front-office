@@ -1,0 +1,60 @@
+{
+  "pulled_at": "2026-06-17T15:11:17",
+  "deal": "MIN: Randle + Shannon Jr. -> Nembhard + Toppin (+ one first), Indiana",
+  "checks": [
+    {
+      "id": "min_legal",
+      "planned": "True",
+      "model": "True",
+      "status": "ok"
+    },
+    {
+      "id": "min_post",
+      "planned": "$192.5M",
+      "model": "$192.5M",
+      "status": "ok"
+    },
+    {
+      "id": "min_under_tax",
+      "planned": "$8.5M",
+      "model": "$8.5M",
+      "status": "ok"
+    },
+    {
+      "id": "min_no_hardcap",
+      "planned": "False",
+      "model": "False",
+      "status": "ok"
+    },
+    {
+      "id": "ind_legal",
+      "planned": "True",
+      "model": "True",
+      "status": "ok"
+    },
+    {
+      "id": "ind_accepts",
+      "planned": "True",
+      "model": "True",
+      "status": "ok"
+    },
+    {
+      "id": "board_riskadj",
+      "planned": "0.56",
+      "model": "0.56",
+      "status": "ok"
+    },
+    {
+      "id": "board_flex",
+      "planned": "MODERATE",
+      "model": "MODERATE",
+      "status": "ok"
+    },
+    {
+      "id": "board_channel",
+      "planned": "value",
+      "model": "value",
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "_note": "Single source of truth. EVERY value traces to a trade-model run (offseason/scripts). The model is seeded/deterministic. See claims.json. Deal: MIN sends Randle for Nembhard + Toppin (Indiana). Thesis: good now AND keeps the 2027 picks.",
+  "hypothetical": true,
+  "handle": "@WolvesToaT",
+
+  "hook_quote": "The smartest Wolves trade nobody is talking about.",
+  "hook_sub": "Randle for Andrew Nembhard and Obi Toppin. Better now, and it keeps the 2027 picks. I ran it through the model.",
+
+  "deal": {
+    "min_sends": [
+      { "name": "Julius Randle", "salary": 33333334, "salaryLabel": "$33.3M" },
+      { "name": "Terrence Shannon Jr.", "salary": 2800000, "salaryLabel": "$2.8M" }
+    ],
+    "min_gets": [
+      { "name": "Andrew Nembhard", "salary": 19600000, "salaryLabel": "$19.6M" },
+      { "name": "Obi Toppin", "salary": 15000000, "salaryLabel": "$15.0M" }
+    ],
+    "picks": ["one future first (sweetener)"],
+    "picks_note": "vs the two firsts a Giddey- or Turner-type deal costs",
+    "out_total": "$36.1M",
+    "in_total": "$34.6M"
+  },
+
+  "cap": {
+    "thresholds": {
+      "capLabel": "$165M", "taxLabel": "$201M", "apron1Label": "$209.1M", "apron2Label": "$222M"
+    },
+    "min": {
+      "preLabel": "$194.0M",
+      "postLabel": "$192.5M",
+      "under_tax_by": "$8.5M",
+      "under_apron_by": "$16.6M",
+      "hard_cap": false,
+      "hard_cap_note": "A near-even swap that sheds a hair of salary, so it never trips a hard cap."
+    },
+    "ind": {
+      "qualitative": "Retooling. Takes Randle's expiring back, lands ~$201M.",
+      "note": "Indiana side legal, post ~$201.5M (deterministic, evaluate_move)."
+    }
+  },
+
+  "future": {
+    "this_deal": { "picks": "one future first", "flex": "2027 stays open (MODERATE)" },
+    "blockbuster": { "picks": "two firsts", "flex": "2027 clogged (LOW)" }
+  },
+
+  "title": {
+    "baseline_pct": "1.9%",
+    "best_estimate_pct": "3.0%",
+    "band_low_pct": "2.9%",
+    "band_high_pct": "3.5%",
+    "views": { "darko": "+1.0", "box": "+0.9", "rapm": "+1.3", "consensus": "+1.6" },
+    "floor_note": "every view lands positive. even the cautious one (+1.0). the best floor of any realistic Wolves deal.",
+    "metric": "modeled championship probability, four-view range (validated 2-for-2 sim)"
+  },
+
+  "sayyes": {
+    "ind": {
+      "verdict": "YES, BUT…",
+      "channel": "value / asset collection",
+      "why": "Toppin sits behind Pascal Siakam at the four, so he's the movable one. But Nembhard is a real starter, and parting with two rotation players for an aging Randle is a tougher sell than my model's tidy yes.",
+      "margin_note": "The model says yes because it grades Nembhard as a below-market contract. read that two ways: Minnesota is probably getting a steal, and a real Indiana likely wants more than Randle, Shannon, and one pick."
+    },
+    "min": {
+      "verdict": "YES",
+      "why": "Nembhard fills the half-court playmaking Minnesota lacks. a real need, addressed.",
+      "channel": "fills the need, best cautious-view floor on the board"
+    },
+    "disclaimer": "Acceptance is my model's read on willingness, not a report that anyone is shopping these players."
+  },
+
+  "verdict": {
+    "call": "Better now without mortgaging 2027. A high-floor playmaker for an expiring and one pick, with the war chest still intact.",
+    "question": "Wolves fans: smarter than chasing a star?"
+  }
+}

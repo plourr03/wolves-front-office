@@ -1,0 +1,10 @@
+scope,key,team,type,magnitude,source,date,expiry,confidence,note
+player,Giannis Antetokounmpo,MIL,extend_or_trade,0.90,"CBS Sports; The Athletic (Amick, Nehm)",2026-06-15,2026-07-15,R,"Bucks signaled extend-or-trade this offseason; ext-eligible Oct; prefers East"
+player,Ja Morant,MEM,shopping,0.85,"NBC Sports/Yahoo (Helin); The Athletic",2026-06-12,2026-07-12,R,"Expected to be traded; Grizzlies wait until Giannis resolves"
+player,Kyrie Irving,DAL,not_available_soft,0.50,"NBC Sports/Yahoo (Helin); The Stein Line",2026-06-12,2026-07-12,R,"Dallas says not available; no short-term trade indication; raises price"
+player,Trae Young,WAS,extend_or_trade,0.60,"The Stein Line (Fischer)",2026-06-16,2026-06-30,R,"WAS wants PO declined and extension; opting in by draft day = trade tell; Miami suitor"
+team,,MIN,win_now_mandate,0.90,"The Athletic (Amick, Nehm); Krawczynski",2026-06-13,2026-08-01,R,"Connelly chasing a running mate for Edwards; expected significant changes"
+team,,MIA,win_now_mandate,0.70,"The Stein Line (Fischer)",2026-06-16,2026-07-15,R,"Chasing a star; Young/Morant/Kawhi-if-available as fallbacks"
+player,Tyler Herro,MIA,shopping,0.50,"CBS Sports; The Stein Line",2026-06-15,2026-07-15,J,"Would move for a star; not untouchable; available-for-upgrade"
+team,,SAC,shopping,0.60,"Locked on Kings (Ham)",2026-06-03,2026-07-15,R,"Wants off one of LaVine/Sabonis/DeRozan; Sabonis most movable"
+player,Herb Jones,NOP,shopping,0.40,"CBS Sports",2026-06-15,2026-07-15,J,"May move at a value low point; soft availability"

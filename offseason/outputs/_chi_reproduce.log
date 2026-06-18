@@ -1,0 +1,10 @@
+=== Pass 1 screen: MIN baseline title 1.80% | NS=2500 | 1 partners ===
+
+  CHI: dP +3.32 risk-adj +1.60 | MIN sends Randle+filler + the 2026 first (slot locked draft night) + the 2028 own first | MIN gets Josh Giddey $25M, Isaac Okoro $12M
+        accept via value (rebuilder) | flex LOW | model-surfaced
+
+=== RANKED (risk-adjusted dP) -- 1 partners with a deal, 0 no-deal ===
+  risk-adj +1.60 anchor +0.03  CHI  Randle+filler  flex LOW      model-surfa | Josh Giddey, Isaac Okoro
+
+=== cross-validation: the Gobert-out harvest the search finds vs the hand-built both-out ===
+  NO Gobert-out deal won its partner -- keep-Gobert (Randle conversion) dominates everywhere.
