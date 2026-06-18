@@ -1,20 +1,7 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.ipynb_checkpoints/
-
-# Environment / secrets
+# Kept minimal per request: commit everything in the working tree.
+# Secret/OS guards only (no .env currently exists; kept as a safety if one appears later).
 .env
 .env.*
 *.local
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Large rebuildable intermediate (regenerate via build_possessions_league.py from the warehouse)
-offseason/data/cache/possessions_league/
-
-# Node deps in social / Remotion projects (rebuildable via npm install)
-node_modules/
