@@ -1,0 +1,8 @@
+# Recomputable RAPM fit caches (regenerate from build_rapm + the frozen snapshot).
+# Not committed: a stale committed cache could silently poison a later calibration run.
+outputs/phase1/rapm_train.parquet
+outputs/phase1/rapm_holdout.parquet
+
+# Python caches
+__pycache__/
+*.pyc

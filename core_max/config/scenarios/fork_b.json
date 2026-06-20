@@ -1,0 +1,21 @@
+{
+  "name": "fork_b",
+  "description": "The bet (spec scenario 2). Two separate fit trades, not an aggregation: Randle into a secondary creator and Gobert into a switchable wing plus relief (both take back less than they send, which opens room and trips no hard cap). Re-sign Ayo via Bird. Joan inherits the starting 5. Representative salaries; exact returns are a Phase 4 search.",
+  "legs": [
+    {
+      "label": "Randle ($33.3M) -> secondary creator (MPJ-type, ~$30M)",
+      "outgoing": [{"label": "Julius Randle", "salary": 33333334, "pid": "203944"}],
+      "incoming": [{"label": "secondary creator (~$30M)", "salary": 30000000, "pid": "FORKB_CREATOR"}]
+    },
+    {
+      "label": "Gobert ($36.5M, 7.5% kicker) -> switchable wing + relief (~$24M)",
+      "outgoing": [{"label": "Rudy Gobert", "salary": 36500000, "pid": "203497", "trade_kicker_pct": 0.075}],
+      "incoming": [{"label": "switchable wing (~$24M)", "salary": 24000000, "pid": "FORKB_WING"}]
+    },
+    {
+      "label": "Re-sign Ayo Dosunmu (~$16.5M) via Bird",
+      "incoming": [{"label": "Ayo Dosunmu (Bird re-sign)", "salary": 16500000, "pid": "1630245"}],
+      "exception_used": "bird"
+    }
+  ]
+}

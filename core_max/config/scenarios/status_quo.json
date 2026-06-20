@@ -1,0 +1,11 @@
+{
+  "name": "status_quo",
+  "description": "Keep everything (spec scenario 1, the baseline). No trades; re-sign Ayo via Bird. Shows how little flexibility remains: keeping both bigs and re-signing Ayo already pushes MIN into the first-apron tier with little room.",
+  "legs": [
+    {
+      "label": "Re-sign Ayo Dosunmu (~$16.5M) via Bird",
+      "incoming": [{"label": "Ayo Dosunmu (Bird re-sign)", "salary": 16500000, "pid": "1630245"}],
+      "exception_used": "bird"
+    }
+  ]
+}

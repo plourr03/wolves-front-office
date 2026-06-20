@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "season": "2026-27",
+  "team": "MIN",
+  "base_scenario": "base",
+  "binding_constraint": "below_second_apron",
+  "required_retained": [
+    {
+      "pid": "1630245",
+      "name": "Ayo Dosunmu",
+      "reason": "Bird re-sign near-mandatory given DiVincenzo's Achilles; spec Section 5."
+    }
+  ],
+  "roster_floor": 8,
+  "roster_floor_note": "Flags egregious over-shedding only. The CBA minimum-salary roster (charge to 12 at the rookie min) is already enforced inside the engine's apron basis; exact 14-man completion via routine minimum signings and the No. 28 / No. 59 picks is a Phase 1 refinement, not a Phase 0 gate.",
+  "seed": 20260619,
+  "constants_source": {
+    "path": "offseason/data/league_year_constants.json",
+    "built": "2026-06-09",
+    "is_projection": true,
+    "second_apron_binding_line": 222000000,
+    "first_apron_line": 209100000,
+    "luxury_tax_line_constants": 201000000,
+    "luxury_tax_line_spec": 200500000,
+    "reconciliation_note": "Binding lines (first apron $209.1M, second apron $222M) match the spec exactly. The $0.5M luxury-tax gap ($201.0M constants vs $200.5M spec) does NOT bind: MIN clears the tax by ~$6.5M under either line, and the second apron is the gate. Flagged is_projection; re-confirm against final 2026-27 lines before publication."
+  }
+}

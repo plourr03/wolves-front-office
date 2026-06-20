@@ -1,0 +1,74 @@
+{
+  "form": "sd_used = net_sd * a * (1 + b * (div - zmu)/zsd), div = |net_rapm - box_net_bpm|",
+  "a": 1.0,
+  "b": 0.0,
+  "zmu": 1.1945367412140575,
+  "zsd": 0.8874176701203952,
+  "decision": "as-is baseline center; shrink and heteroscedastic-widen carried as Phase 3-4 sensitivity variants",
+  "decision_basis": "LOAD-BEARING reason is statistical: low power (one noisy holdout season, 313 players) plus selection toward stable players who over-cover by construction (measured by the stability-tercile trend, not asserted). The fact that shrink would flatter Fork B is a SKEPTICISM FLAG to raise the bar, NOT the justification; a clean high-power test that said shrink would be followed and accepted as honestly helping Fork B.",
+  "grid_result": {
+    "a": 0.8,
+    "b": 0.0,
+    "coverage": {
+      "0.5": 0.6293929712460063,
+      "0.68": 0.8146964856230032,
+      "0.8": 0.9105431309904153,
+      "0.9": 0.9744408945686901,
+      "0.95": 0.987220447284345
+    },
+    "note": "grid minimized coverage loss but hit the shrink floor; carried as the shrink variant"
+  },
+  "sensitivity_variants_phase3_4": [
+    {
+      "name": "center_as_is",
+      "a": 1.0,
+      "b": 0.0,
+      "desc": "adopted baseline center"
+    },
+    {
+      "name": "shrink",
+      "a": 0.8,
+      "b": 0.0,
+      "desc": "corrected-test point estimate; sweep to show the verdict is robust"
+    },
+    {
+      "name": "hetero_widen",
+      "a": 1.0,
+      "b": 0.2,
+      "desc": "mild widen of high-divergence players per their under-coverage; sweep"
+    }
+  ],
+  "levels": [
+    0.5,
+    0.68,
+    0.8,
+    0.9,
+    0.95
+  ],
+  "coverage_baseline_corrected": {
+    "0.5": 0.6837060702875399,
+    "0.68": 0.8562300319488818,
+    "0.8": 0.939297124600639,
+    "0.9": 0.987220447284345,
+    "0.95": 0.9936102236421726
+  },
+  "coverage_baseline_naive": {
+    "0.5": 0.48242811501597443,
+    "0.68": 0.6645367412140575,
+    "0.8": 0.7827476038338658,
+    "0.9": 0.8785942492012779,
+    "0.95": 0.939297124600639
+  },
+  "snapshot": "wh_0e1a90b850e6ea3b",
+  "n_calib": 313,
+  "train": [
+    2023,
+    2024
+  ],
+  "holdout": [
+    2025
+  ],
+  "min_poss_train": 3000,
+  "min_poss_holdout": 1500,
+  "note": "Corrected held-out coverage OVER-covers at every level, so the Q1 premise (analytic SDs too tight, inflate them) is NOT supported by the data. The naive (no noisy-target) coverage under-covers and WOULD have justified inflation, which is exactly the trap the noisy-target correction was required to avoid. 3 seasons is a limited test (noisy 1-season holdout, 313 stable dual-window players), so we neither inflate nor shrink: hold at the principled posterior SDs."
+}

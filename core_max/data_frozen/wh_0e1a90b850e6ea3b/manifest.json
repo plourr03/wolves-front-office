@@ -1,0 +1,97 @@
+{
+  "snapshot_id": "wh_0e1a90b850e6ea3b",
+  "label": "2026-06-20",
+  "source": "nba_warehouse (POSTGRES_HOST 100.69.186.94, schema nba)",
+  "rim_seasons": [
+    "2023-24",
+    "2024-25",
+    "2025-26"
+  ],
+  "box_windows": {
+    "full": null,
+    "train": [
+      2023,
+      2024
+    ],
+    "holdout": [
+      2025
+    ]
+  },
+  "tables": {
+    "rim_defense": {
+      "rows": 1723,
+      "cols": [
+        "player_id",
+        "season_year",
+        "gp",
+        "def_rim_fgm",
+        "def_rim_fga",
+        "def_rim_fg_pct",
+        "blk"
+      ],
+      "sha256": "24088aa6f12947158b139f1c7f7440d173425967abef61d601e951f7643bf9dd"
+    },
+    "box_feats_full": {
+      "rows": 800,
+      "cols": [
+        "player_id",
+        "pts36",
+        "ast36",
+        "tov36",
+        "oreb36",
+        "dreb36",
+        "stl36",
+        "blk36",
+        "pf36",
+        "fg3a_rate",
+        "ts",
+        "usg",
+        "ast_pct",
+        "dreb_pct"
+      ],
+      "sha256": "0a2659e837353f5d7d9258f8190e6b009e7569e577e4faf15524e1e5d3e793cb"
+    },
+    "box_feats_train": {
+      "rows": 691,
+      "cols": [
+        "player_id",
+        "pts36",
+        "ast36",
+        "tov36",
+        "oreb36",
+        "dreb36",
+        "stl36",
+        "blk36",
+        "pf36",
+        "fg3a_rate",
+        "ts",
+        "usg",
+        "ast_pct",
+        "dreb_pct"
+      ],
+      "sha256": "1f1f3651a8a2141aab6a5a6ef205f46eadedb3a450d30c4fa31e5d92b23a2f68"
+    },
+    "box_feats_holdout": {
+      "rows": 582,
+      "cols": [
+        "player_id",
+        "pts36",
+        "ast36",
+        "tov36",
+        "oreb36",
+        "dreb36",
+        "stl36",
+        "blk36",
+        "pf36",
+        "fg3a_rate",
+        "ts",
+        "usg",
+        "ast_pct",
+        "dreb_pct"
+      ],
+      "sha256": "a5fe8a955bb7afe4b05857dbdc21fbae4735eba4e8763877ddd3201374d258df"
+    }
+  },
+  "purpose": "Phase 1 frozen warehouse read; 1b (rim) and 1c (RAPM box prior) both pin this id.",
+  "note": "fit_rapm names query (player_name labels only) is cosmetic and not frozen; the numeric path (box prior) is."
+}

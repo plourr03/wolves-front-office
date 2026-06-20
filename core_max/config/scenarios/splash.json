@@ -1,0 +1,19 @@
+{
+  "name": "splash",
+  "description": "Splash counterfactual (spec scenario 3) for CONTRAST, not endorsement. Aggregate Gobert + Randle into one ~$65M ball-dominant star (take back less than the ~$69.8M sent, so no take-back-more hard cap). Re-sign Ayo via Bird. This is CBA-feasible; it is contrasted on title-equity distribution later, never rejected by the gate. The Morant archetype is the LOCKED run-from case, modeled here only as the contrast point.",
+  "legs": [
+    {
+      "label": "Aggregate Gobert + Randle -> one ball-dominant star (~$65M)",
+      "outgoing": [
+        {"label": "Rudy Gobert", "salary": 36500000, "pid": "203497", "trade_kicker_pct": 0.075},
+        {"label": "Julius Randle", "salary": 33333334, "pid": "203944"}
+      ],
+      "incoming": [{"label": "ball-dominant star (~$65M)", "salary": 65000000, "pid": "SPLASH_STAR"}]
+    },
+    {
+      "label": "Re-sign Ayo Dosunmu (~$16.5M) via Bird",
+      "incoming": [{"label": "Ayo Dosunmu (Bird re-sign)", "salary": 16500000, "pid": "1630245"}],
+      "exception_used": "bird"
+    }
+  ]
+}
