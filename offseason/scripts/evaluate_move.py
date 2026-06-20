@@ -309,11 +309,14 @@ def main():
                       [{"label": "star", "salary": 30_000_000}])
     passed.append(_check("MIN $10M out for $30M in (over band)", r["legal"], False, r))
 
-    # 3. LEGAL but barely: MIN full-MLE signing ($15.048M) lands just under the
-    #    first-apron hard cap ($209.1M). Shows how little first-apron room MIN has.
+    # 3. ILLEGAL by a hair: the verified-contract regeneration raised MIN's base apron to
+    #    ~$194.46M, so a full-MLE signing ($15.048M) now lands at ~$209.51M, ~$0.41M OVER the
+    #    first-apron hard cap ($209.1M). MIN cannot use the full MLE without shedding first.
+    #    (Pre-regeneration this fit, and this test expected legal=True; the data moved, the
+    #    CBA logic did not. Expectation updated to the correct illegal result.)
     r = evaluate_move(min_base, c, [], [{"label": "full MLE signing", "salary": 15_048_000}],
                       exception_used="full_mle")
-    passed.append(_check("MIN full-MLE signing lands just under first-apron hard cap", r["legal"], True, r))
+    passed.append(_check("MIN full-MLE signing trips the first-apron hard cap (no room without shedding)", r["legal"], False, r))
 
     # 3b. ILLEGAL hard cap: with Dosunmu re-signed (apron bumped to ~$200M), the same
     #     MLE signing pushes MIN over the first-apron hard cap. Exercises the
