@@ -55,10 +55,13 @@ ALPHAS = [500, 1000, 2000, 4000, 8000]
 GARBAGE_MARGIN = 25                # 4th-period possessions beyond this margin dropped
 
 
-def load_possessions():
+def load_possessions(seasons=None):
     files = sorted(glob.glob(os.path.join(CACHE, "*.parquet")))
     print(f"loading {len(files)} game files ...", flush=True)
     df = pd.concat([pd.read_parquet(f) for f in files], ignore_index=True)
+    if seasons is not None:
+        df = df[df["season_year"].isin(list(seasons))].reset_index(drop=True)
+        print(f"  filtered to seasons {sorted(seasons)}: {len(df):,} possessions", flush=True)
     df = df.sort_values(["game_id", "possession_number"]).reset_index(drop=True)
 
     # approximate garbage-time filter: running absolute margin, drop 4th-period blowout
@@ -112,16 +115,28 @@ def build_matrix(df):
     return X, y, w, qualifying, R
 
 
-def box_features():
-    """Per-player season aggregates (pooled 2023-24..2025-26) -> per-100 rates +
-    minute-weighted advanced rates. Feeds the learned box prior (the in-house BPM)."""
+SEASON_STRS = {2023: "2023-24", 2024: "2024-25", 2025: "2025-26"}
+
+
+def _season_strs(seasons):
+    """Map possession season-year ints (e.g. 2023) to box-table strings ('2023-24').
+    seasons=None -> the full canonical 3-season window (behavior-preserving)."""
+    yrs = sorted(SEASON_STRS) if seasons is None else sorted(seasons)
+    return tuple(SEASON_STRS[y] for y in yrs)
+
+
+def box_features(seasons=None):
+    """Per-player season aggregates -> per-100 rates + minute-weighted advanced rates.
+    Feeds the learned box prior (the in-house BPM). seasons=None is the full canonical
+    window; a subset restricts the box features to the same window as the fit."""
+    ss = _season_strs(seasons)
     box = db.query("""
         SELECT player_id, SUM(minutes_played) min, SUM(pts) pts, SUM(ast) ast,
                SUM(tov) tov, SUM(oreb) oreb, SUM(dreb) dreb, SUM(stl) stl,
                SUM(blk) blk, SUM(pf) pf, SUM(fg3a) fg3a, SUM(fga) fga
         FROM nba_player_stats
-        WHERE season_year IN ('2023-24','2024-25','2025-26')
-        GROUP BY player_id HAVING SUM(minutes_played) > 0""")
+        WHERE season_year IN %s
+        GROUP BY player_id HAVING SUM(minutes_played) > 0""", (ss,))
     adv = db.query("""
         SELECT person_id AS player_id,
                SUM(true_shooting_percentage*minutes_float)/NULLIF(SUM(minutes_float),0) ts,
@@ -130,8 +145,8 @@ def box_features():
                SUM(defensive_rebound_percentage*minutes_float)/NULLIF(SUM(minutes_float),0) dreb_pct
         FROM nba_player_advanced_stats
         WHERE game_id IN (SELECT DISTINCT game_id FROM nba_player_stats
-                          WHERE season_year IN ('2023-24','2024-25','2025-26'))
-        GROUP BY person_id""")
+                          WHERE season_year IN %s)
+        GROUP BY person_id""", (ss,))
     df = box.merge(adv, on="player_id", how="left")
     m = df["min"].clip(lower=1)
     per36 = lambda c: df[c] / m * 36.0
@@ -164,8 +179,20 @@ def fit_box_prior(player_ids, first_off, first_def, poss_weight, feats):
     return prior_off, prior_def
 
 
-def main():
-    df = load_possessions()
+def fit_rapm(seasons=None, box_feats=None):
+    """Core box-informed RAPM fit, returning the per-player table (off/def/net RAPM,
+    analytic SDs, learned box prior, possessions). seasons=None is the canonical full
+    window (2023-24..2025-26): fit_rapm(None) is the SAME computation that produced
+    player_value.csv's RAPM columns (behavior-preserving, verified by the refactor diff
+    gate). A subset such as (2023, 2024) fits a windowed RAPM for held-out validation,
+    using the same estimator with per-season recency weights subset to the window.
+    box_feats optionally injects a FROZEN box-feature table (the output of box_features
+    for the same window) so a multi-step build pins ONE warehouse snapshot and a later
+    warehouse update cannot open a seam mid-build; box_feats=None reads the warehouse
+    live (behavior-preserving). The table is RETURNED only; nothing is written (main()
+    owns the canonical write, and the coverage validation must never overwrite the
+    enriched player_value.csv)."""
+    df = load_possessions(seasons)
     X, y, w, players, R = build_matrix(df)
     print("fitting first-pass ridge (CV alpha) ...", flush=True)
     cv = RidgeCV(alphas=ALPHAS).fit(X, y, sample_weight=w)
@@ -176,7 +203,7 @@ def main():
 
     # possession counts per qualifying player (for prior weighting)
     counts = np.asarray((X[:, :R] > 0).sum(axis=0)).ravel() + np.asarray((X[:, R + 1:2 * R + 1] > 0).sum(axis=0)).ravel()
-    feats = box_features()
+    feats = box_features(seasons) if box_feats is None else box_feats.copy()
     print("learning box-score prior ...", flush=True)
     prior_off_p, prior_def_p = fit_box_prior(players, first_off[:R], first_def[:R], counts, feats)
 
@@ -220,9 +247,13 @@ def main():
             "box_net_bpm": round(float(bo - bd), 2),
             "reliable": "TRUE" if int(counts[i]) >= RELIABLE_POSS else "FALSE",
         })
-    val = pd.DataFrame(rows)
+    return pd.DataFrame(rows)
 
-    # merge playoff translation
+
+def main():
+    val = fit_rapm()
+
+    # merge playoff translation (canonical full-window output only)
     pt_path = os.path.join(DATA, "playoff_translation.csv")
     if os.path.exists(pt_path):
         pt = pd.read_csv(pt_path)[["player_id", "translation_read", "rs_to_po_delta", "hc_poss_po"]]
