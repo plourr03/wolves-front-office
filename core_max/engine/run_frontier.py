@@ -23,9 +23,15 @@ import run_scenarios as RS
 import run_retool as RT
 from core_max.cba import gate as G
 
-# MLE shooter modeled as a bounded bench-upgrade team-net add (a useful rotation shooter on ~16
-# min displacing back-of-rotation minutes). Conservative, stated; the frontier's job is the SHAPE.
-MLE_FULL, MLE_TAX = 0.40, 0.25
+# ADDITIVITY CORRECTION (2026-06-22): the MLE shooter was modeled here as a flat team-net ADD on
+# top of each move. That is fine on STAND-PAT (a clogged offense, no creator) where a shooter
+# genuinely helps (~+0.25). It is WRONG stacked on top of a CREATOR retool: the combined-roster
+# model (run_package.py, which models the shooter IN the rotation) shows the shooter adds ~0 once a
+# creator has already un-clogged the offense (package C 3.19% ~= Cam-alone 3.24%). So the old
+# "retool + full MLE = 3.69% (+1.24)" double-counted the shooter; the honest ceiling is ~3.2%
+# (+0.77). MLE_ON_CREATOR is set to ~0 accordingly; run_package.py is the CANONICAL combined model.
+MLE_TAX = 0.25            # shooter on stand-pat (no creator) genuinely helps
+MLE_ON_CREATOR = 0.05     # shooter stacked on a creator adds ~nothing (combined model); was 0.40 (inflated)
 CFG = os.path.join(HERE, "..", "config", "gate_config.json")
 
 
@@ -124,7 +130,7 @@ def main():
     rt_M = net_dist(RT.ROT_RETOOL, creator=MPJ, rng=np.random.default_rng(RS.SEED))
     add_move("2 retool Randle+DDV->Jrue (attainable)", rt_J, 0.0, fitval(rt_pids(Jrue)), "Randle+DDV+pick", randle_plus("Jrue", 34_800_000))
     add_move("3 retool Randle->Cam (best fit, shaky)", rt_C, 0.0, fitval(rt_pids(Cam)), "Randle + pick", randle_out("Cam", 23_062_500))
-    add_move("4 retool Randle->Cam + full MLE", rt_C, MLE_FULL, fitval(rt_pids(Cam)), "Randle + pick + MLE$", randle_out("Cam", 23_062_500))
+    add_move("4 retool Randle->Cam + full MLE (canonical: run_package C)", rt_C, MLE_ON_CREATOR, fitval(rt_pids(Cam)), "Randle + pick + MLE$", randle_out("Cam", 23_062_500))
     add_move("5 retool Randle+DDV->MPJ (available, flat)", rt_M, 0.0, fitval(rt_pids(MPJ)), "Randle+DDV+pick", randle_plus("MPJ", 40_806_150))
     # Fork B contrast
     fb = net_dist(RS.ROT_FB, creator=Jrue, wing=ONe, rng=np.random.default_rng(RS.SEED))

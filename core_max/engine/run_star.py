@@ -71,7 +71,7 @@ def main():
         rp["1629027"] = rot["GIANNIS"]   # giannis pid for dims (may be absent -> neutral)
         return RS.fit_delta(sq_pids, rp, RS._dims, 0.75)
 
-    print(f"\nstatus quo: {sp_T:.2f}% (net +1.36) | retool ~3.0-3.7% | Fork B 1.3%\n")
+    print(f"\nstatus quo: {sp_T:.2f}% (net +1.36) | retool ~3.0-3.2% (combined-modeled) | Fork B 1.3%\n")
     for lab, rot in [("A  Bucks' ask: keep Gobert, ship McD+Naz+TSJ (worst fit)", ROT_STAR_A),
                      ("B  move Gobert, KEEP McDaniels+core (analyst-preferred)", ROT_STAR_B),
                      ("C  keep all incl. Gobert, shed Randle+DDV (logjam, max talent)", ROT_STAR_C)]:

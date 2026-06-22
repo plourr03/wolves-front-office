@@ -33,7 +33,7 @@ running the constructions analysts would actually propose (core_max/engine/run_s
 
 - A  Bucks' literal ask (keep Gobert, ship McDaniels+Naz+TSJ): 2.98% (worst fit; the strawman).
 - B  MOVE Gobert, keep McDaniels + the core (analyst-preferred): 3.17%, a TIE with the retool
-   (~3.0-3.7%), NOT a meaningful beat.
+   (~3.0-3.2%), NOT a meaningful beat.
 - C  keep everyone incl. Gobert, add Giannis: 7.73% (would dominate) but SALARY-INFEASIBLE.
 
 The rigorous reason B only ties (this is the real argument, not "bad fit"): Giannis's ~$54M
@@ -67,9 +67,22 @@ build and land beats the disciplined move." Engage Giannis explicitly with this 
   Randle-shedding retool.
 - Consequence: the realistic best retool is the JRUE version (Portland is motivated to move a
   35-turning-36 vet, and Randle + DiVincenzo for Jrue takes back less and opens room, gate-clean),
-  landing ~3.0%, not the Cam/Cam+MLE cells (3.2-3.7%). This LOWERS the realistic near-term ceiling
-  to ~3.0-3.1% and STRENGTHENS the asset-constrained conclusion. Treat the Cam cells as an
-  illustrative upper bound, not an attainable plan.
+  landing ~3.0%, vs the Cam cell ~3.2% (combined-modeled; NOT the old additivity-inflated 3.69 --
+  see the ceiling correction below). The realistic near-term ceiling is ~3.0-3.2%, and Jrue
+  (package A) is the recommended executable build; Cam (package C) is a paper-thin +0.18pp edge
+  that needs a third-team Randle taker. STRENGTHENS the asset-constrained conclusion.
+
+## 3b. CEILING CORRECTION (2026-06-22): the frontier double-counted the MLE shooter.
+
+The published frontier listed "Randle -> Cam + full MLE" as the ceiling at 3.69% (+1.24). That
+ADDED the MLE shooter as a flat team-net bonus ON TOP OF the Cam retool. The combined-roster model
+(run_package.py, package C: shooter modeled IN the rotation) shows the shooter adds ~0 once a
+creator has already un-clogged the offense (package C = ~3.2% = Cam-alone ~3.24%, NOT 3.69%). So
+the honest ceiling is ~3.2% (+0.77). The combined-roster PACKAGE table is canonical; the frontier
+was a first-pass and its stacked-MLE cell was additivity-inflated by ~0.45pp. This is the combined
+modeling catching a real error and it cuts in the honest direction (the ceiling is lower than
+first published). Propagated to conclusion.md and the frontier script; treat ~3.2% as the ceiling
+everywhere.
 
 ## What checks out cleanly (keep with confidence)
 

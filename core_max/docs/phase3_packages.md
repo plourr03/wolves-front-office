@@ -36,6 +36,24 @@ Package-level confirmations of earlier findings:
 - A (Jrue) is the clean, attainable package (+0.60, ~tied with the retool); the realistic pick.
 - C (Cam) is the highest (+0.77) but needs the third-team structure and Cam is a shaky seller.
 
+## RECOMMENDED BUILD: package A (Randle + DiVincenzo -> Jrue Holiday)
+
+A is the executable, NO-ASTERISK build and the recommended one. The gap to C is ~0.18pp (a
+rounding error), and C carries two warts A does not: it needs a third team to take Randle (Denver
+is shedding salary and will not absorb his bigger deal) and it depends on Cam, a shaky seller. A
+needs none of that, fills the actual hole (lead-guard playmaking, made acute by DiVincenzo's torn
+Achilles), reinforces the Gobert/McDaniels defensive identity, and shedding Randle is what unlocks
+the full MLE. Honest cost: Jrue is 35 turning 36 on a 2-year deal (a ~$37M option into age 37), a
+win-now stabilizer while Joan develops behind Gobert, NOT a long-horizon piece; his game (defense,
+IQ, playmaking, off-ball shooting) ages gracefully, which is what makes the term tolerable. Do NOT
+attach the No. 28 first to acquire him (you do not pay a first for a 36-year-old; a second either
+way is fine, and a first going out is the signal to walk or pivot). Keep C in frame as the
+marginally-higher-on-paper option with the third-team catch; choosing the executable build over a
+paper-thin edge is itself the front-office judgment worth showing. This PACKAGE table (combined-
+roster modeled) is CANONICAL; it supersedes the frontier's first-pass "Cam + full MLE" cell, which
+double-counted the shooter on top of the creator (inflated 3.69 -> honest ~3.2; see
+factcheck_pre_publication.md section 3b).
+
 ## CBA texture (a real flexibility finding)
 
 Keeping Randle pins MIN at the FIRST APRON (~$214M), where only the TAXPAYER MLE (~$6M) is
