@@ -23,25 +23,38 @@ must be fixed before anything is published, and one reframe makes the piece much
 - PUBLICATION RULE: never say or imply OKC won. If the KAT-on-the-champion irony is mentioned (it
   should be, it is the emotional spine), state it correctly: KAT won 2026 with the Knicks.
 
-## 2. CRITICAL gap: the star branch (Giannis) was never modeled. Now modeled.
+## 2. CRITICAL gap: the star branch (Giannis). Modeled across constructions (corrected).
 
-The live Wolves conversation is a star-for-the-core trade (Giannis especially). The frontier
-capped moves at ~+3 and concluded "no move helps," which is exposed if published next to "Wolves
-pursue Giannis." Now modeled (core_max/engine/run_star.py):
+The live Wolves conversation is a star-for-the-core trade (Giannis especially); omitting it is a
+publication risk. FIRST PASS ERROR (caught in review): I modeled only the thesis-confirming
+construction (keep Gobert, ship McDaniels -> a Giannis/Gobert spacing logjam + losing Edwards's
+best defensive wing) and concluded "a star barely helps." That was a strawman. Corrected by
+running the constructions analysts would actually propose (core_max/engine/run_star.py):
 
-- Giannis at the REALISTIC price (Milwaukee's reported ask: McDaniels + Naz + TSJ + 2 firsts) ->
-  ~2.98% title, essentially the SAME as the disciplined retool (~3.0%). Surrendering McDaniels'
-  defense + Naz's +3.15 + depth for one body (with minimum-filler holes and a Giannis/Gobert
-  spacing logjam) offsets even an MVP. Fit-over-splash holds at the MVP level.
-- Giannis at a CHEAP price (keep the core) -> ~7.73%, a huge jump. But that price is NOT
-  available: the Bucks want the young core; the Wolves have McDaniels AND Beringer OFF-LIMITS
-  (reporting) and only ~No. 28 + a 2033 first to trade; Miami is the reported frontrunner.
+- A  Bucks' literal ask (keep Gobert, ship McDaniels+Naz+TSJ): 2.98% (worst fit; the strawman).
+- B  MOVE Gobert, keep McDaniels + the core (analyst-preferred): 3.17%, a TIE with the retool
+   (~3.0-3.7%), NOT a meaningful beat.
+- C  keep everyone incl. Gobert, add Giannis: 7.73% (would dominate) but SALARY-INFEASIBLE.
 
-REFRAMED CONCLUSION (rip-proof): the only thing that materially raises title odds is a co-star
-acquired cheaply enough to keep the core, which is not on the table. A star at the price the
-Bucks actually want barely beats the retool. So among ATTAINABLE moves none materially helps, and
-the star route is foreclosed by the asset cupboard and the Wolves' own off-limits stance, not
-because stars would not help. Engage Giannis explicitly; do not omit him.
+The rigorous reason B only ties (this is the real argument, not "bad fit"): Giannis's ~$54M
+salary can ONLY be matched by including Gobert (the team's #2). So a Giannis trade NECESSARILY
+costs Gobert (+4.57), making the real upgrade only Giannis-minus-Gobert (~+2.4) minus the depth
+shipped to match, which nets modest. The construction that would dominate (C, keep Gobert AND add
+Giannis) cannot take back $54M while over the first apron, so it is financially impossible, not
+merely unavailable.
+
+ATTAINABILITY (resolves the McDaniels contradiction): separately, the Bucks' ask is the YOUNG
+CORE (McDaniels + Naz + TSJ + picks). McDaniels AND Beringer are OFF-LIMITS, so the Bucks' ask
+CANNOT be met at all -> Giannis is foreclosed outright. Do NOT also list McDaniels as the price
+we pay; the price MIN could pay (aging Gobert+Randle salary) is exactly what a rebuilding
+Milwaukee does not want, and Miami is the reported frontrunner.
+
+BULLETPROOF CONCLUSION: no FEASIBLE, ATTAINABLE Giannis construction meaningfully beats the
+retool, three independent locks: (i) his salary forces Gobert out, so the upgrade is modest
+(B ~ retool); (ii) the keep-Gobert version is financially impossible (C); (iii) the Bucks want a
+young core that is off-limits. The disciplined retool is the best AVAILABLE move. The honest
+framing is NOT "a star wouldn't help" (kept-core it would); it is "no star MIN can actually
+build and land beats the disciplined move." Engage Giannis explicitly with this logic.
 
 ## 3. REAL error: the Cam Johnson trade structure is backwards. Fixed framing.
 
@@ -71,6 +84,24 @@ because stars would not help. Engage Giannis explicitly; do not omit him.
 - Jrue Holiday: Portland, available, ~2yr/$72M, turning 36 (write "35 turning 36," not "35").
 - Dorian Finney-Smith: Houston. Confirmed.
 
+## 4. Board vs market: the sim's 2026-27 board diverges from real futures. Disclose it.
+
+Real 2026-27 title futures: SAS +250 and OKC +260 (co-favorites), BOS +550, NYK +650 (the
+defending champ, ~13% implied). The sim board: OKC 20% (clear favorite), BOS 14%, DET 11%, SAS
+11%, NYK 6%. So the sim OVERRATES high-regular-season-net teams (OKC the runaway favorite; DET
+3rd) and UNDERRATES playoff-pedigree teams (SAS, who made the Finals, 4th; NYK, the champ, 6% vs
+market 13%). Cause: the sim seats opponents by regular-season net + regression, which weights RS
+dominance more than the market's weighting of playoff results and youth.
+
+Why the FINDINGS still hold: every reported result is a MIN-vs-MIN DELTA on the SAME opponent
+field (Fork B -1.1, retool +0.6, Giannis ~tie). A mis-seated field shifts MIN's ABSOLUTE title
+odds slightly but cancels out of the deltas, which are the actual conclusions. PUBLICATION RULE:
+do NOT publish the sim's opponent board as if it matches the market (a reader will probe OKC-as-
+favorite and NYK-at-6%). Report MIN's own number as a band and frame conclusions as deltas/
+relative, not as an absolute league ranking. MIN's ~2.5% absolute is plausibly market-consistent
+(they are a second-tier contender, off the favorites shortlist), but verify MIN's actual futures
+number before citing any absolute.
+
 ## Tone (not errors, but rip-risks)
 
 - "mid-tier ~2.5%": a 49-33 team that made the second round (and back-to-back conference finals
@@ -80,9 +111,11 @@ because stars would not help. Engage Giannis explicitly; do not omit him.
   aggressive, and is not satisfied with the second-round exit. Our lean is deliberately
   contrarian-to-the-FO; acknowledge that posture explicitly so it reads as considered, not unaware.
 
-## Still open (low priority)
+## Verified clean (closed)
 
-- Royce O'Neale on Phoenix not independently re-verified (tertiary relief option, not load-bearing).
+- Royce O'Neale: Phoenix, $10.875M (2026-27), two more years of control, and AVAILABLE (the
+  33-year-old is the odd man out behind a rising Rasheer Fleming, a useful trade piece). Named-
+  target set now fully verified: MPJ (BKN), Jrue (POR), Cam (DEN), O'Neale (PHX), DFS (HOU), Joan.
 
 ## Sources
 

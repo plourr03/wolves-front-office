@@ -20,12 +20,18 @@ sys.path.insert(0, HERE)
 import run_scenarios as RS
 
 GIANNIS = ("1629027_giannis", 7.29, 1.57, 31)   # consensus_net, sd, age
-# Realistic-price rotation: out McDaniels+Naz+TSJ (Bucks' ask) for Giannis + 2 min fillers.
-ROT_STAR_REAL = {"Edwards": 36, "GIANNIS": 36, "Gobert": 30, "Randle": 26, "Ayo": 26,
-                 "Conley": 18, "Joan": 10, "FILL1": 30, "FILL2": 28}
-# Cheap-price (NOT available) rotation: out Randle + DiVincenzo + picks, KEEP the core.
-ROT_STAR_CHEAP = {"Edwards": 36, "GIANNIS": 36, "McDaniels": 33, "Gobert": 28, "Naz": 26,
-                  "Ayo": 24, "Conley": 11, "Joan": 10}
+# A = the Bucks' literal ask (keep Gobert, ship McDaniels+Naz+TSJ). WORST fit: Giannis/Gobert
+#     logjam + losing Edwards's best defensive wing. (The thesis-confirming construction.)
+ROT_STAR_A = {"Edwards": 36, "GIANNIS": 36, "Gobert": 30, "Randle": 26, "Ayo": 26,
+              "Conley": 18, "Joan": 10, "FILL1": 30, "FILL2": 28}
+# B = the construction analysts would actually propose: MOVE GOBERT (cannot pair with Giannis),
+#     KEEP McDaniels + Naz + the young core. Best fit (no logjam, shooting around Giannis).
+ROT_STAR_B = {"Edwards": 36, "GIANNIS": 34, "McDaniels": 33, "Naz": 30, "Ayo": 28,
+              "TSJ": 20, "Joan": 14, "Conley": 14, "FILL1": 31}
+# C = keep essentially everything (Gobert too), shed only Randle+DDV. Max talent, but the
+#     Giannis/Gobert logjam remains. (Salary/asset-infeasible as a real Giannis package.)
+ROT_STAR_C = {"Edwards": 36, "GIANNIS": 36, "McDaniels": 33, "Gobert": 28, "Naz": 26,
+              "Ayo": 24, "Conley": 11, "Joan": 10}
 
 
 def main():
@@ -65,21 +71,25 @@ def main():
         rp["1629027"] = rot["GIANNIS"]   # giannis pid for dims (may be absent -> neutral)
         return RS.fit_delta(sq_pids, rp, RS._dims, 0.75)
 
-    print(f"\nstatus quo: {sp_T:.2f}% (net +1.36)\n")
-    for lab, rot in [("Giannis at REALISTIC price (out McDaniels+Naz+TSJ+2 firsts)", ROT_STAR_REAL),
-                     ("Giannis at CHEAP price (keep core; NOT available)", ROT_STAR_CHEAP)]:
+    print(f"\nstatus quo: {sp_T:.2f}% (net +1.36) | retool ~3.0-3.7% | Fork B 1.3%\n")
+    for lab, rot in [("A  Bucks' ask: keep Gobert, ship McD+Naz+TSJ (worst fit)", ROT_STAR_A),
+                     ("B  move Gobert, KEEP McDaniels+core (analyst-preferred)", ROT_STAR_B),
+                     ("C  keep all incl. Gobert, shed Randle+DDV (logjam, max talent)", ROT_STAR_C)]:
         nd = net_dist(rot, np.random.default_rng(RS.SEED))
         net = (nd + anchor)
         fit = fit_for(rot)
         T = f(net + fit).mean() * 100
-        print(f"  {lab:54s} net {net.mean()+fit:+.2f} -> {T:.2f}%  (dP {T-sp_T:+.2f}pp vs stand-pat)")
+        print(f"  {lab:56s} net {net.mean()+fit:+.2f} -> {T:.2f}%  (dP {T-sp_T:+.2f}pp)")
 
-    print("\n  Contrast: retool (keep Gobert, fix Randle slot) ~3.0-3.7%; Fork B 1.3%.")
-    print("  Read: a star at the price the Bucks actually want (the young core) barely beats the")
-    print("  retool, because surrendering McDaniels' defense + Naz's +3.15 + depth for ONE body")
-    print("  (with min-filler holes + a Giannis/Gobert spacing logjam) offsets most of the star.")
-    print("  A star acquired CHEAPLY would help a lot, but that price is not on the table")
-    print("  (McDaniels + Beringer off-limits; only ~No. 28 + 2033 tradeable; Miami the frontrunner).")
+    print("\n  HONEST READ: a sanely-constructed Giannis trade (B/C, keep the core) gets MIN to")
+    print("  ~5-8%, materially better than the retool. So a star HELPS, a lot. The reason it does")
+    print("  not happen is ATTAINABILITY, not impact: Milwaukee wants the YOUNG CORE (their ask is")
+    print("  McDaniels+Naz+TSJ+picks), and MIN has McDaniels AND Beringer OFF-LIMITS, so the Bucks'")
+    print("  ask CANNOT be met -> Giannis is foreclosed entirely. MIN's affordable package (aging")
+    print("  Gobert+Randle salary) is exactly what a rebuilding Milwaukee does NOT want, and Miami")
+    print("  is the reported frontrunner. The disciplined retool is the best AVAILABLE move, NOT")
+    print("  better than a star -- it is what you do BECAUSE the star is foreclosed.")
+    print("  (The 'star barely helps' framing from construction A alone was a strawman; corrected.)")
     return 0
 
 
