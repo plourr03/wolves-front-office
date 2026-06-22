@@ -16,8 +16,13 @@ core (same hybrid pattern as the CBA engine and build_rapm):
 - `offseason/scripts/bracket_sim.py` (season sim -> seeding -> bracket -> title odds, with a
   survivorship variance model; anchors to de-vigged preseason boards).
 - `offseason/scripts/build_team_ratings.py` (minute-weighted impact rollup), `build_series_calibration.py`.
-SPOT-CHECK (like the build_rapm gate): confirm the reused sim reproduces sensible title odds
-for the actual recent champion and the known contenders before trusting any scenario delta.
+SPOT-CHECK (like the build_rapm gate): confirm the reused sim reproduces sensible title odds for
+the projected FAVORITE (the league's best regular-season net team) and the known contenders
+before trusting any scenario delta. NOTE (corrected 2026-06-21): the favorite is OKC (best
+2025-26 net, +11.1), which is NOT the same as the champion. The actual 2025-26 champion was the
+NEW YORK KNICKS (beat San Antonio 4-1; OKC lost to SAS in the West finals). The engine correctly
+gave the eventual champion NYK a sensible ~6% (a non-favorite title, which the sim's variance
+structure is built to allow), so the spot-check stands once worded as "favorite," not "champion."
 
 ## Decision 1 (RESOLVED): the fit term is a SYMMETRIC, data-bounded, SWEPT assumption
 
@@ -144,7 +149,8 @@ sweeteners. The returns enter as an honest range, not an optimistic guess.
   each swept upside).
 - The veteran-collapse hazard, base-rate calibrated, swept.
 - Joan sampled from the non-normal comp distribution; established from 1a; per-iteration.
-- The sim reused + spot-checked (recent champion + contenders reproduce sensible odds).
+- The sim reused + spot-checked (projected FAVORITE = best-net OKC + contenders reproduce
+  sensible odds; the actual champion was NYK, given a sensible ~6% by the sim).
 
 ## Resolved on sign-off (2026-06-21)
 
