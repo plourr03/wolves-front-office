@@ -10,7 +10,7 @@ mapped what to do instead. This is the captured result.
 |---|---|---|---|---|
 | stand pat + develop (Ayo only) | 2.46% | - | none | PASS |
 | stand pat + taxpayer-MLE shooter | 2.69% | +0.24 | MLE $ only | PASS |
-| retool Randle+DDV -> Jrue (attainable) | 3.05% | +0.60 | Randle + DDV + pick | PASS |
+| retool Randle+DDV -> Jrue (attainable) | 2.95% | +0.49 | Randle + DDV + pick | PASS |
 | retool Randle -> Cam (best fit, shaky seller) | 3.24% | +0.79 | Randle + pick | PASS |
 | **retool Randle -> Cam + full-MLE shooter (ceiling, combined-modeled)** | **~3.2%** | **+0.77** | Randle + pick + MLE $ | PASS |
 | retool Randle+DDV -> MPJ (available, flat) | 2.68% | +0.23 | Randle + DDV + pick | PASS |
@@ -39,14 +39,14 @@ the conclusion (the ceiling is lower than first published).
    correctly diagnosed the offense and bet on moving the wrong big.
 
 3. **RECOMMENDED BUILD: package A, Randle (+ DiVincenzo) -> Jrue Holiday + a shooter + re-sign Ayo
-   + the No. 28 developmental pick (3.01%, +0.60).** This is the executable, NO-ASTERISK pick: it
+   + the No. 28 developmental pick (2.92%, +0.50).** This is the executable, NO-ASTERISK pick: it
    needs no third team, depends on no shaky seller, fills the actual hole (lead-guard playmaking,
    made acute by DiVincenzo's torn Achilles), reinforces the Gobert/McDaniels defensive identity,
    and shedding Randle is what unlocks the full MLE. Cam Johnson's package C is marginally higher
-   ON PAPER (3.19%, +0.77) but the gap is ~0.18pp (a rounding error) and it needs a third team to
-   take Randle plus a shaky seller in Denver, so it does not survive contact with how you would
-   actually build it. Honest cost of A: Jrue is 35 turning 36 on a 2-year deal (a $37M option into
-   age 37), a win-now stabilizer while Joan develops, NOT a long-horizon piece; do NOT attach the
+   ON PAPER (3.19%, +0.77) but the gap is ~0.27pp (a fraction of a point) and it needs a third team
+   to take Randle plus a shaky seller in Denver, so it does not survive contact with how you would
+   actually build it. Honest cost of A: Jrue just turned 36 (June 12) on a 2-year deal (a $37.2M
+   option into age 37), a win-now stabilizer while Joan develops, NOT a long-horizon piece; do NOT attach the
    No. 28 first to get him (you do not pay a first for a 36-year-old, a second either way is fine).
    Keep C in frame as the marginally-higher paper option with the third-team catch; the choice of
    the executable build over a paper-thin edge is itself the front-office judgment worth showing.

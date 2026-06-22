@@ -10,7 +10,7 @@ minutes for a real creator/shooter. Common random numbers isolate the Randle->cr
 | retool creator | status quo | retool | delta | 90% CI | P(retool>SQ) |
 |---|---|---|---|---|---|
 | MPJ (BKN, available; flat + stacks usage) | 2.42% | 2.69% | +0.26pp | [-1.70, +2.63] | 55% |
-| Jrue Holiday (POR seller, age 35) | 2.42% | 3.05% | **+0.63pp** | [-1.15, +3.20] | 67% |
+| Jrue Holiday (POR seller, just turned 36) | 2.42% | 2.95% | **+0.53pp** | [-1.28, +3.01] | 64% |
 | Cam Johnson (DEN shooter, shaky seller) | 2.42% | 3.24% | +0.82pp | [-0.90, +3.38] | 74% |
 
 ## What it says
@@ -36,8 +36,8 @@ Joan develop behind him instead of handing him the keys at a ~-0.6 year-1 mean.
   not a contender. The CIs still span zero on the low end (the tilt is favorable, P 55-74%, the
   opposite of Fork B's 4-24%, but it is not a certainty).
 - Seller realism: Cam Johnson (best fit, a shooter) is a shaky seller (Denver is a contender);
-  Jrue (POR, +0.63) is the genuinely-available impact upgrade; MPJ (available, but flat impact
-  and stacks on-ball usage) is only +0.26. The realistically-attainable retool is ~+0.3 to +0.6.
+  Jrue (POR, +0.53) is the genuinely-available impact upgrade; MPJ (available, but flat impact
+  and stacks on-ball usage) is only +0.26. The realistically-attainable retool is ~+0.3 to +0.5.
 - CBA: a Cam retool ($23M < Randle $33.3M) opens room and is gate-clean; a Jrue ($34.8M) or MPJ
   ($40.8M) retool is tighter (take-back-more, first-apron hard cap) and must be run through the
   Phase-0 gate before it is treated as feasible.

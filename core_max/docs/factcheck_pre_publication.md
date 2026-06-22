@@ -66,8 +66,8 @@ build and land beats the disciplined move." Engage Giannis explicitly with this 
   first apron, which they are already at). So Cam is, in practice, NOT cleanly attainable for a
   Randle-shedding retool.
 - Consequence: the realistic best retool is the JRUE version (Portland is motivated to move a
-  35-turning-36 vet, and Randle + DiVincenzo for Jrue takes back less and opens room, gate-clean),
-  landing ~3.0%, vs the Cam cell ~3.2% (combined-modeled; NOT the old additivity-inflated 3.69 --
+  just-turned-36 vet, and Randle + DiVincenzo for Jrue takes back less and opens room, gate-clean),
+  landing ~2.9%, vs the Cam cell ~3.2% (combined-modeled; NOT the old additivity-inflated 3.69 --
   see the ceiling correction below). The realistic near-term ceiling is ~3.0-3.2%, and Jrue
   (package A) is the recommended executable build; Cam (package C) is a paper-thin +0.18pp edge
   that needs a third-team Randle taker. STRENGTHENS the asset-constrained conclusion.
@@ -94,7 +94,10 @@ everywhere.
   the realistic zone, matching the CBA gate.
 - Joan: No. 17 pick (2025), redshirt rookie, viewed as Gobert's successor, OFF-LIMITS in trade
   talks, consistent with our untouchable treatment and the retool keeping him as a backup.
-- Jrue Holiday: Portland, available, ~2yr/$72M, turning 36 (write "35 turning 36," not "35").
+- Jrue Holiday: Portland, available, ~2yr (a $37.2M player option for 2027-28), and he ALREADY
+  TURNED 36 on June 12, 2026 (born 1990-06-12). Write "just turned 36," NOT "35 turning 36"
+  (that line is now stale as of today). 2025-26: 16.3 pts / 6.1 ast / 37.8% 3P over 53 games
+  (verified ESPN / Basketball-Reference).
 - Dorian Finney-Smith: Houston. Confirmed.
 
 ## 4. Board vs market: the sim's 2026-27 board diverges from real futures. Disclose it.

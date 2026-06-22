@@ -41,7 +41,7 @@ PID = {"Edwards": "1630162", "McDaniels": "1630183", "Naz": "1629675", "Gobert":
        "Randle": "203944", "Conley": "201144", "Ayo": "1630245", "TSJ": "1630545", "Joan": "1642866",
        "MPJ": "1629008", "Jrue": "201950", "Cam": "1629661", "ONeale": "1626220", "DFS": "1627827"}
 AGE = {"Edwards": 25, "McDaniels": 26, "Naz": 27, "Gobert": 34, "Randle": 32, "Conley": 39,
-       "Ayo": 27, "TSJ": 25, "Joan": 20, "MPJ": 27, "Jrue": 35, "Cam": 30, "ONeale": 33, "DFS": 33}
+       "Ayo": 27, "TSJ": 25, "Joan": 20, "MPJ": 27, "Jrue": 36, "Cam": 30, "ONeale": 33, "DFS": 33}
 ROT_SQ = {"Edwards": 36, "McDaniels": 33, "Randle": 31, "Gobert": 30, "Naz": 28,
           "Ayo": 28, "Conley": 18, "TSJ": 18, "Joan": 10}
 ROT_FB = {"Edwards": 36, "McDaniels": 33, "Naz": 30, "Joan": 26, "Ayo": 28,

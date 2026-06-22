@@ -161,7 +161,7 @@ def main():
 
     packages = {
         "A (fit/initiator: Randle+DDV->Jrue, +full-MLE shooter, +Ayo, +rookie)":
-            (ROT["A"], {"CREATOR": spec("Jrue", RS._val, RS._avail, age=35, av=0.75), "SHOOTER": KEN},
+            (ROT["A"], {"CREATOR": spec("Jrue", RS._val, RS._avail, age=36, av=0.75), "SHOOTER": KEN},
              [trade(["Randle", "DDV"], "Jrue", SAL["Jrue"], PID_X["Jrue"]), AYO_LEG, shooter_leg("full", 8_000_000)]),
         "B (scoring: Randle+DDV->MPJ, +min shooter [MPJ eats MLE room], +Ayo, +rookie)":
             (ROT["B"], {"CREATOR": spec("MPJ", RS._val, RS._avail, age=27, av=0.70), "SHOOTER": KEN},
@@ -177,7 +177,7 @@ def main():
 
     print("\n=== KEEP-CORE PACKAGES (combined roster, CBA-gated first) ===")
     print(f"{'package':54s}{'CBA':>6s}{'tier':>16s}{'title band':>16s}{'dStandpat':>10s}{'dRetool':>9s}")
-    RETOOL = 3.05   # best single retool (Jrue) from the frontier
+    RETOOL = 2.95   # best clean single retool (Jrue, age 36) from the frontier
     results = {}
     for lab, (rot, specials, legs) in packages.items():
         ok, tier, apron, mle, why = cba(legs)
@@ -209,7 +209,7 @@ def main():
         rot = dict(ROT["A"])
         sp = {}
         if cfgd.get("creator"):
-            sp["CREATOR"] = spec("Jrue", RS._val, RS._avail, age=35, av=0.75)
+            sp["CREATOR"] = spec("Jrue", RS._val, RS._avail, age=36, av=0.75)
         else:
             rot["CREATOR"] = rot.pop("CREATOR", 0); rot["Randle"] = 30   # creator slot -> Randle
             if "CREATOR" in rot: del rot["CREATOR"]

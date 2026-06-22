@@ -6,14 +6,14 @@ diminishing returns, and the fit term is recomputed on the combined roster). CBA
 Champion = Knicks; OKC = projected favorite, not champion. Opponent board is RS-net-seated and
 mis-seats playoff-pedigree teams, so the ABSOLUTE level is approximate and the DELTAS are robust.
 
-## Results (Year-1, title odds banded; vs stand-pat 2.42% and vs best single retool 3.05%)
+## Results (Year-1, title odds banded; vs stand-pat 2.42% and vs best clean single retool 2.95%)
 
 | package | CBA | title band | dStandpat | dRetool | R2 | CF | Finals | ~wins |
 |---|---|---|---|---|---|---|---|---|
-| stand-pat (keep Randle + taxpayer-MLE shooter + Ayo + Joan) | PASS (first apron) | 2.42% [0.0,7.6] | - | -0.63 | 29% | 11% | 5% | 44 |
-| **A  Randle+DDV->Jrue + full-MLE shooter + Ayo + rookie** | PASS (taxpayer) | 3.01% [0.1,9.0] | +0.60 | -0.04 | 35% | 14% | 6% | 45 |
-| B  Randle+DDV->MPJ + min shooter + Ayo + rookie | PASS (taxpayer) | 2.45% [0.0,7.5] | +0.03 | -0.60 | 29% | 11% | 5% | 44 |
-| **C  Randle->Cam + full-MLE shooter + Ayo + rookie** | PASS* (taxpayer) | 3.19% [0.1,9.3] | +0.77 | +0.14 | 37% | 15% | 6% | 46 |
+| stand-pat (keep Randle + taxpayer-MLE shooter + Ayo + Joan) | PASS (first apron) | 2.42% [0.0,7.6] | - | -0.53 | 29% | 11% | 5% | 44 |
+| **A  Randle+DDV->Jrue + full-MLE shooter + Ayo + rookie** | PASS (taxpayer) | 2.92% [0.0,8.8] | +0.50 | -0.03 | 34% | 13% | 6% | 45 |
+| B  Randle+DDV->MPJ + min shooter + Ayo + rookie | PASS (taxpayer) | 2.45% [0.0,7.5] | +0.03 | -0.50 | 29% | 11% | 5% | 44 |
+| **C  Randle->Cam + full-MLE shooter + Ayo + rookie** | PASS* (taxpayer) | 3.19% [0.1,9.3] | +0.77 | +0.24 | 37% | 15% | 6% | 46 |
 
 *C requires a THIRD-TEAM Randle taker: Denver is shedding salary (re-signing Watson) and will not
 absorb Randle's bigger, longer deal, so a Randle-for-Cam swap needs a third team to take Randle.
@@ -33,17 +33,17 @@ title number.
 Package-level confirmations of earlier findings:
 - B (MPJ) barely helps (+0.03): MPJ is a near-lateral move from Randle (low impact + high usage),
   confirmed now in a combined roster, not just in isolation.
-- A (Jrue) is the clean, attainable package (+0.60, ~tied with the retool); the realistic pick.
+- A (Jrue) is the clean, attainable package (+0.50, ~tied with the retool); the realistic pick.
 - C (Cam) is the highest (+0.77) but needs the third-team structure and Cam is a shaky seller.
 
 ## RECOMMENDED BUILD: package A (Randle + DiVincenzo -> Jrue Holiday)
 
-A is the executable, NO-ASTERISK build and the recommended one. The gap to C is ~0.18pp (a
-rounding error), and C carries two warts A does not: it needs a third team to take Randle (Denver
-is shedding salary and will not absorb his bigger deal) and it depends on Cam, a shaky seller. A
-needs none of that, fills the actual hole (lead-guard playmaking, made acute by DiVincenzo's torn
-Achilles), reinforces the Gobert/McDaniels defensive identity, and shedding Randle is what unlocks
-the full MLE. Honest cost: Jrue is 35 turning 36 on a 2-year deal (a ~$37M option into age 37), a
+A is the executable, NO-ASTERISK build and the recommended one. The gap to C is ~0.27pp (a small
+fraction of a point), and C carries two warts A does not: it needs a third team to take Randle
+(Denver is shedding salary and will not absorb his bigger deal) and it depends on Cam, a shaky
+seller. A needs none of that, fills the actual hole (lead-guard playmaking, made acute by
+DiVincenzo's torn Achilles), reinforces the Gobert/McDaniels defensive identity, and shedding
+Randle is what unlocks the full MLE. Honest cost: Jrue just turned 36 (June 12) on a 2-year deal (a ~$37.2M option into age 37), a
 win-now stabilizer while Joan develops behind Gobert, NOT a long-horizon piece; his game (defense,
 IQ, playmaking, off-ball shooting) ages gracefully, which is what makes the term tolerable. Do NOT
 attach the No. 28 first to acquire him (you do not pay a first for a 36-year-old; a second either
@@ -66,7 +66,7 @@ flexibility gain beyond the on-court that stand-pat does not have.
 ## Decomposition of package A (cumulative; NON-ADDITIVE, illustrative only)
 
 bare (keep Randle, no Ayo/MLE, Joan->replacement) 1.19% -> +re-sign Ayo +0.45 -> +develop Joan
-+0.39 -> +Randle->Jrue swap +0.36 -> +MLE shooter +0.43. Each piece adds ~0.4pp; they are
++0.39 -> +Randle->Jrue swap +0.27 -> +MLE shooter +0.43. Each piece adds ~0.3-0.4pp; they are
 cumulative and order-dependent and do NOT sum to the package total (interactions + diminishing
 returns). The point: no single component carries it; it is a stack of small, real improvements.
 

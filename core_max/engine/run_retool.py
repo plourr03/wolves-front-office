@@ -63,7 +63,7 @@ def main():
     grid, P = fcurve
     print(f"  sanity f(+1.36)={np.interp(1.36, grid, P)*100:.2f}%\n")
     creators = {"MPJ (BKN, available, flat+stacks)": RS.ret_spec("MPJ", val, avail),
-                "Jrue (POR seller, age 35)": RS.ret_spec("Jrue", val, avail),
+                "Jrue (POR seller, age 36)": RS.ret_spec("Jrue", val, avail),
                 "Cam Johnson (DEN, shooter, shaky seller)": RS.ret_spec("Cam", val, avail)}
     print("=== RANDLE-ONLY RETOOL (keep Gobert + Joan-as-backup; swap only Randle's slot) ===")
     print("  vs status quo. CRN isolates the Randle->creator upgrade.\n")

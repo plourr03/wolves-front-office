@@ -31,7 +31,7 @@ from core_max.cba import gate as G
 # "retool + full MLE = 3.69% (+1.24)" double-counted the shooter; the honest ceiling is ~3.2%
 # (+0.77). MLE_ON_CREATOR is set to ~0 accordingly; run_package.py is the CANONICAL combined model.
 MLE_TAX = 0.25            # shooter on stand-pat (no creator) genuinely helps
-MLE_ON_CREATOR = 0.05     # shooter stacked on a creator adds ~nothing (combined model); was 0.40 (inflated)
+MLE_ON_CREATOR = 0.0      # shooter stacked on a creator adds ~0 (combined model, run_package C); was 0.40 (inflated)
 CFG = os.path.join(HERE, "..", "config", "gate_config.json")
 
 
