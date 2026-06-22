@@ -1,0 +1,78 @@
+{
+  "baseline": { "cap": 194.5, "capLabel": "$194.5M", "underTaxLabel": "$6.5M under the tax" },
+  "dosunmu": {
+    "name": "Ayo Dosunmu",
+    "salaryLabel": "$16.5M",
+    "note": "The starting guard MIN wants back (Bird re-sign). Every win-now door makes him the casualty."
+  },
+  "doors": [
+    {
+      "id": "swing",
+      "page": 3,
+      "kicker": "Door 1 / The Swing",
+      "name": "THE SWING",
+      "thesis": "The star fans dream about.",
+      "legs": [
+        { "text": "Randle + Naz  for  Kyrie Irving + Daniel Gafford", "from": "from Dallas", "blocked": false },
+        { "text": "Re-sign Ayo ($16.5M)", "from": "blocked by the hard cap", "blocked": true }
+      ],
+      "send": "Randle $33.3M + Naz $23.3M",
+      "get": "Kyrie $39.5M + Gafford $17.3M",
+      "cap": { "lands": 194.6, "landsLabel": "$194.6M", "landNote": "under the tax", "ghost": 209.7, "crosses": true },
+      "scrawl": "get Kyrie, lose Ayo",
+      "title": { "kind": "single", "headline": "-0.74", "anchorLabel": "anchor -0.04", "unit": "pp" },
+      "capital": "minus 2 firsts (2026, 2033)",
+      "room": "about $0 room",
+      "acceptShort": "Dallas: yes, 2 firsts",
+      "acceptTag": "SPECULATIVE",
+      "catch": "Get the star, lose your starting guard."
+    },
+    {
+      "id": "flip",
+      "page": 4,
+      "kicker": "Door 2 / The Flip",
+      "name": "THE FLIP",
+      "thesis": "Turn Randle into value and youth.",
+      "legs": [
+        { "text": "Randle + Shannon  for  Keegan Murray + Malik Monk", "from": "from Sacramento", "blocked": false },
+        { "text": "Re-sign Ayo ($16.5M)", "from": "blocked by the hard cap", "blocked": true }
+      ],
+      "send": "Randle $33.3M + Shannon $2.8M",
+      "get": "Murray $24.1M + Monk $20.2M",
+      "cap": { "lands": 202.7, "landsLabel": "$202.7M", "landNote": "into the tax", "ghost": 217.8, "crosses": true },
+      "scrawl": "even the model splits",
+      "title": { "kind": "range", "box": "-1.48", "consensus": "+0.64", "rapm": "+2.40", "anchorLabel": "anchor -1.48", "riskLabel": "risk-adj +1.27", "unit": "pp" },
+      "capital": "minus 2 firsts (2026, 2033)",
+      "room": "takes on about $8.2M",
+      "acceptShort": "Sacramento: yes, 2 firsts",
+      "acceptTag": null,
+      "catch": "Into the tax, two firsts, and Ayo still walks."
+    },
+    {
+      "id": "stockpile",
+      "page": 5,
+      "kicker": "Door 3 / The Stockpile",
+      "name": "THE STOCKPILE",
+      "thesis": "Bank the books, bet on patience.",
+      "legs": [
+        { "text": "Randle + a 2nd  to a rebuilder, min filler back", "from": "e.g. Brooklyn", "blocked": false },
+        { "text": "Gobert has no clean home", "from": "a full teardown is off the table", "blocked": true }
+      ],
+      "send": "Randle $33.3M + a 2nd",
+      "get": "min filler + $31.0M room",
+      "cap": { "lands": 163.4, "landsLabel": "$163.4M", "landNote": "deep under the tax", "ghost": null, "crosses": false },
+      "scrawl": "$31M, then wait",
+      "title": { "kind": "single", "headline": "-1.32", "anchorLabel": "anchor = risk-adj", "unit": "pp" },
+      "capital": "minus 1 second",
+      "room": "plus $31.0M room (the prize)",
+      "acceptShort": "reported moveable, not a model yes",
+      "acceptTag": "MIN SELLING / UN-CALIBRATED",
+      "catch": "No picks to stack. Just $31M and patience."
+    }
+  ],
+  "plane": [
+    { "id": "swing", "label": "SWING", "winNow": -0.74, "future": 0.8, "stat": "title -0.74" },
+    { "id": "flip", "label": "FLIP", "winNow": 1.27, "future": 1.6, "stat": "metric-split" },
+    { "id": "stockpile", "label": "STOCKPILE", "winNow": -1.32, "future": 4.2, "stat": "+$31M room" }
+  ]
+}

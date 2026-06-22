@@ -560,15 +560,37 @@ def tier2_full(eng, rec):
             continue
         iv = F.build_impacts_view(v, override, eng.aged)
         views[v] = _dp_view(eng, scen, iv)
-    # risk overlay on the key (highest-net) incoming player: availability-weighted with/without
-    key = max(in_pids, key=lambda p: float(PV.get(p, {}).get("consensus_net", 0) or 0))
-    avail = G.availability(key)[0]
-    read = PV.get(key, {}).get("translation_read", "")
-    po = G.PO_MULT.get(read, 0.98); um = G.usage_mult(key, eng.dims)
+    # risk overlay on the TOP-TWO highest-net incoming players (extended from single-key per the Phase 2
+    # spec): a low-availability second star (a post-ACL guard who outranks nobody on net but carries real
+    # medical risk) is now priced, where before only the single highest-net piece was haircut. Independent-
+    # availability 4-state EV (both play / each one out / both out); the playoff-translation x usage haircut
+    # is applied to the both-play branch.
     base = eng.base_league
-    with_dp = _dp_view(eng, scen, eng.aged) * po * um
-    without_dp = _dp_view(eng, scen, eng.aged, replace=key)
-    risk_adj = avail * with_dp + (1 - avail) * without_dp
+    ranked = sorted(in_pids, key=lambda p: float(PV.get(p, {}).get("consensus_net", 0) or 0), reverse=True)
+    keys = ranked[:2]
+
+    def _poum(p):
+        return G.PO_MULT.get(PV.get(p, {}).get("translation_read", ""), 0.98) * G.usage_mult(p, eng.dims)
+
+    full = _dp_view(eng, scen, eng.aged)
+    key = keys[0]
+    avail = _avail(key)                       # cached + DB-drop-tolerant (falls back to 0.85), not a raw query
+    if len(keys) == 1:
+        with_dp = full * _poum(key)
+        without_dp = _dp_view(eng, scen, eng.aged, replace=key)
+        risk_adj = avail * with_dp + (1 - avail) * without_dp
+    else:
+        k1, k2 = keys
+        a1, a2 = avail, _avail(k2)
+        with_dp = full * ((_poum(k1) + _poum(k2)) / 2.0)        # both play, playoff/usage haircut
+        dp_k1out = _dp_view(eng, scen, eng.aged, replace=k1)    # top piece hurt, second plays
+        dp_k2out = _dp_view(eng, scen, eng.aged, replace=k2)    # second piece hurt, top plays
+        dp_bothout = _dp_view(eng, scen, eng.aged, replace=set(keys))
+        without_dp = dp_bothout                                 # report the both-out floor as "without"
+        risk_adj = (a1 * a2 * with_dp + a1 * (1 - a2) * dp_k2out
+                    + (1 - a1) * a2 * dp_k1out + (1 - a1) * (1 - a2) * dp_bothout)
+        rec["key2"] = k2
+        rec["avail2"] = a2
     # conservative anchor = lowest available view (winner's-curse discipline)
     avail_views = [x for x in views.values() if x is not None]
     anchor = min(avail_views)

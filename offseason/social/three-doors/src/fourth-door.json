@@ -1,0 +1,39 @@
+{
+  "_provenance": "Every on-screen figure validated. Cap/salary numbers: warehouse nba_player_contracts + the Package A gate run (core_max/engine/run_package.py, snapshot wh_0e1a90b850e6ea3b). Title odds: the model run, framed 'my model says' / hypothetical / estimates. See provenance.json.",
+  "moves": [
+    { "verb": "TRADE", "sub": "", "text": "Randle + DiVincenzo  for  Jrue Holiday" },
+    { "verb": "DRAFT", "sub": "No. 28", "text": "Christian Anderson" },
+    { "verb": "SIGN", "sub": "MLE", "text": "Luke Kennard or Khris Middleton" },
+    { "verb": "RE-SIGN", "sub": "", "text": "Ayo Dosunmu" },
+    { "verb": "DEVELOP", "sub": "", "text": "Joan Beringer" }
+  ],
+  "cap": {
+    "keep": 218.4,
+    "keepLabel": "$218.4M",
+    "trade": 208.7,
+    "tradeLabel": "$208.7M",
+    "shed": "$11M",
+    "shooter": "~$6M"
+  },
+  "verdict": {
+    "delta": "+0.50",
+    "unit": "pp",
+    "range": "2.4%  →  2.9%",
+    "from": "2.4%",
+    "to": "2.9%"
+  },
+  "band": "2.5 to 3.2 percent",
+  "joanDev": {
+    "title": "Where Joan could go",
+    "sub": "the model's range for him, once developed",
+    "bustPct": "64%",
+    "bustLabel": "of the time, he never gets here",
+    "dreamPct": "24%",
+    "dreamLabel": "a real starter, or better",
+    "tiers": [
+      { "label": "Rotation piece", "pct": "12%", "desc": "a useful role player", "tone": "mid" },
+      { "label": "Real starter", "pct": "18%", "desc": "a quality starter", "tone": "up" },
+      { "label": "Two-way anchor", "pct": "6%", "desc": "Gobert's heir", "tone": "dream" }
+    ]
+  }
+}
