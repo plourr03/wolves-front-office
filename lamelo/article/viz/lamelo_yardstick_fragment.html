@@ -1,0 +1,187 @@
+<div id="viz-lamelo-yardstick">
+  <div class="ly-chip" role="status">
+    <span class="ly-chip-dot"></span>
+    <span class="ly-chip-label">What LaMelo actually is</span>
+    <span class="ly-chip-sep">·</span>
+    <span class="ly-chip-sub">elite creator, leaky defender</span>
+  </div>
+  <p class="ly-caption" aria-live="polite"></p>
+  <div class="ly-stage">
+    <div class="ly-tooltip" role="tooltip">
+      <div class="ly-tip-head"></div>
+      <div class="ly-tip-desc"></div>
+    </div>
+  </div>
+  <div class="ly-hero">
+    <div class="ly-hero-line">
+      <span class="ly-hero-num">0.0</span>
+      <span class="ly-hero-unit">his net on a contender, after the move</span>
+    </div>
+    <div class="ly-hero-label">A good starter, a long way from a star</div>
+    <button class="ly-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ly-foot">Points per 100 possessions, the same yardstick. The blue offense bar lands near the star shelf. The red defense bar is the hole good guards hunt for. Together they net out to a good starter, and porting that to a contender role next to Edwards trims it to about plus one.</p>
+  <div class="ly-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-lamelo-yardstick, #viz-lamelo-yardstick * { touch-action: manipulation; }
+  #viz-lamelo-yardstick { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-lamelo-yardstick .ly-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--dataviz-3); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-lamelo-yardstick .ly-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dataviz-3); }
+  #viz-lamelo-yardstick .ly-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-lamelo-yardstick .ly-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-lamelo-yardstick .ly-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-lamelo-yardstick .ly-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; height: 244px; overflow: hidden; }
+  #viz-lamelo-yardstick .ly-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-lamelo-yardstick .ly-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-lamelo-yardstick .ly-tooltip.is-on { opacity: 1; }
+  #viz-lamelo-yardstick .ly-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-lamelo-yardstick .ly-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-lamelo-yardstick .ly-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-lamelo-yardstick .ly-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-lamelo-yardstick .ly-hero-num { font: 800 58px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-lamelo-yardstick.is-compact .ly-hero-num { font-size: 46px; }
+  #viz-lamelo-yardstick .ly-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 160px; }
+  #viz-lamelo-yardstick .ly-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-lamelo-yardstick .ly-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-lamelo-yardstick .ly-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-lamelo-yardstick .ly-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-lamelo-yardstick .ly-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-lamelo-yardstick .ly-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Source: DELIVERABLE section 1. Clean-room net RAPM, points per 100.
+  var OFF = 4.18, DEF = -2.23, RAW = 1.95, TRANS = 0.90;
+  var CAPTIONS = [
+    "Split his impact in two, on the same yardstick.",
+    "Offense: about plus four. Genuine star-level creation.",
+    "Defense: about minus two. A real hole guards go hunting for.",
+    "They nearly cancel to a good starter. A contender role trims even that, to about plus one."
+  ];
+  var OFF_AT = 600, DEF_AT = 1500, NET_AT = 2500, BAR_MS = 650;
+  var CAP1_AT = 600, CAP2_AT = 1500, CAP3_AT = 2500, HERO_MS = 800, REPLAY_AT = 3700;
+
+  var root = d3.select("#viz-lamelo-yardstick");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".ly-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function fmtSigned(v) { return (v >= 0 ? "+" : "") + v.toFixed(1); }
+  function tickHero(to, duration) { var node = root.select(".ly-hero-num").node(); if (reduceMotion || duration <= 0) { node.textContent = fmtSigned(to); return; } d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = fmtSigned(interp(t)); }; }); }
+  function showTooltip(head, desc, cx, cy) { var tip = root.select(".ly-tooltip"); tip.select(".ly-tip-head").text(head); tip.select(".ly-tip-desc").text(desc); tip.classed("is-on", true); var tipEl = tip.node(), stageEl = root.select(".ly-stage").node(), sw = stageEl.clientWidth, sh = stageEl.clientHeight; var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight; if (x + tw > sw - 8) x = cx - tw - 12; if (y + th > sh - 8) y = sh - th - 8; if (x < 4) x = 4; if (y < 4) y = 4; tipEl.style.left = x + "px"; tipEl.style.top = y + "px"; }
+  function hideTooltip() { root.select(".ly-tooltip").classed("is-on", false); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".ly-stage"); stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640, width = Math.max(320, Math.min(720, rawW)), compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: compact ? 64 : 84, right: 18, top: 44, bottom: 34 };
+    var x = d3.scaleLinear().domain([-3, 9]).range([pad.left, W - pad.right]);
+    var rows = ["Offense", "Defense", "Net"];
+    var top = pad.top, usableH = H - pad.top - pad.bottom, rowH = usableH / rows.length;
+    function rowY(i) { return top + i * rowH + rowH / 2; }
+    var barH = Math.min(22, rowH - 14);
+
+    // star shelf band
+    var shelf = svg.append("rect").attr("x", x(6)).attr("y", top - 12).attr("width", x(9) - x(6)).attr("height", usableH + 14).attr("rx", 4).style("fill", "var(--accent-subtle)").style("opacity", reduceMotion ? 1 : 0);
+    svg.append("text").attr("x", (x(6) + x(9)) / 2).attr("y", top - 16).attr("text-anchor", "middle").style("fill", "var(--accent-hover)").style("font", "700 9.5px var(--family-mono)").text(compact ? "star shelf" : "star shelf, +6 to +9");
+
+    // zero + good-starter guides
+    [{ v: 0, t: "avg", bold: true }, { v: 2, t: "good starter", bold: false }].forEach(function (gd) {
+      svg.append("line").attr("x1", x(gd.v)).attr("x2", x(gd.v)).attr("y1", top - 12).attr("y2", H - pad.bottom + 2).style("stroke", gd.bold ? "var(--text-secondary)" : "var(--border-default)").style("stroke-width", gd.bold ? 1.5 : 1).style("stroke-dasharray", gd.bold ? "none" : "3,4");
+      svg.append("text").attr("x", x(gd.v)).attr("y", H - pad.bottom + 18).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").style("font", "10px var(--family-mono)").text(gd.t);
+    });
+
+    rows.forEach(function (r, i) { svg.append("text").attr("x", pad.left - 10).attr("y", rowY(i)).attr("dy", "0.32em").attr("text-anchor", "end").style("fill", "var(--text-secondary)").style("font", "600 12px var(--family-sans)").text(r); });
+
+    // Offense bar
+    var offY = rowY(0);
+    var offBar = svg.append("rect").attr("x", x(0)).attr("y", offY - barH / 2).attr("height", barH).attr("rx", 4).style("fill", "var(--dataviz-3)").style("cursor", "pointer").attr("width", reduceMotion ? (x(OFF) - x(0)) : 0);
+    offBar.on("mouseenter mousemove", function () { showTooltip("Offense", "About " + fmtSigned(OFF) + " per 100. Genuine star-level creation.", x(OFF), offY); }).on("mouseleave", hideTooltip);
+    var offLab = svg.append("text").attr("x", x(OFF) + 8).attr("y", offY).attr("dy", "0.35em").style("fill", "var(--dataviz-3)").style("font", "700 13px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text(fmtSigned(OFF));
+
+    // Defense bar
+    var defY = rowY(1);
+    var defBar = svg.append("rect").attr("y", defY - barH / 2).attr("height", barH).attr("rx", 4).style("fill", "var(--status-error)").style("cursor", "pointer").attr("x", x(0)).attr("width", 0);
+    if (reduceMotion) defBar.attr("x", x(DEF)).attr("width", x(0) - x(DEF));
+    defBar.on("mouseenter mousemove", function () { showTooltip("Defense", "About " + fmtSigned(DEF) + " per 100. A real hole.", x(DEF), defY); }).on("mouseleave", hideTooltip);
+    var defLab = svg.append("text").attr("x", x(DEF) - 8).attr("y", defY).attr("dy", "0.35em").attr("text-anchor", "end").style("fill", "var(--status-error)").style("font", "700 13px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text(fmtSigned(DEF));
+
+    // Net row
+    var netY = rowY(2);
+    var rawDot = svg.append("circle").attr("cx", x(RAW)).attr("cy", netY).attr("r", 8).style("fill", "var(--text-primary)").style("opacity", reduceMotion ? 1 : 0);
+    var arrow = svg.append("line").attr("x1", x(RAW)).attr("x2", reduceMotion ? x(TRANS) : x(RAW)).attr("y1", netY).attr("y2", netY).style("stroke", "var(--text-tertiary)").style("stroke-width", 2).style("stroke-dasharray", "2,3");
+    var transDot = svg.append("circle").attr("cx", reduceMotion ? x(TRANS) : x(RAW)).attr("cy", netY).attr("r", 8).style("fill", "var(--bg-surface)").style("stroke", "var(--text-secondary)").style("stroke-width", 2).style("opacity", reduceMotion ? 1 : 0);
+    var rawLab = svg.append("text").attr("x", x(RAW)).attr("y", netY - 14).attr("text-anchor", "middle").style("fill", "var(--text-primary)").style("font", "700 11px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text("raw " + fmtSigned(RAW));
+    var transLab = svg.append("text").attr("x", x(TRANS)).attr("y", netY + 20).attr("text-anchor", "middle").style("fill", "var(--text-secondary)").style("font", "10px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text("on a contender " + fmtSigned(TRANS));
+
+    svg.append("text").attr("x", W - 6).attr("y", H - 6).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { x: x, shelf: shelf, offBar: offBar, offLab: offLab, defBar: defBar, defLab: defLab, rawDot: rawDot, arrow: arrow, transDot: transDot, rawLab: rawLab, transLab: transLab };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    var x = ctx.x;
+    ctx.shelf.style("opacity", 1);
+    ctx.offBar.attr("width", x(OFF) - x(0)); ctx.offLab.style("opacity", 1);
+    ctx.defBar.attr("x", x(DEF)).attr("width", x(0) - x(DEF)); ctx.defLab.style("opacity", 1);
+    ctx.rawDot.style("opacity", 1); ctx.arrow.attr("x2", x(TRANS)); ctx.transDot.attr("cx", x(TRANS)).style("opacity", 1);
+    ctx.rawLab.style("opacity", 1); ctx.transLab.style("opacity", 1);
+    setCaption(3); tickHero(TRANS, 0); root.classed("is-landed", true); root.select(".ly-replay").classed("is-shown", true);
+  }
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".ly-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    var x = ctx.x;
+    ctx.shelf.style("opacity", 0);
+    ctx.offBar.attr("width", 0); ctx.offLab.style("opacity", 0);
+    ctx.defBar.attr("x", x(0)).attr("width", 0); ctx.defLab.style("opacity", 0);
+    ctx.rawDot.style("opacity", 0); ctx.arrow.attr("x2", x(RAW)); ctx.transDot.attr("cx", x(RAW)).style("opacity", 0); ctx.rawLab.style("opacity", 0); ctx.transLab.style("opacity", 0);
+    root.select(".ly-hero-num").text("0.0");
+    setCaption(0);
+    if (__resetOnly) return;
+    ctx.shelf.transition().delay(200).duration(500).style("opacity", 1);
+    ctx.offBar.transition().delay(OFF_AT).duration(BAR_MS).ease(d3.easeCubicOut).attr("width", x(OFF) - x(0));
+    ctx.offLab.transition().delay(OFF_AT + BAR_MS - 150).duration(250).style("opacity", 1);
+    ctx.defBar.transition().delay(DEF_AT).duration(BAR_MS).ease(d3.easeCubicOut).attr("x", x(DEF)).attr("width", x(0) - x(DEF));
+    ctx.defLab.transition().delay(DEF_AT + BAR_MS - 150).duration(250).style("opacity", 1);
+    ctx.rawDot.transition().delay(NET_AT).duration(300).style("opacity", 1);
+    ctx.rawLab.transition().delay(NET_AT).duration(300).style("opacity", 1);
+    ctx.arrow.transition().delay(NET_AT + 300).duration(500).attr("x2", x(TRANS));
+    ctx.transDot.transition().delay(NET_AT + 300).duration(500).ease(d3.easeCubicOut).attr("cx", x(TRANS)).style("opacity", 1);
+    ctx.transLab.transition().delay(NET_AT + 600).duration(300).style("opacity", 1);
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); root.classed("is-landed", true); tickHero(TRANS, HERO_MS); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".ly-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".ly-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else { __idle(); if ("IntersectionObserver" in window) { var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] }); __io.observe(rootNode); } else { __startOnce(); } }
+  if (window.ResizeObserver) { var resizeTimer = null; var ro = new ResizeObserver(function () { if (resizeTimer) clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150); }); ro.observe(rootNode); }
+})();
+</script>

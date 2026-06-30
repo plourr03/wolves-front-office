@@ -1,0 +1,158 @@
+<div id="viz-price-ledger">
+  <div class="pr-chip" role="status">
+    <span class="pr-chip-dot"></span>
+    <span class="pr-chip-label">The price</span>
+    <span class="pr-chip-sep">·</span>
+    <span class="pr-chip-sub">what left, what came back</span>
+  </div>
+  <p class="pr-caption" aria-live="polite"></p>
+  <div class="pr-grid">
+    <div class="pr-col pr-out"><div class="pr-head"><span>Out, the price</span><span class="pr-count">6 assets</span></div><div class="pr-rows pr-out-rows"></div></div>
+    <div class="pr-col pr-in"><div class="pr-head"><span>In, the return</span><span class="pr-count">5 pieces</span></div><div class="pr-rows pr-in-rows"></div></div>
+  </div>
+  <div class="pr-hero">
+    <div class="pr-hero-line">
+      <span class="pr-hero-num">$0M</span>
+      <span class="pr-hero-unit">second-apron hard cap, the roster frozen behind it</span>
+    </div>
+    <div class="pr-hero-label">The part with no row of its own</div>
+    <button class="pr-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="pr-foot">The players roughly wash on the floor. The price is the row of future picks, a 2033 first with no protection plus three swaps, and the second-apron hard cap that kills the trade exception and the full mid-level. The hole behind Gobert cannot be patched with money this summer.</p>
+  <div class="pr-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-price-ledger, #viz-price-ledger * { touch-action: manipulation; }
+  #viz-price-ledger { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-price-ledger .pr-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-error); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-price-ledger .pr-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-error); }
+  #viz-price-ledger .pr-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-price-ledger .pr-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-price-ledger .pr-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-price-ledger .pr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  #viz-price-ledger .pr-col { background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px; }
+  #viz-price-ledger .pr-out { border-top: 2px solid var(--status-error); }
+  #viz-price-ledger .pr-in { border-top: 2px solid var(--accent-default); }
+  #viz-price-ledger .pr-head { display: flex; align-items: baseline; justify-content: space-between; font: 700 11px var(--family-mono); letter-spacing: .06em; text-transform: uppercase; margin: 0 0 10px; }
+  #viz-price-ledger .pr-out .pr-head { color: var(--status-error); }
+  #viz-price-ledger .pr-in .pr-head { color: var(--accent-hover); }
+  #viz-price-ledger .pr-count { font-size: 10px; color: var(--text-tertiary); }
+  #viz-price-ledger .pr-row { display: flex; align-items: baseline; gap: 7px; padding: 6px 0; font-size: 13.5px; color: var(--text-primary); border-top: 1px solid var(--border-subtle); opacity: 0; transform: translateY(6px); transition: opacity .45s cubic-bezier(.22,.61,.36,1), transform .45s cubic-bezier(.22,.61,.36,1), background-color .3s ease; border-radius: 4px; }
+  #viz-price-ledger .pr-row:first-child { border-top: 0; }
+  #viz-price-ledger .pr-row.in { opacity: 1; transform: none; }
+  #viz-price-ledger .pr-row.hot { background: rgba(255,92,92,.10); }
+  #viz-price-ledger .pr-tag { font: 700 9px var(--family-mono); letter-spacing: .03em; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; white-space: nowrap; flex: 0 0 auto; }
+  #viz-price-ledger .pr-tag.player { background: rgba(255,255,255,.10); color: var(--text-secondary); }
+  #viz-price-ledger .pr-tag.pick { background: rgba(255,92,92,.16); color: var(--status-error); }
+  #viz-price-ledger .pr-tag.star { background: var(--accent-subtle); color: var(--accent-hover); }
+  #viz-price-ledger .pr-sub { color: var(--text-tertiary); font-size: 11.5px; }
+  #viz-price-ledger .pr-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-price-ledger .pr-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-price-ledger .pr-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-price-ledger.is-landed .pr-hero-num { color: var(--status-error); }
+  #viz-price-ledger.is-compact .pr-hero-num { font-size: 42px; }
+  #viz-price-ledger .pr-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 175px; }
+  #viz-price-ledger .pr-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-price-ledger .pr-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-price-ledger .pr-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-price-ledger .pr-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-price-ledger .pr-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-price-ledger .pr-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) { #viz-price-ledger .pr-row { transition: none; } }
+  @media (max-width: 480px) { #viz-price-ledger .pr-grid { grid-template-columns: 1fr; } }
+</style>
+<script>
+(function () {
+  var OUT = [
+    { tag: "player", t: "Julius Randle", s: "near replacement" },
+    { tag: "player", t: "Naz Reid", s: "value the box can't see" },
+    { tag: "pick", t: "2033 first", s: "no protection" },
+    { tag: "pick", t: "2028, 2029, 2030 swaps", s: "swap rights" },
+    { tag: "pick", t: "Three second-rounders", s: "" },
+    { tag: "pick", t: "No. 28 pick", s: "this year" }
+  ];
+  var INC = [
+    { tag: "star", t: "LaMelo Ball", s: "24, downhill creator" },
+    { tag: "player", t: "Josh Green", s: "3 and D wing" },
+    { tag: "player", t: "No. 33 pick", s: "" },
+    { tag: "player", t: "Mouhamadou Gueye", s: "moving to waive" },
+    { tag: "player", t: "Ayo re-signed", s: "5 years, 112M" }
+  ];
+  var APRON = 211;
+  var CAPTIONS = [
+    "Two players and a stack of picks out. A star, a wing, and the books in.",
+    "The players roughly wash on the floor.",
+    "The price is the row of future picks: a 2033 first with no protection, three swaps.",
+    "And the part with no row of its own: a second-apron hard cap that freezes the roster."
+  ];
+  var OUT_AT = 400, IN_AT = 900, ROW_STAG = 80;
+  var CAP1_AT = 1500, CAP2_AT = 2300, HOT_AT = 2300, CAP3_AT = 3100, HERO_MS = 800, REPLAY_AT = 4000;
+
+  var root = d3.select("#viz-price-ledger");
+  if (root.empty()) return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  function tagWord(t) { return t === "pick" ? "pick" : (t === "star" ? "star" : "player"); }
+  function rowHTML(d) { return '<div class="pr-row" data-tag="' + d.tag + '"><span class="pr-tag ' + d.tag + '">' + tagWord(d.tag) + '</span><span>' + d.t + (d.s ? ' <span class="pr-sub">' + d.s + '</span>' : '') + '</span></div>'; }
+  rootNode.querySelector(".pr-out-rows").innerHTML = OUT.map(rowHTML).join("");
+  rootNode.querySelector(".pr-in-rows").innerHTML = INC.map(rowHTML).join("");
+
+  var rows = Array.prototype.slice.call(rootNode.querySelectorAll(".pr-row"));
+  var outRows = rows.filter(function (r) { return r.closest(".pr-out"); });
+  var inRows = rows.filter(function (r) { return r.closest(".pr-in"); });
+  var pickRows = rows.filter(function (r) { return r.getAttribute("data-tag") === "pick"; });
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".pr-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function tickHero(to, duration) {
+    var node = root.select(".pr-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = "$" + to + "M"; return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = "$" + Math.round(interp(t)) + "M"; }; });
+  }
+
+  function finalState() {
+    rows.forEach(function (r) { r.classList.add("in"); });
+    pickRows.forEach(function (r) { r.classList.add("hot"); });
+    setCaption(3); tickHero(APRON, 0); root.classed("is-landed", true); root.select(".pr-replay").classed("is-shown", true);
+  }
+  function play() {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".pr-replay").classed("is-shown", false);
+    rows.forEach(function (r) { r.classList.remove("in", "hot"); });
+    root.select(".pr-hero-num").node().textContent = "$0M";
+    setCaption(0);
+    if (reduceMotion) { finalState(); return; }
+    if (__resetOnly) return;
+    outRows.forEach(function (r, i) { playTimers.push(setTimeout(function () { r.classList.add("in"); }, OUT_AT + i * ROW_STAG)); });
+    inRows.forEach(function (r, i) { playTimers.push(setTimeout(function () { r.classList.add("in"); }, IN_AT + i * ROW_STAG)); });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); pickRows.forEach(function (r) { r.classList.add("hot"); }); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); root.classed("is-landed", true); tickHero(APRON, HERO_MS); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".pr-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".pr-replay").on("click", function () { play(); });
+
+  // ---- Autoplay only when in full view ----
+  var __resetOnly = false, __played = false;
+  function __idle() { __resetOnly = true; play(); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(); }
+  if (reduceMotion) { finalState(); __played = true; }
+  else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else { __startOnce(); }
+  }
+})();
+</script>

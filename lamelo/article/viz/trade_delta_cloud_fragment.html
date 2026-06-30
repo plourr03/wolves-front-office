@@ -1,0 +1,176 @@
+<div id="viz-trade-delta-cloud">
+  <div class="td-chip" role="status">
+    <span class="td-chip-dot"></span>
+    <span class="td-chip-label">The number that wouldn't come</span>
+    <span class="td-chip-sep">·</span>
+    <span class="td-chip-sub">every defensible read</span>
+  </div>
+  <p class="td-caption" aria-live="polite"></p>
+  <div class="td-stage">
+    <div class="td-tooltip" role="tooltip">
+      <div class="td-tip-head"></div>
+      <div class="td-tip-desc"></div>
+    </div>
+  </div>
+  <div class="td-hero">
+    <div class="td-hero-line">
+      <span class="td-hero-num">0.0</span>
+      <span class="td-hero-unit">the most complete read, in net rating</span>
+    </div>
+    <div class="td-hero-label">Below zero, not above it</div>
+    <button class="td-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="td-foot">The trade's effect on team net rating, same points-per-100 scale, under every defensible read. The three dots per row are three honest values for Gueye, the near-minimum throw-in. A single number pulled from a cloud that straddles zero would be false precision, so the piece declines to print one.</p>
+  <div class="td-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-trade-delta-cloud, #viz-trade-delta-cloud * { touch-action: manipulation; }
+  #viz-trade-delta-cloud { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-trade-delta-cloud .td-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-error); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-trade-delta-cloud .td-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-error); }
+  #viz-trade-delta-cloud .td-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-trade-delta-cloud .td-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-trade-delta-cloud .td-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-trade-delta-cloud .td-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; height: 230px; overflow: hidden; }
+  #viz-trade-delta-cloud .td-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-trade-delta-cloud .td-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-trade-delta-cloud .td-tooltip.is-on { opacity: 1; }
+  #viz-trade-delta-cloud .td-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-trade-delta-cloud .td-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-trade-delta-cloud .td-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-trade-delta-cloud .td-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-trade-delta-cloud .td-hero-num { font: 800 58px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-trade-delta-cloud.is-landed .td-hero-num { color: var(--status-error); }
+  #viz-trade-delta-cloud.is-compact .td-hero-num { font-size: 46px; }
+  #viz-trade-delta-cloud .td-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 160px; }
+  #viz-trade-delta-cloud .td-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-trade-delta-cloud .td-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-trade-delta-cloud .td-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-trade-delta-cloud .td-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-trade-delta-cloud .td-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-trade-delta-cloud .td-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Trade's effect on team net rating (points per 100). Source: DELIVERABLE
+  // section 2. Two reads x three valuations of Gueye.
+  var PTS = [
+    { read: 0, gueye: "Gueye generous", v: 0.776 },
+    { read: 0, gueye: "Gueye neutral", v: 0.570 },
+    { read: 0, gueye: "Gueye replacement", v: 0.007 },
+    { read: 1, gueye: "Gueye generous", v: 0.003 },
+    { read: 1, gueye: "Gueye neutral", v: -0.559 },
+    { read: 1, gueye: "Gueye replacement", v: -1.121 }
+  ];
+  var ROWS = ["box, can't see defense", "scoreboard, sees defense"];
+  var HERO_VAL = -0.6;
+  var CAPTIONS = [
+    "Six defensible ways to score the trade's effect on the team, in net rating.",
+    "The box-score read, blind to defense, lands just above zero.",
+    "The scoreboard read, which sees defense, slides at or below it.",
+    "A number pulled from a cloud that straddles zero would be false precision."
+  ];
+  var BOX_AT = 600, SB_AT = 1700, DOT_STAG = 110, DOT_MS = 650;
+  var CAP1_AT = 600, CAP2_AT = 1700, HERO_MS = 800, CAP3_AT = 3000, REPLAY_AT = 3800;
+
+  var root = d3.select("#viz-trade-delta-cloud");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".td-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function fmtSigned(v) { return (v >= 0 ? "+" : "") + v.toFixed(1); }
+  function tickHero(to, duration) { var node = root.select(".td-hero-num").node(); if (reduceMotion || duration <= 0) { node.textContent = fmtSigned(to); return; } d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = fmtSigned(interp(t)); }; }); }
+  function showTooltip(head, desc, cx, cy) { var tip = root.select(".td-tooltip"); tip.select(".td-tip-head").text(head); tip.select(".td-tip-desc").text(desc); tip.classed("is-on", true); var tipEl = tip.node(), stageEl = root.select(".td-stage").node(), sw = stageEl.clientWidth, sh = stageEl.clientHeight; var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight; if (x + tw > sw - 8) x = cx - tw - 12; if (y + th > sh - 8) y = sh - th - 8; if (x < 4) x = 4; if (y < 4) y = 4; tipEl.style.left = x + "px"; tipEl.style.top = y + "px"; }
+  function hideTooltip() { root.select(".td-tooltip").classed("is-on", false); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".td-stage"); stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640, width = Math.max(320, Math.min(720, rawW)), compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: compact ? 14 : 150, right: 18, top: 30, bottom: 30 };
+    var x = d3.scaleLinear().domain([-1.4, 1.0]).range([pad.left, W - pad.right]);
+    var top = pad.top, usableH = H - pad.top - pad.bottom, rowH = usableH / ROWS.length;
+    function rowY(i) { return top + i * rowH + (compact ? 34 : rowH / 2); }
+
+    // worse zone
+    svg.append("rect").attr("x", x(-1.4)).attr("y", top - 6).attr("width", x(0) - x(-1.4)).attr("height", usableH + 8).style("fill", "rgba(255,92,92,.08)");
+    // zero line
+    svg.append("line").attr("x1", x(0)).attr("x2", x(0)).attr("y1", top - 8).attr("y2", H - pad.bottom).style("stroke", "var(--text-secondary)").style("stroke-width", 1.5);
+    svg.append("text").attr("x", x(0)).attr("y", top - 12).attr("text-anchor", "middle").style("fill", "var(--text-secondary)").style("font", "700 10px var(--family-mono)").text("no change");
+    svg.append("text").attr("x", x(-1.4) + 4).attr("y", H - pad.bottom + 18).attr("text-anchor", "start").style("fill", "var(--status-error)").style("font", "9.5px var(--family-mono)").style("letter-spacing", ".05em").text("WORSE");
+    svg.append("text").attr("x", x(1.0) - 2).attr("y", H - pad.bottom + 18).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9.5px var(--family-mono)").style("letter-spacing", ".05em").text("BETTER");
+
+    ROWS.forEach(function (rk, i) {
+      svg.append("text").attr("x", compact ? pad.left : pad.left - 14).attr("y", compact ? top + i * rowH + 12 : rowY(i)).attr("dy", compact ? "0" : "0.35em").attr("text-anchor", compact ? "start" : "end").style("fill", "var(--text-primary)").style("font", "600 12px var(--family-sans)").text(rk);
+    });
+
+    var dotSel = [];
+    PTS.forEach(function (p, idx) {
+      var cy = rowY(p.read);
+      var neg = p.v < 0, col = neg ? "var(--status-error)" : "var(--dataviz-3)";
+      var jWithin = idx % 3;
+      var g = svg.append("g").style("cursor", "pointer");
+      var c = g.append("circle").attr("cx", reduceMotion ? x(p.v) : x(0)).attr("cy", cy).attr("r", 8).style("fill", col).style("fill-opacity", 0.9).style("stroke", "#000").style("stroke-width", 1);
+      var lab = g.append("text").attr("x", x(p.v)).attr("y", cy + (jWithin % 2 === 0 ? -13 : 21)).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text((p.v >= 0 ? "+" : "") + p.v.toFixed(2));
+      g.on("mouseenter", function () { c.attr("r", 11); lab.style("fill", col).style("font-weight", 700); showTooltip(p.gueye, (p.v >= 0 ? "+" : "") + p.v.toFixed(3) + " net rating, the " + ROWS[p.read].split(",")[0] + " read.", x(p.v), cy); })
+       .on("mouseleave", function () { c.attr("r", 8); lab.style("fill", "var(--text-tertiary)").style("font-weight", 400); hideTooltip(); });
+      c.append("title").text(p.gueye + ": " + (p.v >= 0 ? "+" : "") + p.v.toFixed(3));
+      dotSel.push({ p: p, c: c, lab: lab, jWithin: jWithin });
+    });
+
+    svg.append("text").attr("x", W - 6).attr("y", H - 6).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { dotSel: dotSel, x: x };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.dotSel.forEach(function (s) { s.c.attr("cx", ctx.x(s.p.v)); s.lab.style("opacity", 1); });
+    setCaption(3); tickHero(HERO_VAL, 0); root.classed("is-landed", true); root.select(".td-replay").classed("is-shown", true);
+  }
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".td-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    ctx.dotSel.forEach(function (s) { s.c.attr("cx", ctx.x(0)); s.lab.style("opacity", 0); });
+    root.select(".td-hero-num").text("0.0");
+    setCaption(0);
+    if (__resetOnly) return;
+    ctx.dotSel.forEach(function (s) {
+      var base = s.p.read === 0 ? BOX_AT : SB_AT;
+      var at = base + s.jWithin * DOT_STAG;
+      s.c.transition().delay(at).duration(DOT_MS).ease(d3.easeCubicOut).attr("cx", ctx.x(s.p.v));
+      s.lab.transition().delay(at + DOT_MS - 150).duration(250).style("opacity", 1);
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); root.classed("is-landed", true); tickHero(HERO_VAL, HERO_MS); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".td-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".td-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else { __idle(); if ("IntersectionObserver" in window) { var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] }); __io.observe(rootNode); } else { __startOnce(); } }
+  if (window.ResizeObserver) { var resizeTimer = null; var ro = new ResizeObserver(function () { if (resizeTimer) clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150); }); ro.observe(rootNode); }
+})();
+</script>

@@ -1,0 +1,46 @@
+{
+  "as_of": "2026-06-25",
+  "snapshot": "wh_65cf5da7f50c7f62",
+  "model_basis": "COMPLETED post-2026-07-06 trade, NOT the live tracker (Spotrac ~192M is pre-official and would read under-apron, which is wrong)",
+  "thresholds_2026_27": {
+    "salary_cap": 165000000,
+    "luxury_tax": 201000000,
+    "first_apron": 209100000,
+    "second_apron": 222000000,
+    "full_mle": 15048000,
+    "taxpayer_mle": 6065000
+  },
+  "min_pre_trade_committed_2026_27": 190387866,
+  "players_out": [
+    "Julius Randle",
+    "Naz Reid"
+  ],
+  "kept_sum": 133778670,
+  "incoming": {
+    "LaMelo Ball": 41250000,
+    "Josh Green": 14679012,
+    "Mouhamed Gueye": 2406205,
+    "Ayo Dosunmu (re-sign y1)": 19310345
+  },
+  "assumptions": {
+    "lamelo_includes_trade_bonus_to_max": 41250000,
+    "ayo_resign": "5yr / $112,000,000 at 8% raises -> y1 $19,310,345"
+  },
+  "verdict": {
+    "post_trade_salary": 211424232,
+    "n_players_committed": 11,
+    "in_luxury_tax": true,
+    "over_first_apron": true,
+    "over_second_apron": false,
+    "over_tax_by": 10424232,
+    "over_first_apron_by": 2324232,
+    "room_under_second_apron_hardcap": 10575768,
+    "hard_capped_at": "second_apron",
+    "hard_cap_trigger": "aggregating Reid + Randle salaries to acquire LaMelo (second_apron_no_aggregation)",
+    "tpe_33m_available": false,
+    "full_nontaxpayer_mle_available": false,
+    "taxpayer_mle_available": true,
+    "taxpayer_mle_note": "Confirmed: MIN sits between the first and second apron, so it keeps the taxpayer MLE (~6.065M); a team loses it only ABOVE the second apron. Using it keeps them hard-capped at the second apron, which the aggregation already did, so it adds no new restriction. The binding limit is the ~10.6M of room under the 222M hard cap, which must ALSO cover re-signing RFA Jaylen Clark and the remaining minimum spots. So the realistic toolkit is the taxpayer MLE plus minimums, and even that is room-constrained, not fully deployable. This reinforces the depth constraint; it does not relax it.",
+    "tools_to_fill": "taxpayer MLE (6.065M, room-constrained) and minimums; RFA Jaylen Clark; thin at PF"
+  }
+}

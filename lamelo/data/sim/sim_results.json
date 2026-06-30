@@ -1,0 +1,43 @@
+{
+  "n_sims": 20000,
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "beta": 1.067,
+  "gate_note": "TITLE NUMBER GATED pending SCALE/SHAPE/series re-validation diff + retrodiction backtest; reported here with that caveat. CRN-paired delta and Q2 ordinals are field-robust.",
+  "forks": {
+    "rapm": {
+      "min_pre_net": 2.18,
+      "min_post_net": 2.183,
+      "deflated_trade_delta": 0.003,
+      "pre_title": 0.02653,
+      "post_title": 0.026580000000000003,
+      "post_cf": 0.15127000000000002,
+      "post_finals": 0.06379000000000001,
+      "title_delta_pp": 0.0050000000000000044,
+      "title_delta_mc_sd_pp": 0.00316227766016836,
+      "cf_delta_pp": 0.013000000000000787
+    },
+    "box": {
+      "min_pre_net": 2.18,
+      "min_post_net": 3.008,
+      "deflated_trade_delta": 0.828,
+      "pre_title": 0.028030000000000006,
+      "post_title": 0.03916000000000001,
+      "post_cf": 0.19258999999999998,
+      "post_finals": 0.08584,
+      "title_delta_pp": 1.113,
+      "title_delta_mc_sd_pp": 0.05938013135721402,
+      "cf_delta_pp": 3.807999999999999
+    }
+  },
+  "title_delta_structural_band_pp": [
+    0.005,
+    1.113
+  ],
+  "band_note": "AUDIT FIX 4: INTER-FORK POINT SPREAD ONLY, at the modeled-Gueye point. Does NOT include parametric uncertainty (player-impact posterior SDs, transport band, role-player valuation fork). The true band extends well BELOW zero: the Gueye fork alone drives the RAPM net delta to -0.56 (neutral) and -1.12 (replacement). Do not read [0.005, 1.113] as the full uncertainty band."
+}

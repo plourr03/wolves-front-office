@@ -1,0 +1,15 @@
+{
+  "player_id": 1630163.0,
+  "player_name": "LaMelo Ball",
+  "possessions": 17304.0,
+  "off_rapm": 4.18,
+  "off_sd": 1.18,
+  "def_rapm": 2.23,
+  "def_sd": 1.18,
+  "net_rapm": 1.95,
+  "net_sd": 1.67,
+  "box_off_prior": 1.93,
+  "box_def_prior": 0.04,
+  "box_net_bpm": 1.89,
+  "reliable": "TRUE"
+}

@@ -1,0 +1,198 @@
+<div id="viz-prediction-log">
+  <div class="pl-chip" role="status">
+    <span class="pl-chip-dot"></span>
+    <span class="pl-chip-label">What this leaves us with</span>
+    <span class="pl-chip-sep">·</span>
+    <span class="pl-chip-sub">logged cold for grading</span>
+  </div>
+  <p class="pl-caption" aria-live="polite"></p>
+  <div class="pl-stage">
+    <div class="pl-tooltip" role="tooltip">
+      <div class="pl-tip-head"></div>
+      <div class="pl-tip-desc"></div>
+    </div>
+  </div>
+  <div class="pl-hero">
+    <div class="pl-hero-line">
+      <span class="pl-hero-num">0</span>
+      <span class="pl-hero-unit">the Ant and LaMelo net that settles it</span>
+    </div>
+    <div class="pl-hero-label">Near +8 it clicked, near -2 it didn't</div>
+    <button class="pl-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="pl-foot">Green is the logged prediction, point and band. On the win total, the gray block is what the model itself projects, lower than the bet. The bottom row is the one that settles the argument: near plus 8 and the fit clicked, near minus 2 and it didn't.</p>
+  <div class="pl-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-prediction-log, #viz-prediction-log * { touch-action: manipulation; }
+  #viz-prediction-log { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-prediction-log .pl-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-prediction-log .pl-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-prediction-log .pl-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-prediction-log .pl-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-prediction-log .pl-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-prediction-log .pl-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; height: 288px; overflow: hidden; }
+  #viz-prediction-log.is-compact .pl-stage { height: 300px; }
+  #viz-prediction-log .pl-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-prediction-log .pl-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-prediction-log .pl-tooltip.is-on { opacity: 1; }
+  #viz-prediction-log .pl-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-prediction-log .pl-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-prediction-log .pl-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-prediction-log .pl-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-prediction-log .pl-hero-num { font: 800 58px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-prediction-log.is-compact .pl-hero-num { font-size: 46px; }
+  #viz-prediction-log .pl-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 170px; }
+  #viz-prediction-log .pl-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-prediction-log .pl-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-prediction-log .pl-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-prediction-log .pl-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-prediction-log .pl-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-prediction-log .pl-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Forward predictions, source: DELIVERABLE section 8. Win total and seed are
+  // above-model analyst priors; the model's own win read (~46-49) is shown for
+  // contrast on the win row.
+  var PREDS = [
+    { label: "2026-27 wins", lo: 46, hi: 58, pt: 54, dmin: 40, dmax: 62, model: [46, 49], signed: false },
+    { label: "Final seed, West", lo: 3, hi: 5, pt: 4, dmin: 1, dmax: 8, signed: false },
+    { label: "LaMelo games played", lo: 44, hi: 73, pt: 63, dmin: 30, dmax: 82, signed: false },
+    { label: "Ant + LaMelo on-court net", lo: -2, hi: 8, pt: 3, dmin: -6, dmax: 12, signed: true, splits: true }
+  ];
+  var CAPTIONS = [
+    "Four predictions, point and band, written down before the season.",
+    "A mid-to-high-forties team on the model. I logged 54 wins anyway.",
+    "LaMelo for 63 games, the optimistic side of my own forecast.",
+    "And the one that settles it: the Ant and LaMelo two-man net. Grade me on all of it."
+  ];
+  var ROW_AT = 500, ROW_STAG = 650, ROW_MS = 600;
+  var CAP1_AT = 800, CAP2_AT = 1900, CAP3_AT = 2900, HERO_MS = 800, REPLAY_AT = 3900;
+
+  var root = d3.select("#viz-prediction-log");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".pl-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function tickHero(to, duration) { var node = root.select(".pl-hero-num").node(); if (reduceMotion || duration <= 0) { node.textContent = (to >= 0 ? "+" : "") + Math.round(to); return; } d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { var v = interp(t); node.textContent = (v >= 0 ? "+" : "") + Math.round(v); }; }); }
+  function showTooltip(head, desc, cx, cy) { var tip = root.select(".pl-tooltip"); tip.select(".pl-tip-head").text(head); tip.select(".pl-tip-desc").text(desc); tip.classed("is-on", true); var tipEl = tip.node(), stageEl = root.select(".pl-stage").node(), sw = stageEl.clientWidth, sh = stageEl.clientHeight; var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight; if (x + tw > sw - 8) x = cx - tw - 12; if (y + th > sh - 8) y = sh - th - 8; if (x < 4) x = 4; if (y < 4) y = 4; tipEl.style.left = x + "px"; tipEl.style.top = y + "px"; }
+  function hideTooltip() { root.select(".pl-tooltip").classed("is-on", false); }
+
+  function fmt(p, v) { return (p.signed && v >= 0 ? "+" : "") + Math.round(v); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".pl-stage"); stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640, width = Math.max(320, Math.min(720, rawW)), compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: 16, right: 16, top: 10, bottom: 8 };
+    var usableH = H - pad.top - pad.bottom, rowH = usableH / PREDS.length;
+    var trackLeft = pad.left + 6, trackRight = W - pad.right - 6;
+
+    var rowSel = [];
+    PREDS.forEach(function (p, i) {
+      var top = pad.top + i * rowH;
+      var trackY = top + 40;
+      var x = d3.scaleLinear().domain([p.dmin, p.dmax]).range([trackLeft, trackRight]);
+      var g = svg.append("g");
+
+      g.append("text").attr("x", trackLeft).attr("y", top + 16).style("fill", "var(--text-primary)").style("font", "600 12.5px var(--family-sans)").text(p.label);
+      g.append("line").attr("x1", trackLeft).attr("x2", trackRight).attr("y1", trackY).attr("y2", trackY).style("stroke", "var(--border-subtle)").style("stroke-width", 1);
+
+      var modelBlock = null;
+      if (p.model) {
+        modelBlock = g.append("rect").attr("x", x(p.model[0])).attr("y", trackY - 9).attr("height", 18).attr("rx", 3).style("fill", "var(--border-default)").style("fill-opacity", 0.55).attr("width", reduceMotion ? (x(p.model[1]) - x(p.model[0])) : 0);
+        g.append("text").attr("x", x(p.model[0]) - 4).attr("y", trackY + 20).attr("text-anchor", "start").style("fill", "var(--text-tertiary)").style("font", "9.5px var(--family-mono)").text("model " + p.model[0] + " to " + p.model[1]);
+      }
+
+      var band = g.append("line").attr("x1", x(p.lo)).attr("x2", reduceMotion ? x(p.hi) : x(p.lo)).attr("y1", trackY).attr("y2", trackY).style("stroke", "var(--accent-default)").style("stroke-width", 5).style("stroke-linecap", "round");
+      var capLo = g.append("line").attr("x1", x(p.lo)).attr("x2", x(p.lo)).attr("y1", trackY - 7).attr("y2", trackY + 7).style("stroke", "var(--accent-default)").style("stroke-width", 2).style("opacity", reduceMotion ? 0.7 : 0);
+      var capHi = g.append("line").attr("x1", x(p.hi)).attr("x2", x(p.hi)).attr("y1", trackY - 7).attr("y2", trackY + 7).style("stroke", "var(--accent-default)").style("stroke-width", 2).style("opacity", reduceMotion ? 0.7 : 0);
+      var dot = g.append("circle").attr("cx", x(p.pt)).attr("cy", trackY).attr("r", reduceMotion ? 7 : 0).style("fill", "var(--accent-hover)").style("stroke", "#000").style("stroke-width", 1.5).style("cursor", "pointer");
+      dot.append("title").text(p.label + ": " + fmt(p, p.pt) + " (band " + fmt(p, p.lo) + " to " + fmt(p, p.hi) + ")");
+      dot.on("mouseenter mousemove", function () { showTooltip(p.label, "Point " + fmt(p, p.pt) + ", band " + fmt(p, p.lo) + " to " + fmt(p, p.hi) + ".", x(p.pt), trackY); }).on("mouseleave", hideTooltip);
+      var ptLab = g.append("text").attr("x", x(p.pt)).attr("y", trackY - 13).attr("text-anchor", "middle").style("fill", "var(--text-primary)").style("font", "700 14px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0);
+      if (reduceMotion) ptLab.text(fmt(p, p.pt));
+      g.append("text").attr("x", x(p.lo)).attr("y", trackY + 20).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").style("font", "9.5px var(--family-mono)").text(fmt(p, p.lo));
+      g.append("text").attr("x", x(p.hi)).attr("y", trackY + 20).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").style("font", "9.5px var(--family-mono)").text(fmt(p, p.hi));
+
+      if (p.splits) {
+        g.append("text").attr("x", x(p.hi)).attr("y", trackY - 14).attr("text-anchor", "end").style("fill", "var(--accent-hover)").style("font", "9.5px var(--family-mono)").text("fit clicked");
+        g.append("text").attr("x", x(p.lo)).attr("y", trackY - 14).attr("text-anchor", "start").style("fill", "var(--status-error)").style("font", "9.5px var(--family-mono)").text("it didn't");
+      }
+
+      rowSel.push({ p: p, x: x, band: band, capLo: capLo, capHi: capHi, dot: dot, ptLab: ptLab, modelBlock: modelBlock });
+    });
+
+    svg.append("text").attr("x", W - 6).attr("y", H - 4).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { rowSel: rowSel };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function settle(s) {
+    var p = s.p, x = s.x;
+    if (s.modelBlock) s.modelBlock.attr("width", x(p.model[1]) - x(p.model[0]));
+    s.band.attr("x2", x(p.hi)); s.capLo.style("opacity", 0.7); s.capHi.style("opacity", 0.7);
+    s.dot.attr("r", 7); s.ptLab.style("opacity", 1).text(fmt(p, p.pt));
+  }
+  function finalState(ctx) {
+    ctx.rowSel.forEach(settle);
+    setCaption(3); tickHero(3, 0); root.classed("is-landed", true); root.select(".pl-replay").classed("is-shown", true);
+  }
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".pl-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    ctx.rowSel.forEach(function (s) {
+      var x = s.x, p = s.p;
+      if (s.modelBlock) s.modelBlock.attr("width", 0);
+      s.band.attr("x2", x(p.lo)); s.capLo.style("opacity", 0); s.capHi.style("opacity", 0); s.dot.attr("r", 0); s.ptLab.style("opacity", 0);
+    });
+    root.select(".pl-hero-num").text("0");
+    setCaption(0);
+    if (__resetOnly) return;
+    ctx.rowSel.forEach(function (s, i) {
+      var x = s.x, p = s.p, at = ROW_AT + i * ROW_STAG;
+      if (s.modelBlock) s.modelBlock.transition().delay(at).duration(500).attr("width", x(p.model[1]) - x(p.model[0]));
+      s.band.transition().delay(at + 120).duration(ROW_MS).ease(d3.easeCubicOut).attr("x2", x(p.hi));
+      s.capLo.transition().delay(at + ROW_MS).duration(250).style("opacity", 0.7);
+      s.capHi.transition().delay(at + ROW_MS).duration(250).style("opacity", 0.7);
+      s.dot.transition().delay(at + 350).duration(350).ease(d3.easeBackOut).attr("r", 7);
+      var ptLab = s.ptLab, pp = p, val = p.pt;
+      ptLab.transition().delay(at + 450).duration(200).style("opacity", 1).on("start", function () {
+        d3.select(this).transition().duration(450).tween("text", function () { var n = this, ii = d3.interpolateNumber(0, val); return function (t) { n.textContent = fmt(pp, ii(t)); }; });
+      });
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); root.classed("is-landed", true); tickHero(3, HERO_MS); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".pl-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".pl-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else { __idle(); if ("IntersectionObserver" in window) { var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] }); __io.observe(rootNode); } else { __startOnce(); } }
+  if (window.ResizeObserver) { var resizeTimer = null; var ro = new ResizeObserver(function () { if (resizeTimer) clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150); }); ro.observe(rootNode); }
+})();
+</script>

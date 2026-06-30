@@ -1,0 +1,202 @@
+{
+  "survival_fraction": {
+    "center": 0.75,
+    "band": [
+      0.5,
+      0.9
+    ]
+  },
+  "forks": {
+    "rapm": {
+      "LaMelo_in": {
+        "raw": {
+          "off": 4.18,
+          "def_contrib": -2.23,
+          "net": 1.95
+        },
+        "A_surv_on_net": {
+          "net_center": 1.46,
+          "net_band": [
+            0.97,
+            1.75
+          ],
+          "def_contrib_carried": -2.23
+        },
+        "B_surv_on_off": {
+          "off_center": 3.13,
+          "def_contrib": -2.23,
+          "net_center": 0.9,
+          "net_band": [
+            -0.14,
+            1.53
+          ],
+          "implied_net_survival": 0.46
+        }
+      },
+      "Reid_out": {
+        "raw": {
+          "off": 0.55,
+          "def_contrib": 2.72,
+          "net": 3.27
+        },
+        "impact_lost_net": 3.27,
+        "def_contrib_lost": 2.72,
+        "note": "no survival haircut; measured in MIN context, lost in full"
+      },
+      "Randle_out": {
+        "raw": {
+          "off": 1.6,
+          "def_contrib": -1.17,
+          "net": 0.44
+        },
+        "impact_lost_net": 0.44,
+        "def_contrib_lost": -1.17,
+        "note": "no survival haircut; measured in MIN context, lost in full"
+      },
+      "Green_in": {
+        "raw": {
+          "off": -0.01,
+          "def_contrib": 0.23,
+          "net": 0.22
+        },
+        "transported_net": 0.22,
+        "surv": 1.0,
+        "note": "near face value, role close to prior"
+      },
+      "Gueye_in": {
+        "raw": {
+          "off": 0.17,
+          "def_contrib": 2.52,
+          "net": 2.68
+        },
+        "transported_net": 2.68,
+        "surv": 1.0,
+        "note": "near face value, role close to prior"
+      },
+      "gobert_fragility": {
+        "gobert_def_contrib": 6.52,
+        "backup5_def_contrib": {
+          "Mouhamed Gueye": 2.52,
+          "Joan Beringer": 0.63
+        },
+        "best_backup_def_contrib": 2.52,
+        "defensive_cliff_when_gobert_sits": 4.0,
+        "note": "points of team defense lost per 100 when Gobert is off and the best available backup-5 plays; the fragility the Reid+Randle exits widen"
+      }
+    },
+    "box": {
+      "LaMelo_in": {
+        "raw": {
+          "off": 1.93,
+          "def_contrib": -0.04,
+          "net": 1.89
+        },
+        "A_surv_on_net": {
+          "net_center": 1.42,
+          "net_band": [
+            0.94,
+            1.7
+          ],
+          "def_contrib_carried": -0.04
+        },
+        "B_surv_on_off": {
+          "off_center": 1.45,
+          "def_contrib": -0.04,
+          "net_center": 1.41,
+          "net_band": [
+            0.92,
+            1.7
+          ],
+          "implied_net_survival": 0.75
+        }
+      },
+      "Reid_out": {
+        "raw": {
+          "off": 0.32,
+          "def_contrib": 0.55,
+          "net": 0.87
+        },
+        "impact_lost_net": 0.87,
+        "def_contrib_lost": 0.55,
+        "note": "no survival haircut; measured in MIN context, lost in full"
+      },
+      "Randle_out": {
+        "raw": {
+          "off": 0.56,
+          "def_contrib": -0.57,
+          "net": -0.02
+        },
+        "impact_lost_net": -0.02,
+        "def_contrib_lost": -0.57,
+        "note": "no survival haircut; measured in MIN context, lost in full"
+      },
+      "Green_in": {
+        "raw": {
+          "off": -0.66,
+          "def_contrib": -0.44,
+          "net": -1.1
+        },
+        "transported_net": -1.1,
+        "surv": 1.0,
+        "note": "near face value, role close to prior"
+      },
+      "Gueye_in": {
+        "raw": {
+          "off": -0.16,
+          "def_contrib": 1.52,
+          "net": 1.36
+        },
+        "transported_net": 1.36,
+        "surv": 1.0,
+        "note": "near face value, role close to prior"
+      },
+      "gobert_fragility": {
+        "gobert_def_contrib": 1.02,
+        "backup5_def_contrib": {
+          "Mouhamed Gueye": 1.52,
+          "Joan Beringer": 1.87
+        },
+        "best_backup_def_contrib": 1.87,
+        "defensive_cliff_when_gobert_sits": -0.85,
+        "note": "points of team defense lost per 100 when Gobert is off and the best available backup-5 plays; the fragility the Reid+Randle exits widen"
+      }
+    }
+  },
+  "defensive_fork_divergence": {
+    "LaMelo Ball": {
+      "rapm_def_contrib": -2.23,
+      "box_def_contrib": -0.04,
+      "fork_gap": -2.19
+    },
+    "Naz Reid": {
+      "rapm_def_contrib": 2.72,
+      "box_def_contrib": 0.55,
+      "fork_gap": 2.17
+    },
+    "Julius Randle": {
+      "rapm_def_contrib": -1.17,
+      "box_def_contrib": -0.57,
+      "fork_gap": -0.6
+    },
+    "Rudy Gobert": {
+      "rapm_def_contrib": 6.52,
+      "box_def_contrib": 1.02,
+      "fork_gap": 5.5
+    },
+    "Anthony Edwards": {
+      "rapm_def_contrib": -2.21,
+      "box_def_contrib": 0.02,
+      "fork_gap": -2.23
+    },
+    "Jaden McDaniels": {
+      "rapm_def_contrib": 1.07,
+      "box_def_contrib": 0.18,
+      "fork_gap": 0.89
+    },
+    "Josh Green": {
+      "rapm_def_contrib": 0.23,
+      "box_def_contrib": -0.44,
+      "fork_gap": 0.67
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "replacement_level": -1.5,
+  "rotations": {
+    "post": {
+      "LaMelo Ball": 33,
+      "Anthony Edwards": 35,
+      "Josh Green": 27,
+      "Jaden McDaniels": 33,
+      "Rudy Gobert": 30,
+      "Ayo Dosunmu": 28,
+      "Mouhamed Gueye": 18,
+      "Joan Beringer": 14,
+      "_fill_clark": 16,
+      "_fill_min": 6
+    },
+    "pre": {
+      "Ayo Dosunmu": 30,
+      "Anthony Edwards": 35,
+      "Jaden McDaniels": 33,
+      "Julius Randle": 32,
+      "Rudy Gobert": 30,
+      "Naz Reid": 26,
+      "Joan Beringer": 16,
+      "_fill_min": 38
+    }
+  },
+  "note": "RAW aggregated net (pre-SCALE-deflation); the POST-minus-PRE delta is the robust quantity",
+  "forks": {
+    "rapm": {
+      "post_raw_net": 4.4802,
+      "pre_raw_net": 4.4771,
+      "trade_delta_raw": 0.00309
+    },
+    "box": {
+      "post_raw_net": 0.6268,
+      "pre_raw_net": -0.1495,
+      "trade_delta_raw": 0.77629
+    }
+  }
+}

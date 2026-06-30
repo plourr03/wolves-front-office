@@ -18,6 +18,10 @@ Turn a trade run through the trade model into a swipeable carousel for Instagram
 
 This reuses the human look and the Remotion setup from the social-clips and social-visuals skills. Each slide is rendered as a still image, not a video.
 
+## Two modes
+- **Debate starter (default).** A hypothetical or fan trade run through the model, hook first, ending on "would you do it?" to drive comments. The six-slide anatomy and guardrails are in `references/playbook.md`.
+- **Verdict carousel.** An analytical verdict on a trade that already happened (or a full model evaluation), where the honest verdict gets the last word instead of a debate question. Built on the `lamelo/slide/render_lamelo_carousel.py` PIL renderer, not Remotion. Its design language, layout/masthead conventions, fact-check rigor, honest-verdict tone, and five-beat arc are in `references/verdict-carousel.md`. Use this when the post evaluates a settled trade rather than pitching a hypothetical.
+
 ## Order of operations (step 2 is the rule that matters)
 1. Run the trade through the model. Take the trade, yours or one from the comments, and run it to get the full output: salary matching and legality, each team's resulting books versus the tax line and both aprons, the title-odds delta, and the say-yes probabilities.
 2. Use only model numbers, never eyeball them. Every figure on every slide traces to that model run. Cap and apron numbers especially must be exact. Read references/playbook.md, and see the data-integrity reference in the social-visuals skill for the full contract and provenance workflow.
@@ -35,5 +39,6 @@ This reuses the human look and the Remotion setup from the social-clips and soci
 Give the user a plain-language summary: the trade, the headline number, what each slide shows and that every figure came from the model run, and the command to render the slides.
 
 ## Files
-- references/playbook.md, the six-slide anatomy, framing guardrails, and the data rule
+- references/playbook.md, the six-slide debate-starter anatomy, framing guardrails, and the data rule
+- references/verdict-carousel.md, the analytical verdict-carousel mode: the look (green reserved for upside only, mono numerals, editorial not glossy), the masthead/footer/date conventions, the fact-check-against-the-warehouse rigor, the honest-verdict tone, and the five-beat arc. The renderer is lamelo/slide/render_lamelo_carousel.py
 - examples/fox-for-randle-divincenzo.md, a worked example mapping model output to slides

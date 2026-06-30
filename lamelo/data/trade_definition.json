@@ -1,0 +1,60 @@
+{
+  "name": "LaMelo Ball / Josh Green acquisition, four-team sequence",
+  "as_of": "2026-06-25",
+  "source": "Bobby (confirmed actual terms, 2026-06-25). Salaries from nba_player_contracts in snapshot wh_65cf5da7f50c7f62.",
+  "structure": "four-team (MIN, BKN, CHI, CHO), encoded as legs; treat the salary matching as one simultaneous multi-team transaction unless the CBA check says otherwise",
+  "teams": ["MIN", "BKN", "CHI", "CHO"],
+  "legs": {
+    "randle_leg": {
+      "MIN_out": [
+        {"asset": "Julius Randle", "type": "player", "salary_2026_27": 33333334, "to": "BKN"},
+        {"asset": "2026 1st (No. 28)", "type": "pick", "to": "BKN"}
+      ],
+      "MIN_in": [
+        {"asset": "2026 2nd (No. 33)", "type": "pick", "from": "BKN"},
+        {"asset": "Mouhamed Gueye", "type": "player", "salary_2026_27": 2406205, "option": "team_option", "note": "near-minimum; likely acquired via minimum exception (does not count toward matching if so)", "from": "BKN"}
+      ],
+      "other": [
+        {"asset": "Nic Claxton", "salary_2026_27": 23147727, "from": "BKN", "to": "CHI", "note": "salary routing; not a MIN asset"}
+      ]
+    },
+    "ayo_resign": {
+      "player": "Ayo Dosunmu",
+      "terms": "5 years, $112M (~$22.4M/yr)",
+      "note": "re-signed using space cleared by shedding Randle; CBA funding/sequencing to be verified (see flags)"
+    },
+    "lamelo_fold_in": {
+      "MIN_out": [
+        {"asset": "Naz Reid", "type": "player", "salary_2026_27": 23275862, "to": "CHO"},
+        {"asset": "2033 1st unprotected", "type": "pick", "to": "CHO"},
+        {"asset": "2028 1st swap", "type": "pick_swap", "to": "CHO"},
+        {"asset": "2029 1st swap", "type": "pick_swap", "to": "CHO"},
+        {"asset": "2030 1st swap", "type": "pick_swap", "to": "CHO"},
+        {"asset": "2029 2nd", "type": "pick", "to": "CHO"},
+        {"asset": "2032 2nd", "type": "pick", "to": "CHO"},
+        {"asset": "2033 2nd", "type": "pick", "to": "CHO"}
+      ],
+      "MIN_in": [
+        {"asset": "LaMelo Ball", "type": "player", "salary_2026_27": 40770520, "from": "CHO"},
+        {"asset": "Josh Green", "type": "player", "salary_2026_27": 14679012, "from": "CHO"}
+      ],
+      "matching_note": "Randle ($33.33M) + Reid ($23.28M) = $56.61M out as matching for LaMelo ($40.77M) + Green ($14.68M) = $55.45M in (97.95%). Legal if Gueye is a minimum-exception add; otherwise verify the apron take-back limit."
+    }
+  },
+  "min_net": {
+    "players_out": ["Julius Randle", "Naz Reid"],
+    "players_in": ["LaMelo Ball", "Josh Green", "Mouhamed Gueye"],
+    "resigned": ["Ayo Dosunmu (5/112)"],
+    "picks_out": ["2026 1st No.28", "2033 1st unprotected", "2028 1st swap", "2029 1st swap", "2030 1st swap", "2029 2nd", "2032 2nd", "2033 2nd"],
+    "picks_in": ["2026 2nd No.33"],
+    "salary_out_2026_27": 56609196,
+    "salary_in_2026_27": 57855737,
+    "salary_in_counted_if_gueye_min_exception": 55449532
+  },
+  "verification_flags": [
+    "CBA VERIFIED 2026-06-25 (lamelo/data/cap_state.json via min_cap_state.py): aggregating Reid + Randle to acquire LaMelo TRIGGERS a second-apron HARD CAP and forfeits the $33.3M exception. Post-trade ~$211.4M: over the first apron, ~$10.6M under the $222M second-apron hard cap. No full non-taxpayer MLE; only the taxpayer MLE and minimums for four open spots. This CORRECTS an earlier note that wrongly read the Randle shed as keeping MIN under-apron; folding LaMelo in is what consumes the flexibility.",
+    "Matching: LaMelo + Green ($55.45M) in is inside the take-back on Reid + Randle ($56.61M) out. Gueye is a near-minimum add. The aggregation, not Gueye, is the binding hard-cap trigger.",
+    "DATA-SOURCE RULE: model the COMPLETED (post-2026-07-06) trade, NOT the live tracker. Spotrac ~$192M is pre-official (LaMelo's incoming max not yet processed) and would read under the first apron, which is wrong.",
+    "Full MIN post-trade roster: 11 committed players; 4 spots to fill with ~$10.6M (taxpayer MLE + minimums + RFA Jaylen Clark); thin at PF (McDaniels at the 4). Construct the full roster from the snapshot for the impact layer; this JSON encodes the trade delta only."
+  ]
+}
