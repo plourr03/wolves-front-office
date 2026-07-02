@@ -323,6 +323,11 @@ class EngineD:
                 "players": self.rosters[t].player.values,
             } for t in ("MIN", "CHA")}
             win2 = {t: np.full(n, 0.60 if t == "MIN" else 0.35) for t in ("MIN", "CHA")}
+            # Model C parameter uncertainty pairs with paths (spec: posterior
+            # draws per path). Posterior-MEAN deltas gave every path the same
+            # deterministic young-core crest -- no stall-out worlds
+            # (2026-07-02 escalation finding).
+            aging_draw = self.rng.integers(0, len(self.aging_post), n)
 
         # the franchise-prior chain evolves from ITS OWN state (spec 7.4:
         # departure shocks "shift the franchise prior state" -- a separate
@@ -344,11 +349,12 @@ class EngineD:
                 for team in ("MIN", "CHA"):
                     ti = self.fr_index[team]
                     r = rosters[team]
-                    # aging: expected archetype delta at current age (posterior mean;
-                    # residual variation absorbed by roster-cal resid + shocks)
+                    # aging: per-path posterior curve draw (player-level eps
+                    # deliberately NOT added: team-level dispersion is already
+                    # carried by roster-cal resid_sd; documented)
                     for j in range(len(r["age"])):
                         a = int(np.clip(r["age"][j], 19, 44)) - 19
-                        r["bpm"][:, j] += float(self.aging_curves[r["arch"][j]][:, a].mean())
+                        r["bpm"][:, j] += self.aging_curves[r["arch"][j]][aging_draw, a]
                         r["age"][j] += 1
                     # star departures
                     for s in STARS[team]:

@@ -4,8 +4,16 @@ encoded exactly:
 
   A1. Both tails gated at the TERMINAL horizon (2033) within +/-25% of the
       historical unconditional base rate.
-  A2. Transient check: per-year tail-rate excess non-increasing across
-      2027-2033 with tolerance 2x Monte Carlo SE per year.
+  A2. Transient check (RE-EXPRESSED per Ruling B, 2026-07-02):
+      |tail_rate_t - tail_rate_2033| non-increasing across 2027-2033,
+      tolerance 2x Monte Carlo SE per year. Symmetric in approach
+      direction and variant-blind: the original wording ("excess
+      non-increasing") encoded an approach-from-above assumption that was
+      never part of the stated fade-not-diverge purpose, and failed the
+      two-tier variant on legitimate convergence from below.
+      DISCLOSURE: re-expressed after a failing run exposed the directional
+      assumption; the fade-not-diverge rationale predates the run; weaker
+      than pre-registration and stated as such.
   A3. Historical base rates on WIN-PERCENTAGE thresholds (>= .732 top,
       <= .244 bottom) so shortened seasons enter at pace.
   A4. Pooled-over-horizons rates reported, un-gated.
@@ -54,11 +62,12 @@ class TailGateResult:
         return self.terminal_pass and self.transient_pass
 
 
-def _non_increasing_within_noise(excess: np.ndarray, se: np.ndarray) -> bool:
-    """Amendment 2: inversions within 2x per-year MC SE pass."""
-    for i in range(1, len(excess)):
+def _non_increasing_within_noise(dist_from_terminal: np.ndarray, se: np.ndarray) -> bool:
+    """Ruling B check: |rate_t - rate_terminal| non-increasing, inversions
+    within 2x per-year MC SE pass. Symmetric in approach direction."""
+    for i in range(1, len(dist_from_terminal)):
         tol = 2.0 * float(np.hypot(se[i], se[i - 1]))
-        if excess[i] > excess[i - 1] + tol:
+        if dist_from_terminal[i] > dist_from_terminal[i - 1] + tol:
             return False
     return True
 
@@ -83,8 +92,9 @@ def evaluate_tail_gate(sim_win_pct: np.ndarray, hist_win_pct: np.ndarray) -> Tai
     terminal_pass = (abs(term_top - hist_top) / hist_top <= BAND
                      and abs(term_bottom - hist_bottom) / hist_bottom <= BAND)
     transient_pass = (
-        _non_increasing_within_noise(np.array(yearly_top) - hist_top, np.array(se_top))
-        and _non_increasing_within_noise(np.array(yearly_bottom) - hist_bottom, np.array(se_bottom)))
+        _non_increasing_within_noise(np.abs(np.array(yearly_top) - term_top), np.array(se_top))
+        and _non_increasing_within_noise(np.abs(np.array(yearly_bottom) - term_bottom),
+                                         np.array(se_bottom)))
 
     return TailGateResult(
         terminal_top=term_top, terminal_bottom=term_bottom,

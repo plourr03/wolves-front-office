@@ -503,8 +503,320 @@
   "fetched_utc": "2026-07-01T22:43:31.457370+00:00",
   "url": "https://www.basketball-reference.com/leagues/NBA_2026.html"
  },
+ "player_adamsmi01": {
+  "fetched_utc": "2026-07-02T14:53:36.983914+00:00",
+  "url": "https://www.basketball-reference.com/players/a/adamsmi01.html"
+ },
+ "player_adebaba01": {
+  "fetched_utc": "2026-07-02T14:53:41.428482+00:00",
+  "url": "https://www.basketball-reference.com/players/a/adebaba01.html"
+ },
+ "player_aldrila01": {
+  "fetched_utc": "2026-07-02T14:53:45.674352+00:00",
+  "url": "https://www.basketball-reference.com/players/a/aldrila01.html"
+ },
+ "player_allenja01": {
+  "fetched_utc": "2026-07-02T14:53:49.927393+00:00",
+  "url": "https://www.basketball-reference.com/players/a/allenja01.html"
+ },
+ "player_allenra02": {
+  "fetched_utc": "2026-07-02T14:53:54.199158+00:00",
+  "url": "https://www.basketball-reference.com/players/a/allenra02.html"
+ },
+ "player_anderke01": {
+  "fetched_utc": "2026-07-02T14:53:58.488703+00:00",
+  "url": "https://www.basketball-reference.com/players/a/anderke01.html"
+ },
+ "player_anderry01": {
+  "fetched_utc": "2026-07-02T14:54:02.688972+00:00",
+  "url": "https://www.basketball-reference.com/players/a/anderry01.html"
+ },
+ "player_antetgi01": {
+  "fetched_utc": "2026-07-02T14:54:06.966579+00:00",
+  "url": "https://www.basketball-reference.com/players/a/antetgi01.html"
+ },
+ "player_anthoca01": {
+  "fetched_utc": "2026-07-02T14:54:11.205166+00:00",
+  "url": "https://www.basketball-reference.com/players/a/anthoca01.html"
+ },
+ "player_arenagi01": {
+  "fetched_utc": "2026-07-02T14:54:15.355479+00:00",
+  "url": "https://www.basketball-reference.com/players/a/arenagi01.html"
+ },
+ "player_armstda01": {
+  "fetched_utc": "2026-07-02T14:54:19.574978+00:00",
+  "url": "https://www.basketball-reference.com/players/a/armstda01.html"
+ },
+ "player_artesro01": {
+  "fetched_utc": "2026-07-02T14:54:23.845122+00:00",
+  "url": "https://www.basketball-reference.com/players/a/artesro01.html"
+ },
+ "player_avdijde01": {
+  "fetched_utc": "2026-07-02T14:54:28.067467+00:00",
+  "url": "https://www.basketball-reference.com/players/a/avdijde01.html"
+ },
+ "player_bakervi01": {
+  "fetched_utc": "2026-07-02T14:54:32.439730+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bakervi01.html"
+ },
+ "player_ballla01": {
+  "fetched_utc": "2026-07-02T14:54:36.647201+00:00",
+  "url": "https://www.basketball-reference.com/players/b/ballla01.html"
+ },
+ "player_barklch01": {
+  "fetched_utc": "2026-07-02T14:54:40.945421+00:00",
+  "url": "https://www.basketball-reference.com/players/b/barklch01.html"
+ },
+ "player_barnesc01": {
+  "fetched_utc": "2026-07-02T14:54:45.158612+00:00",
+  "url": "https://www.basketball-reference.com/players/b/barnesc01.html"
+ },
+ "player_barroda01": {
+  "fetched_utc": "2026-07-02T14:54:49.441450+00:00",
+  "url": "https://www.basketball-reference.com/players/b/barroda01.html"
+ },
+ "player_barrybr01": {
+  "fetched_utc": "2026-07-02T14:54:53.785992+00:00",
+  "url": "https://www.basketball-reference.com/players/b/barrybr01.html"
+ },
+ "player_batumni01": {
+  "fetched_utc": "2026-07-02T14:54:58.226909+00:00",
+  "url": "https://www.basketball-reference.com/players/b/batumni01.html"
+ },
+ "player_bealbr01": {
+  "fetched_utc": "2026-07-02T14:55:02.713324+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bealbr01.html"
+ },
+ "player_billuch01": {
+  "fetched_utc": "2026-07-02T14:55:08.214200+00:00",
+  "url": "https://www.basketball-reference.com/players/b/billuch01.html"
+ },
+ "player_birdla01": {
+  "fetched_utc": "2026-07-02T14:55:12.422406+00:00",
+  "url": "https://www.basketball-reference.com/players/b/birdla01.html"
+ },
+ "player_blaylmo01": {
+  "fetched_utc": "2026-07-02T14:55:16.690531+00:00",
+  "url": "https://www.basketball-reference.com/players/b/blaylmo01.html"
+ },
+ "player_bogutan01": {
+  "fetched_utc": "2026-07-02T14:55:20.923619+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bogutan01.html"
+ },
+ "player_bookede01": {
+  "fetched_utc": "2026-07-02T14:55:27.870770+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bookede01.html"
+ },
+ "player_boozeca01": {
+  "fetched_utc": "2026-07-02T14:55:32.134643+00:00",
+  "url": "https://www.basketball-reference.com/players/b/boozeca01.html"
+ },
+ "player_boshch01": {
+  "fetched_utc": "2026-07-02T14:55:36.348633+00:00",
+  "url": "https://www.basketball-reference.com/players/b/boshch01.html"
+ },
+ "player_brandel01": {
+  "fetched_utc": "2026-07-02T14:55:40.551701+00:00",
+  "url": "https://www.basketball-reference.com/players/b/brandel01.html"
+ },
+ "player_brandte01": {
+  "fetched_utc": "2026-07-02T14:55:44.835947+00:00",
+  "url": "https://www.basketball-reference.com/players/b/brandte01.html"
+ },
+ "player_brownja02": {
+  "fetched_utc": "2026-07-02T14:55:49.066715+00:00",
+  "url": "https://www.basketball-reference.com/players/b/brownja02.html"
+ },
+ "player_brunsja01": {
+  "fetched_utc": "2026-07-02T14:55:53.283211+00:00",
+  "url": "https://www.basketball-reference.com/players/b/brunsja01.html"
+ },
+ "player_bryanko01": {
+  "fetched_utc": "2026-07-02T14:55:57.551798+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bryanko01.html"
+ },
+ "player_butleca01": {
+  "fetched_utc": "2026-07-02T14:56:01.814242+00:00",
+  "url": "https://www.basketball-reference.com/players/b/butleca01.html"
+ },
+ "player_butleji01": {
+  "fetched_utc": "2026-07-02T14:56:06.076170+00:00",
+  "url": "https://www.basketball-reference.com/players/b/butleji01.html"
+ },
+ "player_bynuman01": {
+  "fetched_utc": "2026-07-02T14:56:10.312211+00:00",
+  "url": "https://www.basketball-reference.com/players/b/bynuman01.html"
+ },
+ "player_caldejo01": {
+  "fetched_utc": "2026-07-02T14:56:14.522814+00:00",
+  "url": "https://www.basketball-reference.com/players/c/caldejo01.html"
+ },
+ "player_cambyma01": {
+  "fetched_utc": "2026-07-02T14:56:18.781051+00:00",
+  "url": "https://www.basketball-reference.com/players/c/cambyma01.html"
+ },
+ "player_cartevi01": {
+  "fetched_utc": "2026-07-02T14:56:23.013214+00:00",
+  "url": "https://www.basketball-reference.com/players/c/cartevi01.html"
+ },
+ "player_cassesa01": {
+  "fetched_utc": "2026-07-02T14:56:27.237513+00:00",
+  "url": "https://www.basketball-reference.com/players/c/cassesa01.html"
+ },
+ "player_chambto01": {
+  "fetched_utc": "2026-07-02T14:56:31.458159+00:00",
+  "url": "https://www.basketball-reference.com/players/c/chambto01.html"
+ },
+ "player_chandty01": {
+  "fetched_utc": "2026-07-02T14:56:35.717923+00:00",
+  "url": "https://www.basketball-reference.com/players/c/chandty01.html"
+ },
+ "player_colemde01": {
+  "fetched_utc": "2026-07-02T14:56:39.970085+00:00",
+  "url": "https://www.basketball-reference.com/players/c/colemde01.html"
+ },
+ "player_conlemi01": {
+  "fetched_utc": "2026-07-02T14:56:44.220374+00:00",
+  "url": "https://www.basketball-reference.com/players/c/conlemi01.html"
+ },
+ "player_couside01": {
+  "fetched_utc": "2026-07-02T14:56:48.430518+00:00",
+  "url": "https://www.basketball-reference.com/players/c/couside01.html"
+ },
+ "player_cunnica01": {
+  "fetched_utc": "2026-07-02T14:56:52.627155+00:00",
+  "url": "https://www.basketball-reference.com/players/c/cunnica01.html"
+ },
+ "player_curryst01": {
+  "fetched_utc": "2026-07-02T14:56:56.843951+00:00",
+  "url": "https://www.basketball-reference.com/players/c/curryst01.html"
+ },
+ "player_daughbr01": {
+  "fetched_utc": "2026-07-02T14:57:01.213605+00:00",
+  "url": "https://www.basketball-reference.com/players/d/daughbr01.html"
+ },
+ "player_davisan02": {
+  "fetched_utc": "2026-07-02T14:57:05.442209+00:00",
+  "url": "https://www.basketball-reference.com/players/d/davisan02.html"
+ },
+ "player_davisba01": {
+  "fetched_utc": "2026-07-02T14:57:09.660477+00:00",
+  "url": "https://www.basketball-reference.com/players/d/davisba01.html"
+ },
+ "player_derozde01": {
+  "fetched_utc": "2026-07-02T14:57:13.855932+00:00",
+  "url": "https://www.basketball-reference.com/players/d/derozde01.html"
+ },
+ "player_divacvl01": {
+  "fetched_utc": "2026-07-02T14:57:18.102482+00:00",
+  "url": "https://www.basketball-reference.com/players/d/divacvl01.html"
+ },
+ "player_doncilu01": {
+  "fetched_utc": "2026-07-02T14:57:22.307605+00:00",
+  "url": "https://www.basketball-reference.com/players/d/doncilu01.html"
+ },
+ "player_dragigo01": {
+  "fetched_utc": "2026-07-02T14:57:26.475445+00:00",
+  "url": "https://www.basketball-reference.com/players/d/dragigo01.html"
+ },
+ "player_drexlcl01": {
+  "fetched_utc": "2026-07-02T14:57:30.760753+00:00",
+  "url": "https://www.basketball-reference.com/players/d/drexlcl01.html"
+ },
+ "player_drumman01": {
+  "fetched_utc": "2026-07-02T14:57:34.982234+00:00",
+  "url": "https://www.basketball-reference.com/players/d/drumman01.html"
+ },
+ "player_dumarjo01": {
+  "fetched_utc": "2026-07-02T14:57:39.241284+00:00",
+  "url": "https://www.basketball-reference.com/players/d/dumarjo01.html"
+ },
+ "player_duncati01": {
+  "fetched_utc": "2026-07-02T14:57:43.419321+00:00",
+  "url": "https://www.basketball-reference.com/players/d/duncati01.html"
+ },
+ "player_duranke01": {
+  "fetched_utc": "2026-07-02T14:57:47.628147+00:00",
+  "url": "https://www.basketball-reference.com/players/d/duranke01.html"
+ },
+ "player_durenja01": {
+  "fetched_utc": "2026-07-02T14:57:51.796014+00:00",
+  "url": "https://www.basketball-reference.com/players/d/durenja01.html"
+ },
  "player_edwaran01": {
   "fetched_utc": "2026-07-01T22:55:07.223704+00:00",
   "url": "https://www.basketball-reference.com/players/e/edwaran01.html"
+ },
+ "player_embiijo01": {
+  "fetched_utc": "2026-07-02T14:57:55.998170+00:00",
+  "url": "https://www.basketball-reference.com/players/e/embiijo01.html"
+ },
+ "player_evansty01": {
+  "fetched_utc": "2026-07-02T14:58:00.932641+00:00",
+  "url": "https://www.basketball-reference.com/players/e/evansty01.html"
+ },
+ "player_ewingpa01": {
+  "fetched_utc": "2026-07-02T14:58:05.102563+00:00",
+  "url": "https://www.basketball-reference.com/players/e/ewingpa01.html"
+ },
+ "player_foxde01": {
+  "fetched_utc": "2026-07-02T14:58:09.257235+00:00",
+  "url": "https://www.basketball-reference.com/players/f/foxde01.html"
+ },
+ "player_francst01": {
+  "fetched_utc": "2026-07-02T14:58:13.394531+00:00",
+  "url": "https://www.basketball-reference.com/players/f/francst01.html"
+ },
+ "player_gallida01": {
+  "fetched_utc": "2026-07-02T14:58:17.970675+00:00",
+  "url": "https://www.basketball-reference.com/players/g/gallida01.html"
+ },
+ "player_garneke01": {
+  "fetched_utc": "2026-07-02T14:58:22.219387+00:00",
+  "url": "https://www.basketball-reference.com/players/g/garneke01.html"
+ },
+ "player_gasolma01": {
+  "fetched_utc": "2026-07-02T14:58:26.430661+00:00",
+  "url": "https://www.basketball-reference.com/players/g/gasolma01.html"
+ },
+ "player_gasolpa01": {
+  "fetched_utc": "2026-07-02T14:58:30.624827+00:00",
+  "url": "https://www.basketball-reference.com/players/g/gasolpa01.html"
+ },
+ "player_georgpa01": {
+  "fetched_utc": "2026-07-02T14:58:34.797159+00:00",
+  "url": "https://www.basketball-reference.com/players/g/georgpa01.html"
+ },
+ "player_gilgesh01": {
+  "fetched_utc": "2026-07-02T14:58:38.963401+00:00",
+  "url": "https://www.basketball-reference.com/players/g/gilgesh01.html"
+ },
+ "player_ginobma01": {
+  "fetched_utc": "2026-07-02T14:58:43.167095+00:00",
+  "url": "https://www.basketball-reference.com/players/g/ginobma01.html"
+ },
+ "player_goberru01": {
+  "fetched_utc": "2026-07-02T14:58:47.349145+00:00",
+  "url": "https://www.basketball-reference.com/players/g/goberru01.html"
+ },
+ "player_grangda01": {
+  "fetched_utc": "2026-07-02T14:58:51.493422+00:00",
+  "url": "https://www.basketball-reference.com/players/g/grangda01.html"
+ },
+ "player_grantho01": {
+  "fetched_utc": "2026-07-02T14:58:55.703300+00:00",
+  "url": "https://www.basketball-reference.com/players/g/grantho01.html"
+ },
+ "player_greenda02": {
+  "fetched_utc": "2026-07-02T14:58:59.870902+00:00",
+  "url": "https://www.basketball-reference.com/players/g/greenda02.html"
+ },
+ "player_greendr01": {
+  "fetched_utc": "2026-07-02T14:59:04.097038+00:00",
+  "url": "https://www.basketball-reference.com/players/g/greendr01.html"
+ },
+ "player_griffbl01": {
+  "fetched_utc": "2026-07-02T14:59:08.269866+00:00",
+  "url": "https://www.basketball-reference.com/players/g/griffbl01.html"
  }
 }

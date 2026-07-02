@@ -1,5 +1,5 @@
 # pick2033 validation report (auto-generated)
-generated 2026-07-02T04:30:54.827672+00:00 @ a5bb0a5d
+generated 2026-07-02T14:59:11.610728+00:00 @ aa4a8b91
 
 **Standing caveats:** Model B and all Engine D outputs are PROVISIONAL (borderline spells kept pending Bobby's final call; contract covariate omitted pending M2 backfill; July-6 exit updates pending). Swap PRICING is hard-gated on trade-terms verification (verified_post_july6: false). The 8.4 operationalization was chosen after a correlated preview, justified a priori; weaker than true pre-registration and disclosed.
 
@@ -239,9 +239,9 @@ sensitivity: +0.005 (negligible). Real interpretation waits on the M2 fit.
 - pooled (reported, un-gated): top 0.0740, bottom 0.0581
 
 # Engine D run (PROVISIONAL), 50000 paths
-- **two_tier** (195.6s): conservation True, slots-perm True, tail terminal PASS, transient FAIL, autocorr PASS {1: 0.6648326859512176, 2: 0.4699388242634918, 3: 0.33373927532940895}
-  departures: {'Anthony Edwards': 0.87934, 'LaMelo Ball': 0.89142}  exit_shift -1.81  roster_cal r=0.979
-- **pure_a** (193.0s): conservation True, slots-perm True, tail terminal PASS, transient PASS, autocorr PASS {1: 0.6616790134720063, 2: 0.4673078820513993, 3: 0.3338892579640091}
+- **two_tier** (203.0s): conservation True, slots-perm True, tail terminal PASS, transient FAIL, autocorr PASS {1: 0.6650942162955008, 2: 0.4702755328407997, 3: 0.3342798807724913}
+  departures: {'Anthony Edwards': 0.88014, 'LaMelo Ball': 0.8889}  exit_shift -1.81  roster_cal r=0.979
+- **pure_a** (197.1s): conservation True, slots-perm True, tail terminal PASS, transient PASS, autocorr PASS {1: 0.6616790134720063, 2: 0.4673078820513993, 3: 0.3338892579640091}
 # Engine D transient check: FAIL (parked) — decision memo for Bobby
 
 2026-07-02 overnight. Two-tier variant, corrected 50k run (after fixing the
@@ -292,6 +292,51 @@ stabilizes; the letter fails on direction of approach.
 Engine D outputs remain PROVISIONAL with 4/5 gates green and this memo
 attached; downstream machinery (E2 resolution, exports) proceeds on
 provisional artifacts; nothing publishes.
+
+---
+
+## Ruling B executed (2026-07-02) — escalation triggered, investigation complete
+
+Re-judged BOTH variants under the symmetric check (|rate_t - rate_2033|
+non-increasing, 2x MC SE): pure_a PASS, two_tier **still FAIL**.
+
+### Why it still fails: overshoot-crossing, not divergence
+Two-tier yearly top rates: .0825, .0692, .0661, .0661, .0667, .0672, .0683
+(terminal .0683). The trajectory CROSSES its terminal value at ~2028
+(distance .0009), dips below (renormalization suppression peaks 2029-30),
+and recovers. Any monotone-distance check fails at a crossing by
+construction: distance ~0 at the cross, then must rise before re-converging.
+Max post-2027 violation: ~.002 absolute (~3% relative).
+
+### Required decomposition: mechanism CONFIRMED, but not via flatness
+The 28 prior-chain teams' top-tail rate also dips (.0877 -> .0673 -> .0697)
+-- which triggered this escalation. Investigation: the dip is the arithmetic
+complement of the MIN+CHA crest under 1230-win renormalization. MIN+CHA
+combined mean win_pct runs hot mid-horizon (.601 at 2028 vs .551 pure_a);
+the 28 teams' mean win_pct is suppressed by up to -.39pp exactly
+mid-horizon; correlation between that suppression and the 28-team top-tail
+gap across years: **0.996**. The field's own dynamics are clean (pure_a's
+28 decay monotonically). "Flat at stationary" was unattainable in a closed
+league once the detail teams move: renormalization transmits their crest to
+everyone. Nothing is wrong in the field.
+
+### Spec-compliance fix applied during investigation (honest miss noted)
+Aging deltas were applied as posterior MEANS (deterministic crest in every
+path); fixed to per-path posterior draws per the spec's uncertainty
+propagation. Expected it to soften the crest; it did not (it widens per-path
+spread; the crest is the mean path). Reported as predicted-wrong.
+
+### Residual question for Bobby (option 3 scope)
+Is the CHA crest right-sized? A -0.67-aggregate young roster cresting at a
+~51-win median by 2029 via aging curves with no churn/injury drag, at
+w(2029) = 0.65 roster weight, is directionally plausible (young cores do
+ascend) but untested against historical young-core base rates. That
+comparison (e.g., trajectory of sub-.500 teams with 3+ under-23 rotation
+players, 1985-2019) is a well-posed Stage-2-prep analysis if you want the
+crest validated rather than assumed. Alternatively: accept the red transient
+cell documented (terminal — the deliverable horizon — passes everywhere,
+and the violation is ~.002 at a confirmed-mechanism crossing).
+No third check-rewording proposed: the pattern lesson says stop.
 
 
 ---
@@ -356,7 +401,7 @@ provisional artifacts; nothing publishes.
 ```
 
 ### Sim manifest: pure_a (PROVISIONAL)
-gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': True, 'autocorr_pass': True}  paths: 50000  seed: 20330706
+gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': True, 'autocorr_pass': True, 'transient_check': 'ruling_B_symmetric_2026-07-02'}  paths: 50000  seed: 20330706
 
 ### Sim manifest: two_tier (PROVISIONAL)
-gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': False, 'autocorr_pass': True}  paths: 50000  seed: 20330706
+gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': False, 'autocorr_pass': True, 'transient_check': 'ruling_B_symmetric_2026-07-02'}  paths: 50000  seed: 20330706

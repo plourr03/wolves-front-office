@@ -91,3 +91,49 @@ strength too long, producing fewer bad-Wolves worlds in the swap years and a
 thinner 2033 tail, biasing asset cost DOWNWARD against the editorial thesis.
 If the priced trade still comes out expensive under a model slightly too kind
 to Minnesota's future, the finding is robust.
+
+## 2026-07-02 — Morning rulings (verbatim)
+
+RULING A (Model B calibration, 8.2 slope): Option 3.
+1. Declared now, blind to backfilled data: M2 refit uses
+   contract_years_remaining backfill (missingness flag per spec 6.2)
+   PLUS coefficient priors Normal(0, 0.5) on standardized covariates.
+   One final pre-declared spec.
+2. M2 refit re-gates ALL of 8.2 on the same sealed holdout. Second and
+   FINAL look: pass, or the red cell stands documented with the
+   bootstrap CI. No third fit.
+3. Bundled-change attribution ambiguity accepted; deliverable is a
+   calibrated model, not cause isolation.
+4. Slope reported with bootstrap CI either way; 46 events is thin and
+   the report says so.
+
+RULING B (Engine D transient, 8.4): Option 1, amended symmetrically.
+1. New check: |tail_rate_t - tail_rate_2033| non-increasing 2027-2033,
+   tolerance 2x MC SE per year. Variant-blind; re-judge BOTH variants
+   and report both.
+2. Required before Stage 2: decompose the mid-horizon dip by computing
+   the top-tail rate among the 28 prior-chain teams only. Flat at
+   stationary = mechanism confirmed; dips too = escalate to option 3
+   investigation.
+3. Disclosure in validation report: check re-expressed after a failing
+   run exposed a directional assumption; fade-not-diverge rationale
+   predates the run; weaker than pre-registration, stated as such.
+4. House-standards entry (third gate-wording defect, same author):
+   convergence checks reference the model's own terminal/stationary
+   state, symmetric in approach direction; unconditional historical
+   references belong in terminal gates only.
+
+CARRY-FORWARD:
+- 0.846 stays quarantined to provisional-tagged artifacts. It appears
+  in no draft, export, or note.
+- Logged prediction, before the M2 refit runs: the final 2033 posterior
+  should come out lighter-tailed than provisional, because the missing
+  contract covariate currently inflates departure worlds. Post-refit
+  shift is then read as predicted, not tuned.
+
+Context notes from the ruling: all three Engine D fixes assessed correct
+(prior-chain separation = correct spec 7.4 reading; shared
+rotation_aggregate = train/serve alignment; shrink-to-replacement = right
+prior for fringe players). Two earlier flags resolved against Bobby's
+recall and are so recorded: Bosh 2016 was 53 games / 1,778 minutes
+(legitimate spell), and Robertson was a covariate bug, not a name-join miss.

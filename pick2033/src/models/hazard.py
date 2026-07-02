@@ -44,6 +44,21 @@ MODEL_CODE_VERSION = "hazard_v1_provisional_nocontract"
 
 COVARS = ["age_z", "age_z2", "yrs_z", "win2_z", "deep", "mkt_c", "supermax", "an_z"]
 
+# =====================================================================
+# M2 FINAL SPEC — pre-declared 2026-07-02 (Ruling A), blind to backfilled
+# data. The M2 refit uses EXACTLY this and re-gates all of 8.2 on the same
+# sealed holdout, once. Pass, or the red cell stands with its bootstrap CI.
+# No third fit.
+M2_FINAL_SPEC = {
+    "covariates": COVARS + ["contract_z", "contract_known"],
+    #  contract_z: standardized contract_years_remaining, 0 where unknown
+    #  contract_known: missingness indicator (spec 6.2 -- the model learns
+    #  a missingness effect rather than silently imputing)
+    "coef_prior_sd": 0.5,     # Normal(0, 0.5) on standardized covariates
+    "code_version": "hazard_m2_final_contract_shrunk",
+}
+# =====================================================================
+
 
 def load_params() -> dict:
     return yaml.safe_load((PROJECT_ROOT / "config" / "model_params.yaml").read_text())

@@ -48,3 +48,48 @@ stabilizes; the letter fails on direction of approach.
 Engine D outputs remain PROVISIONAL with 4/5 gates green and this memo
 attached; downstream machinery (E2 resolution, exports) proceeds on
 provisional artifacts; nothing publishes.
+
+---
+
+## Ruling B executed (2026-07-02) — escalation triggered, investigation complete
+
+Re-judged BOTH variants under the symmetric check (|rate_t - rate_2033|
+non-increasing, 2x MC SE): pure_a PASS, two_tier **still FAIL**.
+
+### Why it still fails: overshoot-crossing, not divergence
+Two-tier yearly top rates: .0825, .0692, .0661, .0661, .0667, .0672, .0683
+(terminal .0683). The trajectory CROSSES its terminal value at ~2028
+(distance .0009), dips below (renormalization suppression peaks 2029-30),
+and recovers. Any monotone-distance check fails at a crossing by
+construction: distance ~0 at the cross, then must rise before re-converging.
+Max post-2027 violation: ~.002 absolute (~3% relative).
+
+### Required decomposition: mechanism CONFIRMED, but not via flatness
+The 28 prior-chain teams' top-tail rate also dips (.0877 -> .0673 -> .0697)
+-- which triggered this escalation. Investigation: the dip is the arithmetic
+complement of the MIN+CHA crest under 1230-win renormalization. MIN+CHA
+combined mean win_pct runs hot mid-horizon (.601 at 2028 vs .551 pure_a);
+the 28 teams' mean win_pct is suppressed by up to -.39pp exactly
+mid-horizon; correlation between that suppression and the 28-team top-tail
+gap across years: **0.996**. The field's own dynamics are clean (pure_a's
+28 decay monotonically). "Flat at stationary" was unattainable in a closed
+league once the detail teams move: renormalization transmits their crest to
+everyone. Nothing is wrong in the field.
+
+### Spec-compliance fix applied during investigation (honest miss noted)
+Aging deltas were applied as posterior MEANS (deterministic crest in every
+path); fixed to per-path posterior draws per the spec's uncertainty
+propagation. Expected it to soften the crest; it did not (it widens per-path
+spread; the crest is the mean path). Reported as predicted-wrong.
+
+### Residual question for Bobby (option 3 scope)
+Is the CHA crest right-sized? A -0.67-aggregate young roster cresting at a
+~51-win median by 2029 via aging curves with no churn/injury drag, at
+w(2029) = 0.65 roster weight, is directionally plausible (young cores do
+ascend) but untested against historical young-core base rates. That
+comparison (e.g., trajectory of sub-.500 teams with 3+ under-23 rotation
+players, 1985-2019) is a well-posed Stage-2-prep analysis if you want the
+crest validated rather than assumed. Alternatively: accept the red transient
+cell documented (terminal — the deliverable horizon — passes everywhere,
+and the violation is ~.002 at a confirmed-mechanism crossing).
+No third check-rewording proposed: the pattern lesson says stop.
