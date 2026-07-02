@@ -7,7 +7,15 @@ panel:
   seasons: [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
   # end-year convention (2014 = 2013-14). Train filter: include_train from
   # game_universe.parquet (002 prefix ONLY, R1); playoffs flagged diagnostic.
-  dev_seasons_layer2_holdout: [2019, 2020, 2021]   # G3 temporal holdout targets
+  # R2 amendment 3: conformal calibration and coverage-gated seasons MUST
+  # be disjoint (calibrating on a gated season makes that gate circular --
+  # split-conformal hits ~80% on its own calibration season by
+  # construction). Calibration = 2019; the G3 coverage gate evaluates
+  # 2020 and 2021 ONLY. R2 log-item 6: G3 reports per-season alongside
+  # pooled (two of three targets are pandemic-shaped; anomalies must be
+  # visible, not averaged away).
+  dev_seasons_layer2_holdout: [2019, 2020, 2021]   # G3 temporal RMSE targets
+  coverage_gate_seasons: [2020, 2021]              # G3 coverage rows
 
 layer1a:
   ridge_alpha: gcv_on_dev_only    # frozen after F2 dev selection
@@ -25,11 +33,20 @@ layer2:
   gbm: lightgbm                   # smoke-verified at F0; sklearn HGB fallback wrapper
   primary: set_attention          # 2 blocks, width 64-128; GNN accepted alternative
   ensemble_seeds: 8
-  conformal_holdout_season: 2021  # one held-out dev season
+  conformal_holdout_season: 2019  # DISJOINT from coverage_gate_seasons (R2 am. 3)
   team_season_intercept: dev_ablation   # A4
   leverage_weighting: frozen_at_F1      # A3, basis = adapters tag_garbage_time/tag_clutch
 
+# R2 amendment 4: cross-repo artifacts carry content hashes (sha256/16),
+# verified at load by src/adapters/pinned_artifacts.py, same posture as the
+# AM-1 fence. The aging posterior pinned is the CONVERGED v1.1 fit
+# (r_hat 1.005; its sibling b8bb2da2 is the unconverged v1 at r_hat 1.60
+# and must never be loaded).
 pinned_artifacts:
-  postmortem_lib: config/pinned_lib.yaml            # AM-1
-  model_c_aging_posteriors: ../pick2033/outputs/posteriors/   # A2 priors
-  draft_outcomes_db: ../pick2033/data/warehouse.duckdb        # rookie archetype priors
+  postmortem_lib: config/pinned_lib.yaml            # AM-1 (git blob hashes)
+  model_c_aging_posterior:
+    path: ../pick2033/outputs/posteriors/aging_with_imputation_6470b7ff80a023e1.parquet
+    sha256_16: 2843ed490a242357
+  draft_outcomes_db:
+    path: ../pick2033/data/warehouse.duckdb
+    sha256_16: 128c951b61ac5f8c

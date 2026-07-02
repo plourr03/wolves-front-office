@@ -9,9 +9,19 @@ universe:
   # test set at 1,500, quietly filtering toward acquisitions that worked.
   transactions_since: 2015-16
   incoming_player_filter:
-    top_minutes_rank: 100          # top-100-minutes player league-wide
+    # R2 amendment 1a: measured as league-wide TOTAL MINUTES rank in the
+    # season PRECEDING the transaction (not the transaction season).
+    top_minutes_rank: 100
+    top_minutes_rank_basis: total_minutes_league_wide_season_preceding_transaction
     min_possessions_new_team: 1000
     min_distinct_lineups: 3
+  # R2 amendment 1b: the realized evaluation window. Midseason moves:
+  # remainder of the transaction season. Offseason moves: the following
+  # season. min_possessions and min_distinct_lineups are counted WITHIN
+  # that window only.
+  realized_window:
+    midseason: remainder_of_transaction_season
+    offseason: following_season
   sensitivity_cut: 1500            # sealed results ALSO reported at >=1500
   inclusion: mechanical            # no cherry-picking, ever
 
@@ -30,8 +40,11 @@ windows:
   sealed: 2021-22 .. 2025-26 transactions        # ONE evaluation, post-freeze
 
 sealed_gates:
+  # R2 amendment 1c: the significance clustering unit is the TRANSACTION
+  # CASE (all of one acquisition's lineups form one cluster).
+  clustering_unit: transaction_case
   primary: beat baseline (a) on possession-weighted RMSE with
-    origin-clustered significance, OR the pre-committed null posture
+    case-clustered significance, OR the pre-committed null posture
     activates ("fit effects at public-data resolution are worth X, which is
     small") published with the same prominence a win would get
   coverage: 80% intervals in [72, 88] on sealed cases regardless

@@ -95,3 +95,49 @@ exploration-before-planning deleted this project's long pole; the second
 time this workflow caught the expensive assumption early.
 
 **Schedule posture:** reclaimed weeks are BANKED, not spent.
+
+## 2026-07-02 — R2 VERDICT (Bobby, verbatim): RATIFIED conditional on amendments 1-4
+
+R2 VERDICT: RATIFIED, conditional on amendments 1-4 landing before F1
+touches anything downstream. 5-6 are logged, non-blocking.
+1. backtest_protocol.yaml precision (keeps "mechanical" mechanical):
+   (a) top_minutes_rank_100 = league-wide total minutes in the season
+       PRECEDING the transaction;
+   (b) realized evaluation window = remainder of the transaction season
+       for midseason moves, the following season for offseason moves;
+       min_possessions and min_distinct_lineups counted within that
+       window only;
+   (c) significance clustering unit = transaction case.
+2. redundancy_def.yaml precision:
+   (a) formula with explicit subscripts:
+       f(C+i+j) - f(C+i+r_j) - f(C+r_i+j) + f(C+r_i+r_j),
+       r_i/r_j = archetypes at i's and j's positions;
+   (b) replacement archetype = minutes-weighted MEAN VECTOR of players
+       in the 20th-30th percentile impact band at the position, dev
+       seasons only (not per-dimension percentiles).
+3. model_params.yaml: conformal_holdout_season must be disjoint from
+   coverage-gated seasons. Set conformal calibration = 2019; G3
+   coverage gate evaluates 2020 and 2021 only. As configured the gate
+   is circular.
+4. pinned_artifacts: record content hashes (or cache keys) for the
+   pick2033 posteriors and warehouse.duckdb alongside the paths, per
+   D6's own promise. Verify at load like the AM-1 fence.
+5. (Log) Play-in census: ~37 expected since 2020, 5 found. Reconcile;
+   log absentees like the 3 playoff games. Excluded from training
+   either way.
+6. (Log) G3 reports per-season, not only pooled: two of three holdout
+   targets are pandemic-shaped seasons and an anomaly there should be
+   visible, not averaged away.
+
+### Amendments landed same session (all four confirmed in committed configs)
+1a/1b/1c -> backtest_protocol.yaml (preceding-season minutes basis,
+realized-window rules, transaction-case clustering). 2a/2b ->
+redundancy_def.yaml (subscripted formula; 20th-30th band mean vector).
+3 -> model_params.yaml (conformal 2019; coverage gate 2020+2021 only;
+per-season G3 reporting noted per log-item 6). 4 ->
+src/adapters/pinned_artifacts.py verifying sha256 pins at load; the
+CONVERGED v1.1 aging posterior pinned explicitly (its unconverged v1
+sibling at r_hat 1.60 must never load).
+Log-item 5 reconciled: only 2025-26's five play-in games exist under the
+005 prefix; 2021-2025 play-ins (~30) were never ingested by the warehouse
+backfill (RS+PO scope). Logged as absentees; excluded from training.
