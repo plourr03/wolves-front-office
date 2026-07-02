@@ -26,3 +26,18 @@ reconciliation only, and AM-4's strata split it into two distinct diseases:
 4. Technical-FT shooters, missing-sub back-fills, OT boundaries
 Re-run harness after each fix; the same 208-game baseline set is the
 iteration bench (dev seasons only; G1 final judgment on the full build).
+
+## Diagnostic on 3 worst legacy games (2026-07-02, closes the session)
+Decisive negatives that reorder the repair plan:
+- ZERO unresolved sub-IN names (the name->id hypothesis, plan fix 2, is
+  DEAD for these cases -- the map resolves everyone).
+- ZERO invisible players (bad players all appear in sub events).
+- Corruption is near-total per game (19/23, 16/20, 19/23 player-games bad)
+  while team-seconds stay exact: the floor MEMBERSHIP is wrong while
+  interval time is right. Candidates: period-start floors cascading
+  through otherwise-correct sub chains, or synthetic sub-IN event ordering
+  (the +0.5 action_number tie-break) misplacing entries.
+NEXT SESSION OPENS WITH: per-period error localization on these three
+games (which periods carry the delta; starters vs bench; walk one game's
+floor chain by hand against the box). Fix, re-run the 208-game bench,
+iterate.
