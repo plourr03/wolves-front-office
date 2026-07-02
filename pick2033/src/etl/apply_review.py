@@ -87,10 +87,14 @@ def final_freeze():
     out.to_parquet(STAGED / "star_spells_final.parquet", index=False)
     disclosure = holdout_disclosure(july6)
     pruned_members = holdout_members(sorted(prune))
+    ho = sp[sp.spell_id.isin(set(holdout_members(sorted(sp.spell_id.unique()))))]
+    ho_after = ho[~ho.spell_id.isin(prune)]
     prune_note = (f"borderline-prune holdout impact: {len(pruned_members)} of "
                   f"{len(prune)} pruned spells were sealed-holdout members "
-                  f"({pruned_members}); the 8.2 re-gate sample shrinks by that "
-                  f"count (precomputed 2026-07-02: 60 -> 57 spells)")
+                  f"({pruned_members}); re-gate sample shrinks 60 -> 57 spells "
+                  f"and, the honest denominator, {int(ho.event_departure.sum())} "
+                  f"-> {int(ho_after.event_departure.sum())} departure events "
+                  f"(calibration is powered by events, not spells)")
     meta = {"tag": "FINAL", "freeze_hash": h, "n_spells": int(out.spell_id.nunique()),
             "n_rows": len(out), "borderline_pruned": sorted(prune),
             "july6_departures_applied": july6, "holdout_disclosure": disclosure,

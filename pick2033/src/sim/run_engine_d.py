@@ -78,9 +78,12 @@ def run_variant(name: str, n_paths: int, seed: int, use_roster_tier: bool,
                 for lag in (1, 2, 3))
 
     SIMS.mkdir(parents=True, exist_ok=True)
+    dep_arrays = ({f"dep_{k.replace(' ', '_')}": v
+                   for k, v in res["departures"].items()}
+                  if use_roster_tier else {})
     np.savez_compressed(SIMS / f"slots_{name}_PROVISIONAL.npz",
                         slots=slots, fr_ids=np.array(res["fr_ids"]),
-                        seasons=np.array(SEASONS))
+                        seasons=np.array(SEASONS), **dep_arrays)
     np.savez_compressed(SIMS / f"winpct_{name}_PROVISIONAL.npz",
                         winpct=wpct, fr_ids=np.array(res["fr_ids"]))
     manifest = {

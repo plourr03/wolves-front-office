@@ -8,6 +8,10 @@ simulation:
   n_paths: 50000
   seasons: [2027, 2028, 2029, 2030, 2031, 2032, 2033]
   lottery_era_forward: post_2026_reformed   # verified at M0; see lottery.py
+  # LaMelo extension status (eligible July 6, 2yr/$119.2M): set from the
+  # news the morning of the final run; 'unresolved' runs BOTH scenarios
+  # (pre-declared sensitivity). Never picked silently.
+  lamelo_contract: unsigned   # unsigned | extended | unresolved
   # blend schedule w(t): roster-informed weight vs franchise prior (spec 7.4, accepted default)
   blend_w:
     2027: 1.00

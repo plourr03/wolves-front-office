@@ -301,6 +301,8 @@ def run_m2():
         ]
         OUT_VAL.mkdir(parents=True, exist_ok=True)
         (OUT_VAL / "model_b_hazard_M2_FINAL.md").write_text("\n".join(lines), encoding="utf-8")
+        # Engine D reads these to build contract covariates for sim stars
+        (POSTERIORS / "hazard_m2_stats.json").write_text(json.dumps(stats, indent=1))
         print("\n".join(lines))
         return post_full, stats
     finally:

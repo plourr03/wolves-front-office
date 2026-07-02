@@ -71,16 +71,39 @@ GAME_SD, HOME_EDGE = 13.4, 2.6
 ROTATION_MIN = np.array([34, 32, 30, 28, 26, 20, 16, 12, 8, 6], dtype=float)
 REPLACEMENT_BPM = -2.0
 
-# star players subject to Model B hazard on the detail teams (v1 list)
+# star players subject to Model B hazard on the detail teams (v1 list).
+# contract_path: season -> years remaining on the deal being played under.
+# Edwards is verified 2/1/0 with the 2029 walk year. LaMelo has the SAME
+# 2029 walk year on his current deal, and is extension-eligible July 6
+# (2yr/$119.2M): 'unsigned' keeps 2/1/0, 'extended' runs 4/3/2/1/0 through
+# 2031. July-6 directive: set per the news that morning; if unresolved,
+# run BOTH (pre-declared sensitivity), never pick silently.
+# post_walk_reset: if a star survives his walk year (no departure drawn),
+# he re-signs and the clock resets to this value, decrementing thereafter
+# (documented assumption, tornado-tested via the hazard-scale arm).
 STARS = {
     "MIN": [
         {"player": "Anthony Edwards", "age_2026": 24, "tenure_2026": 6,
-         "all_nba_count": 2, "spell_market_tier": 2},
+         "all_nba_count": 2, "spell_market_tier": 2,
+         "contract_path": {2027: 2, 2028: 1, 2029: 0}, "post_walk_reset": 4},
         {"player": "LaMelo Ball", "age_2026": 24, "tenure_2026": 0,
-         "all_nba_count": 0, "spell_market_tier": 2},
+         "all_nba_count": 0, "spell_market_tier": 2,
+         "contract_path": {2027: 2, 2028: 1, 2029: 0}, "post_walk_reset": 4,
+         "contract_path_extended": {2027: 4, 2028: 3, 2029: 2, 2030: 1, 2031: 0}},
     ],
     "CHA": [],
 }
+
+
+def contract_years_for(star: dict, season: int, scenario: str = "unsigned") -> int:
+    path = (star.get("contract_path_extended")
+            if scenario == "extended" and "contract_path_extended" in star
+            else star["contract_path"])
+    if season in path:
+        return path[season]
+    walk = max(path)
+    k = season - walk - 1
+    return max(star["post_walk_reset"] - k, 0)
 
 
 def load_config():
@@ -203,8 +226,16 @@ class EngineD:
         self.exit_shift = star_exit_prior_shift()
         aging_files = sorted(POSTERIORS.glob("aging_with_imputation_*.parquet"))
         self.aging_post = pd.read_parquet(aging_files[-1])
-        hazard_files = sorted(POSTERIORS.glob("hazard_full_*.parquet"))
+        # prefer the M2 FINAL hazard posterior when it exists (July-6+);
+        # its contract covariates are detected by column presence below
+        m2_files = sorted(POSTERIORS.glob("hazard_m2_full_*.parquet"))
+        hazard_files = m2_files or sorted(POSTERIORS.glob("hazard_full_*.parquet"))
         self.hazard_post = pd.read_parquet(hazard_files[-1])
+        self.hazard_is_m2 = "b_contract_z" in self.hazard_post.columns
+        stats_file = POSTERIORS / "hazard_m2_stats.json"
+        self.m2_stats = (json.loads(stats_file.read_text())
+                         if self.hazard_is_m2 and stats_file.exists() else None)
+        self.lamelo_scenario = cfg["simulation"].get("lamelo_contract", "unsigned")
         # precompute aging curve means per archetype x age grid (draws paired later)
         self.age_grid = np.arange(19, 45)
         self.aging_curves = {
@@ -231,7 +262,7 @@ class EngineD:
         age = s["age_2026"] + season - 2026
         yrs = s["tenure_2026"] + season - 2026
         age_z = (age - st["age_mean"]) / st["age_sd"]
-        X = np.column_stack([
+        cols = [
             np.full_like(team_win2, age_z),
             np.full_like(team_win2, age_z ** 2),
             np.full_like(team_win2, (yrs - st["yrs_mean"]) / st["yrs_sd"]),
@@ -240,8 +271,17 @@ class EngineD:
             np.full_like(team_win2, s["spell_market_tier"] - 2.0),
             np.full_like(team_win2, 1.0 if yrs >= 7 else 0.0),
             np.full_like(team_win2, (s["all_nba_count"] - st["an_mean"]) / st["an_sd"]),
-        ])
-        b = self.hazard_post[[f"b_{c}" for c in COVARS]].values
+        ]
+        covars = list(COVARS)
+        if self.hazard_is_m2:
+            cyr = contract_years_for(s, season, self.lamelo_scenario)
+            m2 = self.m2_stats
+            cols.append(np.full_like(team_win2,
+                                     (cyr - m2["cyr_mean"]) / m2["cyr_sd"]))
+            cols.append(np.ones_like(team_win2))            # contract_known
+            covars += ["contract_z", "contract_known"]
+        X = np.column_stack(cols)
+        b = self.hazard_post[[f"b_{c}" for c in covars]].values
         hz_draw = self.rng.integers(0, len(self.hazard_post), len(team_win2))
         logits = (self.hazard_post.b0.values[hz_draw]
                   + (X * b[hz_draw]).sum(1)

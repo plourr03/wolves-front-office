@@ -234,3 +234,36 @@ but ALREADY PRICED -- at the 2029 crest, 35% of CHA's simulated strength
 is franchise-prior reversion pulling the roster arc down. The genuinely
 valuable finding is emergent: the engine reproduced the historical
 crest-at-year-4-then-fade arc without being fit to it.
+
+## 2026-07-02 (evening) — verification closures + LaMelo contract directive
+
+DATE CLOSED: June 25 confirmed against public reporting (Charania broke the
+agreement in principle the morning of Thursday June 25; ESPN corroborates).
+"The trade call came on June 25" stands as written.
+
+LAMELO CONTRACT (bonus catch from verification): three years left
+(2/1/0, walk year 2029 -- the SAME summer as Edwards), extension-eligible
+July 6 for 2yr/$119.2M. Directives:
+1. Model: MIN-side star stability in the swap window depends on BOTH
+   clocks. LaMelo's contract path enters the sim config.
+2. July 6: check the news BEFORE the final Engine D run; set LaMelo's
+   path per what is signed/unsigned that morning; if unresolved, run the
+   pre-declared both-ways sensitivity (3-remaining walk-2029 vs extended
+   through 2031), never pick silently.
+3. Editorial: the shared-2029-walk-year line is PARKED out of Part 1
+   (belongs to Parts 2/3; may dissolve by publication morning).
+   Verified: Part 1 v2 contains no LaMelo contract content.
+
+DISCLOSURE ADDITION: re-gate event count reported alongside spell count.
+Verified: all three pruned holdout members are departure exits; events
+46 -> 43 (rows 235 -> 231). Wired into the --final freeze output.
+
+RELEASE GATE (spec Section 12, survives "markup-free"): when slots fill on
+July 6, one full read with real numbers in place before shipping,
+especially the cumulative-probability sentence.
+
+DRAFTING DIRECTIVE received: Part 2 drafted now slot-based (beat sheet in
+directive), Part 3 skeleton only (encumbrance reveal in conditional
+language), viz/tornado/replay code built provisional-safe now. Cadence:
+Part 1 July 6, Part 2 ~July 8-9, Part 3 mid-July. Companion carousel:
+NOT directed (question open with Bobby).

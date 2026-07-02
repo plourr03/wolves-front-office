@@ -52,6 +52,22 @@ def export_slot_distribution_2033(variant="two_tier"):
         "p_lottery": float((s2033 <= 16).mean()),
         "lottery_definition": "post-2026 reform: 16 drawn picks",
     }
+    if "dep_Anthony_Edwards" in z:
+        dep = z["dep_Anthony_Edwards"].astype(bool)
+        payload["conditional"] = {
+            "edwards_stays": {
+                "p_top4": float((s2033[~dep] <= 4).mean()),
+                "p_top10": float((s2033[~dep] <= 10).mean()),
+                "p_lottery": float((s2033[~dep] <= 16).mean()),
+                "n_paths": int((~dep).sum()),
+            },
+            "edwards_departs": {
+                "p_top4": float((s2033[dep] <= 4).mean()),
+                "p_top10": float((s2033[dep] <= 10).mean()),
+                "p_lottery": float((s2033[dep] <= 16).mean()),
+                "n_paths": int(dep.sum()),
+            },
+        }
     (OUT / "slot_distribution_2033_PROVISIONAL.json").write_text(json.dumps(payload, indent=1))
     return payload
 
