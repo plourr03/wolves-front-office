@@ -179,8 +179,9 @@ def add_covariates(sp: pd.DataFrame, seasons: pd.DataFrame, fs: pd.DataFrame,
                    on=["franchise_id", "season"], how="left"))
     sp["team_win_pct_2yr"] = sp[["win_pct_t", "win_pct_prev"]].mean(axis=1)
 
-    # deep run in t..t-2
-    deep_set = set(map(tuple, deep.values))
+    # deep run in t..t-2 (build the set as (franchise, season) explicitly --
+    # a positional-tuple mismatch here once zeroed the covariate silently)
+    deep_set = set(zip(deep.franchise_id, deep.season))
     sp["deep_run_recent"] = [
         any((f, s - k) in deep_set for k in (0, 1, 2))
         for f, s in zip(sp.franchise_id, sp.season)]

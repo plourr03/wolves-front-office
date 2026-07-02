@@ -136,6 +136,22 @@ def test_bosh_2016_entry_is_legitimate(rev):
     assert bosh.iloc[0].entry_season == 2016
 
 
+def test_deep_run_recent_populated():
+    """deep_run_recent must vary and hit known cases (a positional-tuple
+    mismatch once silently zeroed it): Duncan SAS 2004 True (2003 title run),
+    KG MIN 2005 True (2004 WCF), KG MIN 2003 False (no CF+ 2001-2003)."""
+    if not CANDIDATE.exists():
+        pytest.skip("candidate parquet not built")
+    sp = pd.read_parquet(CANDIDATE)
+    assert sp.deep_run_recent.any() and not sp.deep_run_recent.all()
+    def val(pid, season):
+        r = sp[(sp.player_id == pid) & (sp.season == season)]
+        return bool(r.deep_run_recent.iloc[0])
+    assert val("duncati01", 2004) is True
+    assert val("garneke01", 2005) is True
+    assert val("garneke01", 2003) is False
+
+
 def test_tenure_spans_same_franchise_gaps():
     """Jordan's CHI tenure clock starts 1985 and survives the 1994 gap year:
     years_with_franchise on the 1998 row is 14, not reset-at-1995."""

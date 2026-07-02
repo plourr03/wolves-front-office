@@ -1,0 +1,106 @@
+{
+ "tag": "PROVISIONAL",
+ "freeze_hash": "49f2135d534f3ce7",
+ "n_spells": 304,
+ "n_rows": 1290,
+ "pruned": [
+  "aingeda01_1",
+  "anderni01_1",
+  "barryjo01_1",
+  "brewero02_1",
+  "kittlke01_1",
+  "marshdo01_1",
+  "mcmilna01_1",
+  "milleol01_1",
+  "millspa02_1",
+  "murdoer01_1",
+  "outlabo01_1",
+  "persowe01_1",
+  "poseyja01_1",
+  "wardch01_1",
+  "willimi02_1"
+ ],
+ "set_applied": [
+  [
+   "bynuman01_1",
+   "departure"
+  ],
+  [
+   "duranke01_2",
+   "departure"
+  ],
+  [
+   "halibty01_1",
+   "censored"
+  ],
+  [
+   "irvinky01_4",
+   "censored"
+  ],
+  [
+   "jordami01_1",
+   "retire"
+  ],
+  [
+   "kingbe01_1",
+   "departure"
+  ],
+  [
+   "kirilan01_1",
+   "departure"
+  ],
+  [
+   "lillada01_2",
+   "departure"
+  ],
+  [
+   "mcdyean01_1",
+   "departure"
+  ],
+  [
+   "mournal01_1",
+   "departure"
+  ],
+  [
+   "roybr01_1",
+   "retire"
+  ],
+  [
+   "simmobe01_1",
+   "departure"
+  ],
+  [
+   "walljo01_1",
+   "departure"
+  ]
+ ],
+ "borderline_kept": [
+  "adamsmi01_1",
+  "anderke01_1",
+  "anderke01_2",
+  "anderry01_1",
+  "armstda01_1",
+  "barroda01_1",
+  "barrybr01_1",
+  "barrybr01_2",
+  "batumni01_1",
+  "caldejo01_1",
+  "evansty01_1",
+  "gallida01_1",
+  "gallida01_2",
+  "harpede01_1",
+  "hilarne01_1",
+  "kukocto01_1",
+  "lowryky01_1",
+  "martike02_1",
+  "whiteha01_1",
+  "willilo02_1",
+  "williro04_1"
+ ],
+ "pending_july6": [
+  "antetgi01_1",
+  "ballla01_1",
+  "leonaka01_3"
+ ],
+ "note": "BORDERLINE rows kept per overnight directive; final call is Bobby's at the M2 freeze. July-6 exit updates NOT applied."
+}
