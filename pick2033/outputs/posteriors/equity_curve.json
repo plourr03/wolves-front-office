@@ -1,0 +1,178 @@
+{
+ "version_hash": "862a4fb4580c63bb",
+ "n_sims": 20000,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "gate_note": "deltas only; absolute P(title) levels are gated and never stored",
+ "curve": {
+  "rebuild": {
+   "team": "BKN",
+   "base_net": -7.0,
+   "points": [
+    {
+     "net_delta": 0.25,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 0.5,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 1.0,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 1.5,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 2.0,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 3.0,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    },
+    {
+     "net_delta": 4.0,
+     "dtitle_pp_mean": 0.0,
+     "dtitle_pp_se": 0.0
+    }
+   ]
+  },
+  "mid": {
+   "team": "LAL",
+   "base_net": 1.15,
+   "points": [
+    {
+     "net_delta": 0.25,
+     "dtitle_pp_mean": 0.23199999999999998,
+     "dtitle_pp_se": 0.012903487900563983
+    },
+    {
+     "net_delta": 0.5,
+     "dtitle_pp_mean": 0.5050000000000001,
+     "dtitle_pp_se": 0.02554407954888966
+    },
+    {
+     "net_delta": 1.0,
+     "dtitle_pp_mean": 1.102,
+     "dtitle_pp_se": 0.02804460732476029
+    },
+    {
+     "net_delta": 1.5,
+     "dtitle_pp_mean": 1.7400000000000002,
+     "dtitle_pp_se": 0.029622626487197146
+    },
+    {
+     "net_delta": 2.0,
+     "dtitle_pp_mean": 2.378,
+     "dtitle_pp_se": 0.02994160984315982
+    },
+    {
+     "net_delta": 3.0,
+     "dtitle_pp_mean": 4.048,
+     "dtitle_pp_se": 0.03315116890850166
+    },
+    {
+     "net_delta": 4.0,
+     "dtitle_pp_mean": 6.079,
+     "dtitle_pp_se": 0.035334119488109696
+    }
+   ]
+  },
+  "playoff": {
+   "team": "DEN",
+   "base_net": 3.74,
+   "points": [
+    {
+     "net_delta": 0.25,
+     "dtitle_pp_mean": 0.4539999999999999,
+     "dtitle_pp_se": 0.034691497517403184
+    },
+    {
+     "net_delta": 0.5,
+     "dtitle_pp_mean": 0.9109999999999999,
+     "dtitle_pp_se": 0.0647572389775845
+    },
+    {
+     "net_delta": 1.0,
+     "dtitle_pp_mean": 1.9200000000000004,
+     "dtitle_pp_se": 0.08867073925484095
+    },
+    {
+     "net_delta": 1.5,
+     "dtitle_pp_mean": 3.146,
+     "dtitle_pp_se": 0.12537344216380109
+    },
+    {
+     "net_delta": 2.0,
+     "dtitle_pp_mean": 4.29,
+     "dtitle_pp_se": 0.11409425927714317
+    },
+    {
+     "net_delta": 3.0,
+     "dtitle_pp_mean": 7.139,
+     "dtitle_pp_se": 0.11239884341041949
+    },
+    {
+     "net_delta": 4.0,
+     "dtitle_pp_mean": 10.559999999999999,
+     "dtitle_pp_se": 0.1365741556810802
+    }
+   ]
+  },
+  "contender": {
+   "team": "BOS",
+   "base_net": 7.21,
+   "points": [
+    {
+     "net_delta": 0.25,
+     "dtitle_pp_mean": 0.873,
+     "dtitle_pp_se": 0.04983974317750861
+    },
+    {
+     "net_delta": 0.5,
+     "dtitle_pp_mean": 1.748,
+     "dtitle_pp_se": 0.016852299546352707
+    },
+    {
+     "net_delta": 1.0,
+     "dtitle_pp_mean": 3.6769999999999996,
+     "dtitle_pp_se": 0.05395831724581448
+    },
+    {
+     "net_delta": 1.5,
+     "dtitle_pp_mean": 5.748000000000001,
+     "dtitle_pp_se": 0.10004498987955399
+    },
+    {
+     "net_delta": 2.0,
+     "dtitle_pp_mean": 7.770999999999999,
+     "dtitle_pp_se": 0.06912669527758422
+    },
+    {
+     "net_delta": 3.0,
+     "dtitle_pp_mean": 12.034,
+     "dtitle_pp_se": 0.08644940716974271
+    },
+    {
+     "net_delta": 4.0,
+     "dtitle_pp_mean": 16.567,
+     "dtitle_pp_se": 0.09029950165975414
+    }
+   ]
+  }
+ }
+}

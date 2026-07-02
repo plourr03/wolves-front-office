@@ -24,7 +24,8 @@ SECTIONS = [
                                                     "model_b_calibration_decision.md"]),
     ("Gates 8.3 — Model C (aging)", ["model_c_aging.md"]),
     ("Gates 8.4 — Engine D [PROVISIONAL]", ["early_84_rejudged.md",
-                                            "engine_d_gates_PROVISIONAL.md"]),
+                                            "engine_d_gates_PROVISIONAL.md",
+                                            "engine_d_transient_decision.md"]),
     ("Model E1 — slot value", ["model_e1_slot_value.json"]),
 ]
 
