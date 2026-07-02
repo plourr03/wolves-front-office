@@ -96,7 +96,8 @@ def model(X, era_idx, y):
 
     n_cov = X.shape[1]
     b0 = numpyro.sample("b0", dist.Normal(-1.5, 1.5))
-    b = numpyro.sample("b", dist.Normal(0, 1).expand([n_cov]).to_event(1))
+    prior_sd = _M2_PRIOR_SD if _M2_PRIOR_SD is not None else 1.0
+    b = numpyro.sample("b", dist.Normal(0, prior_sd).expand([n_cov]).to_event(1))
     s_era = numpyro.sample("s_era", dist.HalfNormal(0.5))
     with numpyro.plate("eras", 4):
         z_era = numpyro.sample("z_era", dist.Normal(0, 1))
@@ -219,7 +220,126 @@ def edwards_curves(post: pd.DataFrame, stats: dict, scenario_win: float) -> dict
     }
 
 
+def prep_m2(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """M2_FINAL_SPEC covariate construction: provisional covariates PLUS
+    contract_z (standardized years-remaining, 0 where unknown) and
+    contract_known (missingness indicator, spec 6.2)."""
+    bf = pd.read_parquet(STAGED / "contract_years_backfill.parquet")
+    d = df.drop(columns=["contract_years_remaining"], errors="ignore").merge(
+        bf[["player_id", "season", "contract_years_remaining"]],
+        on=["player_id", "season"], how="left")
+    d, stats = prep(d)
+    known = d.contract_years_remaining.notna()
+    cyr = d.contract_years_remaining.fillna(0.0)
+    stats["cyr_mean"] = float(cyr[known].mean())
+    stats["cyr_sd"] = float(cyr[known].std())
+    d["contract_z"] = np.where(known, (cyr - stats["cyr_mean"]) / stats["cyr_sd"], 0.0)
+    d["contract_known"] = known.astype(float)
+    return d, stats
+
+
+def m2_holdout_split(d: pd.DataFrame, params: dict):
+    """The SAME sealed holdout as the provisional gate: drawn from the
+    PROVISIONAL spell list with the fixed seed, then intersected with the
+    final spell set (borderline prunes drop out of both sides; the seal on
+    the remaining spells is untouched)."""
+    prov = pd.read_parquet(STAGED / "star_spells_provisional.parquet")
+    rng = np.random.default_rng(params["model_b"]["holdout_seed"])
+    spells = np.array(sorted(prov.spell_id.unique()))
+    test = set(rng.choice(spells, int(0.2 * len(spells)), replace=False))
+    return d[~d.spell_id.isin(test)], d[d.spell_id.isin(test)]
+
+
+def run_m2():
+    """The July-6 step-3 button: one-shot refit under M2_FINAL_SPEC on the
+    FINAL freeze, full 8.2 re-gate on the sealed holdout, P1 grading input.
+    Second and FINAL look per Ruling A: pass, or the red cell stands with
+    its bootstrap CI. No third fit."""
+    global COVARS
+    final_path = STAGED / "star_spells_final.parquet"
+    if not final_path.exists():
+        raise RuntimeError("M2 refit requires the FINAL freeze "
+                           "(apply_review.py --final, July-6 step 2)")
+    params = load_params()
+    seed = params["seed"] + 2
+    m2_covars = M2_FINAL_SPEC["covariates"]
+    d_all, stats = prep_m2(pd.read_parquet(final_path))
+    prior_sd = M2_FINAL_SPEC["coef_prior_sd"]
+
+    saved_covars = COVARS
+    COVARS = m2_covars                       # module-level: model dims + naming
+    try:
+        train, test = m2_holdout_split(d_all, params)
+        global model
+        import numpyro.distributions as dist  # noqa: F401  (prior override below)
+        post_tr, health_tr = fit_m2_priors(train, "m2_train", seed, prior_sd)
+        p_test = np.concatenate([
+            predict_hazard(post_tr, g[COVARS].values, era=e)
+            for e, g in test.groupby("era")])
+        y_test = np.concatenate([g.event.values for _, g in test.groupby("era")])
+        c_index = auc(p_test, y_test)
+        cal = calibration_slope(p_test, y_test)
+        boot = bootstrap_slope(p_test, y_test, test)
+        cox = cox_sign_check(d_all)
+        post_full, health_full = fit_m2_priors(d_all, "m2_full", seed, prior_sd)
+        bayes_means = {c: float(post_full[f"b_{c}"].mean()) for c in COVARS}
+        sign_pairs = {c: (np.sign(cox[c]), np.sign(bayes_means[c])) for c in cox}
+        sign_ok = all(s1 == s2 for s1, s2 in sign_pairs.values())
+
+        gate_c, gate_cal = c_index >= 0.63, 0.8 <= cal <= 1.2
+        lines = [
+            "# Model B M2 FINAL refit (gates 8.2, second and final look)",
+            f"- spec: M2_FINAL_SPEC (contract covariates, Normal(0,{prior_sd}) priors)",
+            f"- health: train r_hat {health_tr.get('worst_r_hat', float('nan')):.4f}, "
+            f"full r_hat {health_full.get('worst_r_hat', float('nan')):.4f}",
+            f"- C-index: {c_index:.3f} (>= 0.63) -> **{'PASS' if gate_c else 'FAIL'}**",
+            f"- calibration slope: {cal:.3f} [boot 90% CI {boot[0]:.3f}, {boot[1]:.3f}] "
+            f"([0.8, 1.2]) -> **{'PASS' if gate_cal else 'FAIL (stands documented, no third fit)'}**",
+            f"- Cox sign agreement: {'PASS' if sign_ok else 'FAIL'}",
+            f"- contract coefficients: b_contract_z {bayes_means['contract_z']:+.3f}, "
+            f"b_contract_known {bayes_means['contract_known']:+.3f}",
+        ]
+        OUT_VAL.mkdir(parents=True, exist_ok=True)
+        (OUT_VAL / "model_b_hazard_M2_FINAL.md").write_text("\n".join(lines), encoding="utf-8")
+        print("\n".join(lines))
+        return post_full, stats
+    finally:
+        COVARS = saved_covars
+
+
+def fit_m2_priors(d, tag, seed, prior_sd):
+    """fit() with the M2 prior override, cached under its own code version."""
+    global MODEL_CODE_VERSION, _M2_PRIOR_SD
+    saved = MODEL_CODE_VERSION
+    MODEL_CODE_VERSION = M2_FINAL_SPEC["code_version"]
+    _M2_PRIOR_SD = prior_sd
+    try:
+        return fit(d, tag, seed)
+    finally:
+        MODEL_CODE_VERSION = saved
+        _M2_PRIOR_SD = None
+
+
+_M2_PRIOR_SD = None
+
+
+def bootstrap_slope(p, y, test, n=500):
+    test_sorted = pd.concat([g for _, g in test.groupby("era")])
+    brng = np.random.default_rng(7)
+    uspells = test_sorted.spell_id.unique()
+    slopes = []
+    for _ in range(n):
+        pick = brng.choice(uspells, len(uspells), replace=True)
+        idx = np.concatenate([np.where(test_sorted.spell_id.values == s)[0] for s in pick])
+        if 5 <= y[idx].sum() < len(idx):
+            slopes.append(calibration_slope(p[idx], y[idx]))
+    return float(np.percentile(slopes, 5)), float(np.percentile(slopes, 95))
+
+
 def main():
+    if "--m2" in sys.argv:
+        run_m2()
+        return
     params = load_params()
     seed = params["seed"] + 2
     d_all, stats = prep(pd.read_parquet(STAGED / "star_spells_provisional.parquet"))
