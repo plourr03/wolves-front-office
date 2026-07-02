@@ -141,3 +141,46 @@ sibling at r_hat 1.60 must never load).
 Log-item 5 reconciled: only 2025-26's five play-in games exist under the
 005 prefix; 2021-2025 play-ins (~30) were never ingested by the warehouse
 backfill (RS+PO scope). Logged as absentees; excluded from training.
+
+## 2026-07-02 — F1 directive (Bobby, verbatim) + same-session resolutions
+
+F1 DIRECTIVE (before further repair coding):
+1. Validation report labels quarantine, team-seconds, and possession
+   parity as STRUCTURAL INVARIANTS (by construction / lossless
+   partition) until repair logic exists to give them teeth. G1 "green"
+   claims come from the full 15,669-game panel, not the 208-game
+   sample.
+2. Run the discriminator: per player-game |minutes error| vs sub
+   count, by era stratum. Scales with subs -> boundary placement
+   (split bookkeeping: clock-time for minutes, boundary-snap for
+   possession attribution). Flat ~1 min -> audit Live-branch clock
+   parsing (ISO durations, fractional seconds, period boundaries)
+   against legacy-format games as reference.
+3. Confirm nba_player_stats.minutes_played precision (seconds-precise
+   vs rounded); if rounded, source seconds-precise official minutes or
+   restate the tolerance against the reference's granularity, by memo.
+4. Legacy-era repair proceeds per D3 fix order (period-start floors
+   first) once 2-3 resolve.
+
+### Resolutions (same session)
+1. LANDED: reconcile.py labels the three metrics *_INVARIANT /
+   *_PARTITION with the rationale inline; G1 claims restricted to the
+   full panel.
+2. DISCRIMINATOR: FLAT in both eras (corr +0.04 legacy / -0.09 live; no
+   scaling with sub count) -> Candidate A (boundary placement) DEAD.
+   CLOCK AUDIT: the warehouse ingest normalized ALL eras to ISO clock
+   strings; zero unparseable across both branches, fractional seconds
+   correct, period spans integrate -> Candidate B DEAD. The residual
+   signature (flat errors, LOW-sub players worst, legacy >> live) is
+   the period-start-floor fingerprint in both eras.
+3. PRECISION MEMO: minutes_played is an INTEGER TRUNCATION (0 fractional
+   in 786k rows; non-OT team sums average 234.72 vs 240 = the floor(x)
+   shortfall). A perfect reconstruction fails the naive 0.5 bar half the
+   time by construction. RESTATED GATE (authorized by directive item 3):
+   |r - (official + 0.5)| <= 1.0, i.e. r within the truncation cell plus
+   the spec's 0.5 model tolerance; naive metric kept as diagnostic; final
+   G1 adds a seconds-precise verification stratum via targeted nba_api
+   boxscore pulls. Truncation-aware baseline: legacy 67.8%, live 80.7%
+   (from 36.6%/43.0% naive) -- a third disease was the yardstick itself;
+   real disease remains in both eras.
+4. UNLOCKED: repair coding proceeds, period-start floors first, both eras.

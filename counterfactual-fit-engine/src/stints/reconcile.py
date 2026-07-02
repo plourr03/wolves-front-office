@@ -4,11 +4,20 @@ Per game: run the FORKED pipeline (floor_state.process_game +
 stint_builder.derive_stints), integrate per-player on-floor seconds from
 stint durations, join official boxscore minutes, and score:
 
-  minutes reconciliation   |reconstructed - official| <= 0.5 min, target
-                           >= 99.5% of player-games. AM-3: the denominator
-                           is ALL player-games -- a game that errors or
-                           quarantines counts every one of its player-games
-                           as failures; quarantine never launders the gate.
+  minutes reconciliation   TRUNCATION-AWARE (memo 2026-07-02): official
+                           minutes_played is an INTEGER FLOOR of true
+                           minutes (0 fractional in 786k rows; team sums
+                           short by ~0.5/player). A perfect reconstruction
+                           satisfies o <= r < o+1, so the gate metric is
+                           |r - (o + 0.5)| <= 1.0 (the 0.5 truncation cell
+                           half-width + the spec's 0.5 model tolerance),
+                           target >= 99.5% of player-games. The naive
+                           |r - o| is kept as a diagnostic column. Final G1
+                           on the full panel adds a seconds-precise
+                           verification stratum via targeted nba_api
+                           boxscore pulls. AM-3: the denominator is ALL
+                           player-games -- quarantine never launders the
+                           gate.
   team-seconds identity    sum of player-seconds == 5 * (2880 + 300*nOT)
                            exactly, per team-game (floor-size correctness
                            stated as an assertion).
@@ -75,7 +84,9 @@ def reconcile_game(game_id: str) -> dict:
         m = off.merge(ps, on=["player_id", "team_id"], how="outer")
         m["secs"] = m.secs.fillna(0.0)
         m["official_min"] = m.minutes_played.fillna(0.0).astype(float)
-        m["delta_min"] = (m.secs / 60.0 - m.official_min).abs()
+        # truncation-aware error (see module docstring); naive kept as diag
+        m["delta_min"] = (m.secs / 60.0 - (m.official_min + 0.5)).abs()
+        m["delta_naive"] = (m.secs / 60.0 - m.official_min).abs()
         team_secs = ps.groupby("team_id").secs.sum()
         team_exact = bool(np.allclose(team_secs.values, expected_team_secs, atol=0.5))
 
@@ -85,7 +96,8 @@ def reconcile_game(game_id: str) -> dict:
         return {
             "game_id": game_id, "quarantined": False,
             "n_player_games": len(m),
-            "n_within_half_min": int((m.delta_min <= 0.5).sum()),
+            "n_within_tol": int((m.delta_min <= 1.0).sum()),
+            "n_within_half_naive": int((m.delta_naive <= 0.5).sum()),
             "worst_delta_min": float(m.delta_min.max()),
             "team_seconds_exact": team_exact,
             "poss_stints": n_poss_stints, "poss_parser": n_poss_parser,
@@ -98,7 +110,7 @@ def reconcile_game(game_id: str) -> dict:
     except Exception as e:  # quarantine, never silently drop (AM-3)
         n_pg = len(official_minutes(game_id))
         return {"game_id": game_id, "quarantined": True,
-                "n_player_games": n_pg, "n_within_half_min": 0,
+                "n_player_games": n_pg, "n_within_tol": 0, "n_within_half_naive": 0,
                 "worst_delta_min": float("nan"), "team_seconds_exact": False,
                 "poss_stints": 0.0, "poss_parser": 0.0,
                 "n_validation_errors": -1, "error": f"{type(e).__name__}: {e}"}
@@ -113,15 +125,21 @@ def summarize(scorecard: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for name, g in [("pooled", scorecard)] + list(scorecard.groupby("stratum")):
         tot_pg = g.n_player_games.sum()
-        ok_pg = g.n_within_half_min.sum()
+        ok_pg = g.n_within_tol.sum()
         pp = g.poss_parser.sum()
         rows.append({
             "stratum": name,
             "games": len(g),
-            "quarantine_rate": g.quarantined.mean(),
+            # STRUCTURAL INVARIANTS until repair logic gives them teeth
+            # (directive 2026-07-02 item 1): quarantine fires only when a
+            # period cannot resolve to 5v5, team-seconds is tautological
+            # while five bodies always exist, and possession parity is a
+            # lossless-partition check blind to identity errors. Labeled so
+            # in every report; G1 green claims come from the FULL panel.
+            "quarantine_rate_INVARIANT": g.quarantined.mean(),
             "minutes_recon_rate": ok_pg / tot_pg if tot_pg else np.nan,
-            "team_seconds_exact_rate": g.team_seconds_exact.mean(),
-            "poss_parity_pct": abs(g.poss_stints.sum() - pp) / pp * 100 if pp else np.nan,
+            "team_seconds_exact_INVARIANT": g.team_seconds_exact.mean(),
+            "poss_parity_pct_PARTITION": abs(g.poss_stints.sum() - pp) / pp * 100 if pp else np.nan,
             "median_worst_delta_min": g.worst_delta_min.median(),
         })
     return pd.DataFrame(rows)
