@@ -8,10 +8,11 @@ assuming every team drifts back to league average (a statistical tie,
 t = 0.7), and we report that red gate rather than revising the threshold."
 
 ## Finding promoted from the gate investigation (leads, not appendix)
-Forty-six years of data say long-run franchise identity is worth less than
-one point per 100 possessions: the fitted spread of franchise long-run means
-is tau = 0.78 SRS with the extremes (SAS +0.85, WAS -0.69) under a single
-point. "Franchise DNA" is mostly a myth, and that is exactly why no model
+Forty-seven seasons of data (1980-2026 inclusive) say long-run franchise
+identity is worth less than one point per 100 possessions in either
+direction: the fitted spread of franchise long-run means is tau = 0.78 SRS
+with the extremes (SAS +0.85, WAS -0.69) each within a single point of
+average. "Franchise DNA" is mostly a myth, and that is exactly why no model
 beats pooled mean-reversion on seven-year point skill. The red gate and the
 finding are the same fact seen from two sides.
 

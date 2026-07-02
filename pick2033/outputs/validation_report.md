@@ -1,9 +1,11 @@
 # pick2033 validation report (auto-generated)
-generated 2026-07-02T16:44:38.360124+00:00 @ d3d80ff5
+generated 2026-07-02T18:29:24.233341+00:00 @ 3284daf3
 
 **Standing caveats:** Model B and all Engine D outputs are PROVISIONAL (borderline spells kept pending Bobby's final call; contract covariate omitted pending M2 backfill; July-6 exit updates pending). Swap PRICING is hard-gated on trade-terms verification (verified_post_july6: false). The 8.4 operationalization was chosen after a correlated preview, justified a priori; weaker than true pre-registration and disclosed.
 
 **Gate ruling log:** docs/decisions.md (8.1 accepted-with-red-gate; 8.4 operationalization ratified with amendments; Model B calibration parked).
+
+**Counting convention:** season counts are INCLUSIVE (the panel is 1980-2026 = 47 season-years, 1,314 franchise-season rows). Older memos saying '46 years' used span counting and stand under this note (declared 2026-07-02).
 
 
 ---
@@ -238,10 +240,10 @@ sensitivity: +0.005 (negligible). Real interpretation waits on the M2 fit.
 - yearly top rates 2027-33: [0.0887, 0.079, 0.0741, 0.0711, 0.0689, 0.0685, 0.0681]
 - pooled (reported, un-gated): top 0.0740, bottom 0.0581
 
-# Engine D run (PROVISIONAL), 50000 paths
-- **two_tier** (203.0s): conservation True, slots-perm True, tail terminal PASS, transient FAIL, autocorr PASS {1: 0.6650942162955008, 2: 0.4702755328407997, 3: 0.3342798807724913}
-  departures: {'Anthony Edwards': 0.88014, 'LaMelo Ball': 0.8889}  exit_shift -1.81  roster_cal r=0.979
-- **pure_a** (197.1s): conservation True, slots-perm True, tail terminal PASS, transient PASS, autocorr PASS {1: 0.6616790134720063, 2: 0.4673078820513993, 3: 0.3338892579640091}
+# Engine D run (PROVISIONAL), 2000 paths
+- **two_tier** (10.5s): conservation True, slots-perm True, tail terminal PASS, transient PASS, autocorr PASS {1: 0.665458698472196, 2: 0.4713672207811223, 3: 0.3367348887767409}
+  departures: {'Anthony Edwards': 0.889, 'LaMelo Ball': 0.886}  exit_shift -1.81  roster_cal r=0.979
+- **pure_a** (8.1s): conservation True, slots-perm True, tail terminal PASS, transient PASS, autocorr PASS {1: 0.6607580700242676, 2: 0.4664970966101926, 3: 0.335507201149005}
 # Engine D transient check: FAIL (parked) — decision memo for Bobby
 
 2026-07-02 overnight. Two-tier variant, corrected 50k run (after fixing the

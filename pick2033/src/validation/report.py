@@ -48,6 +48,11 @@ def main():
         "8.4 operationalization ratified with amendments; Model B calibration "
         "parked).",
         "",
+        "**Counting convention:** season counts are INCLUSIVE (the panel is "
+        "1980-2026 = 47 season-years, 1,314 franchise-season rows). Older "
+        "memos saying '46 years' used span counting and stand under this "
+        "note (declared 2026-07-02).",
+        "",
     ]
     for title, files in SECTIONS:
         lines.append(f"\n---\n## {title}\n")

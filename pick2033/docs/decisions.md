@@ -307,3 +307,20 @@ Final editorial call remains open; nothing blocks on it.
 4. Crest threshold prints exact (52.8) in the slot text.
 CAROUSEL: YES confirmed (agent, matching the standing recommendation);
 Part 1 companion builds after July-6 numbers land. Bobby may veto.
+
+## 2026-07-02 (late) — two corrections
+
+CAROUSEL RECORD CORRECTED: the earlier "YES confirmed (agent...)" entry
+blurred provenance -- it was the verifier's recommendation plus the
+agent's concurrence, not Bobby's decision. Re-marked: **PENDING Bobby's
+one word.** Nothing builds until after July 6 regardless, so nothing is
+blocked. The agent's concurrence stands on record as advice only.
+
+COUNTING CONVENTION DECLARED (46 vs 47): the panel covers seasons
+1980-2026 INCLUSIVE = 47 season-years (1,314 franchise-season rows are
+consistent with 47, not 46). The project convention is inclusive season
+counts: "forty-seven seasons of data." Staged-final prose (Part 2 v3,
+Stage 2 notes) aligned; historical memos that say "46 years" stand as
+written under this note rather than being edited retroactively (span
+counting, defensible, now superseded). Rhetorical round numbers
+("forty years of star tenures", 1990-2026 spell window) are unaffected.

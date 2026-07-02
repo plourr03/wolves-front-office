@@ -16,7 +16,7 @@ Before the findings, the trust ledger. You should not believe a simulation becau
 
 ## What the machine had to survive
 
-Franchise DNA barely exists, and we found that out by losing a bet to a simpler model. Our trajectory model estimates a long-run identity for every franchise, and forty-six years of data say no franchise's long-run identity sits even a full point from league average (the fitted tau is 0.78, with the extremes, San Antonio at +0.85 and Washington at -0.69, both inside a single point in either direction). That is why our model could not beat plain league-average reversion on seven-year point forecasts, a gate we failed, documented, and kept red rather than re-scoring. The same fact that embarrassed the model is load-bearing for the price: Charlotte is not doomed to be Charlotte, which is exactly why their swap rights have value.
+Franchise DNA barely exists, and we found that out by losing a bet to a simpler model. Our trajectory model estimates a long-run identity for every franchise, and forty-seven seasons of data say no franchise's long-run identity sits even a full point from league average (the fitted tau is 0.78, with the extremes, San Antonio at +0.85 and Washington at -0.69, both inside a single point in either direction). That is why our model could not beat plain league-average reversion on seven-year point forecasts, a gate we failed, documented, and kept red rather than re-scoring. The same fact that embarrassed the model is load-bearing for the price: Charlotte is not doomed to be Charlotte, which is exactly why their swap rights have value.
 
 A second red cell exists where our own check's wording, not the model, was at fault; we kept it red anyway, mechanism attached.
 
