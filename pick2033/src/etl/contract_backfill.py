@@ -4,16 +4,29 @@ Source: B-Ref player-page all_salaries tables (full career, season x salary),
 fetched through the cached throttled client; slugs are already our
 player_ids, so there is NO name-matching risk.
 
-Inference: contract boundaries from salary-series breakpoints.
-  A season STARTS a new contract when: it is the first NBA salary season,
-  OR follows a gap year, OR the year-over-year salary change falls outside
-  the within-contract raise envelope for the era:
-     |change| > 13%  through 2011-12   (CBAs allowed 12.5%/10.5% raises)
-     |change| > 9%   2012-13 onward    (7.5%/4.5% then 8%/5%)
+Inference: contract boundaries from salary-series breakpoints + franchise
+changes. A season STARTS a new contract when:
+  - it is the first NBA salary season, OR follows a gap year, OR
+  - the player's final-stint FRANCHISE changed between seasons (offseason
+    moves: FA signings are new deals; the rare offseason trade is
+    misread as a break -- acceptable truncation noise, flagged), OR
+  - the year-over-year salary change falls outside the era's
+    within-contract raise envelope:
+       |change| > 25%  through 1998-99  (pre-1999 CBA: 20% Bird raises)
+       |change| > 15%  through 2011-12  (12.5%-of-year-1 raises exceed
+                                         12.5% yoy early in backloaded deals
+                                         -- Garnett's $126M was shredded by
+                                         a 13% envelope in QC)
+       |change| > 9%   2012-13 onward   (7.5%/4.5% then 8%/5%)
+    with the envelope widened to 30% in a player's first four salary
+    seasons (rookie-scale year-4 escalations run ~26%, e.g. Edwards).
   Envelopes are deliberately GENEROUS: a false break truncates
   years-remaining mid-contract, which is the worse error for the hazard.
   contract_years_remaining at season t = (last season of current contract) - t.
   Walk year = 0. One-year deals chain to 0 every year (correct).
+  KNOWN BLIND SPOT (accepted, flagged): a same-franchise re-sign whose
+  first-year salary lands within the envelope of the prior year reads as a
+  contract continuation (years-remaining overstated across the re-sign).
 
 Known limitations (documented, carried as method flags):
   - extensions appear as breaks at their START season (years-remaining
@@ -76,7 +89,17 @@ def parse_salaries(html: str) -> pd.DataFrame:
     return df.groupby("season", as_index=False).salary.sum()  # traded-year splits
 
 
-def infer_contracts(sal: pd.DataFrame) -> pd.DataFrame:
+def raise_envelope(season: int, career_idx: int) -> float:
+    if career_idx < 4:
+        return 0.30          # rookie-scale escalations
+    if season <= 1999:
+        return 0.25
+    if season <= 2012:
+        return 0.15
+    return 0.09
+
+
+def infer_contracts(sal: pd.DataFrame, team_by_season: dict | None = None) -> pd.DataFrame:
     """Break inference -> per-season years remaining."""
     sal = sal.sort_values("season").reset_index(drop=True)
     starts = []
@@ -84,10 +107,20 @@ def infer_contracts(sal: pd.DataFrame) -> pd.DataFrame:
         if i == 0 or r.season - sal.season[i - 1] > 1:
             starts.append(i)
             continue
+        if team_by_season is not None:
+            t0 = team_by_season.get(int(sal.season[i - 1]))
+            t1 = team_by_season.get(int(r.season))
+            if t0 is not None and t1 is not None and t0 != t1:
+                starts.append(i)   # offseason franchise change = new deal
+                continue
         prev = sal.salary[i - 1]
         change = (r.salary - prev) / prev if prev > 0 else 1.0
-        env = 0.13 if r.season <= 2012 else 0.09
-        if abs(change) > env:
+        # envelope keys on the CURRENT SEGMENT'S start season: contracts keep
+        # the raise rules of the CBA they were signed under (a season-keyed
+        # envelope shredded Garnett's 1999-2004 deal at the 1999 boundary and
+        # clipped LeBron's 2011-14 deal at the 2011-CBA boundary in QC)
+        seg_start_season = int(sal.season[starts[-1]])
+        if abs(change) > raise_envelope(seg_start_season, i):
             starts.append(i)
     starts.append(len(sal))
     rows = []
@@ -118,6 +151,19 @@ def main():
     players = sorted(sp.player_id.unique())
     names = sp.drop_duplicates("player_id").set_index("player_id").player_name
     contracts = pd.read_csv(CONTRACTS_CSV)
+    # final-stint franchise per (player, season) for franchise-change breaks
+    import duckdb
+    con = duckdb.connect(str(PROJECT_ROOT / "data" / "warehouse.duckdb"), read_only=True)
+    stints = con.execute("""
+        SELECT player_id, season, franchise_id FROM (
+          SELECT player_id, season, franchise_id,
+                 row_number() OVER (PARTITION BY player_id, season
+                   ORDER BY coalesce(stint_order, 0) DESC) rn
+          FROM player_impact_seasons WHERE NOT is_combined AND franchise_id IS NOT NULL)
+        WHERE rn = 1""").fetchdf()
+    con.close()
+    team_map = {pid: dict(zip(g.season, g.franchise_id))
+                for pid, g in stints.groupby("player_id")}
     print(f"backfilling {len(players)} spell players", flush=True)
 
     all_rows, missing = [], []
@@ -127,7 +173,7 @@ def main():
         if sal.empty:
             missing.append(pid)
             continue
-        inf = infer_contracts(sal)
+        inf = infer_contracts(sal, team_map.get(pid))
         # active players: extend the final contract with the verified forward view
         fwd = forward_years_active(names[pid], contracts)
         if fwd is not None and (inf.season.max() >= 2025):
@@ -147,8 +193,9 @@ def main():
     bf["contract_known"] = True
     bf.to_parquet(STAGED / "contract_years_backfill.parquet", index=False)
 
-    merged = sp.merge(bf[["player_id", "season", "contract_years_remaining"]],
-                      on=["player_id", "season"], how="left")
+    merged = sp.drop(columns=["contract_years_remaining"], errors="ignore").merge(
+        bf[["player_id", "season", "contract_years_remaining"]],
+        on=["player_id", "season"], how="left")
     cov = merged.contract_years_remaining.notna().mean()
     by_era = merged.assign(era=(merged.season // 10) * 10).groupby("era").apply(
         lambda g: g.contract_years_remaining.notna().mean(), include_groups=False)
@@ -160,9 +207,15 @@ def main():
         "- by decade: " + ", ".join(f"{int(e)}s {v:.1%}" for e, v in by_era.items()),
         f"- walk-year rate among covered rows: "
         f"{(merged.contract_years_remaining == 0).mean() / max(cov, 1e-9):.1%}",
-        "- method: era-aware salary-break inference (envelopes 13% pre-2012, "
-        "9% after); generous on purpose (false breaks truncate years-remaining, "
-        "the worse error for the hazard). Data enters the M2 refit blind.",
+        "- method: salary-break + franchise-change inference; era envelopes "
+        "keyed on the segment's SIGNING season (25% pre-1999, 15% to 2011, 9% "
+        "after; 30% in a career's first four seasons for rookie scale); "
+        "generous on purpose (false breaks truncate years-remaining, the worse "
+        "error for the hazard). Known blind spot: smooth same-franchise "
+        "re-signs read as continuations (Duncan-pattern; overstates remaining "
+        "for stay-put stars, attenuating the coefficient). QC'd against "
+        "Edwards/Garnett/LeBron/Duncan ground truth. Data enters the M2 refit "
+        "blind to fit outcomes.",
     ]
     OUT_VAL.mkdir(parents=True, exist_ok=True)
     (OUT_VAL / "contract_backfill_coverage.md").write_text("\n".join(lines), encoding="utf-8")
