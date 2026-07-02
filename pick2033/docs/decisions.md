@@ -289,3 +289,21 @@ decomposition so every asset appears in the total exactly once.
 CAROUSEL: recommended YES (Part 1 companion, built after July-6 numbers
 land; hazard curve is the most carousel-able chart of the project).
 Final editorial call remains open; nothing blocks on it.
+
+## 2026-07-02 — Part 2 v3 polish + p70 de-fragilization + record corrections
+1. Franchise-DNA sentence FIXED (factual): extremes are 1.54 apart; true
+   claim is within +/-1 of league average. Bobby's replacement verbatim.
+   Was present in v1 and v2; caught on the v2 verification pass.
+2. p70 re-arm de-fragilized: designated tags only (base-case FINAL, else
+   BOTH both-ways scenario finals evaluated with both required under
+   threshold, else provisional fallback). No file-recency logic in any
+   validation path. July-6 both-ways commands:
+     run_engine_d.py 50000 --tag=FINAL_UNSIGNED --lamelo=unsigned
+     run_engine_d.py 50000 --tag=FINAL_EXTENDED --lamelo=extended
+   (resolved case: one run, --tag=FINAL, config set from the news.)
+3. RECORD CORRECTION: commit 8a05f042's summary said the seconds slot was
+   added to Beat 5; it lives in Beat 3 (alongside the 2026 line item, both
+   feeding Beat 5's total). Placement correct, summary was wrong.
+4. Crest threshold prints exact (52.8) in the slot text.
+CAROUSEL: YES confirmed (agent, matching the standing recommendation);
+Part 1 companion builds after July-6 numbers land. Bobby may veto.

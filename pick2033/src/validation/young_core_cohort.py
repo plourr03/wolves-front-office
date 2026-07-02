@@ -41,15 +41,28 @@ OUT = PROJECT_ROOT / "outputs" / "validation"
 MODEL_CHA_MEDIANS = [45.0, 49.8, 50.8, 49.2, 46.9]   # provisional fallback
 
 
-def model_cha_medians_live() -> list[float]:
-    z_path = PROJECT_ROOT / "outputs" / "sims" / "winpct_two_tier_PROVISIONAL.npz"
-    final = PROJECT_ROOT / "outputs" / "sims" / "winpct_two_tier_FINAL.npz"
-    if final.exists():
-        z_path = final
-    z = np.load(z_path)
-    fr = list(z["fr_ids"])
-    ti = fr.index("CHA")
-    return [round(float(np.median(z["winpct"][:, y, ti])) * 82, 1) for y in range(5)]
+def model_cha_medians_by_scenario() -> dict[str, list[float]]:
+    """Designated tags only, NEVER newest-file logic (a both-ways July-6 run
+    produces two FINAL-class artifacts and mtime would make the validation
+    input depend on run order). Priority: the base-case FINAL if it exists;
+    else BOTH both-ways scenario finals (each evaluated, BOTH must sit under
+    threshold); else the provisional fallback."""
+    sims = PROJECT_ROOT / "outputs" / "sims"
+
+    def medians(path):
+        z = np.load(path)
+        ti = list(z["fr_ids"]).index("CHA")
+        return [round(float(np.median(z["winpct"][:, y, ti])) * 82, 1) for y in range(5)]
+
+    base = sims / "winpct_two_tier_FINAL.npz"
+    if base.exists():
+        return {"FINAL": medians(base)}
+    scen = {f"FINAL_{s}": sims / f"winpct_two_tier_FINAL_{s}.npz"
+            for s in ("UNSIGNED", "EXTENDED")}
+    found = {k: medians(p) for k, p in scen.items() if p.exists()}
+    if found:
+        return found
+    return {"PROVISIONAL": medians(sims / "winpct_two_tier_PROVISIONAL.npz")}
 
 
 def build_cohort():
@@ -92,11 +105,15 @@ def main():
     t_m = np.array(matched.traj.tolist(), float)
     fan_all, fan_m = fan(t_all), fan(t_m)
 
-    medians = model_cha_medians_live()
-    print(f"model CHA medians (live from newest sim artifact): {medians}")
-    model_peak = max(medians)
+    by_scenario = model_cha_medians_by_scenario()
+    for tag, med in by_scenario.items():
+        print(f"model CHA medians [{tag}]: {med}")
+    medians = max(by_scenario.values(), key=max)   # report the worst case
+    model_peak = max(max(m) for m in by_scenario.values())
     p70_peak = max(fan_m["p70"])
     p50_peak = max(fan_m["p50"])
+    # trigger if ANY evaluated scenario crests over p70 (both-ways runs must
+    # BOTH sit under threshold to pass)
     triggered = model_peak > p70_peak
 
     report = {

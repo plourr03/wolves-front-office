@@ -118,7 +118,15 @@ def main():
     import yaml
     cfg = yaml.safe_load((PROJECT_ROOT / "config" / "model_params.yaml").read_text())
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    tag = "FINAL" if "--tag=FINAL" in sys.argv else "PROVISIONAL"
+    tag = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--tag=")),
+               "PROVISIONAL")
+    lamelo = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--lamelo=")), None)
+    if lamelo:
+        cfg["simulation"]["lamelo_contract"] = lamelo
+        import src.sim.league_sim as _ls
+        _orig = _ls.load_config
+        _ls.load_config = lambda: {**_orig(), "simulation": {**_orig()["simulation"],
+                                                             "lamelo_contract": lamelo}}
     n_paths = int(args[0]) if args else cfg["simulation"]["n_paths"]
     seed = cfg["seed"] + 5
     fs = hist_win_pct()
