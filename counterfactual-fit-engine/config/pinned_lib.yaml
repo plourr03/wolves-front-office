@@ -1,0 +1,10 @@
+# AM-1: postmortem/lib is a LIVE library serving another project. These git
+# blob hashes are verified AT IMPORT TIME by src/adapters/postmortem_lib.py,
+# which refuses to import on mismatch. If postmortem must move forward
+# mid-build, fitengine vendors a snapshot at these hashes (one decision
+# memo, no silent divergence). Pinned 2026-07-02 at repo commit 1e56b4c4.
+pinned_files:
+  postmortem/lib/db.py: fb1b5be6d36925ddb3999f9c000ff2114f041da5
+  postmortem/lib/pbp.py: 0a9024c89c7cd3284dee2c8b2208bf1e17fbfb52
+  postmortem/lib/lineups.py: 23587a1d0a0a1bcfd18fe88b6408f79d6b0385fe
+  postmortem/lib/lineup_aggregation.py: 1332d75f2303f6475959202a4e4879a10e7c4704

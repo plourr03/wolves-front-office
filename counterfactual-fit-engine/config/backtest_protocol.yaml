@@ -1,0 +1,44 @@
+# G4 trade-backtest protocol — FROZEN at F0 (2026-07-02) before any model
+# exists. Changes after this point require a decision memo; the sealed
+# window gets exactly one evaluation, ever.
+
+universe:
+  # Bobby's F0 amendment, verbatim rationale in docs/decisions.md:
+  # 1,000 (not 1,500) reduces survivorship-of-successful-fits selection --
+  # a failed fit gets benched at 800 possessions and would never enter the
+  # test set at 1,500, quietly filtering toward acquisitions that worked.
+  transactions_since: 2015-16
+  incoming_player_filter:
+    top_minutes_rank: 100          # top-100-minutes player league-wide
+    min_possessions_new_team: 1000
+    min_distinct_lineups: 3
+  sensitivity_cut: 1500            # sealed results ALSO reported at >=1500
+  inclusion: mechanical            # no cherry-picking, ever
+
+task:
+  data_asof: transaction_date      # prior-season vectors only (leakage rule)
+  predict: post-move lineups that actually played (no rotation prediction)
+  scoring: possession-weighted RMSE vs realized net rating
+
+baselines:
+  a: additive sum of prior-season impact estimates
+  b: league-average prior
+  c: previous-team lineup carryover
+
+windows:
+  development: 2015-16 .. 2020-21 transactions   # iterate freely
+  sealed: 2021-22 .. 2025-26 transactions        # ONE evaluation, post-freeze
+
+sealed_gates:
+  primary: beat baseline (a) on possession-weighted RMSE with
+    origin-clustered significance, OR the pre-committed null posture
+    activates ("fit effects at public-data resolution are worth X, which is
+    small") published with the same prominence a win would get
+  coverage: 80% intervals in [72, 88] on sealed cases regardless
+  noise_floor: A6 split-half reliability ceiling reported alongside;
+    skill judged both raw and as fraction of achievable ceiling
+
+showcase:
+  luka_ad_trade:
+    asof: 2025-02-01
+    task: predict actual post-trade LAL and DAL lineups; grade in public

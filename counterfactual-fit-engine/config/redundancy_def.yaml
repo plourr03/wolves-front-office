@@ -1,0 +1,27 @@
+# The redundancy score — FROZEN at F0 (2026-07-02), before anyone sees any
+# value of it. The Edwards-Ball value of this quantity is the flagship's
+# headline number; the definition cannot be shopped after the fact.
+
+definition: model_based_double_difference
+formula: >
+  For pair (i, j) in context lineup C:
+  f(C + i + j) - f(C + i + r) - f(C + j + r) + f(C + r + r')
+  where r, r' are replacement-archetype vectors at the relevant positional
+  archetypes. Averaged over the fixed context-lineup set and reference
+  defenses. Positive = complementary, negative = redundant. Units:
+  net-rating points.
+
+replacement_archetype:
+  # Bobby's ruling 2026-07-02: realistic bench replacement, not average
+  construction: positional archetype means at the 25th percentile of
+    minutes-weighted impact, computed on development seasons only, frozen
+    with this file
+
+context_lineups: fixed set defined at F6 config-freeze BEFORE any
+  Edwards-Ball computation; drawn from plausible 2026-27 Wolves fives with
+  the pair's slots vacated
+reference_defenses: the frozen reference-opponent set (Layer 3)
+
+secondary_illustration_only:
+  creation_subspace_cosine: computed for the piece as description, never
+    the headline; explicitly not load-bearing

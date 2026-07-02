@@ -1,0 +1,17 @@
+# fitengine — pinned after F0 install + smoke tests
+numpy
+pandas
+pyarrow
+duckdb
+pyyaml
+scipy
+scikit-learn
+matplotlib
+psycopg2-binary
+python-dotenv
+pytest
+jax[cpu]
+numpyro
+arviz
+torch
+lightgbm
