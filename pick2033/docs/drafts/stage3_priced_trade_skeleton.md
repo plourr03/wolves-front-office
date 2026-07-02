@@ -26,6 +26,8 @@ Short options primer through the basketball lens: an option's value lives in the
 
 [SLOT: the resolved 2026 No. 28/No. 33 deterministic line item, one sentence, footnoted as slot-EV by design.]
 
+[SLOT: the three second-rounders (2029, 2032, 2033), flat-valued at the E1 slot-31-45 average with the one-line sensitivity, so every asset in the package appears in the total exactly once.]
+
 ## Beat 4 — The centerpiece: we ran the machine on 2013
 
 The credibility beat: the same pipeline, fed only data available in the summer of 2013, pricing the Nets' package to Boston at the moment it was signed. What did it say about the picks that became Jaylen Brown and Jayson Tatum? Did reality land inside the intervals?

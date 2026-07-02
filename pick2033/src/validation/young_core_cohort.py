@@ -32,7 +32,24 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUT = PROJECT_ROOT / "outputs" / "validation"
 
-MODEL_CHA_MEDIANS = [45.0, 49.8, 50.8, 49.2, 46.9]   # 2027-2031, seed 20330706
+# Fallback = the provisional run (seed 20330706). The RE-ARMED rule
+# (2026-07-02 markup): the p70 trigger binds to the artifact that ships --
+# on July 6 this script re-runs against the FINAL Engine D output
+# (read live from outputs/sims/ below) and the cohort-calibrated adjustment
+# fires automatically if the final crest crosses p70. Cohort side is final
+# and fixed; only the model side re-reads.
+MODEL_CHA_MEDIANS = [45.0, 49.8, 50.8, 49.2, 46.9]   # provisional fallback
+
+
+def model_cha_medians_live() -> list[float]:
+    z_path = PROJECT_ROOT / "outputs" / "sims" / "winpct_two_tier_PROVISIONAL.npz"
+    final = PROJECT_ROOT / "outputs" / "sims" / "winpct_two_tier_FINAL.npz"
+    if final.exists():
+        z_path = final
+    z = np.load(z_path)
+    fr = list(z["fr_ids"])
+    ti = fr.index("CHA")
+    return [round(float(np.median(z["winpct"][:, y, ti])) * 82, 1) for y in range(5)]
 
 
 def build_cohort():
@@ -75,7 +92,9 @@ def main():
     t_m = np.array(matched.traj.tolist(), float)
     fan_all, fan_m = fan(t_all), fan(t_m)
 
-    model_peak = max(MODEL_CHA_MEDIANS)
+    medians = model_cha_medians_live()
+    print(f"model CHA medians (live from newest sim artifact): {medians}")
+    model_peak = max(medians)
     p70_peak = max(fan_m["p70"])
     p50_peak = max(fan_m["p50"])
     triggered = model_peak > p70_peak
@@ -84,7 +103,7 @@ def main():
         "cohort_n": len(cohort), "matched_n": len(matched),
         "unconditional_fan_wins": fan_all,
         "matched_fan_wins": fan_m,
-        "model_cha_medians_2027_2031": MODEL_CHA_MEDIANS,
+        "model_cha_medians_2027_2031": medians,
         "model_peak": model_peak, "matched_p70_peak": p70_peak,
         "matched_p50_peak": p50_peak,
         "decision_rule_triggered": bool(triggered),
@@ -99,7 +118,7 @@ def main():
     print("matched fan (wins), years +1..+5:")
     for q in ("p10", "p30", "p50", "p70", "p90"):
         print(f"  {q}: {fan_m[q]}")
-    print(f"model CHA medians 2027-31: {MODEL_CHA_MEDIANS}")
+    print(f"model CHA medians 2027-31: {medians}")
     print(f"DECISION RULE: model peak {model_peak} vs matched p70 peak {p70_peak} "
           f"-> {'TRIGGERED (apply cohort-calibrated adjustment)' if triggered else 'crest stands'}")
     print(f"P2: {report['prediction_P2_grade']}")

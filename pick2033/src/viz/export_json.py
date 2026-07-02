@@ -25,6 +25,15 @@ GATE_NOTE = ("Absolute title probabilities are gated (LaMelo clean-room "
              "convention); equity figures are CRN-paired deltas only.")
 
 
+def sim_artifact(prefix: str, variant: str) -> tuple:
+    """Prefer FINAL artifacts when they exist; fall back to PROVISIONAL.
+    Returns (path, tag)."""
+    final = SIMS / f"{prefix}_{variant}_FINAL.npz"
+    if final.exists():
+        return final, "FINAL"
+    return SIMS / f"{prefix}_{variant}_PROVISIONAL.npz", "PROVISIONAL"
+
+
 def meta(tag="PROVISIONAL", **extra) -> dict:
     try:
         commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
@@ -37,14 +46,15 @@ def meta(tag="PROVISIONAL", **extra) -> dict:
 
 
 def export_slot_distribution_2033(variant="two_tier"):
-    z = np.load(SIMS / f"slots_{variant}_PROVISIONAL.npz")
+    path, tag = sim_artifact("slots", variant)
+    z = np.load(path)
     slots, fr_ids = z["slots"], list(z["fr_ids"])
     seasons = list(z["seasons"])
     mi, yi = fr_ids.index("MIN"), seasons.index(2033)
     s2033 = slots[:, yi, mi]
     dist = [{"slot": k, "p": float((s2033 == k).mean())} for k in range(1, 31)]
     payload = {
-        "meta": meta(variant=variant, n_paths=int(slots.shape[0]),
+        "meta": meta(tag=tag, variant=variant, n_paths=int(slots.shape[0]),
                      note="MIN 2033 first (conveys to CHA outright)"),
         "slots": dist,
         "p_top4": float((s2033 <= 4).mean()),
@@ -68,15 +78,16 @@ def export_slot_distribution_2033(variant="two_tier"):
                 "n_paths": int(dep.sum()),
             },
         }
-    (OUT / "slot_distribution_2033_PROVISIONAL.json").write_text(json.dumps(payload, indent=1))
+    (OUT / f"slot_distribution_2033_{tag}.json").write_text(json.dumps(payload, indent=1))
     return payload
 
 
 def export_win_fancharts(variant="two_tier"):
-    z = np.load(SIMS / f"winpct_{variant}_PROVISIONAL.npz")
+    path, tag = sim_artifact("winpct", variant)
+    z = np.load(path)
     wpct, fr_ids = z["winpct"], list(z["fr_ids"])
     seasons = list(range(2027, 2034))
-    payload = {"meta": meta(variant=variant, n_paths=int(wpct.shape[0]))}
+    payload = {"meta": meta(tag=tag, variant=variant, n_paths=int(wpct.shape[0]))}
     for team in ("MIN", "CHA"):
         ti = fr_ids.index(team)
         rows = []
@@ -87,7 +98,7 @@ def export_win_fancharts(variant="two_tier"):
                          "q20": round(float(q[1]), 1), "q50": round(float(q[2]), 1),
                          "q80": round(float(q[3]), 1), "q95": round(float(q[4]), 1)})
         payload[team] = rows
-    (OUT / "win_fancharts_PROVISIONAL.json").write_text(json.dumps(payload, indent=1))
+    (OUT / f"win_fancharts_{tag}.json").write_text(json.dumps(payload, indent=1))
     return payload
 
 

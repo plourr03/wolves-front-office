@@ -60,7 +60,7 @@ def sim_autocorr(wpct, lag):
 
 
 def run_variant(name: str, n_paths: int, seed: int, use_roster_tier: bool,
-                fs, env) -> dict:
+                fs, env, tag: str = "PROVISIONAL") -> dict:
     t0 = time.time()
     eng = EngineD(n_paths=n_paths, seed=seed, use_roster_tier=use_roster_tier)
     res = eng.run()
@@ -81,13 +81,13 @@ def run_variant(name: str, n_paths: int, seed: int, use_roster_tier: bool,
     dep_arrays = ({f"dep_{k.replace(' ', '_')}": v
                    for k, v in res["departures"].items()}
                   if use_roster_tier else {})
-    np.savez_compressed(SIMS / f"slots_{name}_PROVISIONAL.npz",
+    np.savez_compressed(SIMS / f"slots_{name}_{tag}.npz",
                         slots=slots, fr_ids=np.array(res["fr_ids"]),
                         seasons=np.array(SEASONS), **dep_arrays)
-    np.savez_compressed(SIMS / f"winpct_{name}_PROVISIONAL.npz",
+    np.savez_compressed(SIMS / f"winpct_{name}_{tag}.npz",
                         winpct=wpct, fr_ids=np.array(res["fr_ids"]))
     manifest = {
-        "tag": "PROVISIONAL", "variant": name, "n_paths": n_paths, "seed": seed,
+        "tag": tag, "variant": name, "n_paths": n_paths, "seed": seed,
         "runtime_s": round(runtime, 1),
         "gates": {
             "conservation": conservation,
@@ -117,13 +117,15 @@ def run_variant(name: str, n_paths: int, seed: int, use_roster_tier: bool,
 def main():
     import yaml
     cfg = yaml.safe_load((PROJECT_ROOT / "config" / "model_params.yaml").read_text())
-    n_paths = int(sys.argv[1]) if len(sys.argv) > 1 else cfg["simulation"]["n_paths"]
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    tag = "FINAL" if "--tag=FINAL" in sys.argv else "PROVISIONAL"
+    n_paths = int(args[0]) if args else cfg["simulation"]["n_paths"]
     seed = cfg["seed"] + 5
     fs = hist_win_pct()
     env = autocorr_envelope(fs)
-    lines = [f"# Engine D run (PROVISIONAL), {n_paths} paths"]
+    lines = [f"# Engine D run ({tag}), {n_paths} paths"]
     for name, tier in [("two_tier", True), ("pure_a", False)]:
-        m = run_variant(name, n_paths, seed, tier, fs, env)
+        m = run_variant(name, n_paths, seed, tier, fs, env, tag)
         g = m["gates"]
         lines.append(
             f"- **{name}** ({m['runtime_s']}s): conservation {g['conservation']}, "
@@ -137,7 +139,7 @@ def main():
                          f"roster_cal r={m['roster_cal']['r']:.3f}")
         print(lines[-1], flush=True)
     OUT_VAL.mkdir(parents=True, exist_ok=True)
-    (OUT_VAL / "engine_d_gates_PROVISIONAL.md").write_text("\n".join(lines), encoding="utf-8")
+    (OUT_VAL / f"engine_d_gates_{tag}.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 if __name__ == "__main__":

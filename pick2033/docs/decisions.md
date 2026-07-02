@@ -267,3 +267,25 @@ directive), Part 3 skeleton only (encumbrance reveal in conditional
 language), viz/tornado/replay code built provisional-safe now. Cadence:
 Part 1 July 6, Part 2 ~July 8-9, Part 3 mid-July. Companion carousel:
 NOT directed (question open with Bobby).
+
+## 2026-07-02 — Part 2 markup + p70 re-arm + Part 3 approval
+
+STAGE 2 MARKUP applied (v1 -> v2), all four items. The validation-logic
+item is wired, not just written: the cohort script now live-reads the CHA
+crest from the NEWEST Engine D artifact (FINAL preferred over PROVISIONAL),
+so the pre-committed p70 rule re-arms automatically against the run that
+ships; if the final crest crosses p70 the cohort-calibrated adjustment
+fires as originally declared. Engine D runner and JSON exports now carry
+FINAL/PROVISIONAL tags end to end. Quarantine boundary clarified on the
+record: the provisional P(top-4)/P(top-10) may be quoted inside the P1
+grading section ONLY, labeled as the known-flawed pre-contract-fix
+artifact being graded; the provisional hazard figure appears nowhere.
+
+PART 3 SKELETON: approved as structure. Replay realized outcomes
+independently verified by Bobby (2014: 17th, 2016: 3rd, 2017 swap: No. 1,
+2018: 8th). Beat 5 amended: the three second-rounders join the bill
+decomposition so every asset appears in the total exactly once.
+
+CAROUSEL: recommended YES (Part 1 companion, built after July-6 numbers
+land; hazard curve is the most carousel-able chart of the project).
+Final editorial call remains open; nothing blocks on it.
