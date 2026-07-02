@@ -43,6 +43,16 @@ REVIEW = PROJECT_ROOT / "outputs" / "star_spells_review.csv"
 SET_RE = re.compile(r"SET exit_type=(\w+)")
 
 
+def holdout_members(spell_ids: list[str]) -> list[str]:
+    import yaml
+    params = yaml.safe_load((PROJECT_ROOT / "config" / "model_params.yaml").read_text())
+    prov = pd.read_parquet(STAGED / "star_spells_provisional.parquet")
+    rng = np.random.default_rng(params["model_b"]["holdout_seed"])
+    spells = np.array(sorted(prov.spell_id.unique()))
+    test = set(rng.choice(spells, int(0.2 * len(spells)), replace=False))
+    return [s for s in spell_ids if s in test]
+
+
 def holdout_disclosure(spell_ids: list[str]) -> str:
     """Which of the corrected spells fall in the sealed 8.2 holdout
     (deterministic from the fixed holdout seed and the provisional spell
@@ -76,9 +86,15 @@ def final_freeze():
     h = hashlib.sha256(pd.util.hash_pandas_object(out, index=False).values.tobytes()).hexdigest()[:16]
     out.to_parquet(STAGED / "star_spells_final.parquet", index=False)
     disclosure = holdout_disclosure(july6)
+    pruned_members = holdout_members(sorted(prune))
+    prune_note = (f"borderline-prune holdout impact: {len(pruned_members)} of "
+                  f"{len(prune)} pruned spells were sealed-holdout members "
+                  f"({pruned_members}); the 8.2 re-gate sample shrinks by that "
+                  f"count (precomputed 2026-07-02: 60 -> 57 spells)")
     meta = {"tag": "FINAL", "freeze_hash": h, "n_spells": int(out.spell_id.nunique()),
             "n_rows": len(out), "borderline_pruned": sorted(prune),
-            "july6_departures_applied": july6, "holdout_disclosure": disclosure}
+            "july6_departures_applied": july6, "holdout_disclosure": disclosure,
+            "prune_holdout_disclosure": prune_note}
     (STAGED / "star_spells_final.meta.json").write_text(json.dumps(meta, indent=1))
     print(f"FINAL freeze {h}: {meta['n_spells']} spells / {len(out)} rows; "
           f"{len(prune)} borderlines pruned; July-6 departures: {july6}")
