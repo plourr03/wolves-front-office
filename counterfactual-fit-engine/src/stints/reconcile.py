@@ -4,26 +4,28 @@ Per game: run the FORKED pipeline (floor_state.process_game +
 stint_builder.derive_stints), integrate per-player on-floor seconds from
 stint durations, join official boxscore minutes, and score:
 
-  minutes reconciliation   TRUNCATION-AWARE (memo 2026-07-02): official
-                           minutes_played is an INTEGER FLOOR of true
-                           minutes (0 fractional in 786k rows; team sums
-                           short by ~0.5/player). A perfect reconstruction
-                           satisfies o <= r < o+1, so the gate metric is
-                           |r - (o + 0.5)| <= 1.0 (the 0.5 truncation cell
-                           half-width + the spec's 0.5 model tolerance),
-                           target >= 99.5% of player-games. The naive
-                           |r - o| is kept as a diagnostic column. Final G1
-                           on the full panel adds a seconds-precise
-                           verification stratum via targeted nba_api
-                           boxscore pulls carrying the ORIGINAL criterion
-                           (rider 1, 2026-07-02): >= 99.5% within 0.5 min
-                           of TRUE seconds on >= 200 era-stratified games.
-                           FINAL G1 GREEN REQUIRES BOTH the relaxed
-                           full-panel gate AND that stratum. AM-3: the
-                           denominator is ALL player-games -- quarantine
-                           never launders the gate. Bench discipline
-                           (rider 3): fixes iterate on the 208-game bench;
-                           gate claims come only from full-panel runs.
+  minutes reconciliation   TWO REFERENCES (memo 2026-07-02, supersedes the
+                           truncation-only memo of the same date):
+                           PRIMARY: nba_player_advanced_stats.minutes_float
+                           is SECONDS-PRECISE official minutes (mm:ss from
+                           the nba_api advanced boxscore, already ingested;
+                           coverage verified complete for all 15,669 panel
+                           games). The gate metric is the spec's ORIGINAL
+                           criterion |r - o_true| <= 0.5 min, >= 99.5% of
+                           player-games. This satisfies rider 1's seconds-
+                           precise verification stratum with FULL-PANEL
+                           coverage instead of the planned >= 200-game
+                           targeted nba_api pulls -- same source data,
+                           same criterion, strictly larger sample.
+                           SECONDARY: nba_player_stats.minutes_played is an
+                           INTEGER FLOOR of true minutes, gated with the
+                           truncation-aware relaxed metric
+                           |r - (o + 0.5)| <= 1.0. FINAL G1 GREEN REQUIRES
+                           BOTH. AM-3: the denominator is ALL player-games
+                           -- quarantine never launders the gate. Bench
+                           discipline (rider 3): fixes iterate on the
+                           208-game bench; gate claims come only from
+                           full-panel runs.
   team-seconds identity    sum of player-seconds == 5 * (2880 + 300*nOT)
                            exactly, per team-game (floor-size correctness
                            stated as an assertion).
@@ -32,9 +34,13 @@ stint durations, join official boxscore minutes, and score:
                            within 0.5% at the season level.
   quarantine rate          games/periods that fail to process, < 0.5%.
 
-AM-4 strata: every metric reports legacy-format (<= 2024-25) and
-live-format (2025-26) rows alongside pooled. (AM-5's backfill stratum is
-empty: the 2013-14 gap was a query artifact; retained for future gap fills.)
+AM-4 strata: every metric reports legacy-format and live-format rows
+alongside pooled. Format is detected PER GAME (2026-07-02 census: the
+2025-26 warehouse load is mixed -- 27,436 legacy-format sub events and
+88,302 live-format across the season), so the stratum comes from
+process_game's detection, never from the season prefix. (AM-5's backfill
+stratum is empty: the 2013-14 gap was a query artifact; retained for
+future gap fills.)
 
 Output: per-game scorecard parquet + summary dict; the repair loop reads
 the failure buckets (minutes-delta histogram, floor-size violations,
@@ -79,18 +85,28 @@ def player_seconds_from_stints(stints: pd.DataFrame) -> pd.DataFrame:
 
 
 def official_minutes(game_id: str) -> pd.DataFrame:
+    """Both references per the two-reference memo: integer minutes_played
+    (nba_player_stats) + seconds-precise minutes_float (advanced boxscore,
+    played players only -- DNP rows carry NULL minutes there)."""
     return query("""
-        SELECT player_id, team_id, minutes_played
-        FROM nba_player_stats WHERE game_id = %s
+        SELECT s.player_id, s.team_id, s.minutes_played, a.minutes_float
+        FROM nba_player_stats s
+        LEFT JOIN nba_player_advanced_stats a
+          ON a.game_id = s.game_id AND a.person_id = s.player_id
+        WHERE s.game_id = %s
     """, (game_id,))
 
 
-def reconcile_game(game_id: str) -> dict:
+def reconcile_game(game_id: str, stints_dir: str | None = None) -> dict:
     """Score one game. Never raises on processing failure: failures come
-    back as quarantine records with every player-game counted failed (AM-3)."""
+    back as quarantine records with every player-game counted failed (AM-3).
+    With stints_dir set, also writes the per-game stint parquet (the F1
+    cache the DuckDB load consumes) — quarantined games write nothing."""
     try:
         result = floor_state.process_game(game_id)
         stints = stint_builder.derive_stints(result["annotated"], result["possessions"])
+        if stints_dir is not None:
+            stints.to_parquet(Path(stints_dir) / f"{game_id}.parquet", index=False)
         ps = player_seconds_from_stints(stints)
         off = official_minutes(game_id)
         n_periods = int(result["pbp"].period.max())
@@ -99,9 +115,11 @@ def reconcile_game(game_id: str) -> dict:
         m = off.merge(ps, on=["player_id", "team_id"], how="outer")
         m["secs"] = m.secs.fillna(0.0)
         m["official_min"] = m.minutes_played.fillna(0.0).astype(float)
-        # truncation-aware error (see module docstring); naive kept as diag
+        # PRIMARY: seconds-precise reference, original 0.5-min criterion
+        m["official_true"] = m.minutes_float.astype(float).fillna(m.official_min + 0.5)
+        m["delta_true"] = (m.secs / 60.0 - m.official_true).abs()
+        # SECONDARY: truncation-aware relaxed metric vs integer reference
         m["delta_min"] = (m.secs / 60.0 - (m.official_min + 0.5)).abs()
-        m["delta_naive"] = (m.secs / 60.0 - m.official_min).abs()
         team_secs = ps.groupby("team_id").secs.sum()
         team_exact = bool(np.allclose(team_secs.values, expected_team_secs, atol=0.5))
 
@@ -110,10 +128,11 @@ def reconcile_game(game_id: str) -> dict:
 
         return {
             "game_id": game_id, "quarantined": False,
+            "pbp_format": result.get("pbp_format", "unknown"),
             "n_player_games": len(m),
+            "n_within_half_true": int((m.delta_true <= 0.5).sum()),
             "n_within_tol": int((m.delta_min <= 1.0).sum()),
-            "n_within_half_naive": int((m.delta_naive <= 0.5).sum()),
-            "worst_delta_min": float(m.delta_min.max()),
+            "worst_delta_true": float(m.delta_true.max()),
             "team_seconds_exact": team_exact,
             "poss_stints": n_poss_stints, "poss_parser": n_poss_parser,
             "n_validation_errors": sum(
@@ -125,14 +144,21 @@ def reconcile_game(game_id: str) -> dict:
     except Exception as e:  # quarantine, never silently drop (AM-3)
         n_pg = len(official_minutes(game_id))
         return {"game_id": game_id, "quarantined": True,
-                "n_player_games": n_pg, "n_within_tol": 0, "n_within_half_naive": 0,
-                "worst_delta_min": float("nan"), "team_seconds_exact": False,
+                "pbp_format": _format_from_db(game_id),
+                "n_player_games": n_pg, "n_within_half_true": 0, "n_within_tol": 0,
+                "worst_delta_true": float("nan"), "team_seconds_exact": False,
                 "poss_stints": 0.0, "poss_parser": 0.0,
                 "n_validation_errors": -1, "error": f"{type(e).__name__}: {e}"}
 
 
-def format_stratum(game_id: str) -> str:
-    return "live_2025_26" if game_id[3:5] == "25" else "legacy_pre_2025"
+def _format_from_db(game_id: str) -> str:
+    """Format stratum for quarantined games (process_game never returned):
+    one cheap probe for a legacy-format sub event."""
+    probe = query("""
+        SELECT 1 FROM nba_play_by_play
+        WHERE game_id = %s AND action_type = 'Substitution' LIMIT 1
+    """, (game_id,))
+    return "legacy" if len(probe) else "live"
 
 
 def summarize(scorecard: pd.DataFrame) -> pd.DataFrame:
@@ -140,22 +166,22 @@ def summarize(scorecard: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for name, g in [("pooled", scorecard)] + list(scorecard.groupby("stratum")):
         tot_pg = g.n_player_games.sum()
-        ok_pg = g.n_within_tol.sum()
         pp = g.poss_parser.sum()
         rows.append({
             "stratum": name,
             "games": len(g),
-            # STRUCTURAL INVARIANTS until repair logic gives them teeth
-            # (directive 2026-07-02 item 1): quarantine fires only when a
-            # period cannot resolve to 5v5, team-seconds is tautological
-            # while five bodies always exist, and possession parity is a
-            # lossless-partition check blind to identity errors. Labeled so
-            # in every report; G1 green claims come from the FULL panel.
-            "quarantine_rate_INVARIANT": g.quarantined.mean(),
-            "minutes_recon_rate": ok_pg / tot_pg if tot_pg else np.nan,
+            # quarantine is real evidence now (LegacySubResolutionError and
+            # kin raise instead of guessing); team-seconds and possession
+            # parity remain STRUCTURAL INVARIANTS (directive 2026-07-02
+            # item 1) -- tautological while five bodies always exist /
+            # lossless partition blind to identity. G1 green claims come
+            # from the FULL panel.
+            "quarantine_rate": g.quarantined.mean(),
+            "recon_rate_TRUE_0p5": g.n_within_half_true.sum() / tot_pg if tot_pg else np.nan,
+            "recon_rate_relaxed": g.n_within_tol.sum() / tot_pg if tot_pg else np.nan,
             "team_seconds_exact_INVARIANT": g.team_seconds_exact.mean(),
             "poss_parity_pct_PARTITION": abs(g.poss_stints.sum() - pp) / pp * 100 if pp else np.nan,
-            "median_worst_delta_min": g.worst_delta_min.median(),
+            "median_worst_delta_true": g.worst_delta_true.median(),
         })
     return pd.DataFrame(rows)
 
@@ -167,7 +193,7 @@ def run(game_ids: list[str], tag: str) -> pd.DataFrame:
         if (i + 1) % 25 == 0:
             print(f"  {i + 1}/{len(game_ids)}", flush=True)
     sc = pd.DataFrame(recs)
-    sc["stratum"] = sc.game_id.map(format_stratum)
+    sc["stratum"] = sc.pbp_format  # per-game detection, never season prefix
     out = FITENGINE_ROOT / "outputs" / f"reconciliation_{tag}.parquet"
     sc.to_parquet(out, index=False)
     summ = summarize(sc)
@@ -176,17 +202,19 @@ def run(game_ids: list[str], tag: str) -> pd.DataFrame:
 
 
 def main():
-    """Baseline error profile: stratified sample across eras, BEFORE any
-    hardening -- the quantified starting point the repair loop works from."""
+    """208-game bench (rider 3): stratified sample across eras, fixed rng.
+    Tag from argv so repair iterations never overwrite the baseline profile
+    (reconciliation_baseline.parquet = pre-repair starting point)."""
+    tag = sys.argv[1] if len(sys.argv) > 1 else "baseline"
     uni = pd.read_parquet(FITENGINE_ROOT / "data" / "staged" / "game_universe.parquet")
     rs = uni[uni.include_train].sort_values("game_id")
     rng = np.random.default_rng(20260702)
     sample = []
     for yy, g in rs.groupby(rs.game_id.str[3:5]):
         sample.extend(rng.choice(g.game_id, size=min(16, len(g)), replace=False))
-    print(f"baseline reconciliation on {len(sample)} games "
+    print(f"bench reconciliation [{tag}] on {len(sample)} games "
           f"({len(set(s[3:5] for s in sample))} seasons x ~16)")
-    run(sorted(sample), "baseline")
+    run(sorted(sample), tag)
 
 
 if __name__ == "__main__":

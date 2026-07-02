@@ -85,6 +85,7 @@ pandas DataFrames. Connection to the warehouse is via `lib.db`.
 """
 from __future__ import annotations
 
+import unicodedata
 from typing import Iterable
 
 import numpy as np
@@ -169,8 +170,12 @@ def load_pbp(game_id: str) -> pd.DataFrame:
         df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
     df["clock_seconds_remaining"] = df["clock"].apply(_parse_clock_to_seconds)
 
-    # Format detection + normalization.
-    if _is_legacy_format(df):
+    # Format detection + normalization. AM-4 note (2026-07-02): format is a
+    # PER-GAME property, not a season property -- the 2025-26 warehouse load
+    # is mixed (some games legacy Stats-API format, some Live format), so
+    # the era stratum must key on this detection, exposed via df.attrs.
+    was_legacy = _is_legacy_format(df)
+    if was_legacy:
         df = _normalize_legacy_pbp(df)
 
     # Sort chronologically.
@@ -179,6 +184,7 @@ def load_pbp(game_id: str) -> pd.DataFrame:
         ascending=[True, False, True],
         kind="stable",
     ).reset_index(drop=True)
+    df.attrs["pbp_format"] = "legacy" if was_legacy else "live"
     return df
 
 
@@ -203,24 +209,165 @@ def _is_legacy_format(df: pd.DataFrame) -> bool:
     return bool(types & _LEGACY_ACTION_MARKERS)
 
 
-def _build_name_to_id_map(df: pd.DataFrame) -> dict[str, int]:
-    """Build a mapping from PBP-style player name (as stored in the
-    player_name column, typically just the last name or last+suffix) to
-    person_id, drawing on non-sub events where both fields are populated.
+class LegacySubResolutionError(ValueError):
+    """A legacy substitution's IN player could not be resolved to a
+    person_id. Raised instead of guessing: the old fallback (inherit the
+    OUTGOING player's id) was a silent identity swap that preserved
+    team-seconds and possession parity while corrupting per-player minutes
+    and downstream period-start inference. An unresolvable sub means the
+    floor state is genuinely unknown -> the game quarantines with a legible
+    reason (AM-3 counts it against the gate either way)."""
+
+
+_GEN_SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
+
+# Retro-renames: the source feed regenerates player_name (and the boxscore
+# roster) from the CURRENT player registry, while description strings keep
+# the name as called at the time. Token-level alias applied at lookup.
+# (Enes Kanter -> Enes Kanter Freedom, Nov 2021 — 7 of 22 bench quarantines.)
+_NAME_ALIASES = {"kanter": "freedom"}
+
+
+def _norm_name(s: str) -> str:
+    """Fold diacritics to ASCII and normalize for matching. G1 HARDENING
+    (fix-order 2, 2026-07-02): PBP player_name stores diacritic spellings
+    ('Porziņģis') while sub descriptions use ASCII ('SUB: Porzingis FOR
+    Noah'); an exact-string map misses and misresolves."""
+    folded = unicodedata.normalize("NFKD", s)
+    ascii_s = "".join(c for c in folded if not unicodedata.combining(c))
+    return " ".join(ascii_s.replace(".", " ").replace("'", "").lower().split())
+
+
+def _strip_gen_suffix(toks: list[str]) -> list[str]:
+    toks = list(toks)
+    while len(toks) > 1 and toks[-1] in _GEN_SUFFIXES:
+        toks = toks[:-1]
+    return toks
+
+
+def _build_name_to_id_map(df: pd.DataFrame) -> dict:
+    """Build TEAM-SCOPED name-resolution state for legacy sub descriptions.
+
+    G1 HARDENING (fix-order 2, 2026-07-02; staged design after the
+    208-game bench): the original map was game-global first-wins on exact
+    strings — cross-team surname collisions, diacritic mismatches, and
+    fallback-to-out-pid identity swaps. Bench round 1 exposed a second
+    layer: within a game, PBP name forms are MINIMAL-UNIQUE ('Williams'
+    means Grant precisely because Robert is 'Williams III'), so flat
+    roster-derived surname keys POISONED already-correct PBP keys with
+    false ambiguity. Hence two tiers consulted in order by the resolver:
+
+      pbp:    (team_id, exact normalized player_name form) -> {pids}.
+              Never blended with roster keys.
+      roster: (team_id, alias form) -> {pids} from the official boxscore
+              full names — full name, suffix-stripped variants, bare
+              surname, 'smith jr' two-part, 'j johnson' initialed.
+      players: [(team_id, pid, roster name tokens)] for the prefix stage
+              ('Jal. Williams' -> first name starting 'jal' + surname
+              'williams' -> Jalen not Jaylin).
     """
-    out: dict[str, int] = {}
+    pbp_map: dict[tuple[int, str], set[int]] = {}
+    roster_map: dict[tuple[int, str], set[int]] = {}
+    players: list[tuple[int, int, list[str]]] = []
+
+    def _add(m: dict, tid: int, key: str, pid: int) -> None:
+        if key:
+            m.setdefault((tid, key), set()).add(pid)
+
     valid = df[
         df["person_id"].notna()
         & (df["person_id"] != 0)
         & df["player_name"].notna()
         & (df["player_name"].astype(str).str.strip() != "")
+        & df["team_id"].notna()
+        & (df["team_id"] != 0)
     ]
     for _, row in valid.iterrows():
-        name = str(row["player_name"]).strip()
-        pid = int(row["person_id"])
-        if name and name not in out:
-            out[name] = pid
-    return out
+        _add(pbp_map, int(row["team_id"]), _norm_name(str(row["player_name"])),
+             int(row["person_id"]))
+
+    game_ids = df["game_id"].dropna().unique() if "game_id" in df.columns else []
+    if len(game_ids) == 1:
+        roster = db.query(
+            """
+            SELECT player_id, player_name, team_id
+            FROM nba_player_stats WHERE game_id = %s
+            """,
+            (str(game_ids[0]),),
+        )
+        for _, r in roster.iterrows():
+            tid, pid = int(r["team_id"]), int(r["player_id"])
+            toks = _norm_name(str(r["player_name"])).split()
+            base = _strip_gen_suffix(toks)
+            players.append((tid, pid, toks))
+            _add(roster_map, tid, " ".join(toks), pid)      # full as printed
+            if base != toks:
+                _add(roster_map, tid, " ".join(base), pid)  # sans suffix
+            _add(roster_map, tid, base[-1], pid)            # bare surname
+            if len(toks) >= 2:
+                _add(roster_map, tid, " ".join(toks[-2:]), pid)  # 'smith jr'
+            if len(base) >= 2:
+                _add(roster_map, tid, " ".join(base[-2:]), pid)
+                # initialed form ('j johnson') — how legacy descriptions
+                # disambiguate same-surname teammates
+                _add(roster_map, tid, f"{base[0][0]} {base[-1]}", pid)
+    return {"pbp": pbp_map, "roster": roster_map, "players": players}
+
+
+def _resolve_sub_in(state: dict, tid: int, in_name: str, out_pid: int | None) -> int:
+    """Resolve a legacy sub description's IN name to a person_id, or raise
+    LegacySubResolutionError. Stages, most-trustworthy first:
+
+      1-2. PBP exact-form map, then with generational suffix stripped
+           (desc 'Martin Jr.' vs retro-renamed PBP form 'Martin').
+      3-4. Roster map, same two forms.
+      5.   Prefix match against roster full names ('jal'+'williams').
+
+    At every stage a multi-pid hit tries OUT-pid elimination (the player
+    entering cannot be the one leaving on the same event: 'SUB: Williams
+    FOR Williams III' -> plain Williams is not Robert). Residual ambiguity
+    RAISES — never a coin flip, never the out-pid fallback.
+    """
+    key = " ".join(_NAME_ALIASES.get(t, t) for t in _norm_name(in_name).split())
+    toks = key.split()
+    stripped = " ".join(_strip_gen_suffix(toks))
+    forms = [key] + ([stripped] if stripped != key else [])
+
+    def _settle(cands: set[int], stage: str) -> int | None:
+        if len(cands) > 1 and out_pid is not None:
+            cands = cands - {out_pid}
+        if len(cands) == 1:
+            return next(iter(cands))
+        if len(cands) > 1:
+            raise LegacySubResolutionError(
+                f"legacy sub IN player AMBIGUOUS at {stage}: {in_name!r} "
+                f"(team_id={tid}, candidates={sorted(cands)})")
+        return None
+
+    for map_name in ("pbp", "roster"):
+        for form in forms:
+            hit = state[map_name].get((tid, form))
+            if hit:
+                got = _settle(set(hit), map_name)
+                if got is not None:
+                    return got
+
+    stoks = stripped.split()
+    if len(stoks) >= 2:
+        prefix, surname = "".join(stoks[:-1]), stoks[-1]
+        cands = {
+            pid for (t, pid, ptoks) in state["players"]
+            if t == tid
+            and _strip_gen_suffix(ptoks)[-1] == surname
+            and ptoks[0].startswith(prefix)
+        }
+        got = _settle(cands, "prefix")
+        if got is not None:
+            return got
+
+    raise LegacySubResolutionError(
+        f"legacy sub IN player unresolved: {in_name!r} "
+        f"(team_id={tid}, key={key!r})")
 
 
 def _parse_in_player_name_from_sub(description: str) -> str | None:
@@ -367,14 +514,22 @@ def _normalize_legacy_pbp(df: pd.DataFrame) -> pd.DataFrame:
             out_row["action_type"] = "substitution"
             out_row["sub_type"] = "out"
             out_rows.append(out_row)
-            # Synthesize IN.
+            # Synthesize IN. G1 HARDENING (fix-order 2, 2026-07-02):
+            # staged team-scoped resolution (see _resolve_sub_in); NEVER
+            # fall back to the OUT player's id (silent identity swap) —
+            # unresolved raises and the game quarantines legibly.
             in_name = _parse_in_player_name_from_sub(description)
-            in_pid = name_to_id.get(in_name) if in_name else None
+            tid = int(row["team_id"]) if pd.notna(row.get("team_id")) else None
+            if not in_name or tid is None:
+                raise LegacySubResolutionError(
+                    f"legacy sub unparseable: {description!r} (team_id={tid})")
+            out_pid = int(row["person_id"]) if pd.notna(row.get("person_id")) else None
+            in_pid = _resolve_sub_in(name_to_id, tid, in_name, out_pid)
             in_row = row.copy()
             in_row["action_type"] = "substitution"
             in_row["sub_type"] = "in"
-            in_row["person_id"] = in_pid if in_pid is not None else row.get("person_id")
-            in_row["player_name"] = in_name if in_name else row.get("player_name")
+            in_row["person_id"] = in_pid
+            in_row["player_name"] = in_name
             # action_number+0.5 to preserve chronological order
             try:
                 orig = float(row.get("action_number"))
@@ -428,7 +583,33 @@ def derive_starters(game_id: str, pbp: pd.DataFrame | None = None) -> dict[int, 
       Players who never appear in a sub event but do appear in another
       action (e.g., shoot) during period 1: starters.
       Players who never appear at all: not on the active roster for this game.
+
+    G1 HARDENING (2026-07-02): the OFFICIAL boxscore is the primary source.
+    nba_player_advanced_stats.position is non-null for exactly the five
+    starters per team (verified 10/10 in all 15,669 panel games). The PBP
+    inference below survives only as a fallback for games absent from that
+    table. Its old defensive fallback ("top 5 by P1 appearance count")
+    silently seated active bench players over quiet starters and broke
+    count ties by unstable sort order -- game 0022500001 seated Jaylin
+    Williams over the actual starter Cason Wallace on a 5-vs-5 tie whose
+    winner flipped with an unrelated upstream fix.
     """
+    official = db.query(
+        """
+        SELECT person_id, team_id FROM nba_player_advanced_stats
+        WHERE game_id = %s AND position IS NOT NULL AND position <> ''
+        """,
+        (game_id,),
+    )
+    if len(official) == 10:
+        by_team = {
+            int(tid): sorted(int(p) for p in g["person_id"])
+            for tid, g in official.groupby("team_id")
+        }
+        if len(by_team) == 2 and all(len(v) == 5 for v in by_team.values()):
+            return by_team
+
+    # FALLBACK: PBP inference (original fork logic).
     if pbp is None:
         pbp = load_pbp(game_id)
     team_ids = _team_ids_for_game(pbp)
@@ -482,10 +663,17 @@ def derive_starters(game_id: str, pbp: pd.DataFrame | None = None) -> dict[int, 
         # Expect exactly 5 starters. If more or fewer, fall back defensively.
         if len(team_starters) != 5:
             # Defensive: pick the 5 with the most appearances in period 1.
+            # G1 HARDENING (2026-07-02): deterministic tie-break (count desc,
+            # person_id asc). The unstable default sort resolved count ties
+            # by array-content accident, so unrelated fixes flipped starters.
             counts = (team_pbp[team_pbp["period"] == 1]
-                      .groupby("person_id").size().sort_values(ascending=False))
+                      .groupby("person_id").size())
             counts = counts[counts.index.notna() & (counts.index != 0)]
-            team_starters = list(counts.head(5).index.astype(int))
+            ranked = counts.reset_index()
+            ranked.columns = ["person_id", "n"]
+            ranked = ranked.sort_values(
+                ["n", "person_id"], ascending=[False, True], kind="stable")
+            team_starters = list(ranked.head(5)["person_id"].astype(int))
 
         starters[tid] = sorted(team_starters)
 
@@ -607,6 +795,18 @@ def _identify_period_start_floors(
                     # they came off the bench and are not a start-of-period
                     # floor player. If they appeared in a non-sub event
                     # earlier, they're already in per_team_start_players.
+                elif (row["sub_type"] == "out"
+                      and pid not in first_sub_in[tid]
+                      and pid not in seen_non_sub[tid]):
+                    # G1 HARDENING (fix-order 1, 2026-07-02): a player whose
+                    # FIRST sub event this period is an OUT, with no prior
+                    # sub-in and no prior non-sub appearance, was necessarily
+                    # on the floor at period start. Without this evidence a
+                    # quiet starter (plays minutes, registers no event, subs
+                    # out) is invisible and gets padded from prior-period
+                    # state -- the dominant baseline failure mode.
+                    seen_non_sub[tid].add(pid)
+                    per_team_start_players[tid].append(pid)
             else:
                 if pid not in seen_non_sub[tid]:
                     seen_non_sub[tid].add(pid)
@@ -623,13 +823,23 @@ def _identify_period_start_floors(
                     start_floor[tid] = set(candidates[:5])
                 else:
                     # Pad with prior-period end state, then with starters as
-                    # ultimate fallback.
+                    # ultimate fallback. G1 HARDENING (negative evidence,
+                    # 2026-07-02): a player whose FIRST event this period is
+                    # a sub-IN provably did NOT start the period -- exclude
+                    # from padding (padding wrong players cascades through
+                    # the running end-of-period state into every later
+                    # period; the 20-30 min baseline residuals).
+                    # banned = subbed IN this period with no prior non-sub
+                    # appearance (candidates holds exactly the players whose
+                    # evidence PRECEDES any sub-in, so the complement within
+                    # first_sub_in is the provably-benched set)
+                    banned = set(first_sub_in[tid]) - set(candidates)
                     pool = list(candidates)
                     for p_ in prior_floor[tid]:
-                        if p_ not in pool:
+                        if p_ not in pool and p_ not in banned:
                             pool.append(p_)
                     for p_ in starters[tid]:
-                        if p_ not in pool:
+                        if p_ not in pool and p_ not in banned:
                             pool.append(p_)
                     start_floor[tid] = set(pool[:5])
             result[p_int] = start_floor
@@ -929,6 +1139,7 @@ def process_game(game_id: str) -> dict:
     possessions = derive_possessions(annotated=annotated)
     return {
         "pbp": pbp,
+        "pbp_format": pbp.attrs.get("pbp_format", "unknown"),
         "starters": starters,
         "annotated": annotated,
         "validation": validation,

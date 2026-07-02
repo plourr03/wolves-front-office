@@ -213,3 +213,115 @@ placement dead on flat correlation; Live clock parsing dead on clean
 audit); the original plan's fix-order item 1 (period-start floors) 1-for-1
 as the surviving target. The discriminator was still the right ten-minute
 spend: two plausible diseases eliminated before a day of repair code.
+
+## 2026-07-02 (night) — F1 repair session: three diseases found, three fixed
+
+**Fix-order 1 (period-start floors), landed earlier this session:**
+(a) sub-out-first evidence — a player whose FIRST sub event in a period is
+an OUT with no prior appearance was on at period start; (b) negative-
+evidence padding ban — a player whose first period event is a sub-IN
+provably did NOT start it and is excluded from prior-floor/starter padding.
+
+**Fix-order 2 (legacy sub name→id resolution) — the identity-swap disease.**
+Two defects in the fork's inherited resolver: (1) PBP player_name stores
+diacritic spellings ('Porziņģis') while sub descriptions use ASCII
+('SUB: Porzingis FOR Noah') — exact-string lookup missed; (2) on a miss,
+the code FELL BACK TO THE OUTGOING PLAYER'S person_id — a silent identity
+swap that preserves team-seconds and possession parity (both structural
+invariants, per the directive's labeling) while corrupting per-player
+minutes AND downstream period-start inference (game 0021600001: the
+phantom re-entry cascaded into Jennings losing his entire P4). The earlier
+"0 unresolved names" check tested that names RESOLVED, not that they
+resolved CORRECTLY. FIX: team-scoped diacritic-folded resolver
+((team_id, normalized name) keys), supplemented by the official roster
+(nba_player_stats) with generational-suffix handling ('Reggie Bullock Jr.'
+must answer to description-form 'Bullock') and initialed forms
+('J. Johnson') for same-surname teammates; same-key collisions within a
+team are marked AMBIGUOUS. Unresolved or ambiguous now RAISES
+LegacySubResolutionError -> the game quarantines with a legible reason.
+The old guess-the-out-player fallback is BANNED. Consequence: the
+quarantine metric now carries evidence (label relaxed from _INVARIANT);
+team-seconds and possession parity remain labeled structural.
+
+**Compensating-errors episode (logged in full, per house standards).**
+The resolver fix REGRESSED live-parsed game 0022500001 from 20/20 to
+17/20. Root cause chain, established by controlled file-surgery A/B: the
+resolver correctly restored Chris Youngblood's 6-second cameo (previously
+misattributed to Barnhizer by the fallback swap). That one P1 row changed
+the appearance-count array feeding derive_starters' DEFENSIVE FALLBACK
+("top 5 by period-1 appearance count", firing because pass logic yielded
+6 candidates), whose unstable sort broke a Wallace/J.Williams 5-vs-5
+count tie by array-content accident. The OLD bug had been flipping that
+tie toward the CORRECT starter. Two wrongs had been scoring as one right;
+the 20/20 was partly luck. Moral for the record: a gate metric that
+improves for the wrong reason will be taken back with interest.
+
+**Fix 3 — official starters (kills the fallback lottery).**
+nba_player_advanced_stats.position is non-null for EXACTLY the five
+official starters per team — verified 10/10 in ALL 15,669 panel games.
+derive_starters now reads official starters first; PBP inference is
+demoted to fallback (for games absent from that table) with its tie-break
+made deterministic (count desc, person_id asc, stable sort).
+
+**Fix 4 — seconds-precise official minutes (rider-1 memo).**
+The same table's minutes_float is SECONDS-PRECISE official minutes
+(mm:ss), complete for all 15,669 panel games. The reconciliation PRIMARY
+gate is therefore restored to the spec's ORIGINAL criterion — >= 99.5% of
+player-games within 0.5 min of TRUE seconds — evaluated on the FULL
+PANEL. This satisfies rider 1's seconds-precise verification stratum with
+the same source data (nba_api boxscore, already ingested by the
+warehouse) at strictly larger coverage than the planned >= 200-game
+targeted pulls. The truncation-aware relaxed metric vs integer
+minutes_played is retained as the SECONDARY gate; G1 green requires both.
+No criterion was weakened; the reference got better and the planned
+nba_api pull work is unnecessary.
+
+**AM-4 refinement — format is a per-game property.** Census: the 2025-26
+warehouse load is MIXED (27,436 legacy-format substitution events vs
+88,302 live-format across the season); earlier assumptions that
+2025-26 == live were wrong per-game (0022500001 is legacy-format in the
+warehouse). G1 strata now key on process_game's per-game format
+detection, never the season prefix. AM-4's rationale stands: the live
+branch is real for most of 2025-26 and keeps its own stratum.
+
+**Spot-check after fixes (bench discipline, rider 3):** the five worst
+baseline games — 0021600001, 0022000927, 0022000726, 0022300951,
+0022500001 — all reconcile PERFECTLY under the original 0.5-min
+criterion, worst per-player error 0.01 min (<1 second). 208-game bench
+re-run tagged bench_fix123 (baseline parquet preserved); full-panel run
+is the only place G1 claims can come from.
+
+**Bench round 1 verdict (bench_fix123):** every game that processed
+reconciled 100.0% — 3,988/3,988 player-games within 0.5 min of true
+seconds, worst 0.012 min. 22/208 games (10.6%) quarantined, ALL on
+LegacySubResolutionError — the honest surfacing of what the old code
+resolved by silent identity swap. Four buckets, each verified against
+source data before coding:
+  (1) MINIMAL-UNIQUE POISONING: within a game the feed's name forms are
+      minimally unique ('Williams' means Grant Williams precisely because
+      Robert is 'Williams III'; plain 'Jones' is Kai because Derrick is
+      'Jones Jr.'). Flat roster surname keys had poisoned already-correct
+      PBP keys with false ambiguity.
+  (2) VARIABLE-LENGTH PREFIX FORMS: 'Jal. Williams' vs 'Jay. Williams'
+      (Jalen/Jaylin, whose player_name column collapses BOTH to
+      'Williams'), 'Marc Morris' vs 'Mark Morris' (the twins), 'Shaw.
+      Williams', 'Je. Green' vs 'Ja. Green' (Jeff/JaMychal, and HOU's
+      Jeff/Jalen).
+  (3) RETRO-RENAMES: the feed regenerates player_name and rosters from
+      the CURRENT registry while descriptions keep the original text —
+      'SUB: Kanter FOR ...' vs player_name 'Freedom' (7 of 22
+      quarantines), desc 'Martin Jr.' vs roster 'KJ Martin'.
+  (4) SUFFIXED LOOKUPS: desc form carries a generational suffix the
+      roster form lacks or vice versa.
+
+**Fix round 2 — staged resolver (_resolve_sub_in):** stages ordered most-
+trustworthy first: (1) PBP exact-form map (team-scoped, never blended
+with roster keys — preserves minimal-uniqueness), (2) same with
+generational suffix stripped, (3) roster map, (4) roster suffix-stripped,
+(5) prefix match against roster first names ('jal'+'williams' -> Jalen).
+Every multi-candidate hit tries OUT-pid elimination (the entering player
+cannot be the one leaving: 'SUB: Williams FOR Williams III' -> Grant).
+Residual ambiguity still RAISES. One explicit alias recorded:
+kanter -> freedom (token-level, lookup side). Result: all 22 quarantined
+games re-run PERFECT (100% player-games within 0.5 min, zero residuals,
+zero quarantines). Bench round 2 tagged bench_fix4.
