@@ -99,6 +99,33 @@ def raise_envelope(season: int, career_idx: int) -> float:
     return 0.09
 
 
+def split_on_raise_structure(sal: pd.DataFrame, starts: list[int],
+                             tight: bool = False) -> list[int]:
+    """Directive-2 re-sign detector: within a real contract, dollar raise
+    increments are near-constant (raises are a fixed % of year-1 salary).
+    A smooth re-sign inside a glued segment shows up as an increment-pattern
+    break. Conservative thresholds (false splits truncate years-remaining):
+    junction where |d_i - d_{i-1}| > max(6% of prior salary, $250k) --
+    or (4%, $150k) on the targeted tight pass for flagged long-tenure
+    segments. A career's FIRST FOUR salary seasons are exempt (rookie-scale
+    year-4 escalations are legitimate increment breaks; the first detector
+    version re-broke Edwards' rookie deal here)."""
+    frac, floor = (0.04, 150_000.0) if tight else (0.06, 250_000.0)
+    extra = []
+    bounds = sorted(starts)
+    for a, b in zip(bounds[:-1], bounds[1:]):
+        if b - a < 4:
+            continue
+        s = sal.salary.values[a:b].astype(float)
+        d = np.diff(s)
+        for j in range(1, len(d)):
+            if a + j + 1 <= 3:          # career seasons 1-4: rookie exemption
+                continue
+            if abs(d[j] - d[j - 1]) > max(frac * s[j], floor):
+                extra.append(a + j + 1)
+    return sorted(set(starts) | set(extra))
+
+
 def infer_contracts(sal: pd.DataFrame, team_by_season: dict | None = None) -> pd.DataFrame:
     """Break inference -> per-season years remaining."""
     sal = sal.sort_values("season").reset_index(drop=True)
@@ -122,6 +149,11 @@ def infer_contracts(sal: pd.DataFrame, team_by_season: dict | None = None) -> pd
         seg_start_season = int(sal.season[starts[-1]])
         if abs(change) > raise_envelope(seg_start_season, i):
             starts.append(i)
+    starts = split_on_raise_structure(sal, starts)
+    # targeted tight pass (directive 2): only where a glued segment >= 6
+    # seasons survives the standard pass -- the Duncan-pattern residue
+    if any(b - a >= 6 for a, b in zip(sorted(starts), sorted(starts)[1:] + [len(sal)])):
+        starts = split_on_raise_structure(sal, starts, tight=True)
     starts.append(len(sal))
     rows = []
     for a, b in zip(starts[:-1], starts[1:]):
@@ -210,12 +242,13 @@ def main():
         "- method: salary-break + franchise-change inference; era envelopes "
         "keyed on the segment's SIGNING season (25% pre-1999, 15% to 2011, 9% "
         "after; 30% in a career's first four seasons for rookie scale); "
-        "generous on purpose (false breaks truncate years-remaining, the worse "
-        "error for the hazard). Known blind spot: smooth same-franchise "
-        "re-signs read as continuations (Duncan-pattern; overstates remaining "
-        "for stay-put stars, attenuating the coefficient). QC'd against "
-        "Edwards/Garnett/LeBron/Duncan ground truth. Data enters the M2 refit "
-        "blind to fit outcomes.",
+        "with a raise-structure re-sign detector (rookie-exempt; tight pass "
+        "on 6+yr residual segments). Duncan-pattern mislabeling EXAGGERATES "
+        "the contract coefficient (settled by synthetic test, "
+        "duncan_bias_test.py; the earlier 'attenuates' claim was wrong). "
+        "Residual ambiguity routes to the pre-declared sensitivity arm, not "
+        "hand edits. QC'd against Edwards/Garnett/LeBron/Duncan/Kobe ground "
+        "truth. Data enters the M2 refit blind to fit outcomes.",
     ]
     OUT_VAL.mkdir(parents=True, exist_ok=True)
     (OUT_VAL / "contract_backfill_coverage.md").write_text("\n".join(lines), encoding="utf-8")

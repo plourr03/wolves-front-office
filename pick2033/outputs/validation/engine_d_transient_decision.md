@@ -93,3 +93,6 @@ crest validated rather than assumed. Alternatively: accept the red transient
 cell documented (terminal — the deliverable horizon — passes everywhere,
 and the violation is ~.002 at a confirmed-mechanism crossing).
 No third check-rewording proposed: the pattern lesson says stop.
+
+## RULING C (2026-07-02): cell accepted RED, documented, FINAL.
+Crossing mechanism confirmed; no further rewording. Same posture as 8.1.

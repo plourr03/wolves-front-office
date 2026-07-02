@@ -137,3 +137,61 @@ rotation_aggregate = train/serve alignment; shrink-to-replacement = right
 prior for fringe players). Two earlier flags resolved against Bobby's
 recall and are so recorded: Bosh 2016 was 53 games / 1,778 minutes
 (legitimate spell), and Robertson was a covariate bug, not a name-join miss.
+
+## 2026-07-02 (afternoon) — Rulings C and D + backfill directive (verbatim)
+
+RULING C (Engine D transient cell): Accept RED, documented, final.
+Crossing mechanism confirmed (0.996 suppression correlation, clean
+pure_a field). No further check rewording; agent's stop was correct.
+
+RULING D (CHA crest validation): Run the young-core cohort analysis
+as Stage-2 prep, framed as validating a swap-pricing input.
+1. Cohort: 1985-2019 team-seasons, win_pct < .500, 3+ players under 23
+   with 1000+ minutes. Report the 5-year win-trajectory fan,
+   unconditional AND matched on starting band (.400-.500).
+2. Pre-committed decision rule, declared before results: if the model's
+   CHA median crest exceeds the matched cohort's 70th-percentile
+   trajectory, apply a cohort-calibrated young-roster blend adjustment
+   (fit to the cohort median, chosen blind to its effect on swap
+   prices), then re-run Engine D and all 8.4 gates once. Otherwise the
+   crest stands, documented.
+3. Log prediction P2 in predictions.md now: the matched cohort median
+   crests BELOW the model's CHA crest (no-churn/no-bust reasoning).
+   Direction reduces swap values, i.e. against the editorial thesis.
+   Grade it when the cohort lands.
+
+CONTRACT BACKFILL DIRECTIVE (before the one-shot M2 refit):
+1. Re-derive the Duncan-pattern bias direction with a synthetic test:
+   simulate spells with a known contract coefficient, inject the
+   smooth-re-sign mislabeling, refit, observe the bias. Bobby's
+   hypothesis: the memo has it backwards -- the error deletes true
+   walk-year person-time from NON-events (stayers), inflating observed
+   hazard at years=0 and EXAGGERATING the coefficient. Settle
+   empirically; the answer goes in the record either way.
+2. Add a salary-discontinuity re-sign detector (new-deal signatures:
+   level jumps, raise-structure breaks) plus a targeted manual pass on
+   residual smooth cases among long-tenure stars. Those rows ARE the
+   Edwards reference class. Covariate construction, upstream of the
+   sealed holdout, blind to fit outcomes: allowed under Ruling A and
+   required by it in spirit.
+3. If ambiguous cases remain, one pre-declared sensitivity arm
+   (perturb affected rows' years_remaining), not a second fit.
+
+Framing note (Bobby): the crest investigation is NOT gate rescue -- it
+validates a load-bearing pricing input whose error direction FAVORS the
+editorial thesis (crest years 2028-2030 are the swap years). The lag-3
+finding biased against the thesis; this one biases toward it, which is
+exactly when the house standard says validate rather than accept.
+
+## 2026-07-02 — Rulings C and D executed
+C: transient cell accepted RED, final; memo closed with mechanism attached.
+D: cohort ran (77 entries / 18 matched). Decision rule NOT triggered:
+model CHA crest 50.8 < matched p70 peak 52.8 (model sits ~p60 of history).
+Crest STANDS, documented. P2 graded CONFIRMED on direction (cohort median
+49.4 < model 50.8) with a 1.4-win magnitude — the honest read is that the
+model is mildly, not materially, generous to Charlotte.
+Backfill directive executed: synthetic test SETTLED the bias direction
+(EXAGGERATES, ~2.6x on the slope; Bobby right, memo wrong — corrected on
+the record); re-sign detector added (rookie-exempt + tight pass; all five
+ground-truth careers read correctly); 21 residual segments routed to the
+pre-declared S-CONTRACT sensitivity arm, no hand edits.
