@@ -1,0 +1,17 @@
+# star_definition.yaml — pick2033 (accepted by Bobby 2026-07-01 as proposed)
+# A player ENTERS a spell in his first season with a franchise where he:
+#   - earns any All-NBA selection, OR
+#   - posts a top-20 league finish in BPM with >= 1500 minutes.
+# The spell PERSISTS until departure, retirement, or censoring, even if
+# star-level play lapses (the asset question is about leaving, not form).
+entry:
+  all_nba: true
+  bpm_top_k: 20
+  bpm_minutes_floor: 1500
+spell:
+  persist_through_form_lapse: true
+  start_year: 1990          # spells beginning 1990 or later
+exit_events:
+  departure: "final-team change or mid-season stint away from spell franchise"
+  retire: "career ends with franchise (competing risk)"
+  censored: "spell ongoing at data end"

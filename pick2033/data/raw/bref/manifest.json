@@ -1,0 +1,510 @@
+{
+ "advanced_NBA_1979": {
+  "fetched_utc": "2026-07-01T22:43:35.826186+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1979_advanced.html"
+ },
+ "advanced_NBA_1980": {
+  "fetched_utc": "2026-07-01T22:43:40.149782+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1980_advanced.html"
+ },
+ "advanced_NBA_1981": {
+  "fetched_utc": "2026-07-01T22:43:44.797231+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1981_advanced.html"
+ },
+ "advanced_NBA_1982": {
+  "fetched_utc": "2026-07-01T22:43:49.157159+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1982_advanced.html"
+ },
+ "advanced_NBA_1983": {
+  "fetched_utc": "2026-07-01T22:43:53.480389+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1983_advanced.html"
+ },
+ "advanced_NBA_1984": {
+  "fetched_utc": "2026-07-01T22:43:57.805943+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1984_advanced.html"
+ },
+ "advanced_NBA_1985": {
+  "fetched_utc": "2026-07-01T22:44:02.149987+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1985_advanced.html"
+ },
+ "advanced_NBA_1986": {
+  "fetched_utc": "2026-07-01T22:44:06.465551+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1986_advanced.html"
+ },
+ "advanced_NBA_1987": {
+  "fetched_utc": "2026-07-01T22:44:11.030664+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1987_advanced.html"
+ },
+ "advanced_NBA_1988": {
+  "fetched_utc": "2026-07-01T22:44:15.426824+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1988_advanced.html"
+ },
+ "advanced_NBA_1989": {
+  "fetched_utc": "2026-07-01T22:44:19.802009+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1989_advanced.html"
+ },
+ "advanced_NBA_1990": {
+  "fetched_utc": "2026-07-01T22:44:24.167599+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1990_advanced.html"
+ },
+ "advanced_NBA_1991": {
+  "fetched_utc": "2026-07-01T22:44:28.495752+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1991_advanced.html"
+ },
+ "advanced_NBA_1992": {
+  "fetched_utc": "2026-07-01T22:44:32.867470+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1992_advanced.html"
+ },
+ "advanced_NBA_1993": {
+  "fetched_utc": "2026-07-01T22:44:37.211007+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1993_advanced.html"
+ },
+ "advanced_NBA_1994": {
+  "fetched_utc": "2026-07-01T22:44:41.647637+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1994_advanced.html"
+ },
+ "advanced_NBA_1995": {
+  "fetched_utc": "2026-07-01T22:44:46.036609+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1995_advanced.html"
+ },
+ "advanced_NBA_1996": {
+  "fetched_utc": "2026-07-01T22:44:50.462234+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1996_advanced.html"
+ },
+ "advanced_NBA_1997": {
+  "fetched_utc": "2026-07-01T22:44:54.984935+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1997_advanced.html"
+ },
+ "advanced_NBA_1998": {
+  "fetched_utc": "2026-07-01T22:44:59.599410+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1998_advanced.html"
+ },
+ "advanced_NBA_1999": {
+  "fetched_utc": "2026-07-01T22:45:03.959495+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1999_advanced.html"
+ },
+ "advanced_NBA_2000": {
+  "fetched_utc": "2026-07-01T22:45:08.311337+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2000_advanced.html"
+ },
+ "advanced_NBA_2001": {
+  "fetched_utc": "2026-07-01T22:45:12.661834+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2001_advanced.html"
+ },
+ "advanced_NBA_2002": {
+  "fetched_utc": "2026-07-01T22:45:17.012814+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2002_advanced.html"
+ },
+ "advanced_NBA_2003": {
+  "fetched_utc": "2026-07-01T22:45:21.368378+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2003_advanced.html"
+ },
+ "advanced_NBA_2004": {
+  "fetched_utc": "2026-07-01T22:45:25.706509+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2004_advanced.html"
+ },
+ "advanced_NBA_2005": {
+  "fetched_utc": "2026-07-01T22:45:30.066291+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2005_advanced.html"
+ },
+ "advanced_NBA_2006": {
+  "fetched_utc": "2026-07-01T22:45:34.452112+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2006_advanced.html"
+ },
+ "advanced_NBA_2007": {
+  "fetched_utc": "2026-07-01T22:45:38.804414+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2007_advanced.html"
+ },
+ "advanced_NBA_2008": {
+  "fetched_utc": "2026-07-01T22:45:43.191466+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2008_advanced.html"
+ },
+ "advanced_NBA_2009": {
+  "fetched_utc": "2026-07-01T22:45:47.609018+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2009_advanced.html"
+ },
+ "advanced_NBA_2010": {
+  "fetched_utc": "2026-07-01T22:45:52.032110+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2010_advanced.html"
+ },
+ "advanced_NBA_2011": {
+  "fetched_utc": "2026-07-01T22:45:56.402387+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2011_advanced.html"
+ },
+ "advanced_NBA_2012": {
+  "fetched_utc": "2026-07-01T22:46:00.832251+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2012_advanced.html"
+ },
+ "advanced_NBA_2013": {
+  "fetched_utc": "2026-07-01T22:46:05.188666+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2013_advanced.html"
+ },
+ "advanced_NBA_2014": {
+  "fetched_utc": "2026-07-01T22:46:09.553778+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2014_advanced.html"
+ },
+ "advanced_NBA_2015": {
+  "fetched_utc": "2026-07-01T22:46:14.091419+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2015_advanced.html"
+ },
+ "advanced_NBA_2016": {
+  "fetched_utc": "2026-07-01T22:46:18.454362+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2016_advanced.html"
+ },
+ "advanced_NBA_2017": {
+  "fetched_utc": "2026-07-01T22:46:22.885630+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2017_advanced.html"
+ },
+ "advanced_NBA_2018": {
+  "fetched_utc": "2026-07-01T22:46:27.397961+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2018_advanced.html"
+ },
+ "advanced_NBA_2019": {
+  "fetched_utc": "2026-07-01T22:46:31.798388+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2019_advanced.html"
+ },
+ "advanced_NBA_2020": {
+  "fetched_utc": "2026-07-01T22:46:36.257048+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2020_advanced.html"
+ },
+ "advanced_NBA_2021": {
+  "fetched_utc": "2026-07-01T22:46:40.689547+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2021_advanced.html"
+ },
+ "advanced_NBA_2022": {
+  "fetched_utc": "2026-07-01T22:46:45.164754+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2022_advanced.html"
+ },
+ "advanced_NBA_2023": {
+  "fetched_utc": "2026-07-01T22:46:49.590682+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2023_advanced.html"
+ },
+ "advanced_NBA_2024": {
+  "fetched_utc": "2026-07-01T22:46:54.351223+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2024_advanced.html"
+ },
+ "advanced_NBA_2025": {
+  "fetched_utc": "2026-07-01T22:46:58.842458+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2025_advanced.html"
+ },
+ "advanced_NBA_2026": {
+  "fetched_utc": "2026-07-01T22:47:03.311071+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2026_advanced.html"
+ },
+ "awards_all_league": {
+  "fetched_utc": "2026-07-01T22:57:49.998831+00:00",
+  "url": "https://www.basketball-reference.com/awards/all_league.html"
+ },
+ "draft_NBA_1990": {
+  "fetched_utc": "2026-07-01T22:55:45.714531+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1990.html"
+ },
+ "draft_NBA_1991": {
+  "fetched_utc": "2026-07-01T22:55:49.949644+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1991.html"
+ },
+ "draft_NBA_1992": {
+  "fetched_utc": "2026-07-01T22:55:54.075612+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1992.html"
+ },
+ "draft_NBA_1993": {
+  "fetched_utc": "2026-07-01T22:55:58.189864+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1993.html"
+ },
+ "draft_NBA_1994": {
+  "fetched_utc": "2026-07-01T22:56:02.300144+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1994.html"
+ },
+ "draft_NBA_1995": {
+  "fetched_utc": "2026-07-01T22:56:06.669284+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1995.html"
+ },
+ "draft_NBA_1996": {
+  "fetched_utc": "2026-07-01T22:56:10.773639+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1996.html"
+ },
+ "draft_NBA_1997": {
+  "fetched_utc": "2026-07-01T22:56:14.900703+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1997.html"
+ },
+ "draft_NBA_1998": {
+  "fetched_utc": "2026-07-01T22:56:19.027567+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1998.html"
+ },
+ "draft_NBA_1999": {
+  "fetched_utc": "2026-07-01T22:56:23.133916+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_1999.html"
+ },
+ "draft_NBA_2000": {
+  "fetched_utc": "2026-07-01T22:56:27.251571+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2000.html"
+ },
+ "draft_NBA_2001": {
+  "fetched_utc": "2026-07-01T22:56:31.411023+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2001.html"
+ },
+ "draft_NBA_2002": {
+  "fetched_utc": "2026-07-01T22:56:35.526255+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2002.html"
+ },
+ "draft_NBA_2003": {
+  "fetched_utc": "2026-07-01T22:56:39.670812+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2003.html"
+ },
+ "draft_NBA_2004": {
+  "fetched_utc": "2026-07-01T22:56:43.788131+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2004.html"
+ },
+ "draft_NBA_2005": {
+  "fetched_utc": "2026-07-01T22:56:47.917564+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2005.html"
+ },
+ "draft_NBA_2006": {
+  "fetched_utc": "2026-07-01T22:56:52.020809+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2006.html"
+ },
+ "draft_NBA_2007": {
+  "fetched_utc": "2026-07-01T22:56:56.129651+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2007.html"
+ },
+ "draft_NBA_2008": {
+  "fetched_utc": "2026-07-01T22:57:00.263753+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2008.html"
+ },
+ "draft_NBA_2009": {
+  "fetched_utc": "2026-07-01T22:57:04.397267+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2009.html"
+ },
+ "draft_NBA_2010": {
+  "fetched_utc": "2026-07-01T22:57:08.520058+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2010.html"
+ },
+ "draft_NBA_2011": {
+  "fetched_utc": "2026-07-01T22:57:12.645320+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2011.html"
+ },
+ "draft_NBA_2012": {
+  "fetched_utc": "2026-07-01T22:57:16.755998+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2012.html"
+ },
+ "draft_NBA_2013": {
+  "fetched_utc": "2026-07-01T22:57:20.860720+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2013.html"
+ },
+ "draft_NBA_2014": {
+  "fetched_utc": "2026-07-01T22:57:25.232086+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2014.html"
+ },
+ "draft_NBA_2015": {
+  "fetched_utc": "2026-07-01T22:57:29.375070+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2015.html"
+ },
+ "draft_NBA_2016": {
+  "fetched_utc": "2026-07-01T22:57:33.496828+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2016.html"
+ },
+ "draft_NBA_2017": {
+  "fetched_utc": "2026-07-01T22:57:37.611541+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2017.html"
+ },
+ "draft_NBA_2018": {
+  "fetched_utc": "2026-07-01T22:57:41.716013+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2018.html"
+ },
+ "draft_NBA_2019": {
+  "fetched_utc": "2026-07-01T22:57:45.845283+00:00",
+  "url": "https://www.basketball-reference.com/draft/NBA_2019.html"
+ },
+ "leagues_NBA_1980": {
+  "fetched_utc": "2026-07-01T22:40:14.371475+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1980.html"
+ },
+ "leagues_NBA_1981": {
+  "fetched_utc": "2026-07-01T22:40:18.693459+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1981.html"
+ },
+ "leagues_NBA_1982": {
+  "fetched_utc": "2026-07-01T22:40:22.975144+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1982.html"
+ },
+ "leagues_NBA_1983": {
+  "fetched_utc": "2026-07-01T22:40:27.259265+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1983.html"
+ },
+ "leagues_NBA_1984": {
+  "fetched_utc": "2026-07-01T22:40:31.594716+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1984.html"
+ },
+ "leagues_NBA_1985": {
+  "fetched_utc": "2026-07-01T22:40:35.832722+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1985.html"
+ },
+ "leagues_NBA_1986": {
+  "fetched_utc": "2026-07-01T22:40:40.086799+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1986.html"
+ },
+ "leagues_NBA_1987": {
+  "fetched_utc": "2026-07-01T22:40:44.375416+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1987.html"
+ },
+ "leagues_NBA_1988": {
+  "fetched_utc": "2026-07-01T22:40:48.644712+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1988.html"
+ },
+ "leagues_NBA_1989": {
+  "fetched_utc": "2026-07-01T22:40:52.907535+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1989.html"
+ },
+ "leagues_NBA_1990": {
+  "fetched_utc": "2026-07-01T22:40:57.175610+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1990.html"
+ },
+ "leagues_NBA_1991": {
+  "fetched_utc": "2026-07-01T22:41:01.430366+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1991.html"
+ },
+ "leagues_NBA_1992": {
+  "fetched_utc": "2026-07-01T22:41:05.700049+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1992.html"
+ },
+ "leagues_NBA_1993": {
+  "fetched_utc": "2026-07-01T22:41:09.973541+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1993.html"
+ },
+ "leagues_NBA_1994": {
+  "fetched_utc": "2026-07-01T22:41:14.244610+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1994.html"
+ },
+ "leagues_NBA_1995": {
+  "fetched_utc": "2026-07-01T22:41:18.518457+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1995.html"
+ },
+ "leagues_NBA_1996": {
+  "fetched_utc": "2026-07-01T22:41:22.789365+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1996.html"
+ },
+ "leagues_NBA_1997": {
+  "fetched_utc": "2026-07-01T22:41:27.089660+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1997.html"
+ },
+ "leagues_NBA_1998": {
+  "fetched_utc": "2026-07-01T22:41:31.362904+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1998.html"
+ },
+ "leagues_NBA_1999": {
+  "fetched_utc": "2026-07-01T22:41:35.630686+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_1999.html"
+ },
+ "leagues_NBA_2000": {
+  "fetched_utc": "2026-07-01T22:41:39.866620+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2000.html"
+ },
+ "leagues_NBA_2001": {
+  "fetched_utc": "2026-07-01T22:41:44.092466+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2001.html"
+ },
+ "leagues_NBA_2002": {
+  "fetched_utc": "2026-07-01T22:41:48.355824+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2002.html"
+ },
+ "leagues_NBA_2003": {
+  "fetched_utc": "2026-07-01T22:41:52.601984+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2003.html"
+ },
+ "leagues_NBA_2004": {
+  "fetched_utc": "2026-07-01T22:41:56.929505+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2004.html"
+ },
+ "leagues_NBA_2005": {
+  "fetched_utc": "2026-07-01T22:42:01.170766+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2005.html"
+ },
+ "leagues_NBA_2006": {
+  "fetched_utc": "2026-07-01T22:42:05.439427+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2006.html"
+ },
+ "leagues_NBA_2007": {
+  "fetched_utc": "2026-07-01T22:42:09.848112+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2007.html"
+ },
+ "leagues_NBA_2008": {
+  "fetched_utc": "2026-07-01T22:42:14.175539+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2008.html"
+ },
+ "leagues_NBA_2009": {
+  "fetched_utc": "2026-07-01T22:42:18.455118+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2009.html"
+ },
+ "leagues_NBA_2010": {
+  "fetched_utc": "2026-07-01T22:42:22.744520+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2010.html"
+ },
+ "leagues_NBA_2011": {
+  "fetched_utc": "2026-07-01T22:42:26.988961+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2011.html"
+ },
+ "leagues_NBA_2012": {
+  "fetched_utc": "2026-07-01T22:42:31.239183+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2012.html"
+ },
+ "leagues_NBA_2013": {
+  "fetched_utc": "2026-07-01T22:42:35.524316+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2013.html"
+ },
+ "leagues_NBA_2014": {
+  "fetched_utc": "2026-07-01T22:42:39.801827+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2014.html"
+ },
+ "leagues_NBA_2015": {
+  "fetched_utc": "2026-07-01T22:42:44.096659+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2015.html"
+ },
+ "leagues_NBA_2016": {
+  "fetched_utc": "2026-07-01T22:42:48.374604+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2016.html"
+ },
+ "leagues_NBA_2017": {
+  "fetched_utc": "2026-07-01T22:42:52.624820+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2017.html"
+ },
+ "leagues_NBA_2018": {
+  "fetched_utc": "2026-07-01T22:42:56.926948+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2018.html"
+ },
+ "leagues_NBA_2019": {
+  "fetched_utc": "2026-07-01T22:43:01.212380+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2019.html"
+ },
+ "leagues_NBA_2020": {
+  "fetched_utc": "2026-07-01T22:43:05.444503+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2020.html"
+ },
+ "leagues_NBA_2021": {
+  "fetched_utc": "2026-07-01T22:43:10.114526+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2021.html"
+ },
+ "leagues_NBA_2022": {
+  "fetched_utc": "2026-07-01T22:43:14.358829+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2022.html"
+ },
+ "leagues_NBA_2023": {
+  "fetched_utc": "2026-07-01T22:43:18.673723+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2023.html"
+ },
+ "leagues_NBA_2024": {
+  "fetched_utc": "2026-07-01T22:43:22.931312+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2024.html"
+ },
+ "leagues_NBA_2025": {
+  "fetched_utc": "2026-07-01T22:43:27.179343+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2025.html"
+ },
+ "leagues_NBA_2026": {
+  "fetched_utc": "2026-07-01T22:43:31.457370+00:00",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2026.html"
+ },
+ "player_edwaran01": {
+  "fetched_utc": "2026-07-01T22:55:07.223704+00:00",
+  "url": "https://www.basketball-reference.com/players/e/edwaran01.html"
+ }
+}

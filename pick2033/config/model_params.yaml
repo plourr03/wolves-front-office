@@ -1,0 +1,70 @@
+# model_params.yaml — pick2033
+# Every stochastic entry point reads its seed from here. Full runs must be
+# reproducible bit-for-bit given this file + data version hashes.
+
+seed: 20330701            # master seed; components derive child seeds deterministically
+
+simulation:
+  n_paths: 50000
+  seasons: [2027, 2028, 2029, 2030, 2031, 2032, 2033]
+  lottery_era_forward: post_2026_reformed   # verified at M0; see lottery.py
+  # blend schedule w(t): roster-informed weight vs franchise prior (spec 7.4, accepted default)
+  blend_w:
+    2027: 1.00
+    2028: 0.85
+    2029: 0.65
+    2030: 0.45
+    2031: 0.30
+    2032: 0.20
+    2033: 0.10
+
+model_a:                  # franchise trajectory, hierarchical AR(1)
+  # innovation: student_t (v1) | mixture (v2: routine noise vs structural
+  # shock). v2 earned 2026-07-01 by the 8.1 skill-gate failure: the t-shape
+  # paid a small but significant CRPS penalty at h=1-5 vs pooled Gaussian.
+  innovation: mixture
+  num_warmup: 1000
+  num_samples: 1000
+  num_chains: 4
+  target_accept: 0.9
+  priors:
+    phi_beta: [20, 5]     # Beta prior on persistence, mean ~0.8
+    nu_gamma: [2, 0.1]    # Gamma on tail dof (student_t variant)
+    tau_halfnormal: 3.0   # franchise long-run mean spread (SRS units)
+    sigma_halfnormal: 3.0
+    mix_w_beta: [9, 1]        # P(routine year), mean 0.9
+    mix_shock_scale_hn: 8.0   # HalfNormal on shock-component scale
+
+model_b:                  # star retention hazard, discrete-time Bayesian logit
+  num_warmup: 1000
+  num_samples: 1000
+  num_chains: 4
+  holdout_spell_frac: 0.20
+  holdout_seed: 20330702
+  edwards:
+    contract_years_remaining: {2027: 2, 2028: 1, 2029: 0}
+    post_2029_if_retained: max_resign_reset   # documented assumption; tornado-tested
+    supermax_eligible: true
+
+model_c:                  # aging curves, delta method hierarchical by archetype
+  archetypes: [guard, wing, big]
+  spline_df: 5
+  dropout_minutes_floor: 500
+  imputed_decline_to_replacement: true
+
+model_e1:                 # slot value curves
+  train_draft_years: [1990, 2019]
+  value_metric: vorp_4yr
+  robustness_metric: ws_4yr
+  monotone: true
+  seconds_flat_slots: [31, 45]
+
+equity_curve:             # adapter F precompute
+  tiers: [rebuild, mid, playoff, contender]
+  net_delta_grid: [0.25, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0]
+  n_sims: 20000
+  seeds: [1, 2, 3, 4, 5]
+
+data:
+  bref_throttle_seconds: 3.75    # 3.5-4.0 band per plan; never below 3.5
+  bref_pull_manifest: data/raw/bref/manifest.json

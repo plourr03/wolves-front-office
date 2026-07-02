@@ -1,0 +1,4329 @@
+{
+  "pulled": "2026-07-01",
+  "source": "https://www.spotrac.com/nba/draft/future",
+  "teams": {
+    "ATL": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "Least favorable of MIL and NOP then other to NOP (via NOP)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "More favorable of (i) ATL and less favorable (ii) CLE and UTA then other to CLE (via ATL swap for CLE or UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "(via BOS to MEM to POR)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "(via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via GSW)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of ATL and MIA the other to OKC (via OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "(via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "or swap for HOU 31-55 (via ATL swap for HOU)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "BOS": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "BOS",
+        "slot_span": 1,
+        "condition": "If 1"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "SAS BOS",
+        "slot_span": 29,
+        "condition": "Or swap 2-30 with SAS (via SAS swap for BOS)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "SAS BOS",
+        "slot_span": 30,
+        "condition": "Or swap with BOS 2-30 (via SAS swap for BOS)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": "FROZEN PICK"
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "If 46-60 (via ORL to PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via HOU)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "CHA",
+        "slot_span": 25,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BOS",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": "Less favorable of BOS and CLE then other to UTA (via CLE to ATL to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "HOU",
+        "slot_span": 25,
+        "condition": "If 31-55 or swap with ATL (via ATL swap for HOU)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BOS",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BOS",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "BKN": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "BKN HOU",
+        "slot_span": 30,
+        "condition": "Or swap with HOU (via HOU swap for BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "HOU BKN",
+        "slot_span": 30,
+        "condition": "Or swap with BKN (via HOU swap for BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, PHI 9-30 (if PHI conveys 1st to OKC by 2026) and PHX (via BKN swap for PHX) Or swap with NYK"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "NYK BKN",
+        "slot_span": 30,
+        "condition": "Or swap with BKN (via BKN swap for NYK)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 8,
+        "condition": "If 1-8 and if PHI conveys 1st to OKC by 2026"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 22,
+        "condition": "If 9-30 and if PHI conveys 1st to OKC by 2026"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "Least favorable of DAL HOU and PHX then others to HOU"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "More favorable of BKN and DAL to WAS then other to DET"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via GSW)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI BKN",
+        "slot_span": 30,
+        "condition": "PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via HOU)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via BOS to MEM)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "CHA": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "DAL",
+        "slot_span": 2,
+        "condition": "If 1-2"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 28,
+        "condition": "If 3-30"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MIA",
+        "slot_span": 14,
+        "condition": "If 1-14"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 16,
+        "condition": "If 15-30"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MIA CHA",
+        "slot_span": 30,
+        "condition": "If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "OKC SAC",
+        "slot_span": 30,
+        "condition": "OKC If SAS is 1-16, SAC If SAS is 17-30"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of NOP and POR to CHA then other to POR (via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of CHA and LAC then other to DET (via LAC to CHA to DAL)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of ATL and MIA the other to OKC (via OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "If DEN conveys 1st to OKC by 2029"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "CHA",
+        "slot_span": 25,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BOS",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of LAC and UTA (via UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "CHI": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "POR",
+        "slot_span": 14,
+        "condition": "If 1-14 if not already settled with CHI"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHI",
+        "slot_span": 16,
+        "condition": "If 15-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 14,
+        "condition": "If 1-14 if not already settled with CHI or swap with MIL"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "CHI",
+        "slot_span": 16,
+        "condition": "If 15-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": "(via WAS to NOP to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via ATL to MIN)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "POR CHI",
+        "slot_span": 30,
+        "condition": "POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via PHX to CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN))"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via DET to CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "More favorable of HOU and PHX then other to PHX (via PHX to MIN)"
+      }
+    ],
+    "CLE": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "CLE",
+        "slot_span": 30,
+        "condition": "Least favorable of CLE, ATL and UTA (via UTH swap for CLE; via ATL swap for CLE or UTH)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "UTA CLE",
+        "slot_span": 30,
+        "condition": "Or swap with CLE"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "CLE",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "CLE",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "CLE",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "CLE",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via ATL to MIN)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "DAL": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "DAL",
+        "slot_span": 2,
+        "condition": "If 1-2"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 28,
+        "condition": "If 3-30"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "DAL OKC",
+        "slot_span": 30,
+        "condition": "Or swap with OKC (via OKC swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "OKC DAL",
+        "slot_span": 30,
+        "condition": "Or swap with DAL (via OKC swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DAL SAS",
+        "slot_span": 30,
+        "condition": "Least favorable of DAL and SAS (via SAN swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "GSW",
+        "slot_span": 20,
+        "condition": "If 1-20"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DAL",
+        "slot_span": 10,
+        "condition": "If 21-30 (via WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": "(via WAS to NOP to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Less favorable of BKN and DAL to DET then other to WAS"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": "(via SAC to IND)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": "(via OKC to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via BOS to MEM)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "DEN": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "DEN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "DEN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "(via CLE to CHI to BOS to UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DEN",
+        "slot_span": 3,
+        "condition": "If 31-33"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "WAS",
+        "slot_span": 27,
+        "condition": "If 34-60 (via SAS to SAC)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "If DEN conveys 1st to OKC by 2029"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "(via CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via PHX to CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "DET": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Less favorable of BKN and DAL to DET then other to WAS"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 25,
+        "condition": "Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW))"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "GSW": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "GSW",
+        "slot_span": 20,
+        "condition": "If 1-20"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DAL",
+        "slot_span": 10,
+        "condition": "If 21-30 (via WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "GSW",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "(via POR to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "GSW WAS",
+        "slot_span": 30,
+        "condition": "GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW))"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "GSW",
+        "slot_span": 20,
+        "condition": "If 31-50"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 10,
+        "condition": "If 51-60"
+      }
+    ],
+    "HOU": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "BKN HOU",
+        "slot_span": 30,
+        "condition": "Or swap with HOU (via HOU swap for BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "HOU BKN",
+        "slot_span": 30,
+        "condition": "Or swap with BKN (via HOU swap for BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "Least favorable of DAL HOU and PHX then others to HOU"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": "Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via LAC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via ATL)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": "(via OKC to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "HOU",
+        "slot_span": 25,
+        "condition": "If 31-55 or swap with ATL (via ATL swap for HOU)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BOS",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "More favorable of HOU and PHX then other to PHX (via PHX to MIN)"
+      }
+    ],
+    "IND": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "(via CLE) or to NOP if IND does not convey 1st to NOP by 2027"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "More favorable of IND and PHX then other to NYK"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Less favorable of IND and WAS to POR then other to IND (via NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "More favorable of IND and WAS to IND then other to POR (via NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "Least favorable of IND, MEM and MIA then others to MEM and WAS (via MIA swap for IND; via UTH to WAS; via MEM swap for IND or MIA)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "LAC": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": "Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "LAC PHI",
+        "slot_span": 30,
+        "condition": "Or swap 4-30 with PHI (via PHI swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "PHI LAC",
+        "slot_span": 30,
+        "condition": "Or swap with LAC 4-30 (via PHI swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "(via ATL to LAC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": "(via SAC to IND)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "Less favorable of LAC and UTA then other to CHA (via LAC to UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "LAL": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "LAL",
+        "slot_span": 4,
+        "condition": "If 1-4"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MEM",
+        "slot_span": 26,
+        "condition": "If 5-30 (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "LAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "LAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "LAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "LAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "LAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "If LAL does not convey 1st to UTA in 2027 or to BKN"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Less favorable of LAL and WAS then other to ORL (via LAL to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "MEM": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "LAL",
+        "slot_span": 4,
+        "condition": "If 1-4"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MEM",
+        "slot_span": 26,
+        "condition": "If 5-30 (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "ORL",
+        "slot_span": 2,
+        "condition": "If 1-2 or swap 3-30 with MEM (via MEM swap for ORL"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MEM",
+        "slot_span": 28,
+        "condition": "If 1-2 or swap 3-30 with MEM (via MEM swap for ORL"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "More favorable of MEM and less favorable of PHX and WAS"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "(via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via LAC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": "(via PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "If ORL 3-30 in 2029"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "(via PHI to IND)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "MEM",
+        "slot_span": 20,
+        "condition": "31-50"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "MIN",
+        "slot_span": 10,
+        "condition": "51-60"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "Most favorable of MEM, IND and MIA then others to IND and UTA (via MIA swap for IND; via MEM swap for IND or MIA)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "GSW",
+        "slot_span": 20,
+        "condition": "If 31-50"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 10,
+        "condition": "If 51-60"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "MEM can swap for PHI"
+      }
+    ],
+    "MIA": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MIA",
+        "slot_span": 14,
+        "condition": "If 1-14"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 16,
+        "condition": "If 15-30"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MIA CHA",
+        "slot_span": 30,
+        "condition": "If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": "Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "More favorable of MIA and IND (via MIA swap for IND; via UTH)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "MIL": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "Least favorable of MIL and NOP then other to NOP (via NOP)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MIL POR",
+        "slot_span": 30,
+        "condition": "Or swap with POR (via POR swap for MIL)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MIL POR",
+        "slot_span": 30,
+        "condition": "Or swap with POR (via POR swap for MIL)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "POR MIL",
+        "slot_span": 30,
+        "condition": "Or swap with MIL"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "MIL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "MIL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "MIL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "(via BKN to HOU to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": "Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "MIN": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "Two most favorable of CLE, MIN and UTA then other to PHX"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MIN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MIN",
+        "slot_span": 5,
+        "condition": "If 1-5"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "UTA",
+        "slot_span": 25,
+        "condition": "If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MIN",
+        "slot_span": 30,
+        "condition": "Least favorable of MIN 2-30, DAL and SAS (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": "(via SAS)"
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "MIN",
+        "slot_span": 30,
+        "condition": "FROZEN PICK"
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "MIN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via HOU to OKC to NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "MIN UTA",
+        "slot_span": 30,
+        "condition": "MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "MEM",
+        "slot_span": 20,
+        "condition": "31-50"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "MIN",
+        "slot_span": 10,
+        "condition": "51-60"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "DET",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN))"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MIN",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "NOP": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": "Most favorable of MIL and NOP then other to ATL"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": "Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of NOP and POR to CHA then other to POR (via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "NOP ORL",
+        "slot_span": 30,
+        "condition": "Or swap with ORL (via ORL swap for NOP)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ORL NOP",
+        "slot_span": 30,
+        "condition": "Or swap with NOP"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "Least favorable of ORL and NOP (via ORL swap for NOP (via NOP))"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "NYK": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "NYK BKN",
+        "slot_span": 30,
+        "condition": "Or swap with BKN (via BKN swap for NYK)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "(via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS NYK",
+        "slot_span": 30,
+        "condition": "WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "If 46-60 (via ORL to PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "Less favorable of IND and PHX to NYK then other to IND (via IND)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ATL",
+        "slot_span": 30,
+        "condition": "(via POR)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHI",
+        "slot_span": 30,
+        "condition": "(via DET to CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "OKC": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "LAC",
+        "slot_span": 30,
+        "condition": "Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 4,
+        "condition": "If 1-4 if not already settled with OKC"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 26,
+        "condition": "If 5-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "If 17-30 (via SAC)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "DAL OKC",
+        "slot_span": 30,
+        "condition": "Or swap with OKC (via OKC swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "OKC DAL",
+        "slot_span": 30,
+        "condition": "Or swap with DAL (via OKC swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DEN",
+        "slot_span": 5,
+        "condition": "If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 25,
+        "condition": "If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "OKC SAC",
+        "slot_span": 30,
+        "condition": "OKC If SAS is 1-16, SAC If SAS is 17-30"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "MIA",
+        "slot_span": 30,
+        "condition": "Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI OKC",
+        "slot_span": 30,
+        "condition": "PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "OKC SAC",
+        "slot_span": 30,
+        "condition": "OKC If SAS is 1-16, SAC If SAS is 17-30"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "(via CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "Least favorable of ORL and NOP (via ORL swap for NOP (via NOP))"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "ORL": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via MEM)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "ORL",
+        "slot_span": 2,
+        "condition": "If 1-2 or swap 3-30 with MEM (via MEM swap for ORL"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MEM",
+        "slot_span": 28,
+        "condition": "If 1-2 or swap 3-30 with MEM (via MEM swap for ORL"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "More favorable of LAL and WAS to ORL then other to WAS"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "If ORL 3-30 in 2029"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "NOP ORL",
+        "slot_span": 30,
+        "condition": "Or swap with ORL (via ORL swap for NOP)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "ORL NOP",
+        "slot_span": 30,
+        "condition": "Or swap with NOP"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "Least favorable of ORL and NOP (via ORL swap for NOP (via NOP))"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "Least favorable of ORL and NOP (via ORL swap for NOP (via NOP))"
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "PHI": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 4,
+        "condition": "If 1-4 if not already settled with OKC"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 26,
+        "condition": "If 5-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 8,
+        "condition": "If 1-8 and if PHI conveys 1st to OKC by 2026"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "BKN",
+        "slot_span": 22,
+        "condition": "If 9-30 and if PHI conveys 1st to OKC by 2026"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "LAC PHI",
+        "slot_span": 30,
+        "condition": "Or swap 4-30 with PHI (via PHI swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "PHI LAC",
+        "slot_span": 30,
+        "condition": "Or swap with LAC 4-30 (via PHI swap for LAC)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI OKC",
+        "slot_span": 30,
+        "condition": "PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "Most favorable of GSW and PHX to PHI then other to WAS (via WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DET",
+        "slot_span": 25,
+        "condition": "Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 5,
+        "condition": "If 56-60"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "(via POR to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "(via BKN to HOU to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "PHI BKN",
+        "slot_span": 30,
+        "condition": "PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "DAL",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "MEM can swap for PHI"
+      }
+    ],
+    "PHX": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via BKN)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "Least Favorable of WAS and BKN, PHI 9-30 if not already settled and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "Least favorable of PHX, MEM and WAS"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "(via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "FROZEN PICK"
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "Most favorable of GSW and PHX to PHI then other to WAS (via WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "Less favorable of IND and PHX to NYK then other to IND (via IND)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "(via OKC to CHA)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "PHX",
+        "slot_span": 30,
+        "condition": "Least favorable of HOU and PHX then other to MIN (via PHX)"
+      }
+    ],
+    "POR": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "POR",
+        "slot_span": 14,
+        "condition": "If 1-14 if not already settled with CHI"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "CHI",
+        "slot_span": 16,
+        "condition": "If 15-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "MIL POR",
+        "slot_span": 30,
+        "condition": "Or swap with POR (via POR swap for MIL)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via MEM)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 14,
+        "condition": "If 1-14 if not already settled with CHI or swap with MIL"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "CHI",
+        "slot_span": 16,
+        "condition": "If 15-30 if not already settled"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "MIL POR",
+        "slot_span": 30,
+        "condition": "Or swap with POR (via POR swap for MIL)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "POR MIL",
+        "slot_span": 30,
+        "condition": "Or swap with MIL"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via HOU to OKC to NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "POR CHI",
+        "slot_span": 30,
+        "condition": "POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via CHI to SAC to MEM)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "Less favorable of IND and WAS to POR then other to IND (via NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "(via PHI to IND)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": "More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "SAC": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "If 17-30 (via SAC)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": "(via SAS)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAC SAS",
+        "slot_span": 30,
+        "condition": "Or swap with SAS (via SAS swap for SAC)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAS SAC",
+        "slot_span": 30,
+        "condition": "Or swap for SAC"
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "OKC SAC",
+        "slot_span": 30,
+        "condition": "OKC If SAS is 1-16, SAC If SAS is 17-30"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "OKC SAC",
+        "slot_span": 30,
+        "condition": "OKC If SAS is 1-16, SAC If SAS is 17-30"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "POR",
+        "slot_span": 30,
+        "condition": "(via CHI to SAC to MEM)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "HOU",
+        "slot_span": 30,
+        "condition": "(via WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "(via IND)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "SAC",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "SAS": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": "If 17-30 (via SAC)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "BOS",
+        "slot_span": 1,
+        "condition": "If 1"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "SAS BOS",
+        "slot_span": 29,
+        "condition": "Or swap 2-30 with SAS (via SAS swap for BOS)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "SAS BOS",
+        "slot_span": 30,
+        "condition": "Or swap with BOS 2-30 (via SAS swap for BOS)"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "DAL SAS",
+        "slot_span": 30,
+        "condition": "Least favorable of DAL and SAS (via SAN swap for DAL)"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "Most favorable of SAS, DAL and MIN 2-30 (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAC SAS",
+        "slot_span": 30,
+        "condition": "Or swap with SAS (via SAS swap for SAC)"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "SAS SAC",
+        "slot_span": 30,
+        "condition": "Or swap for SAC"
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "More favorable SAS and least favorable of HOU, IND, MIA and OKC then others to NYK and OKC (via HOU to DET to OKC; via UTA to SAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "NYK",
+        "slot_span": 30,
+        "condition": "If 46-60 (via ORL to PHX)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "(via PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": "(via IND)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "SAS",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "TOR": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "TOR",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "NOP",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "BKN",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "UTA": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "Two most favorable of CLE, MIN and UTA then other to PHX"
+      },
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "MEM",
+        "slot_span": 30,
+        "condition": "Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)"
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "UTA CLE",
+        "slot_span": 30,
+        "condition": "Or swap with CLE"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "MIN",
+        "slot_span": 5,
+        "condition": "If 1-5"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "UTA",
+        "slot_span": 25,
+        "condition": "If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "Two most favorable of CLE, MIN 6-30 and UTA then other to CHA"
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "(via CLE to CHI to BOS to UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "(via ATL to LAC)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "If LAL does not convey 1st to UTA in 2027 or to BKN"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "(via CLE) or to NOP if IND does not convey 1st to NOP by 2027"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "OKC",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "MIN UTA",
+        "slot_span": 30,
+        "condition": "MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "Less favorable of LAC and UTA then other to CHA (via LAC to UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "CHA",
+        "slot_span": 30,
+        "condition": "More favorable of LAC and UTA (via UTA)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": "More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "UTA",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ],
+    "WAS": [
+      {
+        "round": 1,
+        "year": 2027,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2028,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Most Favorable of WAS and BKN, PHI 9-30 and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX) or swap for MIL or POR"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Two most favorable of BKN, DAL and PHX to HOU then other to BKN"
+      },
+      {
+        "round": 1,
+        "year": 2029,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2030,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Most favorable of WAS, MEM and PHX"
+      },
+      {
+        "round": 1,
+        "year": 2031,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2032,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 1,
+        "year": 2033,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "More favorable of BKN and DAL to WAS then other to DET"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2027,
+        "pick_origin": "WAS NYK",
+        "slot_span": 30,
+        "condition": "WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "DEN",
+        "slot_span": 3,
+        "condition": "If 31-33"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "WAS",
+        "slot_span": 27,
+        "condition": "If 34-60 (via SAS to SAC)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Less favorable of LAL and WAS then other to ORL (via LAL to WAS)"
+      },
+      {
+        "round": 2,
+        "year": 2028,
+        "pick_origin": "ORL",
+        "slot_span": 30,
+        "condition": "More favorable of LAL and WAS to ORL then other to WAS"
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2029,
+        "pick_origin": "IND",
+        "slot_span": 30,
+        "condition": "More favorable of IND and WAS to IND then other to POR (via NYK)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "GSW WAS",
+        "slot_span": 30,
+        "condition": "GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI)"
+      },
+      {
+        "round": 2,
+        "year": 2030,
+        "pick_origin": "PHI",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": "More favorable of MIA and IND (via MIA swap for IND; via UTH)"
+      },
+      {
+        "round": 2,
+        "year": 2031,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      },
+      {
+        "round": 2,
+        "year": 2032,
+        "pick_origin": "WAS",
+        "slot_span": 30,
+        "condition": ""
+      }
+    ]
+  }
+}

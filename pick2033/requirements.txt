@@ -1,0 +1,19 @@
+# pick2033 — pinned after first successful install + smoke test (M0)
+numpy
+pandas
+pyarrow
+duckdb
+pyyaml
+requests
+beautifulsoup4
+lxml
+scipy
+matplotlib
+lifelines
+arviz
+jax[cpu]
+numpyro
+pytest
+psycopg2-binary
+python-dotenv
+tabulate

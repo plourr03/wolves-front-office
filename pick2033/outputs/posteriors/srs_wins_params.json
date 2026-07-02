@@ -1,0 +1,6 @@
+{
+ "c": 0.032568684193784385,
+ "resid_sd_win_pct": 0.04023931894074352,
+ "n": 1314,
+ "note": "win_pct = 0.5 + c*srs; cross-check vs e_calibration wins_b in validation report"
+}

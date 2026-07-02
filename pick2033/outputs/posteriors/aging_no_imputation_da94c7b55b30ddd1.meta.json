@@ -1,0 +1,7 @@
+{
+ "worst_r_hat": 1.0080577401147632,
+ "min_ess_bulk": 493.3994270176488,
+ "n_rows": 11635,
+ "n_players": 1959,
+ "tag": "no_imputation"
+}

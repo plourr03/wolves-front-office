@@ -1,0 +1,67 @@
+# trade_terms.yaml — pick2033
+# Confirmed terms of the LaMelo Ball four-team trade (MIN perspective, draft assets only).
+# Canonical sources: lamelo/data/trade_definition.json (as_of 2026-06-25),
+# lamelo/prereg/preregistration.md Amendment 1.
+# RE-VERIFY against reporting after 2026-07-06 before any M5 pricing run
+# (set verified_post_july6: true once done; swap_pricing.py hard-fails while false).
+verified_post_july6: false
+
+outgoing_first:
+  year: 2033
+  protection: none              # unprotected, confirmed
+  conveys_to: CHA
+
+swaps:
+  # Semantics per Bobby (2026-07-01 plan review). Resolution order matters:
+  # MIN's prior obligations resolve BEFORE the CHA swap in each year (see encumbrances).
+  - year: 2028
+    type: favorable_to_CHA      # straight swap: CHA takes more favorable of MIN/CHA firsts
+    protection: none
+    operates_on: MIN_own        # MIN 2028 first is unencumbered
+  - year: 2029
+    type: favorable_to_CHA
+    protection: none
+    operates_on: MIN_resolved   # MIN holds own first ONLY if top-5 (else conveys to UTA pool)
+    note: >
+      CHA swap operative only in MIN-top-5 worlds. TBD branch: whether CHA may
+      instead swap using the least-favorable UTA/CLE pick they control; v1 prices
+      CHA-own-pick semantics and documents the branch.
+  - year: 2030
+    type: favorable_to_CHA
+    protection: none
+    operates_on: MIN_resolved   # resolve SAS/DAL stack first, then CHA swaps vs MIN's holding
+    note: >
+      SAS stack resolves first: MIN keeps if #1 overall; else MIN holds least
+      favorable of {MIN, best of SAS/DAL}. top1_carries_to_CHA flag below controls
+      whether a MIN #1-overall retention is still swappable by CHA; run both branches.
+
+top1_carries_to_CHA: [true, false]   # run both; report both in swap_pricing.json
+
+seconds:
+  - year: 2029
+  - year: 2032
+  - year: 2033
+
+# Already-resolved 2026 draft-night components (deterministic line item in
+# total_asset_cost.json decomposition, valued off E1 at known slots; slot-EV by design):
+resolved_2026:
+  out: {round: 1, slot: 28}
+  in: {round: 2, slot: 33}
+
+# MIN first-round obligation stack (pre-existing encumbrances + this trade),
+# consumed by src/sim/pick_ledger.py. Source: offseason/data/nba_draft_picks_future.csv
+# (Spotrac 2026-06-06 pre-trade pull; refresh post-trade at M0) + Bobby confirmation.
+min_first_obligations:
+  2027: {holder: UTA_pool, rule: "two most favorable of {CLE, MIN, UTA} to UTA, other to PHX; MIN retains nothing"}
+  2028: {holder: MIN, rule: "own, unencumbered pre-swap", then: CHA_swap}
+  2029: {holder: conditional, rule: "MIN keeps if 1-5; else conveys into UTA/PHX pool", then: CHA_swap_if_retained}
+  2030: {holder: MIN_resolved, rule: "MIN keeps if #1 overall; else least favorable of {MIN, best of SAS/DAL}", then: CHA_swap}
+  2031: {holder: SAC, rule: "out via SAS to SAC"}
+  2032: {holder: MIN, rule: "own; FROZEN per ledger"}
+  2033: {holder: CHA, rule: "conveys outright, unprotected"}
+
+notes: >
+  Swap semantics: in each swap year Charlotte receives the more favorable of the
+  two operative firsts (value terms). Charlotte's own pick side is CHA-own in v1.
+  The all-30 league sim produces the UTA/CLE/PHX/SAS/DAL slots the resolution
+  rules require; pick_ledger.py implements the generalized ordered resolution.
