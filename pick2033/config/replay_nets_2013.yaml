@@ -1,0 +1,22 @@
+# Historical replay: the 2013 Celtics-Nets trade (spec 8.5 primary replay).
+# Terms below are the widely reported structure; VERIFY against primary
+# sources during the replay build (spec: "exact terms verified during build").
+as_of: 2013-07-01          # pipeline may use data through season 2013 ONLY
+lottery_era: pre_2019_weighted   # k=3 drawn
+outgoing_from_BKN:
+  firsts:
+    - {year: 2014, protection: none}
+    - {year: 2016, protection: none}
+    - {year: 2018, protection: none}
+  swaps:
+    - {year: 2017, type: favorable_to_BOS, protection: none}
+realized_outcomes:         # for gate scoring only, NEVER visible to the fit
+  2014: 17                 # James Young
+  2016: 3                  # Jaylen Brown
+  2017: 1                  # swap exercised; became Markelle Fultz pick, traded, Tatum at 3
+  2018: 8                  # Collin Sexton (to CLE via trade)
+gate: >
+  Realized pick slots fall within the 90% predictive interval in at least
+  2 of 3 replays (this + PG-2019 secondary + one negative control), misses
+  analyzed. Replay FIT runs only after the final (post-review, post-July-6)
+  spells freeze per the overnight directive.

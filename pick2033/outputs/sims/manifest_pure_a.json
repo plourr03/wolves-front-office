@@ -1,0 +1,53 @@
+{
+ "tag": "PROVISIONAL",
+ "variant": "pure_a",
+ "n_paths": 50000,
+ "seed": 20330706,
+ "runtime_s": 193.0,
+ "gates": {
+  "conservation": true,
+  "slot_permutation": true,
+  "tail_terminal_pass": true,
+  "tail_transient_pass": true,
+  "autocorr_pass": true
+ },
+ "tail": {
+  "terminal_top": 0.06852266666666666,
+  "terminal_bottom": 0.051333333333333335,
+  "hist_top": 0.0593607305936073,
+  "hist_bottom": 0.06316590563165905,
+  "yearly_top": [
+   0.08858533333333334,
+   0.07873,
+   0.073526,
+   0.07116466666666667,
+   0.069644,
+   0.06907866666666666,
+   0.06852266666666666
+  ],
+  "pooled_top": 0.0741787619047619,
+  "pooled_bottom": 0.05859466666666667
+ },
+ "autocorr": {
+  "sim": {
+   "1": 0.6616790134720063,
+   "2": 0.4673078820513993,
+   "3": 0.3338892579640091
+  },
+  "envelope": {
+   "1": {
+    "min": 0.6162827369282827,
+    "max": 0.7084949822170539
+   },
+   "2": {
+    "min": 0.36186171880253354,
+    "max": 0.5465791025391131
+   },
+   "3": {
+    "min": 0.09407149631376578,
+    "max": 0.45002204626070313
+   }
+  }
+ },
+ "disclosure": "Operationalization chosen after a correlated preview (2026-07-01), justified a priori (phi^7 ~ 0.07 makes the terminal horizon effectively stationary); weaker than true pre-registration and disclosed as such."
+}

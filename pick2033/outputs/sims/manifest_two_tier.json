@@ -1,0 +1,65 @@
+{
+ "tag": "PROVISIONAL",
+ "variant": "two_tier",
+ "n_paths": 50000,
+ "seed": 20330706,
+ "runtime_s": 195.6,
+ "gates": {
+  "conservation": true,
+  "slot_permutation": true,
+  "tail_terminal_pass": true,
+  "tail_transient_pass": false,
+  "autocorr_pass": true
+ },
+ "tail": {
+  "terminal_top": 0.06838266666666666,
+  "terminal_bottom": 0.051091333333333336,
+  "hist_top": 0.0593607305936073,
+  "hist_bottom": 0.06316590563165905,
+  "yearly_top": [
+   0.082654,
+   0.069088,
+   0.06600733333333333,
+   0.06605533333333333,
+   0.06674933333333333,
+   0.06763333333333334,
+   0.06838266666666666
+  ],
+  "pooled_top": 0.06951,
+  "pooled_bottom": 0.05783352380952381
+ },
+ "autocorr": {
+  "sim": {
+   "1": 0.6648326859512176,
+   "2": 0.4699388242634918,
+   "3": 0.33373927532940895
+  },
+  "envelope": {
+   "1": {
+    "min": 0.6162827369282827,
+    "max": 0.7084949822170539
+   },
+   "2": {
+    "min": 0.36186171880253354,
+    "max": 0.5465791025391131
+   },
+   "3": {
+    "min": 0.09407149631376578,
+    "max": 0.45002204626070313
+   }
+  }
+ },
+ "disclosure": "Operationalization chosen after a correlated preview (2026-07-01), justified a priori (phi^7 ~ 0.07 makes the terminal horizon effectively stationary); weaker than true pre-registration and disclosed as such.",
+ "roster_cal": {
+  "a": -0.3452269024216558,
+  "b": 0.9017996921371098,
+  "resid_sd": 0.9422107244301443,
+  "r": 0.9789605589916838,
+  "n": 1200
+ },
+ "star_exit_prior_shift": -1.8097332338460126,
+ "departure_rates": {
+  "Anthony Edwards": 0.87934,
+  "LaMelo Ball": 0.89142
+ }
+}

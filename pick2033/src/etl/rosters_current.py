@@ -92,7 +92,10 @@ def apply_trade(pre: pd.DataFrame, pool: pd.DataFrame) -> pd.DataFrame:
         row = src.iloc[[0]].copy()
         row["team"] = team
         incoming.append(row)
-    return pd.concat([post] + incoming, ignore_index=True)
+    merged = pd.concat([post] + incoming, ignore_index=True)
+    # idempotent vs snapshots that already reflect parts of the trade
+    # (the 2026-07-01 snapshot already had Dosunmu on MIN -> duplicate row)
+    return merged.drop_duplicates(["team", "player"], keep="first")
 
 
 def enrich(df: pd.DataFrame) -> pd.DataFrame:
@@ -102,7 +105,7 @@ def enrich(df: pd.DataFrame) -> pd.DataFrame:
              "team_option_flag", "fa_status_2026"]
     value = pd.read_csv(PLAYER_VALUE)
     vcols = ["player_id", "net_rapm", "net_sd", "off_rapm", "def_rapm",
-             "bbr_bpm", "consensus_net", "reliable"]
+             "bbr_bpm", "bbr_mp", "consensus_net", "reliable"]
     out = (df.merge(contracts[ccols].drop_duplicates("nba_player_id"),
                     on="nba_player_id", how="left")
              .merge(value[vcols].rename(columns={"player_id": "nba_player_id"})
