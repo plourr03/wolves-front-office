@@ -1,0 +1,4 @@
+# Per-game stint parquet cache: the D6 rebuild seam, regenerated from the
+# warehouse by src/stints/run_panel.py. 150-350MB, never carried in git.
+data/cache/stints/
+__pycache__/
