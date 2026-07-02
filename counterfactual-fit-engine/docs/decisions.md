@@ -184,3 +184,32 @@ F1 DIRECTIVE (before further repair coding):
    (from 36.6%/43.0% naive) -- a third disease was the yardstick itself;
    real disease remains in both eras.
 4. UNLOCKED: repair coding proceeds, period-start floors first, both eras.
+
+## 2026-07-02 (late) — F1 precision riders (Bobby, verbatim)
+
+F1 PRECISION RIDERS (before repair iteration hardens):
+1. The relaxed gate is the right observable bound against truncated
+   references, but it admits true errors up to ~1.5 min in tail
+   alignments (model tolerance stacking with the truncation cell).
+   The seconds-precise verification stratum therefore carries the
+   ORIGINAL criterion: >= 99.5% of player-games within 0.5 min of true
+   seconds, on a defined sample (>= 200 games, era-stratified per
+   AM-4) via targeted nba_api boxscore pulls. Final G1 green requires
+   BOTH the relaxed full-panel gate AND this stratum passing. Without
+   an attached criterion the stratum is a dangling check.
+2. Repair inference using official minutes as evidence must constrain
+   with the truncation interval [m, m+1), not m +/- tolerance. Do not
+   bake the old yardstick into the new repair logic.
+3. Bench/panel discipline: fixes iterate on the 208-game bench; gate
+   claims come only from full-panel runs.
+
+Independent verification (Bobby): 5.28-min team shortfall / 0.5 per player
+implies ~10.6 players logging minutes per team-game -- matches NBA reality;
+truncation inference confirmed from a second angle.
+
+Hypothesis scoreboard (Bobby's own grading, logged like the agent's
+predicted-wrong notes): directive disease candidates 0-for-2 (boundary
+placement dead on flat correlation; Live clock parsing dead on clean
+audit); the original plan's fix-order item 1 (period-start floors) 1-for-1
+as the surviving target. The discriminator was still the right ten-minute
+spend: two plausible diseases eliminated before a day of repair code.

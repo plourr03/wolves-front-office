@@ -15,9 +15,15 @@ stint durations, join official boxscore minutes, and score:
                            |r - o| is kept as a diagnostic column. Final G1
                            on the full panel adds a seconds-precise
                            verification stratum via targeted nba_api
-                           boxscore pulls. AM-3: the denominator is ALL
-                           player-games -- quarantine never launders the
-                           gate.
+                           boxscore pulls carrying the ORIGINAL criterion
+                           (rider 1, 2026-07-02): >= 99.5% within 0.5 min
+                           of TRUE seconds on >= 200 era-stratified games.
+                           FINAL G1 GREEN REQUIRES BOTH the relaxed
+                           full-panel gate AND that stratum. AM-3: the
+                           denominator is ALL player-games -- quarantine
+                           never launders the gate. Bench discipline
+                           (rider 3): fixes iterate on the 208-game bench;
+                           gate claims come only from full-panel runs.
   team-seconds identity    sum of player-seconds == 5 * (2880 + 300*nOT)
                            exactly, per team-game (floor-size correctness
                            stated as an assertion).
@@ -50,6 +56,15 @@ from src.stints import floor_state, stint_builder  # noqa: E402
 
 REG_SECONDS = 2880.0
 OT_SECONDS = 300.0
+
+
+def truncation_interval(official_min: float) -> tuple[float, float]:
+    """Rider 2 (2026-07-02): official minutes are FLOOR-truncated, so the
+    only valid consistency bound derived from them is the HALF-OPEN cell
+    [m, m+1) in minutes. Repair logic must use this, never m +/- tolerance
+    -- otherwise the repair bakes in the exact error the yardstick fix
+    removed."""
+    return (official_min, official_min + 1.0)
 
 
 def player_seconds_from_stints(stints: pd.DataFrame) -> pd.DataFrame:
