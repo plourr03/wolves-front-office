@@ -15,6 +15,29 @@ point. "Franchise DNA" is mostly a myth, and that is exactly why no model
 beats pooled mean-reversion on seven-year point skill. The red gate and the
 finding are the same fact seen from two sides.
 
+## Young-core emergent validation (staged for July-6 step 6; Ruling D)
+We asked whether the model was being too generous to Charlotte's future in
+exactly the seasons the swaps live (2028-2030) and checked it against forty
+years of actual young cores: 77 sub-.500 team-seasons with three or more
+under-23 rotation players, 18 in Charlotte's starting band. The model's
+simulated crest (a 51-win median peak) sits at roughly the 60th percentile
+of what those historical teams actually did, below the pre-committed
+correction threshold (the band's 70th percentile peaked at 53). The
+stronger finding is emergent: without ever being fit to it, the engine
+reproduced the cohort's characteristic arc — crest around year four, then
+fade. Caveat carried: the matched band is n=18. The blend schedule was
+already doing the discounting the skeptical prior expected (at the crest,
+35% of Charlotte's simulated strength is franchise-prior reversion).
+
+## Corrected Duncan-bias record (staged for July-6 step 6)
+An early memo claimed smooth same-franchise re-sign mislabeling would
+ATTENUATE the contract coefficient; a synthetic test reversed this on the
+record (true slope -0.45, clean fit -0.62, corrupted fit -1.62 — a ~2.6x
+EXAGGERATION, walk-year hazard inflating .341 -> .667). The labels were
+fixed before the one-shot refit; without the fix, Edwards' 2029 walk year
+would have overproduced departure worlds through a labeling artifact
+wearing the costume of a finding.
+
 ## Shock regime (from the accepted v2 mixture)
 Roughly 19% of franchise-seasons are structural-shock years with innovation
 scale 5.3 SRS (vs 2.9 in routine years) -- the fat tail that drives distant

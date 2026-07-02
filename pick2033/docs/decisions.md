@@ -195,3 +195,42 @@ Backfill directive executed: synthetic test SETTLED the bias direction
 the record); re-sign detector added (rookie-exempt + tight pass; all five
 ground-truth careers read correctly); 21 residual segments routed to the
 pre-declared S-CONTRACT sensitivity arm, no hand edits.
+
+## 2026-07-02 — Sequencing amendment (verbatim) + borderline resolution
+
+SEQUENCING AMENDMENT (Ruling A timing, declared before the refit runs):
+The one-shot M2 refit executes on the complete post-July-6 freeze, not
+before. Rationale: the July 6 pass adds three known departure events
+(Giannis/Kawhi/LaMelo) currently coded censored; refitting first means
+either a final model with knowingly wrong labels or a forbidden third
+fit against the sealed holdout. One fit, complete data.
+
+July 6 run order (one mechanical day):
+1. Trade-terms verification -> trade_terms.yaml, verified_post_july6=true
+2. Spells import: borderline calls + SET verdicts + three exit updates;
+   FINAL freeze. Disclose whether any of the three touched the sealed
+   holdout (label correction, not peeking).
+3. One-shot M2 refit + full 8.2 re-gate; grade P1.
+4. Final Engine D re-run on the final hazard; re-judge 8.4.
+5. Priced E2 runs unlock; Stage 1 finalizes same day.
+6. Stage 2 notes additions: the young-core emergent validation (model
+   crest at ~cohort 60th percentile; matched historical cores also
+   crest at year +4 then fade; n=18 band caveat) and the corrected
+   Duncan-bias record with the synthetic numbers.
+
+Stage 1 DRAFTING from provisional continues now; publication waits.
+
+BORDERLINE RESOLUTION: Bobby's leans on all 21, agent reviewed and
+accepted without exception (internally consistent under
+recognition-or-primacy-during-spell; aggregate stakes pre-measured at
+~0.5% on the Edwards curve).
+PRUNE (13): Michael Adams, Batum, Calderon, Darrell Armstrong, Brent
+Barry x2, Ryan Anderson, Nene, Gallinari x2, Lou Williams, Lowry-HOU,
+Robert Williams. KEEP (8): Dana Barros, Tyreke Evans, Kevin Martin,
+Kenny Anderson x2, Derek Harper, Kukoc, Whiteside.
+
+P2 self-grade nuance (Bobby, on record): the no-churn optimism was real
+but ALREADY PRICED -- at the 2029 crest, 35% of CHA's simulated strength
+is franchise-prior reversion pulling the roster arc down. The genuinely
+valuable finding is emergent: the engine reproduced the historical
+crest-at-year-4-then-fade arc without being fit to it.
