@@ -82,9 +82,78 @@ Committed in 61dc2ed7 (before the panel re-run), then RAPM refined:
 
 37 tests green (13 contract + 24 new).
 
+## F2 through F5 landed (continued)
+
+- Possession cache built: 15,668 games, 3,020,898 possessions (garbage
+  flagged per the stint-builder rule). Gitignored as a rebuildable
+  intermediate.
+- F2 RAPM ran full: GCV alpha frozen at 2000 (dev seasons only), 13
+  seasons fit, 200-block bootstrap, A1 covariance blocks. G2 GREEN both
+  gates -- YoY O/D correlations all 12 pairs in the 0.50-0.75 band, face
+  validity exact (2015-16 Kawhi/Curry/Draymond, 2024-25 Jokic/SGA/Giannis).
+  Commit 9ed1df28. Layer 1b factor rows remain F3-pending.
+- player_features (6,936 rows) built with RAPM joined; a warehouse
+  Decimal->float coercion fixed. DATA NOTE FOR BOBBY: the warehouse has NO
+  2020-21 tracking rows (2019-20 jumps to 2021-22); regime mask flags it,
+  pending an ingest ruling.
+- lineup_obs: the SAME wrong-grain bug RAPM had (stint self-join, 7x
+  undercount) fixed -- now sourced from the possession cache, 770,369 rows,
+  2,969,298 possessions, team context via the lineup->team join. A3
+  leverage weighting deferred to Layer 2 fit time (frozen adapter taggers).
+- dev_transaction_universe: 174 mechanical cases, 2015-16..2020-21 ONLY
+  (sealed asserted absent), face-valid (KD->GSW, Kawhi->LAC, etc.).
+- validation report regenerated (G1 + G2 green).
+- Two grain bugs (RAPM, lineup_obs) both traced to the same root: per-team
+  stints do not share clock boundaries, so a matchup self-join is not 1:1.
+  The possession cache is now the canonical matchup grain for both layers.
+
+Commits this stretch: 6ad459d7 (F1 closed), d489a7cf (GCV), 9ed1df28 (G2),
+c1687276 (F3/F4/F5 builds), plus the diagnose trace instrument.
+
 ## In flight at this log
 
-Possession cache build (src.models.build_possessions, 16 workers) running;
-F2 RAPM fires on completion. Then: G2 face-validity (workflow), player_
-features, lineup_obs, transaction universe (dev only), attribution-residual
-deep verification, validation report regen.
+Tail-residual root-cause workflow (13 stratified games, one trace agent
+each + synthesis) running to adversarially verify the census claim that
+the 140-game attribution tail is diffuse data-floor noise, not a fixable
+systematic bug. Verdict lands in decisions.md on completion.
+
+## Tail root-cause workflow + fix propagation (session close)
+
+The adversarial tail workflow (13 trace agents + synthesis) OVERTURNED the
+census "diffuse" call: 10/13 sampled games traced to one bug in
+_identify_period_start_floors (technical fouls / ejections by non-floor
+players counted as on-floor appearances, seating a phantom into the
+period-start five). validate_floor_state already skipped that event class;
+the seeder didn't. Fix: shared _implies_floor_presence predicate
+(commit 0927e194).
+
+Propagated through the whole pipeline (one combined panel re-run writing
+stints+possessions+scorecard, D6 reload, RAPM re-fit with alpha frozen,
+feature rebuilds). Results (commit b47d5d82):
+- G1 pooled recon 99.8476% -> 99.9318%, live 99.98% -> 100.00%, failing
+  player-games 507 -> 227 (halved), games<99% 141 -> 63.
+- Tail: 140 attribution-residual games -> 61; the technical-foul class
+  (~79 games) eliminated.
+- G2 unchanged green (YoY all in band, alpha still 2000, face validity
+  intact).
+
+Memo'd residuals (not fixed, not systematic at scale): quiet-starter period
+seatings, 1 same-surname IN-resolution, irreducible data-floor games, 1
+reference-incomplete 2025-26 game, 1 phantom-OT.
+
+## Final overnight state
+
+- G1 GREEN (improved), F1 closed. G2 GREEN (RAPM rows). Layer 1b factor
+  rows F3-pending.
+- Full F2-F5 code written, unit/smoke-tested (35 tests green), and the
+  real data builds run: RAPM (13 seasons), player_features (6,936),
+  lineup_obs (770k), dev transaction universe (174 cases, sealed absent).
+- Sealed 2022-26 backtest window untouched and unenumerated throughout.
+- Caches (stints, possessions), the DuckDB store, and large feature
+  parquets are gitignored as rebuildable; scorecards, RAPM parquets, G2
+  report, validation report, dev universe, and all decisions committed.
+- Open for the next session: F3 proper (Layer 1b factor model, K selection
+  on dev seasons -- the K CHOICE is presented to Bobby, not frozen
+  overnight), the A2 aging fit once skill vectors exist, and the memo'd
+  reconstruction residuals if a further pass is wanted (all sub-0.5% of
+  player-games).
