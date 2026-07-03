@@ -24,6 +24,7 @@ FITENGINE_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(FITENGINE_ROOT))
 
 STINTS_DIR = FITENGINE_ROOT / "data" / "cache" / "stints"
+POSS_DIR = FITENGINE_ROOT / "data" / "cache" / "possessions"
 CHECKPOINT = 500
 
 
@@ -31,7 +32,8 @@ def _work(game_id: str) -> dict:
     # import inside the worker so spawn gets a clean module + connection
     from src.stints.reconcile import reconcile_game
     try:
-        return reconcile_game(game_id, stints_dir=str(STINTS_DIR))
+        return reconcile_game(game_id, stints_dir=str(STINTS_DIR),
+                              poss_dir=str(POSS_DIR))
     except Exception as e:  # reconcile_game quarantines internally; this is
         # the belt-and-braces for worker-level failures (db drop etc.)
         return {"game_id": game_id, "quarantined": True, "pbp_format": "unknown",
@@ -48,6 +50,7 @@ def main() -> None:
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 6
     out_path = FITENGINE_ROOT / "outputs" / f"reconciliation_{tag}.parquet"
     STINTS_DIR.mkdir(parents=True, exist_ok=True)
+    POSS_DIR.mkdir(parents=True, exist_ok=True)
 
     uni = pd.read_parquet(FITENGINE_ROOT / "data" / "staged" / "game_universe.parquet")
     gids = sorted(uni[uni.include_train].game_id)

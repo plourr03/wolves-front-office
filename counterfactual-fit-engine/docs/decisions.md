@@ -664,3 +664,58 @@ Note (not a gate issue): alpha 2000 was the argmin of summed dev-season
 GCV; the curve is flat-ish near the top (dev seasons individually also
 picked 2000), so the estimate is stable. Frozen regardless per house
 rule; no post-hoc adjustment.
+
+## 2026-07-03 (overnight) — G1 tail root-cause: a REAL systematic bug found, fixed (post-green repair)
+
+The census called the 140-game reconciliation tail "diffuse." A 13-agent
+adversarial root-cause workflow (one trace agent per worst-residual game
+per season, plus synthesis) OVERTURNED that: 10 of 13 sampled games localize
+to ONE defect in floor_state._identify_period_start_floors. My census
+bucketing was too coarse (it keyed on starter_mismatch / bad_periods, which
+this bug does not trip); the workflow's per-game floor-chain traces caught
+what the aggregate missed. Logged as a scoreboard miss: "diffuse" was wrong.
+
+**The bug.** The period-start-floor seeder counts ANY non-substitution
+event by a player as an on-floor "appearance." A technical foul charged to
+a bench / DNP / ejected player (or an ejection at the period tip) is such
+an event but does NOT imply floor presence. The phantom takes a slot in the
+start-five via candidates[:5], truncating the true quiet starter (whose
+first real event lands microseconds later), and with no sub to remove the
+phantom the whole period freezes on the wrong lineup — one player over,
+conserved unders mirroring. Example (0021300228): Larry Sanders, a DNP with
+a single technical foul and zero sub events, was seated ~12 min in period 2,
+displacing O.J. Mayo (-6.52) and Nate Wolters (-5.49). Team-seconds stay
+exact (5 bodies, wrong identities), which is why it never quarantined.
+
+**The precedent.** validate_floor_state ALREADY skips exactly this event
+class in its actor check (SKIP_ACTOR_CHECK + the technical-foul skip, ~line
+1048). The seeder simply failed to mirror it. FIX: a shared
+_implies_floor_presence(atype, sub_type) predicate (technical fouls,
+ejections, timeouts, period/game markers, jump-ball bookkeeping, heaves,
+replays return False); the seeder's appearance branch now skips events that
+do not imply floor presence. Surgical, name-resolution-independent, and
+consistent with the existing house definition.
+
+**Scope of fix (this is a CODE correctness fix, not a threshold retune —
+house rule distinguishes them; no gate bar moved).** Verified on the 13
+sampled games: 8 now reconcile PERFECTLY, a 9th improves (worst error 17 ->
+5 min). The remaining sampled residuals are: 1 same-surname IN-resolution
+(Glenn vs Thomas Robinson, 0021401189 — genuine, rare at ~8%, memo'd for a
+targeted fix, not a campaign per the workflow); 1 irreducible data floor
+(0021600253 — outgoing Afflalo and incoming Temple both silent in P4, zero
+PBP signal); 2 quiet-starter period seatings with no technical (0021700266,
+0022300527 — one-quarter swaps, partly data-floor, left for a later pass).
+208-game bench re-run (bench_fix7): 208/208 PERFECT both criteria both
+strata, ZERO quarantines — NO regression. 33 contract tests green.
+
+**Propagation.** Because the fix changes period-start floors, it changes
+the reconstructed lineups feeding the stint cache, the possession cache,
+and thus RAPM. Per the directive ("F1 repair loop to completion... run the
+FULL panel"), the full pipeline is being re-run under the fix. Optimization
+landed first: reconcile_game now writes the possession cache in the SAME
+pass as stints + scorecard (shared possessions_for_game), so ONE panel
+re-run regenerates all three instead of two 90-minute warehouse passes.
+Sequence: panel re-run -> D6 reload -> RAPM (alpha stays FROZEN at 2000, no
+reselection) -> player_features + lineup_obs -> updated G1/G2 verdicts.
+The frozen alpha and all gate bars are untouched; only reconstruction
+quality improves.

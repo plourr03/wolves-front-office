@@ -97,16 +97,25 @@ def official_minutes(game_id: str) -> pd.DataFrame:
     """, (game_id,))
 
 
-def reconcile_game(game_id: str, stints_dir: str | None = None) -> dict:
+def reconcile_game(game_id: str, stints_dir: str | None = None,
+                   poss_dir: str | None = None) -> dict:
     """Score one game. Never raises on processing failure: failures come
     back as quarantine records with every player-game counted failed (AM-3).
     With stints_dir set, also writes the per-game stint parquet (the F1
-    cache the DuckDB load consumes) — quarantined games write nothing."""
+    cache the DuckDB load consumes). With poss_dir set, also writes the
+    per-game possession cache (RAPM/Layer-2 grain) in the SAME pass, so a
+    panel run persists stints + scorecard + possessions from one
+    process_game call. Quarantined games write nothing."""
     try:
         result = floor_state.process_game(game_id)
         stints = stint_builder.derive_stints(result["annotated"], result["possessions"])
         if stints_dir is not None:
             stints.to_parquet(Path(stints_dir) / f"{game_id}.parquet", index=False)
+        if poss_dir is not None:
+            from src.models.build_possessions import possessions_for_game
+            pdf = possessions_for_game(result, game_id, game_id[3:5])
+            if not pdf.empty:
+                pdf.to_parquet(Path(poss_dir) / f"{game_id}.parquet", index=False)
         ps = player_seconds_from_stints(stints)
         off = official_minutes(game_id)
         n_periods = int(result["pbp"].period.max())

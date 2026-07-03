@@ -39,22 +39,20 @@ GARBAGE_LAST_SEC = 3 * 60
 DONE_MARKER = FITENGINE_ROOT / "outputs" / "possessions_build_done.txt"
 
 
-def _work(row: tuple[str, str]) -> tuple[str, int]:
-    game_id, season_yy = row
-    out_path = POSS_DIR / f"{game_id}.parquet"
-    if out_path.exists():
-        return (game_id, -1)  # already done
-    from src.stints import floor_state
-    try:
-        res = floor_state.process_game(game_id)
-    except Exception:
-        return (game_id, 0)  # quarantined; no possessions
+def possessions_for_game(res: dict, game_id: str,
+                         season_yy: str) -> "pd.DataFrame":
+    """Build the possession rows (paired 10-player floors + garbage flag)
+    from a process_game result. Shared by this standalone builder and by
+    reconcile.reconcile_game so ONE panel pass can persist stints, the
+    scorecard, and the possession cache together (no second process_game
+    pass over the warehouse)."""
     poss = res["possessions"]
     if poss.empty:
-        return (game_id, 0)
-    ann = res["annotated"]
-    a2clock = ann.set_index("action_number")["clock_seconds_remaining"].to_dict()
-
+        return pd.DataFrame(columns=["game_id", "season_yy", "period",
+                                     "off_lineup", "def_lineup", "points",
+                                     "garbage"])
+    a2clock = res["annotated"].set_index(
+        "action_number")["clock_seconds_remaining"].to_dict()
     rows = []
     score = {int(poss.iloc[0].offensive_team_id): 0,
              int(poss.iloc[0].defensive_team_id): 0}
@@ -73,8 +71,24 @@ def _work(row: tuple[str, str]) -> tuple[str, int]:
             "points": int(p.points_scored), "garbage": garbage,
         })
         score[off_t] = score.get(off_t, 0) + int(p.points_scored)
-    pd.DataFrame(rows).to_parquet(out_path, index=False)
-    return (game_id, len(rows))
+    return pd.DataFrame(rows)
+
+
+def _work(row: tuple[str, str]) -> tuple[str, int]:
+    game_id, season_yy = row
+    out_path = POSS_DIR / f"{game_id}.parquet"
+    if out_path.exists():
+        return (game_id, -1)  # already done
+    from src.stints import floor_state
+    try:
+        res = floor_state.process_game(game_id)
+    except Exception:
+        return (game_id, 0)  # quarantined; no possessions
+    df = possessions_for_game(res, game_id, season_yy)
+    if df.empty:
+        return (game_id, 0)
+    df.to_parquet(out_path, index=False)
+    return (game_id, len(df))
 
 
 def main() -> None:

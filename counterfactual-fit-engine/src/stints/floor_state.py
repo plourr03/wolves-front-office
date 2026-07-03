@@ -209,6 +209,29 @@ def _is_legacy_format(df: pd.DataFrame) -> bool:
     return bool(types & _LEGACY_ACTION_MARKERS)
 
 
+# Event types that do NOT imply the actor was on the floor: administrative
+# / paper-only events (a technical foul can be charged to a bench, DNP, or
+# already-ejected player; an ejection removes rather than places; timeouts,
+# period/game markers, jump-ball bookkeeping, heaves, replays carry no
+# floor signal). This is the SAME definition validate_floor_state uses in
+# its actor check (SKIP_ACTOR_CHECK + the technical-foul skip); the
+# period-start-floor seeder must apply it too, or a technical charged to a
+# non-floor player at a period tip seats a phantom into the start-five and
+# truncates the true quiet starter via candidates[:5] (G1 tail root-cause,
+# 2026-07-03: ~10 of 13 sampled residual games traced here).
+_NON_FLOOR_ACTION_TYPES = frozenset(
+    {"period", "timeout", "game", "jumpball", "ejection", "heave", "replay"})
+
+
+def _implies_floor_presence(atype, sub_type) -> bool:
+    if atype in _NON_FLOOR_ACTION_TYPES:
+        return False
+    if atype == "foul" and isinstance(sub_type, str) and \
+            sub_type.strip().lower() == "technical":
+        return False
+    return True
+
+
 class LegacySubResolutionError(ValueError):
     """A legacy substitution's IN player could not be resolved to a
     person_id. Raised instead of guessing: the old fallback (inherit the
@@ -928,6 +951,12 @@ def _identify_period_start_floors(
                     seen_non_sub[tid].add(pid)
                     per_team_start_players[tid].append(pid)
             else:
+                # Only events that IMPLY floor presence seed the start-five.
+                # A technical foul / ejection / timeout etc. by a non-floor
+                # player must not be read as an appearance (mirrors
+                # validate_floor_state; G1 tail fix 2026-07-03).
+                if not _implies_floor_presence(atype, row.get("sub_type")):
+                    continue
                 if pid not in seen_non_sub[tid]:
                     seen_non_sub[tid].add(pid)
                     # If they have not been subbed in this period yet, they
