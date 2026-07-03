@@ -1,0 +1,6 @@
+# The AM-1 fence (counterfactual-fit-engine/src/adapters/postmortem_lib.py)
+# hashes RAW working-tree bytes against pinned git blob hashes. EOL
+# conversion at checkout (core.autocrlf=true) breaks that equality on
+# Windows clones even though nothing drifted. Keep the pinned lib
+# byte-identical to its blobs on every platform.
+postmortem/lib/** -text
