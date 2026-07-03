@@ -29,3 +29,5 @@ basketball skill decompositions. Graded at the K-selection presentation,
 judged on the reconstruction-vs-K elbow AND the dev-season G3 proxy, not
 reconstruction alone. If reconstruction wants 10 but G3 is flat 8->10, 8
 is taken for interpretability; disagreement of both -> memo to Bobby.
+
+### P-K GRADED — 2026-07-03: CORRECT. K ratified at 8, matching the pre-logged lean. Reconstruction elbow at 8 (FA beats pPCA at all K), G3 proxy agreeing on diminishing returns past 8. Logged before the selection run; ratified without moving goalposts.

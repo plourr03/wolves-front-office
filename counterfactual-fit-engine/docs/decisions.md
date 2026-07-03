@@ -885,3 +885,31 @@ gates (R-hat < 1.01, ESS > 400, anchor sign-stability), skill_vectors
 freezes and versions, and the interpretability question (are the 8
 dimensions nameable for the flagship) is answered from the fitted loadings.
 Artifacts: outputs/factor/k_selection.parquet + .json.
+
+## 2026-07-03 — K RATIFIED: K=8 (Bobby, verbatim)
+
+"K RATIFIED: K=8. Freeze in model_params.yaml. Rationale: FA beats
+pPCA at every K (structure real), soft elbow at 8 on both
+reconstruction (6->8 gain 2.6x the 8->10) and the G3 proxy (8->10
+adds <half the downstream value), matches pre-logged P-K. Proceed to
+the full measurement-error-aware Bayesian factor model at K=8 with
+the REAL health gates: R-hat<1.01, ESS>400, anchor sign-stability
+across refits. skill_vectors freezes and versions ONLY after those
+gates pass; a health-gate failure parks with a memo, it does not
+ship vectors."
+
+Held in view before the fit (Bobby, not a blocker): the K-selection used
+a fast FactorAnalysis; the vector-producing model is the full measurement-
+error-aware Bayesian version consuming the A1 RAPM covariance blocks.
+Different estimators -- the Bayesian effective dimensionality may not match
+FA's at 8 (measurement-error weighting can collapse or sharpen factors). If
+health gates pass at 8, ship. If R-hat or anchor stability struggle SPECIFICALLY
+because two factors fight over the same variance, the pre-authorized response
+is a MEMO showing the Bayesian reconstruction curve, NOT a silent re-selection
+of K. K is frozen; what stays open is whether the Bayesian fit confirms 8 is
+healthy (a gate outcome, not a new choice).
+
+Editorial call queued for after the vectors land (Bobby): whether the 8
+dimensions are coherent enough to NAME in the flagship. The fit must export
+top-loading features and exemplar players per factor so a dimension that is a
+statistical smear is not pretended into a named skill.

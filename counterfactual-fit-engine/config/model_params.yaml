@@ -25,6 +25,12 @@ layer1a:
 
 layer1b:
   K_candidates: [6, 8, 10]        # Bobby-ratified; frozen selection on dev
+  K: 8                            # RATIFIED 2026-07-03 (Bobby). FA beats pPCA at
+                                  # all K; soft elbow at 8 on reconstruction (6->8
+                                  # gain 2.6x the 8->10) and the G3 proxy; matches
+                                  # pre-logged P-K. skill_vectors ship ONLY after
+                                  # the Bayesian health gates below pass at K=8.
+  health_gates: {max_r_hat: 1.01, min_ess_bulk: 400}  # + anchor sign-stability
   num_warmup: 1000
   num_samples: 1000
   num_chains: 4
