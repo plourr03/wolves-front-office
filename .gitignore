@@ -10,3 +10,10 @@ Thumbs.db
 # GitHub's hard 100MB-per-file limit (a 202MB chrome-headless-shell.exe would reject the push).
 .remotion/
 **/node_modules/.cache/
+
+# RAPM possession cache: large rebuildable intermediate (src/models/build_possessions.py),
+# actively regenerated; not a source artifact. Rebuild from the stint pipeline.
+counterfactual-fit-engine/data/cache/possessions/
+# D6 DuckDB store: rebuildable from the stint cache via src/etl/load_duckdb.py
+counterfactual-fit-engine/data/fitengine.duckdb
+counterfactual-fit-engine/data/fitengine.duckdb.wal

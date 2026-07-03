@@ -132,53 +132,27 @@ def season_yy(end_year: int) -> str:
     return f"{end_year - 2001:02d}"
 
 
+POSS_GLOB = str(FITENGINE_ROOT / "data" / "cache" / "possessions" / "*.parquet")
+
+
 def load_matchups(con: duckdb.DuckDBPyConnection, end_year: int) -> pd.DataFrame:
-    """Pair the two directional rows of each stint on their clock window and
-    aggregate to (off five, def five) matchup rows for the season."""
+    """Aggregate the possession cache to (off five, def five) matchup rows
+    for one season: one possession = offense five vs defense five with
+    points. Garbage-time possessions excluded (the stint-builder rule,
+    carried per possession by build_possessions). con is accepted for
+    signature parity with the rest of the module but the possession cache
+    is read directly via DuckDB's parquet scan."""
     df = con.execute("""
-        WITH season_stints AS (
-            SELECT s.* FROM stints s
-            JOIN games g USING (game_id)
-            WHERE g.include_train AND g.season_yy = ? AND NOT s.in_garbage_time
-        )
-        SELECT a.game_id,
-               a.lineup_id  AS off_lineup,
-               b.lineup_id  AS def_lineup,
-               SUM(a.possessions_off) AS poss,
-               SUM(a.points_for)      AS pts
-        FROM season_stints a
-        JOIN season_stints b
-          ON a.game_id = b.game_id
-         AND a.period_start = b.period_start
-         AND a.clock_start_sec = b.clock_start_sec
-         AND a.period_end = b.period_end
-         AND a.clock_end_sec = b.clock_end_sec
-         AND a.team_id <> b.team_id
-        WHERE a.possessions_off > 0
+        SELECT game_id, off_lineup, def_lineup,
+               COUNT(*) AS poss, SUM(points) AS pts
+        FROM read_parquet(?, union_by_name=true)
+        WHERE season_yy = ? AND NOT garbage
         GROUP BY 1, 2, 3
-    """, [season_yy(end_year)]).fetchdf()
-    # pairing sanity: every offensive row must have found exactly one mirror
-    n_dir = con.execute("""
-        SELECT count(*) FROM stints s JOIN games g USING (game_id)
-        WHERE g.include_train AND g.season_yy = ? AND NOT s.in_garbage_time
-          AND s.possessions_off > 0
-    """, [season_yy(end_year)]).fetchone()[0]
-    n_paired = con.execute("""
-        WITH season_stints AS (
-            SELECT s.* FROM stints s JOIN games g USING (game_id)
-            WHERE g.include_train AND g.season_yy = ? AND NOT s.in_garbage_time
-        )
-        SELECT count(*) FROM season_stints a JOIN season_stints b
-          ON a.game_id = b.game_id AND a.period_start = b.period_start
-         AND a.clock_start_sec = b.clock_start_sec
-         AND a.period_end = b.period_end AND a.clock_end_sec = b.clock_end_sec
-         AND a.team_id <> b.team_id
-        WHERE a.possessions_off > 0
-    """, [season_yy(end_year)]).fetchone()[0]
-    if n_dir != n_paired:
+    """, [POSS_GLOB, season_yy(end_year)]).fetchdf()
+    if df.empty:
         raise RuntimeError(
-            f"stint pairing mismatch season {end_year}: {n_dir} directional "
-            f"rows, {n_paired} paired -- window join is not 1:1")
+            f"no possessions for season {end_year} -- run "
+            "`python -m src.models.build_possessions` first")
     return df
 
 

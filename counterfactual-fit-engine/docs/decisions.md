@@ -554,3 +554,80 @@ entering player; inference would be guessing and guessing is banned).
 
 **Also verified this round:** all 12 round-1 bucket games still perfect
 after the round-2 changes; 31 contract tests green.
+
+## 2026-07-03 (overnight) — G1 VERDICT: GREEN (final-code full panel)
+
+The full 15,669-game panel under final resolver code (commit 30744148)
+is the sole basis for this judgment (directive 2026-07-02 item 1; bench
+runs were repair iteration only). Summary table pasted verbatim from
+src.stints.reconcile.summarize:
+
+```
+stratum  games  quarantine_rate  recon_rate_TRUE_0p5  recon_rate_relaxed  team_seconds_exact_INVARIANT  poss_parity_pct_PARTITION  median_worst_delta_true
+ pooled  15669         0.000064             0.998476            0.998603                      0.999872                        0.0                 0.008333
+ legacy  14940         0.000067             0.998410            0.998543                      0.999866                        0.0                 0.008333
+   live    729         0.000000             0.999809            0.999809                      1.000000                        0.0                 0.008333
+```
+
+GATE READ (both criteria required, pooled AND per stratum):
+- recon_rate_TRUE_0p5 (PRIMARY, seconds-precise minutes_float, original
+  0.5-min criterion): pooled 99.8476%, legacy 99.8410%, live 99.9809%.
+  All >= 99.5%. GREEN. (332,267 of 332,774 player-games.)
+- recon_rate_relaxed (SECONDARY, truncation-aware vs integer minutes):
+  pooled 99.8603%, legacy 99.8543%, live 99.9809%. All >= 99.5%. GREEN.
+- quarantine_rate: pooled 0.0064% (1 game), legacy 0.0067%, live 0.0%.
+  All < 0.5%. GREEN.
+- lineup validity (D6 load assertion): 0 non-5v5 stints across 818,713
+  stints. GREEN.
+- possession parity (PARTITION, structural): 0.0000% deviation. Exact.
+- team-seconds (INVARIANT, structural): 0.999872 pooled = 2 of 15,669
+  games not exactly-exact, BOTH explained and cosmetic (below).
+- coverage: all 15,669 R1 train-eligible games present. AM-5 backfill
+  stratum empty by design (the 2013-14 "gap" was a query artifact, R1).
+
+**G1 IS GREEN.** F1 is closed.
+
+**The single quarantine (by design, not a failure to fix).** Game
+0021500624 (2015-16 HOU-LAC): three substitution descriptions read
+'SUB:  FOR Howard' with the ENTERING player's name absent from the text
+entirely (not a resolution miss, an empty field), plus a missing Capela
+sub-in event. The entering player is unrecoverable from the feed and
+guessing is banned (house rule), so the game quarantines with its legible
+reason. 1/15,669 = 0.0064%, ~78x inside the 0.5% budget. AM-3 counts all
+its player-games as failures anyway; the gate passes regardless.
+
+**The two team-seconds non-exact games, both cosmetic:**
+- 0021500624: the quarantine above (reconcile sets team_seconds False for
+  quarantined games by construction).
+- 0021500916: a PHANTOM-OT game. The PBP carries a period-5 marker with
+  ZERO real playing time; reconcile computed expected team-seconds for a
+  5-period game (265 min/team) while the true game is regulation (240).
+  Per-player reconciliation is PERFECT (0/21 fail, worst 0.01 min), so it
+  is a reference-length artifact, not a floor error. Noted; not a defect.
+
+**Tail characterization (src.stints.tail_census over all 142 games that
+miss essentially-perfect reconciliation).** The 507 failing player-games
+(0.152% pooled) bucket as:
+- attribution_residual: 140 games, 464 failing player-games (95.7% of the
+  tail). Team-seconds exact, floor COUNT correct in every period (zero
+  games classified floor_count_error), but floor MEMBERSHIP is wrong for
+  part of a period (a player briefly credited to a teammate). Diffuse
+  across all 13 seasons, worst-10 games holding only ~19% of the mass.
+  This is the residual data-quality floor, NOT a single fixable structural
+  disease; the sharp per-period floor-count localizer (src.stints.diagnose)
+  finds no period miscount to repair. Adversarial root-cause sampling
+  queued as verification; even treating all 464 as genuine errors leaves
+  G1 green with 60x margin.
+- reference_incomplete: 1 game (0022500160, 2025-26 HOU-DAL). Official
+  minutes_float sums to 171.6/team vs 240 expected (68-min shortfall),
+  uniform-over with exact team-seconds -> the warehouse's advanced
+  boxscore for this in-progress-season game is undercounted; the
+  RECONSTRUCTION is correct (240/team). A reference gap, not our error.
+- clean_or_phantom: 1 game (0021500916 above).
+
+**Downstream note for F2.** These 140 residual games carry small lineup-
+membership errors into the RAPM possession cache. At 0.139% of player-
+games with sub-minute-to-few-minute magnitudes, the effect on season
+RAPM is negligible; no exclusion applied. The one reference-incomplete
+2025-26 game is flagged for a completeness re-check when that season's
+boxscore ingest finalizes.
