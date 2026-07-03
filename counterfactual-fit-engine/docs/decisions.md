@@ -483,3 +483,74 @@ coverage by the primary gate itself; no separate 200-game pull is run.
 If an INDEPENDENT-of-warehouse ingest check is wanted on top (fresh API
 pulls compared to the ingested table), that is a new requirement and a
 morning question, not blocking G1.
+
+## 2026-07-03 (overnight) — first full-panel read, round-2 buckets, and a real bug the panel caught
+
+**First full-panel completion (laptop, 16 workers, ~1:00am).** All 15,669
+games scored. Even with AM-3 counting every quarantined game's player-games
+as failures, the gate criteria already read green: pooled
+recon_rate_TRUE_0p5 99.5865%, relaxed 99.5991%, quarantine 0.2553%
+(40 games), possession parity exact, live stratum 99.98% with zero
+quarantines. NOT YET THE G1 CLAIM: the round-2 fixes below changed the
+resolver, so the judged scorecard comes from the final-code re-run.
+
+**The 40 quarantines, bucketed (every reason read, per discipline):**
+  1. 14 games, OperationalError: warehouse connection drops in one
+     contiguous 00221xxx stretch, a transient network blip mid-run, not a
+     data disease. Re-run clean.
+  2. 16 games, 'Pöltl' (2024-25 TOR, legacy-format rows): descriptions
+     carry the umlaut, the registry uses the German transliteration
+     ('Poeltl'), and the NFKD fold gives 'poltl' vs 'poeltl'. FIX:
+     transliteration VARIANT forms (ae/oe/ue/ss) tried after the plain
+     fold, never instead of it ('Schröder' still hits registry 'Schroder'
+     via the plain fold first).
+  3. 2 games, 'Yongxi' (2024-25 BKN): Cui Yongxi; descs use the given
+     name, and the registry row is literally 'Cui Cui' (its own quirk).
+     FIX: token alias yongxi->cui, verified unique.
+  4. 7 games, AMBIGUOUS at roster: a cameo player with ZERO attributed
+     PBP events shares a bare surname key with a teammate ('Williams'
+     BOS 2020-21; 'Jones' CHI x2, LAC x2; 'Jackson' MEM; 'Williams' MEM
+     x2). FIX: two evidence-based eliminations at the roster/prefix
+     stages, each reverted if it would empty the candidate set:
+     (a) minimal-uniqueness elimination: a candidate whose exact PBP forms
+         in THIS game exist and do not include the lookup form is called
+         something else by the feed ('Williams III' is never plain
+         'Williams' in the same game);
+     (b) played elimination: the entering player must appear in the
+         seconds-precise minutes_float column (NULL = DNP). NEVER the
+         integer minutes column: Grant Williams' 36-second cameo in
+         0022000936 is minutes_played=0 but minutes_float=0.60. Rider 2's
+         truncation lesson, reconfirmed in a new spot.
+
+**A real bug the panel caught (hypothesis scoreboard: the ambiguity
+buckets were hiding it).** Game 0022300106 resolved its 'Jackson'
+ambiguity correctly post-fix but still read 22/24. The residual was a
+WILLIAMS self-sub: 'SUB: Williams Jr. FOR Williams' (Vince Williams Jr.
+in for Ziaire Williams). The suffix-stripped lookup 'williams' hit the
+OUT player's own PBP form as a SINGLE candidate, and _settle only
+removed the out-pid from multi-candidate sets, so Ziaire "subbed in for
+himself" and Vince's 0.63-minute cameo vanished, SILENTLY (the game never
+quarantined; team seconds stayed exact because the identity swap
+preserves them). FIX: unconditional out-pid elimination at every stage
+and every candidate count; the entering player can never be the leaving
+player. The lookup then falls through to the roster stage where
+'williams jr' resolves Vince uniquely.
+
+**One more form: 'Louzada Silva' (1 game, 2020-21 NOP).** The desc
+carries MORE of the legal name than any registry form (PBP form
+'Louzada', roster 'Didi Louzada'). FIX: a dead-last leading-token
+fallback stage (>= 2 tokens, leading token >= 3 chars so initialed forms
+never reach it), eliminations on, ambiguity still raises.
+
+**Consequence of the self-sub find: full-panel RE-RUN under final code.**
+The prescribed loop (rerun only quarantined games) is insufficient this
+round because the self-sub bug corrupted games that never quarantined,
+and their per-game stint parquets embed wrong lineups, which would poison
+the RAPM design matrix downstream. The G1 claim must come from ONE code
+state. Re-run launched ~1:20am (16 workers); 208-game bench re-run
+(bench_fix6) launched alongside per bench discipline. 0021500624 stays
+quarantined by design (the 'SUB:  FOR Howard' events genuinely omit the
+entering player; inference would be guessing and guessing is banned).
+
+**Also verified this round:** all 12 round-1 bucket games still perfect
+after the round-2 changes; 31 contract tests green.

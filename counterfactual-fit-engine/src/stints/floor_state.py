@@ -233,7 +233,24 @@ _GEN_SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 #                      descriptions use the family name 'Zhou'; the
 #                      registry's surname form is 'Qi' ('Zhou Qi', 2017-18
 #                      HOU, 18 panel quarantines). No other NBA Zhou.
-_NAME_ALIASES = {"kanter": "freedom", "mcclellan": "mac", "zhou": "qi"}
+#   yongxi -> cui      Cui Yongxi, 2024-25 BKN (2 panel quarantines). Descs
+#                      use the given name 'Yongxi'; the registry row is
+#                      'Cui Cui' (its own duplication quirk), so the bare
+#                      surname key is 'cui'. No other NBA Yongxi/Cui.
+_NAME_ALIASES = {"kanter": "freedom", "mcclellan": "mac", "zhou": "qi",
+                 "yongxi": "cui"}
+
+
+def _translit_variant(s: str) -> str:
+    """German umlaut transliteration BEFORE diacritic folding: desc 'Pöltl'
+    must reach registry form 'Poeltl' (16 panel quarantines, 2024-25 TOR
+    legacy-format games). Applied as an ADDITIONAL lookup form, never the
+    only one: 'Schröder' still matches registry 'Schroder' via the plain
+    NFKD fold, which stays first in the form list."""
+    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss"),
+                 ("Ä", "Ae"), ("Ö", "Oe"), ("Ü", "Ue")):
+        s = s.replace(a, b)
+    return s
 
 
 def _norm_name(s: str) -> str:
@@ -280,6 +297,8 @@ def _build_name_to_id_map(df: pd.DataFrame) -> dict:
     pbp_map: dict[tuple[int, str], set[int]] = {}
     roster_map: dict[tuple[int, str], set[int]] = {}
     players: list[tuple[int, int, list[str]]] = []
+    pbp_forms: dict[int, set[str]] = {}   # pid -> its exact PBP forms
+    played: set[int] = set()              # pids with non-null minutes_float
 
     def _add(m: dict, tid: int, key: str, pid: int) -> None:
         if key:
@@ -294,8 +313,10 @@ def _build_name_to_id_map(df: pd.DataFrame) -> dict:
         & (df["team_id"] != 0)
     ]
     for _, row in valid.iterrows():
-        _add(pbp_map, int(row["team_id"]), _norm_name(str(row["player_name"])),
-             int(row["person_id"]))
+        form = _norm_name(str(row["player_name"]))
+        pid = int(row["person_id"])
+        _add(pbp_map, int(row["team_id"]), form, pid)
+        pbp_forms.setdefault(pid, set()).add(form)
 
     game_ids = df["game_id"].dropna().unique() if "game_id" in df.columns else []
     if len(game_ids) == 1:
@@ -334,7 +355,22 @@ def _build_name_to_id_map(df: pd.DataFrame) -> dict:
                 # AMBIGUOUS via _settle, never a coin flip.
                 for part in base[-1].split("-"):
                     _add(roster_map, tid, part, pid)
-    return {"pbp": pbp_map, "roster": roster_map, "players": players}
+        # Who actually logged floor time: seconds-precise minutes_float
+        # (NULL = DNP). NEVER the integer minutes_played -- a 36-second
+        # cameo truncates to 0 and would read as a DNP (rider 2's lesson,
+        # reconfirmed on Grant Williams, game 0022000936, 0.60 true
+        # minutes vs integer 0). Feeds the played-elimination in
+        # _resolve_sub_in.
+        adv = db.query(
+            """
+            SELECT person_id FROM nba_player_advanced_stats
+            WHERE game_id = %s AND minutes_float IS NOT NULL
+            """,
+            (str(game_ids[0]),),
+        )
+        played = {int(p) for p in adv["person_id"]}
+    return {"pbp": pbp_map, "roster": roster_map, "players": players,
+            "pbp_forms": pbp_forms, "played": played}
 
 
 def _resolve_sub_in(state: dict, tid: int, in_name: str, out_pid: int | None) -> int:
@@ -351,14 +387,54 @@ def _resolve_sub_in(state: dict, tid: int, in_name: str, out_pid: int | None) ->
     FOR Williams III' -> plain Williams is not Robert). Residual ambiguity
     RAISES — never a coin flip, never the out-pid fallback.
     """
-    key = " ".join(_NAME_ALIASES.get(t, t) for t in _norm_name(in_name).split())
+    def _alias_key(raw_norm: str) -> str:
+        return " ".join(_NAME_ALIASES.get(t, t) for t in raw_norm.split())
+
+    key = _alias_key(_norm_name(in_name))
     toks = key.split()
     stripped = " ".join(_strip_gen_suffix(toks))
     forms = [key] + ([stripped] if stripped != key else [])
+    # German transliteration variants (Pöltl -> poeltl), tried AFTER the
+    # plain folds so Schröder-style names keep hitting their plain form
+    key_de = _alias_key(_norm_name(_translit_variant(in_name)))
+    if key_de != key:
+        stripped_de = " ".join(_strip_gen_suffix(key_de.split()))
+        forms += [key_de] + ([stripped_de] if stripped_de != key_de else [])
 
-    def _settle(cands: set[int], stage: str) -> int | None:
-        if len(cands) > 1 and out_pid is not None:
+    def _eliminate(cands: set[int], lookup_form: str) -> set[int]:
+        """Evidence-based elimination for roster/prefix hits, each pass
+        reverted if it would empty the candidate set:
+        (1) minimal-uniqueness: a candidate whose exact PBP forms in THIS
+            game exist and do NOT include the lookup form is called
+            something else by the feed ('Williams III' is never plain
+            'Williams' within a game);
+        (2) the entering player logged floor time: candidates absent from
+            the seconds-precise minutes_float column (true DNPs) cannot be
+            the one subbing in."""
+        forms_of = state.get("pbp_forms", {})
+        kept = {p for p in cands
+                if not forms_of.get(p) or lookup_form in forms_of[p]}
+        if kept:
+            cands = kept
+        played = state.get("played", set())
+        if played:
+            kept = {p for p in cands if p in played}
+            if kept:
+                cands = kept
+        return cands
+
+    def _settle(cands: set[int], stage: str,
+                lookup_form: str | None = None) -> int | None:
+        # UNCONDITIONAL out-pid elimination (panel find, game 0022300106):
+        # 'SUB: Williams Jr. FOR Williams' -- the suffix-stripped lookup
+        # 'williams' hits the OUT player's own PBP form as a SINGLE
+        # candidate, and a len>1 guard would return the leaving player as
+        # the enterer (a self-sub identity swap). The entering player can
+        # never be the leaving player, at any candidate count.
+        if out_pid is not None:
             cands = cands - {out_pid}
+        if len(cands) > 1 and stage in ("roster", "prefix") and lookup_form:
+            cands = _eliminate(cands, lookup_form)
         if len(cands) == 1:
             return next(iter(cands))
         if len(cands) > 1:
@@ -371,7 +447,7 @@ def _resolve_sub_in(state: dict, tid: int, in_name: str, out_pid: int | None) ->
         for form in forms:
             hit = state[map_name].get((tid, form))
             if hit:
-                got = _settle(set(hit), map_name)
+                got = _settle(set(hit), map_name, lookup_form=form)
                 if got is not None:
                     return got
 
@@ -384,9 +460,23 @@ def _resolve_sub_in(state: dict, tid: int, in_name: str, out_pid: int | None) ->
             and _strip_gen_suffix(ptoks)[-1] == surname
             and ptoks[0].startswith(prefix)
         }
-        got = _settle(cands, "prefix")
+        got = _settle(cands, "prefix", lookup_form=stripped)
         if got is not None:
             return got
+
+    # Final fallback: leading-token surname. Some desc forms carry MORE of
+    # the legal name than any registry form ('Louzada Silva' vs PBP form
+    # 'Louzada' / roster 'Didi Louzada', 1 panel game). Tried dead last,
+    # team-scoped, eliminations on, ambiguity still raises; the length
+    # guard keeps initialed forms ('w johnson') away from it.
+    if len(stoks) >= 2 and len(stoks[0]) >= 3:
+        lead = stoks[0]
+        for map_name in ("pbp", "roster"):
+            hit = state[map_name].get((tid, lead))
+            if hit:
+                got = _settle(set(hit), "roster", lookup_form=lead)
+                if got is not None:
+                    return got
 
     raise LegacySubResolutionError(
         f"legacy sub IN player unresolved: {in_name!r} "
