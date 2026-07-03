@@ -719,3 +719,53 @@ Sequence: panel re-run -> D6 reload -> RAPM (alpha stays FROZEN at 2000, no
 reselection) -> player_features + lineup_obs -> updated G1/G2 verdicts.
 The frozen alpha and all gate bars are untouched; only reconstruction
 quality improves.
+
+## 2026-07-03 (overnight) — G1 + G2 RE-VERDICT after the period-start fix propagated (supersedes the earlier green rows)
+
+The period-start-floor fix (commit 0927e194) was propagated through a full
+combined panel re-run (one pass regenerating stints + possessions +
+scorecard), D6 reload, RAPM re-fit (alpha stayed FROZEN at 2000, verified
+no reselection), and player_features / lineup_obs rebuilds. The earlier
+2026-07-03 G1 and G2 green rows are SUPERSEDED by the numbers below; they
+remain in this record and in git history (scorecard at commit 6ad459d7) as
+the audit trail. No gate bar moved; reconstruction quality improved.
+
+**G1 RE-VERDICT: GREEN, improved.** Summary table verbatim:
+
+```
+stratum  games  quarantine_rate  recon_rate_TRUE_0p5  recon_rate_relaxed  team_seconds_exact_INVARIANT  poss_parity_pct_PARTITION  median_worst_delta_true
+ pooled  15669         0.000064             0.999318            0.999396                      0.999872                        0.0                 0.008333
+ legacy  14940         0.000067             0.999284            0.999366                      0.999866                        0.0                 0.008333
+   live    729         0.000000             1.000000            1.000000                      1.000000                        0.0                 0.008333
+```
+
+Movement vs the pre-fix green (both criteria still >= 99.5% everywhere):
+- recon_TRUE_0p5 pooled 99.8476% -> 99.9318%; legacy 99.8410% -> 99.9284%;
+  live 99.9809% -> 100.0000% (live is now PERFECT).
+- failing player-games 507 (0.152%) -> 227 (0.068%): more than halved.
+- games under 99% reconciliation: 141 -> 63.
+- quarantine unchanged (1 by-design game, 0.0064%); parity exact; 0
+  non-5v5 stints across 818,809.
+
+**Tail re-census:** attribution_residual 140 games / 464 failing -> 61
+games / 184 failing (the entire technical-foul / ejection seating class,
+~79 games, is gone). Remaining buckets are the memo'd residuals: quiet-
+starter period seatings with no administrative event, the lone same-surname
+IN-resolution (Glenn vs Thomas Robinson), and irreducible data-floor games
+with zero PBP signal, plus 1 reference-incomplete 2025-26 game and 1
+phantom-OT. All memo'd; none is a fixable systematic class at panel scale.
+
+**G2 RE-VERDICT: GREEN, unchanged.** RAPM re-fit on the corrected
+possessions with alpha FROZEN at 2000. YoY stability still all 12 pairs in
+the 0.50-0.75 band (O 0.624-0.726, D 0.565-0.722) -- essentially identical
+to the pre-fix fit, as expected since the fix cleaned only ~0.08% of
+player-games. Face validity unchanged (top-20 ladders intact). Both G2
+RAPM-row gates hold. Layer 1b factor rows remain F3-pending.
+
+**Scoreboard (my own miss, logged per house convention):** the aggregate
+tail census called the residual "diffuse"; it was wrong. The census keyed
+on starter_mismatch and floor-count signals, neither of which the
+technical-foul bug trips, so it under-classified. The 13-agent per-game
+root-cause workflow caught the systematic cause the aggregate hid. Lesson:
+aggregate bucketers can launder a real bug into "diffuse"; per-item traces
+are the check.
