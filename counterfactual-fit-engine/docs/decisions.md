@@ -839,3 +839,49 @@ No targeted re-pull warranted for one cosmetic reference value; if the
 Both gates clear. Per the ruling, F3 K-selection now runs on the complete
 feature matrix; K stays UNFROZEN and the choice is presented with the
 reconstruction-vs-K curve AND the dev-season G3 proxy.
+
+## 2026-07-03 — F3 K-selection EVIDENCE (presented to Bobby; K NOT frozen, awaiting ratify)
+
+Run on the COMPLETE dev feature matrix (2020-21 hole now closed): 3,475
+rotation player-seasons (own-column RAPM present) x 21 features (box rates,
+advanced rates, tracking per-75, O/D-RAPM point estimates), dev seasons
+2013-14..2020-21 only, sealed window untouched. Selection instrument =
+probabilistic FactorAnalysis (the full measurement-error-aware Bayesian fit
++ skill_vectors freeze follows AFTER ratify). Two curves, per the ruling:
+
+Reconstruction (held-out average log-likelihood, higher better; FA vs
+probabilistic-PCA is the spec health gate -- raw reconstruction MSE is
+minimized by PCA by construction so LL is the correct metric):
+```
+ K   FA held-out LL   PCA held-out LL   FA beats PCA
+ 6      -18.695          -22.751            YES
+ 8      -18.360          -22.108            YES
+10      -18.229          -21.491            YES
+```
+FA beats PCA at every K (the posterior machinery earns its keep). Gains:
+6->8 = +0.335, 8->10 = +0.130. The 8->10 gain is 39% of the 6->8 gain --
+a SOFT ELBOW AT 8, exactly the shape the ruling anticipated.
+
+G3 proxy (dev-season lineup-prediction possession-weighted RMSE by K, lower
+= factors help; within-season scoring proxy, diagnostic not a gate, used
+only for the relative K comparison; temporal holdout on 2019/2020/2021):
+```
+ K   G3-proxy RMSE
+ 6      27.179
+ 8      27.010
+10      26.929
+```
+Improvement 6->8 = 0.169, 8->10 = 0.082. The marginal lineup-prediction
+value of factors 9-10 is under half that of factors 7-8. G3 AGREES with
+reconstruction: diminishing returns after 8.
+
+RECOMMENDATION: K = 8. Both curves show a clean elbow at 8, FA beats PCA at
+all K, and the G3 proxy confirms factors past 8 add little downstream
+predictive value. This matches the pre-registered lean (P-K, predictions.md)
+and is the "clean elbow at 8 with G3 agreeing -> ratify" scenario Bobby
+pre-authorized. K IS NOT FROZEN here; presented for Bobby's ratify. On
+ratify, the full Bayesian factor model fits at K=8 with the real health
+gates (R-hat < 1.01, ESS > 400, anchor sign-stability), skill_vectors
+freezes and versions, and the interpretability question (are the 8
+dimensions nameable for the flagship) is answered from the fitted loadings.
+Artifacts: outputs/factor/k_selection.parquet + .json.

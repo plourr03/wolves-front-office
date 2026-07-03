@@ -1,0 +1,26 @@
+[
+ {
+  "K":6,
+  "fa_heldout_ll":-18.6952964708,
+  "pca_heldout_ll":-22.7514091797,
+  "fa_beats_pca":true,
+  "g3_proxy_rmse":27.1789496526,
+  "n_test_years":3
+ },
+ {
+  "K":8,
+  "fa_heldout_ll":-18.3598473397,
+  "pca_heldout_ll":-22.107565164,
+  "fa_beats_pca":true,
+  "g3_proxy_rmse":27.0103880888,
+  "n_test_years":3
+ },
+ {
+  "K":10,
+  "fa_heldout_ll":-18.2292984481,
+  "pca_heldout_ll":-21.4908055705,
+  "fa_beats_pca":true,
+  "g3_proxy_rmse":26.9286434645,
+  "n_test_years":3
+ }
+]
