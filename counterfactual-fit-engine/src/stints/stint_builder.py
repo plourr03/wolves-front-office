@@ -291,7 +291,13 @@ def derive_stints(annotated: pd.DataFrame, possessions: pd.DataFrame) -> pd.Data
         elif atype == "turnover":
             delta["tov"] = 1
         elif atype == "rebound":
-            sub = (row.get("sub_type") or "").lower()
+            # NaN is truthy — `or ""` does not guard it. Team-rebound rows in
+            # a few legacy games reach here with NaN sub_type (the normalizer
+            # nulls 'Normal Rebound'/'Unknown'); crash site of 3 panel
+            # quarantines. Unknown class counts as not-offensive, identical
+            # to the legacy annotator's 'defensive' default.
+            sub = row.get("sub_type")
+            sub = sub.lower() if isinstance(sub, str) else ""
             # Only offensive rebounds: defensive rebounds are mirror-counted
             # via the offensive side already (they're just the team that
             # collected after the opponent's miss).

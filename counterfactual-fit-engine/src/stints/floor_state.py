@@ -225,7 +225,15 @@ _GEN_SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 # roster) from the CURRENT player registry, while description strings keep
 # the name as called at the time. Token-level alias applied at lookup.
 # (Enes Kanter -> Enes Kanter Freedom, Nov 2021 — 7 of 22 bench quarantines.)
-_NAME_ALIASES = {"kanter": "freedom"}
+# Panel-scale additions (2026-07-03, each verified against source data):
+#   mcclellan -> mac   Sheldon McClellan -> Sheldon Mac (2016-17 WAS renames;
+#                      registry says 'Mac', 25 panel quarantines said
+#                      'McClellan'). No other NBA McClellan/Mac.
+#   zhou -> qi         Not a rename: Chinese family-name ordering. Sub
+#                      descriptions use the family name 'Zhou'; the
+#                      registry's surname form is 'Qi' ('Zhou Qi', 2017-18
+#                      HOU, 18 panel quarantines). No other NBA Zhou.
+_NAME_ALIASES = {"kanter": "freedom", "mcclellan": "mac", "zhou": "qi"}
 
 
 def _norm_name(s: str) -> str:
@@ -235,7 +243,10 @@ def _norm_name(s: str) -> str:
     Noah'); an exact-string map misses and misresolves."""
     folded = unicodedata.normalize("NFKD", s)
     ascii_s = "".join(c for c in folded if not unicodedata.combining(c))
-    return " ".join(ascii_s.replace(".", " ").replace("'", "").lower().split())
+    # Commas fold like periods: desc 'Jones, Jr.' vs PBP form 'Jones Jr.'
+    # (20 panel quarantines, 2016-17 PHX).
+    return " ".join(
+        ascii_s.replace(".", " ").replace(",", " ").replace("'", "").lower().split())
 
 
 def _strip_gen_suffix(toks: list[str]) -> list[str]:
@@ -311,6 +322,18 @@ def _build_name_to_id_map(df: pd.DataFrame) -> dict:
                 # initialed form ('j johnson') — how legacy descriptions
                 # disambiguate same-surname teammates
                 _add(roster_map, tid, f"{base[0][0]} {base[-1]}", pid)
+            if len(base) >= 3:
+                # multi-token surname: desc 'Mbah a Moute' vs roster 'Luc
+                # Mbah a Moute' (bare-surname key 'moute' misses; 3 panel
+                # quarantines where he has no other PBP events to map)
+                _add(roster_map, tid, " ".join(base[1:]), pid)
+            if "-" in base[-1]:
+                # hyphenated-surname parts: desc 'Hayes' vs retro-renamed
+                # roster 'Nigel Hayes-Davis' (2 panel quarantines). A part
+                # colliding with a real teammate surname surfaces as
+                # AMBIGUOUS via _settle, never a coin flip.
+                for part in base[-1].split("-"):
+                    _add(roster_map, tid, part, pid)
     return {"pbp": pbp_map, "roster": roster_map, "players": players}
 
 
@@ -381,10 +404,17 @@ def _parse_in_player_name_from_sub(description: str) -> str | None:
     if not description.startswith("SUB:"):
         return None
     rest = description[len("SUB:"):].strip()
-    if " FOR " not in rest:
-        return None
-    in_part, _, _out_part = rest.partition(" FOR ")
-    return in_part.strip()
+    if " FOR " in rest:
+        in_part, _, _out_part = rest.partition(" FOR ")
+        return in_part.strip()
+    if rest.endswith(" FOR"):
+        # Truncated feed description ('SUB: Jones FOR', 3 events in game
+        # 0021500624): the OUT name is missing from the TEXT, but the OUT
+        # player was never parsed from it anyway — the event's person_id
+        # carries the OUT pid (verified on all 3 events). The IN name is
+        # intact, so resolution proceeds normally.
+        return rest[: -len(" FOR")].strip() or None
+    return None
 
 
 def _parse_ft_sub_type(legacy_sub_type: str) -> str | None:
@@ -1077,7 +1107,13 @@ def derive_possessions(
             # how many (e.g., "2 of 2", "1 of 1"). We end the possession on
             # the last made FT of the trip; missed last FTs fall through to
             # the rebound logic.
-            sub = (row["sub_type"] or "").lower()
+            # NaN is truthy, so `or ""` alone does not guard it: team-rebound
+            # rows in a handful of legacy games carry sub_type the normalizer
+            # nulls ('Normal Rebound'/'Unknown'), and NaN.lower() raised
+            # AttributeError (3 panel quarantines). Unknown FT ordinal ->
+            # not-last, same as any unparseable sub_type.
+            sub = row["sub_type"]
+            sub = sub.lower() if isinstance(sub, str) else ""
             # Parse "X of Y" pattern.
             is_last = False
             if " of " in sub:

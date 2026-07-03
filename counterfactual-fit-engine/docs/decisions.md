@@ -325,3 +325,102 @@ Residual ambiguity still RAISES. One explicit alias recorded:
 kanter -> freedom (token-level, lookup side). Result: all 22 quarantined
 games re-run PERFECT (100% player-games within 0.5 min, zero residuals,
 zero quarantines). Bench round 2 tagged bench_fix4.
+
+## 2026-07-02 (laptop pickup, late night) — environment verification and panel-scale resolver buckets
+
+**Machine switch.** Session resumed on the laptop (bobbys-lenovo) per
+PICKUP.md. Python 3.13.14 installed via winget (the laptop had only
+Anaconda 3.12.4; the venv was rebuilt on 3.13 to match the F0-verified
+environment), venv from requirements.lock, warehouse reachable at the
+Tailscale address. All 13 contract tests green after the fence episode
+below.
+
+**AM-1 fence false alarm (NOT drift, NOT a re-pin).** First pytest run
+tripped PinnedLibDriftError on all pins. Evidence gathered before touching
+anything: git ls-tree HEAD shows the COMMITTED blobs identical to every
+hash in config/pinned_lib.yaml (db.py fb1b5be6, pbp.py 0a9024c8,
+lineups.py 23587a1d, lineup_aggregation.py 1332d75f). The laptop clone has
+core.autocrlf=true, so checkout smudged postmortem/lib to CRLF, and the
+fence hashes raw working-tree bytes. The pinned library did not move one
+byte; the working-tree REPRESENTATION did. Resolution: repo .gitattributes
+now marks postmortem/lib/** -text (no EOL conversion on any platform) and
+the four files were renormalized to LF in the working tree, after which
+the pins verify and all 13 tests pass. The pin file was not edited. Commit
+8b6fc807. Lesson for the record: the fence is representation-sensitive;
+any future clone on Windows would have hit this, and the .gitattributes
+closes it permanently.
+
+**PICKUP.md correction.** data/cache/stints/ is NOT gitignored as PICKUP
+section 3 claims; the .gitignore that landed in 8a08f178 is secrets-only,
+and 7,377 stint parquets came over with the pull. Harmless (the fresh
+laptop panel run regenerates them all), noted so nobody plans around the
+wrong seam.
+
+**Panel state at pickup.** The desktop pushed a mid-flight checkpoint
+(8,500 of 15,669 games scored) at 17:01 and whatever finished after never
+got pushed. The laptop is running the panel fresh (desktop checkpoint set
+aside; it remains in git history at 8a08f178) so this machine ends up with
+the complete stint cache for the D6 DuckDB load, per the PICKUP section 3
+caveat. Build resumed from the laptop's own first checkpoint with 16
+workers after the initial 8-worker pace projected ~5 hours over the
+remote warehouse link.
+
+**Panel-scale quarantine census (desktop checkpoint, 8,500 games, 72
+quarantines, all legacy stratum).** Every reason read and bucketed before
+any code was touched; every bucket verified against warehouse source data
+(house rule: verify against source, then code). Seven buckets:
+
+  1. 'McClellan' (25 games, 2016-17 WAS): retro-rename. Descriptions say
+     McClellan; player_name and roster say 'Sheldon Mac' (pid 1627815, he
+     changed his name). Same disease as kanter->freedom. FIX: token alias
+     mcclellan->mac. No other NBA McClellan or Mac.
+  2. 'Jones, Jr.' (20 games, 2016-17 PHX): comma-suffix form. Desc
+     'Jones, Jr.' vs PBP exact form 'Jones Jr.' (Derrick Jones Jr.,
+     1627884). _norm_name folded periods but not commas. FIX: commas fold
+     like periods in _norm_name.
+  3. 'Zhou' (18 games, 2017-18 HOU): Chinese family-name ordering, not a
+     rename. Descriptions use the family name 'Zhou'; the registry surname
+     form is 'Qi' (roster 'Zhou Qi', pid 1627753, PBP form 'Qi'). FIX:
+     token alias zhou->qi. No other NBA Zhou.
+  4. 'Mbah a Moute' (3 games: 2 MIN 2013-14, 1 LAC 2015-16): multi-token
+     surname. In those games he has NO other PBP events, so the PBP
+     exact-form map never learns him, and the roster map keyed only the
+     bare last token 'moute'. FIX: roster names with 3+ tokens also key
+     tokens[1:] ('mbah a moute' -> Luc, 201601).
+  5. 'Hayes' (2 games, 2017-18 LAL and TOR): retro-rename WITH
+     hyphenation. Desc 'Hayes'; current registry 'Nigel Hayes-Davis'
+     (1628502). FIX: hyphenated surnames also key each part ('hayes',
+     'davis'), team-scoped; a part colliding with a real teammate surname
+     surfaces as AMBIGUOUS through _settle, never a coin flip.
+  6. 'SUB: Jones FOR' truncated text (1 game, 0021500624 HOU-LAC
+     2016-01-18): the feed's descriptions in this game drop names around
+     the Howard/Jones/Capela rotations. Verified on all three 'SUB: Jones
+     FOR' events that person_id carries the OUT pid (Capela 203991,
+     Harrell 1626149), so the missing OUT TEXT costs nothing. FIX: the
+     parser accepts 'SUB: <IN> FOR' with an empty OUT tail. BUT the same
+     game also has three 'SUB:  FOR Howard' events where the IN name
+     itself is absent, plus a missing Capela IN event entirely. The
+     entering player is not recoverable from the sub text, inference would
+     be guessing, and guessing is banned. THE GAME STAYS QUARANTINED with
+     its legible reason. 1/15,669 = 0.006%, far inside the 0.5% gate.
+  7. AttributeError 'float' has no attribute 'lower' (3 games, 2015-17):
+     hypothesis scoreboard entry, my first read was WRONG. I suspected the
+     freethrow branch of the possession walk (floor_state ~1080); the
+     traceback landed in stint_builder.py:294, the rebound stat tally.
+     Root cause: team-rebound rows in these games carry sub_type values
+     the normalizer nulls ('Normal Rebound'/'Unknown'), and `(x or
+     "").lower()` does not guard NaN because NaN is truthy. FIX: isinstance
+     guards at BOTH sites (stint_builder rebound tally, floor_state FT
+     ordinal parse). Unknown rebound class counts as not-offensive,
+     identical to the legacy annotator's 'defensive' default; unknown FT
+     ordinal means not-last, identical to the unparseable path. The
+     possession walk decides rebound possession switches by team_id alone,
+     so no working game changes behavior.
+
+**Verification after fixes.** One game per bucket (all three for Mbah a
+Moute, both for Hayes, all three AttributeError games): 11 of 12 reconcile
+PERFECT (100% of player-games within 0.5 min of seconds-precise official
+minutes, worst error 0.012 min); the twelfth is 0021500624 above,
+quarantined by design. All 13 contract tests green after the edits. Full
+208-game bench rerun tagged bench_fix5 and the panel-wide quarantine
+re-run happen next; results recorded below when they land.
