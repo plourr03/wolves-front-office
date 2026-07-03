@@ -19,3 +19,6 @@ counterfactual-fit-engine/data/fitengine.duckdb
 counterfactual-fit-engine/data/fitengine.duckdb.wal
 # Derived feature tables: rebuildable from code + caches via src/etl/{player_features,lineup_obs}.py
 counterfactual-fit-engine/outputs/features/*.parquet
+# Stint cache: rebuildable intermediate (src/stints/run_panel.py writes it alongside the
+# possession cache); was only partially/accidentally tracked. Rebuild from the panel run.
+counterfactual-fit-engine/data/cache/stints/
