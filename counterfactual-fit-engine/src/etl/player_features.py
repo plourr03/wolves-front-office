@@ -143,6 +143,13 @@ def build(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
         df = (box.merge(trk, on="player_id", how="left")
                  .merge(poss, on="player_id", how="left")
                  .merge(rapm, on="player_id", how="left"))
+        # Postgres NUMERIC comes back as decimal.Decimal via psycopg2; cast
+        # every non-key column to float so downstream arithmetic (per-75
+        # rates, parquet) does not choke on Decimal/float mixing.
+        keep = {"player_id"}
+        for c in df.columns:
+            if c not in keep:
+                df[c] = pd.to_numeric(df[c], errors="coerce")
         p75 = df.poss_off.clip(lower=1) / 75.0
         d75 = df.poss_def.clip(lower=1) / 75.0
         df["drives_per75"] = df.drives / p75

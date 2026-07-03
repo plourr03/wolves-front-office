@@ -1,6 +1,6 @@
 # fitengine validation report
 
-Generated 2026-07-03T09:53:51 from committed artifacts. Gate FAILURES produce decision memos for Bobby; thresholds never move to make a row green.
+Generated 2026-07-03T11:14:38 from committed artifacts. Gate FAILURES produce decision memos for Bobby; thresholds never move to make a row green.
 
 ## G1: data integrity (Layer 0)
 
@@ -20,7 +20,7 @@ Quarantine reasons (all read, none laundered; AM-3 counts their player-games as 
 
 ## G2: Layer 1 (skills)
 
-PENDING: F2 RAPM not yet run on this machine.
+RAPM rows: see `outputs\rapm\g2_rapm_report.md` (YoY band 0.50-0.75 and top-20 face lists). Factor rows PENDING until F3.
 
 ## G3: Layer 2 (synergy, dev seasons)
 

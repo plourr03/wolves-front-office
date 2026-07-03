@@ -54,57 +54,60 @@ def game_context() -> pd.DataFrame:
     return g[["game_id", "team_id", "is_home", "rest_days"]]
 
 
+POSS_GLOB = str(FITENGINE_ROOT / "data" / "cache" / "possessions" / "*.parquet")
+
+
 def build(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
+    """Layer 2 training rows from the POSSESSION cache (the correct grain:
+    offense five vs defense five per possession). The stint table is the
+    wrong source -- per-team stints do not share clock boundaries, so a
+    stint self-join captures only the coincidentally-aligned subset (~7x
+    undercount). Team context (home_share, rest_delta) attaches via the
+    (game_id, lineup_id) -> team_id map from the stints table; a five-man
+    lineup belongs to exactly one team in a game, and the possession-cache
+    lineup strings are byte-identical to the stint lineup_ids (verified).
+
+    Garbage possessions are already excluded (build_possessions carries the
+    flag). The A3 leverage WEIGHTS proper -- from the frozen adapter
+    taggers (tag_garbage_time/tag_clutch) -- attach at Layer 2 FIT time,
+    not here; this builder ships the possession-weighted rows plus the
+    context covariates the fit consumes. NO Layer 2 fit runs until F3
+    vectors exist (directive 2026-07-03 item 4)."""
     ctx = game_context()
     con.register("ctx", ctx)
     df = con.execute("""
-        WITH ss AS (
-            SELECT s.*, g.season_yy
-            FROM stints s JOIN games g USING (game_id)
-            WHERE g.include_train AND NOT s.in_garbage_time
+        WITH poss AS (
+            SELECT game_id, season_yy, off_lineup, def_lineup,
+                   COUNT(*) AS poss, SUM(points) AS pts
+            FROM read_parquet(?, union_by_name=true)
+            WHERE NOT garbage
+            GROUP BY 1, 2, 3, 4
         ),
-        margined AS (
-            SELECT *,
-                   COALESCE(SUM(points_for - points_against) OVER (
-                       PARTITION BY game_id, team_id
-                       ORDER BY period_start, clock_start_sec DESC
-                       ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING
-                   ), 0) AS margin_at_start
-            FROM ss
+        lu_team AS (   -- a lineup belongs to one team per game
+            SELECT DISTINCT game_id, lineup_id, team_id FROM stints
         ),
-        directional AS (
-            SELECT a.game_id, a.season_yy,
-                   a.lineup_id AS off_lineup, b.lineup_id AS def_lineup,
-                   a.team_id AS off_team, b.team_id AS def_team,
-                   a.possessions_off AS poss, a.points_for AS pts,
-                   CASE WHEN a.period_start >= 4
-                             AND a.clock_start_sec <= 300
-                             AND abs(a.margin_at_start) <= 5
-                        THEN 1 ELSE 0 END AS is_clutch
-            FROM margined a JOIN margined b
-              ON a.game_id = b.game_id
-             AND a.period_start = b.period_start
-             AND a.clock_start_sec = b.clock_start_sec
-             AND a.period_end = b.period_end
-             AND a.clock_end_sec = b.clock_end_sec
-             AND a.team_id <> b.team_id
-            WHERE a.possessions_off > 0
+        per_game AS (
+            SELECT p.game_id, p.season_yy, p.off_lineup, p.def_lineup,
+                   p.poss, p.pts,
+                   co.is_home AS off_home,
+                   (co.rest_days - cd.rest_days) AS rest_delta
+            FROM poss p
+            JOIN lu_team ot ON ot.game_id = p.game_id AND ot.lineup_id = p.off_lineup
+            JOIN lu_team dt ON dt.game_id = p.game_id AND dt.lineup_id = p.def_lineup
+            JOIN ctx co ON co.game_id = p.game_id AND co.team_id = ot.team_id
+            JOIN ctx cd ON cd.game_id = p.game_id AND cd.team_id = dt.team_id
         )
-        SELECT d.season_yy,
-               CAST(d.season_yy AS INTEGER) + 2001 AS end_year,
-               d.off_lineup, d.def_lineup,
-               SUM(d.poss) AS poss,
-               SUM(d.pts) * 100.0 / SUM(d.poss) AS pts_per100,
-               SUM(d.poss * co.is_home) * 1.0 / SUM(d.poss) AS home_share,
-               SUM(d.poss * (co.rest_days - cd.rest_days)) / SUM(d.poss)
-                   AS rest_delta,
-               SUM(d.poss * d.is_clutch) * 1.0 / SUM(d.poss) AS clutch_share,
-               COUNT(*) AS n_stints
-        FROM directional d
-        JOIN ctx co ON co.game_id = d.game_id AND co.team_id = d.off_team
-        JOIN ctx cd ON cd.game_id = d.game_id AND cd.team_id = d.def_team
+        SELECT season_yy,
+               CAST(season_yy AS INTEGER) + 2001 AS end_year,
+               off_lineup, def_lineup,
+               SUM(poss) AS poss,
+               SUM(pts) * 100.0 / SUM(poss) AS pts_per100,
+               SUM(poss * off_home) * 1.0 / SUM(poss) AS home_share,
+               SUM(poss * rest_delta) / SUM(poss) AS rest_delta,
+               COUNT(DISTINCT game_id) AS n_games
+        FROM per_game
         GROUP BY 1, 2, 3, 4
-    """).fetchdf()
+    """, [POSS_GLOB]).fetchdf()
     return df
 
 
