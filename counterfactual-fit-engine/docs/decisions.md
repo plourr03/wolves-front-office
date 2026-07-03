@@ -769,3 +769,36 @@ technical-foul bug trips, so it under-classified. The 13-agent per-game
 root-cause workflow caught the systematic cause the aggregate hid. Lesson:
 aggregate bucketers can launder a real bug into "diffuse"; per-item traces
 are the check.
+
+## 2026-07-03 — F3 GATING ruling (Bobby, verbatim)
+
+"F3 GATING (resolve before K selection runs):
+1. 2020-21 tracking: attempt targeted nba_player_tracking_season
+   ingest (few calls). If it lands, hole closed. If the endpoint
+   lacks the season: pre-declared fallback = per-dimension mean
+   imputation with a missingness flag into the factor model, AND
+   2020-21 excluded from K-selection reconstruction scoring. Never
+   silent. Memo either outcome.
+2. 2025-26 undercounted boxscore: confirm ingest-gap vs live-branch
+   reconstruction defect (AM-4 stratum). Ingest gap -> targeted pull
+   or memo'd single-game exclusion. Defect -> stop and memo, do not
+   proceed to F3.
+3. THEN F3: fit factor model, K in {6,8,10} on dev, reconstruction
+   vs PCA health gate, and present the K choice to me with both the
+   reconstruction curve AND dev-season G3 proxy performance. Do not
+   freeze K.
+PREDICTION (logged pre-selection, predictions.md): K resolves to 8.
+
+Residual cleanup pass: DEFER. Sub-0.5%, non-systematic, memo'd. Not
+worth a session against the September clock; the banked time stays
+banked."
+
+Verbatim framing recorded for the K decision (so it can't be back-fit):
+soft elbow expected on the reconstruction-vs-K curve; tie-breaker is
+downstream dev-season G3 proxy, not reconstruction alone (a dimension that
+does not help predict lineups is not worth interpreting). Ratify 8 if the
+elbow is clean at 8 and G3 agrees; take 8 for interpretability if
+reconstruction wants 10 but G3 is flat 8->10; memo if both point elsewhere.
+Both data gates must resolve before K selection RUNS (the honest
+reconstruction scoring needs a complete feature matrix; 2020-21 is
+currently a hole).

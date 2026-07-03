@@ -19,3 +19,13 @@ The model's largest positive interaction terms league-wide involve elite
 spacing bigs next to rim-pressure creators. A sanity prediction about what
 the machine should discover if it works; graded from the F4 interaction
 diagnostics.
+
+## P-K — 2026-07-03, logged BEFORE the F3 K-selection runs (Bobby's pre-registered lean)
+K (Layer 1b latent factor count, chosen from {6, 8, 10} on dev seasons)
+resolves to 8. Rationale logged pre-selection so it cannot be back-fit: 6
+likely cannot separate the skills the synergy function needs to see
+interact; 10 risks noise dimensions; 8 is the usual landing spot for
+basketball skill decompositions. Graded at the K-selection presentation,
+judged on the reconstruction-vs-K elbow AND the dev-season G3 proxy, not
+reconstruction alone. If reconstruction wants 10 but G3 is flat 8->10, 8
+is taken for interpretability; disagreement of both -> memo to Bobby.
