@@ -631,3 +631,36 @@ games with sub-minute-to-few-minute magnitudes, the effect on season
 RAPM is negligible; no exclusion applied. The one reference-incomplete
 2025-26 game is flagged for a completeness re-check when that season's
 boxscore ingest finalizes.
+
+## 2026-07-03 (overnight) — G2 (RAPM rows) VERDICT: GREEN
+
+F2 Layer 1a per plan D4: per-season O/D ridge RAPM from the possession
+cache (3,020,898 possessions, garbage excluded), two-stage prior (box
+composite + season s-1 estimate aged one year via the pinned Model C
+curves, 0.6/0.4 blend), GCV alpha FROZEN at 2000 on dev seasons 2015-16
+through 2020-21 only (alpha_freeze.json; refuses reselection), 200-game-
+block bootstrap SEs, A1 covariance blocks at >= 500 shared possessions.
+13 seasons written to outputs/rapm/rapm_<yr>.parquet + cov_<yr>.parquet.
+
+GATE 1 — RAPM stability (YoY correlation in 0.50-0.75): GREEN, all 12
+adjacent-season pairs in band on BOTH O-RAPM (0.624-0.726) and D-RAPM
+(0.566-0.722). Neither noise (too low) nor over-shrunk prior (too high).
+Full table in outputs/rapm/g2_rapm_report.md.
+
+GATE 2 — face validity (narrative check, NEVER fitted-to): top-20 lists
+match the known impact ladder precisely. 2015-16: Kawhi (def -4.88, the
+DPOY that year), unanimous-MVP Curry (off +9.09), Draymond (def -3.50),
+Chris Paul, Westbrook, LeBron. 2024-25: Jokic / SGA / Giannis at the top
+(the actual MVP-race top three), then rim/wing defenders (Lively -5.21,
+Finney-Smith, Franz Wagner) and Luka. Sign convention correct (negative
+def_rapm = fewer points allowed = better defense). Bottom lists are
+low-impact rotation players. Exported for Bobby's morning read.
+
+Both G2 RAPM-row gates pass. The Layer 1b FACTOR rows (R-hat, ESS,
+PCA-beat) are F3 and remain PENDING. The A2 aging fit for skill vectors
+remains written-but-unrun until F3 produces skill_vectors.
+
+Note (not a gate issue): alpha 2000 was the argmin of summed dev-season
+GCV; the curve is flat-ish near the top (dev seasons individually also
+picked 2000), so the estimate is stable. Frozen regardless per house
+rule; no post-hoc adjustment.
