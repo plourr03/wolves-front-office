@@ -802,3 +802,40 @@ reconstruction wants 10 but G3 is flat 8->10; memo if both point elsewhere.
 Both data gates must resolve before K selection RUNS (the honest
 reconstruction scoring needs a complete feature matrix; 2020-21 is
 currently a hole).
+
+## 2026-07-03 — F3 GATING resolved (both data gates cleared; K selection unblocked)
+
+**Gate 1 (2020-21 tracking hole): CLOSED via targeted ingest (preferred
+option landed).** The endpoint HAS the season (LeagueDashPtStats
+season=2020-21 returns 540 players; a known-present control season
+returned identically), so the hole was a warehouse ingest gap, not an
+endpoint limitation. src/etl/ingest_tracking_2021.py pulled all 11 measure
+types and inserted 5,937 rows into nba_player_tracking_season with the
+existing seasons' schema/convention (API fields lowercased; one rename,
+ast_pts_created -> ast_points_created, the sole API/warehouse column-name
+difference). Idempotent (deletes 2020-21 rows first; there were none).
+player_features rebuilt: 2020-21 tracking coverage 0% -> 100%, matching the
+adjacent seasons. The pre-declared imputation fallback is NOT needed and
+was not used. Feature matrix is complete; no missingness flag, no 2020-21
+exclusion from K-selection reconstruction scoring.
+
+**Gate 2 (2025-26 undercounted boxscore, game 0022500160): CONFIRMED
+ingest gap, NOT a live-branch reconstruction defect (AM-4 check passes).**
+Evidence: the integer reference (nba_player_stats.minutes_played) sums to
+232/235 per team (near-full 240, the small gap is floor truncation), and
+the reconstruction produces 240/team exactly, matching it. Only the
+seconds-precise reference (nba_player_advanced_stats.minutes_float) is
+wrong -- it sums to 171.6/171.6 per team, but every player HAS a non-null
+float, so the VALUES are partial, not the rows missing. It is the ONLY
+game in all of 2025-26 with this float-undercount. The reconstruction is
+sound; the live branch is not defective; this is the same reference-ingest
+class as the play-in absentees. Resolution: memo'd single-game reference
+note. The game's lineups (correct, 240/team) feed RAPM/features unharmed;
+it costs the G1 PRIMARY metric one game (counted against the gate under
+AM-3, no laundering) while passing the SECONDARY integer-based criterion.
+No targeted re-pull warranted for one cosmetic reference value; if the
+2025-26 advanced-boxscore ingest is refreshed later it self-heals.
+
+Both gates clear. Per the ruling, F3 K-selection now runs on the complete
+feature matrix; K stays UNFROZEN and the choice is presented with the
+reconstruction-vs-K curve AND the dev-season G3 proxy.
