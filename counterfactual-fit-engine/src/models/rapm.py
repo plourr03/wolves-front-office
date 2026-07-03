@@ -190,18 +190,30 @@ def build_design(df: pd.DataFrame):
     return X, y, poss, games, players, R, poss_by_player
 
 
+def gram_system(X, y, w, offset: np.ndarray | None = None):
+    """Weighted, intercept-centered normal-equation pieces, shared by the
+    ridge solve and the analytical GCV. Returns (G0, b0, SYY, x_mean,
+    y_mean, sum_w): G0 = Xc'W Xc, b0 = Xc'W yc, SYY = yc'W yc, all in the
+    weighted-centered space (Xc = X - weighted col means). Densifies only
+    the p x p Gram (p ~ 1000), never the n x p design."""
+    yy = y - (offset if offset is not None else 0.0)
+    sum_w = float(w.sum())
+    sw = w / sum_w
+    x_mean = np.asarray(X.multiply(sw[:, None]).sum(axis=0)).ravel()
+    y_mean = float(yy @ sw)
+    XtW = X.multiply(w[:, None]).T
+    G0 = np.asarray((XtW @ X).todense()) - sum_w * np.outer(x_mean, x_mean)
+    b0 = np.asarray(XtW @ yy).ravel() - sum_w * x_mean * y_mean
+    SYY = float((w * yy * yy).sum()) - sum_w * y_mean * y_mean
+    return G0, b0, SYY, x_mean, y_mean, sum_w
+
+
 def ridge_solve(X, y, w, alpha: float, offset: np.ndarray | None = None):
     """Weighted ridge with intercept via centering; returns (coef, intercept)."""
-    yy = y - (offset if offset is not None else 0.0)
-    sw = w / w.sum()
-    Xw = X.multiply(sw[:, None]).tocsr()
-    x_mean = np.asarray(Xw.sum(axis=0)).ravel()
-    y_mean = float(yy @ sw)
-    G = (X.multiply(w[:, None]).T @ X).toarray()
-    G -= w.sum() * np.outer(x_mean, x_mean)
+    G0, b0, SYY, x_mean, y_mean, _ = gram_system(X, y, w, offset)
+    G = G0.copy()
     G[np.diag_indices_from(G)] += alpha
-    b = np.asarray(X.multiply(w[:, None]).T @ yy).ravel() - w.sum() * x_mean * y_mean
-    coef = np.linalg.solve(G, b)
+    coef = np.linalg.solve(G, b0)
     intercept = y_mean - float(x_mean @ coef)
     return coef, intercept
 
@@ -260,24 +272,43 @@ def fit_box_prior(players, first_off, first_def, poss_w, feats):
 # ---------------------------------------------------------------------------
 # Alpha freeze (GCV on dev seasons only)
 
+def _gcv_curve(X, y, w) -> np.ndarray:
+    """Analytical generalized cross-validation over ALPHA_GRID for one
+    season, computed from the p x p Gram (never densifying the n x p
+    design). GCV(a) = (WRSS(a)/sum_w) / (1 - dof(a)/n)^2 with dof(a) =
+    1 + sum_i lambda_i/(lambda_i + a) (the +1 is the centered intercept),
+    lambda_i the eigenvalues of the weighted-centered Gram. Returns the
+    per-alpha GCV in (pts/100)^2 units, comparable across seasons."""
+    G0, b0, SYY, _, _, sum_w = gram_system(X, y, w)
+    n = X.shape[0]
+    lam = np.linalg.eigvalsh(G0)
+    lam = np.clip(lam, 0.0, None)
+    out = []
+    for a in ALPHA_GRID:
+        beta = np.linalg.solve(G0 + a * np.eye(G0.shape[0]), b0)
+        wrss = SYY - 2.0 * float(b0 @ beta) + float(beta @ G0 @ beta)
+        dof = 1.0 + float((lam / (lam + a)).sum())
+        denom = (1.0 - dof / n) ** 2
+        out.append((wrss / sum_w) / denom if denom > 0 else np.inf)
+    return np.array(out)
+
+
 def select_alpha(con) -> float:
     if ALPHA_FREEZE.exists():
         frozen = json.loads(ALPHA_FREEZE.read_text())
         print(f"alpha already FROZEN at {frozen['alpha']} "
               f"({frozen['frozen_at']}); refusing to reselect")
         return float(frozen["alpha"])
-    from sklearn.linear_model import RidgeCV
     per_season = {}
-    total = None
+    total = np.zeros(len(ALPHA_GRID))
     for s in DEV_SEASONS_GCV:
         df = load_matchups(con, s)
         X, y, w, games, players, R, _ = build_design(df)
-        cv = RidgeCV(alphas=ALPHA_GRID, store_cv_results=True).fit(
-            X.toarray(), y, sample_weight=w)
-        errs = np.average(cv.cv_results_, axis=0, weights=w)
+        errs = _gcv_curve(X, y, w)
         per_season[s] = dict(zip(map(float, ALPHA_GRID), map(float, errs)))
-        total = errs if total is None else total + errs
-        print(f"  GCV {s}: best alpha {float(cv.alpha_)}")
+        total += errs
+        print(f"  GCV {season_str(s)}: best alpha "
+              f"{float(ALPHA_GRID[int(np.argmin(errs))])}", flush=True)
     alpha = float(ALPHA_GRID[int(np.argmin(total))])
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     ALPHA_FREEZE.write_text(json.dumps({

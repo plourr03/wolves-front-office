@@ -79,6 +79,42 @@ def test_build_design_pools_subthreshold_players():
     assert X[1, R] == 1.0
 
 
+def test_gram_system_matches_dense_weighted_centered():
+    rapm = _rapm()
+    rng = np.random.default_rng(3)
+    from scipy.sparse import csr_matrix
+    n, k = 500, 8
+    X = csr_matrix((rng.random((n, k)) < 0.4).astype(float))
+    y = rng.normal(0, 3, n)
+    w = rng.uniform(0.5, 4, n)
+    G0, b0, SYY, x_mean, y_mean, sw = rapm.gram_system(X, y, w)
+    Xd = X.toarray()
+    xm = (w[:, None] * Xd).sum(0) / w.sum()
+    ym = (w * y).sum() / w.sum()
+    Xc, yc = Xd - xm, y - ym
+    np.testing.assert_allclose(G0, (Xc * w[:, None]).T @ Xc, atol=1e-8)
+    np.testing.assert_allclose(b0, (Xc * w[:, None]).T @ yc, atol=1e-8)
+    np.testing.assert_allclose(SYY, (w * yc * yc).sum(), atol=1e-6)
+    np.testing.assert_allclose(x_mean, xm, atol=1e-10)
+
+
+def test_gcv_prefers_more_shrinkage_when_noisier():
+    rapm = _rapm()
+    rng = np.random.default_rng(5)
+    from scipy.sparse import csr_matrix
+    n, k = 3000, 20
+    X = csr_matrix((rng.random((n, k)) < 0.3).astype(float))
+    beta = rng.normal(0, 1, k)
+    w = np.ones(n)
+    y_clean = X @ beta + rng.normal(0, 0.3, n)
+    y_noisy = X @ beta + rng.normal(0, 6.0, n)
+    a_clean = rapm.ALPHA_GRID[int(np.argmin(rapm._gcv_curve(X, y_clean, w)))]
+    a_noisy = rapm.ALPHA_GRID[int(np.argmin(rapm._gcv_curve(X, y_noisy, w)))]
+    assert a_noisy >= a_clean
+    # GCV curve must be finite everywhere
+    assert np.all(np.isfinite(rapm._gcv_curve(X, y_clean, w)))
+
+
 def test_archetype_mapping():
     rapm = _rapm()
     assert rapm.archetype("Guard") == "guard"
