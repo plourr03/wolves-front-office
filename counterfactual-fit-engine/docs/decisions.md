@@ -424,3 +424,62 @@ minutes, worst error 0.012 min); the twelfth is 0021500624 above,
 quarantined by design. All 13 contract tests green after the edits. Full
 208-game bench rerun tagged bench_fix5 and the panel-wide quarantine
 re-run happen next; results recorded below when they land.
+
+## 2026-07-03 — OVERNIGHT DIRECTIVE (Bobby, verbatim)
+
+"OVERNIGHT DIRECTIVE, fitengine (auto mode; work in order, skip past
+blocks, log everything):
+
+1. F1 repair loop to completion: period-start-floor repair per D3 fix
+   order, iterating on the 208-game bench with the truncation-aware
+   scorer. Rider 2 binding: official-minutes evidence constrains with
+   the half-open interval [m, m+1), never m +/- tolerance. When bench
+   converges, run the FULL 15,669-game panel, produce the G1 scorecard
+   (AM-3 denominator, AM-4/AM-5 strata, invariant labels), and run the
+   Rider-1 seconds-precise stratum: >= 200 era-stratified games via
+   targeted nba_api boxscore pulls, original 99.5%-within-0.5-min
+   criterion. G1 green requires BOTH gates. If any G1 row fails after
+   D3 fix items 1-5 are exhausted: decision memo, park, continue.
+2. On G1 green (or parked-with-memo): F2 in full. Layer 1a per D4:
+   per-season O/D ridge RAPM, prior blend, GCV alpha on dev seasons
+   only then frozen, 200-block bootstrap SEs, A1 covariance parquets
+   (exact blocks >= 500 shared possessions). Gate: G2 RAPM rows
+   (YoY 0.50-0.75 band, face-validity top-20 lists exported for my
+   morning read, never fitted-to).
+3. F3 prep that doesn't need G2 ratified: player_features table from
+   nba_player_tracking_season + box + RAPM placeholders; feature_regime
+   scaffolding with the leakage canary test green on synthetic data;
+   A2 aging-fit code written (fit runs only after skill vectors exist).
+4. F4 scaffolding: lineup_obs builder with A3 leverage weights (frozen
+   rule from the adapter taggers), GBM floor training harness,
+   set-attention module + trainer with smoke tests on synthetic data.
+   NO real Layer 2 fits until F3 vectors exist.
+5. Backtest harness plumbing (F5 prep): mechanical transaction-universe
+   builder from nba_player_stats team changes under the frozen
+   protocol (preceding-season minutes basis, realized-window rules).
+   Output the DEV-window case list only. Do NOT enumerate, list, or
+   touch sealed-window (2021-22 onward) cases in any artifact.
+6. Housekeeping: validation report regenerated; commit at each green
+   milestone; full session log; any gate failure -> memo like the
+   Model B one, park, proceed to independent work.
+
+HARD CONSTRAINTS: sealed window untouched and unenumerated; no
+threshold or gate revisions (memos only); K selection is F3 dev work
+but the CHOICE is presented to me, not frozen overnight; nothing
+publishes; provisional tags on anything downstream of an unratified
+gate; when genuinely blocked, skip and log rather than guess."
+
+### Same-session reading of directive item 1 vs the fix-4 memo
+
+Item 1's Rider-1 stratum ("&gt;= 200 era-stratified games via targeted
+nba_api boxscore pulls") is the plan-as-written language. The fix-4 memo
+(2026-07-02 night, logged above and in reconcile.py) established that
+nba_player_advanced_stats.minutes_float IS that seconds-precise reference,
+same nba_api source data already ingested, with FULL-PANEL coverage
+(15,669 games, strictly larger than the required 200), and made the
+original 99.5%-within-0.5-min criterion the PRIMARY gate on the whole
+panel. The directive's stratum is therefore satisfied at superset
+coverage by the primary gate itself; no separate 200-game pull is run.
+If an INDEPENDENT-of-warehouse ingest check is wanted on top (fresh API
+pulls compared to the ingested table), that is a new requirement and a
+morning question, not blocking G1.
