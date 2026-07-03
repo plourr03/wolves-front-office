@@ -192,6 +192,50 @@ def diagnose(game_id: str) -> dict:
     }
 
 
+def trace(game_id: str, top: int = 4) -> dict:
+    """For the worst-failing players (the swap pair and neighbours), dump
+    their reconstructed on-floor stint intervals next to their PBP
+    substitution events, so a membership swap is directly visible: a player
+    credited to a stint the PBP says they were subbed out of, or vice
+    versa. Read-only diagnostic for the tail-census workflow."""
+    res = floor_state.process_game(game_id)
+    stints = stint_builder.derive_stints(res["annotated"], res["possessions"])
+    d = diagnose(game_id)
+    fails = d["failing_players"][:top]
+    names = query("""SELECT DISTINCT ON (player_id) player_id, player_name
+                     FROM nba_player_stats WHERE game_id = %s
+                     ORDER BY player_id, game_date DESC""", (game_id,))
+    nm = dict(zip(names.player_id, names.player_name))
+    subs = query("""
+        SELECT period, clock, description, person_id
+        FROM nba_play_by_play
+        WHERE game_id = %s AND action_type IN ('Substitution','substitution')
+        ORDER BY period, action_number""", (game_id,))
+    out = {"game_id": game_id, "players": []}
+    for f in fails:
+        pid = f["player_id"]
+        pid_stints = [
+            {"period": int(s.period_start),
+             "clock_start": float(s.clock_start_sec),
+             "clock_end": float(s.clock_end_sec),
+             "mins": round(float(s.duration_sec) / 60.0, 2)}
+            for s in stints.itertuples()
+            if pid in _lineup_pids(s.lineup_id)]
+        pid_subs = [
+            {"period": int(r.period), "clock": r.clock, "desc": r.description}
+            for r in subs.itertuples()
+            if (r.person_id == pid) or (nm.get(pid, "") and
+                nm[pid].split()[-1].lower() in str(r.description).lower())]
+        out["players"].append({
+            "player_id": pid, "name": f["name"],
+            "recon_min": f["recon_min"], "official_min": f["official_min"],
+            "delta": f["delta_min"], "is_starter": f["is_official_starter"],
+            "n_stint_intervals": len(pid_stints),
+            "stint_intervals": pid_stints,
+            "pbp_sub_events": pid_subs})
+    return out
+
+
 def _print_human(d: dict) -> None:
     if d.get("quarantined"):
         print(f"{d['game_id']}: QUARANTINED -- {d['error']}")
@@ -220,9 +264,12 @@ def _print_human(d: dict) -> None:
 
 def main() -> None:
     game_id = sys.argv[1]
-    as_json = "--json" in sys.argv[2:]
+    flags = sys.argv[2:]
+    if "--trace" in flags:
+        print(json.dumps(trace(game_id), default=str, indent=1))
+        return
     d = diagnose(game_id)
-    if as_json:
+    if "--json" in flags:
         print(json.dumps(d))
     else:
         _print_human(d)
