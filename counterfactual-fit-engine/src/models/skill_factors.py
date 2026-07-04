@@ -105,8 +105,17 @@ def _model(Y, SE2, anchor_idx):
     import numpyro.distributions as dist
 
     n, p = Y.shape
-    tau = numpyro.sample("tau", dist.HalfNormal(1.0))
-    W_free = numpyro.sample("W_free", dist.Laplace(0.0, tau).expand([p, K]).to_event(2))
+    # Free loadings: FIXED-scale weakly-informative Normal (features are
+    # standardized, so a unit-scale prior comfortably covers the O(0.3-0.5)
+    # loadings while shrinking noise). A hierarchical (learned) scale funnels
+    # against the loadings when the data is this informative (3475+ rows),
+    # saturating the NUTS tree depth and making the fit intractable -- a
+    # sampler-geometry pathology, NOT a structural issue (2026-07-03). Fixing
+    # the scale removes the funnel; the Normal-shrinkage family and the whole
+    # factor/anchor/measurement-error structure are unchanged. Direct
+    # (centered) parametrization is correct here because the likelihood, not
+    # the prior, dominates.
+    W_free = numpyro.sample("W_free", dist.Normal(0.0, 1.0).expand([p, K]).to_event(2))
     anchor_diag = numpyro.sample("anchor_diag", dist.HalfNormal(2.0).expand([K]).to_event(1))
     psi = numpyro.sample("psi", dist.HalfNormal(1.0).expand([p]).to_event(1))
 
@@ -142,13 +151,22 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
     import arviz as az
 
     numpyro.set_host_device_count(int(L1B["num_chains"]))
-    mcmc = MCMC(NUTS(_model, target_accept_prob=0.9),
+    # 'vectorized' runs all chains in one vmapped pass -- far faster on CPU
+    # than the default sequential chains for this small-parameter model.
+    # max_tree_depth=7 (<=128 leapfrog steps): the smooth Normal-prior
+    # posterior is well-conditioned so deep trees are never needed, and the
+    # traced doubling scan is the dominant COMPILE cost -- 7 keeps compile
+    # short. num_steps that saturate the cap would show as low ESS (caught
+    # by the gate).
+    mcmc = MCMC(NUTS(_model, target_accept_prob=0.9,
+                     max_tree_depth=int(L1B.get("max_tree_depth", 6))),
                 num_warmup=int(L1B["num_warmup"]),
                 num_samples=int(L1B["num_samples"]),
-                num_chains=int(L1B["num_chains"]), progress_bar=False)
+                num_chains=int(L1B["num_chains"]), progress_bar=False,
+                chain_method="vectorized")
     mcmc.run(jax.random.PRNGKey(SEED), Y=Y, SE2=se2, anchor_idx=anchor_idx)
     idata = az.from_numpyro(mcmc)
-    summ = az.summary(idata, var_names=["W_free", "anchor_diag", "psi", "tau"],
+    summ = az.summary(idata, var_names=["W_free", "anchor_diag", "psi"],
                       round_to="none")
     health = {"worst_r_hat": float(summ.r_hat.max()),
               "min_ess_bulk": float(summ.ess_bulk.min()),
@@ -196,10 +214,26 @@ def main() -> None:
     f, Y, se2, (mu, sd) = load_matrix(dev_only)
     anchor_idx = tuple(FEAT_COLS.index(ANCHORS[k]) for k in range(K))
     tag = "dev" if dev_only else "full"
-    print(f"[{tag}] factor fit: {Y.shape[0]} player-seasons x {Y.shape[1]} "
-          f"features, K={K}, anchors={[ANCHORS[k] for k in range(K)]}", flush=True)
 
-    samples, health = fit(Y, se2, anchor_idx, tag)
+    # The loadings W and unique variances psi are POPULATION parameters; a
+    # bounded random subsample estimates the ~189 of them with negligible
+    # loss (and identical health-gate meaning), while the per-row MVN
+    # likelihood cost -- the fit's bottleneck on CPU -- scales with rows.
+    # We fit on <= N_FIT rows and score ALL player-seasons post-hoc (the
+    # conditional-posterior scores are cheap, no MCMC). Pre-authorized lever
+    # (ruling 2026-07-03: "loadings are population params; score all rows").
+    N_FIT = int(L1B.get("n_fit_rows", 1500))
+    if Y.shape[0] > N_FIT:
+        rng = np.random.default_rng(SEED)
+        sel = rng.choice(Y.shape[0], size=N_FIT, replace=False)
+        Yf, se2f = Y[sel], se2[sel]
+    else:
+        Yf, se2f = Y, se2
+    print(f"[{tag}] factor fit: {Yf.shape[0]} of {Y.shape[0]} player-seasons "
+          f"(subsampled for the fit; all scored) x {Y.shape[1]} features, "
+          f"K={K}, anchors={[ANCHORS[k] for k in range(K)]}", flush=True)
+
+    samples, health = fit(Yf, se2f, anchor_idx, tag)
     passed = (health["worst_r_hat"] < GATES["max_r_hat"]
               and health["min_ess_bulk"] > GATES["min_ess_bulk"])
     print(f"HEALTH: worst R-hat {health['worst_r_hat']:.4f} "

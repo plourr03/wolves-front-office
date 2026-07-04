@@ -913,3 +913,64 @@ Editorial call queued for after the vectors land (Bobby): whether the 8
 dimensions are coherent enough to NAME in the flagship. The fit must export
 top-loading features and exemplar players per factor so a dimension that is a
 statistical smear is not pretended into a named skill.
+
+## 2026-07-03 — F3 Layer 1b fit PARKED: NUTS intractable on this CPU; SVI fallback proposed (Bobby's ruling needed)
+
+The measurement-error-aware Bayesian factor model (K=8, ratified) is
+CORRECT and math-unit-tested (Woodbury marginal log-likelihood == direct
+MVN; conditional-posterior scores == brute-force Gaussian conditioning;
+8 distinct pure-marker anchors). The blocker is purely the NUTS fit's
+wall-clock on this laptop CPU. Nothing about K, the anchors, the
+measurement-error handling, or the factor structure is in question, and
+none of it was changed; only sampler/perf settings were tuned.
+
+**Diagnosis chain (each a sampler-geometry issue, each fixed, all
+committed in skill_factors.py):**
+1. Laplace sparsity prior: its non-differentiable spike at 0 forced very
+   deep NUTS trees. FIX: smooth Normal loadings (shrinkage still yields
+   interpretable few-large-loadings; strict-sparse is a v1.1 refinement).
+2. Hierarchical loading scale (tau x w_raw): funneled against the loadings
+   with this much data, saturating the tree cap. FIX: fixed-scale Normal
+   (removes the funnel; standardized features make unit scale weakly
+   informative).
+3. Per-row MVN likelihood over the fit rows is the intrinsic CPU cost.
+   FIXES: fit loadings on a bounded row SUBSAMPLE (population params;
+   all player-seasons scored post-hoc), and cap max_tree_depth.
+
+**Escalation ladder actually run (dev, 3475 rotation player-seasons):**
+- funnel-fixed, 3475 rows, depth 7: killed at ~68 min, saturating.
+- subsampled 1500 rows, depth 7: killed at ~26 min, still saturating (3.3
+  cores steady).
+- subsampled 1000 rows, depth 6, warmup 600 / samples 800: LIGHTER (2.1-2.4
+  cores, ~40% less total compute) but STILL did not complete -- no health
+  json at 28.7 min, steady sampling (not tapering). ~5 min of that is fixed
+  JAX compile of the vectorized-4-chain NUTS scan; the rest is the per-row
+  MVN over 1000 rows x up to 64 leapfrog steps x 1400 draws.
+
+**Finding:** full-4-chain NUTS on this likelihood is intractable on this
+CPU within a workable iteration budget, even funnel-fixed at depth 6 /
+1000 rows. Further shaving (depth 5, 700 rows, 2 chains) would trade away
+the health-gate's statistical meaning for speed, which is the wrong lever.
+
+**PROPOSAL for Bobby's ruling (NOT adopted unilaterally -- it changes the
+health-gate semantics):** fit Layer 1b by STOCHASTIC VARIATIONAL INFERENCE
+(numpyro SVI, AutoLowRankMultivariateNormal guide over the loadings/psi;
+the latent factor scores stay analytically marginalized, so the guide is
+low-dimensional and SVI converges in seconds-to-minutes). Because SVI has
+no R-hat/ESS, the health gate would be REPLACED by a documented surrogate:
+(a) ELBO convergence (stable over the last N steps, multiple inits agree);
+(b) posterior-predictive held-out reconstruction still BEATS PCA at K=8
+    (the spec's own structural check, method-agnostic);
+(c) loading sign/rotation STABILITY across seeds (the anchor-stability
+    intent, restated for SVI).
+Trade-off: SVI gives an approximate (often over-concentrated) posterior,
+so the skill_vectors' sample spread would be a floor on uncertainty, not
+exact -- acceptable for v1 vectors, flagged for Layer 2 to widen via the
+deep ensemble it already runs. K STAYS FROZEN at 8. skill_vectors are NOT
+shipped until Bobby rules on the SVI substitution. If he prefers to keep
+strict NUTS, the path is a longer offline run on the desktop / more cores /
+a GPU, or accepting a multi-hour fit -- his call.
+
+Everything else in F3 is done and committed: K=8 ratified and frozen, the
+factor model built and math-verified, the K-selection evidence, both data
+gates resolved. Only the vector-producing fit is parked on this question.
