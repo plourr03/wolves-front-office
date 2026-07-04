@@ -161,11 +161,16 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
     # minutes with the real gates. max_tree_depth stays generous (won't be
     # hit once the geometry is fixed); if it ever were, low ESS would flag it.
     mcmc = MCMC(NUTS(_model, target_accept_prob=0.9, dense_mass=True,
-                     max_tree_depth=int(L1B.get("max_tree_depth", 10))),
+                     max_tree_depth=int(L1B.get("max_tree_depth", 8))),
                 num_warmup=int(L1B["num_warmup"]),
                 num_samples=int(L1B["num_samples"]),
                 num_chains=int(L1B["num_chains"]), progress_bar=False,
-                chain_method="vectorized")
+                # SEQUENTIAL: the vectorized dense-mass compile stalled on
+                # this CPU; sequential compiles a single-chain graph that
+                # reliably runs. This is the OFFLINE full-data NUTS run
+                # (Bobby's pre-approved step-2) -- correctness + real gates
+                # over speed, on a load-bearing artifact.
+                chain_method=L1B.get("chain_method", "sequential"))
     mcmc.run(jax.random.PRNGKey(SEED), Y=Y, SE2=se2, anchor_idx=anchor_idx)
     idata = az.from_numpyro(mcmc)
     summ = az.summary(idata, var_names=["W_free", "anchor_diag", "psi"],

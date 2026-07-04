@@ -1090,3 +1090,30 @@ The ~1,098 non-rotation player-seasons (all player-seasons 6,936 minus
 5,838 rotation) are sub-minutes-floor players with no own-column RAPM; they
 take archetype priors per spec 8.4 and NONE are query/backtest targets
 (verified). This is a principled population definition, not a subsample.
+
+## 2026-07-03 — F3 Layer 1b: OFFLINE full-data NUTS run launched (Bobby's step-2, pre-approved)
+
+After the profile (gradient cheap + linear, model exonerated) and the mass-
+matrix diagnosis, every INTERACTIVE sampler config proved too slow on this
+laptop CPU to iterate on: diagonal mass saturates the tree cap (~63 leapfrog
+steps at depth 6, confirmed by arithmetic: ~7 min/180-draw single chain);
+dense-mass VECTORIZED chains stalled on a heavy compile (>20 min for
+200+200); dense-mass SEQUENTIAL compiled and ran but the dense warmup
+adaptation is expensive (tiny 150+60 test still going at 12 min). No single
+config gives a fast interactive fit. The gradient is cheap and the model is
+correct; this is a slow-CPU + hard-geometry combination, exactly Bobby's
+step-2: "the overnight/offline full-data NUTS run with the REAL gates
+intact. We have banked schedule; spend it here, this artifact is
+load-bearing."
+
+LAUNCHED (per that pre-approval, no further ok needed): the full-data fit,
+ALL 5,838 rotation player-seasons, dense_mass=True, chain_method=sequential
+(vectorized stalled), max_tree_depth=8, 4 chains x 1000+1000, real gates
+(R-hat<1.01, ESS>400, anchor stability). Expected multi-hour on CPU; it
+WILL complete (dense mass fixes the geometry after warmup, so sampling
+steps collapse -- unlike diagonal which never converges the tree). On
+health PASS it auto-freezes skill_vectors + the interpretability export
+(top +/- loadings + top/bottom-5 exemplar player-seasons per factor).
+Nothing traded away: exact NUTS, full population, real gates. SVI stays in
+the drawer; subsampling stays retracted; K frozen at 8. Population
+verification already PASSED (c9e41b81). Will NOT kill from impatience.
