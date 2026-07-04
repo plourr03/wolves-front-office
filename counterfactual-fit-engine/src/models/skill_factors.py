@@ -153,13 +153,15 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
     numpyro.set_host_device_count(int(L1B["num_chains"]))
     # 'vectorized' runs all chains in one vmapped pass -- far faster on CPU
     # than the default sequential chains for this small-parameter model.
-    # max_tree_depth=7 (<=128 leapfrog steps): the smooth Normal-prior
-    # posterior is well-conditioned so deep trees are never needed, and the
-    # traced doubling scan is the dominant COMPILE cost -- 7 keeps compile
-    # short. num_steps that saturate the cap would show as low ESS (caught
-    # by the gate).
-    mcmc = MCMC(NUTS(_model, target_accept_prob=0.9,
-                     max_tree_depth=int(L1B.get("max_tree_depth", 6))),
+    # DENSE mass matrix: the loadings posterior is correlated, which made
+    # NUTS take enormous (tree-depth-saturating) trajectories under the
+    # default diagonal mass -- the true cause of the wall (the gradient is
+    # cheap, profiled). A full 197x197 mass matrix captures the correlations
+    # and collapses trajectory length, so exact NUTS runs on ALL the data in
+    # minutes with the real gates. max_tree_depth stays generous (won't be
+    # hit once the geometry is fixed); if it ever were, low ESS would flag it.
+    mcmc = MCMC(NUTS(_model, target_accept_prob=0.9, dense_mass=True,
+                     max_tree_depth=int(L1B.get("max_tree_depth", 10))),
                 num_warmup=int(L1B["num_warmup"]),
                 num_samples=int(L1B["num_samples"]),
                 num_chains=int(L1B["num_chains"]), progress_bar=False,
@@ -215,25 +217,20 @@ def main() -> None:
     anchor_idx = tuple(FEAT_COLS.index(ANCHORS[k]) for k in range(K))
     tag = "dev" if dev_only else "full"
 
-    # The loadings W and unique variances psi are POPULATION parameters; a
-    # bounded random subsample estimates the ~189 of them with negligible
-    # loss (and identical health-gate meaning), while the per-row MVN
-    # likelihood cost -- the fit's bottleneck on CPU -- scales with rows.
-    # We fit on <= N_FIT rows and score ALL player-seasons post-hoc (the
-    # conditional-posterior scores are cheap, no MCMC). Pre-authorized lever
-    # (ruling 2026-07-03: "loadings are population params; score all rows").
-    N_FIT = int(L1B.get("n_fit_rows", 1500))
-    if Y.shape[0] > N_FIT:
-        rng = np.random.default_rng(SEED)
-        sel = rng.choice(Y.shape[0], size=N_FIT, replace=False)
-        Yf, se2f = Y[sel], se2[sel]
-    else:
-        Yf, se2f = Y, se2
-    print(f"[{tag}] factor fit: {Yf.shape[0]} of {Y.shape[0]} player-seasons "
-          f"(subsampled for the fit; all scored) x {Y.shape[1]} features, "
-          f"K={K}, anchors={[ANCHORS[k] for k in range(K)]}", flush=True)
+    # FULL-DATA fit, NO subsampling (ruling 2026-07-03: a subsampled fit
+    # disproportionately drops exactly the query/backtest players the engine
+    # targets, so it does not ship). The earlier wall was NOT the data size:
+    # the likelihood gradient is cheap and scales LINEARLY in rows (~6 us/row,
+    # ~36 ms on the full ~5.8k rotation player-seasons -- profiled). The wall
+    # was NUTS saturating the tree depth on a poorly-conditioned (correlated-
+    # loadings) posterior; the DENSE mass matrix in fit() cures the geometry
+    # and collapses the trajectory length, keeping exact NUTS and the real
+    # R-hat/ESS gates on all the data.
+    print(f"[{tag}] factor fit: ALL {Y.shape[0]} rotation player-seasons x "
+          f"{Y.shape[1]} features, K={K}, "
+          f"anchors={[ANCHORS[k] for k in range(K)]}", flush=True)
 
-    samples, health = fit(Yf, se2f, anchor_idx, tag)
+    samples, health = fit(Y, se2, anchor_idx, tag)
     passed = (health["worst_r_hat"] < GATES["max_r_hat"]
               and health["min_ess_bulk"] > GATES["min_ess_bulk"])
     print(f"HEALTH: worst R-hat {health['worst_r_hat']:.4f} "
@@ -248,19 +245,23 @@ def main() -> None:
 
     interp = []
     for k in range(K):
-        top = load[f"z{k}"].abs().sort_values(ascending=False).head(5)
+        col = load[f"z{k}"].sort_values(ascending=False)
+        pos = [(c, round(float(col[c]), 2)) for c in col.index if col[c] > 0.05][:5]
+        neg = [(c, round(float(col[c]), 2)) for c in col[::-1].index
+               if col[c] < -0.05][:5]
         interp.append({"factor": k, "anchor": ANCHORS[k],
                        "provisional_label": ANCHOR_LABELS[k],
-                       "top_features": [(c, round(float(load.loc[c, f'z{k}']), 2))
-                                        for c in top.index]})
+                       "top_positive_features": pos, "top_negative_features": neg})
     health["interpretability"] = interp
     (OUT_DIR / f"health_{tag}.json").write_text(json.dumps(health, indent=1))
 
-    print("\nTop-loading features per factor (provisional labels; naming is "
-          "Bobby's editorial call):", flush=True)
+    print("\nTop +/- loading features per factor (provisional labels; naming "
+          "is Bobby's editorial call):", flush=True)
     for it in interp:
-        feats = ", ".join(f"{c}{v:+.2f}" for c, v in it["top_features"])
-        print(f"  z{it['factor']} [{it['provisional_label']}] anchor={it['anchor']}: {feats}")
+        p_ = ", ".join(f"{c}{v:+.2f}" for c, v in it["top_positive_features"])
+        n_ = ", ".join(f"{c}{v:+.2f}" for c, v in it["top_negative_features"])
+        print(f"  z{it['factor']} [{it['provisional_label']}] anchor={it['anchor']}"
+              f"\n      +: {p_}\n      -: {n_}")
 
     if not passed:
         print("\nHEALTH GATE FAILED -> PARKING. skill_vectors NOT shipped. "
@@ -280,8 +281,29 @@ def main() -> None:
     ids["z_samples_shape"] = [list(Z.shape[1:])] * len(ids)
     ids.to_parquet(OUT_DIR / f"skill_vectors_{tag}.parquet")
     np.save(OUT_DIR / f"skill_vectors_{tag}_samples.npy", Z.astype(np.float32))
+
+    # exemplar player-seasons per factor (the naming aid Bobby asked for: a
+    # namable axis has coherent exemplars, a smear does not). Top/bottom 5
+    # by posterior-mean score, restricted to reliable rotation seasons.
+    zmean = Z.mean(1)                                    # (n, K)
+    label = (f.player_name + " " + f.season).tolist()
+    for it in interp:
+        k = it["factor"]
+        order = np.argsort(zmean[:, k])
+        it["exemplars_high"] = [(label[i], round(float(zmean[i, k]), 2))
+                                for i in order[::-1][:5]]
+        it["exemplars_low"] = [(label[i], round(float(zmean[i, k]), 2))
+                               for i in order[:5]]
+    (OUT_DIR / f"interpretability_{tag}.json").write_text(json.dumps(interp, indent=1))
+    print("\nExemplars per factor (naming aid):", flush=True)
+    for it in interp:
+        hi = ", ".join(f"{n} ({v:+.1f})" for n, v in it["exemplars_high"])
+        lo = ", ".join(f"{n} ({v:+.1f})" for n, v in it["exemplars_low"])
+        print(f"  z{it['factor']} [{it['provisional_label']}]"
+              f"\n      high: {hi}\n      low:  {lo}")
+
     (OUT_DIR / f"skill_vectors_{tag}.meta.json").write_text(json.dumps(meta, indent=1))
-    print(f"skill_vectors FROZEN: {Y.shape[0]} player-seasons x {Z.shape[1]} "
+    print(f"\nskill_vectors FROZEN: {Y.shape[0]} player-seasons x {Z.shape[1]} "
           f"draws x K={K} -> outputs/skill_vectors/ (key {key})", flush=True)
 
 

@@ -31,11 +31,11 @@ layer1b:
                                   # pre-logged P-K. skill_vectors ship ONLY after
                                   # the Bayesian health gates below pass at K=8.
   health_gates: {max_r_hat: 1.01, min_ess_bulk: 400}  # + anchor sign-stability
-  n_fit_rows: 1000
-  max_tree_depth: 6            # cap NUTS steps (perf; depth-7 saturated on CPU, 2026-07-03)              # fit loadings on a bounded row sample (population
+  dense_mass: true             # cures the correlated-loadings geometry (the real wall)
+  max_tree_depth: 10           # dense mass keeps trees shallow; generous cap (perf, 2026-07-03)
                                   # params); score all player-seasons post-hoc (perf, 2026-07-03)
-  num_warmup: 600
-  num_samples: 800
+  num_warmup: 1000
+  num_samples: 1000
   num_chains: 4
 
 layer2:

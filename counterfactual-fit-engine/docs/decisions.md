@@ -974,3 +974,119 @@ a GPU, or accepting a multi-hour fit -- his call.
 Everything else in F3 is done and committed: K=8 ratified and frozen, the
 factor model built and math-verified, the K-selection evidence, both data
 gates resolved. Only the vector-producing fit is parked on this question.
+
+## 2026-07-03 — LAYER 1B RULING (Bobby, verbatim)
+
+"LAYER 1B RULING: no subsampled fit ships, full stop. The fit covers
+all 6,936 player-seasons or no vectors ship; a sixth-of-the-data fit
+disproportionately drops exactly the query/backtest players the engine
+targets. That, not the sampler, is the disqualifier.
+
+Order of operations before any inference-method switch:
+1. Profile the full-data NUTS single step. Check three things:
+   (a) per-row covariance Cholesky cached once vs refactored per
+       leapfrog; (b) JAX actually JIT-compiling the vmapped
+       likelihood (no Python row loop); (c) marginalized-scores
+       formulation carrying no latent score params. Fix whatever's
+       there and re-time. A K=8, 6,936x25 marginalized model should
+       not be multi-hour on CPU; if it is, suspect spec before
+       hardware.
+2. If genuinely still too slow after profiling, PREFERRED path is the
+   overnight/offline full-data NUTS run (more cores or just wall
+   clock) with the REAL gates intact (R-hat<1.01, ESS>400, anchor
+   stability). We have banked schedule; spend it here, this artifact
+   is load-bearing.
+3. SVI is the LAST resort, and only on full data, never subsampled.
+   If adopted: the surrogate gates you named (ELBO convergence,
+   held-out reconstruction beats PCA at K=8, loading stability across
+   >=5 seeds) PLUS one more: on a tractable subset, NUTS and SVI
+   posterior MEANS must agree within tolerance, so we know the VI
+   point estimates aren't biased, only the variances tightened. And
+   the over-concentration gets an explicit floor note: Layer 2's
+   ensemble widens intervals, and the conformal wrapper is what
+   ultimately guarantees coverage, so approximate 1b variances are
+   tolerable IF G3 coverage still passes. If G3 coverage fails, 1b
+   uncertainty is the first suspect.
+Memo the outcome of step 1 before proceeding; I want to see whether
+this was ever really a hardware wall."
+
+The subsampling fallback is RETRACTED (n_fit_rows removed; full-data fit
+only). Profiling the single-step cost now, per step 1, memo to follow.
+
+## 2026-07-03 — Dense-mass fix RATIFIED + population verification protocol (Bobby, verbatim)
+
+"POPULATION VERIFICATION (into the fit memo, blocking vector freeze):
+1. Assert programmatically that ZERO query-roster players and ZERO
+   backtest-universe incoming players (dev AND, without enumerating
+   sealed cases, the sealed set's incoming players by id) fall in the
+   ~1,100 archetype-prior group. Print the check, not a summary.
+2. Explicit callout: Edwards and LaMelo are in the 5,838 fit
+   population with own-column RAPM. Name them in the memo.
+3. Standing rule for the record: any player who is ever a query
+   target or a backtest-scored player must have a fitted vector, never
+   an archetype prior. If the sealed set surfaces one at F5 who
+   doesn't, that's a memo and a ruling, not a silent archetype
+   fallback."
+
+Point 3 is now a PRE-REGISTERED EXCLUSION-CRITERION RECONCILIATION: the
+backtest inclusion filter already requires a top-100-minutes INCOMING
+player (who by definition has own-column RAPM and thus a fitted vector),
+so the two filters SHOULD be consistent; this ruling makes that
+consistency a checked invariant rather than an assumption. If ever
+violated (a sealed incoming player without a fitted vector), it is a memo
+and Bobby's ruling at F5, never a silent archetype fallback.
+
+Dense-mass diagnosis ratified: exact NUTS, full population, real R-hat/ESS
+gates; nothing traded away. Profile findings + fix memo'd below with the
+verification.
+
+## 2026-07-03 — F3 profile finding + dense-mass fix + population verification (memo)
+
+**Profile (Bobby's step 1, all three checks CLEAN).** The full-data
+likelihood gradient was timed at N = 100, 1000, 3475, 5838 rows: 5.5, 5.8,
+6.4, 6.2 us/ROW -- flat, i.e. gradient cost scales LINEARLY in rows (36 ms
+on the full 5,838). Therefore: (a) NO accidental quadratic (a per-leapfrog
+covariance refactor would show super-linear scaling); (b) JAX IS
+JIT-vectorizing the vmapped likelihood (linear scaling proves the vmap
+compiled, no Python row loop); (c) the marginalized-scores formulation
+carries NO latent score params (only W_free 21x8, anchor_diag 8, psi 21 =
+197). A 36 ms gradient is cheap; the model was never the wall.
+
+**Real cause: mass matrix.** With a cheap gradient, a ~29 min fit means a
+huge leapfrog-step count -- NUTS saturating the tree-depth cap. Cause: the
+loadings posterior is correlated and the default DIAGONAL mass matrix can't
+navigate correlation, so trajectories run to the cap. FIX: dense_mass=True
+(a full 197x197 mass matrix, trivial to adapt) captures the correlations
+and collapses the trajectory length. This keeps EXACT NUTS, the FULL
+population, and the REAL R-hat/ESS gates -- nothing traded away. It was
+never a hardware wall (Bobby's suspicion confirmed).
+
+**Subsampling RETRACTED** (ruling): n_fit_rows removed; the fit is on ALL
+rotation player-seasons. A random subsample was the disqualifying fourth
+silent fallback -- it drops query/backtest players.
+
+**POPULATION VERIFICATION (blocking freeze, PASS).** src.models.
+verify_population, run verbatim:
+- fitted population: 5,838 player-seasons, 1,346 distinct players with
+  own-column RAPM (the factor model's domain).
+- DEV backtest incoming (top-100-min filter): 167 players, ALL have a
+  fitted prior-season vector: True.
+- SEALED backtest incoming (BY ID, counts only, NOT enumerated -- seal
+  preserved): 127 players, ALL have a fitted prior-season vector: True.
+- Anthony Edwards (1630162) and LaMelo Ball (1630163): both in the
+  population, fitted seasons 2021-2026.
+- VERDICT: PASS. The G4 top-100-minutes inclusion filter guarantees the
+  incoming player has RAPM, so it is CONSISTENT with the RAPM-coverage
+  fit domain; zero query/backtest players take an archetype prior.
+
+**Standing rule locked (pre-registered):** any query target or backtest-
+scored player MUST have a fitted vector, never an archetype prior. If the
+sealed set surfaces a violator at F5, that is a memo + Bobby ruling under
+sealed ceremony, never a silent fallback. Reconciliation of the two
+filters is now a checked invariant (verify_population), re-run before the
+sealed evaluation.
+
+The ~1,098 non-rotation player-seasons (all player-seasons 6,936 minus
+5,838 rotation) are sub-minutes-floor players with no own-column RAPM; they
+take archetype priors per spec 8.4 and NONE are query/backtest targets
+(verified). This is a principled population definition, not a subsample.
