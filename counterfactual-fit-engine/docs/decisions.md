@@ -1175,3 +1175,39 @@ BLOCKING PROTOCOL, no exceptions:
 Standing rule added to house standards: any NUTS config change is
 verified by a short leapfrog probe BEFORE any full run depends on it.
 An unverified sampler assumption is a parked risk, not a green light."
+
+## 2026-07-05 — PATH A NEGATIVE RESULT (probe): funnel was not the cause; rotational under-identification confirmed
+
+Path A blocking probe (depth-6, 2 chains, 250+100, diagonal mass, after the
+softplus reparam of psi/anchor_diag):
+  PATHA_RESULT: mean_leapfrog 63.0 | median 63 | max 63 | frac_at_cap 100%
+                | worst_Rhat 2.022 | min_ESS 3 | 2585s
+IDENTICAL 63/63 saturation to the pre-fix measurement -> Path A did NOT
+help. The scale funnel was NOT the cause. And the health numbers are the
+smoking gun: worst_Rhat 2.02 (gate 1.01) with min_ESS 3 (gate 400) mean the
+2 chains DID NOT MIX AT ALL -- they settled on different points. That is the
+textbook signature of ROTATIONAL UNDER-IDENTIFICATION: the marginalized
+likelihood sees only WW^T, which is invariant under W -> W R for any
+orthogonal R, so the posterior has FLAT RIDGES (whole rotation orbits of
+equal density). The 8 pure-marker anchors pin only the K diagonal entries;
+the off-anchor loadings are free to rotate along those ridges. NUTS
+saturates wandering the ridge (63/63) and different chains land on
+different rotations (R-hat 2.0). No mass matrix and no scale reparam can fix
+a flat ridge; only IDENTIFICATION can.
+
+VALUE OF THE PROBE PROTOCOL (first use): caught this in ~43 min (2-chain
+probe) instead of another multi-hour full-fit wall, and the R-hat/ESS from
+the probe pinpointed the cause. The standing rule earned its keep
+immediately.
+
+PARKED per protocol (no long fit launched). RECOMMEND Path B, awaiting
+Bobby's ok (changes how W is parametrized, near the model boundary):
+lower-triangular W with a positive diagonal (Geweke-Zhou factor-analysis
+identification) -- W[i,k]=0 for k>i, W[i,i]>0. This removes the rotational
+freedom ENTIRELY (a lower-triangular positive-diagonal loading matrix is a
+unique representative of each WW^T orbit), so the flat ridges collapse to
+points and NUTS should mix. The pure-marker ANCHORS are then redundant for
+identification and can be dropped or kept as interpretation labels; the
+interpretability naming still works from the fitted loadings. Path B is
+gated by a fresh leapfrog probe before any full fit (standing rule). No SVI,
+no subsample, K frozen at 8.
