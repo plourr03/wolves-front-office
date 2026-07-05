@@ -1,5 +1,13 @@
 # July 6 Runbook — the five buttons, in order
 
+> **OPEN BEFORE STEP 3 (found on release eve, 2026-07-05):** P1's provisional
+> baseline is ambiguous — the prediction log says .167/.422 (04:02 run), the
+> artifact + this runbook say .170/.421 (18:16 run, post-pick_ledger). Both
+> pre-M2. Needs your one-word ruling (A/B/C) before the public P1 grade.
+> Memo: `outputs/validation/p1_baseline_decision.md`. Nothing before Step 4
+> depends on it; predictions.md and the Step-4 number are UNCHANGED pending
+> your call.
+
 Everything below is staged, gated, and tested. Your part is three human
 items (marked BOBBY); the rest is commands. If anything goes red, the house
 rule applies: decision memo, park it, keep going on what doesn't depend on
@@ -77,7 +85,9 @@ Output: `outputs/validation/model_b_hazard_M2_FINAL.md`.
 
 **Grade P1 here** (docs/predictions.md): the final 2033 posterior should
 come out lighter-tailed than provisional. The grade itself lands after
-Step 4's slot distribution exists.
+Step 4's slot distribution exists. FIRST settle the baseline ruling (see
+the note at the top + `p1_baseline_decision.md`): .167/.422 as-logged vs
+.170/.421 re-pinned. Direction call is unaffected either way.
 
 ## Step 4 — Final Engine D run + automatic checks
 
