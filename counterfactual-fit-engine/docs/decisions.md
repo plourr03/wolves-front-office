@@ -1295,3 +1295,37 @@ OPTIONS for Bobby (his call, per the ceiling):
      pre-registered v2 one-stage structure -- but these are F3 design
      decisions for Bobby, not in-session.
 Not shipping vectors. Awaiting Bobby's path choice.
+
+## 2026-07-05 — CORRECTION + Path A disambiguating probe (Bobby, verbatim)
+
+CORRECTION to the prior park memo (Bobby, and correct): the "three schemes,
+same pathology -> multimodality" conclusion was OVER-STATED. All three
+probes shared ONE confound -- ~250 warmup against tree-cap-saturated
+trajectories, so NO config could have shown mixing even if healthy. You
+cannot diagnose multimodality with a probe that never explores. Multimodality
+is a HYPOTHESIS, not a finding. And dense mass failing pre-B was expected (a
+flat rotation ridge is unpreconditionable); Path B REMOVED the ridge, so on
+the triangular model dense mass targets ordinary LINEAR correlation for the
+first time. Triangular+dense has never been tried; pairing them COMPLETES
+the third attempt (not a fourth), and stops at the tree-cap ceiling.
+
+RULING (verbatim): "LAYER 1B: Path A, scoped as the disambiguating probe,
+not a fit. Triangular (Path B's identified model) + DENSE mass, one probe.
+Critical change from prior probes: longer warmup. The saturation confound
+means short warmup can't distinguish healthy-but-slow from multimodal. Run
+>= 1000 warmup, 2 chains, and RAISE the tree-depth cap to 10 for this probe
+so trajectories aren't artificially capped while the dense mass adapts. Read
+TWO things: leapfrog count: collapses = dense mass on the de-ridged model
+was the answer all along; still capped = geometry genuinely hard. R-hat/ESS
+AFTER real warmup: mixing now = it was under-exploration, not multimodality;
+still split = multimodality confirmed, and THEN path C (FA/PCA warm-start or
+tempering) is the justified next move. This is the honest test the three
+short probes couldn't be. If it's slow on this CPU, let it run offline
+overnight; it's one probe and the answer settles the whole question. Ceiling
+still holds: if this fails on genuine multimodality grounds, next move is C
+or offline hardware, not more in-session tries. K frozen at 8."
+
+HOUSE STANDARD addition (Bobby): match the probe length to the QUANTITY
+being measured, not to a fixed idea of cheap. Leapfrog count shows up in 250
+steps; mixing does not. A cheap probe that answers the wrong question is
+worse than a slow probe that answers the right one.
