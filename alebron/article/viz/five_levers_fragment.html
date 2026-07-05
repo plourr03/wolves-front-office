@@ -1,0 +1,165 @@
+<div id="viz-five-levers">
+  <div class="fl-chip" role="status">
+    <span class="fl-chip-dot"></span>
+    <span class="fl-chip-label">Where the bet is won or lost</span>
+    <span class="fl-chip-sep">·</span>
+    <span class="fl-chip-sub">ranked by influence</span>
+  </div>
+  <p class="fl-caption" aria-live="polite"></p>
+  <div class="fl-stage">
+    <div class="fl-tooltip" role="tooltip">
+      <div class="fl-tip-head"></div>
+      <div class="fl-tip-desc"></div>
+    </div>
+  </div>
+  <div class="fl-hero">
+    <div class="fl-hero-line">
+      <span class="fl-hero-num">0</span>
+      <span class="fl-hero-unit">of the five levers points up</span>
+    </div>
+    <div class="fl-hero-label">And it rides on a choice, not a measurement</div>
+    <button class="fl-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="fl-foot">Ranked by how much each lever moves the outcome, not by which way it points. Bar length is that rank, not a measured percentage. The one that points up is Edwards off the ball, and it rides on a choice. The biggest of all is the one no one can call.</p>
+  <div class="fl-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-five-levers, #viz-five-levers * { touch-action: manipulation; }
+  #viz-five-levers { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-five-levers .fl-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--text-tertiary); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-five-levers .fl-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary); }
+  #viz-five-levers .fl-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-five-levers .fl-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-five-levers .fl-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-five-levers .fl-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; height: 280px; overflow: hidden; }
+  #viz-five-levers.is-compact .fl-stage { height: 300px; }
+  #viz-five-levers .fl-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-five-levers .fl-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-five-levers .fl-tooltip.is-on { opacity: 1; }
+  #viz-five-levers .fl-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-five-levers .fl-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-five-levers .fl-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-five-levers .fl-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-five-levers .fl-hero-num { font: 800 60px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-five-levers.is-landed .fl-hero-num { color: var(--accent-hover); }
+  #viz-five-levers.is-compact .fl-hero-num { font-size: 46px; }
+  #viz-five-levers .fl-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 150px; }
+  #viz-five-levers .fl-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-five-levers .fl-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-five-levers .fl-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-five-levers .fl-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-five-levers .fl-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-five-levers .fl-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Ordinal ranking of influence (rank 5 = biggest swing). Direction and the
+  // key fact are from the article's lever section. Bar length is a RANK, not a
+  // measured percentage, and the chart says so.
+  var LEVERS = [
+    { name: "Defense vs the playoff scheme", rank: 5, dir: "uncertain", full: "bottom-third vs the pick and roll, almost no playoff sample", short: "no playoff sample to judge it" },
+    { name: "LaMelo's availability", rank: 4, dir: "down", full: "games-played center near 49, two-humped", short: "games center near 49" },
+    { name: "Edwards off the ball", rank: 3, dir: "up", full: "elite catch and shoot, but it rides on a choice", short: "rides on a choice" },
+    { name: "Frontcourt depth", rank: 2, dir: "down", full: "a 19-year-old behind Gobert, only cheap help left", short: "only cheap help left" },
+    { name: "The backcourt collision", rank: 1, dir: "small", full: "every comparable pair ran a fine offense", short: "every comp pair was fine" }
+  ];
+  var PALETTE = { uncertain: "var(--text-tertiary)", down: "var(--status-error)", up: "var(--accent-default)", small: "var(--border-default)" };
+  var DIRLABEL = { uncertain: "CAN'T CALL", down: "LEANS DOWN", up: "LEANS UP", small: "BARELY MOVES" };
+  var DATA = LEVERS.slice().sort(function (a, b) { return b.rank - a.rank; });
+  var CAPTIONS = [
+    "Five levers, ranked not by direction but by how much they move the outcome.",
+    "The biggest swing is defense, and it is the one no one can call.",
+    "Two knowable levers point down: availability and depth.",
+    "Only one points up, Edwards off the ball, and it rides on a choice."
+  ];
+  var BARS_AT = 500, BAR_STAG = 240, BAR_MS = 600;
+  var CAP1_AT = 700, CAP2_AT = 1900, CAP3_AT = 3100, HERO_MS = 700, REPLAY_AT = 4000;
+
+  var root = d3.select("#viz-five-levers");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".fl-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function tickHero(to, duration) { var node = root.select(".fl-hero-num").node(); if (reduceMotion || duration <= 0) { node.textContent = String(to); return; } d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = String(Math.round(interp(t))); }; }); }
+  function showTooltip(head, desc, cx, cy) { var tip = root.select(".fl-tooltip"); tip.select(".fl-tip-head").text(head); tip.select(".fl-tip-desc").text(desc); tip.classed("is-on", true); var tipEl = tip.node(), stageEl = root.select(".fl-stage").node(), sw = stageEl.clientWidth, sh = stageEl.clientHeight; var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight; if (x + tw > sw - 8) x = cx - tw - 12; if (y + th > sh - 8) y = sh - th - 8; if (x < 4) x = 4; if (y < 4) y = 4; tipEl.style.left = x + "px"; tipEl.style.top = y + "px"; }
+  function hideTooltip() { root.select(".fl-tooltip").classed("is-on", false); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".fl-stage"); stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640, width = Math.max(320, Math.min(720, rawW)), compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: 14, right: compact ? 84 : 104, top: 12, bottom: 26 };
+    var usableH = H - pad.top - pad.bottom, rowH = usableH / DATA.length;
+    var x = d3.scaleLinear().domain([0, 5]).range([0, W - pad.left - pad.right]);
+    var barH = compact ? 15 : 17;
+
+    var barSel = [];
+    DATA.forEach(function (d, i) {
+      var top = pad.top + i * rowH;
+      var barY = top + (rowH - barH) / 2 + 4;
+      var full = x(d.rank);
+      svg.append("text").attr("x", pad.left).attr("y", top + 14).style("fill", "var(--text-primary)").style("font", "600 12.5px var(--family-sans)").text(d.name);
+      var bar = svg.append("rect").attr("x", pad.left).attr("y", barY).attr("height", barH).attr("rx", 4).style("fill", PALETTE[d.dir]).style("cursor", "pointer").attr("width", reduceMotion ? full : 0);
+      bar.on("mouseenter mousemove", function () { d3.select(this).attr("height", barH + 4).attr("y", barY - 2); showTooltip(d.name, DIRLABEL[d.dir] + ". " + d.full + ".", pad.left + full, barY); })
+         .on("mouseleave", function () { d3.select(this).attr("height", barH).attr("y", barY); hideTooltip(); });
+      bar.append("title").text(d.name + ", " + DIRLABEL[d.dir]);
+      var tag = svg.append("text").attr("x", pad.left + full + 8).attr("y", barY + barH / 2).attr("dy", "0.35em").style("fill", d.dir === "small" ? "var(--text-tertiary)" : PALETTE[d.dir]).style("font", "700 9.5px var(--family-mono)").style("letter-spacing", ".03em").style("opacity", reduceMotion ? 1 : 0).text(DIRLABEL[d.dir]);
+      svg.append("text").attr("x", pad.left).attr("y", barY + barH + 15).style("fill", "var(--text-tertiary)").style("font", "10.5px var(--family-sans)").text(compact ? d.short : d.full);
+      barSel.push({ d: d, bar: bar, tag: tag, full: full });
+    });
+
+    svg.append("text").attr("x", pad.left).attr("y", H - 8).style("fill", "var(--text-tertiary)").style("font", "9px var(--family-mono)").style("letter-spacing", ".03em").text("BAR LENGTH = RANK OF INFLUENCE, NOT A PERCENTAGE");
+    svg.append("text").attr("x", W - 6).attr("y", H - 6).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { barSel: barSel };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.barSel.forEach(function (s) { s.bar.attr("width", s.full); s.tag.style("opacity", 1); });
+    setCaption(3); tickHero(1, 0); root.classed("is-landed", true); root.select(".fl-replay").classed("is-shown", true);
+  }
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".fl-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    ctx.barSel.forEach(function (s) { s.bar.attr("width", 0); s.tag.style("opacity", 0); });
+    root.select(".fl-hero-num").text("0");
+    setCaption(0);
+    if (__resetOnly) return;
+    ctx.barSel.forEach(function (s, i) {
+      s.bar.transition().delay(BARS_AT + i * BAR_STAG).duration(BAR_MS).ease(d3.easeCubicOut).attr("width", s.full);
+      s.tag.transition().delay(BARS_AT + i * BAR_STAG + BAR_MS - 200).duration(250).style("opacity", 1);
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); root.classed("is-landed", true); tickHero(1, HERO_MS); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".fl-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".fl-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else { __idle(); if ("IntersectionObserver" in window) { var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] }); __io.observe(rootNode); } else { __startOnce(); } }
+  if (window.ResizeObserver) { var resizeTimer = null; var ro = new ResizeObserver(function () { if (resizeTimer) clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150); }); ro.observe(rootNode); }
+})();
+</script>

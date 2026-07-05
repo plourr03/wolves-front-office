@@ -1,0 +1,88 @@
+{
+  "n_sims": 20000,
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "beta": 1.067,
+  "gate_note": "TITLE % GATED on identifiability (same engine, same noise floor as the LaMelo project). The CRN-paired delta and Q2 ordinals are field-robust and reported.",
+  "field_2026_updates": {
+    "BOS": -2.0,
+    "PHI": 2.0,
+    "LAC": -3.0,
+    "TOR": 2.5,
+    "POR": 2.0,
+    "MEM": -1.5,
+    "LAL": -1.0
+  },
+  "fields": {
+    "calibrated_primary": {
+      "forks": {
+        "rapm": {
+          "min_runitback_net": 2.18,
+          "min_baseline_postlamelo_net": 2.183,
+          "min_with_lebron_net": 3.127,
+          "deflated_lebron_delta": 0.944,
+          "baseline_title": 0.026580000000000003,
+          "with_lebron_title": 0.03901,
+          "with_lebron_cf": 0.19556,
+          "with_lebron_finals": 0.08763,
+          "title_delta_pp": 1.243,
+          "title_delta_mc_sd_pp": 0.13515176654413374,
+          "cf_delta_pp": 4.428999999999999
+        },
+        "box": {
+          "min_runitback_net": 2.18,
+          "min_baseline_postlamelo_net": 3.008,
+          "min_with_lebron_net": 4.283,
+          "deflated_lebron_delta": 1.274,
+          "baseline_title": 0.03916000000000001,
+          "with_lebron_title": 0.06105000000000001,
+          "with_lebron_cf": 0.26280000000000003,
+          "with_lebron_finals": 0.12206999999999998,
+          "title_delta_pp": 2.1889999999999996,
+          "title_delta_mc_sd_pp": 0.1337684566704723,
+          "cf_delta_pp": 7.021000000000003
+        }
+      }
+    },
+    "field_2026_updated_sensitivity": {
+      "forks": {
+        "rapm": {
+          "min_runitback_net": 2.18,
+          "min_baseline_postlamelo_net": 2.183,
+          "min_with_lebron_net": 3.127,
+          "deflated_lebron_delta": 0.944,
+          "baseline_title": 0.028229999999999998,
+          "with_lebron_title": 0.040290000000000006,
+          "with_lebron_cf": 0.19812,
+          "with_lebron_finals": 0.08862,
+          "title_delta_pp": 1.206,
+          "title_delta_mc_sd_pp": 0.05122499389946273,
+          "cf_delta_pp": 4.082
+        },
+        "box": {
+          "min_runitback_net": 2.18,
+          "min_baseline_postlamelo_net": 3.008,
+          "min_with_lebron_net": 4.283,
+          "deflated_lebron_delta": 1.274,
+          "baseline_title": 0.03968,
+          "with_lebron_title": 0.06117,
+          "with_lebron_cf": 0.25888,
+          "with_lebron_finals": 0.12021,
+          "title_delta_pp": 2.149,
+          "title_delta_mc_sd_pp": 0.08169455306200041,
+          "cf_delta_pp": 6.65
+        }
+      }
+    }
+  },
+  "title_delta_structural_band_pp_primary": [
+    1.243,
+    2.189
+  ],
+  "band_note": "Inter-fork point spread on the primary field ONLY. Does NOT include the retention x availability fork (sweep_lebron_availability.py) or MC/parametric uncertainty. The single-season noise (sigma_t ~ 5.5) dwarfs a ~+0.9 net add, so the title delta is NOT identifiable to a point regardless of field."
+}

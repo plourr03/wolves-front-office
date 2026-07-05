@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The LaMelo Bet, preview launcher</title>
+<style>
+  :root {
+    --accent:#00843D; --accent-hover:#00A04A; --bg-surface:#0E0E0E;
+    --text:#fff; --text-2:rgba(255,255,255,.72); --text-3:rgba(255,255,255,.48);
+    --border:rgba(255,255,255,.08);
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  body { margin:0; padding:48px 16px 80px; background:#000; color:var(--text); font-family:var(--sans); }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1 { font-size:24px; margin:0 0 6px; }
+  p.lead { color:var(--text-2); font-size:14px; line-height:1.6; margin:0 0 4px; }
+  p.note { color:var(--text-3); font-size:12.5px; line-height:1.55; margin:0 0 28px; }
+  a.card { display:block; text-decoration:none; background:var(--bg-surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:12px; transition:border-color .15s ease, transform .15s ease; }
+  a.card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .sec { font:700 11px var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--text-3); }
+  .bonus { color:var(--accent-hover); }
+  .title { color:var(--text); font-size:17px; font-weight:600; margin:4px 0 2px; }
+  .sub { color:var(--text-2); font-size:13px; line-height:1.45; }
+  .files { color:var(--text-3); font:11px var(--mono); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>The LaMelo Bet, preview launcher</h1>
+  <p class="lead">Nine charts in the fragment plus preview pattern. Click a card to open its preview harness.</p>
+  <p class="note">This launcher is for local review only. Each chart's publishable artifact is its <code>*_fragment.html</code> (host supplies D3 and the design tokens). Drop <code>{{viz:id}}</code> in the article to place one.</p>
+
+  <a class="card" href="price_ledger_preview.html"><div class="sec">The price</div><div class="title">What left, and what came back</div><div class="sub">Asset ledger, hero is the second-apron hard cap.</div><div class="files">price_ledger_fragment.html</div></a>
+  <a class="card" href="contention_window_preview.html"><div class="sec">It's not a one-year shot</div><div class="title">The core is locked young</div><div class="sub">Contract window through 2028-29, picks land after.</div><div class="files">contention_window_fragment.html</div></a>
+  <a class="card" href="count_two_ways_preview.html"><div class="sec">What LaMelo actually is</div><div class="title">Two ways of counting the same player</div><div class="sub">Box vs scoreboard dumbbells, the Reid gap is the hero.</div><div class="files">count_two_ways_fragment.html</div></a>
+  <a class="card" href="lamelo_yardstick_preview.html"><div class="sec">What LaMelo actually is <span class="bonus">&middot; bonus</span></div><div class="title">Elite creator, leaky defender</div><div class="sub">Offense and defense split, the transport haircut.</div><div class="files">lamelo_yardstick_fragment.html</div></a>
+  <a class="card" href="trade_delta_cloud_preview.html"><div class="sec">The number that wouldn't come</div><div class="title">Every honest read sits at or below zero</div><div class="sub">Six swept reads, the cloud straddling zero.</div><div class="files">trade_delta_cloud_fragment.html</div></a>
+  <a class="card" href="five_levers_preview.html"><div class="sec">Where the bet is won or lost</div><div class="title">Five levers, ranked by influence</div><div class="sub">Direction and rank, only one points up.</div><div class="files">five_levers_fragment.html</div></a>
+  <a class="card" href="lamelo_availability_preview.html"><div class="sec">Where the bet is won or lost <span class="bonus">&middot; bonus</span></div><div class="title">The two-humped career</div><div class="sub">Games by season, the model's center vs my bet.</div><div class="files">lamelo_availability_fragment.html</div></a>
+  <a class="card" href="season_distribution_preview.html"><div class="sec">What Connelly actually bought</div><div class="title">The bet, drawn to scale</div><div class="sub">20,000 seasons, the green reach-CF tail.</div><div class="files">season_distribution_fragment.html</div></a>
+  <a class="card" href="prediction_log_preview.html"><div class="sec">What this leaves us with</div><div class="title">Logged cold, for the season to grade</div><div class="sub">Four predictions, my bets vs the model's read.</div><div class="files">prediction_log_fragment.html</div></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "purpose": "SHARED Gobert-defensive estimate, computed ONCE in Lever 3, fed into BOTH Lever 3 (rim save behind LaMelo) and Lever 4 (non-Gobert cliff). Correlated-skepticism guard: do not re-estimate independently in Lever 4.",
+  "as_of": "2026-06-26",
+  "rim_deterrence": {
+    "gobert_rim_fgpct_allowed_recent": 0.527,
+    "gobert_rim_fgpct_allowed_note": "2023-24..2025-26 RS: 0.520 / 0.519 / 0.542 (mild age creep)",
+    "league_rim_fgpct_baseline": 0.673,
+    "rim_suppression_pp": 0.146,
+    "volume": "elite, ~450-560 rim FGA defended per RS season",
+    "playoff_rim_fgpct_noisy": "0.485-0.639 across runs; small samples; 2025-26 PO 0.639 is the worst, a possible spread-PnR hint but not callable"
+  },
+  "overall_defensive_value_fork": {
+    "rapm_def": -6.52,
+    "box_def_prior": -1.02,
+    "reconciliation": "The rim-FG% tracking stat is a BOX-INDEPENDENT corroboration that Gobert's defensive value is LARGE (0.527 vs 0.673 league = elite, high-volume). It supports the RAPM end of the fork and shows the box prior (-1.02) UNDER-rates him, because his deterrence is invisible to box stats but visible in opponent rim FG% allowed. So the shared estimate leans toward the RAPM end, which TIGHTENS the fork in Gobert's favor for both levers."
+  },
+  "shared_use": "Lever 3 uses rim_suppression_pp as the mitigation behind LaMelo. Lever 4 uses the overall_defensive_value (leaning RAPM-ward per the rim corroboration) as the value lost in non-Gobert minutes. The SAME uncertainty is priced once here, not twice."
+}

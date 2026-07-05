@@ -1,0 +1,156 @@
+{
+  "as_of": "2026-07-03",
+  "provenance": "Verified via a 9-agent fan-out web research workflow (6 finders + 3 adversarial verifiers) run 2026-07-03. Every fact carried a source URL and the three load-bearing slices (LeBron status, Jaylen Brown trade, Wolves roster) were independently re-checked. Confidence tags are the verifier's.",
+  "caveat": "Free agency opened 2026-07-01; many terms were reported/agreed but not officially executed at the snapshot. Dollar figures from single aggregators are medium-confidence. This digest is the CURRENT FIELD the Q2 sim runs against; the CRN-paired LeBron delta is field-robust, so field uncertainty mostly moves absolute odds, not the delta.",
+  "lebron": {
+    "status": "UNRESTRICTED FREE AGENT (confirmed high). Told Lakers (via agent Rich Paul, to ESPN/Shams) he will 'play elsewhere' in 2026-27; did not re-sign or extend. 2025-26 was the final year of the $52.6M player option he exercised.",
+    "age": "Born 1984-12-30. Age 41 for the 2026 offseason and start of 2026-27; turns 42 on 2026-12-30. (Task premise 'turns 41' is off by one; he plays 2026-27 at 41 heading to 42.) 24th season, unprecedented.",
+    "season_2025_26": "Missed the first 14 games with right-side sciatica (offseason workout injury); debuted in November vs Utah. ~60 GP, ~20.9 / 6.1 / 7.2 on .515/.317/.737 (medium confidence on exact decimals).",
+    "motivation": "Wants 'meaningful, competitive basketball' (ESPN, confirmed). 'Happiness over money' is a secondary-outlet framing, not a confirmed quote. Has NOT retired; undecided whether 2026-27 is his last.",
+    "contract_tools_for_a_new_team": "Cap-space teams: up to a max. Capped-out contenders: exceptions or the minimum only. Taxpayer MLE ~$6.064M, non-taxpayer MLE ~$15.044M, room exception ~$9.366M, vet minimum (10+ yr) full $3,876,529 / cap hit $2,449,421.",
+    "teams_linked": "Warriors (reported pursuit, high), Cavaliers, Heat; secondary speculation incl. Knicks, 76ers, Celtics, TIMBERWOLVES, Nuggets (analyst speculation, not confirmed mutual interest).",
+    "impact_anchor": "player_impact.csv id 2544: RAPM off -0.18, def -1.45 -> net +1.27 (sd 1.5); box off +1.32, def -0.21 -> net +1.53. Reliable=TRUE (28,286 poss)."
+  },
+  "cap_2026_27": {
+    "salary_cap": 164961000,
+    "luxury_tax": 200428000,
+    "first_apron": 209015000,
+    "second_apron": 221686000,
+    "salary_floor": 148465000,
+    "taxpayer_mle_y1": 6064000,
+    "nontaxpayer_mle_y1": 15044000,
+    "room_exception_y1": 9366000,
+    "biannual_y1": 5477000,
+    "vet_min_10yr_full": 3876529,
+    "vet_min_10yr_cap_hit_1yr_deal": 2449421,
+    "min_scale": {
+      "0": 1357763,
+      "1": 2185116,
+      "2": 2449421,
+      "3": 2537526,
+      "4": 2625627,
+      "5": 2845883,
+      "6": 3066143,
+      "7": 3286399,
+      "8": 3506659,
+      "9": 3524115,
+      "10+": 3876529
+    },
+    "second_apron_hardcap_rule": "A team hard-capped at the second apron may add outside free agents essentially only on veteran-minimum contracts; it cannot spend past the second apron for any reason. The taxpayer MLE remains technically usable only if it fits UNDER the hard cap. Source: hoopsrumors 2026-27 MLE/min values; NBA.com salary-cap release."
+  },
+  "wolves_confirmed": {
+    "lamelo_trade": "Ball + Josh Green from CHA for Naz Reid + 2033 unprotected 1st + 2028/29/30 first swaps + 2029/32/33 seconds. Aggregation hard-caps MIN at the second apron.",
+    "randle_trade": "Randle + No. 28 to Brooklyn (3-team), MIN gets No. 33; salary-shed to fund Ayo.",
+    "ayo_resign": "5yr/$112M, Y5 player option (~$19M y1).",
+    "clark_resign": "3yr/~$10M (RFA, finalized 2026-06-27).",
+    "bones_resign": "1yr/~$2.9M vet min (2026-06-30).",
+    "draft": "No. 33 Isaiah Evans (Duke wing shooter); also Rocco Zikarsky (45), Trey Kaufman-Renn (59).",
+    "departures": "Naz Reid (traded), Julius Randle (traded), Julian Phillips (option declined), Kyle Anderson (to TOR).",
+    "divincenzo_note": "Research lists DiVincenzo in the projected 2026-27 core (recovered); the inherited LaMelo tower assumed DiVincenzo OUT for 2026-27 (Achilles torn in a 2026 playoff game vs Denver). This is a FIELD DISCREPANCY carried forward unchanged for consistency with the baseline; it affects MIN's absolute level, not the CRN-paired LeBron delta. Flagged, not silently resolved.",
+    "hardcap_room": "~$9-10M under the second apron post-trade with ~3-4 minimum spots to fill (Clark, Bones, minimums)."
+  },
+  "field_moves_material_to_the_title_race": [
+    {
+      "team": "BOS",
+      "change": "Jaylen Brown OUT (to PHI) for Paul George (36) + picks; Tatum retained ($58.5M) rehabbing Achilles; added Mitchell Robinson (3/$47.4M), Mike Conley (min). NET: clearly worse/older than the 2025-26 roster still encoded in the field.",
+      "direction": "down",
+      "confidence": "high"
+    },
+    {
+      "team": "PHI",
+      "change": "Jaylen Brown IN (Brown+Maxey+Embiid+Edgecombe), Paul George OUT; added Dean Wade (4/$39M), re-signed Simons.",
+      "direction": "up",
+      "confidence": "high"
+    },
+    {
+      "team": "MIA",
+      "change": "Giannis + Bobby Portis IN from MIL for Herro/Ware/Jaquez/Jakucionis + picks; re-signed Wiggins (3/$64M). Already encoded in field as MIA+Giannis.",
+      "direction": "up (in field)",
+      "confidence": "high"
+    },
+    {
+      "team": "MIL",
+      "change": "Giannis OUT; youth rebuild (~$33M room, Dieng 3/$17.5M). Field proxy-removal already docks Giannis.",
+      "direction": "down (in field)",
+      "confidence": "high"
+    },
+    {
+      "team": "LAC",
+      "change": "Kawhi Leonard OUT (to TOR) for Brandon Ingram + Gradey Dick + picks; blew up the Kawhi/PG era.",
+      "direction": "down",
+      "confidence": "high"
+    },
+    {
+      "team": "TOR",
+      "change": "Kawhi Leonard IN (+ Kyle Anderson from MIN).",
+      "direction": "up",
+      "confidence": "high"
+    },
+    {
+      "team": "POR",
+      "change": "Ja Morant IN from MEM for Jerami Grant + Kris Murray. Win-now riser.",
+      "direction": "up",
+      "confidence": "high"
+    },
+    {
+      "team": "MEM",
+      "change": "Ja Morant OUT, Santi Aldama OUT (to DAL). Retool.",
+      "direction": "down",
+      "confidence": "high"
+    },
+    {
+      "team": "LAL",
+      "change": "LeBron OUT (leaving); Luka-led; added Walker Kessler (S&T), re-signed Reaves (4/$184.8M), added Grimes/Sexton/Mamukelashvili; Ayton to WAS.",
+      "direction": "mixed",
+      "confidence": "high"
+    },
+    {
+      "team": "NYK",
+      "change": "WON the 2025-26 title (Brunson Finals MVP). Lost Mitchell Robinson to BOS; re-signed Shamet, Alvarado.",
+      "direction": "flat/strong",
+      "confidence": "high"
+    },
+    {
+      "team": "DET",
+      "change": "No. 1 East seed 2025-26; added John Collins (3/$51M), matching RFA Duren.",
+      "direction": "up",
+      "confidence": "high"
+    },
+    {
+      "team": "CLE",
+      "change": "Harden re-signed (declined $42.3M, ~2/$56M) to stay under 2nd apron; Mitchell/Mobley/Allen core intact.",
+      "direction": "flat",
+      "confidence": "high"
+    },
+    {
+      "team": "HOU",
+      "change": "Re-signed Tari Eason (5/$81.5M), added Marcus Smart + Bogdanovic; VanVleet opted in ($25M); KD still on roster (2/$90M).",
+      "direction": "flat/up",
+      "confidence": "high"
+    },
+    {
+      "team": "OKC",
+      "change": "Defending-core run-it-back; Lu Dort option picked up; minor depth churn (McCain in, Wiggins/Joe out).",
+      "direction": "flat (champ tier)",
+      "confidence": "high"
+    },
+    {
+      "team": "DEN",
+      "change": "Quiet FA (Bagley min, Tyus Jones re-sign); Watson RFA unresolved.",
+      "direction": "flat",
+      "confidence": "medium"
+    },
+    {
+      "team": "SAS",
+      "change": "Added Tobias Harris (2/$31M), re-signed Barnes, Champagnie; Wembanyama core.",
+      "direction": "up",
+      "confidence": "high"
+    },
+    {
+      "team": "WAS",
+      "change": "Trae Young (re-signed ~4/$212M after Jan-2026 trade) + Ayton in. Non-contender.",
+      "direction": "n/a",
+      "confidence": "medium"
+    }
+  ]
+}

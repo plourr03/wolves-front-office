@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-07-03",
+  "snapshot": "wh_65cf5da7f50c7f62",
+  "model_basis": "Completed post-LaMelo trade + confirmed Clark/Bones re-signings; VERIFIED 2026-27 thresholds.",
+  "thresholds_2026_27": {
+    "salary_cap": 164961000,
+    "luxury_tax": 200428000,
+    "first_apron": 209015000,
+    "second_apron": 221686000,
+    "taxpayer_mle": 6064000,
+    "vet_min_10yr_full": 3876529,
+    "vet_min_10yr_caphit": 2449421,
+    "vet_min_generic_caphit": 2100000
+  },
+  "players_out_in_lamelo_trade": [
+    "Julius Randle",
+    "Naz Reid"
+  ],
+  "kept_sum": 133778670,
+  "incoming_lamelo": {
+    "LaMelo Ball": 41250000,
+    "Josh Green": 14679012,
+    "Mouhamed Gueye": 2406205,
+    "Ayo Dosunmu (re-sign y1)": 19310345
+  },
+  "roster_fills": {
+    "Jaylen Clark (re-sign y1)": 3200000,
+    "Bones Hyland": 2900000,
+    "one more minimum": 2100000
+  },
+  "assumptions": {
+    "ayo_resign": "5yr/$112,000,000 at 8% -> y1 $19,310,345",
+    "clark_resign": "3yr/~$10M -> y1 ~$3.2M (approx)",
+    "bones": "1yr/~$2.9M",
+    "lebron_min_caphit": "10+yr vet, 1-yr min: full $3,876,529, cap/apron hit $2,449,421"
+  },
+  "lebron_scenarios": {
+    "min_added_as_extra_body": {
+      "lebron_cap_hit": 2449421,
+      "team_salary": 222073653,
+      "over_hardcap_by": 387653,
+      "legal": false,
+      "note": "LeBron as a 15th man ON TOP of a filled 14. The naive 'just add him' case."
+    },
+    "min_swapped_for_a_minimum_body": {
+      "lebron_cap_hit": 2449421,
+      "displaced_body_caphit": 2100000,
+      "team_salary": 219973653,
+      "over_hardcap_by": -1712347,
+      "legal": true,
+      "note": "LeBron REPLACES the 14th/15th minimum body. The realistic path if legal."
+    },
+    "taxpayer_mle_added": {
+      "lebron_cap_hit": 6064000,
+      "team_salary": 225688232,
+      "over_hardcap_by": 4002232,
+      "legal": false,
+      "note": "The MLE MIN nominally keeps, but only if it fits under the hard cap."
+    },
+    "taxpayer_mle_swapped_for_a_minimum_body": {
+      "lebron_cap_hit": 6064000,
+      "displaced_body_caphit": 2100000,
+      "team_salary": 223588232,
+      "over_hardcap_by": 1902232,
+      "legal": false
+    }
+  },
+  "verdict": {
+    "post_lamelo_salary": 211424232,
+    "n_post_lamelo_committed": 11,
+    "filled_14man_salary": 219624232,
+    "n_filled": 14,
+    "room_under_second_apron_after_fill": 2061768,
+    "hard_capped_at": "second_apron ($221.686M)",
+    "hard_cap_trigger": "salary aggregation in the LaMelo four-team trade",
+    "feasibility_conclusion": "LeBron fits ONLY at the veteran minimum and ONLY as a SWAP for an existing minimum body (not as an addition). The taxpayer MLE is INFEASIBLE (it blows the hard cap). So the four-time MVP can be added, if at all, only as a minimum-for-minimum swap that keeps the roster the same size. He is not additive; he is a substitution, and the hard cap is the reason. Availability is then the whole game: a 41-turning-42 body in a spot that otherwise holds a healthier 65-75 game minimum player."
+  }
+}

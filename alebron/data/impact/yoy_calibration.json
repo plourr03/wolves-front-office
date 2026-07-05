@@ -1,0 +1,20 @@
+{
+  "n_players": 329,
+  "train": "2023-24+2024-25",
+  "test": "2025-26 single-season RAPM",
+  "note": "one transition only (cache is 3 seasons); low power, reported honestly",
+  "candidates": {
+    "net_rapm": {
+      "oos_corr_vs_next_season_rapm": 0.495,
+      "oos_rmse": 1.93,
+      "std_resid_mean": 0.039,
+      "std_resid_sd": 0.687
+    },
+    "box_net_bpm": {
+      "oos_corr_vs_next_season_rapm": 0.495,
+      "oos_rmse": 1.649,
+      "std_resid_mean": -0.027,
+      "std_resid_sd": 0.59
+    }
+  }
+}

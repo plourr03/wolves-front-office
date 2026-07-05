@@ -1,0 +1,42 @@
+{
+  "replacement_level": -1.5,
+  "rotations": {
+    "post": {
+      "LeBron James": 30,
+      "Anthony Edwards": 34,
+      "LaMelo Ball": 32,
+      "Jaden McDaniels": 32,
+      "Rudy Gobert": 30,
+      "Ayo Dosunmu": 25,
+      "Josh Green": 21,
+      "Mouhamed Gueye": 14,
+      "Joan Beringer": 12,
+      "_fill_clark": 10
+    },
+    "pre": {
+      "LaMelo Ball": 33,
+      "Anthony Edwards": 35,
+      "Josh Green": 27,
+      "Jaden McDaniels": 33,
+      "Rudy Gobert": 30,
+      "Ayo Dosunmu": 28,
+      "Mouhamed Gueye": 18,
+      "Joan Beringer": 14,
+      "_fill_clark": 16,
+      "_fill_min": 6
+    }
+  },
+  "note": "PRE = current post-LaMelo roster; POST = +LeBron. The POST-minus-PRE delta is LeBron's marginal team-strength contribution (the robust quantity).",
+  "forks": {
+    "rapm": {
+      "post_raw_net": 5.736,
+      "pre_raw_net": 4.8516,
+      "lebron_add_delta_raw": 0.88434
+    },
+    "box": {
+      "post_raw_net": 1.8067,
+      "pre_raw_net": 0.6125,
+      "lebron_add_delta_raw": 1.19428
+    }
+  }
+}

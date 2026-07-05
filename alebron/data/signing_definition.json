@@ -1,0 +1,32 @@
+{
+  "name": "LeBron James free-agent signing onto the completed post-LaMelo Timberwolves",
+  "as_of": "2026-07-03",
+  "source": "Verified 2026 offseason research (alebron/data/field_2026_offseason.json). LeBron is a confirmed UNRESTRICTED FREE AGENT; this evaluates the hypothetical that he signs with Minnesota.",
+  "structure": "Free-agent SIGNING (not a trade). No assets leave; no picks change hands. The only cost is a roster spot, the salary, and the on-court fit/availability risk. This is the sharpest contrast with the LaMelo trade, which spent a mountain of future and a hard cap.",
+  "baseline_roster": "The COMPLETED post-LaMelo, post-Ayo, post-Clark, post-Bones Timberwolves (LaMelo Ball, Anthony Edwards, Ayo Dosunmu, Jaden McDaniels, Rudy Gobert, Josh Green, Mouhamed Gueye, Joan Beringer, Jaylen Clark, Bones Hyland, DiVincenzo per field note, plus fills). This roster is already hard-capped at the second apron.",
+  "signing_terms_evaluated": {
+    "realistic": "Veteran minimum, 1 year. 10+ yr vet full salary $3,876,529; APRON/tax cap hit $2,449,421 (league reimburses the difference on a 1-yr min for a 3+ yr vet).",
+    "aspirational_but_likely_illegal": "Taxpayer MLE 1 year, $6,064,000, almost certainly blows the second-apron hard cap given the room after Clark/Bones; tested and shown infeasible in cap_state.json."
+  },
+  "min_net_change": {
+    "players_in": [
+      "LeBron James (vet minimum)"
+    ],
+    "players_out": [
+      "one minimum/replacement-level roster body (forced by the hard cap; LeBron is a SWAP, not an addition)"
+    ],
+    "picks_out": [],
+    "picks_in": [],
+    "assets_surrendered": "NONE"
+  },
+  "the_three_questions": {
+    "Q0_feasibility": "Can MIN legally sign him at all under the second-apron hard cap, and at what price? (Likely the binding constraint, see cap_state.json.)",
+    "Q1_decision_grade": "Is a minimum LeBron the best use of the last roster spot vs a healthier, younger minimum body? Opportunity cost is near-zero in ASSETS (unlike LaMelo) but real in ROSTER (a 15th man who plays 65-75 games vs a 41-turning-42 star who might play 45-60).",
+    "Q2_state_estimate": "Given the completed roster, how much does adding a 41-year-old LeBron move title odds, and is that delta distinguishable from zero?"
+  },
+  "verification_flags": [
+    "LeBron UFA status: CONFIRMED (ESPN/Shams via Rich Paul; NBA.com; NBC; Spotrac FA listing).",
+    "Second-apron hard cap on MIN: CONFIRMED (salary aggregation in the LaMelo trade). A hard-capped team can add outside FAs essentially only on minimums.",
+    "This is a HYPOTHETICAL: no reporting links LeBron to Minnesota beyond one analyst-speculation list. Evaluated as a what-if, exactly as the LaMelo project evaluated a completed trade, the deliverable is an honest decomposition, not a prediction that it happens."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "retention_factor": {
+    "center": 0.8,
+    "band": [
+      0.55,
+      1.0
+    ],
+    "applies_to": "NET (operationalization A); see module docstring"
+  },
+  "forks": {
+    "rapm": {
+      "LeBron_in": {
+        "raw": {
+          "off": -0.18,
+          "def_contrib": 1.45,
+          "net": 1.27
+        },
+        "A_retention_on_net": {
+          "net_center": 1.02,
+          "net_band": [
+            0.7,
+            1.27
+          ],
+          "def_contrib_carried": 1.45
+        },
+        "B_survival_on_off_REJECTED": {
+          "net_center": 1.31,
+          "why_rejected": "RAPM offense is ~0/negative; a <1 factor on it moves net the WRONG way. B is only sensible for an offense-concentrated player (LaMelo)."
+        }
+      },
+      "gobert_fragility": {
+        "gobert_def_contrib": 6.52,
+        "backup5_def_contrib": {
+          "Mouhamed Gueye": 2.52,
+          "Joan Beringer": 0.63
+        },
+        "best_backup_def_contrib": 2.52,
+        "defensive_cliff_when_gobert_sits": 4.0,
+        "note": "LeBron does not address this; he is not a rim protector. The Reid+Randle exits opened this cliff and adding LeBron leaves it open."
+      }
+    },
+    "box": {
+      "LeBron_in": {
+        "raw": {
+          "off": 1.32,
+          "def_contrib": 0.21,
+          "net": 1.53
+        },
+        "A_retention_on_net": {
+          "net_center": 1.22,
+          "net_band": [
+            0.84,
+            1.53
+          ],
+          "def_contrib_carried": 0.21
+        },
+        "B_survival_on_off_REJECTED": {
+          "net_center": 1.27,
+          "why_rejected": "RAPM offense is ~0/negative; a <1 factor on it moves net the WRONG way. B is only sensible for an offense-concentrated player (LaMelo)."
+        }
+      },
+      "gobert_fragility": {
+        "gobert_def_contrib": 1.02,
+        "backup5_def_contrib": {
+          "Mouhamed Gueye": 1.52,
+          "Joan Beringer": 1.87
+        },
+        "best_backup_def_contrib": 1.87,
+        "defensive_cliff_when_gobert_sits": -0.85,
+        "note": "LeBron does not address this; he is not a rim protector. The Reid+Randle exits opened this cliff and adding LeBron leaves it open."
+      }
+    }
+  },
+  "defensive_fork_divergence": {
+    "LeBron James": {
+      "rapm_def_contrib": 1.45,
+      "box_def_contrib": 0.21,
+      "fork_gap": 1.24
+    },
+    "Rudy Gobert": {
+      "rapm_def_contrib": 6.52,
+      "box_def_contrib": 1.02,
+      "fork_gap": 5.5
+    },
+    "Anthony Edwards": {
+      "rapm_def_contrib": -2.21,
+      "box_def_contrib": 0.02,
+      "fork_gap": -2.23
+    },
+    "LaMelo Ball": {
+      "rapm_def_contrib": -2.23,
+      "box_def_contrib": -0.04,
+      "fork_gap": -2.19
+    },
+    "Jaden McDaniels": {
+      "rapm_def_contrib": 1.07,
+      "box_def_contrib": 0.18,
+      "fork_gap": 0.89
+    },
+    "Josh Green": {
+      "rapm_def_contrib": 0.23,
+      "box_def_contrib": -0.44,
+      "fork_gap": 0.67
+    }
+  }
+}

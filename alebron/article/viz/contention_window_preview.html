@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contention Window, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is contention_window_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage"><div id="viz-contention-window">
+  <div class="cw-chip" role="status">
+    <span class="cw-chip-dot"></span>
+    <span class="cw-chip-label">It's not a one-year shot</span>
+    <span class="cw-chip-sep">·</span>
+    <span class="cw-chip-sub">the contention window</span>
+  </div>
+  <p class="cw-caption" aria-live="polite"></p>
+  <div class="cw-stage">
+    <div class="cw-tooltip" role="tooltip">
+      <div class="cw-tip-head"></div>
+      <div class="cw-tip-desc"></div>
+    </div>
+  </div>
+  <div class="cw-hero">
+    <div class="cw-hero-line">
+      <span class="cw-hero-num">0</span>
+      <span class="cw-hero-unit">full seasons of this core, locked in</span>
+    </div>
+    <div class="cw-hero-label">What we spent lands after the window</div>
+    <button class="cw-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="cw-foot">Green spans each player's contract, all three through the 2028-29 season. The red markers are the draft capital surrendered, every one of them dated past the window it paid for. We spent the picks, not the players.</p>
+  <div class="cw-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-contention-window, #viz-contention-window * { touch-action: manipulation; }
+  #viz-contention-window { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-contention-window .cw-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-surface); border: 1px solid var(--accent-default);
+    border-radius: 999px; padding: 6px 14px; margin-bottom: 14px;
+    font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary);
+  }
+  #viz-contention-window .cw-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-contention-window .cw-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-contention-window .cw-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-contention-window .cw-caption {
+    font: 600 17px var(--family-sans); color: var(--text-primary);
+    margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease;
+  }
+  #viz-contention-window .cw-stage {
+    position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle);
+    border-radius: 12px; height: 246px; overflow: hidden;
+  }
+  #viz-contention-window .cw-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-contention-window .cw-tooltip {
+    position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default);
+    border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease;
+    z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+  #viz-contention-window .cw-tooltip.is-on { opacity: 1; }
+  #viz-contention-window .cw-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-contention-window .cw-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-contention-window .cw-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-contention-window .cw-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-contention-window .cw-hero-num { font: 800 60px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-contention-window.is-landed .cw-hero-num { color: var(--accent-hover); }
+  #viz-contention-window.is-compact .cw-hero-num { font-size: 46px; }
+  #viz-contention-window .cw-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 150px; }
+  #viz-contention-window .cw-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-contention-window .cw-replay {
+    margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle);
+    border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  #viz-contention-window .cw-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-contention-window .cw-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-contention-window .cw-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-contention-window .cw-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Core under contract through 2028-29; picks surrendered after the window.
+  // Ages and contract years from the locked evaluation.
+  var CORE = [
+    { name: "LaMelo Ball", age: 24, role: "All-Star creator", start: 2026, end: 2029 },
+    { name: "Anthony Edwards", age: 24, role: "top-five ceiling", start: 2026, end: 2029 },
+    { name: "Jaden McDaniels", age: 25, role: "perimeter defender", start: 2026, end: 2029 }
+  ];
+  var PICKS = [
+    { year: 2028, label: "first-round swap" },
+    { year: 2029, label: "first-round swap" },
+    { year: 2030, label: "first-round swap" },
+    { year: 2033, label: "first, unprotected" }
+  ];
+  var X0 = 2026, X1 = 2033.6;
+
+  var CAPTIONS = [
+    "Three players, all on the good side of their primes, under contract through 2028-29.",
+    "That is three full seasons of the core, locked in.",
+    "What we actually spent is the draft capital, and it all lands after the window.",
+    "We didn't bet next season. We bet the next three, and pushed the chips after them in."
+  ];
+  var BAND_AT = 350, BARS_AT = 700, BAR_STAG = 130, BAR_MS = 600;
+  var CAP1_AT = 1500, PICKS_AT = 2300, PICK_STAG = 130, CAP2_AT = 2500, CAP3_AT = 3800, REPLAY_AT = 4500;
+
+  var root = d3.select("#viz-contention-window");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); }
+    }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); }
+    }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) {
+    var c = root.select(".cw-caption");
+    if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; }
+    c.style("opacity", 0);
+    setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220);
+  }
+  function tickHero(to, duration) {
+    var node = root.select(".cw-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = String(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = String(Math.round(interp(t))); }; });
+  }
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".cw-tooltip");
+    tip.select(".cw-tip-head").text(head); tip.select(".cw-tip-desc").text(desc); tip.classed("is-on", true);
+    var tipEl = tip.node(), stageEl = root.select(".cw-stage").node();
+    var sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12;
+    if (y + th > sh - 8) y = sh - th - 8;
+    if (x < 4) x = 4; if (y < 4) y = 4;
+    tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".cw-tooltip").classed("is-on", false); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".cw-stage");
+    stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640;
+    var width = Math.max(320, Math.min(720, rawW));
+    var compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: compact ? 96 : 134, right: 14, top: 30, bottom: 30 };
+    var x = d3.scaleLinear().domain([X0, X1]).range([pad.left, W - pad.right]);
+    var coreTop = pad.top + 6;
+    var rowH = compact ? 38 : 42;
+    var coreBottom = coreTop + CORE.length * rowH;
+    var laneY = coreBottom + 14;
+
+    // Window band.
+    var bandFull = x(2029) - x(2026);
+    var band = svg.append("rect").attr("x", x(2026)).attr("y", coreTop - 8).attr("height", CORE.length * rowH + 6).attr("rx", 6)
+      .style("fill", "var(--accent-subtle)").attr("width", reduceMotion ? bandFull : 0);
+    var bandLabel = svg.append("text").attr("x", (x(2026) + x(2029)) / 2).attr("y", coreTop - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--accent-hover)").style("font", "700 10px var(--family-mono)").style("letter-spacing", ".06em")
+      .style("opacity", reduceMotion ? 1 : 0).text("THE WINDOW");
+
+    // window close guide
+    svg.append("line").attr("x1", x(2029)).attr("x2", x(2029)).attr("y1", coreTop - 8).attr("y2", laneY + 34)
+      .style("stroke", "var(--border-default)").style("stroke-dasharray", "2,4");
+
+    // Core bars.
+    var barSel = [];
+    CORE.forEach(function (d, i) {
+      var by = coreTop + i * rowH + (rowH - (compact ? 18 : 22)) / 2;
+      var bh = compact ? 18 : 22;
+      svg.append("text").attr("x", pad.left - 10).attr("y", by + bh / 2).attr("dy", "0.32em").attr("text-anchor", "end")
+        .style("fill", "var(--text-primary)").style("font", "600 " + (compact ? "11" : "12.5") + "px var(--family-sans)").text(d.name + " (" + d.age + ")");
+      var bar = svg.append("rect").attr("x", x(d.start)).attr("y", by).attr("height", bh).attr("rx", 4)
+        .style("fill", "var(--accent-default)").style("cursor", "pointer").attr("width", reduceMotion ? (x(d.end) - x(d.start)) : 0);
+      bar.on("mouseenter mousemove", function () {
+        d3.select(this).style("fill", "var(--accent-hover)");
+        showTooltip(d.name + ", age " + d.age, "Under contract through 2028-29. " + d.role + ".", x(d.start) + (x(d.end) - x(d.start)) / 2, by);
+      }).on("mouseleave", function () { d3.select(this).style("fill", "var(--accent-default)"); hideTooltip(); });
+      bar.append("title").text(d.name + ": under contract through 2028-29.");
+      barSel.push({ d: d, bar: bar });
+    });
+
+    // Picks lane label + markers.
+    var laneLabel = svg.append("text").attr("x", pad.left - 10).attr("y", laneY + 8).attr("text-anchor", "end")
+      .style("fill", "var(--status-error)").style("font", "700 9.5px var(--family-mono)").style("letter-spacing", ".05em")
+      .style("opacity", reduceMotion ? 1 : 0).text(compact ? "SPENT" : "SPENT, AFTER");
+    var pickSel = [];
+    PICKS.forEach(function (p) {
+      var px = x(p.year), cy = laneY + 8;
+      var g = svg.append("g").style("cursor", "pointer");
+      var dot = g.append("circle").attr("cx", px).attr("cy", reduceMotion ? cy : cy - 22).attr("r", 6).style("fill", "var(--status-error)").style("opacity", reduceMotion ? 1 : 0);
+      g.append("text").attr("x", px).attr("y", laneY + 30).attr("text-anchor", "middle").style("fill", "var(--text-secondary)").style("font", "700 10px var(--family-mono)").text("'" + String(p.year).slice(2));
+      g.on("mouseenter mousemove", function () { dot.style("fill", "#ff8585"); showTooltip(p.year + " " + p.label, "Surrendered in the trade, landing after the window.", px, cy); })
+       .on("mouseleave", function () { dot.style("fill", "var(--status-error)"); hideTooltip(); });
+      dot.append("title").text(p.year + " " + p.label);
+      pickSel.push({ p: p, dot: dot, cy: cy });
+    });
+
+    // Year axis.
+    [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033].forEach(function (yr) {
+      if (compact && yr % 2 === 1) return;
+      svg.append("text").attr("x", x(yr)).attr("y", H - pad.bottom + 18).attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)").style("font", "10px var(--family-mono)").text(yr);
+    });
+
+    svg.append("text").attr("x", W - 6).attr("y", H - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { barSel: barSel, pickSel: pickSel, band: band, bandFull: bandFull, bandLabel: bandLabel, laneLabel: laneLabel, x: x };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function finalState(ctx) {
+    ctx.band.attr("width", ctx.bandFull); ctx.bandLabel.style("opacity", 1); ctx.laneLabel.style("opacity", 1);
+    ctx.barSel.forEach(function (s) { s.bar.attr("width", ctx.x(s.d.end) - ctx.x(s.d.start)); });
+    ctx.pickSel.forEach(function (s) { s.dot.attr("cy", s.cy).style("opacity", 1); });
+    setCaption(3); tickHero(3, 0); root.classed("is-landed", true); root.select(".cw-replay").classed("is-shown", true);
+  }
+
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".cw-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    ctx.band.attr("width", 0); ctx.bandLabel.style("opacity", 0); ctx.laneLabel.style("opacity", 0);
+    ctx.barSel.forEach(function (s) { s.bar.attr("width", 0); });
+    ctx.pickSel.forEach(function (s) { s.dot.attr("cy", s.cy - 22).style("opacity", 0); });
+    root.select(".cw-hero-num").text("0");
+    setCaption(0);
+    if (__resetOnly) return;
+
+    ctx.band.transition().delay(BAND_AT).duration(600).ease(d3.easeCubicOut).attr("width", ctx.bandFull);
+    ctx.bandLabel.transition().delay(BAND_AT + 200).duration(300).style("opacity", 1);
+    ctx.barSel.forEach(function (s, i) {
+      s.bar.transition().delay(BARS_AT + i * BAR_STAG).duration(BAR_MS).ease(d3.easeCubicOut).attr("width", ctx.x(s.d.end) - ctx.x(s.d.start));
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); root.classed("is-landed", true); tickHero(3, 700); }, CAP1_AT));
+    ctx.laneLabel.transition().delay(PICKS_AT - 200).duration(300).style("opacity", 1);
+    ctx.pickSel.forEach(function (s, i) {
+      s.dot.transition().delay(PICKS_AT + i * PICK_STAG).duration(450).ease(d3.easeBounceOut).attr("cy", s.cy).style("opacity", 1);
+    });
+    playTimers.push(setTimeout(function () { setCaption(2); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".cw-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".cw-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else {
+    __idle();
+    if ("IntersectionObserver" in window) {
+      var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] });
+      __io.observe(rootNode);
+    } else { __startOnce(); }
+  }
+  if (window.ResizeObserver) {
+    var resizeTimer = null;
+    var ro = new ResizeObserver(function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150);
+    });
+    ro.observe(rootNode);
+  }
+})();
+</script>
+
+</div>
+</body>
+</html>

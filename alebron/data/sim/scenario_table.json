@@ -1,0 +1,89 @@
+{
+  "fit_bound": 0.75,
+  "n_sims": 20000,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "field": "calibrated_primary",
+  "note": "Three-initiator fit term (+/-0.75 net), CRN-paired vs the completed post-LaMelo baseline. Title % remains GATED on identifiability.",
+  "forks": {
+    "rapm": {
+      "min_baseline_postlamelo_net": 2.183,
+      "min_with_lebron_neutral_net": 3.127,
+      "baseline_postlamelo": {
+        "title": 0.026783333333333336,
+        "cf": 0.15055,
+        "finals": 0.06291666666666668
+      },
+      "scenarios": {
+        "fit_clicks": {
+          "min_net": 3.877,
+          "title": 0.05165,
+          "cf": 0.2363666666666667,
+          "finals": 0.1089,
+          "title_delta_pp": 2.4866666666666664,
+          "cf_delta_pp": 8.58166666666667,
+          "finals_delta_pp": 4.598333333333332
+        },
+        "neutral": {
+          "min_net": 3.127,
+          "title": 0.03895,
+          "cf": 0.1952,
+          "finals": 0.08668333333333333,
+          "title_delta_pp": 1.2166666666666663,
+          "cf_delta_pp": 4.4650000000000025,
+          "finals_delta_pp": 2.376666666666666
+        },
+        "fit_fails": {
+          "min_net": 2.377,
+          "title": 0.0296,
+          "cf": 0.15988333333333335,
+          "finals": 0.06793333333333333,
+          "title_delta_pp": 0.2816666666666665,
+          "cf_delta_pp": 0.933333333333336,
+          "finals_delta_pp": 0.5016666666666656
+        }
+      }
+    },
+    "box": {
+      "min_baseline_postlamelo_net": 3.008,
+      "min_with_lebron_neutral_net": 4.283,
+      "baseline_postlamelo": {
+        "title": 0.03886666666666667,
+        "cf": 0.19126666666666667,
+        "finals": 0.08523333333333333
+      },
+      "scenarios": {
+        "fit_clicks": {
+          "min_net": 5.033,
+          "title": 0.07681666666666666,
+          "cf": 0.30965,
+          "finals": 0.1464,
+          "title_delta_pp": 3.794999999999999,
+          "cf_delta_pp": 11.838333333333331,
+          "finals_delta_pp": 6.116666666666667
+        },
+        "neutral": {
+          "min_net": 4.283,
+          "title": 0.06041666666666667,
+          "cf": 0.2631666666666667,
+          "finals": 0.12145,
+          "title_delta_pp": 2.155,
+          "cf_delta_pp": 7.190000000000005,
+          "finals_delta_pp": 3.6216666666666675
+        },
+        "fit_fails": {
+          "min_net": 3.533,
+          "title": 0.04613333333333333,
+          "cf": 0.21886666666666668,
+          "finals": 0.09805000000000001,
+          "title_delta_pp": 0.7266666666666665,
+          "cf_delta_pp": 2.7600000000000016,
+          "finals_delta_pp": 1.2816666666666685
+        }
+      }
+    }
+  }
+}

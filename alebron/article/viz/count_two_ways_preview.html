@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Count Two Ways, preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is count_two_ways_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage"><div id="viz-count-two-ways">
+  <div class="ct-chip" role="status">
+    <span class="ct-chip-dot"></span>
+    <span class="ct-chip-label">What LaMelo actually is</span>
+    <span class="ct-chip-sep">·</span>
+    <span class="ct-chip-sub">two ways of counting</span>
+  </div>
+  <p class="ct-caption" aria-live="polite"></p>
+  <div class="ct-stage">
+    <div class="ct-tooltip" role="tooltip">
+      <div class="ct-tip-head"></div>
+      <div class="ct-tip-desc"></div>
+    </div>
+  </div>
+  <div class="ct-hero">
+    <div class="ct-hero-line">
+      <span class="ct-hero-num">0.0</span>
+      <span class="ct-hero-unit">the Reid value the box score can't see</span>
+    </div>
+    <div class="ct-hero-label">Scoreboard read minus box-score read</div>
+    <button class="ct-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="ct-foot">Net impact in points per 100 possessions, the same yardstick. Each player has two dots: what the box score counts (gray) and what the scoreboard counts (blue). For LaMelo and Randle the two nearly touch. For Reid they are on different planets, and the planet the box cannot see is the bigger one.</p>
+  <div class="ct-watermark">@WolvesToaT · Jun 2026</div>
+</div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-count-two-ways, #viz-count-two-ways * { touch-action: manipulation; }
+  #viz-count-two-ways { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-count-two-ways .ct-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-surface); border: 1px solid var(--dataviz-3);
+    border-radius: 999px; padding: 6px 14px; margin-bottom: 14px;
+    font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary);
+  }
+  #viz-count-two-ways .ct-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dataviz-3); }
+  #viz-count-two-ways .ct-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-count-two-ways .ct-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-count-two-ways .ct-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-count-two-ways .ct-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; height: 250px; overflow: hidden; }
+  #viz-count-two-ways .ct-stage svg { display: block; width: 100%; height: 100%; }
+  #viz-count-two-ways .ct-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 150px; max-width: 240px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-count-two-ways .ct-tooltip.is-on { opacity: 1; }
+  #viz-count-two-ways .ct-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-count-two-ways .ct-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.4; }
+  #viz-count-two-ways .ct-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-count-two-ways .ct-hero-line { display: flex; align-items: baseline; gap: 10px; }
+  #viz-count-two-ways .ct-hero-num { font: 800 58px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-count-two-ways.is-landed .ct-hero-num { color: var(--status-warning); }
+  #viz-count-two-ways.is-compact .ct-hero-num { font-size: 46px; }
+  #viz-count-two-ways .ct-hero-unit { font: 700 13px var(--family-sans); color: var(--text-secondary); line-height: 1.2; max-width: 160px; }
+  #viz-count-two-ways .ct-hero-label { font: 700 11px var(--family-sans); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; text-align: center; }
+  #viz-count-two-ways .ct-replay { margin-top: 12px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--family-sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 280ms ease, color 150ms ease, border-color 150ms ease; }
+  #viz-count-two-ways .ct-replay.is-shown { opacity: 1; pointer-events: auto; }
+  #viz-count-two-ways .ct-replay:hover { color: var(--text-primary); border-color: var(--border-default); }
+  #viz-count-two-ways .ct-foot { font: 12px var(--family-sans); color: var(--text-tertiary); margin: 14px 0 0 0; text-align: center; line-height: 1.45; }
+  #viz-count-two-ways .ct-watermark { font: 9px var(--family-sans); color: var(--text-tertiary); opacity: 0.55; text-align: right; margin-top: 8px; }
+</style>
+<script>
+(function () {
+  // Net impact, points per 100. box = defense-blind, floor = defense-aware
+  // (RAPM). LaMelo transported to his MIN role; Reid and Randle are the cost of
+  // losing them. Source: DELIVERABLE section 1. Ordered so Reid lands last.
+  var DATA = [
+    { name: "LaMelo Ball", side: "added", box: 1.41, floor: 0.90 },
+    { name: "Julius Randle", side: "lost", box: -0.02, floor: 0.44 },
+    { name: "Naz Reid", side: "lost", box: 0.87, floor: 3.27 }
+  ];
+  var REID_GAP = 2.4;
+  var CAPTIONS = [
+    "Two ways to measure a player: what the box score sees, and what the scoreboard sees.",
+    "For LaMelo and Randle, the two reads nearly agree.",
+    "For Reid, they land on different planets.",
+    "We traded the guy whose value the box score could not see."
+  ];
+  var ROWS_AT = 500, ROW_STAG = 700, ROW_MS = 650;
+  var CAP1_AT = 900, CAP2_AT = 1900, HERO_AT = 1900, HERO_MS = 800, CAP3_AT = 3000, REPLAY_AT = 3800;
+
+  var root = d3.select("#viz-count-two-ways");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function setCaption(idx) { var c = root.select(".ct-caption"); if (idx === 0) { c.style("opacity", 1).text(CAPTIONS[0]); return; } c.style("opacity", 0); setTimeout(function () { c.text(CAPTIONS[idx]).style("opacity", 1); }, 220); }
+  function fmtSigned(v) { return (v >= 0 ? "+" : "") + v.toFixed(1); }
+  function tickHero(to, duration) {
+    var node = root.select(".ct-hero-num").node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmtSigned(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut).tween("text", function () { var interp = d3.interpolateNumber(0, to); return function (t) { node.textContent = fmtSigned(interp(t)); }; });
+  }
+  function showTooltip(head, desc, cx, cy) {
+    var tip = root.select(".ct-tooltip"); tip.select(".ct-tip-head").text(head); tip.select(".ct-tip-desc").text(desc); tip.classed("is-on", true);
+    var tipEl = tip.node(), stageEl = root.select(".ct-stage").node(), sw = stageEl.clientWidth, sh = stageEl.clientHeight;
+    var x = cx + 12, y = cy - 10, tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    if (x + tw > sw - 8) x = cx - tw - 12; if (y + th > sh - 8) y = sh - th - 8; if (x < 4) x = 4; if (y < 4) y = 4;
+    tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
+  }
+  function hideTooltip() { root.select(".ct-tooltip").classed("is-on", false); }
+
+  var lastRender = null;
+
+  function render(triggerPlay) {
+    var stage = root.select(".ct-stage"); stage.selectAll("svg").remove();
+    var rawW = rootNode.clientWidth || 640, width = Math.max(320, Math.min(720, rawW)), compact = width < 480;
+    root.classed("is-compact", compact);
+    var stageNode = stage.node(), W = stageNode.clientWidth, H = stageNode.clientHeight;
+    var svg = stage.append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("preserveAspectRatio", "xMidYMid meet").attr("role", "img");
+
+    var pad = { left: compact ? 86 : 116, right: 28, top: 40, bottom: 24 };
+    var x = d3.scaleLinear().domain([-0.5, 3.6]).range([pad.left, W - pad.right]);
+    var top = pad.top, usableH = H - pad.top - pad.bottom, rowH = usableH / DATA.length;
+
+    // good-starter +2 guide
+    svg.append("line").attr("x1", x(2)).attr("x2", x(2)).attr("y1", top - 8).attr("y2", H - pad.bottom).style("stroke", "var(--border-default)").style("stroke-dasharray", "3,4");
+    svg.append("text").attr("x", x(2)).attr("y", top - 12).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").style("font", "10px var(--family-mono)").text("good starter, +2");
+
+    // legend
+    var leg = svg.append("g").attr("transform", "translate(" + pad.left + "," + (top - 26) + ")");
+    leg.append("circle").attr("cx", 6).attr("cy", 0).attr("r", 6).style("fill", "var(--text-tertiary)");
+    leg.append("text").attr("x", 16).attr("y", 4).style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)").text("box");
+    leg.append("circle").attr("cx", 64).attr("cy", 0).attr("r", 6).style("fill", "var(--dataviz-3)");
+    leg.append("text").attr("x", 74).attr("y", 4).style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)").text("scoreboard");
+
+    var rowSel = [];
+    DATA.forEach(function (d, i) {
+      var cy = top + i * rowH + rowH / 2;
+      var g = svg.append("g").style("cursor", "pointer");
+      var gap = Math.abs(d.floor - d.box), wide = gap >= 1.5;
+      g.append("text").attr("x", pad.left - 12).attr("y", cy - 6).attr("text-anchor", "end").style("fill", "var(--text-primary)").style("font", "600 12.5px var(--family-sans)").text(d.name);
+      g.append("text").attr("x", pad.left - 12).attr("y", cy + 11).attr("text-anchor", "end").style("fill", d.side === "added" ? "var(--accent-hover)" : "var(--text-tertiary)").style("font", "700 9px var(--family-mono)").style("letter-spacing", ".06em").text(d.side === "added" ? "ADDED" : "LOST");
+      var line = g.append("line").attr("x1", x(d.box)).attr("x2", reduceMotion ? x(d.floor) : x(d.box)).attr("y1", cy).attr("y2", cy).style("stroke", wide ? "var(--status-warning)" : "var(--border-default)").style("stroke-width", wide ? 3 : 2);
+      var dBox = g.append("circle").attr("cx", x(d.box)).attr("cy", cy).attr("r", 7).style("fill", "var(--text-tertiary)");
+      var dFloor = g.append("circle").attr("cx", reduceMotion ? x(d.floor) : x(d.box)).attr("cy", cy).attr("r", 7).style("fill", "var(--dataviz-3)");
+      var fLab = g.append("text").attr("x", x(d.floor) + (d.floor >= d.box ? 12 : -12)).attr("y", cy + 4).attr("text-anchor", d.floor >= d.box ? "start" : "end").style("fill", "var(--dataviz-3)").style("font", "700 11px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text((d.floor >= 0 ? "+" : "") + d.floor.toFixed(2));
+      var bLab = g.append("text").attr("x", x(d.box) - (d.box <= d.floor ? 12 : -12)).attr("y", cy + 4).attr("text-anchor", d.box <= d.floor ? "end" : "start").style("fill", "var(--text-tertiary)").style("font", "10px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text((d.box >= 0 ? "+" : "") + d.box.toFixed(2));
+      var gapLab = null;
+      if (wide) gapLab = g.append("text").attr("x", (x(d.box) + x(d.floor)) / 2).attr("y", cy - 13).attr("text-anchor", "middle").style("fill", "var(--status-warning)").style("font", "700 11px var(--family-mono)").style("opacity", reduceMotion ? 1 : 0).text("the box can't see this");
+      g.on("mouseenter", function () { rowSel.forEach(function (r, j) { r.g.style("opacity", j === i ? 1 : 0.32); }); showTooltip(d.name, "box score " + fmtSigned(d.box) + ", scoreboard " + fmtSigned(d.floor) + " per 100.", (x(d.box) + x(d.floor)) / 2, cy); })
+       .on("mouseleave", function () { rowSel.forEach(function (r) { r.g.style("opacity", 1); }); hideTooltip(); });
+      rowSel.push({ d: d, g: g, line: line, dFloor: dFloor, fLab: fLab, bLab: bLab, gapLab: gapLab, cy: cy });
+    });
+
+    svg.append("text").attr("x", W - 6).attr("y", H - 6).attr("text-anchor", "end").style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)").style("opacity", 0.55).style("pointer-events", "none").text("@WolvesToaT · Jun 2026");
+
+    var ctx = { rowSel: rowSel, x: x };
+    lastRender = { ctx: ctx };
+    if (triggerPlay !== false) play(ctx); else finalState(ctx);
+  }
+
+  function settle(s, ctx) {
+    s.line.attr("x2", ctx.x(s.d.floor)); s.dFloor.attr("cx", ctx.x(s.d.floor));
+    s.fLab.style("opacity", 1); s.bLab.style("opacity", 1); if (s.gapLab) s.gapLab.style("opacity", 1);
+  }
+  function finalState(ctx) {
+    ctx.rowSel.forEach(function (s) { settle(s, ctx); });
+    setCaption(3); tickHero(REID_GAP, 0); root.classed("is-landed", true); root.select(".ct-replay").classed("is-shown", true);
+  }
+  function play(ctx) {
+    clearPlayTimers(); root.classed("is-landed", false); root.select(".ct-replay").classed("is-shown", false);
+    if (reduceMotion) { finalState(ctx); return; }
+    ctx.rowSel.forEach(function (s) { s.line.attr("x2", ctx.x(s.d.box)); s.dFloor.attr("cx", ctx.x(s.d.box)); s.fLab.style("opacity", 0); s.bLab.style("opacity", 0); if (s.gapLab) s.gapLab.style("opacity", 0); });
+    root.select(".ct-hero-num").text("0.0");
+    setCaption(0);
+    if (__resetOnly) return;
+    ctx.rowSel.forEach(function (s, i) {
+      var at = ROWS_AT + i * ROW_STAG;
+      s.line.transition().delay(at).duration(ROW_MS).ease(d3.easeCubicOut).attr("x2", ctx.x(s.d.floor));
+      s.dFloor.transition().delay(at).duration(ROW_MS).ease(d3.easeCubicOut).attr("cx", ctx.x(s.d.floor));
+      s.fLab.transition().delay(at + ROW_MS - 100).duration(250).style("opacity", 1);
+      s.bLab.transition().delay(at + ROW_MS - 100).duration(250).style("opacity", 1);
+      if (s.gapLab) s.gapLab.transition().delay(at + ROW_MS).duration(250).style("opacity", 1);
+    });
+    playTimers.push(setTimeout(function () { setCaption(1); }, CAP1_AT));
+    playTimers.push(setTimeout(function () { setCaption(2); root.classed("is-landed", true); tickHero(REID_GAP, HERO_MS); }, CAP2_AT));
+    playTimers.push(setTimeout(function () { setCaption(3); }, CAP3_AT));
+    playTimers.push(setTimeout(function () { root.select(".ct-replay").classed("is-shown", true); }, REPLAY_AT));
+  }
+
+  root.select(".ct-replay").on("click", function () { if (lastRender) play(lastRender.ctx); });
+
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0;
+  function __idle() { render(false); if (!lastRender) return; __resetOnly = true; play(lastRender.ctx); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; render(true); }
+  if (reduceMotion) { render(false); __played = true; }
+  else { __idle(); if ("IntersectionObserver" in window) { var __io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.6) __startOnce(); }); }, { threshold: [0, 0.6, 1] }); __io.observe(rootNode); } else { __startOnce(); } }
+  if (window.ResizeObserver) { var resizeTimer = null; var ro = new ResizeObserver(function () { if (resizeTimer) clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { var w = rootNode.clientWidth || 0; if (Math.abs(w - __lastW) < 2) return; __lastW = w; if (__played) { render(false); } else { __idle(); } }, 150); }); ro.observe(rootNode); }
+})();
+</script>
+
+</div>
+</body>
+</html>
