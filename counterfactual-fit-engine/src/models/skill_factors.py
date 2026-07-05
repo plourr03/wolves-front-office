@@ -70,6 +70,12 @@ ANCHORS = {
     6: "blk36",              # rim protection
     7: "def_rapm",           # overall defensive impact
 }
+# Path A funnel-fix constants: psi = PSI_FLOOR + softplus(PSI_LOC + N(0,1)),
+# anchor_diag = ANCHOR_FLOOR + softplus(ANCHOR_LOC + N(0,1)). LOCs set the
+# implied prior scale (psi median ~0.5 unique-std; anchors large markers).
+PSI_FLOOR, PSI_LOC = 0.05, -0.5
+ANCHOR_FLOOR, ANCHOR_LOC = 0.1, 1.0
+
 ANCHOR_LABELS = {
     0: "scoring load", 1: "scoring efficiency", 2: "spacing",
     3: "playmaking", 4: "rim pressure", 5: "rebounding",
@@ -116,8 +122,24 @@ def _model(Y, SE2, anchor_idx):
     # (centered) parametrization is correct here because the likelihood, not
     # the prior, dominates.
     W_free = numpyro.sample("W_free", dist.Normal(0.0, 1.0).expand([p, K]).to_event(2))
-    anchor_diag = numpyro.sample("anchor_diag", dist.HalfNormal(2.0).expand([K]).to_event(1))
-    psi = numpyro.sample("psi", dist.HalfNormal(1.0).expand([p]).to_event(1))
+    # PATH A (2026-07-05): scale params reparametrized to kill the variance
+    # FUNNEL. The measurement proved BOTH diagonal AND dense mass saturate
+    # the NUTS tree cap (63/63 every draw) -> a non-linear funnel geometry,
+    # not linear correlation. A HalfNormal scale funnels in its log tail when
+    # the likelihood drives it toward 0 (a feature well-explained by the
+    # factors -> psi->0; a strong marker -> anchor_diag large but its 0-tail
+    # still pinches). Sampling in an UNCONSTRAINED Normal through softplus +
+    # a small floor removes the neck (smooth everywhere, no boundary), while
+    # keeping a weakly-informative positive prior of the same scale. psi and
+    # anchor_diag are exposed via deterministic so downstream code is
+    # unchanged. Distributionally ~identical (weakly-informative positive).
+    psi_raw = numpyro.sample("psi_raw", dist.Normal(0.0, 1.0).expand([p]).to_event(1))
+    psi = numpyro.deterministic(
+        "psi", PSI_FLOOR + jax.nn.softplus(PSI_LOC + psi_raw))
+    anchor_raw = numpyro.sample(
+        "anchor_raw", dist.Normal(0.0, 1.0).expand([K]).to_event(1))
+    anchor_diag = numpyro.deterministic(
+        "anchor_diag", ANCHOR_FLOOR + jax.nn.softplus(ANCHOR_LOC + anchor_raw))
 
     W = W_free
     for k in range(K):
@@ -173,7 +195,7 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
                 chain_method=L1B.get("chain_method", "sequential"))
     mcmc.run(jax.random.PRNGKey(SEED), Y=Y, SE2=se2, anchor_idx=anchor_idx)
     idata = az.from_numpyro(mcmc)
-    summ = az.summary(idata, var_names=["W_free", "anchor_diag", "psi"],
+    summ = az.summary(idata, var_names=["W_free", "anchor_raw", "psi_raw"],
                       round_to="none")
     health = {"worst_r_hat": float(summ.r_hat.max()),
               "min_ess_bulk": float(summ.ess_bulk.min()),

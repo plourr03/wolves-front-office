@@ -1158,3 +1158,20 @@ strategic time decision):
   D. (Last resort, needs explicit ok) SVI on full data with the surrogate
      gates.
 NOT done: no SVI, no subsample, K frozen at 8. Awaiting Bobby's path choice.
+
+## 2026-07-05 — LAYER 1B PATH A approved + BLOCKING PROBE PROTOCOL (Bobby, verbatim)
+
+"LAYER 1B PATH A: approved. Reparametrize scale params (non-centered
+psi/tau, softplus or a small floor), model distributionally identical.
+BLOCKING PROTOCOL, no exceptions:
+1. Run the DEPTH-CAPPED leapfrog probe FIRST (2 chains, ~250+100,
+   depth 6). Read the mean leapfrog count before launching anything
+   long. Collapse to single digits = fixed; still near cap = A
+   insufficient, park and bring me B.
+2. No multi-hour full fit launches until the probe confirms collapse.
+   The probe is the gate on the fit, every time, from now on.
+3. If A works: full fit at 2 chains first (not 4), real R-hat/ESS,
+   then vectors freeze.
+Standing rule added to house standards: any NUTS config change is
+verified by a short leapfrog probe BEFORE any full run depends on it.
+An unverified sampler assumption is a parked risk, not a green light."
