@@ -1117,3 +1117,44 @@ health PASS it auto-freezes skill_vectors + the interpretability export
 Nothing traded away: exact NUTS, full population, real gates. SVI stays in
 the drawer; subsampling stays retracted; K frozen at 8. Population
 verification already PASSED (c9e41b81). Will NOT kill from impatience.
+
+## 2026-07-05 — F3 leapfrog measurement: BOTH mass matrices saturate; geometry pathology, not a mass problem
+
+Killed the 8.5h offline run (Bobby's call) and measured NUTS leapfrog steps
+directly (depth-6 cap = 63 max), sampling phase, full data:
+  DIAGONAL: mean 63.0, median 63, max 63, 100% at cap, 770s
+  DENSE:    mean 63.0, median 63, max 63, 100% at cap, 1454s (SLOWER)
+
+DEFINITIVE: dense mass gives ZERO benefit -- identical 100% saturation,
+just slower per step. The earlier assumption that dense mass would cure the
+wall was WRONG (never verified until now). NUTS ALWAYS hits the tree cap
+under both mass settings, so the pathology is NOT linear correlation (which
+dense mass would fix) -- it is a non-linear geometry (funnel and/or weak
+identification / near-multimodality) that no global mass matrix
+preconditions. This is why the 8.5h run never converged: it was saturating
+throughout.
+
+Root-cause candidates (to investigate, all near the MODEL-PARAMETRIZATION
+boundary -> flagged for Bobby's ok before changing):
+  1. Variance-parameter FUNNEL: psi ~ HalfNormal (a feature driven near
+     zero unique variance funnels in log psi); and/or anchor_diag ~
+     HalfNormal near its 0 boundary. Standard fix: non-centered / softplus
+     reparametrization of the scale params, or a small floor.
+  2. Weak identification / rotation ridges among non-anchor loadings (the
+     anchors pin sign but 8 factors x 21 features leaves loading trade-offs
+     that create curved ridges).
+Neither is fixed by mass tuning; both are fixed by REPARAMETRIZATION.
+
+Options presented to Bobby (his call, this is near the model boundary and a
+strategic time decision):
+  A. Reparametrize the scale params (psi, anchor_diag) to kill the funnel
+     -- low-risk, standard, keeps the model identical in distribution; then
+     re-measure leapfrog. If steps collapse, NUTS becomes fast on THIS CPU.
+  B. If A doesn't collapse it, investigate loading-ridge identification
+     (e.g. orthogonal/QR loading parametrization) -- more invasive.
+  C. Run the current model on a GPU / many-core box (Bobby's step-2 offline
+     on better hardware) -- but 63 steps x 36ms is the per-draw floor even
+     there, so it only buys a constant factor, not efficiency.
+  D. (Last resort, needs explicit ok) SVI on full data with the surrogate
+     gates.
+NOT done: no SVI, no subsample, K frozen at 8. Awaiting Bobby's path choice.
