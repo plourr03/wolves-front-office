@@ -51,13 +51,23 @@ G3_PROXY_TARGETS = [2019, 2020, 2021]  # dev-season temporal test years
 # public tracking per-75, and the Layer 1a O/D-RAPM point estimates. The
 # RAPM SEs are NOT features -- they enter the Bayesian measurement-error
 # likelihood at the real fit, not the selection reconstruction.
-FEAT_COLS = [
-    "usg_pct", "ts_pct", "fg3a_rate", "ftr", "ast_pct", "tov_ratio",
-    "orb_pct", "drb_pct", "stl36", "blk36", "pts36", "ast36",
-    "drives_per75", "cs_fg3a_per75", "pu_fg3a_per75", "potential_ast_per75",
-    "def_rim_fga_per75", "reb_contest_rate", "avg_speed",
-    "off_rapm", "def_rapm",
+# FROZEN ORDER (2026-07-05, Path B). Layer 1b identifies the factors by a
+# lower-triangular loading matrix, so the FIRST 8 features are the factor
+# scaffolding (feature k primarily defines factor k). They are chosen as 8
+# dense, 100%-populated, conceptually distinct skill markers (the former
+# anchor set); a noisy/sparse leader would poison its factor. The remaining
+# 13 features follow in any order (their loadings are free). This order is
+# load-bearing for identification AND interpretation -- do not shuffle.
+LEADER_FEATURES = [
+    "usg_pct", "ts_pct", "fg3a_rate", "ast_pct",        # scoring/eff/spacing/playmaking
+    "drives_per75", "drb_pct", "blk36", "def_rapm",     # rim-pressure/reb/rim-prot/def
 ]
+_REST_FEATURES = [
+    "ftr", "tov_ratio", "orb_pct", "stl36", "pts36", "ast36",
+    "cs_fg3a_per75", "pu_fg3a_per75", "potential_ast_per75",
+    "def_rim_fga_per75", "reb_contest_rate", "avg_speed", "off_rapm",
+]
+FEAT_COLS = LEADER_FEATURES + _REST_FEATURES
 ZERO_FILL = ["cs_fg3a_per75", "pu_fg3a_per75"]  # legitimate zeros (no such shots)
 
 

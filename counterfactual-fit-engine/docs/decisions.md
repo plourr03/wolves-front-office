@@ -1211,3 +1211,41 @@ identification and can be dropped or kept as interpretation labels; the
 interpretability naming still works from the fitted loadings. Path B is
 gated by a fresh leapfrog probe before any full fit (standing rule). No SVI,
 no subsample, K frozen at 8.
+
+## 2026-07-05 — LAYER 1B PATH B approved (Bobby, verbatim)
+
+"LAYER 1B PATH B: approved. Lower-triangular W, positive diagonal
+(Geweke-Zhou identification). Conditions:
+1. Probe FIRST (2 chains, ~250+100, depth 6): leapfrog collapse AND
+   R-hat < 1.1 / ESS healthy on the probe before any full fit. Both,
+   not just leapfrog. Rotational fixes must show mixing, which is the
+   thing that was actually broken.
+2. Ordering caveat, verify at F3: lower-triangular identification is
+   order-dependent (the first K features define the factor basis).
+   Confirm the current feature order puts sensible, well-populated,
+   low-missingness anchor-like features in the first 8 slots. If slot
+   1 is a noisy or sparse feature, factor 1 inherits its junk. Choose
+   the first-8 feature ordering deliberately and record it as a frozen
+   config, since it now affects interpretation.
+3. Anchors: keep as interpretation labels only, identification now
+   comes from the triangular structure. Note in the record that the
+   naming exercise reads from fitted loadings regardless.
+4. If B's probe still doesn't mix: STOP, park, bring me the numbers.
+   That's three structural attempts; past it the move is offline
+   hardware on a known-good config or a real modeling rethink, not a
+   fourth in-session try.
+K frozen at 8, no SVI, no subsample."
+
+FROZEN first-8 leader feature order (condition 2), chosen as 8 dense,
+high-quality, conceptually distinct skill markers (the former anchor set):
+  0 usg_pct (scoring load), 1 ts_pct (efficiency), 2 fg3a_rate (spacing),
+  3 ast_pct (playmaking), 4 drives_per75 (rim pressure),
+  5 drb_pct (rebounding), 6 blk36 (rim protection),
+  7 def_rapm (defensive impact).
+All 100% populated within the fit population (rotation player-seasons);
+each defines factor k's scaffolding by construction. Order frozen in
+skill_factors.LEADER_FEATURES; the remaining 13 features follow. Anchors
+retained as labels only. Path B gated by a fresh probe requiring BOTH
+leapfrog collapse AND R-hat<1.1/healthy ESS. If B's probe fails: STOP/park
+(three structural attempts is the ceiling; then offline hardware or a
+modeling rethink, not a fourth in-session try).

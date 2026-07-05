@@ -70,11 +70,11 @@ ANCHORS = {
     6: "blk36",              # rim protection
     7: "def_rapm",           # overall defensive impact
 }
-# Path A funnel-fix constants: psi = PSI_FLOOR + softplus(PSI_LOC + N(0,1)),
-# anchor_diag = ANCHOR_FLOOR + softplus(ANCHOR_LOC + N(0,1)). LOCs set the
-# implied prior scale (psi median ~0.5 unique-std; anchors large markers).
+# Reparam constants: positive scale params sampled as floor + softplus(LOC +
+# N(0,1)) -- smooth, no funnel neck. psi = unique std per feature (median
+# ~0.5). W_diag = the triangular positive diagonal (Path B, median ~0.8).
 PSI_FLOOR, PSI_LOC = 0.05, -0.5
-ANCHOR_FLOOR, ANCHOR_LOC = 0.1, 1.0
+DIAG_FLOOR, DIAG_LOC = 0.1, 0.0
 
 ANCHOR_LABELS = {
     0: "scoring load", 1: "scoring efficiency", 2: "spacing",
@@ -111,41 +111,38 @@ def _model(Y, SE2, anchor_idx):
     import numpyro.distributions as dist
 
     n, p = Y.shape
-    # Free loadings: FIXED-scale weakly-informative Normal (features are
-    # standardized, so a unit-scale prior comfortably covers the O(0.3-0.5)
-    # loadings while shrinking noise). A hierarchical (learned) scale funnels
-    # against the loadings when the data is this informative (3475+ rows),
-    # saturating the NUTS tree depth and making the fit intractable -- a
-    # sampler-geometry pathology, NOT a structural issue (2026-07-03). Fixing
-    # the scale removes the funnel; the Normal-shrinkage family and the whole
-    # factor/anchor/measurement-error structure are unchanged. Direct
-    # (centered) parametrization is correct here because the likelihood, not
-    # the prior, dominates.
-    W_free = numpyro.sample("W_free", dist.Normal(0.0, 1.0).expand([p, K]).to_event(2))
-    # PATH A (2026-07-05): scale params reparametrized to kill the variance
-    # FUNNEL. The measurement proved BOTH diagonal AND dense mass saturate
-    # the NUTS tree cap (63/63 every draw) -> a non-linear funnel geometry,
-    # not linear correlation. A HalfNormal scale funnels in its log tail when
-    # the likelihood drives it toward 0 (a feature well-explained by the
-    # factors -> psi->0; a strong marker -> anchor_diag large but its 0-tail
-    # still pinches). Sampling in an UNCONSTRAINED Normal through softplus +
-    # a small floor removes the neck (smooth everywhere, no boundary), while
-    # keeping a weakly-informative positive prior of the same scale. psi and
-    # anchor_diag are exposed via deterministic so downstream code is
-    # unchanged. Distributionally ~identical (weakly-informative positive).
+    # PATH B (2026-07-05): LOWER-TRIANGULAR loadings with a POSITIVE DIAGONAL
+    # (Geweke-Zhou factor-analysis identification). The measurement proved
+    # both diagonal and dense mass saturate the tree cap AND the chains do
+    # not mix (R-hat 2.02, ESS 3): the marginalized likelihood sees only
+    # W Wᵀ, which is invariant under W -> W R for orthogonal R, so the
+    # posterior has FLAT ROTATION RIDGES. Pure-marker anchors (Path A) pinned
+    # only K diagonal entries and left the ridge; a lower-triangular
+    # positive-diagonal W is a UNIQUE representative of each W Wᵀ orbit, so
+    # the ridge collapses to a point and NUTS can mix. The first K features
+    # (FEAT_COLS[:K] = LEADER_FEATURES, frozen) are the factor scaffolding:
+    # feature k loads on factors 0..k only, with W[k,k] > 0. The remaining
+    # p-K features load freely on all K factors. Anchors are now labels only.
+    W_diag_raw = numpyro.sample(
+        "W_diag_raw", dist.Normal(0.0, 1.0).expand([K]).to_event(1))
+    W_diag = DIAG_FLOOR + jax.nn.softplus(DIAG_LOC + W_diag_raw)   # positive
+    n_lower = K * (K - 1) // 2
+    W_lower = numpyro.sample(
+        "W_lower", dist.Normal(0.0, 1.0).expand([n_lower]).to_event(1))
+    W_rest = numpyro.sample(
+        "W_rest", dist.Normal(0.0, 1.0).expand([p - K, K]).to_event(2))
+
+    Wtop = jnp.zeros((K, K))
+    Wtop = Wtop.at[jnp.diag_indices(K)].set(W_diag)
+    tr, tc = jnp.tril_indices(K, -1)                 # strictly-lower entries
+    Wtop = Wtop.at[tr, tc].set(W_lower)
+    W = numpyro.deterministic("W", jnp.concatenate([Wtop, W_rest], axis=0))
+
+    # psi: softplus reparam retained (smooth positive, no funnel), exposed
+    # via deterministic so downstream code reads samples["psi"] unchanged.
     psi_raw = numpyro.sample("psi_raw", dist.Normal(0.0, 1.0).expand([p]).to_event(1))
     psi = numpyro.deterministic(
         "psi", PSI_FLOOR + jax.nn.softplus(PSI_LOC + psi_raw))
-    anchor_raw = numpyro.sample(
-        "anchor_raw", dist.Normal(0.0, 1.0).expand([K]).to_event(1))
-    anchor_diag = numpyro.deterministic(
-        "anchor_diag", ANCHOR_FLOOR + jax.nn.softplus(ANCHOR_LOC + anchor_raw))
-
-    W = W_free
-    for k in range(K):
-        a = anchor_idx[k]
-        W = W.at[a, :].set(0.0)
-        W = W.at[a, k].set(anchor_diag[k])
 
     log2pi = jnp.log(2.0 * jnp.pi)
 
@@ -195,8 +192,8 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
                 chain_method=L1B.get("chain_method", "sequential"))
     mcmc.run(jax.random.PRNGKey(SEED), Y=Y, SE2=se2, anchor_idx=anchor_idx)
     idata = az.from_numpyro(mcmc)
-    summ = az.summary(idata, var_names=["W_free", "anchor_raw", "psi_raw"],
-                      round_to="none")
+    summ = az.summary(idata, var_names=["W_diag_raw", "W_lower", "W_rest",
+                                        "psi_raw"], round_to="none")
     health = {"worst_r_hat": float(summ.r_hat.max()),
               "min_ess_bulk": float(summ.ess_bulk.min()),
               "n_rows": int(Y.shape[0]), "K": K, "tag": dev_tag}
@@ -204,15 +201,9 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
 
 
 def _reassemble_W(samples, anchor_idx, p):
-    """(S, p, K) loading draws with the anchor structure applied."""
-    Wf = np.asarray(samples["W_free"])              # (S, p, K)
-    ad = np.asarray(samples["anchor_diag"])          # (S, K)
-    W = Wf.copy()
-    for k in range(K):
-        a = anchor_idx[k]
-        W[:, a, :] = 0.0
-        W[:, a, k] = ad[:, k]
-    return W
+    """(S, p, K) loading draws. Path B exposes the assembled lower-triangular
+    W directly via numpyro.deterministic, so this just returns it."""
+    return np.asarray(samples["W"])                  # (S, p, K)
 
 
 def factor_scores(Y, se2, samples, anchor_idx, n_draw=200, seed=SEED):
