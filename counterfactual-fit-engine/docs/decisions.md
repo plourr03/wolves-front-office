@@ -1249,3 +1249,49 @@ retained as labels only. Path B gated by a fresh probe requiring BOTH
 leapfrog collapse AND R-hat<1.1/healthy ESS. If B's probe fails: STOP/park
 (three structural attempts is the ceiling; then offline hardware or a
 modeling rethink, not a fourth in-session try).
+
+## 2026-07-05 — PATH B NEGATIVE (probe): PARKED at the 3-attempt ceiling (Bobby cond 4)
+
+Path B probe (lower-triangular positive-diagonal W, diagonal mass, depth-6,
+2 chains 250+100):
+  PATHB_RESULT: mean_leapfrog 63.0 | frac_at_cap 100% | worst_Rhat 2.252
+                | min_ESS 3 | 2059s
+Identical 63/63 saturation, and R-hat 2.25 (WORSE than Path A's 2.02). The
+triangular identification did NOT collapse the steps or fix mixing.
+
+Three structural attempts now, all saturating at EXACTLY 63/63 with R-hat
+~2, ESS 3:
+  1. pure-marker anchors     -> 63/63, R-hat 2.02
+  2. softplus scale reparam  -> 63/63, R-hat 2.02 (funnel ruled out)
+  3. lower-triangular ID      -> 63/63, R-hat 2.25 (rotation-ID ruled out)
+PARKED per Bobby condition 4 (three attempts is the ceiling; no fourth
+in-session structural try). K frozen at 8, no SVI, no subsample.
+
+HONEST ANALYSIS for Bobby's decision:
+- The identical 63/63 across three DIFFERENT identification schemes says the
+  saturation is NOT primarily rotation/identification. Something more
+  fundamental in the marginalized measurement-error geometry over 5,838
+  rows.
+- R-hat ~2 with ESS 3 means the 2 chains sit in DIFFERENT regions -> genuine
+  multi-basin / non-mixing, not just slow convergence (overlapping slow
+  chains would give R-hat near 1). This points at MULTIMODALITY (factor
+  models are classically multimodal) that no reparametrization removes.
+- CONFOUND CAVEAT: with every draw saturating at 63 steps, a 250-warmup
+  probe barely moves, so some of the high R-hat is under-exploration. The
+  one lever NOT yet tried is a mass matrix on the triangular model: dense
+  mass failed on the ANCHOR model only because of the (now-removed) rotation
+  ridge; on the triangular model it targets any residual LINEAR correlation.
+  It is a SAMPLER setting (not a 4th structural attempt), but it is slow on
+  this CPU (earlier dense runs never finished a small probe).
+
+OPTIONS for Bobby (his call, per the ceiling):
+  A. One triangular+DENSE-mass probe to disambiguate mass-matrix vs genuine
+     multimodality (sampler setting; ~40 min or slow).
+  B. Offline hardware (GPU / many-core) on the known-good triangular config,
+     with a longer warmup so mixing has room to show.
+  C. Modeling rethink: the marginalized measurement-error factor model may
+     be multimodal at K=8; options include an initialization from the FA/PCA
+     solution (warm-start the chains at a shared mode), tempering, or the
+     pre-registered v2 one-stage structure -- but these are F3 design
+     decisions for Bobby, not in-session.
+Not shipping vectors. Awaiting Bobby's path choice.
