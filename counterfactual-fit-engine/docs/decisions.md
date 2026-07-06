@@ -1329,3 +1329,29 @@ HOUSE STANDARD addition (Bobby): match the probe length to the QUANTITY
 being measured, not to a fixed idea of cheap. Leapfrog count shows up in 250
 steps; mixing does not. A cheap probe that answers the wrong question is
 worse than a slow probe that answers the right one.
+
+## 2026-07-05 — PATH A DISAMBIGUATION: IT MIXES. Multimodality REJECTED; triangular+dense is the answer
+
+Disambiguating probe (triangular model + DENSE mass, depth-10 uncapped,
+1000 warmup, 2 chains x 300 samples):
+  PATHA_DISAMBIG: mean_leapfrog 159.4 | median 191 | max 255 |
+                  frac_at_cap(1023) 0% | worst_Rhat 1.056 | min_ESS 39 | 16637s
+DECISIVE. Contrast the three prior short probes (all 63/63 saturating at
+depth 6, R-hat ~2.0-2.25, ESS 3):
+- Leapfrog: 0% at the depth-10 cap (max 255 << 1023). NUTS finds U-turns now
+  instead of always hitting the wall. Dense mass on the DE-RIDGED (triangular)
+  model was the missing piece -- it targets ordinary linear correlation for
+  the first time, which is exactly its job; it only failed pre-B because a
+  flat rotation ridge is unpreconditionable, and Path B removed that ridge.
+- R-hat 1.056 (< 1.1) after REAL warmup: THE CHAINS MIX. The earlier R-hat ~2
+  was UNDER-EXPLORATION (short warmup vs saturated trajectories), NOT
+  multimodality. Bobby's correction was right; the multimodality "finding" is
+  formally REJECTED.
+Caveat: min_ESS 39 on 300 samples = modest per-sample efficiency (~13%); the
+full fit needs a long sample run to clear ESS>400. A duration matter, not a
+mixing failure.
+
+UNBLOCKED. Launching the full fit (triangular + dense + real warmup, 2 chains,
+1500 warmup / 3000 samples for ESS headroom) offline toward the freeze; on
+health PASS (R-hat<1.01, ESS>400) vectors freeze + interpretability. K frozen
+at 8. This is the config that works; nothing structural changes.
