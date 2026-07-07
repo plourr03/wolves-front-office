@@ -1,8 +1,11 @@
 [
  {
   "factor": 0,
-  "anchor": "usg_pct",
+  "name": "offensive engine",
+  "leader_feature": "usg_pct",
   "provisional_label": "scoring load",
+  "drift_from_leader": false,
+  "honest_read": "High-usage on-ball creation load. usg (+1.00), scoring volume, drives, pull-up 3s, playmaking gravity. High: Westbrook, Harden, Embiid, Luka, Giannis. Leader owns the axis.",
   "top_positive_features": [
    [
     "usg_pct",
@@ -61,7 +64,7 @@
     3.91
    ],
    [
-    "Luka Don\u010di\u0107 2021-22",
+    "Luka Dončić 2021-22",
     3.72
    ],
    [
@@ -94,8 +97,11 @@
  },
  {
   "factor": 1,
-  "anchor": "ts_pct",
+  "name": "interior finishing",
+  "leader_feature": "ts_pct",
   "provisional_label": "scoring efficiency",
+  "drift_from_leader": false,
+  "honest_read": "Low-usage rim-finishing efficiency, NOT general scoring efficiency. ts% (+0.81) flanked by center markers (orb%, def_rim_fga). High end is unanimously rim-running / putback centers (Gafford, Bruno Fernando, Beringer 25-26), not efficient wings or stars.",
   "top_positive_features": [
    [
     "ts_pct",
@@ -187,8 +193,11 @@
  },
  {
   "factor": 2,
-  "anchor": "fg3a_rate",
+  "name": "spacing",
+  "leader_feature": "fg3a_rate",
   "provisional_label": "spacing",
+  "drift_from_leader": false,
+  "honest_read": "Three-point shooting volume / floor spacing. fg3a_rate (+0.98) and catch-shoot 3PA (+0.90) dominate. High: Merrill, Bertans, Hauser. Low: non-shooting interior bigs.",
   "top_positive_features": [
    [
     "fg3a_rate",
@@ -280,8 +289,11 @@
  },
  {
   "factor": 3,
-  "anchor": "ast_pct",
+  "name": "playmaking",
+  "leader_feature": "ast_pct",
   "provisional_label": "playmaking",
+  "drift_from_leader": false,
+  "honest_read": "On-ball, pass-first assist creation. ast36 / potential_ast / ast% cluster (+0.83 to +0.88). High: Rondo, McConnell, Haliburton. Skewed toward pass-first accumulator guards.",
   "top_positive_features": [
    [
     "ast36",
@@ -350,7 +362,7 @@
   ],
   "exemplars_low": [
    [
-    "Kristaps Porzi\u0146\u0123is 2017-18",
+    "Kristaps Porziņģis 2017-18",
     -2.52
    ],
    [
@@ -373,8 +385,11 @@
  },
  {
   "factor": 4,
-  "anchor": "drives_per75",
+  "name": "perimeter quickness",
+  "leader_feature": "drives_per75",
   "provisional_label": "rim pressure",
+  "drift_from_leader": true,
+  "honest_read": "Guard-vs-big size axis, NOT rim pressure. Owned by the negative interior pole (def_rim_fga, drb%, reb_contest, orb%, blk all -0.4 to -0.6); leader drives_per75 only +0.33. High: small/fast perimeter players (M. Howard, S. Brown, SGA). Low: rim-anchoring bigs (Jokic scores lowest). Measures backcourt smallness via absence of interior work.",
   "top_positive_features": [
    [
     "drives_per75",
@@ -447,7 +462,7 @@
     -3.86
    ],
    [
-    "Nikola Joki\u0107 2025-26",
+    "Nikola Jokić 2025-26",
     -3.69
    ],
    [
@@ -459,15 +474,18 @@
     -3.55
    ],
    [
-    "Nikola Joki\u0107 2021-22",
+    "Nikola Jokić 2021-22",
     -3.54
    ]
   ]
  },
  {
   "factor": 5,
-  "anchor": "drb_pct",
+  "name": "perimeter disruption",
+  "leader_feature": "drb_pct",
   "provisional_label": "rebounding",
+  "drift_from_leader": true,
+  "honest_read": "Steals and deflections / event defense, NOT rebounding. stl (+0.55) dominates (2x anything else), def_rapm (-0.36) second; leader drb_pct only +0.13. High: Thybulle, Covington, Reed. Low: stationary offense-first shooters.",
   "top_positive_features": [
    [
     "stl36",
@@ -547,8 +565,12 @@
  },
  {
   "factor": 6,
-  "anchor": "blk36",
+  "name": "shot-blocking",
+  "leader_feature": "blk36",
   "provisional_label": "rim protection",
+  "drift_from_leader": false,
+  "honest_read": "Block RATE / raw swat production, narrower than defensive value. blk36 (+0.48) leads, def_rim_fga (+0.29) reinforces. High: Turner, Wembanyama, Boucher, Pelle, Anthony.",
+  "footnote": "Tracks block PRODUCTION, not team-defense VALUE: def_rapm (-0.23) and off_rapm (-0.17) load ~0/negative, so high block-rate specialists here are not necessarily high-value defenders.",
   "top_positive_features": [
    [
     "blk36",
@@ -632,8 +654,11 @@
  },
  {
   "factor": 7,
-  "anchor": "def_rapm",
+  "name": "pull-up shooting",
+  "leader_feature": "def_rapm",
   "provisional_label": "defensive impact",
+  "drift_from_leader": true,
+  "honest_read": "Off-the-dribble / pull-up shot creation, NOT defense. pull-up 3PA (+0.40) dominates (~2.5x leader def_rapm +0.16); catch-shoot 3PA (-0.28) is the negative pole. High: Harden, Luka, Lillard (offensive engines, zero defensive character). stl loads negative, i.e. against event defense.",
   "top_positive_features": [
    [
     "pu_fg3a_per75",
@@ -676,7 +701,7 @@
     5.8
    ],
    [
-    "Luka Don\u010di\u0107 2021-22",
+    "Luka Dončić 2021-22",
     4.16
    ],
    [

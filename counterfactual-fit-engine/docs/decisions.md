@@ -1462,3 +1462,50 @@ NAMING CALL IS BOBBY'S. Vectors are frozen and shippable as-is regardless of
 labels (Project 2 consumes the numeric vectors, not the names). The names are
 an editorial/interpretability layer: 3 clean as-is, 2 nameable with a narrowed
 label, 3 needing a rename to what they actually measure.
+
+## 2026-07-06 — FACTOR NAMES FROZEN (Bobby's editorial call) + drift is a finding, not a label fix
+
+Bobby's ruling (verbatim), frozen into the interpretability export (name field;
+the honest data-driven reads ship, NOT the aspirational anchor labels):
+
+  z0 offensive engine       [as proposed]
+  z1 interior finishing     [sharpened from "rim-finishing efficiency"]
+  z2 spacing                [as proposed]
+  z3 playmaking             [as proposed]
+  z4 perimeter quickness    [size axis; honest about Jokic-low]
+  z5 perimeter disruption   [as proposed; steals/deflections]
+  z6 shot-blocking          [block RATE, not defensive value; footnote def_rapm ~0/neg]
+  z7 pull-up shooting       [sharpened from "shot creation"; NOT defense]
+
+  "Freeze these; leave the honest data-driven reads in the export, not the
+  aspirational originals."
+  "LOG: the three defensive/hustle drifts are a real finding, not just a
+  labeling fix. Flagship honesty section notes offensive fit is sharply
+  identified and defensive fit is softer at public-data resolution, which is
+  the clean motivation for Project 6. v2 defensive-leader reassignment logged."
+
+Implemented: FROZEN_FACTOR_NAMES + FACTOR_DRIFT + FACTOR_HONEST_READ +
+FACTOR_FOOTNOTE in src/models/skill_factors.py; the export builder now writes
+name / leader_feature / provisional_label / drift_from_leader / honest_read
+(+ footnote on z6) per factor. Code names reconcile 1:1 with the already-frozen
+outputs/skill_vectors/interpretability_full.json (verified). A regenerate
+reproduces the frozen names; K stays 8, vectors unchanged.
+
+FINDING (logged, load-bearing): the three drifts (z4/z5/z7) are all
+defensive/hustle factors, and in each the assigned leader (drives_per75,
+drb_pct, def_rapm) was outloaded by a free feature and contradicted by the
+exemplars. The offensive factors (z0-z3) are sharply identified: leader owns
+the axis, exemplars are the textbook archetype. The defensive side is softer at
+PUBLIC-DATA resolution: box/tracking/RAPM cannot cleanly separate rim
+protection, event defense, and team-defense value, so those axes reorganize
+around whatever public signal is strongest (blocks, steals, size). This is not
+a modeling bug to patch on the frozen K=8; it is a real limit of the input
+resolution, and it is the clean, honest motivation for PROJECT 6 (richer
+defensive measurement). The flagship writeup's honesty section states exactly
+that asymmetry (offense sharply identified, defense softer) rather than
+papering the drifted labels.
+
+V2 (future refit, NOT now): revisit the defensive-leader feature assignment
+(the first-8 triangular scaffolding) for the defensive block. Candidates: let
+the defensive factors be leader-free, or choose leaders that actually own their
+axis at public-data resolution. Logged; no action against the frozen vectors.
