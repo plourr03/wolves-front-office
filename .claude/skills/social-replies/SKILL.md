@@ -1,112 +1,156 @@
 ---
 name: social-replies
-description: Draft a sharp, data-backed reply to a Reddit or X (Twitter) post about the Minnesota Timberwolves, grounded in the trade model, cap runs, and warehouse so every claim traces to real numbers, written in Bobby's own fan voice as a starting draft for him to rewrite and post himself. This is a co-pilot: it finds the data and drafts the analysis, and it NEVER scrapes threads or posts on its own. Use this whenever Bobby pastes a Reddit thread, comment, tweet, or a link to one and wants to weigh in, asks "how should I reply to this" or "what would I say here," wants to answer a fan question with real analysis, or wants to turn a Wolves discussion into a credible comment that grows the account. Trigger even if he just pastes a thread and says "respond to this," "help me answer this," or names a topic he wants to jump into on r/timberwolves or Wolves Twitter.
+description: Draft a Reddit or X (Twitter) reply about the Minnesota Timberwolves that actually lands, by deeply reading the post, deciding the right TYPE of response on purpose (serious analysis, agree-and-add, a dry data-backed one-liner, a straight joke, a hot take, a question, a gentle correction, or skip), and then writing it in Bobby's casual fan voice as a starting draft he rewrites and posts himself. Grounded in the trade model and warehouse whenever analysis is what the room wants. This is a co-pilot: it analyzes and drafts, it NEVER scrapes threads or posts on its own, and it will honestly tell Bobby when the best move is one line or no comment at all. Use this whenever Bobby pastes a Reddit thread, comment, tweet, or a link and wants to weigh in, asks "how should I reply to this," "what would I say here," "should I even comment on this," wants to answer a fan question with real analysis, or wants to turn a Wolves discussion into a comment that grows the account. Trigger even if he just pastes a thread and says "respond to this," "help me answer this," or names a topic he wants to jump into on r/timberwolves or Wolves Twitter.
 ---
 
 # Wolves to a T: Social Replies
 
-Turn a Reddit or X post about the Timberwolves into a reply that is the smartest, most grounded take in the thread, backed by the trade model and the warehouse, and written so it sounds like Bobby. The goal is not clicks. The goal is to be the most useful voice in the room so that people click the profile on their own and follow the trail home.
+Turn a Reddit or X post into a comment that grows the account. The point is NOT to win the thread on upvotes. It is to reach the handful of close readers who see something sharp, click the profile, and follow. This skill reads the post carefully, decides the right TYPE of response on purpose, drafts it, then checks the draft is actually the best call before handing it to Bobby. It will tell Bobby honestly when the right move is one dry line or no comment.
+
+Rebuilt from four real threads where Bobby's comment was the smartest in the room and still got a single upvote. The autopsies are in `references/thread-teardowns.md`. Read them whenever the read on a post or the right response type is unclear; they are the ground truth behind every rule here.
 
 ## The one rule that governs everything: co-pilot, never auto-poster
 
 This skill drafts. Bobby posts. Always, no exceptions.
 
 - It NEVER scrapes threads, monitors subreddits, or posts comments on its own.
-- It produces a starting draft. Bobby rewrites it in his own words, adds his own judgment, and posts it as himself. The final comment has to be genuinely his take, tool-assisted, not a copy-paste of model output.
-- Why this is non-negotiable: the entire strategy works because a real person who knows ball did the homework. Reddit and X can smell a generic AI comment instantly, and getting tagged as "the guy running bot replies" would vaporize the exact credibility being built. It also cuts against platform rules on automation and self-promotion, and a ban kills the channel outright.
+- It produces a starting draft. Bobby rewrites it in his own words and posts it himself. The final comment has to be genuinely his, tool-assisted, not a copy-paste of model output.
+- Why: the whole thing works because a real person who knows ball did the homework. Getting tagged as a bot account would vaporize the credibility being built, and it violates platform rules on automation and self-promotion. A ban kills the channel outright.
 
-If a request ever implies auto-posting or bulk-generating comments to spray around, stop and reframe it back to the co-pilot workflow.
+If a request implies auto-posting or mass-generating comments, stop and reframe it back to this workflow.
 
-## Workflow
+## The second rule: verify before you draft, never after
 
-Input can be pasted text (a thread, a comment, a tweet) or a link. If it is a link, read it first; if it is text, use it directly. Then:
+Every factual claim in a draft gets checked against the data BEFORE it is handed to Bobby, not after he posts it. Bobby's whole edge is that a person who knows ball did the homework. A confident claim that the numbers quietly contradict does the opposite of growing the account: it makes him look like he is guessing, and forces a public backtrack in front of the exact close readers he is trying to win. One wrong "actually" undoes ten sharp reads.
 
-1. **Read the prompt for what is actually being asked, and answer THAT.** Parse the literal ask and the human intent behind it before doing anything else. Many posts are a plain question that just wants a plain take: "would you trade X for Y if it meant getting Z" is usually just asking "yes or no, and why," and the honest answer is often a simple "yeah, obviously." State the ask in one line. Reframe ONLY when there is a genuinely better question hiding that the asker would find illuminating (e.g. "can we afford to re-sign Ayo" really is "are we OK operating as a first-apron team"). Do NOT substitute a more technical or clever question for the simple one they meant. Over-reframing a straightforward hypothetical into a cap-mechanics lecture answers a question nobody asked. When the answer is "yes, obviously," lead with that in plain language, take the side, and add at most one grounded layer on top.
-2. **Inventory what's already been said, then pull the data.** Before drafting, list what the post asserts AND the obvious common takes floating around the topic. Treat all of it as known ground the reply must get past (see the add-don't-reiterate guardrail). Then query the warehouse and model for the numbers that answer it (see Data sources). Every factual claim in the draft must trace to something real. If the data does not support a claim, do not make the claim.
-3. **Verify any stat the post cites, including its season.** If the post drops a number (On-Off, EPM, a per-game line), check it before amplifying it, and check WHICH SEASON it is from. Raw stats swing wildly year to year (a hurt year vs a healthy year), and posters routinely splice a stat from one season onto a claim about another. Reframe raw team splits (On-Off, team-offense-with-him-on) toward isolated impact (RAPM), which strips out how bad the supporting cast was without him. Do not correct a poster's season pedantically in public; fold the correct read in so the reply is simply right.
-4. **Draft in Bobby's voice.** A few tight paragraphs, casual register (see Voice and format). Grant the point, sharpen or flip the frame, add the one angle they don't have, land it.
-5. **Hand it back for editing.** Output the draft, plus a short note on which data or model output it used, plus any flags. Good flag set from experience: which cited stats are verified-safe, which are shaky or wrong (so he doesn't lean on them), any sub self-promo rule, and any place Bobby's own read should override. Bobby sharpens it and posts.
+This is not the same as "cite a number." The failure mode is subtler and it has already burned us:
+
+- **Match the instrument to the claim.** Pull the stat that measures the thing you are actually asserting. A net-value metric (RAPM, DPM, surplus) answers "how good/valuable is he." It does NOT answer "what is his role," "is he a low-usage spot-up guy," "is he a good shooter," "can he defend the point of attack." Those need usage rate, synergy play-type share, shooting splits, position-specific defense. Using a net number to settle a role or style claim is the wrong instrument, and it will be confidently wrong. (This is the Green/Ayo miss: the draft said "they grade the same, so Ayo fits both units" and "Green's coasting on a shooter rep he hasn't earned," using RAPM to adjudicate a usage/role question. The synergy data said the opposite, Green was 60% spot-up at .626 eFG, and Bobby had to backtrack.)
+- **The riskier the line, the harder the check.** Any draft that pushes back, corrects, or says "actually" is a claim you are staking his credibility on. Those get verified against the warehouse first, no exceptions. If you cannot pull the number that backs a corrective line, the line does not ship, downgrade to a question or a softer frame.
+- **If the data is not pulled, say so out loud.** A draft resting on an unverified assumption gets flagged as such in the handoff ("i have not checked X"), and ideally you go pull X before finishing. Never present an unchecked empirical claim as if it were grounded.
+- **Pulling the data can change the take, and that is a feature.** If the numbers refute the draft, the honest reply, or a graceful concession, is the better product. Better to change the take in the workspace than to change it in the thread.
+
+## What actually gets rewarded (read this once)
+
+Upvotes and comment quality are barely related. Upvotes are a crowd reflex that rewards, in rough order: getting there early, sitting high on the page, brevity, and matching the room's mood. Followers, the thing that actually grows the account, come from the few close readers who value a sharp take enough to click the name. The comment that earns 300 upvotes and the comment that earns a follow are usually not the same comment. So the job is to get in front of those close readers without getting buried, and to spend deep analysis only where the room rewards it.
+
+## The workflow: analyze, choose the type, draft, check
+
+Do these four in order, every time. Do not skip straight to drafting.
+
+### Step 1: Analyze the post and the room
+
+Before anything, actually read it. Write out, briefly:
+
+- **The literal ask.** What is the post saying or asking, in one line.
+- **The real intent underneath it.** What does the poster actually want: a debate, validation for a take they already hold, a laugh, information, or just to vent. These want very different replies.
+- **The room's mood.** Read the top three comments. Are they arguments, hopeful agreement, or jokes and one-liners? That is the genre (debate, hype, roast) and it sets what the room will reward right now.
+- **What is already said and already crowned.** List what the post and the obvious common takes already cover, and note the current top comment. All of it is off-limits to repeat, especially a point the room has already upvoted as a one-liner.
+- **Do I actually have something additive.** If the honest answer is no, the right output is skip. Do not manufacture a take.
+
+### Step 2: Choose the response type, on purpose, and say why
+
+This is the key decision. Pick ONE type from the menu, name it, and justify why it is the best fit for THIS specific post and room. Genre is a strong hint, not an automatic answer; use judgment.
+
+The menu:
+
+- **Serious analysis.** A real breakdown grounded in the model. Fits debate threads and genuine questions where people are reasoning. This is Bobby's superweapon, but only in the right room.
+- **Agree and add.** A full beat of genuine agreement, then one wrinkle that is optimistic AND novel. Fits hype and hope threads, and replying to a good take you mostly share.
+- **Dry data-backed one-liner.** A single line in the room's voice that happens to be true because the numbers back it. Fits roast and vibe threads where a paragraph would die but a sharp one-liner wins.
+- **Straight joke or light line.** Sometimes the room just wants funny and there is no data angle worth forcing. A genuinely good short joke beats a mediocre analysis in a roast thread.
+- **Hot take.** A short, bold, defensible claim that cuts against the easy consensus. Can spike in debate or hype threads if it is genuinely provocative and you can back it. Use sparingly and never contrarian just for attention.
+- **Genuine question.** Ask something that moves the thread forward. Good when you can advance the conversation without needing to assert, and it invites replies.
+- **Gentle correction.** When the post leans on a wrong or misdated stat, fold in the right read as a soft nuance ("one nuance on that number"), never a gotcha.
+- **Skip.** Often the correct answer: nothing additive to add, the thread is settled, the only landing spot is under a buried comment, or it is the wrong room for what you have. Recommend the better thread or a standalone post instead.
+
+State the pick like: "This is a roast thread and the top comment already nailed the joke, so the move is a single dry line or a skip, not analysis."
+
+### Step 3: Draft in that type
+
+Now write it, in Bobby's register (see Voice), matching the type chosen.
+
+Rules that apply to every type:
+- **Lead with the most novel thing, short.** The first line is the thing nobody else said, standing alone. Do not build to it over two paragraphs.
+- **Add, never reiterate.** Cut any line that re-explains what the post or the top comments already said.
+- **Right length.** Shorter than you think. Roast and hype replies are a line or two. Even a debate reply is a few short paragraphs Bobby will trim.
+
+Before you write any line that asserts a fact, pull the stat that measures it (see "The second rule"). Do not draft the claim first and plan to check it later, the checking decides whether the claim survives.
+
+Type-specific shapes:
+- *Analysis:* real ask in one line, verify any cited stat and its SEASON, reframe raw On-Off toward RAPM, pull the numbers (see Data sources), add the marginal layer, land it.
+- *Agree and add:* real agreement first, then the one optimistic-and-novel wrinkle, then at most one soft caveat, close human. Never open with the disagreement.
+- *One-liner or joke:* one line, in the room's voice. NEVER explain or annotate a joke the room already crowned; that reads like explaining why a joke is funny and it kills it.
+
+### Step 4: Check it is the right call (the perfection pass)
+
+Before handing it over, run the draft against these. If it fails one, fix it or drop to a shorter type or skip.
+
+- **Right type for this room?** Would this specific room reward this, or upvote-ignore it? An analysis in a roast thread fails here.
+- **Novel first line?** Is the opening the thing nobody else said, or a restatement of a crowned take?
+- **Nothing repeated?** Does every sentence add something not already in the post or the top comments?
+- **Right length and register?** Casual, lowercase, phone-typed, no journal voice, and no longer than it needs to be.
+- **Grounded, and checked with the RIGHT stat?** Does every checkable claim trace to data you actually pulled, using the metric that measures THAT claim (usage/synergy/shooting for role and style, not a net-value number)? Projections labeled? Any corrective or pushback line verified against the warehouse first? If a claim is not backed, cut it or downgrade to a question. Guessing here is what forces a public backtrack.
+- **Position sane?** Is this landing top-level or under a strong comment, not buried under a dead one?
+
+## What to hand Bobby
+
+Output four things, so he can see the judgment and adjust:
+1. **The read:** one or two lines on the post's intent and the room's mood and genre.
+2. **The call:** which response type, and why it fits (or a recommendation to skip).
+3. **The draft:** in his voice, ready for him to rewrite.
+4. **Flags:** which cited stats are verified-safe versus shaky, any sub self-promo rule, and any spot his own read should override.
 
 ## Data sources
 
 Use the existing stack. Pull only what the question needs and map to the live schema.
 
-- **Cap and apron picture:** the current cap run (committed salary, distance to tax, first apron, second apron, available exceptions). This answers most "can we afford / can we sign / are we hard-capped" questions.
-- **Trade grades:** `chain_engine.py` for multi-step sequences, `trade_search.py` / `evaluate_move.py` for single trades and CBA legality. This answers "should we trade X for Y," "is this deal legal," "does this help."
-- **Player value and fit:** `player_value.csv` (RAPM blended with BPM), `player_surplus.csv` (value minus contract), `team_needs` / posture. This answers "is this player good," "does he fit," "is this contract worth it." Note the split: `consensus_off` / `consensus_def` / `consensus_net` are the blended value; RAPM (teammate-and-opponent-controlled) is the number to reach for whenever a post leans on a raw On-Off or team-split stat, because it is the deconfounded version of exactly that.
-- **Championship evals:** the full player-specific evaluations in `lamelo/` (and clones like `alebron/`) hold deep, already-verified numbers on fit, availability, the defensive/offensive tax, sim-based title deltas, and built-in comparisons (e.g. the Gobert defensive-lift estimate). When a post is about a star the Wolves added or might add, fan out across that eval before drafting rather than re-deriving. These are also Bobby's published positions, so the reply must stay consistent with them.
+- **Cap and apron picture:** the current cap run (committed salary, distance to tax, first apron, second apron, exceptions). Answers "can we afford / sign / are we hard-capped."
+- **Trade grades:** `chain_engine.py` for multi-step sequences, `trade_search.py` / `evaluate_move.py` for single trades and CBA legality. Answers "should we trade X for Y," "is this legal," "does this help."
+- **Player value and fit:** `player_value.csv` (RAPM blended with BPM), `player_surplus.csv` (value minus contract), `team_needs` / posture. Note the split: `consensus_off` / `consensus_def` / `consensus_net` are the blended value; reach for RAPM (teammate- and opponent-controlled) whenever a post leans on a raw On-Off or team split, because it is the deconfounded version of exactly that.
+- **Championship evals:** the player-specific evaluations in `lamelo/` (and clones like `alebron/`) hold verified numbers on fit, availability, the offensive and defensive tax, sim-based title deltas, and built-in comparisons. When a post is about a star the Wolves added or might add, read that eval before drafting rather than re-deriving. These are also Bobby's published positions, so replies must stay consistent with them.
 - **Contracts:** the verified contract table for exact salaries, options, and Bird status.
 
-Same integrity bar as the posts: every number traces to the model or a cap run, projections are labeled as projections, and anything selling-side or out-of-lane is flagged as lower-confidence rather than stated as fact.
+- **Role, usage, and style claims:** usage rate and assist share (`nba_player_advanced_stats`), synergy play-type mix and efficiency (`nba_synergy_player_play_types`, e.g. spot-up share and spot-up eFG), and shooting splits (`nba_player_stats`) in the `alebron/data/snapshot_*` warehouse. Query with duckdb over the parquet. Reach for THESE, not RAPM, whenever the claim is about what a player's job is or how he plays ("low-usage corner guy," "movement shooter," "point-of-attack defender"), because a net-value number cannot see role or style.
 
-## Voice and format
+Same integrity bar as the posts: every number traces to the model or a cap run, projections are labeled, and anything selling-side or out-of-lane is flagged as lower-confidence, not stated as fact. If the data does not support a claim, do not make the claim. And critically, match the metric to the claim, a value number cannot answer a role question (see "The second rule: verify before you draft").
 
-Fan tone, not journal tone. Confident, plainspoken, a little personality, no lecturing. Someone should be able to tell a real person who watches the games wrote it.
+## Voice and register
 
-**Register: casual, the way Bobby actually types in a thread, not the way an article reads.** This is the single biggest correction from real use. Draft it lowercase and loose, not polished:
+Fan tone, not journal tone. It should read like a real person who watches the games, typed on a phone.
 
+**Draft it casual and lowercase, not polished:**
 - mostly lowercase, including "i"
-- soft hedges: "i feel like", "imo", "to me", "honestly"
-- clipped, conversational rhythm and slang ("hits diff", "way bigger swing", "for sure")
-- CAPS on one key word for emphasis instead of italics (e.g. "make ANT better")
-- contractions welcome, comma-splices welcome; it should read like a text, not a paragraph
-- still no em dashes or en dashes anywhere; commas, periods, parentheses only
+- soft hedges: "i feel like," "imo," "to me," "honestly"
+- clipped rhythm and light slang ("hits diff," "way bigger swing," "for sure")
+- CAPS on one key word for emphasis instead of italics ("make ANT better")
+- contractions and comma-splices welcome; it should read like a text, not a paragraph
+- no em dashes or en dashes anywhere; commas, periods, parentheses only
+- do not fake typos; write clean but loose and let Bobby add his own
 
-The analysis underneath stays rigorous and every number still traces to the model. The casual surface is a delivery choice, not a license to get loose with facts. Do not fake typos; write clean but casual and let Bobby add his own.
-
-Shape of a strong reply (this is the pattern that landed in practice):
-1. **Grant the point in one clause.** Do not re-explain what the poster already said. "totally with you on the comp" and move on.
-2. **Sharpen or flip the frame.** The marginal insight: the thing that is true but one level deeper than the post (e.g. the comp is real but it is not 1 to 1, it is floor vs ceiling).
-3. **Add the one angle they don't have.** Usually a second-order or fit effect. If it is a common take, name the common take and go past it (see the false-novelty guardrail).
-4. **One honest caveat, close human.** Name the real risk in a line, then end on the upside or a real-fan note. Do not end as a wet blanket.
-
-Length: shorter than you think. Reddit is a few SHORT paragraphs and Bobby will trim from there, so cut anything the poster already said and anything that does not add. X is tighter, one or two sentences, compressed to the single sharpest point and the number that carries it.
+Register shifts with the response type: analysis is casual but substantive, agree-and-add leans warm and excited, a one-liner or joke is dry and short. The analysis underneath stays rigorous in every case; the casual surface is delivery, not a license to get loose with facts.
 
 ## Guardrails that make it land
 
-- **Add, never reiterate.** This is the most common failure mode in practice. Every sentence must add something the poster does not already have. Cut any line that re-explains or re-cites what is already in the post (if they made the comp, cited the number, or used the word "gravity," repeating it back is filler that reads as agreement padding). The value is the marginal layer, nothing else.
-- **Don't claim false novelty.** "The part nobody is bringing up is X" is fragile and often wrong, because X is frequently a common take. Instead, name the prevailing take explicitly, then go one level past it: flip the direction or raise the magnitude. Example from real use: the common take was "Ant CAN play off-ball so Melo fits" (permission, coexistence); the sharper add was "Ant is BETTER off-ball than on-ball, so Melo could make ANT better" (an upgrade, not just tolerance). "yeah people say X, but it is actually bigger/backwards: Y" beats "nobody is saying X."
-- **Answer the question asked, sized to it.** Match the depth of the reply to the depth of the ask. A simple hypothetical ("would you trade X for Y") gets a plain human take first (pick a side, say it like you'd type it), then at most one light grounded nugget on top. Do not turn it into a mechanics breakdown. The data is seasoning, not the meal, unless the post is genuinely a data or mechanics question. Tell: if you have talked yourself three reframes deep or are leading with the salary cap on a question about a player, you have probably answered a question nobody asked. The account is built by being the smartest voice, and the smartest voice also knows when the answer is just "yeah, obviously, because."
-- **Additive, never contrarian for sport.** Add a layer nobody else has. "Here is a wrinkle the raw stats miss" beats "actually you're wrong." When correcting a shaky number, do it as a gentle nuance ("one nuance on that number"), not a gotcha, and fold in the honest version rather than just deflating theirs.
-- **Lead with the surprising thing.** The edge is a model that produces takes people do not expect. The counterintuitive, defensible call is what makes someone click the name.
-- **No links in the early going.** For a new account, earn the right to be heard first. The profile and flair or bio do the linking silently. Only share actual work once recognized, and even then as substance, not an ad.
-- **Respect each community's rules.** Read the subreddit sidebar. Many have a self-promo ratio (e.g. a lot of helpful comments per link). Never post a bare "check out my article." If sharing an article, the analysis lives in the comment and the link is the source.
-- **Match the room.** These are fans. Keep it human. You can be the smartest person in the thread without sounding like the driest.
+- **Choose the type on purpose, and match the room.** The most important rule. A great comment of the wrong type is a wasted comment. Analysis into a debate thread, agreement into a hype thread, one line or nothing into a roast thread.
+- **Be early and top-level.** Outweighs wording. Late and buried is where good comments go to die; if the only landing spot is under a dead comment, skip.
+- **Lead with the novel line, and keep it short.** First sentence is the thing nobody else said, standing alone.
+- **Add, never reiterate.** Every sentence adds something not already in the post or the crowned top comments.
+- **Do not claim false novelty.** "Nobody is bringing up X" is fragile and usually wrong. Name the prevailing take, then go one level past it: flip the direction or raise the magnitude.
+- **Additive, never contrarian for sport.** Add a layer, do not dunk on the poster. Corrections come as gentle nuance, folding in the honest version.
+- **Verify before you draft, and use the right stat.** Never ship a checkable claim, especially a pushback or correction, without pulling the metric that actually measures it. A value number (RAPM/DPM/surplus) cannot settle a role, usage, or shooting question. Guessing gets Bobby a public backtrack. See "The second rule."
+- **Never explain a crowned joke.** Annotating the funniest comment in the thread with data kills it and gets nothing.
+- **No links in the early going.** Earn the right to be heard first; the profile and flair do the linking silently. Respect each sub's self-promo rules (read the sidebar).
 
 ## Worked examples
 
-### Example 1: reframing a question (analysis shape)
+Short shapes below. The full before-and-after autopsies of the real threads, with vote counts and the exact fix for each, are in `references/thread-teardowns.md`. Read them to calibrate the read, the type choice, and the register.
 
-**Reddit thread:** "Can we even afford to keep Ayo?"
-
-Draft:
-
-> The re-sign isn't really the question, the apron is. Ayo lands you right around the first-apron line. So it's not "can we afford the contract," it's "are we OK operating as a first-apron team," which costs you real tools. You drop from the full mid-level down to just the taxpayer version, and you lose the ability to bring anyone in through a sign-and-trade. If the front office believes in this core, you pay it and live with the smaller toolkit. If they think this group has a ceiling, that is the reason to hesitate. I'd pay it, his playoff shot-making earned the check, but it's a real fork, not a formality.
-
-Why it works: reframes the question, drops one real constraint (the apron and what it costs), lands a clear take, and never mentions the site. Note this one is written toward the FORMAL end of the register; a live fan thread usually wants it looser and lowercase (see Example 2). The reframing discipline is the part to copy, not the polish.
-
-**Same take, compressed for X:**
-
-> Keeping Ayo isn't a money question, it's an apron question. His number puts MIN on the first-apron line, which means taxpayer MLE only and no sign-and-trades. I'd still pay him, but that's the real cost, not the salary.
-
-### Example 2: replying to a good take (voice + add-don't-reiterate)
-
-**Reddit post:** a strong, bullish take arguing the LaMelo trade mirrors the Gobert trade, "LaMelo raises the offense the way Gobert raised the defense," citing his huge On-Off and his EPM rank.
-
-The post already made the comp, cited the On-Off, and used the word "gravity." So none of that goes in the reply. What the post did NOT have: that the comp is not symmetric, and what LaMelo does for Ant specifically. That is the whole reply.
-
-Draft (his actual posted register):
-
-> totally with you on the comp. i feel like gobert for sure raised the floor, did it every single night no matter what. melo's though i feel like is more of a ceiling instead of the floor, it only shows up when hes actually out there and when the fit clicks, so its a way bigger swing.
->
-> yeah people are already talking about ant being able to play off ball so melo can run the show. but i think its actually bigger than that. ant isnt just able to play off ball, hes better off the ball than on it, like top 4 among stars in off ball efficiency. so its not really "can they coexist," its that melo taking the on ball load could make ant a MORE efficient scorer than he already is. only real question to me is if ant actually gives up those reps.
->
-> only catch is health, but if hes out there this offense hits diff.
-
-Why it works: grants the comp in one clause instead of re-explaining it, flips the frame (floor vs ceiling, not a mirror), names the common "Ant can play off-ball" take and goes one level past it (better off-ball, so it is an upgrade to Ant, not just coexistence), and closes on one honest caveat (health) without souring the room. Every claim traces to the eval (RAPM offense, the off-ball efficiency rank, the availability record), and it stays consistent with Bobby's published article on the trade.
+- **Debate thread, type = analysis ("can we afford Ayo"):** reframe to the real question (the apron, not the money), one real constraint, a clear take, no link.
+- **Hype thread, type = agree and add (the KAT comp):** lead with a full beat of agreement, then the optimistic wrinkle, caveat soft. Do not open with the disagreement.
+- **Roast thread, type = one dry line or skip (D'Lo "longest stint"):** a single data-flavored line in the room's voice, or skip. Never annotate the crowned joke with a paragraph of stats.
 
 ## When to use, and when not to
 
-Use it whenever Bobby wants to respond to a Wolves post or question on Reddit or X, or wants a fan question turned into a grounded reply.
+Use it whenever Bobby wants to respond to a Wolves post or question, or wants a read on whether and how to engage a thread.
 
-Do not use it to post anything automatically, to generate piles of comments to scatter, or to make claims the data does not back. If the numbers aren't there, say so in the draft instead of inventing them.
+Do not use it to post automatically, to mass-produce comments, or to make claims the data does not back. And do not force a comment: choosing "skip this one" or "this belongs in a different thread" is a valid and often correct output.
