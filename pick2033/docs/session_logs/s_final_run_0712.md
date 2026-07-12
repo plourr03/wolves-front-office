@@ -62,11 +62,40 @@ untouched, slots only). Force-ranking check: contract_z dominates ->
 "does the most work" clause RESTORED; win-pct stays non-superlative as
 drafted. Calibration clause uses the red-cell branch.
 
+## Same-day continuation: articles, visuals, tornado, replay
+
+Part 2 filled (v4) and Part 3 drafted (v1: pre-registered beats + priced
+numbers; v2: replay + tornado filled). Twelve D3 fragments built to the
+site contract, shortcodes wired into all three drafts (article/viz/).
+
+TORNADO (engine implemented per the 7/2 pre-declared arms; 20k paths,
+CRN-paired vs a same-seed 20k base, checkpointed): NO ARM FLIPS A
+CONCLUSION; total spans 4.25-5.22 vs base 4.77. Order: hazard 0.5x/1.5x
+(-.52/+.45), lamelo_extended (-.41), blend_faster (+.29), top1_false
+(-.16), everything else <= .13. S-CONTRACT arm: 26 residual segments
+midpoint-split (reproducible superset of the noted 21, DISCLOSED),
+b_contract_z softens -2.94 -> -2.56, bill moves -.04 (labeling risk not
+load-bearing). outputs/json/tornado_FINAL.json.
+
+REPLAY (2013 Nets, pure-A default, as-of-2013 fit): 2014/2016/2018 inside
+the 90% intervals; 2017 (realized #1, the Tatum pick) OUTSIDE, a P=.03
+tail event -> primary replay RED under the strict all-inside rule, stands
+documented. Direction of the miss: the machine UNDERSTATES collapse
+extremity, i.e. the bill errs small, consistent with the documented
+momentum bias. Gate 8.5 PARTIAL: the 2019 PG replay and the negative
+control were never built; named open, not waived.
+outputs/json/replay_nets_2013_FINAL.json.
+
+Engine hooks added for the arms (default-preserving): EngineD
+trajectory_post + playin_mode params; trajectory.fit panel_override.
+
 ## Open items
 - BOBBY: numbers-in-place read of Part 1 v3 (RELEASE GATE), then publish.
 - BOBBY: the carousel word (still pending on the record).
-- Part 2 fill ~2 days post-read; Part 3 (replays, 15-arm tornado, equity
-  final pass, total_asset_cost.json) mid-July.
+- Part 3 remaining: equity/total_asset_cost pass, seconds + 2026 line
+  items, clean-room quote; gate 8.5 completion (2019 PG replay + negative
+  control) if Bobby wants the full pre-declared standard before Part 3
+  ships.
 - OUT OF SCOPE, FLAGGED: finalization coverage shows Mouhamadou Gueye
   landing in CHARLOTTE (with Spagnolo draft rights), while
   lamelo/data/trade_definition.json routes Gueye to MIN from BKN. Does not

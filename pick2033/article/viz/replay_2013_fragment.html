@@ -1,0 +1,173 @@
+<div id="viz-replay-2013"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-replay-2013, #viz-replay-2013 * { touch-action: manipulation; }
+  #viz-replay-2013 .rp-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // The 2013 Celtics-Nets replay: simulated 90% intervals for Brooklyn's
+  // pick slots (as-of-2013 model) vs what reality delivered to Boston.
+  // Source: pick2033 outputs/json/replay_nets_2013_FINAL.json.
+  var data = [
+    { year: "2014", who: "became James Young", lo: 4, hi: 28, med: 18, real: 17, inside: true },
+    { year: "2016", who: "became Jaylen Brown", lo: 2, hi: 29, med: 16, real: 3, inside: true },
+    { year: "2017 swap", who: "became the Tatum pick", lo: 2, hi: 29, med: 16, real: 1, inside: false },
+    { year: "2018", who: "became Collin Sexton", lo: 2, hi: 29, med: 15, real: 8, inside: true }
+  ];
+
+  var root = d3.select("#viz-replay-2013");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 84 : 66;
+    var margin = { top: 34, right: 16, bottom: 36, left: compact ? 8 : 118 };
+    var height = margin.top + margin.bottom + data.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    // Slot 1 on the left (best pick), 30 on the right.
+    var x = d3.scaleLinear().domain([0.5, 30.5])
+      .range([margin.left, width - margin.right]);
+
+    var xTicks = [1, 5, 10, 15, 20, 25, 30];
+    svg.append("g").selectAll("line").data(xTicks).join("line")
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", margin.top - 6).attr("y2", height - margin.bottom + 2)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", x).attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("text")
+      .attr("x", (margin.left + width - margin.right) / 2).attr("y", height - 6)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("draft slot Brooklyn's pick landed on (1 = best)");
+
+    data.forEach(function (d, i) {
+      var yMid = margin.top + i * rowH + (compact ? 46 : rowH / 2);
+
+      // Row labels.
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 12)
+        .attr("y", compact ? margin.top + i * rowH + 16 : yMid - 4)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-secondary)").style("font", "600 13px var(--family-sans)")
+        .text(d.year);
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 12)
+        .attr("y", compact ? margin.top + i * rowH + 30 : yMid + 12)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(d.who);
+
+      // 90% interval strip.
+      var strip = svg.append("rect")
+        .attr("x", x(d.lo) - 0).attr("y", yMid - 7)
+        .attr("height", 14).attr("rx", 7)
+        .style("fill", "rgba(255,255,255,.10)")
+        .style("cursor", "pointer")
+        .attr("width", reduceMotion ? x(d.hi) - x(d.lo) : 2);
+      if (!reduceMotion) {
+        strip.transition().duration(600).delay(i * 120).ease(d3.easeCubicOut)
+          .attr("width", x(d.hi) - x(d.lo));
+      }
+      strip.append("title").text(
+        d.year + ": simulated 90% interval slots " + d.lo + " to " + d.hi +
+        ", median " + d.med + "; reality delivered " + d.real);
+
+      // Median tick.
+      svg.append("line")
+        .attr("x1", x(d.med)).attr("x2", x(d.med))
+        .attr("y1", yMid - 10).attr("y2", yMid + 10)
+        .style("stroke", "var(--text-tertiary)").style("stroke-width", 1.5);
+
+      // Realized outcome.
+      var dot = svg.append("circle")
+        .attr("cx", x(d.real)).attr("cy", yMid).attr("r", 7)
+        .style("fill", d.inside ? "var(--accent-default)" : "var(--status-error)")
+        .style("stroke", "var(--bg-inset)").style("stroke-width", 1.5)
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        dot.transition().duration(400).delay(i * 120 + 400).style("opacity", 1);
+      }
+      dot.append("title").text(
+        d.year + ": reality delivered slot " + d.real +
+        (d.inside ? " (inside the 90% interval)" : " (OUTSIDE the 90% interval)"));
+      svg.append("text")
+        .attr("x", x(d.real)).attr("y", yMid - 13).attr("text-anchor", "middle")
+        .style("fill", d.inside ? "var(--text-primary)" : "var(--status-error)")
+        .style("font", "600 12px var(--family-mono)")
+        .text("#" + d.real);
+      if (!d.inside) {
+        svg.append("text")
+          .attr("x", x(d.real)).attr("y", yMid + 26).attr("text-anchor", "start")
+          .style("fill", "var(--status-error)").style("font", "11px var(--family-sans)")
+          .text(compact ? "outside, P .03" : "outside the interval: a 3-in-100 event");
+      }
+    });
+
+    // Legend.
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", margin.top - 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "strip: 90% | tick: median | dot: reality" :
+        "strip: simulated 90% interval, tick: median, dot: what reality delivered");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "rp-caption")
+      .text("The machine, knowing only the summer of 2013, against the four picks Brooklyn " +
+        "delivered to Boston. Three land inside the intervals. The 2017 swap, the pick that " +
+        "became Jayson Tatum, lands outside: reality was harsher than the model's tails.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

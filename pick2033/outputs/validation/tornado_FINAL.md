@@ -1,0 +1,18 @@
+# S7 tornado (FINAL)
+- base 20k: pick EV 2.19, total 4.77 (50k reference: {'pick_ev_2033': 2.239522695541382, 'total_mean': 4.8640174740026785})
+- arms by |delta total| (4-yr VORP):
+  - hazard_scale_0.5x: total 4.25 (delta -0.5225), pick EV 2.15
+  - hazard_scale_1.5x: total 5.22 (delta 0.4482), pick EV 2.22
+  - lamelo_extended: total 4.36 (delta -0.4114), pick EV 2.21 -- lamelo_contract = extended
+  - blend_faster: total 5.06 (delta 0.2918), pick EV 2.18 -- blend_w shifted, clamped: {2027: 0.85, 2028: 0.65, 2029: 0.45, 2030: 0.3, 2031: 0.2, 2032: 0.1, 2033: 0.1}
+  - top1_carries_false: total 4.61 (delta -0.1583), pick EV 2.20 -- re-price of base run
+  - blend_slower: total 4.64 (delta -0.1328), pick EV 2.22 -- blend_w shifted, clamped: {2027: 1.0, 2028: 1.0, 2029: 0.85, 2030: 0.65, 2031: 0.45, 2032: 0.3, 2033: 0.2}
+  - pooled_dynamics: total 4.71 (delta -0.0575), pick EV 2.11 -- trajectory posterior swapped to trajectory_c0a9750162a046d3
+  - trajectory_phi_p10: total 4.83 (delta 0.0565), pick EV 2.21 -- phi pinned at posterior p10 = 0.6472
+  - s_contract_midpoint_split: total 4.73 (delta -0.0376), pick EV 2.18 -- S-CONTRACT midpoint split on 26 residual segments (26 reproducible vs 21 in the 7/2 note, superset, conservative); b_contract_z -2.563
+  - trajectory_phi_p90: total 4.74 (delta -0.0272), pick EV 2.17 -- phi pinned at posterior p90 = 0.7039
+  - cha_lineage_bobcats_fresh: total 4.80 (delta 0.0266), pick EV 2.18 -- CHA lineage starts 2005 (Bobcats fresh); trajectory cache trajectory_275d313dd493b202.parquet
+  - playin_crude_randomization: total 4.79 (delta 0.0205), pick EV 2.19
+  - shock_scale_p10: total 4.78 (delta 0.0126), pick EV 2.20 -- sigma_shock pinned at posterior p10 = 4.5909
+  - shock_scale_p90: total 4.77 (delta -0.0021), pick EV 2.19 -- sigma_shock pinned at posterior p90 = 6.1144
+  - slot_value_ws: total 17.15 (delta n/a), pick EV 10.06 -- re-price of base run

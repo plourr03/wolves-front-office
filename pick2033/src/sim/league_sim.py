@@ -195,14 +195,23 @@ def star_exit_prior_shift() -> float:
 
 
 class EngineD:
-    def __init__(self, n_paths: int, seed: int, use_roster_tier: bool = True):
+    def __init__(self, n_paths: int, seed: int, use_roster_tier: bool = True,
+                 trajectory_post: tuple | None = None, playin_mode: str = "srs"):
+        # trajectory_post: optional (posterior DataFrame, fr_ids) injection for
+        # the S7 tornado arms (posterior_swap, refit_lineage); default path
+        # unchanged. playin_mode "crude" replaces the SRS-probit play-in game
+        # with a coin flip (tornado arm playin_crude_randomization).
         cfg = load_config()
         self.n_paths, self.seed = n_paths, seed
         self.use_roster_tier = use_roster_tier
         self.blend_w = cfg["simulation"]["blend_w"]
+        self.playin_mode = playin_mode
         self.rng = np.random.default_rng(seed)
 
-        self.post_a, fr_ids, _ = fit_trajectory(quiet=True)
+        if trajectory_post is not None:
+            self.post_a, fr_ids = trajectory_post
+        else:
+            self.post_a, fr_ids, _ = fit_trajectory(quiet=True)
         self.fr_ids = fr_ids
         self.fr_index = {f: i for i, f in enumerate(fr_ids)}
         panel = load_panel()
@@ -317,6 +326,8 @@ class EngineD:
                 s7, s8, s9, s10 = order[6], order[7], order[8], order[9]
 
                 def game(a, b_):
+                    if self.playin_mode == "crude":
+                        return (a, b_) if self.rng.random() < 0.5 else (b_, a)
                     diff = srs_now[p, a] - srs_now[p, b_] + HOME_EDGE
                     return (a, b_) if self.rng.random() < _phi(diff / GAME_SD) else (b_, a)
 

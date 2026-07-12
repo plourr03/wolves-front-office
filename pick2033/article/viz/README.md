@@ -34,6 +34,8 @@ altText below, then the article shortcode (already placed in the drafts).
 |---|---|---|---|
 | swap-ledger | swap_ledger_fragment.html | What each instrument pays Charlotte | Ledger chart of the three pick swaps, the 2033 first, and the total package, each shown as an 80% interval strip with median tick and mean dot in four-year VORP, highlighting that the 2029 swap's interval is a stub at zero while its mean is 0.65. |
 | cost-quadrants | cost_quadrants_fragment.html | The four world-states of the trade | Mosaic chart of four world-states sized by probability, showing the package's average payout to Charlotte rising from 4.0 wins when Edwards stays and Charlotte is ordinary to 5.6 wins in the 24 percent of futures where Edwards leaves and Charlotte is good. |
+| replay-2013 | replay_2013_fragment.html | The machine, sent back to 2013 | Interval chart of the 2013 Nets replay: simulated 90% intervals for Brooklyn's four delivered picks against reality, with 2014, 2016, and 2018 landing inside and the 2017 swap pick that became Jayson Tatum landing at slot 1, outside the interval, a 3-in-100 event in the model. |
+| tornado | tornado_fragment.html | Fifteen ways to shake the bill | Tornado chart of fourteen pre-declared stress tests of the total trade bill, led by halving or inflating the star departure model (about half a win each way) and the LaMelo extension scenario (0.4 wins cheaper), with every arm keeping the total between 4.3 and 5.2 wins. |
 
 ## Data provenance
 
@@ -44,7 +46,9 @@ altText below, then the article shortcode (already placed in the drafts).
 - slot-2033, edwards-split: outputs/json/slot_distribution_2033_FINAL.json
 - cohort-crest: outputs/validation/young_core_cohort.json
 - swap-ledger, cost-quadrants: outputs/json/swap_pricing_FINAL.json (top1_true, VORP)
+- replay-2013: outputs/json/replay_nets_2013_FINAL.json
+- tornado: outputs/json/tornado_FINAL.json (deltas vs the CRN-paired 20k base)
 
-Part 3 remains partly slotted (replay, tornado, title equity). When those
-runs land, two more visuals are natural: the 2013 replay fans vs realized
-picks, and the tornado. Build them into this same set.
+Part 3's remaining slots (title equity / total_asset_cost, the seconds and
+2026 line items, the clean-room quote) may earn one more visual when the
+equity pass runs.
