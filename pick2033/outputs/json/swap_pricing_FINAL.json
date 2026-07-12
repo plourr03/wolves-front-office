@@ -1,0 +1,552 @@
+{
+ "meta": {
+  "tag": "FINAL",
+  "variant": "two_tier",
+  "n_paths": 50000,
+  "seed": 20330708,
+  "generated_utc": "2026-07-12T13:19:16.578065+00:00",
+  "code_commit": "f3b3691e"
+ },
+ "runs": {
+  "top1_true_vorp": {
+   "currency": "vorp",
+   "top1_carries_to_CHA": true,
+   "swaps": {
+    "2028": {
+     "mean": 0.6550548568420526,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 2.1931986898183817,
+     "p_exercise": 0.41644,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.5275514436659641
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 0.734340742387796
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.5785639125320768
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 0.7336014178426981
+      }
+     }
+    },
+    "2029": {
+     "mean": 0.6514943122396432,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 0.0,
+     "p_exercise": 0.12264,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.35024676569291907
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 0.8840283810818627
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.32029021461960966
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 0.88692561795331
+      }
+     }
+    },
+    "2030": {
+     "mean": 1.3179453887367123,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 4.553811019659041,
+     "p_exercise": 0.66268,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 1.0046779571111564
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 1.3914341484851978
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 1.2177334700503197
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 1.6134135807207732
+      }
+     }
+    }
+   },
+   "outright_2033": {
+    "mean": 2.239522695541382,
+    "q10": -1.3781760931015015,
+    "q50": 0.8030523061752319,
+    "q80_lo": -1.3781760931015015,
+    "q90": 8.079862594604492,
+    "p_exercise": 1.0,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 2.0862534046173096
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 2.3149898052215576
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 2.119626760482788
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 2.3823182582855225
+     }
+    }
+   },
+   "total_per_path": {
+    "mean": 4.8640174740026785,
+    "q10": -0.8254345417022705,
+    "q50": 3.1024124920368195,
+    "q80_lo": -0.8254345417022705,
+    "q90": 13.03593879342079,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 3.968729545775582
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 5.32479308564344
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 4.2362143467705335
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 5.616258878587254
+     }
+    }
+   }
+  },
+  "top1_true_ws": {
+   "currency": "ws",
+   "top1_carries_to_CHA": true,
+   "swaps": {
+    "2028": {
+     "mean": 1.913074635543459,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 7.579650413990018,
+     "p_exercise": 0.41644,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 1.5581998101855272
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 2.1127135545458886
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 1.7245621780355933
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 2.1426042514385233
+      }
+     }
+    },
+    "2029": {
+     "mean": 1.531012804971965,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 0.0,
+     "p_exercise": 0.12264,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.8065677852704543
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 2.0799088866520203
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.7511597698517061
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 2.0990265012054032
+      }
+     }
+    },
+    "2030": {
+     "mean": 3.7163848562572284,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 13.213962411880493,
+     "p_exercise": 0.66268,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 2.882003173413853
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 3.8287670789963735
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 3.491409929433535
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 4.587481764432843
+      }
+     }
+    }
+   },
+   "outright_2033": {
+    "mean": 10.12270736694336,
+    "q10": 0.30573898553848267,
+    "q50": 7.988110542297363,
+    "q80_lo": 0.30573898553848267,
+    "q90": 23.2594051361084,
+    "p_exercise": 1.0,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 9.668692588806152
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 10.3441743850708
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 9.784994125366211
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 10.535543441772461
+     }
+    }
+   },
+   "total_per_path": {
+    "mean": 17.28318020488469,
+    "q10": 1.929585278034211,
+    "q50": 14.267939567565918,
+    "q80_lo": 1.929585278034211,
+    "q90": 36.512509155273435,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 14.91546329246497
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 18.36556332338695
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 15.752126385354865
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 19.364655587470818
+     }
+    }
+   }
+  },
+  "top1_false_vorp": {
+   "currency": "vorp",
+   "top1_carries_to_CHA": false,
+   "swaps": {
+    "2028": {
+     "mean": 0.6550548568420526,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 2.1931986898183817,
+     "p_exercise": 0.41644,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.5275514436659641
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 0.734340742387796
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.5785639125320768
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 0.7336014178426981
+      }
+     }
+    },
+    "2029": {
+     "mean": 0.6514943122396432,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 0.0,
+     "p_exercise": 0.12264,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.35024676569291907
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 0.8840283810818627
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.32029021461960966
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 0.88692561795331
+      }
+     }
+    },
+    "2030": {
+     "mean": 1.1405425713533899,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 3.9875028640031793,
+     "p_exercise": 0.63246,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.9368391387830332
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 1.1607816544386884
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 1.0927317956196225
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 1.357862967821504
+      }
+     }
+    }
+   },
+   "outright_2033": {
+    "mean": 2.233280658721924,
+    "q10": -1.368407964706421,
+    "q50": 0.7971004247665405,
+    "q80_lo": -1.368407964706421,
+    "q90": 8.057714462280273,
+    "p_exercise": 1.0,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 2.093536376953125
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 2.3483119010925293
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 2.0886051654815674
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 2.3258702754974365
+     }
+    }
+   },
+   "total_per_path": {
+    "mean": 4.680372234485755,
+    "q10": -0.8184637129306792,
+    "q50": 2.95780548453331,
+    "q80_lo": -0.8184637129306792,
+    "q90": 12.596801367960868,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 3.908173670609394
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 5.127462725612456
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 4.0801910533535155
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 5.304260265778352
+     }
+    }
+   }
+  },
+  "top1_false_ws": {
+   "currency": "ws",
+   "top1_carries_to_CHA": false,
+   "swaps": {
+    "2028": {
+     "mean": 1.913074635543459,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 7.579650413990018,
+     "p_exercise": 0.41644,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 1.5581998101855272
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 2.1127135545458886
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 1.7245621780355933
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 2.1426042514385233
+      }
+     }
+    },
+    "2029": {
+     "mean": 1.531012804971965,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 0.0,
+     "p_exercise": 0.12264,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 0.8065677852704543
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 2.0799088866520203
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 0.7511597698517061
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 2.0990265012054032
+      }
+     }
+    },
+    "2030": {
+     "mean": 3.310412438285183,
+     "q10": 0.0,
+     "q50": 0.0,
+     "q80_lo": 0.0,
+     "q90": 12.120851600170134,
+     "p_exercise": 0.63246,
+     "scenarios": {
+      "baseline": {
+       "p": 0.24726,
+       "conditional_mean": 2.7194935931069324
+      },
+      "edwards_departs": {
+       "p": 0.33286,
+       "conditional_mean": 3.317331574848188
+      },
+      "cha_ascends": {
+       "p": 0.1796,
+       "conditional_mean": 3.2695468294449026
+      },
+      "joint_tail": {
+       "p": 0.24028,
+       "conditional_mean": 3.93945752406064
+      }
+     }
+    }
+   },
+   "outright_2033": {
+    "mean": 10.111128807067871,
+    "q10": 0.3077085018157959,
+    "q50": 7.948690414428711,
+    "q80_lo": 0.3077085018157959,
+    "q90": 23.19745635986328,
+    "p_exercise": 1.0,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 9.70051097869873
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 10.405325889587402
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 9.703611373901367
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 10.43072509765625
+     }
+    }
+   },
+   "total_per_path": {
+    "mean": 16.865628548727,
+    "q10": 1.8423922777175905,
+    "q50": 13.975854396820068,
+    "q80_lo": 1.8423922777175905,
+    "q90": 35.73445430994033,
+    "scenarios": {
+     "baseline": {
+      "p": 0.24726,
+      "conditional_mean": 14.784772750664446
+     },
+     "edwards_departs": {
+      "p": 0.33286,
+      "conditional_mean": 17.91528012867598
+     },
+     "cha_ascends": {
+      "p": 0.1796,
+      "conditional_mean": 15.448880322031815
+     },
+     "joint_tail": {
+      "p": 0.24028,
+      "conditional_mean": 18.61181367125731
+     }
+    }
+   }
+  }
+ }
+}

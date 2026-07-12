@@ -4,7 +4,10 @@
 # lamelo/prereg/preregistration.md Amendment 1.
 # RE-VERIFY against reporting after 2026-07-06 before any M5 pricing run
 # (set verified_post_july6: true once done; swap_pricing.py hard-fails while false).
-verified_post_july6: false
+# VERIFIED 2026-07-12: trade finalized 2026-07-10 (HoopsRumors "Wolves, Hornets,
+# Nets, Bulls Finalize Four-Team Trade"; Shams 2026-06-25 report). Terms match:
+# 2033 first unprotected; swaps 2028/2029/2030; seconds 2029/2032/2033.
+verified_post_july6: true
 
 outgoing_first:
   year: 2033
@@ -23,9 +26,12 @@ swaps:
     protection: none
     operates_on: MIN_resolved   # MIN holds own first ONLY if top-5 (else conveys to UTA pool)
     note: >
-      CHA swap operative only in MIN-top-5 worlds. TBD branch: whether CHA may
-      instead swap using the least-favorable UTA/CLE pick they control; v1 prices
-      CHA-own-pick semantics and documents the branch.
+      CHA swap operative only in MIN-top-5 worlds. TBD branch SETTLED by the
+      finalized terms (HoopsRumors 2026-07-10): CHA swaps "their 2029 first-round
+      pick for the Timberwolves' 2029 first-round pick (6-30 protected)" --
+      CHA-own-pick semantics confirmed (no UTA/CLE substitution), and the 6-30
+      protection matches the MIN-top-5-only operative worlds already encoded.
+      v1 pricing stands as-is.
   - year: 2030
     type: favorable_to_CHA
     protection: none

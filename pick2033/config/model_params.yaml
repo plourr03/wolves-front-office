@@ -11,6 +11,10 @@ simulation:
   # LaMelo extension status (eligible July 6, 2yr/$119.2M): set from the
   # news the morning of the final run; 'unresolved' runs BOTH scenarios
   # (pre-declared sensitivity). Never picked silently.
+  # SET 2026-07-12 (news check delegated to agent by Bobby): no extension
+  # reported anywhere as of 2026-07-11; Hornets exec Peterson (7/11) and
+  # SalarySwish both describe the original deal, 3 yrs remaining
+  # (40.8/43.6/46.4), walk year 2029. Basis documented, not picked silently.
   lamelo_contract: unsigned   # unsigned | extended | unresolved
   # blend schedule w(t): roster-informed weight vs franchise prior (spec 7.4, accepted default)
   blend_w:

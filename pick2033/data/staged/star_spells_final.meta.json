@@ -1,0 +1,28 @@
+{
+ "tag": "FINAL",
+ "freeze_hash": "50f9b7bc5b19835b",
+ "n_spells": 291,
+ "n_rows": 1264,
+ "borderline_pruned": [
+  "adamsmi01_1",
+  "anderry01_1",
+  "armstda01_1",
+  "barrybr01_1",
+  "barrybr01_2",
+  "batumni01_1",
+  "caldejo01_1",
+  "gallida01_1",
+  "gallida01_2",
+  "hilarne01_1",
+  "lowryky01_1",
+  "willilo02_1",
+  "williro04_1"
+ ],
+ "july6_departures_applied": [
+  "antetgi01_1",
+  "ballla01_1",
+  "leonaka01_3"
+ ],
+ "holdout_disclosure": "sealed-holdout disclosure: none of the July-6 corrected spells are holdout members",
+ "prune_holdout_disclosure": "borderline-prune holdout impact: 3 of 13 pruned spells were sealed-holdout members (['anderry01_1', 'batumni01_1', 'lowryky01_1']); re-gate sample shrinks 60 -> 57 spells and, the honest denominator, 46 -> 43 departure events (calibration is powered by events, not spells)"
+}

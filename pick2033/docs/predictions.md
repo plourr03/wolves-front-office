@@ -11,6 +11,19 @@ over-produced, and the provisional pick posterior is too heavy at the top).
 (.167/.422, run seed 20330706) vs post-M2-refit run. Direction called in
 advance; a post-refit lightening is read as predicted, not tuned.
 
+### P1 GRADED (2026-07-12, post-M2-refit FINAL run): CONFIRMED in both cells
+Final slot_distribution_2033 (FINAL freeze 50f9b7bc5b19835b, M2 posterior,
+seed 20330706): P(top4) .157 vs provisional .167; P(top10) .391 vs
+provisional .422. Lighter-tailed in both pre-declared cells — direction
+called in advance, read as predicted, not tuned. Mechanism matches the
+stated reasoning: the backfilled contract covariate is strongly protective
+(b_contract_z -2.940), so signed years suppress simulated departures and
+fewer MIN-collapse worlds reach the top of the 2033 draft. Magnitude:
+-1.0 point top-4 (6% relative), -3.1 points top-10 (7% relative).
+Caveat carried with the grade: the M2 calibration slope re-gate stayed red
+(1.413, boot 90% CI [1.127, 1.872] vs [0.8, 1.2]) — final look, stands
+documented per Ruling A; see outputs/validation/model_b_hazard_M2_FINAL.md.
+
 ## P2 — 2026-07-02, logged BEFORE the young-core cohort analysis runs
 **Prediction (Bobby, Ruling D):** the matched cohort's median trajectory
 crests BELOW the model's CHA median crest (~51 wins at 2029). Reasoning:

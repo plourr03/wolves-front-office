@@ -1,16 +1,15 @@
 {
- "tag": "PROVISIONAL",
+ "tag": "FINAL",
  "variant": "pure_a",
  "n_paths": 50000,
  "seed": 20330706,
- "runtime_s": 197.1,
+ "runtime_s": 151.3,
  "gates": {
   "conservation": true,
   "slot_permutation": true,
   "tail_terminal_pass": true,
   "tail_transient_pass": true,
-  "autocorr_pass": true,
-  "transient_check": "ruling_B_symmetric_2026-07-02"
+  "autocorr_pass": true
  },
  "tail": {
   "terminal_top": 0.06852266666666666,

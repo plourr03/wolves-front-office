@@ -1,5 +1,5 @@
 # pick2033 validation report (auto-generated)
-generated 2026-07-02T18:29:24.233341+00:00 @ 3284daf3
+generated 2026-07-12T13:14:23.283923+00:00 @ f3b3691e
 
 **Standing caveats:** Model B and all Engine D outputs are PROVISIONAL (borderline spells kept pending Bobby's final call; contract covariate omitted pending M2 backfill; July-6 exit updates pending). Swap PRICING is hard-gated on trade-terms verification (verified_post_july6: false). The 8.4 operationalization was chosen after a correlated preview, justified a priori; weaker than true pre-registration and disclosed.
 
@@ -405,8 +405,8 @@ Crossing mechanism confirmed; no further rewording. Same posture as 8.1.
    -0.054
 ```
 
-### Sim manifest: pure_a (PROVISIONAL)
-gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': True, 'autocorr_pass': True, 'transient_check': 'ruling_B_symmetric_2026-07-02'}  paths: 50000  seed: 20330706
+### Sim manifest: pure_a (FINAL)
+gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': True, 'autocorr_pass': True}  paths: 50000  seed: 20330706
 
-### Sim manifest: two_tier (PROVISIONAL)
-gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': False, 'autocorr_pass': True, 'transient_check': 'ruling_B_symmetric_2026-07-02'}  paths: 50000  seed: 20330706
+### Sim manifest: two_tier (FINAL)
+gates: {'conservation': True, 'slot_permutation': True, 'tail_terminal_pass': True, 'tail_transient_pass': False, 'autocorr_pass': True}  paths: 50000  seed: 20330706

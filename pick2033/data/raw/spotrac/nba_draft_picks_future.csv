@@ -1,610 +1,610 @@
 controlling_team,round,year,pick_origin,slot_span,is_unprotected_or_unknown,condition,source,last_verified
-ATL,1,2027,SAS,30,TRUE,,Spotrac,2026-07-01
-ATL,1,2027,ATL,30,TRUE,Least favorable of MIL and NOP then other to NOP (via NOP),Spotrac,2026-07-01
-ATL,1,2028,ATL,30,TRUE,More favorable of (i) ATL and less favorable (ii) CLE and UTA then other to CLE (via ATL swap for CLE or UTA),Spotrac,2026-07-01
-ATL,1,2029,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,1,2030,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,1,2031,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,1,2032,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,1,2033,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,2,2027,ATL,30,TRUE,(via BOS to MEM to POR),Spotrac,2026-07-01
-ATL,2,2027,ATL,30,TRUE,(via POR),Spotrac,2026-07-01
-ATL,2,2028,BKN,30,TRUE,(via GSW),Spotrac,2026-07-01
-ATL,2,2029,CHA,30,TRUE,More favorable of ATL and MIA the other to OKC (via OKC),Spotrac,2026-07-01
-ATL,2,2029,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,2,2030,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,2,2030,ATL,30,TRUE,(via POR),Spotrac,2026-07-01
-ATL,2,2031,ATL,30,TRUE,or swap for HOU 31-55 (via ATL swap for HOU),Spotrac,2026-07-01
-ATL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-01
-ATL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2027,BKN HOU,30,TRUE,Or swap with HOU (via HOU swap for BKN),Spotrac,2026-07-01
-BKN,1,2027,HOU BKN,30,TRUE,Or swap with BKN (via HOU swap for BKN),Spotrac,2026-07-01
-BKN,1,2027,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2028,BKN,30,TRUE,"Two most favorable of BKN, PHI 9-30 (if PHI conveys 1st to OKC by 2026) and PHX (via BKN swap for PHX) Or swap with NYK",Spotrac,2026-07-01
-BKN,1,2028,NYK BKN,30,TRUE,Or swap with BKN (via BKN swap for NYK),Spotrac,2026-07-01
-BKN,1,2028,PHI,8,FALSE,If 1-8 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-01
-BKN,1,2028,BKN,22,FALSE,If 9-30 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-01
-BKN,1,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2029,BKN,30,TRUE,Least favorable of DAL HOU and PHX then others to HOU,Spotrac,2026-07-01
-BKN,1,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2030,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,1,2033,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2027,WAS,30,TRUE,More favorable of BKN and DAL to WAS then other to DET,Spotrac,2026-07-01
-BKN,2,2028,BKN,30,TRUE,(via GSW),Spotrac,2026-07-01
-BKN,2,2028,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2028,BKN,30,TRUE,(via PHX),Spotrac,2026-07-01
-BKN,2,2028,PHI BKN,30,TRUE,PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028,Spotrac,2026-07-01
-BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2029,BKN,30,TRUE,(via PHX),Spotrac,2026-07-01
-BKN,2,2030,BKN,30,TRUE,(via HOU),Spotrac,2026-07-01
-BKN,2,2030,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2030,BKN,30,TRUE,(via BOS to MEM),Spotrac,2026-07-01
-BKN,2,2030,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-BOS,1,2027,BOS,30,TRUE,,Spotrac,2026-07-01
-BOS,1,2028,BOS,1,FALSE,If 1,Spotrac,2026-07-01
-BOS,1,2028,SAS BOS,29,FALSE,Or swap 2-30 with SAS (via SAS swap for BOS),Spotrac,2026-07-01
-BOS,1,2028,SAS BOS,30,TRUE,Or swap with BOS 2-30 (via SAS swap for BOS),Spotrac,2026-07-01
-BOS,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-01
-BOS,1,2030,BOS,30,TRUE,,Spotrac,2026-07-01
-BOS,1,2031,BOS,30,TRUE,,Spotrac,2026-07-01
-BOS,1,2032,BOS,30,TRUE,FROZEN PICK,Spotrac,2026-07-01
-BOS,1,2033,BOS,30,TRUE,,Spotrac,2026-07-01
-BOS,2,2027,CHA,30,TRUE,Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL),Spotrac,2026-07-01
-BOS,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-01
-BOS,2,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-BOS,2,2030,BKN,30,TRUE,(via HOU),Spotrac,2026-07-01
-BOS,2,2030,CHA,25,FALSE,,Spotrac,2026-07-01
-BOS,2,2030,BOS,5,FALSE,If 56-60,Spotrac,2026-07-01
-BOS,2,2031,BOS,30,TRUE,Less favorable of BOS and CLE then other to UTA (via CLE to ATL to BOS),Spotrac,2026-07-01
-BOS,2,2031,HOU,25,FALSE,If 31-55 or swap with ATL (via ATL swap for HOU),Spotrac,2026-07-01
-BOS,2,2031,BOS,5,FALSE,If 56-60,Spotrac,2026-07-01
-BOS,2,2032,BOS,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2027,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2027,DAL,2,FALSE,If 1-2,Spotrac,2026-07-01
-CHA,1,2027,CHA,28,FALSE,If 3-30,Spotrac,2026-07-01
-CHA,1,2027,MIA,14,FALSE,If 1-14,Spotrac,2026-07-01
-CHA,1,2027,CHA,16,FALSE,If 15-30,Spotrac,2026-07-01
-CHA,1,2028,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2028,MIA CHA,30,TRUE,If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025,Spotrac,2026-07-01
-CHA,1,2029,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2029,CHA,30,TRUE,"Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)",Spotrac,2026-07-01
-CHA,1,2030,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2032,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,1,2033,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2027,CHA,30,TRUE,Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL),Spotrac,2026-07-01
-CHA,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-01
-CHA,2,2027,CHA,30,TRUE,More favorable of NOP and POR to CHA then other to POR (via POR),Spotrac,2026-07-01
-CHA,2,2028,CHA,30,TRUE,More favorable of CHA and LAC then other to DET (via LAC to CHA to DAL),Spotrac,2026-07-01
-CHA,2,2028,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2029,CHA,30,TRUE,More favorable of ATL and MIA the other to OKC (via OKC),Spotrac,2026-07-01
-CHA,2,2029,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2029,CHA,30,TRUE,If DEN conveys 1st to OKC by 2029,Spotrac,2026-07-01
-CHA,2,2030,CHA,25,FALSE,,Spotrac,2026-07-01
-CHA,2,2030,BOS,5,FALSE,If 56-60,Spotrac,2026-07-01
-CHA,2,2030,CHA,30,TRUE,More favorable of LAC and UTA (via UTA),Spotrac,2026-07-01
-CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2032,CHA,30,TRUE,,Spotrac,2026-07-01
-CHA,2,2032,CHA,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2027,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2027,POR,14,FALSE,If 1-14 if not already settled with CHI,Spotrac,2026-07-01
-CHI,1,2027,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-01
-CHI,1,2028,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2028,POR,14,FALSE,If 1-14 if not already settled with CHI or swap with MIL,Spotrac,2026-07-01
-CHI,1,2028,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-01
-CHI,1,2029,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2030,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2031,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2032,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,1,2033,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2027,DAL,30,TRUE,(via WAS to NOP to WAS),Spotrac,2026-07-01
-CHI,2,2027,CHI,30,TRUE,(via ATL to MIN),Spotrac,2026-07-01
-CHI,2,2028,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2028,POR CHI,30,TRUE,POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028,Spotrac,2026-07-01
-CHI,2,2029,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2029,CHI,30,TRUE,"Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)",Spotrac,2026-07-01
-CHI,2,2030,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2031,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2031,CHI,30,TRUE,(via PHX to CHA),Spotrac,2026-07-01
-CHI,2,2031,CHI,30,TRUE,Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN)),Spotrac,2026-07-01
-CHI,2,2031,CHI,30,TRUE,(via DET to CHA),Spotrac,2026-07-01
-CHI,2,2032,CHI,30,TRUE,,Spotrac,2026-07-01
-CHI,2,2032,CHI,30,TRUE,More favorable of HOU and PHX then other to PHX (via PHX to MIN),Spotrac,2026-07-01
-CLE,1,2027,PHX,30,TRUE,"Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)",Spotrac,2026-07-01
-CLE,1,2028,CLE,30,TRUE,"Least favorable of CLE, ATL and UTA (via UTH swap for CLE; via ATL swap for CLE or UTH)",Spotrac,2026-07-01
-CLE,1,2028,UTA CLE,30,TRUE,Or swap with CLE,Spotrac,2026-07-01
-CLE,1,2029,CHA,30,TRUE,"Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)",Spotrac,2026-07-01
-CLE,1,2030,CLE,30,TRUE,,Spotrac,2026-07-01
-CLE,1,2031,CLE,30,TRUE,,Spotrac,2026-07-01
-CLE,1,2032,CLE,30,TRUE,,Spotrac,2026-07-01
-CLE,1,2033,CLE,30,TRUE,,Spotrac,2026-07-01
-CLE,2,2027,CHI,30,TRUE,(via ATL to MIN),Spotrac,2026-07-01
-CLE,2,2028,UTA,30,TRUE,,Spotrac,2026-07-01
-CLE,2,2029,ATL,30,TRUE,,Spotrac,2026-07-01
-CLE,2,2030,SAS,30,TRUE,,Spotrac,2026-07-01
-CLE,2,2031,UTA,30,TRUE,More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS),Spotrac,2026-07-01
-CLE,2,2032,UTA,30,TRUE,,Spotrac,2026-07-01
-DAL,1,2027,DAL,2,FALSE,If 1-2,Spotrac,2026-07-01
-DAL,1,2027,CHA,28,FALSE,If 3-30,Spotrac,2026-07-01
-DAL,1,2028,DAL OKC,30,TRUE,Or swap with OKC (via OKC swap for DAL),Spotrac,2026-07-01
-DAL,1,2028,OKC DAL,30,TRUE,Or swap with DAL (via OKC swap for DAL),Spotrac,2026-07-01
-DAL,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-DAL,1,2029,DAL,30,TRUE,,Spotrac,2026-07-01
-DAL,1,2030,DAL SAS,30,TRUE,Least favorable of DAL and SAS (via SAN swap for DAL),Spotrac,2026-07-01
-DAL,1,2030,GSW,20,FALSE,If 1-20,Spotrac,2026-07-01
-DAL,1,2030,DAL,10,FALSE,If 21-30 (via WAS),Spotrac,2026-07-01
-DAL,1,2031,DAL,30,TRUE,,Spotrac,2026-07-01
-DAL,1,2032,DAL,30,TRUE,,Spotrac,2026-07-01
-DAL,1,2033,DAL,30,TRUE,,Spotrac,2026-07-01
-DAL,2,2027,DAL,30,TRUE,(via WAS to NOP to WAS),Spotrac,2026-07-01
-DAL,2,2027,DET,30,TRUE,Less favorable of BKN and DAL to DET then other to WAS,Spotrac,2026-07-01
-DAL,2,2028,LAC,30,TRUE,(via SAC to IND),Spotrac,2026-07-01
-DAL,2,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-DAL,2,2029,DAL,30,TRUE,(via OKC to WAS),Spotrac,2026-07-01
-DAL,2,2030,BKN,30,TRUE,(via BOS to MEM),Spotrac,2026-07-01
-DAL,2,2030,DAL,30,TRUE,,Spotrac,2026-07-01
-DAL,2,2031,DET,30,TRUE,(via PHI),Spotrac,2026-07-01
-DAL,2,2032,DAL,30,TRUE,,Spotrac,2026-07-01
-DEN,1,2027,DEN,5,FALSE,If 1-5,Spotrac,2026-07-01
-DEN,1,2027,OKC,25,FALSE,If 6-30,Spotrac,2026-07-01
-DEN,1,2028,DEN,5,FALSE,If 1-5 if not already settled with OKC,Spotrac,2026-07-01
-DEN,1,2028,OKC,25,FALSE,If 6-30 if not already settled,Spotrac,2026-07-01
-DEN,1,2029,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-01
-DEN,1,2029,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-01
-DEN,1,2030,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-01
-DEN,1,2030,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-01
-DEN,1,2031,DEN,30,TRUE,,Spotrac,2026-07-01
-DEN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-DEN,1,2033,DEN,30,TRUE,,Spotrac,2026-07-01
-DEN,2,2027,UTA,30,TRUE,(via CLE to CHI to BOS to UTA),Spotrac,2026-07-01
-DEN,2,2028,DEN,3,FALSE,If 31-33,Spotrac,2026-07-01
-DEN,2,2028,WAS,27,FALSE,If 34-60 (via SAS to SAC),Spotrac,2026-07-01
-DEN,2,2029,CHA,30,TRUE,If DEN conveys 1st to OKC by 2029,Spotrac,2026-07-01
-DEN,2,2030,OKC,30,TRUE,(via CHA),Spotrac,2026-07-01
-DEN,2,2031,CHI,30,TRUE,(via PHX to CHA),Spotrac,2026-07-01
-DEN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-DET,1,2027,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2028,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2029,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2030,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2031,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2032,DET,30,TRUE,,Spotrac,2026-07-01
-DET,1,2033,DET,30,TRUE,,Spotrac,2026-07-01
-DET,2,2027,DET,30,TRUE,Less favorable of BKN and DAL to DET then other to WAS,Spotrac,2026-07-01
-DET,2,2027,DET,30,TRUE,,Spotrac,2026-07-01
-DET,2,2027,DET,30,TRUE,(via PHI),Spotrac,2026-07-01
-DET,2,2028,DET,25,FALSE,"Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET",Spotrac,2026-07-01
-DET,2,2028,PHI,5,FALSE,If 56-60,Spotrac,2026-07-01
-DET,2,2028,DET,30,TRUE,Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL),Spotrac,2026-07-01
-DET,2,2028,DET,30,TRUE,If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027,Spotrac,2026-07-01
-DET,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-01
-DET,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-01
-DET,2,2030,DET,30,TRUE,,Spotrac,2026-07-01
-DET,2,2030,DET,30,TRUE,,Spotrac,2026-07-01
-DET,2,2031,DET,30,TRUE,(via PHI),Spotrac,2026-07-01
-DET,2,2031,DET,30,TRUE,,Spotrac,2026-07-01
-DET,2,2031,DET,30,TRUE,Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW)),Spotrac,2026-07-01
-DET,2,2032,DET,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2027,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2028,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2029,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2030,GSW,20,FALSE,If 1-20,Spotrac,2026-07-01
-GSW,1,2030,DAL,10,FALSE,If 21-30 (via WAS),Spotrac,2026-07-01
-GSW,1,2031,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2032,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,1,2033,GSW,30,TRUE,,Spotrac,2026-07-01
-GSW,2,2027,WAS,30,TRUE,Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-01
-GSW,2,2028,PHI,30,TRUE,(via POR to WAS),Spotrac,2026-07-01
-GSW,2,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-GSW,2,2030,GSW WAS,30,TRUE,GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030,Spotrac,2026-07-01
-GSW,2,2031,DET,30,TRUE,Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW)),Spotrac,2026-07-01
-GSW,2,2032,GSW,20,FALSE,If 31-50,Spotrac,2026-07-01
-GSW,2,2032,MEM,10,FALSE,If 51-60,Spotrac,2026-07-01
-HOU,1,2027,BKN HOU,30,TRUE,Or swap with HOU (via HOU swap for BKN),Spotrac,2026-07-01
-HOU,1,2027,HOU BKN,30,TRUE,Or swap with BKN (via HOU swap for BKN),Spotrac,2026-07-01
-HOU,1,2027,HOU,30,TRUE,(via BKN),Spotrac,2026-07-01
-HOU,1,2028,HOU,30,TRUE,,Spotrac,2026-07-01
-HOU,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-HOU,1,2029,BKN,30,TRUE,Least favorable of DAL HOU and PHX then others to HOU,Spotrac,2026-07-01
-HOU,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-HOU,1,2030,HOU,30,TRUE,,Spotrac,2026-07-01
-HOU,1,2031,HOU,30,TRUE,,Spotrac,2026-07-01
-HOU,1,2032,HOU,30,TRUE,,Spotrac,2026-07-01
-HOU,1,2033,HOU,30,TRUE,,Spotrac,2026-07-01
-HOU,2,2027,NOP,30,TRUE,"Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-HOU,2,2027,HOU,30,TRUE,(via LAC),Spotrac,2026-07-01
-HOU,2,2027,HOU,30,TRUE,If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS),Spotrac,2026-07-01
-HOU,2,2028,HOU,30,TRUE,(via ATL),Spotrac,2026-07-01
-HOU,2,2029,DAL,30,TRUE,(via OKC to WAS),Spotrac,2026-07-01
-HOU,2,2029,HOU,30,TRUE,(via WAS),Spotrac,2026-07-01
-HOU,2,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-HOU,2,2031,HOU,25,FALSE,If 31-55 or swap with ATL (via ATL swap for HOU),Spotrac,2026-07-01
-HOU,2,2031,BOS,5,FALSE,If 56-60,Spotrac,2026-07-01
-HOU,2,2032,CHI,30,TRUE,More favorable of HOU and PHX then other to PHX (via PHX to MIN),Spotrac,2026-07-01
-IND,1,2027,IND,30,TRUE,,Spotrac,2026-07-01
-IND,1,2028,IND,30,TRUE,,Spotrac,2026-07-01
-IND,1,2029,LAC,30,TRUE,,Spotrac,2026-07-01
-IND,1,2030,IND,30,TRUE,,Spotrac,2026-07-01
-IND,1,2031,IND,30,TRUE,,Spotrac,2026-07-01
-IND,1,2032,IND,30,TRUE,,Spotrac,2026-07-01
-IND,1,2033,IND,30,TRUE,,Spotrac,2026-07-01
-IND,2,2027,NYK,30,TRUE,"Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-IND,2,2027,IND,30,TRUE,(via CLE) or to NOP if IND does not convey 1st to NOP by 2027,Spotrac,2026-07-01
-IND,2,2028,IND,30,TRUE,More favorable of IND and PHX then other to NYK,Spotrac,2026-07-01
-IND,2,2029,POR,30,TRUE,Less favorable of IND and WAS to POR then other to IND (via NYK),Spotrac,2026-07-01
-IND,2,2029,IND,30,TRUE,More favorable of IND and WAS to IND then other to POR (via NYK),Spotrac,2026-07-01
-IND,2,2030,IND,30,TRUE,,Spotrac,2026-07-01
-IND,2,2031,IND,30,TRUE,"Least favorable of IND, MEM and MIA then others to MEM and WAS (via MIA swap for IND; via UTH to WAS; via MEM swap for IND or MIA)",Spotrac,2026-07-01
-IND,2,2032,IND,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2027,OKC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-01
-LAC,1,2027,LAC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-01
-LAC,1,2028,PHI,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2029,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2029,LAC PHI,30,TRUE,Or swap 4-30 with PHI (via PHI swap for LAC),Spotrac,2026-07-01
-LAC,1,2029,PHI LAC,30,TRUE,Or swap with LAC 4-30 (via PHI swap for LAC),Spotrac,2026-07-01
-LAC,1,2030,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2031,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2032,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,1,2033,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,2,2027,UTA,30,TRUE,(via ATL to LAC),Spotrac,2026-07-01
-LAC,2,2028,LAC,30,TRUE,(via SAC to IND),Spotrac,2026-07-01
-LAC,2,2028,DET,30,TRUE,Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL),Spotrac,2026-07-01
-LAC,2,2029,SAS,30,TRUE,(via PHI),Spotrac,2026-07-01
-LAC,2,2030,UTA,30,TRUE,Less favorable of LAC and UTA then other to CHA (via LAC to UTA),Spotrac,2026-07-01
-LAC,2,2031,LAC,30,TRUE,,Spotrac,2026-07-01
-LAC,2,2032,LAC,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2027,LAL,4,FALSE,If 1-4,Spotrac,2026-07-01
-LAL,1,2027,MEM,26,FALSE,If 5-30 (via UTA),Spotrac,2026-07-01
-LAL,1,2028,LAL,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2029,DAL,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2030,LAL,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2031,LAL,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2032,LAL,30,TRUE,,Spotrac,2026-07-01
-LAL,1,2033,LAL,30,TRUE,,Spotrac,2026-07-01
-LAL,2,2027,UTA,30,TRUE,If LAL does not convey 1st to UTA in 2027 or to BKN,Spotrac,2026-07-01
-LAL,2,2028,WAS,30,TRUE,Less favorable of LAL and WAS then other to ORL (via LAL to WAS),Spotrac,2026-07-01
-LAL,2,2029,WAS,30,TRUE,,Spotrac,2026-07-01
-LAL,2,2030,BKN,30,TRUE,,Spotrac,2026-07-01
-LAL,2,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-LAL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2027,LAL,4,FALSE,If 1-4,Spotrac,2026-07-01
-MEM,1,2027,MEM,26,FALSE,If 5-30 (via UTA),Spotrac,2026-07-01
-MEM,1,2027,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2027,MEM,30,TRUE,"Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)",Spotrac,2026-07-01
-MEM,1,2028,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2029,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2029,ORL,2,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-01
-MEM,1,2029,MEM,28,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-01
-MEM,1,2030,MEM,30,TRUE,More favorable of MEM and less favorable of PHX and WAS,Spotrac,2026-07-01
-MEM,1,2030,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2031,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2031,MEM,30,TRUE,(via UTA),Spotrac,2026-07-01
-MEM,1,2032,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,1,2033,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,2,2027,HOU,30,TRUE,(via LAC),Spotrac,2026-07-01
-MEM,2,2028,BKN,30,TRUE,(via PHX),Spotrac,2026-07-01
-MEM,2,2029,BKN,30,TRUE,(via PHX),Spotrac,2026-07-01
-MEM,2,2029,ORL,30,TRUE,If ORL 3-30 in 2029,Spotrac,2026-07-01
-MEM,2,2029,MEM,30,TRUE,(via PHI to IND),Spotrac,2026-07-01
-MEM,2,2030,MEM,20,FALSE,31-50,Spotrac,2026-07-01
-MEM,2,2030,MIN,10,FALSE,51-60,Spotrac,2026-07-01
-MEM,2,2031,MEM,30,TRUE,"Most favorable of MEM, IND and MIA then others to IND and UTA (via MIA swap for IND; via MEM swap for IND or MIA)",Spotrac,2026-07-01
-MEM,2,2032,GSW,20,FALSE,If 31-50,Spotrac,2026-07-01
-MEM,2,2032,MEM,10,FALSE,If 51-60,Spotrac,2026-07-01
-MEM,2,2032,MEM,30,TRUE,,Spotrac,2026-07-01
-MEM,2,2032,MEM,30,TRUE,MEM can swap for PHI,Spotrac,2026-07-01
-MIA,1,2027,MIA,14,FALSE,If 1-14,Spotrac,2026-07-01
-MIA,1,2027,CHA,16,FALSE,If 15-30,Spotrac,2026-07-01
-MIA,1,2028,MIA CHA,30,TRUE,If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025,Spotrac,2026-07-01
-MIA,1,2029,MIA,30,TRUE,,Spotrac,2026-07-01
-MIA,1,2030,MIA,30,TRUE,,Spotrac,2026-07-01
-MIA,1,2031,MIA,30,TRUE,,Spotrac,2026-07-01
-MIA,1,2032,MIA,30,TRUE,,Spotrac,2026-07-01
-MIA,1,2033,MIA,30,TRUE,,Spotrac,2026-07-01
-MIA,2,2027,PHI,30,TRUE,"Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-MIA,2,2027,MIA,30,TRUE,"Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-01
-MIA,2,2028,DET,30,TRUE,If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027,Spotrac,2026-07-01
-MIA,2,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-MIA,2,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-MIA,2,2031,WAS,30,TRUE,More favorable of MIA and IND (via MIA swap for IND; via UTH),Spotrac,2026-07-01
-MIA,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-MIL,1,2027,ATL,30,TRUE,Least favorable of MIL and NOP then other to NOP (via NOP),Spotrac,2026-07-01
-MIL,1,2028,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-01
-MIL,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-01
-MIL,1,2030,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-01
-MIL,1,2030,POR MIL,30,TRUE,Or swap with MIL,Spotrac,2026-07-01
-MIL,1,2031,MIL,30,TRUE,,Spotrac,2026-07-01
-MIL,1,2032,MIL,30,TRUE,,Spotrac,2026-07-01
-MIL,1,2033,MIL,30,TRUE,,Spotrac,2026-07-01
-MIL,2,2027,DET,30,TRUE,(via PHI),Spotrac,2026-07-01
-MIL,2,2028,PHI,30,TRUE,(via BKN to HOU to OKC),Spotrac,2026-07-01
-MIL,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-01
-MIL,2,2030,ORL,30,TRUE,,Spotrac,2026-07-01
-MIL,2,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-MIL,2,2032,CHA,30,TRUE,,Spotrac,2026-07-01
-MIN,1,2027,UTA,30,TRUE,"Two most favorable of CLE, MIN and UTA then other to PHX",Spotrac,2026-07-01
-MIN,1,2028,MIN,30,TRUE,,Spotrac,2026-07-01
-MIN,1,2029,MIN,5,FALSE,If 1-5,Spotrac,2026-07-01
-MIN,1,2029,UTA,25,FALSE,"If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX",Spotrac,2026-07-01
-MIN,1,2030,MIN,30,TRUE,"Least favorable of MIN 2-30, DAL and SAS (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)",Spotrac,2026-07-01
-MIN,1,2031,SAC,30,TRUE,(via SAS),Spotrac,2026-07-01
-MIN,1,2032,MIN,30,TRUE,FROZEN PICK,Spotrac,2026-07-01
-MIN,1,2033,MIN,30,TRUE,,Spotrac,2026-07-01
-MIN,2,2027,POR,30,TRUE,(via HOU to OKC to NYK),Spotrac,2026-07-01
-MIN,2,2028,SAS,30,TRUE,,Spotrac,2026-07-01
-MIN,2,2029,MIN UTA,30,TRUE,MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029,Spotrac,2026-07-01
-MIN,2,2030,MEM,20,FALSE,31-50,Spotrac,2026-07-01
-MIN,2,2030,MIN,10,FALSE,51-60,Spotrac,2026-07-01
-MIN,2,2030,DET,30,TRUE,,Spotrac,2026-07-01
-MIN,2,2031,CHI,30,TRUE,Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN)),Spotrac,2026-07-01
-MIN,2,2032,MIN,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2027,NOP,30,TRUE,Most favorable of MIL and NOP then other to ATL,Spotrac,2026-07-01
-NOP,1,2028,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2029,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2030,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2031,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2032,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,1,2033,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,2,2027,NOP,30,TRUE,"Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-NOP,2,2027,CHA,30,TRUE,More favorable of NOP and POR to CHA then other to POR (via POR),Spotrac,2026-07-01
-NOP,2,2028,SAS,30,TRUE,,Spotrac,2026-07-01
-NOP,2,2029,SAS,30,TRUE,,Spotrac,2026-07-01
-NOP,2,2030,NOP ORL,30,TRUE,Or swap with ORL (via ORL swap for NOP),Spotrac,2026-07-01
-NOP,2,2030,ORL NOP,30,TRUE,Or swap with NOP,Spotrac,2026-07-01
-NOP,2,2031,ORL,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-01
-NOP,2,2031,NOP,30,TRUE,,Spotrac,2026-07-01
-NOP,2,2032,NOP,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2027,BKN,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2028,NYK BKN,30,TRUE,Or swap with BKN (via BKN swap for NYK),Spotrac,2026-07-01
-NYK,1,2029,BKN,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2030,NYK,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2031,BKN,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2032,NYK,30,TRUE,,Spotrac,2026-07-01
-NYK,1,2033,NYK,30,TRUE,,Spotrac,2026-07-01
-NYK,2,2027,NYK,30,TRUE,"Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-NYK,2,2027,ATL,30,TRUE,(via POR),Spotrac,2026-07-01
-NYK,2,2027,WAS NYK,30,TRUE,WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC),Spotrac,2026-07-01
-NYK,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-01
-NYK,2,2028,UTA,30,TRUE,,Spotrac,2026-07-01
-NYK,2,2028,NYK,30,TRUE,Less favorable of IND and PHX to NYK then other to IND (via IND),Spotrac,2026-07-01
-NYK,2,2029,CHI,30,TRUE,"Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)",Spotrac,2026-07-01
-NYK,2,2030,ATL,30,TRUE,(via POR),Spotrac,2026-07-01
-NYK,2,2031,CHI,30,TRUE,(via DET to CHA),Spotrac,2026-07-01
-NYK,2,2032,NYK,30,TRUE,,Spotrac,2026-07-01
-OKC,1,2027,DEN,5,FALSE,If 1-5,Spotrac,2026-07-01
-OKC,1,2027,OKC,25,FALSE,If 6-30,Spotrac,2026-07-01
-OKC,1,2027,OKC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-01
-OKC,1,2027,LAC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-01
-OKC,1,2027,PHI,4,FALSE,If 1-4 if not already settled with OKC,Spotrac,2026-07-01
-OKC,1,2027,OKC,26,FALSE,If 5-30 if not already settled,Spotrac,2026-07-01
-OKC,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-01
-OKC,1,2028,DAL OKC,30,TRUE,Or swap with OKC (via OKC swap for DAL),Spotrac,2026-07-01
-OKC,1,2028,DEN,5,FALSE,If 1-5 if not already settled with OKC,Spotrac,2026-07-01
-OKC,1,2028,OKC,25,FALSE,If 6-30 if not already settled,Spotrac,2026-07-01
-OKC,1,2028,OKC DAL,30,TRUE,Or swap with DAL (via OKC swap for DAL),Spotrac,2026-07-01
-OKC,1,2029,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-01
-OKC,1,2029,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-01
-OKC,1,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,1,2030,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-01
-OKC,1,2030,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-01
-OKC,1,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,1,2031,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,1,2032,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,1,2033,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-01
-OKC,2,2027,MIA,30,TRUE,"Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-01
-OKC,2,2027,PHI OKC,30,TRUE,PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027,Spotrac,2026-07-01
-OKC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-01
-OKC,2,2028,PHI,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2028,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2030,OKC,30,TRUE,(via CHA),Spotrac,2026-07-01
-OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2031,OKC,30,TRUE,,Spotrac,2026-07-01
-OKC,2,2031,OKC,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-01
-OKC,2,2032,OKC,30,TRUE,,Spotrac,2026-07-01
-ORL,1,2027,ORL,30,TRUE,,Spotrac,2026-07-01
-ORL,1,2028,POR,30,TRUE,(via MEM),Spotrac,2026-07-01
-ORL,1,2029,ORL,2,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-01
-ORL,1,2029,MEM,28,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-01
-ORL,1,2030,MEM,30,TRUE,,Spotrac,2026-07-01
-ORL,1,2031,ORL,30,TRUE,,Spotrac,2026-07-01
-ORL,1,2032,ORL,30,TRUE,,Spotrac,2026-07-01
-ORL,1,2033,ORL,30,TRUE,,Spotrac,2026-07-01
-ORL,2,2027,UTA,30,TRUE,More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS),Spotrac,2026-07-01
-ORL,2,2028,CHA,30,TRUE,,Spotrac,2026-07-01
-ORL,2,2028,ORL,30,TRUE,More favorable of LAL and WAS to ORL then other to WAS,Spotrac,2026-07-01
-ORL,2,2029,ORL,30,TRUE,If ORL 3-30 in 2029,Spotrac,2026-07-01
-ORL,2,2030,ORL,30,TRUE,,Spotrac,2026-07-01
-ORL,2,2030,NOP ORL,30,TRUE,Or swap with ORL (via ORL swap for NOP),Spotrac,2026-07-01
-ORL,2,2030,ORL NOP,30,TRUE,Or swap with NOP,Spotrac,2026-07-01
-ORL,2,2031,ORL,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-01
-ORL,2,2031,OKC,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-01
-ORL,2,2032,ORL,30,TRUE,,Spotrac,2026-07-01
-PHI,1,2027,PHI,4,FALSE,If 1-4 if not already settled with OKC,Spotrac,2026-07-01
-PHI,1,2027,OKC,26,FALSE,If 5-30 if not already settled,Spotrac,2026-07-01
-PHI,1,2028,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,1,2028,PHI,8,FALSE,If 1-8 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-01
-PHI,1,2028,BKN,22,FALSE,If 9-30 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-01
-PHI,1,2029,LAC PHI,30,TRUE,Or swap 4-30 with PHI (via PHI swap for LAC),Spotrac,2026-07-01
-PHI,1,2029,PHI LAC,30,TRUE,Or swap with LAC 4-30 (via PHI swap for LAC),Spotrac,2026-07-01
-PHI,1,2030,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,1,2031,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,1,2032,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,1,2033,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2027,PHI,30,TRUE,"Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-01
-PHI,2,2027,PHI OKC,30,TRUE,PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027,Spotrac,2026-07-01
-PHI,2,2027,PHI,30,TRUE,Most favorable of GSW and PHX to PHI then other to WAS (via WAS),Spotrac,2026-07-01
-PHI,2,2028,DET,25,FALSE,"Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET",Spotrac,2026-07-01
-PHI,2,2028,PHI,5,FALSE,If 56-60,Spotrac,2026-07-01
-PHI,2,2028,PHI,30,TRUE,(via POR to WAS),Spotrac,2026-07-01
-PHI,2,2028,PHI,30,TRUE,(via BKN to HOU to OKC),Spotrac,2026-07-01
-PHI,2,2028,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2028,PHI BKN,30,TRUE,PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028,Spotrac,2026-07-01
-PHI,2,2029,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2030,DAL,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2030,PHI,30,TRUE,More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI),Spotrac,2026-07-01
-PHI,2,2030,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2031,PHI,30,TRUE,,Spotrac,2026-07-01
-PHI,2,2032,MEM,30,TRUE,MEM can swap for PHI,Spotrac,2026-07-01
-PHX,1,2027,PHX,30,TRUE,"Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)",Spotrac,2026-07-01
-PHX,1,2027,HOU,30,TRUE,(via BKN),Spotrac,2026-07-01
-PHX,1,2028,PHX,30,TRUE,"Least Favorable of WAS and BKN, PHI 9-30 if not already settled and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX)",Spotrac,2026-07-01
-PHX,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-PHX,1,2030,PHX,30,TRUE,"Least favorable of PHX, MEM and WAS",Spotrac,2026-07-01
-PHX,1,2031,MEM,30,TRUE,(via UTA),Spotrac,2026-07-01
-PHX,1,2032,PHX,30,TRUE,FROZEN PICK,Spotrac,2026-07-01
-PHX,1,2033,PHX,30,TRUE,,Spotrac,2026-07-01
-PHX,2,2027,PHI,30,TRUE,Most favorable of GSW and PHX to PHI then other to WAS (via WAS),Spotrac,2026-07-01
-PHX,2,2028,NYK,30,TRUE,Less favorable of IND and PHX to NYK then other to IND (via IND),Spotrac,2026-07-01
-PHX,2,2029,PHX,30,TRUE,(via OKC to CHA),Spotrac,2026-07-01
-PHX,2,2030,WAS,30,TRUE,Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-01
-PHX,2,2031,CHA,30,TRUE,,Spotrac,2026-07-01
-PHX,2,2032,PHX,30,TRUE,Least favorable of HOU and PHX then other to MIN (via PHX),Spotrac,2026-07-01
-POR,1,2027,POR,14,FALSE,If 1-14 if not already settled with CHI,Spotrac,2026-07-01
-POR,1,2027,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-01
-POR,1,2028,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-01
-POR,1,2028,POR,30,TRUE,(via MEM),Spotrac,2026-07-01
-POR,1,2028,POR,14,FALSE,If 1-14 if not already settled with CHI or swap with MIL,Spotrac,2026-07-01
-POR,1,2028,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-01
-POR,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-01
-POR,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-01
-POR,1,2029,WAS,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-POR,1,2030,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-01
-POR,1,2030,POR MIL,30,TRUE,Or swap with MIL,Spotrac,2026-07-01
-POR,1,2031,POR,30,TRUE,,Spotrac,2026-07-01
-POR,1,2032,POR,30,TRUE,,Spotrac,2026-07-01
-POR,1,2033,POR,30,TRUE,,Spotrac,2026-07-01
-POR,2,2027,POR,30,TRUE,(via HOU to OKC to NYK),Spotrac,2026-07-01
-POR,2,2027,HOU,30,TRUE,If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS),Spotrac,2026-07-01
-POR,2,2028,POR CHI,30,TRUE,POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028,Spotrac,2026-07-01
-POR,2,2028,POR,30,TRUE,(via CHI to SAC to MEM),Spotrac,2026-07-01
-POR,2,2029,POR,30,TRUE,Less favorable of IND and WAS to POR then other to IND (via NYK),Spotrac,2026-07-01
-POR,2,2029,MEM,30,TRUE,(via PHI to IND),Spotrac,2026-07-01
-POR,2,2030,PHI,30,TRUE,More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI),Spotrac,2026-07-01
-POR,2,2031,POR,30,TRUE,,Spotrac,2026-07-01
-POR,2,2032,POR,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2027,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-01
-SAC,1,2028,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2029,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2030,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2031,SAC,30,TRUE,(via SAS),Spotrac,2026-07-01
-SAC,1,2031,SAC SAS,30,TRUE,Or swap with SAS (via SAS swap for SAC),Spotrac,2026-07-01
-SAC,1,2031,SAS SAC,30,TRUE,Or swap for SAC,Spotrac,2026-07-01
-SAC,1,2032,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,1,2033,SAC,30,TRUE,,Spotrac,2026-07-01
-SAC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-01
-SAC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-01
-SAC,2,2028,POR,30,TRUE,(via CHI to SAC to MEM),Spotrac,2026-07-01
-SAC,2,2029,HOU,30,TRUE,(via WAS),Spotrac,2026-07-01
-SAC,2,2030,SAS,30,TRUE,(via IND),Spotrac,2026-07-01
-SAC,2,2031,SAS,30,TRUE,,Spotrac,2026-07-01
-SAC,2,2032,SAC,30,TRUE,,Spotrac,2026-07-01
-SAS,1,2027,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-01
-SAS,1,2028,BOS,1,FALSE,If 1,Spotrac,2026-07-01
-SAS,1,2028,SAS BOS,29,FALSE,Or swap 2-30 with SAS (via SAS swap for BOS),Spotrac,2026-07-01
-SAS,1,2028,SAS BOS,30,TRUE,Or swap with BOS 2-30 (via SAS swap for BOS),Spotrac,2026-07-01
-SAS,1,2029,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,1,2030,DAL SAS,30,TRUE,Least favorable of DAL and SAS (via SAN swap for DAL),Spotrac,2026-07-01
-SAS,1,2030,SAS,30,TRUE,"Most favorable of SAS, DAL and MIN 2-30 (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)",Spotrac,2026-07-01
-SAS,1,2031,SAC SAS,30,TRUE,Or swap with SAS (via SAS swap for SAC),Spotrac,2026-07-01
-SAS,1,2031,SAS SAC,30,TRUE,Or swap for SAC,Spotrac,2026-07-01
-SAS,1,2032,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,1,2033,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2027,SAS,30,TRUE,"More favorable SAS and least favorable of HOU, IND, MIA and OKC then others to NYK and OKC (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-01
-SAS,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-01
-SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2029,SAS,30,TRUE,(via PHI),Spotrac,2026-07-01
-SAS,2,2029,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2029,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2030,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2030,SAS,30,TRUE,(via IND),Spotrac,2026-07-01
-SAS,2,2030,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2031,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2031,SAS,30,TRUE,,Spotrac,2026-07-01
-SAS,2,2032,SAS,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2027,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2028,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2029,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2030,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2031,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2032,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,1,2033,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2027,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2028,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2029,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2030,TOR,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2031,NOP,30,TRUE,,Spotrac,2026-07-01
-TOR,2,2032,BKN,30,TRUE,,Spotrac,2026-07-01
-UTA,1,2027,UTA,30,TRUE,"Two most favorable of CLE, MIN and UTA then other to PHX",Spotrac,2026-07-01
-UTA,1,2027,MEM,30,TRUE,"Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)",Spotrac,2026-07-01
-UTA,1,2028,UTA CLE,30,TRUE,Or swap with CLE,Spotrac,2026-07-01
-UTA,1,2029,MIN,5,FALSE,If 1-5,Spotrac,2026-07-01
-UTA,1,2029,UTA,25,FALSE,"If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX",Spotrac,2026-07-01
-UTA,1,2029,UTA,30,TRUE,"Two most favorable of CLE, MIN 6-30 and UTA then other to CHA",Spotrac,2026-07-01
-UTA,1,2030,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,1,2031,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,1,2032,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,1,2033,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2027,UTA,30,TRUE,(via CLE to CHI to BOS to UTA),Spotrac,2026-07-01
-UTA,2,2027,UTA,30,TRUE,(via ATL to LAC),Spotrac,2026-07-01
-UTA,2,2027,UTA,30,TRUE,If LAL does not convey 1st to UTA in 2027 or to BKN,Spotrac,2026-07-01
-UTA,2,2027,UTA,30,TRUE,More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS),Spotrac,2026-07-01
-UTA,2,2027,IND,30,TRUE,(via CLE) or to NOP if IND does not convey 1st to NOP by 2027,Spotrac,2026-07-01
-UTA,2,2028,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2028,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2028,OKC,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2029,MIN UTA,30,TRUE,MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029,Spotrac,2026-07-01
-UTA,2,2029,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2030,UTA,30,TRUE,Less favorable of LAC and UTA then other to CHA (via LAC to UTA),Spotrac,2026-07-01
-UTA,2,2030,CHA,30,TRUE,More favorable of LAC and UTA (via UTA),Spotrac,2026-07-01
-UTA,2,2031,UTA,30,TRUE,More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS),Spotrac,2026-07-01
-UTA,2,2031,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2032,UTA,30,TRUE,,Spotrac,2026-07-01
-UTA,2,2032,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,1,2027,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,1,2028,WAS,30,TRUE,"Most Favorable of WAS and BKN, PHI 9-30 and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX) or swap for MIL or POR",Spotrac,2026-07-01
-WAS,1,2029,WAS,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-01
-WAS,1,2029,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,1,2030,WAS,30,TRUE,"Most favorable of WAS, MEM and PHX",Spotrac,2026-07-01
-WAS,1,2031,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,1,2032,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,1,2033,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,2,2027,WAS,30,TRUE,More favorable of BKN and DAL to WAS then other to DET,Spotrac,2026-07-01
-WAS,2,2027,WAS,30,TRUE,Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-01
-WAS,2,2027,WAS NYK,30,TRUE,WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC),Spotrac,2026-07-01
-WAS,2,2028,DEN,3,FALSE,If 31-33,Spotrac,2026-07-01
-WAS,2,2028,WAS,27,FALSE,If 34-60 (via SAS to SAC),Spotrac,2026-07-01
-WAS,2,2028,WAS,30,TRUE,Less favorable of LAL and WAS then other to ORL (via LAL to WAS),Spotrac,2026-07-01
-WAS,2,2028,ORL,30,TRUE,More favorable of LAL and WAS to ORL then other to WAS,Spotrac,2026-07-01
-WAS,2,2029,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,2,2029,IND,30,TRUE,More favorable of IND and WAS to IND then other to POR (via NYK),Spotrac,2026-07-01
-WAS,2,2030,GSW WAS,30,TRUE,GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030,Spotrac,2026-07-01
-WAS,2,2030,WAS,30,TRUE,Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-01
-WAS,2,2030,PHI,30,TRUE,,Spotrac,2026-07-01
-WAS,2,2031,WAS,30,TRUE,More favorable of MIA and IND (via MIA swap for IND; via UTH),Spotrac,2026-07-01
-WAS,2,2031,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,2,2032,WAS,30,TRUE,,Spotrac,2026-07-01
-WAS,2,2032,WAS,30,TRUE,,Spotrac,2026-07-01
+ATL,1,2027,SAS,30,TRUE,,Spotrac,2026-07-12
+ATL,1,2027,ATL,30,TRUE,Least favorable of MIL and NOP then other to NOP (via NOP),Spotrac,2026-07-12
+ATL,1,2028,ATL,30,TRUE,More favorable of (i) ATL and less favorable (ii) CLE and UTA then other to CLE (via ATL swap for CLE or UTA),Spotrac,2026-07-12
+ATL,1,2029,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,1,2030,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,1,2031,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,1,2032,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,1,2033,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,2,2027,ATL,30,TRUE,(via BOS to MEM to POR),Spotrac,2026-07-12
+ATL,2,2027,ATL,30,TRUE,(via POR),Spotrac,2026-07-12
+ATL,2,2028,BKN,30,TRUE,(via GSW),Spotrac,2026-07-12
+ATL,2,2029,CHA,30,TRUE,More favorable of ATL and MIA the other to OKC (via OKC),Spotrac,2026-07-12
+ATL,2,2029,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,2,2030,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,2,2030,ATL,30,TRUE,(via POR),Spotrac,2026-07-12
+ATL,2,2031,ATL,30,TRUE,or swap for HOU 31-55 (via ATL swap for HOU),Spotrac,2026-07-12
+ATL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-12
+ATL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2027,BKN HOU,30,TRUE,Or swap with HOU (via HOU swap for BKN),Spotrac,2026-07-12
+BKN,1,2027,HOU BKN,30,TRUE,Or swap with BKN (via HOU swap for BKN),Spotrac,2026-07-12
+BKN,1,2027,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2028,BKN,30,TRUE,"Two most favorable of BKN, PHI 9-30 (if PHI conveys 1st to OKC by 2026) and PHX (via BKN swap for PHX) Or swap with NYK",Spotrac,2026-07-12
+BKN,1,2028,NYK BKN,30,TRUE,Or swap with BKN (via BKN swap for NYK),Spotrac,2026-07-12
+BKN,1,2028,PHI,8,FALSE,If 1-8 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-12
+BKN,1,2028,BKN,22,FALSE,If 9-30 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-12
+BKN,1,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2029,BKN,30,TRUE,Least favorable of DAL HOU and PHX then others to HOU,Spotrac,2026-07-12
+BKN,1,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2030,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,1,2033,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2027,WAS,30,TRUE,More favorable of BKN and DAL to WAS then other to DET,Spotrac,2026-07-12
+BKN,2,2028,BKN,30,TRUE,(via GSW),Spotrac,2026-07-12
+BKN,2,2028,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2028,BKN,30,TRUE,(via PHX),Spotrac,2026-07-12
+BKN,2,2028,PHI BKN,30,TRUE,PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028,Spotrac,2026-07-12
+BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2029,BKN,30,TRUE,(via PHX),Spotrac,2026-07-12
+BKN,2,2030,BKN,30,TRUE,(via HOU),Spotrac,2026-07-12
+BKN,2,2030,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2030,BKN,30,TRUE,(via BOS to MEM),Spotrac,2026-07-12
+BKN,2,2030,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BKN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+BOS,1,2027,BOS,30,TRUE,,Spotrac,2026-07-12
+BOS,1,2028,BOS,1,FALSE,If 1,Spotrac,2026-07-12
+BOS,1,2028,SAS BOS,29,FALSE,Or swap 2-30 with SAS (via SAS swap for BOS),Spotrac,2026-07-12
+BOS,1,2028,SAS BOS,30,TRUE,Or swap with BOS 2-30 (via SAS swap for BOS),Spotrac,2026-07-12
+BOS,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-12
+BOS,1,2030,BOS,30,TRUE,,Spotrac,2026-07-12
+BOS,1,2031,BOS,30,TRUE,,Spotrac,2026-07-12
+BOS,1,2032,BOS,30,TRUE,FROZEN PICK,Spotrac,2026-07-12
+BOS,1,2033,BOS,30,TRUE,,Spotrac,2026-07-12
+BOS,2,2027,CHA,30,TRUE,Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL),Spotrac,2026-07-12
+BOS,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-12
+BOS,2,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+BOS,2,2030,BKN,30,TRUE,(via HOU),Spotrac,2026-07-12
+BOS,2,2030,CHA,25,FALSE,,Spotrac,2026-07-12
+BOS,2,2030,BOS,5,FALSE,If 56-60,Spotrac,2026-07-12
+BOS,2,2031,BOS,30,TRUE,Less favorable of BOS and CLE then other to UTA (via CLE to ATL to BOS),Spotrac,2026-07-12
+BOS,2,2031,HOU,25,FALSE,If 31-55 or swap with ATL (via ATL swap for HOU),Spotrac,2026-07-12
+BOS,2,2031,BOS,5,FALSE,If 56-60,Spotrac,2026-07-12
+BOS,2,2032,BOS,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2027,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2027,DAL,2,FALSE,If 1-2,Spotrac,2026-07-12
+CHA,1,2027,CHA,28,FALSE,If 3-30,Spotrac,2026-07-12
+CHA,1,2027,MIA,14,FALSE,If 1-14,Spotrac,2026-07-12
+CHA,1,2027,CHA,16,FALSE,If 15-30,Spotrac,2026-07-12
+CHA,1,2028,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2028,MIA CHA,30,TRUE,If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025,Spotrac,2026-07-12
+CHA,1,2029,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2029,CHA,30,TRUE,"Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)",Spotrac,2026-07-12
+CHA,1,2030,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2032,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,1,2033,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2027,CHA,30,TRUE,Less favorable of BOS and ORL then other to UTA (via BOS to ORL to BOS to ORL),Spotrac,2026-07-12
+CHA,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-12
+CHA,2,2027,CHA,30,TRUE,More favorable of NOP and POR to CHA then other to POR (via POR),Spotrac,2026-07-12
+CHA,2,2028,CHA,30,TRUE,More favorable of CHA and LAC then other to DET (via LAC to CHA to DAL),Spotrac,2026-07-12
+CHA,2,2028,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2029,CHA,30,TRUE,More favorable of ATL and MIA the other to OKC (via OKC),Spotrac,2026-07-12
+CHA,2,2029,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2029,CHA,30,TRUE,If DEN conveys 1st to OKC by 2029,Spotrac,2026-07-12
+CHA,2,2030,CHA,25,FALSE,,Spotrac,2026-07-12
+CHA,2,2030,BOS,5,FALSE,If 56-60,Spotrac,2026-07-12
+CHA,2,2030,CHA,30,TRUE,More favorable of LAC and UTA (via UTA),Spotrac,2026-07-12
+CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2032,CHA,30,TRUE,,Spotrac,2026-07-12
+CHA,2,2032,CHA,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2027,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2027,POR,14,FALSE,If 1-14 if not already settled with CHI,Spotrac,2026-07-12
+CHI,1,2027,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-12
+CHI,1,2028,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2028,POR,14,FALSE,If 1-14 if not already settled with CHI or swap with MIL,Spotrac,2026-07-12
+CHI,1,2028,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-12
+CHI,1,2029,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2030,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2031,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2032,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,1,2033,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2027,DAL,30,TRUE,(via WAS to NOP to WAS),Spotrac,2026-07-12
+CHI,2,2027,CHI,30,TRUE,(via ATL to MIN),Spotrac,2026-07-12
+CHI,2,2028,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2028,POR CHI,30,TRUE,POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028,Spotrac,2026-07-12
+CHI,2,2029,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2029,CHI,30,TRUE,"Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)",Spotrac,2026-07-12
+CHI,2,2030,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2031,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2031,CHI,30,TRUE,(via PHX to CHA),Spotrac,2026-07-12
+CHI,2,2031,CHI,30,TRUE,Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN)),Spotrac,2026-07-12
+CHI,2,2031,CHI,30,TRUE,(via DET to CHA),Spotrac,2026-07-12
+CHI,2,2032,CHI,30,TRUE,,Spotrac,2026-07-12
+CHI,2,2032,CHI,30,TRUE,More favorable of HOU and PHX then other to PHX (via PHX to MIN),Spotrac,2026-07-12
+CLE,1,2027,PHX,30,TRUE,"Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)",Spotrac,2026-07-12
+CLE,1,2028,CLE,30,TRUE,"Least favorable of CLE, ATL and UTA (via UTH swap for CLE; via ATL swap for CLE or UTH)",Spotrac,2026-07-12
+CLE,1,2028,UTA CLE,30,TRUE,Or swap with CLE,Spotrac,2026-07-12
+CLE,1,2029,CHA,30,TRUE,"Least favorable of CLE, MIN 6-30 and UTA to PHX then others to UTA (via UTA to PHX)",Spotrac,2026-07-12
+CLE,1,2030,CLE,30,TRUE,,Spotrac,2026-07-12
+CLE,1,2031,CLE,30,TRUE,,Spotrac,2026-07-12
+CLE,1,2032,CLE,30,TRUE,,Spotrac,2026-07-12
+CLE,1,2033,CLE,30,TRUE,,Spotrac,2026-07-12
+CLE,2,2027,CHI,30,TRUE,(via ATL to MIN),Spotrac,2026-07-12
+CLE,2,2028,UTA,30,TRUE,,Spotrac,2026-07-12
+CLE,2,2029,ATL,30,TRUE,,Spotrac,2026-07-12
+CLE,2,2030,SAS,30,TRUE,,Spotrac,2026-07-12
+CLE,2,2031,UTA,30,TRUE,More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS),Spotrac,2026-07-12
+CLE,2,2032,UTA,30,TRUE,,Spotrac,2026-07-12
+DAL,1,2027,DAL,2,FALSE,If 1-2,Spotrac,2026-07-12
+DAL,1,2027,CHA,28,FALSE,If 3-30,Spotrac,2026-07-12
+DAL,1,2028,DAL OKC,30,TRUE,Or swap with OKC (via OKC swap for DAL),Spotrac,2026-07-12
+DAL,1,2028,OKC DAL,30,TRUE,Or swap with DAL (via OKC swap for DAL),Spotrac,2026-07-12
+DAL,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+DAL,1,2029,DAL,30,TRUE,,Spotrac,2026-07-12
+DAL,1,2030,DAL SAS,30,TRUE,Least favorable of DAL and SAS (via SAN swap for DAL),Spotrac,2026-07-12
+DAL,1,2030,GSW,20,FALSE,If 1-20,Spotrac,2026-07-12
+DAL,1,2030,DAL,10,FALSE,If 21-30 (via WAS),Spotrac,2026-07-12
+DAL,1,2031,DAL,30,TRUE,,Spotrac,2026-07-12
+DAL,1,2032,DAL,30,TRUE,,Spotrac,2026-07-12
+DAL,1,2033,DAL,30,TRUE,,Spotrac,2026-07-12
+DAL,2,2027,DAL,30,TRUE,(via WAS to NOP to WAS),Spotrac,2026-07-12
+DAL,2,2027,DET,30,TRUE,Less favorable of BKN and DAL to DET then other to WAS,Spotrac,2026-07-12
+DAL,2,2028,LAC,30,TRUE,(via SAC to IND),Spotrac,2026-07-12
+DAL,2,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+DAL,2,2029,DAL,30,TRUE,(via OKC to WAS),Spotrac,2026-07-12
+DAL,2,2030,BKN,30,TRUE,(via BOS to MEM),Spotrac,2026-07-12
+DAL,2,2030,DAL,30,TRUE,,Spotrac,2026-07-12
+DAL,2,2031,DET,30,TRUE,(via PHI),Spotrac,2026-07-12
+DAL,2,2032,DAL,30,TRUE,,Spotrac,2026-07-12
+DEN,1,2027,DEN,5,FALSE,If 1-5,Spotrac,2026-07-12
+DEN,1,2027,OKC,25,FALSE,If 6-30,Spotrac,2026-07-12
+DEN,1,2028,DEN,5,FALSE,If 1-5 if not already settled with OKC,Spotrac,2026-07-12
+DEN,1,2028,OKC,25,FALSE,If 6-30 if not already settled,Spotrac,2026-07-12
+DEN,1,2029,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-12
+DEN,1,2029,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-12
+DEN,1,2030,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-12
+DEN,1,2030,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-12
+DEN,1,2031,DEN,30,TRUE,,Spotrac,2026-07-12
+DEN,1,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+DEN,1,2033,DEN,30,TRUE,,Spotrac,2026-07-12
+DEN,2,2027,UTA,30,TRUE,(via CLE to CHI to BOS to UTA),Spotrac,2026-07-12
+DEN,2,2028,DEN,3,FALSE,If 31-33,Spotrac,2026-07-12
+DEN,2,2028,WAS,27,FALSE,If 34-60 (via SAS to SAC),Spotrac,2026-07-12
+DEN,2,2029,CHA,30,TRUE,If DEN conveys 1st to OKC by 2029,Spotrac,2026-07-12
+DEN,2,2030,OKC,30,TRUE,(via CHA),Spotrac,2026-07-12
+DEN,2,2031,CHI,30,TRUE,(via PHX to CHA),Spotrac,2026-07-12
+DEN,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+DET,1,2027,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2028,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2029,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2030,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2031,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2032,DET,30,TRUE,,Spotrac,2026-07-12
+DET,1,2033,DET,30,TRUE,,Spotrac,2026-07-12
+DET,2,2027,DET,30,TRUE,Less favorable of BKN and DAL to DET then other to WAS,Spotrac,2026-07-12
+DET,2,2027,DET,30,TRUE,,Spotrac,2026-07-12
+DET,2,2027,DET,30,TRUE,(via PHI),Spotrac,2026-07-12
+DET,2,2028,DET,25,FALSE,"Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET",Spotrac,2026-07-12
+DET,2,2028,PHI,5,FALSE,If 56-60,Spotrac,2026-07-12
+DET,2,2028,DET,30,TRUE,Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL),Spotrac,2026-07-12
+DET,2,2028,DET,30,TRUE,If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027,Spotrac,2026-07-12
+DET,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-12
+DET,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-12
+DET,2,2030,DET,30,TRUE,,Spotrac,2026-07-12
+DET,2,2030,DET,30,TRUE,,Spotrac,2026-07-12
+DET,2,2031,DET,30,TRUE,(via PHI),Spotrac,2026-07-12
+DET,2,2031,DET,30,TRUE,,Spotrac,2026-07-12
+DET,2,2031,DET,30,TRUE,Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW)),Spotrac,2026-07-12
+DET,2,2032,DET,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2027,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2028,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2029,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2030,GSW,20,FALSE,If 1-20,Spotrac,2026-07-12
+GSW,1,2030,DAL,10,FALSE,If 21-30 (via WAS),Spotrac,2026-07-12
+GSW,1,2031,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2032,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,1,2033,GSW,30,TRUE,,Spotrac,2026-07-12
+GSW,2,2027,WAS,30,TRUE,Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-12
+GSW,2,2028,PHI,30,TRUE,(via POR to WAS),Spotrac,2026-07-12
+GSW,2,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+GSW,2,2030,GSW WAS,30,TRUE,GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030,Spotrac,2026-07-12
+GSW,2,2031,DET,30,TRUE,Least favorable of GSW and MIN then other to MIN (via MIN swap for GSW (via GSW)),Spotrac,2026-07-12
+GSW,2,2032,GSW,20,FALSE,If 31-50,Spotrac,2026-07-12
+GSW,2,2032,MEM,10,FALSE,If 51-60,Spotrac,2026-07-12
+HOU,1,2027,BKN HOU,30,TRUE,Or swap with HOU (via HOU swap for BKN),Spotrac,2026-07-12
+HOU,1,2027,HOU BKN,30,TRUE,Or swap with BKN (via HOU swap for BKN),Spotrac,2026-07-12
+HOU,1,2027,HOU,30,TRUE,(via BKN),Spotrac,2026-07-12
+HOU,1,2028,HOU,30,TRUE,,Spotrac,2026-07-12
+HOU,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+HOU,1,2029,BKN,30,TRUE,Least favorable of DAL HOU and PHX then others to HOU,Spotrac,2026-07-12
+HOU,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+HOU,1,2030,HOU,30,TRUE,,Spotrac,2026-07-12
+HOU,1,2031,HOU,30,TRUE,,Spotrac,2026-07-12
+HOU,1,2032,HOU,30,TRUE,,Spotrac,2026-07-12
+HOU,1,2033,HOU,30,TRUE,,Spotrac,2026-07-12
+HOU,2,2027,NOP,30,TRUE,"Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+HOU,2,2027,HOU,30,TRUE,(via LAC),Spotrac,2026-07-12
+HOU,2,2027,HOU,30,TRUE,If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS),Spotrac,2026-07-12
+HOU,2,2028,HOU,30,TRUE,(via ATL),Spotrac,2026-07-12
+HOU,2,2029,DAL,30,TRUE,(via OKC to WAS),Spotrac,2026-07-12
+HOU,2,2029,HOU,30,TRUE,(via WAS),Spotrac,2026-07-12
+HOU,2,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+HOU,2,2031,HOU,25,FALSE,If 31-55 or swap with ATL (via ATL swap for HOU),Spotrac,2026-07-12
+HOU,2,2031,BOS,5,FALSE,If 56-60,Spotrac,2026-07-12
+HOU,2,2032,CHI,30,TRUE,More favorable of HOU and PHX then other to PHX (via PHX to MIN),Spotrac,2026-07-12
+IND,1,2027,IND,30,TRUE,,Spotrac,2026-07-12
+IND,1,2028,IND,30,TRUE,,Spotrac,2026-07-12
+IND,1,2029,LAC,30,TRUE,,Spotrac,2026-07-12
+IND,1,2030,IND,30,TRUE,,Spotrac,2026-07-12
+IND,1,2031,IND,30,TRUE,,Spotrac,2026-07-12
+IND,1,2032,IND,30,TRUE,,Spotrac,2026-07-12
+IND,1,2033,IND,30,TRUE,,Spotrac,2026-07-12
+IND,2,2027,NYK,30,TRUE,"Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+IND,2,2027,IND,30,TRUE,(via CLE) or to NOP if IND does not convey 1st to NOP by 2027,Spotrac,2026-07-12
+IND,2,2028,IND,30,TRUE,More favorable of IND and PHX then other to NYK,Spotrac,2026-07-12
+IND,2,2029,POR,30,TRUE,Less favorable of IND and WAS to POR then other to IND (via NYK),Spotrac,2026-07-12
+IND,2,2029,IND,30,TRUE,More favorable of IND and WAS to IND then other to POR (via NYK),Spotrac,2026-07-12
+IND,2,2030,IND,30,TRUE,,Spotrac,2026-07-12
+IND,2,2031,IND,30,TRUE,"Least favorable of IND, MEM and MIA then others to MEM and WAS (via MIA swap for IND; via UTH to WAS; via MEM swap for IND or MIA)",Spotrac,2026-07-12
+IND,2,2032,IND,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2027,OKC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-12
+LAC,1,2027,LAC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-12
+LAC,1,2028,PHI,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2029,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2029,LAC PHI,30,TRUE,Or swap 4-30 with PHI (via PHI swap for LAC),Spotrac,2026-07-12
+LAC,1,2029,PHI LAC,30,TRUE,Or swap with LAC 4-30 (via PHI swap for LAC),Spotrac,2026-07-12
+LAC,1,2030,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2031,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2032,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,1,2033,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,2,2027,UTA,30,TRUE,(via ATL to LAC),Spotrac,2026-07-12
+LAC,2,2028,LAC,30,TRUE,(via SAC to IND),Spotrac,2026-07-12
+LAC,2,2028,DET,30,TRUE,Least favorable of CHA and LAC then other to CHA (via LAC to CHA to DAL),Spotrac,2026-07-12
+LAC,2,2029,SAS,30,TRUE,(via PHI),Spotrac,2026-07-12
+LAC,2,2030,UTA,30,TRUE,Less favorable of LAC and UTA then other to CHA (via LAC to UTA),Spotrac,2026-07-12
+LAC,2,2031,LAC,30,TRUE,,Spotrac,2026-07-12
+LAC,2,2032,LAC,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2027,LAL,4,FALSE,If 1-4,Spotrac,2026-07-12
+LAL,1,2027,MEM,26,FALSE,If 5-30 (via UTA),Spotrac,2026-07-12
+LAL,1,2028,LAL,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2029,DAL,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2030,LAL,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2031,LAL,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2032,LAL,30,TRUE,,Spotrac,2026-07-12
+LAL,1,2033,LAL,30,TRUE,,Spotrac,2026-07-12
+LAL,2,2027,UTA,30,TRUE,If LAL does not convey 1st to UTA in 2027 or to BKN,Spotrac,2026-07-12
+LAL,2,2028,WAS,30,TRUE,Less favorable of LAL and WAS then other to ORL (via LAL to WAS),Spotrac,2026-07-12
+LAL,2,2029,WAS,30,TRUE,,Spotrac,2026-07-12
+LAL,2,2030,BKN,30,TRUE,,Spotrac,2026-07-12
+LAL,2,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+LAL,2,2032,ATL,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2027,LAL,4,FALSE,If 1-4,Spotrac,2026-07-12
+MEM,1,2027,MEM,26,FALSE,If 5-30 (via UTA),Spotrac,2026-07-12
+MEM,1,2027,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2027,MEM,30,TRUE,"Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)",Spotrac,2026-07-12
+MEM,1,2028,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2029,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2029,ORL,2,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-12
+MEM,1,2029,MEM,28,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-12
+MEM,1,2030,MEM,30,TRUE,More favorable of MEM and less favorable of PHX and WAS,Spotrac,2026-07-12
+MEM,1,2030,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2031,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2031,MEM,30,TRUE,(via UTA),Spotrac,2026-07-12
+MEM,1,2032,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,1,2033,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,2,2027,HOU,30,TRUE,(via LAC),Spotrac,2026-07-12
+MEM,2,2028,BKN,30,TRUE,(via PHX),Spotrac,2026-07-12
+MEM,2,2029,BKN,30,TRUE,(via PHX),Spotrac,2026-07-12
+MEM,2,2029,ORL,30,TRUE,If ORL 3-30 in 2029,Spotrac,2026-07-12
+MEM,2,2029,MEM,30,TRUE,(via PHI to IND),Spotrac,2026-07-12
+MEM,2,2030,MEM,20,FALSE,31-50,Spotrac,2026-07-12
+MEM,2,2030,MIN,10,FALSE,51-60,Spotrac,2026-07-12
+MEM,2,2031,MEM,30,TRUE,"Most favorable of MEM, IND and MIA then others to IND and UTA (via MIA swap for IND; via MEM swap for IND or MIA)",Spotrac,2026-07-12
+MEM,2,2032,GSW,20,FALSE,If 31-50,Spotrac,2026-07-12
+MEM,2,2032,MEM,10,FALSE,If 51-60,Spotrac,2026-07-12
+MEM,2,2032,MEM,30,TRUE,,Spotrac,2026-07-12
+MEM,2,2032,MEM,30,TRUE,MEM can swap for PHI,Spotrac,2026-07-12
+MIA,1,2027,MIA,14,FALSE,If 1-14,Spotrac,2026-07-12
+MIA,1,2027,CHA,16,FALSE,If 15-30,Spotrac,2026-07-12
+MIA,1,2028,MIA CHA,30,TRUE,If MIA conveys 1st to CHA in 2027 or If MIA does not convey 1st to OKC in 2025,Spotrac,2026-07-12
+MIA,1,2029,MIA,30,TRUE,,Spotrac,2026-07-12
+MIA,1,2030,MIA,30,TRUE,,Spotrac,2026-07-12
+MIA,1,2031,MIA,30,TRUE,,Spotrac,2026-07-12
+MIA,1,2032,MIA,30,TRUE,,Spotrac,2026-07-12
+MIA,1,2033,MIA,30,TRUE,,Spotrac,2026-07-12
+MIA,2,2027,PHI,30,TRUE,"Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+MIA,2,2027,MIA,30,TRUE,"Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-12
+MIA,2,2028,DET,30,TRUE,If DAL conveys 1st to CHA in 2027(via SAS to DAL to DET) or to CHA if DAL does not convey 1st to CHA in 2027,Spotrac,2026-07-12
+MIA,2,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+MIA,2,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+MIA,2,2031,WAS,30,TRUE,More favorable of MIA and IND (via MIA swap for IND; via UTH),Spotrac,2026-07-12
+MIA,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+MIL,1,2027,ATL,30,TRUE,Least favorable of MIL and NOP then other to NOP (via NOP),Spotrac,2026-07-12
+MIL,1,2028,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-12
+MIL,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-12
+MIL,1,2030,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-12
+MIL,1,2030,POR MIL,30,TRUE,Or swap with MIL,Spotrac,2026-07-12
+MIL,1,2031,MIL,30,TRUE,,Spotrac,2026-07-12
+MIL,1,2032,MIL,30,TRUE,,Spotrac,2026-07-12
+MIL,1,2033,MIL,30,TRUE,,Spotrac,2026-07-12
+MIL,2,2027,DET,30,TRUE,(via PHI),Spotrac,2026-07-12
+MIL,2,2028,PHI,30,TRUE,(via BKN to HOU to OKC),Spotrac,2026-07-12
+MIL,2,2029,DET,30,TRUE,"Two most favorable of DET, MIL and NYK then other to SAC (via MIL to BRK to DET; via NYK to DET)",Spotrac,2026-07-12
+MIL,2,2030,ORL,30,TRUE,,Spotrac,2026-07-12
+MIL,2,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+MIL,2,2032,CHA,30,TRUE,,Spotrac,2026-07-12
+MIN,1,2027,UTA,30,TRUE,"Two most favorable of CLE, MIN and UTA then other to PHX",Spotrac,2026-07-12
+MIN,1,2028,MIN,30,TRUE,,Spotrac,2026-07-12
+MIN,1,2029,MIN,5,FALSE,If 1-5,Spotrac,2026-07-12
+MIN,1,2029,UTA,25,FALSE,"If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX",Spotrac,2026-07-12
+MIN,1,2030,MIN,30,TRUE,"Least favorable of MIN 2-30, DAL and SAS (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)",Spotrac,2026-07-12
+MIN,1,2031,SAC,30,TRUE,(via SAS),Spotrac,2026-07-12
+MIN,1,2032,MIN,30,TRUE,FROZEN PICK,Spotrac,2026-07-12
+MIN,1,2033,MIN,30,TRUE,,Spotrac,2026-07-12
+MIN,2,2027,POR,30,TRUE,(via HOU to OKC to NYK),Spotrac,2026-07-12
+MIN,2,2028,SAS,30,TRUE,,Spotrac,2026-07-12
+MIN,2,2029,MIN UTA,30,TRUE,MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029,Spotrac,2026-07-12
+MIN,2,2030,MEM,20,FALSE,31-50,Spotrac,2026-07-12
+MIN,2,2030,MIN,10,FALSE,51-60,Spotrac,2026-07-12
+MIN,2,2030,DET,30,TRUE,,Spotrac,2026-07-12
+MIN,2,2031,CHI,30,TRUE,Most favorable of GSW and MIN then other to DET (via MIN swap for GSW (via MIN)),Spotrac,2026-07-12
+MIN,2,2032,MIN,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2027,NOP,30,TRUE,Most favorable of MIL and NOP then other to ATL,Spotrac,2026-07-12
+NOP,1,2028,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2029,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2030,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2031,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2032,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,1,2033,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,2,2027,NOP,30,TRUE,"Second most favorable of HOU, IND, MIA and OKC to NYK; then others to PHI and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+NOP,2,2027,CHA,30,TRUE,More favorable of NOP and POR to CHA then other to POR (via POR),Spotrac,2026-07-12
+NOP,2,2028,SAS,30,TRUE,,Spotrac,2026-07-12
+NOP,2,2029,SAS,30,TRUE,,Spotrac,2026-07-12
+NOP,2,2030,NOP ORL,30,TRUE,Or swap with ORL (via ORL swap for NOP),Spotrac,2026-07-12
+NOP,2,2030,ORL NOP,30,TRUE,Or swap with NOP,Spotrac,2026-07-12
+NOP,2,2031,ORL,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-12
+NOP,2,2031,NOP,30,TRUE,,Spotrac,2026-07-12
+NOP,2,2032,NOP,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2027,BKN,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2028,NYK BKN,30,TRUE,Or swap with BKN (via BKN swap for NYK),Spotrac,2026-07-12
+NYK,1,2029,BKN,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2030,NYK,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2031,BKN,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2032,NYK,30,TRUE,,Spotrac,2026-07-12
+NYK,1,2033,NYK,30,TRUE,,Spotrac,2026-07-12
+NYK,2,2027,NYK,30,TRUE,"Second and third most favorable of HOU, IND, MIA and OKC to NYK; then others to OKC and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+NYK,2,2027,ATL,30,TRUE,(via POR),Spotrac,2026-07-12
+NYK,2,2027,WAS NYK,30,TRUE,WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC),Spotrac,2026-07-12
+NYK,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-12
+NYK,2,2028,UTA,30,TRUE,,Spotrac,2026-07-12
+NYK,2,2028,NYK,30,TRUE,Less favorable of IND and PHX to NYK then other to IND (via IND),Spotrac,2026-07-12
+NYK,2,2029,CHI,30,TRUE,"Least favorable of DET, MIL and NYK then others to DET (via MIL to BRK to DET; via NYK to DET to SAC)",Spotrac,2026-07-12
+NYK,2,2030,ATL,30,TRUE,(via POR),Spotrac,2026-07-12
+NYK,2,2031,CHI,30,TRUE,(via DET to CHA),Spotrac,2026-07-12
+NYK,2,2032,NYK,30,TRUE,,Spotrac,2026-07-12
+OKC,1,2027,DEN,5,FALSE,If 1-5,Spotrac,2026-07-12
+OKC,1,2027,OKC,25,FALSE,If 6-30,Spotrac,2026-07-12
+OKC,1,2027,OKC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-12
+OKC,1,2027,LAC,30,TRUE,"Two most favorable of DEN 6-30, LAC and OKC (via OKC swap for LAC)",Spotrac,2026-07-12
+OKC,1,2027,PHI,4,FALSE,If 1-4 if not already settled with OKC,Spotrac,2026-07-12
+OKC,1,2027,OKC,26,FALSE,If 5-30 if not already settled,Spotrac,2026-07-12
+OKC,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-12
+OKC,1,2028,DAL OKC,30,TRUE,Or swap with OKC (via OKC swap for DAL),Spotrac,2026-07-12
+OKC,1,2028,DEN,5,FALSE,If 1-5 if not already settled with OKC,Spotrac,2026-07-12
+OKC,1,2028,OKC,25,FALSE,If 6-30 if not already settled,Spotrac,2026-07-12
+OKC,1,2028,OKC DAL,30,TRUE,Or swap with DAL (via OKC swap for DAL),Spotrac,2026-07-12
+OKC,1,2029,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-12
+OKC,1,2029,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2027,Spotrac,2026-07-12
+OKC,1,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,1,2030,DEN,5,FALSE,If 1-5 if not already settled with OKC or 1-5 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-12
+OKC,1,2030,OKC,25,FALSE,If 6-30 if not already settled or 6-30 if DEN conveys 1st to OKC by 2028,Spotrac,2026-07-12
+OKC,1,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,1,2031,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,1,2032,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,1,2033,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-12
+OKC,2,2027,MIA,30,TRUE,"Least favorable of HOU, IND, MIA and OKC then others to NYK, OKC and SAS (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-12
+OKC,2,2027,PHI OKC,30,TRUE,PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027,Spotrac,2026-07-12
+OKC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-12
+OKC,2,2028,PHI,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2028,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2029,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2030,OKC,30,TRUE,(via CHA),Spotrac,2026-07-12
+OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2030,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2031,OKC,30,TRUE,,Spotrac,2026-07-12
+OKC,2,2031,OKC,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-12
+OKC,2,2032,OKC,30,TRUE,,Spotrac,2026-07-12
+ORL,1,2027,ORL,30,TRUE,,Spotrac,2026-07-12
+ORL,1,2028,POR,30,TRUE,(via MEM),Spotrac,2026-07-12
+ORL,1,2029,ORL,2,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-12
+ORL,1,2029,MEM,28,FALSE,If 1-2 or swap 3-30 with MEM (via MEM swap for ORL,Spotrac,2026-07-12
+ORL,1,2030,MEM,30,TRUE,,Spotrac,2026-07-12
+ORL,1,2031,ORL,30,TRUE,,Spotrac,2026-07-12
+ORL,1,2032,ORL,30,TRUE,,Spotrac,2026-07-12
+ORL,1,2033,ORL,30,TRUE,,Spotrac,2026-07-12
+ORL,2,2027,UTA,30,TRUE,More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS),Spotrac,2026-07-12
+ORL,2,2028,CHA,30,TRUE,,Spotrac,2026-07-12
+ORL,2,2028,ORL,30,TRUE,More favorable of LAL and WAS to ORL then other to WAS,Spotrac,2026-07-12
+ORL,2,2029,ORL,30,TRUE,If ORL 3-30 in 2029,Spotrac,2026-07-12
+ORL,2,2030,ORL,30,TRUE,,Spotrac,2026-07-12
+ORL,2,2030,NOP ORL,30,TRUE,Or swap with ORL (via ORL swap for NOP),Spotrac,2026-07-12
+ORL,2,2030,ORL NOP,30,TRUE,Or swap with NOP,Spotrac,2026-07-12
+ORL,2,2031,ORL,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-12
+ORL,2,2031,OKC,30,TRUE,Least favorable of ORL and NOP (via ORL swap for NOP (via NOP)),Spotrac,2026-07-12
+ORL,2,2032,ORL,30,TRUE,,Spotrac,2026-07-12
+PHI,1,2027,PHI,4,FALSE,If 1-4 if not already settled with OKC,Spotrac,2026-07-12
+PHI,1,2027,OKC,26,FALSE,If 5-30 if not already settled,Spotrac,2026-07-12
+PHI,1,2028,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,1,2028,PHI,8,FALSE,If 1-8 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-12
+PHI,1,2028,BKN,22,FALSE,If 9-30 and if PHI conveys 1st to OKC by 2026,Spotrac,2026-07-12
+PHI,1,2029,LAC PHI,30,TRUE,Or swap 4-30 with PHI (via PHI swap for LAC),Spotrac,2026-07-12
+PHI,1,2029,PHI LAC,30,TRUE,Or swap with LAC 4-30 (via PHI swap for LAC),Spotrac,2026-07-12
+PHI,1,2030,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,1,2031,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,1,2032,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,1,2033,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2027,PHI,30,TRUE,"Most favorable of HOU, IND, MIA and OKC to PHI; then others to NYK and SAS (via HOU to DET to UTA to OKC)",Spotrac,2026-07-12
+PHI,2,2027,PHI OKC,30,TRUE,PHI pick if PHI conveys 1st to OKC by 2027; OKC pick if PHI does not convey 1st to HOU by 2027,Spotrac,2026-07-12
+PHI,2,2027,PHI,30,TRUE,Most favorable of GSW and PHX to PHI then other to WAS (via WAS),Spotrac,2026-07-12
+PHI,2,2028,DET,25,FALSE,"Least favorable of DET 31-55, CHA, LAC, MIA and NYK to UTA then others to DET",Spotrac,2026-07-12
+PHI,2,2028,PHI,5,FALSE,If 56-60,Spotrac,2026-07-12
+PHI,2,2028,PHI,30,TRUE,(via POR to WAS),Spotrac,2026-07-12
+PHI,2,2028,PHI,30,TRUE,(via BKN to HOU to OKC),Spotrac,2026-07-12
+PHI,2,2028,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2028,PHI BKN,30,TRUE,PHI pick if PHI conveys second 1st to BKN by 2028; BKN pick if PHI does not convey second 1st to BKN by 2028,Spotrac,2026-07-12
+PHI,2,2029,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2030,DAL,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2030,PHI,30,TRUE,More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI),Spotrac,2026-07-12
+PHI,2,2030,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2031,PHI,30,TRUE,,Spotrac,2026-07-12
+PHI,2,2032,MEM,30,TRUE,MEM can swap for PHI,Spotrac,2026-07-12
+PHX,1,2027,PHX,30,TRUE,"Least favorable of CLE, MIN and UTA to PHX then others to UTA (via UTA)",Spotrac,2026-07-12
+PHX,1,2027,HOU,30,TRUE,(via BKN),Spotrac,2026-07-12
+PHX,1,2028,PHX,30,TRUE,"Least Favorable of WAS and BKN, PHI 9-30 if not already settled and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX)",Spotrac,2026-07-12
+PHX,1,2029,HOU,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+PHX,1,2030,PHX,30,TRUE,"Least favorable of PHX, MEM and WAS",Spotrac,2026-07-12
+PHX,1,2031,MEM,30,TRUE,(via UTA),Spotrac,2026-07-12
+PHX,1,2032,PHX,30,TRUE,FROZEN PICK,Spotrac,2026-07-12
+PHX,1,2033,PHX,30,TRUE,,Spotrac,2026-07-12
+PHX,2,2027,PHI,30,TRUE,Most favorable of GSW and PHX to PHI then other to WAS (via WAS),Spotrac,2026-07-12
+PHX,2,2028,NYK,30,TRUE,Less favorable of IND and PHX to NYK then other to IND (via IND),Spotrac,2026-07-12
+PHX,2,2029,PHX,30,TRUE,(via OKC to CHA),Spotrac,2026-07-12
+PHX,2,2030,WAS,30,TRUE,Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-12
+PHX,2,2031,CHA,30,TRUE,,Spotrac,2026-07-12
+PHX,2,2032,PHX,30,TRUE,Least favorable of HOU and PHX then other to MIN (via PHX),Spotrac,2026-07-12
+POR,1,2027,POR,14,FALSE,If 1-14 if not already settled with CHI,Spotrac,2026-07-12
+POR,1,2027,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-12
+POR,1,2028,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-12
+POR,1,2028,POR,30,TRUE,(via MEM),Spotrac,2026-07-12
+POR,1,2028,POR,14,FALSE,If 1-14 if not already settled with CHI or swap with MIL,Spotrac,2026-07-12
+POR,1,2028,CHI,16,FALSE,If 15-30 if not already settled,Spotrac,2026-07-12
+POR,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-12
+POR,1,2029,POR,30,TRUE,"Most and least favorable of BOS, MIL and POR to POR then other to WAS (via BOS to POR; via MIL to POR; via POR to WAS)",Spotrac,2026-07-12
+POR,1,2029,WAS,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+POR,1,2030,MIL POR,30,TRUE,Or swap with POR (via POR swap for MIL),Spotrac,2026-07-12
+POR,1,2030,POR MIL,30,TRUE,Or swap with MIL,Spotrac,2026-07-12
+POR,1,2031,POR,30,TRUE,,Spotrac,2026-07-12
+POR,1,2032,POR,30,TRUE,,Spotrac,2026-07-12
+POR,1,2033,POR,30,TRUE,,Spotrac,2026-07-12
+POR,2,2027,POR,30,TRUE,(via HOU to OKC to NYK),Spotrac,2026-07-12
+POR,2,2027,HOU,30,TRUE,If POR 56-60 then less favorable of NOP and POR 56-60 (via POR to BOS),Spotrac,2026-07-12
+POR,2,2028,POR CHI,30,TRUE,POR pick if POR conveys 1st to CHI by 2028; CHI pick if POR does not convey 1st to POR by 2028,Spotrac,2026-07-12
+POR,2,2028,POR,30,TRUE,(via CHI to SAC to MEM),Spotrac,2026-07-12
+POR,2,2029,POR,30,TRUE,Less favorable of IND and WAS to POR then other to IND (via NYK),Spotrac,2026-07-12
+POR,2,2029,MEM,30,TRUE,(via PHI to IND),Spotrac,2026-07-12
+POR,2,2030,PHI,30,TRUE,More favorable of PHX and POR to PHI then other to WAS (via WAS to PHI),Spotrac,2026-07-12
+POR,2,2031,POR,30,TRUE,,Spotrac,2026-07-12
+POR,2,2032,POR,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2027,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-12
+SAC,1,2028,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2029,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2030,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2031,SAC,30,TRUE,(via SAS),Spotrac,2026-07-12
+SAC,1,2031,SAC SAS,30,TRUE,Or swap with SAS (via SAS swap for SAC),Spotrac,2026-07-12
+SAC,1,2031,SAS SAC,30,TRUE,Or swap for SAC,Spotrac,2026-07-12
+SAC,1,2032,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,1,2033,SAC,30,TRUE,,Spotrac,2026-07-12
+SAC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-12
+SAC,2,2027,OKC SAC,30,TRUE,"OKC If SAS is 1-16, SAC If SAS is 17-30",Spotrac,2026-07-12
+SAC,2,2028,POR,30,TRUE,(via CHI to SAC to MEM),Spotrac,2026-07-12
+SAC,2,2029,HOU,30,TRUE,(via WAS),Spotrac,2026-07-12
+SAC,2,2030,SAS,30,TRUE,(via IND),Spotrac,2026-07-12
+SAC,2,2031,SAS,30,TRUE,,Spotrac,2026-07-12
+SAC,2,2032,SAC,30,TRUE,,Spotrac,2026-07-12
+SAS,1,2027,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,1,2027,OKC,30,TRUE,If 17-30 (via SAC),Spotrac,2026-07-12
+SAS,1,2028,BOS,1,FALSE,If 1,Spotrac,2026-07-12
+SAS,1,2028,SAS BOS,29,FALSE,Or swap 2-30 with SAS (via SAS swap for BOS),Spotrac,2026-07-12
+SAS,1,2028,SAS BOS,30,TRUE,Or swap with BOS 2-30 (via SAS swap for BOS),Spotrac,2026-07-12
+SAS,1,2029,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,1,2030,DAL SAS,30,TRUE,Least favorable of DAL and SAS (via SAN swap for DAL),Spotrac,2026-07-12
+SAS,1,2030,SAS,30,TRUE,"Most favorable of SAS, DAL and MIN 2-30 (via SAN swap for DAL; via SAN swap of SAN or DAL for MIN)",Spotrac,2026-07-12
+SAS,1,2031,SAC SAS,30,TRUE,Or swap with SAS (via SAS swap for SAC),Spotrac,2026-07-12
+SAS,1,2031,SAS SAC,30,TRUE,Or swap for SAC,Spotrac,2026-07-12
+SAS,1,2032,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,1,2033,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2027,SAS,30,TRUE,"More favorable SAS and least favorable of HOU, IND, MIA and OKC then others to NYK and OKC (via HOU to DET to OKC; via UTA to SAS)",Spotrac,2026-07-12
+SAS,2,2028,NYK,30,TRUE,If 46-60 (via ORL to PHX),Spotrac,2026-07-12
+SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2028,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2029,SAS,30,TRUE,(via PHI),Spotrac,2026-07-12
+SAS,2,2029,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2029,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2030,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2030,SAS,30,TRUE,(via IND),Spotrac,2026-07-12
+SAS,2,2030,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2031,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2031,SAS,30,TRUE,,Spotrac,2026-07-12
+SAS,2,2032,SAS,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2027,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2028,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2029,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2030,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2031,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2032,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,1,2033,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2027,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2028,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2029,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2030,TOR,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2031,NOP,30,TRUE,,Spotrac,2026-07-12
+TOR,2,2032,BKN,30,TRUE,,Spotrac,2026-07-12
+UTA,1,2027,UTA,30,TRUE,"Two most favorable of CLE, MIN and UTA then other to PHX",Spotrac,2026-07-12
+UTA,1,2027,MEM,30,TRUE,"Most favorable of CLE, MIN and UTA then others to PHX and UTA (via UTA)",Spotrac,2026-07-12
+UTA,1,2028,UTA CLE,30,TRUE,Or swap with CLE,Spotrac,2026-07-12
+UTA,1,2029,MIN,5,FALSE,If 1-5,Spotrac,2026-07-12
+UTA,1,2029,UTA,25,FALSE,"If 6-30 then two most favorable of CLE, MIN 6-30 and UTA then other to PHX",Spotrac,2026-07-12
+UTA,1,2029,UTA,30,TRUE,"Two most favorable of CLE, MIN 6-30 and UTA then other to CHA",Spotrac,2026-07-12
+UTA,1,2030,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,1,2031,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,1,2032,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,1,2033,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2027,UTA,30,TRUE,(via CLE to CHI to BOS to UTA),Spotrac,2026-07-12
+UTA,2,2027,UTA,30,TRUE,(via ATL to LAC),Spotrac,2026-07-12
+UTA,2,2027,UTA,30,TRUE,If LAL does not convey 1st to UTA in 2027 or to BKN,Spotrac,2026-07-12
+UTA,2,2027,UTA,30,TRUE,More favorable of BOS and UTA then other to ORL (via BOS to ORL to BOS),Spotrac,2026-07-12
+UTA,2,2027,IND,30,TRUE,(via CLE) or to NOP if IND does not convey 1st to NOP by 2027,Spotrac,2026-07-12
+UTA,2,2028,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2028,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2028,OKC,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2029,MIN UTA,30,TRUE,MIN pick if MIN conveys 1st to UTA in 2029; UTA pick if MIN does not convey 1st to UTA in 2029,Spotrac,2026-07-12
+UTA,2,2029,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2030,UTA,30,TRUE,Less favorable of LAC and UTA then other to CHA (via LAC to UTA),Spotrac,2026-07-12
+UTA,2,2030,CHA,30,TRUE,More favorable of LAC and UTA (via UTA),Spotrac,2026-07-12
+UTA,2,2031,UTA,30,TRUE,More favorable of BOS and CLE then other to BOS (via CLE to ATL to BOS),Spotrac,2026-07-12
+UTA,2,2031,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2032,UTA,30,TRUE,,Spotrac,2026-07-12
+UTA,2,2032,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,1,2027,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,1,2028,WAS,30,TRUE,"Most Favorable of WAS and BKN, PHI 9-30 and if PHI conveys 1st to OKC by 2026 and PHX (via BKN and WAS swap for PHX) or swap for MIL or POR",Spotrac,2026-07-12
+WAS,1,2029,WAS,30,TRUE,"Two most favorable of BKN, DAL and PHX to HOU then other to BKN",Spotrac,2026-07-12
+WAS,1,2029,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,1,2030,WAS,30,TRUE,"Most favorable of WAS, MEM and PHX",Spotrac,2026-07-12
+WAS,1,2031,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,1,2032,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,1,2033,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,2,2027,WAS,30,TRUE,More favorable of BKN and DAL to WAS then other to DET,Spotrac,2026-07-12
+WAS,2,2027,WAS,30,TRUE,Least favorable of GSW and PHX to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-12
+WAS,2,2027,WAS NYK,30,TRUE,WAS pick if WAS conveys 1st to NYK by 2026; NYK pick if WAS does not convey 1st to NYK to by 2026 (via HOU to OKC),Spotrac,2026-07-12
+WAS,2,2028,DEN,3,FALSE,If 31-33,Spotrac,2026-07-12
+WAS,2,2028,WAS,27,FALSE,If 34-60 (via SAS to SAC),Spotrac,2026-07-12
+WAS,2,2028,WAS,30,TRUE,Less favorable of LAL and WAS then other to ORL (via LAL to WAS),Spotrac,2026-07-12
+WAS,2,2028,ORL,30,TRUE,More favorable of LAL and WAS to ORL then other to WAS,Spotrac,2026-07-12
+WAS,2,2029,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,2,2029,IND,30,TRUE,More favorable of IND and WAS to IND then other to POR (via NYK),Spotrac,2026-07-12
+WAS,2,2030,GSW WAS,30,TRUE,GSW pick if GSW conveys 1st to WAS in 2030; WAS pick if GSW does not convey 1st to WAS in 2030,Spotrac,2026-07-12
+WAS,2,2030,WAS,30,TRUE,Least favorable of PHX and POR to WAS then other to PHI (via WAS to PHI),Spotrac,2026-07-12
+WAS,2,2030,PHI,30,TRUE,,Spotrac,2026-07-12
+WAS,2,2031,WAS,30,TRUE,More favorable of MIA and IND (via MIA swap for IND; via UTH),Spotrac,2026-07-12
+WAS,2,2031,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,2,2032,WAS,30,TRUE,,Spotrac,2026-07-12
+WAS,2,2032,WAS,30,TRUE,,Spotrac,2026-07-12
