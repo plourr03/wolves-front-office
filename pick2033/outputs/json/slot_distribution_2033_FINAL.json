@@ -1,8 +1,8 @@
 {
  "meta": {
   "tag": "FINAL",
-  "generated_utc": "2026-07-12T13:14:22.580027+00:00",
-  "code_commit": "f3b3691e",
+  "generated_utc": "2026-07-12T13:24:58.532453+00:00",
+  "code_commit": "52a75845",
   "variant": "two_tier",
   "n_paths": 50000,
   "note": "MIN 2033 first (conveys to CHA outright)"

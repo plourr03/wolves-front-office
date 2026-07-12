@@ -4,8 +4,8 @@
   "variant": "two_tier",
   "n_paths": 50000,
   "seed": 20330708,
-  "generated_utc": "2026-07-12T13:19:16.578065+00:00",
-  "code_commit": "f3b3691e"
+  "generated_utc": "2026-07-12T13:25:02.075642+00:00",
+  "code_commit": "52a75845"
  },
  "runs": {
   "top1_true_vorp": {
