@@ -1,0 +1,187 @@
+<div id="viz-spell-lengths"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-spell-lengths, #viz-spell-lengths * { touch-action: manipulation; }
+  #viz-spell-lengths .sl-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Length of all 291 star spells since 1990 (seasons from first star
+  // season to departure, retirement, or data end).
+  // Source: pick2033 star_spells_final.parquet (freeze 50f9b7bc5b19835b).
+  var raw = [
+    {len:1,n:45},{len:2,n:52},{len:3,n:45},{len:4,n:39},{len:5,n:37},
+    {len:6,n:23},{len:7,n:11},{len:8,n:13},{len:9,n:5},{len:10,n:6},
+    {len:11,n:3},{len:12,n:2},{len:14,n:4},{len:15,n:2},{len:16,n:1},
+    {len:18,n:1},{len:19,n:2}
+  ];
+  var data = [];
+  for (var L = 1; L <= 19; L++) {
+    var hit = raw.filter(function (d) { return d.len === L; })[0];
+    data.push({ len: L, n: hit ? hit.n : 0 });
+  }
+
+  var root = d3.select("#viz-spell-lengths");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw2 = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw2));
+    var compact = width < 480;
+    var margin = { top: 44, right: 12, bottom: 34, left: compact ? 30 : 38 };
+    var height = Math.max(240, Math.round(width * 0.46));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleBand()
+      .domain(data.map(function (d) { return d.len; }))
+      .range([margin.left, width - margin.right])
+      .padding(0.18);
+    var y = d3.scaleLinear().domain([0, 56]).range([height - margin.bottom, margin.top]);
+
+    var yTicks = [0, 20, 40];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return d; });
+
+    var xTicks = compact ? [1, 4, 8, 12, 16, 19] : [1, 2, 4, 6, 8, 10, 12, 14, 16, 19];
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", function (d) { return x(d) + x.bandwidth() / 2; })
+      .attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", function (d) {
+        return d === 4 ? "var(--text-primary)" : "var(--text-secondary)";
+      })
+      .style("font", function (d) {
+        return (d === 4 ? "600 " : "") + "12px var(--family-sans)";
+      })
+      .text(function (d) { return d; });
+    svg.append("text")
+      .attr("x", (margin.left + width - margin.right) / 2)
+      .attr("y", height - 4).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("spell length, seasons");
+
+    // Bars. The median season (4) carries the accent; the rest stay quiet.
+    var bars = svg.append("g").selectAll("rect").data(data).join("rect")
+      .attr("x", function (d) { return x(d.len); })
+      .attr("width", x.bandwidth())
+      .attr("rx", 3)
+      .style("fill", function (d) {
+        return d.len === 4 ? "var(--accent-default)" : "var(--accent-subtle)";
+      })
+      .style("stroke", "var(--accent-default)")
+      .style("stroke-width", function (d) { return d.len === 4 ? 0 : 0.6; })
+      .style("cursor", "pointer")
+      .attr("y", reduceMotion ? function (d) { return y(d.n); } : y(0))
+      .attr("height", reduceMotion
+        ? function (d) { return y(0) - y(d.n); } : 0);
+    if (!reduceMotion) {
+      bars.transition().duration(600).delay(function (_, i) { return i * 35; })
+        .ease(d3.easeCubicOut)
+        .attr("y", function (d) { return y(d.n); })
+        .attr("height", function (d) { return y(0) - y(d.n); });
+    }
+    bars.append("title").text(function (d) {
+      return d.n + " of 291 spells ran exactly " + d.len +
+        (d.len === 1 ? " season" : " seasons");
+    });
+    bars.on("mouseenter", function () {
+      d3.select(this).style("fill", "var(--accent-hover)");
+    }).on("mouseleave", function (e, d) {
+      d3.select(this).style("fill",
+        d.len === 4 ? "var(--accent-default)" : "var(--accent-subtle)");
+    });
+
+    // Median annotation.
+    svg.append("text")
+      .attr("x", x(4) + x.bandwidth() / 2).attr("y", y(39) - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-primary)").style("font", "600 12px var(--family-sans)")
+      .text(compact ? "median: 4" : "the typical spell: 4 seasons");
+
+    // Garnett annotation: his MIN star spell is 10 seasons (12 calendar
+    // years in uniform; spells start at the first star season).
+    svg.append("line")
+      .attr("x1", x(10) + x.bandwidth() / 2).attr("x2", x(10) + x.bandwidth() / 2)
+      .attr("y1", y(6) - 4).attr("y2", y(20))
+      .style("stroke", "var(--border-default)").style("stroke-dasharray", "2,3");
+    svg.append("text")
+      .attr("x", x(10) + x.bandwidth() / 2).attr("y", y(20) - 16)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(compact ? "KG in MIN" : "Garnett in Minnesota");
+    svg.append("text")
+      .attr("x", x(10) + x.bandwidth() / 2).attr("y", y(20) - 4)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "10 star seasons" : "10 star seasons, already an outlier");
+
+    // The forever-star tail.
+    svg.append("text")
+      .attr("x", x(18)).attr("y", y(4) - 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "forever" : "the forever");
+    svg.append("text")
+      .attr("x", x(18)).attr("y", y(4) - 14)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("stars");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "sl-caption")
+      .text("All 291 star spells since 1990, counted from a player's first star season " +
+        "with the franchise. Garnett's twelve calendar years in Minnesota register as " +
+        "10 star seasons here, and even that is deep in the tail.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

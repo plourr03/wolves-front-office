@@ -1,0 +1,197 @@
+<div id="viz-win-fancharts"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-win-fancharts, #viz-win-fancharts * { touch-action: manipulation; }
+  #viz-win-fancharts .wf-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Simulated win totals, 50,000 futures, FINAL Engine D run.
+  // Source: pick2033 outputs/json/win_fancharts_FINAL.json (seed 20330706).
+  var MIN = [
+    {season:2027,q05:45.9,q20:48.9,q50:52.1,q80:55.4,q95:58.7},
+    {season:2028,q05:42.7,q20:46.9,q50:51.0,q80:55.0,q95:58.9},
+    {season:2029,q05:32.5,q20:38.1,q50:44.2,q80:50.2,q95:55.9},
+    {season:2030,q05:28.6,q20:35.4,q50:42.4,q80:49.3,q95:56.2},
+    {season:2031,q05:25.1,q20:33.0,q50:40.9,q80:49.0,q95:56.9},
+    {season:2032,q05:22.5,q20:31.3,q50:40.0,q80:48.7,q95:57.6},
+    {season:2033,q05:19.0,q20:28.8,q50:38.7,q80:48.5,q95:58.2}
+  ];
+  var CHA = [
+    {season:2027,q05:39.0,q20:41.9,q50:45.0,q80:48.2,q95:51.4},
+    {season:2028,q05:42.7,q20:46.1,q50:49.7,q80:53.5,q95:57.4},
+    {season:2029,q05:41.5,q20:46.1,q50:50.9,q80:55.9,q95:60.9},
+    {season:2030,q05:36.8,q20:42.9,q50:49.2,q80:55.6,q95:62.2},
+    {season:2031,q05:31.8,q20:39.2,q50:46.8,q80:54.6,q95:62.4},
+    {season:2032,q05:27.8,q20:36.3,q50:44.9,q80:53.5,q95:62.1},
+    {season:2033,q05:23.7,q20:33.2,q50:42.8,q80:52.4,q95:62.0}
+  ];
+
+  var root = d3.select("#viz-win-fancharts");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var panelH = Math.max(190, Math.round(width * 0.34));
+    var gap = 34;
+    var margin = { top: 26, right: compact ? 44 : 56, bottom: 26, left: compact ? 30 : 38 };
+    var height = margin.top + panelH * 2 + gap + margin.bottom;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint()
+      .domain(MIN.map(function (d) { return d.season; }))
+      .range([margin.left, width - margin.right]);
+
+    function panel(data, top, color, band, name, annotate) {
+      var y = d3.scaleLinear().domain([15, 65]).range([top + panelH, top]);
+
+      var yTicks = [20, 35, 50, 65];
+      svg.append("g").selectAll("line").data(yTicks).join("line")
+        .attr("x1", margin.left).attr("x2", width - margin.right)
+        .attr("y1", y).attr("y2", y)
+        .style("stroke", "var(--border-subtle)");
+      svg.append("g").selectAll("text").data(yTicks).join("text")
+        .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+        .attr("text-anchor", "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(function (d) { return d; });
+
+      // 2029 walk-year guide, both panels.
+      svg.append("line")
+        .attr("x1", x(2029)).attr("x2", x(2029))
+        .attr("y1", top).attr("y2", top + panelH)
+        .style("stroke", "var(--border-default)").style("stroke-dasharray", "3,4");
+
+      var area90 = d3.area()
+        .x(function (d) { return x(d.season); })
+        .y0(function (d) { return y(d.q05); })
+        .y1(function (d) { return y(d.q95); })
+        .curve(d3.curveMonotoneX);
+      var area60 = d3.area()
+        .x(function (d) { return x(d.season); })
+        .y0(function (d) { return y(d.q20); })
+        .y1(function (d) { return y(d.q80); })
+        .curve(d3.curveMonotoneX);
+      var median = d3.line()
+        .x(function (d) { return x(d.season); })
+        .y(function (d) { return y(d.q50); })
+        .curve(d3.curveMonotoneX);
+
+      svg.append("path").datum(data).attr("d", area90).style("fill", band[0]);
+      svg.append("path").datum(data).attr("d", area60).style("fill", band[1]);
+      var med = svg.append("path").datum(data).attr("d", median)
+        .style("fill", "none").style("stroke", color).style("stroke-width", 2.5);
+      if (!reduceMotion) {
+        med.style("opacity", 0)
+          .transition().duration(700).ease(d3.easeCubicOut).style("opacity", 1);
+      }
+
+      var pts = svg.append("g").selectAll("circle").data(data).join("circle")
+        .attr("cx", function (d) { return x(d.season); })
+        .attr("cy", function (d) { return y(d.q50); })
+        .attr("r", 3.5)
+        .style("fill", color).style("cursor", "pointer");
+      pts.append("title").text(function (d) {
+        return name + " " + d.season + ": median " + d.q50 + " wins, " +
+          "60% band " + d.q20 + " to " + d.q80 + ", 90% band " + d.q05 + " to " + d.q95;
+      });
+      pts.on("mouseenter", function () { d3.select(this).attr("r", 5.5); })
+        .on("mouseleave", function () { d3.select(this).attr("r", 3.5); });
+
+      // Panel title and 2033 median end label.
+      svg.append("text")
+        .attr("x", margin.left).attr("y", top - 8)
+        .style("fill", color).style("font", "600 13px var(--family-sans)")
+        .text(name);
+      var last = data[data.length - 1];
+      svg.append("text")
+        .attr("x", x(2033) + 8).attr("y", y(last.q50) + 4)
+        .style("fill", "var(--text-primary)").style("font", "600 12px var(--family-mono)")
+        .text(last.q50);
+
+      if (annotate === "crest") {
+        svg.append("text")
+          .attr("x", x(2029)).attr("y", y(50.9) - 12).attr("text-anchor", "middle")
+          .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+          .text(compact ? "crest: 50.9" : "the crest: 50.9 wins, 2029");
+      }
+      if (annotate === "walk") {
+        svg.append("text")
+          .attr("x", x(2029)).attr("y", top + 12).attr("text-anchor", "middle")
+          .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+          .text("walk year");
+      }
+
+      // Season labels only under the lower panel.
+      if (top > margin.top + 10) {
+        svg.append("g").selectAll("text").data(data).join("text")
+          .attr("x", function (d) { return x(d.season); })
+          .attr("y", top + panelH + 18)
+          .attr("text-anchor", "middle")
+          .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+          .text(function (d) { return compact ? "'" + String(d.season).slice(2) : d.season; });
+      }
+    }
+
+    panel(MIN, margin.top,
+      "var(--accent-default)",
+      ["rgba(0,132,61,.10)", "rgba(0,132,61,.22)"],
+      "Minnesota", "walk");
+    panel(CHA, margin.top + panelH + gap,
+      "var(--dataviz-3)",
+      ["rgba(74,158,255,.10)", "rgba(74,158,255,.22)"],
+      "Charlotte", "crest");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "wf-caption")
+      .text("Win totals across 50,000 simulated futures. Inner band holds 60% of futures, " +
+        "outer band 90%, line is the median. Minnesota fades as the walk years bite; " +
+        "Charlotte crests in the exact window its swap rights live.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

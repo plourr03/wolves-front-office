@@ -24,17 +24,25 @@ The collapse years are real and the model carries them. About one franchise seas
 
 We checked whether the machine was being too kind to Charlotte, on purpose, before believing it. The simulated Hornets crest in the swap window, and a too-rosy Charlotte inflates every asset they got. So we pulled every sub-.500 team since 1985 that had three or more under-23 rotation players, 77 of them, 18 in Charlotte's starting band, and asked what actually happened next. The answer came back clean on the final run: the simulated crest is a 50.9-win median peak, which lands at roughly the sixtieth percentile of what those eighteen teams actually did (their median peak was 49.4 wins, their seventieth percentile 52.8). Mildly generous, inside the band, below the pre-committed trigger, so no correction fired and the crest stands as drawn. And the shape agreement is the part we did not engineer: historical young cores crest around year four and then fade, and the simulation reproduces that arc without ever having been fit to it.
 
+{{viz:cohort-crest}}
+
 The model's known biases run against our own story. Simulated win trajectories hold their year-three momentum slightly longer than real teams did, which means the machine holds Minnesota's current strength a little too long, produces slightly fewer bad-Wolves seasons in the swap years, and therefore prices Charlotte's assets a little too low. If the bill still comes out large under a model tilted toward Minnesota, the bill is robust.
 
 And the full scorecard is public: every validation gate, including the calibration cell that stayed red at the final re-gate, making three red cells in all, lives in the validation report with the rulings that produced it.
 
 ## Where the pick lands
 
-Start with the two win-total fan charts (chart ref: win_fancharts_FINAL.json). Minnesota's median future is a slow fade, 52 wins now, 51 next year, then down through the mid-40s to 39 by 2033, and the honest part is the width: by 2033 the 90 percent band runs from 19 wins to 58, which is to say that seven drafts out, the machine considers everything from a teardown to a contender live. Charlotte's median future does exactly what the young-core histories do: it climbs from 45 wins to a crest just under 51 in 2029, then fades back to 43 by 2033.
+Start with the two win-total fan charts. Minnesota's median future is a slow fade, 52 wins now, 51 next year, then down through the mid-40s to 39 by 2033, and the honest part is the width: by 2033 the 90 percent band runs from 19 wins to 58, which is to say that seven drafts out, the machine considers everything from a teardown to a contender live. Charlotte's median future does exactly what the young-core histories do: it climbs from 45 wins to a crest just under 51 in 2029, then fades back to 43 by 2033.
 
-Now the pick itself (chart ref: slot_distribution_2033_FINAL.json). The 2033 first Minnesota sent out lands in the top four in 15.7 percent of futures. It lands in the top ten in 39.1 percent. And under the sixteen-team definition the reform gave us, it is a lottery pick at all in 61.9 percent, which is a sentence worth reading twice about a team that just won 49 games.
+{{viz:win-fancharts}}
+
+Now the pick itself. The 2033 first Minnesota sent out lands in the top four in 15.7 percent of futures. It lands in the top ten in 39.1 percent. And under the sixteen-team definition the reform gave us, it is a lottery pick at all in 61.9 percent, which is a sentence worth reading twice about a team that just won 49 games.
+
+{{viz:slot-2033}}
 
 Here is the centerpiece. Split the fifty thousand futures by the Part 1 question and the pick changes character. In the 21,343 futures where Edwards is still a Timberwolf in 2033, the pick lands top-ten 35.4 percent of the time and top-four 14.1 percent. In the 28,657 futures where he has left, those numbers are 41.9 and 16.9. That gap is the tenure bet made visible: same franchise, same league, same lottery balls, and the single variable of one man's address moves the tail of a draft pick seven years away.
+
+{{viz:edwards-split}}
 
 ## Grading our own homework
 

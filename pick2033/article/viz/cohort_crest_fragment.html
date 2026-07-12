@@ -1,0 +1,195 @@
+<div id="viz-cohort-crest"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-cohort-crest, #viz-cohort-crest * { touch-action: manipulation; }
+  #viz-cohort-crest .cc-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Simulated Charlotte vs 18 real young cores in its band (sub-.500,
+  // 3+ under-23 rotation players, since 1985), years +1 to +5.
+  // Source: pick2033 outputs/validation/young_core_cohort.json.
+  var years = [1, 2, 3, 4, 5];
+  var seasons = [2027, 2028, 2029, 2030, 2031];
+  var fan = {
+    p10: [26.1, 26.4, 35.4, 38.4, 27.5],
+    p30: [37.0, 35.1, 41.1, 44.3, 43.1],
+    p50: [40.5, 44.8, 47.9, 49.4, 44.5],
+    p70: [45.6, 52.8, 52.8, 50.0, 47.8],
+    p90: [50.2, 59.3, 60.6, 56.1, 52.7]
+  };
+  var model = [45.0, 49.7, 50.9, 49.2, 46.8];
+  var TRIGGER = 52.8;
+
+  var root = d3.select("#viz-cohort-crest");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 40, right: compact ? 14 : 20, bottom: 40, left: compact ? 30 : 38 };
+    var height = Math.max(250, Math.round(width * 0.5));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint().domain(years).range([margin.left, width - margin.right]);
+    var y = d3.scaleLinear().domain([20, 64]).range([height - margin.bottom, margin.top]);
+
+    var yTicks = [25, 35, 45, 55];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("g").selectAll("text").data(years).join("text")
+      .attr("x", x).attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(function (d, i) {
+        return compact ? "+" + d : "year +" + d + " ('" + String(seasons[i]).slice(2) + ")";
+      });
+
+    function band(loArr, hiArr, fill) {
+      var pts = years.map(function (yr, i) { return { x: x(yr), lo: loArr[i], hi: hiArr[i] }; });
+      var area = d3.area()
+        .x(function (d) { return d.x; })
+        .y0(function (d) { return y(d.lo); })
+        .y1(function (d) { return y(d.hi); })
+        .curve(d3.curveMonotoneX);
+      svg.append("path").datum(pts).attr("d", area).style("fill", fill);
+    }
+    band(fan.p10, fan.p90, "rgba(255,255,255,.06)");
+    band(fan.p30, fan.p70, "rgba(255,255,255,.11)");
+
+    // Cohort median, quiet and dashed.
+    var lineGen = function (arr) {
+      return d3.line()
+        .x(function (d, i) { return x(years[i]); })
+        .y(function (d) { return y(d); })
+        .curve(d3.curveMonotoneX)(arr);
+    };
+    svg.append("path")
+      .attr("d", lineGen(fan.p50))
+      .style("fill", "none").style("stroke", "var(--text-tertiary)")
+      .style("stroke-width", 1.5).style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", x(5) - (compact ? 0 : 4)).attr("y", y(fan.p50[4]) + 16)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "cohort median" : "what real young cores did (median)");
+
+    // The pre-committed trigger line.
+    svg.append("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y(TRIGGER)).attr("y2", y(TRIGGER))
+      .style("stroke", "var(--status-warning)").style("stroke-width", 1.5)
+      .style("stroke-dasharray", "6,4");
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", y(TRIGGER) - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--status-warning)").style("font", "600 11px var(--family-sans)")
+      .text(compact ? "trigger: 52.8" : "pre-committed correction trigger: a 52.8-win crest");
+
+    // Model line.
+    var modelPath = svg.append("path")
+      .attr("d", lineGen(model))
+      .style("fill", "none").style("stroke", "var(--dataviz-3)").style("stroke-width", 2.5);
+    if (!reduceMotion) {
+      modelPath.style("opacity", 0)
+        .transition().duration(700).ease(d3.easeCubicOut).style("opacity", 1);
+    }
+    var pts = svg.append("g").selectAll("circle").data(model).join("circle")
+      .attr("cx", function (d, i) { return x(years[i]); })
+      .attr("cy", function (d) { return y(d); })
+      .attr("r", function (d, i) { return i === 2 ? 5 : 3.5; })
+      .style("fill", "var(--dataviz-3)").style("cursor", "pointer");
+    pts.append("title").text(function (d, i) {
+      return "Simulated Charlotte, year +" + years[i] + " (" + seasons[i] + "): median " +
+        d + " wins. Cohort median that year: " + fan.p50[i] + ".";
+    });
+    pts.on("mouseenter", function () { d3.select(this).attr("r", 6.5); })
+      .on("mouseleave", function (e, d) {
+        var i = model.indexOf(d);
+        d3.select(this).attr("r", i === 2 ? 5 : 3.5);
+      });
+
+    svg.append("text")
+      .attr("x", x(3)).attr("y", y(50.9) - 12).attr("text-anchor", "middle")
+      .style("fill", "var(--dataviz-3)").style("font", "600 12px var(--family-sans)")
+      .text(compact ? "model crest: 50.9" : "simulated Charlotte crest: 50.9");
+
+    // Legend.
+    var lg = svg.append("g");
+    lg.append("line")
+      .attr("x1", margin.left).attr("x2", margin.left + 18)
+      .attr("y1", margin.top - 21).attr("y2", margin.top - 21)
+      .style("stroke", "var(--dataviz-3)").style("stroke-width", 2.5);
+    lg.append("text")
+      .attr("x", margin.left + 24).attr("y", margin.top - 17)
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(compact ? "simulated CHA" : "simulated Charlotte (median)");
+    var l2x = margin.left + (compact ? 130 : 220);
+    lg.append("rect")
+      .attr("x", l2x).attr("y", margin.top - 28)
+      .attr("width", 16).attr("height", 12)
+      .style("fill", "rgba(255,255,255,.11)");
+    lg.append("text")
+      .attr("x", l2x + 22).attr("y", margin.top - 17)
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(compact ? "18 real cores" : "18 real young cores, middle 40%");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "cc-caption")
+      .text("The self-audit: simulated Charlotte against the 18 real young cores in its band " +
+        "since 1985. The model's crest sits near the cohort's 60th percentile, under the " +
+        "pre-committed trigger, so it stands. Note the shared shape: crest near year four, then fade.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

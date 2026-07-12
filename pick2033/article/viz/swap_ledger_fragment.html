@@ -1,0 +1,200 @@
+<div id="viz-swap-ledger"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-swap-ledger, #viz-swap-ledger * { touch-action: manipulation; }
+  #viz-swap-ledger .swl-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // What each instrument pays Charlotte, in 4-year VORP, 50,000 futures.
+  // Strips are 80% intervals (q10 to q90), dot is the mean, tick the median.
+  // Source: pick2033 outputs/json/swap_pricing_FINAL.json (top1_true, VORP).
+  var rows = [
+    { label: "2028 swap", sub: "exercised in 41.6%", lo: 0, q50: 0, hi: 2.19, mean: 0.66, total: false },
+    { label: "2029 swap", sub: "exercised in 12.3%", lo: 0, q50: 0, hi: 0, mean: 0.65, total: false,
+      note: "pays about 5.3 when it pays at all" },
+    { label: "2030 swap", sub: "exercised in 66.3%", lo: 0, q50: 0, hi: 4.55, mean: 1.32, total: false },
+    { label: "2033 first", sub: "conveys in 100%", lo: -1.38, q50: 0.8, hi: 8.08, mean: 2.24, total: false },
+    { label: "Total package", sub: "per-path sum", lo: -0.83, q50: 3.1, hi: 13.04, mean: 4.86, total: true }
+  ];
+
+  var root = d3.select("#viz-swap-ledger");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 78 : 62;
+    var margin = { top: 34, right: compact ? 46 : 56, bottom: 34, left: compact ? 8 : 128 };
+    var height = margin.top + margin.bottom + rows.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleLinear()
+      .domain([-2, 13.5])
+      .range([margin.left, width - margin.right]);
+
+    function rowMid(i) { return margin.top + i * rowH + (compact ? 44 : rowH / 2); }
+
+    // Zero line.
+    svg.append("line")
+      .attr("x1", x(0)).attr("x2", x(0))
+      .attr("y1", margin.top - 8).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-default)");
+    svg.append("text")
+      .attr("x", x(0)).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("0");
+
+    // X ticks.
+    var xTicks = [5, 10];
+    svg.append("g").selectAll("line").data(xTicks).join("line")
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", margin.top - 4).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", x).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return "+" + d; });
+    svg.append("text")
+      .attr("x", (x(-2) + x(13.5)) / 2).attr("y", height - 8)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("wins above replacement, first four seasons of the pick (4-yr VORP)");
+
+    rows.forEach(function (d, i) {
+      var yMid = rowMid(i);
+      var color = d.total ? "var(--dataviz-2)" : "var(--accent-default)";
+
+      // Separator above the total row.
+      if (d.total) {
+        svg.append("line")
+          .attr("x1", compact ? 8 : 12).attr("x2", width - 12)
+          .attr("y1", margin.top + i * rowH + 2).attr("y2", margin.top + i * rowH + 2)
+          .style("stroke", "var(--border-subtle)");
+      }
+
+      // Row labels.
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 16 : yMid - 4)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", d.total ? "var(--text-primary)" : "var(--text-secondary)")
+        .style("font", (d.total ? "600 " : "") + "13px var(--family-sans)")
+        .text(d.label);
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 30 : yMid + 12)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(d.sub);
+
+      // 80% interval strip. Degenerate intervals (the 2029 swap) draw as a
+      // minimal stub so the emptiness itself is visible.
+      var stripX0 = x(Math.min(d.lo, d.hi)), stripX1 = x(Math.max(d.lo, d.hi));
+      var strip = svg.append("rect")
+        .attr("x", stripX0).attr("y", yMid - 7)
+        .attr("height", 14).attr("rx", 7)
+        .style("fill", d.total ? "rgba(255,255,255,.14)" : "var(--accent-subtle)")
+        .style("cursor", "pointer")
+        .attr("width", reduceMotion ? Math.max(stripX1 - stripX0, 3) : 3);
+      if (!reduceMotion) {
+        strip.transition().duration(600).delay(i * 110).ease(d3.easeCubicOut)
+          .attr("width", Math.max(stripX1 - stripX0, 3));
+      }
+      strip.append("title").text(
+        d.label + ": mean " + d.mean.toFixed(2) + ", median " + d.q50.toFixed(1) +
+        ", 80% of futures between " + d.lo.toFixed(1) + " and " + d.hi.toFixed(1));
+
+      // Median tick.
+      svg.append("line")
+        .attr("x1", x(d.q50)).attr("x2", x(d.q50))
+        .attr("y1", yMid - 10).attr("y2", yMid + 10)
+        .style("stroke", "var(--text-secondary)").style("stroke-width", 1.5);
+
+      // Mean dot.
+      var dot = svg.append("circle")
+        .attr("cx", x(d.mean)).attr("cy", yMid).attr("r", d.total ? 7 : 5.5)
+        .style("fill", color).style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        dot.transition().duration(400).delay(i * 110 + 350).style("opacity", 1);
+      }
+      dot.append("title").text(d.label + ": mean " + d.mean.toFixed(2));
+      dot.on("mouseenter", function () { d3.select(this).attr("r", d.total ? 9 : 7.5); })
+        .on("mouseleave", function () { d3.select(this).attr("r", d.total ? 7 : 5.5); });
+
+      // Mean value label.
+      svg.append("text")
+        .attr("x", x(Math.max(d.hi, d.mean)) + 10).attr("y", yMid + 4)
+        .style("fill", d.total ? "var(--text-primary)" : "var(--text-secondary)")
+        .style("font", "600 13px var(--family-mono)")
+        .text(d.mean.toFixed(2));
+
+      // The 2029 story, written on the chart.
+      if (d.note) {
+        svg.append("text")
+          .attr("x", x(0.4) + (compact ? 30 : 46)).attr("y", yMid + 4)
+          .style("fill", "var(--status-warning)").style("font", "11px var(--family-sans)")
+          .text(compact ? "5.3 when it pays" : d.note);
+      }
+    });
+
+    // Legend for the marks.
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", margin.top - 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "strip: 80% | tick: median | dot: mean" : "strip: 80% of futures, tick: median, dot: mean");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "swl-caption")
+      .text("What each instrument pays Charlotte across 50,000 futures. The 2029 swap's " +
+        "strip is a stub on zero: even its 90th percentile pays nothing, and its whole " +
+        "value hides in the rare futures where Minnesota keeps a top-five pick.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

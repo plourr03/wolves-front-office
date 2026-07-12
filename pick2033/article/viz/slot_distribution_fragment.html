@@ -1,0 +1,170 @@
+<div id="viz-slot-2033"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-slot-2033, #viz-slot-2033 * { touch-action: manipulation; }
+  #viz-slot-2033 .s33-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Where the 2033 first lands: probability by slot, 50,000 futures.
+  // Source: pick2033 outputs/json/slot_distribution_2033_FINAL.json.
+  var data = [
+    {slot:1,p:0.03984},{slot:2,p:0.03914},{slot:3,p:0.0388},{slot:4,p:0.03922},
+    {slot:5,p:0.0395},{slot:6,p:0.03898},{slot:7,p:0.03854},{slot:8,p:0.0401},
+    {slot:9,p:0.03944},{slot:10,p:0.0376},{slot:11,p:0.03952},{slot:12,p:0.03962},
+    {slot:13,p:0.03876},{slot:14,p:0.03804},{slot:15,p:0.0377},{slot:16,p:0.03448},
+    {slot:17,p:0.03358},{slot:18,p:0.0318},{slot:19,p:0.0304},{slot:20,p:0.03142},
+    {slot:21,p:0.03134},{slot:22,p:0.02972},{slot:23,p:0.02856},{slot:24,p:0.02744},
+    {slot:25,p:0.02692},{slot:26,p:0.02656},{slot:27,p:0.02334},{slot:28,p:0.02248},
+    {slot:29,p:0.02024},{slot:30,p:0.01692}
+  ];
+  var zones = [
+    { from: 1, to: 4, label: "Top 4: 15.7%", fill: "rgba(255,92,92,.10)" },
+    { from: 5, to: 10, label: "5 to 10: 23.4%", fill: "rgba(245,166,35,.08)" },
+    { from: 11, to: 16, label: "11 to 16: 22.8%", fill: "rgba(74,158,255,.07)" }
+  ];
+
+  var root = d3.select("#viz-slot-2033");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 52, right: 12, bottom: 36, left: compact ? 34 : 42 };
+    var height = Math.max(250, Math.round(width * 0.44));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleBand()
+      .domain(data.map(function (d) { return d.slot; }))
+      .range([margin.left, width - margin.right])
+      .padding(0.22);
+    var y = d3.scaleLinear().domain([0, 0.045]).range([height - margin.bottom, margin.top]);
+
+    // Zone shading and bracket labels, so the cumulative numbers travel
+    // with position, not color alone.
+    zones.forEach(function (z) {
+      var x0 = x(z.from), x1 = x(z.to) + x.bandwidth();
+      svg.append("rect")
+        .attr("x", x0).attr("y", margin.top - 6)
+        .attr("width", x1 - x0).attr("height", height - margin.bottom - margin.top + 6)
+        .style("fill", z.fill);
+      svg.append("line")
+        .attr("x1", x0 + 1).attr("x2", x1 - 1)
+        .attr("y1", margin.top - 14).attr("y2", margin.top - 14)
+        .style("stroke", "var(--border-default)");
+      svg.append("text")
+        .attr("x", (x0 + x1) / 2).attr("y", margin.top - 22)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)")
+        .style("font", (compact ? "10px" : "600 12px") + " var(--family-sans)")
+        .text(compact ? z.label.replace(": ", " ") : z.label);
+    });
+    svg.append("text")
+      .attr("x", (x(17) + x(30) + x.bandwidth()) / 2).attr("y", margin.top - 22)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", (compact ? "10px" : "12px") + " var(--family-sans)")
+      .text(compact ? "17 to 30: 38.1%" : "17 to 30: 38.1%");
+
+    // Y gridlines.
+    var yTicks = [0, 0.02, 0.04];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return (d * 100).toFixed(0) + "%"; });
+
+    // X labels.
+    var xTicks = compact ? [1, 5, 10, 16, 23, 30] : [1, 4, 8, 12, 16, 20, 25, 30];
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", function (d) { return x(d) + x.bandwidth() / 2; })
+      .attr("y", height - margin.bottom + 16)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("text")
+      .attr("x", (margin.left + width - margin.right) / 2)
+      .attr("y", height - 4).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("draft slot, 2033");
+
+    // Bars.
+    var bars = svg.append("g").selectAll("rect").data(data).join("rect")
+      .attr("x", function (d) { return x(d.slot); })
+      .attr("width", x.bandwidth())
+      .attr("rx", 2)
+      .style("fill", "var(--accent-default)")
+      .style("cursor", "pointer")
+      .attr("y", reduceMotion ? function (d) { return y(d.p); } : y(0))
+      .attr("height", reduceMotion ? function (d) { return y(0) - y(d.p); } : 0);
+    if (!reduceMotion) {
+      bars.transition().duration(600).delay(function (_, i) { return i * 22; })
+        .ease(d3.easeCubicOut)
+        .attr("y", function (d) { return y(d.p); })
+        .attr("height", function (d) { return y(0) - y(d.p); });
+    }
+    bars.append("title").text(function (d) {
+      return "Slot " + d.slot + ": " + (d.p * 100).toFixed(1) + "% of 50,000 futures";
+    });
+    bars.on("mouseenter", function () {
+      d3.select(this).style("fill", "var(--accent-hover)");
+    }).on("mouseleave", function () {
+      d3.select(this).style("fill", "var(--accent-default)");
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "s33-caption")
+      .text("Probability the 2033 first lands on each slot, across 50,000 futures. " +
+        "The startling part is the flatness: under the reformed lottery, slots 1 " +
+        "through 16 are all nearly equally likely for this pick.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

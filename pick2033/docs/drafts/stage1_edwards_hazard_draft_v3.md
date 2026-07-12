@@ -20,11 +20,15 @@ Here is the dataset the tenure bet rests on. Take every player since 1990 who re
 
 Sit with that ratio for a second. Of the star tenures that have finished, the overwhelming majority finished with the star in another uniform. The forever-star, the Duncan, the Dirk, the Curry, is not the norm. He is the tail of the distribution. The typical spell runs about four seasons. Kevin Garnett's twelve years in Minnesota, the longest anyone around here needs reminding of, was already an outlier before it ended the way most spells end.
 
+{{viz:spell-lengths}}
+
 Those endings are the raw material (a fifth of the spells sit in a sealed holdout the model never trains on, kept aside to grade it honestly). What separates the tenures that lasted from the tenures that didn't turns out to be boringly consistent, and two entirely different statistical machines agree on every direction (a hierarchical Bayesian model and an old-fashioned Cox survival model, fit separately as a check on each other).
 
 Stars stay where the team wins. Trailing two-year win percentage pushes retention; deep playoff runs push the same way, and a conference finals trip in the last three seasons measurably slows the exits. Small markets bleed stars faster than big ones, which Minnesota fans did not need a regression to believe. The decorated dig in: the more All-NBA selections a player has accumulated with a franchise, the less likely he is to leave it in any given year. And seasons where a player holds supermax leverage are exactly the seasons the relationship gets renegotiated, one way or the other.
 
 Then there is the covariate everyone forgets when the conversation stays on vibes: the contract clock. In the final model it is the one that does the most work, and it is not close.
+
+{{viz:tenure-forces}}
 
 ## The walk-year cliff
 
@@ -42,9 +46,13 @@ His age arc covers 25 to 31, entering the exact years where the historical exits
 
 And his contract is public record: signed through 2028-29, no options, verified against two independent sources. The summer of 2029 is the walk year. It sits one season before the final swap and four drafts before the unprotected pick conveys.
 
-Here is the curve the machine draws (chart: edwards_hazard_FINAL export, central scenario, 80% bands). With the Wolves winning at a .600 clip, Edwards' annual departure hazard is under 1 percent in 2027 and about 7 percent in 2028. At the 2029 walk year it spikes to 44 percent (80% interval: 35 to 53). Past the cliff, the curve is conditional on him having crossed it: the model assumes a star who survives his walk year re-signs on a fresh four-year deal (an assumption written down in advance and stress-tested in Part 3's tornado), so 2030 and 2031 fall to near zero, and the hazard climbs back to about 14 percent by 2033 as that hypothetical second deal ages toward its own cliff.
+Here is the curve the machine draws. With the Wolves winning at a .600 clip, Edwards' annual departure hazard is under 1 percent in 2027 and about 7 percent in 2028. At the 2029 walk year it spikes to 44 percent (80% interval: 35 to 53). Past the cliff, the curve is conditional on him having crossed it: the model assumes a star who survives his walk year re-signs on a fresh four-year deal (an assumption written down in advance and stress-tested in Part 3's tornado), so 2030 and 2031 fall to near zero, and the hazard climbs back to about 14 percent by 2033 as that hypothetical second deal ages toward its own cliff.
+
+{{viz:edwards-hazard}}
 
 Add it up and the machine's answer to the talk-radio question is this: a 56 percent chance Anthony Edwards has departed by the summer of 2033, with an 80 percent interval running from 45 to 68. Read the interval before the point estimate. History genuinely does not know, and the width is itself the finding: the pick Charlotte now owns is priced off something close to a coin flip, not a certainty in either direction.
+
+{{viz:edwards-cumulative}}
 
 The split between scenarios is the one controllable lever, and it is worth stating plainly. Keep the team winning at .600 and the cumulative departure number is 56 percent. Let the team sag to .450 and it is 71 percent (80% interval: 60 to 81). Fifteen points of Edwards-retention probability is what "just keep winning" is actually worth, before anyone says a word about vibes.
 

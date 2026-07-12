@@ -1,0 +1,195 @@
+<div id="viz-edwards-cumulative"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-cumulative, #viz-edwards-cumulative * { touch-action: manipulation; }
+  #viz-edwards-cumulative .ec-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Cumulative P(Edwards has departed by season), FINAL M2 model.
+  // Source: pick2033 outputs/json/edwards_hazard_FINAL.json (freeze 50f9b7bc5b19835b).
+  var central = [
+    {s:2027,m:0.0076,lo:0.004,hi:0.012},{s:2028,m:0.0804,lo:0.0517,hi:0.1139},
+    {s:2029,m:0.4838,lo:0.3853,hi:0.583},{s:2030,m:0.4839,lo:0.3854,hi:0.5834},
+    {s:2031,m:0.4851,lo:0.3866,hi:0.5845},{s:2032,m:0.4949,lo:0.3943,hi:0.5963},
+    {s:2033,m:0.5644,lo:0.4529,hi:0.6769}
+  ];
+  var decline = [
+    {s:2027,m:0.0127,lo:0.0067,hi:0.0198},{s:2028,m:0.1274,lo:0.0842,hi:0.1765},
+    {s:2029,m:0.6182,lo:0.5182,hi:0.7141},{s:2030,m:0.6183,lo:0.5184,hi:0.7143},
+    {s:2031,m:0.6198,lo:0.5195,hi:0.7157},{s:2032,m:0.6315,lo:0.5297,hi:0.7285},
+    {s:2033,m:0.7072,lo:0.5991,hi:0.8095}
+  ];
+
+  var root = d3.select("#viz-edwards-cumulative");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 30, right: compact ? 52 : 72, bottom: 30, left: compact ? 34 : 44 };
+    var height = Math.max(260, Math.round(width * 0.52));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint()
+      .domain(central.map(function (d) { return d.s; }))
+      .range([margin.left, width - margin.right]);
+    var y = d3.scaleLinear().domain([0, 0.85]).range([height - margin.bottom, margin.top]);
+
+    var ticks = [0, 0.25, 0.5, 0.75];
+    svg.append("g").selectAll("line").data(ticks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(ticks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return Math.round(d * 100) + "%"; });
+    svg.append("g").selectAll("text").data(central).join("text")
+      .attr("x", function (d) { return x(d.s); })
+      .attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return compact ? "'" + String(d.s).slice(2) : d.s; });
+
+    // Coin-flip reference line at 50%.
+    svg.append("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y(0.5)).attr("y2", y(0.5))
+      .style("stroke", "var(--border-default)").style("stroke-dasharray", "2,5");
+    svg.append("text")
+      .attr("x", margin.left + 4).attr("y", y(0.5) - 6)
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("a coin flip");
+
+    var lineGen = d3.line()
+      .x(function (d) { return x(d.s); })
+      .y(function (d) { return y(d.m); })
+      .curve(d3.curveMonotoneX);
+    var areaGen = d3.area()
+      .x(function (d) { return x(d.s); })
+      .y0(function (d) { return y(d.lo); })
+      .y1(function (d) { return y(d.hi); })
+      .curve(d3.curveMonotoneX);
+
+    svg.append("path").datum(central)
+      .attr("d", areaGen)
+      .style("fill", "var(--accent-subtle)");
+    var paths = [
+      svg.append("path").datum(central).attr("d", lineGen)
+        .style("fill", "none").style("stroke", "var(--accent-default)").style("stroke-width", 2.5),
+      svg.append("path").datum(decline).attr("d", lineGen)
+        .style("fill", "none").style("stroke", "var(--status-warning)")
+        .style("stroke-width", 2).style("stroke-dasharray", "5,4")
+    ];
+    if (!reduceMotion) {
+      paths.forEach(function (p, i) {
+        p.style("opacity", 0)
+          .transition().duration(700).delay(i * 150).ease(d3.easeCubicOut)
+          .style("opacity", 1);
+      });
+    }
+
+    function dots(data, color, name) {
+      var g = svg.append("g").selectAll("circle").data(data).join("circle")
+        .attr("cx", function (d) { return x(d.s); })
+        .attr("cy", function (d) { return y(d.m); })
+        .attr("r", 4)
+        .style("fill", color).style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      g.append("title").text(function (d) {
+        return name + ": departed by " + d.s + " with probability " +
+          (d.m * 100).toFixed(1) + "% (80% interval " +
+          (d.lo * 100).toFixed(1) + " to " + (d.hi * 100).toFixed(1) + ")";
+      });
+      g.on("mouseenter", function () { d3.select(this).attr("r", 6); })
+        .on("mouseleave", function () { d3.select(this).attr("r", 4); });
+      if (!reduceMotion) {
+        g.transition().duration(500).delay(function (_, i) { return 300 + i * 60; })
+          .style("opacity", 1);
+      }
+    }
+    dots(central, "var(--accent-default)", "Wolves keep winning (.600)");
+    dots(decline, "var(--status-warning)", "Wolves sag (.450)");
+
+    // End labels: the two numbers the piece is about.
+    svg.append("text")
+      .attr("x", x(2033) + 10).attr("y", y(0.5644) + 4)
+      .style("fill", "var(--text-primary)").style("font", "600 14px var(--family-mono)")
+      .text("56%");
+    svg.append("text")
+      .attr("x", x(2033) + 10).attr("y", y(0.7072) + 4)
+      .style("fill", "var(--status-warning)").style("font", "600 14px var(--family-mono)")
+      .text("71%");
+
+    var legend = [
+      { t: compact ? ".600 team" : "Wolves keep winning (.600)", c: "var(--accent-default)", dash: false },
+      { t: compact ? ".450 team" : "Wolves sag (.450)", c: "var(--status-warning)", dash: true }
+    ];
+    var lg = svg.append("g");
+    var lx = margin.left;
+    legend.forEach(function (item) {
+      lg.append("line")
+        .attr("x1", lx).attr("x2", lx + 18)
+        .attr("y1", margin.top - 17).attr("y2", margin.top - 17)
+        .style("stroke", item.c).style("stroke-width", 2.5)
+        .style("stroke-dasharray", item.dash ? "5,4" : "none");
+      var label = lg.append("text")
+        .attr("x", lx + 24).attr("y", margin.top - 13)
+        .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+        .text(item.t);
+      lx += 24 + label.node().getComputedTextLength() + 20;
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "ec-caption")
+      .text("Cumulative probability Edwards has departed, with an 80% interval on the central scenario. " +
+        "The curve is nearly flat from 2030 to 2032 because a star who crosses his walk year is modeled as re-signing.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

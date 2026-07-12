@@ -26,6 +26,8 @@ The 2029 swap exercises in 12.3 percent of futures, and here is the fine-print s
 
 The 2030 swap is where the skeleton needed its first amendment. We characterized it as subordinated debt, upside pre-stripped by the San Antonio and Dallas stack, and structurally that is still true. But it prices as the most valuable swap of the three, not the least: exercised in 66.3 percent of futures, mean payoff 1.3 wins, 90th percentile 4.6. The reason is not Minnesota's side of the trade at all. It is Charlotte's. By 2030 the simulated Hornets are cresting, a median 49-win team picking in the twenties, and a swap right held by a good team is cheap to exercise against almost anybody. Charlotte did not buy 2030 upside from Minnesota. They bought the right to throw away their own late pick in the exact season they expect to stop needing it.
 
+{{viz:swap-ledger}}
+
 [SLOT: the resolved 2026 No. 28/No. 33 line item, one sentence, footnoted as slot-EV by design.]
 
 [SLOT: the three second-rounders (2029, 2032, 2033), flat-valued at the E1 slot-31-45 average with the one-line sensitivity, so every asset in the package appears in the total exactly once.]
@@ -33,6 +35,8 @@ The 2030 swap is where the skeleton needed its first amendment. We characterized
 ## Where the cost lives
 
 Cut the fifty thousand futures into four world-states and ask each one what the full package pays Charlotte. Baseline, Edwards stays and the Hornets stay ordinary, is 24.7 percent of futures and pays 4.0 wins on average. Edwards leaves while the Hornets stay ordinary: 33.3 percent, paying 5.3. The Hornets ascend to a 45-win-or-better 2033 while Edwards stays: 18.0 percent, paying 4.2. And the quadrant where both things happen, Edwards gone and Charlotte good, is 24.0 percent of futures and pays 5.6.
+
+{{viz:cost-quadrants}}
 
 The skeleton expected that last quadrant to be rare and brutal, a thin tail carrying an outsized share of the bill. That is the second amendment, and it is worse news than the expectation: the joint tail is not rare. A quarter of simulated futures put a departed Edwards and an ascendant Charlotte in the same timeline, partly because the same 2029 summer that decides Edwards' address also sits mid-crest on Charlotte's arc. The bill is not a lightning strike Minnesota is hoping to dodge. Every quadrant pays at least four wins on average; the bad quadrants just pay more. What Minnesota is actually hoping is that its own future comes from the left side of each quadrant's distribution, and to be fair, the path-level spread is wide: the total package pays less than nothing in about one future in ten (a late pick's first four years can be worth less than a replacement player) and more than 13 wins in another one in ten.
 

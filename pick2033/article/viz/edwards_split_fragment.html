@@ -1,0 +1,165 @@
+<div id="viz-edwards-split"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-split, #viz-edwards-split * { touch-action: manipulation; }
+  #viz-edwards-split .es-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // The 2033 pick, conditioned on the Part 1 question.
+  // Source: pick2033 outputs/json/slot_distribution_2033_FINAL.json, conditional block.
+  var groups = [
+    { label: "Top 4", stays: 0.1407, departs: 0.1691 },
+    { label: "Top 10", stays: 0.3540, departs: 0.4188 },
+    { label: "Any lottery pick", stays: 0.5673, departs: 0.6580 }
+  ];
+  var N_STAYS = "21,343", N_DEPARTS = "28,657";
+
+  var root = d3.select("#viz-edwards-split");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 34, right: 14, bottom: 56, left: compact ? 34 : 42 };
+    var height = Math.max(250, Math.round(width * 0.44));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x0 = d3.scaleBand()
+      .domain(groups.map(function (d) { return d.label; }))
+      .range([margin.left, width - margin.right])
+      .paddingInner(0.32).paddingOuter(0.12);
+    var x1 = d3.scaleBand()
+      .domain(["stays", "departs"])
+      .range([0, x0.bandwidth()])
+      .padding(0.14);
+    var y = d3.scaleLinear().domain([0, 0.72]).range([height - margin.bottom, margin.top]);
+
+    var yTicks = [0, 0.2, 0.4, 0.6];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return Math.round(d * 100) + "%"; });
+
+    var series = [
+      { key: "stays", name: "Edwards stays", color: "var(--accent-default)", hover: "var(--accent-hover)", n: N_STAYS },
+      { key: "departs", name: "Edwards departs", color: "var(--status-error)", hover: "#FF7A7A", n: N_DEPARTS }
+    ];
+
+    groups.forEach(function (g, gi) {
+      series.forEach(function (s, si) {
+        var v = g[s.key];
+        var bx = x0(g.label) + x1(s.key);
+        var bar = svg.append("rect")
+          .attr("x", bx).attr("width", x1.bandwidth()).attr("rx", 4)
+          .style("fill", s.color).style("cursor", "pointer")
+          .attr("y", reduceMotion ? y(v) : y(0))
+          .attr("height", reduceMotion ? y(0) - y(v) : 0);
+        if (!reduceMotion) {
+          bar.transition().duration(600).delay(gi * 120 + si * 60)
+            .ease(d3.easeCubicOut)
+            .attr("y", y(v)).attr("height", y(0) - y(v));
+        }
+        bar.append("title").text(function () {
+          return g.label + ", " + s.name + " (" + s.n + " futures): " +
+            (v * 100).toFixed(1) + "%";
+        });
+        bar.on("mouseenter", function () { d3.select(this).style("fill", s.hover); })
+          .on("mouseleave", function () { d3.select(this).style("fill", s.color); });
+
+        svg.append("text")
+          .attr("x", bx + x1.bandwidth() / 2).attr("y", y(v) - 6)
+          .attr("text-anchor", "middle")
+          .style("fill", "var(--text-primary)")
+          .style("font", "600 " + (compact ? "11px" : "13px") + " var(--family-mono)")
+          .text((v * 100).toFixed(1));
+      });
+
+      // The gap, stated as a number between the pair.
+      var delta = ((g.departs - g.stays) * 100).toFixed(1);
+      svg.append("text")
+        .attr("x", x0(g.label) + x0.bandwidth() / 2)
+        .attr("y", height - margin.bottom + 34)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text("+" + delta + " pts if he leaves");
+
+      svg.append("text")
+        .attr("x", x0(g.label) + x0.bandwidth() / 2)
+        .attr("y", height - margin.bottom + 18)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)").style("font", "600 12px var(--family-sans)")
+        .text(g.label);
+    });
+
+    // Legend.
+    var lg = svg.append("g");
+    var lx = margin.left;
+    series.forEach(function (s) {
+      lg.append("rect")
+        .attr("x", lx).attr("y", margin.top - 24)
+        .attr("width", 12).attr("height", 12).attr("rx", 3)
+        .style("fill", s.color);
+      var label = lg.append("text")
+        .attr("x", lx + 18).attr("y", margin.top - 14)
+        .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+        .text(s.name + (compact ? "" : " (" + s.n + " futures)"));
+      lx += 18 + label.node().getComputedTextLength() + 22;
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "es-caption")
+      .text("Where the 2033 pick lands, split by whether Edwards is still a Timberwolf in 2033. " +
+        "Same league, same lottery balls; one man's address moves the tail.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
