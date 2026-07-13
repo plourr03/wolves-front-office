@@ -24,6 +24,17 @@ Caveat carried with the grade: the M2 calibration slope re-gate stayed red
 (1.413, boot 90% CI [1.127, 1.872] vs [0.8, 1.2]) — final look, stands
 documented per Ruling A; see outputs/validation/model_b_hazard_M2_FINAL.md.
 
+### P1 BASELINE PIN-NOTE (2026-07-13 addendum; the logged prediction above is untouched)
+Two committed pre-M2 provisional runs existed for the P1 baseline: the
+04:02 UTC 2026-07-02 run (commit 8931e70c, .167/.422, the run P1's grading
+clause quotes) and the 18:16 UTC run (commit dbb3657b, post-pick_ledger,
+.170/.421). Bobby's ruling (2026-07-13, verbatim "A"): grade as-logged.
+The baseline is PINNED to the 04:02 artifact, commit 8931e70c. The 18:16
+run stands on the record as a later, ledger-resolved provisional, not the
+grading baseline. Shift between them: +0.003 p_top4 (~1.8 SE), within
+noise; the grade's direction is identical under either. Memo:
+outputs/validation/p1_baseline_decision.md.
+
 ## P2 — 2026-07-02, logged BEFORE the young-core cohort analysis runs
 **Prediction (Bobby, Ruling D):** the matched cohort's median trajectory
 crests BELOW the model's CHA median crest (~51 wins at 2029). Reasoning:

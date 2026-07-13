@@ -1,12 +1,11 @@
 # July 6 Runbook — the five buttons, in order
 
-> **OPEN BEFORE STEP 3 (found on release eve, 2026-07-05):** P1's provisional
-> baseline is ambiguous — the prediction log says .167/.422 (04:02 run), the
-> artifact + this runbook say .170/.421 (18:16 run, post-pick_ledger). Both
-> pre-M2. Needs your one-word ruling (A/B/C) before the public P1 grade.
-> Memo: `outputs/validation/p1_baseline_decision.md`. Nothing before Step 4
-> depends on it; predictions.md and the Step-4 number are UNCHANGED pending
-> your call.
+> **RESOLVED 2026-07-13 — Ruling A (grade as-logged, .167/.422).** Original
+> note (release eve, 2026-07-05): P1's provisional baseline was ambiguous —
+> the prediction log said .167/.422 (04:02 run), the artifact + this runbook
+> said .170/.421 (18:16 run, post-pick_ledger). Ruled A; pin-note appended to
+> predictions.md, Step 4 below corrected. Memo:
+> `outputs/validation/p1_baseline_decision.md`.
 
 Everything below is staged, gated, and tested. Your part is three human
 items (marked BOBBY); the rest is commands. If anything goes red, the house
@@ -118,8 +117,8 @@ Then refresh exports and the report:
 .venv/Scripts/python src/validation/report.py
 ```
 Exports auto-prefer FINAL artifacts. **Grade P1 now**: compare the final
-P(top4)/P(top10) against provisional (.170/.421); write the grade into
-docs/predictions.md either way.
+P(top4)/P(top10) against provisional (.167/.422, per Ruling A 2026-07-13);
+write the grade into docs/predictions.md either way.
 
 ## Step 5 — Pricing unlocks + Stage 1 ships
 

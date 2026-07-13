@@ -1,0 +1,210 @@
+<div id="viz-equity-bill"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-equity-bill, #viz-equity-bill * { touch-action: manipulation; }
+  #viz-equity-bill .eqb-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // The picks-and-swaps bill in cumulative title equity (percentage points
+  // across each pick's four delivery seasons), both perspectives, 50,000
+  // futures. Strips are 80% intervals (q10 to q90), dot is the mean, tick
+  // the median. Deltas only, per the house gate: no absolute title odds.
+  // Source: pick2033 outputs/json/total_asset_cost.json (top1_true,
+  // picks_swaps_total, delivered_to_CHA / forgone_by_MIN).
+  var rows = [
+    { label: "Delivered to Charlotte", short: "To Charlotte",
+      sub: "priced on Charlotte's futures", lo: -0.66, q50: 3.34, hi: 23.57, mean: 8.27, cha: true },
+    { label: "Forgone by Minnesota", short: "From Minnesota",
+      sub: "priced on Minnesota's futures", lo: -0.67, q50: 1.97, hi: 13.05, mean: 4.51, cha: false }
+  ];
+
+  var root = d3.select("#viz-equity-bill");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 92 : 78;
+    var margin = { top: 34, right: compact ? 46 : 56, bottom: 58, left: compact ? 8 : 168 };
+    var height = margin.top + margin.bottom + rows.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleLinear()
+      .domain([-2, 25])
+      .range([margin.left, width - margin.right]);
+
+    function rowMid(i) { return margin.top + i * rowH + (compact ? 56 : rowH / 2); }
+
+    // Zero line.
+    svg.append("line")
+      .attr("x1", x(0)).attr("x2", x(0))
+      .attr("y1", margin.top - 8).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-default)");
+    svg.append("text")
+      .attr("x", x(0)).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("0");
+
+    // X ticks.
+    var xTicks = [10, 20];
+    svg.append("g").selectAll("line").data(xTicks).join("line")
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", margin.top - 4).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", x).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return "+" + d; });
+    svg.append("text")
+      .attr("x", (x(-2) + x(25)) / 2).attr("y", height - 8)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "cumulative title equity, percentage points"
+                    : "cumulative title equity, percentage points across the picks' four delivery seasons");
+
+    rows.forEach(function (d, i) {
+      var yMid = rowMid(i);
+      var dotColor = d.cha ? "var(--accent-default)" : "var(--dataviz-2)";
+      var stripColor = d.cha ? "var(--accent-subtle)" : "rgba(255,255,255,.14)";
+
+      // Row labels.
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 18 : yMid - 4)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-primary)")
+        .style("font", "600 13px var(--family-sans)")
+        .text(compact ? d.short : d.label);
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 34 : yMid + 12)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(d.sub);
+
+      // 80% interval strip.
+      var stripX0 = x(d.lo), stripX1 = x(d.hi);
+      var strip = svg.append("rect")
+        .attr("x", stripX0).attr("y", yMid - 7)
+        .attr("height", 14).attr("rx", 7)
+        .style("fill", stripColor)
+        .style("cursor", "pointer")
+        .attr("width", reduceMotion ? Math.max(stripX1 - stripX0, 3) : 3);
+      if (!reduceMotion) {
+        strip.transition().duration(600).delay(i * 110).ease(d3.easeCubicOut)
+          .attr("width", Math.max(stripX1 - stripX0, 3));
+      }
+      strip.append("title").text(
+        d.label + ": mean " + d.mean.toFixed(2) + "pp, median " + d.q50.toFixed(1) +
+        ", 80% of futures between " + d.lo.toFixed(1) + " and " + d.hi.toFixed(1) + "pp");
+
+      // Median tick.
+      svg.append("line")
+        .attr("x1", x(d.q50)).attr("x2", x(d.q50))
+        .attr("y1", yMid - 10).attr("y2", yMid + 10)
+        .style("stroke", "var(--text-secondary)").style("stroke-width", 1.5);
+
+      // Mean dot.
+      var dot = svg.append("circle")
+        .attr("cx", x(d.mean)).attr("cy", yMid).attr("r", 6)
+        .style("fill", dotColor).style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        dot.transition().duration(400).delay(i * 110 + 350).style("opacity", 1);
+      }
+      dot.append("title").text(d.label + ": mean " + d.mean.toFixed(2) + "pp");
+      dot.on("mouseenter", function () { d3.select(this).attr("r", 8); })
+        .on("mouseleave", function () { d3.select(this).attr("r", 6); });
+
+      // Mean value label.
+      svg.append("text")
+        .attr("x", x(Math.max(d.hi, d.mean)) + 10).attr("y", yMid + 4)
+        .style("fill", "var(--text-primary)")
+        .style("font", "600 13px var(--family-mono)")
+        .text(d.mean.toFixed(1));
+    });
+
+    // The gap annotation: same wins, twice the title weight. Bracket runs
+    // between the two mean dots at a y between the rows. Wide layouts only;
+    // in compact mode that band belongs to the second row's labels, and the
+    // caption carries the point instead.
+    if (!compact) {
+      var yGap = (rowMid(0) + rowMid(1)) / 2;
+      var gx0 = x(rows[1].mean), gx1 = x(rows[0].mean);
+      svg.append("line")
+        .attr("x1", gx0).attr("x2", gx1).attr("y1", yGap).attr("y2", yGap)
+        .style("stroke", "var(--text-secondary)").style("stroke-width", 1)
+        .style("stroke-dasharray", "3,3");
+      [gx0, gx1].forEach(function (gx) {
+        svg.append("line")
+          .attr("x1", gx).attr("x2", gx).attr("y1", yGap - 4).attr("y2", yGap + 4)
+          .style("stroke", "var(--text-secondary)").style("stroke-width", 1);
+      });
+      svg.append("text")
+        .attr("x", (gx0 + gx1) / 2).attr("y", yGap - 7).attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)")
+        .text("same wins, 1.8x the title weight");
+    }
+
+    // Legend for the marks.
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", margin.top - 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "strip: 80% | tick: median | dot: mean" : "strip: 80% of futures, tick: median, dot: mean");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "eqb-caption")
+      .text("The picks-and-swaps bill converted to championship probability, priced from " +
+        "both sides of the same 50,000 futures. Charlotte collects nearly twice the title " +
+        "equity Minnesota gives up, because the biggest payments arrive in futures where " +
+        "Minnesota has already collapsed and Charlotte is cresting. Changes only, per the " +
+        "house rule: no absolute title odds appear anywhere in the series.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

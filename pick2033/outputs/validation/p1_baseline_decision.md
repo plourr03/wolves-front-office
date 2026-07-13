@@ -59,6 +59,14 @@ move the pre-commit is designed to prevent; if the shift mattered
 scientifically it would be larger than 1.8 SE.
 
 ## RULING (Bobby)
-> _pending — hand one word: A / B / C (or amend). Recorded verbatim here and
-> mirrored into docs/decisions.md. Until ruled, predictions.md and the runbook
-> number are LEFT AS-IS; no priced/graded output depends on this before Step 4._
+> **A** (2026-07-13, verbatim: "A"). Grade as-logged (.167/.422).
+
+Mirrored into docs/decisions.md. Option A paperwork executed same day:
+dated pin-note appended to predictions.md naming the 04:02 artifact and
+commit 8931e70c; runbook Step 4 corrected to .167/.422.
+
+Sequencing disclosure, on the record: the P1 grade was written into
+predictions.md on 2026-07-12 against the as-logged baseline while this
+ruling was still pending. The ruling now ratifies that choice; it did not
+precede it. The grade's direction call (CONFIRMED, lighter-tailed) holds
+against either candidate baseline, so no graded output changes under A.

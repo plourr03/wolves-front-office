@@ -324,3 +324,48 @@ Stage 2 notes) aligned; historical memos that say "46 years" stand as
 written under this note rather than being edited retroactively (span
 counting, defensible, now superseded). Rhetorical round numbers
 ("forty years of star tenures", 1990-2026 spell window) are unaffected.
+
+## 2026-07-13 — P1 baseline RULING: A (grade as-logged)
+
+**RULING (Bobby, verbatim): "A."** The P1 provisional baseline is the
+as-logged .167/.422 (04:02 UTC 2026-07-02 run, commit 8931e70c). Grading
+honors the timestamp; the "newer provisional is better" argument is the
+post-hoc baseline adjustment the pre-commit discipline exists to forbid.
+Full memo: outputs/validation/p1_baseline_decision.md.
+
+Paperwork executed with the ruling: dated pin-note appended to
+docs/predictions.md (addendum, logged prediction untouched); runbook
+Step 4 corrected .170/.421 -> .167/.422; memo ruling section filled.
+
+Sequencing disclosed in the memo: the grade entered predictions.md on
+07-12 against the as-logged number while the ruling was pending; the
+ruling ratifies rather than precedes it. Direction (CONFIRMED,
+lighter-tailed in both cells) holds against either candidate baseline;
+Part 2's public grade paragraph (16.7/42.2 vs 15.7/39.1) is unchanged.
+
+## 2026-07-13 — Equity adapter implementation decisions (agent, on the record)
+
+The equity final pass required implementation choices the plan left open.
+All are printed in the adapter docstring, the export meta, and the Part 3
+methodology note; none moves a pre-committed number. Listed here so none
+is silent; Bobby's numbers-in-place read of Part 3 is the ratification
+gate.
+
+1. VORP -> net: per-season net-rating delta = 4yr VORP / 4 (a season of
+   VORP is already a net-rating-equivalent unit; no wins conversion).
+2. Tier read: per delivery season (draft year +1..+4) on the receiving
+   team's simulated win path, clamped to the 2033 horizon; net =
+   (win_pct - 0.5) / c from srs_wins_params.json.
+3. Per-instrument conversion; convexity cross-term between overlapping
+   delivery windows documented as second-order (curve near-linear at
+   observed deltas), not modeled.
+4. Negative payoff draws map through odd symmetry; deltas past the 4.0
+   grid edge extrapolate on the 3.0-4.0 slope.
+5. CRN discipline: the adapter regenerates the pricing pass's exact
+   per-path draws (same seed, same rng order) and hard-fails unless mean
+   and median reproduce swap_pricing_FINAL.json, both branches.
+6. Equity defined for VORP only (WS is not a net-rating unit); the WS
+   robustness track stays in the VORP bill.
+7. Headline unit in Part 3 (Bobby's call at fill time, made by the agent
+   in his absence, veto at the read): cumulative 4-yr pp leads,
+   per-season stated once in a clause.
