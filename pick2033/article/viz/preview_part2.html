@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 2, Fifty Thousand Futures, viz preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+  .harness-sep { max-width:720px; margin:36px auto; border:0; border-top:1px solid rgba(255,255,255,.1); }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness for Part 2, Fifty Thousand Futures. The publishable artifacts are the *_fragment.html files; this file is generated, do not edit by hand.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='720px'})">720</button>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='480px'})">480</button>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='360px'})">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-win-fancharts"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-win-fancharts, #viz-win-fancharts * { touch-action: manipulation; }
+  #viz-win-fancharts .wf-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Simulated win totals, 50,000 futures, FINAL Engine D run.
+  // Source: pick2033 outputs/json/win_fancharts_FINAL.json (seed 20330706).
+  var MIN = [
+    {season:2027,q05:45.9,q20:48.9,q50:52.1,q80:55.4,q95:58.7},
+    {season:2028,q05:42.7,q20:46.9,q50:51.0,q80:55.0,q95:58.9},
+    {season:2029,q05:32.5,q20:38.1,q50:44.2,q80:50.2,q95:55.9},
+    {season:2030,q05:28.6,q20:35.4,q50:42.4,q80:49.3,q95:56.2},
+    {season:2031,q05:25.1,q20:33.0,q50:40.9,q80:49.0,q95:56.9},
+    {season:2032,q05:22.5,q20:31.3,q50:40.0,q80:48.7,q95:57.6},
+    {season:2033,q05:19.0,q20:28.8,q50:38.7,q80:48.5,q95:58.2}
+  ];
+  var CHA = [
+    {season:2027,q05:39.0,q20:41.9,q50:45.0,q80:48.2,q95:51.4},
+    {season:2028,q05:42.7,q20:46.1,q50:49.7,q80:53.5,q95:57.4},
+    {season:2029,q05:41.5,q20:46.1,q50:50.9,q80:55.9,q95:60.9},
+    {season:2030,q05:36.8,q20:42.9,q50:49.2,q80:55.6,q95:62.2},
+    {season:2031,q05:31.8,q20:39.2,q50:46.8,q80:54.6,q95:62.4},
+    {season:2032,q05:27.8,q20:36.3,q50:44.9,q80:53.5,q95:62.1},
+    {season:2033,q05:23.7,q20:33.2,q50:42.8,q80:52.4,q95:62.0}
+  ];
+
+  var root = d3.select("#viz-win-fancharts");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var panelH = Math.max(190, Math.round(width * 0.34));
+    var gap = 34;
+    var margin = { top: 26, right: compact ? 44 : 56, bottom: 26, left: compact ? 30 : 38 };
+    var height = margin.top + panelH * 2 + gap + margin.bottom;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint()
+      .domain(MIN.map(function (d) { return d.season; }))
+      .range([margin.left, width - margin.right]);
+
+    function panel(data, top, color, band, name, annotate) {
+      var y = d3.scaleLinear().domain([15, 65]).range([top + panelH, top]);
+
+      var yTicks = [20, 35, 50, 65];
+      svg.append("g").selectAll("line").data(yTicks).join("line")
+        .attr("x1", margin.left).attr("x2", width - margin.right)
+        .attr("y1", y).attr("y2", y)
+        .style("stroke", "var(--border-subtle)");
+      svg.append("g").selectAll("text").data(yTicks).join("text")
+        .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+        .attr("text-anchor", "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(function (d) { return d; });
+
+      // 2029 walk-year guide, both panels.
+      svg.append("line")
+        .attr("x1", x(2029)).attr("x2", x(2029))
+        .attr("y1", top).attr("y2", top + panelH)
+        .style("stroke", "var(--border-default)").style("stroke-dasharray", "3,4");
+
+      var area90 = d3.area()
+        .x(function (d) { return x(d.season); })
+        .y0(function (d) { return y(d.q05); })
+        .y1(function (d) { return y(d.q95); })
+        .curve(d3.curveMonotoneX);
+      var area60 = d3.area()
+        .x(function (d) { return x(d.season); })
+        .y0(function (d) { return y(d.q20); })
+        .y1(function (d) { return y(d.q80); })
+        .curve(d3.curveMonotoneX);
+      var median = d3.line()
+        .x(function (d) { return x(d.season); })
+        .y(function (d) { return y(d.q50); })
+        .curve(d3.curveMonotoneX);
+
+      svg.append("path").datum(data).attr("d", area90).style("fill", band[0]);
+      svg.append("path").datum(data).attr("d", area60).style("fill", band[1]);
+      var med = svg.append("path").datum(data).attr("d", median)
+        .style("fill", "none").style("stroke", color).style("stroke-width", 2.5);
+      if (!reduceMotion) {
+        med.style("opacity", 0)
+          .transition().duration(700).ease(d3.easeCubicOut).style("opacity", 1);
+      }
+
+      var pts = svg.append("g").selectAll("circle").data(data).join("circle")
+        .attr("cx", function (d) { return x(d.season); })
+        .attr("cy", function (d) { return y(d.q50); })
+        .attr("r", 3.5)
+        .style("fill", color).style("cursor", "pointer");
+      pts.append("title").text(function (d) {
+        return name + " " + d.season + ": median " + d.q50 + " wins, " +
+          "60% band " + d.q20 + " to " + d.q80 + ", 90% band " + d.q05 + " to " + d.q95;
+      });
+      pts.on("mouseenter", function () { d3.select(this).attr("r", 5.5); })
+        .on("mouseleave", function () { d3.select(this).attr("r", 3.5); });
+
+      // Panel title and 2033 median end label.
+      svg.append("text")
+        .attr("x", margin.left).attr("y", top - 8)
+        .style("fill", color).style("font", "600 13px var(--family-sans)")
+        .text(name);
+      var last = data[data.length - 1];
+      svg.append("text")
+        .attr("x", x(2033) + 8).attr("y", y(last.q50) + 4)
+        .style("fill", "var(--text-primary)").style("font", "600 12px var(--family-mono)")
+        .text(last.q50);
+
+      if (annotate === "crest") {
+        svg.append("text")
+          .attr("x", x(2029)).attr("y", y(50.9) - 12).attr("text-anchor", "middle")
+          .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+          .text(compact ? "crest: 50.9" : "the crest: 50.9 wins, 2029");
+      }
+      if (annotate === "walk") {
+        svg.append("text")
+          .attr("x", x(2029)).attr("y", top + 12).attr("text-anchor", "middle")
+          .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+          .text("walk year");
+      }
+
+      // Season labels only under the lower panel.
+      if (top > margin.top + 10) {
+        svg.append("g").selectAll("text").data(data).join("text")
+          .attr("x", function (d) { return x(d.season); })
+          .attr("y", top + panelH + 18)
+          .attr("text-anchor", "middle")
+          .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+          .text(function (d) { return compact ? "'" + String(d.season).slice(2) : d.season; });
+      }
+    }
+
+    panel(MIN, margin.top,
+      "var(--accent-default)",
+      ["rgba(0,132,61,.10)", "rgba(0,132,61,.22)"],
+      "Minnesota", "walk");
+    panel(CHA, margin.top + panelH + gap,
+      "var(--dataviz-3)",
+      ["rgba(74,158,255,.10)", "rgba(74,158,255,.22)"],
+      "Charlotte", "crest");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "wf-caption")
+      .text("Win totals across 50,000 simulated futures. Inner band holds 60% of futures, " +
+        "outer band 90%, line is the median. Minnesota fades as the walk years bite; " +
+        "Charlotte crests in the exact window its swap rights live.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-slot-2033"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-slot-2033, #viz-slot-2033 * { touch-action: manipulation; }
+  #viz-slot-2033 .s33-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Where the 2033 first lands: probability by slot, 50,000 futures.
+  // Source: pick2033 outputs/json/slot_distribution_2033_FINAL.json.
+  var data = [
+    {slot:1,p:0.03984},{slot:2,p:0.03914},{slot:3,p:0.0388},{slot:4,p:0.03922},
+    {slot:5,p:0.0395},{slot:6,p:0.03898},{slot:7,p:0.03854},{slot:8,p:0.0401},
+    {slot:9,p:0.03944},{slot:10,p:0.0376},{slot:11,p:0.03952},{slot:12,p:0.03962},
+    {slot:13,p:0.03876},{slot:14,p:0.03804},{slot:15,p:0.0377},{slot:16,p:0.03448},
+    {slot:17,p:0.03358},{slot:18,p:0.0318},{slot:19,p:0.0304},{slot:20,p:0.03142},
+    {slot:21,p:0.03134},{slot:22,p:0.02972},{slot:23,p:0.02856},{slot:24,p:0.02744},
+    {slot:25,p:0.02692},{slot:26,p:0.02656},{slot:27,p:0.02334},{slot:28,p:0.02248},
+    {slot:29,p:0.02024},{slot:30,p:0.01692}
+  ];
+  var zones = [
+    { from: 1, to: 4, label: "Top 4: 15.7%", fill: "rgba(255,92,92,.10)" },
+    { from: 5, to: 10, label: "5 to 10: 23.4%", fill: "rgba(245,166,35,.08)" },
+    { from: 11, to: 16, label: "11 to 16: 22.8%", fill: "rgba(74,158,255,.07)" }
+  ];
+
+  var root = d3.select("#viz-slot-2033");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 52, right: 12, bottom: 36, left: compact ? 34 : 42 };
+    var height = Math.max(250, Math.round(width * 0.44));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleBand()
+      .domain(data.map(function (d) { return d.slot; }))
+      .range([margin.left, width - margin.right])
+      .padding(0.22);
+    var y = d3.scaleLinear().domain([0, 0.045]).range([height - margin.bottom, margin.top]);
+
+    // Zone shading and bracket labels, so the cumulative numbers travel
+    // with position, not color alone.
+    zones.forEach(function (z) {
+      var x0 = x(z.from), x1 = x(z.to) + x.bandwidth();
+      svg.append("rect")
+        .attr("x", x0).attr("y", margin.top - 6)
+        .attr("width", x1 - x0).attr("height", height - margin.bottom - margin.top + 6)
+        .style("fill", z.fill);
+      svg.append("line")
+        .attr("x1", x0 + 1).attr("x2", x1 - 1)
+        .attr("y1", margin.top - 14).attr("y2", margin.top - 14)
+        .style("stroke", "var(--border-default)");
+      svg.append("text")
+        .attr("x", (x0 + x1) / 2).attr("y", margin.top - 22)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)")
+        .style("font", (compact ? "10px" : "600 12px") + " var(--family-sans)")
+        .text(compact ? z.label.replace(": ", " ") : z.label);
+    });
+    svg.append("text")
+      .attr("x", (x(17) + x(30) + x.bandwidth()) / 2).attr("y", margin.top - 22)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)")
+      .style("font", (compact ? "10px" : "12px") + " var(--family-sans)")
+      .text(compact ? "17 to 30: 38.1%" : "17 to 30: 38.1%");
+
+    // Y gridlines.
+    var yTicks = [0, 0.02, 0.04];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return (d * 100).toFixed(0) + "%"; });
+
+    // X labels.
+    var xTicks = compact ? [1, 5, 10, 16, 23, 30] : [1, 4, 8, 12, 16, 20, 25, 30];
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", function (d) { return x(d) + x.bandwidth() / 2; })
+      .attr("y", height - margin.bottom + 16)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("text")
+      .attr("x", (margin.left + width - margin.right) / 2)
+      .attr("y", height - 4).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("draft slot, 2033");
+
+    // Bars.
+    var bars = svg.append("g").selectAll("rect").data(data).join("rect")
+      .attr("x", function (d) { return x(d.slot); })
+      .attr("width", x.bandwidth())
+      .attr("rx", 2)
+      .style("fill", "var(--accent-default)")
+      .style("cursor", "pointer")
+      .attr("y", reduceMotion ? function (d) { return y(d.p); } : y(0))
+      .attr("height", reduceMotion ? function (d) { return y(0) - y(d.p); } : 0);
+    if (!reduceMotion) {
+      bars.transition().duration(600).delay(function (_, i) { return i * 22; })
+        .ease(d3.easeCubicOut)
+        .attr("y", function (d) { return y(d.p); })
+        .attr("height", function (d) { return y(0) - y(d.p); });
+    }
+    bars.append("title").text(function (d) {
+      return "Slot " + d.slot + ": " + (d.p * 100).toFixed(1) + "% of 50,000 futures";
+    });
+    bars.on("mouseenter", function () {
+      d3.select(this).style("fill", "var(--accent-hover)");
+    }).on("mouseleave", function () {
+      d3.select(this).style("fill", "var(--accent-default)");
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "s33-caption")
+      .text("Probability the 2033 first lands on each slot, across 50,000 futures. " +
+        "The startling part is the flatness: under the reformed lottery, slots 1 " +
+        "through 16 are all nearly equally likely for this pick.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-edwards-split"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-split, #viz-edwards-split * { touch-action: manipulation; }
+  #viz-edwards-split .es-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // The 2033 pick, conditioned on the Part 1 question.
+  // Source: pick2033 outputs/json/slot_distribution_2033_FINAL.json, conditional block.
+  var groups = [
+    { label: "Top 4", stays: 0.1407, departs: 0.1691 },
+    { label: "Top 10", stays: 0.3540, departs: 0.4188 },
+    { label: "Any lottery pick", stays: 0.5673, departs: 0.6580 }
+  ];
+  var N_STAYS = "21,343", N_DEPARTS = "28,657";
+
+  var root = d3.select("#viz-edwards-split");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 34, right: 14, bottom: 56, left: compact ? 34 : 42 };
+    var height = Math.max(250, Math.round(width * 0.44));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x0 = d3.scaleBand()
+      .domain(groups.map(function (d) { return d.label; }))
+      .range([margin.left, width - margin.right])
+      .paddingInner(0.32).paddingOuter(0.12);
+    var x1 = d3.scaleBand()
+      .domain(["stays", "departs"])
+      .range([0, x0.bandwidth()])
+      .padding(0.14);
+    var y = d3.scaleLinear().domain([0, 0.72]).range([height - margin.bottom, margin.top]);
+
+    var yTicks = [0, 0.2, 0.4, 0.6];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return Math.round(d * 100) + "%"; });
+
+    var series = [
+      { key: "stays", name: "Edwards stays", color: "var(--accent-default)", hover: "var(--accent-hover)", n: N_STAYS },
+      { key: "departs", name: "Edwards departs", color: "var(--status-error)", hover: "#FF7A7A", n: N_DEPARTS }
+    ];
+
+    groups.forEach(function (g, gi) {
+      series.forEach(function (s, si) {
+        var v = g[s.key];
+        var bx = x0(g.label) + x1(s.key);
+        var bar = svg.append("rect")
+          .attr("x", bx).attr("width", x1.bandwidth()).attr("rx", 4)
+          .style("fill", s.color).style("cursor", "pointer")
+          .attr("y", reduceMotion ? y(v) : y(0))
+          .attr("height", reduceMotion ? y(0) - y(v) : 0);
+        if (!reduceMotion) {
+          bar.transition().duration(600).delay(gi * 120 + si * 60)
+            .ease(d3.easeCubicOut)
+            .attr("y", y(v)).attr("height", y(0) - y(v));
+        }
+        bar.append("title").text(function () {
+          return g.label + ", " + s.name + " (" + s.n + " futures): " +
+            (v * 100).toFixed(1) + "%";
+        });
+        bar.on("mouseenter", function () { d3.select(this).style("fill", s.hover); })
+          .on("mouseleave", function () { d3.select(this).style("fill", s.color); });
+
+        svg.append("text")
+          .attr("x", bx + x1.bandwidth() / 2).attr("y", y(v) - 6)
+          .attr("text-anchor", "middle")
+          .style("fill", "var(--text-primary)")
+          .style("font", "600 " + (compact ? "11px" : "13px") + " var(--family-mono)")
+          .text((v * 100).toFixed(1));
+      });
+
+      // The gap, stated as a number between the pair.
+      var delta = ((g.departs - g.stays) * 100).toFixed(1);
+      svg.append("text")
+        .attr("x", x0(g.label) + x0.bandwidth() / 2)
+        .attr("y", height - margin.bottom + 34)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text("+" + delta + " pts if he leaves");
+
+      svg.append("text")
+        .attr("x", x0(g.label) + x0.bandwidth() / 2)
+        .attr("y", height - margin.bottom + 18)
+        .attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)").style("font", "600 12px var(--family-sans)")
+        .text(g.label);
+    });
+
+    // Legend.
+    var lg = svg.append("g");
+    var lx = margin.left;
+    series.forEach(function (s) {
+      lg.append("rect")
+        .attr("x", lx).attr("y", margin.top - 24)
+        .attr("width", 12).attr("height", 12).attr("rx", 3)
+        .style("fill", s.color);
+      var label = lg.append("text")
+        .attr("x", lx + 18).attr("y", margin.top - 14)
+        .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+        .text(s.name + (compact ? "" : " (" + s.n + " futures)"));
+      lx += 18 + label.node().getComputedTextLength() + 22;
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "es-caption")
+      .text("Where the 2033 pick lands, split by whether Edwards is still a Timberwolf in 2033. " +
+        "Same league, same lottery balls; one man's address moves the tail.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-cohort-crest"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-cohort-crest, #viz-cohort-crest * { touch-action: manipulation; }
+  #viz-cohort-crest .cc-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Simulated Charlotte vs 18 real young cores in its band (sub-.500,
+  // 3+ under-23 rotation players, since 1985), years +1 to +5.
+  // Source: pick2033 outputs/validation/young_core_cohort.json.
+  var years = [1, 2, 3, 4, 5];
+  var seasons = [2027, 2028, 2029, 2030, 2031];
+  var fan = {
+    p10: [26.1, 26.4, 35.4, 38.4, 27.5],
+    p30: [37.0, 35.1, 41.1, 44.3, 43.1],
+    p50: [40.5, 44.8, 47.9, 49.4, 44.5],
+    p70: [45.6, 52.8, 52.8, 50.0, 47.8],
+    p90: [50.2, 59.3, 60.6, 56.1, 52.7]
+  };
+  var model = [45.0, 49.7, 50.9, 49.2, 46.8];
+  var TRIGGER = 52.8;
+
+  var root = d3.select("#viz-cohort-crest");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 40, right: compact ? 14 : 20, bottom: 40, left: compact ? 30 : 38 };
+    var height = Math.max(250, Math.round(width * 0.5));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint().domain(years).range([margin.left, width - margin.right]);
+    var y = d3.scaleLinear().domain([20, 64]).range([height - margin.bottom, margin.top]);
+
+    var yTicks = [25, 35, 45, 55];
+    svg.append("g").selectAll("line").data(yTicks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(yTicks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("g").selectAll("text").data(years).join("text")
+      .attr("x", x).attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(function (d, i) {
+        return compact ? "+" + d : "year +" + d + " ('" + String(seasons[i]).slice(2) + ")";
+      });
+
+    function band(loArr, hiArr, fill) {
+      var pts = years.map(function (yr, i) { return { x: x(yr), lo: loArr[i], hi: hiArr[i] }; });
+      var area = d3.area()
+        .x(function (d) { return d.x; })
+        .y0(function (d) { return y(d.lo); })
+        .y1(function (d) { return y(d.hi); })
+        .curve(d3.curveMonotoneX);
+      svg.append("path").datum(pts).attr("d", area).style("fill", fill);
+    }
+    band(fan.p10, fan.p90, "rgba(255,255,255,.06)");
+    band(fan.p30, fan.p70, "rgba(255,255,255,.11)");
+
+    // Cohort median, quiet and dashed.
+    var lineGen = function (arr) {
+      return d3.line()
+        .x(function (d, i) { return x(years[i]); })
+        .y(function (d) { return y(d); })
+        .curve(d3.curveMonotoneX)(arr);
+    };
+    svg.append("path")
+      .attr("d", lineGen(fan.p50))
+      .style("fill", "none").style("stroke", "var(--text-tertiary)")
+      .style("stroke-width", 1.5).style("stroke-dasharray", "4,4");
+    svg.append("text")
+      .attr("x", x(5) - (compact ? 0 : 4)).attr("y", y(fan.p50[4]) + 16)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "cohort median" : "what real young cores did (median)");
+
+    // The pre-committed trigger line.
+    svg.append("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y(TRIGGER)).attr("y2", y(TRIGGER))
+      .style("stroke", "var(--status-warning)").style("stroke-width", 1.5)
+      .style("stroke-dasharray", "6,4");
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", y(TRIGGER) - 6)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--status-warning)").style("font", "600 11px var(--family-sans)")
+      .text(compact ? "trigger: 52.8" : "pre-committed correction trigger: a 52.8-win crest");
+
+    // Model line.
+    var modelPath = svg.append("path")
+      .attr("d", lineGen(model))
+      .style("fill", "none").style("stroke", "var(--dataviz-3)").style("stroke-width", 2.5);
+    if (!reduceMotion) {
+      modelPath.style("opacity", 0)
+        .transition().duration(700).ease(d3.easeCubicOut).style("opacity", 1);
+    }
+    var pts = svg.append("g").selectAll("circle").data(model).join("circle")
+      .attr("cx", function (d, i) { return x(years[i]); })
+      .attr("cy", function (d) { return y(d); })
+      .attr("r", function (d, i) { return i === 2 ? 5 : 3.5; })
+      .style("fill", "var(--dataviz-3)").style("cursor", "pointer");
+    pts.append("title").text(function (d, i) {
+      return "Simulated Charlotte, year +" + years[i] + " (" + seasons[i] + "): median " +
+        d + " wins. Cohort median that year: " + fan.p50[i] + ".";
+    });
+    pts.on("mouseenter", function () { d3.select(this).attr("r", 6.5); })
+      .on("mouseleave", function (e, d) {
+        var i = model.indexOf(d);
+        d3.select(this).attr("r", i === 2 ? 5 : 3.5);
+      });
+
+    svg.append("text")
+      .attr("x", x(3)).attr("y", y(50.9) - 12).attr("text-anchor", "middle")
+      .style("fill", "var(--dataviz-3)").style("font", "600 12px var(--family-sans)")
+      .text(compact ? "model crest: 50.9" : "simulated Charlotte crest: 50.9");
+
+    // Legend.
+    var lg = svg.append("g");
+    lg.append("line")
+      .attr("x1", margin.left).attr("x2", margin.left + 18)
+      .attr("y1", margin.top - 21).attr("y2", margin.top - 21)
+      .style("stroke", "var(--dataviz-3)").style("stroke-width", 2.5);
+    lg.append("text")
+      .attr("x", margin.left + 24).attr("y", margin.top - 17)
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(compact ? "simulated CHA" : "simulated Charlotte (median)");
+    var l2x = margin.left + (compact ? 130 : 220);
+    lg.append("rect")
+      .attr("x", l2x).attr("y", margin.top - 28)
+      .attr("width", 16).attr("height", 12)
+      .style("fill", "rgba(255,255,255,.11)");
+    lg.append("text")
+      .attr("x", l2x + 22).attr("y", margin.top - 17)
+      .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+      .text(compact ? "18 real cores" : "18 real young cores, middle 40%");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "cc-caption")
+      .text("The self-audit: simulated Charlotte against the 18 real young cores in its band " +
+        "since 1985. The model's crest sits near the cohort's 60th percentile, under the " +
+        "pre-committed trigger, so it stands. Note the shared shape: crest near year four, then fade.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+</body>
+</html>

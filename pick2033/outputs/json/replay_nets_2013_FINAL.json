@@ -1,0 +1,117 @@
+{
+ "meta": {
+  "tag": "FINAL",
+  "n_paths": 20000,
+  "as_of": "2013-07-01",
+  "lottery_era": "pre_2019_weighted",
+  "variant": "pure_model_a (declared default; two-tier needs 2013 rosters)",
+  "runtime_s": 11.6
+ },
+ "scored": [
+  {
+   "season": 2014,
+   "realized_slot": 17,
+   "interval_90": [
+    4,
+    28
+   ],
+   "inside": true,
+   "median_slot": 18.0,
+   "p_slot_leq_realized": 0.4692,
+   "p_top3": 0.04195,
+   "dist_head": {
+    "1": 0.01275,
+    "2": 0.0143,
+    "3": 0.0149,
+    "4": 0.00985,
+    "5": 0.01575,
+    "6": 0.01965,
+    "7": 0.02385,
+    "8": 0.0272,
+    "9": 0.02835,
+    "10": 0.0271
+   }
+  },
+  {
+   "season": 2016,
+   "realized_slot": 3,
+   "interval_90": [
+    2,
+    29
+   ],
+   "inside": true,
+   "median_slot": 16.0,
+   "p_slot_leq_realized": 0.0896,
+   "p_top3": 0.0896,
+   "dist_head": {
+    "1": 0.03035,
+    "2": 0.0288,
+    "3": 0.03045,
+    "4": 0.02905,
+    "5": 0.0307,
+    "6": 0.0319,
+    "7": 0.0346,
+    "8": 0.03345,
+    "9": 0.0326,
+    "10": 0.02965
+   }
+  },
+  {
+   "season": 2017,
+   "realized_slot": 1,
+   "interval_90": [
+    2,
+    29
+   ],
+   "inside": false,
+   "median_slot": 16.0,
+   "p_slot_leq_realized": 0.0317,
+   "p_top3": 0.0978,
+   "dist_head": {
+    "1": 0.0317,
+    "2": 0.033,
+    "3": 0.0331,
+    "4": 0.03255,
+    "5": 0.0312,
+    "6": 0.03455,
+    "7": 0.0342,
+    "8": 0.035,
+    "9": 0.035,
+    "10": 0.0342
+   }
+  },
+  {
+   "season": 2018,
+   "realized_slot": 8,
+   "interval_90": [
+    2,
+    29
+   ],
+   "inside": true,
+   "median_slot": 15.0,
+   "p_slot_leq_realized": 0.27805,
+   "p_top3": 0.10865,
+   "dist_head": {
+    "1": 0.0375,
+    "2": 0.03595,
+    "3": 0.0352,
+    "4": 0.0329,
+    "5": 0.03385,
+    "6": 0.03275,
+    "7": 0.0346,
+    "8": 0.0353,
+    "9": 0.03405,
+    "10": 0.03395
+   }
+  }
+ ],
+ "replay_verdict": {
+  "slots_inside_90": "3/4",
+  "pass": false
+ },
+ "gate_85_status": {
+  "status": "PARTIAL",
+  "note": "gate is 2-of-3 replays (2013 primary, 2019 PG secondary, negative control); only the 2013 chain is built and run. The remaining two replays are open work, not waived.",
+  "primary_2013": "FAIL"
+ }
+}

@@ -1,0 +1,369 @@
+{
+ "worst_r_hat": 1.0027262269752766,
+ "min_ess_bulk": 2277.854262488017,
+ "n_rows": 5838,
+ "K": 8,
+ "tag": "full",
+ "interpretability": [
+  {
+   "factor": 0,
+   "anchor": "usg_pct",
+   "provisional_label": "scoring load",
+   "top_positive_features": [
+    [
+     "usg_pct",
+     1.0
+    ],
+    [
+     "pts36",
+     0.92
+    ],
+    [
+     "drives_per75",
+     0.59
+    ],
+    [
+     "pu_fg3a_per75",
+     0.55
+    ],
+    [
+     "ast_pct",
+     0.52
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "avg_speed",
+     -0.29
+    ],
+    [
+     "orb_pct",
+     -0.17
+    ],
+    [
+     "def_rim_fga_per75",
+     -0.15
+    ],
+    [
+     "reb_contest_rate",
+     -0.14
+    ],
+    [
+     "blk36",
+     -0.12
+    ]
+   ]
+  },
+  {
+   "factor": 1,
+   "anchor": "ts_pct",
+   "provisional_label": "scoring efficiency",
+   "top_positive_features": [
+    [
+     "ts_pct",
+     0.81
+    ],
+    [
+     "orb_pct",
+     0.38
+    ],
+    [
+     "def_rim_fga_per75",
+     0.38
+    ],
+    [
+     "off_rapm",
+     0.37
+    ],
+    [
+     "pts36",
+     0.37
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "potential_ast_per75",
+     -0.24
+    ],
+    [
+     "drives_per75",
+     -0.24
+    ],
+    [
+     "tov_ratio",
+     -0.22
+    ],
+    [
+     "ast_pct",
+     -0.17
+    ],
+    [
+     "stl36",
+     -0.15
+    ]
+   ]
+  },
+  {
+   "factor": 2,
+   "anchor": "fg3a_rate",
+   "provisional_label": "spacing",
+   "top_positive_features": [
+    [
+     "fg3a_rate",
+     0.98
+    ],
+    [
+     "cs_fg3a_per75",
+     0.9
+    ],
+    [
+     "pu_fg3a_per75",
+     0.45
+    ],
+    [
+     "def_rapm",
+     0.26
+    ],
+    [
+     "off_rapm",
+     0.18
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "orb_pct",
+     -0.64
+    ],
+    [
+     "ftr",
+     -0.52
+    ],
+    [
+     "drb_pct",
+     -0.47
+    ],
+    [
+     "reb_contest_rate",
+     -0.47
+    ],
+    [
+     "def_rim_fga_per75",
+     -0.45
+    ]
+   ]
+  },
+  {
+   "factor": 3,
+   "anchor": "ast_pct",
+   "provisional_label": "playmaking",
+   "top_positive_features": [
+    [
+     "ast36",
+     0.88
+    ],
+    [
+     "potential_ast_per75",
+     0.85
+    ],
+    [
+     "ast_pct",
+     0.83
+    ],
+    [
+     "drives_per75",
+     0.52
+    ],
+    [
+     "stl36",
+     0.3
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "reb_contest_rate",
+     -0.32
+    ],
+    [
+     "def_rim_fga_per75",
+     -0.26
+    ],
+    [
+     "cs_fg3a_per75",
+     -0.23
+    ],
+    [
+     "blk36",
+     -0.22
+    ],
+    [
+     "orb_pct",
+     -0.22
+    ]
+   ]
+  },
+  {
+   "factor": 4,
+   "anchor": "drives_per75",
+   "provisional_label": "rim pressure",
+   "top_positive_features": [
+    [
+     "drives_per75",
+     0.33
+    ],
+    [
+     "avg_speed",
+     0.28
+    ],
+    [
+     "def_rapm",
+     0.19
+    ],
+    [
+     "pu_fg3a_per75",
+     0.17
+    ],
+    [
+     "stl36",
+     0.17
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "def_rim_fga_per75",
+     -0.57
+    ],
+    [
+     "drb_pct",
+     -0.56
+    ],
+    [
+     "reb_contest_rate",
+     -0.52
+    ],
+    [
+     "orb_pct",
+     -0.44
+    ],
+    [
+     "blk36",
+     -0.38
+    ]
+   ]
+  },
+  {
+   "factor": 5,
+   "anchor": "drb_pct",
+   "provisional_label": "rebounding",
+   "top_positive_features": [
+    [
+     "stl36",
+     0.55
+    ],
+    [
+     "reb_contest_rate",
+     0.23
+    ],
+    [
+     "orb_pct",
+     0.22
+    ],
+    [
+     "drb_pct",
+     0.13
+    ],
+    [
+     "off_rapm",
+     0.13
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "def_rapm",
+     -0.36
+    ],
+    [
+     "cs_fg3a_per75",
+     -0.09
+    ]
+   ]
+  },
+  {
+   "factor": 6,
+   "anchor": "blk36",
+   "provisional_label": "rim protection",
+   "top_positive_features": [
+    [
+     "blk36",
+     0.48
+    ],
+    [
+     "def_rim_fga_per75",
+     0.29
+    ],
+    [
+     "tov_ratio",
+     0.13
+    ],
+    [
+     "stl36",
+     0.11
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "def_rapm",
+     -0.23
+    ],
+    [
+     "off_rapm",
+     -0.17
+    ],
+    [
+     "orb_pct",
+     -0.08
+    ],
+    [
+     "reb_contest_rate",
+     -0.06
+    ]
+   ]
+  },
+  {
+   "factor": 7,
+   "anchor": "def_rapm",
+   "provisional_label": "defensive impact",
+   "top_positive_features": [
+    [
+     "pu_fg3a_per75",
+     0.4
+    ],
+    [
+     "def_rapm",
+     0.16
+    ],
+    [
+     "ftr",
+     0.16
+    ],
+    [
+     "tov_ratio",
+     0.15
+    ]
+   ],
+   "top_negative_features": [
+    [
+     "cs_fg3a_per75",
+     -0.28
+    ],
+    [
+     "stl36",
+     -0.19
+    ],
+    [
+     "avg_speed",
+     -0.17
+    ]
+   ]
+  }
+ ]
+}

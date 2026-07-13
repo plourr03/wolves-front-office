@@ -1,0 +1,208 @@
+<div id="viz-edwards-hazard"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-edwards-hazard, #viz-edwards-hazard * { touch-action: manipulation; }
+  #viz-edwards-hazard .eh-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Annual departure hazard, Anthony Edwards, FINAL M2 model.
+  // Source: pick2033 outputs/json/edwards_hazard_FINAL.json (freeze 50f9b7bc5b19835b).
+  var central = [
+    {s:2027,m:0.0076,lo:0.004,hi:0.012},{s:2028,m:0.0734,lo:0.0478,hi:0.1034},
+    {s:2029,m:0.4402,lo:0.3491,hi:0.5333},{s:2030,m:0.0003,lo:0.0001,hi:0.0005},
+    {s:2031,m:0.0024,lo:0.001,hi:0.0043},{s:2032,m:0.02,lo:0.0101,hi:0.0322},
+    {s:2033,m:0.1437,lo:0.0896,hi:0.2049}
+  ];
+  var decline = [
+    {s:2027,m:0.0127,lo:0.0067,hi:0.0198},{s:2028,m:0.1163,lo:0.0773,hi:0.1607},
+    {s:2029,m:0.5649,lo:0.4709,hi:0.6563},{s:2030,m:0.0005,lo:0.0001,hi:0.0009},
+    {s:2031,m:0.004,lo:0.0016,hi:0.0071},{s:2032,m:0.0328,lo:0.0168,hi:0.0526},
+    {s:2033,m:0.217,lo:0.1416,hi:0.301}
+  ];
+
+  var root = d3.select("#viz-edwards-hazard");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 34, right: compact ? 40 : 58, bottom: 30, left: compact ? 34 : 44 };
+    var height = Math.max(260, Math.round(width * 0.52));
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scalePoint()
+      .domain(central.map(function (d) { return d.s; }))
+      .range([margin.left, width - margin.right]);
+    var yMax = 0.7;
+    var y = d3.scaleLinear().domain([0, yMax]).range([height - margin.bottom, margin.top]);
+
+    // Gridlines and axes.
+    var ticks = [0, 0.2, 0.4, 0.6];
+    svg.append("g").selectAll("line").data(ticks).join("line")
+      .attr("x1", margin.left).attr("x2", width - margin.right)
+      .attr("y1", y).attr("y2", y)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(ticks).join("text")
+      .attr("x", margin.left - 6).attr("y", function (d) { return y(d) + 4; })
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-sans)")
+      .text(function (d) { return Math.round(d * 100) + "%"; });
+    svg.append("g").selectAll("text").data(central).join("text")
+      .attr("x", function (d) { return x(d.s); })
+      .attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", function (d) {
+        return d.s === 2029 ? "var(--text-primary)" : "var(--text-secondary)";
+      })
+      .style("font", function (d) {
+        return (d.s === 2029 ? "600 " : "") + "12px var(--family-sans)";
+      })
+      .text(function (d) { return compact ? "'" + String(d.s).slice(2) : d.s; });
+
+    // Walk-year guide.
+    svg.append("line")
+      .attr("x1", x(2029)).attr("x2", x(2029))
+      .attr("y1", margin.top - 14).attr("y2", height - margin.bottom)
+      .style("stroke", "var(--border-default)").style("stroke-dasharray", "3,4");
+    svg.append("text")
+      .attr("x", x(2029)).attr("y", margin.top - 20).attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "600 12px var(--family-sans)")
+      .text("the walk year");
+
+    var lineGen = d3.line()
+      .x(function (d) { return x(d.s); })
+      .y(function (d) { return y(d.m); })
+      .curve(d3.curveMonotoneX);
+    var areaGen = d3.area()
+      .x(function (d) { return x(d.s); })
+      .y0(function (d) { return y(d.lo); })
+      .y1(function (d) { return y(d.hi); })
+      .curve(d3.curveMonotoneX);
+
+    // Central scenario: 80% band plus line.
+    svg.append("path").datum(central)
+      .attr("d", areaGen)
+      .style("fill", "var(--accent-subtle)");
+    var centralPath = svg.append("path").datum(central)
+      .attr("d", lineGen)
+      .style("fill", "none").style("stroke", "var(--accent-default)")
+      .style("stroke-width", 2.5);
+
+    // Decline scenario: dashed caution line, no band (tooltips carry its interval).
+    var declinePath = svg.append("path").datum(decline)
+      .attr("d", lineGen)
+      .style("fill", "none").style("stroke", "var(--status-warning)")
+      .style("stroke-width", 2).style("stroke-dasharray", "5,4");
+
+    if (!reduceMotion) {
+      [centralPath, declinePath].forEach(function (p, i) {
+        p.style("opacity", 0)
+          .transition().duration(700).delay(i * 150).ease(d3.easeCubicOut)
+          .style("opacity", 1);
+      });
+    }
+
+    // Dots with tooltips, both scenarios.
+    function dots(data, color, name) {
+      var g = svg.append("g").selectAll("circle").data(data).join("circle")
+        .attr("cx", function (d) { return x(d.s); })
+        .attr("cy", function (d) { return y(d.m); })
+        .attr("r", 4)
+        .style("fill", color).style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      g.append("title").text(function (d) {
+        return name + ", " + d.s + ": " + (d.m * 100).toFixed(1) +
+          "% (80% interval " + (d.lo * 100).toFixed(1) + " to " + (d.hi * 100).toFixed(1) + ")";
+      });
+      g.on("mouseenter", function () { d3.select(this).attr("r", 6); })
+        .on("mouseleave", function () { d3.select(this).attr("r", 4); });
+      if (!reduceMotion) {
+        g.transition().duration(500).delay(function (_, i) { return 300 + i * 60; })
+          .style("opacity", 1);
+      }
+    }
+    dots(central, "var(--accent-default)", "Wolves keep winning (.600)");
+    dots(decline, "var(--status-warning)", "Wolves sag (.450)");
+
+    // Peak labels at the cliff.
+    svg.append("text")
+      .attr("x", x(2029) + 8).attr("y", y(0.4402) + 4)
+      .style("fill", "var(--text-primary)").style("font", "600 13px var(--family-mono)")
+      .text("44%");
+    svg.append("text")
+      .attr("x", x(2029) + 8).attr("y", y(0.5649) + 4)
+      .style("fill", "var(--status-warning)").style("font", "600 13px var(--family-mono)")
+      .text("56%");
+
+    // Legend chips.
+    var legend = [
+      { t: compact ? ".600 team" : "Wolves keep winning (.600)", c: "var(--accent-default)", dash: false },
+      { t: compact ? ".450 team" : "Wolves sag (.450)", c: "var(--status-warning)", dash: true }
+    ];
+    var lg = svg.append("g");
+    var lx = margin.left;
+    legend.forEach(function (item) {
+      lg.append("line")
+        .attr("x1", lx).attr("x2", lx + 18)
+        .attr("y1", margin.top - 21).attr("y2", margin.top - 21)
+        .style("stroke", item.c).style("stroke-width", 2.5)
+        .style("stroke-dasharray", item.dash ? "5,4" : "none");
+      var label = lg.append("text")
+        .attr("x", lx + 24).attr("y", margin.top - 17)
+        .style("fill", "var(--text-secondary)").style("font", "12px var(--family-sans)")
+        .text(item.t);
+      lx += 24 + label.node().getComputedTextLength() + 20;
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "eh-caption")
+      .text("Annual departure hazard, 2027 to 2033, with an 80% interval on the central scenario. " +
+        "The near-zero seasons after 2029 are conditional on Edwards crossing the walk year and re-signing.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

@@ -1,0 +1,165 @@
+<div id="viz-cost-quadrants"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-cost-quadrants, #viz-cost-quadrants * { touch-action: manipulation; }
+  #viz-cost-quadrants .cq-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Mosaic of the four world-states: tile area equals probability, the
+  // number inside is the package's average payout to Charlotte there.
+  // Source: pick2033 outputs/json/swap_pricing_FINAL.json, total_per_path scenarios.
+  var P_DEPARTS = 0.573;
+  var cells = [
+    { col: 0, row: 0, p: 0.247, mean: 3.97, name: "Baseline",
+      desc: "Edwards stays, Hornets ordinary" },
+    { col: 0, row: 1, p: 0.180, mean: 4.24, name: "Hornets ascend",
+      desc: "Edwards stays, Hornets good" },
+    { col: 1, row: 0, p: 0.333, mean: 5.32, name: "The tenure bet goes bad",
+      desc: "Edwards leaves, Hornets ordinary" },
+    { col: 1, row: 1, p: 0.240, mean: 5.62, name: "The joint tail",
+      desc: "Edwards leaves, Hornets good" }
+  ];
+  // Fill scales with the payout: quiet green at 4.0 to warm red at 5.6.
+  var meanScale = d3.scaleLinear().domain([3.9, 5.7])
+    .range(["rgba(0,132,61,.20)", "rgba(255,92,92,.30)"]);
+
+  var root = d3.select("#viz-cost-quadrants");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 46, right: 12, bottom: 16, left: 12 };
+    var plotH = Math.max(240, Math.round(width * 0.46));
+    var height = margin.top + plotH + margin.bottom;
+    var gapPx = 4;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var plotW = width - margin.left - margin.right;
+    var colW = [plotW * (1 - P_DEPARTS), plotW * P_DEPARTS];
+    var colX = [margin.left, margin.left + colW[0]];
+
+    // Column headers: the Part 1 split.
+    svg.append("text")
+      .attr("x", colX[0] + colW[0] / 2).attr("y", margin.top - 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--accent-default)").style("font", "600 13px var(--family-sans)")
+      .text(compact ? "Edwards stays" : "Edwards still a Wolf in 2033");
+    svg.append("text")
+      .attr("x", colX[0] + colW[0] / 2).attr("y", margin.top - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-mono)")
+      .text("42.7%");
+    svg.append("text")
+      .attr("x", colX[1] + colW[1] / 2).attr("y", margin.top - 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--status-error)").style("font", "600 13px var(--family-sans)")
+      .text(compact ? "Edwards leaves" : "Edwards gone by 2033");
+    svg.append("text")
+      .attr("x", colX[1] + colW[1] / 2).attr("y", margin.top - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-mono)")
+      .text("57.3%");
+
+    // Tiles: within each column, row heights are the conditional shares,
+    // so every tile's area is its true probability.
+    var colP = [cells[0].p + cells[1].p, cells[2].p + cells[3].p];
+    cells.forEach(function (c, idx) {
+      var share = c.p / colP[c.col];
+      var yTop = margin.top + (c.row === 0 ? 0 : plotH * (cells[c.col === 0 ? 0 : 2].p / colP[c.col]));
+      var h = plotH * share - gapPx;
+      var xLeft = colX[c.col] + (c.col === 1 ? gapPx : 0);
+      var w = colW[c.col] - gapPx;
+
+      var tile = svg.append("rect")
+        .attr("x", xLeft).attr("y", yTop)
+        .attr("width", w).attr("height", Math.max(h, 10))
+        .attr("rx", 8)
+        .style("fill", meanScale(c.mean))
+        .style("stroke", "var(--border-subtle)")
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        tile.transition().duration(500).delay(idx * 120).ease(d3.easeCubicOut)
+          .style("opacity", 1);
+      }
+      tile.append("title").text(
+        c.name + " (" + c.desc + "): " + (c.p * 100).toFixed(1) +
+        "% of futures, average package payout " + c.mean.toFixed(2) + " wins");
+      tile.on("mouseenter", function () { d3.select(this).style("stroke", "var(--border-default)"); })
+        .on("mouseleave", function () { d3.select(this).style("stroke", "var(--border-subtle)"); });
+
+      var cx = xLeft + w / 2, cy = yTop + Math.max(h, 10) / 2;
+      svg.append("text")
+        .attr("x", cx).attr("y", cy - (compact ? 14 : 18)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)")
+        .style("font", "600 " + (compact ? "11px" : "12px") + " var(--family-sans)")
+        .style("pointer-events", "none")
+        .text(c.name);
+      svg.append("text")
+        .attr("x", cx).attr("y", cy + (compact ? 4 : 6)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-primary)")
+        .style("font", "600 " + (compact ? "17px" : "21px") + " var(--family-mono)")
+        .style("pointer-events", "none")
+        .text(c.mean.toFixed(1) + " wins");
+      svg.append("text")
+        .attr("x", cx).attr("y", cy + (compact ? 18 : 24)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", (compact ? "10px" : "11px") + " var(--family-sans)")
+        .style("pointer-events", "none")
+        .text((c.p * 100).toFixed(1) + "% of futures");
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "cq-caption")
+      .text("The four world-states of the trade. Tile area is the share of 50,000 futures; " +
+        "the number is the package's average payout to Charlotte there, in 4-year VORP. " +
+        "Every quadrant pays at least four wins. The bad ones just pay more.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>

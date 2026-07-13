@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 3, The Bill, viz preview harness</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+  body { margin:0; padding:32px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+  .harness-sep { max-width:720px; margin:36px auto; border:0; border-top:1px solid rgba(255,255,255,.1); }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness for Part 3, The Bill. The publishable artifacts are the *_fragment.html files; this file is generated, do not edit by hand.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='720px'})">720</button>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='480px'})">480</button>
+  <button onclick="document.querySelectorAll('.harness-stage').forEach(function(s){s.style.maxWidth='360px'})">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<div id="viz-swap-ledger"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-swap-ledger, #viz-swap-ledger * { touch-action: manipulation; }
+  #viz-swap-ledger .swl-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // What each instrument pays Charlotte, in 4-year VORP, 50,000 futures.
+  // Strips are 80% intervals (q10 to q90), dot is the mean, tick the median.
+  // Source: pick2033 outputs/json/swap_pricing_FINAL.json (top1_true, VORP).
+  var rows = [
+    { label: "2028 swap", sub: "exercised in 41.6%", lo: 0, q50: 0, hi: 2.19, mean: 0.66, total: false },
+    { label: "2029 swap", sub: "exercised in 12.3%", lo: 0, q50: 0, hi: 0, mean: 0.65, total: false,
+      note: "pays about 5.3 when it pays at all" },
+    { label: "2030 swap", sub: "exercised in 66.3%", lo: 0, q50: 0, hi: 4.55, mean: 1.32, total: false },
+    { label: "2033 first", sub: "conveys in 100%", lo: -1.38, q50: 0.8, hi: 8.08, mean: 2.24, total: false },
+    { label: "Total package", sub: "per-path sum", lo: -0.83, q50: 3.1, hi: 13.04, mean: 4.86, total: true }
+  ];
+
+  var root = d3.select("#viz-swap-ledger");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 78 : 62;
+    var margin = { top: 34, right: compact ? 46 : 56, bottom: 34, left: compact ? 8 : 128 };
+    var height = margin.top + margin.bottom + rows.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleLinear()
+      .domain([-2, 13.5])
+      .range([margin.left, width - margin.right]);
+
+    function rowMid(i) { return margin.top + i * rowH + (compact ? 44 : rowH / 2); }
+
+    // Zero line.
+    svg.append("line")
+      .attr("x1", x(0)).attr("x2", x(0))
+      .attr("y1", margin.top - 8).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-default)");
+    svg.append("text")
+      .attr("x", x(0)).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("0");
+
+    // X ticks.
+    var xTicks = [5, 10];
+    svg.append("g").selectAll("line").data(xTicks).join("line")
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", margin.top - 4).attr("y2", height - margin.bottom + 4)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", x).attr("y", margin.top - 14).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return "+" + d; });
+    svg.append("text")
+      .attr("x", (x(-2) + x(13.5)) / 2).attr("y", height - 8)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("wins above replacement, first four seasons of the pick (4-yr VORP)");
+
+    rows.forEach(function (d, i) {
+      var yMid = rowMid(i);
+      var color = d.total ? "var(--dataviz-2)" : "var(--accent-default)";
+
+      // Separator above the total row.
+      if (d.total) {
+        svg.append("line")
+          .attr("x1", compact ? 8 : 12).attr("x2", width - 12)
+          .attr("y1", margin.top + i * rowH + 2).attr("y2", margin.top + i * rowH + 2)
+          .style("stroke", "var(--border-subtle)");
+      }
+
+      // Row labels.
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 16 : yMid - 4)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", d.total ? "var(--text-primary)" : "var(--text-secondary)")
+        .style("font", (d.total ? "600 " : "") + "13px var(--family-sans)")
+        .text(d.label);
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 14)
+        .attr("y", compact ? margin.top + i * rowH + 30 : yMid + 12)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(d.sub);
+
+      // 80% interval strip. Degenerate intervals (the 2029 swap) draw as a
+      // minimal stub so the emptiness itself is visible.
+      var stripX0 = x(Math.min(d.lo, d.hi)), stripX1 = x(Math.max(d.lo, d.hi));
+      var strip = svg.append("rect")
+        .attr("x", stripX0).attr("y", yMid - 7)
+        .attr("height", 14).attr("rx", 7)
+        .style("fill", d.total ? "rgba(255,255,255,.14)" : "var(--accent-subtle)")
+        .style("cursor", "pointer")
+        .attr("width", reduceMotion ? Math.max(stripX1 - stripX0, 3) : 3);
+      if (!reduceMotion) {
+        strip.transition().duration(600).delay(i * 110).ease(d3.easeCubicOut)
+          .attr("width", Math.max(stripX1 - stripX0, 3));
+      }
+      strip.append("title").text(
+        d.label + ": mean " + d.mean.toFixed(2) + ", median " + d.q50.toFixed(1) +
+        ", 80% of futures between " + d.lo.toFixed(1) + " and " + d.hi.toFixed(1));
+
+      // Median tick.
+      svg.append("line")
+        .attr("x1", x(d.q50)).attr("x2", x(d.q50))
+        .attr("y1", yMid - 10).attr("y2", yMid + 10)
+        .style("stroke", "var(--text-secondary)").style("stroke-width", 1.5);
+
+      // Mean dot.
+      var dot = svg.append("circle")
+        .attr("cx", x(d.mean)).attr("cy", yMid).attr("r", d.total ? 7 : 5.5)
+        .style("fill", color).style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        dot.transition().duration(400).delay(i * 110 + 350).style("opacity", 1);
+      }
+      dot.append("title").text(d.label + ": mean " + d.mean.toFixed(2));
+      dot.on("mouseenter", function () { d3.select(this).attr("r", d.total ? 9 : 7.5); })
+        .on("mouseleave", function () { d3.select(this).attr("r", d.total ? 7 : 5.5); });
+
+      // Mean value label.
+      svg.append("text")
+        .attr("x", x(Math.max(d.hi, d.mean)) + 10).attr("y", yMid + 4)
+        .style("fill", d.total ? "var(--text-primary)" : "var(--text-secondary)")
+        .style("font", "600 13px var(--family-mono)")
+        .text(d.mean.toFixed(2));
+
+      // The 2029 story, written on the chart.
+      if (d.note) {
+        svg.append("text")
+          .attr("x", x(0.4) + (compact ? 30 : 46)).attr("y", yMid + 4)
+          .style("fill", "var(--status-warning)").style("font", "11px var(--family-sans)")
+          .text(compact ? "5.3 when it pays" : d.note);
+      }
+    });
+
+    // Legend for the marks.
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", margin.top - 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "strip: 80% | tick: median | dot: mean" : "strip: 80% of futures, tick: median, dot: mean");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "swl-caption")
+      .text("What each instrument pays Charlotte across 50,000 futures. The 2029 swap's " +
+        "strip is a stub on zero: even its 90th percentile pays nothing, and its whole " +
+        "value hides in the rare futures where Minnesota keeps a top-five pick.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-cost-quadrants"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-cost-quadrants, #viz-cost-quadrants * { touch-action: manipulation; }
+  #viz-cost-quadrants .cq-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // Mosaic of the four world-states: tile area equals probability, the
+  // number inside is the package's average payout to Charlotte there.
+  // Source: pick2033 outputs/json/swap_pricing_FINAL.json, total_per_path scenarios.
+  var P_DEPARTS = 0.573;
+  var cells = [
+    { col: 0, row: 0, p: 0.247, mean: 3.97, name: "Baseline",
+      desc: "Edwards stays, Hornets ordinary" },
+    { col: 0, row: 1, p: 0.180, mean: 4.24, name: "Hornets ascend",
+      desc: "Edwards stays, Hornets good" },
+    { col: 1, row: 0, p: 0.333, mean: 5.32, name: "The tenure bet goes bad",
+      desc: "Edwards leaves, Hornets ordinary" },
+    { col: 1, row: 1, p: 0.240, mean: 5.62, name: "The joint tail",
+      desc: "Edwards leaves, Hornets good" }
+  ];
+  // Fill scales with the payout: quiet green at 4.0 to warm red at 5.6.
+  var meanScale = d3.scaleLinear().domain([3.9, 5.7])
+    .range(["rgba(0,132,61,.20)", "rgba(255,92,92,.30)"]);
+
+  var root = d3.select("#viz-cost-quadrants");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var margin = { top: 46, right: 12, bottom: 16, left: 12 };
+    var plotH = Math.max(240, Math.round(width * 0.46));
+    var height = margin.top + plotH + margin.bottom;
+    var gapPx = 4;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var plotW = width - margin.left - margin.right;
+    var colW = [plotW * (1 - P_DEPARTS), plotW * P_DEPARTS];
+    var colX = [margin.left, margin.left + colW[0]];
+
+    // Column headers: the Part 1 split.
+    svg.append("text")
+      .attr("x", colX[0] + colW[0] / 2).attr("y", margin.top - 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--accent-default)").style("font", "600 13px var(--family-sans)")
+      .text(compact ? "Edwards stays" : "Edwards still a Wolf in 2033");
+    svg.append("text")
+      .attr("x", colX[0] + colW[0] / 2).attr("y", margin.top - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-mono)")
+      .text("42.7%");
+    svg.append("text")
+      .attr("x", colX[1] + colW[1] / 2).attr("y", margin.top - 26)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--status-error)").style("font", "600 13px var(--family-sans)")
+      .text(compact ? "Edwards leaves" : "Edwards gone by 2033");
+    svg.append("text")
+      .attr("x", colX[1] + colW[1] / 2).attr("y", margin.top - 10)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "12px var(--family-mono)")
+      .text("57.3%");
+
+    // Tiles: within each column, row heights are the conditional shares,
+    // so every tile's area is its true probability.
+    var colP = [cells[0].p + cells[1].p, cells[2].p + cells[3].p];
+    cells.forEach(function (c, idx) {
+      var share = c.p / colP[c.col];
+      var yTop = margin.top + (c.row === 0 ? 0 : plotH * (cells[c.col === 0 ? 0 : 2].p / colP[c.col]));
+      var h = plotH * share - gapPx;
+      var xLeft = colX[c.col] + (c.col === 1 ? gapPx : 0);
+      var w = colW[c.col] - gapPx;
+
+      var tile = svg.append("rect")
+        .attr("x", xLeft).attr("y", yTop)
+        .attr("width", w).attr("height", Math.max(h, 10))
+        .attr("rx", 8)
+        .style("fill", meanScale(c.mean))
+        .style("stroke", "var(--border-subtle)")
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        tile.transition().duration(500).delay(idx * 120).ease(d3.easeCubicOut)
+          .style("opacity", 1);
+      }
+      tile.append("title").text(
+        c.name + " (" + c.desc + "): " + (c.p * 100).toFixed(1) +
+        "% of futures, average package payout " + c.mean.toFixed(2) + " wins");
+      tile.on("mouseenter", function () { d3.select(this).style("stroke", "var(--border-default)"); })
+        .on("mouseleave", function () { d3.select(this).style("stroke", "var(--border-subtle)"); });
+
+      var cx = xLeft + w / 2, cy = yTop + Math.max(h, 10) / 2;
+      svg.append("text")
+        .attr("x", cx).attr("y", cy - (compact ? 14 : 18)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-secondary)")
+        .style("font", "600 " + (compact ? "11px" : "12px") + " var(--family-sans)")
+        .style("pointer-events", "none")
+        .text(c.name);
+      svg.append("text")
+        .attr("x", cx).attr("y", cy + (compact ? 4 : 6)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-primary)")
+        .style("font", "600 " + (compact ? "17px" : "21px") + " var(--family-mono)")
+        .style("pointer-events", "none")
+        .text(c.mean.toFixed(1) + " wins");
+      svg.append("text")
+        .attr("x", cx).attr("y", cy + (compact ? 18 : 24)).attr("text-anchor", "middle")
+        .style("fill", "var(--text-tertiary)")
+        .style("font", (compact ? "10px" : "11px") + " var(--family-sans)")
+        .style("pointer-events", "none")
+        .text((c.p * 100).toFixed(1) + "% of futures");
+    });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "cq-caption")
+      .text("The four world-states of the trade. Tile area is the share of 50,000 futures; " +
+        "the number is the package's average payout to Charlotte there, in 4-year VORP. " +
+        "Every quadrant pays at least four wins. The bad ones just pay more.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-replay-2013"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-replay-2013, #viz-replay-2013 * { touch-action: manipulation; }
+  #viz-replay-2013 .rp-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // The 2013 Celtics-Nets replay: simulated 90% intervals for Brooklyn's
+  // pick slots (as-of-2013 model) vs what reality delivered to Boston.
+  // Source: pick2033 outputs/json/replay_nets_2013_FINAL.json.
+  var data = [
+    { year: "2014", who: "became James Young", lo: 4, hi: 28, med: 18, real: 17, inside: true },
+    { year: "2016", who: "became Jaylen Brown", lo: 2, hi: 29, med: 16, real: 3, inside: true },
+    { year: "2017 swap", who: "became the Tatum pick", lo: 2, hi: 29, med: 16, real: 1, inside: false },
+    { year: "2018", who: "became Collin Sexton", lo: 2, hi: 29, med: 15, real: 8, inside: true }
+  ];
+
+  var root = d3.select("#viz-replay-2013");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 84 : 66;
+    var margin = { top: 34, right: 16, bottom: 36, left: compact ? 8 : 118 };
+    var height = margin.top + margin.bottom + data.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    // Slot 1 on the left (best pick), 30 on the right.
+    var x = d3.scaleLinear().domain([0.5, 30.5])
+      .range([margin.left, width - margin.right]);
+
+    var xTicks = [1, 5, 10, 15, 20, 25, 30];
+    svg.append("g").selectAll("line").data(xTicks).join("line")
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", margin.top - 6).attr("y2", height - margin.bottom + 2)
+      .style("stroke", "var(--border-subtle)");
+    svg.append("g").selectAll("text").data(xTicks).join("text")
+      .attr("x", x).attr("y", height - margin.bottom + 18)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-secondary)").style("font", "11px var(--family-sans)")
+      .text(function (d) { return d; });
+    svg.append("text")
+      .attr("x", (margin.left + width - margin.right) / 2).attr("y", height - 6)
+      .attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("draft slot Brooklyn's pick landed on (1 = best)");
+
+    data.forEach(function (d, i) {
+      var yMid = margin.top + i * rowH + (compact ? 46 : rowH / 2);
+
+      // Row labels.
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 12)
+        .attr("y", compact ? margin.top + i * rowH + 16 : yMid - 4)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-secondary)").style("font", "600 13px var(--family-sans)")
+        .text(d.year);
+      svg.append("text")
+        .attr("x", compact ? 8 : margin.left - 12)
+        .attr("y", compact ? margin.top + i * rowH + 30 : yMid + 12)
+        .attr("text-anchor", compact ? "start" : "end")
+        .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+        .text(d.who);
+
+      // 90% interval strip.
+      var strip = svg.append("rect")
+        .attr("x", x(d.lo) - 0).attr("y", yMid - 7)
+        .attr("height", 14).attr("rx", 7)
+        .style("fill", "rgba(255,255,255,.10)")
+        .style("cursor", "pointer")
+        .attr("width", reduceMotion ? x(d.hi) - x(d.lo) : 2);
+      if (!reduceMotion) {
+        strip.transition().duration(600).delay(i * 120).ease(d3.easeCubicOut)
+          .attr("width", x(d.hi) - x(d.lo));
+      }
+      strip.append("title").text(
+        d.year + ": simulated 90% interval slots " + d.lo + " to " + d.hi +
+        ", median " + d.med + "; reality delivered " + d.real);
+
+      // Median tick.
+      svg.append("line")
+        .attr("x1", x(d.med)).attr("x2", x(d.med))
+        .attr("y1", yMid - 10).attr("y2", yMid + 10)
+        .style("stroke", "var(--text-tertiary)").style("stroke-width", 1.5);
+
+      // Realized outcome.
+      var dot = svg.append("circle")
+        .attr("cx", x(d.real)).attr("cy", yMid).attr("r", 7)
+        .style("fill", d.inside ? "var(--accent-default)" : "var(--status-error)")
+        .style("stroke", "var(--bg-inset)").style("stroke-width", 1.5)
+        .style("cursor", "pointer")
+        .style("opacity", reduceMotion ? 1 : 0);
+      if (!reduceMotion) {
+        dot.transition().duration(400).delay(i * 120 + 400).style("opacity", 1);
+      }
+      dot.append("title").text(
+        d.year + ": reality delivered slot " + d.real +
+        (d.inside ? " (inside the 90% interval)" : " (OUTSIDE the 90% interval)"));
+      svg.append("text")
+        .attr("x", x(d.real)).attr("y", yMid - 13).attr("text-anchor", "middle")
+        .style("fill", d.inside ? "var(--text-primary)" : "var(--status-error)")
+        .style("font", "600 12px var(--family-mono)")
+        .text("#" + d.real);
+      if (!d.inside) {
+        svg.append("text")
+          .attr("x", x(d.real)).attr("y", yMid + 26).attr("text-anchor", "start")
+          .style("fill", "var(--status-error)").style("font", "11px var(--family-sans)")
+          .text(compact ? "outside, P .03" : "outside the interval: a 3-in-100 event");
+      }
+    });
+
+    // Legend.
+    svg.append("text")
+      .attr("x", width - margin.right).attr("y", margin.top - 14)
+      .attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text(compact ? "strip: 90% | tick: median | dot: reality" :
+        "strip: simulated 90% interval, tick: median, dot: what reality delivered");
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "rp-caption")
+      .text("The machine, knowing only the summer of 2013, against the four picks Brooklyn " +
+        "delivered to Boston. Three land inside the intervals. The 2017 swap, the pick that " +
+        "became Jayson Tatum, lands outside: reality was harsher than the model's tails.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+<div class="harness-stage">
+<div id="viz-tornado"></div>
+<style>
+  /* Force vertical scroll/swipe to pass through every descendant. */
+  #viz-tornado, #viz-tornado * { touch-action: manipulation; }
+  #viz-tornado .tn-caption {
+    max-width: 640px; margin: 10px auto 0;
+    font: 12px var(--family-sans); color: var(--text-tertiary);
+  }
+</style>
+<script>
+(function () {
+  // S7 tornado: delta on the total package bill (4-yr VORP) per pre-declared
+  // arm, CRN-paired against a same-seed 20k base (total 4.77).
+  // Source: pick2033 outputs/json/tornado_FINAL.json.
+  var BASE = 4.77;
+  var data = [
+    { label: "Star departure odds halved", short: "Hazard 0.5x", d: -0.52 },
+    { label: "Star departure odds 1.5x", short: "Hazard 1.5x", d: 0.45 },
+    { label: "LaMelo signs the extension", short: "LaMelo extends", d: -0.41 },
+    { label: "Roster trust fades faster", short: "Blend faster", d: 0.29 },
+    { label: "No swap on a #1 pick in 2030", short: "2030 top-1 flag", d: -0.16 },
+    { label: "Roster trust fades slower", short: "Blend slower", d: -0.13 },
+    { label: "One shared franchise DNA (pooled)", short: "Pooled DNA", d: -0.06 },
+    { label: "Faster mean reversion (phi p10)", short: "phi p10", d: 0.06 },
+    { label: "Contract labels split at midpoints", short: "S-CONTRACT", d: -0.04 },
+    { label: "Stickier trajectories (phi p90)", short: "phi p90", d: -0.03 },
+    { label: "Charlotte lineage starts 2005", short: "CHA lineage", d: 0.03 },
+    { label: "Play-in as a coin flip", short: "Play-in crude", d: 0.02 },
+    { label: "Milder shock years (p10)", short: "Shock p10", d: 0.01 },
+    { label: "Wilder shock years (p90)", short: "Shock p90", d: 0.0 }
+  ];
+
+  var root = d3.select("#viz-tornado");
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.parent !== window) {
+    root.node().addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.metaKey) return;
+      try { window.parent.scrollBy(e.deltaX, e.deltaY); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: e.deltaX, deltaY: e.deltaY }, "*");
+      }
+    }, { passive: true });
+    var lastTouchY = null;
+    root.node().addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+    root.node().addEventListener("touchmove", function (e) {
+      if (e.touches.length !== 1 || lastTouchY === null) return;
+      var y = e.touches[0].clientY, dy = lastTouchY - y;
+      lastTouchY = y;
+      try { window.parent.scrollBy(0, dy); }
+      catch (err) {
+        window.parent.postMessage({ type: "viz-scroll", deltaX: 0, deltaY: dy }, "*");
+      }
+    }, { passive: true });
+  }
+
+  function render() {
+    root.selectAll("*").remove();
+
+    var raw = root.node().clientWidth || 640;
+    var width = Math.max(320, Math.min(960, raw));
+    var compact = width < 480;
+    var rowH = compact ? 46 : 34;
+    var barH = compact ? 12 : 16;
+    var margin = { top: 42, right: compact ? 44 : 54, bottom: 26, left: compact ? 8 : 224 };
+    var height = margin.top + margin.bottom + data.length * rowH;
+
+    var svg = root.append("svg")
+      .attr("width", width).attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .style("display", "block").style("max-width", "100%").style("margin", "0 auto");
+
+    var x = d3.scaleLinear()
+      .domain([-0.62, 0.55])
+      .range([margin.left, width - margin.right]);
+
+    function rowTop(i) { return margin.top + i * rowH; }
+    var barOffset = compact ? 22 : (rowH - barH) / 2;
+
+    // Direction headers.
+    svg.append("text")
+      .attr("x", x(0) - 8).attr("y", margin.top - 24).attr("text-anchor", "end")
+      .style("fill", "var(--accent-default)").style("font", "600 12px var(--family-sans)")
+      .text(compact ? "bill shrinks" : "the bill shrinks");
+    svg.append("text")
+      .attr("x", x(0) + 8).attr("y", margin.top - 24)
+      .style("fill", "var(--status-error)").style("font", "600 12px var(--family-sans)")
+      .text(compact ? "bill grows" : "the bill grows");
+    svg.append("text")
+      .attr("x", x(0)).attr("y", margin.top - 10).attr("text-anchor", "middle")
+      .style("fill", "var(--text-tertiary)").style("font", "11px var(--family-sans)")
+      .text("base: " + BASE.toFixed(2) + " wins");
+
+    // Zero axis.
+    svg.append("line")
+      .attr("x1", x(0)).attr("x2", x(0))
+      .attr("y1", margin.top - 6).attr("y2", height - margin.bottom + 2)
+      .style("stroke", "var(--border-default)");
+
+    // Labels.
+    svg.append("g").selectAll("text").data(data).join("text")
+      .attr("x", compact ? margin.left : margin.left - 12)
+      .attr("y", function (d, i) { return rowTop(i) + (compact ? 12 : rowH / 2); })
+      .attr("dy", compact ? "0" : "0.35em")
+      .attr("text-anchor", compact ? "start" : "end")
+      .style("fill", "var(--text-secondary)").style("font", "13px var(--family-sans)")
+      .text(function (d) { return compact ? d.short : d.label; });
+
+    // Bars.
+    var bars = svg.append("g").selectAll("rect").data(data).join("rect")
+      .attr("y", function (d, i) { return rowTop(i) + barOffset; })
+      .attr("height", barH).attr("rx", 3)
+      .style("fill", function (d) {
+        return d.d < 0 ? "var(--accent-default)" : "var(--status-error)";
+      })
+      .style("cursor", "pointer")
+      .attr("x", x(0)).attr("width", 0);
+    var grow = function (sel) {
+      sel.attr("x", function (d) { return Math.min(x(0), x(d.d)); })
+        .attr("width", function (d) { return Math.max(Math.abs(x(d.d) - x(0)), 2); });
+    };
+    if (reduceMotion) { grow(bars); }
+    else {
+      grow(bars.transition().duration(600)
+        .delay(function (_, i) { return i * 50; }).ease(d3.easeCubicOut));
+    }
+    bars.append("title").text(function (d) {
+      return d.label + ": total " + (BASE + d.d).toFixed(2) + " wins (" +
+        (d.d >= 0 ? "+" : "") + d.d.toFixed(2) + " vs base)";
+    });
+    bars.on("mouseenter", function (e, d) {
+      d3.select(this).style("fill", d.d < 0 ? "var(--accent-hover)" : "#FF7A7A");
+    }).on("mouseleave", function (e, d) {
+      d3.select(this).style("fill", d.d < 0 ? "var(--accent-default)" : "var(--status-error)");
+    });
+
+    // Value labels.
+    svg.append("g").selectAll("text").data(data).join("text")
+      .attr("x", function (d) { return d.d < 0 ? x(d.d) - 8 : x(Math.max(d.d, 0)) + 8; })
+      .attr("y", function (d, i) { return rowTop(i) + barOffset + barH / 2; })
+      .attr("dy", "0.35em")
+      .attr("text-anchor", function (d) { return d.d < 0 ? "end" : "start"; })
+      .style("fill", "var(--text-primary)").style("font", "600 12px var(--family-mono)")
+      .text(function (d) { return (d.d >= 0 ? "+" : "") + d.d.toFixed(2); });
+
+    // Watermark + date stamp. Travels with the chart in screenshots.
+    svg.append("text")
+      .attr("x", width - 6).attr("y", height - 6).attr("text-anchor", "end")
+      .style("fill", "var(--text-tertiary)").style("font", "9px var(--family-sans)")
+      .style("opacity", 0.55).style("pointer-events", "none")
+      .text("@WolvesToaT · Jul 2026");
+
+    root.append("div").attr("class", "tn-caption")
+      .text("Fourteen pre-declared stress tests of the total bill, each a full re-run, " +
+        "paired on identical random paths. The win-shares currency arm is reported in " +
+        "the data file (different units, same shape). Nothing flips: the bill stays " +
+        "between 4.3 and 5.2 wins in every arm.");
+  }
+
+  render();
+  if (window.ResizeObserver) { new ResizeObserver(render).observe(root.node()); }
+})();
+</script>
+
+</div>
+<hr class="harness-sep">
+</body>
+</html>

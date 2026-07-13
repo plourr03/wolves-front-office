@@ -1329,3 +1329,183 @@ HOUSE STANDARD addition (Bobby): match the probe length to the QUANTITY
 being measured, not to a fixed idea of cheap. Leapfrog count shows up in 250
 steps; mixing does not. A cheap probe that answers the wrong question is
 worse than a slow probe that answers the right one.
+
+## 2026-07-05 — PATH A DISAMBIGUATION: IT MIXES. Multimodality REJECTED; triangular+dense is the answer
+
+Disambiguating probe (triangular model + DENSE mass, depth-10 uncapped,
+1000 warmup, 2 chains x 300 samples):
+  PATHA_DISAMBIG: mean_leapfrog 159.4 | median 191 | max 255 |
+                  frac_at_cap(1023) 0% | worst_Rhat 1.056 | min_ESS 39 | 16637s
+DECISIVE. Contrast the three prior short probes (all 63/63 saturating at
+depth 6, R-hat ~2.0-2.25, ESS 3):
+- Leapfrog: 0% at the depth-10 cap (max 255 << 1023). NUTS finds U-turns now
+  instead of always hitting the wall. Dense mass on the DE-RIDGED (triangular)
+  model was the missing piece -- it targets ordinary linear correlation for
+  the first time, which is exactly its job; it only failed pre-B because a
+  flat rotation ridge is unpreconditionable, and Path B removed that ridge.
+- R-hat 1.056 (< 1.1) after REAL warmup: THE CHAINS MIX. The earlier R-hat ~2
+  was UNDER-EXPLORATION (short warmup vs saturated trajectories), NOT
+  multimodality. Bobby's correction was right; the multimodality "finding" is
+  formally REJECTED.
+Caveat: min_ESS 39 on 300 samples = modest per-sample efficiency (~13%); the
+full fit needs a long sample run to clear ESS>400. A duration matter, not a
+mixing failure.
+
+UNBLOCKED. Launching the full fit (triangular + dense + real warmup, 2 chains,
+1500 warmup / 3000 samples for ESS headroom) offline toward the freeze; on
+health PASS (R-hat<1.01, ESS>400) vectors freeze + interpretability. K frozen
+at 8. This is the config that works; nothing structural changes.
+
+## 2026-07-06 — LAYER 1B DONE: skill_vectors FROZEN (health PASS), 8-factor coherence read for Bobby's naming call
+
+The full fit (triangular + dense mass + real warmup, 2 chains, 1500 warmup /
+3000 samples) COMPLETED and cleared both health gates with margin:
+  HEALTH: worst R-hat 1.0027 (gate < 1.01) | min ESS-bulk 2278 (gate > 400)
+Both pass comfortably. The R-hat is essentially 1.0 (the chains are
+indistinguishable) and ESS 2278 is ~5.7x the floor, so the posterior is well
+mixed and well sampled. Multimodality stays formally REJECTED; the
+triangular+dense config was the answer, exactly as the disambiguation probe
+predicted. Nothing structural changed between probe and fit; only the sample
+count grew (300 -> 3000) to buy the ESS headroom, which it did.
+
+ARTIFACT (frozen, committed d50c4928):
+- outputs/skill_vectors/skill_vectors_full.parquet: 5,838 player-seasons x
+  K=8 posterior-mean skill scores (z_mean) + player_id / season / name.
+- skill_vectors_full_samples.npy: the full posterior, 5,838 x 200 draws x 8,
+  for Project 2 to propagate skill uncertainty (not just point estimates).
+- loadings_full.parquet (W, 21 features x 8 factors), interpretability_full.json
+  (per-factor top +/- loadings and high/low exemplar player-seasons),
+  health_full.json, skill_vectors_full.meta.json.
+- Raw MCMC sample checkpoint (samples_*.npz) is gitignored (37MB, resumable).
+
+POPULATION VERIFICATION (blocking gate) PASSED before freeze: all 167 dev +
+127 sealed backtest incoming players (top-100-min filter) have a fitted
+prior-season vector, and both named query targets (Edwards id 1630162, LaMelo
+id 1630163) are in the fitted population. Zero query/backtest players fall to
+an archetype prior. Recorded separately; re-confirmed at freeze.
+
+RECOVERY NOTE (recorded so it is not repeated): the FIRST full fit passed the
+same gates but its export crashed on KeyError 'player_name' (player_features
+never carried the name column) AND the samples were in-memory only, so a ~14h
+fit was lost. Fixes landed before the re-run (commit 2dfb8782): sample
+checkpointing in fit() (persist to .npz + health.json IMMEDIATELY after
+mcmc.run, resume-from-checkpoint on restart), player_name fetched from the
+warehouse at export, exemplar label fixed, and the full export path dry-run
+verified end to end with synthetic samples before committing real compute.
+The re-run then froze cleanly.
+
+### 8-FACTOR COHERENCE READ (naming-readiness, for Bobby's editorial call)
+
+Method: one agent per factor judged nameable-skill vs statistical-smear from
+the loadings AND the exemplars (not loadings alone), then flagged whether the
+factor's identity drifted off its assigned leader feature. K STAYS FROZEN at
+8; this is interpretation, not re-selection. The provisional labels are the
+leader-feature guesses; the honest names are what the data actually shows.
+
+| # | Provisional label  | Honest name (data-driven)                                   | Coherent | Drifted | Conf |
+|---|--------------------|-------------------------------------------------------------|----------|---------|------|
+| 0 | scoring load       | Primary offensive engine (high-usage on-ball creation load) | Yes      | No      | High |
+| 1 | scoring efficiency | Low-usage rim-finishing efficiency (interior bigs)          | Yes      | No      | High |
+| 2 | spacing            | Floor spacing / three-point shooting volume                 | Yes      | No      | High |
+| 3 | playmaking         | On-ball playmaking (pass-first assist creation)             | Yes      | No      | High |
+| 4 | rim pressure       | Perimeter guard vs interior big (small-ball speed vs rim)   | Yes      | YES     | High |
+| 5 | rebounding         | Perimeter disruption / steals + deflections (event defense) | Yes      | YES     | High |
+| 6 | rim protection     | Shot-blocking / block rate (swats, not defensive value)     | Yes      | No      | High |
+| 7 | defensive impact   | Pull-up three-point shot creation (on-ball self-creation)   | Yes      | YES     | High |
+
+Three buckets:
+
+- CLEAN, name as-is (0, 2, 3): the leader carries the top loading, the high
+  exemplars are the textbook archetype and the low exemplars its exact
+  inverse, and the honest name only sharpens the provisional label. Flagship
+  ready. F0 high: Westbrook 16-17, Harden 18-19, Embiid, Luka, Giannis. F2
+  high: Merrill, Bertans, Hauser (pure shooters). F3 high: Rondo, McConnell,
+  Haliburton (pass-first guards).
+
+- REAL but MISLABELED, keep the leader / narrow the label (1, 6): no drift
+  (the leader still owns the axis), but the provisional label over-claims.
+  "Scoring efficiency" is really low-usage RIM-finishing efficiency (the top
+  is unanimously rim-running centers: Bruno Fernando, Gafford, and yes Joan
+  Beringer 25-26, not efficient wings/stars). "Rim protection" is really raw
+  BLOCK PRODUCTION not defensive value (Pelle/Anthony/Boucher rack up swats
+  with weak team-D; def_rapm even loads slightly negative). Nameable, but the
+  label must narrow or it misleads.
+
+- DRIFTED, rename to the honest name (4, 5, 7): coherent real dimensions whose
+  LEADER IS WRONG. A free feature owns each axis and the exemplars flatly
+  contradict the provisional label:
+  * F4 "rim pressure": leader drives_per75 loads only +0.33; the -0.5x
+    rebounding/rim-protection cluster owns it. It is a guard-vs-center size
+    axis. Jokic scores LOWEST (he anchors the paint); Markus Howard / Shannon
+    Brown score high (small, fast, no interior work). Not rim pressure.
+  * F5 "rebounding": leader drb_pct barely loads (+0.13); stl +0.55 dominates
+    (2x anything else), def_rapm -0.36 second. The top is Thybulle, Covington,
+    Reed (steals/deflections wings), not rebounders. It is perimeter
+    disruption / event defense.
+  * F7 "defensive impact": leader def_rapm loads only +0.16; pullup3PA +0.40
+    dominates (~2.5x). The top is Harden, Luka, Lillard (pull-up bombers, zero
+    defensive character); the bottom is catch-and-shoot stretch bigs. It is
+    off-the-dribble shot creation, the OPPOSITE of defense.
+
+No smears: all eight poles are internally consistent; none should be withheld
+for incoherence.
+
+LOAD-BEARING FINDING for v2 (not a change now, K is frozen): the triangular
+leader ordering does NOT guarantee a factor equals its leader. In 3 of 8 cases
+a free feature hijacked the axis, and every drift was caught ONLY by the
+exemplars, not the loadings. The pattern is systematic: all three drifts are
+the defense/hustle factors (leaders drives, drb%, def_rapm all underperform).
+Recommend revisiting the leader-feature assignment for the defensive block in
+any future refit. Logged; no action taken against the frozen K=8 vectors.
+
+NAMING CALL IS BOBBY'S. Vectors are frozen and shippable as-is regardless of
+labels (Project 2 consumes the numeric vectors, not the names). The names are
+an editorial/interpretability layer: 3 clean as-is, 2 nameable with a narrowed
+label, 3 needing a rename to what they actually measure.
+
+## 2026-07-06 — FACTOR NAMES FROZEN (Bobby's editorial call) + drift is a finding, not a label fix
+
+Bobby's ruling (verbatim), frozen into the interpretability export (name field;
+the honest data-driven reads ship, NOT the aspirational anchor labels):
+
+  z0 offensive engine       [as proposed]
+  z1 interior finishing     [sharpened from "rim-finishing efficiency"]
+  z2 spacing                [as proposed]
+  z3 playmaking             [as proposed]
+  z4 perimeter quickness    [size axis; honest about Jokic-low]
+  z5 perimeter disruption   [as proposed; steals/deflections]
+  z6 shot-blocking          [block RATE, not defensive value; footnote def_rapm ~0/neg]
+  z7 pull-up shooting       [sharpened from "shot creation"; NOT defense]
+
+  "Freeze these; leave the honest data-driven reads in the export, not the
+  aspirational originals."
+  "LOG: the three defensive/hustle drifts are a real finding, not just a
+  labeling fix. Flagship honesty section notes offensive fit is sharply
+  identified and defensive fit is softer at public-data resolution, which is
+  the clean motivation for Project 6. v2 defensive-leader reassignment logged."
+
+Implemented: FROZEN_FACTOR_NAMES + FACTOR_DRIFT + FACTOR_HONEST_READ +
+FACTOR_FOOTNOTE in src/models/skill_factors.py; the export builder now writes
+name / leader_feature / provisional_label / drift_from_leader / honest_read
+(+ footnote on z6) per factor. Code names reconcile 1:1 with the already-frozen
+outputs/skill_vectors/interpretability_full.json (verified). A regenerate
+reproduces the frozen names; K stays 8, vectors unchanged.
+
+FINDING (logged, load-bearing): the three drifts (z4/z5/z7) are all
+defensive/hustle factors, and in each the assigned leader (drives_per75,
+drb_pct, def_rapm) was outloaded by a free feature and contradicted by the
+exemplars. The offensive factors (z0-z3) are sharply identified: leader owns
+the axis, exemplars are the textbook archetype. The defensive side is softer at
+PUBLIC-DATA resolution: box/tracking/RAPM cannot cleanly separate rim
+protection, event defense, and team-defense value, so those axes reorganize
+around whatever public signal is strongest (blocks, steals, size). This is not
+a modeling bug to patch on the frozen K=8; it is a real limit of the input
+resolution, and it is the clean, honest motivation for PROJECT 6 (richer
+defensive measurement). The flagship writeup's honesty section states exactly
+that asymmetry (offense sharply identified, defense softer) rather than
+papering the drifted labels.
+
+V2 (future refit, NOT now): revisit the defensive-leader feature assignment
+(the first-8 triangular scaffolding) for the defensive block. Candidates: let
+the defensive factors be leader-free, or choose leaders that actually own their
+axis at public-data resolution. Logged; no action against the frozen vectors.

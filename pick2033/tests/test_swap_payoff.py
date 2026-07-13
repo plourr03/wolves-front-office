@@ -73,9 +73,17 @@ def test_2033_outright_conveyance():
     assert (out.cha_slot_final == arr(5, 30)).all()      # CHA's own, held alongside
 
 
-def test_pricing_hard_gate():
+def test_pricing_hard_gate(monkeypatch):
+    # Tests the gate MECHANISM under both flag states, independent of the live
+    # config (verified_post_july6 flipped true 2026-07-12 when terms verified).
+    from src.sim import pick_ledger
+    monkeypatch.setattr(pick_ledger, "load_trade_terms",
+                        lambda: {"verified_post_july6": False})
     with pytest.raises(RuntimeError, match="verified_post_july6"):
         require_verified_terms()
+    monkeypatch.setattr(pick_ledger, "load_trade_terms",
+                        lambda: {"verified_post_july6": True})
+    require_verified_terms()
 
 
 def test_e2_machinery_on_synthetic_slots():
@@ -101,7 +109,10 @@ def test_e2_machinery_on_synthetic_slots():
     assert abs(sum(probs) - 1.0) < 1e-9
 
 
-def test_priced_run_hard_gate():
+def test_priced_run_hard_gate(monkeypatch):
+    from src.sim import pick_ledger
     from src.sim.swap_pricing import price_all
+    monkeypatch.setattr(pick_ledger, "load_trade_terms",
+                        lambda: {"verified_post_july6": False})
     with pytest.raises(RuntimeError, match="verified_post_july6"):
         price_all(None, None, None, None, None, 0)

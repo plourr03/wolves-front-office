@@ -82,6 +82,34 @@ ANCHOR_LABELS = {
     6: "rim protection", 7: "defensive impact",
 }
 
+# FROZEN factor names (Bobby's editorial call, 2026-07-06), replacing the
+# provisional anchor labels in the shipped export. Three factors (4, 5, 7)
+# drifted off their assigned leader: a free feature owns the axis, caught only
+# by the exemplars. The honest data-driven reads (not the aspirational anchor
+# labels) ship in the export. See decisions.md 2026-07-06. drift_from_leader
+# marks the three defensive/hustle factors whose identity moved; a v2
+# defensive-leader reassignment is logged for a future refit (K stays 8).
+FROZEN_FACTOR_NAMES = {
+    0: "offensive engine",     1: "interior finishing",   2: "spacing",
+    3: "playmaking",           4: "perimeter quickness",  5: "perimeter disruption",
+    6: "shot-blocking",        7: "pull-up shooting",
+}
+FACTOR_DRIFT = {0: False, 1: False, 2: False, 3: False,
+                4: True, 5: True, 6: False, 7: True}
+FACTOR_HONEST_READ = {
+    0: "High-usage on-ball creation load. usg (+1.00), scoring volume, drives, pull-up 3s, playmaking gravity. High: Westbrook, Harden, Embiid, Luka, Giannis. Leader owns the axis.",
+    1: "Low-usage rim-finishing efficiency, NOT general scoring efficiency. ts% (+0.81) flanked by center markers (orb%, def_rim_fga). High end is unanimously rim-running / putback centers (Gafford, Bruno Fernando, Beringer 25-26), not efficient wings or stars.",
+    2: "Three-point shooting volume / floor spacing. fg3a_rate (+0.98) and catch-shoot 3PA (+0.90) dominate. High: Merrill, Bertans, Hauser. Low: non-shooting interior bigs.",
+    3: "On-ball, pass-first assist creation. ast36 / potential_ast / ast% cluster (+0.83 to +0.88). High: Rondo, McConnell, Haliburton. Skewed toward pass-first accumulator guards.",
+    4: "Guard-vs-big size axis, NOT rim pressure. Owned by the negative interior pole (def_rim_fga, drb%, reb_contest, orb%, blk all -0.4 to -0.6); leader drives_per75 only +0.33. High: small/fast perimeter players (M. Howard, S. Brown, SGA). Low: rim-anchoring bigs (Jokic scores lowest). Measures backcourt smallness via absence of interior work.",
+    5: "Steals and deflections / event defense, NOT rebounding. stl (+0.55) dominates (2x anything else), def_rapm (-0.36) second; leader drb_pct only +0.13. High: Thybulle, Covington, Reed. Low: stationary offense-first shooters.",
+    6: "Block RATE / raw swat production, narrower than defensive value. blk36 (+0.48) leads, def_rim_fga (+0.29) reinforces. High: Turner, Wembanyama, Boucher, Pelle, Anthony.",
+    7: "Off-the-dribble / pull-up shot creation, NOT defense. pull-up 3PA (+0.40) dominates (~2.5x leader def_rapm +0.16); catch-shoot 3PA (-0.28) is the negative pole. High: Harden, Luka, Lillard (offensive engines, zero defensive character). stl loads negative, i.e. against event defense.",
+}
+FACTOR_FOOTNOTE = {
+    6: "Tracks block PRODUCTION, not team-defense VALUE: def_rapm (-0.23) and off_rapm (-0.17) load ~0/negative, so high block-rate specialists here are not necessarily high-value defenders.",
+}
+
 
 def load_matrix(dev_only: bool):
     f = pd.read_parquet(FEAT_PATH)
@@ -163,11 +191,34 @@ def _model(Y, SE2, anchor_idx):
     numpyro.factor("obs", jax.vmap(row_ll)(Y, SE2).sum())
 
 
+def _samples_cache_key(dev_tag: str) -> str:
+    blob = json.dumps({"v": MODEL_VERSION, "tag": dev_tag, "seed": SEED,
+                       "K": K, "warmup": L1B["num_warmup"],
+                       "samples": L1B["num_samples"], "chains": L1B["num_chains"],
+                       "depth": L1B.get("max_tree_depth", 8),
+                       "dense": L1B.get("dense_mass", True)}, sort_keys=True)
+    return hashlib.sha256(blob.encode()).hexdigest()[:12]
+
+
 def fit(Y, se2, anchor_idx, dev_tag: str):
     import jax
     import numpyro
     from numpyro.infer import MCMC, NUTS
     import arviz as az
+
+    # CHECKPOINT: the MCMC samples are the ONLY expensive artifact (~14h on
+    # CPU). Persist them the instant the run finishes, BEFORE any downstream
+    # post-processing that could crash, and resume from them if present. A
+    # trivial export bug once cost a full 14h fit (2026-07-06); never again.
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    key = _samples_cache_key(dev_tag)
+    scache = OUT_DIR / f"samples_{dev_tag}_{key}.npz"
+    hcache = OUT_DIR / f"samples_{dev_tag}_{key}.health.json"
+    if scache.exists() and hcache.exists():
+        print(f"[{dev_tag}] resuming from cached samples {scache.name} "
+              "(skipping MCMC)", flush=True)
+        npz = np.load(scache)
+        return {k: npz[k] for k in npz.files}, json.loads(hcache.read_text())
 
     numpyro.set_host_device_count(int(L1B["num_chains"]))
     # 'vectorized' runs all chains in one vmapped pass -- far faster on CPU
@@ -197,7 +248,12 @@ def fit(Y, se2, anchor_idx, dev_tag: str):
     health = {"worst_r_hat": float(summ.r_hat.max()),
               "min_ess_bulk": float(summ.ess_bulk.min()),
               "n_rows": int(Y.shape[0]), "K": K, "tag": dev_tag}
-    return mcmc.get_samples(), health
+    samples = {k: np.asarray(v) for k, v in mcmc.get_samples().items()}
+    # persist IMMEDIATELY (before any caller post-processing can crash)
+    np.savez(scache, **samples)
+    hcache.write_text(json.dumps(health, indent=1))
+    print(f"[{dev_tag}] samples checkpointed -> {scache.name}", flush=True)
+    return samples, health
 
 
 def _reassemble_W(samples, anchor_idx, p):
@@ -267,18 +323,24 @@ def main() -> None:
         pos = [(c, round(float(col[c]), 2)) for c in col.index if col[c] > 0.05][:5]
         neg = [(c, round(float(col[c]), 2)) for c in col[::-1].index
                if col[c] < -0.05][:5]
-        interp.append({"factor": k, "anchor": ANCHORS[k],
-                       "provisional_label": ANCHOR_LABELS[k],
-                       "top_positive_features": pos, "top_negative_features": neg})
+        rec = {"factor": k, "name": FROZEN_FACTOR_NAMES[k],
+               "leader_feature": ANCHORS[k], "provisional_label": ANCHOR_LABELS[k],
+               "drift_from_leader": FACTOR_DRIFT[k],
+               "honest_read": FACTOR_HONEST_READ[k],
+               "top_positive_features": pos, "top_negative_features": neg}
+        if k in FACTOR_FOOTNOTE:
+            rec["footnote"] = FACTOR_FOOTNOTE[k]
+        interp.append(rec)
     health["interpretability"] = interp
     (OUT_DIR / f"health_{tag}.json").write_text(json.dumps(health, indent=1))
 
-    print("\nTop +/- loading features per factor (provisional labels; naming "
-          "is Bobby's editorial call):", flush=True)
+    print("\nTop +/- loading features per factor (FROZEN names; * = drifted "
+          "off leader):", flush=True)
     for it in interp:
         p_ = ", ".join(f"{c}{v:+.2f}" for c, v in it["top_positive_features"])
         n_ = ", ".join(f"{c}{v:+.2f}" for c, v in it["top_negative_features"])
-        print(f"  z{it['factor']} [{it['provisional_label']}] anchor={it['anchor']}"
+        drift = " *drift" if it["drift_from_leader"] else ""
+        print(f"  z{it['factor']} [{it['name']}{drift}] leader={it['leader_feature']}"
               f"\n      +: {p_}\n      -: {n_}")
 
     if not passed:
@@ -294,7 +356,16 @@ def main() -> None:
             "n_player_seasons": int(Y.shape[0]), "n_draws": int(Z.shape[1]),
             "anchors": {k: ANCHORS[k] for k in range(K)}, "health": health,
             "schema_version": "skill_vectors.v1", "content_key": key}
-    ids = f[["player_id", "player_name", "season", "end_year"]].reset_index(drop=True)
+    # player_features carries player_id/season/end_year but NOT player_name;
+    # fetch names from the warehouse by id (robust; the feature ETL omitted it).
+    from src.adapters.postmortem_lib import query
+    nm = query("""SELECT DISTINCT ON (player_id) player_id, player_name
+                  FROM nba_player_stats WHERE player_id = ANY(%s)
+                  ORDER BY player_id, game_date DESC""",
+               (f.player_id.astype(int).tolist(),))
+    name_map = dict(zip(nm.player_id, nm.player_name))
+    ids = f[["player_id", "season", "end_year"]].reset_index(drop=True)
+    ids["player_name"] = ids.player_id.map(name_map)
     ids["z_mean"] = list(Z.mean(1))
     ids["z_samples_shape"] = [list(Z.shape[1:])] * len(ids)
     ids.to_parquet(OUT_DIR / f"skill_vectors_{tag}.parquet")
@@ -304,7 +375,8 @@ def main() -> None:
     # namable axis has coherent exemplars, a smear does not). Top/bottom 5
     # by posterior-mean score, restricted to reliable rotation seasons.
     zmean = Z.mean(1)                                    # (n, K)
-    label = (f.player_name + " " + f.season).tolist()
+    label = (ids.player_name.fillna(ids.player_id.astype(str)) + " "
+             + f.season.values).tolist()
     for it in interp:
         k = it["factor"]
         order = np.argsort(zmean[:, k])
@@ -317,7 +389,7 @@ def main() -> None:
     for it in interp:
         hi = ", ".join(f"{n} ({v:+.1f})" for n, v in it["exemplars_high"])
         lo = ", ".join(f"{n} ({v:+.1f})" for n, v in it["exemplars_low"])
-        print(f"  z{it['factor']} [{it['provisional_label']}]"
+        print(f"  z{it['factor']} [{it['name']}]"
               f"\n      high: {hi}\n      low:  {lo}")
 
     (OUT_DIR / f"skill_vectors_{tag}.meta.json").write_text(json.dumps(meta, indent=1))

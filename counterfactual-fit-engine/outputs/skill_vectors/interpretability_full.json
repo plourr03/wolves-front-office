@@ -1,0 +1,739 @@
+[
+ {
+  "factor": 0,
+  "name": "offensive engine",
+  "leader_feature": "usg_pct",
+  "provisional_label": "scoring load",
+  "drift_from_leader": false,
+  "honest_read": "High-usage on-ball creation load. usg (+1.00), scoring volume, drives, pull-up 3s, playmaking gravity. High: Westbrook, Harden, Embiid, Luka, Giannis. Leader owns the axis.",
+  "top_positive_features": [
+   [
+    "usg_pct",
+    1.0
+   ],
+   [
+    "pts36",
+    0.92
+   ],
+   [
+    "drives_per75",
+    0.59
+   ],
+   [
+    "pu_fg3a_per75",
+    0.55
+   ],
+   [
+    "ast_pct",
+    0.52
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "avg_speed",
+    -0.29
+   ],
+   [
+    "orb_pct",
+    -0.17
+   ],
+   [
+    "def_rim_fga_per75",
+    -0.15
+   ],
+   [
+    "reb_contest_rate",
+    -0.14
+   ],
+   [
+    "blk36",
+    -0.12
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Russell Westbrook 2016-17",
+    4.34
+   ],
+   [
+    "James Harden 2018-19",
+    4.08
+   ],
+   [
+    "Joel Embiid 2023-24",
+    3.91
+   ],
+   [
+    "Luka Dončić 2021-22",
+    3.72
+   ],
+   [
+    "Giannis Antetokounmpo 2022-23",
+    3.7
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Julyan Stone 2017-18",
+    -2.53
+   ],
+   [
+    "Ronnie Brewer 2013-14",
+    -2.44
+   ],
+   [
+    "P.J. Tucker 2023-24",
+    -2.4
+   ],
+   [
+    "Jericho Sims 2023-24",
+    -2.36
+   ],
+   [
+    "Tyson Chandler 2019-20",
+    -2.35
+   ]
+  ]
+ },
+ {
+  "factor": 1,
+  "name": "interior finishing",
+  "leader_feature": "ts_pct",
+  "provisional_label": "scoring efficiency",
+  "drift_from_leader": false,
+  "honest_read": "Low-usage rim-finishing efficiency, NOT general scoring efficiency. ts% (+0.81) flanked by center markers (orb%, def_rim_fga). High end is unanimously rim-running / putback centers (Gafford, Bruno Fernando, Beringer 25-26), not efficient wings or stars.",
+  "top_positive_features": [
+   [
+    "ts_pct",
+    0.81
+   ],
+   [
+    "orb_pct",
+    0.38
+   ],
+   [
+    "def_rim_fga_per75",
+    0.38
+   ],
+   [
+    "off_rapm",
+    0.37
+   ],
+   [
+    "pts36",
+    0.37
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "potential_ast_per75",
+    -0.24
+   ],
+   [
+    "drives_per75",
+    -0.24
+   ],
+   [
+    "tov_ratio",
+    -0.22
+   ],
+   [
+    "ast_pct",
+    -0.17
+   ],
+   [
+    "stl36",
+    -0.15
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Bruno Fernando 2021-22",
+    3.81
+   ],
+   [
+    "Ante Zizic 2017-18",
+    3.71
+   ],
+   [
+    "Luka Garza 2022-23",
+    3.63
+   ],
+   [
+    "Joan Beringer 2025-26",
+    3.58
+   ],
+   [
+    "Daniel Gafford 2024-25",
+    3.38
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Tony Wroten 2015-16",
+    -5.05
+   ],
+   [
+    "Kobe Bryant 2013-14",
+    -3.6
+   ],
+   [
+    "Nemanja Nedovic 2013-14",
+    -3.5
+   ],
+   [
+    "Ricky Ledo 2014-15",
+    -3.34
+   ],
+   [
+    "Theo Pinson 2019-20",
+    -3.3
+   ]
+  ]
+ },
+ {
+  "factor": 2,
+  "name": "spacing",
+  "leader_feature": "fg3a_rate",
+  "provisional_label": "spacing",
+  "drift_from_leader": false,
+  "honest_read": "Three-point shooting volume / floor spacing. fg3a_rate (+0.98) and catch-shoot 3PA (+0.90) dominate. High: Merrill, Bertans, Hauser. Low: non-shooting interior bigs.",
+  "top_positive_features": [
+   [
+    "fg3a_rate",
+    0.98
+   ],
+   [
+    "cs_fg3a_per75",
+    0.9
+   ],
+   [
+    "pu_fg3a_per75",
+    0.45
+   ],
+   [
+    "def_rapm",
+    0.26
+   ],
+   [
+    "off_rapm",
+    0.18
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "orb_pct",
+    -0.64
+   ],
+   [
+    "ftr",
+    -0.52
+   ],
+   [
+    "drb_pct",
+    -0.47
+   ],
+   [
+    "reb_contest_rate",
+    -0.47
+   ],
+   [
+    "def_rim_fga_per75",
+    -0.45
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Sam Merrill 2023-24",
+    2.69
+   ],
+   [
+    "Lindy Waters III 2022-23",
+    2.65
+   ],
+   [
+    "Davis Bertans 2020-21",
+    2.64
+   ],
+   [
+    "Sam Hauser 2021-22",
+    2.63
+   ],
+   [
+    "Caleb Houstan 2023-24",
+    2.6
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Johnny O'Bryant III 2014-15",
+    -2.11
+   ],
+   [
+    "Lou Amundson 2013-14",
+    -2.08
+   ],
+   [
+    "Omer Asik 2017-18",
+    -2.07
+   ],
+   [
+    "Lou Amundson 2015-16",
+    -2.04
+   ],
+   [
+    "Nazr Mohammed 2013-14",
+    -2.03
+   ]
+  ]
+ },
+ {
+  "factor": 3,
+  "name": "playmaking",
+  "leader_feature": "ast_pct",
+  "provisional_label": "playmaking",
+  "drift_from_leader": false,
+  "honest_read": "On-ball, pass-first assist creation. ast36 / potential_ast / ast% cluster (+0.83 to +0.88). High: Rondo, McConnell, Haliburton. Skewed toward pass-first accumulator guards.",
+  "top_positive_features": [
+   [
+    "ast36",
+    0.88
+   ],
+   [
+    "potential_ast_per75",
+    0.85
+   ],
+   [
+    "ast_pct",
+    0.83
+   ],
+   [
+    "drives_per75",
+    0.52
+   ],
+   [
+    "stl36",
+    0.3
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "reb_contest_rate",
+    -0.32
+   ],
+   [
+    "def_rim_fga_per75",
+    -0.26
+   ],
+   [
+    "cs_fg3a_per75",
+    -0.23
+   ],
+   [
+    "blk36",
+    -0.22
+   ],
+   [
+    "orb_pct",
+    -0.22
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Rajon Rondo 2015-16",
+    4.49
+   ],
+   [
+    "T.J. McConnell 2025-26",
+    4.25
+   ],
+   [
+    "Elfrid Payton 2024-25",
+    4.08
+   ],
+   [
+    "Tyrese Haliburton 2022-23",
+    4.04
+   ],
+   [
+    "Rajon Rondo 2013-14",
+    4.04
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Kristaps Porziņģis 2017-18",
+    -2.52
+   ],
+   [
+    "Charlie Villanueva 2013-14",
+    -2.27
+   ],
+   [
+    "Jordan Nwora 2020-21",
+    -2.22
+   ],
+   [
+    "LaMarcus Aldridge 2014-15",
+    -2.15
+   ],
+   [
+    "Andre Drummond 2015-16",
+    -2.15
+   ]
+  ]
+ },
+ {
+  "factor": 4,
+  "name": "perimeter quickness",
+  "leader_feature": "drives_per75",
+  "provisional_label": "rim pressure",
+  "drift_from_leader": true,
+  "honest_read": "Guard-vs-big size axis, NOT rim pressure. Owned by the negative interior pole (def_rim_fga, drb%, reb_contest, orb%, blk all -0.4 to -0.6); leader drives_per75 only +0.33. High: small/fast perimeter players (M. Howard, S. Brown, SGA). Low: rim-anchoring bigs (Jokic scores lowest). Measures backcourt smallness via absence of interior work.",
+  "top_positive_features": [
+   [
+    "drives_per75",
+    0.33
+   ],
+   [
+    "avg_speed",
+    0.28
+   ],
+   [
+    "def_rapm",
+    0.19
+   ],
+   [
+    "pu_fg3a_per75",
+    0.17
+   ],
+   [
+    "stl36",
+    0.17
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "def_rim_fga_per75",
+    -0.57
+   ],
+   [
+    "drb_pct",
+    -0.56
+   ],
+   [
+    "reb_contest_rate",
+    -0.52
+   ],
+   [
+    "orb_pct",
+    -0.44
+   ],
+   [
+    "blk36",
+    -0.38
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Shannon Brown 2013-14",
+    2.69
+   ],
+   [
+    "Markus Howard 2021-22",
+    2.68
+   ],
+   [
+    "David Nwaba 2016-17",
+    2.58
+   ],
+   [
+    "Shai Gilgeous-Alexander 2022-23",
+    2.43
+   ],
+   [
+    "Keldon Johnson 2019-20",
+    2.43
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Gorgui Dieng 2022-23",
+    -3.86
+   ],
+   [
+    "Nikola Jokić 2025-26",
+    -3.69
+   ],
+   [
+    "Kevin Love 2023-24",
+    -3.65
+   ],
+   [
+    "Kyle O'Quinn 2019-20",
+    -3.55
+   ],
+   [
+    "Nikola Jokić 2021-22",
+    -3.54
+   ]
+  ]
+ },
+ {
+  "factor": 5,
+  "name": "perimeter disruption",
+  "leader_feature": "drb_pct",
+  "provisional_label": "rebounding",
+  "drift_from_leader": true,
+  "honest_read": "Steals and deflections / event defense, NOT rebounding. stl (+0.55) dominates (2x anything else), def_rapm (-0.36) second; leader drb_pct only +0.13. High: Thybulle, Covington, Reed. Low: stationary offense-first shooters.",
+  "top_positive_features": [
+   [
+    "stl36",
+    0.55
+   ],
+   [
+    "reb_contest_rate",
+    0.23
+   ],
+   [
+    "orb_pct",
+    0.22
+   ],
+   [
+    "drb_pct",
+    0.13
+   ],
+   [
+    "off_rapm",
+    0.13
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "def_rapm",
+    -0.36
+   ],
+   [
+    "cs_fg3a_per75",
+    -0.09
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Matisse Thybulle 2025-26",
+    4.44
+   ],
+   [
+    "Matisse Thybulle 2024-25",
+    3.44
+   ],
+   [
+    "Robert Covington 2023-24",
+    3.43
+   ],
+   [
+    "Paul Reed 2021-22",
+    3.29
+   ],
+   [
+    "Paul Reed 2020-21",
+    3.1
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Dirk Nowitzki 2018-19",
+    -2.3
+   ],
+   [
+    "Arron Afflalo 2013-14",
+    -2.09
+   ],
+   [
+    "John Jenkins 2018-19",
+    -2.07
+   ],
+   [
+    "Arron Afflalo 2016-17",
+    -2.07
+   ],
+   [
+    "Andrea Bargnani 2014-15",
+    -2.01
+   ]
+  ]
+ },
+ {
+  "factor": 6,
+  "name": "shot-blocking",
+  "leader_feature": "blk36",
+  "provisional_label": "rim protection",
+  "drift_from_leader": false,
+  "honest_read": "Block RATE / raw swat production, narrower than defensive value. blk36 (+0.48) leads, def_rim_fga (+0.29) reinforces. High: Turner, Wembanyama, Boucher, Pelle, Anthony.",
+  "footnote": "Tracks block PRODUCTION, not team-defense VALUE: def_rapm (-0.23) and off_rapm (-0.17) load ~0/negative, so high block-rate specialists here are not necessarily high-value defenders.",
+  "top_positive_features": [
+   [
+    "blk36",
+    0.48
+   ],
+   [
+    "def_rim_fga_per75",
+    0.29
+   ],
+   [
+    "tov_ratio",
+    0.13
+   ],
+   [
+    "stl36",
+    0.11
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "def_rapm",
+    -0.23
+   ],
+   [
+    "off_rapm",
+    -0.17
+   ],
+   [
+    "orb_pct",
+    -0.08
+   ],
+   [
+    "reb_contest_rate",
+    -0.06
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "Chris Boucher 2018-19",
+    5.65
+   ],
+   [
+    "Myles Turner 2020-21",
+    5.05
+   ],
+   [
+    "Victor Wembanyama 2023-24",
+    4.91
+   ],
+   [
+    "Norvel Pelle 2019-20",
+    4.87
+   ],
+   [
+    "Joel Anthony 2014-15",
+    4.83
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Terry Taylor 2021-22",
+    -2.74
+   ],
+   [
+    "Oscar Tshiebwe 2024-25",
+    -2.71
+   ],
+   [
+    "Oscar Tshiebwe 2025-26",
+    -2.51
+   ],
+   [
+    "Alize Johnson 2021-22",
+    -2.44
+   ],
+   [
+    "T.J. Warren 2023-24",
+    -2.43
+   ]
+  ]
+ },
+ {
+  "factor": 7,
+  "name": "pull-up shooting",
+  "leader_feature": "def_rapm",
+  "provisional_label": "defensive impact",
+  "drift_from_leader": true,
+  "honest_read": "Off-the-dribble / pull-up shot creation, NOT defense. pull-up 3PA (+0.40) dominates (~2.5x leader def_rapm +0.16); catch-shoot 3PA (-0.28) is the negative pole. High: Harden, Luka, Lillard (offensive engines, zero defensive character). stl loads negative, i.e. against event defense.",
+  "top_positive_features": [
+   [
+    "pu_fg3a_per75",
+    0.4
+   ],
+   [
+    "def_rapm",
+    0.16
+   ],
+   [
+    "ftr",
+    0.16
+   ],
+   [
+    "tov_ratio",
+    0.15
+   ]
+  ],
+  "top_negative_features": [
+   [
+    "cs_fg3a_per75",
+    -0.28
+   ],
+   [
+    "stl36",
+    -0.19
+   ],
+   [
+    "avg_speed",
+    -0.17
+   ]
+  ],
+  "exemplars_high": [
+   [
+    "James Harden 2018-19",
+    6.81
+   ],
+   [
+    "James Harden 2019-20",
+    5.8
+   ],
+   [
+    "Luka Dončić 2021-22",
+    4.16
+   ],
+   [
+    "Damian Lillard 2020-21",
+    4.0
+   ],
+   [
+    "James Harden 2024-25",
+    3.97
+   ]
+  ],
+  "exemplars_low": [
+   [
+    "Patrick Baldwin Jr. 2022-23",
+    -4.38
+   ],
+   [
+    "Charlie Villanueva 2014-15",
+    -3.77
+   ],
+   [
+    "Marreese Speights 2017-18",
+    -3.67
+   ],
+   [
+    "Mike Muscala 2021-22",
+    -3.14
+   ],
+   [
+    "Austin Daye 2013-14",
+    -3.02
+   ]
+  ]
+ }
+]

@@ -22,3 +22,7 @@ counterfactual-fit-engine/outputs/features/*.parquet
 # Stint cache: rebuildable intermediate (src/stints/run_panel.py writes it alongside the
 # possession cache); was only partially/accidentally tracked. Rebuild from the panel run.
 counterfactual-fit-engine/data/cache/stints/
+# Raw MCMC sample checkpoint: crash-recovery artifact, regenerable; the S x K
+# skill_vectors samples (spec 7.4 handoff) are committed separately.
+counterfactual-fit-engine/outputs/skill_vectors/samples_*.npz
+counterfactual-fit-engine/outputs/skill_vectors/samples_*.health.json

@@ -134,9 +134,12 @@ def cache_key(panel: pd.DataFrame, model_a_cfg: dict, seed: int,
 
 
 def fit(through: int | None = None, quiet: bool = False,
-        variant_overrides: dict | None = None):
+        variant_overrides: dict | None = None,
+        panel_override: pd.DataFrame | None = None):
     """Fit Model A; returns (posterior DataFrame, franchise ids, cache path).
-    Cache-first: an existing parquet for the same key is returned untouched."""
+    Cache-first: an existing parquet for the same key is returned untouched.
+    panel_override: alternate panel (the tornado CHA-lineage arm); the cache
+    key hashes panel data, so an override keys its own cache entry."""
     import jax
     import numpyro
     from numpyro.infer import MCMC, NUTS
@@ -145,7 +148,7 @@ def fit(through: int | None = None, quiet: bool = False,
     model_a_cfg = dict(params["model_a"])
     if variant_overrides:
         model_a_cfg.update(variant_overrides)
-    panel = load_panel(through)
+    panel = panel_override if panel_override is not None else load_panel(through)
     key = cache_key(panel, model_a_cfg, params["seed"], through)
     POSTERIORS.mkdir(parents=True, exist_ok=True)
     cache_path = POSTERIORS / f"trajectory_{key}.parquet"
