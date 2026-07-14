@@ -1,6 +1,6 @@
 # One Summer, recording sheet (what's on screen while you say it)
 
-DEEP CUT (~62 seconds), with your sheet edits folded in (spelling normalized so
+DEEP CUT (~66 seconds), with your sheet edits folded in (spelling normalized so
 the captions match). Record 3 takes, phone in a quiet room, mic 8 to 12 inches
 away. Conversational clip, and let the pauses be real; the cut has room for
 them. Hit B1 cold; it is the scroll-stopper. Don't chase the timings below,
@@ -31,7 +31,7 @@ SAY: "2029. Ant's walk year. And history is blunt about walk years."
 SCREEN: A giant 2029 in mono numerals, ANT'S WALK YEAR in green beneath it,
 and the quiet line "History is blunt about walk years." under that.
 
-B4 (0:16 to 0:40, the long beat; breathe where marked)
+B4 (0:16 to 0:44, the long beat; breathe where marked, it has real room now)
 SAY: "With two years left on his deal, his odds of leaving this year are near
 1 percent. But that isn't what we're worried about. [beat] In the walk year,
 however? 44. And that's with the team winning. [beat] On a 37-win pace? It
@@ -48,7 +48,7 @@ white one, peaking higher, with 56% and ON A 37-WIN PACE stacked over the 44.
 Then it all holds while you land the forty-years line, and the method note
 fades in (291 STAR TENURES SINCE 1990 · 80% BAND AT THE 44: 35 TO 53).
 
-B5 (0:40 to 0:47)
+B5 (0:44 to 0:51)
 SAY: "And LaMelo's deal ends the same July. Still not extended."
 ALSO RECORD (insurance take, same session): "And LaMelo's deal ends the exact
 same July." with no "Still not extended." If he signs between recording and
@@ -62,21 +62,21 @@ NO EXTENSION rubber stamp slams across the bottom of the document and shakes
 for a split second. (Stamp wording matches your line: he is under contract,
 just not extended.)
 
-B6 (0:47 to 0:54)
+B6 (0:51 to 0:58)
 SAY: "Two max guys. One summer. The Wolves and Charlotte both making opposite
 bets on that summer."
 SCREEN: Statement card: TWO MAX GUYS. in white over ONE SUMMER. in green, with
 "Opposite bets on the same summer." quiet underneath. The caption pages twice
 under it, matching the line as you say it.
 
-B7 (0:54 to 1:02)
+B7 (0:58 to 1:06)
 SAY: "We priced all of it across fifty thousand futures. Comment BILL and
 I'll send you Part 1."
 SCREEN: The CTA. Kicker THE FULL PRICE, IN THREE PARTS, then COMMENT in white
 and "BILL" in green, a green underline drawing itself, "and I'll send you
 Part 1," and small type: PRICED ACROSS 50,000 FUTURES · WOLVESTOAT.COM.
 
-TAIL (1:02)
+TAIL (1:06)
 (nothing to say)
 SCREEN: Hard cut back to the exact 44% opening card for half a second, so the
 video loops clean into a rewatch.

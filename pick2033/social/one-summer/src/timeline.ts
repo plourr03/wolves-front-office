@@ -59,23 +59,23 @@ export const BEATS: Beat[] = [
     caption: "With two years left on his deal, his\nodds of leaving this year are near 1%.",
   },
   { id: "curve1b", startSec: 22.2, caption: "But that isn't what\nwe're worried about." },
-  { id: "curve2", startSec: 25.8, caption: "In the walk year, however? 44.\nAnd that's with the team winning." },
-  { id: "curve2b", startSec: 30.8, caption: "On a 37-win pace?\nIt jumps to 56." },
-  { id: "curve3", startSec: 34.8, caption: "That cliff is forty years of stars,\nnot a hot take." },
-  { id: "unsig", startSec: 40.4, caption: "And LaMelo's deal ends the same July.\nStill not extended." },
-  { id: "twomax", startSec: 47.0, caption: "Two max guys. One summer." },
+  { id: "curve2", startSec: 26.8, caption: "In the walk year, however? 44.\nAnd that's with the team winning." },
+  { id: "curve2b", startSec: 32.8, caption: "On a 37-win pace?\nIt jumps to 56." },
+  { id: "curve3", startSec: 37.8, caption: "That cliff is forty years of stars,\nnot a hot take." },
+  { id: "unsig", startSec: 44.4, caption: "And LaMelo's deal ends the same July.\nStill not extended." },
+  { id: "twomax", startSec: 51.0, caption: "Two max guys. One summer." },
   {
     id: "twomax2",
-    startSec: 50.0,
+    startSec: 54.0,
     caption: "The Wolves and Charlotte both\nmaking opposite bets on that summer.",
   },
   // The CTA card carries the spoken words itself; no lower-third on top of it.
-  { id: "cta", startSec: 54.4 },
+  { id: "cta", startSec: 58.4 },
   // Loop-friendly ending: back onto the 44 card, so a rewatch reads as intentional.
-  { id: "loop", startSec: 61.6 },
+  { id: "loop", startSec: 65.6 },
 ];
 
-export const END_SEC = 62.1;
+export const END_SEC = 66.1;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 
