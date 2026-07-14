@@ -17,6 +17,7 @@ import json
 import os
 import subprocess
 import sys
+import urllib.request
 
 import edge_tts
 
@@ -52,6 +53,41 @@ async def synth():
         print(f"  {bid}: {text[:50]}...")
 
 
+def load_elevenlabs_key():
+    """ELEVENLABS_API_KEY from the environment, or from the repo .env
+    (gitignored, same file that holds the warehouse password)."""
+    key = os.environ.get("ELEVENLABS_API_KEY")
+    if key:
+        return key
+    env_path = os.path.normpath(os.path.join(ROOT, "..", "..", "..", ".env"))
+    if os.path.exists(env_path):
+        for line in open(env_path, encoding="utf-8"):
+            line = line.strip()
+            if line.startswith("ELEVENLABS_API_KEY="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
+
+def synth_elevenlabs(voice_id, api_key):
+    """Bobby's cloned voice via the ElevenLabs API, one clip per beat."""
+    os.makedirs(SEG_DIR, exist_ok=True)
+    for bid, _, text in SEGMENTS:
+        req = urllib.request.Request(
+            f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}?output_format=mp3_44100_128",
+            data=json.dumps({
+                "text": text,
+                "model_id": "eleven_multilingual_v2",
+                "voice_settings": {"stability": 0.45, "similarity_boost": 0.75},
+            }).encode("utf-8"),
+            headers={"xi-api-key": api_key, "Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req) as resp:
+            audio = resp.read()
+        with open(os.path.join(SEG_DIR, f"{bid}.mp3"), "wb") as f:
+            f.write(audio)
+        print(f"  {bid}: {text[:50]}...")
+
+
 # Remotion's bundled binaries, invoked directly (the npx.cmd shim routes args
 # through cmd.exe, which mangles the | and ; inside filter strings).
 COMPOSITOR = os.path.join(ROOT, "node_modules", "@remotion", "compositor-win32-x64-msvc")
@@ -68,12 +104,25 @@ def ffprobe_duration(path):
 
 
 def main():
-    # --assemble-only: skip TTS and mix whatever clips already sit in
-    # out/vo_segments (e.g. Bobby's ElevenLabs voice-clone lines, one mp3 per
-    # beat id: h44.mp3, h1.mp3, y2029.mp3, curve1.mp3, curve1b.mp3, curve2.mp3,
-    # curve2b.mp3, curve3.mp3, unsig.mp3, twomax.mp3, twomax2.mp3, cta.mp3).
+    global OUT
+    # Modes:
+    #   (default)              free Edge TTS preview -> public/voiceover_ai.mp3
+    #   --elevenlabs VOICE_ID  Bobby's clone via API -> public/voiceover_clone.mp3
+    #   --assemble-only        mix clips already in out/vo_segments (e.g. lines
+    #                          downloaded by hand from the ElevenLabs UI, one
+    #                          mp3 per beat id) -> public/voiceover_clone.mp3
     if "--assemble-only" in sys.argv:
+        OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
         print("assemble-only: using existing clips in out/vo_segments")
+    elif "--elevenlabs" in sys.argv:
+        OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
+        voice_id = sys.argv[sys.argv.index("--elevenlabs") + 1]
+        api_key = load_elevenlabs_key()
+        if not api_key:
+            print("No ELEVENLABS_API_KEY found (env var or repo .env). Add it and re-run.")
+            sys.exit(1)
+        print(f"synthesizing {len(SEGMENTS)} segments with ElevenLabs voice {voice_id}...")
+        synth_elevenlabs(voice_id, api_key)
     else:
         print(f"synthesizing {len(SEGMENTS)} segments with {VOICE}...")
         asyncio.run(synth())
