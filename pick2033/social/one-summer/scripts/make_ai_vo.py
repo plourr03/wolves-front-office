@@ -50,6 +50,8 @@ ELEVEN_SETTINGS = {"stability": 0.30, "similarity_boost": 0.80, "style": 0.45}
 SETTING_OVERRIDES = {
     "h44": {"speed": 1.15},
     "unsig2": {"stability": 0.55, "style": 0.12},
+    # twomax2 read as a slow question; steady it and pick up the pace a touch.
+    "twomax2": {"stability": 0.50, "style": 0.20, "speed": 1.07},
 }
 
 # Faint original clock-pulse bed (soft low thump / tick alternating). Peak
@@ -79,7 +81,7 @@ SEGMENTS = [
     ("unsig2", "And we still have not extended him."),
     ("twomax", "So, we have two max guys."),
     ("twomaxb", "One summer that the next decade of basketball in Minnesota hinges on."),
-    ("twomax2", "The Wolves and Charlotte both making opposite bets on that summer."),
+    ("twomax2", "The Wolves and Hornets both made opposing bets on where that summer will land."),
     ("cta1", "What are the most likely futures for that summer?"),
     ("cta2", "Comment BILL and I'll send you the link to the Part 1 article."),
 ]

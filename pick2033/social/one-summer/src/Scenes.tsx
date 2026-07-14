@@ -218,7 +218,7 @@ export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
         ONE SUMMER.
       </div>
       <div style={{ ...subStyle, marginTop: 30, opacity: c.opacity, transform: `translateY(${c.y}px)` }}>
-        Opposite bets on the same summer.
+        Opposing bets on the same summer.
       </div>
     </Stage>
   );

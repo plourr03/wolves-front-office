@@ -30,6 +30,7 @@ export type BeatId =
   | "twomax"
   | "twomaxb"
   | "twomax2"
+  | "twomax2b"
   | "cta1"
   | "cta2"
   | "loop";
@@ -59,14 +60,14 @@ export const BEATS: Beat[] = [
   { id: "twomax", startSec: 60.1, caption: "So, we have two max guys." },
   { id: "twomaxb", startSec: 62.8, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
   { id: "twomax2", startSec: 68.3, caption: "The Wolves and Charlotte both making\nopposite bets on that summer." },
-  { id: "cta1", startSec: 74.4, caption: "What are the most likely futures\nfor that summer?" },
+  { id: "cta1", startSec: 75.1, caption: "What are the most likely futures\nfor that summer?" },
   // The CTA card carries the spoken words; no lower-third on the send line.
-  { id: "cta2", startSec: 77.9 },
+  { id: "cta2", startSec: 78.6 },
   // Loop-friendly ending: back onto the 44 card, so a rewatch reads as intentional.
-  { id: "loop", startSec: 83.5 },
+  { id: "loop", startSec: 84.2 },
 ];
 
-export const END_SEC = 84.0;
+export const END_SEC = 84.7;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 
