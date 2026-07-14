@@ -199,8 +199,9 @@ def make_faded_wav(bid):
 
 
 def write_bed(end_sec):
-    """Original minimal clock-pulse: soft 54 Hz thump on the beat, faint tick
-    on the offbeat, fading in and out. Synthesized, so nothing to license."""
+    """Original minimal heartbeat bed: a soft 54 Hz thump every other beat,
+    nothing in the highs (the earlier tick poked through speech and read as
+    'ticking noise'). Felt more than heard. Synthesized, nothing to license."""
     sr = 44100
     n = int(end_sec * sr)
     buf = [0.0] * n
@@ -209,18 +210,12 @@ def write_bed(end_sec):
     beat = 0
     while t < end_sec:
         start = int(t * sr)
-        if beat % 2 == 0:  # thump
+        if beat % 2 == 0:  # thump only; offbeats stay silent
             for j in range(int(0.25 * sr)):
                 if start + j >= n:
                     break
                 x = j / sr
                 buf[start + j] += math.sin(2 * math.pi * 54 * x) * math.exp(-x / 0.045)
-        else:  # tick
-            for j in range(int(0.05 * sr)):
-                if start + j >= n:
-                    break
-                x = j / sr
-                buf[start + j] += 0.32 * math.sin(2 * math.pi * 3800 * x) * math.exp(-x / 0.010)
         t += period
         beat += 1
     fade = int(0.6 * sr)
