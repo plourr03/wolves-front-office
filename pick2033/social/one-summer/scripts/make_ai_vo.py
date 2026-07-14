@@ -44,6 +44,14 @@ VOICE = "en-US-AndrewMultilingualNeural"  # Edge preview voice
 # style exaggeration for the sports-desk energy.
 ELEVEN_SETTINGS = {"stability": 0.30, "similarity_boost": 0.80, "style": 0.45}
 
+# Per-line tweaks, merged over the base settings. h44: the hook read too slow
+# (8.4s), so it gets the max delivery speed. unsig2: the extension line came
+# out movie-trailer intense; calm it down.
+SETTING_OVERRIDES = {
+    "h44": {"speed": 1.15},
+    "unsig2": {"stability": 0.55, "style": 0.12},
+}
+
 # Faint original clock-pulse bed (soft low thump / tick alternating). Peak
 # gain of the bed relative to full scale; the voice peaks around 0.8.
 BED_GAIN = 0.10
@@ -139,15 +147,18 @@ def resolve_voice_id(name, api_key):
     raise RuntimeError(f"No voice named '{name}'. Non-stock voices on the account: {cloned}")
 
 
-def synth_elevenlabs(voice_id, api_key):
+def synth_elevenlabs(voice_id, api_key, only=None):
     """One clip per beat, each generated WITH its neighbors as prosody context
-    so lines flow into each other instead of restarting cold."""
+    so lines flow into each other instead of restarting cold. `only` limits
+    regeneration to a subset of beat ids (cheap single-line fixes)."""
     os.makedirs(SEG_DIR, exist_ok=True)
     for i, (bid, text) in enumerate(SEGMENTS):
+        if only is not None and bid not in only:
+            continue
         payload = {
             "text": text,
             "model_id": "eleven_multilingual_v2",
-            "voice_settings": ELEVEN_SETTINGS,
+            "voice_settings": {**ELEVEN_SETTINGS, **SETTING_OVERRIDES.get(bid, {})},
         }
         if i > 0:
             payload["previous_text"] = SEGMENTS[i - 1][1]
@@ -249,8 +260,12 @@ def main():
             voice_id = resolve_voice_id(sys.argv[sys.argv.index("--elevenlabs-name") + 1], api_key)
         else:
             voice_id = sys.argv[sys.argv.index("--elevenlabs") + 1]
-        print(f"synthesizing {len(SEGMENTS)} segments (expressive settings, with context)...")
-        synth_elevenlabs(voice_id, api_key)
+        # --only h44,unsig2 regenerates just those lines; the rest are reused.
+        only = None
+        if "--only" in sys.argv:
+            only = set(sys.argv[sys.argv.index("--only") + 1].split(","))
+        print(f"synthesizing {len(only) if only else len(SEGMENTS)} segments (expressive settings, with context)...")
+        synth_elevenlabs(voice_id, api_key, only)
     else:
         print(f"synthesizing {len(SEGMENTS)} segments with {VOICE}...")
         asyncio.run(synth_edge())
