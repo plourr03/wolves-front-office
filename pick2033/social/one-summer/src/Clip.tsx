@@ -14,7 +14,8 @@ export type ClipProps = {
 // Which visual a beat renders. Beats that share a scene (the three curve
 // beats, the two twomax beats) never transition between themselves.
 const sceneKey = (id: BeatId): string => {
-  if (id === "curve1" || id === "curve2" || id === "curve3") return "curve";
+  if (id === "curve1" || id === "curve1b" || id === "curve2" || id === "curve2b" || id === "curve3")
+    return "curve";
   if (id === "twomax2") return "twomax";
   if (id === "loop") return "h44";
   return id;

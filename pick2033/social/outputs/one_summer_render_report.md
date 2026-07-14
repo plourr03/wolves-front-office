@@ -82,6 +82,26 @@ spelling normalized), its caption split across two pages to stay inside the
 two-line rule, and the card's sub now reads "Opposite bets on the same
 summer." Recording-sheet windows updated (B1 0:00-0:05 ... B7 0:45-0:52).
 
+## Bobby's sheet edits folded in (2026-07-14, fifth cut, ~62s)
+
+- B1 rewritten to Bobby's hook line (words build to the number the screen
+  already shows); B3 gains his "And"; grammar and spelling normalized so the
+  burned captions match a clean read.
+- B4 grew into a four-moment act per his margin note, and this time the
+  losing-team number exists on the record: the Part 1 hazard viz publishes
+  both scenarios (44 at .600, 56 declining), so "On a 37-win pace? It jumps to
+  56." is spoken AND drawn (dotted slate decline_win45 line from the same
+  export, arriving on the beat, 56% stacked over the 44 in the annotation
+  column; .450 x 82 = 36.9 -> a 37-win pace). The earlier "no published
+  walk-year-at-.450 number" ruling was wrong and is superseded. Method note
+  now reads 291 STAR TENURES SINCE 1990 · 80% BAND AT THE 44: 35 TO 53, and
+  the 44's tag reads THE WALK YEAR · AT .600.
+- B5 is now "Still not extended." (his edit, and more accurate: LaMelo is
+  under contract, not extended), so the stamp reads NO EXTENSION. Insurance
+  take updated to match. Reel two's cumulative 56/71 pair is unchanged and
+  distinct; watch the two 56s across posts when reel two ships.
+- Total 62.1s, a true deep cut. Windows: B1 0:00-0:05 ... B7 0:54-1:02.
+
 ## B4 honesty clause + scope rulings (2026-07-14)
 
 B4 now says out loud what the method note prints: "In the walk year? 44. And

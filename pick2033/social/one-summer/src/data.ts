@@ -34,6 +34,22 @@ export const HAZARD: { season: number; h: number }[] = [
 export const SPIKE_LO = 0.3490510891651707;
 export const SPIKE_HI = 0.5332502045000675;
 
+// edwards_hazard_FINAL.json, scenarios.decline_win45.annual (hazard_mean).
+// The declining-team (.450) scenario, exact export floats. Its 2029 spike
+// (0.5649 -> 56) is published in the Part 1 hazard viz ("spiking to 44 or 56
+// percent at the 2029 walk year"). Spoken as "a 37-win pace" (.450 x 82 =
+// 36.9 wins).
+export const HAZARD_DECLINE: { season: number; h: number }[] = [
+  { season: 2027, h: 0.012650044807761704 },
+  { season: 2028, h: 0.116348321781477 },
+  { season: 2029, h: 0.5649082446570604 },
+  { season: 2030, h: 0.00046410357066433664 },
+  { season: 2031, h: 0.003995322477388121 },
+  { season: 2032, h: 0.03282384693435635 },
+  { season: 2033, h: 0.21703851156216664 },
+];
+export const DECLINE_SPIKE_LABEL = "56%";
+
 // "1 percent with two years left": Part 1's counterfactual (Edwards' 2029
 // profile run with two years remaining reads about 1 percent), and the 2027
 // point on the curve (two years remaining, hazard 0.0076) rounds to 1.

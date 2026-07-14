@@ -3,7 +3,7 @@ import { AbsoluteFill } from "remotion";
 import { COLORS, FONT, RADIUS, SAFE } from "./config";
 import { T } from "./timeline";
 import { drawOn, ramp, riseIn, shake, stampIn } from "./animation";
-import { HAZARD, SPIKE_HI, SPIKE_LO } from "./data";
+import { DECLINE_SPIKE_LABEL, HAZARD, HAZARD_DECLINE, SPIKE_HI, SPIKE_LO } from "./data";
 
 // One hero visual per beat, statement lines, real holds. Every scene is a pure
 // function of the frame; motion happens at the top of a beat, then stillness.
@@ -275,9 +275,14 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   const arrow = drawOn(frame, fps, T.curve2 + 1.0, 0.4);
   const method = ramp(frame, fps, T.curve3 + 0.2, 0.45);
 
+  const declineIn = ramp(frame, fps, T.curve2b, 0.5);
+
   const pts = HAZARD.map((d, i) => [cx(i), cy(d.h)] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
   const spike = pts[2];
+  const dPts = HAZARD_DECLINE.map((d, i) => [cx(i), cy(d.h)] as const);
+  const dPath = dPts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+  const dSpike = dPts[2];
 
   return (
     <Stage>
@@ -318,6 +323,27 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             {HAZARD[i].season}
           </text>
         ))}
+        {/* the declining-team (.450) scenario: quiet context behind the story,
+            arriving only when the VO names it */}
+        <g opacity={declineIn}>
+          <path
+            d={dPath}
+            fill="none"
+            stroke={COLORS.slate}
+            strokeWidth={3.5}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeDasharray="2 8"
+          />
+          <circle cx={dSpike[0]} cy={dSpike[1]} r={6.5} fill={COLORS.slate} />
+          {/* annotation column shared with the 44%: tag, then 56, above the green number */}
+          <text x={spike[0] + 130} y={dSpike[1] - 54} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
+            ON A 37-WIN PACE
+          </text>
+          <text x={spike[0] + 128} y={dSpike[1] - 12} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={46} fontWeight={700}>
+            {DECLINE_SPIKE_LABEL}
+          </text>
+        </g>
         {/* the curve itself, drawn on slow */}
         <path
           d={path}
@@ -349,7 +375,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             44%
           </text>
           <text x={spike[0] + 130} y={spike[1] + 30} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={20} letterSpacing={2}>
-            THE WALK YEAR
+            THE WALK YEAR · AT .600
           </text>
         </g>
         <ellipse
@@ -390,7 +416,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
         <path d="M 238 172 L 246 184 L 254 172 Z" fill={COLORS.accentPop} opacity={arrow >= 0.98 ? 1 : 0} />
       </svg>
       <div style={{ ...kickerStyle, fontSize: 20, letterSpacing: 2, marginTop: 20, opacity: method }}>
-        291 STAR TENURES SINCE 1990 · .600 SCENARIO · 80% BAND: 35 TO 53
+        291 STAR TENURES SINCE 1990 · 80% BAND AT THE 44: 35 TO 53
       </div>
     </Stage>
   );
@@ -441,12 +467,12 @@ export const Unsigned: React.FC<SceneProps> = ({ frame, fps }) => {
             padding: "8px 34px",
             fontFamily: FONT.display,
             fontWeight: 700,
-            fontSize: 100,
-            letterSpacing: 12,
+            fontSize: 88,
+            letterSpacing: 11,
             color: COLORS.text,
           }}
         >
-          UNSIGNED
+          NO EXTENSION
         </div>
       </div>
     </Stage>
