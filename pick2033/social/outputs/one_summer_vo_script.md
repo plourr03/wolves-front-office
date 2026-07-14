@@ -31,11 +31,14 @@ and the quiet line "History is blunt about walk years." under that.
 
 B4 (0:16 to 0:32, the long beat; take a breath mid-line where marked)
 SAY: "With two years left on his deal, his odds of leaving sit near 1 percent.
-[beat] In the walk year? 44. [beat] That cliff is forty years of stars, not a
-hot take."
+[beat] In the walk year? 44. And that's with the team winning. [beat] That
+cliff is forty years of stars, not a hot take."
 (Why this wording: the 1 and the 44 both sit on the same .600 winning path.
 The contract clock is the only thing that changes. That is the whole Part 1
-thesis, so the VO names the clock, not the winning.)
+thesis, so the VO names the clock, not the winning. The "with the team
+winning" clause says out loud that 44 is the optimistic case, matching the
+.600 SCENARIO note on screen. The 56-vs-71 winning stat stays out of this
+reel on purpose; it is reel two.)
 SCREEN: The chart beat. A white curve draws itself slowly left to right across
 2027 to 2033 under the title EDWARDS · ANNUAL DEPARTURE ODDS, MODELED. As you
 say "1 percent," a 1% callout lands on the flat early years (TWO YEARS LEFT).
@@ -45,7 +48,7 @@ Then the chart just holds while you land the forty-years line, and a small
 method note fades in under it (291 STAR TENURES SINCE 1990 · .600 SCENARIO ·
 80% BAND: 35 TO 53).
 
-B5 (0:32 to 0:38)
+B5 (0:32 to 0:39)
 SAY: "And LaMelo's deal ends the same July. Still unsigned."
 ALSO RECORD (insurance take, same session): "And LaMelo's deal ends the exact
 same July." with no "Still unsigned." If he signs between recording and
@@ -57,7 +60,7 @@ with "the same July as Edwards' walk year" beneath. About a second in, a big
 UNSIGNED rubber stamp slams across the bottom of the document and shakes for
 a split second.
 
-B6 (0:38 to 0:45)
+B6 (0:39 to 0:46)
 SAY: "Two max guys. One summer. The Wolves and Charlotte both making opposite
 bets on that summer."
 (Your line from the sheet, spelling normalized for the captions.)
@@ -65,14 +68,14 @@ SCREEN: Statement card: TWO MAX GUYS. in white over ONE SUMMER. in green, with
 "Opposite bets on the same summer." quiet underneath. The caption pages twice
 under it, matching the line as you say it.
 
-B7 (0:45 to 0:52)
+B7 (0:46 to 0:53)
 SAY: "We priced all of it across fifty thousand futures. Comment BILL and
 I'll send you Part 1."
 SCREEN: The CTA. Kicker THE FULL PRICE, IN THREE PARTS, then COMMENT in white
 and "BILL" in green, a green underline drawing itself, "and I'll send you
 Part 1," and small type: PRICED ACROSS 50,000 FUTURES · WOLVESTOAT.COM.
 
-TAIL (0:52)
+TAIL (0:53)
 (nothing to say)
 SCREEN: Hard cut back to the exact 44% opening card for half a second, so the
 video loops clean into a rewatch.

@@ -82,6 +82,25 @@ spelling normalized), its caption split across two pages to stay inside the
 two-line rule, and the card's sub now reads "Opposite bets on the same
 summer." Recording-sheet windows updated (B1 0:00-0:05 ... B7 0:45-0:52).
 
+## B4 honesty clause + scope rulings (2026-07-14)
+
+B4 now says out loud what the method note prints: "In the walk year? 44. And
+that's with the team winning." (curve2 caption updated to match; the beat
+gained 0.4s and everything downstream shifted; total now 53.2s). Two expansion
+ideas were weighed and parked as their own posts rather than squeezed in:
+
+- Jaden in B3 (his deal IS up the same summer, extension runs through
+  2028-29): kept out because the model priced two clocks, not three (THE MODEL
+  SAYS has to stay true), an early LaMelo mention kills the B5 stamp reveal,
+  and B6's "two max guys" stops being accurate. Next post: "Three contracts.
+  One summer." with the October extension-window peg. An optional caption seed
+  line is in the kit.
+- The winning stat (gone by 2033 in 56 percent of futures at .600, 71 at
+  .450): cumulative numbers, not walk-year, and too good to bury; that is reel
+  two, closing on the series' own most practical line (winning is worth 15
+  points of keeping Ant; the cheapest way to keep the 2033 pick worthless is
+  the best reason to have made the trade).
+
 ## Bobby's review fixes (2026-07-14, pre-recording)
 
 1. B4 VO re-anchored to the contract clock ("With two years left on his deal")

@@ -10,11 +10,12 @@ import { FPS } from "./config";
 //   B2  "The whole LaMelo trade comes down to that one summer."
 //   B3  "2029. Ant's walk year. History is blunt about walk years."
 //   B4  "With two years left on his deal, his odds of leaving sit near
-//        1 percent. In the walk year? 44. That cliff is forty years of stars,
-//        not a hot take."
+//        1 percent. In the walk year? 44. And that's with the team winning.
+//        That cliff is forty years of stars, not a hot take."
 //        (Both numbers ride the same .600 winning path; the contract clock is
-//        the only variable. That IS the Part 1 thesis; the VO must not imply
-//        winning is what moves it.)
+//        the only variable. That IS the Part 1 thesis. The "with the team
+//        winning" clause makes 44 the optimistic case out loud, matching the
+//        .600 SCENARIO method note on screen.)
 //   B5  "And LaMelo's deal ends the same July. Still unsigned."
 //        (plus the insurance take without "Still unsigned.")
 //   B6  "Two max guys. One summer. The Wolves and Charlotte both making
@@ -53,22 +54,22 @@ export const BEATS: Beat[] = [
     startSec: 16.0,
     caption: "With two years left on his deal,\nhis odds of leaving sit near 1 percent.",
   },
-  { id: "curve2", startSec: 21.6, caption: "In the walk year? 44." },
-  { id: "curve3", startSec: 25.2, caption: "That cliff is forty years of stars,\nnot a hot take." },
-  { id: "unsig", startSec: 31.6, caption: "And LaMelo's deal ends the same July.\nStill unsigned." },
-  { id: "twomax", startSec: 38.2, caption: "Two max guys. One summer." },
+  { id: "curve2", startSec: 21.6, caption: "In the walk year? 44.\nAnd that's with the team winning." },
+  { id: "curve3", startSec: 26.0, caption: "That cliff is forty years of stars,\nnot a hot take." },
+  { id: "unsig", startSec: 32.4, caption: "And LaMelo's deal ends the same July.\nStill unsigned." },
+  { id: "twomax", startSec: 39.0, caption: "Two max guys. One summer." },
   {
     id: "twomax2",
-    startSec: 41.2,
+    startSec: 42.0,
     caption: "The Wolves and Charlotte both\nmaking opposite bets on that summer.",
   },
   // The CTA card carries the spoken words itself; no lower-third on top of it.
-  { id: "cta", startSec: 44.8 },
+  { id: "cta", startSec: 45.6 },
   // Loop-friendly ending: back onto the 44 card, so a rewatch reads as intentional.
-  { id: "loop", startSec: 51.8 },
+  { id: "loop", startSec: 52.6 },
 ];
 
-export const END_SEC = 52.4;
+export const END_SEC = 53.2;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 
