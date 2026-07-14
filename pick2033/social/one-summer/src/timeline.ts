@@ -9,8 +9,12 @@ import { FPS } from "./config";
 //   B1  "44 percent. Those are Ant's odds of leaving in the 2029 walk year."
 //   B2  "The whole LaMelo trade comes down to that one summer."
 //   B3  "2029. Ant's walk year. History is blunt about walk years."
-//   B4  "On a winning team, his odds of leaving sit near 1 percent. In the
-//        walk year? 44. That cliff is forty years of stars, not a hot take."
+//   B4  "With two years left on his deal, his odds of leaving sit near
+//        1 percent. In the walk year? 44. That cliff is forty years of stars,
+//        not a hot take."
+//        (Both numbers ride the same .600 winning path; the contract clock is
+//        the only variable. That IS the Part 1 thesis; the VO must not imply
+//        winning is what moves it.)
 //   B5  "And LaMelo's deal ends the same July. Still unsigned."
 //   B6  "Two max guys. One summer. That is the bet Charlotte made."
 //   B7  "We priced all of it across fifty thousand futures. Comment BILL and
@@ -44,7 +48,7 @@ export const BEATS: Beat[] = [
   {
     id: "curve1",
     startSec: 11.8,
-    caption: "On a winning team, his odds of\nleaving sit near 1 percent.",
+    caption: "With two years left on his deal,\nhis odds of leaving sit near 1 percent.",
   },
   { id: "curve2", startSec: 16.2, caption: "In the walk year? 44." },
   { id: "curve3", startSec: 19.2, caption: "That cliff is forty years of stars,\nnot a hot take." },

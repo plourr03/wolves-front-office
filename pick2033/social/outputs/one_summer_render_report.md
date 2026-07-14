@@ -70,6 +70,24 @@ All values are embedded in `src/data.ts` with per-value provenance comments.
    signed extension cuts the bill by about 0.4 wins) and the unsigned beat gets
    rewritten before this ever posts.
 
+## Bobby's review fixes (2026-07-14, pre-recording)
+
+1. B4 VO re-anchored to the contract clock ("With two years left on his deal")
+   instead of "On a winning team": both the 1 and the 44 sit on the same .600
+   path (central_win60); the clock is the only variable, which is the Part 1
+   thesis. Caption updated to match.
+2. Method note under the chart re-credited to the right machine: 291 STAR
+   TENURES SINCE 1990 · .600 SCENARIO · 80% BAND: 35 TO 53 (the curve is the
+   Part 1 tenure model, not Engine D; the ~70x dropped for fit per Bobby's
+   call, the 50,000 stays in the CTA where it belongs).
+3. THE MODEL SAYS kicker added above the 44% cold open (attribution turns the
+   doom-stat into an owned claim; Part 1 warns about this number screenshotted
+   naked).
+4. Wordmark nudged down inside the safe zone (top 236) so app UI never covers it.
+5. Recording sheet now asks for an insurance take of B5 without "Still
+   unsigned," so a LaMelo signing between recording and posting is a one-line
+   audio swap plus a stamp-card re-render, not a new session.
+
 ## Open flags for Bobby
 
 1. VO script is new for this cut (~95 words, in the caption kit). It is not the

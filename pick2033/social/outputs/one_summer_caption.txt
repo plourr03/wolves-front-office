@@ -7,7 +7,7 @@ hashtags (3 to 5 max, final pick yours):
 #Timberwolves #NBA #WolvesBack #LaMelo
 
 === ALT TEXT ===
-A midnight-blue animated data video in the Wolves to a T style: a statement card says the LaMelo trade comes down to one summer, 2029 fills the screen as Ant's walk year, Anthony Edwards' departure-odds curve draws slowly and spikes to 44 percent at 2029 with a hand-drawn circle marked "the cliff," an UNSIGNED stamp lands on LaMelo's contract card, a closing card reads two max guys one summer, and the video ends on comment BILL.
+A midnight-blue animated data video in the Wolves to a T style: it opens on a giant green 44 percent labeled as the model's odds Anthony Edwards leaves in the 2029 walk year, a statement card says the whole LaMelo trade comes down to that one summer, Edwards' departure-odds curve draws slowly and spikes to 44 at 2029 with a hand-drawn circle marked "the cliff," an UNSIGNED stamp lands on LaMelo's contract card, a closing card reads two max guys one summer, and the video ends on comment BILL before looping back to the 44.
 
 === COMMENT KEYWORD ===
 BILL, wired in ManyChat to DM the Part 1 article deep link (the specific article URL, never the homepage).
@@ -21,8 +21,9 @@ Record 3 takes on the phone in a quiet room, mic 8 to 12 inches away, conversati
 B1: "44 percent. Those are Ant's odds of leaving in the 2029 walk year."
 B2: "The whole LaMelo trade comes down to that one summer."
 B3: "2029. Ant's walk year. History is blunt about walk years."
-B4: "On a winning team, his odds of leaving sit near 1 percent. In the walk year? 44. That cliff is forty years of stars, not a hot take."
+B4: "With two years left on his deal, his odds of leaving sit near 1 percent. In the walk year? 44. That cliff is forty years of stars, not a hot take."
 B5: "And LaMelo's deal ends the same July. Still unsigned."
+    (also record the insurance take: "And LaMelo's deal ends the exact same July." with no "Still unsigned.")
 B6: "Two max guys. One summer. That is the bet Charlotte made."
 B7: "We priced all of it across fifty thousand futures. Comment BILL and I'll send you Part 1."
 

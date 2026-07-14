@@ -71,7 +71,7 @@ export const Chrome: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: 88,
+          top: 236, // just inside the safe zone so no app UI ever covers it
           left: SAFE.x,
           fontFamily: FONT.sans,
           fontWeight: 600,
@@ -139,10 +139,15 @@ const Statement: React.FC<{
 export const Hook44: React.FC<SceneProps & { settled?: boolean }> = ({ frame, fps, settled }) => {
   const at = (delay: number) =>
     settled ? { opacity: 1, y: 0 } : riseIn(frame, fps, T.h44 + delay, 0.32);
-  const a = at(0);
-  const b = at(0.1);
+  const k = at(0);
+  const a = at(0.04);
+  const b = at(0.12);
   return (
     <Stage>
+      {/* three small words that turn a naked doom-stat into an owned claim */}
+      <div style={{ ...kickerStyle, opacity: k.opacity, transform: `translateY(${k.y}px)`, marginBottom: 26 }}>
+        THE MODEL SAYS
+      </div>
       <div
         style={{
           fontFamily: FONT.mono,
@@ -385,7 +390,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
         <path d="M 238 172 L 246 184 L 254 172 Z" fill={COLORS.accentPop} opacity={arrow >= 0.98 ? 1 : 0} />
       </svg>
       <div style={{ ...kickerStyle, fontSize: 20, letterSpacing: 2, marginTop: 20, opacity: method }}>
-        50,000 PATHS · WALK YEAR ~70X MID-CONTRACT · 80% BAND: 35 TO 53
+        291 STAR TENURES SINCE 1990 · .600 SCENARIO · 80% BAND: 35 TO 53
       </div>
     </Stage>
   );
