@@ -17,6 +17,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 import urllib.request
 
 import edge_tts
@@ -68,6 +69,35 @@ def load_elevenlabs_key():
     return None
 
 
+def api_call(req, retries=6, wait=2.0):
+    """The key auths intermittently right after creation; retry through blips."""
+    import urllib.error
+
+    last = None
+    for i in range(retries):
+        try:
+            with urllib.request.urlopen(req) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as e:
+            last = f"{e.code} {e.read().decode()[:160]}"
+            print(f"    retry {i + 1}/{retries} ({e.code})...")
+            time.sleep(wait)
+    raise RuntimeError(f"ElevenLabs call failed after {retries} tries: {last}")
+
+
+def resolve_voice_id(name, api_key):
+    req = urllib.request.Request(
+        "https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": api_key}
+    )
+    voices = json.loads(api_call(req))["voices"]
+    for v in voices:
+        if v["name"].lower().strip() == name.lower().strip():
+            print(f"voice '{v['name']}' ({v.get('category')}) -> {v['voice_id']}")
+            return v["voice_id"]
+    cloned = [f"{v['name']} ({v.get('category')})" for v in voices if v.get("category") != "premade"]
+    raise RuntimeError(f"No voice named '{name}'. Non-stock voices on the account: {cloned}")
+
+
 def synth_elevenlabs(voice_id, api_key):
     """Bobby's cloned voice via the ElevenLabs API, one clip per beat."""
     os.makedirs(SEG_DIR, exist_ok=True)
@@ -81,8 +111,7 @@ def synth_elevenlabs(voice_id, api_key):
             }).encode("utf-8"),
             headers={"xi-api-key": api_key, "Content-Type": "application/json"},
         )
-        with urllib.request.urlopen(req) as resp:
-            audio = resp.read()
+        audio = api_call(req)
         with open(os.path.join(SEG_DIR, f"{bid}.mp3"), "wb") as f:
             f.write(audio)
         print(f"  {bid}: {text[:50]}...")
@@ -114,13 +143,16 @@ def main():
     if "--assemble-only" in sys.argv:
         OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
         print("assemble-only: using existing clips in out/vo_segments")
-    elif "--elevenlabs" in sys.argv:
+    elif "--elevenlabs" in sys.argv or "--elevenlabs-name" in sys.argv:
         OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
-        voice_id = sys.argv[sys.argv.index("--elevenlabs") + 1]
         api_key = load_elevenlabs_key()
         if not api_key:
             print("No ELEVENLABS_API_KEY found (env var or repo .env). Add it and re-run.")
             sys.exit(1)
+        if "--elevenlabs-name" in sys.argv:
+            voice_id = resolve_voice_id(sys.argv[sys.argv.index("--elevenlabs-name") + 1], api_key)
+        else:
+            voice_id = sys.argv[sys.argv.index("--elevenlabs") + 1]
         print(f"synthesizing {len(SEGMENTS)} segments with ElevenLabs voice {voice_id}...")
         synth_elevenlabs(voice_id, api_key)
     else:
