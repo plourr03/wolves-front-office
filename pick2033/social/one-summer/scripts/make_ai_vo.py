@@ -68,7 +68,7 @@ SEGMENTS = [
     ("curve1t", "With two years left on his contract."),
     ("curve1b", "But we're not worried about this year."),
     ("curve2", "However, his 2029 walk year has him at about a 44 percent chance of leaving."),
-    ("curve2s", "And that assumes the Wolves keep pace with how they've been doing this past year."),
+    ("curve2s", "And that assumes they have a decent year this year."),
     ("curve2b", "Let's say the Wolves have a bad year and win just 37 games. The odds jump to as high as a 66 percent chance of him leaving."),
     ("curve3", "And this is based on forty years of data, not a gut feeling."),
     ("h1", "The whole LaMelo trade comes down to that one summer."),
@@ -84,8 +84,8 @@ SEGMENTS = [
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "curve1": 0.55, "curve1t": 0.5, "curve1b": 0.7, "curve2": 0.8, "curve2s": 0.7,
-    "curve2b": 0.8, "curve3": 0.9, "h1": 0.75, "unsig": 0.35, "unsig2": 0.75,
+    "curve1": 0.3, "curve1t": 0.4, "curve1b": 0.6, "curve2": 0.7, "curve2s": 0.6,
+    "curve2b": 0.7, "curve3": 0.8, "h1": 0.75, "unsig": 0.35, "unsig2": 0.75,
     "twomax": 0.35, "twomaxb": 0.5, "twomax2": 0.75, "cta1": 0.35,
 }
 CTA_HOLD = 2.2  # dwell on the CTA card after the line ends
@@ -178,7 +178,9 @@ def ffprobe_duration(path):
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
-TEMPO = 1.05  # "speed everything up just the tiniest of bits"
+TEMPO = 1.05  # global lift; the chart act gets a touch more
+def tempo_for(bid):
+    return 1.09 if bid.startswith("curve") else TEMPO
 
 
 def make_faded_wav(bid):
@@ -190,7 +192,7 @@ def make_faded_wav(bid):
     src = os.path.join(SEG_DIR, f"{bid}.mp3")
     dst = os.path.join(SEG_DIR, f"{bid}_faded.wav")
     tmp = os.path.join(SEG_DIR, f"{bid}_tmp.wav")
-    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, "-af", f"atempo={TEMPO}", tmp], cwd=ROOT, capture_output=True)
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, "-af", f"atempo={tempo_for(bid)}", tmp], cwd=ROOT, capture_output=True)
     with wave.open(tmp) as w:
         params = w.getparams()
         frames = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).copy()

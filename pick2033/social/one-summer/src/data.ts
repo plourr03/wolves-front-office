@@ -49,6 +49,12 @@ export const HAZARD_DECLINE: { season: number; h: number }[] = [
   { season: 2033, h: 0.21703851156216664 },
 ];
 export const DECLINE_SPIKE_LABEL = "56%";
+// The decline spike's 80% band (lo80/hi80 from the same export row). The
+// spoken line rides the band top ("as high as a 66 percent chance"), so the
+// chart draws this band and labels its top 66.
+export const DECLINE_LO = 0.4709;
+export const DECLINE_HI = 0.6563;
+export const DECLINE_HI_LABEL = "66%";
 
 // "1 percent with two years left": Part 1's counterfactual (Edwards' 2029
 // profile run with two years remaining reads about 1 percent), and the 2027

@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate } from "remotion";
 import { COLORS, FONT, RADIUS, SAFE } from "./config";
 import { T } from "./timeline";
 import { drawOn, ramp, riseIn, shake, stampIn } from "./animation";
-import { DECLINE_SPIKE_LABEL, HAZARD, HAZARD_DECLINE, SPIKE_HI, SPIKE_LO } from "./data";
+import { DECLINE_HI, DECLINE_HI_LABEL, DECLINE_LO, HAZARD, HAZARD_DECLINE, SPIKE_HI, SPIKE_LO } from "./data";
 
 // One hero visual per beat, statement lines, real holds. Every scene is a pure
 // function of the frame; motion happens at the top of a beat, then stillness.
@@ -146,7 +146,7 @@ export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
 
 // ------------------------------------------------------------- the cliff ---
 
-const CURVE = { w: 912, h: 600, l: 46, r: 30, top: 96, bottom: 64, yMax: 0.6 };
+const CURVE = { w: 912, h: 600, l: 46, r: 30, top: 96, bottom: 64, yMax: 0.7 };
 const cx = (i: number) => CURVE.l + (i * (CURVE.w - CURVE.l - CURVE.r)) / 6;
 const cy = (h: number) =>
   CURVE.h - CURVE.bottom - (h / CURVE.yMax) * (CURVE.h - CURVE.bottom - CURVE.top);
@@ -155,7 +155,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   // Cold open: the chart IS the hook. The 1% callout is legible inside the
   // first half second, the flat years draw during the setup line, and the
   // spike races up to land exactly on the word "forty-four."
-  const HIT = T.curve2 + 3.4; // "...has him at about a 44 percent chance..."
+  const HIT = T.curve2 + 3.2; // "...has him at about a 44 percent chance..."
   const intro = ramp(frame, fps, T.curve1, 0.2);
   const callout1 = ramp(frame, fps, T.curve1 + 0.15, 0.4);
   const band = ramp(frame, fps, HIT + 0.25, 0.4);
@@ -242,17 +242,26 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
           />
           <circle cx={dSpike[0]} cy={dSpike[1]} r={6.5} fill={COLORS.slate} />
         </g>
-        {/* the 56 lands when it's spoken; annotation column shared with the 44,
-            band printed so the "as high as 66" clause is covered on screen */}
+        {/* the bad-year band lands when it's spoken: the capsule is the 80%
+            band at the decline spike, the big 66 sits at its top (the "as
+            high as" the voice claims), the dot below stays the 56 point */}
         <g opacity={label56}>
-          <text x={spike[0] + 130} y={dSpike[1] - 54} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
-            ON A 37-WIN PACE
+          <rect
+            x={dSpike[0] - 30}
+            y={cy(DECLINE_HI)}
+            width={60}
+            height={cy(DECLINE_LO) - cy(DECLINE_HI)}
+            rx={6}
+            fill="rgba(150,168,190,0.13)"
+          />
+          <text x={spike[0] + 130} y={cy(DECLINE_HI) - 26} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
+            ON A 37-WIN PACE, AS HIGH AS
           </text>
-          <text x={spike[0] + 128} y={dSpike[1] - 12} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={46} fontWeight={700}>
-            {DECLINE_SPIKE_LABEL}
+          <text x={spike[0] + 128} y={cy(DECLINE_HI) + 12} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={46} fontWeight={700}>
+            {DECLINE_HI_LABEL}
           </text>
-          <text x={spike[0] + 130} y={dSpike[1] + 14} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={16} letterSpacing={2}>
-            80%: 47 TO 66
+          <text x={spike[0] + 130} y={cy(DECLINE_HI) + 38} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={16} letterSpacing={2}>
+            80% BAND: 47 TO 66
           </text>
         </g>
         {/* the curve itself, drawn on cue */}
