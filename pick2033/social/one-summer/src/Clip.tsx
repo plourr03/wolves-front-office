@@ -2,8 +2,8 @@ import React from "react";
 import { AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "./Background";
 import { Captions } from "./Captions";
-import { Chrome, Cta, HazardCurve, TwoMax, Unsigned } from "./Scenes";
-import { BEATS, BeatId, END_SEC, activeBeatIndex } from "./timeline";
+import { Chrome, Cta, HazardCurve, OneSummerCard, TwoMax, Unsigned } from "./Scenes";
+import { BEATS, BeatId, END_SEC, T, activeBeatIndex, secToFrame } from "./timeline";
 import { COLORS } from "./config";
 
 export type ClipProps = {
@@ -12,11 +12,12 @@ export type ClipProps = {
 };
 
 // Which visual a beat renders. The cold open IS the chart; the loop lands on
-// the fully drawn chart. Beats that share a scene never transition.
+// the chart's flat-line 1% state. Beats that share a scene never transition.
 const sceneKey = (id: BeatId): string => {
   if (id.startsWith("curve") || id === "loop") return "curve";
   if (id.startsWith("twomax")) return "twomax";
   if (id.startsWith("unsig")) return "unsig";
+  if (id === "h1") return "h1";
   return "cta";
 };
 
@@ -37,9 +38,16 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
   const prev = idx > 0 ? BEATS[idx - 1] : null;
 
   const scene = (id: BeatId): React.ReactNode => {
+    // The loop shows the chart frozen mid-setup: flat line, 1% callout, no
+    // spike yet, so the rewatch reads as a seamless rewind.
+    if (id === "loop") {
+      return <HazardCurve frame={secToFrame(T.curve2) - 18} fps={fps} />;
+    }
     switch (sceneKey(id)) {
       case "curve":
         return <HazardCurve frame={frame} fps={fps} />;
+      case "h1":
+        return <OneSummerCard frame={frame} fps={fps} />;
       case "unsig":
         return <Unsigned frame={frame} fps={fps} />;
       case "twomax":

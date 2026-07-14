@@ -64,30 +64,27 @@ BED_BPM = 72
 # summer" (he means 2029), "similar clip then they have been" -> "the clip
 # they have been."
 SEGMENTS = [
-    ("curve1", "Anthony Edwards has two years left on his contract with Minnesota."),
-    ("curve1c", "The odds he leaves this year? Only around 1 percent."),
-    ("curve1b", "But we're not worried about this year."),
-    ("curve2", "In the walk year, the odds of Ant leaving skyrocket to 44 percent."),
+    ("curve1", "One percent. Those are Ant's odds of leaving Minnesota this year, with two years left on his deal."),
+    ("curve2", "His 2029 walk year? Forty-four."),
     ("curve2r", "Really, it's anywhere between 35 and 53 percent."),
-    ("curve2s", "And that's if the Wolves keep winning at the clip they have been."),
-    ("curve2b", "Let's say the Wolves have a bad year and win at just a 37-win pace?"),
-    ("curve2c", "The odds of him leaving jump to 56."),
+    ("curve2s", "And that's with the team winning."),
     ("curve3", "And this is based on forty years of data, not a gut feeling."),
+    ("h1", "The whole LaMelo trade comes down to that one summer."),
     ("unsig", "Not only that, but LaMelo's deal ends the same July."),
     ("unsig2", "And we still have not extended him."),
     ("twomax", "So, we have two max guys."),
     ("twomaxb", "One summer that the next decade of basketball in Minnesota hinges on."),
     ("twomax2", "The Wolves and Hornets both made opposing bets on where that summer will land."),
     ("cta1", "What are the most likely futures for that summer?"),
-    ("cta2", "Comment BILL and I'll send you the link to the Part 1 article."),
+    ("cta2", "Comment BILL and I'll send you Part 1."),
 ]
 
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "curve1": 0.35, "curve1c": 0.5, "curve1b": 0.8, "curve2": 0.35, "curve2r": 0.8, "curve2s": 0.8,
-    "curve2b": 0.35, "curve2c": 0.9, "curve3": 1.0, "unsig": 0.4,
-    "unsig2": 0.9, "twomax": 0.4, "twomaxb": 0.6, "twomax2": 0.9, "cta1": 0.4,
+    "curve1": 0.5, "curve2": 0.6, "curve2r": 0.8, "curve2s": 0.8, "curve3": 1.0,
+    "h1": 0.9, "unsig": 0.4, "unsig2": 0.9, "twomax": 0.4, "twomaxb": 0.6,
+    "twomax2": 0.9, "cta1": 0.4,
 }
 CTA_HOLD = 2.4  # dwell on the CTA card after the line ends
 LOOP_LEN = 0.5

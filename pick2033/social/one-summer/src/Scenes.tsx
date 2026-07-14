@@ -1,9 +1,9 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, interpolate } from "remotion";
 import { COLORS, FONT, RADIUS, SAFE } from "./config";
 import { T } from "./timeline";
 import { drawOn, ramp, riseIn, shake, stampIn } from "./animation";
-import { DECLINE_SPIKE_LABEL, HAZARD, HAZARD_DECLINE, SPIKE_HI, SPIKE_LO } from "./data";
+import { HAZARD, SPIKE_HI, SPIKE_LO } from "./data";
 
 // One hero visual per beat, statement lines, real holds. Every scene is a pure
 // function of the frame; motion happens at the top of a beat, then stillness.
@@ -88,6 +88,33 @@ export const Chrome: React.FC = () => {
 
 // ------------------------------------------------------------ statements ---
 
+// The breather after the chart act: the thesis card, right before LaMelo enters.
+export const OneSummerCard: React.FC<SceneProps> = ({ frame, fps }) => {
+  const k = riseIn(frame, fps, T.h1);
+  const a = riseIn(frame, fps, T.h1 + 0.12);
+  const b = riseIn(frame, fps, T.h1 + 0.24);
+  return (
+    <Stage>
+      <div style={{ ...kickerStyle, opacity: k.opacity, transform: `translateY(${k.y}px)`, marginBottom: 30 }}>
+        THE LAMELO TRADE, PRICED
+      </div>
+      <div style={{ ...statementStyle, opacity: a.opacity, transform: `translateY(${a.y}px)` }}>
+        IT COMES DOWN
+      </div>
+      <div
+        style={{
+          ...statementStyle,
+          color: COLORS.accentPop,
+          opacity: b.opacity,
+          transform: `translateY(${b.y}px)`,
+        }}
+      >
+        TO ONE SUMMER.
+      </div>
+    </Stage>
+  );
+};
+
 // Custom timing: each line lands as its sentence is spoken.
 export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
   const a = riseIn(frame, fps, T.twomax);
@@ -123,20 +150,18 @@ const cy = (h: number) =>
   CURVE.h - CURVE.bottom - (h / CURVE.yMax) * (CURVE.h - CURVE.bottom - CURVE.top);
 
 export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
-  // Cold open: the chart IS the hook now, so the title snaps on and the line
-  // starts moving inside the first few frames.
+  // Cold open: the chart IS the hook. The 1% callout is legible inside the
+  // first half second, the flat years draw during the setup line, and the
+  // spike races up to land exactly on the word "forty-four."
+  const HIT = T.curve2 + 1.1;
   const intro = ramp(frame, fps, T.curve1, 0.2);
-  const p = drawOn(frame, fps, T.curve1 + 0.05, 2.8);
-  const callout1 = ramp(frame, fps, T.curve1c + 0.3, 0.45); // "only about 1 percent"
-  const band = ramp(frame, fps, T.curve2 - 0.1, 0.35);
-  const label44 = riseIn(frame, fps, T.curve2 + 0.15, 0.4);
-  const circle = drawOn(frame, fps, T.curve2 + 0.35, 0.6);
-  const scrawl = ramp(frame, fps, T.curve2 + 0.85, 0.35);
-  const arrow = drawOn(frame, fps, T.curve2 + 1.0, 0.4);
+  const callout1 = ramp(frame, fps, T.curve1 + 0.15, 0.4);
+  const band = ramp(frame, fps, HIT + 0.25, 0.4);
+  const label44 = riseIn(frame, fps, HIT - 0.05, 0.4);
+  const circle = drawOn(frame, fps, HIT + 0.05, 0.55);
+  const scrawl = ramp(frame, fps, HIT + 0.5, 0.35);
+  const arrow = drawOn(frame, fps, HIT + 0.65, 0.4);
   const method = ramp(frame, fps, T.curve3 + 0.2, 0.45);
-
-  const declineIn = ramp(frame, fps, T.curve2b, 0.5);
-  const label56 = ramp(frame, fps, T.curve2c + 0.15, 0.4);
   // "Really, it's anywhere between 35 and 53": the band brightens and gets
   // its edge labels the moment the range is spoken.
   const bandCall = ramp(frame, fps, T.curve2r + 0.1, 0.45);
@@ -144,9 +169,20 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   const pts = HAZARD.map((d, i) => [cx(i), cy(d.h)] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
   const spike = pts[2];
-  const dPts = HAZARD_DECLINE.map((d, i) => [cx(i), cy(d.h)] as const);
-  const dPath = dPts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
-  const dSpike = dPts[2];
+  // Cumulative length fractions along the path, so draw progress can idle on
+  // the flat 2027-2028 stretch and then race up the spike on cue.
+  const segLens = pts.slice(1).map(([x, y], i) => Math.hypot(x - pts[i][0], y - pts[i][1]));
+  const total = segLens.reduce((a, b) => a + b, 0);
+  const fracs: number[] = [];
+  segLens.forEach((l) => fracs.push((fracs.length ? fracs[fracs.length - 1] : 0) + l / total));
+  const flatP = fracs[0]; // through 2028
+  const apexP = fracs[1]; // top of the spike
+  const p = interpolate(
+    frame,
+    [T.curve1 * fps + 3, T.curve1 * fps + 26, HIT * fps - 24, HIT * fps, HIT * fps + 42],
+    [0, flatP, flatP + 0.015, apexP, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
   return (
     <Stage>
@@ -217,30 +253,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             {HAZARD[i].season}
           </text>
         ))}
-        {/* the declining-team (.450) scenario: quiet context behind the story,
-            arriving only when the VO names it */}
-        <g opacity={declineIn}>
-          <path
-            d={dPath}
-            fill="none"
-            stroke={COLORS.slate}
-            strokeWidth={3.5}
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeDasharray="2 8"
-          />
-          <circle cx={dSpike[0]} cy={dSpike[1]} r={6.5} fill={COLORS.slate} />
-        </g>
-        {/* the 56 lands when its sentence does; annotation column shared with the 44 */}
-        <g opacity={label56}>
-          <text x={spike[0] + 130} y={dSpike[1] - 54} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
-            ON A 37-WIN PACE
-          </text>
-          <text x={spike[0] + 128} y={dSpike[1] - 12} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={46} fontWeight={700}>
-            {DECLINE_SPIKE_LABEL}
-          </text>
-        </g>
-        {/* the curve itself, drawn on slow */}
+        {/* the curve itself, drawn on cue */}
         <path
           d={path}
           fill="none"
@@ -253,7 +266,14 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
           strokeDashoffset={1 - p}
         />
         {pts.map(([x, y], i) => (
-          <circle key={i} cx={x} cy={y} r={6.5} fill={COLORS.text} opacity={p >= i / 6 - 0.001 ? 1 : 0} />
+          <circle
+            key={i}
+            cx={x}
+            cy={y}
+            r={6.5}
+            fill={COLORS.text}
+            opacity={p >= (i === 0 ? 0 : fracs[i - 1]) - 0.001 ? 1 : 0}
+          />
         ))}
         {/* callout: 1% with two years left (the 2027 point) */}
         <g opacity={callout1}>
