@@ -155,7 +155,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   // Cold open: the chart IS the hook. The 1% callout is legible inside the
   // first half second, the flat years draw during the setup line, and the
   // spike races up to land exactly on the word "forty-four."
-  const HIT = T.curve2 + 3.2; // "...has him at about a 44 percent chance..."
+  const HIT = T.curve2 + 3.1; // "...has him at about a 44 percent chance..."
   const intro = ramp(frame, fps, T.curve1, 0.2);
   const callout1 = ramp(frame, fps, T.curve1 + 0.15, 0.4);
   const band = ramp(frame, fps, HIT + 0.25, 0.4);
@@ -292,7 +292,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             1%
           </text>
           <text x={pts[0][0] - 8} y={pts[0][1] - 80} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={20} letterSpacing={2}>
-            TWO YEARS LEFT
+            THIS YEAR
           </text>
         </g>
         {/* the spike: green dot, green number, hand-drawn circle, marker scrawl */}

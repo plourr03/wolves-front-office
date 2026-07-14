@@ -64,8 +64,7 @@ BED_BPM = 72
 # summer" (he means 2029), "similar clip then they have been" -> "the clip
 # they have been."
 SEGMENTS = [
-    ("curve1", "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent."),
-    ("curve1t", "With two years left on his contract."),
+    ("curve1", "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent. He's under contract until the summer of 2029."),
     ("curve1b", "But we're not worried about this year."),
     ("curve2", "However, his 2029 walk year has him at about a 44 percent chance of leaving."),
     ("curve2s", "And that assumes they have a decent year this year."),
@@ -84,7 +83,7 @@ SEGMENTS = [
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "curve1": 0.3, "curve1t": 0.4, "curve1b": 0.6, "curve2": 0.7, "curve2s": 0.6,
+    "curve1": 0.6, "curve1b": 0.6, "curve2": 0.7, "curve2s": 0.6,
     "curve2b": 0.7, "curve3": 0.8, "h1": 0.75, "unsig": 0.35, "unsig2": 0.75,
     "twomax": 0.35, "twomaxb": 0.5, "twomax2": 0.75, "cta1": 0.35,
 }
@@ -178,9 +177,9 @@ def ffprobe_duration(path):
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
-TEMPO = 1.05  # global lift; the chart act gets a touch more
+TEMPO = 1.09  # global lift; the chart act gets a touch more
 def tempo_for(bid):
-    return 1.09 if bid.startswith("curve") else TEMPO
+    return 1.13 if bid.startswith("curve") else TEMPO
 
 
 def make_faded_wav(bid):
