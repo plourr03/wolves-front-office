@@ -20,16 +20,16 @@ Single slide: "the series is live." Link sticker to Part 1, sticker text "Read i
 === VO SCRIPT (Bobby's rewrite, grammar normalized; this is what the "upbeat bob" clone reads and what the burned captions match) ===
 Cleanup flags from the edit pass: "honestly" dropped (house banned word, with "genuinely" and "actually"); "this summer" became "that summer" in B7 (the summer in question is 2029); "a similar clip then they have been" tightened to "the clip they have been."
 
-FINAL SHAPE (the buddy cut): chart cold open with the 1-to-44 rug-pull, no second sensitivity number (the cumulative 56-to-71 pair is reel two's headline, intact), the ONE SUMMER card as the breather, loop lands on the flat-line 1% state. 57 seconds.
+FINAL SHAPE: chart cold open with the 1-to-44 rug-pull, the bad-year beat back per Bobby (56, as high as 66, band printed on screen), the ONE SUMMER card as the breather, loop lands on the flat-line 1% state. 64 seconds.
 
-B1 (the chart act): "One percent. Those are Ant's odds of leaving Minnesota this year, with two years left on his deal. [beat] His 2029 walk year? Forty-four. [beat] Really, it's anywhere between 35 and 53 percent. And that's with the team winning. [beat] And this is based on forty years of data, not a gut feeling."
+B1 (the chart act): "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent, with two years left on his contract. [beat] His 2029 walk year? Forty-four percent. And that's with the team winning. [beat] Let's say the Wolves have a bad year and win just 37 games? The odds of Ant leaving jump to 56, maybe as high as 66 percent. [beat] And this is based on forty years of data, not a gut feeling."
 B2 (the breather card): "The whole LaMelo trade comes down to that one summer."
 B3: "Not only that, but LaMelo's deal ends the same July. And we still have not extended him."
     (insurance take if he signs: "Not only that, but LaMelo's deal ends the exact same July." with no extension line; the NO EXTENSION stamp gets re-rendered away too)
 B4: "So, we have two max guys. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Hornets both made opposing bets on where that summer will land."
 B5: "What are the most likely futures for that summer? Comment BILL and I'll send you Part 1."
 
-FACT RECORD on the cut 37-win-pace line: the .450-scenario walk-year hazard DOES exist in edwards_hazard_FINAL.json (0.5649, 80% band 0.4709 to 0.6563). It was cut editorially (two different true 56s across assets: this one, and the cumulative gone-by-2033 figure), not for accuracy.
+FACT RECORD on the 37-win-pace numbers: decline_win45 2029 walk-year hazard = 0.5649 [80%: 0.4709, 0.6563] in edwards_hazard_FINAL.json; spoken as 'jump to 56, maybe as high as 66 percent' with the 47-to-66 band printed on screen. CROSS-ASSET NOTE: reel two's cumulative pair (56 gone-by-2033 at .600, 71 at .450) shares a digit with this beat; keep reel two's captions explicit about 'gone by 2033.'
 
 === RENDER COMMANDS ===
 Silent CapCut cut (already rendered): one-summer/out/one_summer_reel.mp4

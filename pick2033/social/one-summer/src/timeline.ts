@@ -1,14 +1,12 @@
 import { FPS } from "./config";
 
-// The One Summer reel, seventh cut (the buddy cut): cold open ON the chart
-// with the 1-to-44 rug-pull in the first breath, no second sensitivity
-// number (the cumulative 56-to-71 pair stays whole for reel two), the ONE
-// SUMMER statement card as the breather before LaMelo enters, and the loop
-// landing on the flat-line 1% state. Runs 57.0s.
-//
-// Fact record: the .450-scenario walk-year hazard DOES exist in
-// edwards_hazard_FINAL.json (0.5649 [80%: 0.4709, 0.6563]); it was cut on
-// editorial grounds (two different 56s across assets), not accuracy.
+// The One Summer reel, eighth cut: Bobby's reworded chart act. Cold open on
+// "about 1 percent," the 44 lands as "Forty-four percent," the range line is
+// out, and the sensitivity beat is back in the bad-year shape with the band
+// top spoken honestly: "jump to 56, maybe as high as 66 percent" (decline
+// walk-year hazard 0.5649 [80%: 0.4709, 0.6563], receipt in the repo). The
+// 80% band 47-66 is printed on screen under the 56. Calmer delivery settings
+// on the whole act. Runs 64.4s.
 //
 // When re-timing, run scripts/make_ai_vo.py and paste its printed starts.
 
@@ -16,8 +14,9 @@ export type BeatId =
   | "curve1"
   | "curve1b"
   | "curve2"
-  | "curve2r"
   | "curve2s"
+  | "curve2b"
+  | "curve2b2"
   | "curve3"
   | "h1"
   | "unsig"
@@ -37,28 +36,30 @@ export type Beat = {
 };
 
 export const BEATS: Beat[] = [
-  { id: "curve1", startSec: 0.0, caption: "One percent. Those are Ant's odds of\nleaving Minnesota this year," },
+  { id: "curve1", startSec: 0.0, caption: "Anthony Edwards' odds of leaving\nMinnesota this year are about 1%," },
   // caption-only page inside the same clip
-  { id: "curve1b", startSec: 3.7, caption: "with two years left on his deal." },
-  { id: "curve2", startSec: 6.7, caption: "His 2029 walk year? Forty-four." },
-  { id: "curve2r", startSec: 9.7, caption: "Really, it's anywhere\nbetween 35 and 53 percent." },
-  { id: "curve2s", startSec: 15.1, caption: "And that's with the team winning." },
-  { id: "curve3", startSec: 17.2, caption: "And this is based on forty years\nof data, not a gut feeling." },
-  { id: "h1", startSec: 22.8, caption: "The whole LaMelo trade\ncomes down to that one summer." },
-  { id: "unsig", startSec: 26.5, caption: "Not only that, but LaMelo's deal\nends the same July." },
-  { id: "unsig2", startSec: 30.4, caption: "And we still have not extended him." },
-  { id: "twomax", startSec: 33.0, caption: "So, we have two max guys." },
-  { id: "twomaxb", startSec: 35.7, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
-  { id: "twomax2", startSec: 41.2, caption: "The Wolves and Hornets both made" },
-  { id: "twomax2b", startSec: 44.1, caption: "opposing bets on where\nthat summer will land." },
-  { id: "cta1", startSec: 48.0, caption: "What are the most likely futures\nfor that summer?" },
+  { id: "curve1b", startSec: 4.7, caption: "with two years left on his contract." },
+  { id: "curve2", startSec: 8.4, caption: "His 2029 walk year?\nForty-four percent." },
+  { id: "curve2s", startSec: 12.5, caption: "And that's with the team winning." },
+  { id: "curve2b", startSec: 14.9, caption: "Let's say the Wolves have a bad year\nand win just 37 games?" },
+  // caption-only page inside the same clip
+  { id: "curve2b2", startSec: 20.4, caption: "The odds of Ant leaving jump to 56,\nmaybe as high as 66 percent." },
+  { id: "curve3", startSec: 25.7, caption: "And this is based on forty years\nof data, not a gut feeling." },
+  { id: "h1", startSec: 30.2, caption: "The whole LaMelo trade\ncomes down to that one summer." },
+  { id: "unsig", startSec: 33.9, caption: "Not only that, but LaMelo's deal\nends the same July." },
+  { id: "unsig2", startSec: 37.8, caption: "And we still have not extended him." },
+  { id: "twomax", startSec: 40.4, caption: "So, we have two max guys." },
+  { id: "twomaxb", startSec: 43.1, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
+  { id: "twomax2", startSec: 48.6, caption: "The Wolves and Hornets both made" },
+  { id: "twomax2b", startSec: 51.5, caption: "opposing bets on where\nthat summer will land." },
+  { id: "cta1", startSec: 55.4, caption: "What are the most likely futures\nfor that summer?" },
   // The CTA card carries the spoken words; no lower-third on the send line.
-  { id: "cta2", startSec: 51.5 },
+  { id: "cta2", startSec: 58.9 },
   // Loop-friendly ending: back onto the chart's flat-line 1% state.
-  { id: "loop", startSec: 56.5 },
+  { id: "loop", startSec: 63.9 },
 ];
 
-export const END_SEC = 57.0;
+export const END_SEC = 64.4;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 

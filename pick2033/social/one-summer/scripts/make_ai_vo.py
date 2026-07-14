@@ -42,7 +42,7 @@ VOICE = "en-US-AndrewMultilingualNeural"  # Edge preview voice
 
 # Expressive settings for the clone: lower stability = more life, a bit of
 # style exaggeration for the sports-desk energy.
-ELEVEN_SETTINGS = {"stability": 0.30, "similarity_boost": 0.80, "style": 0.45}
+ELEVEN_SETTINGS = {"stability": 0.42, "similarity_boost": 0.80, "style": 0.25}
 
 # Per-line tweaks, merged over the base settings. h44: the hook read too slow
 # (8.4s), so it gets the max delivery speed. unsig2: the extension line came
@@ -64,10 +64,10 @@ BED_BPM = 72
 # summer" (he means 2029), "similar clip then they have been" -> "the clip
 # they have been."
 SEGMENTS = [
-    ("curve1", "One percent. Those are Ant's odds of leaving Minnesota this year, with two years left on his deal."),
-    ("curve2", "His 2029 walk year? Forty-four."),
-    ("curve2r", "Really, it's anywhere between 35 and 53 percent."),
+    ("curve1", "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent, with two years left on his contract."),
+    ("curve2", "His 2029 walk year? Forty-four percent."),
     ("curve2s", "And that's with the team winning."),
+    ("curve2b", "Let's say the Wolves have a bad year and win just 37 games? The odds of Ant leaving jump to 56, maybe as high as 66 percent."),
     ("curve3", "And this is based on forty years of data, not a gut feeling."),
     ("h1", "The whole LaMelo trade comes down to that one summer."),
     ("unsig", "Not only that, but LaMelo's deal ends the same July."),
@@ -82,7 +82,7 @@ SEGMENTS = [
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "curve1": 0.5, "curve2": 0.6, "curve2r": 0.8, "curve2s": 0.8, "curve3": 1.0,
+    "curve1": 0.5, "curve2": 0.6, "curve2s": 0.6, "curve2b": 0.8, "curve3": 1.0,
     "h1": 0.9, "unsig": 0.4, "unsig2": 0.9, "twomax": 0.4, "twomaxb": 0.6,
     "twomax2": 0.9, "cta1": 0.4,
 }

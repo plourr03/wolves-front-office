@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate } from "remotion";
 import { COLORS, FONT, RADIUS, SAFE } from "./config";
 import { T } from "./timeline";
 import { drawOn, ramp, riseIn, shake, stampIn } from "./animation";
-import { HAZARD, SPIKE_HI, SPIKE_LO } from "./data";
+import { DECLINE_SPIKE_LABEL, HAZARD, HAZARD_DECLINE, SPIKE_HI, SPIKE_LO } from "./data";
 
 // One hero visual per beat, statement lines, real holds. Every scene is a pure
 // function of the frame; motion happens at the top of a beat, then stillness.
@@ -162,13 +162,17 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   const scrawl = ramp(frame, fps, HIT + 0.5, 0.35);
   const arrow = drawOn(frame, fps, HIT + 0.65, 0.4);
   const method = ramp(frame, fps, T.curve3 + 0.2, 0.45);
-  // "Really, it's anywhere between 35 and 53": the band brightens and gets
-  // its edge labels the moment the range is spoken.
-  const bandCall = ramp(frame, fps, T.curve2r + 0.1, 0.45);
+  // The bad-year beat: the dotted decline line rises on the setup, the 56
+  // lands when it's spoken ("jump to 56, maybe as high as 66").
+  const declineIn = ramp(frame, fps, T.curve2b + 0.2, 0.5);
+  const label56 = ramp(frame, fps, T.curve2b2 + 0.1, 0.45);
 
   const pts = HAZARD.map((d, i) => [cx(i), cy(d.h)] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
   const spike = pts[2];
+  const dPts = HAZARD_DECLINE.map((d, i) => [cx(i), cy(d.h)] as const);
+  const dPath = dPts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+  const dSpike = dPts[2];
   // Cumulative length fractions along the path, so draw progress can idle on
   // the flat 2027-2028 stretch and then race up the spike on cue.
   const segLens = pts.slice(1).map(([x, y], i) => Math.hypot(x - pts[i][0], y - pts[i][1]));
@@ -198,38 +202,8 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
           height={cy(SPIKE_LO) - cy(SPIKE_HI)}
           rx={6}
           fill={COLORS.accentDim}
-          opacity={band + bandCall * 0.9}
+          opacity={band}
         />
-        {/* 80% band edges, labeled as they're spoken (0.349 / 0.533 -> 35 / 53) */}
-        <g opacity={bandCall}>
-          {[
-            [SPIKE_HI, "53"],
-            [SPIKE_LO, "35"],
-          ].map(([h, label]) => (
-            <g key={label as string}>
-              <line
-                x1={92}
-                x2={spike[0] - 34}
-                y1={cy(h as number)}
-                y2={cy(h as number)}
-                stroke={COLORS.hair}
-                strokeWidth={1.5}
-                strokeDasharray="3 6"
-              />
-              <text
-                x={86}
-                y={cy(h as number) + 7}
-                textAnchor="end"
-                fill={COLORS.slate}
-                fontFamily={FONT.mono}
-                fontSize={22}
-                fontWeight={700}
-              >
-                {label}
-              </text>
-            </g>
-          ))}
-        </g>
         {/* baseline + year ticks */}
         <line
           x1={CURVE.l - 8}
@@ -253,6 +227,32 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             {HAZARD[i].season}
           </text>
         ))}
+        {/* the declining-team (.450) scenario: quiet context, arriving on cue */}
+        <g opacity={declineIn}>
+          <path
+            d={dPath}
+            fill="none"
+            stroke={COLORS.slate}
+            strokeWidth={3.5}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeDasharray="2 8"
+          />
+          <circle cx={dSpike[0]} cy={dSpike[1]} r={6.5} fill={COLORS.slate} />
+        </g>
+        {/* the 56 lands when it's spoken; annotation column shared with the 44,
+            band printed so the "as high as 66" clause is covered on screen */}
+        <g opacity={label56}>
+          <text x={spike[0] + 130} y={dSpike[1] - 54} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
+            ON A 37-WIN PACE
+          </text>
+          <text x={spike[0] + 128} y={dSpike[1] - 12} fill={COLORS.slate} fontFamily={FONT.mono} fontSize={46} fontWeight={700}>
+            {DECLINE_SPIKE_LABEL}
+          </text>
+          <text x={spike[0] + 130} y={dSpike[1] + 14} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={16} letterSpacing={2}>
+            80%: 47 TO 66
+          </text>
+        </g>
         {/* the curve itself, drawn on cue */}
         <path
           d={path}
