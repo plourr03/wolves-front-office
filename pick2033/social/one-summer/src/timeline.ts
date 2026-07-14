@@ -51,31 +51,31 @@ export type Beat = {
 
 export const BEATS: Beat[] = [
   { id: "h44", startSec: 0.0, caption: "The odds of Ant leaving in his 2029\nwalk year are somewhere around 44%." },
-  { id: "h1", startSec: 5.8, caption: "The whole LaMelo trade\ncomes down to that one summer." },
-  { id: "y2029", startSec: 10.8, caption: "2029. Ant's walk year.\nAnd history is blunt about walk years." },
+  { id: "h1", startSec: 5.9, caption: "The whole LaMelo trade\ncomes down to that one summer." },
+  { id: "y2029", startSec: 9.2, caption: "2029. Ant's walk year.\nAnd history is blunt about walk years." },
   {
     id: "curve1",
-    startSec: 16.8,
+    startSec: 14.6,
     caption: "With two years left on his deal, his\nodds of leaving this year are near 1%.",
   },
-  { id: "curve1b", startSec: 23.0, caption: "But that isn't what\nwe're worried about." },
-  { id: "curve2", startSec: 27.6, caption: "In the walk year, however? 44.\nAnd that's with the team winning." },
-  { id: "curve2b", startSec: 33.6, caption: "On a 37-win pace?\nIt jumps to 56." },
-  { id: "curve3", startSec: 38.6, caption: "That cliff is forty years of stars,\nnot a hot take." },
-  { id: "unsig", startSec: 45.2, caption: "And LaMelo's deal ends the same July.\nStill not extended." },
-  { id: "twomax", startSec: 51.8, caption: "Two max guys. One summer." },
+  { id: "curve1b", startSec: 19.8, caption: "But that isn't what\nwe're worried about." },
+  { id: "curve2", startSec: 21.9, caption: "In the walk year, however? 44.\nAnd that's with the team winning." },
+  { id: "curve2b", startSec: 28.0, caption: "On a 37-win pace?\nIt jumps to 56." },
+  { id: "curve3", startSec: 31.3, caption: "That cliff is forty years of stars,\nnot a hot take." },
+  { id: "unsig", startSec: 35.2, caption: "And LaMelo's deal ends the same July.\nStill not extended." },
+  { id: "twomax", startSec: 39.1, caption: "Two max guys. One summer." },
   {
     id: "twomax2",
-    startSec: 54.8,
+    startSec: 41.3,
     caption: "The Wolves and Charlotte both\nmaking opposite bets on that summer.",
   },
   // The CTA card carries the spoken words itself; no lower-third on top of it.
-  { id: "cta", startSec: 59.2 },
+  { id: "cta", startSec: 45.7 },
   // Loop-friendly ending: back onto the 44 card, so a rewatch reads as intentional.
-  { id: "loop", startSec: 66.4 },
+  { id: "loop", startSec: 53.4 },
 ];
 
-export const END_SEC = 66.9;
+export const END_SEC = 53.9;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 

@@ -1,24 +1,34 @@
-"""Assemble an AI-voice test VO for the One Summer reel.
+"""Assemble the One Summer voiceover track (clone or preview voice).
 
-Generates one Edge neural-TTS clip per spoken beat (free, no account), places
-each at its beat's exact startSec from src/timeline.ts, mixes to a single
-track normalized toward the brief's -14 LUFS, and writes
-public/voiceover_ai.mp3. This is a PREVIEW/pace-check voice; the shipping
-plan remains Bobby's own read (or a consented clone of it), and platforms
-want realistic AI audio disclosed if this ever posts as-is.
+Pipeline: synthesize one clip per beat (ElevenLabs clone by name/id, or free
+Edge TTS for previews) -> probe real durations -> RE-TIME the beats so each
+line starts a natural pause after the previous one ends (the audio is the
+master clock) -> print the timeline.ts starts to paste -> mix with a tail
+fade per clip (no clipped breaths) plus a faint original clock-pulse bed ->
+public/voiceover_clone.mp3 (or voiceover_ai.mp3 for the Edge preview).
 
-Run from the one-summer project root:  python scripts/make_ai_vo.py
-Then render:  npx remotion render Clip out/one_summer_reel_ai_vo.mp4
-              --props="{\"voiceoverSrc\":\"voiceover_ai.mp3\"}"
+Modes:
+  python scripts/make_ai_vo.py --elevenlabs-name bobby    (the real one)
+  python scripts/make_ai_vo.py --elevenlabs VOICE_ID
+  python scripts/make_ai_vo.py --assemble-only            (mix existing clips)
+  python scripts/make_ai_vo.py                            (Edge TTS preview)
+  add --no-bed to skip the music bed
+
+After it prints the new starts, update src/timeline.ts to match, then render:
+  npx remotion render Clip out/one_summer_reel_clone_vo.mp4
+      --props="{\"voiceoverSrc\":\"voiceover_clone.mp3\"}"
 """
 
 import asyncio
 import json
+import math
 import os
+import struct
 import subprocess
 import sys
 import time
 import urllib.request
+import wave
 
 import edge_tts
 
@@ -26,43 +36,63 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SEG_DIR = os.path.join(ROOT, "out", "vo_segments")
 OUT = os.path.join(ROOT, "public", "voiceover_ai.mp3")
+BED_WAV = os.path.join(ROOT, "out", "bed.wav")
 
-VOICE = "en-US-AndrewMultilingualNeural"  # conversational, sports-desk adjacent
+VOICE = "en-US-AndrewMultilingualNeural"  # Edge preview voice
 
-# (beat id, startSec, spoken line) -- keep in lockstep with src/timeline.ts.
+# Expressive settings for the clone: lower stability = more life, a bit of
+# style exaggeration for the sports-desk energy.
+ELEVEN_SETTINGS = {"stability": 0.30, "similarity_boost": 0.80, "style": 0.45}
+
+# Faint original clock-pulse bed (soft low thump / tick alternating). Peak
+# gain of the bed relative to full scale; the voice peaks around 0.8.
+BED_GAIN = 0.10
+BED_BPM = 72
+
+# (beat id, spoken line). Starts are COMPUTED from clip durations + gaps.
 SEGMENTS = [
-    ("h44", 0.0, "The odds of Ant leaving in his 2029 walk year are somewhere around 44 percent."),
-    ("h1", 5.8, "The whole LaMelo trade comes down to that one summer."),
-    ("y2029", 10.8, "2029. Ant's walk year. And history is blunt about walk years."),
-    ("curve1", 16.8, "With two years left on his deal, his odds of leaving this year are near 1 percent."),
-    ("curve1b", 23.0, "But that isn't what we're worried about."),
-    ("curve2", 27.6, "In the walk year, however? 44. And that's with the team winning."),
-    ("curve2b", 33.6, "On a 37-win pace? It jumps to 56."),
-    ("curve3", 38.6, "That cliff is forty years of stars, not a hot take."),
-    ("unsig", 45.2, "And LaMelo's deal ends the same July. Still not extended."),
-    ("twomax", 51.8, "Two max guys. One summer."),
-    ("twomax2", 54.8, "The Wolves and Charlotte both making opposite bets on that summer."),
-    ("cta", 59.2, "We priced all of it across fifty thousand futures. Comment BILL and I'll send you Part 1."),
+    ("h44", "The odds of Ant leaving in his 2029 walk year are somewhere around 44 percent."),
+    ("h1", "The whole LaMelo trade comes down to that one summer."),
+    ("y2029", "2029. Ant's walk year. And history is blunt about walk years."),
+    ("curve1", "With two years left on his deal, his odds of leaving this year are near 1 percent."),
+    ("curve1b", "But that isn't what we're worried about."),
+    ("curve2", "In the walk year, however? 44. And that's with the team winning."),
+    ("curve2b", "On a 37-win pace? It jumps to 56."),
+    ("curve3", "That cliff is forty years of stars, not a hot take."),
+    ("unsig", "And LaMelo's deal ends the same July. Still not extended."),
+    ("twomax", "Two max guys. One summer."),
+    ("twomax2", "The Wolves and Charlotte both making opposite bets on that summer."),
+    ("cta", "We priced all of it across fifty thousand futures. Comment BILL and I'll send you Part 1."),
 ]
 
+# Pause AFTER each beat's line ends (seconds). Bigger after the heavy moments.
+GAP_AFTER = {
+    "h44": 0.6, "h1": 0.7, "y2029": 0.7, "curve1": 0.6, "curve1b": 0.8,
+    "curve2": 0.9, "curve2b": 0.9, "curve3": 1.0, "unsig": 0.9,
+    "twomax": 0.5, "twomax2": 0.9,
+}
+CTA_HOLD = 2.4  # dwell on the CTA card after the line ends
+LOOP_LEN = 0.5
 
-async def synth():
+COMPOSITOR = os.path.join(ROOT, "node_modules", "@remotion", "compositor-win32-x64-msvc")
+FFMPEG = os.path.join(COMPOSITOR, "ffmpeg.exe")
+FFPROBE = os.path.join(COMPOSITOR, "ffprobe.exe")
+
+
+async def synth_edge():
     os.makedirs(SEG_DIR, exist_ok=True)
-    for bid, _, text in SEGMENTS:
-        path = os.path.join(SEG_DIR, f"{bid}.mp3")
-        await edge_tts.Communicate(text, VOICE).save(path)
+    for bid, text in SEGMENTS:
+        await edge_tts.Communicate(text, VOICE).save(os.path.join(SEG_DIR, f"{bid}.mp3"))
         print(f"  {bid}: {text[:50]}...")
 
 
 def load_elevenlabs_key():
-    """ELEVENLABS_API_KEY from the environment, or from the repo .env
-    (gitignored, same file that holds the warehouse password)."""
     key = os.environ.get("ELEVENLABS_API_KEY")
     if key:
         return key
     env_path = os.path.normpath(os.path.join(ROOT, "..", "..", "..", ".env"))
     if os.path.exists(env_path):
-        for line in open(env_path, encoding="utf-8"):
+        for line in open(env_path, encoding="utf-8-sig"):
             line = line.strip()
             if line.startswith("ELEVENLABS_API_KEY="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'")
@@ -86,9 +116,7 @@ def api_call(req, retries=6, wait=2.0):
 
 
 def resolve_voice_id(name, api_key):
-    req = urllib.request.Request(
-        "https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": api_key}
-    )
+    req = urllib.request.Request("https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": api_key})
     voices = json.loads(api_call(req))["voices"]
     for v in voices:
         if v["name"].lower().strip() == name.lower().strip():
@@ -99,29 +127,27 @@ def resolve_voice_id(name, api_key):
 
 
 def synth_elevenlabs(voice_id, api_key):
-    """Bobby's cloned voice via the ElevenLabs API, one clip per beat."""
+    """One clip per beat, each generated WITH its neighbors as prosody context
+    so lines flow into each other instead of restarting cold."""
     os.makedirs(SEG_DIR, exist_ok=True)
-    for bid, _, text in SEGMENTS:
+    for i, (bid, text) in enumerate(SEGMENTS):
+        payload = {
+            "text": text,
+            "model_id": "eleven_multilingual_v2",
+            "voice_settings": ELEVEN_SETTINGS,
+        }
+        if i > 0:
+            payload["previous_text"] = SEGMENTS[i - 1][1]
+        if i + 1 < len(SEGMENTS):
+            payload["next_text"] = SEGMENTS[i + 1][1]
         req = urllib.request.Request(
             f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}?output_format=mp3_44100_128",
-            data=json.dumps({
-                "text": text,
-                "model_id": "eleven_multilingual_v2",
-                "voice_settings": {"stability": 0.45, "similarity_boost": 0.75},
-            }).encode("utf-8"),
+            data=json.dumps(payload).encode("utf-8"),
             headers={"xi-api-key": api_key, "Content-Type": "application/json"},
         )
-        audio = api_call(req)
         with open(os.path.join(SEG_DIR, f"{bid}.mp3"), "wb") as f:
-            f.write(audio)
+            f.write(api_call(req))
         print(f"  {bid}: {text[:50]}...")
-
-
-# Remotion's bundled binaries, invoked directly (the npx.cmd shim routes args
-# through cmd.exe, which mangles the | and ; inside filter strings).
-COMPOSITOR = os.path.join(ROOT, "node_modules", "@remotion", "compositor-win32-x64-msvc")
-FFMPEG = os.path.join(COMPOSITOR, "ffmpeg.exe")
-FFPROBE = os.path.join(COMPOSITOR, "ffprobe.exe")
 
 
 def ffprobe_duration(path):
@@ -132,19 +158,81 @@ def ffprobe_duration(path):
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
+def make_faded_wav(bid):
+    """Decode a clip to wav and bake in a 150ms tail fade (and a 10ms head
+    fade), since the bundled ffmpeg has no afade filter. Kills the clipped
+    breath at every line's end."""
+    import numpy as np
+
+    src = os.path.join(SEG_DIR, f"{bid}.mp3")
+    dst = os.path.join(SEG_DIR, f"{bid}_faded.wav")
+    tmp = os.path.join(SEG_DIR, f"{bid}_tmp.wav")
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, tmp], cwd=ROOT, capture_output=True)
+    with wave.open(tmp) as w:
+        params = w.getparams()
+        frames = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).copy()
+    ch = params.nchannels
+    sr = params.framerate
+    a = frames.reshape(-1, ch).astype(np.float64)
+    tail = min(int(0.15 * sr), len(a))
+    head = min(int(0.01 * sr), len(a))
+    a[-tail:] *= np.linspace(1, 0, tail)[:, None]
+    a[:head] *= np.linspace(0, 1, head)[:, None]
+    with wave.open(dst, "w") as w:
+        w.setparams(params)
+        w.writeframes(a.astype(np.int16).tobytes())
+    os.remove(tmp)
+    return dst
+
+
+def write_bed(end_sec):
+    """Original minimal clock-pulse: soft 54 Hz thump on the beat, faint tick
+    on the offbeat, fading in and out. Synthesized, so nothing to license."""
+    sr = 44100
+    n = int(end_sec * sr)
+    buf = [0.0] * n
+    period = 60.0 / BED_BPM
+    t = 0.0
+    beat = 0
+    while t < end_sec:
+        start = int(t * sr)
+        if beat % 2 == 0:  # thump
+            for j in range(int(0.25 * sr)):
+                if start + j >= n:
+                    break
+                x = j / sr
+                buf[start + j] += math.sin(2 * math.pi * 54 * x) * math.exp(-x / 0.045)
+        else:  # tick
+            for j in range(int(0.05 * sr)):
+                if start + j >= n:
+                    break
+                x = j / sr
+                buf[start + j] += 0.32 * math.sin(2 * math.pi * 3800 * x) * math.exp(-x / 0.010)
+        t += period
+        beat += 1
+    fade = int(0.6 * sr)
+    for j in range(min(fade, n)):
+        buf[j] *= j / fade
+        buf[n - 1 - j] *= j / fade
+    peak = max(abs(v) for v in buf) or 1.0
+    scale = BED_GAIN / peak
+    with wave.open(BED_WAV, "w") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(sr)
+        w.writeframes(b"".join(struct.pack("<h", int(max(-1, min(1, v * scale)) * 32767)) for v in buf))
+    print(f"bed: {end_sec:.1f}s clock pulse at {BED_BPM} bpm, peak {BED_GAIN}")
+
+
 def main():
     global OUT
-    # Modes:
-    #   (default)              free Edge TTS preview -> public/voiceover_ai.mp3
-    #   --elevenlabs VOICE_ID  Bobby's clone via API -> public/voiceover_clone.mp3
-    #   --assemble-only        mix clips already in out/vo_segments (e.g. lines
-    #                          downloaded by hand from the ElevenLabs UI, one
-    #                          mp3 per beat id) -> public/voiceover_clone.mp3
+    clone = "--elevenlabs" in sys.argv or "--elevenlabs-name" in sys.argv or "--assemble-only" in sys.argv
+    if clone:
+        OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
+
     if "--assemble-only" in sys.argv:
-        OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
         print("assemble-only: using existing clips in out/vo_segments")
-    elif "--elevenlabs" in sys.argv or "--elevenlabs-name" in sys.argv:
-        OUT = os.path.join(ROOT, "public", "voiceover_clone.mp3")
+    elif clone:
         api_key = load_elevenlabs_key()
         if not api_key:
             print("No ELEVENLABS_API_KEY found (env var or repo .env). Add it and re-run.")
@@ -153,40 +241,47 @@ def main():
             voice_id = resolve_voice_id(sys.argv[sys.argv.index("--elevenlabs-name") + 1], api_key)
         else:
             voice_id = sys.argv[sys.argv.index("--elevenlabs") + 1]
-        print(f"synthesizing {len(SEGMENTS)} segments with ElevenLabs voice {voice_id}...")
+        print(f"synthesizing {len(SEGMENTS)} segments (expressive settings, with context)...")
         synth_elevenlabs(voice_id, api_key)
     else:
         print(f"synthesizing {len(SEGMENTS)} segments with {VOICE}...")
-        asyncio.run(synth())
+        asyncio.run(synth_edge())
 
-    # Fit check: every clip must fit inside its beat window.
-    print("fit check:")
-    ok = True
-    for i, (bid, start, _) in enumerate(SEGMENTS):
-        dur = ffprobe_duration(os.path.join(SEG_DIR, f"{bid}.mp3"))
-        window = (SEGMENTS[i + 1][1] - start) if i + 1 < len(SEGMENTS) else 7.2
-        flag = "OK " if dur <= window else "OVER"
-        if dur > window:
-            ok = False
-        print(f"  {bid:8s} start {start:5.1f}  clip {dur:5.2f}s  window {window:4.1f}s  {flag}")
-    if not ok:
-        print("SOME CLIPS OVERRUN THEIR WINDOW: widen those beats in timeline.ts and re-run.")
-        sys.exit(1)
+    # Re-time: each beat starts a natural pause after the previous line ends.
+    durs = {bid: ffprobe_duration(os.path.join(SEG_DIR, f"{bid}.mp3")) for bid, _ in SEGMENTS}
+    starts = {}
+    t = 0.0
+    for bid, _ in SEGMENTS:
+        starts[bid] = round(t, 1)
+        t = starts[bid] + durs[bid] + GAP_AFTER.get(bid, CTA_HOLD)
+    loop_start = round(starts["cta"] + durs["cta"] + CTA_HOLD, 1)
+    end_sec = round(loop_start + LOOP_LEN, 1)
 
-    # Mix: delay each clip to its beat start, sum, normalize toward -14 LUFS.
-    inputs = []
-    filters = []
-    for i, (bid, start, _) in enumerate(SEGMENTS):
-        inputs += ["-i", os.path.join(SEG_DIR, f"{bid}.mp3")]
-        ms = int(round(start * 1000))
+    print("\nPASTE INTO src/timeline.ts (keep the captions):")
+    for bid, _ in SEGMENTS:
+        print(f"  {bid}: startSec {starts[bid]}   (clip {durs[bid]:.2f}s)")
+    print(f"  loop: startSec {loop_start}")
+    print(f"  END_SEC = {end_sec}\n")
+
+    # Mix: tail-fade each clip (no clipped breaths), delay to its start, add
+    # the bed unless --no-bed, sum, normalize toward -14 LUFS.
+    use_bed = "--no-bed" not in sys.argv
+    if use_bed:
+        write_bed(end_sec)
+    inputs, filters, labels = [], [], []
+    for i, (bid, _) in enumerate(SEGMENTS):
+        inputs += ["-i", make_faded_wav(bid)]
+        ms = int(round(starts[bid] * 1000))
         filters.append(f"[{i}:a]adelay={ms}|{ms}[a{i}]")
-    chain = "".join(f"[a{i}]" for i in range(len(SEGMENTS)))
-    filters.append(f"{chain}amix=inputs={len(SEGMENTS)}:normalize=0[mix]")
+        labels.append(f"[a{i}]")
+    if use_bed:
+        idx = len(SEGMENTS)
+        inputs += ["-i", BED_WAV]
+        filters.append(f"[{idx}:a]anull[a{idx}]")
+        labels.append(f"[a{idx}]")
+    filters.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0[mix]")
     filters.append("[mix]loudnorm=I=-14:TP=-1.5:LRA=11[out]")
-    cmd = (
-        [FFMPEG, "-y"] + inputs +
-        ["-filter_complex", ";".join(filters), "-map", "[out]", "-b:a", "192k", OUT]
-    )
+    cmd = [FFMPEG, "-y"] + inputs + ["-filter_complex", ";".join(filters), "-map", "[out]", "-b:a", "192k", OUT]
     print("mixing...")
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT)
     if r.returncode != 0:
