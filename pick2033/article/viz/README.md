@@ -11,7 +11,7 @@ them by hand; the `*_fragment.html` files are canonical.
 Publish per fragment at /admin/visualizations/new with the vizId and
 altText below, then the article shortcode (already placed in the drafts).
 
-## Part 1, The Tenure Bet (stage1 draft v3)
+## Part 1, The Tenure Bet (stage1 draft v4)
 
 | vizId | file | title | altText |
 |---|---|---|---|
@@ -20,7 +20,7 @@ altText below, then the article shortcode (already placed in the drafts).
 | edwards-hazard | edwards_hazard_fragment.html | Edwards' annual departure hazard, 2027 to 2033 | Line chart of Anthony Edwards' modeled annual departure probability from 2027 to 2033 under a winning and a declining team scenario, spiking to 44 or 56 percent at the 2029 walk year and falling to near zero after a modeled re-signing. |
 | edwards-cumulative | edwards_cumulative_fragment.html | The cumulative tenure bet | Line chart of the cumulative probability Anthony Edwards has departed Minnesota by each season through 2033, reaching 56 percent in the winning scenario and 71 percent in the declining scenario, with an 80% interval band and a coin-flip reference line. |
 
-## Part 2, Fifty Thousand Futures (stage2 draft v4)
+## Part 2, Fifty Thousand Futures (stage2 draft v5)
 
 | vizId | file | title | altText |
 |---|---|---|---|
@@ -29,7 +29,7 @@ altText below, then the article shortcode (already placed in the drafts).
 | edwards-split | edwards_split_fragment.html | The tenure bet made visible | Grouped bar chart comparing the 2033 pick's top-four, top-ten, and lottery probabilities between futures where Edwards stays (14.1, 35.4, 56.7 percent) and futures where he departs (16.9, 41.9, 65.8 percent). |
 | cohort-crest | cohort_crest_fragment.html | The self-audit: simulated Charlotte vs real young cores | Line chart of simulated Charlotte's median wins over years one to five against the banded range of 18 real young cores since 1985, with the model's 50.9-win crest sitting near the cohort's 60th percentile, below the pre-committed 52.8-win correction trigger. |
 
-## Part 3, The Bill (stage3 draft v3)
+## Part 3, The Bill (stage3 draft v4)
 
 | vizId | file | title | altText |
 |---|---|---|---|

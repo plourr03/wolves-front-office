@@ -1,0 +1,33 @@
+ONE SUMMER REEL · POSTING KIT (2026-07-14, hook-led carousel cut)
+
+=== POST CAPTION (edit voice as you like) ===
+44%. those are ant's odds of leaving in the 2029 walk year, and the whole lamelo trade comes down to that one summer. near 1% mid-contract, 44% in the walk year, and lamelo's deal ends the exact same july. we priced the whole trade across 50,000 simulated futures. comment BILL and i'll send you part one.
+
+hashtags (3 to 5 max, final pick yours):
+#Timberwolves #NBA #WolvesBack #LaMelo
+
+=== ALT TEXT ===
+A midnight-blue animated data video in the Wolves to a T style: a statement card says the LaMelo trade comes down to one summer, 2029 fills the screen as Ant's walk year, Anthony Edwards' departure-odds curve draws slowly and spikes to 44 percent at 2029 with a hand-drawn circle marked "the cliff," an UNSIGNED stamp lands on LaMelo's contract card, a closing card reads two max guys one summer, and the video ends on comment BILL.
+
+=== COMMENT KEYWORD ===
+BILL, wired in ManyChat to DM the Part 1 article deep link (the specific article URL, never the homepage).
+
+=== SAME-DAY STORY ===
+Single slide: "the series is live." Link sticker to Part 1, sticker text "Read it."
+
+=== VO SCRIPT (record verbatim; the burned captions match these words, ~95 words) ===
+Record 3 takes on the phone in a quiet room, mic 8 to 12 inches away, conversational clip, a beat of pause between beats. Save the pick as one-summer/public/voiceover.mp3. Hit B1 cold and fast; it is the scroll-stopper.
+
+B1: "44 percent. Those are Ant's odds of leaving in the 2029 walk year."
+B2: "The whole LaMelo trade comes down to that one summer."
+B3: "2029. Ant's walk year. History is blunt about walk years."
+B4: "On a winning team, his odds of leaving sit near 1 percent. In the walk year? 44. That cliff is forty years of stars, not a hot take."
+B5: "And LaMelo's deal ends the same July. Still unsigned."
+B6: "Two max guys. One summer. That is the bet Charlotte made."
+B7: "We priced all of it across fifty thousand futures. Comment BILL and I'll send you Part 1."
+
+=== RENDER COMMANDS ===
+Silent CapCut cut (already rendered): one-summer/out/one_summer_reel.mp4
+With your VO baked in:  cd pick2033/social/one-summer && npx remotion render Clip out/one_summer_reel.mp4 --props="{\"voiceoverSrc\":\"voiceover.mp3\"}"
+Without burned captions (caption in CapCut instead): add ,\"showCaptions\":false to the props.
+Re-time to your read: edit the startSec values in src/timeline.ts (one number per beat), re-render.
