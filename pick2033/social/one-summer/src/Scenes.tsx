@@ -123,7 +123,9 @@ export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
   return (
     <Stage>
       <div style={{ ...statementStyle, opacity: a.opacity, transform: `translateY(${a.y}px)` }}>
-        TWO MAX GUYS.
+        TWO GUYS ON
+        <br />
+        MAX CONTRACTS.
       </div>
       <div
         style={{
@@ -153,7 +155,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   // Cold open: the chart IS the hook. The 1% callout is legible inside the
   // first half second, the flat years draw during the setup line, and the
   // spike races up to land exactly on the word "forty-four."
-  const HIT = T.curve2 + 1.1;
+  const HIT = T.curve2 + 3.4; // "...has him at about a 44 percent chance..."
   const intro = ramp(frame, fps, T.curve1, 0.2);
   const callout1 = ramp(frame, fps, T.curve1 + 0.15, 0.4);
   const band = ramp(frame, fps, HIT + 0.25, 0.4);

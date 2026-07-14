@@ -22,11 +22,11 @@ Cleanup flags from the edit pass: "honestly" dropped (house banned word, with "g
 
 FINAL SHAPE: chart cold open with the 1-to-44 rug-pull, the bad-year beat back per Bobby (56, as high as 66, band printed on screen), the ONE SUMMER card as the breather, loop lands on the flat-line 1% state. 64 seconds.
 
-B1 (the chart act): "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent, with two years left on his contract. [beat] His 2029 walk year? Forty-four percent. And that's with the team winning. [beat] Let's say the Wolves have a bad year and win just 37 games? The odds of Ant leaving jump to 56, maybe as high as 66 percent. [beat] And this is based on forty years of data, not a gut feeling."
+B1 (the chart act): "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent. [beat] With two years left on his contract. [beat] But we're not worried about this year. [beat] However, his 2029 walk year has him at about a 44 percent chance of leaving. [beat] And that assumes the Wolves keep pace with how they've been doing this past year. [beat] Let's say the Wolves have a bad year and win just 37 games. The odds jump to as high as a 66 percent chance of him leaving. [beat] And this is based on forty years of data, not a gut feeling."
 B2 (the breather card): "The whole LaMelo trade comes down to that one summer."
 B3: "Not only that, but LaMelo's deal ends the same July. And we still have not extended him."
     (insurance take if he signs: "Not only that, but LaMelo's deal ends the exact same July." with no extension line; the NO EXTENSION stamp gets re-rendered away too)
-B4: "So, we have two max guys. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Hornets both made opposing bets on where that summer will land."
+B4: "So, we have two guys on max contracts. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Hornets both made opposing bets on where that summer will land."
 B5: "What are the most likely futures for that summer? Comment BILL and I'll send you Part 1."
 
 FACT RECORD on the 37-win-pace numbers: decline_win45 2029 walk-year hazard = 0.5649 [80%: 0.4709, 0.6563] in edwards_hazard_FINAL.json; spoken as 'jump to 56, maybe as high as 66 percent' with the 47-to-66 band printed on screen. CROSS-ASSET NOTE: reel two's cumulative pair (56 gone-by-2033 at .600, 71 at .450) shares a digit with this beat; keep reel two's captions explicit about 'gone by 2033.'

@@ -64,15 +64,17 @@ BED_BPM = 72
 # summer" (he means 2029), "similar clip then they have been" -> "the clip
 # they have been."
 SEGMENTS = [
-    ("curve1", "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent, with two years left on his contract."),
-    ("curve2", "His 2029 walk year? Forty-four percent."),
-    ("curve2s", "And that's with the team winning."),
-    ("curve2b", "Let's say the Wolves have a bad year and win just 37 games? The odds of Ant leaving jump to 56, maybe as high as 66 percent."),
+    ("curve1", "Anthony Edwards' odds of leaving Minnesota this year are about 1 percent."),
+    ("curve1t", "With two years left on his contract."),
+    ("curve1b", "But we're not worried about this year."),
+    ("curve2", "However, his 2029 walk year has him at about a 44 percent chance of leaving."),
+    ("curve2s", "And that assumes the Wolves keep pace with how they've been doing this past year."),
+    ("curve2b", "Let's say the Wolves have a bad year and win just 37 games. The odds jump to as high as a 66 percent chance of him leaving."),
     ("curve3", "And this is based on forty years of data, not a gut feeling."),
     ("h1", "The whole LaMelo trade comes down to that one summer."),
     ("unsig", "Not only that, but LaMelo's deal ends the same July."),
     ("unsig2", "And we still have not extended him."),
-    ("twomax", "So, we have two max guys."),
+    ("twomax", "So, we have two guys on max contracts."),
     ("twomaxb", "One summer that the next decade of basketball in Minnesota hinges on."),
     ("twomax2", "The Wolves and Hornets both made opposing bets on where that summer will land."),
     ("cta1", "What are the most likely futures for that summer?"),
@@ -82,11 +84,11 @@ SEGMENTS = [
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "curve1": 0.5, "curve2": 0.6, "curve2s": 0.6, "curve2b": 0.8, "curve3": 1.0,
-    "h1": 0.9, "unsig": 0.4, "unsig2": 0.9, "twomax": 0.4, "twomaxb": 0.6,
-    "twomax2": 0.9, "cta1": 0.4,
+    "curve1": 0.55, "curve1t": 0.5, "curve1b": 0.7, "curve2": 0.8, "curve2s": 0.7,
+    "curve2b": 0.8, "curve3": 0.9, "h1": 0.75, "unsig": 0.35, "unsig2": 0.75,
+    "twomax": 0.35, "twomaxb": 0.5, "twomax2": 0.75, "cta1": 0.35,
 }
-CTA_HOLD = 2.4  # dwell on the CTA card after the line ends
+CTA_HOLD = 2.2  # dwell on the CTA card after the line ends
 LOOP_LEN = 0.5
 
 COMPOSITOR = os.path.join(ROOT, "node_modules", "@remotion", "compositor-win32-x64-msvc")
@@ -176,6 +178,9 @@ def ffprobe_duration(path):
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
+TEMPO = 1.05  # "speed everything up just the tiniest of bits"
+
+
 def make_faded_wav(bid):
     """Decode a clip to wav and bake in a 150ms tail fade (and a 10ms head
     fade), since the bundled ffmpeg has no afade filter. Kills the clipped
@@ -185,7 +190,7 @@ def make_faded_wav(bid):
     src = os.path.join(SEG_DIR, f"{bid}.mp3")
     dst = os.path.join(SEG_DIR, f"{bid}_faded.wav")
     tmp = os.path.join(SEG_DIR, f"{bid}_tmp.wav")
-    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, tmp], cwd=ROOT, capture_output=True)
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, "-af", f"atempo={TEMPO}", tmp], cwd=ROOT, capture_output=True)
     with wave.open(tmp) as w:
         params = w.getparams()
         frames = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).copy()
@@ -265,7 +270,7 @@ def main():
         asyncio.run(synth_edge())
 
     # Re-time: each beat starts a natural pause after the previous line ends.
-    durs = {bid: ffprobe_duration(os.path.join(SEG_DIR, f"{bid}.mp3")) for bid, _ in SEGMENTS}
+    durs = {bid: ffprobe_duration(make_faded_wav(bid)) for bid, _ in SEGMENTS}
     starts = {}
     t = 0.0
     for bid, _ in SEGMENTS:
@@ -288,7 +293,7 @@ def main():
         write_bed(end_sec)
     inputs, filters, labels = [], [], []
     for i, (bid, _) in enumerate(SEGMENTS):
-        inputs += ["-i", make_faded_wav(bid)]
+        inputs += ["-i", os.path.join(SEG_DIR, f"{bid}_faded.wav")]
         ms = int(round(starts[bid] * 1000))
         filters.append(f"[{i}:a]adelay={ms}|{ms}[a{i}]")
         labels.append(f"[a{i}]")

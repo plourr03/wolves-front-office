@@ -1,20 +1,21 @@
 import { FPS } from "./config";
 
-// The One Summer reel, eighth cut: Bobby's reworded chart act. Cold open on
-// "about 1 percent," the 44 lands as "Forty-four percent," the range line is
-// out, and the sensitivity beat is back in the bad-year shape with the band
-// top spoken honestly: "jump to 56, maybe as high as 66 percent" (decline
-// walk-year hazard 0.5649 [80%: 0.4709, 0.6563], receipt in the repo). The
-// 80% band 47-66 is printed on screen under the 56. Calmer delivery settings
-// on the whole act. Runs 64.4s.
+// The One Summer reel, ninth cut: Bobby's line notes. Faster intro split into
+// two clips with a real half-second breath before the contract line, "But
+// we're not worried about this year." restored, his 44 / keep-pace / bad-year
+// wordings, "two guys on max contracts," and a global 1.05x tempo lift baked
+// into every clip (atempo before probing, so these starts match the audio).
+// Runs 70.5s.
 //
 // When re-timing, run scripts/make_ai_vo.py and paste its printed starts.
 
 export type BeatId =
   | "curve1"
+  | "curve1t"
   | "curve1b"
   | "curve2"
   | "curve2s"
+  | "curve2s2"
   | "curve2b"
   | "curve2b2"
   | "curve3"
@@ -36,30 +37,32 @@ export type Beat = {
 };
 
 export const BEATS: Beat[] = [
-  { id: "curve1", startSec: 0.0, caption: "Anthony Edwards' odds of leaving\nMinnesota this year are about 1%," },
+  { id: "curve1", startSec: 0.0, caption: "Anthony Edwards' odds of leaving\nMinnesota this year are about 1%." },
+  { id: "curve1t", startSec: 5.6, caption: "With two years left on his contract." },
+  { id: "curve1b", startSec: 8.0, caption: "But we're not worried about this year." },
+  { id: "curve2", startSec: 10.3, caption: "However, his 2029 walk year has him at\nabout a 44% chance of leaving." },
+  { id: "curve2s", startSec: 17.1, caption: "And that assumes the Wolves keep pace" },
   // caption-only page inside the same clip
-  { id: "curve1b", startSec: 4.7, caption: "with two years left on his contract." },
-  { id: "curve2", startSec: 8.4, caption: "His 2029 walk year?\nForty-four percent." },
-  { id: "curve2s", startSec: 12.5, caption: "And that's with the team winning." },
-  { id: "curve2b", startSec: 14.9, caption: "Let's say the Wolves have a bad year\nand win just 37 games?" },
+  { id: "curve2s2", startSec: 19.6, caption: "with how they've been doing\nthis past year." },
+  { id: "curve2b", startSec: 22.3, caption: "Let's say the Wolves have a bad year\nand win just 37 games." },
   // caption-only page inside the same clip
-  { id: "curve2b2", startSec: 20.4, caption: "The odds of Ant leaving jump to 56,\nmaybe as high as 66 percent." },
-  { id: "curve3", startSec: 25.7, caption: "And this is based on forty years\nof data, not a gut feeling." },
-  { id: "h1", startSec: 30.2, caption: "The whole LaMelo trade\ncomes down to that one summer." },
-  { id: "unsig", startSec: 33.9, caption: "Not only that, but LaMelo's deal\nends the same July." },
-  { id: "unsig2", startSec: 37.8, caption: "And we still have not extended him." },
-  { id: "twomax", startSec: 40.4, caption: "So, we have two max guys." },
-  { id: "twomaxb", startSec: 43.1, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
-  { id: "twomax2", startSec: 48.6, caption: "The Wolves and Hornets both made" },
-  { id: "twomax2b", startSec: 51.5, caption: "opposing bets on where\nthat summer will land." },
-  { id: "cta1", startSec: 55.4, caption: "What are the most likely futures\nfor that summer?" },
+  { id: "curve2b2", startSec: 27.6, caption: "The odds jump to as high as a 66%\nchance of him leaving." },
+  { id: "curve3", startSec: 33.7, caption: "And this is based on forty years\nof data, not a gut feeling." },
+  { id: "h1", startSec: 37.9, caption: "The whole LaMelo trade\ncomes down to that one summer." },
+  { id: "unsig", startSec: 41.3, caption: "Not only that, but LaMelo's deal\nends the same July." },
+  { id: "unsig2", startSec: 44.9, caption: "And we still have not extended him." },
+  { id: "twomax", startSec: 47.2, caption: "So, we have two guys on max contracts." },
+  { id: "twomaxb", startSec: 50.6, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
+  { id: "twomax2", startSec: 55.8, caption: "The Wolves and Hornets both made" },
+  { id: "twomax2b", startSec: 58.6, caption: "opposing bets on where\nthat summer will land." },
+  { id: "cta1", startSec: 62.1, caption: "What are the most likely futures\nfor that summer?" },
   // The CTA card carries the spoken words; no lower-third on the send line.
-  { id: "cta2", startSec: 58.9 },
+  { id: "cta2", startSec: 65.3 },
   // Loop-friendly ending: back onto the chart's flat-line 1% state.
-  { id: "loop", startSec: 63.9 },
+  { id: "loop", startSec: 70.0 },
 ];
 
-export const END_SEC = 64.4;
+export const END_SEC = 70.5;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 
