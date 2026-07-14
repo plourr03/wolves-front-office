@@ -206,7 +206,7 @@ export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => (
       { text: "TWO MAX GUYS." },
       { text: "ONE SUMMER.", green: true },
     ]}
-    sub="That is the bet Charlotte made."
+    sub="Opposite bets on the same summer."
   />
 );
 
@@ -265,9 +265,9 @@ const cy = (h: number) =>
   CURVE.h - CURVE.bottom - (h / CURVE.yMax) * (CURVE.h - CURVE.bottom - CURVE.top);
 
 export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
-  const intro = ramp(frame, fps, T.curve1, 0.35);
-  const p = drawOn(frame, fps, T.curve1 + 0.15, 2.3);
-  const callout1 = ramp(frame, fps, T.curve1 + 1.1, 0.4);
+  const intro = ramp(frame, fps, T.curve1, 0.4);
+  const p = drawOn(frame, fps, T.curve1 + 0.2, 3.2);
+  const callout1 = ramp(frame, fps, T.curve1 + 1.2, 0.45);
   const band = ramp(frame, fps, T.curve2 - 0.1, 0.35);
   const label44 = riseIn(frame, fps, T.curve2 + 0.15, 0.4);
   const circle = drawOn(frame, fps, T.curve2 + 0.35, 0.6);
@@ -400,8 +400,8 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
 
 export const Unsigned: React.FC<SceneProps> = ({ frame, fps }) => {
   const a = riseIn(frame, fps, T.unsig);
-  const st = stampIn(frame, fps, T.unsig + 0.6);
-  const sx = shake(frame, fps, T.unsig + 0.73, 0.4, 5);
+  const st = stampIn(frame, fps, T.unsig + 0.9);
+  const sx = shake(frame, fps, T.unsig + 1.03, 0.4, 5);
   return (
     <Stage>
       <div

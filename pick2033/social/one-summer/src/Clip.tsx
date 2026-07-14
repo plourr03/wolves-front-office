@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame, 
 import { Background } from "./Background";
 import { Captions } from "./Captions";
 import { Chrome, Cta, HazardCurve, Hook44, HookOneSummer, TwoMax, Unsigned, Y2029 } from "./Scenes";
-import { BEATS, BeatId, activeBeatIndex } from "./timeline";
+import { BEATS, BeatId, END_SEC, activeBeatIndex } from "./timeline";
 import { COLORS } from "./config";
 
 export type ClipProps = {
@@ -12,14 +12,22 @@ export type ClipProps = {
 };
 
 // Which visual a beat renders. Beats that share a scene (the three curve
-// beats) never transition between themselves.
-const sceneKey = (id: BeatId): string =>
-  id === "curve1" || id === "curve2" || id === "curve3" ? "curve" : id === "loop" ? "h44" : id;
+// beats, the two twomax beats) never transition between themselves.
+const sceneKey = (id: BeatId): string => {
+  if (id === "curve1" || id === "curve2" || id === "curve3") return "curve";
+  if (id === "twomax2") return "twomax";
+  if (id === "loop") return "h44";
+  return id;
+};
 
 // One directional gesture for the whole video: on every beat change the
 // outgoing scene drifts UP and fades while the incoming one rises from below
 // (the scenes' own entrances). A short overlap, a confident ease, no wipes.
-const OVERLAP_SEC = 0.3;
+const OVERLAP_SEC = 0.45;
+
+// The slow-cut trick: each scene carries a barely-there push-in across its
+// whole beat, so the long holds read as alive rather than frozen.
+const DRIFT_SCALE = 0.016;
 
 export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
   const frame = useCurrentFrame();
@@ -47,6 +55,23 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
     }
   };
 
+  // The current SCENE's window (spanning shared-scene beats) for the push-in.
+  let sceneStart = beat.startSec;
+  for (let i = idx - 1; i >= 0 && sceneKey(BEATS[i].id) === sceneKey(beat.id); i--) {
+    sceneStart = BEATS[i].startSec;
+  }
+  let sceneEnd = END_SEC;
+  for (let i = idx + 1; i < BEATS.length; i++) {
+    if (sceneKey(BEATS[i].id) !== sceneKey(beat.id)) {
+      sceneEnd = BEATS[i].startSec;
+      break;
+    }
+  }
+  const drift = interpolate(frame, [sceneStart * fps, sceneEnd * fps], [1, 1 + DRIFT_SCALE], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
   // Outgoing-scene progress across the overlap window at the top of this beat.
   const out = interpolate(
     frame,
@@ -62,11 +87,11 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
     <AbsoluteFill style={{ backgroundColor: COLORS.bgBot }}>
       <Background />
       {showPrev ? (
-        <AbsoluteFill style={{ opacity: 1 - out, transform: `translateY(${-44 * out}px)` }}>
+        <AbsoluteFill style={{ opacity: 1 - out, transform: `translateY(${-44 * out}px) scale(${1 + DRIFT_SCALE})` }}>
           {scene(prev!.id)}
         </AbsoluteFill>
       ) : null}
-      {scene(beat.id)}
+      <AbsoluteFill style={{ transform: `scale(${drift})` }}>{scene(beat.id)}</AbsoluteFill>
       <Chrome />
       {showCaptions ? <Captions beats={BEATS} /> : null}
       {voiceoverSrc ? <Audio src={staticFile(voiceoverSrc)} /> : null}

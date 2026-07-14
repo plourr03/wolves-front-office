@@ -70,6 +70,18 @@ All values are embedded in `src/data.ts` with per-value provenance comments.
    signed extension cuts the bill by about 0.4 wins) and the unsigned beat gets
    rewritten before this ever posts.
 
+## Slow cut (2026-07-14, Bobby: "super fast, slow some of it down")
+
+Re-timed from ~40s to 52.4s. Same seven-beat spine; every beat gains air, the
+chart's hold grows to ~16 seconds, the curve draws slower, the stamp lands a
+touch later, dissolves lengthen to 0.45s, and every scene carries a
+barely-there push-in (1.6% across its whole beat) so the long holds read as
+alive rather than frozen. B6 swapped to Bobby's own line from the recording
+sheet ("The Wolves and Charlotte both making opposite bets on that summer,"
+spelling normalized), its caption split across two pages to stay inside the
+two-line rule, and the card's sub now reads "Opposite bets on the same
+summer." Recording-sheet windows updated (B1 0:00-0:05 ... B7 0:45-0:52).
+
 ## Bobby's review fixes (2026-07-14, pre-recording)
 
 1. B4 VO re-anchored to the contract clock ("With two years left on his deal")
