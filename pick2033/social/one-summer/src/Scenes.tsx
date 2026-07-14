@@ -197,18 +197,32 @@ export const HookOneSummer: React.FC<SceneProps & { settled?: boolean }> = ({ fr
   />
 );
 
-export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => (
-  <Statement
-    frame={frame}
-    fps={fps}
-    startSec={T.twomax}
-    lines={[
-      { text: "TWO MAX GUYS." },
-      { text: "ONE SUMMER.", green: true },
-    ]}
-    sub="Opposite bets on the same summer."
-  />
-);
+// Custom timing: each line lands as its sentence is spoken.
+export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
+  const a = riseIn(frame, fps, T.twomax);
+  const b = riseIn(frame, fps, T.twomaxb + 0.05);
+  const c = riseIn(frame, fps, T.twomax2 + 0.1);
+  return (
+    <Stage>
+      <div style={{ ...statementStyle, opacity: a.opacity, transform: `translateY(${a.y}px)` }}>
+        TWO MAX GUYS.
+      </div>
+      <div
+        style={{
+          ...statementStyle,
+          color: COLORS.accentPop,
+          opacity: b.opacity,
+          transform: `translateY(${b.y}px)`,
+        }}
+      >
+        ONE SUMMER.
+      </div>
+      <div style={{ ...subStyle, marginTop: 30, opacity: c.opacity, transform: `translateY(${c.y}px)` }}>
+        Opposite bets on the same summer.
+      </div>
+    </Stage>
+  );
+};
 
 // ------------------------------------------------------------- the year ---
 
@@ -216,6 +230,7 @@ export const Y2029: React.FC<SceneProps> = ({ frame, fps }) => {
   const a = riseIn(frame, fps, T.y2029);
   const b = riseIn(frame, fps, T.y2029 + 0.16);
   const c = riseIn(frame, fps, T.y2029 + 0.34);
+  const d = riseIn(frame, fps, T.y2029b + 0.1); // the history line, as it's spoken
   return (
     <Stage>
       <div style={{ ...kickerStyle, opacity: a.opacity, transform: `translateY(${a.y}px)` }}>
@@ -250,8 +265,8 @@ export const Y2029: React.FC<SceneProps> = ({ frame, fps }) => {
       >
         ANT'S WALK YEAR
       </div>
-      <div style={{ ...subStyle, marginTop: 26, opacity: c.opacity, transform: `translateY(${c.y}px)` }}>
-        History is blunt about walk years.
+      <div style={{ ...subStyle, marginTop: 26, opacity: d.opacity, transform: `translateY(${d.y}px)` }}>
+        History is not kind to teams with stars on walk years.
       </div>
     </Stage>
   );
@@ -267,7 +282,7 @@ const cy = (h: number) =>
 export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   const intro = ramp(frame, fps, T.curve1, 0.4);
   const p = drawOn(frame, fps, T.curve1 + 0.2, 3.2);
-  const callout1 = ramp(frame, fps, T.curve1 + 1.2, 0.45);
+  const callout1 = ramp(frame, fps, T.curve1c + 0.3, 0.45); // "only about 1 percent"
   const band = ramp(frame, fps, T.curve2 - 0.1, 0.35);
   const label44 = riseIn(frame, fps, T.curve2 + 0.15, 0.4);
   const circle = drawOn(frame, fps, T.curve2 + 0.35, 0.6);
@@ -276,6 +291,7 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
   const method = ramp(frame, fps, T.curve3 + 0.2, 0.45);
 
   const declineIn = ramp(frame, fps, T.curve2b, 0.5);
+  const label56 = ramp(frame, fps, T.curve2c + 0.15, 0.4);
 
   const pts = HAZARD.map((d, i) => [cx(i), cy(d.h)] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
@@ -336,7 +352,9 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
             strokeDasharray="2 8"
           />
           <circle cx={dSpike[0]} cy={dSpike[1]} r={6.5} fill={COLORS.slate} />
-          {/* annotation column shared with the 44%: tag, then 56, above the green number */}
+        </g>
+        {/* the 56 lands when its sentence does; annotation column shared with the 44 */}
+        <g opacity={label56}>
           <text x={spike[0] + 130} y={dSpike[1] - 54} fill={COLORS.mute} fontFamily={FONT.mono} fontSize={18} letterSpacing={2}>
             ON A 37-WIN PACE
           </text>
@@ -426,8 +444,9 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
 
 export const Unsigned: React.FC<SceneProps> = ({ frame, fps }) => {
   const a = riseIn(frame, fps, T.unsig);
-  const st = stampIn(frame, fps, T.unsig + 0.9);
-  const sx = shake(frame, fps, T.unsig + 1.03, 0.4, 5);
+  // The stamp slams on "And we still have not extended him."
+  const st = stampIn(frame, fps, T.unsig2 + 0.05);
+  const sx = shake(frame, fps, T.unsig2 + 0.18, 0.4, 5);
   return (
     <Stage>
       <div
@@ -482,11 +501,12 @@ export const Unsigned: React.FC<SceneProps> = ({ frame, fps }) => {
 // ------------------------------------------------------------------ cta ---
 
 export const Cta: React.FC<SceneProps> = ({ frame, fps }) => {
-  const k = riseIn(frame, fps, T.cta);
-  const a = riseIn(frame, fps, T.cta + 0.12);
-  const b = riseIn(frame, fps, T.cta + 0.24);
-  const bar = ramp(frame, fps, T.cta + 0.4, 0.45);
-  const c = riseIn(frame, fps, T.cta + 0.5);
+  // Card rises on the question (cta1); the send line (cta2) lands on the card.
+  const k = riseIn(frame, fps, T.cta1);
+  const a = riseIn(frame, fps, T.cta1 + 0.12);
+  const b = riseIn(frame, fps, T.cta2 + 0.05);
+  const bar = ramp(frame, fps, T.cta2 + 0.2, 0.45);
+  const c = riseIn(frame, fps, T.cta2 + 0.3);
   return (
     <Stage>
       <div style={{ ...kickerStyle, opacity: k.opacity, transform: `translateY(${k.y}px)`, marginBottom: 30 }}>

@@ -17,17 +17,17 @@ BILL, wired in ManyChat to DM the Part 1 article deep link (the specific article
 === SAME-DAY STORY ===
 Single slide: "the series is live." Link sticker to Part 1, sticker text "Read it."
 
-=== VO SCRIPT (record verbatim; the burned captions match these words, ~95 words) ===
-Record 3 takes on the phone in a quiet room, mic 8 to 12 inches away, conversational clip, a beat of pause between beats. Save the pick as one-summer/public/voiceover.mp3. Hit B1 cold and fast; it is the scroll-stopper.
+=== VO SCRIPT (Bobby's rewrite, grammar normalized; this is what the "upbeat bob" clone reads and what the burned captions match) ===
+Cleanup flags from the edit pass: "honestly" dropped (house banned word, with "genuinely" and "actually"); "this summer" became "that summer" in B7 (the summer in question is 2029); "a similar clip then they have been" tightened to "the clip they have been."
 
-B1: "The odds of Ant leaving in his 2029 walk year are somewhere around 44 percent."
+B1: "The odds of Ant leaving the Minnesota Timberwolves in his 2029 walk year sit somewhere near 44 percent."
 B2: "The whole LaMelo trade comes down to that one summer."
-B3: "2029. Ant's walk year. And history is blunt about walk years."
-B4: "With two years left on his deal, his odds of leaving this year are near 1 percent. But that isn't what we're worried about. In the walk year, however? 44. And that's with the team winning. On a 37-win pace? It jumps to 56. That cliff is forty years of stars, not a hot take."
-B5: "And LaMelo's deal ends the same July. Still not extended."
-    (also record the insurance take: "And LaMelo's deal ends the exact same July." with no "Still not extended.")
-B6: "Two max guys. One summer. The Wolves and Charlotte both making opposite bets on that summer."
-B7: "We priced all of it across fifty thousand futures. Comment BILL and I'll send you Part 1."
+B3: "2029. Ant's walk year. And history is not kind to teams with stars on walk years."
+B4: "Ant has two years left on his contract. And his odds of leaving this year? Only about 1 percent. But we're not worried about this year. In the walk year, the odds of Ant leaving skyrocket to 44 percent. And that's if the Wolves keep winning at the clip they have been. Let's say the Wolves have a bad year and win at just a 37-win pace? The odds of him leaving jump to 56. And this is based on forty years of data, not a gut feeling."
+B5: "Not only that, but LaMelo's deal ends the same July. And we still have not extended him."
+    (insurance take if he signs: "Not only that, but LaMelo's deal ends the exact same July." with no extension line; the NO EXTENSION stamp gets re-rendered away too)
+B6: "So, we have two max guys. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Charlotte both making opposite bets on that summer."
+B7: "What are the most likely futures for that summer? Comment BILL and I'll send you the link to the Part 1 article."
 
 === RENDER COMMANDS ===
 Silent CapCut cut (already rendered): one-summer/out/one_summer_reel.mp4

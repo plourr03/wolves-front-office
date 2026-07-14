@@ -1,46 +1,37 @@
 import { FPS } from "./config";
 
-// The One Summer reel, fifth cut: Bobby's sheet edits incorporated. The hook
-// leads with his wording, B4 grows into a four-moment chart act (1% setup,
-// the pivot, the 44 payoff, the declining-team 56), and the stamp now says
-// NO EXTENSION to match "Still not extended." Runs about 62s, a true deep cut.
+// The One Summer reel, sixth cut: Bobby's rewritten script (from the posting
+// kit), voiced by the "upbeat bob" clone and re-timed to its actual read
+// (this voice reads slow; 84.9s total). Grammar normalized; flagged fixes:
+// "honestly" dropped (house banned word), "this summer" -> "that summer",
+// "similar clip then they have been" -> "the clip they have been."
 //
-// The VO script (Bobby records verbatim; captions match it):
-//   B1  "The odds of Ant leaving in his 2029 walk year are somewhere around
-//        44 percent."
-//   B2  "The whole LaMelo trade comes down to that one summer."
-//   B3  "2029. Ant's walk year. And history is blunt about walk years."
-//   B4  "With two years left on his deal, his odds of leaving this year are
-//        near 1 percent. But that isn't what we're worried about. [beat]
-//        In the walk year, however? 44. And that's with the team winning.
-//        [beat] On a 37-win pace? It jumps to 56. [beat] That cliff is forty
-//        years of stars, not a hot take."
-//        (44 and 1 ride the same .600 path; the clock is the variable. The 56
-//        is the published decline_win45 walk-year spike from the same export,
-//        and .450 x 82 = 36.9, spoken as a 37-win pace.)
-//   B5  "And LaMelo's deal ends the same July. Still not extended."
-//        (plus the insurance take without "Still not extended.")
-//   B6  "Two max guys. One summer. The Wolves and Charlotte both making
-//        opposite bets on that summer."  (Bobby's line)
-//   B7  "We priced all of it across fifty thousand futures. Comment BILL and
-//        I'll send you Part 1."
+// Captions match the spoken words verbatim; long sentences page across
+// multiple beats. h44b is a caption-only page inside the hook clip.
 //
-// When the recorded VO lands in public/voiceover.mp3, re-time by editing the
-// start seconds below only; every scene keys off these constants.
+// When re-timing, run scripts/make_ai_vo.py and paste its printed starts.
 
 export type BeatId =
   | "h44"
+  | "h44b"
   | "h1"
   | "y2029"
+  | "y2029b"
   | "curve1"
+  | "curve1c"
   | "curve1b"
   | "curve2"
+  | "curve2s"
   | "curve2b"
+  | "curve2c"
   | "curve3"
   | "unsig"
+  | "unsig2"
   | "twomax"
+  | "twomaxb"
   | "twomax2"
-  | "cta"
+  | "cta1"
+  | "cta2"
   | "loop";
 
 export type Beat = {
@@ -50,32 +41,32 @@ export type Beat = {
 };
 
 export const BEATS: Beat[] = [
-  { id: "h44", startSec: 0.0, caption: "The odds of Ant leaving in his 2029\nwalk year are somewhere around 44%." },
-  { id: "h1", startSec: 5.9, caption: "The whole LaMelo trade\ncomes down to that one summer." },
-  { id: "y2029", startSec: 9.2, caption: "2029. Ant's walk year.\nAnd history is blunt about walk years." },
-  {
-    id: "curve1",
-    startSec: 14.6,
-    caption: "With two years left on his deal, his\nodds of leaving this year are near 1%.",
-  },
-  { id: "curve1b", startSec: 19.8, caption: "But that isn't what\nwe're worried about." },
-  { id: "curve2", startSec: 21.9, caption: "In the walk year, however? 44.\nAnd that's with the team winning." },
-  { id: "curve2b", startSec: 28.0, caption: "On a 37-win pace?\nIt jumps to 56." },
-  { id: "curve3", startSec: 31.3, caption: "That cliff is forty years of stars,\nnot a hot take." },
-  { id: "unsig", startSec: 35.2, caption: "And LaMelo's deal ends the same July.\nStill not extended." },
-  { id: "twomax", startSec: 39.1, caption: "Two max guys. One summer." },
-  {
-    id: "twomax2",
-    startSec: 41.3,
-    caption: "The Wolves and Charlotte both\nmaking opposite bets on that summer.",
-  },
-  // The CTA card carries the spoken words itself; no lower-third on top of it.
-  { id: "cta", startSec: 45.7 },
+  { id: "h44", startSec: 0.0, caption: "The odds of Ant leaving the Minnesota\nTimberwolves in his 2029 walk year" },
+  { id: "h44b", startSec: 5.3, caption: "sit somewhere near 44%." },
+  { id: "h1", startSec: 9.0, caption: "The whole LaMelo trade\ncomes down to that one summer." },
+  { id: "y2029", startSec: 12.5, caption: "2029. Ant's walk year." },
+  { id: "y2029b", startSec: 14.8, caption: "And history is not kind to teams\nwith stars on walk years." },
+  { id: "curve1", startSec: 19.9, caption: "Ant has two years left on his contract." },
+  { id: "curve1c", startSec: 22.5, caption: "And his odds of leaving this year?\nOnly about 1 percent." },
+  { id: "curve1b", startSec: 26.2, caption: "But we're not worried about this year." },
+  { id: "curve2", startSec: 28.8, caption: "In the walk year, the odds of Ant\nleaving skyrocket to 44 percent." },
+  { id: "curve2s", startSec: 34.9, caption: "And that's if the Wolves keep winning\nat the clip they have been." },
+  { id: "curve2b", startSec: 39.8, caption: "Let's say the Wolves have a bad year\nand win at just a 37-win pace?" },
+  { id: "curve2c", startSec: 45.1, caption: "The odds of him leaving jump to 56." },
+  { id: "curve3", startSec: 48.7, caption: "And this is based on forty years\nof data, not a gut feeling." },
+  { id: "unsig", startSec: 54.3, caption: "Not only that, but LaMelo's deal\nends the same July." },
+  { id: "unsig2", startSec: 58.2, caption: "And we still have not extended him." },
+  { id: "twomax", startSec: 61.0, caption: "So, we have two max guys." },
+  { id: "twomaxb", startSec: 63.7, caption: "One summer that the next decade of\nbasketball in Minnesota hinges on." },
+  { id: "twomax2", startSec: 69.2, caption: "The Wolves and Charlotte both making\nopposite bets on that summer." },
+  { id: "cta1", startSec: 75.3, caption: "What are the most likely futures\nfor that summer?" },
+  // The CTA card carries the spoken words; no lower-third on the send line.
+  { id: "cta2", startSec: 78.8 },
   // Loop-friendly ending: back onto the 44 card, so a rewatch reads as intentional.
-  { id: "loop", startSec: 53.4 },
+  { id: "loop", startSec: 84.4 },
 ];
 
-export const END_SEC = 53.9;
+export const END_SEC = 84.9;
 
 export const secToFrame = (sec: number): number => Math.round(sec * FPS);
 

@@ -11,13 +11,15 @@ export type ClipProps = {
   voiceoverSrc: string;
 };
 
-// Which visual a beat renders. Beats that share a scene (the three curve
-// beats, the two twomax beats) never transition between themselves.
+// Which visual a beat renders. Beats that share a scene (caption pages,
+// sentence splits) never transition between themselves.
 const sceneKey = (id: BeatId): string => {
-  if (id === "curve1" || id === "curve1b" || id === "curve2" || id === "curve2b" || id === "curve3")
-    return "curve";
-  if (id === "twomax2") return "twomax";
-  if (id === "loop") return "h44";
+  if (id.startsWith("curve")) return "curve";
+  if (id.startsWith("twomax")) return "twomax";
+  if (id.startsWith("y2029")) return "y2029";
+  if (id.startsWith("unsig")) return "unsig";
+  if (id.startsWith("cta")) return "cta";
+  if (id === "h44b" || id === "loop") return "h44";
   return id;
 };
 
@@ -51,6 +53,7 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
         return <Unsigned frame={frame} fps={fps} />;
       case "twomax":
         return <TwoMax frame={frame} fps={fps} />;
+      case "cta":
       default:
         return <Cta frame={frame} fps={fps} />;
     }
