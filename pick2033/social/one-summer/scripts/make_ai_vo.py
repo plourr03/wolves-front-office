@@ -48,7 +48,6 @@ ELEVEN_SETTINGS = {"stability": 0.30, "similarity_boost": 0.80, "style": 0.45}
 # (8.4s), so it gets the max delivery speed. unsig2: the extension line came
 # out movie-trailer intense; calm it down.
 SETTING_OVERRIDES = {
-    "h44": {"speed": 1.15},
     "unsig2": {"stability": 0.55, "style": 0.12},
     # twomax2 read as a slow question; steady it and pick up the pace a touch.
     "twomax2": {"stability": 0.50, "style": 0.20, "speed": 1.07},
@@ -65,14 +64,11 @@ BED_BPM = 72
 # summer" (he means 2029), "similar clip then they have been" -> "the clip
 # they have been."
 SEGMENTS = [
-    ("h44", "The odds of Ant leaving the Minnesota Timberwolves in his 2029 walk year sit somewhere near 44 percent."),
-    ("h1", "The whole LaMelo trade comes down to that one summer."),
-    ("y2029", "2029. Ant's walk year."),
-    ("y2029b", "And history is not kind to teams with stars on walk years."),
-    ("curve1", "Ant has two years left on his contract."),
-    ("curve1c", "And his odds of leaving this year? Only about 1 percent."),
+    ("curve1", "Anthony Edwards has two years left on his contract with Minnesota."),
+    ("curve1c", "The odds he leaves this year? Only around 1 percent."),
     ("curve1b", "But we're not worried about this year."),
     ("curve2", "In the walk year, the odds of Ant leaving skyrocket to 44 percent."),
+    ("curve2r", "Really, it's anywhere between 35 and 53 percent."),
     ("curve2s", "And that's if the Wolves keep winning at the clip they have been."),
     ("curve2b", "Let's say the Wolves have a bad year and win at just a 37-win pace?"),
     ("curve2c", "The odds of him leaving jump to 56."),
@@ -89,8 +85,7 @@ SEGMENTS = [
 # Pause AFTER each beat's line ends (seconds). Tight inside a thought, bigger
 # between ideas and after the heavy moments.
 GAP_AFTER = {
-    "h44": 0.6, "h1": 0.7, "y2029": 0.35, "y2029b": 0.7, "curve1": 0.35,
-    "curve1c": 0.5, "curve1b": 0.8, "curve2": 0.7, "curve2s": 0.8,
+    "curve1": 0.35, "curve1c": 0.5, "curve1b": 0.8, "curve2": 0.35, "curve2r": 0.8, "curve2s": 0.8,
     "curve2b": 0.35, "curve2c": 0.9, "curve3": 1.0, "unsig": 0.4,
     "unsig2": 0.9, "twomax": 0.4, "twomaxb": 0.6, "twomax2": 0.9, "cta1": 0.4,
 }

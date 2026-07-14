@@ -9,7 +9,7 @@ hashtags (3 to 5 max, final pick yours):
 OPTIONAL last caption line (your call; seeds the next post without breaking this reel's two-clock frame): "and jaden's deal is up that same summer too. different post."
 
 === ALT TEXT ===
-A midnight-blue animated data video in the Wolves to a T style: it opens on a giant green 44 percent labeled as the model's odds Anthony Edwards leaves in the 2029 walk year, a statement card says the whole LaMelo trade comes down to that one summer, Edwards' departure-odds curve draws slowly and spikes to 44 at 2029 with a hand-drawn circle marked "the cliff," a dotted second line shows the spike jumping to 56 on a 37-win pace, a NO EXTENSION stamp lands on LaMelo's contract card, a closing card reads two max guys one summer, and the video ends on comment BILL before looping back to the 44.
+A midnight-blue animated data video in the Wolves to a T style: it opens cold on Anthony Edwards' departure-odds chart drawing itself, the curve spikes to a green 44 percent at his 2029 walk year with a hand-drawn circle marked "the cliff," the 80 percent band lights up as the narrator says the real range is 35 to 53, a dotted second line jumps to 56 on a 37-win pace, a NO EXTENSION stamp lands on LaMelo's contract card, a closing card reads two max guys one summer, and the video ends on comment BILL before looping back to the finished chart.
 
 === COMMENT KEYWORD ===
 BILL, wired in ManyChat to DM the Part 1 article deep link (the specific article URL, never the homepage).
@@ -20,14 +20,13 @@ Single slide: "the series is live." Link sticker to Part 1, sticker text "Read i
 === VO SCRIPT (Bobby's rewrite, grammar normalized; this is what the "upbeat bob" clone reads and what the burned captions match) ===
 Cleanup flags from the edit pass: "honestly" dropped (house banned word, with "genuinely" and "actually"); "this summer" became "that summer" in B7 (the summer in question is 2029); "a similar clip then they have been" tightened to "the clip they have been."
 
-B1: "The odds of Ant leaving the Minnesota Timberwolves in his 2029 walk year sit somewhere near 44 percent."
-B2: "The whole LaMelo trade comes down to that one summer."
-B3: "2029. Ant's walk year. And history is not kind to teams with stars on walk years."
-B4: "Ant has two years left on his contract. And his odds of leaving this year? Only about 1 percent. But we're not worried about this year. In the walk year, the odds of Ant leaving skyrocket to 44 percent. And that's if the Wolves keep winning at the clip they have been. Let's say the Wolves have a bad year and win at just a 37-win pace? The odds of him leaving jump to 56. And this is based on forty years of data, not a gut feeling."
-B5: "Not only that, but LaMelo's deal ends the same July. And we still have not extended him."
+COLD-OPEN CUT (Bobby's call: the chart is the hook; the old B1-B3 cards are gone).
+
+B1 (the chart act): "Anthony Edwards has two years left on his contract with Minnesota. The odds he leaves this year? Only around 1 percent. But we're not worried about this year. In the walk year, the odds of Ant leaving skyrocket to 44 percent. Really, it's anywhere between 35 and 53 percent. And that's if the Wolves keep winning at the clip they have been. Let's say the Wolves have a bad year and win at just a 37-win pace? The odds of him leaving jump to 56. And this is based on forty years of data, not a gut feeling."
+B2: "Not only that, but LaMelo's deal ends the same July. And we still have not extended him."
     (insurance take if he signs: "Not only that, but LaMelo's deal ends the exact same July." with no extension line; the NO EXTENSION stamp gets re-rendered away too)
-B6: "So, we have two max guys. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Charlotte both making opposite bets on that summer."
-B7: "What are the most likely futures for that summer? Comment BILL and I'll send you the link to the Part 1 article."
+B3: "So, we have two max guys. One summer that the next decade of basketball in Minnesota hinges on. The Wolves and Hornets both made opposing bets on where that summer will land."
+B4: "What are the most likely futures for that summer? Comment BILL and I'll send you the link to the Part 1 article."
 
 === RENDER COMMANDS ===
 Silent CapCut cut (already rendered): one-summer/out/one_summer_reel.mp4

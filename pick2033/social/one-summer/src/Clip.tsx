@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "./Background";
 import { Captions } from "./Captions";
-import { Chrome, Cta, HazardCurve, Hook44, HookOneSummer, TwoMax, Unsigned, Y2029 } from "./Scenes";
+import { Chrome, Cta, HazardCurve, TwoMax, Unsigned } from "./Scenes";
 import { BEATS, BeatId, END_SEC, activeBeatIndex } from "./timeline";
 import { COLORS } from "./config";
 
@@ -11,16 +11,13 @@ export type ClipProps = {
   voiceoverSrc: string;
 };
 
-// Which visual a beat renders. Beats that share a scene (caption pages,
-// sentence splits) never transition between themselves.
+// Which visual a beat renders. The cold open IS the chart; the loop lands on
+// the fully drawn chart. Beats that share a scene never transition.
 const sceneKey = (id: BeatId): string => {
-  if (id.startsWith("curve")) return "curve";
+  if (id.startsWith("curve") || id === "loop") return "curve";
   if (id.startsWith("twomax")) return "twomax";
-  if (id.startsWith("y2029")) return "y2029";
   if (id.startsWith("unsig")) return "unsig";
-  if (id.startsWith("cta")) return "cta";
-  if (id === "h44b" || id === "loop") return "h44";
-  return id;
+  return "cta";
 };
 
 // One directional gesture for the whole video: on every beat change the
@@ -41,19 +38,12 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
 
   const scene = (id: BeatId): React.ReactNode => {
     switch (sceneKey(id)) {
-      case "h44":
-        return <Hook44 frame={frame} fps={fps} settled={id === "loop"} />;
-      case "h1":
-        return <HookOneSummer frame={frame} fps={fps} />;
-      case "y2029":
-        return <Y2029 frame={frame} fps={fps} />;
       case "curve":
         return <HazardCurve frame={frame} fps={fps} />;
       case "unsig":
         return <Unsigned frame={frame} fps={fps} />;
       case "twomax":
         return <TwoMax frame={frame} fps={fps} />;
-      case "cta":
       default:
         return <Cta frame={frame} fps={fps} />;
     }
@@ -83,7 +73,7 @@ export const Clip: React.FC<ClipProps> = ({ showCaptions, voiceoverSrc }) => {
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }
   );
-  // No dissolve into the loop card: the hard cut back to the hook IS the loop.
+  // No dissolve into the loop card: the hard cut back to the chart IS the loop.
   const showPrev =
     prev !== null && beat.id !== "loop" && sceneKey(prev.id) !== sceneKey(beat.id) && out < 1;
 

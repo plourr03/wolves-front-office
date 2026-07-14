@@ -88,115 +88,6 @@ export const Chrome: React.FC = () => {
 
 // ------------------------------------------------------------ statements ---
 
-const Statement: React.FC<{
-  frame: number;
-  fps: number;
-  startSec: number;
-  kicker?: string;
-  lines: { text: string; green?: boolean }[];
-  sub?: string;
-  settled?: boolean;
-}> = ({ frame, fps, startSec, kicker, lines, sub, settled = false }) => {
-  const at = (delay: number) =>
-    settled ? { opacity: 1, y: 0 } : riseIn(frame, fps, startSec + delay);
-  const k = at(0);
-  const s = at(0.14 + lines.length * 0.12);
-  return (
-    <Stage>
-      {kicker ? (
-        <div style={{ ...kickerStyle, opacity: k.opacity, transform: `translateY(${k.y}px)`, marginBottom: 30 }}>
-          {kicker}
-        </div>
-      ) : null}
-      {lines.map((l, i) => {
-        const a = at(0.12 + i * 0.12);
-        return (
-          <div
-            key={i}
-            style={{
-              ...statementStyle,
-              color: l.green ? COLORS.accentPop : COLORS.text,
-              opacity: a.opacity,
-              transform: `translateY(${a.y}px)`,
-            }}
-          >
-            {l.text}
-          </div>
-        );
-      })}
-      {sub ? (
-        <div style={{ ...subStyle, marginTop: 30, opacity: s.opacity, transform: `translateY(${s.y}px)` }}>
-          {sub}
-        </div>
-      ) : null}
-    </Stage>
-  );
-};
-
-// The cold open: the biggest number in the series, fully legible inside the
-// first second. The reel spends its runtime earning this card, and the loop
-// lands back on it.
-export const Hook44: React.FC<SceneProps & { settled?: boolean }> = ({ frame, fps, settled }) => {
-  const at = (delay: number) =>
-    settled ? { opacity: 1, y: 0 } : riseIn(frame, fps, T.h44 + delay, 0.32);
-  const k = at(0);
-  const a = at(0.04);
-  const b = at(0.12);
-  return (
-    <Stage>
-      {/* three small words that turn a naked doom-stat into an owned claim */}
-      <div style={{ ...kickerStyle, opacity: k.opacity, transform: `translateY(${k.y}px)`, marginBottom: 26 }}>
-        THE MODEL SAYS
-      </div>
-      <div
-        style={{
-          fontFamily: FONT.mono,
-          fontWeight: 700,
-          fontSize: 330,
-          lineHeight: 1.0,
-          color: COLORS.accentPop,
-          fontVariantNumeric: "tabular-nums",
-          marginLeft: -14,
-          opacity: a.opacity,
-          transform: `translateY(${a.y}px)`,
-        }}
-      >
-        44%
-      </div>
-      <div
-        style={{
-          fontFamily: FONT.display,
-          fontWeight: 700,
-          fontSize: 60,
-          lineHeight: 1.14,
-          color: COLORS.text,
-          marginTop: 22,
-          opacity: b.opacity,
-          transform: `translateY(${b.y}px)`,
-        }}
-      >
-        ANT'S ODDS OF LEAVING
-        <br />
-        IN THE 2029 WALK YEAR.
-      </div>
-    </Stage>
-  );
-};
-
-export const HookOneSummer: React.FC<SceneProps & { settled?: boolean }> = ({ frame, fps, settled }) => (
-  <Statement
-    frame={frame}
-    fps={fps}
-    startSec={T.h1}
-    settled={settled}
-    kicker="THE LAMELO TRADE, PRICED"
-    lines={[
-      { text: "IT COMES DOWN" },
-      { text: "TO ONE SUMMER.", green: true },
-    ]}
-  />
-);
-
 // Custom timing: each line lands as its sentence is spoken.
 export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
   const a = riseIn(frame, fps, T.twomax);
@@ -224,54 +115,6 @@ export const TwoMax: React.FC<SceneProps> = ({ frame, fps }) => {
   );
 };
 
-// ------------------------------------------------------------- the year ---
-
-export const Y2029: React.FC<SceneProps> = ({ frame, fps }) => {
-  const a = riseIn(frame, fps, T.y2029);
-  const b = riseIn(frame, fps, T.y2029 + 0.16);
-  const c = riseIn(frame, fps, T.y2029 + 0.34);
-  const d = riseIn(frame, fps, T.y2029b + 0.1); // the history line, as it's spoken
-  return (
-    <Stage>
-      <div style={{ ...kickerStyle, opacity: a.opacity, transform: `translateY(${a.y}px)` }}>
-        THE SUMMER OF
-      </div>
-      <div
-        style={{
-          fontFamily: FONT.mono,
-          fontWeight: 700,
-          fontSize: 330,
-          lineHeight: 1.02,
-          color: COLORS.text,
-          fontVariantNumeric: "tabular-nums",
-          marginLeft: -14, // optical alignment for Consolas' side bearing
-          opacity: b.opacity,
-          transform: `translateY(${b.y}px)`,
-        }}
-      >
-        2029
-      </div>
-      <div
-        style={{
-          fontFamily: FONT.display,
-          fontWeight: 700,
-          fontSize: 64,
-          letterSpacing: 5,
-          color: COLORS.accentPop,
-          marginTop: 6,
-          opacity: c.opacity,
-          transform: `translateY(${c.y}px)`,
-        }}
-      >
-        ANT'S WALK YEAR
-      </div>
-      <div style={{ ...subStyle, marginTop: 26, opacity: d.opacity, transform: `translateY(${d.y}px)` }}>
-        History is not kind to teams with stars on walk years.
-      </div>
-    </Stage>
-  );
-};
-
 // ------------------------------------------------------------- the cliff ---
 
 const CURVE = { w: 912, h: 600, l: 46, r: 30, top: 96, bottom: 64, yMax: 0.6 };
@@ -280,8 +123,10 @@ const cy = (h: number) =>
   CURVE.h - CURVE.bottom - (h / CURVE.yMax) * (CURVE.h - CURVE.bottom - CURVE.top);
 
 export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
-  const intro = ramp(frame, fps, T.curve1, 0.4);
-  const p = drawOn(frame, fps, T.curve1 + 0.2, 3.2);
+  // Cold open: the chart IS the hook now, so the title snaps on and the line
+  // starts moving inside the first few frames.
+  const intro = ramp(frame, fps, T.curve1, 0.2);
+  const p = drawOn(frame, fps, T.curve1 + 0.05, 2.8);
   const callout1 = ramp(frame, fps, T.curve1c + 0.3, 0.45); // "only about 1 percent"
   const band = ramp(frame, fps, T.curve2 - 0.1, 0.35);
   const label44 = riseIn(frame, fps, T.curve2 + 0.15, 0.4);
@@ -292,6 +137,9 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
 
   const declineIn = ramp(frame, fps, T.curve2b, 0.5);
   const label56 = ramp(frame, fps, T.curve2c + 0.15, 0.4);
+  // "Really, it's anywhere between 35 and 53": the band brightens and gets
+  // its edge labels the moment the range is spoken.
+  const bandCall = ramp(frame, fps, T.curve2r + 0.1, 0.45);
 
   const pts = HAZARD.map((d, i) => [cx(i), cy(d.h)] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
@@ -314,8 +162,38 @@ export const HazardCurve: React.FC<SceneProps> = ({ frame, fps }) => {
           height={cy(SPIKE_LO) - cy(SPIKE_HI)}
           rx={6}
           fill={COLORS.accentDim}
-          opacity={band}
+          opacity={band + bandCall * 0.9}
         />
+        {/* 80% band edges, labeled as they're spoken (0.349 / 0.533 -> 35 / 53) */}
+        <g opacity={bandCall}>
+          {[
+            [SPIKE_HI, "53"],
+            [SPIKE_LO, "35"],
+          ].map(([h, label]) => (
+            <g key={label as string}>
+              <line
+                x1={92}
+                x2={spike[0] - 34}
+                y1={cy(h as number)}
+                y2={cy(h as number)}
+                stroke={COLORS.hair}
+                strokeWidth={1.5}
+                strokeDasharray="3 6"
+              />
+              <text
+                x={86}
+                y={cy(h as number) + 7}
+                textAnchor="end"
+                fill={COLORS.slate}
+                fontFamily={FONT.mono}
+                fontSize={22}
+                fontWeight={700}
+              >
+                {label}
+              </text>
+            </g>
+          ))}
+        </g>
         {/* baseline + year ticks */}
         <line
           x1={CURVE.l - 8}
