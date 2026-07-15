@@ -20,7 +20,7 @@ altText below, then the article shortcode (already placed in the drafts).
 | edwards-hazard | edwards_hazard_fragment.html | Edwards' annual departure hazard, 2027 to 2033 | Line chart of Anthony Edwards' modeled annual departure probability from 2027 to 2033 under a winning and a declining team scenario, spiking to 44 or 56 percent at the 2029 walk year and falling to near zero after a modeled re-signing. |
 | edwards-cumulative | edwards_cumulative_fragment.html | The cumulative tenure bet | Line chart of the cumulative probability Anthony Edwards has departed Minnesota by each season through 2033, reaching 56 percent in the winning scenario and 71 percent in the declining scenario, with an 80% interval band and a coin-flip reference line. |
 
-## Part 2, Fifty Thousand Futures (stage2 draft v5)
+## Part 2, Fifty Thousand Futures (stage2 draft v6)
 
 | vizId | file | title | altText |
 |---|---|---|---|
