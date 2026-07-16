@@ -26,6 +26,8 @@ The collapse years are real and the model carries them. About one franchise seas
 
 Then the check that matters most for this trade: is the machine being too kind to Charlotte? The simulated Hornets crest right in the middle of the swap window, and a too-rosy Charlotte inflates every asset they got. So we pulled history's receipts. Every losing team since 1985 that had three or more rotation players under 23, the way Charlotte does now, went into a pile: 77 teams, 18 of them matching Charlotte's band closely. Then we asked one question: how good did those teams actually get? Their typical peak was 49.4 wins. Our simulated Hornets peak at a median of 50.9, which lands around the sixtieth percentile of the real group, meaning the machine sees Charlotte a bit sunnier than the average real story but well inside the range of what actually happened. Before running any of this, we wrote down a tripwire: if the simulated crest beat 52.8 wins (the real group's seventieth percentile), we'd call the machine too generous and correct it. It came in under the tripwire, so the crest stands as drawn. And the part we did not engineer is the part that builds the most trust: real young cores crest around year four and then fade, and the simulation reproduces that arc without ever having been told to.
 
+{{viz:cohort-crest}}
+
 One more honesty note, and it runs in Minnesota's favor rather than ours. The model's known bias is that simulated teams hold their momentum slightly longer than real teams did, which means the machine keeps Minnesota strong a little too long, produces slightly fewer bad-Wolves seasons in the swap years, and therefore prices Charlotte's assets a little too low. If the bill still comes out large under a model tilted toward Minnesota, the bill is robust.
 
 And the full scorecard is public: every validation gate, including the calibration cell that stayed red at the final re-gate, making three red cells in all, lives in the validation report with the rulings that produced it.
@@ -34,9 +36,15 @@ And the full scorecard is public: every validation gate, including the calibrati
 
 Start with the two win-total fan charts. Minnesota's median future, the middle path with half the simulations above it and half below, is a slow fade: 52 wins now, 51 next year, then down through the mid-40s to 39 by 2033. The honest part is the width. By 2033 the 90 percent band runs from 19 wins to 58, which is to say that seven drafts out, the machine considers everything from a teardown to a contender live. Charlotte's median future does exactly what the young-core histories do: it climbs from 45 wins to a crest just under 51 in 2029, then fades back to 43 by 2033.
 
+{{viz:win-fancharts}}
+
 Now the pick itself. The 2033 first Minnesota sent out lands in the top four in 15.7 percent of futures. It lands in the top ten in 39.1 percent. And under the sixteen-team definition the reform gave us, it is a lottery pick at all in 61.9 percent, which is a sentence worth reading twice about a team that just won 49 games.
 
+{{viz:slot-2033}}
+
 Here is the centerpiece. Split the fifty thousand futures by the Part 1 question and the pick changes character. In the 21,343 futures where Edwards is still a Timberwolf in 2033, the pick lands top-ten 35.4 percent of the time and top-four 14.1 percent. In the 28,657 futures where he has left, those numbers are 41.9 and 16.9. That gap is the tenure bet made visible: same franchise, same league, same lottery balls, and the single variable of one man's address moves the tail of a draft pick seven years away.
+
+{{viz:edwards-split}}
 
 ## Grading our own homework
 
