@@ -29,7 +29,7 @@ altText below, then the article shortcode (already placed in the drafts).
 | edwards-split | edwards_split_fragment.html | The tenure bet made visible | Grouped bar chart comparing the 2033 pick's top-four, top-ten, and lottery probabilities between futures where Edwards stays (14.1, 35.4, 56.7 percent) and futures where he departs (16.9, 41.9, 65.8 percent). |
 | cohort-crest | cohort_crest_fragment.html | The self-audit: simulated Charlotte vs real young cores | Line chart of simulated Charlotte's median wins over years one to five against the banded range of 18 real young cores since 1985, with the model's 50.9-win crest sitting near the cohort's 60th percentile, below the pre-committed 52.8-win correction trigger. |
 
-## Part 3, The Bill (stage3 draft v4)
+## Part 3, The Bill (stage3 draft v5)
 
 | vizId | file | title | altText |
 |---|---|---|---|
