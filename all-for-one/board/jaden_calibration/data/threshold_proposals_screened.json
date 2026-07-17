@@ -1,0 +1,40 @@
+{
+ "screen": {
+  "rule": "jd_load_before >= class median",
+  "threshold": 0.19058123488638828,
+  "n_full": 38,
+  "n_screened": 19,
+  "seeds_in": [
+   "Mikal Bridges",
+   "OG Anunoby"
+  ]
+ },
+ "JO-EFF": {
+  "leap_ts_after_vs_trail3_ge": 0.019,
+  "leap_d_ts_vs_league_ge": 0.021,
+  "decline_le": -0.015,
+  "n_leap_screened": 4,
+  "leap_members": [
+   "Harrison Barnes",
+   "Kevin Huerter",
+   "Kyle Kuzma",
+   "Taurean Prince"
+  ]
+ },
+ "JO-FLOOR": {
+  "floor_pctchg": -15,
+  "trips_screened": 6
+ },
+ "JO-GROWTH": {
+  "rule": "at least one rung",
+  "screened": 10,
+  "of": 19
+ },
+ "JD-HOLD": {
+  "strong_pass_le": -0.124,
+  "hold_below_screened": 16
+ },
+ "JD-LOAD": {
+  "pass_after_share_ge": 0.2
+ }
+}
