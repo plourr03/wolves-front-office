@@ -1,0 +1,66 @@
+{
+ "n_screened": 19,
+ "screen_threshold_jd_load_before": 0.19058123488638828,
+ "residualization": {
+  "model": "ts_after_vs_trail3 ~ usg_delta (OLS, n=19)",
+  "slope": -0.15407908284263136,
+  "intercept": 0.0016657604608923983,
+  "r2": 0.02918577166638503,
+  "residual_sd": 0.02825549985710386,
+  "slope_per_0.01_usage": -0.0015407908284263137
+ },
+ "residual_leap_band": {
+  "PROPOSED_primary": "residual >= +1 SD (primary); >= 75th pct alternative -- identical LEAP set",
+  "thr_1sd": 0.02825549985710386,
+  "band_1sd": [
+   "Kevin Huerter",
+   "Jae Crowder",
+   "Harrison Barnes"
+  ],
+  "thr_p75": 0.015683663809226277,
+  "band_p75": [
+   "Kevin Huerter",
+   "Jae Crowder",
+   "Harrison Barnes",
+   "Taurean Prince",
+   "Kyle Kuzma"
+  ],
+  "v01_bare_ts_band": [
+   "Harrison Barnes",
+   "Kevin Huerter",
+   "Kyle Kuzma",
+   "Taurean Prince"
+  ]
+ },
+ "growth_rungs_canonical": {
+  "a": "pull-up eFG% OR drive FG% up by >= +0.010",
+  "b": "FTA/FGA up by >= +0.010",
+  "c": "fg3a/g up AND fg3_pct up",
+  "screened_any": 12,
+  "screened_two": 4
+ },
+ "leap_tier": {
+  "definition": "gate PASS (composite JD-LOAD+JD-HOLD) AND residual leap band AND JO-FLOOR intact (sa75 > -15%) AND >=1 growth signal",
+  "jd_load_pass_thr": 0.20039076536112108,
+  "gate_pass_composite_n": 16,
+  "gate_pass_strict_n": 10,
+  "sets": {
+   "resid>=+1SD|>=1growth": [
+    "Harrison Barnes",
+    "Jae Crowder"
+   ],
+   "resid>=+1SD|>=2growth": [],
+   "resid>=p75|>=1growth": [
+    "Harrison Barnes",
+    "Jae Crowder"
+   ],
+   "resid>=p75|>=2growth": []
+  }
+ },
+ "jd_cover_coverage": "34/38 computed, 4 panel-pending (2025-26 AFTERs)",
+ "gordon_appendix": {
+  "jd_load_before": 0.1816361905226923,
+  "screen_threshold": 0.19058123488638828,
+  "status": "adjacent-informative, OUT of calibration class"
+ }
+}
