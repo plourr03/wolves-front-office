@@ -2,7 +2,14 @@
 
 For the "If I Were Tim Connelly" master plan project. Covers the state vector definition, the root node encoded as of July 17, 2026, the decision calendar through the summer 2028 gate, and the mapping from each moving part to the machinery that powers it.
 
-Version 0.3, revised July 17, 2026. Companion to tripwire_backtest_spec.md. Facts pulled from the July 2026 asset audit carry VERIFY tags where they can drift. Changes from 0.1: Jaden promoted to a state variable with the loyalty premium as a first-class output, repeater clock added to the cap state, ARM-D dump arm added with reset-aware valuation, ownership curves added beside the Ant machine, standing orders added as section 7. Changes from 0.2: availability transition source corrected after the Phase 0 finding that pick2033 models draft slots, not availability (see phase0_avail_pace_redefinition.md), and the P_yes probability gate replaced with the acceptance model's boolean verdict plus sweetener price (see gap G5).
+**Version 2.0, July 17, 2026. Source of truth.** Consolidates and supersedes the 0.1-0.4 drafts (this file replaces both the prior `board_spec.md` at 0.3 and the `board_spec (1).md` at 0.4). Companion to `tripwire_backtest_spec.md` (v0.2) and `jaden_markers.md`. Facts pulled from the July 2026 asset audit carry VERIFY tags where they can drift.
+
+Version history:
+- 0.1: initial state vector, root node, decision calendar; Jaden a state variable with the loyalty premium as a first-class output; repeater clock in the cap state; ARM-D dump arm with reset-aware valuation; ownership curves beside the Ant machine; standing orders (section 7).
+- 0.2: availability transition source corrected after the tripwire Phase 0 finding that pick2033 models draft slots, not player availability (see `phase0_avail_pace_redefinition.md`); the P_yes probability gate replaced with the acceptance model's boolean verdict plus sweetener price (gap G5).
+- 0.3: (draft) minor consistency edits.
+- 0.4: `jaden` gains a fourth tier, CONVERTED (defensive gate failed, offensive leap achieved), per Bobby's ruling; tier semantics and markers in `jaden_markers.md`.
+- 2.0: consolidated to a single source-of-truth file; duplicate removed; settled tripwire findings folded into the transition mapping (AVAIL-PACE threshold derived and live; SPACE-ANT reclassified dashboard-only per gap G4; PAIR-DRTG/FC-DRB pending final Phase 1 panel results); Jaden markers cross-referenced now that `jaden_markers.md` exists.
 
 ## 0. Plain language summary
 
@@ -29,11 +36,11 @@ S = (t, perf, run, melo_avail, fit, ant, melo_deal, jaden, cap, chest)
 | t | Node index from the calendar in section 5 | Time and action menus are node dependent |
 | perf | T1 top-4 seed pace, T2 playoff band, T3 play-in band, T4 lottery band | Gates deadline posture and feeds the hazard through equity |
 | run | none, R1, R2, WCF, F, RING within the window | Deepest playoff result since June 2026; monotone; RING absorbing; primary hazard covariate |
-| melo_avail | A on or above 60-game pace, B 40 to 59 pace, C under 40 pace | Tiered from the availability baseline (prior-three-season median) and, once built, the real availability posterior; gates ARM-G |
-| fit | prior, green, yellow, red | Compressed tripwire state (PAIR-DRTG, TOV-BLEED, SPACE-ANT per the tripwire spec); gates ARM-S and trade arms |
+| melo_avail | A on or above 60-game pace, B 40 to 59 pace, C under 40 pace | Tiered from the availability baseline (prior-three-season median, 47 games) and, once built, the real availability posterior; gates ARM-G. The in-season read is AVAIL-PACE (threshold derived, see section 8) |
+| fit | prior, green, yellow, red | Compressed tripwire state (the wired metrics: PAIR-DRTG and TOV-BLEED; SPACE-ANT is dashboard-only per tripwire gap G4, not a wire); gates ARM-S and trade arms |
 | ant | default, smax_signed, smax_declined, REQUESTED | Observable commitment machine; see section 4 |
 | melo_deal | pre_ext (3 years left), extended, walk (2028-29 unextended) | Own decision plus his agreement; affects hazard and salvage |
-| jaden | leap, steady, stalled | Named bet in the thesis; the gate move differs by his trajectory specifically, which passes the membership test; tier markers pre-registered with tripwire discipline, definitions TBD |
+| jaden | leap, steady, converted, stalled | Named bet in the thesis; the gate move differs by tier, with CONVERTED (defensive gate failed, offensive leap achieved) as the archetype-change branch where the loyalty premium is expected to diverge widest; tier markers defined in `jaden_markers.md`, frozen after the feasibility pass |
 | cap | below_tax, tax_band, apron1_band, apron2_plus, each carrying a repeater_clock count of consecutive tax finishes | Determines legal action menus under the apron rules and the marginal price of a payroll dollar |
 | chest | Tuple, see below | Determines which trade arms are constructible |
 
@@ -41,11 +48,11 @@ chest = (firsts_tradeable: 0 or 1, pick2028_status: swap_pending or resolved_kep
 
 Lives in the simulation layer, not the state: full roster and minutes, individual stat lines, opponent strength and schedule. Ownership tax appetite is handled by the curves in section 4 rather than by a state variable.
 
-Rough size: 4 x 6 x 3 x 4 x 4 x 3 x 3 x 4 levels across roughly 14 time nodes with a modest set of reachable chest combinations. Naive product is large; reachability pruning (run is monotone, chest evolves nearly deterministically given actions, absorbing states exit) should land the reachable set in the low thousands. Phase one of the build should print the exact count.
+Rough size: 4 x 6 x 3 x 4 x 4 x 3 x 4 x 4 levels across roughly 14 time nodes with a modest set of reachable chest combinations. Naive product is large; reachability pruning (run is monotone, chest evolves nearly deterministically given actions, absorbing states exit) should land the reachable set in the low thousands. Phase one of the build should print the exact count.
 
 ## 3. Root node, July 17, 2026
 
-t: node 0. perf: projection band pending a fresh Joan Bet run on the post-trade roster; placeholder T2. run: none (window opens June 2026; context for the hazard baseline: WCF trips in 2024 and 2025, then a second-round exit in 2026, a step back that mildly elevates the starting hazard). melo_avail: prior from the prior-three-season games-played median (47), pending the availability posterior build. fit: prior (no shared-floor data exists). ant: default. melo_deal: pre_ext, and note the two-year extension window is ALREADY OPEN per reporting from the trade (VERIFY exact eligibility window). jaden: steady (baseline; tier markers to be defined before the October freeze). cap: apron1_band with repeater_clock 2, tax finishes in 2024-25 and 2025-26 and a third projected in 2026-27, meaning repeater rates arrive with this season's bill or 2027-28 at the latest (VERIFY exact trigger against CBA text), over the first apron, under a second-apron hard cap that expires June 30, 2027, roughly 4.4M of headroom (VERIFY, drifts with signings). chest: firsts_tradeable 0, pick2028_status swap_pending (Charlotte), unlock_done false, seconds VERIFY from warehouse ledger, sweeteners {Shannon, Beringer, Evans, Clark, Zikarsky}, expirings {Green about 14.7M, DDV about 12.9M injured (Achilles, expected to miss most or all of the season)}, core_on_roster {Gobert (expiring after 2027-28, salary roughly high 30s VERIFY), Jaden (through 2028-29)}. Additional root facts: two open roster spots, veteran minimum is the only signing tool, leftover trade exceptions functionally dead while over the first apron, no midlevel.
+t: node 0. perf: projection band pending a fresh Joan Bet run on the post-trade roster; placeholder T2. run: none (window opens June 2026; context for the hazard baseline: WCF trips in 2024 and 2025, then a second-round exit in 2026, a step back that mildly elevates the starting hazard). melo_avail: prior from the prior-three-season games-played median (47), pending the availability posterior build. fit: prior (no shared-floor data exists yet for the Ant-LaMelo pair; the pair has never shared a floor). ant: default. melo_deal: pre_ext, and note the two-year extension window is ALREADY OPEN per reporting from the trade (VERIFY exact eligibility window). jaden: steady (baseline; tier markers now defined in `jaden_markers.md`, frozen after the feasibility pass, before the October freeze). cap: apron1_band with repeater_clock 2, tax finishes in 2024-25 and 2025-26 and a third projected in 2026-27, meaning repeater rates arrive with this season's bill or 2027-28 at the latest (VERIFY exact trigger against CBA text), over the first apron, under a second-apron hard cap that expires June 30, 2027, roughly 4.4M of headroom (VERIFY, drifts with signings). chest: firsts_tradeable 0, pick2028_status swap_pending (Charlotte), unlock_done false, seconds VERIFY from warehouse ledger, sweeteners {Shannon, Beringer, Evans, Clark, Zikarsky}, expirings {Green about 14.7M, DDV about 12.9M injured (Achilles, expected to miss most or all of the season)}, core_on_roster {Gobert (expiring after 2027-28, salary roughly high 30s VERIFY), Jaden (through 2028-29)}. Additional root facts: two open roster spots, veteran minimum is the only signing tool, leftover trade exceptions functionally dead while over the first apron, no midlevel.
 
 Pruned branch: LeBron. Per the design decision, the exercise assumes he signs elsewhere. On the published board he appears as a grey stub that resolved in July 2026.
 
@@ -67,14 +74,14 @@ Ownership curves. The owner is the second human the model cannot see inside, and
 |---|---|---|---|
 | 0 | Now to Oct 2026 | Decision | Fill two roster spots at the vet min (frontcourt depth per need); two-way slots; LaMelo early-extension arm (default WAIT, preserves option value of one season of fit data; counterargument, his price rises if he plays well); LeBron stub resolves |
 | 1 | Oct 31, 2026 | Decision | Rookie scale options: Shannon fourth year, Beringer third year (VERIFY dates); expected exercise |
-| 2 | Oct 20, 2026 approx | Commitment | TRIPWIRES.md freezes; season opens |
-| 3 | Nov 27, 2026 | Read R1 | Advisory tripwire read, approx game 17 to 20 |
+| 2 | Oct 20, 2026 approx | Commitment | TRIPWIRES.md and jaden_markers.md freeze; season opens |
+| 3 | Nov 27, 2026 | Read R1 | Advisory tripwire read, approx game 17 to 20 (AVAIL-PACE R1); Jaden markers read informationally |
 | 4 | Dec 15, 2026 | Threshold | Offseason signees league-wide become trade eligible; practical open of trade season |
-| 5 | Jan 10, 2027 | Read R2 | Binding tripwire read; also league guarantee date window (VERIFY exact date) |
+| 5 | Jan 10, 2027 | Read R2 | Binding tripwire read, approx game 36 to 39 (AVAIL-PACE R2); also league guarantee date window (VERIFY exact date) |
 | 6 | Early Feb 2027 | Decision | Trade deadline. Arms per tripwire spec: WAIT default, ARM-G guard depth, ARM-B frontcourt, ARM-S staggering (free). Matching salary Green and DDV. Over-apron rules: 100 percent matching, no buyout signings above the midlevel line. UNLOCK and ARM-D available here (see section 6) |
 | 7 | Apr to Jun 2027 | Chance | Playoffs. Outcome updates run, feeds the hazard. This is the milestone lever: a deep run is worth equity through retention, not just glory |
 | 8 | Jun 2027 | Decision | Draft. No picks owned; second-round purchases if inventory and rules allow (VERIFY) |
-| 9 | Jul 2027 | Decision layer | Hard cap expires. Green and DDV roughly 27.6M come off the books. Gobert enters his expiring year, the largest matching salary of the whole window. Ant supermax window opens, offer decision plus his response, the first clean read of the clock. LaMelo extension arm again. Own free agents (Hyland, Lyles). Midlevel status recomputed. Tax and repeater posture set for 2027-28 |
+| 9 | Jul 2027 | Decision layer | Hard cap expires. Green and DDV roughly 27.6M come off the books. Gobert enters his expiring year, the largest matching salary of the whole window. Ant supermax window opens, offer decision plus his response, the first clean read of the clock. Jaden tier assignment (2026-27 season-end) feeds the extension node. LaMelo extension arm again. Own free agents (Hyland, Lyles). Midlevel status recomputed. Tax and repeater posture set for 2027-28 |
 | 10 | Oct 31, 2027 | Decision | Next rookie option cycle (Beringer fourth year, Evans, others VERIFY) |
 | 11 | Nov 2027 to Jan 2028 | Reads | Season two tripwire cycle; re-run the backtest freeze for the new roster context before the season (new TRIPWIRES revision) |
 | 12 | Early Feb 2028 | Decision | Trade deadline two. Gobert expiring is the hammer. NOTE: still zero tradeable firsts unless UNLOCK was executed, because the Utah 2029 obligation keeps Stepien binding. If unlock_done, the 2028 first (post-swap value) is advance-tradeable here |
@@ -107,10 +114,11 @@ OWNERSHIP-SHIFT. Trigger: any observed action or directive implying a budget pos
 
 | Moving part | Powered by |
 |---|---|
-| melo_avail transitions | Per-player availability posterior (build spec in phase0_avail_pace_redefinition.md, scheduled on this board's roadmap; interim, the prior-three-season median baseline plus the Scenario B reference-class mapping), updated in season by AVAIL-PACE |
+| melo_avail transitions | Interim: the prior-three-season median baseline (47 games) plus the Scenario B reference-class mapping; the in-season read is AVAIL-PACE, threshold derived (trip toward ARM-G if LaMelo is available in 12 or fewer of the first 20 games at R1, 23 or fewer of 37 at R2; baseline-conditioned, see `phase3_avail_pace_derivation.md`). Later: the real per-player availability posterior (build spec in `phase0_avail_pace_redefinition.md`, scheduled on this board's roadmap, its actual customer) |
 | perf given roster | Joan Bet Monte Carlo (roster to win distribution to seed band) |
 | run given perf | Joan Bet playoff and championship simulation |
-| fit transitions | Priors from tripwire backtest Phase 3, updated in season by fitengine shrunk posteriors |
+| fit transitions | Priors from tripwire backtest Phase 3, updated in season by fitengine shrunk posteriors. Settled: AVAIL-PACE wire-eligible with a derived threshold. Pending final Phase 1 panel results: PAIR-DRTG and FC-DRB reliability, per the pre-staged decision rule (a metric that clears r(25) >= 0.50 proceeds as a wire candidate; otherwise it demotes to dashboard). SPACE-ANT is dashboard-only (gap G4: no wide-open/defender-distance data exists in the warehouse) |
+| jaden transitions | The tier markers in `jaden_markers.md` (defensive gate JD-LOAD/JD-COVER/JD-HOLD, offensive ladder JO-EFF/JO-FLOOR/JO-GROWTH), computed at season end, read informationally at R1/R2. Thresholds calibrated on the section-5 calibration class (queued). This dial feeds the July 2027 extension node and the 2028 gate, NOT the February deadline |
 | ant transitions | Patience curve (section 4) reading solver forward equity |
 | Action legality | Joan Bet CBA feasibility gating (aprons, matching, Stepien, hard caps) |
 | Counterparty realism | partner_acceptance.decide() boolean verdict plus required sweetener price for every trade arm target list, carrying the acceptance model's documented caveat that marginal deals are least reliable |
@@ -122,7 +130,7 @@ Step one, encode the calendar and state space and print the reachable state coun
 
 ## 10. Open questions
 
-Jaden tier markers: the pre-registered definitions of leap, steady, and stalled, to be written with the same discipline as the tripwires before the October freeze.
+Jaden tier markers: defined in `jaden_markers.md` with four tiers; thresholds TUNE pending the calibration class (section 5 there, queued) and the agent feasibility pass; freeze before October 20.
 
 Granularity of perf (four bands versus six) and whether run should distinguish losing the Finals from winning the conference.
 
