@@ -10,11 +10,28 @@
 - [ ] **Hash-publication decision recorded** (Bobby's call): whether to publish the SHA-256 of the frozen file in October. If yes, compute and paste the hash at freeze.
 
 
-Pre-registered deadline alarms for the February 2027 trade deadline node of the "If I Were Tim Connelly" master plan. Each wire binds a metric to a threshold, two read dates, and one pre-committed arm. The backtest behind every number is in `doc/` (`REVIEW.md` indexes it).
+Pre-registered deadline alarms for the February 2027 trade deadline node of the "If I Were Tim Connelly" master plan. The backtest behind every number is in `doc/` (`REVIEW.md` indexes it).
 
-## Header honesty clause (belongs in the frozen file)
+**What ships: one binding wire, plus advisories.**
+- **AVAIL-PACE -> ARM-G**: the one binding wire. It fires an action.
+- **FC-DRB -> ARM-B**: a structured advisory. It binds preparation and forces an adjudication, but does not itself fire the trade.
+- **PAIR-DRTG, TOV-BLEED -> ARM-S**: dashboard advisories, non-binding, feeding the free staggering action only.
 
-The reference classes are small (roughly 8 to 400 cases depending on the scenario), so everything here is a prior update, not a proof. Two of the four candidate metrics could not be promoted at all because the co-star class is too small to power them (see the dashboard section). The one binding wire that clears every gate unambiguously (AVAIL-PACE) rests on a 388-case class; the second (FC-DRB) is explicitly marginal: its binding metric (whole-team DRB) is validated on the broad succession class, but the Wolves' own subgroup (kept the primary anchor, lost the second, no replacement) does not independently validate, which is disclosed below. The model contains no private information: no medicals, no agent conversations, no locker room. That is the blind spot a real front office fills, and this file does not pretend to fill it.
+## Header: the arc (belongs in the frozen file)
+
+Four candidate wires entered the backtest. The reliability and predictive-validity gates killed two (PAIR-DRTG and TOV-BLEED: reliability passed, but the co-star class of ~6 labeled cases could not power the predictive test). The subgroup split demoted a third (FC-DRB: its whole-team trip metric validates on the broad frontcourt-succession class, but not on the Wolves' own subgroup, disclosed below). One survived everything (AVAIL-PACE, on a 388-case class).
+
+The single most important honesty note this backtest produced: **the situations most like ours are the least predictable.** FC-DRB's subgroup split makes this concrete. Teams that kept their primary anchor and lost the second without replacing it, which is exactly the Wolves losing Reid behind Gobert, are the noisiest subgroup, weaker than either teams that lost their primary or teams that replaced the loss:
+
+| Subgroup | n | whole-team DRB persistence | verdict |
+|---|---|---|---|
+| Lost the primary anchor | 81 | 0.619 | validates |
+| **Kept primary, lost second, no replacement (Wolves' case)** | 35 | **0.375** (CI to 0.05) | does not validate |
+| Kept primary, lost second, replaced it | 65 | 0.665 | validates |
+
+Everything here is a prior update, not a proof; the classes are small (roughly 8 to 400 cases). The model contains no private information: no medicals, no agent conversations, no locker room. That is the blind spot a real front office fills, and this file does not pretend to fill it.
+
+**Design principle running through all of it: pre-commitment strictness scales with action cost.** Binding the costliest arm (a trade) requires subgroup-level validation; AVAIL-PACE has it, FC-DRB does not, so FC-DRB binds only the cheap and reversible parts (preparation, adjudication) and leaves the trade to human judgment. ARM-S costs nothing, so a dashboard whisper is enough to prompt it.
 
 ## Wire 1: AVAIL-PACE (binding) -> ARM-G
 
@@ -32,28 +49,29 @@ The reference classes are small (roughly 8 to 400 cases depending on the scenari
 
 **Evidence.** 388 comparable arrivals (players with a 2-of-4-season availability history). Early-pace-to-full-availability Spearman 0.77 at N=20, sign consistency 0.77, both above gate; reliability-exempt as an exact count. Strongest-supported wire in the library.
 
-## Wire 2: FC-DRB (marginal, binding) -> ARM-B  [trip + attribution]
+## FC-DRB: structured advisory (NOT a binding wire) -> ARM-B
 
-**Binding trip metric.** Wolves **whole-team** defensive-rebound rate, expressed as a league percentile. This is the validated construct (see redesign below).
+FC-DRB is **demoted to a structured advisory** (ruling 2026-07-17). It does not fire the trade. The redesigned construct stands; only the commitment level drops, because binding the costliest arm requires subgroup-level validation and the Wolves' subgroup (retained_primary, 0.375-0.394, CI to 0.05, n=35) does not provide it.
 
-**Threshold (two-read persistence, derived; see `doc/memo_fcdrb_redesign.md`).** Fires only if whole-team DRB percentile is in the **bottom third of the league at both R1 and R2**. Derived from the whole-team scorecard: bottom-third at both reads is where P(the rebounding hole persists into the bottom third) first clears 0.5 (0.554). A single low read does not fire.
+**Trip metric (unchanged from the redesign).** Wolves **whole-team** defensive-rebound rate as a league percentile. Trip = bottom league third at a read. Derived from the whole-team scorecard: bottom-third at both reads is where P(the hole persists into the bottom third) first clears 0.5 (0.554). Binding-metric reliability r(25) = 0.619.
 
-**Attribution read (Gobert-off, routes the response, not a trip condition):**
-- **trip + Gobert-off red** -> route ARM-B to the backup-big target list (the hole is where Reid's absence bites; diagnosis fits).
-- **trip + Gobert-off green** -> **does not auto-route**; flags an out-of-cycle review, because a team-level collapse with healthy anchor-off minutes implies a different cause than the Reid hole, and the backup-big move would treat the wrong problem.
+**Advisory teeth (these bind; the trade does not).**
+1. **First trip at either read BINDS preparation.** On the first read (R1 or R2) that shows whole-team DRB in the bottom third, the ARM-B target list is refreshed through the acceptance model, price discovery is completed, and readiness is logged. This is cheap and reversible, so it binds: the front office must be a prepared buyer, not a browsing one, by the deadline.
+2. **Trip at both reads triggers a MANDATORY adjudication memo before the deadline.** If the bottom-third trip holds at both R1 and R2, a memo is required that decides act-or-pass, argued against the pre-registered scorecard (all-team P(persist in bottom third) = 0.554) with the subgroup caveat stated (the Wolves' own retained-primary subgroup validates weakly, 0.375). The decision is logged in change control either way. **Silence is not an option**: the wire's teeth are that a both-read trip cannot be ignored, only adjudicated.
+3. **Attribution (unchanged).** Gobert-off DRB frames the diagnosis: **Gobert-off red** frames the backup-big case (the hole is where Reid's absence bites); **Gobert-off green** flags an out-of-cycle review instead (team-level collapse with healthy anchor-off minutes implies a different cause than the Reid hole).
 
-**Marginal-wire disclosure (required, prominent).** FC-DRB is the weaker of the two wires:
-1. **Binding-metric reliability** (whole-team DRB): r(25) = 0.619, which clears the gate (better than the old Gobert-off metric's 0.502).
-2. **Gate history (change-control item):** FC-DRB failed the original binarized sign gate (0.659 vs 0.70). The gate was amended, after seeing the data, to a continuous Spearman >= 0.59 criterion for n >= 30 (arcsine translation of 0.70; `doc/memo_signgate_amendment.md`).
-3. **Subgroup-provenance caveat (the real limit):** the binding metric validates on the broad succession class (lost-primary 0.619, n=81) but **not** on the Wolves' own subgroup. Teams that keep their primary anchor and lose the second without replacing it (retained-primary, the Wolves' exact case) show weak persistence (whole-team 0.375, anchor-off 0.394, n=35, CI straddling near-zero to above gate). So the wire rests on the general succession signal, and its transfer to the Wolves' specific situation is uncertain. Treat it as a plausibility trigger, not a precise predictor.
+**Arm.** ARM-B, a backup big or rebounding forward, matching pieces (Green / DiVincenzo, or the aggregate ~27.6M). Target list below. The advisory prepares and adjudicates ARM-B; a human fires it.
 
-**Arm.** ARM-B, a backup big or rebounding forward, matching pieces (Green / DiVincenzo, or the aggregate ~27.6M). Target list below.
-
-**Evidence.** Binding metric (whole-team DRB): reliability r(25) 0.619 across 330 team-seasons; succession validity on lost-primary 0.619 (n=81, Fisher CI [0.464, 0.738]). Wolves-subgroup (retained-primary) does not independently validate (0.375, n=35). See `doc/memo_fcdrb_redesign.md`.
+**Provenance (full, retained; the marginal-wire label is moot for a non-binding advisory).**
+- Trip metric reliability (whole-team DRB): r(25) = 0.619 across 330 team-seasons.
+- Succession validity, broad class: lost-primary 0.619 (n=81, Fisher CI [0.464, 0.738]).
+- Wolves-subgroup validity: retained-primary does **not** independently validate, whole-team 0.375 / anchor-off 0.394 (n=35, CI straddling ~0.05 to ~0.64). This non-validation is the reason for the demotion.
+- Gate history: FC-DRB failed the original binarized sign gate (0.659 vs 0.70); the gate was amended to a continuous Spearman >= 0.59 for n >= 30 (arcsine translation; `doc/memo_signgate_amendment.md`). Moot for an advisory but recorded.
+- Full basis: `doc/memo_fcdrb_redesign.md`.
 
 ## Default arm: WAIT
 
-**WAIT is the explicit default.** If neither wire fires, the pre-committed February action is to stand pat, develop internally, and revisit at the summer 2028 gate. This is written down as an action so that inaction in February is a decision made in October, not a failure of nerve.
+**WAIT is the explicit default.** If AVAIL-PACE does not fire and the FC-DRB advisory adjudicates to pass (or does not trip both reads), the pre-committed February action is to stand pat, develop internally, and revisit at the summer 2028 gate. This is written down as an action so that inaction in February is a decision made in October, not a failure of nerve. Note the asymmetry the advisory structure creates: AVAIL-PACE firing is a decision to act; the FC-DRB advisory tripping is a decision to *adjudicate*, whose outcome may still be WAIT, but only after the logged act-or-pass memo.
 
 ## ARM-S (free): advisory only, from the dashboard
 
@@ -91,6 +109,7 @@ These are method demonstrations, not recommendations: the contract snapshot has 
 - **Change-control log (pre-freeze, disclosed):**
   - 2026-07-17: SIGN_GATE amended from binarized 0.70 to continuous Spearman >= 0.59 for n >= 30 (arcsine translation), after seeing the data, admitting FC-DRB. Both verdicts recorded. See `doc/memo_signgate_amendment.md`.
   - 2026-07-17: FC-DRB redesigned (post-draft). BEFORE: binding metric = Gobert-off (anchor-off) DRB percentile, admitted on the 0.617 whole-team number with a metric-definition caveat. AFTER: binding trip metric = **whole-team** DRB percentile (r25 0.619, validated on succession), threshold derived from the whole-team scorecard; Gobert-off demoted to the attribution read (route vs review). Subgroup split disclosed: the Wolves' retained-primary subgroup does not independently validate (0.375-0.394, n=35). See `doc/memo_fcdrb_redesign.md`.
+  - 2026-07-17: FC-DRB **demoted from binding wire to structured advisory** (final ruling). Rationale: pre-commitment strictness scales with action cost; binding the costliest arm requires subgroup-level validation, which the retained-primary subgroup (0.375-0.394, CI to 0.05, n=35) does not provide. The redesigned construct stands; only the commitment level drops. File now ships ONE binding wire (AVAIL-PACE) + the FC-DRB structured advisory + the ARM-S dashboard advisories.
 - **Optional, recommended for the article (Bobby's call):** on the freeze date, publish the SHA-256 hash of this frozen file publicly, so the February piece can prove the alarms were not chosen after the fact. Hash line to be filled at freeze:
   `SHA-256 (frozen 2026-10-20): <to be computed at freeze>`
 
