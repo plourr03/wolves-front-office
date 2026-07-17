@@ -49,15 +49,17 @@ Below-plan probability by early-availability bucket at N=20:
 
 The below-plan probability crosses 0.5 at roughly **70% availability through 20 games, i.e. 14 of 20**. Below that pace, the reference class says a player is more likely than not to finish below his own prior-three-season median.
 
+**This 14-of-20 is the absolute class breakpoint, not the LaMelo wire.** It is the crossing for a typical-plan player. LaMelo's plan (47 games) is below the class-typical plan, so his baseline-conditioned trip is lower: **12 or fewer of 20 at R1, 23 or fewer of 37 at R2**. See `phase3_avail_pace_derivation.md` for the relative-vs-absolute derivation, the R2 number, the 63-game sensitivity, and the injury-history-subset check. The predictive-validity result below (Spearman, sign consistency, wire-eligibility) is unchanged; only the threshold count is corrected in the derivation memo.
+
 ## Applied to LaMelo, out of sample
 
 LaMelo's prior-three-season games are 22, 47, 72, so his plan (prior-three-season median) is **47 games**, 0.573 of an 82-game season. This is the warehouse-derived baseline, matching the YB3 definition, replacing the three inconsistent hand-set numbers (63, 49, 0.75) documented in the availability reconciliation note.
 
-The wire, derived from the mapping and applied to him out of sample:
+The wire, derived from the mapping and applied to him out of sample (baseline-conditioned, see the derivation memo):
 
-> **AVAIL-PACE trips toward ARM-G (guard depth) if LaMelo is available in fewer than 14 of the Wolves' first 20 games (R1, advisory), confirmed at R2.** Below that pace, the reference class of 388 comparable arrivals says he is more likely than not to finish below his own 47-game plan, which is the availability state that makes guard insurance the correct deadline move.
+> **AVAIL-PACE trips toward ARM-G (guard depth) if LaMelo is available in 12 or fewer of the Wolves' first 20 games at R1 (advisory) and 23 or fewer of the first 37 at R2 (binding).** Below that pace, the reference class of comparable arrivals says he is more likely than not to finish below his own 47-game plan, which is the availability state that makes guard insurance the correct deadline move.
 
-This is a pure reference-class threshold: no fitted model, no distributional assumption, just where 388 historical arrivals at that early pace ended up. It is applied to LaMelo out of sample (he is not in the class; his season is 2026-27).
+This is a pure reference-class threshold: no fitted model, no distributional assumption, just where the historical arrivals at that early pace (relative to their own plan) ended up. It is applied to LaMelo out of sample (he is not in the class; his season is 2026-27).
 
 ## Honesty clauses that carry into TRIPWIRES.md
 
