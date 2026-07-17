@@ -1,0 +1,12 @@
+arm,target,team,salary,min_sweetener_pts,channel,matched_single
+ARM-G (guard depth),Coby White,BOS,30348000,,NO DEAL <=12,False
+ARM-G (guard depth),Bruce Brown,BOS,57078728,,NO DEAL <=12,False
+ARM-G (guard depth),Gary Trent Jr.,MIL,3881960,,NO DEAL <=12,True
+ARM-G (guard depth),Tre Jones,CHI,8000000,4.0,value,True
+ARM-B (backup big / rebounding fwd),Nick Richards,ORL,3132360,,NO DEAL <=12,True
+ARM-B (backup big / rebounding fwd),Jakob Poeltl,TOR,19500000,,NO DEAL <=12,False
+ARM-B (backup big / rebounding fwd),Robert Williams III,NOP,27000000,0.0,value,False
+ARM-B (backup big / rebounding fwd),Isaiah Stewart,DET,15000000,,NO DEAL <=12,False
+ARM-B (backup big / rebounding fwd),Naz Reid,MIN,23275862,,NO DEAL <=12,False
+ARM-B (backup big / rebounding fwd),Jarrett Allen,CLE,28000000,,NO DEAL <=12,False
+ARM-B (backup big / rebounding fwd),Nic Claxton,BKN,23147727,0.0,value,False
