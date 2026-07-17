@@ -2,7 +2,20 @@
 
 Pre-registering the February 2027 deadline alarms for the "If I Were Tim Connelly" master plan project.
 
-Version 0.1, drafted July 17, 2026. Intended executor: warehouse agent (Claude Code) against the ScoutIQ PostgreSQL warehouse. All table and column names below are placeholders and must be mapped to the real schema in Phase 0.
+Version 0.2, revised July 17, 2026 (from 0.1 drafted the same day). Intended executor: warehouse agent (Claude Code) against the ScoutIQ PostgreSQL warehouse (`nba_warehouse`, schema `nba`). The placeholder schema of 0.1 has been mapped to the real schema in Phase 0; the mappings, gaps, and query corrections live in `phase0_*.md` and are folded into this revision.
+
+Changelog, 0.1 to 0.2 (all from Phase 0 findings, Bobby's rulings 2026-07-17):
+- Scenario A usage filter corrected from `usg_pct >= 28.0` to `>= 0.28`. The warehouse column is a fraction; the original bar silently matched zero rows (coverage report section 1). A non-empty assertion is now mandatory on the extraction query.
+- `player_season` is DERIVED, not a rename: no minutes column (derive from `SUM(minutes_float)`), no position column (join `nba_player_bio`, career-static).
+- All joins on `nba_player_id`, never on player name: names carry diacritics (Dončić, Porziņģis) and silently drop on ASCII exact-match.
+- AVAIL-PACE redefined off the nonexistent pick2033 posterior onto a warehouse baseline plus the Scenario B reference-class mapping (section 5, section 7, section 8; full rationale in `phase0_avail_pace_redefinition.md`).
+- SPACE-ANT reclassified to dashboard-only: no wide-open/defender-distance data exists in the warehouse (gap G4).
+- Trade-model gate: `P_yes >= 0.25` replaced by the acceptance model's boolean verdict plus required sweetener price; there is no probability to threshold (gap G5).
+- Era window: stint reconstruction spike-verified feasible back to 2010-11 (section 3).
+- Stint trust thresholds fixed at r(recon) 0.995 / quarantine 0.005 with a 0.95-0.995 amber band (config).
+- Query acceptance is now a three-tier bar (section 7); the original "every query parses" could not be met while `honors` and the availability posterior do not exist.
+
+All table and column names in the query sketches (section 7) retain their 0.1 placeholder form for readability; the authoritative mapping is `phase0_rename_map.md`.
 
 ## 0. Plain language summary
 
@@ -36,7 +49,7 @@ Constraints to encode as config, not prose: team is over the first apron (VERIFY
 
 ## 3. Scenario templates and reference classes
 
-Era window: primary class 2010-11 through 2025-26, with a tracking-era flag for 2013-14 onward. Metrics that require tracking data restrict to the flagged subset.
+Era window: primary class 2010-11 through 2025-26, with a tracking-era flag for 2013-14 onward. Metrics that require tracking data restrict to the flagged subset. **Spike-verified (Phase 0 Step 2, `phase0_stint_trust_spike.md`): stint reconstruction is trustworthy back to 2010-11, the earliest season with warehouse data, so the early end of the window carries lineup-dependent features. There is no pre-2014 cliff.** The one carried caveat is a name alias (Pendergraph/Ayres) that affects only 2011-12 Indiana Pacers games, none of which are in the reference class. Sealed-season stint features (2021-22 onward, inside fitengine's F5 seal) are additionally verified by the spike addendum before use (`phase0_stint_trust_spike_addendum.md`); reconstruction there is mechanical only, and no metric is fit on sealed seasons.
 
 ### Scenario A: co-star integration
 
@@ -83,11 +96,13 @@ Scenario C. YC1: team defensive rebound percentage and opponent rim field goal p
 
 | ID | Definition | Gates | Stabilization prior |
 |---|---|---|---|
-| AVAIL-PACE | LaMelo games played through team game N, expressed as a percentile of the pick2033 pre-season availability posterior | ARM-G | Exact count, no sampling noise |
+| AVAIL-PACE | LaMelo games played through team game N, versus his prior-three-season games-played median (warehouse-derived), thresholded on the Scenario B empirical mapping (see below and `phase0_avail_pace_redefinition.md`) | ARM-G | Exact count, no sampling noise |
 | PAIR-DRTG | Ant plus LaMelo shared-floor defensive rating, hierarchically shrunk using the fitengine prior, reported as posterior mean and P(worse than team baseline by 4 or more) | ARM-S first, then ARM-G or ARM-B | Raw version slow, shrunk version usable at R1 with the possession floor |
 | FC-DRB | Team defensive rebound percentage in Gobert-off minutes, as a league percentile | ARM-B | Fast |
 | TOV-BLEED | Opponent points off turnovers per 100 in LaMelo minutes, plus his shared-floor turnover percentage | ARM-S, ARM-G | Fast to moderate |
-| SPACE-ANT | Ant catch-and-shoot three-point attempts per 100 and wide-open three frequency, as deltas versus his prior season | ARM-S, diagnostic | Moderate, tracking data required |
+| ~~SPACE-ANT~~ (DASHBOARD-ONLY, gap G4) | Ant catch-and-shoot three-point attempts per 100 and wide-open three frequency, as deltas versus his prior season | (was ARM-S, diagnostic) | Reclassified: no wide-open/defender-distance data exists in the warehouse, and catch-and-shoot is season-grain only, so the reliability curve cannot be computed. Retained as a season-grain dashboard diagnostic, never wired. |
+
+AVAIL-PACE redefinition (0.2): the original definition read a per-player availability posterior from pick2033. That posterior does not exist; pick2033 models draft-pick lottery slots, not player availability (a total name collision). AVAIL-PACE now measures games-played pace against the arriving player's prior-three-season games-played median (identical to the YB3 label baseline, so the wire and its outcome label share one definition), and its trip threshold comes from the Scenario B reference-class mapping in Phase 3, applied to LaMelo out of sample. The 63-game analyst prior is a sensitivity scenario, not the baseline. This is a pure reference-class argument with no fitted model on the critical path, which is stronger for a pre-committed decision than a posterior fit by the same shop making the call. A real per-player availability posterior is still worth building; its customer is the master plan board (`melo_avail` transitions), not this backtest, so it is scheduled there.
 
 Dashboard-only, explicitly excluded from wiring, with reasons: any three-point percentage (does not stabilize by R1 or R2), clutch net rating (tiny samples, famously noisy year to year), raw win-loss versus expectation before R2 (schedule confounded, use an SRS-adjusted view at R2 only), any specific five-man lineup net rating (possession counts too small, the pair-level shrunk metric is the ceiling of what the sample supports), and individual scoring averages (not decision-relevant to any arm).
 
@@ -117,7 +132,17 @@ Select at most MAX_WIRES wires, breaking ties by decision coverage (prefer a set
 
 ## 7. Query sketches
 
-Placeholder schema. Rename in Phase 0. first_n_games(team, season, n) is a helper view returning the game_ids of a team's first n games of a season.
+Placeholder schema, retained from 0.1 for readability. The authoritative mapping to the real schema is `phase0_rename_map.md`; the corrections below are mandatory when these run. first_n_games(team, season, n) is a helper view returning the game_ids of a team's first n games of a season (still to build, trivially, from `nba_games` ordered by `game_date`).
+
+**Mandatory corrections when these queries run (Phase 0, do not skip):**
+- `player_season.usg_pct >= 28.0` becomes `>= 0.28` (the column is a fraction). Add a non-empty assertion so the class can never silently come back empty.
+- `player_season.minutes >= 1200` has no source column; derive from `SUM(nba_player_advanced_stats.minutes_float)`.
+- `player_season.pos_group = 'G'` becomes a join to `nba_player_bio.position IN ('Guard','Guard-Forward','Forward-Guard')`, declared career-static.
+- Every join keys on `nba_player_id`, never on player name (diacritics silently drop Dončić, Porziņģis).
+- The team-DRB reliability query's `opp_orb` is not a column; opponent offensive rebounds come from a `game_id` self-join to the other team's `nba_games` row.
+- The AVAIL-PACE query below is retired (it reads tables that never existed); its replacement is the warehouse-only games-through-N count against the prior-three-season median.
+
+**Acceptance bar (revised, replaces "every query parses"):** each section 7 query is classified RUNS NOW (parses and runs after the mapping), RUNS AFTER named ingest (parses once a specific gap-register item lands, e.g. Scenario A after the G1 honors ingest; the stint aggregates after the panel build, feasibility already proven), or RETIRED (deleted by a 0.2 redefinition, e.g. the AVAIL-PACE posterior query). Acceptance is met when every query is in one of those three states with its blocker costed or its redefinition recorded. Phase 0 met this bar.
 
 Reliability curve, team defensive rebound percentage example:
 
@@ -215,7 +240,7 @@ JOIN availability_posterior ap ON ap.player_id = :player_id;
 
 ## 8. Honesty clauses
 
-The reference classes are small, roughly ten to fifteen cases each, so everything downstream is a prior update, not a proof, and TRIPWIRES.md should say so in its header. Intervention outcomes (YA2 uplift after a deadline move, YC2) carry selection bias that matching only partially addresses; they are reported as descriptive comparisons. The class spans three collective bargaining regimes, and apron-era constraints changed what deadline arms even existed, so era is carried as a covariate and flagged in every table. The model contains no private information: no medicals, no agent conversations, no locker room, and the article should name that as the blind spot a real front office fills. Finally, LaMelo's specific injury and usage profile is only partially exchangeable with the class, which is exactly why AVAIL-PACE runs against his individually fitted posterior rather than a class average.
+The reference classes are small, roughly ten to fifteen cases each, so everything downstream is a prior update, not a proof, and TRIPWIRES.md should say so in its header. Intervention outcomes (YA2 uplift after a deadline move, YC2) carry selection bias that matching only partially addresses; they are reported as descriptive comparisons. The class spans three collective bargaining regimes, and apron-era constraints changed what deadline arms even existed, so era is carried as a covariate and flagged in every table. The model contains no private information: no medicals, no agent conversations, no locker room, and the article should name that as the blind spot a real front office fills. Finally, LaMelo's specific injury and usage profile is only partially exchangeable with the class. In 0.1 this was the stated reason AVAIL-PACE ran "against his individually fitted posterior rather than a class average." That posterior never existed (see the changelog and `phase0_avail_pace_redefinition.md`), and the honest justification is close to the opposite: AVAIL-PACE runs on a reference-class mapping precisely because his individual posterior is not built and, for a pre-committed February decision, should not be the thing on the critical path. The partial-exchangeability caveat stays real, and it is carried by measuring pace against his own prior-three-season median (his own baseline, not the class's) and by logging the 63-game analyst prior as a sensitivity scenario, so the class informs the threshold while his own history sets the plan.
 
 ## 9. Config
 
@@ -229,7 +254,8 @@ The reference classes are small, roughly ten to fifteen cases each, so everythin
 | SIGN_GATE | 0.70 | TUNE |
 | N_GATE | 8 cases | Fixed |
 | MAX_WIRES | 4 | Fixed |
-| P_yes floor for target lists | 0.25 | TUNE, from trade model |
+| ~~P_yes floor for target lists~~ | ~~0.25~~ | RETIRED (G5). No probability exists; use `partner_acceptance.decide()` boolean verdict + required sweetener price, carrying its marginal-deal caveat. |
+| STINT_TRUST_GATE (recon / quarantine) | recon 0.995 / quarantine 0.005 | RULED 2026-07-17. Amber band 0.95-0.995 requires a tail census + decision memo. Bench/spike-class only; G-gate claims come from the full panel. |
 | Freeze date for TRIPWIRES.md | 2026-10-20 | Day before opener, VERIFY |
 
 ## 10. How this feeds the board
