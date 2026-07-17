@@ -1,0 +1,2 @@
+# Per-game stint cache: large, regenerable from build_stint_panel.py. Not committed.
+data/stints_panel/
