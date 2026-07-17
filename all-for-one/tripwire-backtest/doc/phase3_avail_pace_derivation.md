@@ -78,6 +78,31 @@ Note the relative-mapping Spearman (0.636) is lower than the raw-count Spearman 
 
 That deliverable stated the wire as "fewer than 14 of the first 20 games." That was the absolute class breakpoint, not the baseline-conditioned LaMelo number. **The corrected wire is 12 or fewer of 20 at R1, 23 or fewer of 37 at R2**, both at the 47-game plan, with the 63-game reads logged as sensitivity. The predictive-validity result in that doc (Spearman 0.77 raw, sign consistency 0.77, wire-eligible) is unchanged; only the threshold count is corrected here.
 
+## The cushion effect: the wire stands down only if he outperforms his own history
+
+Bobby's reading (2026-07-17), tested against the data and **confirmed**: both trip lines sit at or above LaMelo's on-plan pace, so the wire trips unless he beats his own history early.
+
+**The trip lines are above plan pace.** LaMelo's 47-game plan is 0.573 of the season, which is 11.5 games through 20 and 21.2 through 37. The trip lines are 12 and 23. So the R1 line sits +0.5 above plan pace and the R2 line +1.8 above. To stand the wire down he must be available in **at least 13 of 20** (0.65, about 13% above his own plan pace) and **at least 24 of 37**. Merely pacing at his plan is not enough to stand it down.
+
+**Two reasons, both empirical.**
+
+(a) **The 47-game baseline itself sits inside arm territory.** Players pacing at plan early (early_rel 0.9-1.1) finish under the 55-game contention bar 46% of the time at R1 and 59% at R2, and are available for only 41% (R1) / 53% (R2) of their team's playoff games. So even if LaMelo merely hits his 47-game history, his stretch-run and playoff availability is a coin flip at best, which is exactly the state ARM-G (guard depth) insures against. The baseline is not a safe outcome; it is already a concerning one.
+
+(b) **Early pace overstates final availability.** Across the class, early availability runs a median 6% higher than final (R1: mean +0.044, median +0.061 of season; R2: +0.029). Concretely, of players who paced at LaMelo's plan pace early, **62% (R1) and 75% (R2) still finished below their plan**. Availability erodes over a season for injury-prone players, so landing a plan requires running ahead of it by midseason. The cushion in the trip line (+0.5 at R1, +1.8 at R2) is the wire encoding that erosion.
+
+**Scorecard above vs below each trip line:**
+
+| | n | P(below plan) | median season games | share under 55 | playoff availability |
+|---|---|---|---|---|---|
+| **R1** below/at 12 (fires) | 166 | 0.77 | 26 | 0.91 | 0.30 |
+| **R1** above 12 (stands down) | 211 | 0.28 | 62 | 0.33 | 0.72 |
+| **R2** below/at 23 (fires) | 151 | 0.80 | 23 | 0.95 | 0.27 |
+| **R2** above 23 (stands down) | 168 | 0.24 | 64 | 0.27 | 0.70 |
+
+A LaMelo who trips the wire looks like the top rows: a median 23-26 game season, under the contention bar ~90-95% of the time, available for barely a quarter of the playoffs. A LaMelo who clears it looks like the bottom rows: a median 62-64 games, clears 55 two-thirds of the time, available for ~70% of the playoffs. The wire is not splitting hairs; it is separating a lost season from a healthy one.
+
+**The memo does not differ from Bobby's reading; it confirms it.** The one nuance worth stating plainly: the absolute cushion is small (half a game at R1, under two at R2), because LaMelo's plan pace already sits just below the class's below-plan crossing. The wire is not demanding heroics, it is demanding that he clear his own low bar with a small margin, and the data says even that margin matters because early availability flatters the final number.
+
 ## For TRIPWIRES.md
 
-> **AVAIL-PACE.** Trip toward ARM-G (guard depth) if LaMelo Ball is available in 12 or fewer of the Wolves' first 20 games at R1 (2026-11-27, advisory) and 23 or fewer of the first 37 at R2 (2027-01-10, binding). Baseline-conditioned on his 47-game prior-three-season median; at a 63-game plan the reads are 15 and 31. Derived from 388 (253 injury-history) comparable arrivals; no fitted model. Exact count, may hard-trip at R2.
+> **AVAIL-PACE.** Trip toward ARM-G (guard depth) if LaMelo Ball is available in 12 or fewer of the Wolves' first 20 games at R1 (2026-11-27, advisory) and 23 or fewer of the first 37 at R2 (2027-01-10, binding). These lines sit just above his 47-game-baseline plan pace (11.5 of 20, 21.2 of 37), so the wire stands down only if he is available at **at least 13 of 20 and 24 of 37, i.e. only if he outperforms his own three-season history** by a small margin. This is deliberate: at his 47-game baseline he is under the 55-game contention bar about half the time and available for under half the playoffs, and early availability overstates the final number by ~6%, so hitting the plan requires pacing ahead of it. Baseline-conditioned on his prior-three-season median; at a 63-game plan the reads are 15 and 31. Derived from 388 (253 injury-history) comparable arrivals; no fitted model. Exact count, may hard-trip at R2.
