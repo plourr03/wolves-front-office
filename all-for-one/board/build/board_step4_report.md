@@ -4,6 +4,8 @@ Against `board_spec v2.2` plus the ONE FOR ALL salvage rider. Produced 2026-07-1
 
 This step ran under the mandated three-lens adversarial workflow, which found one clean lens and two real defects. Both were fixed before this report; they are documented in full below because the process catching them is part of the deliverable.
 
+> **SUPERSEDING CAP NOTE (2026-07-17).** The salvage/convert numbers in this report were computed at the **0.03 placeholder** cap. Bobby subsequently issued the SALVAGE_CAP values ruling: **0.012** ("I want to try to win this with Ant"), logged in `board_spec v2.3`. `board_step4.py` now carries 0.012, so re-running it will not reproduce the 0.03 figures below; those are retained as the placeholder-cap record. The ruled-cap re-emission (convert mass box 0.18 / rapm 0.94, conditional breakdown, convert audit, no-scorched-earth confirmation) is in `board_step5_report.md`. The structural finding (fork disagreement, convert always at the node-9 boundary, live branches always held) is unchanged; the magnitudes tightened.
+
 ## What un-stopped, and the gate that preceded it
 
 The un-stop was CONDITIONAL on a roster reconciliation, because the encoded sim input failed inspection. That gate ran first and is its own artifact: `roster_recon/roster_reconciliation.md`.

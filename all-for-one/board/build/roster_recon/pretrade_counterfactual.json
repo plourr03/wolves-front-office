@@ -1,0 +1,79 @@
+{
+ "n_sims": 20000,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "pre_rotation": {
+  "Ayo Dosunmu": 30,
+  "Anthony Edwards": 35,
+  "Jaden McDaniels": 33,
+  "Julius Randle": 32,
+  "Rudy Gobert": 30,
+  "Naz Reid": 26,
+  "Joan Beringer": 16,
+  "_fill_min": 38
+ },
+ "note": "encoded PRE rotation (run-it-back); anchored on the engine's calibrated MIN net, same scale as the reconciled post; the delta is the trade effect; title GATED.",
+ "forks": {
+  "rapm": {
+   "fork": "rapm",
+   "min_pre_net": 2.18,
+   "title": 0.026529999999999998,
+   "cf": 0.15114,
+   "finals": 0.06373,
+   "reach_r2": 0.38005000000000005,
+   "conf": 0.06373,
+   "exp_wins": 45.9,
+   "perf_bands": {
+    "T1": 0.098,
+    "T2": 0.394,
+    "T3": 0.366,
+    "T4": 0.142
+   },
+   "run_bands": {
+    "none": 0.509,
+    "R1": 0.111,
+    "R2": 0.229,
+    "WCF": 0.087,
+    "F": 0.037,
+    "RING": 0.0265
+   },
+   "post_title": 0.019370000000000002,
+   "post_net": 1.5,
+   "trade_delta_title": -0.007159999999999996,
+   "trade_delta_net": -0.6800000000000002
+  },
+  "box": {
+   "fork": "box",
+   "min_pre_net": 2.18,
+   "title": 0.02803,
+   "cf": 0.15451,
+   "finals": 0.06542,
+   "reach_r2": 0.3921,
+   "conf": 0.06542,
+   "exp_wins": 45.9,
+   "perf_bands": {
+    "T1": 0.098,
+    "T2": 0.394,
+    "T3": 0.366,
+    "T4": 0.142
+   },
+   "run_bands": {
+    "none": 0.509,
+    "R1": 0.099,
+    "R2": 0.238,
+    "WCF": 0.089,
+    "F": 0.037,
+    "RING": 0.028
+   },
+   "post_title": 0.03811,
+   "post_net": 2.943,
+   "trade_delta_title": 0.010079999999999999,
+   "trade_delta_net": 0.7629999999999999
+  }
+ }
+}

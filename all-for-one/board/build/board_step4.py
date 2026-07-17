@@ -151,12 +151,15 @@ def stay_split(equity, curve):
 
 
 # ------------------------------------------------- SALVAGE (ONE FOR ALL rider)
-# SALVAGE_CAP is Bobby's values dial. Per the board_spec v2.2 ANTI-TUNING CLAUSE it
-# is NOT adjusted in response to solver outputs; equity landing near it is a
-# reported finding, not a parameter to move. It changes only by Bobby's logged
-# values ruling.
-SALVAGE_CAP = 0.03           # Bobby's dial: a stocked rebuild is worth at most this in title odds
-SALVAGE_WEIGHT = 0.03        # proactive convert at best leverage == SALVAGE_CAP
+# SALVAGE_CAP is Bobby's values dial. Per the board_spec ANTI-TUNING CLAUSE it is
+# NOT adjusted in response to solver outputs; equity landing near it is a reported
+# finding, not a parameter to move. It changes only by Bobby's logged values ruling.
+# RULED 2026-07-17 to 0.012 (was a 0.03 placeholder). Verbatim justification: "I want
+# to try to win this with Ant." Values-anchored (Utah 2022 ~1, rebuild median 2-3,
+# OKC best 5-6, in title-equity points); solver outputs used ONCE as a disclosed
+# consistency check only, no cap adjusted to alter any output. See board_spec v2.3.
+SALVAGE_CAP = 0.012          # Bobby's dial (RULED): a stocked rebuild is worth at most this in title odds
+SALVAGE_WEIGHT = 0.012       # proactive convert at best leverage (node 6, return_quality 1.0) == SALVAGE_CAP
 INVOLUNTARY_DISCOUNT = 0.6   # REQUESTED salvages worse than proactive: the price of hesitation
 LEVERAGE = {6: 1.00, 9: 0.85, 12: 0.70, 14: 0.55}          # decays toward the 2029 walk (TUNE)
 
@@ -254,6 +257,30 @@ def jaden_dist(perf_label):
 
 CONVERT = "__CONVERT__"
 
+# ------------------------------------------------- loyalty premium (step five)
+# The keep-Jaden vs cold comparison (loyalty premium, publishable three). Default
+# OFF so steps 1-4 are unchanged. When ON, the gate (node 14, Jaden's walk year:
+# "extend or expose") offers an expose-Jaden arm. Its economics use ONLY existing
+# channels -- the leaf loses Jaden's tier bonus and gains one band of cap relief
+# (node 14 -> leaf t=15 is direct, so the cap change is valued, unlike ARM-D). A
+# real Jaden-trade asset return is NOT modeled (per the do-not-improvise rule), so
+# the expose value here is a LOWER bound and the loyalty premium a conservative one.
+EXPOSE_JADEN_ARM = False
+
+# step-five diagnostic (default OFF): remove ARM-CONVERT from every menu, forcing a
+# pure-hold (never-reset) solve. Used only to price how much the reset OPTION adds
+# over running it back to the end -- the root hold-vs-reset reconciliation.
+DISABLE_CONVERT = False
+
+
+def exposed_leaf(s):
+    """Leaf continuation if Jaden is exposed (traded/walked) at the gate: his tier
+    bonus removed (jaden -> stalled, bonus 0) plus one band of cap relief. Existing
+    channels only; asset return unmodeled -> conservative."""
+    s2 = _set(s, jaden=JADEN.index("stalled"), cap=max(0, gi(s, "cap") - 1))
+    return soft_horizon(_set(s2, t=15))
+
+
 # ------------------------------------------------- run-band fit shift
 RUN_FIT_SHIFT = 0.15   # fraction of run mass moved one round deeper/shallower per fit notch (TUNE)
 
@@ -314,7 +341,8 @@ def successors(s):
                 acts.append((lbl, UNLOCK_COST, [(1.0, _set(arm_effect(lbl, s), t=nt))]))
             else:
                 acts.append((lbl, ARM_COST[lbl], [(1.0, _set(arm_effect(lbl, s), t=nt))]))
-        acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 6)]))
+        if not DISABLE_CONVERT:
+            acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 6)]))
         return acts
 
     if typ == "chance" and t == 7:   # REAL run dist: fork season-1 run bands, fit-shifted
@@ -325,7 +353,8 @@ def successors(s):
 
     if typ == "ant_decision":
         acts.append(("proceed", 0.0, [("HAZARD9", 9)]))
-        acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 9)]))
+        if not DISABLE_CONVERT:
+            acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 9)]))
         if MELO_DEAL[gi(s, "melo_deal")] == "pre_ext":
             acts.append(("ext-LaMelo-9", 0.012, [("HAZARD9_EXT", 9)]))
         return acts
@@ -338,7 +367,8 @@ def successors(s):
             acts.append(("advance-trade-2028", 0.005, [(1.0, _set(_fit(s, "green"), t=nt, firsts=FIRSTS.index(1)))]))
         if MELO_DEAL[gi(s, "melo_deal")] == "pre_ext":
             acts.append(("ext-LaMelo-late", 0.012, [(1.0, _set(s, t=nt, melo_deal=MELO_DEAL.index("extended")))]))
-        acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 12)]))
+        if not DISABLE_CONVERT:
+            acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 12)]))
         return acts
 
     if t == 11:
@@ -349,7 +379,12 @@ def successors(s):
                             (.5, _set(s, t=nt, pick2028=PICK2028.index("resolved_swapped")))])]
 
     if typ == "gate":
-        return [("proceed", 0.0, [("GATE14", 14)]), ("ARM-CONVERT", 0.0, [(CONVERT, 14)])]
+        acts = [("proceed", 0.0, [("GATE14", 14)])]
+        if not DISABLE_CONVERT:
+            acts.append(("ARM-CONVERT", 0.0, [(CONVERT, 14)]))
+        if EXPOSE_JADEN_ARM:
+            acts.append(("expose-Jaden", 0.0, [("GATE14_EXPOSE", 14)]))
+        return acts
 
     return [("_", 0.0, [(1.0, _set(s, t=nt))])]
 
@@ -387,8 +422,8 @@ def reachable():
             p0, tgt0 = outs[0]              # for special actions p0 is the marker, tgt0 the node
             if p0 == CONVERT:
                 continue                     # convert is terminal, not expanded
-            if p0 in ("HAZARD9", "HAZARD9_EXT", "GATE14"):
-                if p0 == "GATE14":
+            if p0 in ("HAZARD9", "HAZARD9_EXT", "GATE14", "GATE14_EXPOSE"):
+                if p0 in ("GATE14", "GATE14_EXPOSE"):
                     continue                 # gate is terminal (final hazard in solve)
                 for _pw, b in _hazard9_next_states(s, extended=(p0 == "HAZARD9_EXT")):
                     for al in ANT:
@@ -419,8 +454,8 @@ def node9_resolve(s, val, curve, extended=False):
     return value, eq_m, req_m
 
 
-def gate14_value(s, val, curve):
-    cont = soft_horizon(_set(s, t=15))
+def gate14_value(s, val, curve, expose=False):
+    cont = exposed_leaf(s) if expose else soft_horizon(_set(s, t=15))
     pd = 1.0 - sigmoid_commit(cont, curve)
     if ANT[gi(s, "ant")] == "smax_signed":
         pd *= SMAX_MULT
@@ -451,6 +486,8 @@ def action_value(s, lbl, cost, outs, val, curve):
         ev = node9_resolve(s, val, curve, extended=True)[0]
     elif p0 == "GATE14":
         ev = gate14_value(s, val, curve)
+    elif p0 == "GATE14_EXPOSE":
+        ev = gate14_value(s, val, curve, expose=True)
     else:
         ev = sum(p * val.get(ns, terminal_value(ns, curve)) for p, ns in outs)
     return ev - cost
@@ -501,8 +538,8 @@ def forward(states, val, choice, curve):
                 for al in ("smax_signed", "smax_declined", "default"):
                     mass[_set(b, ant=ANT.index(al))] += m * pw * p_stay * w[al]
                 mass[_set(b, ant=ANT.index("REQUESTED"))] += m * pw * (1 - p_stay)
-        elif p0 == "GATE14":
-            cont = soft_horizon(_set(s, t=15))
+        elif p0 in ("GATE14", "GATE14_EXPOSE"):
+            cont = exposed_leaf(s) if p0 == "GATE14_EXPOSE" else soft_horizon(_set(s, t=15))
             pd = 1 - sigmoid_commit(cont, curve)
             if ANT[gi(s, "ant")] == "smax_signed":
                 pd *= SMAX_MULT

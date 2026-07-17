@@ -49,13 +49,37 @@ DiVincenzo (Achilles) is correctly absent from the rotation; he is on the roster
 
 Corrections vs the file: **Gueye 18 removed** (phantom), `_fill_min` 6 removed, and the freed 24 minutes reallocated to Shannon Jr. (16, was 0) and Trey Lyles (10), trimming Clark 16 -> 14. Core six (Edwards, LaMelo, McDaniels, Gobert, Dosunmu, Green) unchanged from the file.
 
-**Judgment flagged for Bobby:** the exact bench split among Shannon Jr. / Lyles / Clark / Beringer / Hyland / Ingles / Anderson / Conley is a rotation projection, not a fact. The core six are solid; the last ~40 non-star minutes could distribute differently (e.g. Hyland or Ingles taking some of Shannon's). This affects MIN's aggregate net only at the margin (all these are near-replacement pieces), but it is a modeling choice, not data, and is labelled as such in the sim.
+**Judgment flagged for Bobby:** the exact bench split among Shannon Jr. / Lyles / Clark / Beringer / Hyland is a rotation projection, not a fact. The core six are solid; the last ~40 non-star minutes could distribute differently (e.g. Hyland taking some of Shannon's). This affects MIN's aggregate net only at the margin (all these are near-replacement pieces), but it is a modeling choice, not data, and is labelled as such in the sim.
 
-Bench (on roster, out of rotation): Bones Hyland, Joe Ingles, Kyle Anderson, Mike Conley, Julian Phillips, Isaiah Evans, DiVincenzo (out, Achilles); two-way / fringe: Enrique Freeman, Zyon Pullin, Rocco Zikarsky.
+## Full roster, log-derived (bench scrub, amended 2026-07-17)
+
+Bobby's step-four review caught that the original bench list below carried Ingles / Kyle Anderson / Mike Conley / Julian Phillips, none of whom are Timberwolves. That list was residue from the same stale `nba_team_rosters` snapshot this document itself flagged in the sources note: the snapshot at roster_date 2026-07-17 lists 18 players and is wrong in BOTH directions, still carrying Randle, Reid, Anderson, Conley, Ingles, and Phillips while omitting LaMelo, Green, Lyles, and Evans. The rotation section above was built from the transaction log and is clean; the non-load-bearing bench paragraph reached for the snapshot and inherited its rot. Re-derived here strictly by applying the 2026 transaction-log deltas to that snapshot (snapshot + log-delta = current; the log is the authority for who moved).
+
+**Departures the snapshot missed (transaction-log evidence):**
+
+| Player | snapshot still lists | actual 2026 move (nba_transactions) |
+|---|---|---|
+| Julius Randle | yes | Trade -> Brooklyn Nets, 2026-07-10 (handled in rotation section) |
+| Naz Reid | yes | Trade -> Charlotte Hornets, 2026-07-10 (handled in rotation section) |
+| Kyle Anderson | yes | Signing -> Toronto Raptors, 2026-07-06 |
+| Mike Conley | yes | Signing -> Boston Celtics, 2026-07-06 |
+| Joe Ingles | yes | none in 2026; his 2024-07-06 one-year deal lapsed, unsigned FA |
+| Julian Phillips | yes | none in 2026; his CHI-acquired expiring lapsed, not re-signed |
+
+The four short-deal lapses are corroborated by the snapshot's own `how_acquired` stamps (Ingles signed 07/06/24, Phillips a 02/05/26 trade-in, Anderson a 03/01/26 signing, Conley a 02/17/26 signing) against the absence of any 2026 re-sign row.
+
+**Clean 15-man plus two-ways (13 standard filled, 2 open, 3 two-way):**
+
+- Standard, in rotation (10): Anthony Edwards, LaMelo Ball, Jaden McDaniels, Rudy Gobert, Ayo Dosunmu, Josh Green, Terrence Shannon Jr., Jaylen Clark, Joan Beringer, Trey Lyles.
+- Standard, out of rotation (3): Donte DiVincenzo (out, Achilles), Bones Hyland, Isaiah Evans.
+- Open standard spots: 2 (vet-minimum only, per the root-node cap state).
+- Two-way (3): Enrique Freeman (re-signed two-way 2026-07-02, log-confirmed), Zyon Pullin, Rocco Zikarsky (both signed 2025, no 2026 move, held).
 
 ## Carry-forward logged
 
 Silent-plausible bug #4 (**trade ingested, waiver/roster-consequence not**) added to the lamelo-pipeline carry-forwards: the post rotation encoded a player (a Gueye, wrong id and wrong team) who is not on the post-trade Timberwolves, at a real 18-mpg role. The fix is roster reconciliation against the transaction log before any sim consumes the rotation. This joins the earlier silent-plausible bugs (score_home/away; usg_pct scale; the board keystone fallback; the FC-DRB fallback-index).
+
+Bench-scrub leak logged alongside it (amendment 2026-07-17): the stale `nba_team_rosters` snapshot contaminated this document's own non-load-bearing bench paragraph, the very section that flagged the snapshot as unreliable. The rotation (load-bearing) was log-derived and clean; the bench list was not, and copied the snapshot's four lapsed contracts (Anderson, Conley, Ingles, Phillips) into the roster. Lesson: a source flagged as unreliable must be quarantined from EVERY section, not only the load-bearing one, because this document is the freeze's roster snapshot and has to be clean end to end. Now re-derived from the transaction log throughout.
 
 ## Gate verdict
 
