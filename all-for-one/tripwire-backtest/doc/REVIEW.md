@@ -1,6 +1,18 @@
-# Tripwire Backtest: Review Package (stop before Phase 4)
+# Tripwire Backtest: Review Package
 
-Produced 2026-07-17. This is the review package at the Phase 4 stop, per Bobby's ruling to run Phases 1 through 3 (plus Phase 0.5 and the pre-staged directives) and stop before Phase 4 selection. Everything below is committed.
+Produced 2026-07-17, updated after Phase 4. Phases 0 through 4 ran; the deliverable is a **TRIPWIRES.md draft that stops before the freeze** for review. Everything is committed and pushed.
+
+## Phase 4 draft (the deliverable)
+
+`../TRIPWIRES.md` (draft, not frozen): two wires. **AVAIL-PACE -> ARM-G** (R1 12/20 advisory, R2 23/37 binding, hard-trip allowed, cushion language, 63-game sensitivity). **FC-DRB -> ARM-B** (bottom-third at both reads, marginal-wire disclosure). WAIT explicit default. ARM-S free takes non-binding advisories from the PAIR-DRTG/TOV-BLEED dashboard. Target lists via the acceptance model. Freeze 2026-10-20 + change-control + optional hash line.
+
+**Top review item (I flagged, did not decide):** FC-DRB was admitted on the Scenario C succession-class persistence (0.617, whole-team DRB), but the wire's own Gobert-off metric persists at only ~0.50. The Wolves keep Gobert and lose the second anchor (Reid), so the wire reads Gobert-off. Keep-with-disclosure vs demote-to-dashboard (ship one wire) is your call. See `memo_signgate_amendment.md`.
+
+**SIGN_GATE amendment** (`memo_signgate_amendment.md`): the 0.70 gate translated via arcsine to Spearman >= 0.59 (n >= 30); FC-DRB admitted, symmetry re-checked, CIs reported, disclosed in change control.
+
+---
+
+## The earlier phases (Phases 0-3, all committed)
 
 ## What ran
 
