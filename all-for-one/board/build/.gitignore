@@ -1,1 +1,4 @@
 __pycache__/
+# derived summary dump (numbers live in board_step4_report.md); regenerable from the script.
+# the reconciled sim INPUT (roster_recon/joanbet_reconciled.json) IS committed as the pinned input.
+board_step4_out.json

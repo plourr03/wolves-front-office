@@ -1,0 +1,100 @@
+{
+ "n_sims": 20000,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "beta": 1.067,
+ "rotation": {
+  "Anthony Edwards": 35,
+  "LaMelo Ball": 33,
+  "Jaden McDaniels": 33,
+  "Rudy Gobert": 30,
+  "Ayo Dosunmu": 28,
+  "Josh Green": 27,
+  "Terrence Shannon Jr.": 16,
+  "Jaylen Clark": 14,
+  "Joan Beringer": 14,
+  "Trey Lyles": 10
+ },
+ "note": "reconciled roster; only the trade DELTA is used, not the file's absolute nets; title GATED; forks carried as first-class scenarios.",
+ "forks": {
+  "rapm": {
+   "fork": "rapm",
+   "min_pre_net": 2.18,
+   "min_post_net": 1.5,
+   "reconciled_trade_delta_raw": -0.6371,
+   "deflated_delta": -0.68,
+   "title": 0.019370000000000002,
+   "conf": 0.047990000000000005,
+   "finals": 0.047990000000000005,
+   "cf": 0.11973,
+   "reach_r2": 0.30328000000000005,
+   "mn_keys": [
+    "net",
+    "munc",
+    "title",
+    "conf",
+    "r2",
+    "cf",
+    "finals"
+   ],
+   "seedband_sample": {},
+   "exp_wins": 44.4,
+   "perf_bands": {
+    "T1": 0.058,
+    "T2": 0.325,
+    "T3": 0.403,
+    "T4": 0.214
+   },
+   "run_bands": {
+    "none": 0.617,
+    "R1": 0.079,
+    "R2": 0.184,
+    "WCF": 0.072,
+    "F": 0.029,
+    "RING": 0.0194
+   }
+  },
+  "box": {
+   "fork": "box",
+   "min_pre_net": 2.18,
+   "min_post_net": 2.943,
+   "reconciled_trade_delta_raw": 0.715,
+   "deflated_delta": 0.763,
+   "title": 0.03811,
+   "conf": 0.08407,
+   "finals": 0.08407,
+   "cf": 0.18899000000000002,
+   "reach_r2": 0.46812000000000004,
+   "mn_keys": [
+    "net",
+    "munc",
+    "title",
+    "conf",
+    "r2",
+    "cf",
+    "finals"
+   ],
+   "seedband_sample": {},
+   "exp_wins": 47.6,
+   "perf_bands": {
+    "T1": 0.163,
+    "T2": 0.451,
+    "T3": 0.302,
+    "T4": 0.084
+   },
+   "run_bands": {
+    "none": 0.386,
+    "R1": 0.146,
+    "R2": 0.279,
+    "WCF": 0.105,
+    "F": 0.046,
+    "RING": 0.0381
+   }
+  }
+ }
+}
