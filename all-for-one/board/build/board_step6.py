@@ -43,7 +43,7 @@ TAX = DATA["tax"]
 
 # ---- TUNE knobs (all labelled; freeze nothing) --------------------------------
 DRIFT_SCALE = 0.5         # on-court net YoY change -> individual impact-drift units (TUNE)
-P_EAST = 0.35             # P(realignment puts MIN in the East from 2028-29) TUNE, pending Bobby
+P_EAST = 0.60             # RULED (Bobby 2026-07-17): "almost for sure the Wolves". Sensitivity band +/-0.15 (0.45-0.75)
 EAST_EASE = 0.18          # fractional title-equity uplift from the easier conference (TUNE, from W/E gap)
 # $ for one FULL title-equity unit. Set for INTERNAL CONSISTENCY with SALVAGE_CAP
 # (0.012 = a full stocked rebuild): a PARTIAL tax dump (DDV's $12.9M expiring) must be

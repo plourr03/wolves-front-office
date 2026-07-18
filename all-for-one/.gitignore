@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+# regenerable dry-run output; the canonical rehearsal hash lives in OCTOBER_FREEZE_MANIFEST.md
+freeze_bundle_manifest.txt

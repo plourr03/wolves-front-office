@@ -50,6 +50,8 @@ w_rapm(R) = 1 - w_box(R)
 
 **Recommendation on the prior (logged 2026-07-17).** The recommendation is that **0.5/0.5 stands at the freeze**, for credibility. An agnostic prior is the strongest public position: it lets the season's realized reads do the adjudicating, and it forecloses the objection that the shop tilted the metric toward the answer it wanted before a single game was played. A 50/50 prior is the one nobody can accuse of curation. Bobby may override before October with a logged justification, per this rule's own anti-tuning terms; absent that override, the freeze carries 0.5/0.5.
 
+**RULING (Bobby, 2026-07-17): 0.5/0.5 confirmed for the freeze.** Bobby confirmed the agnostic recommendation. The freeze carries `prior_box = prior_rapm = 0.5`, closed.
+
 The board then reports every downstream number as the fork-weighted blend `w_rapm * X_rapm + w_box * X_box` at the current read, in addition to the standing full range. Between reads the weights hold.
 
 ## Permitted fire dates

@@ -52,14 +52,14 @@ The development is real but modest, because Gobert's age-35 decline at 30 mpg of
 
 ## Item 3: the value of the East
 
-Solved under WEST_FOREVER and EAST_FROM_2028-29, with the easier conference modeled as an 18% far-field title uplift (TUNE, from the West/East strength gap). **Per Bobby's directive (item 5), the scenario axis is held UNWEIGHTED until his P(east) prior arrives; the two scenarios are reported side by side, and the blend below is provisional/illustrative at P(east)=0.35, not the headline.**
+Solved under WEST_FOREVER and EAST_FROM_2028-29, with the easier conference modeled as an 18% far-field title uplift (TUNE, from the West/East strength gap). **P(east) = 0.60, RULED by Bobby 2026-07-17** ("almost for sure the Wolves"); the weighted blend is emitted beside the per-scenario values with the +/-0.15 sensitivity band (0.45-0.75), per the rule's terms.
 
-| Fork | leaf West (scenario) | leaf East (scenario) | root delta if P(east)=0.35 (illustrative) |
-|---|---|---|---|
-| rapm | 0.0194 | 0.0229 | +0.0003 |
-| box | 0.0381 | 0.0450 | +0.0082 |
+| Fork | leaf West (scenario) | leaf East (scenario) | blend @ P(east)=0.60 | value of East (root) @0.60 [band 0.45-0.75] |
+|---|---|---|---|---|
+| rapm | 0.0194 | 0.0229 | 0.0215 | +0.0005 [+0.0003, +0.0007] |
+| box | 0.0381 | 0.0450 | 0.0422 | **+0.0151** [+0.0109, +0.0195] |
 
-The per-scenario read: the East lifts the box team's far-field leaf by ~18% (0.0381 to 0.0450) and the rapm team's proportionally, but the rapm team is too weak for a softer conference to matter to its retention. **When Bobby sets P(east), the weighted blend is emitted beside these per-scenario values, with a sensitivity band of +/-0.15 around his number** (per the rule's own terms). The retention interaction is explicit and named in the spec: a higher leaf raises the commitment probability at the gate and walk year, so an easier conference relieves the hazard, not only the run. That is why the value of the East is concentrated on the fork where Ant is retained enough for the relief to bind.
+At the ruled 0.60 the East is worth +0.0005 root to the rapm team (still too weak for a softer conference to matter) and **+0.0151 root to the box team**, roughly double the illustrative 0.35 figure. The band stays comfortably positive on box across 0.45-0.75. The retention interaction is explicit and named in the spec: a higher leaf raises the commitment probability at the gate and walk year, so an easier conference relieves the hazard, not only the run. That is why the value of the East is concentrated on the fork where Ant is retained enough for the relief to bind.
 
 ## Item 6: market tightness
 
