@@ -9,7 +9,9 @@ Export schema (per the directive):
               tag (SOLVER here; SYNTHETIC if ever hand-faked), curve, generated stamp.
   nodes     : the decision calendar (id, t, type, name).
   forks[f]  : traces  -> 400 weight-tagged forward samples, each with an event-CODE
-                         stream, per-node health + equity, and a terminal class.
+                         stream, per-node health + equity, a per-column `sid` (the
+                         solver's reachable-state encoding -- the LATTICE KEY, v6),
+                         and a terminal class.
               node_health -> per-node mass distribution over health bands.
               terminals   -> mass by terminal class (RING / REQUESTED / CONVERT@n /
                              EXPOSE / leaf-<run>).
@@ -60,8 +62,19 @@ def health_band(h):
     return "green" if h >= 0.66 else ("yellow" if h >= 0.4 else "red")
 
 
+def sid(s):
+    """The LATTICE KEY: the solver's own reachable-state encoding, verbatim.
+
+    A state is the 12-tuple indexed by B.IDX; this is its lossless string form. Two traces
+    carrying the same sid at the same column ARE in the same state -- the renderer must draw
+    them as one channel, which is what makes convergence (merging) visible rather than
+    discarded. Nothing here is derived or bucketed; it is the solver's key."""
+    return "-".join(str(int(v)) for v in s)
+
+
 def _node_rec(s, val):
     return {"t": int(B.gi(s, "t")), "type": B.NODE_TYPE.get(B.gi(s, "t"), ""),
+            "sid": sid(s),
             "health": health(s), "band": health_band(health(s)),
             "equity": round(float(val.get(s, B.terminal_value(s, CURVE))), 4),
             "run": B.RUN[B.gi(s, "run")], "fit": B.FIT[B.gi(s, "fit")],
@@ -129,7 +142,8 @@ def sample_trace(fork, val, choice, rng, tid):
             if B.ANT[B.gi(s, "ant")] == "smax_signed":
                 pd *= B.SMAX_MULT
             pd = min(1.0, pd)
-            path.append({"t": 15, "type": "leaf", "health": health(s), "band": health_band(health(s)),
+            path.append({"t": 15, "type": "leaf", "sid": sid(B._set(s, t=15)),
+                         "health": health(s), "band": health_band(health(s)),
                          "equity": round(float(cont), 4), "run": B.RUN[B.gi(s, "run")], "fit": B.FIT[B.gi(s, "fit")],
                          "melo": B.MELO_AVAIL[B.gi(s, "melo_avail")], "jaden": B.JADEN[B.gi(s, "jaden")], "ant": B.ANT[B.gi(s, "ant")]})
             if rng.random() < pd:
@@ -204,6 +218,92 @@ def exact_aggregates(states, val, choice):
     return nh, tm
 
 
+def build_lattice(states, val, choice):
+    """THE LATTICE (v6). The solver's exact forward mass over its reachable states, with the
+    edges between them -- so convergence is carried in the data instead of being thrown away.
+
+    Why exact rather than sampled: a channel is a STATE, and two histories merge when they
+    reach the same state. In a 400-trace sample that almost never happens in the wide part of
+    the field (measured: 12 merge-nodes of 774), so a sample-built render is a tree wearing a
+    lattice's name. The same object computed exactly has 1,376 merge-nodes of 13,019. Same
+    definition, no estimator noise. The traces stay -- they are the audit overlay.
+
+    Emitted per column: live states (mass, equity, health), the edges arriving into them, and
+    the mass that EXITS at that column (converted, requested, ring), each tagged to the live
+    lane it left from so the render can route it off the page instead of ending it mid-field.
+    """
+    mass = defaultdict(float); mass[B.ROOT] = 1.0
+    edges = defaultdict(float)           # (col, src_state, dst_state) -> mass
+    exits = defaultdict(float)           # (col, kind, src_state) -> mass
+    for s in sorted(states, key=lambda x: B.gi(x, "t")):
+        m = mass.get(s, 0.0)
+        if m <= 1e-15:
+            continue
+        t = int(B.gi(s, "t"))
+        if B.is_absorbing(s):
+            continue                     # already booked as an exit by its predecessor
+        lbl = choice[s]
+        if lbl in ("ARM-CONVERT", "expose-Jaden"):
+            exits[(t, "EXPOSE" if lbl == "expose-Jaden" else "CONVERT", s)] += m
+            continue
+        cost, outs = next((c, o) for l, c, o in B.successors(s) if l == lbl)
+        p0, tgt0 = outs[0]
+
+        def land(ns, w):
+            if w <= 1e-15:
+                return
+            if B.is_absorbing(ns):       # RING / REQUESTED: leaves from THIS lane, at this column
+                exits[(t, "RING" if B.RUN[B.gi(ns, "run")] == "RING" else "REQUESTED", s)] += w
+            else:
+                mass[ns] += w; edges[(int(B.gi(ns, "t")), s, ns)] += w
+
+        if p0 in ("HAZARD9", "HAZARD9_EXT"):
+            for pw, b in B._hazard9_next_states(s, extended=(p0 == "HAZARD9_EXT")):
+                vs = {al: val.get(B._set(b, ant=B.ANT.index(al)), B.terminal_value(B._set(b, ant=B.ANT.index(al)), CURVE)) for al in HAZ}
+                w = B.stay_split(max(vs.values()), CURVE); ps = B.sigmoid_commit(sum(w[al] * vs[al] for al in vs), CURVE)
+                for al in HAZ:
+                    land(B._set(b, ant=B.ANT.index(al)), m * pw * ps * w[al])
+                land(B._set(b, ant=B.ANT.index("REQUESTED")), m * pw * (1 - ps))
+        elif p0 in ("GATE14", "GATE14_EXPOSE"):
+            cont = B.exposed_leaf(s) if p0 == "GATE14_EXPOSE" else B.soft_horizon(B._set(s, t=15))
+            pd = 1 - B.sigmoid_commit(cont, CURVE)
+            if B.ANT[B.gi(s, "ant")] == "smax_signed":
+                pd *= B.SMAX_MULT
+            pd = min(1.0, pd)
+            exits[(t, "REQUESTED", s)] += m * pd
+            exits[(t, "COMMITTED", s)] += m * (1 - pd)
+        else:
+            for p, ns in outs:
+                land(ns, m * p)
+
+    # per-column live lanes, ordered by equity rank (descending; stable tiebreak on the key)
+    bycol = defaultdict(list)
+    for s, m in mass.items():
+        if m > 1e-12 and not B.is_absorbing(s):
+            bycol[int(B.gi(s, "t"))].append(s)
+    st_out, idx = {}, {}
+    for c, ss in bycol.items():
+        ss.sort(key=lambda s: (-float(val.get(s, B.terminal_value(s, CURVE))), sid(s)))
+        idx[c] = {s: k for k, s in enumerate(ss)}
+        st_out[str(c)] = [[sid(s), round(mass[s], 9), round(float(val.get(s, B.terminal_value(s, CURVE))), 5),
+                           health(s)] for s in ss]
+    ed_out = defaultdict(list)
+    for (c, a, b), m in edges.items():
+        if c in idx and (c - 1) in idx and a in idx[c - 1] and b in idx[c]:
+            ed_out[str(c)].append([idx[c - 1][a], idx[c][b], round(m, 9)])
+    ex_out = defaultdict(list)
+    for (c, kind, s), m in exits.items():
+        if c in idx and s in idx[c]:
+            ex_out[str(c)].append([kind, idx[c][s], round(m, 9)])
+    indeg = defaultdict(set)
+    for (c, a, b) in edges:
+        indeg[(c, b)].add(a)
+    return {"states": st_out, "edges": dict(ed_out), "exits": dict(ex_out),
+            "widths": {str(c): len(v) for c, v in sorted(st_out.items(), key=lambda kv: int(kv[0]))},
+            "n_states": sum(len(v) for v in st_out.values()), "n_edges": len(edges),
+            "n_merge_nodes": sum(1 for v in indeg.values() if len(v) > 1)}
+
+
 def build_fork(fork):
     B.set_fork(fork); B.EXPOSE_JADEN_ARM = False; B.DISABLE_CONVERT = False; B.DISABLE_ACQ_ARMS = False
     states = B.reachable()
@@ -211,11 +311,12 @@ def build_fork(fork):
     rng = np.random.default_rng(SEED + (0 if fork == "rapm" else 1))
     traces = [sample_trace(fork, val, choice, rng, i) for i in range(N_TRACES)]
     node_health, terminals = exact_aggregates(states, val, choice)   # EXACT, not sampled
+    lattice = build_lattice(states, val, choice)
     # sampled terminals kept for transparency (shows the 400-trace visual field's spread)
     sampled = defaultdict(float)
     for tr in traces:
         sampled[tr["terminal"]] += tr["weight"]
-    return {"traces": traces, "node_health": node_health, "terminals": terminals,
+    return {"traces": traces, "lattice": lattice, "node_health": node_health, "terminals": terminals,
             "terminals_sampled": {k: round(v, 4) for k, v in sorted(sampled.items(), key=lambda kv: -kv[1])},
             "root_value": round(float(val[B.ROOT]), 4)}
 
@@ -231,7 +332,7 @@ def main():
             "salvage_cap": B.SALVAGE_CAP,
             "p_east": X6.P_EAST,
             "n_traces_per_fork": N_TRACES,
-            "schema": "one-for-all/board-viz/1",
+            "schema": "one-for-all/board-viz/2",   # v2 adds per-column `sid` (lattice key)
         },
         "nodes": nodes,
         "forks": {fk: build_fork(fk) for fk in ("rapm", "box")},

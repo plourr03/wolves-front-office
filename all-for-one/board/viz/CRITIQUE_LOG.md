@@ -175,6 +175,78 @@ re-draws while the mass envelope holds, so it is not decoration).
 Note: afo_frame.jpg is STILL not in the repo; per the v5 note the target is the frame's
 IRREGULARITY (not a tiling), which the lens satisfies. A further pass runs if the frame lands.
 
+---
+
+# ONE RIVER v6 — THE LATTICE, NOT THE TREE
+
+Bobby's review found a physics omission: v5 drew prefix-tree semantics, which renders
+divergence and discards convergence. Channels become STATES (the solver's reachable-state
+encoding), lanes are ordered by equity rank, exits leave the page, and the audit gains a
+repaired future. Three iterations, each viewed and scored against the v6 laws.
+
+**The finding that changed the build.** v6 item 1 says a channel is the group of TRACES on
+the same state. Measured against the export, the 400-trace sample has **12 merge-nodes across
+774 channels** — in the wide part of the field two sampled histories essentially never land on
+the same state, so a sample-built render is a tree wearing a lattice's name. The same object
+computed exactly over the solver's forward mass has **1,376 merge-nodes across 12,565
+states**. Same definition, no estimator noise. So the field is built from the exact lattice
+and the traces were reassigned to the job they are actually good at — the audit overlay. The
+deviation from the letter of item 1 is in service of its substance, and both numbers are on
+the review page. See "One deviation, flagged" there.
+
+## Lattice iteration 1 — states, edges, exits; linear-mass brightness
+
+| law | pass? | note |
+|---|---|---|
+| channels are states | YES | 12,565 states, 14,429 transitions, 1,376 merge points |
+| merges drawn | YES | convergent edge bundles land on one lane |
+| lanes by rank | YES | equity descending, stable tiebreak on the state key |
+| nothing ends mid-field | YES | exits merged per column per kind, off the page |
+| brightness = mass | NO | blown out: the trunk is a saturated white slab ~40px wide |
+| split-merge rhythm | NO | one global lane pitch (BAND/4312) crushes cols 4-9 to 2px |
+
+Verdict: physics right, picture wrong. The 4,312-lane gate column sets the scale and erases
+every structure before July 27. Two fixes needed: column height and exposure.
+
+## Lattice iteration 2 — sqrt column height, exposure down
+
+Change: column vertical extent = sqrt(live states) scaled to the band (disclosed compression;
+rank ORDER inside the column stays exact and uncompressed), wide-bloom weight 0.30 -> 0.05,
+gain 3.1 -> 0.9, exits shallower and dimmer, COMMITTED runs off the right edge per state.
+
+| law | pass? | note |
+|---|---|---|
+| brightness = mass | YES | thin bright trunk, dim wide field; light visibly leaves |
+| split-merge rhythm | YES | 9 -> 6 pinch at the playoffs, 3312 -> 2156 pinch at the second |
+| nothing ends mid-field | YES | July-27 departures run off the bottom edge |
+| conservation of light | YES | linear-in-mass accumulation; one display curve at the end |
+| audit readable | NO | five white paths over a saturated trunk; the merge is invisible |
+
+Verdict: the field holds. The audit does not — the left half saturates and you cannot see the
+one thing v6 is about, two futures becoming one.
+
+## Lattice iteration 3 — the merge made visible
+
+Change: audit frame dims the field to 0.18 and tightens the highlight core; the audit gains a
+fifth role, the partner trace the repaired future MERGES WITH, chosen as the candidate that
+stays merged longest; a dedicated close-up renders that pair alone over a 0.10 field.
+
+| law | pass? | note |
+|---|---|---|
+| channels are states | YES | b167 and b229 differ at the Nov read, share one state from the deadline to the gate |
+| merges are visible | YES | the close-up shows two white lines becoming one and staying one |
+| every bend caused | YES | lane = equity rank, so each bend is a rank change; no presentation-layer motion exists in the renderer |
+| brightness = mass | YES | linear accumulation, single display transfer, no per-channel gamma |
+| nothing ends mid-field | YES | 6 merged exit channels, all leaving the canvas; exit mass sums to 1.0000 |
+| repaired role | YES | trips a wire, arms at the deadline, climbs 39% of the ranking, checked not asserted |
+
+Verdict: honors v6. Delivered with the reconciliation, the upgraded audit, and a perturbation
+pair that is now a genuine input change (the rapm fork) rather than a reseed — the field is
+exact, so a seed no longer moves it.
+
+Note: `afo_frame.jpg` is STILL not in the repo (fourth directive naming it). Density and glow
+remain calibrated to the v4-approved braid, not to the frame.
+
 ## Still to do once afo_frame.jpg lands
 
 - match weave DENSITY to the frame (lane count 36-48, stroke restraint from the reference prototype)

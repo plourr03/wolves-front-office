@@ -4,4 +4,5 @@ __pycache__/
 freeze_bundle_manifest.txt
 # regenerable viz viewer (5MB of embedded PNGs); rebuild with build_gallery.py from the stills
 board/viz/radial_gallery.html
+board/viz/lattice_review.html
 board/viz/board_viz_export_alt.json
