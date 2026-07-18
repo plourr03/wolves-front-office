@@ -123,6 +123,58 @@ Verdict: honors the v4 spec. Delivered as one straight still + its 50% zoom.
 Note: `afo_frame.jpg` is STILL not in the repo, so the density/glow is matched to the APPROVED
 weave (Bobby's v4 review), not to the frame. If the frame lands and differs, a further pass runs.
 
+---
+
+# ONE RIVER v5 — THE DATA MUST BE VISIBLE (the lens)
+
+Bobby rejected the honeycomb as decoration and revoked the presentation-layer lane-exchange
+license: no bend may exist unless the data caused it. Rebuilt as a lens grown from the real
+state prefixes -- one thread at Now, splitting only where (fit, LaMelo availability, run,
+Ant) diverge, brightness = mass. Three iterations, viewed and scored against the three laws.
+
+## Lens iteration 1 — prefix tree, first pass
+
+| law | pass? | note |
+|---|---|---|
+| one origin | YES | single thread at Now, splitting at the reads / playoffs / July 27 |
+| every bend caused | YES | channels split only at columns where the data diverged (897 channels) |
+| brightness = mass | NO | a base brightness made the high-branching regions solid uniform blocks |
+
+Verdict: data-driven and irregular, but the dense regions read as filled grids -- a
+uniform-brightness fail. Kill the base.
+
+## Lens iteration 2 — luminance from mass only
+
+Change: `amt = (mass/max)^0.6`, no base. Probable corridors glow, rare states fall dim.
+
+| law | pass? | note |
+|---|---|---|
+| brightness = mass | PARTIAL | contrast better, but 210 distinct states still packed as a grid |
+
+Verdict: closer, but the July-27 re-draw exploded the state count into a grid.
+
+## Lens iteration 3 — coarsen the road + steepen contrast
+
+Change: drop jaden from the branching signature (it is read informationally and never
+re-sorts the policy, so it must not split the road) -> 897 to 766 channels, peak 210 to 139
+states; `amt = (mass/max)^0.88`; skip channels below one thread of mass; dim the verticals.
+
+| law | pass? | note |
+|---|---|---|
+| one origin | YES | |
+| every bend caused | YES | audit proves it: every bend on a highlighted path maps to a listed event |
+| brightness = mass | YES | bright corridors, dim tail, the gate visibly thinner (conservation of light) |
+
+Verdict: honors the three laws. Delivered with all three data-fidelity proofs.
+
+Data-fidelity proofs delivered: A trace audit (3 real ids, event tables, white overlay --
+the future is readable off the picture); B reconciliation (400 traces -> 766 channels, peak
+139 states); C perturbation (seed 20260717 vs 88888 side by side -- the fine branching
+re-draws while the mass envelope holds, so it is not decoration).
+
+Note: afo_frame.jpg is STILL not in the repo; per the v5 note the target is the frame's
+IRREGULARITY (not a tiling), which the lens satisfies. A further pass runs if the frame lands.
+
 ## Still to do once afo_frame.jpg lands
 
 - match weave DENSITY to the frame (lane count 36-48, stroke restraint from the reference prototype)
