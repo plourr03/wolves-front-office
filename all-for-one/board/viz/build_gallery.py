@@ -14,21 +14,17 @@ HERE = Path(__file__).resolve().parent
 STILLS = HERE / "stills"
 
 SHOTS = [
-    ("corridor_box_full.png", "Full field · straight · box fork",
-     "THE CORRIDOR: left is NOW, right is the 2028 GATE, calendar columns are the verticals. Futures "
-     "route as circuit traces on a lane grid, bending only at columns. The center lane is the road to "
-     "the next ring; ring '27 sits in-line with a thin gold entry (only the 4.5% that win enter); the "
-     "alive weave routes around it; the Ant-departs drain off the bottom as a rose fall; resets freeze "
-     "as red rings in the failure shelf."),
-    ("corridor_box_sheared.png", "Full field · sheared ~12° · box fork",
-     "The same render with a ~12-degree isometric shear, for the straight-vs-sheared pick. The board "
-     "reads as a circuit seen at an angle."),
-    ("corridor_box_zoom50.png", "50% zoom · the crossover and both rings",
-     "Magnified from ring '27 to the gate: the re-sort where '28-bound futures jog back into the "
-     "center road, the rose fall of departures, and ring '28 crowded at the gate."),
-    ("corridor_box_scrubber_r2.png", "Season scrubber · frozen at R2 (node 5)",
-     "The collapse tool positioned at the January-2027 read: the weave up to R2, before the "
-     "node-9 resets fire. Early season, the field still intact."),
+    ("river_box_full.png", "Full field",
+     "ONE RIVER. Every future the board holds for 2026-27, woven into a single stream: NOW at the "
+     "left, the 2028 gate at the right, calendar moments as the verticals. The weave never leaves "
+     "the centerline; the rings live IN the river (ring '27 at the playoffs, ring '28 at the gate), "
+     "the weave parting around each and only the title threads entering in gold. It only narrows: "
+     "when a future ends it peels toward the nearest edge and fades to nothing. The river at the gate "
+     "is visibly thinner than at NOW, and that thinning — the ~51% who leave — is the whole story."),
+    ("river_box_zoom50.png", "50% zoom · the narrowing and both rings",
+     "The same image, magnified from the January read through the gate: the weave parting around "
+     "ring '27, the cinch after July 2027 as departures fade off, and the thin surviving stream "
+     "reaching ring '28."),
 ]
 
 TOKENS = """
@@ -62,14 +58,14 @@ def main():
             continue
         figs.append(f'<figure><img alt="{title}" src="{data_uri(p)}">'
                     f'<figcaption><div class="t">{title}</div><div class="d">{desc}</div></figcaption></figure>')
-    html = f"""<title>Corridor stills — ONE FOR ALL board</title>
+    html = f"""<title>One River still — ONE FOR ALL board</title>
 <style>{TOKENS}</style>
 <div class="wrap">
-<h1>ONE FOR ALL &nbsp;/&nbsp; <b>THE CORRIDOR</b> &nbsp;·&nbsp; composition stills</h1>
+<h1>ONE FOR ALL &nbsp;/&nbsp; <b>ONE RIVER</b> &nbsp;·&nbsp; composition stills</h1>
 <p class="lede">Every future the board holds for 2026-27, drawn as one circuit trace on the real solver export.
-Left to right is time; the center lane is the road to the next ring; the eye follows the corridor to the gate.</p>
-<p class="recipe">GRAMMAR PREVIEW (v3) · additive light · circuit routing, bends only at columns · rings in-line ·
-awaiting afo_frame.jpg for the weave-density and channel-glow match · static, no interactivity yet</p>
+Left to right is time; the river only narrows, because light leaves when a future ends.</p>
+<p class="recipe">v4 ONE RIVER · additive light · one woven stream · rings in the river · death = leaving the page ·
+weave matched to the Bobby-approved hex braid (afo_frame.jpg not yet in repo) · static, no interactivity yet</p>
 {''.join(figs)}
 <p class="foot">Delivery: PNG stills at board/viz/stills/. Rendered from board_viz_export.json
 (SOLVER, forks 0.5/0.5, cap 0.012, P(east) 0.60, 400 traces/fork). Nothing published beyond this
