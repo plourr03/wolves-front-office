@@ -11,16 +11,22 @@ Geometry, all of it data-caused:
     function), best at the top. A trace's lane IS its state's rank. A crossing happens exactly
     when two states swap rank between columns -- every braid, every out-and-back, is that.
   * WIDTH = distinct live states. One state at Now; 4,312 at the gate.
-  * BRIGHTNESS = MASS, additively and in linear light, so conservation of light is not a
-    styling rule but arithmetic: the light in a column equals the probability still in play.
-    A display transfer curve is applied once at the end (that is encoding, not weighting).
+  * BRIGHTNESS = MASS, additively and in linear light. In the BUFFER that makes conservation
+    of light arithmetic. In the FRAME it does not, and the difference is not academic: any
+    display transfer that keeps a 180:1 per-pixel range legible gives back more light to a
+    thousand dim pixels than to one bright one, so dispersing a column's mass can brighten the
+    picture even as the probability drains. An earlier cut of this render did exactly that --
+    the frame got ~9x brighter left to right while the docstring claimed the opposite. So the
+    profile is now MEASURED off the rendered frame (light_profile) and tuned until the live
+    field really does end dimmer than it starts: gate/Now = 0.73. The residual bulge at the
+    reads is the trunk clipping, and is reported rather than hidden.
   * NOTHING ENDS MID-FIELD. Exiting mass (converted, requested, dead end) merges into one
     weighted channel per column per kind and runs off the page at a shallow angle. Futures
     that leave the story leave the page.
 
 Why the field is the exact lattice and not the 400 traces: a channel is a state, and in a
 400-trace sample two histories almost never land on the same state out in the wide part of the
-field. Measured: the sample has 12 merge-nodes of 774 channels; the same object computed
+field. Measured: the sample has 12 merge-nodes of 586 channels; the same object computed
 exactly has 1,376 of 12,565. Rendering the sample would have drawn a tree again and called it
 a lattice. The traces remain, doing the job they are actually good at: the audit overlay.
 
@@ -42,6 +48,9 @@ HERE = Path(__file__).resolve().parent
 S_W, S_H = 2100, 1180
 XL, XR = 150, S_W - 150
 CY, BAND = S_H / 2 + 14, S_H * 0.72
+# Column height exponent and the display transfer. These two together decide whether the
+# PICTURE conserves light, not just the buffer -- see light_profile() and the note there.
+HEXP, GAIN, GAMMA = 0.5, 0.22, 1.0
 YB = S_H - 84
 TMAX = 14
 RING27_T = 7
@@ -89,7 +98,7 @@ class Lattice:
         gate, 4,312 states) fills the band. Disclosed compression, and the only one: a linear
         scale would render nine states at Now-plus-one-read as two pixels next to a field four
         thousand lanes wide. Rank ORDER inside the column is exact and uncompressed."""
-        return BAND * math.sqrt(self.n[c]) / math.sqrt(self.n_max)
+        return BAND * (self.n[c] ** HEXP) / (self.n_max ** HEXP)
 
     def y(self, c, rank):
         """Lane y: rank 0 (best equity) at the top of that column's band, centered."""
@@ -142,7 +151,7 @@ def render(L, highlight=None, subtitle="", dim_field=1.0, fork="box"):
             _splat(live, (x0, lat.y(c - 1, i)), (x1, lat.y(c, j)), m)
 
     # --- exits: merged per (column, kind), off the page, never ending mid-field -------------
-    exit_log = []
+    exit_log, rings = [], []
     for c, rows in sorted(lat.exits.items()):
         byk = defaultdict(list)
         for kind, rank, m in rows:
@@ -155,11 +164,16 @@ def render(L, highlight=None, subtitle="", dim_field=1.0, fork="box"):
             x0 = col_x(c)
             exit_log.append((c, kind, tot, len(parts)))
             if kind == "RING":                                      # a ring is arrival, not exit
-                _splat(gold, (x0, y0), (col_x(RING27_T), CY), tot * 2.2)
+                # The title is decided in the c -> c+1 transition, so the ring sits half a
+                # column downstream of the lane the mass leaves from, and the gold thread has
+                # real horizontal extent. (Drawing it at col_x(c) made dx = 0, which _splat's
+                # per-x normalisation then collapsed to ~1/130th of an equal-mass edge.)
+                rings.append((col_x(c) + (col_x(1) - col_x(0)) * 0.5, y0, x0, tot))
                 continue
-            if kind == "COMMITTED":
+            if kind.startswith("COMMITTED"):
                 # not an exit -- this is the plan working. It keeps its shape and runs off the
                 # RIGHT edge, one run per surviving state, so the gate shows a distribution.
+                # (COMMITTED_EXPOSED is the same outcome reached via the expose-Jaden arm.)
                 for r, m in parts:
                     _splat(live, (x0, lat.y(c, r)), (S_W + 40, lat.y(c, r)), m, dim=0.7)
                 continue
@@ -168,6 +182,9 @@ def render(L, highlight=None, subtitle="", dim_field=1.0, fork="box"):
             y1 = -80 if up else S_H + 80
             _splat(live, (x0, y0), (x0 + span * 0.5, y0 + (y1 - y0) * 0.34), tot * 0.62, dim=0.55)
             _splat(rose, (x0 + span * 0.5, y0 + (y1 - y0) * 0.34), (x0 + span, y1), tot * 0.7, dim=0.22)
+
+    for rx, y0, x0, tot in rings:
+        _splat(gold, (x0, y0), (rx, CY), tot)
 
     # --- audit overlay ---------------------------------------------------------------------
     if highlight:
@@ -194,13 +211,14 @@ def render(L, highlight=None, subtitle="", dim_field=1.0, fork="box"):
         Ll += np.array([255, 255, 255])[None, None, :] * three(hi, 0.008, 0.035, 0.85)[..., None] * 0.85
     # brightness stays LINEAR in mass all the way to here (conservation of light is arithmetic);
     # this last curve is display encoding, applied once, to the whole frame equally.
-    lin = np.clip(Ll * 0.9, 0, None)
-    out = base + 255.0 * (1.0 - np.exp(-lin ** 0.55))
+    lin = np.clip(Ll * GAIN, 0, None)
+    out = base + 255.0 * (1.0 - np.exp(-lin ** GAMMA))
     img = Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGB")
 
     d = ImageDraw.Draw(img, "RGBA")
-    cx = col_x(RING27_T)
-    d.ellipse([cx - RING_R, CY - RING_R, cx + RING_R, CY + RING_R], outline=(*GOLD.astype(int), 220), width=2)
+    for rx, _y, _x, tot in rings:                # radius carries the mass that reaches it
+        rr = 14 + 260 * math.sqrt(tot)
+        d.ellipse([rx - rr, CY - rr, rx + rr, CY + rr], outline=(*GOLD.astype(int), 210), width=2)
     _chrome(d, lat, subtitle, fork)
     return img, lat, exit_log
 
@@ -209,7 +227,7 @@ def _chrome(d, lat, subtitle, fork):
     d.text((30, 26), "ONE RIVER", font=_font(21), fill=(*INK, 240))
     d.text((30, 56), "every future the board holds. a channel is a STATE, so futures that reach the same state merge into one channel;",
            font=_font(13), fill=(*INK, 168))
-    d.text((30, 72), "lanes are ordered by equity, so every crossing is a change of rank. brightness = probability still in play." + subtitle,
+    d.text((30, 72), "lanes are ordered by equity, so every crossing is a change of rank. a channel's brightness is its probability mass." + subtitle,
            font=_font(13), fill=(*INK, 168))
     for t, lab in HUMAN.items():
         x = col_x(t); d.text((x - len(lab) * 3.1, YB + 22), lab, font=_font(12), fill=(*INK, 175))
@@ -222,7 +240,10 @@ def _chrome(d, lat, subtitle, fork):
 
 # ------------------------------------------------------------------ audit (proof A) --------
 ADVERSE = {"FIT_R", "FIT_Y", "AVAIL_C", "PERF_T3", "PERF_T4", "JAD_STAL"}
-ARMS = {"ARMG", "ARMB", "ARMD", "ARMS", "EXT", "UNLOCK", "ADV28"}
+# Every one of these is emitted only from the t=6 or t=12 decision menus, so "arms at the
+# deadline" is true by construction. EXT is deliberately NOT here: an extension can fire at
+# t=0, t=9 or t=12, so counting it would have made the caption true only by luck.
+ARMS = {"ARMG", "ARMB", "ARMD", "ARMS", "UNLOCK", "ADV28"}
 
 
 def lanes_of(tr, lat):
@@ -236,6 +257,17 @@ def lanes_of(tr, lat):
 
 def rank_frac(lat, c, rank):
     return rank / max(1, lat.n[c] - 1)
+
+
+def adverse_col(s):
+    """The column at which this future's state first went bad -- the trip, not the repair.
+    Read off the state itself (a red/yellow fit, LaMelo unavailable, a bottom perf tier or a
+    stalled Jaden), so it does not depend on the code stream being complete."""
+    for n in s["tr"]["path"]:
+        if (n["fit"] in ("red", "yellow") or n["melo"] == "C"
+                or n["run"] == "none" and n["t"] > 8 or n["jaden"] == "stalled"):
+            return int(n["t"])
+    return None
 
 
 def audit(traces, lat):
@@ -294,7 +326,14 @@ def audit(traces, lat):
     for s in scored:
         if not (s["alive"] and s["codes"] & ADVERSE and s["codes"] & ARMS):
             continue
-        after = [(c, r) for c, r in s["lanes"] if c >= 6]
+        # Measure the climb from where the WIRE TRIPPED, not from the merge. Anchoring at the
+        # deadline made the gain a property of the shared downstream state, so the repaired
+        # trace and its untouched partner posted an identical number and the caption credited
+        # the repair for something the repair had nothing to do with.
+        t0 = adverse_col(s)
+        if t0 is None:
+            continue
+        after = [(c, r) for c, r in s["lanes"] if c >= t0]
         if len(after) < 3:
             continue
         gain = rank_frac(lat, *after[0]) - rank_frac(lat, *after[-1])      # + = climbed the board
@@ -307,8 +346,16 @@ def audit(traces, lat):
         gain, s, p, mc, mr, span, until = best
         pick["repaired"], pick["converges-with"] = s, p
         where = HUMAN.get(mc, f"column {mc}")
-        note["repaired"] = (f"trips a wire early, arms at the deadline, and climbs {gain * 100:.0f}% of the "
-                            f"equity ranking by the gate")
+        t0 = adverse_col(s)
+        pgain = None
+        if adverse_col(p) is not None:
+            pa = [(c, r) for c, r in p["lanes"] if c >= adverse_col(p)]
+            pgain = rank_frac(lat, *pa[0]) - rank_frac(lat, *pa[-1]) if len(pa) >= 3 else None
+        note["repaired"] = (
+            f"its state has gone bad by the {HUMAN.get(t0, 'column ' + str(t0))}, it takes a deadline arm, "
+            f"and from the column where it went bad it climbs {gain * 100:.0f}% of the equity ranking by the gate"
+            + ("" if pgain is not None else
+               " — the partner below never went bad at all, so there was nothing to repair"))
         note["converges-with"] = (
             f"a different history that lands on the SAME state at the {where} — {len(indeg[(mc, mr)])} "
             f"histories reach it. From there the two white lines are ONE line, because they are one "
@@ -324,6 +371,26 @@ def audit(traces, lat):
             pair.append(h)
         rows.append([label, tr["id"], tr["terminal"], tr["codes"], note.get(label, "")])
     return hl, rows, pair, (best[3] if best else None)
+
+
+def light_profile(img, lat):
+    """Emitted light per calendar column, MEASURED off the rendered frame.
+
+    The linear buffer conserves light by construction (amplitude = mass), but the buffer is
+    not what anyone looks at. A concave display transfer gives back more light to many dim
+    pixels than to one bright one, so dispersing a column's mass across thousands of sub-pixel
+    lanes can make the FRAME brighter even as the probability drains. That is measurable, so
+    it gets measured rather than asserted: this returns the column integral in the picture
+    next to the probability mass it is supposed to track."""
+    a = np.asarray(img, float).sum(axis=2)
+    bg = float(BG.sum())
+    rows = []
+    for t in sorted(lat.n):
+        x = int(col_x(t))
+        band = a[:, max(0, x - 18):x + 18] - bg
+        rows.append((t, float(np.clip(band, 0, None).sum()) / 1e3,
+                     sum(s[1] for s in lat.states[t])))
+    return rows
 
 
 def reconcile(traces, lat):
@@ -358,17 +425,24 @@ def main():
     img.crop((x0, y0, x1, y1)).resize((int((x1 - x0) * 1.5), int((y1 - y0) * 1.5)), Image.LANCZOS).save(out / "lattice_zoom50.png")
 
     hl, rows, pair, mcol = audit(F["traces"], lat)
-    aimg, *_ = render(F["lattice"], highlight=hl, dim_field=0.18)
+    aimg, *_ = render(F["lattice"], highlight=hl, dim_field=0.55)
     aimg.save(out / "lattice_audit.png")
     if mcol is not None:                       # the merge, close up: two white lines becoming one
-        pimg, *_ = render(F["lattice"], highlight=pair, dim_field=0.10)
+        pimg, *_ = render(F["lattice"], highlight=pair, dim_field=0.35)
         mx0, mx1 = int(col_x(mcol - 2.6)), int(col_x(mcol + 2.2))
         my0, my1 = int(CY - 130), int(CY + 130)
         pimg.crop((mx0, my0, mx1, my1)).resize((int((mx1 - mx0) * 2.4), int((my1 - my0) * 2.4)),
                                                Image.LANCZOS).save(out / "lattice_merge_zoom.png")
     rec = reconcile(F["traces"], lat)
+    prof = light_profile(img, lat)
+    lat_nx = Lattice({**F["lattice"], "exits": {}})
+    prof_live = light_profile(render({**F["lattice"], "exits": {}})[0], lat_nx)
     (out / "lattice_audit_table.json").write_text(json.dumps(rows, indent=1))
-    (out / "lattice_recon.json").write_text(json.dumps({"recon": rec, "exits": exit_log}, indent=1))
+    (out / "lattice_recon.json").write_text(json.dumps(
+        {"recon": rec, "exits": exit_log, "light": prof, "light_live": prof_live}, indent=1))
+    print("light per column (measured off the frame): "
+          + " ".join(f"{t}:{v:.0f}" for t, v, _m in prof_live)
+          + f"  [live field only; gate/Now = {prof_live[-1][1] / prof_live[0][1]:.2f}]")
     print(f"states {rec['n_states']} · edges {rec['n_edges']} · merge points {rec['merges']}")
     print(f"widths {rec['widths']}")
     print("exits:", [(c, k, round(m, 4), n) for c, k, m, n in exit_log])

@@ -161,9 +161,15 @@ def sample_trace(fork, val, choice, rng, tid):
             codes.append(_code(lbl, s2))
         if t == 7:                                   # run resolved
             codes.append("RUN_" + B.RUN[B.gi(s2, "run")])
-        if B.NODE_TYPE.get(t) == "read_R1":
-            codes.append("AVAIL_" + B.MELO_AVAIL[B.gi(s2, "melo_avail")])
-            codes.append("FIT_" + B.FIT[B.gi(s2, "fit")][0].upper())
+        # EVERY read node, not just the advisory one. R2 (t=5) is the BINDING read and t=11 is
+        # the season-2 cycle; emitting only read_R1 left a degradation at the binding read
+        # invisible to anything reading the code stream (the audit's ADVERSE test, notably).
+        # Change-guarded after t=3 so the stream stays an event log, not a state dump.
+        if B.NODE_TYPE.get(t) in ("read_R1", "read_R2", "read"):
+            if t == 3 or B.gi(s2, "melo_avail") != B.gi(s, "melo_avail"):
+                codes.append("AVAIL_" + B.MELO_AVAIL[B.gi(s2, "melo_avail")])
+            if t == 3 or B.gi(s2, "fit") != B.gi(s, "fit"):
+                codes.append("FIT_" + B.FIT[B.gi(s2, "fit")][0].upper())
         s = s2
     return {"id": f"{fork[:1]}{tid}", "fork": fork, "weight": round(1.0 / N_TRACES, 6),
             "path": path, "codes": codes, "terminal": terminal}
@@ -190,8 +196,12 @@ def exact_aggregates(states, val, choice):
         # depart split runs, exactly as board_step4.forward() does. (An earlier guard here
         # dead-coded the gate handler and dumped all gate mass into leaf-<run>.)
         lbl = choice[s]
-        if lbl in ("ARM-CONVERT", "expose-Jaden"):
-            terminals[("EXPOSE" if lbl == "expose-Jaden" else f"CONVERT@{t}")] += m
+        # ARM-CONVERT is the only terminal choice. expose-Jaden is NOT: the solver prices it
+        # through gate14_value(expose=True), a commit-vs-depart split, and forward() has no
+        # expose special-case at all. Short-circuiting it here would book 100% of expose mass
+        # as an exit and dead-code the GATE14_EXPOSE half of the branch below.
+        if lbl == "ARM-CONVERT":
+            terminals[f"CONVERT@{t}"] += m
             continue
         cost, outs = next((c, o) for l, c, o in B.successors(s) if l == lbl)
         p0, tgt0 = outs[0]
@@ -208,7 +218,7 @@ def exact_aggregates(states, val, choice):
             if B.ANT[B.gi(s, "ant")] == "smax_signed":
                 pd *= B.SMAX_MULT
             pd = min(1.0, pd)
-            terminals["leaf-committed"] += m * (1 - pd)
+            terminals["leaf-committed" + ("-exposed" if p0 == "GATE14_EXPOSE" else "")] += m * (1 - pd)
             terminals["REQUESTED"] += m * pd
         else:
             for p, ns in outs:
@@ -224,8 +234,10 @@ def build_lattice(states, val, choice):
 
     Why exact rather than sampled: a channel is a STATE, and two histories merge when they
     reach the same state. In a 400-trace sample that almost never happens in the wide part of
-    the field (measured: 12 merge-nodes of 774), so a sample-built render is a tree wearing a
-    lattice's name. The same object computed exactly has 1,376 merge-nodes of 13,019. Same
+    the field (measured: 12 merge-nodes of 586 channels; the 400 traces
+    touch 774 distinct sids, but 188 of those are absorbing terminals or t=15 leaves, which
+    are not lattice channels), so a sample-built render is a tree wearing a
+    lattice's name. The same object computed exactly has 1,376 merge-nodes of 12,565. Same
     definition, no estimator noise. The traces stay -- they are the audit overlay.
 
     Emitted per column: live states (mass, equity, health), the edges arriving into them, and
@@ -243,8 +255,8 @@ def build_lattice(states, val, choice):
         if B.is_absorbing(s):
             continue                     # already booked as an exit by its predecessor
         lbl = choice[s]
-        if lbl in ("ARM-CONVERT", "expose-Jaden"):
-            exits[(t, "EXPOSE" if lbl == "expose-Jaden" else "CONVERT", s)] += m
+        if lbl == "ARM-CONVERT":            # the ONLY terminal choice -- see exact_aggregates
+            exits[(t, "CONVERT", s)] += m
             continue
         cost, outs = next((c, o) for l, c, o in B.successors(s) if l == lbl)
         p0, tgt0 = outs[0]
@@ -271,7 +283,7 @@ def build_lattice(states, val, choice):
                 pd *= B.SMAX_MULT
             pd = min(1.0, pd)
             exits[(t, "REQUESTED", s)] += m * pd
-            exits[(t, "COMMITTED", s)] += m * (1 - pd)
+            exits[(t, "COMMITTED_EXPOSED" if p0 == "GATE14_EXPOSE" else "COMMITTED", s)] += m * (1 - pd)
         else:
             for p, ns in outs:
                 land(ns, m * p)
@@ -285,16 +297,16 @@ def build_lattice(states, val, choice):
     for c, ss in bycol.items():
         ss.sort(key=lambda s: (-float(val.get(s, B.terminal_value(s, CURVE))), sid(s)))
         idx[c] = {s: k for k, s in enumerate(ss)}
-        st_out[str(c)] = [[sid(s), round(mass[s], 9), round(float(val.get(s, B.terminal_value(s, CURVE))), 5),
+        st_out[str(c)] = [[sid(s), round(mass[s], 12), round(float(val.get(s, B.terminal_value(s, CURVE))), 5),
                            health(s)] for s in ss]
     ed_out = defaultdict(list)
     for (c, a, b), m in edges.items():
         if c in idx and (c - 1) in idx and a in idx[c - 1] and b in idx[c]:
-            ed_out[str(c)].append([idx[c - 1][a], idx[c][b], round(m, 9)])
+            ed_out[str(c)].append([idx[c - 1][a], idx[c][b], round(m, 12)])
     ex_out = defaultdict(list)
     for (c, kind, s), m in exits.items():
         if c in idx and s in idx[c]:
-            ex_out[str(c)].append([kind, idx[c][s], round(m, 9)])
+            ex_out[str(c)].append([kind, idx[c][s], round(m, 12)])
     indeg = defaultdict(set)
     for (c, a, b) in edges:
         indeg[(c, b)].add(a)

@@ -14,6 +14,7 @@ HERE = Path(__file__).resolve().parent
 STILLS = HERE / "stills"
 ROWS = json.loads((STILLS / "lattice_audit_table.json").read_text())
 REC = json.loads((STILLS / "lattice_recon.json").read_text())
+LIGHT = REC["light_live"]
 EXPORT = json.loads((HERE / "board_viz_export.json").read_text())
 LB, LR = EXPORT["forks"]["box"]["lattice"], EXPORT["forks"]["rapm"]["lattice"]
 RAPM_CONVERT = sum(v for k, v in EXPORT["forks"]["rapm"]["terminals"].items() if k.startswith("CONVERT"))
@@ -75,8 +76,16 @@ def exit_table():
         r.append(f'<tr><td class="k">{HUMAN.get(c, c)}</td><td>{KIND.get(kind, kind)}</td>'
                  f'<td>{m * 100:.2f}%</td><td>{n}</td></tr>')
     tot = sum(m for _, _, m, _ in REC["exits"])
-    r.append(f'<tr><td colspan="2"><b>total</b></td><td><b>{tot * 100:.2f}%</b></td>'
+    r.append(f'<tr><td colspan="2"><b>total</b></td><td><b>{tot * 100:.6f}%</b></td>'
              f'<td class="note">nothing is lost and nothing ends in frame</td></tr>')
+    return "".join(r) + "</table>"
+
+
+def light_table():
+    r = ['<table><tr><th>column</th><th>light in the frame (live field)</th>'
+         '<th>probability still in play</th></tr>']
+    for t, v, m in LIGHT:
+        r.append(f'<tr><td class="k">{HUMAN.get(t, t)}</td><td>{v:.0f}</td><td>{m * 100:.1f}%</td></tr>')
     return "".join(r) + "</table>"
 
 
@@ -88,9 +97,8 @@ def main():
 <h1>ONE FOR ALL &nbsp;/&nbsp; <b>ONE RIVER</b> &nbsp;·&nbsp; v6, the lattice not the tree</h1>
 <p class="lede">A channel here is a <b>state</b>, not a history. So futures that reach the same state
 stop being two lines and become one, which is what a prefix tree throws away. Lanes are ordered by
-equity, so every crossing on the page is a change of rank. Brightness is probability mass, added in
-linear light, which makes conservation of light arithmetic rather than a styling rule: the light in a
-column is the probability still in play. Futures that leave the story leave the page.</p>
+equity, so every crossing on the page is a change of rank. A channel's brightness is its probability
+mass, added in linear light. Futures that leave the story leave the page.</p>
 
 <h2>The lattice <span>&mdash; full field</span></h2>
 <figure><img alt="lattice full" src="{uri('lattice_full.png')}"><figcaption>One state at Now. It opens
@@ -114,11 +122,11 @@ below lists the events that caused it.</figcaption></figure>
 
 <h2>The merge, close up <span>· the physics v5 discarded</span></h2>
 <figure><img alt="merge close-up" src="{uri('lattice_merge_zoom.png')}"><figcaption>Only the repaired
-future and the future it merges with. They part at the November read &mdash; one gets LaMelo available,
-one does not &mdash; run as two separate lines through the January read, and then <b>land on the same
-state at the deadline and become one line</b>. They stay one line to the gate, because from there they
-are not two similar futures, they are the same future. A prefix tree would have drawn them as two lines
-forever.</figcaption></figure>
+future and the future it merges with. Their LaMelo reads differ &mdash; one degrades in November, the
+other holds until the binding read in January &mdash; so they run as two separate lines, and then
+<b>land on the same state at the deadline and become one line</b>. They stay one line through the ring
+and out to the gate, because from there they are not two similar futures, they are the same future. A
+prefix tree would have drawn them as two lines forever.</figcaption></figure>
 
 <h2>Proof B &mdash; reconciliation</h2>
 <p class="lede">{rec['n_states']:,} states, {rec['n_edges']:,} transitions,
@@ -133,14 +141,28 @@ runs off the canvas:</p>
 
 <div class="flag"><b>One deviation, flagged.</b> The directive defines a channel as the group of
 <i>traces</i> on the same state. Measured: in the 400-trace sample that produces only <b>12 merge
-points across 774 channels</b> &mdash; out in the wide part of the field two sampled histories almost
-never land on the same state, so a sample-built render would have been a tree wearing a lattice's name.
-The same object computed exactly over the solver's forward mass gives <b>{rec['merges']:,} merge points
-across {rec['n_states']:,} states</b>. Same definition, no estimator noise. So the field is the exact
-lattice and the traces do the audit. Second disclosure: column height is
-<b>&radic;(live states)</b>, not live states &mdash; on a linear scale the nine states at the November
-read are two pixels beside a gate {LB['widths']['14']:,} lanes wide. Rank order inside a column is exact
-and uncompressed.</div>
+points across {rec['occupied']:,} channels</b> &mdash; out in the wide part of the field two sampled
+histories almost never land on the same state, so a sample-built render would have been a tree wearing
+a lattice's name. The same object computed exactly over the solver's forward mass gives
+<b>{rec['merges']:,} merge points across {rec['n_states']:,} states</b>. Same definition, no estimator
+noise. So the field is the exact lattice and the traces do the audit. Second disclosure: column height
+is <b>&radic;(live states)</b>, not live states &mdash; on a linear scale the nine states at the
+November read are two pixels beside a gate {LB['widths']['14']:,} lanes wide. Rank order inside a
+column is exact and uncompressed.</div>
+
+<h2>Conservation of light <span>· measured off the frame, not asserted</span></h2>
+<p class="lede">Brightness is linear in mass, so the light <i>buffer</i> conserves by construction. The
+frame is a different question, and the honest answer took a correction. Any display curve that keeps a
+180:1 per-pixel range legible hands back more light to a thousand dim pixels than to one bright one, so
+spreading a column's mass can brighten the picture while the probability drains &mdash; an earlier cut
+of this render got about <b>9&times; brighter</b> left to right while claiming the opposite. It is
+measurable, so it is now measured off the rendered PNG and tuned until the live field really does end
+darker than it starts.</p>
+{light_table()}
+<p class="lede">Gate over Now = <b>{LIGHT[-1][1] / LIGHT[0][1]:.2f}</b>. The bulge through the reads is
+real and is not hidden: a single lane carrying all the probability clips, so the trunk under-emits
+relative to the same mass spread over nine lanes. Departing light is excluded here &mdash; it is
+leaving, so it should not count as still in play.</p>
 
 <h2>Proof C &mdash; perturbation <span>· a different input must visibly change the picture</span></h2>
 <div class="pair">
@@ -155,6 +177,32 @@ converts at July 27, so nearly all the light leaves in a single beam and what re
 ghost. If the render were decoration the two frames would look alike. Note the change from v5: the field
 is now exact, so re-seeding no longer moves it &mdash; a seed only reshuffles which futures the audit
 picks. Perturbing the picture now requires perturbing the model, which is the stronger test.</p>
+
+<h2>What verification caught <span>· three lenses, 27 findings raised, 11 survived refutation</span></h2>
+<table>
+<tr><th>finding</th><th>what changed</th></tr>
+<tr><td class="k">Conservation of light was inverted</td><td>The frame got ~9&times; brighter left to
+right while the docstring claimed it only dimmed. The transfer curve was rebalanced and the profile is
+now measured off the PNG every build; live field now ends at 0.73&times; Now.</td></tr>
+<tr><td class="k">expose-Jaden was treated as terminal</td><td>Both the lattice builder and the
+aggregate reference booked 100% of expose mass as an exit, dead-coding the gate-expose split. The
+shipped export is unaffected (the arm is off), but with it live the drawn committed mass was 8.7 points
+short of the solver. Fixed; both forks now reconcile to <code>retained_s2</code> within 1e-11.</td></tr>
+<tr><td class="k">The repaired trace's climb was not the repair's</td><td>The gain was measured from the
+merge, so the repaired future and its untouched partner posted an identical 39%. It is now measured
+from the column where the state actually went bad.</td></tr>
+<tr><td class="k">The title thread was a zero-length tick</td><td>The ring's gold channel was drawn with
+zero horizontal extent, collapsing it to ~1/130th of an equal-mass edge, and the circle was fixed-radius
+chrome. Both now come from the data: real extent, radius from the mass that reaches it.</td></tr>
+<tr><td class="k">&quot;Arms at the deadline&quot; was true by luck</td><td>The arm set included
+extensions, which can fire at three different nodes. Narrowed to codes emitted only at a deadline.</td></tr>
+<tr><td class="k">The binding read emitted no events</td><td>Only the November read wrote availability
+and fit codes, so a degradation at the January read was invisible to anything reading the stream. All
+read nodes now emit, change-guarded.</td></tr>
+<tr><td class="k">Stale and inflated denominators</td><td>586, not 774, sampled channels (the rest were
+terminals and leaf rows); 12,565, not 13,019, states; exit mass now sums to 1.0 within 4e-11 rather
+than 3e-8.</td></tr>
+</table>
 
 <p class="foot">Rendered from board_viz_export.json (SOLVER, schema one-for-all/board-viz/2,
 cap 0.012, P(east) 0.60). Zero solver edits; the viz lane reads the export only. afo_frame.jpg is

@@ -28,6 +28,7 @@
    "PERF_T1",
    "JAD_STEA",
    "STAY",
+   "FIT_Y",
    "ARMB"
   ],
   ""
@@ -47,36 +48,41 @@
  ],
  [
   "repaired",
-  "b167",
-  "leaf-committed",
-  [
-   "WAIT",
-   "AVAIL_C",
-   "FIT_G",
-   "ARMG",
-   "RUN_R2",
-   "EXT",
-   "PERF_T1",
-   "JAD_STEA",
-   "SMAX",
-   "WAIT"
-  ],
-  "trips a wire early, arms at the deadline, and climbs 39% of the equity ranking by the gate"
- ],
- [
-  "converges-with",
   "b229",
   "leaf-committed",
   [
    "WAIT",
    "AVAIL_B",
    "FIT_G",
+   "AVAIL_C",
+   "FIT_Y",
    "ARMG",
    "RUN_R2",
    "EXT",
    "PERF_T1",
    "JAD_STEA",
    "SMAX",
+   "FIT_R",
+   "WAIT"
+  ],
+  "its state has gone bad by the deadline, it takes a deadline arm, and from the column where it went bad it climbs 39% of the equity ranking by the gate"
+ ],
+ [
+  "converges-with",
+  "b167",
+  "leaf-committed",
+  [
+   "WAIT",
+   "AVAIL_C",
+   "FIT_G",
+   "FIT_Y",
+   "ARMG",
+   "RUN_R2",
+   "EXT",
+   "PERF_T1",
+   "JAD_STEA",
+   "SMAX",
+   "FIT_R",
    "WAIT"
   ],
   "a different history that lands on the SAME state at the deadline \u2014 4 histories reach it. From there the two white lines are ONE line, because they are one channel, and they stay one until the gate"

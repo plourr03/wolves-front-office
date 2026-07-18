@@ -244,6 +244,36 @@ Verdict: honors v6. Delivered with the reconciliation, the upgraded audit, and a
 pair that is now a genuine input change (the rapm fork) rather than a reseed — the field is
 exact, so a seed no longer moves it.
 
+## Lattice iteration 4 — three-lens verification, and the claim that did not survive
+
+27 findings raised, 11 survived adversarial refutation. The one that mattered:
+
+**Conservation of light was inverted.** Measured off the shipped PNG, the frame got roughly
+**9x BRIGHTER** left to right (column light 3,541 -> 12,865 -> 35,362 as mass fell 1.00 ->
+0.96 -> 0.31) while the docstring, the inline comment and the on-image chrome all asserted the
+opposite. My own check had verified the *buffer* (live mass monotone non-increasing), which is
+the wrong object: nobody looks at the buffer. Root cause is not the gamma — at gamma 1.0 the
+inversion persists — it is that one lane carrying all the probability CLIPS while the same
+mass spread over thousands of sub-pixel lanes sits in the responsive part of the curve, and
+the exit beams dump light into every column they cross on their way off the page.
+
+There is a real impossibility underneath: brightness linear in mass, a frame whose column
+integral tracks mass, and a legible dispersed field cannot all hold at once, because the
+per-pixel range required is about 180:1 with the trunk also unclipped. So: exposure rebalanced
+(gain 0.9 -> 0.22, transfer exponent 0.55 -> 1.0), the profile is now MEASURED off the rendered
+frame on every build, and the live field ends at **0.73x** its brightness at Now. The residual
+bulge through the reads (trunk clipping) is reported, not hidden, and the claim was rewritten
+to say what is true instead of what was convenient.
+
+| law | pass? | note |
+|---|---|---|
+| conservation of light | YES (measured) | live field gate/Now 0.73; profile printed each build |
+| expose-Jaden physics | FIXED | was booked terminal, dead-coding the gate-expose split; now reconciles to the solver's retained_s2 within 1e-11 both forks |
+| repaired role is real | FIXED | climb was measured from the merge, so the untouched partner posted the same 39%; now measured from where the state went bad |
+| rings live in the river | FIXED | gold thread had zero horizontal extent (~1/130th of an equal-mass edge); circle was fixed-radius chrome, now mass-scaled |
+| every bend caused | YES | held under attack: brute-force check found no crossing that is not a rank change |
+| brightness = mass | YES | held under attack |
+
 Note: `afo_frame.jpg` is STILL not in the repo (fourth directive naming it). Density and glow
 remain calibrated to the v4-approved braid, not to the frame.
 
