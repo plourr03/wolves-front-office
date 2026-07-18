@@ -49,17 +49,17 @@
   ],
   [
    "a ring",
-   "5,974 gold pixels; 6 title routes, honestly thin at 4.5% of the board",
+   "3,416 gold pixels; 6 title routes, honestly thin at 4.5% of the board",
    true
   ],
   [
    "wide or thin",
-   "the drawn field spans 55px at its narrowest column and 634px at its widest (12x)",
+   "the drawn field spans 34% of the canvas at its narrowest column and 66% at its widest (2.0x). v7.2's log pitch bought the early braid by compressing this ratio from 12x",
    true
   ],
   [
    "some paths leave",
-   "13,011 rose pixels and 4,652 lit pixels on the canvas edges",
+   "6,780 rose pixels and 4,280 lit pixels on the canvas edges",
    true
   ]
  ],
@@ -69,6 +69,44 @@
   ],
   "one_postseason": true,
   "text": "title mass exists at exactly one column (playoffs), so the board resolves one postseason; a 2028 title lives inside the gate's continuation value rather than as a route"
+ },
+ "spacing": {
+  "occupancy": {
+   "opening (Now to the Jan read)": [
+    0.042,
+    0.593
+   ],
+   "season one (deadline to the draft)": [
+    0.593,
+    0.593
+   ],
+   "the boundary (July 27)": [
+    0.55,
+    0.593
+   ],
+   "season two (reads to the gate)": [
+    0.593,
+    0.593
+   ]
+  },
+  "largest_empty_region": 0.062,
+  "label_collisions": 0,
+  "gap_share": {
+   "1": 0.0331,
+   "2": 0.0331,
+   "3": 0.0331,
+   "4": 0.0497,
+   "5": 0.0497,
+   "6": 0.0546,
+   "7": 0.0479,
+   "8": 0.0714,
+   "9": 0.0614,
+   "10": 0.1179,
+   "11": 0.1002,
+   "12": 0.1105,
+   "13": 0.1249,
+   "14": 0.1122
+  }
  },
  "pert": [
   {

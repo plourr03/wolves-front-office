@@ -398,6 +398,77 @@ Corrected coverage: title 6 of 25 routes = **45.7%** of that outcome; alive-at-g
 = **61.1%** (74.4%). The asymmetry survives the correction and is sharper than before: winning is
 a corridor, surviving is a delta.
 
+---
+
+# ONE RIVER v7.2 — SPACING (composition only)
+
+Principle, logged: **layout is editorial, data is sacred.** Pitch and column spacing are
+composed for legibility; topology (splits, merges, bends at columns), brightness = mass, and
+every printed number stay exactly what the solver says. Selection, physics, proofs and the
+honesty footer are unchanged from v7.1 — the coverage table is byte-identical.
+
+Two composition rules replaced the uniform grid, both disclosed in the poster's own footer:
+
+- **Vertical**: band height is monotone in the live-state count but on a LOG scale between 13%
+  and 58% of canvas. Nine states at the November read now read as a braid instead of a string.
+- **Horizontal**: column spacing follows structural activity (transitions arriving + live
+  states + exits leaving the previous column), not days and not uniform, with a floor of 2.6%
+  of the span per gap. Quiet stretches compress; the playoffs-to-July-27 act gets room. Every
+  calendar label survives, so the axis is warped but never hidden.
+
+Spacing checklist, measured off the frame each build (`spacing_report`).
+
+## Spacing iteration 1 — log pitch and activity warp in
+
+| check | result | note |
+|---|---|---|
+| label collisions | 0 | two-baseline stagger where labels would touch |
+| largest empty region | 6% | target was under ~15% |
+| field occupancy, middle acts | 55% | target 35-70% |
+| caption | FAIL | the two caption columns overlapped each other |
+| ring | FAIL | drawn at the centreline while the gold exits far below, so the entry thread was a spike |
+| upward exit | FAIL | the reset sheared diagonally across the entire second season |
+
+## Spacing iteration 2 — the ring goes where the gold goes
+
+Change: ring positioned at the title mass's actual departure lane; the upward exit gets a short
+run (0.17 of the span) so it clears the top instead of crossing the field, while the downward
+exit keeps the long shallow run; caption columns re-measured to a real two-column grid.
+
+| check | result | note |
+|---|---|---|
+| caption | PASS | left column classes, right column disclosures, no overlap |
+| ring | PASS | short horizontal gold entry at the departure lane |
+| band vs frame | FAIL | FMAX 0.70 of canvas made the band TALLER than the field, so routes could sit under the calendar rule |
+
+## Spacing iteration 3 — the band fits its own frame, and the type gets a plate
+
+Change: FMAX bounded by the field height (0.58), canvas re-proportioned around a 64px margin
+and a 22px baseline step, gold bloom raised so the thin gold stays visible, and the caption set
+on a scrim so the departing beams pass BEHIND the type instead of through it — which is the
+difference between a composed page and a collision.
+
+| check | result | note |
+|---|---|---|
+| label collisions | 0 | |
+| largest empty region | 6% of field | well under the ~15% target |
+| occupancy, opening | 4% to 59% | the 4% is column zero, which is one state by definition |
+| occupancy, season one | 59% | inside 35-70% |
+| occupancy, the boundary | 55-59% | inside 35-70% |
+| occupancy, season two | 59% | inside 35-70% |
+| never under 15% after the first read | PASS | minimum after the November read is 34% |
+| two-second: start / ring / wide-or-thin / paths leave | PASS ×4 | measured off the frame |
+| type collides with routes | PASS | caption plate |
+
+**The cost, stated rather than buried.** The log pitch bought the early braid by compressing the
+width signal: the ratio between the narrowest and widest drawn column fell from **12x to 2.0x**.
+Width still increases monotonically with the state count, so the pinches are still true, but the
+poster now says "the field is wide" much more quietly than v7.1 did. That is the trade v7.2
+asked for; it is on the frame and in the footer, not hidden.
+
+Note: `afo_frame.jpg` is STILL not in the repo (sixth directive naming it), so the spacing
+checklist could not be scored against it. Scored against v7.2's own stated targets instead.
+
 ## Still to do once afo_frame.jpg lands
 
 - match weave DENSITY to the frame (lane count 36-48, stroke restraint from the reference prototype)

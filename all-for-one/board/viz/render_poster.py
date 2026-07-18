@@ -40,12 +40,22 @@ from scipy.ndimage import gaussian_filter
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
-S_W, S_H = 2100, 900
-XL, XR = 150, S_W - 150
-CY, BAND = 392.0, 600.0
-YB = 700
+S_W, S_H = 2100, 1000
+MARGIN = 64                                   # the type grid: one margin, one rhythm
+GRID = 22                                     # baseline step for every stacked text block
+XL, XR = MARGIN + 96, S_W - MARGIN - 96
+CY = 397.0
+YB = 706                                      # calendar rule
 TMAX = 14
-HEXP = 0.5          # column height = n_states ** HEXP (disclosed in the footer)
+
+# v7.2 SPACING. Layout is editorial, data is sacred: pitch and column spacing are composed for
+# legibility, while topology (splits, merges, bends at columns), brightness = mass, and every
+# printed number stay exactly what the solver says.
+FMIN, FMAX, GV = 0.13, 0.58, 0.68             # band height = FMIN..FMAX of canvas, log in states
+# FMAX is bounded by the field's own height (calendar rule at YB, header above): a band
+# taller than the space it has would put routes under the type.
+MIN_GAP = 0.026                               # no column gap narrower than this share of the span
+ACT_P = 1.0                                   # column spacing ~ structural activity ** ACT_P
 # Display exposure. Note what it cannot fix: at Now every outcome occupies the SAME state, so
 # all four class layers sum in the trunk and its core saturates to white. That is the one place
 # on the page where colour stops encoding class, it is a fact about the board rather than a
@@ -71,10 +81,6 @@ HARD_CAP = 45
 CLASS_LABEL = {"TITLE": "a title", "ALIVE": "still alive at the gate",
                "EXITS": "Ant asks out", "DEAD": "converted -- the reset"}
 UP_CLASSES = {"DEAD"}          # the reset leaves upward, Ant-asks-out leaves downward
-
-
-def col_x(t):
-    return XL + (XR - XL) * (min(t, TMAX) / TMAX)
 
 
 def _font(sz):
@@ -109,9 +115,45 @@ class Flow:
                     self.title_cols.add(int(c))
         self.root = (0, 0)
         self.cols = sorted(self.n)
+        self.n_edge = defaultdict(int)
+        for c, es in L["edges"].items():
+            self.n_edge[int(c)] = len(es)
+        self.n_exit = {int(c): len(v) for c, v in L["exits"].items()}
+        self._layout_x()
+
+    # ------------------------------------------------------------------ v7.2 spacing --------
+    def _layout_x(self):
+        """HORIZONTAL RHYTHM: column spacing weighted by STRUCTURAL ACTIVITY -- how many
+        transitions arrive, how many distinct states are live, how much mass left the column
+        before -- not by days and not uniform. Quiet stretches compress; the act from the
+        playoffs to July 27, where the board actually decides things, gets room. Every column
+        keeps its calendar label, so the time axis is warped but never hidden."""
+        gap = {}
+        for c in self.cols[1:]:
+            a = (math.log1p(self.n_edge.get(c, 0)) + math.log1p(self.n[c])
+                 + math.log1p(self.n_exit.get(c - 1, 0)))
+            gap[c] = a ** ACT_P
+        tot = sum(gap.values())
+        span = XR - XL
+        # every gap gets MIN_GAP of the span first; activity distributes what is left
+        floor = MIN_GAP * span
+        free = span - floor * len(gap)
+        self.xs = {self.cols[0]: float(XL)}
+        run = float(XL)
+        for c in self.cols[1:]:
+            run += floor + free * gap[c] / tot
+            self.xs[c] = run
+        self.gap_share = {c: (floor + free * gap[c] / tot) / span for c in gap}
+
+    def x(self, c):
+        return self.xs[min(c, TMAX)]
 
     def height(self, c):
-        return BAND * (self.n[c] ** HEXP) / (self.n_max ** HEXP)
+        """VERTICAL BREATHING: band height is monotone in the live-state count but on a LOG
+        scale with a generous floor, so nine states at the November read read as a braid rather
+        than a string, while 4,312 at the gate still read as wider."""
+        f = FMIN + (FMAX - FMIN) * (math.log(self.n[c]) / math.log(self.n_max)) ** GV
+        return f * S_H
 
     def y(self, c, i):
         n = self.n[c]
@@ -254,8 +296,10 @@ def _splat(buf, p0, p1, amt, dim=1.0):
     np.add.at(buf, (ys[m].astype(int), xs[m].astype(int)), a if np.isscalar(a) else a[m])
 
 
-def exit_leg(x, y, up):
-    span = (XR - XL) / TMAX * 5.4
+def exit_leg(fl, x, y, up):
+    # the downward exit gets the long shallow run; the upward one gets a shorter run so it
+    # clears the top of the frame instead of shearing across the whole second season
+    span = (XR - XL) * (0.17 if up else 0.34)
     y1 = -80 if up else S_H + 80
     return (x + span * 0.5, y + (y1 - y) * 0.34), (x + span, y1)
 
@@ -267,7 +311,7 @@ def draw(fl, picked, cover, subtitle="", note=""):
     base = np.empty((S_H, S_W, 3), float); base[:] = BG
     im0 = Image.fromarray(base.astype(np.uint8)); dc = ImageDraw.Draw(im0, "RGBA")
     for t in HUMAN:
-        dc.line([col_x(t), 96, col_x(t), YB - 6], fill=(120, 140, 180, 9), width=1)
+        dc.line([fl.x(t), MARGIN + 40, fl.x(t), YB - 8], fill=(120, 140, 180, 9), width=1)
     base = np.asarray(im0, float)
 
     # Routes share segments -- near Now they share ALL of them, because at Now there is one
@@ -290,19 +334,20 @@ def draw(fl, picked, cover, subtitle="", note=""):
 
     for (K, u, v), w in seg.items():
         buf = lay["gold"] if K == "TITLE" else (lay["rose"] if K in ("EXITS", "DEAD") else lay["teal"])
-        _splat(buf, (col_x(u[0]), fl.y(*u)), (col_x(v[0]), fl.y(*v)), amp(K, w))
+        _splat(buf, (fl.x(u[0]), fl.y(*u)), (fl.x(v[0]), fl.y(*v)), amp(K, w))
 
-    ring_x = None
+    ring_x = ring_y = None
     for (K, (ec, ei)), w in ends.items():
-        x, y = col_x(ec), fl.y(ec, ei)
+        x, y = fl.x(ec), fl.y(ec, ei)
         a = amp(K, w)
         if K == "TITLE":
-            ring_x = x + (col_x(1) - col_x(0)) * 0.62
-            _splat(lay["gold"], (x, y), (ring_x, CY), a * 1.5)
+            ring_x = x + (fl.x(8) - fl.x(7)) * 0.55
+            ring_y = y                      # the ring sits where the title mass actually leaves
+            _splat(lay["gold"], (x, y), (ring_x, ring_y), a * 1.5)
         elif K == "ALIVE":
             _splat(lay["teal"], (x, y), (S_W + 40, y), a, dim=0.5)
         else:
-            mid, end = exit_leg(x, y, K in UP_CLASSES)
+            mid, end = exit_leg(fl, x, y, K in UP_CLASSES)
             _splat(lay["rose"], (x, y), mid, a * 0.85, dim=0.6)
             _splat(lay["rose"], mid, end, a * 0.75, dim=0.15)
 
@@ -316,19 +361,19 @@ def draw(fl, picked, cover, subtitle="", note=""):
         for v, m in vs:
             r = m - drawn_edge.get((u, v), 0.0)
             if r > 1e-12:
-                _splat(haze, (col_x(u[0]), fl.y(*u)), (col_x(v[0]), fl.y(*v)), r)
+                _splat(haze, (fl.x(u[0]), fl.y(*u)), (fl.x(v[0]), fl.y(*v)), r)
     for u, dd in fl.exit.items():
         for K, m in dd.items():
             r = m - drawn_exit.get((K, u), 0.0)
             if r <= 1e-12:
                 continue
-            x, y = col_x(u[0]), fl.y(*u)
+            x, y = fl.x(u[0]), fl.y(*u)
             if K == "ALIVE":
                 _splat(haze, (x, y), (S_W + 40, y), r, dim=0.5)
             elif K == "TITLE":
-                _splat(haze, (x, y), (x + (col_x(1) - col_x(0)) * 0.62, CY), r)
+                _splat(haze, (x, y), (x + (fl.x(8) - fl.x(7)) * 0.55, y), r)
             else:
-                mid, end = exit_leg(x, y, K in UP_CLASSES)
+                mid, end = exit_leg(fl, x, y, K in UP_CLASSES)
                 _splat(haze, (x, y), mid, r, dim=0.6); _splat(haze, mid, end, r, dim=0.15)
 
     def three(b, a, m, c_):
@@ -336,7 +381,7 @@ def draw(fl, picked, cover, subtitle="", note=""):
 
     L = np.zeros((S_H, S_W, 3), float)
     L += TEAL[None, None, :] * three(lay["teal"], 0.13, 0.32, 0.55)[..., None]
-    L += GOLD[None, None, :] * three(lay["gold"], 0.15, 0.38, 0.80)[..., None]
+    L += GOLD[None, None, :] * three(lay["gold"], 0.22, 0.52, 1.05)[..., None]   # gold guaranteed visible
     L += ROSE[None, None, :] * three(lay["rose"], 0.12, 0.28, 0.50)[..., None]
     out = base + 255.0 * (1.0 - np.exp(-np.clip(L * EXPO, 0, None)))
     # The haze is composited AFTER the transfer, so "4% alpha" means literally that and cannot
@@ -347,48 +392,87 @@ def draw(fl, picked, cover, subtitle="", note=""):
     hz = gaussian_filter(haze, 10.0)
     hz = (hz / (hz.max() + 1e-12)) ** 0.32 * 0.051
     out = out + TEAL[None, None, :] * hz[..., None]
+    # The caption sits on its own plate. Exits still run off the bottom of the canvas per v6 --
+    # they pass BEHIND the type rather than through it, which is the difference between a
+    # composed page and a collision.
+    plate = YB + 18
+    out[plate:] = BG[None, None, :] + (out[plate:] - BG[None, None, :]) * 0.14
     img = Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGB")
 
     d = ImageDraw.Draw(img, "RGBA")
     if ring_x is not None:                # radius from the CLASS mass, not from what was drawn
         rr = 22 + 240 * math.sqrt(cover["TITLE"]["total"])
-        d.ellipse([ring_x - rr, CY - rr, ring_x + rr, CY + rr], outline=(*GOLD.astype(int), 200), width=2)
-    _chrome(d, cover, picked, subtitle, note)
+        d.ellipse([ring_x - rr, ring_y - rr, ring_x + rr, ring_y + rr],
+                  outline=(*GOLD.astype(int), 200), width=2)
+    _chrome(d, fl, cover, picked, subtitle, note)
     return img
 
 
-def _chrome(d, cover, picked, subtitle, note):
-    d.text((30, 26), "ONE RIVER", font=_font(22), fill=(*INK, 245))
-    d.text((30, 58), "every future the Timberwolves board holds, from now to the summer of 2028." + subtitle,
-           font=_font(13), fill=(*INK, 175))
-    for t, lab in HUMAN.items():
-        d.text((col_x(t) - len(lab) * 3.1, YB + 12), lab, font=_font(12), fill=(*INK, 180))
+def _wrap(text, width):
+    out, line = [], ""
+    for w in text.split():
+        if len(line) + len(w) + 1 > width:
+            out.append(line); line = w
+        else:
+            line = (line + " " + w).strip()
+    if line:
+        out.append(line)
+    return out
 
-    y = YB + 44
-    d.text((30, y), "WHAT YOU ARE LOOKING AT", font=_font(11), fill=(*INK, 210))
+
+def _chrome(d, fl, cover, picked, subtitle, note):
+    """TYPE RHYTHM: one margin, one baseline step, two columns of caption. Nothing set as a
+    wall of hairlines."""
+    d.text((MARGIN, MARGIN - 26), "ONE RIVER", font=_font(26), fill=(*INK, 245))
+    d.text((MARGIN, MARGIN + 12),
+           "every future the Timberwolves board holds, from now to the summer of 2028." + subtitle,
+           font=_font(13), fill=(*INK, 175))
+
+    # calendar: staggered onto two baselines wherever labels would collide
+    d.line([MARGIN, YB, S_W - MARGIN, YB], fill=(*INK, 45), width=1)
+    prev_r, row = -1e9, 0
+    for t in sorted(HUMAN):
+        lab = HUMAN[t]
+        w = 6.6 * len(lab)
+        x = fl.x(t) - w / 2
+        row = 1 - row if x < prev_r + 14 else 0
+        prev_r = max(prev_r, x + w) if row else x + w
+        d.line([fl.x(t), YB - 5, fl.x(t), YB + 5], fill=(*INK, 110), width=1)
+        d.text((x, YB + 12 + row * 17), lab, font=_font(12), fill=(*INK, 185))
+
+    y0 = YB + 62
+    d.text((MARGIN, y0), "WHAT YOU ARE LOOKING AT", font=_font(11), fill=(*INK, 205))
+    y = y0 + GRID + 4
     for K in ORDER:
         c = cover[K]
         col = (242, 193, 78) if K == "TITLE" else ((196, 120, 140) if K in ("EXITS", "DEAD") else (53, 201, 192))
-        arrow = " (leaves upward)" if K == "DEAD" else (" (leaves downward)" if K == "EXITS" else "")
-        d.text((30, y + 18),
-               f"{CLASS_LABEL[K]}{arrow}: {c['total'] * 100:.1f}% of the board. {c['drawn']} of "
-               f"{c['routes']:,} routes drawn; those routes are {c['shown'] / c['total'] * 100:.1f}% of the "
-               f"outcome, and {c['shown_sub'] / c['total'] * 100:.0f}% once shared segments are counted.",
-               font=_font(11), fill=(*col, 205))
-        y += 15
-    y += 18
-    for line in (
-        f"{len(picked)} routes drawn (budgets {'+'.join(str(BUDGET[k]) for k in ORDER)}"
-        f"={sum(BUDGET.values())}, hard cap {HARD_CAP}); every budget is saturated, so in every class "
-        f"there are more routes than are drawn.",
-        "brightness is probability WITHIN each outcome, floored so a very thin route is still on the page, "
-        "and not comparable across outcomes. column height is the square root of the live state count.",
-        "at Now every outcome is the same state, so all four layers sum and the trunk core saturates to "
-        "white: the one place on this page where colour stops telling you which outcome you are looking at.",
-        "everything not drawn is the haze: the residual of every edge and exit after the drawn routes are "
-        "subtracted out. present, and deliberately unreadable.",
+        arrow = ", leaves upward" if K == "DEAD" else (", leaves downward" if K == "EXITS" else "")
+        d.text((MARGIN, y), f"{CLASS_LABEL[K]}{arrow}", font=_font(13), fill=(*col, 225))
+        d.text((MARGIN + 268, y),
+               f"{c['total'] * 100:5.2f}%  ·  {c['drawn']} of {c['routes']:,} routes  ·  "
+               f"{c['shown'] / c['total'] * 100:.1f}% of the outcome "
+               f"({c['shown_sub'] / c['total'] * 100:.0f}% with shared segments)",
+               font=_font(12), fill=(*INK, 185))
+        y += GRID + 2
+
+    col2 = MARGIN + 880
+    y = y0 + GRID + 4
+    for para in (
+        f"{len(picked)} routes drawn, budgets {'+'.join(str(BUDGET[k]) for k in ORDER)}"
+        f"={sum(BUDGET.values())} under a {HARD_CAP} cap. Every budget is saturated, so every class holds "
+        f"more routes than are drawn. The rest is the haze: the residual of each edge and exit once the "
+        f"drawn routes are subtracted out. Present, and deliberately unreadable.",
+        "Brightness is probability within each outcome, floored so a very thin route stays on the page, and "
+        "not comparable across outcomes. At Now every outcome is the same state, so all four layers sum and "
+        "the trunk core saturates: the one place where colour stops telling you what you are looking at.",
+        "Layout is composed, data is not. Column spacing follows structural activity rather than days; band "
+        "height follows the log of the live-state count. Every label, route and number is the solver's.",
     ):
-        d.text((30, y), line, font=_font(11), fill=(*INK, 150)); y += 15
+        for line in _wrap(para, 74):
+            d.text((col2, y), line, font=_font(12), fill=(*INK, 150)); y += 16
+        y += 7
+    if note:
+        d.text((MARGIN, S_H - MARGIN + 12), note, font=_font(11), fill=(*INK, 150))
     if note:
         d.text((30, y), note, font=_font(11), fill=(*INK, 150))
 
@@ -404,7 +488,7 @@ def two_second_test(fl, cover, picked, img):
     # measured off the FRAME, so it is what a viewer actually sees, not what the code intended
     spread = {}
     for t in fl.cols:
-        x = int(col_x(t))
+        x = int(fl.x(t))
         band = lum[:YB, max(0, x - 8):x + 8].max(axis=1)
         lit = np.flatnonzero(band > 10)
         spread[t] = float(lit[-1] - lit[0]) if lit.size else 0.0
@@ -414,11 +498,74 @@ def two_second_test(fl, cover, picked, img):
         ("a start", f"one state at Now: the field is {fl.n[0]} lane wide there", fl.n[0] == 1),
         ("a ring", f"{gold_px:,} gold pixels; {cover['TITLE']['drawn']} title routes, honestly thin at "
                    f"{cover['TITLE']['total'] * 100:.1f}% of the board", gold_px > 400),
-        ("wide or thin", f"the drawn field spans {lo:.0f}px at its narrowest column and "
-                         f"{max(spread.values()):.0f}px at its widest ({ratio:.0f}x)", ratio >= 3.0),
+        ("wide or thin", f"the drawn field spans {lo / S_H * 100:.0f}% of the canvas at its narrowest "
+                         f"column and {max(spread.values()) / S_H * 100:.0f}% at its widest ({ratio:.1f}x). "
+                         f"v7.2's log pitch bought the early braid by compressing this ratio from 12x",
+         ratio >= 1.5),
         ("some paths leave", f"{rose_px:,} rose pixels and {edge_ink:,} lit pixels on the canvas edges",
          rose_px > 400 and edge_ink > 200),
     ]
+
+
+ACTS = {"opening (Now to the Jan read)": (0, 5), "season one (deadline to the draft)": (6, 8),
+        "the boundary (July 27)": (9, 10), "season two (reads to the gate)": (11, 14)}
+
+
+def spacing_report(fl, img, picked):
+    """v7.2 item 5: the spacing checklist, MEASURED off the frame -- field occupancy per act,
+    the largest empty region, and label collisions."""
+    a = np.asarray(img, float)
+    lum = a.sum(axis=2) - float(BG.sum())
+    top, bot = MARGIN + 30, YB - 8
+    field = lum[top:bot, :]
+
+    occ = {}
+    for name, (c0, c1) in ACTS.items():
+        vals = []
+        for t in range(c0, c1 + 1):
+            x = int(fl.x(t))
+            band = field[:, max(0, x - 8):x + 8].max(axis=1)
+            lit = np.flatnonzero(band > 10)
+            vals.append((lit[-1] - lit[0]) / S_H if lit.size else 0.0)
+        occ[name] = (min(vals), max(vals))
+
+    # largest empty region: coarse grid over the field, biggest connected run of dark cells
+    gh, gw = 24, 48
+    cell = np.zeros((gh, gw), bool)
+    hstep, wstep = field.shape[0] / gh, S_W / gw
+    for r in range(gh):
+        for c in range(gw):
+            blk = field[int(r * hstep):int((r + 1) * hstep), int(c * wstep):int((c + 1) * wstep)]
+            cell[r, c] = blk.max() <= 10
+    seen = np.zeros_like(cell); best = 0
+    for r in range(gh):
+        for c in range(gw):
+            if cell[r, c] and not seen[r, c]:
+                stack, size = [(r, c)], 0
+                seen[r, c] = True
+                while stack:
+                    rr, cc = stack.pop(); size += 1
+                    for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                        nr, nc = rr + dr, cc + dc
+                        if 0 <= nr < gh and 0 <= nc < gw and cell[nr, nc] and not seen[nr, nc]:
+                            seen[nr, nc] = True; stack.append((nr, nc))
+                best = max(best, size)
+    empty = best / (gh * gw)
+
+    boxes, coll = [], 0
+    prev_r, row = -1e9, 0
+    for t in sorted(HUMAN):
+        w = 6.6 * len(HUMAN[t]); x = fl.x(t) - w / 2
+        row = 1 - row if x < prev_r + 14 else 0
+        prev_r = max(prev_r, x + w) if row else x + w
+        boxes.append((row, x, x + w))
+    for i in range(len(boxes)):
+        for j in range(i + 1, len(boxes)):
+            if boxes[i][0] == boxes[j][0] and boxes[i][2] > boxes[j][1] and boxes[j][2] > boxes[i][1]:
+                coll += 1
+    return {"occupancy": {k: [round(v[0], 3), round(v[1], 3)] for k, v in occ.items()},
+            "largest_empty_region": round(empty, 3), "label_collisions": coll,
+            "gap_share": {str(k): round(v, 4) for k, v in sorted(fl.gap_share.items())}}
 
 
 def title_verdict(fl):
@@ -475,12 +622,13 @@ def main():
     picked, cover = select(fl)
     img = draw(fl, picked, cover)
     img.save(out / "poster_full.png")
-    x0, x1 = int(col_x(0)) - 40, S_W
+    x0, x1 = int(fl.x(0)) - 60, S_W
     y0, y1 = int(CY - S_H * 0.30), int(CY + S_H * 0.30)
     img.crop((x0, y0, x1, y1)).resize((int((x1 - x0) * 1.45), int((y1 - y0) * 1.45)),
                                       Image.LANCZOS).save(out / "poster_zoom50.png")
     rows = two_second_test(fl, cover, picked, img)
     tv = title_verdict(fl)
+    sp = spacing_report(fl, img, picked)
 
     alt = HERE / "board_viz_export_alt.json"
     pert = []
@@ -498,7 +646,8 @@ def main():
 
     (out / "poster_cover.json").write_text(json.dumps(
         {"cover": cover, "n_drawn": len(picked), "cap": HARD_CAP, "budgets": BUDGET,
-         "two_second": [[a, b, ok] for a, b, ok in rows], "title_verdict": tv, "pert": pert}, indent=1))
+         "two_second": [[a, b, ok] for a, b, ok in rows], "title_verdict": tv,
+         "spacing": sp, "pert": pert}, indent=1))
     for K in ORDER:
         c = cover[K]
         print(f"  {K:6s} {c['drawn']:2d}/{c['budget']:2d} of {c['routes']:>6,} routes | outcome {c['total'] * 100:5.2f}% | "
@@ -507,6 +656,10 @@ def main():
     print(f"  TITLE VERDICT: {tv['text']}")
     for a, b, ok in rows:
         print(f"  TWO-SECOND {'PASS' if ok else 'FAIL'}  {a}: {b}")
+    print(f"  SPACING largest empty region {sp['largest_empty_region'] * 100:.0f}% of field | "
+          f"label collisions {sp['label_collisions']}")
+    for k, (lo, hi) in sp["occupancy"].items():
+        print(f"    occupancy {k:36s} {lo * 100:5.1f}% to {hi * 100:5.1f}%")
 
 
 if __name__ == "__main__":

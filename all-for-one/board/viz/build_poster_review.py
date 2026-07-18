@@ -1,4 +1,4 @@
-"""v7.1 delivery page: the poster, its 50% zoom, per-class coverage, and the perturbation pair.
+"""v7.2 delivery page: the poster, its 50% zoom, per-class coverage, and the perturbation pair.
 
 Nothing else, per the directive. Content-only HTML for the Artifact host.
 """
@@ -12,6 +12,7 @@ STILLS = HERE / "stills"
 C = json.loads((STILLS / "poster_cover.json").read_text())
 COVER, N, CAP, BUD = C["cover"], C["n_drawn"], C["cap"], C["budgets"]
 TV = C["title_verdict"]
+SP = C["spacing"]
 LABEL = {"TITLE": "a title", "ALIVE": "still alive at the gate",
          "EXITS": "Ant asks out", "DEAD": "converted &mdash; the reset"}
 ORDER = ("TITLE", "ALIVE", "EXITS", "DEAD")
@@ -57,6 +58,19 @@ def cover_table():
     return "".join(r) + "</table>"
 
 
+def spacing_block():
+    rows = "".join(f'<tr><td>{k}</td><td>{v[0] * 100:.0f}% to {v[1] * 100:.0f}%</td></tr>'
+                   for k, v in SP["occupancy"].items())
+    return (f'<h2>Spacing <span>&mdash; measured off the frame, same as everything else</span></h2>'
+            f'<table><tr><th>act</th><th>field occupancy (target 35&ndash;70%)</th></tr>{rows}</table>'
+            f'<p class="lede">Largest empty region <b>{SP["largest_empty_region"] * 100:.0f}%</b> of the '
+            f'field against a ~15% ceiling, and <b>{SP["label_collisions"]}</b> label collisions. The cost '
+            f'is stated rather than buried: the log pitch bought the early braid by compressing the width '
+            f'signal, so the ratio between the narrowest and widest drawn column fell from 12x to about 2x. '
+            f'Width still rises monotonically with the state count, so the pinches remain true &mdash; the '
+            f'poster just says &ldquo;wide&rdquo; more quietly than v7.1 did.</p>')
+
+
 def test_table():
     r = ['<table><tr><th>in two seconds you should see</th><th>measured off the frame</th><th></th></tr>']
     for a, b, ok in C["two_second"]:
@@ -67,15 +81,20 @@ def test_table():
 
 def main():
     t, al = COVER["TITLE"], COVER["ALIVE"]
-    html = f"""<title>One River — the poster (v7.1)</title>
+    html = f"""<title>One River — the poster (v7.2)</title>
 <style>{TOK}</style>
 <div class="wrap">
-<h1>ONE FOR ALL &nbsp;/&nbsp; <b>ONE RIVER</b> &nbsp;·&nbsp; v7.1, the poster</h1>
+<h1>ONE FOR ALL &nbsp;/&nbsp; <b>ONE RIVER</b> &nbsp;·&nbsp; v7.2, the poster</h1>
 <p class="lede">Same lattice, same physics: a channel is a state, so futures that reach the same state
 merge; lanes are ordered by equity, so every bend is a change of rank; futures that leave the story
 leave the page. What is new is <b>selection</b>. The board holds 12,565 states, and drawing all of them
 makes a texture rather than a picture &mdash; so the poster draws {N} routes, budgeted <b>by where the
 future ends up</b>, and prints on its own face how much of each outcome those routes actually carry.</p>
+<p class="lede"><b>v7.2 is spacing only.</b> Layout is editorial, data is sacred: lane pitch now follows the
+log of the live-state count and column spacing follows structural activity rather than days, so the early
+river reads as a braid instead of a string and the quiet stretches stop eating the page. Selection, the
+physics, the proofs and every number below are unchanged from v7.1 &mdash; the coverage table is
+identical. What moved is where things sit.</p>
 
 <h2>The poster</h2>
 <figure><img alt="poster" src="{uri('poster_full.png')}"><figcaption>One state at Now, because the
@@ -113,6 +132,8 @@ selection does not get to be sloppy about its own arithmetic.</div>
 <div class="flag"><b>There is no 2028 title on this board, and that is measured, not assumed.</b>
 {TV['text'].capitalize()}. Its budget of 10 routes went unspent, which is why {N} rather than
 {sum(BUD.values()) + 10} channels are drawn.</div>
+
+{spacing_block()}
 
 <h2>The two-second test</h2>
 {test_table()}
