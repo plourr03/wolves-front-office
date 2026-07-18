@@ -2,7 +2,7 @@
 
 For the **ONE FOR ALL** master plan project (public name; internal codename and repo path: `all-for-one`, working title "If I Were Tim Connelly"). Covers the state vector definition, the root node encoded as of July 17, 2026, the decision calendar through the summer 2028 gate, and the mapping from each moving part to the machinery that powers it.
 
-**Version 2.3, July 17, 2026. Source of truth.** Consolidates and supersedes the 0.1-0.4 drafts (this file replaces both the prior `board_spec.md` at 0.3 and the `board_spec (1).md` at 0.4). Companion to `tripwire_backtest_spec.md` (v0.2) and `jaden_markers.md`. Facts pulled from the July 2026 asset audit carry VERIFY tags where they can drift.
+**Version 2.4, July 17, 2026. Source of truth.** Consolidates and supersedes the 0.1-0.4 drafts (this file replaces both the prior `board_spec.md` at 0.3 and the `board_spec (1).md` at 0.4). Companion to `tripwire_backtest_spec.md` (v0.2), `jaden_markers.md`, `fork_adjudication.md`, and `league_event_resolve_rule.md`. Facts pulled from the July 2026 asset audit carry VERIFY tags where they can drift.
 
 Version history:
 - 0.1: initial state vector, root node, decision calendar; Jaden a state variable with the loyalty premium as a first-class output; repeater clock in the cap state; ARM-D dump arm with reset-aware valuation; ownership curves beside the Ant machine; standing orders (section 7).
@@ -13,6 +13,7 @@ Version history:
 - 2.1: adopts the public name **ONE FOR ALL** (internal codename `all-for-one` retained as the repo path). Adds the SALVAGE term to the objective (section 0/1): departure is no longer worth zero; it carries a leverage-adjusted salvage value capped at SALVAGE_CAP (0.03, Bobby's dial), and a new proactive-conversion arm ARM-CONVERT sits beside the involuntary REQUESTED absorbing state. See section 4 and `build/board_step3_report.md`.
 - 2.2: adds the **SALVAGE_CAP anti-tuning clause** (section 4), Bobby's ruling of July 17, 2026. Un-stops perf/run and the leaf title-equity anchor with a real reconciled Joan Bet run carried across both metric forks (rapm, box) as first-class scenarios (`build/board_step4_report.md`, `build/roster_recon/`). Records the roster-reconciliation gate that preceded it (silent-plausible bug #4, the phantom Gueye). Cross-references the ratified Jaden ladder inversion (`jaden_markers_v02.md`), whose screened-class tier frequencies now seed the board's `jaden` transition priors.
 - 2.3: **SALVAGE_CAP values ruling, 0.03 placeholder -> 0.012** (Bobby, July 17, 2026), logged verbatim under the anti-tuning clause (section 4). Also records the bench-scrub amendment to the roster snapshot (stale `nba_team_rosters` residue purged, roster re-derived from the transaction log) and the ruled-cap re-emission of the convert analytics + the loyalty-premium and pre-trade-counterfactual publishables (`build/board_step5_report.md`). SALVAGE_WEIGHT scaled to 0.012 so max rebuild value (node 6, best leverage) equals the cap.
+- 2.4: **season-boundary evolution, realignment axis, market tightness, ARM-D value channel** (`build/board_step6_report.md`). Adds the evolution principle (section 11), the field-side league-event re-solve standing order (section 7, `league_event_resolve_rule.md`), the fork-adjudication pre-registration (`fork_adjudication.md`), the ARM-D value channel replacing the net-zero placeholder (section 6), and the reworded model-limitations statement (section 12). Nothing frozen; all new parameters TUNE.
 
 ## 0. Plain language summary
 
@@ -103,6 +104,8 @@ Acquiring any 2029 first-round pick, from any team, at any node, plugs the poten
 
 ARM-D, the dump. A generic salary-shed template, instantiated per contract, with the DiVincenzo expiring as the first case. Value side: tax savings at the applicable rate, plus, decisively, the repeater reset if the dump is what carries the team under the line for the season, which reprices every tax dollar spent in the gate years at standard rates instead of repeater rates. Cost side: the sweetener the market charges to absorb an injured expiring, the amputation of aggregate matching (Green plus DDV at roughly 27.6M is the only doorway to a midsize deadline acquisition; Green alone is 14.7M), and the loss of his return in healthy branches, since Achilles timelines put him back on the floor around the stretch run at zero acquisition cost. Expected behavior: fires rarely, mostly in branches where the tripwires are green and no acquisition is coming. If the real front office executes a dump at asset cost, treat it as revealed preference on the ownership curve and re-solve.
 
+**ARM-D value channel (v2.4, `build/board_step6.py`).** ARM-D's title-equity value is now QUANTIFIED from a real channel: the marginal tax saved on the dumped salary (at MIN's over-apron bracket rate) plus the repeater-reset value where the dump ends a tax year, converted to title-equity units at a dollars-per-title rate that depends on the ownership posture. Under the two posture curves the same dump is worth roughly twice as much to a tax_averse owner (+0.0340 equity) as to a tax_tolerant one (+0.0153), the robustness sort. The tax schedule and MIN's repeater clock come from `offseason/data/league_year_constants.json` and `tax_history.csv`; the dollars-per-title and posture multipliers are TUNE. **The channel is deliberately NOT yet wired into the live solve; ARM-D remains net-zero in the solver.** The channel is the BENEFIT only; ARM-D's cost side (dump sweetener, lost Green+DDV matching, DDV's healthy-branch return) stays unmodeled per the prior directive's do-not-improvise rule, and because ARM-D's cap relief washes out at the node-9 reset, wiring the benefit alone would reproduce the step-four spurious-dump artifact. So the value is on the record as a posture-conditional number, and it waits on the cost side before it moves the board.
+
 ## 7. Standing orders
 
 The state vector is egocentric, so events that expand the menu rather than move the dials cannot be pre-solved as calendar nodes. They get standing orders instead: pre-committed protocols for unschedulable event classes, frozen with the October freeze and edited only with logged justification. Each order names its trigger and its first-week actions, and every one ends the same way: re-solve the board from the new position.
@@ -116,6 +119,8 @@ MELO-REQUEST. Trigger: LaMelo asks out. Survivable by design, which is why it is
 CONTENDER-COLLAPSE. Trigger: a rival starts selling veterans midseason. Protocol: the windfall shopping list, refreshed at each read date by archetype of need, so the front office is a prepared buyer inside 48 hours instead of a browsing one.
 
 OWNERSHIP-SHIFT. Trigger: any observed action or directive implying a budget posture change, in either direction. Protocol: update the ownership curve, log the evidence, re-solve, and re-sort the holds-under-both pile, since moves that were unconditional may no longer be.
+
+FIELD-CHANGE (v2.4, the environment side). Trigger classes and the update-and-re-solve protocol are pre-registered separately in `league_event_resolve_rule.md` (a consensus top-15 player changes teams; a 55-plus-win core breaks up; a season-ending injury to a top-10 player on a West contender; a league-structure event). This standing order is the mirror of STAR-AVAILABLE and CONTENDER-COLLAPSE: those cover what MIN can DO, this covers a change in the FIELD that moves MIN's odds without MIN acting. Per the evolution principle (section 11) a fire updates a rival's strength from the fact of the event and re-solves; it never simulates the rival scheming against MIN. Thresholds TUNE, text freezes in October. The LeBron resolution is the worked first instance (`build/board_step6.py`).
 
 ## 8. Transition model mapping
 
@@ -146,3 +151,25 @@ The exact repeater trigger year, 2026-27 or 2027-28, pinned against the CBA text
 Second-round inventory: fill in from the warehouse ledger before step one.
 
 Whether melo_deal needs a REQUESTED level of its own (LaMelo asking out is survivable in a way Ant asking out is not; currently it would be handled as a chest and roster event in the sim layer rather than an absorbing state).
+
+## 11. Season-boundary evolution and the realignment axis (v2.4)
+
+The board no longer carries teams unchanged across the window. The organizing principle, logged here so it governs every field mechanism: **model that teams change, never how.** The field evolves by facts (aging) and calibrations (mean-reversion, churn variance), never by asserting a specific rival's future roster or trade.
+
+- **MIN drift**: MIN's own net drifts season to season by an age-and-development curve applied to the reconciled rotation, young core up and Gobert down, replacing the constant carry. The curve is the linear trend of the warehouse's same-player year-over-year net change (peak at age ~28); its scale is TUNE.
+- **Near field (2026-27, 2027-28)**: rival baselines drift by aging, calibrated from contract continuity (how much of each roster is under contract). Facts only, no predicted trades.
+- **Far field (2028-29 on)**: statistical drift (mean-reversion, warehouse slope ~0.60) plus churn variance (warehouse year-to-year net SD ~4.3), a horizon-widening uncertainty rather than a forecast.
+- **Realignment axis**: the far-field playoff field is solved under WEST_FOREVER and EAST_FROM_2028-29, weighted by P(east) (TUNE, pending Bobby's prior). The equity gap is the value of the East, reported per fork. The retention interaction is explicit: an easier conference raises deep-run probability, which raises the leaf, which raises the commitment probability at the gate and walk year, so the East relieves the hazard, not only the run.
+- **Market tightness**: deadline sweetener prices are state-dependent on a buyers-to-sellers proxy calibrated from historical deadline activity. Model the market, not the minds. TUNE mapping.
+
+The fork adjudication (`fork_adjudication.md`) decides, as real games arrive, how to weight the two metric forks; its update rule, evidence read, and fire dates are pre-registered and freeze in October.
+
+## 12. Model limitations (v2.4, reworded)
+
+The league is modeled as a **mean field**: rivals are carried as strengths that evolve by aging and churn, with **exact interaction only at MIN's own trade table** (the acceptance model prices the specific counterparty for a specific MIN trade). Consequences, stated plainly so the piece does not overclaim:
+
+- Rivals do **not strategically respond** to MIN's moves. A MIN trade is priced against a static counterparty, not against a counterparty that re-optimizes in reply.
+- The far field is churn, not forecast. Beyond 2027-28 the board models that teams change (drift + variance), never how; no specific rival trajectory is asserted.
+- The **conference/realignment scenario is exogenous**: P(east) is an input, not a modeled outcome, and the value of the East is reported as a conditional, not a prediction that realignment happens.
+
+These are the honest boundaries of a single-team board that solves MIN's decisions exactly and treats the other twenty-nine teams as a weather system.

@@ -17,6 +17,19 @@ The forward-equity positioning of pre and post against the 0.10 hazard cliff (th
 board's commitment line) is done in board_step5.py, which owns the board machinery;
 this script produces the single-season sim inputs it consumes.
 
+PROVENANCE (added per the step-six directive item 8):
+  - The fork gap at identical net. This script simulates BOTH forks at the same
+    pre-trade MIN net (+2.18) yet reports slightly different pre-trade titles (rapm
+    2.65% vs box 2.80%). The gap is NOT MIN: each fork builds the WHOLE league from
+    its own metric, so the field MIN faces differs by fork. At equal MIN net the box
+    fork's surrounding field is marginally weaker (or MIN's path easier), giving a
+    higher title. The fork disagreement is about the league, not only about MIN.
+  - The year-one-lens caveat, now closed. This counterfactual and the step-five board
+    valued a single 2026-27 season (constant carry). board_step6.py's season-boundary
+    evolution closes that: the board's leaf is now the drifted season-2 title, and the
+    far field adds mean-reversion plus churn. This pre-trade read stays a one-season
+    trade verdict by design; the multi-season lens lives in step six.
+
 Run:  python pretrade_counterfactual.py
 """
 from __future__ import annotations
