@@ -45,7 +45,13 @@ TAX = DATA["tax"]
 DRIFT_SCALE = 0.5         # on-court net YoY change -> individual impact-drift units (TUNE)
 P_EAST = 0.35             # P(realignment puts MIN in the East from 2028-29) TUNE, pending Bobby
 EAST_EASE = 0.18          # fractional title-equity uplift from the easier conference (TUNE, from W/E gap)
-DOLLAR_PER_EQUITY = 4e9   # $ tax saved for one FULL title-equity unit (a title ~ a few $B, TUNE)
+# $ for one FULL title-equity unit. Set for INTERNAL CONSISTENCY with SALVAGE_CAP
+# (0.012 = a full stocked rebuild): a PARTIAL tax dump (DDV's $12.9M expiring) must be
+# worth well BELOW a full rebuild, so the ARM-D benefit stays under the cap. At 2.5e10
+# the ~$61M tax+repeater relief maps to ~0.0025 (tolerant) / ~0.0055 (averse), a
+# fraction of the 0.012 rebuild ceiling. TUNE, but bounded by the cap by construction.
+# (Step-seven verification caught the prior 4e9 making ARM-D worth MORE than a rebuild.)
+DOLLAR_PER_EQUITY = 2.5e10
 STEP6_N = 12000           # sims for the step-6 drift deltas (less precision needed than the headline)
 
 # The raw empirical age curve is noisy (role-player-dominated at peak ages); the board
@@ -246,7 +252,9 @@ def lebron_field_update(fork):
     """First rule-4 field update (worked example): LeBron resolves by signing with a
     West contender (assumed). That rival's net rises; MIN's title odds fall. Emit delta."""
     LEBRON_NET = 1.2          # approx on-court net contribution (TUNE)
-    DEST = "LAL"              # assumed West destination (the resolution driving the example)
+    DEST = "GSW"              # assumed West destination (LAL not in the reported finalist set); the
+    #                          resolution driving the example. On the REAL announcement, fire T1 with
+    #                          the actual destination and re-solve (league_event_resolve_rule.md).
     imp = J.make_imp(fork)
     strengths = J.E.build_2026_27_league(imp)
     t_before = _sim_min_title(strengths, RECON[fork]["min_post_net"])

@@ -52,14 +52,14 @@ The development is real but modest, because Gobert's age-35 decline at 30 mpg of
 
 ## Item 3: the value of the East
 
-Solved under WEST_FOREVER and EAST_FROM_2028-29, P(east) = 0.35 (TUNE, pending Bobby's prior), with the easier conference modeled as an 18% far-field title uplift (TUNE, from the West/East strength gap):
+Solved under WEST_FOREVER and EAST_FROM_2028-29, with the easier conference modeled as an 18% far-field title uplift (TUNE, from the West/East strength gap). **Per Bobby's directive (item 5), the scenario axis is held UNWEIGHTED until his P(east) prior arrives; the two scenarios are reported side by side, and the blend below is provisional/illustrative at P(east)=0.35, not the headline.**
 
-| Fork | leaf West | leaf East | blended root delta (value of East) |
+| Fork | leaf West (scenario) | leaf East (scenario) | root delta if P(east)=0.35 (illustrative) |
 |---|---|---|---|
 | rapm | 0.0194 | 0.0229 | +0.0003 |
-| box | 0.0381 | 0.0450 | **+0.0082** |
+| box | 0.0381 | 0.0450 | +0.0082 |
 
-The East is worth almost nothing to the rapm team (still too weak for a softer conference to matter) and a real +0.008 root equity to the box team. The retention interaction is explicit and named in the spec: the higher leaf raises the commitment probability at the gate and walk year, so an easier conference relieves the hazard, not only the run. That is why the value of the East is concentrated on the fork where Ant is retained enough for the relief to bind.
+The per-scenario read: the East lifts the box team's far-field leaf by ~18% (0.0381 to 0.0450) and the rapm team's proportionally, but the rapm team is too weak for a softer conference to matter to its retention. **When Bobby sets P(east), the weighted blend is emitted beside these per-scenario values, with a sensitivity band of +/-0.15 around his number** (per the rule's own terms). The retention interaction is explicit and named in the spec: a higher leaf raises the commitment probability at the gate and walk year, so an easier conference relieves the hazard, not only the run. That is why the value of the East is concentrated on the fork where Ant is retained enough for the relief to bind.
 
 ## Item 6: market tightness
 
@@ -71,23 +71,23 @@ Dumping the DiVincenzo expiring (~12.9M) off an over-apron team saves marginal t
 
 | Posture | ARM-D value (equity) |
 |---|---|
-| tax_tolerant (base) | +0.0153 |
-| tax_averse (alt) | +0.0340 |
+| tax_tolerant (base) | +0.0025 |
+| tax_averse (alt) | +0.0054 |
 
-The same dump is worth ~2.2x as much to a tax-averse owner, so the channel is genuinely posture-conditional. This is a REAL value channel (tax schedule from `league_year_constants.json`, repeater clock from `tax_history.csv`), replacing the invented -0.008 placeholder step four's verification flagged.
+The same dump is worth ~2.2x as much to a tax-averse owner, so the channel is genuinely posture-conditional. This is a REAL value channel (tax schedule from `league_year_constants.json`, repeater clock from `tax_history.csv`), replacing the invented -0.008 placeholder step four's verification flagged. (These figures were recalibrated in step seven: the exchange rate is set so a partial tax dump stays bounded BELOW the SALVAGE_CAP rebuild ceiling of 0.012, per the internal-consistency requirement step seven's verification surfaced. The step-six draft had 0.0153 / 0.0340, which exceeded the cap and is superseded.)
 
 **But it is deliberately NOT wired into the live solve, and ARM-D stays net-zero in every board_step6 solve.** The reason is the discipline from the prior directive (item 5, do not improvise a cost side): this channel is the BENEFIT only (tax + repeater). ARM-D's cost side (the sweetener to absorb an injured expiring, the amputation of Green+DDV aggregate matching, and DDV's healthy-branch return) is still unmodeled, and because ARM-D's cap-relief effect washes out at the node-9 reset, wiring the benefit alone would make ARM-D a reflexive deadline dump again, exactly the step-four artifact but with a bigger (now justified) credit. So the value channel is built, quantified, and posture-sorted, and it waits on the cost side before it enters the solve. The honest status: ARM-D's tax value is now a real, ownership-conditional number on the record (+0.0153 tolerant, +0.0340 averse), not a live board move.
 
 ## Item 5: LeBron resolution (the first field event, rule 4)
 
-Worked instance of the league-event re-solve rule (T1, a top-15 player changes teams). LeBron resolves by signing with an assumed West destination (LAL, +1.2 net); the field updates, the board re-solves, and MIN's title equity falls slightly:
+Worked instance of the league-event re-solve rule (T1, a top-15 player changes teams). LeBron resolves by signing with an assumed West destination (GSW, +1.2 net; LAL was dropped as it is not in the reported finalist set); the field updates, the board re-solves, and MIN's title equity falls slightly:
 
 | Fork | MIN title before | after | delta |
 |---|---|---|---|
-| rapm | 0.0190 | 0.0183 | -0.0008 |
-| box | 0.0382 | 0.0378 | -0.0004 |
+| rapm | 0.0190 | 0.0180 | -0.0010 |
+| box | 0.0382 | 0.0371 | -0.0011 |
 
-A rival strengthening costs MIN a few basis points of title equity, as it should. The point is the machinery: a field fact updates a rival's strength and the board re-solves, with the delta emitted as a marker-moved artifact. The destination and magnitude are the assumed resolution driving the example; the real fire runs on his actual decision.
+A rival strengthening costs MIN a few basis points of title equity, as it should. The point is the machinery: a field fact updates a rival's strength and the board re-solves, with the delta emitted as a marker-moved artifact. The destination and magnitude are the assumed resolution driving the example. **Standing instruction (frozen with the league-event rule): on the real announcement, fire T1 with the actual destination, re-solve, and emit the marker-moved artifact unprompted.**
 
 ## Item 8: counterfactual provenance (folded in)
 

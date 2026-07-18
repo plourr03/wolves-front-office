@@ -272,6 +272,11 @@ EXPOSE_JADEN_ARM = False
 # over running it back to the end -- the root hold-vs-reset reconciliation.
 DISABLE_CONVERT = False
 
+# step-seven diagnostic (default OFF): remove the node-6 acquisition arms (ARM-G,
+# ARM-B) from the menu. Used to price the matching-optionality that DDV's salary
+# enables (board value with vs without the acquire doorway) -- ARM-D's cost side.
+DISABLE_ACQ_ARMS = False
+
 
 def exposed_leaf(s):
     """Leaf continuation if Jaden is exposed (traded/walked) at the gate: his tier
@@ -335,6 +340,8 @@ def successors(s):
 
     if t == 6:
         for lbl in ("WAIT", "ARM-S", "ARM-G", "ARM-B", "UNLOCK", "ARM-D"):
+            if lbl in ("ARM-G", "ARM-B") and DISABLE_ACQ_ARMS:
+                continue                      # matching-optionality diagnostic: no acquire doorway
             if lbl == "UNLOCK":
                 if UNLOCK[gi(s, "unlock")]:
                     continue
