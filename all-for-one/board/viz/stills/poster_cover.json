@@ -1,139 +1,105 @@
 {
  "cover": {
-  "RING27": {
+  "TITLE": {
    "drawn": 6,
    "budget": 6,
-   "shown": 0.020382961704021547,
    "total": 0.044609139086999997,
-   "corridor_total": 25
-  },
-  "RING28": {
-   "drawn": 0,
-   "budget": 10,
-   "shown": 0,
-   "total": 0.0,
-   "corridor_total": 0
+   "routes": 25,
+   "shown": 0.020382961704021544,
+   "shown_sub": 0.020382961704021547
   },
   "ALIVE": {
    "drawn": 18,
    "budget": 18,
-   "shown": 0.019056557454,
    "total": 0.2650112148640003,
-   "corridor_total": 32012
+   "routes": 32012,
+   "shown": 0.004498827778658482,
+   "shown_sub": 0.004924187726297319
   },
   "EXITS": {
    "drawn": 8,
    "budget": 8,
-   "shown": 0.26004671100171106,
    "total": 0.5088534672539978,
-   "corridor_total": 32125
+   "routes": 32125,
+   "shown": 0.13996654822119298,
+   "shown_sub": 0.13996654822119295
   },
   "DEAD": {
    "drawn": 4,
    "budget": 4,
-   "shown": 0.15794476094481408,
    "total": 0.18152617883599995,
-   "corridor_total": 278
+   "routes": 278,
+   "shown": 0.11091070892899976,
+   "shown_sub": 0.13499296737006727
   }
  },
  "n_drawn": 36,
  "cap": 45,
+ "budgets": {
+  "TITLE": 6,
+  "ALIVE": 18,
+  "EXITS": 8,
+  "DEAD": 4
+ },
  "two_second": [
   [
    "a start",
-   "one origin at Now: the present is a single state",
+   "one state at Now: the field is 1 lane wide there",
    true
   ],
   [
    "a ring",
-   "gold ring drawn, 6 title routes, honestly thin at 4.5%",
+   "5,974 gold pixels; 6 title routes, honestly thin at 4.5% of the board",
    true
   ],
   [
    "wide or thin",
-   "the field widens to the July-27 redraw and thins to the gate",
+   "the drawn field spans 55px at its narrowest column and 634px at its widest (12x)",
    true
   ],
   [
    "some paths leave",
-   "12 channels run off the page",
+   "13,011 rose pixels and 4,652 lit pixels on the canvas edges",
    true
   ]
  ],
- "pert": [
-  [
-   "A",
-   [
-    [
-     "RING27",
-     0.00711
-    ],
-    [
-     "RING27",
-     0.0045
-    ],
-    [
-     "RING27",
-     0.00384
-    ],
-    [
-     "RING27",
-     0.0035
-    ],
-    [
-     "RING27",
-     0.0031
-    ],
-    [
-     "RING27",
-     0.003
-    ],
-    [
-     "ALIVE",
-     0.005
-    ],
-    [
-     "ALIVE",
-     0.005
-    ]
-   ]
+ "title_verdict": {
+  "cols": [
+   7
   ],
-  [
-   "B",
-   [
-    [
-     "RING27",
-     0.00995
-    ],
-    [
-     "RING27",
-     0.00561
-    ],
-    [
-     "RING27",
-     0.00507
-    ],
-    [
-     "RING27",
-     0.00368
-    ],
-    [
-     "RING27",
-     0.00279
-    ],
-    [
-     "RING27",
-     0.00271
-    ],
-    [
-     "ALIVE",
-     0.005
-    ],
-    [
-     "ALIVE",
-     0.005
-    ]
-   ]
-  ]
+  "one_postseason": true,
+  "text": "title mass exists at exactly one column (playoffs), so the board resolves one postseason; a 2028 title lives inside the gate's continuation value rather than as a route"
+ },
+ "pert": [
+  {
+   "seed": "A",
+   "shown": {
+    "TITLE": 0.025055,
+    "ALIVE": 0.032466,
+    "EXITS": 0.148714,
+    "DEAD": 0.139871
+   },
+   "total": {
+    "TITLE": 0.0375,
+    "ALIVE": 0.2425,
+    "EXITS": 0.51,
+    "DEAD": 0.21
+   }
+  },
+  {
+   "seed": "B",
+   "shown": {
+    "TITLE": 0.029814,
+    "ALIVE": 0.037222,
+    "EXITS": 0.11789,
+    "DEAD": 0.142484
+   },
+   "total": {
+    "TITLE": 0.05,
+    "ALIVE": 0.2625,
+    "EXITS": 0.46,
+    "DEAD": 0.2275
+   }
+  }
  ]
 }

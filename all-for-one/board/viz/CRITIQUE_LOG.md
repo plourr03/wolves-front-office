@@ -349,6 +349,55 @@ presence, not a measurement; the footer is the measurement.
 
 Self-scored, which is the weakest kind of scoring. Binding judge is Bobby showing it cold.
 
+## Poster iteration 4 — verification, and the number that was in the wrong currency
+
+Three-lens adversarial verification: 30 findings raised, **23 survived refutation**. That is a
+failing grade for a poster whose entire premise is honest selection, and the headline finding
+was exactly on that premise.
+
+**The coverage numbers were in the wrong currency.** "N routes carrying X% of that outcome" was
+computed as the sum of widest-path BOTTLENECK weights. A bottleneck is a flow-decomposition
+quantity, not the probability of any event, and in a lattice with 1,376 merge points it
+overstates badly: the published figure for the survivors was **7.2% when the truth is 1.7%**.
+Worse, the review page had elevated that specific number to prose and called it "the finding".
+The gold number happened to be right (45.7%), for incidental structural reasons rather than the
+reason the code implied.
+
+Fixes, all in the viz lane:
+
+- **Selection is now by probability mass**, as the directive actually said. An exact K-best
+  suffix DP returns the most probable routes per class. The previous subtract-and-repeat greedy
+  was doubly wrong: it double-counted the "ends in K" factor into the transition probability
+  (collapsing every route probability to ~0), and it re-extracted the SAME path, because a
+  route's probability is far below any single edge's mass so subtracting never retired it —
+  6 "routes" for the title were only 4 distinct paths. Now: 36 distinct routes, and each
+  reported weight equals its exact route probability to 0.0.
+- **Two coverage columns**, because there are two honest answers: the probability the future
+  follows one of the drawn routes, and the probability it stays inside the drawn corridors the
+  whole way (larger, because routes share segments).
+- **The haze is now the residual** — every edge and exit minus what the drawn routes took.
+  Before it was the full lattice at full mass and contained no exit mass at all, so
+  "everything not drawn is the haze" was false in both directions.
+- **The ring radius comes from the class mass**, not from how much of it the budget happened to
+  select. **EXITS and DEAD are now distinguishable**: the reset leaves upward, Ant-asks-out
+  leaves downward, both stated in the footer.
+- **The two-second test is measured off the rendered frame** (gold pixel count, rose pixel
+  count, lit pixels on the canvas edges, lit vertical extent per column). Two of its four rows
+  were previously hardcoded `True`, and the "wide or thin" claim was false on both the data and
+  the image. The delivery page also rendered a FAIL in the success colour; it now has a fail state.
+- **The RING'28 verdict is measured**, not a hard-coded class list: the code reports which
+  columns carry title mass and concludes from that.
+- **Performance**: adjacency lists instead of rescanning the whole edge dict per node. One
+  `select()` went from 602s to under 7s, which is also why iterating on it was so slow.
+- **Trunk clipping is stated, not hidden.** At Now every outcome occupies the same state, so all
+  four class layers sum and the core saturates to white. No exposure setting fixes that; it is a
+  fact about the board, and the footer now says it is the one place where colour stops encoding class.
+
+Corrected coverage: title 6 of 25 routes = **45.7%** of that outcome; alive-at-gate 18 of 32,012
+= **1.7%** (1.9% with shared segments); Ant asks out 8 of 32,125 = **27.5%**; the reset 4 of 278
+= **61.1%** (74.4%). The asymmetry survives the correction and is sharper than before: winning is
+a corridor, surviving is a delta.
+
 ## Still to do once afo_frame.jpg lands
 
 - match weave DENSITY to the frame (lane count 36-48, stroke restraint from the reference prototype)
