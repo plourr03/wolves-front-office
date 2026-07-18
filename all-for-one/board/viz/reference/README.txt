@@ -1,0 +1,1 @@
+Drop afo_frame.jpg here (Bobby's visual target for THE CORRIDOR). The renderer matches its weave density, luminous channel feel, and around-the-ring behavior. Also: the reference prototype (stroke restraint).
