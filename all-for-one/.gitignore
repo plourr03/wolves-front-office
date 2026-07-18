@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 # regenerable dry-run output; the canonical rehearsal hash lives in OCTOBER_FREEZE_MANIFEST.md
 freeze_bundle_manifest.txt
+# regenerable viz viewer (5MB of embedded PNGs); rebuild with build_gallery.py from the stills
+board/viz/radial_gallery.html
