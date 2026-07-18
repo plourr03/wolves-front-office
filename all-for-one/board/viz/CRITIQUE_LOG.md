@@ -277,6 +277,78 @@ to say what is true instead of what was convenient.
 Note: `afo_frame.jpg` is STILL not in the repo (fourth directive naming it). Density and glow
 remain calibrated to the v4-approved braid, not to the frame.
 
+---
+
+# ONE RIVER v7.1 — POSTER AND INSTRUMENT (poster half)
+
+v6 was an instrument pretending to be a picture. v7.1 keeps every bit of the physics and adds
+the one thing a poster needs: SELECTION, stratified by where the future ends up, with the
+selection disclosed on the poster's own face.
+
+**Method.** The exported lattice is re-read as a flow network. For each destination class, a
+backward recursion gives the per-edge mass destined for that class, and a widest-path
+(max-bottleneck) decomposition repeatedly pulls out the fattest remaining corridor. So a drawn
+channel is a genuine weighted GROUP of futures sharing states, the coverage number is exact
+(extracted flow over class mass), and the residual is the haze.
+
+**One finding, before a pixel was drawn: there is no RING '28.** The board resolves exactly one
+postseason (node 7). Node 13 is the May 2028 LOTTERY, and the 2028 title lives inside the gate
+leaf's continuation value, not as a terminal. So the class gets 0 of its 10 budget and the
+footer says "no such path on this board" rather than inventing a route. The same check caught a
+label bug carried in the v6 stills: column 13 was captioned "playoffs".
+
+Coverage as delivered: title 6 of 25 routes = 46% of a 4.46% outcome; alive-at-gate 18 of
+32,012 = 7% of 26.5%; Ant asks out 8 of 32,125 = 51% of 50.9%; the reset 4 of 278 = 87% of
+18.2%. 36 channels against a 45 cap. That asymmetry is itself the finding: titles run through a
+narrow neck, survival fans into tens of thousands of distinguishable states.
+
+## Poster iteration 1 — stratified selection, first frame
+
+| axis | score | note |
+|---|---|---|
+| selection is real | YES | flow decomposition, coverage exact |
+| honesty footer | NO | printed off the bottom of the canvas |
+| gold visible | NO | buried in a saturated white trunk |
+| haze 2-4% | NO | invisible |
+| ring | NO | one circle drawn PER corridor, so six overlapping rings |
+
+Verdict: the machinery is right, the frame is not.
+
+## Poster iteration 2 — aggregate shared segments
+
+Change: near Now every corridor shares every segment, because at Now there is ONE state.
+Stacking them made the trunk's brightness a function of how many corridors the selection
+happened to keep, which is not a fact about the board. A segment is now drawn once per class
+carrying the summed weight of the corridors using it. One ring, radius from title mass. Canvas
+re-proportioned (2100x900) so the footer sits inside the frame.
+
+| axis | score | note |
+|---|---|---|
+| trunk honest | YES | no selection-count artifact |
+| footer | YES | inside the frame, five lines, always printed |
+| exposure | NO | the exposure constant was applied AFTER the colour multiplier, so every setting clipped to white |
+
+## Poster iteration 3 — exposure, and the haze that was swamped
+
+Change: exposure re-scaled into its real range (clipping at any value was the tell), corridor
+bloom widened so channels read as channels rather than hairlines. The haze is now composited
+AFTER the transfer, so "4% alpha" means literally that, and compressed (^0.32) before scaling,
+because raw residual mass is dominated by the trunk by four orders of magnitude and a linear
+haze is invisible exactly where the undrawn futures are. Disclosed on the page: the haze is a
+presence, not a measurement; the footer is the measurement.
+
+| axis | score | note |
+|---|---|---|
+| two-second: a start | PASS | one bright line at Now |
+| two-second: a ring | PASS | gold ring at the 2027 playoffs, thin, with a real gold thread through it |
+| two-second: wide or thin | PASS | spreads through the reads, fans after July 27 |
+| two-second: paths leave | PASS | the rose bundle peels off and runs off the page |
+| gold visible + honestly thin | YES | scaled within its own class, 4.5% of the board |
+| haze 2-4%, no readable lines | YES | ~4% peak, blurred at sigma 10 |
+| perturbation | YES | structure holds, thin corridors reshuffle, coverage % moves |
+
+Self-scored, which is the weakest kind of scoring. Binding judge is Bobby showing it cold.
+
 ## Still to do once afo_frame.jpg lands
 
 - match weave DENSITY to the frame (lane count 36-48, stroke restraint from the reference prototype)

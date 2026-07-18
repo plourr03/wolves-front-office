@@ -1,0 +1,139 @@
+{
+ "cover": {
+  "RING27": {
+   "drawn": 6,
+   "budget": 6,
+   "shown": 0.020382961704021547,
+   "total": 0.044609139086999997,
+   "corridor_total": 25
+  },
+  "RING28": {
+   "drawn": 0,
+   "budget": 10,
+   "shown": 0,
+   "total": 0.0,
+   "corridor_total": 0
+  },
+  "ALIVE": {
+   "drawn": 18,
+   "budget": 18,
+   "shown": 0.019056557454,
+   "total": 0.2650112148640003,
+   "corridor_total": 32012
+  },
+  "EXITS": {
+   "drawn": 8,
+   "budget": 8,
+   "shown": 0.26004671100171106,
+   "total": 0.5088534672539978,
+   "corridor_total": 32125
+  },
+  "DEAD": {
+   "drawn": 4,
+   "budget": 4,
+   "shown": 0.15794476094481408,
+   "total": 0.18152617883599995,
+   "corridor_total": 278
+  }
+ },
+ "n_drawn": 36,
+ "cap": 45,
+ "two_second": [
+  [
+   "a start",
+   "one origin at Now: the present is a single state",
+   true
+  ],
+  [
+   "a ring",
+   "gold ring drawn, 6 title routes, honestly thin at 4.5%",
+   true
+  ],
+  [
+   "wide or thin",
+   "the field widens to the July-27 redraw and thins to the gate",
+   true
+  ],
+  [
+   "some paths leave",
+   "12 channels run off the page",
+   true
+  ]
+ ],
+ "pert": [
+  [
+   "A",
+   [
+    [
+     "RING27",
+     0.00711
+    ],
+    [
+     "RING27",
+     0.0045
+    ],
+    [
+     "RING27",
+     0.00384
+    ],
+    [
+     "RING27",
+     0.0035
+    ],
+    [
+     "RING27",
+     0.0031
+    ],
+    [
+     "RING27",
+     0.003
+    ],
+    [
+     "ALIVE",
+     0.005
+    ],
+    [
+     "ALIVE",
+     0.005
+    ]
+   ]
+  ],
+  [
+   "B",
+   [
+    [
+     "RING27",
+     0.00995
+    ],
+    [
+     "RING27",
+     0.00561
+    ],
+    [
+     "RING27",
+     0.00507
+    ],
+    [
+     "RING27",
+     0.00368
+    ],
+    [
+     "RING27",
+     0.00279
+    ],
+    [
+     "RING27",
+     0.00271
+    ],
+    [
+     "ALIVE",
+     0.005
+    ],
+    [
+     "ALIVE",
+     0.005
+    ]
+   ]
+  ]
+ ]
+}

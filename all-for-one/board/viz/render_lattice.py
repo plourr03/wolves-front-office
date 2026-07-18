@@ -62,8 +62,10 @@ GOLD = np.array([242, 193, 78], float)
 ROSE = np.array([196, 120, 140], float)
 INK = (110, 123, 160)
 FONT_PATH = "C:/Windows/Fonts/consola.ttf"
+# node 13 is the MAY 2028 LOTTERY, not a second postseason -- the board resolves exactly one
+# (node 7). Earlier cuts mislabelled it "playoffs".
 HUMAN = {0: "Now", 3: "Nov read", 5: "Jan read", 6: "deadline", 7: "playoffs", 8: "draft",
-         9: "July 27", 12: "deadline", 13: "playoffs", 14: "the gate"}
+         9: "July 27", 11: "season-2 reads", 12: "deadline", 13: "lottery", 14: "the gate"}
 
 
 def col_x(t):
