@@ -78,7 +78,7 @@ def main():
     manifest = {
         "snapshot_id": snapshot_id,
         "label": args.label,
-        "source": "nba_warehouse (POSTGRES_HOST 100.69.186.94, schema nba)",
+        "source": "nba_warehouse (POSTGRES_HOST <SERVER_TAILSCALE_IP>, schema nba)",
         "rim_seasons": list(RIM_SEASONS),
         "box_windows": {"full": None, "train": [2023, 2024], "holdout": [2025]},
         "tables": {k: {"rows": int(len(v)), "cols": list(v.columns), "sha256": hashes[k]}

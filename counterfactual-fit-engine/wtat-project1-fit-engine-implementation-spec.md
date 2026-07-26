@@ -184,7 +184,7 @@ fitengine/
     posteriors/  ensembles/  sims/  json/  validation_report.md
 ```
 
-**Environment notes (inherited realities):** Windows, global Python 3.13, per-project venv. The Bayesian stack is whichever won pick2033's D4 smoke test; reuse that decision, do not re-litigate. Layer 2 uses PyTorch CPU wheels (small networks; ensemble training is hours, not days). The Postgres warehouse (192.168.1.236, never localhost) is available for cross-validation joins but the primary store is DuckDB, matching house convention.
+**Environment notes (inherited realities):** Windows, global Python 3.13, per-project venv. The Bayesian stack is whichever won pick2033's D4 smoke test; reuse that decision, do not re-litigate. Layer 2 uses PyTorch CPU wheels (small networks; ensemble training is hours, not days). The Postgres warehouse (<SERVER_LAN_IP>, never localhost) is available for cross-validation joins but the primary store is DuckDB, matching house convention.
 
 **Data-use note:** NBA Stats API pulls are for analysis; raw play-by-play dumps are never redistributed. Published artifacts are derived metrics and charts only. Same posture as broadcast-derived work: analyze, do not redistribute the source.
 

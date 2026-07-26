@@ -1,7 +1,7 @@
 {
   "snapshot_id": "wh_0e1a90b850e6ea3b",
   "label": "2026-06-20",
-  "source": "nba_warehouse (POSTGRES_HOST 100.69.186.94, schema nba)",
+  "source": "nba_warehouse (POSTGRES_HOST <SERVER_TAILSCALE_IP>, schema nba)",
   "rim_seasons": [
     "2023-24",
     "2024-25",

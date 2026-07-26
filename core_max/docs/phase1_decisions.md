@@ -73,7 +73,7 @@ Refinements (binding):
 ## Data dependencies: CONFIRMED (grounded 2026-06-20)
 
 - **Rim signals (Q2.1): available.** `nba_player_tracking_season` (measure_type
-  'Defense', warehouse, reachable over Tailscale at POSTGRES_HOST 100.69.186.94)
+  'Defense', warehouse, reachable over Tailscale at POSTGRES_HOST <SERVER_TAILSCALE_IP>)
   has `def_rim_fg_pct`, `def_rim_fga` (rim contest volume), `blk` per
   player-season, 2013-14 to 2025-26, RS+PO. Joan (player_id 1642866) is present:
   2025-26 rookie line is def_rim_fg_pct 0.514 on 105 contests, 26 blocks, 40 GP,

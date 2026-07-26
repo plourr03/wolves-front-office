@@ -136,7 +136,7 @@ Things that need to be built once and reused across analyses.
 
 The data ingestion pipeline lives in a separate repo, `nba-warehouse` (sibling directory `../nba-warehouse/`). Architecture and operations are documented in `../nba-warehouse/specs/data_pipeline_spec.md`. Current contents in `../nba-warehouse/docs/database_inventory.md`.
 
-All analysis code connects to the production Postgres warehouse at `192.168.1.236:5432 / nba_warehouse`, schema `nba`. Credentials live in `wolves-front-office/.env` (gitignored). The legacy `localhost:4101` instance is decommissioned and must not be used.
+All analysis code connects to the production Postgres warehouse at `<SERVER_LAN_IP>:5432 / nba_warehouse`, schema `nba`. Credentials live in `wolves-front-office/.env` (gitignored). The legacy `localhost:4101` instance is decommissioned and must not be used.
 
 Capability inventory as of 2026-05-14 (after `daily_refresh_run_log.run_id=31`):
 

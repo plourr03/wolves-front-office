@@ -38,7 +38,7 @@ If the desktop gets shut down mid-run, nothing is lost: the run checkpoints ever
 
 1. git pull. The repo carries everything except the venv, the .env, and the stint cache.
 2. Python 3.13 venv in counterfactual-fit-engine/: `python -m venv .venv` then `.venv/Scripts/pip install -r requirements.lock` (the lock file pins the exact F0-verified versions; requirements.txt is the loose list).
-3. Warehouse access: repo-root .env with the POSTGRES_* variables (copy from the desktop or recreate; it is not in git). AWAY FROM THE HOME LAN THE HOST IS THE TAILSCALE ADDRESS 100.69.186.94, not 192.168.1.236. Never localhost.
+3. Warehouse access: repo-root .env with the POSTGRES_* variables (copy from the desktop or recreate; it is not in git). AWAY FROM THE HOME LAN THE HOST IS THE TAILSCALE ADDRESS <SERVER_TAILSCALE_IP>, not <SERVER_LAN_IP>. Never localhost.
 4. Smoke: `.venv/Scripts/python -m pytest tests/ -q` (13 tests: AM-1 pin verification, golden possession fixtures both formats, R1 census). If the AM-1 pin test fails, postmortem/lib drifted relative to config/pinned_lib.yaml; that is a stop-and-memo situation, not a re-pin.
 5. Cross-repo artifact pins (config/model_params.yaml pinned_artifacts) reference the pick2033 aging posterior and warehouse.duckdb. They are verified at load, first needed at F2/F3, not for G1.
 
@@ -111,7 +111,7 @@ Working style with me:
 - Writing rules for anything you draft: never use em dashes or en dashes, use periods, commas, or parentheses instead. In article draft files, one line per paragraph, no hard wrapping. Treat unusual spellings in my messages as voice, not errors.
 
 Environment notes (Windows, PowerShell and Git Bash both available):
-- Warehouse is Postgres. Away from the home LAN the host is the Tailscale address 100.69.186.94 (home LAN is 192.168.1.236). NEVER localhost. Credentials come from the repo-root .env via POSTGRES_* variables; if .env is missing I need to copy it over, ask me.
+- Warehouse is Postgres. Away from the home LAN the host is the Tailscale address <SERVER_TAILSCALE_IP> (home LAN is <SERVER_LAN_IP>). NEVER localhost. Credentials come from the repo-root .env via POSTGRES_* variables; if .env is missing I need to copy it over, ask me.
 - Use the project venv: counterfactual-fit-engine/.venv/Scripts/python. If it does not exist yet, build it per PICKUP.md section 4 (python 3.13, requirements.lock).
 - Set PYTHONIOENCODING=utf-8 when printing player names (diacritics break cp1252).
 - NBA Stats API data is for analysis only, raw play-by-play is never redistributed.

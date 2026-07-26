@@ -10,7 +10,7 @@ fitting. It is the run manifest's root: every later output traces to this freeze
   moving through free agency; a changelog records any re-run and how the answer
   moved. The MIN and CHA rows are re-verified post-trade before use.
 - Warehouse access: Postgres `nba_warehouse`, schema `nba`, over Tailscale
-  (`100.69.186.94`, LAN `192.168.1.236`), via `postmortem/lib/db.py` and the
+  (`<SERVER_TAILSCALE_IP>`, LAN `<SERVER_LAN_IP>`), via `postmortem/lib/db.py` and the
   `POSTGRES_*` env vars. Connectivity confirmed 2026-06-25.
 
 ## Warehouse fingerprint (as of 2026-06-25)

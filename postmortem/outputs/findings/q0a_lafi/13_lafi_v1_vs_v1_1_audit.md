@@ -41,7 +41,7 @@ Searched and confirmed absent from:
 
 What was located instead: the **Firestore document itself** at `visualizations/lafi-fingerprint-2025-26`. Public read on `visualizations/*` (verified in `firestore.rules`). Pulled the live document via the Firestore REST API. The doc was last updated 2026-05-19 03:39:08 UTC (today). The document carries **no provenance fields**: no `pipelineVersion`, no `computedAt` distinct from `lastUpdated`, no `sourceCommit`. The fields are limited to season, components, composites, and lastUpdated.
 
-**Inference:** the v1.1 writer likely runs on the home server (`192.168.1.236`) where the warehouse cron lives, or on a Cloud Function not in the local checkout, or as a manual ad-hoc Python script that was not committed. It writes the document fresh each day (createTime 2026-05-19T01:39:22, updateTime 2026-05-19T03:39:08, both today).
+**Inference:** the v1.1 writer likely runs on the home server (`<SERVER_LAN_IP>`) where the warehouse cron lives, or on a Cloud Function not in the local checkout, or as a manual ad-hoc Python script that was not committed. It writes the document fresh each day (createTime 2026-05-19T01:39:22, updateTime 2026-05-19T03:39:08, both today).
 
 **The audit below is structured around the comparison of canonical code, canonical CSV output, and the live Firestore document. I do not have the v1.1 source to inspect directly, so for every gap I distinguish "verified" (comparing canonical code to canonical CSV) from "consistent with" (inferred from the Firestore document shape).**
 
@@ -397,7 +397,7 @@ Suggested text for the website methodology page. Plain English, no em or en dash
 1. **Why does v1.1 exist if there is a canonical implementation already in `analyses/q0a_lafi`?** The most likely explanation is that v1.1 was an independent first-cut someone built before being aware of the canonical analysis, or before the canonical analysis was finalized. Resolution: ask whoever built v1.1, or find the writer on the home server and read its commit history.
 2. **Is the v1.1 C3 pull-up-to-catch-shoot ratio an intentional sub-metric choice or a copy-paste from C5?** Resolution: find the v1.1 source and read it.
 3. **Did v1.1 drop the canonical C5 catch-and-shoot share and restricted-area share based on a measured collinearity check?** If yes, on what reference sample. The canonical composite.py already produces a correlation matrix; the canonical C5 sub-metric set has not been audited for collinearity. Resolution: compute Pearson r among the canonical C5 sub-metrics across the full 12-season sample. If two sub-metrics correlate above 0.80, that is a real C5 v1.2 improvement opportunity; otherwise v1.1's drop was unsupported.
-4. **Where does v1.1 run?** Probably the home server cron. Resolution: SSH to 192.168.1.236 and look in /etc/cron.* and the user crontab.
+4. **Where does v1.1 run?** Probably the home server cron. Resolution: SSH to <SERVER_LAN_IP> and look in /etc/cron.* and the user crontab.
 5. **Should the canonical implementation be promoted into the daily Firestore pipeline?** Yes, per Section 4's option (b). Resolution: write a thin `publish_lafi.py` in this repo that imports `analyses.q0a_lafi.composite`, serializes the result into the v1.1 document schema, and writes via firebase-admin. Schedule it on the same cadence as v1.1 (probably daily). Remove the v1.1 writer once verified.
 
 ---
