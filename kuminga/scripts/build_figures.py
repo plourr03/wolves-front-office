@@ -133,6 +133,46 @@ def fig_fan(fan: pd.DataFrame):
     return p
 
 
+def fig_seeds(sd: pd.DataFrame):
+    """Minnesota's seed distribution, baseline vs current, per fork."""
+    mn = sd[sd.team_abbr == "MIN"]
+    seeds = [f"p_seed{k}" for k in range(1, 11)]
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.6), sharey=True)
+    for ax, field, title in ((axes[0], "baseline", "Baseline: 2025-26 roster, healthy"),
+                             (axes[1], "current", "After the 2026 offseason")):
+        d = mn[mn.field == field]
+        for i, fork in enumerate(FORKS):
+            row = d[d.fork == fork]
+            if row.empty:
+                continue
+            ax.plot(range(1, 11), row[seeds].to_numpy()[0], marker="o", ms=4, lw=1.5,
+                    color=[INK, POS, "#7a7a7a", ACCENT][i], label=fork)
+        ax.axvspan(6.5, 10.5, color="#f0f0f0", zorder=0)
+        ax.text(8.5, ax.get_ylim()[1] * 0.92, "play-in", ha="center", fontsize=7,
+                color="#777777")
+        ax.set_xticks(range(1, 11))
+        ax.set_xlabel("Western Conference seed", fontsize=8)
+        ax.set_title(title, fontsize=9, loc="left")
+        ax.grid(axis="y", color=GRID, lw=0.5)
+        ax.set_axisbelow(True)
+    axes[0].set_ylabel("probability", fontsize=8)
+    axes[1].legend(fontsize=7, frameon=False, title="impact view", title_fontsize=7)
+    fig.suptitle("Where Minnesota finishes", fontsize=11, x=0.02, ha="left", weight="bold")
+    fig.tight_layout(rect=[0, 0.10, 1, 0.94])
+    # Placed on the FIGURE, not an axis: an axis-relative note in a two-panel layout
+    # lands on top of the left panel's x-axis label.
+    fig.text(0.02, 0.015,
+             "Seeds drawn from the engine's own seeding model (wins = 41 + 2.239*net + noise, ranked "
+             "within conference). The shaded band is the play-in.\nUnder the consensus view the Wolves "
+             "go from a 73% chance of avoiding the play-in to 39%; DARKO says 84%. That spread is the "
+             "finding, not any one line.",
+             fontsize=6.5, color="#555555", va="bottom")
+    p = os.path.join(FIGDIR, "fig4_seed_distribution.png")
+    fig.savefig(p, bbox_inches="tight")
+    plt.close(fig)
+    return p
+
+
 def main():
     os.makedirs(FIGDIR, exist_ok=True)
     with runlog.run("build_figures", inputs={"outdir": OUTDIR}) as r:
@@ -148,6 +188,12 @@ def main():
             made.append(fig_west(pd.read_csv(t2)))
         else:
             r.note("T2_west_ranking.csv missing, West figure skipped")
+
+        sd = os.path.join(OUTDIR, "seed_distribution.csv")
+        if os.path.exists(sd):
+            made.append(fig_seeds(pd.read_csv(sd)))
+        else:
+            r.note("seed_distribution.csv missing, seed figure skipped")
 
         fan = os.path.join(OUTDIR, "scenario_fan.csv")
         if os.path.exists(fan):
