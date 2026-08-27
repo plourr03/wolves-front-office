@@ -208,3 +208,105 @@ Separately, `type_grouping` in the Synergy table is capitalised `Offensive`; que
 
 Both are now asserted: every lineup must parse to exactly five ids, every player named in the analysis must appear in at least one stint, and the Transition query must return rows. These are the project's stated bogey (a plausible number produced silently) and the only reason they were caught is that a table of exact zeroes is visibly wrong. A table of slightly-wrong numbers would not have been.
 
+---
+
+## Phase 3.5 decisions
+
+### D20. The cap double-count, and the canonical apron basis (cap reconciliation, items 1 to 3)
+
+**The disagreement.** Phase 0 reported Minnesota's 2026-27 book at $215,871,829 across 13 players. The first morning report said $223,293,829. The gap is exactly $7,422,000 and it decomposes with no remainder:
+
+| | |
+|---|---|
+| 13 contracted players, `nba_player_contracts` scraped 2026-08-26 | $215,871,829 |
+| Jonathan Kuminga at the taxpayer MLE | + $6,064,000 |
+| the R4 "14th man" modelling placeholder | + $1,358,000 |
+| = the figure the morning report quoted | **$223,293,829** |
+
+**The ruling on what counts.** Apron team salary is contracted salary, plus dead money, plus likely incentives, plus an incomplete-roster charge **only when a team is below TWELVE players** (the rookie minimum per empty slot, offseason only). It does **not** include free-agent cap holds, which sit in the cap basis (Minnesota carries $16,484,548 of those, which is why its cap-basis total of $239,778,377 is larger again and must never be quoted as an apron figure), and it does not include two-way contracts or players a team has not signed.
+
+Minnesota is at 13 contracts, so the incomplete-roster charge is **zero**, and `team_state` independently agrees. **The R4 placeholder is therefore not a CBA charge at all.** It is a projection of a signing that has not happened, and it does not belong in an apron figure.
+
+**CANONICAL: apron team salary = contracted salary only.**
+
+- Pre-Kuminga: **$215,871,829** (13 contracts)
+- With Kuminga: **$221,935,829** (14 contracts)
+
+**A second, worse error found while fixing the first.** `eval_signing.py` took `team_state.apron_team_salary`, which already contains Kuminga because `patch_contracts.py` had put him in the contract book, and then added the taxpayer MLE on top of it. The signing was counted twice.
+
+| Figure | Before (reported) | After (correct) |
+|---|---|---|
+| Apron salary with Green, after signing | $229,357,829 | **$221,935,829** |
+| Amount over the second apron | $7,671,829 | **$249,829** |
+| Apron salary with Green removed, after signing | $214,678,817 | **$207,256,817** |
+| Room under the second apron | $7,007,183 | **$14,429,183** |
+
+The headline changes character entirely. It is not that Minnesota misses by $7.7M. **It is that they miss by $249,829**, which is a quarter of one percent of the apron and less than a rookie minimum contract.
+
+**A third error, same function.** The branch state passed to `evaluate_move` kept the base row's `tier` of `second_apron` even after Green's salary was removed, so the gate refused **both** branches with "taxpayer_mle not available at tier second_apron", including the legal one. The tier is now recomputed from the branch's own salary. On the canonical basis Minnesota's pre-signing tier with Green on the books is **first apron**, not second, which means the taxpayer MLE **is** available to them. The binding constraint was never eligibility. It was the hard cap the exception creates.
+
+### D21. The Green branches restated, with roster fill made explicit
+
+Thresholds: first apron $209,015,000, second apron $221,686,000, rookie minimum $1,358,000. A team must carry 14 or 15 players in the regular season (a grace period allows 12 or 13 for at most two consecutive weeks and 28 total days), so roster size is a real constraint and is shown rather than assumed.
+
+| Branch | Players | Apron salary | vs first apron | vs second apron |
+|---|---|---|---|---|
+| Trade Green | 13 | $207,256,817 | +$1,758,183 | +$14,429,183 |
+| Trade Green | **14** | **$208,614,817** | **+$400,183** | +$13,071,183 |
+| Trade Green | 15 | $209,972,817 | **-$957,817** | +$11,713,183 |
+| Stretch Green | 13 | $212,149,821 | -$3,134,821 | +$9,536,179 |
+| Stretch Green | 14 | $213,507,821 | -$4,492,821 | +$8,178,179 |
+| Stretch Green | 15 | $214,865,821 | -$5,850,821 | +$6,820,179 |
+
+**Two findings that only appear once roster fill is explicit.**
+
+First: the trade branch clears the first apron at a legal 14-man roster, but by **$400,183**, and a fifteenth man on a rookie minimum puts them **$957,817 over it**. Staying under the first apron requires carrying exactly fourteen, which is the league minimum and leaves no injury slack.
+
+Second: **any player coming back in a Green trade crosses the first apron.** The room at 14 is $400,183 and the smallest contract that can legally come back is the rookie minimum of $1,358,000. So the "pure salary dump" framing in R3 is not one option among several; it is the only version of the trade that preserves first-apron status.
+
+The stretch branch is over the first apron in every configuration.
+
+### D22. The two-sentence version for the piece (item 3)
+
+> Minnesota could use the taxpayer mid-level exception, worth $6,064,000, but using it hard-caps them at the second apron of $221,686,000 for the rest of the league year, and the test is where the team sits **after** the signing, not before. With Josh Green's $14,679,012 on the books they land at $221,935,829, which is $249,829 over that line, so the exception was legal to use and impossible to fit until Green went.
+
+Sourcing: the exception values and the hard-cap trigger are from Hoops Rumors' 2026-27 exception values and its hard-cap explainer; the incomplete-roster-charge threshold is from the CBA FAQ; the 14-or-15-man regular-season roster requirement and its grace period are from the CBA Guide's roster page. All URLs are in `league_year_constants.json` and `cap_reconciliation.md`.
+
+### D23. The model's market value agrees with the real market, and that adjudicates between the forks (A1)
+
+Kuminga turned down a reported **$12 million-plus annually over three years** from the Lakers via sign-and-trade, roughly $36M total (Anthony Slater, ESPN). Chicago made an offer with no terms reported; Portland pursued him with no terms reported. All three are now in the transaction supplement as `RejectedOffer` rows, with the two undisclosed ones carrying zero dollars so they can never be summed into a total.
+
+Against the best observed bid of $12.0M per year:
+
+| View | Model market value | vs the Lakers bid |
+|---|---|---|
+| consensus | $11.5M | **agrees, within 4%** |
+| RAPM | $11.7M | **agrees, within 3%** |
+| box | $6.0M | half the bid |
+| DARKO | $2.7M | a quarter of the bid |
+
+This is the first evidence in the project that discriminates between the four views using something outside the model. **The two possession-based views land within four percent of what a real team actually offered. The box and DARKO views are contradicted by the observed market by a factor of two and four.**
+
+That does not make consensus and RAPM right about his on-court impact, and it should not be oversold: a bid is a price, prices embed role and upside and desperation, and one bid is one observation. But it is a real out-of-sample check and it points the same way twice.
+
+**And it sharpens the surplus claim.** Minnesota is paying $6,064,000 for a player whose highest actual bid was about $12,000,000 a year. That is a price argument that no longer rests on the model alone.
+
+### D24. Age-restricted market value, and why it moves so much (A2)
+
+Restricting the reference set to players aged 22 to 25 on non-rookie-scale deals moves Kuminga's estimated market value **down**, sharply:
+
+| View | All ages | Age 22-25 | Direction of the shift |
+|---|---|---|---|
+| consensus | $11.5M | $2.9M | -$8.5M |
+| RAPM | $11.7M | $3.6M | -$8.1M |
+| box | $6.0M | $2.6M | -$3.4M |
+| DARKO | $2.7M | $2.3M | -$0.4M |
+
+**Why, and what it does and does not mean.** The restricted cohort has a median 2026-27 salary of $2.6M against $9.0M league-wide. Kuminga sits at the 58th percentile of impact all-ages and the 55th within his age band, so his percentile barely moves; almost the entire shift is the cohort's salary distribution, not his standing in it. Young players earn less because of the rookie-scale and second-contract structure, not because they are worse.
+
+So the two numbers answer different questions. **All ages: what does this much impact get paid? Age-restricted: what do players his age get paid?** The first is the better estimate of what he is worth; the second is closer to what a team can usually get him for.
+
+**Two reasons not to lean on the restricted figure.** The cohort is thin, 38 players after the non-minimum filter, and its salary distribution is bimodal, mixing modest second contracts with max rookie extensions up to $36.3M. A percentile map onto a bimodal distribution of that size is fragile.
+
+**The decisive observation is that the real bid, $12.0M, sits above both.** The market did not price Kuminga like a typical 24-year-old. It priced him like his impact, which is what the all-ages consensus and RAPM figures say.
+

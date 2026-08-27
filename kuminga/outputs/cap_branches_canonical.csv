@@ -1,0 +1,7 @@
+branch,branch_label,n_players,contracted,dead_money,roster_fill,apron_team_salary,vs_first_apron,vs_second_apron,under_first_apron,under_second_apron,legal_roster_size
+trade,A: Green traded (pure salary dump),13,207256817.0,0.0,0,207256817.0,1758183.0,14429183.0,True,True,False
+trade,A: Green traded (pure salary dump),14,207256817.0,0.0,1358000,208614817.0,400183.0,13071183.0,True,True,True
+trade,A: Green traded (pure salary dump),15,207256817.0,0.0,2716000,209972817.0,-957817.0,11713183.0,False,True,True
+stretch,B: Green waived and stretched,13,207256817.0,4893004.0,0,212149821.0,-3134821.0,9536179.0,False,True,False
+stretch,B: Green waived and stretched,14,207256817.0,4893004.0,1358000,213507821.0,-4492821.0,8178179.0,False,True,True
+stretch,B: Green waived and stretched,15,207256817.0,4893004.0,2716000,214865821.0,-5850821.0,6820179.0,False,True,True

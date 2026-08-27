@@ -40,7 +40,7 @@ REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
 
-from kuminga.lib import market, runlog  # noqa: E402
+from kuminga.lib import kfreeze, market, runlog  # noqa: E402
 import evaluate_move as EM      # noqa: E402
 
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
@@ -51,6 +51,9 @@ CONST = os.path.join(REPO, "offseason", "data", "league_year_constants.json")
 OUT_CURVES = os.path.join(REPO, "kuminga", "outputs", "par_curves_by_fork.csv")
 OUT_SURPLUS = os.path.join(REPO, "kuminga", "outputs", "kuminga_surplus_by_fork.csv")
 OUT_GATE = os.path.join(REPO, "kuminga", "outputs", "kuminga_cap_gate.json")
+SUPP = os.path.join(REPO, "kuminga", "data", "transaction_supplement.csv")
+OUT_MKT = os.path.join(REPO, "kuminga", "outputs", "market_comparison.csv")
+AGE_LO, AGE_HI = 22, 25
 
 PRICED_MIN_SALARY = 8_000_000
 KUMINGA_ID = 1630228
@@ -160,6 +163,73 @@ def main():
                    f"{x.surplus_net:+.2f} | market ${x.market_salary_pctile/1e6:.1f}M "
                    f"| dollar_gap ${x.dollar_gap/1e6:+.1f}M")
 
+        # ---------------- A2: age-restricted market curve ---------------------
+        # Kuminga is 23. The all-ages curve prices him against a distribution whose
+        # upper reaches are 28-to-32-year-olds on second and third contracts, which
+        # biases his estimate UPWARD if young players are systematically underpaid
+        # relative to impact (they are, because rookie-scale and early-extension deals
+        # are below market by construction). Restricting the reference set to players
+        # aged 22 to 25 on NON-rookie-scale deals removes most of that.
+        bio, _ = kfreeze.load("player_bio")
+        bio = bio.copy()
+        bio["age"] = ((pd.Timestamp("2026-10-01") - pd.to_datetime(bio.birthdate)).dt.days
+                      / 365.25)
+        bio["season_exp"] = pd.to_numeric(bio.season_exp, errors="coerce")
+        bio["draft_round"] = pd.to_numeric(bio.draft_round, errors="coerce")
+        # A first-round pick is on the rookie scale for his first four seasons.
+        bio["on_rookie_scale"] = (bio.draft_round == 1) & (bio.season_exp <= 3)
+        age_by_pid = bio.set_index("player_id").age
+        rookie_by_pid = bio.set_index("player_id").on_rookie_scale
+
+        nets_age = nets.copy()
+        nets_age["age"] = nets_age.player_id.map(age_by_pid)
+        nets_age["on_rookie_scale"] = nets_age.player_id.map(rookie_by_pid).fillna(False)
+        young = nets_age[(nets_age.age.between(AGE_LO, AGE_HI))
+                         & (~nets_age.on_rookie_scale)]
+        r.note(f"age-restricted reference set ({AGE_LO}-{AGE_HI}, non-rookie-scale): "
+               f"{len(young)} players")
+
+        # ---------------- A1: the real bids -----------------------------------
+        sup = pd.read_csv(SUPP)
+        bids = sup[sup.transaction_type == "RejectedOffer"]
+        best_bid = float(bids.salary.max()) if len(bids) else float("nan")
+        r.note(f"observed rejected bids: " + ", ".join(
+            f"{b.team_abbr} ${b.salary/1e6:.1f}M/yr x{int(b.years)}"
+            if b.salary > 0 else f"{b.team_abbr} (terms undisclosed)"
+            for _, b in bids.iterrows()))
+
+        mkt_rows = []
+        for fork in FORKS:
+            if pd.isna(kum[fork]):
+                continue
+            knet = float(kum[fork])
+            mc_all = market.build(nets, salary, fork, label=f"{fork}_all_ages")
+            mc_young = market.build(young, salary, fork, label=f"{fork}_age{AGE_LO}_{AGE_HI}")
+            v_all, v_young = float(mc_all.salary(knet)), float(mc_young.salary(knet))
+            mkt_rows.append(dict(
+                fork=fork, kuminga_net=knet,
+                market_all_ages=v_all,
+                market_age_restricted=v_young,
+                age_bias=v_young - v_all,
+                n_all=mc_all.n, n_young=mc_young.n,
+                actual_salary=TPMLE_2026_27,
+                best_real_bid=best_bid,
+                model_vs_best_bid=v_all - best_bid,
+                agrees_with_best_bid=abs(v_all - best_bid) / best_bid < 0.25,
+            ))
+        mk = pd.DataFrame(mkt_rows)
+        mk.to_csv(OUT_MKT, index=False)
+        r.note("MARKET COMPARISON (model market value vs the best real bid):")
+        for _, x in mk.iterrows():
+            r.note(f"  [{x.fork:9s}] all-ages ${x.market_all_ages/1e6:5.1f}M | "
+                   f"age {AGE_LO}-{AGE_HI} ${x.market_age_restricted/1e6:5.1f}M "
+                   f"(bias {x.age_bias/1e6:+.1f}M) | best real bid "
+                   f"${x.best_real_bid/1e6:.1f}M | "
+                   f"{'AGREES' if x.agrees_with_best_bid else 'disagrees'} (within 25%)")
+        n_agree = int(mk.agrees_with_best_bid.sum())
+        r.note(f"  => {n_agree} of {len(mk)} views agree with the Lakers bid within 25%")
+        r.output(OUT_MKT, rows=len(mk))
+
         # ---------------- cap side -------------------------------------------
         ts = pd.read_csv(TEAMSTATE)
         base = ts[(ts.team_abbr == "MIN") & (ts.season == "2026-27")
@@ -167,18 +237,49 @@ def main():
         gate = {}
         apron2 = const["second_apron"]
 
+        # team_state's apron_team_salary ALREADY contains Kuminga (patch_contracts put
+        # him in the contract book) and the R4 placeholder. Adding the exception on top
+        # of it double-counts the signing, which is what produced the "$7.7M over the
+        # apron" figure in the first morning report. The gate is rebuilt on the
+        # CANONICAL basis instead: contracted salary only, Kuminga removed, then added
+        # back exactly once. See cap_reconciliation.py.
+        PLACEHOLDER = 1_358_000
+        pre_kuminga = float(base["apron_team_salary"]) - TPMLE_2026_27 - PLACEHOLDER
+        r.note(f"canonical pre-Kuminga apron salary: ${pre_kuminga:,.0f} "
+               f"(team_state ${float(base['apron_team_salary']):,.0f} minus Kuminga "
+               f"${TPMLE_2026_27:,} minus the ${PLACEHOLDER:,} placeholder)")
+
+        def tier_for(salary):
+            if salary > const["second_apron"]:
+                return "second_apron"
+            if salary > const["first_apron"]:
+                return "first_apron"
+            if salary > const["luxury_tax"]:
+                return "taxpayer"
+            if salary > const["salary_cap"]:
+                return "over_cap_under_tax"
+            return "under_cap"
+
         for branch, green_out in (("green_on_books", False), ("green_removed", True)):
+            before = pre_kuminga - (14_679_012 if green_out else 0.0)
             state = dict(base)
-            if green_out:
-                state["apron_team_salary"] = base["apron_team_salary"] - 14_679_012
-                state["distance_to_second_apron"] = apron2 - state["apron_team_salary"]
+            state["apron_team_salary"] = before
+            state["distance_to_second_apron"] = apron2 - before
+            state["distance_to_first_apron"] = const["first_apron"] - before
+            # The tier must be recomputed for the branch. Leaving the base row's tier
+            # in place made evaluate_move refuse BOTH branches with "taxpayer_mle not
+            # available at tier second_apron", including the one that is legal.
+            state["tier"] = tier_for(before)
+            state["taxpayer_mle_available"] = state["tier"] != "second_apron"
             res = EM.evaluate_move(
                 state, const, outgoing=[],
                 incoming=[{"salary": TPMLE_2026_27, "label": "Jonathan Kuminga"}],
                 exception_used="taxpayer_mle")
-            post = state["apron_team_salary"] + TPMLE_2026_27
+            post = before + TPMLE_2026_27
             gate[branch] = {
-                "apron_salary_before": state["apron_team_salary"],
+                "basis": "canonical: contracted salary only, no placeholder",
+                "tier_before_signing": state["tier"],
+                "apron_salary_before": before,
                 "apron_salary_after_signing": post,
                 "second_apron": apron2,
                 "room_after_signing": apron2 - post,
@@ -188,7 +289,7 @@ def main():
                 "hard_cap_level": res["hard_cap_level"],
             }
             verdict = "FITS" if post <= apron2 else f"OVER by ${post - apron2:,.0f}"
-            r.note(f"CAP [{branch}]: ${state['apron_team_salary']:,.0f} + "
+            r.note(f"CAP [{branch}, tier {state['tier']}]: ${before:,.0f} + "
                    f"${TPMLE_2026_27:,} = ${post:,.0f} vs apron2 ${apron2:,} -> {verdict}")
 
         json.dump(gate, open(OUT_GATE, "w", encoding="utf-8"), indent=2)

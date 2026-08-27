@@ -101,6 +101,69 @@ RECORDS = [
              "corroborates: his first ATL box score is 2026-02-24, last GSW 2026-01-22. "
              "The GSW/ATL split is the basis of the role-conditional read.",
     ),
+    # ----------------------------------------------- rejected offers (A1)
+    # The real market for Kuminga this summer. These are the competing bids he turned
+    # down, which are the only observed prices for him other than the one he took, and
+    # therefore the sharpest available check on the model's four-view market estimate.
+    dict(
+        group_sort="SUPP_KUMINGA_REJECTED_LAL", leg=1, transaction_date="2026-08-26",
+        transaction_type="RejectedOffer", team_abbr="LAL", direction="offered",
+        player_name="Jonathan Kuminga", nba_player_id=1630228, asset_type="player",
+        season="2026-27", salary=12000000, option_type="", season_order=1,
+        total_value=36000000, years=3, exception_used="sign_and_trade",
+        status="reported_rejected",
+        source_url_1="https://www.espn.com/nba/story/_/id/49736014/jonathan-kuminga-reaches-2-year-deal-minnesota-timberwolves",
+        source_url_2="https://heavy.com/sports/nba/los-angeles-lakers/lakers-jonathan-kuminga-picked-minnesota/",
+        source_tier="reporter",
+        note="Anthony Slater (ESPN): a similar starting role and '$12 million-plus "
+             "annually over three years' via sign-and-trade, roughly $36M total. "
+             "REJECTED. This is the highest observed bid and it is roughly DOUBLE the "
+             "annual value of the deal he took.",
+    ),
+    dict(
+        group_sort="SUPP_KUMINGA_REJECTED_CHI", leg=1, transaction_date="2026-08-26",
+        transaction_type="RejectedOffer", team_abbr="CHI", direction="offered",
+        player_name="Jonathan Kuminga", nba_player_id=1630228, asset_type="player",
+        season="2026-27", salary=0, option_type="", season_order=1,
+        total_value=0, years=0, exception_used="",
+        status="reported_rejected_terms_undisclosed",
+        source_url_1="https://www.si.com/nba/bulls/onsi/bulls-reportedly-made-offer-to-jonathan-kuminga-but-struck-out-26",
+        source_url_2="",
+        source_tier="reporter",
+        note="Chicago made an offer; NO TERMS were reported. Recorded with zero dollars "
+             "so it is never summed, and flagged so nobody infers a number from silence.",
+    ),
+    dict(
+        group_sort="SUPP_KUMINGA_REJECTED_POR", leg=1, transaction_date="2026-08-26",
+        transaction_type="RejectedOffer", team_abbr="POR", direction="offered",
+        player_name="Jonathan Kuminga", nba_player_id=1630228, asset_type="player",
+        season="2026-27", salary=0, option_type="", season_order=1,
+        total_value=0, years=0, exception_used="",
+        status="reported_pursued_terms_undisclosed",
+        source_url_1="https://heavy.com/sports/nba/minnesota-timberwolves/timberwolves-land-jonathan-kuminga/",
+        source_url_2="",
+        source_tier="reporter",
+        note="Portland pursued him; no terms reported.",
+    ),
+    # The stated reason for the shorter deal, which is the qualitative counterpart to
+    # the option model in item 14.
+    dict(
+        group_sort="SUPP_KUMINGA_STATED_INTENT", leg=1, transaction_date="2026-08-26",
+        transaction_type="StatedIntent", team_abbr="MIN", direction="context",
+        player_name="Jonathan Kuminga", nba_player_id=1630228, asset_type="note",
+        season="2026-27", salary=0, option_type="player_option", season_order=0,
+        total_value=0, years=2, exception_used="taxpayer_mle",
+        status="reported",
+        source_url_1="https://www.espn.com/nba/story/_/id/49736014/jonathan-kuminga-reaches-2-year-deal-minnesota-timberwolves",
+        source_url_2="https://heavy.com/sports/nba/los-angeles-lakers/lakers-jonathan-kuminga-picked-minnesota/",
+        source_tier="reporter",
+        note="Anthony Slater (ESPN): he chose Minnesota on a 'shorter-term, prove-it "
+             "deal to give him the ability to have more control of his future and "
+             "possibly jump back in free agency next summer.' He turned down roughly "
+             "twice the annual money from the Lakers to do it. The stated intent is to "
+             "reach free agency again in 2027, which is the same event the option model "
+             "prices at a 0.50 to 0.80 probability.",
+    ),
     # ---------------------------------------------------------------- item 4/16
     # The 14th-man placeholder per R4. MIN sits at 13 standard contracts after Green
     # leaves; the league minimum is 14. This is a modeling placeholder, not a signing.
