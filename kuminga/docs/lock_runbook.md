@@ -29,6 +29,25 @@ python -c "import sys;sys.path.insert(0,'postmortem');from lib import db;print(d
 
 **Either way:** retire the other branch in `cap_branches.md` with a one-line note saying which resolved and when, rather than deleting it.
 
+## L1c. The asset cost of the dump (ADDENDUM)
+
+Shedding Green is not free, and the piece currently prices it as if it were. On resolution, capture what it actually cost and put it in **both** places.
+
+**If TRADED, record:**
+- Any **draft pick attached** to move the salary (round, year, protections, and whether it is Minnesota's own).
+- Any **swap right** given up, and the years it covers.
+- **Cash** sent, against the annual limit.
+- Whether a **second-round pick or a future second** was the sweetener, which is the most likely shape for a $14.7M dump.
+
+**If STRETCHED, record:** the dead-money schedule, **$4,893,004 per season across 2026-27, 2027-28 and 2028-29**, the third of which lands in Edwards's walk year. That is the asset cost in that branch and it is already computed.
+
+**Then:**
+1. Add one sentence to the **Dosunmu claim (a)** paragraph in section 4. The current text says the re-signing cost Green plus about $4M of Kuminga's first-year salary. The asset cost is the third item in that list and belongs in the same sentence.
+2. Add a row to `final_numbers` under `Dosunmu (b) cap`, with **two source URLs per R8**.
+3. If a pick went out, cross-check it against `offseason/data` pick ledger so the 2033 first and the existing swaps are not double-counted.
+
+**Until it resolves** the sheet carries a row reading `PENDING GREEN RESOLUTION`, so the hole is visible on the gate rather than silently absent.
+
 ## L2. The signing becomes official
 
 1. Verify the announced dollars against R4 ($6,064,000 / $6,367,200 player option / $12,431,200 total).

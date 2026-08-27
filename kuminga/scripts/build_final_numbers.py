@@ -296,7 +296,29 @@ def main():
                     "the non-taxpayer MLE is $15,044,000 but hard-caps at the first apron, "
                     "so the whole exception was never spendable. Always write 'up to, at a "
                     "full roster'.")
-                add("Dosunmu (b) cap", "why Green must be shed", "$249,829 over",
+                # The asset cost of the dump is not known until Green moves. Carry the
+            # hole on the sheet rather than letting it be silently absent (L1c).
+            ac = load("green_asset_cost.csv")
+            if ac is None:
+                add("Dosunmu (b) cap", "asset cost of shedding Green",
+                    "PENDING GREEN RESOLUTION", "pick attached / swap / stretch dead money",
+                    "NOT QUOTABLE", "n/a",
+                    "see lock_runbook L1c. Needs two source URLs per R8. Until then the "
+                    "piece understates the cost of the dump.")
+            else:
+                x = ac.iloc[0]
+                add("Dosunmu (b) cap", "asset cost of shedding Green",
+                    str(x.get("cost", "")), str(x.get("detail", "")), "FACT",
+                    last_run("green_asset_cost"), str(x.get("sources", "")))
+            add("Dosunmu (b) cap", "Dosunmu agreed vs the Ball/Green trade",
+                "Dosunmu first, by 3 days",
+                "agreed 2026-06-22 (Mon night) vs 2026-06-25 (Thu); both official 2026-07-10",
+                "FACT", "ESPN 49150075 + 49175343; NBA.com corroboration",
+                "nba_transactions dates BOTH 2026-07-10 and cannot order them: "
+                "additional_sort is 0 for signings and the counterparty team id for trades, "
+                "group_sort is a type-prefixed group id, created_at is our ingest batch. "
+                "Reported-first is NOT decided-first; do not claim causal ordering.")
+            add("Dosunmu (b) cap", "why Green must be shed", "$249,829 over",
                     "$215,871,829 + $6,064,000 vs the second apron", "FACT", rid_fs,
                     "Dosunmu's $19,310,345 exceeds that overage by $19,060,516, so without "
                     "him Green stays and the signing still fits")

@@ -627,3 +627,26 @@ Two caveats recorded with it. The pooled rule gives Green 13.3 minutes and takes
 ### D45. Section 4 magnitudes labelled (F3)
 
 The table row is now **"Dosunmu retained (on-court)"**, so a reader cannot take a Shapley number as a verdict on the contract. Added: applying the slot rule cut every magnitude in that table, by between a quarter and three quarters, and moved none of their signs. The looser rule flatters big effects by letting minutes flow to whoever the model rates highest, so the sizes shown are the conservative version and the signs are the finding.
+
+### D46. Dosunmu was agreed three days before the trade that brought Green in
+
+**The warehouse cannot answer this, and the way it fails is worth recording.** Both rows carry `transaction_date = 2026-07-10`:
+
+| Date | Player | Type | Description |
+|---|---|---|---|
+| 2026-07-10 | ayo-dosunmu | Signing | Minnesota Timberwolves re-signed guard Ayo Dosunmu to a Contract. |
+| 2026-07-10 | lamelo-ball | Trade | Minnesota Timberwolves received guard LaMelo Ball from Charlotte Hornets. |
+| 2026-07-10 | josh-green | Trade | Minnesota Timberwolves received guard Josh Green from Charlotte Hornets. |
+
+That is the **official** date for both, the day the league processed them after the moratorium. The two sort columns look ordinal and are not: `additional_sort` is **0 for every signing and the counterparty team id for trades** (1610612766, Charlotte), and `group_sort` is a type-prefixed group id (`Signing 1153092`, `Trade 2026008`). `created_at` is our own ingest batch, not league time. **The same hazard as `action_number`: a column that sorts cleanly and means something else.** Do not use any of the three to order same-day transactions.
+
+**The agreement dates, from primary reporting (R8, two sources each).**
+
+- **Dosunmu: agreed the night of Monday 2026-06-22.** ESPN published 2026-06-23 at 12:02 AM ET: "Dosunmu's agents... worked with Timberwolves executives on Monday night to ultimately secure the long-term commitment" (espn.com/nba/story/_/id/49150075). Corroborated by NBA.com's report of the same five-year, $112M deal (nba.com/news/reports-ayo-dosunmu-to-re-sign-with-timberwolves).
+- **Ball and Green: agreed Thursday 2026-06-25.** ESPN, Ohm Youngmisuk, published 2026-06-25 09:35 AM ET, "sources told ESPN's Shams Charania on Thursday", and the trade explicitly sends "LaMelo Ball and Josh Green to the Minnesota Timberwolves for Naz Reid and a series of draft picks" (espn.com/nba/story/_/id/49175343). Corroborated by NBA.com (nba.com/news/lamelo-ball-trade-timberwolves-2026) and the club release (timberwolves.com).
+
+**Which came first: Dosunmu, by three days.** Both became official on Friday 2026-07-10.
+
+**Why this matters to claim (a), and the limit on it.** Section 4 says Green has to be shed to fit Kuminga. The sequence supports that ordering: the $19,310,345 commitment to Dosunmu was reported before Minnesota agreed to take Green's $14,679,012 back. **But it does not establish that they were decided in that order.** A four-team trade of that size is negotiated over weeks, so the two were almost certainly live at once, and a reported-first date is not a decided-first date. The piece may say the Dosunmu agreement was reported three days earlier; it may not say Minnesota chose Dosunmu and then took Green anyway.
+
+**And one fact that was not in the model's framing at all: Green did not arrive separately.** He came from Charlotte in the LaMelo Ball trade, as part of the same deal that sent Naz Reid out. Every earlier note treats him as a salary already sitting on the book. He is salary Minnesota **took on**, three days after committing to Dosunmu, in the trade that is the largest positive in the Shapley table.
