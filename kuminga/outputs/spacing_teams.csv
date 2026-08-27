@@ -1,0 +1,31 @@
+team_abbr,mw_rate,pooled_rate,pooled_acc,five
+GSW,0.5696649745444045,0.5636029411764706,0.3613829093281148,Brandin Podziemski; Draymond Green; Moses Moody; Gui Santos; Will Richard
+MIL,0.5492274777384428,0.5159389231181355,0.4055036344755971,Ryan Rollins; AJ Green; Myles Turner; Kyle Kuzma; Bobby Portis Jr.
+POR,0.48437882020119705,0.47339449541284406,0.35707364341085274,Toumani Camara; Deni Avdija; Donovan Clingan; Jerami Grant; Jrue Holiday
+SAS,0.47134292088432317,0.4407394609536973,0.3590748725989808,Julian Champagnie; De'Aaron Fox; Devin Vassell; Stephon Castle; Victor Wembanyama
+PHX,0.46351462179207686,0.4577397910731244,0.37863070539419086,Collin Gillespie; Royce O'Neale; Devin Booker; Oso Ighodaro; Dillon Brooks
+BOS,0.4497747030032178,0.4406261932035128,0.3574523396880416,Derrick White; Payton Pritchard; Jaylen Brown; Sam Hauser; Neemias Queta
+MEM,0.44944131933914266,0.43957084253707795,0.37760229720028715,Jaylen Wells; Cam Spencer; Cedric Coward; Jock Landale; Jaren Jackson Jr.
+LAC,0.4484575101115785,0.43987929433611883,0.37361477572559365,James Harden; Kris Dunn; Kawhi Leonard; John Collins; Brook Lopez
+WAS,0.44671240112883764,0.4444444444444444,0.36005830903790087,Bub Carrington; Will Riley; Bilal Coulibaly; Tre Johnson; Khris Middleton
+CHA,0.4386246421528232,0.49445258530458447,0.38018628281117695,Kon Knueppel; Miles Bridges; LaMelo Ball; Brandon Miller; Moussa Diabaté
+DEN,0.4314045493139013,0.4204764971023825,0.40224604389994895,Jamal Murray; Nikola Jokić; Tim Hardaway Jr.; Bruce Brown; Cameron Johnson
+IND,0.4146596681476105,0.3960295240519216,0.34640102827763497,Pascal Siakam; Jarace Walker; Andrew Nembhard; Jay Huff; Bennedict Mathurin
+DAL,0.41228867524359186,0.40329617062530293,0.3557692307692308,Cooper Flagg; Max Christie; Naji Marshall; P.J. Washington; Klay Thompson
+OKC,0.405931256253445,0.36201584507042256,0.3580547112462006,Shai Gilgeous-Alexander; Chet Holmgren; Cason Wallace; Luguentz Dort; Ajay Mitchell
+BKN,0.40456088545573116,0.4251207729468599,0.33685064935064934,Nic Claxton; Noah Clowney; Michael Porter Jr.; Terance Mann; Drake Powell
+PHI,0.4004383290521013,0.4074695761644985,0.3470648815653965,Tyrese Maxey; VJ Edgecombe; Quentin Grimes; Kelly Oubre Jr.; Dominick Barlow
+UTA,0.39837432745750595,0.410958904109589,0.34294871794871795,Ace Bailey; Kyle Filipowski; Keyonte George; Brice Sensabaugh; Cody Williams
+NYK,0.3955782116460129,0.3856621307666777,0.3816695352839931,Mikal Bridges; Jalen Brunson; Karl-Anthony Towns; OG Anunoby; Josh Hart
+CHI,0.3758738333966404,0.3813219829744617,0.3703217334208798,Matas Buzelis; Ayo Dosunmu; Nikola Vučević; Tre Jones; Josh Giddey
+ATL,0.3694101039641116,0.38149146451033245,0.36693358455016484,Nickeil Alexander-Walker; Jalen Johnson; Dyson Daniels; Onyeka Okongwu; CJ McCollum
+ORL,0.36617847718140667,0.35744234800838576,0.35131964809384164,Desmond Bane; Paolo Banchero; Wendell Carter Jr.; Anthony Black; Tristan da Silva
+CLE,0.3630895409018777,0.35687893936100845,0.36114494518879414,Donovan Mitchell; Evan Mobley; Jarrett Allen; Jaylon Tyson; Dean Wade
+TOR,0.35823355930133766,0.34311963251447974,0.3521536670547148,Scottie Barnes; Brandon Ingram; Immanuel Quickley; Jamal Shead; RJ Barrett
+MIN,0.34618469676905544,0.37101114955786235,0.3689119170984456,Julius Randle; Rudy Gobert; Jaden McDaniels; Donte DiVincenzo; Anthony Edwards
+MIA,0.34413300814026204,0.3362698212937327,0.3555389221556886,Bam Adebayo; Jaime Jaquez Jr.; Andrew Wiggins; Davion Mitchell; Pelle Larsson
+LAL,0.32871485878389506,0.34544648792377575,0.3701090442591405,LeBron James; Rui Hachimura; Luka Dončić; Deandre Ayton; Jake LaRavia
+HOU,0.32239278606821387,0.323277339732602,0.3679745493107105,Amen Thompson; Jabari Smith Jr.; Kevin Durant; Alperen Sengun; Reed Sheppard
+DET,0.29796689917922753,0.29722339082877575,0.3786270346779901,Cade Cunningham; Duncan Robinson; Jalen Duren; Ausar Thompson; Tobias Harris
+NOP,0.2943104746036197,0.30034949759720403,0.3563636363636364,Trey Murphy III; Saddiq Bey; Jeremiah Fears; Derik Queen; Zion Williamson
+SAC,0.2834448953323853,0.28556485355648537,0.3315018315018315,DeMar DeRozan; Dennis Schröder; Maxime Raynaud; Nique Clifford; Russell Westbrook

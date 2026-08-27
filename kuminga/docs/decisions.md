@@ -668,3 +668,51 @@ The fifth restriction usually listed, losing the non-taxpayer mid-level, is **mo
 **The reframe that follows.** "The re-signing removes every option except the dump" is replaced by **"it removes keeping him, and makes every other exit cost something"**. There are two exits and both are charged: a pure dump costs whatever pick or swap moves a $14.7M expiring for nothing, and a trade that returns a player costs the first-apron restrictions for the season. Section 1's closing line changed from "the pure salary dump is not one option among several" to "it is **not the only legal option**; it is the only one that keeps them under the first apron".
 
 **Fixed in all four places** so the terms match: section 1, claim (a), `lock_runbook.md` L1 item 4, and two new rows on `final_numbers.csv` ("salary a Green trade can bring back", $13,071,183; "incoming salary that costs the tier", $400,183).
+
+### D48. The independent recomputation broke the lede (V1)
+
+A fresh context with no access to `kuminga/scripts` or `kuminga/lib` recomputed every published cap figure from raw sources. **The arithmetic was clean throughout. The inputs and the CBA rules were not.** Six material errors, two of which are publication-blocking.
+
+**ERROR 1, the lede is wrong by 8x. Apron Team Salary includes UNLIKELY BONUSES.**
+
+Regular Team Salary excludes unlikely bonuses. The apron calculation removes cap holds and **adds them back**. Minnesota carries **$1,750,000** of them: Jaden McDaniels $1,000,000 and Donte DiVincenzo $750,000.
+
+| | Before | After |
+|---|---|---|
+| Pre-Kuminga apron basis | $215,871,829 | **$217,621,829** |
+| With Kuminga | $221,935,829 | **$223,685,829** |
+| **Over the second apron** | **$249,829** | **$1,999,829** |
+| The "loophole" first-year salary | $5,814,171 | **$4,064,171** |
+| Cost of the loophole to Kuminga | $512,149 | **$4,099,649** |
+
+**Independently confirmed twice.** The rule: Hoops Rumors tax-apron glossary and the CBA Guide both state Apron Team Salary = Team Salary − cap holds + unlikely bonuses. The magnitude: **Spotrac's own page computes "2nd Apron Space: $4,064,172"** against our $4,064,171, a one-dollar difference traceable to McDaniels ($26,200,000 there, $26,200,001 in Basketball-Reference, SalarySwish and our book).
+
+Everything in section 1 keyed to $249,829 is gone. So is the slide, whose headline is literally "SHORT BY $249,829".
+
+**ERROR 2, a sign flip. The trade branch is a FIRST-APRON team.** At a legal 14-man roster it is now **$1,349,817 OVER** the first apron, not $400,183 under. The consequence inverts: it is no longer "any incoming salary above $400,183 costs the tier", it is **they are already a first-apron team in the pure-dump branch, before anything comes back.** Section 1's "the only version that keeps them under the first apron" is false. The four restrictions apply either way.
+
+**ERROR 3, the luxury-tax schedule was the pre-2023 CBA table.** `tax_brackets_nonrepeater_approx` used a **$5,000,000** bracket width with rates 1.50/1.75/2.50/4.75/5.75. The 2026-27 schedule is a **$6,064,000** width with non-repeater rates **1.00/1.25/3.50/4.75, +0.50 per bracket after**. The width is checkable arithmetic: $5,000,000 indexed to the cap is 5,000,000 x 164,961,000 / 136,021,000 = $6,063,806, i.e. $6,064,000; the constants had frozen the 2023-24 value. Verified against Hoops Rumors and the CBA Guide, which agree.
+
+Our figures were **22% to 50% too high**: the 13-player book falls from $30,858,188 to **$25,249,402**, and the trade branch from $13,076,930 to **$8,717,521**. Fixed in `league_year_constants.json`, which the offseason project shares, with the repeater schedule added and the source recorded. `tax_brackets_confirm` flipped from True to False.
+
+**ERROR 4, the Non-Bird figure uses the wrong base year.** Published $7,640,640 = 120% of the *declined option year* ($6,367,200). Non-Bird is 120% of the salary in the **last season actually played**, so if he opts out after 2026-27 that is $6,064,000 and the ceiling is **$7,276,800**. The published figure was also internally inconsistent with itself: in any branch where $6,367,200 is the prior salary he has played two seasons in Minnesota and holds **Early Bird** rights, which is exactly the U4 finding, so Non-Bird would not bind there at all.
+
+**ERROR 5, a live deadline the model has no date condition for.** The current season's salary can only be stretched if the player clears waivers by **August 31**, and waivers run 48 hours. Green has no seasons after 2026-27. If Minnesota does not waive him by roughly **August 29**, the stretch branch **ceases to exist** and the full $14,679,012 stays on the book. That is the Saturday lock date, and the runbook models the branch with no date condition on it.
+
+**ERROR 6, `min_salary_by_yos` is rounded to the nearest $1,000 throughout.** Real values: rookie minimum **$1,357,763** (not $1,358,000), 2-YOS **$2,449,421** (not $2,449,000), 10+ YOS **$3,876,529** (not $3,877,000). This puts a small error into every roster-fill figure and makes the claim that a partial exception "lands team salary on the apron to the dollar" unsupportable at that precision.
+
+**Also surfaced, not yet actioned:** Minnesota holds two live prior-year trade exceptions worth **$17,350,158** (Conley $10,774,038 expiring 2/3/2027, Dillingham $6,576,120 expiring 2/5/2027), which the first-apron restriction list mentions without naming; Trey Lyles is only **$1,500,000 guaranteed** of a $2,449,421 cap hit with a 1/10/2027 guarantee date, while our book marks him fully guaranteed; the two-way line names one player when there are three; and Spotrac already displays Minnesota as hard-capped at the second apron for a reason the check could not identify.
+
+**Cross-check of the 13-player total (Part B).** Ours $215,871,829; **Spotrac $215,871,828**, a one-dollar difference on McDaniels, same 13 players, no holds, no dead money; **HoopsHype $218,886,255** across 16 rows, which reconciles exactly once three two-ways ($2,036,646) are removed and three line items are explained: HoopsHype prints Lyles at what he is *paid* ($3,876,529) rather than his cap charge, has McDaniels $450,000 low against three other sources, and Hyland $672 high. **Our cap-basis figure is right; it was the apron basis that was wrong.**
+
+### D49. The aging pass exposed an architecture fact worth more than the aging pass (U1, partial)
+
+Fitted a one-year aging curve from `nba_player_season_bio`, on same-team year-over-year net-rating deltas, shrunk n/(n+40), 2000 onward. Peak at **27**. Applied adjustment runs from **+0.767** impact points at age 20 to **-0.353** at 36. Minnesota is **+0.176**, 18th of 30.
+
+**Two errors caught inside it.**
+
+**First, applying the curve as distance-from-peak double-counts age.** A player's measured impact already reflects how old he was. The projection needs only the expected *one-year change*. The first version applied the cumulative curve and made **20-year-old Joan Beringer the most penalised player on Minnesota at -2.864**, when the same data says he should improve by +1.5 net points. Caught because a rookie centre being the biggest age penalty on a roster containing 35-year-old Rudy Gobert is absurd on its face.
+
+**Second, and this is the finding: aging cancels out of this model by construction.** `exp_2026_27` comes from last season's measured team rating, and the impact model enters only as `beta x (roll[current] − roll[baseline])`. Both rollups were being built from the same aged impacts, so **every returning player's adjustment cancelled exactly** and the aged run reproduced the un-aged team strengths to all 120 rows. The fix is that the baseline rollup must use un-aged impacts, because it represents last season's roster at last season's ages. Now corrected, and the aged strengths do move.
+
+**What this means for reading any Shapley number in this project:** the model has never been able to see a roster simply getting older. It only ever sees the difference between who left and who arrived. That is a real limitation and it belongs in the methods note regardless of what the aged verdicts turn out to be.

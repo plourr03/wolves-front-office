@@ -77,6 +77,9 @@ def main():
         t = ts[(ts.team_abbr == "MIN") & (ts.season == "2026-27")
                & (ts.scenario_id == "base")].iloc[0]
 
+        ub = pd.read_csv(os.path.join(REPO, "offseason", "data",
+                                      "mn_unlikely_bonuses_2026_27.csv"))
+        unlikely = float(ub[ub.team_abbr == "MIN"].unlikely_bonus_2026_27.sum())
         rec = [
             dict(component="13 contracted players (nba_player_contracts, 2026-08-26)",
                  amount=base_13, counts_toward_apron=True,
@@ -100,12 +103,20 @@ def main():
             dict(component="two-way contracts (Enrique Freeman)",
                  amount=0.0, counts_toward_apron=False,
                  note="Excluded from team salary."),
+            dict(component="UNLIKELY BONUSES", amount=unlikely,
+                 counts_toward_apron=True,
+                 note="Apron Team Salary = Team Salary MINUS cap holds PLUS unlikely "
+                      "bonuses. Unlikely bonuses are excluded from cap and tax salary "
+                      "but INCLUDED in the apron figure. McDaniels $1,000,000 and "
+                      "DiVincenzo $750,000. Verified 2026-08-27 against the Hoops Rumors "
+                      "tax-apron glossary and the CBA Guide, and against Spotrac's own "
+                      "computed 2nd Apron Space of $4,064,172."),
         ]
         rc = pd.DataFrame(rec)
         rc.to_csv(OUT_REC, index=False)
 
-        canonical_pre = base_13
-        canonical_with_k = base_13 + KUMINGA
+        canonical_pre = base_13 + unlikely
+        canonical_with_k = canonical_pre + KUMINGA
         r.note(f"CANONICAL pre-Kuminga apron salary: ${canonical_pre:,.0f} ({n_13} contracts)")
         r.note(f"CANONICAL with Kuminga signed:      ${canonical_with_k:,.0f} (14 contracts)")
         gap = canonical_with_k - apron2
@@ -114,12 +125,17 @@ def main():
         r.note(f"  previously reported as ${float(t.apron_team_salary):,.0f}, which "
                "included the placeholder; and the cap gate then added Kuminga a SECOND "
                "time, producing $229,357,829. Both corrected here.")
+        r.note(f"  CORRECTION 2026-08-27: the basis previously OMITTED ${unlikely:,.0f} "
+               f"of unlikely bonuses. The headline overage was reported as $249,829 and "
+               f"is actually ${abs(gap):,.0f}, an {abs(gap) / 249_829:.1f}x error. "
+               f"Independently confirmed: Spotrac computes 2nd Apron Space of $4,064,172 "
+               f"against our ${apron2 - canonical_pre:,.0f}.")
 
         # ---- Green branches, canonical basis, with roster fill explicit ----------
         rows = []
         for branch, label in (("trade", "A: Green traded (pure salary dump)"),
                               ("stretch", "B: Green waived and stretched")):
-            after_green = base_13 - GREEN + KUMINGA          # 13 players
+            after_green = base_13 + unlikely - GREEN + KUMINGA   # 13 players, apron basis
             dead = GREEN / STRETCH_YEARS if branch == "stretch" else 0.0
             for n_players in (13, 14, 15):
                 fills = max(0, n_players - 13)

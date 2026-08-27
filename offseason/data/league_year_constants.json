@@ -1,692 +1,732 @@
 {
-  "built": "2026-08-26",
-  "growth_assumption_outyears": 1.07,
-  "notes": "2025-26 and 2026-27 are FINAL (league-set); 2027-28+ scaled forward. 2026-27 was upgraded from projection to final on 2026-08-26 against NBA.com + Hoops Rumors; see source field. Confirm flags mark figures the rules reference still says need a primary-source check (first-apron matching %, exact tax bracket rates, frozen-pick window).",
-  "seasons": {
-    "2025-26": {
-      "season": "2025-26",
-      "salary_cap": 154647000,
-      "luxury_tax": 187895000,
-      "first_apron": 195945000,
-      "second_apron": 207824000,
-      "min_team_salary": 139182000,
-      "full_mle": 14104000,
-      "taxpayer_mle": 5685000,
-      "room_exception": 8781000,
-      "bae": 5134000,
-      "match_t1": 7500000,
-      "match_t2": 29000000,
-      "min_salary_by_yos": {
-        "0": 1272870,
-        "1": 2048494,
-        "2": 2296274,
-        "3": 2378870,
-        "4": 2461463,
-        "5": 2667947,
-        "6": 2874436,
-        "7": 3080921,
-        "8": 3287409,
-        "9": 3303774,
-        "10+": 3634153
-      },
-      "trade_matching": {
-        "under_first_apron_brackets": [
-          {
-            "outgoing_max": "match_t1",
-            "take_back": "2.00x + 250000"
-          },
-          {
-            "outgoing_max": "match_t2",
-            "take_back": "1.00x + match_t1"
-          },
-          {
-            "outgoing_max": null,
-            "take_back": "1.25x + 250000"
-          }
-        ],
-        "first_apron_pct": 1.1,
-        "first_apron_pct_confirm": true,
-        "second_apron_pct": 1.0,
-        "second_apron_no_aggregation": true
-      },
-      "hard_cap_triggers": {
-        "first_apron": [
-          "full_mle",
-          "bae",
-          "sign_and_trade_acquire",
-          "use_any_tpe_MIN"
-        ],
-        "second_apron": [
-          "taxpayer_mle"
-        ]
-      },
-      "exception_terms": {
-        "full_mle": {
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        },
-        "taxpayer_mle": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "second_apron"
-        },
-        "room_exception": {
-          "max_years": 3,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": null
-        },
-        "bae": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        }
-      },
-      "bird_rights": {
-        "full_bird": {
-          "seasons_required": 3,
-          "max_years": 5,
-          "max_raise_pct": 0.08,
-          "starting_salary_rule": "up to the max"
-        },
-        "early_bird": {
-          "seasons_required": 2,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
-        },
-        "non_bird": {
-          "seasons_required": 1,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
-        }
-      },
-      "repeater_lookback_years": 4,
-      "repeater_threshold_years": 3,
-      "frozen_pick": {
-        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
-        "counting_window_candidates": [
-          "2_of_4",
-          "3_of_5"
-        ],
-        "confirm": true
-      },
-      "tax_brackets_nonrepeater_approx": [
-        {
-          "over_by_max": 5000000,
-          "rate": 1.5
-        },
-        {
-          "over_by_max": 10000000,
-          "rate": 1.75
-        },
-        {
-          "over_by_max": 15000000,
-          "rate": 2.5
-        },
-        {
-          "over_by_max": 20000000,
-          "rate": 4.75
-        },
-        {
-          "over_by_max": null,
-          "rate": 5.75
-        }
-      ],
-      "tax_brackets_confirm": true,
-      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
-      "is_projection": false,
-      "source": "NBA PR, 'NBA Salary Cap for 2025-26 season set at $154.647 million' (https://pr.nba.com/nba-salary-cap-2025-26-season). FINAL.",
-      "as_of_date": "2026-08-26"
+ "built": "2026-08-26",
+ "growth_assumption_outyears": 1.07,
+ "notes": "2025-26 and 2026-27 are FINAL (league-set); 2027-28+ scaled forward. 2026-27 was upgraded from projection to final on 2026-08-26 against NBA.com + Hoops Rumors; see source field. Confirm flags mark figures the rules reference still says need a primary-source check (first-apron matching %, exact tax bracket rates, frozen-pick window).",
+ "seasons": {
+  "2025-26": {
+   "season": "2025-26",
+   "salary_cap": 154647000,
+   "luxury_tax": 187895000,
+   "first_apron": 195945000,
+   "second_apron": 207824000,
+   "min_team_salary": 139182000,
+   "full_mle": 14104000,
+   "taxpayer_mle": 5685000,
+   "room_exception": 8781000,
+   "bae": 5134000,
+   "match_t1": 7500000,
+   "match_t2": 29000000,
+   "min_salary_by_yos": {
+    "0": 1272870,
+    "1": 2048494,
+    "2": 2296274,
+    "3": 2378870,
+    "4": 2461463,
+    "5": 2667947,
+    "6": 2874436,
+    "7": 3080921,
+    "8": 3287409,
+    "9": 3303774,
+    "10+": 3634153
+   },
+   "trade_matching": {
+    "under_first_apron_brackets": [
+     {
+      "outgoing_max": "match_t1",
+      "take_back": "2.00x + 250000"
+     },
+     {
+      "outgoing_max": "match_t2",
+      "take_back": "1.00x + match_t1"
+     },
+     {
+      "outgoing_max": null,
+      "take_back": "1.25x + 250000"
+     }
+    ],
+    "first_apron_pct": 1.1,
+    "first_apron_pct_confirm": true,
+    "second_apron_pct": 1.0,
+    "second_apron_no_aggregation": true
+   },
+   "hard_cap_triggers": {
+    "first_apron": [
+     "full_mle",
+     "bae",
+     "sign_and_trade_acquire",
+     "use_any_tpe_MIN"
+    ],
+    "second_apron": [
+     "taxpayer_mle"
+    ]
+   },
+   "exception_terms": {
+    "full_mle": {
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
     },
-    "2026-27": {
-      "season": "2026-27",
-      "salary_cap": 164961000,
-      "luxury_tax": 200428000,
-      "first_apron": 209015000,
-      "second_apron": 221686000,
-      "min_team_salary": 148465000,
-      "full_mle": 15044000,
-      "taxpayer_mle": 6064000,
-      "room_exception": 9366000,
-      "bae": 5477000,
-      "match_t1": 8000000,
-      "match_t2": 30934000,
-      "min_salary_by_yos": {
-        "0": 1358000,
-        "1": 2185000,
-        "2": 2449000,
-        "3": 2538000,
-        "4": 2626000,
-        "5": 2846000,
-        "6": 3066000,
-        "7": 3286000,
-        "8": 3507000,
-        "9": 3524000,
-        "10+": 3877000
-      },
-      "trade_matching": {
-        "under_first_apron_brackets": [
-          {
-            "outgoing_max": "match_t1",
-            "take_back": "2.00x + 250000"
-          },
-          {
-            "outgoing_max": "match_t2",
-            "take_back": "1.00x + match_t1"
-          },
-          {
-            "outgoing_max": null,
-            "take_back": "1.25x + 250000"
-          }
-        ],
-        "first_apron_pct": 1.1,
-        "first_apron_pct_confirm": true,
-        "second_apron_pct": 1.0,
-        "second_apron_no_aggregation": true
-      },
-      "hard_cap_triggers": {
-        "first_apron": [
-          "full_mle",
-          "bae",
-          "sign_and_trade_acquire",
-          "use_any_tpe_MIN"
-        ],
-        "second_apron": [
-          "taxpayer_mle"
-        ]
-      },
-      "exception_terms": {
-        "full_mle": {
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        },
-        "taxpayer_mle": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "second_apron"
-        },
-        "room_exception": {
-          "max_years": 3,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": null
-        },
-        "bae": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        }
-      },
-      "bird_rights": {
-        "full_bird": {
-          "seasons_required": 3,
-          "max_years": 5,
-          "max_raise_pct": 0.08,
-          "starting_salary_rule": "up to the max"
-        },
-        "early_bird": {
-          "seasons_required": 2,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
-        },
-        "non_bird": {
-          "seasons_required": 1,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
-        }
-      },
-      "repeater_lookback_years": 4,
-      "repeater_threshold_years": 3,
-      "frozen_pick": {
-        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
-        "counting_window_candidates": [
-          "2_of_4",
-          "3_of_5"
-        ],
-        "confirm": true
-      },
-      "tax_brackets_nonrepeater_approx": [
-        {
-          "over_by_max": 5000000,
-          "rate": 1.5
-        },
-        {
-          "over_by_max": 10000000,
-          "rate": 1.75
-        },
-        {
-          "over_by_max": 15000000,
-          "rate": 2.5
-        },
-        {
-          "over_by_max": 20000000,
-          "rate": 4.75
-        },
-        {
-          "over_by_max": null,
-          "rate": 5.75
-        }
-      ],
-      "tax_brackets_confirm": true,
-      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
-      "is_projection": false,
-      "source": "FINAL, effective 12:01am ET 2026-07-01. Cap/tax/apron/min-team-salary: NBA.com, 'NBA sets salary cap for 2026-27 season at $164.961 million' (https://www.nba.com/news/nba-salary-cap-2026-27-season). Exception values (MLE/TPMLE/room/BAE) and their term limits: Hoops Rumors, 'Values Of 2026/27 Mid-Level, Bi-Annual Exceptions' (https://www.hoopsrumors.com/2026/07/values-of-2026-27-mid-level-bi-annual-exceptions.html). Verified 2026-08-26 for the Kuminga project (item 1).",
-      "as_of_date": "2026-08-26"
+    "taxpayer_mle": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "second_apron"
     },
-    "2027-28": {
-      "season": "2027-28",
-      "salary_cap": 176508000,
-      "luxury_tax": 214458000,
-      "first_apron": 223646000,
-      "second_apron": 237204000,
-      "min_team_salary": 158858000,
-      "full_mle": 16097000,
-      "taxpayer_mle": 6488000,
-      "room_exception": 10022000,
-      "bae": 5860000,
-      "match_t1": 8560000,
-      "match_t2": 33099000,
-      "min_salary_by_yos": {
-        "0": 1453000,
-        "1": 2338000,
-        "2": 2620000,
-        "3": 2716000,
-        "4": 2810000,
-        "5": 3045000,
-        "6": 3281000,
-        "7": 3516000,
-        "8": 3752000,
-        "9": 3771000,
-        "10+": 4148000
-      },
-      "trade_matching": {
-        "under_first_apron_brackets": [
-          {
-            "outgoing_max": "match_t1",
-            "take_back": "2.00x + 250000"
-          },
-          {
-            "outgoing_max": "match_t2",
-            "take_back": "1.00x + match_t1"
-          },
-          {
-            "outgoing_max": null,
-            "take_back": "1.25x + 250000"
-          }
-        ],
-        "first_apron_pct": 1.1,
-        "first_apron_pct_confirm": true,
-        "second_apron_pct": 1.0,
-        "second_apron_no_aggregation": true
-      },
-      "hard_cap_triggers": {
-        "first_apron": [
-          "full_mle",
-          "bae",
-          "sign_and_trade_acquire",
-          "use_any_tpe_MIN"
-        ],
-        "second_apron": [
-          "taxpayer_mle"
-        ]
-      },
-      "exception_terms": {
-        "full_mle": {
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        },
-        "taxpayer_mle": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "second_apron"
-        },
-        "room_exception": {
-          "max_years": 3,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": null
-        },
-        "bae": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        }
-      },
-      "bird_rights": {
-        "full_bird": {
-          "seasons_required": 3,
-          "max_years": 5,
-          "max_raise_pct": 0.08,
-          "starting_salary_rule": "up to the max"
-        },
-        "early_bird": {
-          "seasons_required": 2,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
-        },
-        "non_bird": {
-          "seasons_required": 1,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
-        }
-      },
-      "repeater_lookback_years": 4,
-      "repeater_threshold_years": 3,
-      "frozen_pick": {
-        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
-        "counting_window_candidates": [
-          "2_of_4",
-          "3_of_5"
-        ],
-        "confirm": true
-      },
-      "tax_brackets_nonrepeater_approx": [
-        {
-          "over_by_max": 5000000,
-          "rate": 1.5
-        },
-        {
-          "over_by_max": 10000000,
-          "rate": 1.75
-        },
-        {
-          "over_by_max": 15000000,
-          "rate": 2.5
-        },
-        {
-          "over_by_max": 20000000,
-          "rate": 4.75
-        },
-        {
-          "over_by_max": null,
-          "rate": 5.75
-        }
-      ],
-      "tax_brackets_confirm": true,
-      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
-      "is_projection": true,
-      "source": "projected from 2026-27 at 1.07x/yr growth",
-      "as_of_date": "2026-08-26"
+    "room_exception": {
+     "max_years": 3,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": null
     },
-    "2028-29": {
-      "season": "2028-29",
-      "salary_cap": 188864000,
-      "luxury_tax": 229470000,
-      "first_apron": 239301000,
-      "second_apron": 253808000,
-      "min_team_salary": 169978000,
-      "full_mle": 17224000,
-      "taxpayer_mle": 6942000,
-      "room_exception": 10724000,
-      "bae": 6270000,
-      "match_t1": 9159000,
-      "match_t2": 35416000,
-      "min_salary_by_yos": {
-        "0": 1555000,
-        "1": 2502000,
-        "2": 2803000,
-        "3": 2906000,
-        "4": 3007000,
-        "5": 3258000,
-        "6": 3511000,
-        "7": 3762000,
-        "8": 4015000,
-        "9": 4035000,
-        "10+": 4438000
-      },
-      "trade_matching": {
-        "under_first_apron_brackets": [
-          {
-            "outgoing_max": "match_t1",
-            "take_back": "2.00x + 250000"
-          },
-          {
-            "outgoing_max": "match_t2",
-            "take_back": "1.00x + match_t1"
-          },
-          {
-            "outgoing_max": null,
-            "take_back": "1.25x + 250000"
-          }
-        ],
-        "first_apron_pct": 1.1,
-        "first_apron_pct_confirm": true,
-        "second_apron_pct": 1.0,
-        "second_apron_no_aggregation": true
-      },
-      "hard_cap_triggers": {
-        "first_apron": [
-          "full_mle",
-          "bae",
-          "sign_and_trade_acquire",
-          "use_any_tpe_MIN"
-        ],
-        "second_apron": [
-          "taxpayer_mle"
-        ]
-      },
-      "exception_terms": {
-        "full_mle": {
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        },
-        "taxpayer_mle": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "second_apron"
-        },
-        "room_exception": {
-          "max_years": 3,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": null
-        },
-        "bae": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        }
-      },
-      "bird_rights": {
-        "full_bird": {
-          "seasons_required": 3,
-          "max_years": 5,
-          "max_raise_pct": 0.08,
-          "starting_salary_rule": "up to the max"
-        },
-        "early_bird": {
-          "seasons_required": 2,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
-        },
-        "non_bird": {
-          "seasons_required": 1,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
-        }
-      },
-      "repeater_lookback_years": 4,
-      "repeater_threshold_years": 3,
-      "frozen_pick": {
-        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
-        "counting_window_candidates": [
-          "2_of_4",
-          "3_of_5"
-        ],
-        "confirm": true
-      },
-      "tax_brackets_nonrepeater_approx": [
-        {
-          "over_by_max": 5000000,
-          "rate": 1.5
-        },
-        {
-          "over_by_max": 10000000,
-          "rate": 1.75
-        },
-        {
-          "over_by_max": 15000000,
-          "rate": 2.5
-        },
-        {
-          "over_by_max": 20000000,
-          "rate": 4.75
-        },
-        {
-          "over_by_max": null,
-          "rate": 5.75
-        }
-      ],
-      "tax_brackets_confirm": true,
-      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
-      "is_projection": true,
-      "source": "projected from 2026-27 at 1.07x/yr growth",
-      "as_of_date": "2026-08-26"
-    },
-    "2029-30": {
-      "season": "2029-30",
-      "salary_cap": 202084000,
-      "luxury_tax": 245533000,
-      "first_apron": 256052000,
-      "second_apron": 271575000,
-      "min_team_salary": 181876000,
-      "full_mle": 18430000,
-      "taxpayer_mle": 7428000,
-      "room_exception": 11475000,
-      "bae": 6709000,
-      "match_t1": 9800000,
-      "match_t2": 37895000,
-      "min_salary_by_yos": {
-        "0": 1664000,
-        "1": 2677000,
-        "2": 2999000,
-        "3": 3109000,
-        "4": 3217000,
-        "5": 3486000,
-        "6": 3757000,
-        "7": 4025000,
-        "8": 4296000,
-        "9": 4317000,
-        "10+": 4749000
-      },
-      "trade_matching": {
-        "under_first_apron_brackets": [
-          {
-            "outgoing_max": "match_t1",
-            "take_back": "2.00x + 250000"
-          },
-          {
-            "outgoing_max": "match_t2",
-            "take_back": "1.00x + match_t1"
-          },
-          {
-            "outgoing_max": null,
-            "take_back": "1.25x + 250000"
-          }
-        ],
-        "first_apron_pct": 1.1,
-        "first_apron_pct_confirm": true,
-        "second_apron_pct": 1.0,
-        "second_apron_no_aggregation": true
-      },
-      "hard_cap_triggers": {
-        "first_apron": [
-          "full_mle",
-          "bae",
-          "sign_and_trade_acquire",
-          "use_any_tpe_MIN"
-        ],
-        "second_apron": [
-          "taxpayer_mle"
-        ]
-      },
-      "exception_terms": {
-        "full_mle": {
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        },
-        "taxpayer_mle": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "second_apron"
-        },
-        "room_exception": {
-          "max_years": 3,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": null
-        },
-        "bae": {
-          "max_years": 2,
-          "max_raise_pct": 0.05,
-          "hard_caps_at": "first_apron"
-        }
-      },
-      "bird_rights": {
-        "full_bird": {
-          "seasons_required": 3,
-          "max_years": 5,
-          "max_raise_pct": 0.08,
-          "starting_salary_rule": "up to the max"
-        },
-        "early_bird": {
-          "seasons_required": 2,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
-        },
-        "non_bird": {
-          "seasons_required": 1,
-          "max_years": 4,
-          "max_raise_pct": 0.05,
-          "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
-        }
-      },
-      "repeater_lookback_years": 4,
-      "repeater_threshold_years": 3,
-      "frozen_pick": {
-        "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
-        "counting_window_candidates": [
-          "2_of_4",
-          "3_of_5"
-        ],
-        "confirm": true
-      },
-      "tax_brackets_nonrepeater_approx": [
-        {
-          "over_by_max": 5000000,
-          "rate": 1.5
-        },
-        {
-          "over_by_max": 10000000,
-          "rate": 1.75
-        },
-        {
-          "over_by_max": 15000000,
-          "rate": 2.5
-        },
-        {
-          "over_by_max": 20000000,
-          "rate": 4.75
-        },
-        {
-          "over_by_max": null,
-          "rate": 5.75
-        }
-      ],
-      "tax_brackets_confirm": true,
-      "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
-      "is_projection": true,
-      "source": "projected from 2026-27 at 1.07x/yr growth",
-      "as_of_date": "2026-08-26"
+    "bae": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
     }
+   },
+   "bird_rights": {
+    "full_bird": {
+     "seasons_required": 3,
+     "max_years": 5,
+     "max_raise_pct": 0.08,
+     "starting_salary_rule": "up to the max"
+    },
+    "early_bird": {
+     "seasons_required": 2,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
+    },
+    "non_bird": {
+     "seasons_required": 1,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
+    }
+   },
+   "repeater_lookback_years": 4,
+   "repeater_threshold_years": 3,
+   "frozen_pick": {
+    "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+    "counting_window_candidates": [
+     "2_of_4",
+     "3_of_5"
+    ],
+    "confirm": true
+   },
+   "tax_brackets_nonrepeater_approx": [
+    {
+     "over_by_max": 5000000,
+     "rate": 1.5
+    },
+    {
+     "over_by_max": 10000000,
+     "rate": 1.75
+    },
+    {
+     "over_by_max": 15000000,
+     "rate": 2.5
+    },
+    {
+     "over_by_max": 20000000,
+     "rate": 4.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 5.75
+    }
+   ],
+   "tax_brackets_confirm": true,
+   "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+   "is_projection": false,
+   "source": "NBA PR, 'NBA Salary Cap for 2025-26 season set at $154.647 million' (https://pr.nba.com/nba-salary-cap-2025-26-season). FINAL.",
+   "as_of_date": "2026-08-26"
+  },
+  "2026-27": {
+   "season": "2026-27",
+   "salary_cap": 164961000,
+   "luxury_tax": 200428000,
+   "first_apron": 209015000,
+   "second_apron": 221686000,
+   "min_team_salary": 148465000,
+   "full_mle": 15044000,
+   "taxpayer_mle": 6064000,
+   "room_exception": 9366000,
+   "bae": 5477000,
+   "match_t1": 8000000,
+   "match_t2": 30934000,
+   "min_salary_by_yos": {
+    "0": 1358000,
+    "1": 2185000,
+    "2": 2449000,
+    "3": 2538000,
+    "4": 2626000,
+    "5": 2846000,
+    "6": 3066000,
+    "7": 3286000,
+    "8": 3507000,
+    "9": 3524000,
+    "10+": 3877000
+   },
+   "trade_matching": {
+    "under_first_apron_brackets": [
+     {
+      "outgoing_max": "match_t1",
+      "take_back": "2.00x + 250000"
+     },
+     {
+      "outgoing_max": "match_t2",
+      "take_back": "1.00x + match_t1"
+     },
+     {
+      "outgoing_max": null,
+      "take_back": "1.25x + 250000"
+     }
+    ],
+    "first_apron_pct": 1.1,
+    "first_apron_pct_confirm": true,
+    "second_apron_pct": 1.0,
+    "second_apron_no_aggregation": true
+   },
+   "hard_cap_triggers": {
+    "first_apron": [
+     "full_mle",
+     "bae",
+     "sign_and_trade_acquire",
+     "use_any_tpe_MIN"
+    ],
+    "second_apron": [
+     "taxpayer_mle"
+    ]
+   },
+   "exception_terms": {
+    "full_mle": {
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    },
+    "taxpayer_mle": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "second_apron"
+    },
+    "room_exception": {
+     "max_years": 3,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": null
+    },
+    "bae": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    }
+   },
+   "bird_rights": {
+    "full_bird": {
+     "seasons_required": 3,
+     "max_years": 5,
+     "max_raise_pct": 0.08,
+     "starting_salary_rule": "up to the max"
+    },
+    "early_bird": {
+     "seasons_required": 2,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
+    },
+    "non_bird": {
+     "seasons_required": 1,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
+    }
+   },
+   "repeater_lookback_years": 4,
+   "repeater_threshold_years": 3,
+   "frozen_pick": {
+    "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+    "counting_window_candidates": [
+     "2_of_4",
+     "3_of_5"
+    ],
+    "confirm": true
+   },
+   "tax_brackets_nonrepeater_approx": [
+    {
+     "over_by_max": 6064000,
+     "rate": 1.0
+    },
+    {
+     "over_by_max": 12128000,
+     "rate": 1.25
+    },
+    {
+     "over_by_max": 18192000,
+     "rate": 3.5
+    },
+    {
+     "over_by_max": 24256000,
+     "rate": 4.75
+    },
+    {
+     "over_by_max": 30320000,
+     "rate": 5.25
+    },
+    {
+     "over_by_max": 36384000,
+     "rate": 5.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 6.25
+    }
+   ],
+   "tax_brackets_confirm": false,
+   "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+   "is_projection": false,
+   "source": "FINAL, effective 12:01am ET 2026-07-01. Cap/tax/apron/min-team-salary: NBA.com, 'NBA sets salary cap for 2026-27 season at $164.961 million' (https://www.nba.com/news/nba-salary-cap-2026-27-season). Exception values (MLE/TPMLE/room/BAE) and their term limits: Hoops Rumors, 'Values Of 2026/27 Mid-Level, Bi-Annual Exceptions' (https://www.hoopsrumors.com/2026/07/values-of-2026-27-mid-level-bi-annual-exceptions.html). Verified 2026-08-26 for the Kuminga project (item 1).",
+   "as_of_date": "2026-08-26",
+   "tax_brackets_repeater": [
+    {
+     "over_by_max": 6064000,
+     "rate": 3.0
+    },
+    {
+     "over_by_max": 12128000,
+     "rate": 3.25
+    },
+    {
+     "over_by_max": 18192000,
+     "rate": 5.5
+    },
+    {
+     "over_by_max": 24256000,
+     "rate": 6.75
+    },
+    {
+     "over_by_max": 30320000,
+     "rate": 7.25
+    },
+    {
+     "over_by_max": 36384000,
+     "rate": 7.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 8.25
+    }
+   ],
+   "tax_bracket_increment": 6064000,
+   "tax_brackets_source": "2023 CBA schedule. Increment is $5,000,000 indexed to the cap: 5,000,000 * 164,961,000 / 136,021,000 = 6,063,806 -> $6,064,000. Non-repeater rates 1.00/1.25/3.50/4.75 then +0.50 per bracket; repeater adds 2.00 to each. Verified 2026-08-27 against Hoops Rumors luxury-tax glossary and CBA Guide, which agree. REPLACES a pre-2023-CBA table ($5,000,000 width, rates 1.50/1.75/2.50/4.75/5.75) that overstated Minnesota's bill by 22-50%."
+  },
+  "2027-28": {
+   "season": "2027-28",
+   "salary_cap": 176508000,
+   "luxury_tax": 214458000,
+   "first_apron": 223646000,
+   "second_apron": 237204000,
+   "min_team_salary": 158858000,
+   "full_mle": 16097000,
+   "taxpayer_mle": 6488000,
+   "room_exception": 10022000,
+   "bae": 5860000,
+   "match_t1": 8560000,
+   "match_t2": 33099000,
+   "min_salary_by_yos": {
+    "0": 1453000,
+    "1": 2338000,
+    "2": 2620000,
+    "3": 2716000,
+    "4": 2810000,
+    "5": 3045000,
+    "6": 3281000,
+    "7": 3516000,
+    "8": 3752000,
+    "9": 3771000,
+    "10+": 4148000
+   },
+   "trade_matching": {
+    "under_first_apron_brackets": [
+     {
+      "outgoing_max": "match_t1",
+      "take_back": "2.00x + 250000"
+     },
+     {
+      "outgoing_max": "match_t2",
+      "take_back": "1.00x + match_t1"
+     },
+     {
+      "outgoing_max": null,
+      "take_back": "1.25x + 250000"
+     }
+    ],
+    "first_apron_pct": 1.1,
+    "first_apron_pct_confirm": true,
+    "second_apron_pct": 1.0,
+    "second_apron_no_aggregation": true
+   },
+   "hard_cap_triggers": {
+    "first_apron": [
+     "full_mle",
+     "bae",
+     "sign_and_trade_acquire",
+     "use_any_tpe_MIN"
+    ],
+    "second_apron": [
+     "taxpayer_mle"
+    ]
+   },
+   "exception_terms": {
+    "full_mle": {
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    },
+    "taxpayer_mle": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "second_apron"
+    },
+    "room_exception": {
+     "max_years": 3,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": null
+    },
+    "bae": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    }
+   },
+   "bird_rights": {
+    "full_bird": {
+     "seasons_required": 3,
+     "max_years": 5,
+     "max_raise_pct": 0.08,
+     "starting_salary_rule": "up to the max"
+    },
+    "early_bird": {
+     "seasons_required": 2,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
+    },
+    "non_bird": {
+     "seasons_required": 1,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
+    }
+   },
+   "repeater_lookback_years": 4,
+   "repeater_threshold_years": 3,
+   "frozen_pick": {
+    "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+    "counting_window_candidates": [
+     "2_of_4",
+     "3_of_5"
+    ],
+    "confirm": true
+   },
+   "tax_brackets_nonrepeater_approx": [
+    {
+     "over_by_max": 5000000,
+     "rate": 1.5
+    },
+    {
+     "over_by_max": 10000000,
+     "rate": 1.75
+    },
+    {
+     "over_by_max": 15000000,
+     "rate": 2.5
+    },
+    {
+     "over_by_max": 20000000,
+     "rate": 4.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 5.75
+    }
+   ],
+   "tax_brackets_confirm": true,
+   "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+   "is_projection": true,
+   "source": "projected from 2026-27 at 1.07x/yr growth",
+   "as_of_date": "2026-08-26"
+  },
+  "2028-29": {
+   "season": "2028-29",
+   "salary_cap": 188864000,
+   "luxury_tax": 229470000,
+   "first_apron": 239301000,
+   "second_apron": 253808000,
+   "min_team_salary": 169978000,
+   "full_mle": 17224000,
+   "taxpayer_mle": 6942000,
+   "room_exception": 10724000,
+   "bae": 6270000,
+   "match_t1": 9159000,
+   "match_t2": 35416000,
+   "min_salary_by_yos": {
+    "0": 1555000,
+    "1": 2502000,
+    "2": 2803000,
+    "3": 2906000,
+    "4": 3007000,
+    "5": 3258000,
+    "6": 3511000,
+    "7": 3762000,
+    "8": 4015000,
+    "9": 4035000,
+    "10+": 4438000
+   },
+   "trade_matching": {
+    "under_first_apron_brackets": [
+     {
+      "outgoing_max": "match_t1",
+      "take_back": "2.00x + 250000"
+     },
+     {
+      "outgoing_max": "match_t2",
+      "take_back": "1.00x + match_t1"
+     },
+     {
+      "outgoing_max": null,
+      "take_back": "1.25x + 250000"
+     }
+    ],
+    "first_apron_pct": 1.1,
+    "first_apron_pct_confirm": true,
+    "second_apron_pct": 1.0,
+    "second_apron_no_aggregation": true
+   },
+   "hard_cap_triggers": {
+    "first_apron": [
+     "full_mle",
+     "bae",
+     "sign_and_trade_acquire",
+     "use_any_tpe_MIN"
+    ],
+    "second_apron": [
+     "taxpayer_mle"
+    ]
+   },
+   "exception_terms": {
+    "full_mle": {
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    },
+    "taxpayer_mle": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "second_apron"
+    },
+    "room_exception": {
+     "max_years": 3,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": null
+    },
+    "bae": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    }
+   },
+   "bird_rights": {
+    "full_bird": {
+     "seasons_required": 3,
+     "max_years": 5,
+     "max_raise_pct": 0.08,
+     "starting_salary_rule": "up to the max"
+    },
+    "early_bird": {
+     "seasons_required": 2,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
+    },
+    "non_bird": {
+     "seasons_required": 1,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
+    }
+   },
+   "repeater_lookback_years": 4,
+   "repeater_threshold_years": 3,
+   "frozen_pick": {
+    "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+    "counting_window_candidates": [
+     "2_of_4",
+     "3_of_5"
+    ],
+    "confirm": true
+   },
+   "tax_brackets_nonrepeater_approx": [
+    {
+     "over_by_max": 5000000,
+     "rate": 1.5
+    },
+    {
+     "over_by_max": 10000000,
+     "rate": 1.75
+    },
+    {
+     "over_by_max": 15000000,
+     "rate": 2.5
+    },
+    {
+     "over_by_max": 20000000,
+     "rate": 4.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 5.75
+    }
+   ],
+   "tax_brackets_confirm": true,
+   "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+   "is_projection": true,
+   "source": "projected from 2026-27 at 1.07x/yr growth",
+   "as_of_date": "2026-08-26"
+  },
+  "2029-30": {
+   "season": "2029-30",
+   "salary_cap": 202084000,
+   "luxury_tax": 245533000,
+   "first_apron": 256052000,
+   "second_apron": 271575000,
+   "min_team_salary": 181876000,
+   "full_mle": 18430000,
+   "taxpayer_mle": 7428000,
+   "room_exception": 11475000,
+   "bae": 6709000,
+   "match_t1": 9800000,
+   "match_t2": 37895000,
+   "min_salary_by_yos": {
+    "0": 1664000,
+    "1": 2677000,
+    "2": 2999000,
+    "3": 3109000,
+    "4": 3217000,
+    "5": 3486000,
+    "6": 3757000,
+    "7": 4025000,
+    "8": 4296000,
+    "9": 4317000,
+    "10+": 4749000
+   },
+   "trade_matching": {
+    "under_first_apron_brackets": [
+     {
+      "outgoing_max": "match_t1",
+      "take_back": "2.00x + 250000"
+     },
+     {
+      "outgoing_max": "match_t2",
+      "take_back": "1.00x + match_t1"
+     },
+     {
+      "outgoing_max": null,
+      "take_back": "1.25x + 250000"
+     }
+    ],
+    "first_apron_pct": 1.1,
+    "first_apron_pct_confirm": true,
+    "second_apron_pct": 1.0,
+    "second_apron_no_aggregation": true
+   },
+   "hard_cap_triggers": {
+    "first_apron": [
+     "full_mle",
+     "bae",
+     "sign_and_trade_acquire",
+     "use_any_tpe_MIN"
+    ],
+    "second_apron": [
+     "taxpayer_mle"
+    ]
+   },
+   "exception_terms": {
+    "full_mle": {
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    },
+    "taxpayer_mle": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "second_apron"
+    },
+    "room_exception": {
+     "max_years": 3,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": null
+    },
+    "bae": {
+     "max_years": 2,
+     "max_raise_pct": 0.05,
+     "hard_caps_at": "first_apron"
+    }
+   },
+   "bird_rights": {
+    "full_bird": {
+     "seasons_required": 3,
+     "max_years": 5,
+     "max_raise_pct": 0.08,
+     "starting_salary_rule": "up to the max"
+    },
+    "early_bird": {
+     "seasons_required": 2,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"
+    },
+    "non_bird": {
+     "seasons_required": 1,
+     "max_years": 4,
+     "max_raise_pct": 0.05,
+     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"
+    }
+   },
+   "repeater_lookback_years": 4,
+   "repeater_threshold_years": 3,
+   "frozen_pick": {
+    "mechanism": "above 2nd apron freezes the first 7 drafts out; sustained membership moves it to pick 30",
+    "counting_window_candidates": [
+     "2_of_4",
+     "3_of_5"
+    ],
+    "confirm": true
+   },
+   "tax_brackets_nonrepeater_approx": [
+    {
+     "over_by_max": 5000000,
+     "rate": 1.5
+    },
+    {
+     "over_by_max": 10000000,
+     "rate": 1.75
+    },
+    {
+     "over_by_max": 15000000,
+     "rate": 2.5
+    },
+    {
+     "over_by_max": 20000000,
+     "rate": 4.75
+    },
+    {
+     "over_by_max": null,
+     "rate": 5.75
+    }
+   ],
+   "tax_brackets_confirm": true,
+   "stepien_rule": "cannot trade a future first that leaves the team without a first in two consecutive future drafts; tradeable window is 7 drafts out",
+   "is_projection": true,
+   "source": "projected from 2026-27 at 1.07x/yr growth",
+   "as_of_date": "2026-08-26"
   }
+ }
 }

@@ -51,3 +51,13 @@ What exists instead: `kuminga/data/nba_draft_picks_future_2026_08_26.csv`, which
 **New gap, from C3.** The slot finding is conditional on Terrence Shannon Jr. being the man who fills the 4. Minnesota still has to reach the 14-man minimum, and if the body they add is a forward, the alternative improves and Kuminga's margin narrows. Re-run `slot_analysis.py` after any signing.
 
 **Standing, unchanged.** The matchup overlay is off and its measured cost (0.11pp) is computed on profiles that exist for 12 of 30 teams, so it is a floor rather than an estimate. DARKO remains integer-rounded. The 2027-28 and 2028-29 thresholds remain a forward scale. The impact spine was not refit.
+
+## 12. Early Bird rights and an exercised player option (CONFIRM, U4)
+
+If Kuminga picks up his 2027-28 player option, Minnesota reaches the 2028 offseason with two consecutive seasons of his service and, on the plain reading, **Early Bird rights** (greater of 175% of prior salary, $11,142,600, or 105% of the league-average salary; up to four years; the new deal must run at least two years and its second season cannot be an option).
+
+**What is not confirmed:** the sources consulted state Early Bird requires "two consecutive seasons with one team without changing teams via free agency" but do **not explicitly address whether a season played on an exercised player option counts** toward that total. It plainly should, because exercising an option continues the same contract and involves no free agency, but that inference is not sourced.
+
+**To close:** find the CBA definition of "Early Qualifying Veteran Free Agent" (Article I definitions) and confirm the service-counting language. Section 5 currently states the Early Bird branch with this caveat attached; if it turns out an option year does NOT count, the whole opt-in branch collapses back to Non-Bird and section 5 must be rewritten.
+
+Status as of 2026-08-27: open. Two sources consulted (Hoops Rumors Early Bird glossary, CBA Guide).

@@ -102,7 +102,62 @@ def build_impacts(value: pd.DataFrame, darko: pd.DataFrame, bio: pd.DataFrame) -
     for f in FORKS:
         for pid, d in imps[f].items():
             d["def"] = d.pop("def_")
+    apply_aging(imps)
     return imps, matched
+
+
+# ---------------------------------------------------------------------------
+# U1: the aging adjustment. OPT-IN ONLY, via KUMINGA_AGING=1 in the environment, so
+# the default behaviour of every existing script is byte-identical to before.
+#
+# `aging_curve.py` fits an expected ONE-YEAR change in net rating by age and writes
+# `aging_applied.csv`. Here that change is added to a player's impact, split evenly
+# between the two sides because nothing in the fit says how aging divides between
+# offence and defence. net = off - def, so half is added to off and half subtracted
+# from def, which moves net by exactly the adjustment.
+# ---------------------------------------------------------------------------
+AGING_ENV = "KUMINGA_AGING"
+
+
+def unaged_impacts(value, darko, bio):
+    """A fresh impact set with the aging adjustment suppressed."""
+    prev = os.environ.get(AGING_ENV)
+    os.environ[AGING_ENV] = "0"
+    try:
+        out, _ = build_impacts(value, darko, bio)
+    finally:
+        if prev is None:
+            os.environ.pop(AGING_ENV, None)
+        else:
+            os.environ[AGING_ENV] = prev
+    return out
+
+
+def aging_enabled() -> bool:
+    return os.environ.get(AGING_ENV, "") == "1"
+
+
+def apply_aging(imps: dict) -> int:
+    if not aging_enabled():
+        return 0
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outputs",
+                        "aging_applied.csv")
+    path = os.path.abspath(path)
+    if not os.path.exists(path):
+        raise SystemExit(f"{AGING_ENV}=1 but {path} is missing; run aging_curve.py first")
+    a = pd.read_csv(path)
+    a = a[a.scenario == "current"].dropna(subset=["player_id"])
+    adj = {str(int(pid)): float(v) for pid, v in zip(a.player_id, a.age_adj)}
+    n = 0
+    for f in FORKS:
+        for pid, d in imps[f].items():
+            v = adj.get(str(pid))
+            if v is None:
+                continue
+            d["off"] += v / 2.0
+            d["def"] -= v / 2.0
+            n += 1
+    return n // max(len(FORKS), 1)
 
 
 def add_rookie_impacts(imps: dict, pool: pd.DataFrame) -> int:
@@ -157,18 +212,25 @@ def main():
         r.note(f"deflate beta = {beta}; persist slope = {p['persist_slope']}, "
                f"int = {p['persist_int']}")
 
+        # U1: `imps` is AGED when KUMINGA_AGING=1. The BASELINE rollup must not be:
+        # it stands for last season's roster at last season's ages, and delta_net is
+        # current-minus-baseline. Age both sides and every returning player's adjustment
+        # cancels exactly, which silently turns the aging pass into a no-op.
+        imps_base = unaged_impacts(value, darko, bio) if aging_enabled() else imps
         rows = []
         for fork in FORKS:
             imp = imps[fork]
+            imp_base = imps_base[fork]
             for team in sorted(rot.team_abbr.unique()):
                 roll = {}
                 for scen in ("baseline", "current"):
                     g = rot[(rot.scenario == scen) & (rot.team_abbr == team)]
                     mpg = {str(int(x.player_id)): float(x.mpg)
                            for _, x in g.iterrows() if pd.notna(x.player_id)}
-                    roll[scen] = A.rollup(mpg, imp, "rs")
+                    use = imp_base if scen == "baseline" else imp
+                    roll[scen] = A.rollup(mpg, use, "rs")
                     # coverage: how much of the rotation the fork can actually value
-                    covered = sum(m for pid, m in mpg.items() if pid in imp)
+                    covered = sum(m for pid, m in mpg.items() if pid in use)
                     roll[scen]["coverage"] = covered / 240.0
 
                 m25 = measured.get(team)

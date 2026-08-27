@@ -6,3 +6,4 @@ incomplete roster charge,0.0,True,"Zero, correctly: the charge applies only belo
 dead money,0.0,True,Zero on the current book. Non-zero only in the stretch branch.
 free-agent cap holds,16484548.0,False,CAP basis only. Never quote the cap-basis total as an apron figure.
 two-way contracts (Enrique Freeman),0.0,False,Excluded from team salary.
+UNLIKELY BONUSES,1750000.0,True,"Apron Team Salary = Team Salary MINUS cap holds PLUS unlikely bonuses. Unlikely bonuses are excluded from cap and tax salary but INCLUDED in the apron figure. McDaniels $1,000,000 and DiVincenzo $750,000. Verified 2026-08-27 against the Hoops Rumors tax-apron glossary and the CBA Guide, and against Spotrac's own computed 2nd Apron Space of $4,064,172."

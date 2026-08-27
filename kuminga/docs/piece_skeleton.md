@@ -166,9 +166,17 @@ Because a declined option year is never "covered by a player contract" under the
 
 The first-pass option model puts **P(he opts out) at 0.50 to 0.80** and **P(Minnesota can keep him) at only 0.28 to 0.54** `[player_option_20260827T124131Z, band, labelled first pass]`.
 
+**And there is no way to negotiate around it during the season, which we checked rather than assumed.** A two-year contract is **categorically ineligible to be extended**. The waiting period is the second anniversary of signing for three- and four-year deals and the third for five- and six-year deals, and beneath that "a contract that only covers one or two seasons is ineligible to be extended" `[Hoops Rumors glossary, veteran contract extension; CBA Guide extensions table]`. Kuminga's second anniversary would arrive in the summer of 2028, after the deal has already expired. **Minnesota cannot buy the leverage back in February.** There is no extension, and renegotiation needs cap room a team $8M into the tax does not have.
+
+**But the retention door is not one door, and the piece had only described one of them.** Everything above is the branch where he **opts out**. If he instead **picks up the option and plays 2027-28**, Minnesota reaches the summer of 2028 with two consecutive seasons of his service and therefore **Early Bird rights**, which allow the greater of **175% of his prior salary, $11,142,600**, or 105% of the league-average salary, over up to four years `[Hoops Rumors glossary, Early Bird rights]`. That is a materially better position than the $7,640,640 Non-Bird cap.
+
+So the structure is: **opt out and Minnesota is nearly powerless; opt in and Minnesota is fine.** Which is exactly why the option year, and his camp's stated reason for wanting it, is the whole risk.
+
+*One thing to verify before this ships.* Sources are explicit that Early Bird needs two consecutive seasons without changing teams as a free agent, and are **not explicit that a year played on an exercised player option counts** toward it. It plainly should, since exercising an option continues the same contract rather than passing through free agency, but it is not confirmed in the sources consulted. Flagged CONFIRM in `gaps_remaining.md`.
+
 **And his camp said the quiet part out loud.** The stated reason for taking roughly half the Lakers' annual money was to get back to free agency in 2027. The model prices that event at a coin flip or worse; the player is describing it as the plan.
 
-**So the honest framing of the deal:** Minnesota is buying one year of a **23-year-old who turns 24 in October** at half his market price, and the most likely single outcome is that they lose him for nothing.
+**So the honest framing of the deal:** Minnesota is buying one year of a **23-year-old who turns 24 in October** at half his market price, the most likely single outcome is that they lose him for nothing, and there is no mechanism available to them in between.
 
 ---
 
