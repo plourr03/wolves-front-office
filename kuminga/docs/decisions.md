@@ -783,3 +783,35 @@ Aged run is primary per the decision rule; un-aged preserved in `outputs/preagin
 **No currently-quotable verdict is lost.** `ball_in`, `reid_out` and `dosunmu_retained` survive both the slot rule and the aging adjustment. `randle_out` flips again, in the opposite direction this time, which settles it: a verdict that moves under two independent modelling choices is not a finding, and it stays retired. `depth` was already sign-less.
 
 MIN's title band rises across all four views, **1.57-3.81% to 2.33-4.83%**. That is mostly a level effect: the fitted curve is net-positive league-wide because of survivorship (players who decline leave and stop contributing deltas), so most teams gain. The band is what ships, and it moved.
+
+### D53. The sim does not read the table R3 checked (G1, G3)
+
+**G1. What the all-30 field actually consumes.**
+
+```
+kuminga/data/roster_snapshot_2026_27.csv          <- THE ROOT TABLE
+  sha256 5593ba8c3df5e40470c8c841aac3d197a5e23cee1555988f7c87dcec9c9152ef
+  modified 2026-08-26T22:17:02, 516 rows, 30 teams
+  source column: "nba_player_contracts (B-Ref), scraped 2026-08-26" for 457 of 516 rows;
+                 the remaining 59 from nba_transactions rows dated 2026-07-01..07-06
+    -> build_rotations.py  -> outputs/player_pool_2026_27.csv, rotations_2026_27.csv
+    -> build_strengths.py  -> outputs/team_strengths_2026_27.csv
+    -> run_sim.py          -> outputs/sim_all30_2026_27.csv
+```
+
+`build_strengths.py` reads only `rotations_2026_27.csv`, `player_value.csv` and the DARKO file. It never opens a contracts table. **The cap layer and the sim layer are fed by two different tables.**
+
+**G3. The contradiction, resolved: the two checks read different tables and neither used the reference I attributed to it.**
+
+- **R3** compared `offseason/data/nba_contracts_2026_27_verified.csv` against **Spotrac's published apron allocations**. That is the CAP table, checked against an EXTERNAL reference, on DOLLARS. It failed 30 of 30.
+- **The August "26 of 30 reconcile to the dollar"** (D5) was **not against SalarySwish and not against any external source**. It compared **two of our own artifacts** to each other: a snapshot-derived cap hit against the trade engine's assumption, for waive-and-stretch cases. The four that disagreed (LAC, MEM, PHI, POR) differed on how to split an active player's charge from dead money; the other 26 simply had no such case to disagree about. **It was an internal consistency check on one edge case, it never tested roster membership, and it never left our own files.**
+
+So there is no contradiction to explain. One check was external and failed; the other was internal, narrow, and was never evidence that the roster table was right. **I mis-stated its scope in the earlier report and am correcting that here.**
+
+**G2, partial, and it is already decisive.** The root table has the same defects as the cap table, so this is not a processing error downstream, it is the source:
+
+- **Harden is on CLE and Giannis is on MIA in the warehouse's own `nba_player_contracts`**, so the assignments come straight from the Basketball-Reference scrape rather than from anything we did.
+- **14 of 30 teams carry more than 15 standard contracts** in `roster_snapshot_2026_27.csv` after filtering `slot_type == 'standard'`. MEM 21, LAC 18, MIL 18, NOP 18, then four at 17. The maximum permitted is 15. The same 14-of-30 over-count is present in the warehouse table itself (MEM 22, MIL 19).
+- Only **4 players appear on two teams** for 2026-27 in the warehouse (Lillard MIL/POR, Beal LAC/PHO, Caldwell-Pope MEM/PHI, Prosper DAL/MEM, $170,835,554 total). Cross-team duplication therefore explains only a small part of the over-count; the rest is most likely waived and dead-money rows being carried as standard contracts.
+
+**Consequence, stated before the branch is taken.** `roster_snapshot_2026_27.csv` does NOT pass a player-level sanity check, so the G4 branch is already determined: it is the rebuild branch, not the re-run branch. Every sim-derived figure is provisional. The full per-team membership comparison against Spotrac team pages is in progress.

@@ -50,3 +50,4 @@ IND       -4.21      -6.10  -3.64 -6.92 -5.22
 [run] run_sim_20260827T194456Z
   [run_sim_20260827T194456Z] expected wins = 41.0 + 2.239 * net
   [run_sim_20260827T194456Z] fork consensus: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T194456Z] fork rapm: 5 seeds x 20,000 sims x 2 fields done
