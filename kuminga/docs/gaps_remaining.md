@@ -37,3 +37,17 @@ What exists instead: `kuminga/data/nba_draft_picks_future_2026_08_26.csv`, which
 **The impact spine was not refit.** `player_value.csv` is the June three-season RAPM fit. Refitting it to include 2025-26 playoffs would have meant rebuilding the league-wide possession cache, which is a multi-hour job that would have consumed the night. Kuminga, LaMelo and every rotation player are already in it, so the run is not blocked, but the values are a June vintage on a 2023-26 window.
 
 **The fit engine's synergy layer was not built,** per R5. It remains scaffolding. The Edwards-times-Kuminga interaction does not exist as a number in this project and nothing here should be read as one.
+
+---
+
+## Phase 3.5 status of the remaining gaps
+
+**Item 7 / A3 forward half: STILL BLOCKED, but now one command from done.** `kuminga/scripts/market_vs_model_2026_27.py` is written, tested to its blocked path, and exits with instructions. The moment `offseason/data/2026-27-preseason-odd.csv` exists in the same three-column shape as the three historical files, running that script produces the all-30 model-vs-market table with flagged disagreements. Thresholds are stated rather than tuned: 4.0 wins and 2.5pp on title odds, each roughly calibrated to the model's own measured out-of-sample error, and a disagreement only counts when the market sits OUTSIDE the whole four-fork band.
+
+**A3 backtest half: DONE.** Three seasons run. What could not be done, and why, is worth keeping visible: a full historical replay of this pipeline is impossible because the warehouse holds only one season of rosters (`nba_team_rosters` is 2025-26 only) and the impact spine is a pooled 2023-26 fit, so using it for 2023-24 would leak three years of future information. What was testable is the calibration spine, and it was.
+
+**New gap, from C2.** The Shapley move set has no "replacement guard" for the Dosunmu counterfactual, so letting him walk credits Minnesota with minutes nobody actually plays. That is why he grades ALL NEGATIVE. C3 fixes exactly this problem for the power-forward slot; the same slot treatment has not been applied to the guard rotation. Doing so would need a slot pool per position and is a half-day of work, not a rerun.
+
+**New gap, from C3.** The slot finding is conditional on Terrence Shannon Jr. being the man who fills the 4. Minnesota still has to reach the 14-man minimum, and if the body they add is a forward, the alternative improves and Kuminga's margin narrows. Re-run `slot_analysis.py` after any signing.
+
+**Standing, unchanged.** The matchup overlay is off and its measured cost (0.11pp) is computed on profiles that exist for 12 of 30 teams, so it is a floor rather than an estimate. DARKO remains integer-rounded. The 2027-28 and 2028-29 thresholds remain a forward scale. The impact spine was not refit.
