@@ -9,11 +9,13 @@
 
 **The single most important thing:** Kuminga has not signed. He has agreed. NBA.com's own tracker separates "multiple reports" from "officially announced" and puts him in the first bucket; the league transaction log has no row for him. Every outlet traces back to one report, from his agent to Shams Charania, on the day you gave me this. Everything below carries that tag.
 
-**And the deal cannot be executed until Josh Green is gone.** This is not a preference, it is arithmetic. Minnesota's 2026-27 book is $223,293,829. The second apron is $221,686,000. They are already $1.6M over it, and a team above the second apron cannot use any mid-level exception at all, taxpayer included. Signing Kuminga at $6,064,000 would put them $7.7M over. With Green's $14,679,012 removed, the same signing sits $7.0M under the line and is legal. Saturday, August 29, is the last day to waive a player and stretch his 2026-27 salary. That is the whole reason the deadline exists.
+**And the deal cannot be executed until Josh Green is gone.** This is not a preference, it is arithmetic. Minnesota's contracted 2026-27 salary is **$215,871,829** across 13 players. Adding Kuminga at $6,064,000 takes them to **$221,935,829**, which is **$249,829 over** the second apron of $221,686,000, and using the taxpayer mid-level exception hard-caps them at exactly that line. With Green's $14,679,012 removed the same signing sits $14.4M under it and is legal. Saturday, August 29, is the last day to waive a player and stretch his 2026-27 salary. That is the whole reason the deadline exists.
+
+They miss by less than a rookie-minimum contract. **[Corrected 2026-08-27.** The first version of this report said $223,293,829 and "$7.7M over". That figure included a modelling placeholder for a 14th man, which is not a CBA charge, and the cap gate then added the exception on top of a total that already contained Kuminga, counting the signing twice. See `outputs/cap_reconciliation.md` and decision D20.**]**
 
 **Is the signing good?** In price terms, yes, and the honest range is narrower than I expected. Kuminga's market value on his own impact estimate comes out at $11.5M under the in-house consensus, $11.7M on RAPM, $6.0M on box score, and $2.7M on the external DARKO anchor. He is being paid $6.06M. So two of four views say Minnesota is getting him for about half his price, one says they are paying exactly what he is worth, and one says they are overpaying slightly. Nobody says they are overpaying badly.
 
-**Is the offseason good?** That, the model will not tell you, and I think that is the finding rather than a failure. Minnesota's title probability goes from 2.95% on the "nobody did anything" baseline to somewhere between 1.67% and 3.83% depending on which impact view you use. **The four views disagree about the sign.** Under R1 that means there is no publishable claim about the offseason as a whole. What is publishable is that the offseason was close to a wash: projected wins move +0.29, from 45.8 to 46.1, and Minnesota slips from fifth to sixth in the West.
+**Is the offseason good?** That, the model will not tell you, and I think that is the finding rather than a failure. Minnesota's title probability goes from 2.95% on the R6 baseline (the 2025-26 roster run back healthy, consensus fork) to somewhere between 1.67% and 3.83% depending on which impact view you use. **The four views disagree about the sign.** Under R1 that means there is no publishable claim about the offseason as a whole. What is publishable is that the offseason was close to a wash: projected wins move +0.29, from 45.8 to 46.1, and Minnesota slips from fifth to sixth in the West.
 
 **The clearest number the run produced is not a title probability, it is a play-in probability.** Minnesota's chance of finishing top six in the West and skipping the play-in falls from **73% on the baseline to 39%** under the in-house consensus. The other views are kinder (57% RAPM, 69% box, 84% DARKO), but the direction is the same in three of four and the magnitude is legible in a way that 1.7% against 3.8% is not.
 
@@ -57,10 +59,12 @@ All priced on the same pipeline and the same baseline, so they are directly comp
 |---|---|---|
 | Kept Reid **and** added Ball | **3.64** | 2.89 to 4.25 |
 | What happened, but DiVincenzo healthy | 3.36 | 2.02 to 5.31 |
-| Did nothing at all | 3.15 | 2.56 to 3.64 |
+| Let the free agents walk, sign nobody | 3.15 | 2.56 to 3.64 |
 | What happened, minus Kuminga | 2.95 | 1.40 to 4.92 |
 | **What actually happened** | **2.77** | 1.71 to 3.77 |
 | The Joan Bet's shape (retool the Randle slot only) | 2.53 | 2.17 to 3.19 |
+
+(The third row was labelled "did nothing at all" in the first version. It is not the R6 baseline: it lets Dosunmu, Hyland and Clark walk and signs nobody, which is a different roster. The R6 baseline is 2.94% as a four-fork mean. See `outputs/canonical_figures.md` and decision D25.)
 
 Two things fall out. First, the single best available shape was **keeping Naz Reid and still adding LaMelo Ball**, which is not a criticism the model can fully make, because the Reid salary was part of what made the Ball trade work. Second, **the shape core_max recommended in June scores below what Minnesota actually did**, which is worth saying out loud given that project's standing.
 

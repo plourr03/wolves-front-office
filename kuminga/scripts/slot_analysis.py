@@ -203,11 +203,37 @@ def main():
                 continue
             rw = row.iloc[0]
             sd = float(np.sqrt(rw.off_sd ** 2 + rw.def_sd ** 2))
+            # Price the swap under the SAME slot rule: the alternative takes exactly
+            # Kuminga's minutes, nobody else moves. That is the like-for-like question.
+            per_fork = {}
+            for fork in FORKS:
+                exp = float(st[(st.fork == fork) & (st.team_abbr == "MIN")].exp_2026_27.iloc[0])
+                hb = float(st[(st.fork == fork) & (st.team_abbr == "MIN")].hot_baseline.iloc[0])
+                g = fc[fc.fork == fork]
+                imp = dict(imps[fork])
+                pid_alt = str(int(rw.player_id))
+                if pid_alt not in imp:
+                    per_fork[fork] = np.nan
+                    continue
+                swapped = dict(rot_min)
+                kmin = swapped.pop(str(KUMINGA_ID), 0.0)
+                swapped[pid_alt] = swapped.get(pid_alt, 0.0) + kmin
+                roll = A.rollup(swapped, imp, "rs")
+                net = exp + beta * (roll["net"] - hb)
+                t_alt = float(np.interp(net, g.min_net, g.title))
+                base_t = float(sc[sc.fork == fork].title_with.iloc[0])
+                per_fork[fork] = (t_alt - base_t) * 100
+            vals = [v for v in per_fork.values() if not np.isnan(v)]
+            sign = ("ALL POSITIVE" if vals and all(v > 0 for v in vals) else
+                    "ALL NEGATIVE" if vals and all(v < 0 for v in vals) else "MIXED")
             alt_rows.append(dict(
                 player=name, listed_position=position, pf_eligible=eligible,
                 salary=price_paid, affordable_on_tpmle=price_paid <= TPMLE,
                 consensus_net=float(rw.consensus_net), net_sd=float(rw.net_sd),
                 posterior_sd=sd,
+                **{f"pp_{f}": per_fork.get(f, np.nan) for f in FORKS},
+                mean_pp=float(np.mean(vals)) if vals else np.nan,
+                sign_agreement=sign,
                 quotable=(sd <= SD_NOT_QUOTABLE) and eligible,
                 exclusion_reason=("centre-first listing, not a 4" if not eligible else
                                   f"posterior sd {sd:.2f} exceeds {SD_NOT_QUOTABLE}"
@@ -217,8 +243,9 @@ def main():
         alt.to_csv(OUT_ALT, index=False)
         r.note("ALTERNATIVES under the slot rule:")
         for _, x in alt.iterrows():
-            r.note(f"  {x.player:18s} {x.listed_position:15s} pf_eligible={x.pf_eligible} "
-                   f"afford={x.affordable_on_tpmle} sd={x.posterior_sd:.2f} "
+            r.note(f"  {x.player:18s} {x.listed_position:15s} pf={str(x.pf_eligible):5s} "
+                   f"afford={str(x.affordable_on_tpmle):5s} sd={x.posterior_sd:.2f} "
+                   f"mean {x.mean_pp:+.2f}pp {x.sign_agreement:13s} "
                    f"quotable={x.quotable} {x.exclusion_reason}")
         r.output(OUT, rows=len(sc))
         r.output(OUT_ALT, rows=len(alt))
