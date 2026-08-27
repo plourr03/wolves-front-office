@@ -69,10 +69,11 @@ def main():
         rid_cap = last_run("cap_reconciliation")
         rid_sign = last_run("eval_signing")
         add("The deal that cannot happen yet", "MIN 2026-27 apron salary, pre-Kuminga",
-            "$215,871,829", "13 contracted players", "FACT", rid_cap,
-            "contracted salary only; excludes cap holds and the roster placeholder")
+            "$217,621,829", "13 contracted + $1,750,000 unlikely bonuses", "FACT", rid_cap,
+            "APRON basis. Unlikely bonuses count toward the apron though not the cap or "
+            "tax. Contracted alone is $215,871,829 and is NOT an apron figure.")
         add("The deal that cannot happen yet", "with Kuminga at the taxpayer MLE",
-            "$221,935,829", "14 contracted players", "FACT", rid_cap)
+            "$223,685,829", "14 contracts + unlikely bonuses", "FACT", rid_cap)
         add("The deal that cannot happen yet", "amount over the second apron",
             f"${-gate['green_on_books']['room_after_signing']:,.0f}",
             "second apron $221,686,000", "FACT", rid_sign,
@@ -82,7 +83,11 @@ def main():
             s14 = br[(br.branch == "stretch") & (br.n_players == 14)].iloc[0]
             add("The deal that cannot happen yet", "trade branch at a legal 14-man roster",
                 f"${t14.apron_team_salary:,.0f}",
-                f"${t14.vs_first_apron:,.0f} under the first apron", "FACT", rid_cap)
+                f"${abs(t14.vs_first_apron):,.0f} "
+                f"{'under' if t14.vs_first_apron >= 0 else 'OVER'} the first apron",
+                "FACT", rid_cap,
+                "the trade branch is a FIRST-APRON team at a legal roster; there is no "
+                "version of this that stays under it")
             add("The deal that cannot happen yet", "stretch branch at 14",
                 f"${s14.apron_team_salary:,.0f}",
                 f"${-s14.vs_first_apron:,.0f} OVER the first apron", "FACT", rid_cap)
@@ -91,8 +96,9 @@ def main():
                 "FACT", rid_cap,
                 "the hard cap binds before the matching rules do (Green out is "
                 "$14,679,012). A trade CAN return a player; it is not prohibited.")
-            add("The deal that cannot happen yet", "incoming salary that costs the tier",
-                f"${t14.vs_first_apron:,.0f}", "above this MIN is a first-apron team",
+            add("The deal that cannot happen yet", "first-apron room in the trade branch",
+                f"NONE, ${abs(t14.vs_first_apron):,.0f} OVER",
+                "they are a first-apron team before anything comes back",
                 "FACT", rid_cap,
                 "four restrictions: no sign-and-trade acquisition, no bi-annual "
                 "($5,477,000), no prior-year trade exceptions, tighter matching (no "
@@ -291,19 +297,19 @@ def main():
                 act = f["ACTUAL: Green traded out, Kuminga at the taxpayer MLE"]
                 cf = f["CF: veteran min (2-yr charge) + Kuminga at the ceiling"]
                 add("Dosunmu (b) cap", "FINAL STATE, what happened",
-                    f"${act.payroll:,.0f} at 14",
+                    f"${act.apron_payroll:,.0f} at 14",
                     f"${act.vs_tax_line:,.0f} over the tax line, est tax "
                     f"${act.est_tax_bill:,.0f}", "FACT", rid_fs,
                     "Kuminga at $6,064,000, Green traded away")
                 add("Dosunmu (b) cap", "FINAL STATE, Dosunmu not re-signed",
-                    f"${cf.payroll:,.0f} at 14",
+                    f"${cf.apron_payroll:,.0f} at 14",
                     f"${cf.vs_tax_line:,.0f} over the tax line, est tax "
                     f"${cf.est_tax_bill:,.0f}", "FACT", rid_fs,
-                    "Kuminga up to $10,004,516, Green KEPT. Both states are taxpayers at "
+                    "Kuminga up to $8,254,095, Green KEPT. Both states are taxpayers at "
                     "roughly the same payroll, so the re-signing did not cost money, it "
                     "cost roster. Do not use a tax-saving framing.")
                 add("Dosunmu (b) cap", "Kuminga first-year ceiling without Dosunmu",
-                    "up to $10,004,516", "at a full roster; $11,095,516 with a rookie-min "
+                    "up to $8,254,095", "at a full roster; $9,345,753 with a rookie-min "
                     "replacement", "FACT", rid_fs,
                     "the non-taxpayer MLE is $15,044,000 but hard-caps at the first apron, "
                     "so the whole exception was never spendable. Always write 'up to, at a "
@@ -330,8 +336,8 @@ def main():
                 "additional_sort is 0 for signings and the counterparty team id for trades, "
                 "group_sort is a type-prefixed group id, created_at is our ingest batch. "
                 "Reported-first is NOT decided-first; do not claim causal ordering.")
-            add("Dosunmu (b) cap", "why Green must be shed", "$249,829 over",
-                    "$215,871,829 + $6,064,000 vs the second apron", "FACT", rid_fs,
+            add("Dosunmu (b) cap", "why Green must be shed", "$1,999,829 over",
+                    "$217,621,829 + $6,064,000 vs the second apron", "FACT", rid_fs,
                     "Dosunmu's $19,310,345 exceeds that overage by $19,060,516, so without "
                     "him Green stays and the signing still fits")
             gk = load("green_kept.csv")
@@ -347,7 +353,7 @@ def main():
                 "second-apron distance without him",
                 f"${g['13 players, Kuminga signed, Dosunmu gone'].vs_second_apron:,.0f} under",
                 "same roster, Kuminga signed", "FACT", rid_dc,
-                "against $249,829 OVER with him")
+                "against $1,999,829 OVER with him")
         # P2: does the injury claim hold per view, or only on the mean?
         if sh is not None and "ddv_injury" in sh.index:
             wins = [f for f in FORKS if sh[f].idxmin() == "ddv_injury"]
@@ -377,8 +383,11 @@ def main():
             add("The structural risk", "P(Minnesota can retain him)",
                 f"{b.p_minnesota_retains.min():.2f} to {b.p_minnesota_retains.max():.2f}",
                 "flat aging", "QUOTABLE AS BAND", rid_po,
-                "Non-Bird caps a re-sign start at $7,640,640")
-        add("The structural risk", "Non-Bird re-sign ceiling in 2027", "$7,640,640",
+                "Non-Bird caps a re-sign start at $7,276,800, which is 120% of the YEAR-ONE "
+                "salary he last played on; the old $7,640,640 used the declined option "
+                "year. If he opts IN instead he has two seasons of service and Early "
+                "Bird applies, 175% = $11,142,600.")
+        add("The structural risk", "Non-Bird re-sign ceiling in 2027", "$7,276,800",
             "120% of the year-two salary", "FACT", "league_year_constants",
             "confirmed from CBA text: a declined option year is never covered")
 

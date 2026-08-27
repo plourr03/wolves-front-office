@@ -46,6 +46,9 @@ def stretch_schedule(salary: float, years_left: int) -> tuple[float, int]:
     return salary / n, n
 
 
+UNLIKELY_BONUSES = 1_750_000.0   # McDaniels $1.0M + DiVincenzo $750k, 2026-27
+
+
 def tax_bill(over: float, brackets: list) -> float:
     """Non-repeater luxury tax, marginal brackets. Approximate: the constants file
     flags the exact rates as CONFIRM."""
@@ -91,13 +94,19 @@ def main():
             for branch, label in (("trade", "A: Green traded (pure dump)"),
                                   ("stretch", "B: Green waived + stretched")):
                 if season == "2026-27":
-                    base = committed - GREEN_SALARY
+                    # APRON basis: unlikely bonuses count toward the apron even though
+                    # they are excluded from cap and tax salary. Omitting them is what
+                    # produced the 8x error in the published lede.
+                    base = committed + UNLIKELY_BONUSES - GREEN_SALARY
                     extra = per_season if branch == "stretch" else 0.0
                 else:
                     base = committed
                     extra = per_season if branch == "stretch" else 0.0
                 total = base + extra
-                over_tax = total - k["luxury_tax"]
+                # R2: tax is charged on REGULAR team salary, so the unlikely bonuses
+                # added above for the apron come back out for the tax calculation.
+                tax_basis = total - (UNLIKELY_BONUSES if season == "2026-27" else 0.0)
+                over_tax = tax_basis - k["luxury_tax"]
                 rows.append(dict(
                     season=season, branch=branch, branch_label=label,
                     is_projection=k["is_projection"],

@@ -244,7 +244,12 @@ def main():
         # CANONICAL basis instead: contracted salary only, Kuminga removed, then added
         # back exactly once. See cap_reconciliation.py.
         PLACEHOLDER = 1_358_000
-        pre_kuminga = float(base["apron_team_salary"]) - TPMLE_2026_27 - PLACEHOLDER
+        # Canonical APRON basis: contracted + unlikely bonuses, cap holds excluded.
+        # Deriving it from team_state omitted $1,750,000 of unlikely bonuses and is what
+        # produced the 8x error in the published lede.
+        _canon = json.load(open(os.path.join(REPO, "kuminga", "outputs",
+                                             "cap_canonical.json"), encoding="utf-8"))
+        pre_kuminga = float(_canon["pre_kuminga_apron"])
         r.note(f"canonical pre-Kuminga apron salary: ${pre_kuminga:,.0f} "
                f"(team_state ${float(base['apron_team_salary']):,.0f} minus Kuminga "
                f"${TPMLE_2026_27:,} minus the ${PLACEHOLDER:,} placeholder)")
