@@ -232,6 +232,44 @@ def main():
                                      sd_pp=a.std(), spread_pp=a.max() - a.min()))
         ordf = pd.DataFrame(ord_rows)
 
+        # ---- item 19: named coalitions of interest -----------------------------
+        # These are already priced, so the comparison is free. The one that matters is
+        # the shape core_max ("The Joan Bet") recommended in June: keep Gobert, retool
+        # ONLY the Randle slot. That is the coalition with randle_out but WITHOUT
+        # reid_out and WITHOUT ball_in. Minnesota did something else, and this prices
+        # both on the same pipeline and the same baseline.
+        NAMED = {
+            "did_nothing": frozenset(),
+            "what_actually_happened": frozenset(MOVES),
+            "joanbet_shape_retool_randle_slot_only":
+                frozenset(["randle_out", "kuminga_in", "depth", "dosunmu_retained",
+                           "ddv_injury", "other_departures"]),
+            "kept_reid_and_added_ball":
+                frozenset(["randle_out", "ball_in", "kuminga_in", "depth",
+                           "dosunmu_retained", "ddv_injury", "other_departures"]),
+            "actual_but_healthy_divincenzo":
+                frozenset(MOVES) - {"ddv_injury"},
+            "actual_without_kuminga":
+                frozenset(MOVES) - {"kuminga_in"},
+        }
+        named_rows = []
+        for label, coal in NAMED.items():
+            for fork in FORKS:
+                named_rows.append(dict(scenario=label, fork=fork,
+                                       min_net=nets[fork][coal],
+                                       title=vals[fork][coal],
+                                       title_pp=vals[fork][coal] * 100))
+        nm = pd.DataFrame(named_rows)
+        npiv = nm.pivot(index="scenario", columns="fork", values="title_pp")
+        npiv["mean"] = npiv.mean(axis=1)
+        npiv["min"] = npiv[FORKS].min(axis=1)
+        npiv["max"] = npiv[FORKS].max(axis=1)
+        npiv.to_csv(os.path.join(REPO, "kuminga", "outputs", "named_scenarios.csv"))
+        r.note("NAMED SCENARIOS (title %, by fork):")
+        for s_, x in npiv.sort_values("mean", ascending=False).iterrows():
+            r.note(f"  {s_:40s} " + " ".join(f"{f}={x[f]:5.2f}" for f in FORKS) +
+                   f"  mean={x['mean']:5.2f}  band [{x['min']:.2f}, {x['max']:.2f}]")
+
         piv = sh.pivot(index="move", columns="fork", values="shapley_pp")
         piv["sign_agreement"] = piv[FORKS].apply(
             lambda x: "ALL POSITIVE" if (x > 0).all() else

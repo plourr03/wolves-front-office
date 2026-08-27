@@ -140,3 +140,71 @@ So if Kuminga opts out in the summer of 2027, Minnesota holds **Non-Bird rights 
 
 Encoded in `league_year_constants.json` under `bird_rights` so it is machine-readable rather than prose.
 
+---
+
+## Phase 2 decisions
+
+### D12. The minutes heuristic, and the two parameters in it (item 8)
+
+**Call.** One rule for all 30 teams. Rank each player by `0.5 * pct_rank(prior minutes) + 0.5 * pct_rank(consensus net)`, take the top 10 available, and give them minutes that are a 50/50 blend of an empirical team-rank curve (fitted on 2025-26) and the player's own prior load, rescaled to 240.
+
+**Two judgment calls inside it, both stated rather than fitted.**
+
+*The rank weight.* Ranking by minutes alone freezes everyone in last season's role and would refuse to promote a player who changed teams into a bigger one, which is precisely Kuminga's situation. Ranking by impact alone hands a high-RAPM, low-minute specialist a starter's load. Half and half.
+
+*The minutes blend.* The rank curve alone gave Rudy Gobert, a 34-year-old centre who played 29 minutes a game, the team's largest load, because his consensus impact (+5.28) is the highest on the roster. That is a real output of the value spine and not obviously wrong as *valuation*, but it is wrong as *minutes*. Blending the curve with each player's own prior load keeps role change possible while bounding it by what the player has actually carried.
+
+**A genuine bug found here, not a preference.** The first version computed prior minutes as total minutes divided by 82, which is minutes per TEAM GAME. That conflates role with availability: Edwards, who played 61 games at about 35 minutes, came out as a 26-minute player and ranked behind Gobert. Since availability is applied separately and explicitly through `rs_avail`, folding it into the role signal as well double-counts it. Fixed to minutes per appearance.
+
+**What is NOT modelled.** Position. The heuristic will happily field five centres. It is a talent-allocation rule, not a lineup constructor, and every downstream counterfactual inherits that limit.
+
+### D13. The delta is the product, not the level (item 8)
+
+Each team's 2026-27 net is `regress_to_expectation(measured 2025-26 net) + beta * (rollup_current - rollup_baseline)`. Both rollups run through the same heuristic, so its level bias cancels and only the roster change survives. This is the shape the engine already used for its three MOVED teams, applied uniformly to all 30.
+
+The baseline (R6) is the 2025-26 end-of-season roster with no injuries, which by construction makes `rollup_current == rollup_baseline` and the baseline net equal to the regressed measured net. Minnesota's measured 2025-26 net of **+2.88** matches the engine's own June figure exactly, which is a useful check that the new pipeline is anchored where the old one was.
+
+### D14. The all-30 rebuild changed the league, not just Minnesota (item 8)
+
+Replacing the 25 stand-pat assumptions moved a lot. Boston rises from 3rd to 1st in projected wins (+4.13) with all four forks agreeing the offseason helped. Miami (+5.19) and Philadelphia (+5.05) are the biggest gainers; Utah (-7.37), Indiana (-5.00) and Toronto (-4.37) the biggest losers. Oklahoma City slips from 1st to 2nd, all four forks agreeing.
+
+**And a finding about the method itself:** only 11 of 30 teams have all four impact views agreeing on the SIGN of their offseason (4 positive, 7 negative). Nineteen are mixed. That is the honest resolution of this machinery, and it is the reason R1's sign-agreement rule is the right publication test rather than a hedge.
+
+### D15. The linear par-dollar curve is unusable out of sample, and it nearly produced a fake headline (items 9, 14)
+
+**What happened.** `build_value_layer` fits `salary = a + b*net` over players earning $8,000,000 or more, which is the right sample for pricing veterans on market-set deals. The fitted intercept is about $19.6M. Applied to Kuminga at the taxpayer MLE it produced a "dollar gap" of **+$17.7M**, and it did so under all four views, which looked like a very clean headline: *every way of measuring him says he is a huge bargain*.
+
+It is an artefact. The curve prices a league-average player at $19.6M because it has never seen a player earning less than $8M. The same curve put Kuminga's 2027 market at $25.5M and therefore said he opts out with probability 1.00 under every fork, which is what made me look at it.
+
+**The fix.** An empirical percentile map (`kuminga/lib/market.py`): a player's impact percentile is read across to the same percentile of the salary distribution among rotation players on non-minimum deals. Monotone, bounded by observed salaries, no functional form. Calibration: net 0.0 maps to about $5.4M, Kuminga's +1.33 to $11.5M, Edwards's +1.88 to $16.0M, Gobert's +5.28 to $57.1M. Those are recognisable prices; the linear curve's were not.
+
+**What it does to the finding, which is the point.** The honest read is no longer unanimous. At the taxpayer MLE, Kuminga's market value comes out at $11.5M (consensus) and $11.7M (RAPM), roughly double what Minnesota is paying; $6.0M on the box view, which is exactly what they are paying; and $2.7M on DARKO, which says they are overpaying slightly even at the minimum-ish price. Two of four views say bargain, one says fair, one says mild overpay.
+
+The project's own value layer had already anticipated this and says the primary surplus should be in NET units because those are bounded. It was right. The impact-unit surplus is now primary and the dollar figure is reported alongside it.
+
+### D16. An eighth move was added to the Shapley set so the decomposition is complete (item 11)
+
+The brief named seven moves. Those seven do not span the difference between the 2025-26 roster and the current one: Conley, Anderson, Ingles, Phillips, Zikarsky, Pullin and Freeman also left and are in none of them. Left as-is, the marginal contributions would sum to something other than the total offseason effect and the gap would sit unexplained.
+
+Added `other_departures` as an eighth move. 2^8 = 256 coalitions, all enumerated exactly, so contributions sum to `v(all) - v(none)` with no residual. Josh Green is deliberately in no coalition: per R3 he is off the roster in both branches, so he is a precondition rather than a lever.
+
+**Exact, not sampled.** Because every coalition is priced by interpolating the f-curve rather than simulated, all 256 are affordable and there is no permutation sampling error to report. The order-dependence table is computed anyway, over 2,000 random orderings, because a move whose marginal contribution swings widely with order is one whose headline should be a range.
+
+### D17. DARKO is carried as a fourth view, but it is integer-rounded (items 9, 10)
+
+The DARKO leaderboard on disk has **13 distinct DPM values across 582 players**: Jokic 7, Kawhi 6, Wembanyama 6, Giannis 5. It is rounded to whole points. Kuminga's "-1.0" could be anything from -1.5 to -0.5.
+
+Kept as a fork, because an external check that disagrees is worth more than one that agrees, and it is the only non-in-house view available (Dunks & Threes EPM and BBall Index LEBRON are both gated). But it is not a peer of the other three and is labelled that way everywhere it appears. The project's own provenance note already calls it "not a calibrated pipeline input; an external sanity check." That is the right reading, and DARKO's coarseness is part of why Minnesota's fork spread is as wide as it is.
+
+### D18. The overlay is off, because it only exists for 12 teams (item 10)
+
+`simulate_league` can apply a matchup-dimension overlay in series resolution, using `opponent_profiles.json`. That file covers 12 teams. Running an overlay for 12 of 30 would make the pipeline non-identical across teams, which is the one thing R2 forbids. The overlay is off and every series resolves on net rating alone, uniformly. The cost is real: the overlay is where archetype matchup effects lived, and the postmortem's Q4 work says those matter for this roster specifically. Recorded as a limitation rather than quietly dropped.
+
+### D19. Two silent-failure bugs in the lineup evidence, both caught by guards rather than by inspection (item 15)
+
+`lineup_id` is COMMA-delimited. The first version split on a hyphen, which returns False for every player and produces a complete, clean-looking table in which nobody was ever on the floor: Randle+Gobert showed 0 possessions, and Kuminga's "OFF" split silently contained all 8,054 Golden State possessions. Nothing raised.
+
+Separately, `type_grouping` in the Synergy table is capitalised `Offensive`; querying for `offensive` returned an empty frame and the transition-share lines simply did not print.
+
+Both are now asserted: every lineup must parse to exactly five ids, every player named in the analysis must appear in at least one stint, and the Transition query must return rows. These are the project's stated bogey (a plausible number produced silently) and the only reason they were caught is that a table of exact zeroes is visibly wrong. A table of slightly-wrong numbers would not have been.
+
