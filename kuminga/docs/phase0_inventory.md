@@ -155,7 +155,7 @@ A $314,000 difference. It decides the whole question:
 
 | Branch | Total | vs projected apron | vs verified apron |
 |---|---|---|---|
-| Keep Green + full TPMLE (14 players) | $221,935,829 | under by $63,171 — **legal** | over by $249,829 — **illegal** |
+| Keep Green + full TPMLE (14 players) | $221,935,829 | under by $63,171, **legal** | over by $249,829, **illegal** |
 | Green out + full TPMLE (13 players) | $207,256,817 | under by $14,742,183 | under by $14,429,183 |
 
 Even on the permissive projection, keeping Green leaves $63,171 of room with only 14 players signed; a 14th-man minimum (~$1.36M) breaks it. On the verified number, the signing is simply illegal while Green is on the books.
@@ -339,7 +339,7 @@ So: do you want Phase 2 planned around a **title-odds number that probably canno
 **2. How far to take "identically on all 30 teams."**
 The engine is all-30 on the output side already. The input side is not: 25 of 30 teams are assumed to have stood pat. Three options:
 - (a) Full: project 2026-27 rotations for all 30 teams. Highest fidelity, by far the most work, and 29 of them are judgment calls.
-- (b) Mechanical: rebuild every team's roster from `nba_player_contracts` + `nba_transactions` and roll up player values with a minutes heuristic. Uniform, reproducible, defensible, less accurate per team. **My recommendation** — it is the only option that literally satisfies "run identically on all 30."
+- (b) Mechanical: rebuild every team's roster from `nba_player_contracts` + `nba_transactions` and roll up player values with a minutes heuristic. Uniform, reproducible, defensible, less accurate per team. **My recommendation**, it is the only option that literally satisfies "run identically on all 30."
 - (c) Tiered: full treatment for contenders, mechanical for the rest. Best accuracy per hour, but the pipeline is no longer identical across teams, which is the thing the brief specifically asked for.
 
 **3. The Green branch, and when to lock.**

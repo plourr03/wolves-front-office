@@ -78,7 +78,7 @@ These are talent rollups. The machinery cannot see position and would field five
 | Beringer absorbs the minutes | +0.53 | mixed | n/a |
 | Jaxson Hayes ($6.0M, UTA) | +0.39 | ALL POSITIVE | **yes** |
 | Kenrich Williams ($5.0M, OKC) | +0.10 | mixed | yes |
-| **The actual signing** | 0.00 | — | yes |
+| **The actual signing** | 0.00 |, | yes |
 | McDaniels at the 4, next wing up | -0.13 | mixed | n/a |
 
 Every alternative tested lands at or above the actual signing on the mean, and **two affordable ones beat it under all four views**: Josh Minott and Jaxson Hayes. That is the most uncomfortable result in the run and it deserves its caveats: Minott has only 4,535 possessions and a posterior sd of 2.10, which is the widest in the group; Hayes is a centre, which this machinery cannot know matters; and neither was necessarily gettable, since the model has no idea who would have taken Minnesota's call. What the table supports is narrower than "they signed the wrong player": it is that **the taxpayer MLE market this summer contained players who grade at least as well as Kuminga for the same money or less.**
