@@ -105,6 +105,28 @@ def build_impacts(value: pd.DataFrame, darko: pd.DataFrame, bio: pd.DataFrame) -
     return imps, matched
 
 
+def add_rookie_impacts(imps: dict, pool: pd.DataFrame) -> int:
+    """Give the 2026 rookies (synthetic negative ids) an impact in every fork.
+
+    They have no measured value in any of the four views, so all four get the SAME
+    draft-slot prior that build_rotations fitted on the 2025 class. The prior is split
+    evenly between offence and defence (off = net/2, def = -net/2, so off - def = net)
+    because nothing in the data says which side it belongs on. Their uncertainty is set
+    wide deliberately: a slot prior is a guess.
+    """
+    n = 0
+    for _, x in pool[pool.player_id < 0].drop_duplicates("player_id").iterrows():
+        pid = str(int(x.player_id))
+        net = float(x.consensus_net)
+        for f in FORKS:
+            if pid in imps[f]:
+                continue
+            imps[f][pid] = dict(off=net / 2.0, **{"def": -net / 2.0},
+                                off_sd=2.0, def_sd=2.0, def_div=0.0, read="")
+            n += 1
+    return n
+
+
 def main():
     with runlog.run("build_strengths", inputs={"rotations": ROT,
                                                "snapshot": kfreeze.current_snapshot_id()}) as r:
@@ -118,6 +140,8 @@ def main():
             tn[c] = pd.to_numeric(tn[c], errors="coerce")
 
         imps, n_darko = build_impacts(value, darko, bio)
+        n_rook = add_rookie_impacts(imps, rot)
+        r.note(f"2026 rookies given a slot-prior impact in every fork: {n_rook // len(FORKS)}")
         for f in FORKS:
             r.note(f"impact fork '{f}': {len(imps[f])} players")
         r.note(f"DARKO name-matched: {n_darko} of {len(darko)}")

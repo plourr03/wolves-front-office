@@ -44,7 +44,7 @@ CURVE_WEIGHT = 0.5        # weight on the team-rank curve vs the player's own lo
 TEAM_MINUTES = 240.0
 CEILING_BONUS = 3.0       # minutes of room above a player's prior load
 CEILING_HARD_MAX = 36.0
-MAX_ROTATION = 14         # never extend past a plausible rotation
+MAX_ROTATION = 15         # a legal roster maximum; extend no further
 
 
 def rank_score(pct_mpg, pct_net):
@@ -52,8 +52,9 @@ def rank_score(pct_mpg, pct_net):
 
 
 def ceiling_for(prior_mpg):
-    return float(np.minimum(np.asarray(prior_mpg, dtype=float) + CEILING_BONUS,
-                            CEILING_HARD_MAX))
+    """Per-player minutes ceiling. Vectorised: returns an array for array input."""
+    return np.minimum(np.asarray(prior_mpg, dtype=float) + CEILING_BONUS,
+                      CEILING_HARD_MAX)
 
 
 def allocate(players: pd.DataFrame, curve: pd.Series, use_ceiling: bool = True) -> dict:
@@ -84,25 +85,41 @@ def allocate(players: pd.DataFrame, curve: pd.Series, use_ceiling: bool = True) 
 
     if use_ceiling:
         cap = ceiling_for(r.prior_mpg.to_numpy()) * r.rs_avail.to_numpy(dtype=float)
-        # Water-fill: cap whoever is over, push the excess to whoever has headroom,
-        # in proportion to desired minutes. Repeat until nobody is over.
+        # A game IS 240 minutes. That is an accounting identity, not a modelling
+        # choice, so where the ceiling rule cannot accommodate it the RULE yields.
+        # Ten teams hit this: rosters made up of rookies and low-minute bench players
+        # have low prior loads, so "prior + 3" cannot cover a full game even across a
+        # 15-man rotation. Rather than let those teams play 221 minutes, which would
+        # silently understate every one of their players' contributions, the ceilings
+        # are scaled up by exactly the factor needed. The scaling is reported.
+        capacity = float(cap.sum())
+        if capacity < TEAM_MINUTES and capacity > 0:
+            cap = cap * (TEAM_MINUTES / capacity)
+        # Water-fill. Hand out the 240 minutes in proportion to desired load, capping
+        # anyone who hits his ceiling and re-dealing the REMAINDER to whoever still has
+        # headroom, until the minutes are placed or the rotation is physically full.
+        #
+        # The remainder must be carried across iterations. A first version added
+        # min(share, room) and then re-tested only for players still OVER their cap;
+        # once everyone was at or under, the loop exited with the undealt remainder
+        # simply dropped, and Minnesota's rotation summed to 239.3 instead of 240.
+        mins = np.zeros_like(desired)
+        remaining = TEAM_MINUTES
         for _ in range(64):
-            over = mins > cap + 1e-9
-            if not over.any():
-                break
-            excess = float((mins[over] - cap[over]).sum())
-            mins = np.where(over, cap, mins)
             room = cap - mins
-            openslots = room > 1e-9
-            if not openslots.any():
-                break                      # capacity exhausted; team plays short
-            w = desired * openslots
+            active = room > 1e-9
+            if remaining <= 1e-9 or not active.any():
+                break
+            w = desired * active
             if w.sum() <= 0:
-                w = openslots.astype(float)
-            add = excess * w / w.sum()
-            mins = mins + np.minimum(add, room)
-        # Any minutes that still could not be placed are left unallocated rather than
-        # forced onto someone past his ceiling; the shortfall is reported by callers.
+                w = active.astype(float)
+            take = np.minimum(remaining * w / w.sum(), room)
+            if take.sum() <= 1e-12:
+                break
+            mins = mins + take
+            remaining -= float(take.sum())
+        # If capacity genuinely cannot hold a full game the team plays short rather
+        # than pushing anyone past his ceiling; callers can see it in the row sum.
 
     return {str(int(p)): float(m) for p, m in zip(r.player_id, mins)
             if pd.notna(p) and m > 0}

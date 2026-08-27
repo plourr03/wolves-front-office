@@ -51,7 +51,7 @@ sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
 sys.path.insert(0, HERE)   # sibling scripts (build_strengths) regardless of how this is invoked
 
-from kuminga.lib import kfreeze, runlog  # noqa: E402
+from kuminga.lib import kfreeze, rotation, runlog  # noqa: E402
 import build_team_ratings as A           # noqa: E402
 import bracket_sim as E                  # noqa: E402
 from build_strengths import build_impacts, nkey  # noqa: E402
@@ -100,31 +100,7 @@ PRESENT_UNLESS_APPLIED = set(sum(REMOVE_WHEN_APPLIED.values(), []))
 BASELINE_AND_MOVE = {"Ayo Dosunmu", "Bones Hyland", "Jaylen Clark"}
 
 
-def allocate(players: pd.DataFrame, curve: pd.Series) -> dict:
-    """The item-8 minutes heuristic, applied to one coalition's roster.
-
-    IMPORTANT: `rank_score` must be the LEAGUE-WIDE score computed once in
-    build_rotations, not re-ranked within this roster. Re-ranking inside the
-    coalition makes a player's standing depend on which teammates happen to be in
-    it, because the score is a blend of two percentiles and a blend of percentiles
-    is not order-preserving under a change of reference set. For Shapley that is a
-    correctness bug, not a nuance: the same player appears in 128 different rosters
-    and would carry a different rank in each, injecting interaction effects that are
-    artefacts of the ranking rather than of the roster.
-    """
-    g = players[players.rs_avail > 0].copy()
-    if g.empty:
-        return {}
-    if "rank_score" not in g.columns or g.rank_score.isna().any():
-        raise ValueError("allocate() requires a precomputed league-wide rank_score; "
-                         f"missing for {g[g.get('rank_score', pd.Series()).isna()].player_name.tolist() if 'rank_score' in g else 'all rows'}")
-    g = g.sort_values("rank_score", ascending=False).head(ROTATION_SIZE).reset_index(drop=True)
-    g["rot_rank"] = g.index + 1
-    cm = g.rot_rank.map(lambda i: curve.get(float(i), curve.iloc[-1]))
-    base = CURVE_WEIGHT * cm + (1 - CURVE_WEIGHT) * g.prior_mpg
-    mpg = base * g.rs_avail
-    mpg = mpg / mpg.sum() * TEAM_MINUTES
-    return {str(int(p)): float(m) for p, m in zip(g.player_id, mpg) if pd.notna(p)}
+allocate = rotation.allocate   # single source of truth (kuminga/lib/rotation.py)
 
 
 def main():

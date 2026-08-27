@@ -69,13 +69,16 @@ REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
 
-from kuminga.lib import kfreeze, runlog  # noqa: E402
+from kuminga.lib import kfreeze, rotation, runlog  # noqa: E402
 
-ROTATION_SIZE = 10
-MPG_WEIGHT = 0.5                 # weight on prior minutes in the rank score
-CURVE_WEIGHT = 0.5               # weight on the team-rank curve vs the player's own prior load
+# The heuristic itself now lives in kuminga/lib/rotation.py so build_rotations and
+# shapley cannot drift apart again. These are re-exported for readability.
+ROTATION_SIZE = rotation.ROTATION_SIZE
+MPG_WEIGHT = rotation.MPG_WEIGHT
+CURVE_WEIGHT = rotation.CURVE_WEIGHT
+TEAM_MINUTES = rotation.TEAM_MINUTES
 REPLACEMENT_NET = -2.0           # consensus_net for an unmatched / placeholder body
-TEAM_MINUTES = 240.0
+USE_CEILING = os.environ.get("KUMINGA_NO_CEILING", "") != "1"
 
 SNAP = os.path.join(REPO, "kuminga", "data", "roster_snapshot_2026_27.csv")
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
@@ -238,6 +241,14 @@ def main():
 
                 is_rookie = k in draft26
                 slot = draft26[k]["pick"] if is_rookie else None
+                # 2026 rookies exist in no id namespace yet: nba_player_bio stops at the
+                # 2025 class. Without an id their minutes were allocated and then DROPPED
+                # by every consumer (which filters on notna(player_id)), so a team with a
+                # rookie in its rotation was silently valued on fewer than 240 minutes.
+                # Washington lost 19 of Dybantsa's minutes that way. Synthetic negative
+                # ids keep them in the arithmetic and make them obvious in any join.
+                if (pid is None or pd.isna(pid)) and is_rookie:
+                    pid = -(1000 + int(slot))
 
                 cn = v.consensus_net.get(pid) if pid in v.index else None
                 if cn is None or pd.isna(cn):
@@ -291,22 +302,13 @@ def main():
 
         # ---- allocate minutes ----------------------------------------------------
         out = []
+        r.note(f"minutes ceiling ENABLED: {USE_CEILING} "
+               f"(min(prior load + {rotation.CEILING_BONUS:.0f}, "
+               f"{rotation.CEILING_HARD_MAX:.0f}), overflow cascades down the rank order)")
         for (scen, team), grp in pool.groupby(["scenario", "team_abbr"]):
-            g = grp[grp.rs_avail > 0].sort_values("rank_score", ascending=False).copy()
-            g = g.head(ROTATION_SIZE).reset_index(drop=True)
-            g["rot_rank"] = g.index + 1
-            g["curve_min"] = g.rot_rank.map(lambda i: curve.get(float(i), curve.iloc[-1]))
-            # Blend the team-rank curve with the player's own prior load. The curve
-            # alone lets a high-impact, moderate-minute player inherit a 36-minute
-            # role he has never carried (Gobert, a 34-year-old centre who played 29);
-            # prior minutes alone freeze everyone in last season's role and refuse to
-            # promote a player who changed teams. Half and half is a stated modelling
-            # choice, applied identically to all 30 teams.
-            g["base_min"] = CURVE_WEIGHT * g.curve_min + (1 - CURVE_WEIGHT) * g.prior_mpg
-            g["mpg"] = g.base_min * g.rs_avail
-            tot = g.mpg.sum()
-            if tot > 0:
-                g["mpg"] = g.mpg / tot * TEAM_MINUTES      # always a full game of minutes
+            g = rotation.allocation_frame(grp, curve, use_ceiling=USE_CEILING)
+            g["scenario"] = scen
+            g["team_abbr"] = team
             out.append(g)
         rot = pd.concat(out, ignore_index=True)
         rot.to_csv(OUT_ROT, index=False)
