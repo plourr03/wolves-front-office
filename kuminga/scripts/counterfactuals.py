@@ -95,10 +95,26 @@ def main():
 
         vmap = value.set_index("player_id")
 
-        def price(roster: pd.DataFrame, fork: str, kum_override: float | None = None):
-            """roster -> (net, title). kum_override replaces Kuminga's impact."""
+        def price(roster: pd.DataFrame, fork: str, kum_override: float | None = None,
+                  kum_playoff_mult: bool = False):
+            """roster -> (net, title).
+
+            kum_override replaces Kuminga's total impact. kum_playoff_mult instead
+            applies the ENGINE'S OWN playoff multiplier for his translation read to
+            his offensive term, rather than an invented haircut: his record carries
+            translation_read = 'slips', and build_team_ratings.PLAYOFF_OFF_MULT maps
+            'slips' to 0.92. Using the engine's constant keeps this consistent with
+            how every other playoff rollup in the project is computed.
+            """
             mpg = allocate(roster, curve)
             imp = imps[fork]
+            if kum_playoff_mult:
+                kid = str(int(roster[roster.player_name == KUMINGA].player_id.iloc[0]))
+                imp = dict(imp)
+                base = dict(imp[kid])
+                mult = A.PLAYOFF_OFF_MULT.get(base.get("read", ""), 1.0)
+                base["off"] = base["off"] * mult
+                imp[kid] = base
             if kum_override is not None:
                 kid = str(int(roster[roster.player_name == KUMINGA].player_id.iloc[0]))
                 imp = dict(imp)
@@ -133,8 +149,12 @@ def main():
             for label, val in (("low_p10", fork_net - 1.2816 * sd),
                                ("median", fork_net),
                                ("high_p90", fork_net + 1.2816 * sd),
-                               ("playoff_slips", fork_net - 0.08 * abs(fork_net) - 0.30)):
-                net, title = price(mn, fork, kum_override=val)
+                               ("playoff_slips", None)):
+                if label == "playoff_slips":
+                    net, title = price(mn, fork, kum_playoff_mult=True)
+                    val = float("nan")
+                else:
+                    net, title = price(mn, fork, kum_override=val)
                 w = st[(st.fork == fork) & (st.conf == "W")].copy()
                 w.loc[w.team_abbr == "MIN", "net_current"] = net
                 rank = int((w.net_current > net).sum()) + 1
