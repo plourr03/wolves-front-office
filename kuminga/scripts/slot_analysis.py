@@ -75,8 +75,14 @@ def reallocate_within_slot(rot_min: dict, removed_id: str, slot_ids: set,
     out = dict(rot_min)
     freed = out.pop(removed_id, 0.0)
     if freed <= 0:
-        return out
-    order = [p for p in out if p in slot_ids] + [p for p in bench_slot_ids if p not in out]
+        return out, 0.0
+    # The removed player must be excluded from the fill order. Without this he is
+    # simply the next eligible body with headroom, so the loop hands his own minutes
+    # straight back to him: he came out at 26.0 and went back in at 23.3, the
+    # "counterfactual" was 97% himself, and every marginal contribution came out at
+    # roughly zero. That is the failure mode this whole slot exercise exists to avoid.
+    order = ([p for p in out if p in slot_ids and p != removed_id]
+             + [p for p in bench_slot_ids if p not in out and p != removed_id])
     for pid in order:
         if freed <= 1e-9:
             break

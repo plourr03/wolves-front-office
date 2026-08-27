@@ -1,33 +1,33 @@
 variant,fork,replacement,min_net,title,note,title_vs_actual_pp
-actual,consensus,Jonathan Kuminga,1.2782409797802599,0.017114075603926963,,0.0
-actual,rapm,Jonathan Kuminga,2.1076443517387786,0.02356115481391023,,0.0
-actual,box,Jonathan Kuminga,2.8105678962000686,0.03258892833364084,,0.0
-actual,darko,Jonathan Kuminga,2.9606075308924025,0.03768082621433957,,0.0
-beringer_4,consensus,Joan Beringer,1.0177513831174267,0.01544694218528483,Joan Beringer absorbs Kuminga's minutes directly,-0.16671334186421327
-beringer_4,rapm,Joan Beringer,1.9643641718183211,0.022367398936970997,Joan Beringer absorbs Kuminga's minutes directly,-0.11937558769392342
-beringer_4,box,Joan Beringer,3.7597575172752165,0.046258722281010134,Joan Beringer absorbs Kuminga's minutes directly,1.3669793947369293
-beringer_4,darko,Joan Beringer,3.631354471980668,0.04815251881462142,Joan Beringer absorbs Kuminga's minutes directly,1.047169260028185
-mcdaniels_4_next_wing,consensus,Bones Hyland,0.5600173124534422,0.011050835174546775,Bones Hyland absorbs Kuminga's minutes directly,-0.6063240429380189
-mcdaniels_4_next_wing,rapm,Bones Hyland,1.1901396865809546,0.015038016970282548,Bones Hyland absorbs Kuminga's minutes directly,-0.8523137843627684
-mcdaniels_4_next_wing,box,Bones Hyland,3.0666173531268983,0.035850407571277075,Bones Hyland absorbs Kuminga's minutes directly,0.32614792376362345
-mcdaniels_4_next_wing,darko,Bones Hyland,3.3697921458869624,0.04398472976195483,Bones Hyland absorbs Kuminga's minutes directly,0.6303903547615265
-alt_joshminott,consensus,Josh Minott,1.9745814662319083,0.022931121587082284,Josh Minott signed instead of Kuminga,0.5817045983155321
-alt_joshminott,rapm,Josh Minott,2.4474585091271823,0.02627966807301746,Josh Minott signed instead of Kuminga,0.27185132591072275
-alt_joshminott,box,Josh Minott,3.9024297789562525,0.04857952440435498,Josh Minott signed instead of Kuminga,1.5990596070714138
-alt_joshminott,darko,Josh Minott,4.07475230921504,0.05551531038780476,Josh Minott signed instead of Kuminga,1.783448417346519
-alt_jaxsonhayes,consensus,Jaxson Hayes,1.4954992115531742,0.018504528287273617,Jaxson Hayes signed instead of Kuminga,0.1390452683346654
-alt_jaxsonhayes,rapm,Jaxson Hayes,2.3249025835116908,0.02529922066809353,Jaxson Hayes signed instead of Kuminga,0.17380658541832975
-alt_jaxsonhayes,box,Jaxson Hayes,3.1002455385639545,0.03633016968351241,Jaxson Hayes signed instead of Kuminga,0.37412413498715685
-alt_jaxsonhayes,darko,Jaxson Hayes,3.5176799200537214,0.046318569376866674,Jaxson Hayes signed instead of Kuminga,0.8637743162527106
-alt_kenrichwilliams,consensus,Kenrich Williams,0.9328560985002412,0.014679799358735642,Kenrich Williams signed instead of Kuminga,-0.24342762451913214
-alt_kenrichwilliams,rapm,Kenrich Williams,1.5505719625774588,0.018505338317389586,Kenrich Williams signed instead of Kuminga,-0.5055816496520645
-alt_kenrichwilliams,box,Kenrich Williams,3.0501090235394366,0.03561488873582929,Kenrich Williams signed instead of Kuminga,0.302596040218845
-alt_kenrichwilliams,darko,Kenrich Williams,3.5176799200537214,0.046318569376866674,Kenrich Williams signed instead of Kuminga,0.8637743162527106
-alt_alhorford,consensus,Al Horford,2.1305617351970776,0.024289497589361466,Al Horford signed instead of Kuminga,0.7175421985434502
-alt_alhorford,rapm,Al Horford,2.9209700399143017,0.031386799777712505,Al Horford signed instead of Kuminga,0.7825644963802274
-alt_alhorford,box,Al Horford,3.3230744942284827,0.03950919611765966,Al Horford signed instead of Kuminga,0.6920267784018823
-alt_alhorford,darko,Al Horford,2.9606075308924025,0.03768082621433957,Al Horford signed instead of Kuminga,0.0
-alt_deanwade,consensus,Dean Wade,2.6948762591127133,0.029675264269944032,Dean Wade signed instead of Kuminga,1.256118866601707
-alt_deanwade,rapm,Dean Wade,4.080743241561722,0.04741860357961384,Dean Wade signed instead of Kuminga,2.3857448765703606
-alt_deanwade,box,Dean Wade,2.920965599767532,0.03393578031716389,Dean Wade signed instead of Kuminga,0.13468519835230508
-alt_deanwade,darko,Dean Wade,4.104366266592473,0.05607600131415082,Dean Wade signed instead of Kuminga,1.839517509981125
+actual,consensus,Jonathan Kuminga,1.132537690252191,0.01629924624298093,,0.0
+actual,rapm,Jonathan Kuminga,1.8835683172490563,0.021742067858458294,,0.0
+actual,box,Jonathan Kuminga,2.567396962758252,0.03014847143466232,,0.0
+actual,darko,Jonathan Kuminga,2.908986957236354,0.0373593031973623,,0.0
+beringer_4,consensus,Joan Beringer,1.0818030680846331,0.01596778004481956,Joan Beringer absorbs Kuminga's minutes directly,-0.033146619816137174
+beringer_4,rapm,Joan Beringer,2.0212571429700676,0.022946643810479835,Joan Beringer absorbs Kuminga's minutes directly,0.12045759520215409
+beringer_4,box,Joan Beringer,3.806714238195158,0.047886132535011956,Joan Beringer absorbs Kuminga's minutes directly,1.7737661100349638
+beringer_4,darko,Joan Beringer,3.6887914891821847,0.04950670013917513,Joan Beringer absorbs Kuminga's minutes directly,1.2147396941812834
+mcdaniels_4_next_wing,consensus,Bones Hyland,0.485558101761171,0.010920686527070433,Bones Hyland absorbs Kuminga's minutes directly,-0.5378559715910497
+mcdaniels_4_next_wing,rapm,Bones Hyland,1.013050476675414,0.013691951242750576,Bones Hyland absorbs Kuminga's minutes directly,-0.8050116615707719
+mcdaniels_4_next_wing,box,Bones Hyland,2.8039435323918562,0.032892411642412134,Bones Hyland absorbs Kuminga's minutes directly,0.27439402077498143
+mcdaniels_4_next_wing,darko,Bones Hyland,3.438854087521577,0.04569720703535386,Bones Hyland absorbs Kuminga's minutes directly,0.8337903837991566
+alt_joshminott,consensus,Josh Minott,1.8541419466408324,0.022028934298423796,Josh Minott signed instead of Kuminga,0.5729688055442865
+alt_joshminott,rapm,Josh Minott,2.2357111943667136,0.024762354778971426,Josh Minott signed instead of Kuminga,0.30202869205131316
+alt_joshminott,box,Josh Minott,3.698872436775642,0.046074390271164084,Josh Minott signed instead of Kuminga,1.5925918836501765
+alt_joshminott,darko,Josh Minott,4.06355376745818,0.05540864560032745,Josh Minott signed instead of Kuminga,1.804934240296515
+alt_jaxsonhayes,consensus,Jaxson Hayes,1.3576782182454474,0.01777016435920351,Jaxson Hayes signed instead of Kuminga,0.14709181162225782
+alt_jaxsonhayes,rapm,Jaxson Hayes,2.1087088452423126,0.023687068223051506,Jaxson Hayes signed instead of Kuminga,0.1945000364593212
+alt_jaxsonhayes,box,Jaxson Hayes,2.867584333415927,0.033630644934291354,Jaxson Hayes signed instead of Kuminga,0.34821734996290343
+alt_jaxsonhayes,darko,Jaxson Hayes,3.486270362347267,0.04647483394249518,Jaxson Hayes signed instead of Kuminga,0.9115530745132883
+alt_kenrichwilliams,consensus,Kenrich Williams,0.7746219790834237,0.013450006749267428,Kenrich Williams signed instead of Kuminga,-0.28492394937135024
+alt_kenrichwilliams,rapm,Kenrich Williams,1.3062849121381426,0.016507001823192768,Kenrich Williams signed instead of Kuminga,-0.5235066035265526
+alt_kenrichwilliams,box,Kenrich Williams,2.815628826955944,0.03302796105935555,Kenrich Williams signed instead of Kuminga,0.287948962469323
+alt_kenrichwilliams,darko,Kenrich Williams,3.486270362347267,0.04647483394249518,Kenrich Williams signed instead of Kuminga,0.9115530745132883
+alt_alhorford,consensus,Al Horford,2.015781300071886,0.023532562920603843,Al Horford signed instead of Kuminga,0.7233316677622913
+alt_alhorford,rapm,Al Horford,2.726402088710989,0.029369675195174947,Al Horford signed instead of Kuminga,0.7627607336716653
+alt_alhorford,box,Al Horford,3.098497695460292,0.03665726512463236,Al Horford signed instead of Kuminga,0.6508793689970042
+alt_alhorford,darko,Al Horford,2.908986957236354,0.0373593031973623,Al Horford signed instead of Kuminga,0.0
+alt_deanwade,consensus,Dean Wade,2.506646765264155,0.027679761183169862,Dean Wade signed instead of Kuminga,1.138051494018893
+alt_deanwade,rapm,Dean Wade,3.799891692373193,0.04318496262667153,Dean Wade signed instead of Kuminga,2.1442894768213234
+alt_deanwade,box,Dean Wade,2.6809088747186403,0.03146520961340283,Dean Wade signed instead of Kuminga,0.13167381787405097
+alt_deanwade,darko,Dean Wade,4.057435946588282,0.055285881328204826,Dean Wade signed instead of Kuminga,1.792657813084253

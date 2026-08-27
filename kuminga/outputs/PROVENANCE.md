@@ -1,6 +1,6 @@
 # Provenance appendix
 
-Assembled 2026-08-27T03:17:14.052488+00:00
+Assembled 2026-08-27T13:16:29.222908+00:00
 
 ## Frozen warehouse snapshot
 
@@ -23,7 +23,6 @@ Assembled 2026-08-27T03:17:14.052488+00:00
 
 | artifact                                               | rows   | script                       | run_id                                        | status   |
 |:-------------------------------------------------------|:-------|:-----------------------------|:----------------------------------------------|:---------|
-| kuminga\data\transaction_supplement.csv                | 5      | build_transaction_supplement | build_transaction_supplement_20260827T015411Z | ok       |
 | kuminga/data/frozen/wh_a806ee0164f04a3f                |        | freeze_inputs                | freeze_inputs_20260827T015615Z                | ok       |
 | kuminga\outputs\team_state_diff_2026_27.csv            | 30     | diff_team_state              | diff_team_state_20260827T020817Z              | ok       |
 | offseason\data\nba_contracts_2026_27_verified.csv      | 459    | patch_contracts              | patch_contracts_20260827T021228Z              | ok       |
@@ -33,38 +32,52 @@ Assembled 2026-08-27T03:17:14.052488+00:00
 | kuminga/data/frozen/wh_bfebdf122fef9959                |        | freeze_inputs                | freeze_inputs_20260827T022316Z                | ok       |
 | kuminga/data/frozen/wh_cffa3359210c1181                |        | freeze_inputs                | freeze_inputs_20260827T022633Z                | ok       |
 | kuminga/data/frozen/wh_cf31d54027f4e098                |        | freeze_inputs                | freeze_inputs_20260827T023006Z                | ok       |
-| kuminga\outputs\team_strengths_2026_27.csv             | 120    | build_strengths              | build_strengths_20260827T023202Z              | ok       |
-| kuminga\outputs\rotations_2026_27.csv                  | 600    | build_rotations              | build_rotations_20260827T023548Z              | ok       |
-| kuminga\outputs\minutes_rank_curve.csv                 | 10     | build_rotations              | build_rotations_20260827T023548Z              | ok       |
-| kuminga\outputs\rookie_priors.csv                      | 60     | build_rotations              | build_rotations_20260827T023548Z              | ok       |
-| kuminga\outputs\player_pool_2026_27.csv                | 988    | build_rotations              | build_rotations_20260827T023548Z              | ok       |
 | kuminga\outputs\cap_branches.csv                       | 6      | cap_branches                 | cap_branches_20260827T023847Z                 | ok       |
 | kuminga\outputs\cap_branches.md                        |        | cap_branches                 | cap_branches_20260827T023847Z                 | ok       |
-| kuminga\outputs\sim_all30_2026_27.csv                  | 120    | run_sim                      | run_sim_20260827T023247Z                      | ok       |
-| kuminga\outputs\par_curves_by_fork.csv                 | 4      | eval_signing                 | eval_signing_20260827T024047Z                 | ok       |
-| kuminga\outputs\kuminga_surplus_by_fork.csv            | 8      | eval_signing                 | eval_signing_20260827T024047Z                 | ok       |
-| kuminga\outputs\kuminga_cap_gate.json                  |        | eval_signing                 | eval_signing_20260827T024047Z                 | ok       |
 | kuminga\outputs\player_option.csv                      | 9      | player_option                | player_option_20260827T024131Z                | ok       |
 | kuminga\data\stints_2025_26.parquet                    | 12608  | build_stints_2026            | build_stints_2026_20260827T023401Z            | ok       |
 | kuminga\data\stints_2025_26_games.csv                  | 256    | build_stints_2026            | build_stints_2026_20260827T023401Z            | ok       |
 | kuminga\outputs\lineup_evidence.csv                    | 10     | lineup_evidence              | lineup_evidence_20260827T024925Z              | ok       |
 | kuminga\outputs\kuminga_shot_profile.csv               | 8      | lineup_evidence              | lineup_evidence_20260827T024925Z              | ok       |
 | kuminga\outputs\seed_distribution.csv                  | 240    | seed_distribution            | seed_distribution_20260827T025830Z            | ok       |
-| kuminga\outputs\fcurve_min.csv                         | 116    | build_fcurve                 | build_fcurve_20260827T024206Z                 | ok       |
-| kuminga\outputs\shapley_min.csv                        | 8      | shapley                      | shapley_20260827T031438Z                      | ok       |
-| kuminga\outputs\shapley_order_spread.csv               | 32     | shapley                      | shapley_20260827T031438Z                      | ok       |
-| kuminga\outputs\scenario_fan.csv                       | 16     | counterfactuals              | counterfactuals_20260827T031441Z              | ok       |
-| kuminga\outputs\counterfactual_fives.csv               | 32     | counterfactuals              | counterfactuals_20260827T031441Z              | ok       |
-| kuminga\outputs\coherence_checks.csv                   | 4      | build_outputs                | build_outputs_20260827T031455Z                | ok       |
-| kuminga\outputs\T1_all30_before_after.csv              | 30     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
-| kuminga\outputs\T2_west_ranking.csv                    | 15     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
-| kuminga\outputs\PROVENANCE.csv                         | 42     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
 | kuminga\outputs\figures\fig1_attribution_waterfall.png |        | build_figures                | build_figures_20260827T031456Z                | ok       |
 | kuminga\outputs\figures\fig2_west_before_after.png     |        | build_figures                | build_figures_20260827T031456Z                | ok       |
 | kuminga\outputs\figures\fig4_seed_distribution.png     |        | build_figures                | build_figures_20260827T031456Z                | ok       |
 | kuminga\outputs\figures\fig3_scenario_fan.png          |        | build_figures                | build_figures_20260827T031456Z                | ok       |
 | kuminga\data\roster_snapshot_2026_27.csv               | 516    | build_roster_snapshot        | build_roster_snapshot_20260827T031702Z        | ok       |
 | kuminga\data\roster_snapshot_discrepancies.csv         | 12     | build_roster_snapshot        | build_roster_snapshot_20260827T031702Z        | ok       |
+| kuminga\outputs\coherence_checks.csv                   | 4      | build_outputs                | build_outputs_20260827T031713Z                | ok       |
+| kuminga\outputs\T1_all30_before_after.csv              | 30     | build_outputs                | build_outputs_20260827T031713Z                | ok       |
+| kuminga\outputs\T2_west_ranking.csv                    | 15     | build_outputs                | build_outputs_20260827T031713Z                | ok       |
+| kuminga\outputs\PROVENANCE.csv                         | 42     | build_outputs                | build_outputs_20260827T031713Z                | ok       |
+| kuminga\outputs\canonical_figures.csv                  | 4      | reconcile_figures            | reconcile_figures_20260827T123219Z            | ok       |
+| kuminga\outputs\canonical_figures.md                   |        | reconcile_figures            | reconcile_figures_20260827T123219Z            | ok       |
+| kuminga\outputs\cap_reconciliation.csv                 | 7      | cap_reconciliation           | cap_reconciliation_20260827T123553Z           | ok       |
+| kuminga\outputs\cap_branches_canonical.csv             | 6      | cap_reconciliation           | cap_reconciliation_20260827T123553Z           | ok       |
+| kuminga\outputs\cap_reconciliation.md                  |        | cap_reconciliation           | cap_reconciliation_20260827T123553Z           | ok       |
+| kuminga\data\transaction_supplement.csv                | 9      | build_transaction_supplement | build_transaction_supplement_20260827T123728Z | ok       |
+| kuminga\outputs\market_comparison.csv                  | 4      | eval_signing                 | eval_signing_20260827T123804Z                 | ok       |
+| kuminga\outputs\par_curves_by_fork.csv                 | 4      | eval_signing                 | eval_signing_20260827T123804Z                 | ok       |
+| kuminga\outputs\kuminga_surplus_by_fork.csv            | 8      | eval_signing                 | eval_signing_20260827T123804Z                 | ok       |
+| kuminga\outputs\kuminga_cap_gate.json                  |        | eval_signing                 | eval_signing_20260827T123804Z                 | ok       |
+| kuminga\outputs\rotations_2026_27.csv                  | 600    | build_rotations              | build_rotations_20260827T124322Z              | ok       |
+| kuminga\outputs\minutes_rank_curve.csv                 | 10     | build_rotations              | build_rotations_20260827T124322Z              | ok       |
+| kuminga\outputs\rookie_priors.csv                      | 60     | build_rotations              | build_rotations_20260827T124322Z              | ok       |
+| kuminga\outputs\player_pool_2026_27.csv                | 988    | build_rotations              | build_rotations_20260827T124322Z              | ok       |
+| kuminga\outputs\team_strengths_2026_27.csv             | 120    | build_strengths              | build_strengths_20260827T124335Z              | ok       |
+| kuminga\outputs\baseline_decomposition.csv             | 4      | baseline_decomp              | baseline_decomp_20260827T124626Z              | ok       |
+| kuminga\outputs\sim_all30_2026_27.csv                  | 120    | run_sim                      | run_sim_20260827T124337Z                      | ok       |
+| kuminga\outputs\backtest_calibration.csv               | 90     | backtest_calibration         | backtest_calibration_20260827T124932Z         | ok       |
+| kuminga\outputs\backtest_calibration_summary.csv       | 3      | backtest_calibration         | backtest_calibration_20260827T124932Z         | ok       |
+| kuminga\outputs\fcurve_min.csv                         | 116    | build_fcurve                 | build_fcurve_20260827T124351Z                 | ok       |
+| kuminga\outputs\shapley_min.csv                        | 8      | shapley                      | shapley_20260827T131301Z                      | ok       |
+| kuminga\outputs\shapley_order_spread.csv               | 32     | shapley                      | shapley_20260827T131301Z                      | ok       |
+| kuminga\outputs\C2_moves_ceiling_vs_not.csv            | 8      | compare_ceiling              | compare_ceiling_20260827T131315Z              | ok       |
+| kuminga\outputs\C2_teams_ceiling_vs_not.csv            | 30     | compare_ceiling              | compare_ceiling_20260827T131315Z              | ok       |
+| kuminga\outputs\slot_constrained.csv                   | 4      | slot_analysis                | slot_analysis_20260827T131606Z                | ok       |
+| kuminga\outputs\slot_alternatives.csv                  | 5      | slot_analysis                | slot_analysis_20260827T131606Z                | ok       |
+| kuminga\outputs\scenario_fan.csv                       | 16     | counterfactuals              | counterfactuals_20260827T131627Z              | ok       |
+| kuminga\outputs\counterfactual_fives.csv               | 32     | counterfactuals              | counterfactuals_20260827T131627Z              | ok       |
 
 ## External sources
 
