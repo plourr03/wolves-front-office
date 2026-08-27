@@ -20,7 +20,7 @@ python -c "import sys;sys.path.insert(0,'postmortem');from lib import db;print(d
 1. Add the incoming player to `kuminga/data/transaction_supplement.csv` with his salary.
 2. Re-run: `patch_contracts.py`, `build_roster_snapshot.py`, `build_team_state.py`, `build_rotations.py`, `build_strengths.py`, `run_sim.py`, `build_fcurve.py`, `shapley.py`.
 3. **Green becomes a lever, not a precondition.** Add `green_out` to `MOVES` in `shapley.py` and to `REMOVE_WHEN_APPLIED`; the coalition count goes from 256 to 512, which is still instant on the f-curve. Re-run `compare_ceiling.py` to see whether any verdict moves.
-4. Remember the first-apron finding: any incoming salary above **$400,183** crosses the first apron at a 14-man roster. If a player comes back, Minnesota is a first-apron team and loses the bi-annual exception, sign-and-trade acquisition, and prior-year trade exceptions. Say so.
+4. Remember the first-apron finding, in the terms section 1 uses. A Green trade **can** return salary: there is **$13,071,183** of room under the second-apron hard cap at a 14-man roster, and the hard cap binds before the matching rules do. But any incoming salary above **$400,183** makes Minnesota a **first-apron team for the season**, which costs four things: no sign-and-trade acquisition, no bi-annual exception ($5,477,000), no prior-year trade exceptions, and tighter matching (no aggregating salaries, no taking back more than is sent out). Losing the non-taxpayer MLE is moot, since the taxpayer version is what signs Kuminga. Say it that way, not "a player cannot come back".
 
 **If STRETCHED:**
 1. Promote the stretch branch to primary in `cap_branches.py` (set a `PRIMARY_BRANCH` constant).

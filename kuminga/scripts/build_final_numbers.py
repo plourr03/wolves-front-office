@@ -86,6 +86,18 @@ def main():
             add("The deal that cannot happen yet", "stretch branch at 14",
                 f"${s14.apron_team_salary:,.0f}",
                 f"${-s14.vs_first_apron:,.0f} OVER the first apron", "FACT", rid_cap)
+            add("The deal that cannot happen yet", "salary a Green trade can bring back",
+                f"${t14.vs_second_apron:,.0f}", "room under the SECOND apron hard cap at 14",
+                "FACT", rid_cap,
+                "the hard cap binds before the matching rules do (Green out is "
+                "$14,679,012). A trade CAN return a player; it is not prohibited.")
+            add("The deal that cannot happen yet", "incoming salary that costs the tier",
+                f"${t14.vs_first_apron:,.0f}", "above this MIN is a first-apron team",
+                "FACT", rid_cap,
+                "four restrictions: no sign-and-trade acquisition, no bi-annual "
+                "($5,477,000), no prior-year trade exceptions, tighter matching (no "
+                "aggregating, no taking back more than sent). Losing the non-taxpayer "
+                "MLE is moot; they are using the taxpayer version on Kuminga.")
             t15 = br[(br.branch == "trade") & (br.n_players == 15)].iloc[0]
             add("The deal that cannot happen yet", "a 15th man in the trade branch",
                 f"${-t15.vs_first_apron:,.0f} over the first apron", "", "FACT", rid_cap,

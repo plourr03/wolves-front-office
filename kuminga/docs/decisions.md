@@ -650,3 +650,21 @@ That is the **official** date for both, the day the league processed them after 
 **Why this matters to claim (a), and the limit on it.** Section 4 says Green has to be shed to fit Kuminga. The sequence supports that ordering: the $19,310,345 commitment to Dosunmu was reported before Minnesota agreed to take Green's $14,679,012 back. **But it does not establish that they were decided in that order.** A four-team trade of that size is negotiated over weeks, so the two were almost certainly live at once, and a reported-first date is not a decided-first date. The piece may say the Dosunmu agreement was reported three days earlier; it may not say Minnesota chose Dosunmu and then took Green anyway.
 
 **And one fact that was not in the model's framing at all: Green did not arrive separately.** He came from Charlotte in the LaMelo Ball trade, as part of the same deal that sent Naz Reid out. Every earlier note treats him as a salary already sitting on the book. He is salary Minnesota **took on**, three days after committing to Dosunmu, in the trade that is the largest positive in the Shapley table.
+
+### D47. "A player cannot come back in a Green trade" was wrong, in two places
+
+**Correction to a previously reported claim.** Section 1 said "any player coming back in a Green trade crosses it, because the smallest contract that **can legally** come back is $1,358,000", and claim (a) said Green "cannot be flipped for a player". Both confused *costly* with *prohibited*.
+
+**What is actually true.** A Green trade can bring salary back. The binding ceiling is the **second-apron hard cap**, which leaves **$13,071,183 of room at a fourteen-man roster** `[cap_branches_20260827T023847Z]`. That is the constraint that binds, not the trade-matching rules: Green goes out at $14,679,012, so matching would allow more than the hard cap does. Crossing the **first** apron is permitted; it is not a hard cap for Minnesota, whose hard cap sits at the second apron from using the taxpayer MLE.
+
+**What crossing the first apron costs, now stated as four things** rather than the three in the old runbook note:
+1. No **sign-and-trade** acquisition.
+2. No **bi-annual exception**, $5,477,000.
+3. No **trade exception generated in a prior year**.
+4. **Tighter matching**: cannot aggregate two salaries to match one larger one, cannot take back more than is sent out.
+
+The fifth restriction usually listed, losing the non-taxpayer mid-level, is **moot here** and is flagged as such, because the taxpayer version is what signs Kuminga.
+
+**The reframe that follows.** "The re-signing removes every option except the dump" is replaced by **"it removes keeping him, and makes every other exit cost something"**. There are two exits and both are charged: a pure dump costs whatever pick or swap moves a $14.7M expiring for nothing, and a trade that returns a player costs the first-apron restrictions for the season. Section 1's closing line changed from "the pure salary dump is not one option among several" to "it is **not the only legal option**; it is the only one that keeps them under the first apron".
+
+**Fixed in all four places** so the terms match: section 1, claim (a), `lock_runbook.md` L1 item 4, and two new rows on `final_numbers.csv` ("salary a Green trade can bring back", $13,071,183; "incoming salary that costs the tier", $400,183).

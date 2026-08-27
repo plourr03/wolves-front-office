@@ -37,7 +37,11 @@ So the Green move is not only about the last $249,829. It is about being able to
 | Trade Green, 14 players | $208,614,817 | **$400,183 under** |
 | Stretch Green, 14 players | $213,507,821 | $4,492,821 over |
 
-Two things fall out of that $400,183. A **fifteenth** man on a rookie minimum puts the trade branch $957,817 over the first apron by itself. And **any player coming back in a Green trade crosses it**, because the smallest contract that can legally come back is $1,358,000 and the room is $400,183. The "pure salary dump" is not one option among several. It is the only version that keeps them under the first apron.
+Two things fall out of that $400,183. A **fifteenth** man on a rookie minimum puts the trade branch $957,817 over the first apron by itself. And a Green trade **can** bring salary back: there is **$13,071,183 of room under the second-apron hard cap** at fourteen players `[cap_branches_20260827T023847Z]`, and the hard cap, not the matching rules, is what binds. But **any incoming salary above $400,183 makes Minnesota a first-apron team for the season.**
+
+**What that costs, and it is four things.** Above the first apron a team cannot acquire a player by **sign-and-trade**; cannot use the **bi-annual exception**, worth $5,477,000; cannot use a **trade exception generated in a prior year**; and has **tighter trade matching**, meaning it cannot aggregate two salaries to match one larger one and cannot take back more than it sends out. (The fifth usual restriction, losing the non-taxpayer mid-level, is already moot: they are signing Kuminga with the taxpayer version.)
+
+So the pure salary dump is **not the only legal option**. It is the only one that keeps them under the first apron, and every other exit has a price.
 
 *Optional colour:* stretching costs roughly $10.9M more in tax in 2026-27 alone and leaves $4,893,004 of dead money in each of the next two seasons, the second of which lands in Edwards's walk year.
 
@@ -132,7 +136,11 @@ The rule being applied is worth stating once in the piece: **if a verdict change
 
 **First, it is why Josh Green has to be moved for nothing.** Be precise about what is lost here, because it is not the player. Green was **the matching salary in the LaMelo Ball trade**, on an expiring one-year deal at $14,679,012, and priced on the floor his departure is a wash: keeping him grades **mixed across the four views, -0.48 to +0.01pp** `[green_kept_20260827T154636Z]`. Nothing in this project says Minnesota will miss him.
 
-What the re-signing removes is every option *except* the dump. With both contracts on the book, adding Kuminga at the full taxpayer exception gives $215,871,829 + $6,064,000 = $221,935,829, which is $249,829 past the second apron and cannot be done, so **Green cannot be kept**. And he cannot be flipped for a player either, because the smallest contract that could come back is $1,358,000 against $400,183 of room under the first apron. Keep him and Kuminga does not fit; trade him for anything with salary in it and Minnesota crosses the first apron. What is left is the pure salary dump, and **a $14.7M expiring contract given away for nothing has a price** in whatever pick or swap has to be attached to move it. Dosunmu's $19,310,345 is larger than the $249,829 overage by $19,060,516, so **without him, Green stays and the signing still fits.** The Saturday deadline in section 1 traces back to a contract agreed in June.
+**What the re-signing removes is keeping him, and it makes every other exit cost something.** With both contracts on the book, adding Kuminga at the full taxpayer exception gives $215,871,829 + $6,064,000 = $221,935,829, which is $249,829 past the second apron and cannot be done, so **Green cannot be kept**.
+
+He *can* be traded for salary. There is **$13,071,183 of room under the second-apron hard cap** at a fourteen-man roster `[cap_branches_20260827T023847Z]`, so a real player can come back. But **any incoming salary above $400,183 makes Minnesota a first-apron team for the season**, with the four restrictions section 1 lists: no sign-and-trade acquisition, no bi-annual exception, no prior-year trade exceptions, and tighter matching. So there are two exits and both are charged for. A **pure dump** costs whatever pick or swap has to be attached to move a $14.7M expiring contract for nothing. A **trade that brings something back** costs the apron restrictions instead, for the rest of the season.
+
+Dosunmu's $19,310,345 is larger than the $249,829 overage by $19,060,516, so **without him, Green stays and neither exit is needed.** The Saturday deadline in section 1 traces back to a contract agreed in June.
 
 **And the two sit three days apart.** Minnesota agreed to re-sign Dosunmu on the night of Monday **June 22**. It agreed the trade that brought Ball and Green in, and sent Naz Reid out, on Thursday **June 25**. The league processed both on **July 10**, which is why the transaction log dates them identically and cannot be used to order them `[ESPN, Charania 06.23 and Youngmisuk 06.25]`.
 
