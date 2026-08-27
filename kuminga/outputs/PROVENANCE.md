@@ -1,6 +1,6 @@
 # Provenance appendix
 
-Assembled 2026-08-27T03:14:55.581825+00:00
+Assembled 2026-08-27T03:17:14.052488+00:00
 
 ## Frozen warehouse snapshot
 
@@ -27,8 +27,6 @@ Assembled 2026-08-27T03:14:55.581825+00:00
 | kuminga/data/frozen/wh_a806ee0164f04a3f                |        | freeze_inputs                | freeze_inputs_20260827T015615Z                | ok       |
 | kuminga\outputs\team_state_diff_2026_27.csv            | 30     | diff_team_state              | diff_team_state_20260827T020817Z              | ok       |
 | offseason\data\nba_contracts_2026_27_verified.csv      | 459    | patch_contracts              | patch_contracts_20260827T021228Z              | ok       |
-| kuminga\data\roster_snapshot_2026_27.csv               | 516    | build_roster_snapshot        | build_roster_snapshot_20260827T021240Z        | ok       |
-| kuminga\data\roster_snapshot_discrepancies.csv         | 12     | build_roster_snapshot        | build_roster_snapshot_20260827T021240Z        | ok       |
 | kuminga\data\injuries_2026_27.csv                      | 10     | build_injuries               | build_injuries_20260827T021428Z               | ok       |
 | kuminga\data\traded_picks_2026_offseason.csv           | 10     | build_pick_ledger            | build_pick_ledger_20260827T021502Z            | ok       |
 | kuminga\data\nba_draft_picks_future_2026_08_26.csv     | 617    | build_pick_ledger            | build_pick_ledger_20260827T021502Z            | ok       |
@@ -53,18 +51,20 @@ Assembled 2026-08-27T03:14:55.581825+00:00
 | kuminga\outputs\kuminga_shot_profile.csv               | 8      | lineup_evidence              | lineup_evidence_20260827T024925Z              | ok       |
 | kuminga\outputs\seed_distribution.csv                  | 240    | seed_distribution            | seed_distribution_20260827T025830Z            | ok       |
 | kuminga\outputs\fcurve_min.csv                         | 116    | build_fcurve                 | build_fcurve_20260827T024206Z                 | ok       |
-| kuminga\outputs\coherence_checks.csv                   | 4      | build_outputs                | build_outputs_20260827T031238Z                | ok       |
-| kuminga\outputs\T1_all30_before_after.csv              | 30     | build_outputs                | build_outputs_20260827T031238Z                | ok       |
-| kuminga\outputs\T2_west_ranking.csv                    | 15     | build_outputs                | build_outputs_20260827T031238Z                | ok       |
-| kuminga\outputs\PROVENANCE.csv                         | 40     | build_outputs                | build_outputs_20260827T031238Z                | ok       |
-| kuminga\outputs\figures\fig1_attribution_waterfall.png |        | build_figures                | build_figures_20260827T031239Z                | ok       |
-| kuminga\outputs\figures\fig2_west_before_after.png     |        | build_figures                | build_figures_20260827T031239Z                | ok       |
-| kuminga\outputs\figures\fig4_seed_distribution.png     |        | build_figures                | build_figures_20260827T031239Z                | ok       |
-| kuminga\outputs\figures\fig3_scenario_fan.png          |        | build_figures                | build_figures_20260827T031239Z                | ok       |
 | kuminga\outputs\shapley_min.csv                        | 8      | shapley                      | shapley_20260827T031438Z                      | ok       |
 | kuminga\outputs\shapley_order_spread.csv               | 32     | shapley                      | shapley_20260827T031438Z                      | ok       |
 | kuminga\outputs\scenario_fan.csv                       | 16     | counterfactuals              | counterfactuals_20260827T031441Z              | ok       |
 | kuminga\outputs\counterfactual_fives.csv               | 32     | counterfactuals              | counterfactuals_20260827T031441Z              | ok       |
+| kuminga\outputs\coherence_checks.csv                   | 4      | build_outputs                | build_outputs_20260827T031455Z                | ok       |
+| kuminga\outputs\T1_all30_before_after.csv              | 30     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
+| kuminga\outputs\T2_west_ranking.csv                    | 15     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
+| kuminga\outputs\PROVENANCE.csv                         | 42     | build_outputs                | build_outputs_20260827T031455Z                | ok       |
+| kuminga\outputs\figures\fig1_attribution_waterfall.png |        | build_figures                | build_figures_20260827T031456Z                | ok       |
+| kuminga\outputs\figures\fig2_west_before_after.png     |        | build_figures                | build_figures_20260827T031456Z                | ok       |
+| kuminga\outputs\figures\fig4_seed_distribution.png     |        | build_figures                | build_figures_20260827T031456Z                | ok       |
+| kuminga\outputs\figures\fig3_scenario_fan.png          |        | build_figures                | build_figures_20260827T031456Z                | ok       |
+| kuminga\data\roster_snapshot_2026_27.csv               | 516    | build_roster_snapshot        | build_roster_snapshot_20260827T031702Z        | ok       |
+| kuminga\data\roster_snapshot_discrepancies.csv         | 12     | build_roster_snapshot        | build_roster_snapshot_20260827T031702Z        | ok       |
 
 ## External sources
 
