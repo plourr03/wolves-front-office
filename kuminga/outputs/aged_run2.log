@@ -1,0 +1,52 @@
+[run] build_strengths_20260827T194454Z
+  [build_strengths_20260827T194454Z] 2026 rookies given a slot-prior impact in every fork: 10
+  [build_strengths_20260827T194454Z] impact fork 'consensus': 622 players
+  [build_strengths_20260827T194454Z] impact fork 'rapm': 622 players
+  [build_strengths_20260827T194454Z] impact fork 'box': 622 players
+  [build_strengths_20260827T194454Z] impact fork 'darko': 585 players
+  [build_strengths_20260827T194454Z] DARKO name-matched: 575 of 582
+  [build_strengths_20260827T194454Z] measured 2025-26 RS net available for 30 teams
+  [build_strengths_20260827T194454Z] deflate beta = 1.067; persist slope = 0.7086, int = 0.1191
+  [build_strengths_20260827T194454Z] strengths: 120 rows (4 forks x 30 teams)
+  [build_strengths_20260827T194454Z]   consensus: mean coverage 1.000, delta range [-6.40, +1.09]
+  [build_strengths_20260827T194454Z]   rapm: mean coverage 1.000, delta range [-7.41, +1.96]
+  [build_strengths_20260827T194454Z]   box: mean coverage 1.000, delta range [-5.66, +0.51]
+  [build_strengths_20260827T194454Z]   darko: mean coverage 0.969, delta range [-4.77, +1.41]
+[run] build_strengths_20260827T194454Z -> ok
+
+2026-27 net-rating delta from the offseason, by fork (positive = improved):
+fork        box  consensus  darko  rapm  mean
+team_abbr                                    
+BKN       -0.78       1.08  -0.92  1.96  0.34
+PHI       -1.52       1.09   0.51  0.50  0.15
+CHI       -0.97       0.10   1.41 -0.23  0.08
+SAS       -1.81       0.08  -1.30  0.49 -0.64
+MIA       -2.05      -1.07   0.37 -0.97 -0.93
+LAL        0.51      -1.05  -2.31 -1.19 -1.01
+CHA       -1.26       0.38  -4.66  0.89 -1.16
+POR        0.02      -1.42  -3.15 -0.93 -1.37
+BOS       -2.53      -0.62  -2.14 -0.31 -1.40
+DAL       -1.09      -1.32  -1.81 -1.72 -1.48
+MIN       -1.03      -2.47  -0.74 -1.71 -1.49
+ATL       -2.35      -1.67  -0.50 -1.72 -1.56
+HOU       -1.55      -1.93  -1.50 -1.47 -1.61
+WAS       -0.95      -2.32   0.75 -4.01 -1.63
+ORL       -1.46      -1.70  -2.05 -1.46 -1.67
+MIL       -0.60      -2.40  -2.45 -2.51 -1.99
+OKC       -2.13      -2.15  -2.30 -2.36 -2.24
+NOP       -1.57      -2.83  -1.80 -2.98 -2.30
+DEN       -1.67      -2.99  -2.83 -3.44 -2.73
+MEM       -3.67      -3.02  -1.61 -2.66 -2.74
+PHX       -2.83      -3.24  -1.49 -3.51 -2.77
+LAC       -4.05      -2.60  -3.39 -2.06 -3.03
+SAC       -3.79      -4.37  -1.30 -3.77 -3.31
+TOR       -3.30      -3.78  -3.14 -4.39 -3.65
+CLE       -2.11      -4.42  -4.43 -4.58 -3.88
+NYK       -3.37      -4.17  -4.77 -4.06 -4.09
+DET       -3.30      -5.38  -3.20 -5.28 -4.29
+GSW       -3.57      -5.79  -4.65 -5.76 -4.94
+UTA       -5.66      -6.40  -1.17 -7.41 -5.16
+IND       -4.21      -6.10  -3.64 -6.92 -5.22
+[run] run_sim_20260827T194456Z
+  [run_sim_20260827T194456Z] expected wins = 41.0 + 2.239 * net
+  [run_sim_20260827T194456Z] fork consensus: 5 seeds x 20,000 sims x 2 fields done

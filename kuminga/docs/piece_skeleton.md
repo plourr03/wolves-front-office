@@ -28,7 +28,7 @@ Using the taxpayer MLE hard-caps a team at the second apron for the rest of the 
 
 **Hence Saturday.** Josh Green's $14,679,012 is what has to move.
 
-**And Saturday is a real deadline, not a convenience.** The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an **August 31** cut-off. Green has no salary beyond 2026-27. **If a waiver request is not reported by end of day Friday August 29 ET, the stretch branch ceases to exist** and a trade is the only route left `[gaps_remaining, stretch deadline]`.
+**And Saturday is a real deadline, not a convenience.** The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an **August 31** cut-off. Green has no salary beyond 2026-27. **If a waiver request is not reported by end of day Saturday August 29 ET, the stretch branch ceases to exist** and a trade is the only route left `[gaps_remaining, stretch deadline]`.
 
 **The two branches, at a legal 14-man roster** `[cap_reconciliation_20260827T191905Z]`. "Legal" means the 14-man floor: CBA **Article XXIX, Section 2(a)**, with **2(b)(i)** allowing 12 or 13 for two consecutive weeks at a time and 28 days total.
 
@@ -211,6 +211,12 @@ Structure it as three claims of decreasing confidence.
 ## Methods note
 
 Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separately end to end and never averaged; a claim ships only if all four agree on the sign. Title probabilities come from a bracket simulation calibrated against three prior seasons of betting markets. Minutes are allocated by a league-wide rank score with a per-player ceiling of prior load plus three, capped at 36.
+
+**The four views are not four independent measurements, and the piece should not imply they are.** They are built from overlapping data: the consensus view is constructed partly *from* the RAPM and box views, and all four ultimately read the same possessions and the same box scores. Four-way agreement is therefore weaker evidence than four independent instruments agreeing would be. It is a check that a finding does not depend on one modelling choice, not a confidence interval, and it is used here only to decide whether a claim gets a sign at all.
+
+**The noise floor, and how much it eats.** The machinery has its own error: Monte Carlo variation in the simulated seasons plus interpolation on the f-curve grid. At Minnesota's odds level that combines to a materiality floor of **0.24 to 0.45 percentage points** depending on the view `[noise_floor_20260827T194635Z]`. Re-testing every verdict against it, requiring an agreed sign *and* every individual view clearing the floor, **only two of eight survive**, and only one of those is a player move: LaMelo Ball's arrival. Reid out, Dosunmu retained and the DiVincenzo injury all have an agreed sign whose smallest view is inside the noise.
+
+**That floor is our compute budget, not a law of nature.** Monte Carlo dominates it by roughly five to one over interpolation, and Monte Carlo error falls with the square root of the simulation count. The current figures come from 20,000 simulations per fork per seed. Ten times that would cut the floor by about a factor of three and several of these verdicts would clear it. Until that run happens, the honest statement is that the piece cannot resolve effects this small, not that the effects are zero.
 
 **Why this piece reports signs and never rankings.** The four views agree far more often on direction than on size, and a ranking is a claim about size. The worked example is the DiVincenzo injury in the slot-aware run `[compare_slot_shapley_20260827T134414Z]`:
 

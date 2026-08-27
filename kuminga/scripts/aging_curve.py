@@ -55,10 +55,15 @@ SHRINK_K = 40.0      # n / (n + K); at n = 40 a cell keeps half its measured del
 AGE_LO, AGE_HI = 20, 39
 IMPACT_SCALE = 0.5   # net-rating points -> impact points. JUDGEMENT CALL, see D-log.
 FIRST_SEASON = 2000  # start year; earlier data is thinner and the league differs
+# C: drop-outs re-entered at this percentile of same-age observed deltas.
+# 0.25 is a stated assumption: a player who loses his roster spot is assumed
+# to have been on a bad-but-not-catastrophic trajectory, not the median one.
+DROPOUT_PCTILE = 0.25
 
 
 def main():
     with runlog.run("aging_curve", inputs={"min_gp": MIN_GP, "shrink_k": SHRINK_K,
+                                           "dropout_pctile": DROPOUT_PCTILE,
                                            "impact_scale": IMPACT_SCALE,
                                            "same_team_only": True}) as r:
         q = f"""
@@ -91,6 +96,32 @@ def main():
                f"({len(same) / len(m):.0%}); team-changers dropped to limit the "
                f"team-quality confound")
         same["delta"] = same.net_rating - same.net_rating_prev
+        same["imputed"] = False
+
+        # ---- C: SURVIVORSHIP CORRECTION ------------------------------------
+        # Players who drop out of the following season contribute no delta, and they are
+        # not a random sample: they are disproportionately the ones who declined. Leaving
+        # them out biases the curve UPWARD, which is why the uncorrected fit shows every
+        # age below 27 improving and most teams gaining. Each drop-out is re-entered with
+        # an IMPUTED delta at a low percentile of the observed deltas at the age he would
+        # have reached. The percentile is a stated assumption, not a fitted quantity.
+        if DROPOUT_PCTILE is not None:
+            last_yr = int(d.yr.max())
+            nxt = set(zip(d.player_id, d.yr - 1))     # (player, season he came FROM)
+            drop = d[(d.yr < last_yr)
+                     & ~d.apply(lambda x: (x.player_id, x.yr) in nxt, axis=1)].copy()
+            drop["age"] = drop.age + 1                # the age he would have reached
+            obs_by_age = same.groupby("age").delta
+            q = {a: float(g.quantile(DROPOUT_PCTILE)) for a, g in obs_by_age
+                 if len(g) >= 10}
+            drop["delta"] = drop.age.map(q)
+            drop = drop.dropna(subset=["delta"])
+            drop["imputed"] = True
+            r.note(f"SURVIVORSHIP: {len(drop):,} drop-outs re-entered at the "
+                   f"{DROPOUT_PCTILE:.0%} percentile of same-age observed deltas "
+                   f"({len(drop) / (len(same) + len(drop)):.0%} of the corrected sample)")
+            cols = ["player_id", "player_name", "age", "yr", "delta", "imputed"]
+            same = pd.concat([same[cols], drop[cols]], ignore_index=True)
 
         rows = []
         for age in range(AGE_LO, AGE_HI + 1):

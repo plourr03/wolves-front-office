@@ -55,7 +55,7 @@ The branch table has always modelled trade-vs-stretch as two standing options. I
 **The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an August 31 cut-off.** Green has no salary beyond 2026-27.
 
 **The rule, applied literally:**
-- If a **waiver request is reported by end of day Friday 2026-08-29 ET**, both branches stay live and the lock proceeds as written.
+- If a **waiver request is reported by end of day Saturday 2026-08-29 ET** (Aug 29 2026 is a Saturday; Friday is Aug 28), both branches stay live and the lock proceeds as written.
 - **If it is not, the stretch branch ceases to exist.** Retire it in `cap_branches.md`, delete the stretch row from the branch table in section 1, and remove the stretch tax and dead-money figures from the piece. Trade becomes the only branch and the section-1 table collapses to one row.
 - If Green is still on the roster after August 31 with no move at all, neither branch has happened and Kuminga still cannot be signed to the full exception. That is a third outcome the piece does not currently describe.
 
