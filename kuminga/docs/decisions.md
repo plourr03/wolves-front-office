@@ -508,3 +508,53 @@ Rendered: `kuminga/slide/kuminga_apron.png`, config `kuminga/slide/kuminga_apron
 Four tiles carry the arithmetic ($215.9M on the books, $6.06M exception, $221.7M apron, $249,829 over), the catch line carries the S3 loophole ("They can pay Kuminga $5,814,171 today. Just not the full exception."), and the footer credits the contract book as of 2026-08-26 and flags the terms as reported rather than official. Every figure on the slide is on `final_numbers.csv`; the config carries a `_provenance` block mapping each number to the run that produced it, since a run ID cannot go on a public post.
 
 **The renderer had to be localised, and it would have failed quietly.** The skill bundle ships `FONT_DIR = "/usr/share/fonts/truetype/dejavu/"`. On Windows every `ImageFont.truetype` call raises OSError, the handler falls through to `ImageFont.load_default()`, and the script **renders a 1080x1350 slide in a tiny bitmap font and exits 0**. A copy now lives at `kuminga/slide/render_slide.py` mapped to the same Windows faces the approved lamelo carousel uses (bahnschrift condensed, Segoe UI, Consolas Bold for numerals), with an `_assert_fonts()` guard that refuses to render rather than emitting a broken slide. The skill bundle itself is untouched.
+
+### D36. Dosunmu is two claims, and together they say less than either does alone (P1)
+
+Split in the skeleton and on the numbers sheet as **Dosunmu (a) on-court** and **Dosunmu (b) cap**, so neither can borrow the other's authority.
+
+**(a) On-court.** His minutes against the guards actually on the roster: **-0.13 to -0.76pp, negative under all four views**, quotable as a band `[shapley_20260827T134406Z]`.
+
+**The counterfactual, now stated explicitly in the piece.** It is **"lose him for nothing"**, not "spend the money elsewhere". Minnesota was over the cap, and an over-the-cap team has exceptions rather than room, so $19,310,345 was never convertible into a better guard at that price. The alternative being priced is his minutes going to Ball, Edwards, Clark and Hyland with nobody arriving. This matters because the natural misreading of a negative Shapley value on a contract is "that money was wasted, spend it better", and that option did not exist.
+
+**(b) Cap** `[dosunmu_cap_20260827T144259Z]`. On the pre-Kuminga book Minnesota is $15,443,829 over the tax line with an estimated **$30.9M** bill. Without his salary they are **$3,866,516 under the line owing nothing**, and still under it after filling to the 14-man floor with two minimums. **His is the contract that makes them a taxpayer.** It also sized the tool they signed Kuminga with: without him they sit **$12,453,516 under the first apron**, where the non-taxpayer mid-level lives, so the exception available to chase a forward would have been **up to $12.45M rather than $6,064,000**.
+
+**Why the split matters and is not pedantry.** (a) says the minutes are worth less than the guards behind him. (b) says the money bought tax liability and a smaller exception. Stacked carelessly they read as "they should have let him walk", which does not follow, because (a)'s counterfactual is losing him for nothing and being worse on the floor. The composite the evidence supports is narrower: Minnesota paid a taxpayer's price for a player their own minutes model grades below his replacements, and the bill arrived as a $6M exception instead of a $12M one.
+
+**Two provenance notes.** The tax rates are flagged CONFIRM in `league_year_constants`, so every tax figure is labelled est. And the contract book carries four years ($86,510,348); the reported five-year $112M total includes a 2030-31 season not in our data, so the $112M is reported terms and not derived here.
+
+### D37. The injury claim fails the per-view check, and so does the fallback (P2)
+
+Asked whether the DiVincenzo Achilles is the largest single negative under **each** of the four views in the slot-aware run rather than on the mean. It is not, and it is not close.
+
+| View | Largest single negative | ddv_injury | Its rank |
+|---|---|---|---|
+| consensus | depth, -0.332 | -0.218 | 4 of 8 |
+| RAPM | dosunmu_retained, -0.443 | -0.189 | 4 of 8 |
+| box | **ddv_injury, -0.356** | -0.356 | 1 of 8 |
+| DARKO | dosunmu_retained, -0.758 | -0.627 | 3 of 8 |
+
+**It is the largest under one view of four. Under RAPM it is the smallest of the four negatives on the board.**
+
+**The specified fallback also fails, so I did not write it.** The instruction was to fall back to "the largest negative on the mean and the only item nobody chose" if the per-view check failed. It is **not** the largest on the mean either: it ranks **third of eight** at -0.348, behind `dosunmu_retained` at -0.402 and the `depth` bundle at -0.356. Writing the fallback would have replaced one false superlative with another.
+
+**What went in instead**, which needs no superlative: the Achilles is **negative under all four views**, it **survives the slot rule**, and it is **the only item on the list nobody chose**. Every other line is a decision somebody made. The failed superlative is now stated in the skeleton as a do-not-write, with the three ways it is wrong, so it cannot creep back in during drafting.
+
+`compare_slot_shapley_20260827T134414Z`; the check is now a permanent row on `final_numbers.csv` rather than a one-off.
+
+### D38. The methods note names the assumption that is most likely to be wrong (P3)
+
+Added a Methods section to the skeleton. The sentence asked for, in full:
+
+> **Positional minute budgets are each team's own 2025-26 shape, not a league average.** For Minnesota that assumes a **double-big allocation the current roster cannot repeat**: last season's 53.7 centre minutes a game were Gobert plus Reid, and Reid is gone.
+
+With the reason it is still the right choice: holding the shape fixed while the personnel changes is what makes "what did the departures cost" answerable at all. It is simply the wrong tool for forecasting how Finch will play this roster, and every Shapley figure in the piece should be read as "what these moves did to last season's shape" rather than as a rotation projection. This is the same fact that made the league-average budget an artifact in D31, pointed at our own result instead of at the alternative.
+
+### D39. Section 3 gets its setup (P4)
+
+Two facts added ahead of the fill-robustness discussion, both with run IDs:
+
+- **Minnesota is the most big-heavy team in the league**: 53.7 centre minutes a game, **first of thirty**, against a league mean of 33.8 `[build_rotations_20260827T133313Z]`. This is what makes "who can actually take these minutes" a constraint rather than a technicality.
+- **Under strict eligibility, 23.3 of Kuminga's 26 minutes have nobody to go to.** Behind Lyles there is no eligible 4 `[slot_robustness_20260827T133141Z]`. The line the section now carries: Minnesota did not sign a power forward into a crowded room, they signed one into an empty one.
+
+The Lyles split then arrives as the honest narrowing rather than as a hedge bolted on at the end: it is the one failing fill a coach could actually choose, and the four views disagree about it.

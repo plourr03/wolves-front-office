@@ -77,7 +77,13 @@ Constrain his minutes to players actually eligible at the 4, and the man who fil
 
 **That is the case for the signing.** Not that he is good in the abstract. That the alternative on this roster is bad.
 
-**And here is exactly how far that claim goes, which is not as far as it first looks.** The answer depends on naming the man who takes the minutes, so we re-priced it under five different answers `[slot_robustness_20260827T133141Z]`. It holds against Shannon and it holds if Jaden McDaniels slides down to the 4. It does **not** hold under three others: Trey Lyles promoted into the role (mixed, -0.91 to +0.68), Joan Beringer promoted into the role (negative under all four), or a strict reading of eligibility that counts only players listed Forward or Forward-Centre.
+**Two facts to set this up, because they are why the slot rule bites at all.**
+
+First, Minnesota is the most big-heavy team in the league. Their centres played **53.7 minutes a game last season, first of thirty, against a league mean of 33.8** `[build_rotations_20260827T133313Z]`. That is not a rounding difference. It is a structurally different roster shape, and it is why "who can actually take these minutes" is a real constraint here rather than a technicality.
+
+Second, and more starkly: read positional eligibility strictly, counting only players listed Forward or Forward-Centre, and **23.3 of Kuminga's 26 minutes have nobody to go to**. Behind Trey Lyles there is no eligible 4 on the roster `[slot_robustness_20260827T133141Z]`. Minnesota did not sign a power forward into a crowded room. They signed one into an empty one.
+
+**Now, exactly how far the claim goes, which is not as far as it first looks.** The answer depends on naming the man who takes the minutes, so we re-priced it under five different answers `[slot_robustness_20260827T133141Z]`. It holds against Shannon and it holds if Jaden McDaniels slides down to the 4. It does **not** hold under three others: Trey Lyles promoted into the role (mixed, -0.91 to +0.68), Joan Beringer promoted into the role (negative under all four), or a strict reading of eligibility that counts only players listed Forward or Forward-Centre.
 
 So the claim is **against the most likely internal alternative**, never "against any internal alternative". Two of those three failures are worth a sentence each rather than a hedge:
 
@@ -103,9 +109,23 @@ The one that genuinely narrows the claim is Lyles, because a coach could actuall
 
 The rule being applied is worth stating once in the piece: **if a verdict changes when we change a modelling assumption, it is not a finding, and it does not get quoted.** Four of nine survived that test.
 
-**The sentence this section is tempted by, and cannot have.** Hold the injury out and the remaining transactions are positive under all four views here, but under the looser minutes rule the same total is mixed. It flips. So the honest version is the weaker one: the Achilles is the single largest negative on the board under every view we have, and it is the only thing on that list that nobody chose.
+**The sentence this section is tempted by, and cannot have.** Hold the injury out and the remaining transactions are positive under all four views here, but under the looser minutes rule the same total is mixed. It flips, so it does not get a sign.
 
-**The uncomfortable one, which now stays in.** Re-signing Ayo Dosunmu at five years and $112M grades negative under all four views, and it was the verdict most likely to be an artifact of handing his minutes to better players. Constraining them to the guards actually on the roster moves it by a tenth of a point and does not touch the sign: **-0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE]`. The caveat that survives is different and smaller: the counterfactual is his minutes going to guards already here, not to a replacement Minnesota would have signed.
+**The fallback sentence does not survive either, so do not write it.** "The Achilles is the largest negative on the board" is wrong three ways. It is the largest under **one of four views** (box). Under RAPM it is the **smallest** of the four negatives. And on the mean it ranks **third**, behind re-signing Dosunmu and behind the depth bundle `[compare_slot_shapley_20260827T134414Z]`.
+
+**What is true, and it is enough.** The Achilles is negative under all four views, it survives the slot rule, and **it is the only item on the list nobody chose.** Every other line is a decision somebody made. That is the point, and it does not need a superlative to land.
+
+**The uncomfortable one, which now stays in. It is two separate claims and the piece must not blur them.**
+
+**(a) The on-court claim.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
+
+**What that counterfactual is, stated plainly, because it is the thing most likely to be misread.** It is **"lose him for nothing"**, not "spend the money elsewhere". Minnesota was over the cap. An over-the-cap team has exceptions, not room, so his $19,310,345 was never convertible into a better guard at that price. The alternative being priced is his minutes going to Ball, Edwards, Clark and Hyland, and nobody arriving. That is a real option and it is the one the model answers.
+
+**(b) The cap claim, which is separate and larger** `[dosunmu_cap_20260827T144259Z]`. On the pre-Kuminga book Minnesota is $15,443,829 over the tax line and owes roughly **$30.9M in tax (est)**. Take his salary off and they are **$3,866,516 under the line, owing nothing**, and still under it after filling to the 14-man floor with two minimum contracts. His is the contract that makes them a taxpayer.
+
+It also set the size of the tool they signed Kuminga with. Without him they would sit **$12,453,516 under the first apron**, where the non-taxpayer mid-level is available. **The exception available to chase a forward would have been up to $12.45M rather than $6,064,000** `[same]`.
+
+**Why the two claims must stay apart.** (a) says the minutes are worth less than the guards behind him. (b) says the money bought tax liability and a smaller exception. Both are defensible; together they are *not* "they should have let him walk", because (a)'s counterfactual is losing him for nothing and getting worse on the floor. The honest composite is that Minnesota paid a taxpayer's price for a player their own minutes model grades below his replacements, and the bill came due as a $6M exception instead of a $12M one.
 
 ---
 
@@ -150,6 +170,14 @@ Structure it as three claims of decreasing confidence.
 **What we cannot say.** Whether the offseason as a whole helped. The four views disagree on the sign, and the measurement error is as large as the effect. Anyone who tells you the Wolves' title odds went up or down by a specific amount this summer is reporting their choice of impact metric, not a fact about the team.
 
 **The closing thought, if one is wanted:** they spent the summer converting a frontcourt that worked into a frontcourt that is cheaper and younger and less proven, and the thing that actually moved their season was a non-contact injury in Game 4 of a first-round series.
+
+---
+
+## Methods note
+
+Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separately end to end and never averaged; a claim ships only if all four agree on the sign. Title probabilities come from a bracket simulation calibrated against three prior seasons of betting markets. Minutes are allocated by a league-wide rank score with a per-player ceiling of prior load plus three, capped at 36.
+
+**Positional minute budgets are each team's own 2025-26 shape, not a league average.** For Minnesota that assumes a **double-big allocation the current roster cannot repeat**: last season's 53.7 centre minutes a game were Gobert plus Reid, and Reid is gone. The budget is the right choice for measuring what the departures cost, because it holds the shape fixed while the personnel changes, and it is the wrong choice for predicting how Finch will actually play this team. Read every Shapley figure here as "what these moves did to last season's shape", not as a rotation forecast `[build_rotations_20260827T133313Z]`.
 
 ---
 

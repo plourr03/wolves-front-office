@@ -228,6 +228,54 @@ def main():
                 f"{exi.min():+.2f} to {exi.max():+.2f}pp", "NOT QUOTABLE", rid_sh,
                 f"{sign} here but MIXED under the unpooled rule, so it flips and "
                 f"cannot carry a sign")
+        # P1: the Dosunmu finding is TWO claims and the sheet must label them apart.
+        dc = load("dosunmu_cap.csv")
+        rid_dc = last_run("dosunmu_cap")
+        if sh is not None and "dosunmu_retained" in sh.index:
+            x = sh.loc["dosunmu_retained"]
+            add("Dosunmu (a) on-court", "his minutes vs the guards on the roster",
+                f"{x.mean_pp:+.2f}pp mean",
+                f"{min(x[f] for f in FORKS):+.2f} to {max(x[f] for f in FORKS):+.2f}pp",
+                "QUOTABLE AS BAND", rid_sh,
+                "counterfactual is LOSE HIM FOR NOTHING, not spend the money elsewhere: "
+                "Minnesota was over the cap, so the salary was never convertible into a "
+                "replacement at that price")
+        if dc is not None:
+            g = {r_["scenario"]: r_ for _, r_ in dc.iterrows()}
+            on = g["13 players, Dosunmu on the book"]
+            off = g["12 players, Dosunmu gone"]
+            off14 = g["14 players, Dosunmu gone + 2 minimums"]
+            add("Dosunmu (b) cap", "2026-27 salary", "$19,310,345",
+                "5 years; $86,510,348 across the 4 years in the contract book",
+                "FACT", rid_dc,
+                "the reported $112M total includes a 5th year not carried in the book")
+            add("Dosunmu (b) cap", "MIN vs the tax line, with him",
+                f"${on.vs_tax_line:,.0f} over", f"est tax bill ${on.est_tax_bill:,.0f}",
+                "FACT", rid_dc, "tax rates flagged CONFIRM in the constants; label est")
+            add("Dosunmu (b) cap", "MIN vs the tax line, without him",
+                f"${-off.vs_tax_line:,.0f} under", "no tax bill", "FACT", rid_dc,
+                f"still under after filling to 14 men: "
+                f"${-off14.vs_tax_line:,.0f} under, no bill. His is the contract that "
+                f"makes them a taxpayer.")
+            add("Dosunmu (b) cap", "exception tier without him",
+                f"${off.vs_first_apron:,.0f} under the first apron",
+                "non-taxpayer mid-level available", "FACT", rid_dc,
+                "so the tool to chase a forward would have been up to $12,453,516 "
+                "rather than the $6,064,000 taxpayer exception")
+            add("Dosunmu (b) cap", "second-apron distance without him",
+                f"${g['13 players, Kuminga signed, Dosunmu gone'].vs_second_apron:,.0f} under",
+                "same roster, Kuminga signed", "FACT", rid_dc,
+                "against $249,829 OVER with him")
+        # P2: does the injury claim hold per view, or only on the mean?
+        if sh is not None and "ddv_injury" in sh.index:
+            wins = [f for f in FORKS if sh[f].idxmin() == "ddv_injury"]
+            rank_mean = int(sh["mean_pp"].rank().loc["ddv_injury"])
+            add("What moved the offseason", "is the injury the largest single negative?",
+                f"under {len(wins)} of 4 views", f"only: {', '.join(wins) or 'none'}",
+                "NOT QUOTABLE", rid_sh,
+                f"rank {rank_mean} of {len(sh)} on the mean, behind dosunmu_retained and "
+                f"depth; under rapm it is the SMALLEST negative. Say 'negative under all "
+                f"four and the only item nobody chose', never 'the largest'.")
         if cmp_ is not None:
             add("What moved the offseason", "player verdicts that survive the slot rule",
                 f"{int(cmp_[cmp_.quotable].shape[0])} of "
