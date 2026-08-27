@@ -65,6 +65,20 @@ def main():
         t1["title_baseline_mean_pct"] = t1[bcols].mean(axis=1) * 100
         t1["rank_baseline"] = t1.title_baseline_mean_pct.rank(ascending=False).astype(int)
         t1["rank_change"] = t1.rank_baseline - t1.rank_current
+
+        # Title odds round to zero for roughly the bottom third of the league, which
+        # makes their title RANK meaningless (ties broken by floating-point dust). A
+        # wins-based ordinal is meaningful for all 30 and is reported alongside, so
+        # nobody reads a "rank change" for a team with no title probability either way.
+        wcols = [f"wins_current_{f}" for f in FORKS if f"wins_current_{f}" in t1.columns]
+        t1["wins_current_mean"] = t1[wcols].mean(axis=1)
+        sim_b = sim.pivot_table(index="team_abbr", columns="fork", values="wins_baseline")
+        t1["wins_baseline_mean"] = t1.team_abbr.map(sim_b.mean(axis=1))
+        t1["wins_delta_mean"] = t1.wins_current_mean - t1.wins_baseline_mean
+        t1["wins_rank_current"] = t1.wins_current_mean.rank(ascending=False).astype(int)
+        t1["wins_rank_baseline"] = t1.wins_baseline_mean.rank(ascending=False).astype(int)
+        t1["wins_rank_change"] = t1.wins_rank_baseline - t1.wins_rank_current
+        t1["title_rank_meaningful"] = t1.title_current_mean_pct >= 0.05
         t1.to_csv(os.path.join(OUTDIR, "T1_all30_before_after.csv"), index=False)
         r.note(f"T1: {len(t1)} teams | sign agreement: "
                f"{t1.sign_agreement.value_counts().to_dict()}")
@@ -150,10 +164,11 @@ def main():
         r.output(os.path.join(OUTDIR, "PROVENANCE.csv"), rows=len(pv))
 
     print()
-    cols = ["team_abbr", "conf", "rank_baseline", "rank_current", "rank_change",
-            "title_baseline_mean_pct", "title_current_mean_pct",
+    cols = ["team_abbr", "conf", "wins_rank_baseline", "wins_rank_current",
+            "wins_rank_change", "wins_baseline_mean", "wins_current_mean",
+            "wins_delta_mean", "title_current_mean_pct",
             "title_delta_min_pp", "title_delta_max_pp", "sign_agreement"]
-    print(t1[cols].round(2).to_string(index=False))
+    print(t1[cols].sort_values("wins_current_mean", ascending=False).round(2).to_string(index=False))
 
 
 if __name__ == "__main__":

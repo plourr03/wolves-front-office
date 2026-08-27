@@ -36,6 +36,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
+sys.path.insert(0, HERE)   # sibling scripts (build_strengths) regardless of how this is invoked
 
 from kuminga.lib import kfreeze, runlog  # noqa: E402
 import build_team_ratings as A           # noqa: E402

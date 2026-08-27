@@ -45,7 +45,13 @@ MIN_POSS = 100          # below this, report but flag as too thin to read
 
 
 def has(lineup_id: str, pid: int) -> bool:
-    return str(pid) in str(lineup_id).split("-")
+    """lineup_id is a COMMA-separated, sorted list of player ids.
+
+    Splitting on the wrong delimiter here does not raise: it silently returns False for
+    every player, which reads as "this player was never on the floor" and produces a
+    clean-looking table of zeroes. Guarded by the assertion in main().
+    """
+    return str(pid) in str(lineup_id).split(",")
 
 
 def agg(df: pd.DataFrame) -> dict:
@@ -69,6 +75,16 @@ def main():
         st = pd.read_parquet(STINTS)
         st = st[~st.in_garbage_time]
         r.note(f"{len(st):,} non-garbage stints loaded")
+
+        # Guard: every lineup must parse to exactly five ids, and the players we are
+        # about to split on must actually appear. A wrong delimiter or an id typo
+        # produces zeroes rather than an error, so it is asserted rather than assumed.
+        sizes = st.lineup_id.map(lambda l: len(str(l).split(",")))
+        assert (sizes == 5).all(), f"lineup_id does not parse to 5 ids: {sizes.value_counts().to_dict()}"
+        for nm, pid in PID.items():
+            n = int(st.lineup_id.map(lambda l: has(l, pid)).sum())
+            assert n > 0, f"{nm} ({pid}) appears in ZERO stints: id or delimiter is wrong"
+            r.note(f"  guard: {nm} appears in {n:,} stints")
 
         rows = []
 
@@ -151,13 +167,15 @@ def main():
                    poss, poss_pct, ppp, percentile
             FROM nba_synergy_player_play_types
             WHERE player_id = %s AND season_year IN ('2024-25','2025-26')
-              AND type_grouping = 'offensive'
+              AND type_grouping = 'Offensive'   -- capitalised in the table
             ORDER BY season_year, season_type, poss DESC""", (PID["Kuminga"],))
         pr.to_csv(OUT_SHOT, index=False)
         r.note("Kuminga shot profile (both teams, regular season): " +
                str(pr[(pr.team == 'both') & (pr.season_type == 'Regular Season')]
                    [["rim_rate", "fg3a_rate", "fg3_pct", "mid_rate"]].round(3).to_dict("records")))
+        syn.to_csv(os.path.join(REPO, "kuminga", "outputs", "kuminga_play_types.csv"), index=False)
         tr = syn[(syn.play_type == "Transition") & (syn.season_year == "2025-26")]
+        assert len(tr), "no Transition rows: check type_grouping capitalisation"
         for _, x in tr.iterrows():
             r.note(f"  transition {x.season_type} {x.team_abbreviation}: "
                    f"{float(x.poss_pct)*100:.1f}% of possessions, {float(x.ppp):.3f} PPP, "
