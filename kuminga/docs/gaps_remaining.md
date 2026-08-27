@@ -61,3 +61,22 @@ If Kuminga picks up his 2027-28 player option, Minnesota reaches the 2028 offsea
 **To close:** find the CBA definition of "Early Qualifying Veteran Free Agent" (Article I definitions) and confirm the service-counting language. Section 5 currently states the Early Bird branch with this caveat attached; if it turns out an option year does NOT count, the whole opt-in branch collapses back to Non-Bird and section 5 must be rewritten.
 
 Status as of 2026-08-27: open. Two sources consulted (Hoops Rumors Early Bird glossary, CBA Guide).
+
+## 13. QUARANTINE: every league-wide cap claim (R3, 2026-08-27)
+
+**30 of 30 teams fail to reconcile within $2,000** against Spotrac's published 2026-27 apron allocations. `outputs/R3_apron_failure_table.csv`, run `apron_reconcile_all30_20260827T191607Z`.
+
+**The diagnostic that settles the cause.** The league aggregate is close: ours $5,854,937,618 against Spotrac's $5,892,133,056, a gap of $37,195,438 or **0.63%**. But the sum of the absolute per-team differences is **$183,047,636, 4.9x the net**. The errors cancel. If we were merely missing unlikely bonuses every difference would point the same way and the absolute sum would equal the net. **Players are sitting on different teams in the two books.**
+
+Confirmed by inspection: our book has **James Harden on Cleveland** (CLE is +$42,317,307, exactly his salary), **Giannis Antetokounmpo on Miami** rather than Milwaukee, and eight teams carry impossible roster counts (MEM 21 standard contracts, LAC/MIL/NOP 18, four more at 17, against a maximum of 15).
+
+**Cause groups:** roster composition, 17 teams, $169,634,541 absolute. Non-standard rows beyond the 15-man limit, 3 teams, $2,948,660. Consistent with unlikely bonuses, 7 teams, $6,082,153. Unexplained, 2 teams, $68,281. And **MIN, which reconciles exactly**: +$4,314,001 = Kuminga's $6,064,000 in our book and not theirs, minus the $1,750,000 of unlikely bonuses in theirs and not our raw contracted figure.
+
+**No single rule fix is available.** The dominant cause is not a rule; it is the contract book disagreeing with the world about who plays where. It needs a re-scrape and a player-level verification pass, not a formula change.
+
+**QUARANTINE, in force until 30 of 30 reconcile within $2,000:**
+- Every league-wide cap and apron claim is **NOT QUOTABLE**. That includes "seventeen of thirty changed apron tier", every rival's tier label, and the companion league skeleton, which cannot be written yet.
+- **Minnesota's own chain is unaffected and remains quotable.** It reconciles to the dollar, and it was separately verified player-for-player against the warehouse, Spotrac and Basketball-Reference.
+- **The simulation field stays live.** The sim reads rotations and impacts, not apron figures, so team strengths, title odds and the Shapley set are untouched by this. What is quarantined is the cap layer sitting beside them.
+
+**To close:** re-verify `nba_contracts_2026_27_verified.csv` team assignments against a current source, drop non-standard rows from the apron basis, and add per-team unlikely bonuses. Then re-run `apron_reconcile_all30.py` and require 30 of 30.

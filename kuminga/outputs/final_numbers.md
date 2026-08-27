@@ -120,6 +120,12 @@ Frozen warehouse snapshot: `wh_cf31d54027f4e098`.
 | MIN title probability, after                   | 3.58%    | 2.33% to 4.83%     | QUOTABLE AS BAND | run_sim_20260827T171154Z           | never quote the midpoint alone     |
 | MIN offseason title-odds change                | +0.64pp  | -0.61 to +1.88pp   | NOT QUOTABLE     | run_sim_20260827T171154Z           | the four views disagree on sign    |
 
+## QUARANTINE
+
+| figure                           | value        | band                                           | verdict      | run_id                                 | note                                                                                                                                                                                                                                                                                                                                                          |
+|:---------------------------------|:-------------|:-----------------------------------------------|:-------------|:---------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| league-wide cap and apron claims | NOT QUOTABLE | 30 of 30 teams fail to reconcile within $2,000 | NOT QUOTABLE | apron_reconcile_all30_20260827T191607Z | Absolute per-team differences are 4.9x the net gap, so the errors cancel: players sit on different teams in our book than in Spotrac's (Harden on CLE, Giannis on MIA, 8 teams over the 15-man limit). MIN reconciles exactly and stays quotable. The SIM FIELD IS UNAFFECTED: it reads rotations and impacts, not apron figures. See gaps_remaining item 13. |
+
 ## Calibration
 
 | figure                                            | value          | band                | verdict   | run_id                                | note                                            |

@@ -424,6 +424,14 @@ def main():
                 f"{m.title_delta.min()*100:+.2f} to {m.title_delta.max()*100:+.2f}pp",
                 "NOT QUOTABLE", rid_sim, "the four views disagree on sign")
 
+        add("QUARANTINE", "league-wide cap and apron claims",
+            "NOT QUOTABLE", "30 of 30 teams fail to reconcile within $2,000",
+            "NOT QUOTABLE", "apron_reconcile_all30_20260827T191607Z",
+            "Absolute per-team differences are 4.9x the net gap, so the errors cancel: "
+            "players sit on different teams in our book than in Spotrac's (Harden on CLE, "
+            "Giannis on MIA, 8 teams over the 15-man limit). MIN reconciles exactly and "
+            "stays quotable. The SIM FIELD IS UNAFFECTED: it reads rotations and impacts, "
+            "not apron figures. See gaps_remaining item 13.")
         # ---- the honesty rail --------------------------------------------------
         bt = load("backtest_calibration_summary.csv")
         rid_bt = last_run("backtest_calibration")
