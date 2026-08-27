@@ -1,0 +1,156 @@
+{
+  "snapshot_id": "wh_cf31d54027f4e098",
+  "label": "kuminga-phase1",
+  "note": "One snapshot for the whole Kuminga build. rosters_2025_26 is the 2025-26 end-of-season roster (the table is current-dated but 2025-26 in content); it is the R6 baseline, not a 2026-27 roster.",
+  "frozen_at_utc": "2026-08-27T02:31:21.257819+00:00",
+  "source": "nba_warehouse schema nba (read-only)",
+  "tables": {
+    "contracts": {
+      "rows": 1070,
+      "cols": [
+        "br_player_id",
+        "team_abbr",
+        "season",
+        "player_name",
+        "nba_team_id",
+        "nba_team_tricode",
+        "season_order",
+        "salary",
+        "option_type",
+        "remaining_guaranteed_total",
+        "source_url",
+        "scraped_at"
+      ],
+      "sha256": "13f4bbda102234a7c8724b59e4d989b2024c3e2071dc2047e1f9de7943bc23e5"
+    },
+    "transactions": {
+      "rows": 9849,
+      "cols": [
+        "transaction_hash",
+        "transaction_type",
+        "transaction_date",
+        "transaction_description",
+        "team_id",
+        "team_slug",
+        "player_id",
+        "player_slug",
+        "additional_sort",
+        "group_sort"
+      ],
+      "sha256": "0a41feff88c20533f8c9936ddfefc078d03ae7da6c80f79071fa37c8901b97b8"
+    },
+    "rosters_2025_26": {
+      "rows": 530,
+      "cols": [
+        "team_id",
+        "team_abbreviation",
+        "season",
+        "player",
+        "player_id",
+        "position",
+        "height",
+        "weight",
+        "age",
+        "experience",
+        "how_acquired",
+        "roster_date"
+      ],
+      "sha256": "61e88ea5587b3dc880510b289ddcbf18fc5c736a6e661018a5c1a18d6eb12fb0"
+    },
+    "player_games": {
+      "rows": 28572,
+      "cols": [
+        "player_id",
+        "player_name",
+        "team_id",
+        "team_abbreviation",
+        "game_date",
+        "game_id",
+        "season_type",
+        "minutes_played",
+        "pts",
+        "reb",
+        "ast",
+        "stl",
+        "blk",
+        "tov",
+        "fgm",
+        "fga",
+        "fg3m",
+        "fg3a",
+        "ftm",
+        "fta",
+        "plus_minus"
+      ],
+      "sha256": "34adbe7efd37c08c295eae6445e7d99ad6df140c3a03ed96f99abe9fceaea1d5"
+    },
+    "player_games_adv": {
+      "rows": 34587,
+      "cols": [
+        "game_id",
+        "player_id",
+        "team_id",
+        "season_type",
+        "minutes_float",
+        "usage_percentage",
+        "true_shooting_percentage",
+        "offensive_rating",
+        "defensive_rating",
+        "net_rating",
+        "pie",
+        "possessions",
+        "comment"
+      ],
+      "sha256": "0e242b0cf363e9ff1d8663e0e3887a632acaecaa663e05f458adbfe563ebaf7b"
+    },
+    "team_games": {
+      "rows": 2772,
+      "cols": [
+        "game_id",
+        "team_id",
+        "team_abbreviation",
+        "game_date",
+        "season_type",
+        "matchup",
+        "wl",
+        "pts",
+        "plus_minus",
+        "minutes_played"
+      ],
+      "sha256": "47bbd20da894f0adc0cee7fe280197ea11cf404a1e14ebcf72e2957dd66a9795"
+    },
+    "team_net": {
+      "rows": 283,
+      "cols": [
+        "team_abbr",
+        "season_start_year",
+        "season_type",
+        "net_rating",
+        "off_rating",
+        "def_rating",
+        "pace",
+        "games"
+      ],
+      "sha256": "d16b6060e21b174086557120c770b4f759fbb839b65fb5814de7892f85c776a2"
+    },
+    "player_bio": {
+      "rows": 2860,
+      "cols": [
+        "player_id",
+        "player_name",
+        "birthdate",
+        "position",
+        "height_inches",
+        "weight",
+        "season_exp",
+        "from_year",
+        "to_year",
+        "draft_year",
+        "draft_round",
+        "draft_number",
+        "team_abbreviation"
+      ],
+      "sha256": "9c7d1f0b550d4d0e6638d0991bcabead4c3789a13240d0b8cf345df129f8207c"
+    }
+  }
+}

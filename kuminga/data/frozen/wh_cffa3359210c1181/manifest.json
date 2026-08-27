@@ -1,8 +1,8 @@
 {
-  "snapshot_id": "wh_a806ee0164f04a3f",
+  "snapshot_id": "wh_cffa3359210c1181",
   "label": "kuminga-phase1",
   "note": "One snapshot for the whole Kuminga build. rosters_2025_26 is the 2025-26 end-of-season roster (the table is current-dated but 2025-26 in content); it is the R6 baseline, not a 2026-27 roster.",
-  "frozen_at_utc": "2026-08-27T01:57:26.165601+00:00",
+  "frozen_at_utc": "2026-08-27T02:28:50.241641+00:00",
   "source": "nba_warehouse schema nba (read-only)",
   "tables": {
     "contracts": {
@@ -101,7 +101,7 @@
         "possessions",
         "comment"
       ],
-      "sha256": "48de8ecb2ae8e3634c65c6ddb994d36ac486ee271032ebbcf120822702826604"
+      "sha256": "0e242b0cf363e9ff1d8663e0e3887a632acaecaa663e05f458adbfe563ebaf7b"
     },
     "team_games": {
       "rows": 2772,
@@ -118,6 +118,20 @@
         "minutes_played"
       ],
       "sha256": "47bbd20da894f0adc0cee7fe280197ea11cf404a1e14ebcf72e2957dd66a9795"
+    },
+    "team_net": {
+      "rows": 205,
+      "cols": [
+        "team_abbr",
+        "season_end_year",
+        "season_type",
+        "net_rating",
+        "off_rating",
+        "def_rating",
+        "pace",
+        "games"
+      ],
+      "sha256": "d147747ea0b403052371aeab377d9b5386fde093da255d42d5c865cf42d006cf"
     },
     "player_bio": {
       "rows": 2860,
@@ -136,7 +150,7 @@
         "draft_number",
         "team_abbreviation"
       ],
-      "sha256": "f20ae4d3041d59ad3160a8e5a70e2419350f92527e7402571e52fb56baeca100"
+      "sha256": "9c7d1f0b550d4d0e6638d0991bcabead4c3789a13240d0b8cf345df129f8207c"
     }
   }
 }

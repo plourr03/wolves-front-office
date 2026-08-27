@@ -16,6 +16,7 @@ import hashlib
 import json
 import os
 from datetime import datetime, timezone
+from decimal import Decimal
 
 import pandas as pd
 
@@ -30,11 +31,43 @@ def _hash_df(df: pd.DataFrame) -> str:
     return hashlib.sha256(csv).hexdigest()
 
 
+def _normalise(df: pd.DataFrame) -> pd.DataFrame:
+    """Coerce Postgres NUMERIC (decimal.Decimal) columns to float.
+
+    Decimal objects survive a parquet round-trip with a different repr than the
+    in-memory frame, so hashing before the write and re-hashing after the read
+    disagree even though nothing changed. Normalising once, up front, means the
+    stored bytes and the verified bytes are the same object.
+    """
+    out = df.copy()
+    for c in out.columns:
+        if out[c].dtype == object:
+            nonnull = out[c].dropna()
+            if len(nonnull) and isinstance(nonnull.iloc[0], Decimal):
+                out[c] = pd.to_numeric(out[c], errors="coerce")
+    return out
+
+
 def freeze(tables: dict[str, pd.DataFrame], label: str = "unlabeled",
            note: str = "", set_current: bool = True) -> str:
-    """Write a content-addressed snapshot. Returns the snapshot id."""
+    """Write a content-addressed snapshot. Returns the snapshot id.
+
+    The hash is taken on the ROUND-TRIPPED frame (write, read back, hash) so that
+    freeze-time and load-time hashes are computed over identical bytes. Hashing the
+    in-memory frame instead makes the integrity assert fire on any dtype the parquet
+    writer normalises, which is a false alarm that looks exactly like corruption.
+    """
     os.makedirs(FROZEN_ROOT, exist_ok=True)
-    hashes = {k: _hash_df(v) for k, v in sorted(tables.items())}
+    tables = {k: _normalise(v) for k, v in tables.items()}
+
+    tmpdir = os.path.join(FROZEN_ROOT, "_staging")
+    os.makedirs(tmpdir, exist_ok=True)
+    hashes = {}
+    for name, df in sorted(tables.items()):
+        path = os.path.join(tmpdir, name + ".parquet")
+        df.to_parquet(path, index=False)
+        hashes[name] = _hash_df(pd.read_parquet(path))
+
     combined = hashlib.sha256(
         "".join(f"{k}:{hashes[k]}" for k in sorted(hashes)).encode("utf-8")
     ).hexdigest()[:16]
@@ -42,8 +75,13 @@ def freeze(tables: dict[str, pd.DataFrame], label: str = "unlabeled",
 
     outdir = os.path.join(FROZEN_ROOT, sid)
     os.makedirs(outdir, exist_ok=True)
-    for name, df in tables.items():
-        df.to_parquet(os.path.join(outdir, name + ".parquet"), index=False)
+    for name in tables:
+        os.replace(os.path.join(tmpdir, name + ".parquet"),
+                   os.path.join(outdir, name + ".parquet"))
+    try:
+        os.rmdir(tmpdir)
+    except OSError:
+        pass
 
     manifest = {
         "snapshot_id": sid,

@@ -84,6 +84,29 @@ def pull():
         FROM nba_games
         WHERE game_date >= '2025-09-01'""")
 
+    # Measured team net rating per 100, by season and season type.
+    # NOTE: season_id modulo 10000 is the season START year. The 2025-26 season is 2025,
+    # not 2026. Naming this column season_end_year (as a first pass did) silently
+    # returns an empty frame downstream. This is the anchor
+    # the 2026-27 projection is built on: regress_to_expectation(measured) plus the
+    # modelled roster delta. Pulled here rather than through bracket_helpers so the
+    # whole build reads one pinned snapshot instead of hitting the live warehouse
+    # mid-run.
+    t["team_net"] = db.query("""
+        SELECT g.team_abbreviation AS team_abbr,
+               (g.season_id % 10000) AS season_start_year,
+               g.season_type,
+               AVG(a.net_rating)      AS net_rating,
+               AVG(a.offensive_rating) AS off_rating,
+               AVG(a.defensive_rating) AS def_rating,
+               AVG(a.pace)            AS pace,
+               COUNT(*)               AS games
+        FROM nba_games g
+        JOIN nba_team_advanced_stats a
+          ON a.game_id = g.game_id AND a.team_tricode = g.team_abbreviation
+        WHERE (g.season_id % 10000) >= 2022
+        GROUP BY 1, 2, 3""")
+
     # Player bio: age, draft slot, experience. Used by the minutes heuristic and the
     # rookie prior. NOTE: contains no 2026 draft class.
     t["player_bio"] = db.query("""

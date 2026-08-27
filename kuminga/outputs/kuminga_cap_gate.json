@@ -1,0 +1,22 @@
+{
+  "green_on_books": {
+    "apron_salary_before": 223293829,
+    "apron_salary_after_signing": 229357829,
+    "second_apron": 221686000,
+    "room_after_signing": -7671829,
+    "fits_under_hard_cap": false,
+    "evaluate_move_legal": false,
+    "failing_constraint": "taxpayer_mle not available at tier second_apron",
+    "hard_cap_level": "second_apron"
+  },
+  "green_removed": {
+    "apron_salary_before": 208614817,
+    "apron_salary_after_signing": 214678817,
+    "second_apron": 221686000,
+    "room_after_signing": 7007183,
+    "fits_under_hard_cap": true,
+    "evaluate_move_legal": false,
+    "failing_constraint": "taxpayer_mle not available at tier second_apron",
+    "hard_cap_level": "second_apron"
+  }
+}
