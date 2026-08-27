@@ -84,6 +84,7 @@ INJ = os.path.join(REPO, "kuminga", "data", "injuries_2026_27.csv")
 OUT_ROT = os.path.join(REPO, "kuminga", "outputs", "rotations_2026_27.csv")
 OUT_CURVE = os.path.join(REPO, "kuminga", "outputs", "minutes_rank_curve.csv")
 OUT_ROOK = os.path.join(REPO, "kuminga", "outputs", "rookie_priors.csv")
+OUT_POOL = os.path.join(REPO, "kuminga", "outputs", "player_pool_2026_27.csv")
 
 TF = {"PHO": "PHX", "BRK": "BKN", "CHO": "CHA"}
 
@@ -309,6 +310,10 @@ def main():
             out.append(g)
         rot = pd.concat(out, ignore_index=True)
         rot.to_csv(OUT_ROT, index=False)
+        # The full pre-truncation pool, with every player's attributes. Item 11 needs
+        # it to re-allocate minutes for each Shapley coalition, which changes who is
+        # in the top ROTATION_SIZE.
+        pool.to_csv(OUT_POOL, index=False)
 
         r.note(f"rotations built: {rot.scenario.nunique()} scenarios x "
                f"{rot.team_abbr.nunique()} teams, {len(rot)} player-rows")
@@ -317,6 +322,7 @@ def main():
         r.output(OUT_ROT, rows=len(rot))
         r.output(OUT_CURVE, rows=len(curve))
         r.output(OUT_ROOK, rows=60)
+        r.output(OUT_POOL, rows=len(pool))
 
     print()
     mn = rot[(rot.scenario == "current") & (rot.team_abbr == "MIN")]
