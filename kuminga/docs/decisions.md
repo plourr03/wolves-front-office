@@ -387,3 +387,47 @@ The spine is essentially **unbiased** (+0.27 wins) and its ordering correlates 0
 
 **The number that matters for how this piece is written:** the model's title-odds error against the de-vigged market is **1.4 to 2.3 percentage points**. Minnesota's entire four-fork spread this season runs from 1.57% to 3.81%, a range of 2.2pp. **The measurement error is the same size as the thing being measured.** That is the strongest available argument for R1's rule, and it is now a measured quantity rather than a methodological instinct.
 
+### D29. The ceiling result: robust, and primary anyway (C2, completed)
+
+**Wolves moves: 0 of 8 sign-agreement verdicts changed.**
+
+| Move | Without ceiling | With ceiling | Mean, before to after |
+|---|---|---|---|
+| ball_in | ALL POSITIVE | ALL POSITIVE | +1.17 to +1.30 |
+| randle_out | ALL POSITIVE | ALL POSITIVE | +0.35 to +0.19 |
+| other_departures | MIXED | MIXED | +0.30 to +0.15 |
+| depth | MIXED | MIXED | +0.15 to +0.10 |
+| kuminga_in | MIXED | MIXED | -0.20 to -0.04 |
+| dosunmu_retained | ALL NEGATIVE | ALL NEGATIVE | -0.71 to -0.52 |
+| ddv_injury | ALL NEGATIVE | ALL NEGATIVE | -0.57 to -0.72 |
+| reid_out | ALL NEGATIVE | ALL NEGATIVE | -0.88 to -0.98 |
+
+**All 30 teams: 2 of 30 changed**, Chicago (MIXED to ALL POSITIVE) and New Orleans (ALL NEGATIVE to MIXED). Both have mean effects of +0.01pp and -0.00pp respectively, i.e. teams whose title odds round to zero, where the "verdict" is floating-point dust rather than a finding.
+
+**Ruling applied:** no Wolves verdict changed, so per Bobby's rule the ceiling version is **still primary** because it is the more defensible rule, and the result is reported as **robust to the minutes model**. The un-ceilinged run is preserved as `*_NOCEILING.csv`.
+
+**The Dosunmu diagnostic, which was the point of asking.** He stays ALL NEGATIVE under the ceiling, mean -0.71 to -0.52. Bobby's read was that a rotation guard scoring unambiguously negative on pure on-court terms is a smell, and I think that is right, but the smell is not the minutes model: tightening the minutes moved him a fifth of a percentage point and did not touch the sign. Two things it could be instead. His consensus impact is -0.21, genuinely below average, so the model is not inventing anything. And the counterfactual is "Dosunmu walks and nobody replaces him", which credits the roster with minutes that would in reality be bought at some price. The move set has no "replacement guard" to hand them to. That is a limitation of the move set, not of the ceiling, and it is the same limitation C3 fixes for the power forward slot. **If this finding is used in the piece it should carry that caveat explicitly.**
+
+### D30. The slot constraint flips the Kuminga verdict, and it is the most important result of the phase (C3)
+
+**Unconstrained**, removing Kuminga sends his minutes across the whole rotation, so Gobert, Edwards and Ball absorb them. His marginal contribution is MIXED, mean -0.04pp, and the signing looks replaceable.
+
+**Constrained to the slot**, using listed positions from `nba_player_bio` (eligible at the 4 means the listing contains "Forward" and is not centre-first), his minutes can only go to Minnesota's other forwards. McDaniels absorbs 2.7 before hitting his ceiling; Beringer and Lyles are already at theirs. The man who actually fills the slot is **Terrence Shannon Jr.**, whose consensus impact is **-2.18**.
+
+| Fork | With Kuminga | Without | Marginal | Kuminga vs Shannon |
+|---|---|---|---|---|
+| consensus | 1.63% | 0.57% | **+1.06pp** | +1.33 vs -2.18 |
+| RAPM | 2.17% | 0.95% | **+1.23pp** | +1.37 vs -2.21 |
+| box | 3.01% | 2.63% | **+0.39pp** | +0.07 vs -0.87 |
+| DARKO | 3.74% | 3.60% | **+0.14pp** | -1.00 vs -2.00 |
+
+**ALL POSITIVE, +0.140 to +1.226pp.** His surplus over the actual filler is positive under every view.
+
+**Why this is the right counterfactual and the unconstrained one is not.** "What if Kuminga were not here" is only meaningful if the replacement is someone who could actually take the minutes. The unconstrained version answers "what if his minutes went to the best players on the roster", which is not available to a coach, because the other four positions are occupied by the people occupying them. The constrained version answers the question a general manager actually faces.
+
+**A bug found inside this, and it is the kind that produces a confident wrong answer.** The fill order included the removed player himself. So when Kuminga was taken out, the loop found him as the next eligible body with headroom and handed his own minutes straight back: out at 26.0, back in at 23.3. The "counterfactual" was 97% Kuminga, every marginal contribution came out within 0.08pp of zero, and the table looked perfectly plausible. It was caught because the filler was reported as Jaden McDaniels gaining 2.7 minutes, which does not add up to 26. **The exact failure mode this whole exercise exists to avoid, reproduced inside the fix for it.**
+
+**And it resolves the uncomfortable overnight finding.** Under the slot rule with the posterior-sd bar applied, **no alternative is quotable**: Minott (sd 2.10), Kenrich Williams (1.87) and Dean Wade (1.61) all exceed the 1.5 threshold, and Hayes and Horford are centre-first listings rather than 4s. The "they could have signed someone better" claim does not survive its own uncertainty. That belongs in an appendix with the sd values shown, not in the verdict.
+
+**Scope of the claim, stated so it is not overread.** This is highly sensitive to who is identified as the filler. Shannon Jr. is a Guard-Forward with 12.5 prior minutes a game and a poor rating; if Minnesota signs another forward with the roster spot the 14-man minimum requires, the alternative improves and Kuminga's margin narrows. The finding is "against the forward currently on the roster", not "against any forward they could get".
+
