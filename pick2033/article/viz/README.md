@@ -51,3 +51,18 @@ altText below, then the article shortcode (already placed in the drafts).
 - replay-2013: outputs/json/replay_nets_2013_FINAL.json
 - equity-bill: outputs/json/total_asset_cost.json (top1_true, picks_swaps_total, both perspectives)
 - tornado: outputs/json/tornado_FINAL.json (deltas vs the CRN-paired 20k base)
+
+## Hero images
+
+Not visualizations, so these do not get published at /admin/visualizations/new.
+They are article header images, generated the same receipted way (numbers read
+from the FINAL exports at run time, nothing typed in). 2560x1440, drawn on a
+1280x720 logical grid at 4x and LANCZOS-downscaled, flat #050505 ground, no
+people depicted.
+
+| part | file | generator | altText |
+|---|---|---|---|
+| 3 | ../hero/part3_the_bill_hero.png | ../hero/build_part3_hero.py | Dark editorial title card reading "The Bill," part three of Pricing the LaMelo Trade, laid out as an itemized invoice of what Minnesota owes Charlotte: the unprotected 2033 first at 2.2, the 2028 swap at 0.7, the 2029 swap at 0.7, the 2030 swap at 1.3, the 2026 draft-night exchange at 0.2, and the three second-round picks at 1.1, ruled off to a total of 6.2 wins of four-year value above replacement delivered to Charlotte across 50,000 simulated futures. |
+
+Parts 1 and 2 have no hero on file; their thumbnails in `../thumbs/` were the
+only header-sized assets built.

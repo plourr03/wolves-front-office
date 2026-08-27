@@ -54,14 +54,19 @@ ANCHORS = {
         "match_t1": 7_500_000, "match_t2": 29_000_000,
         "min_scale": MIN_SCALE_2025_26, "is_projection": False,
     },
+    # 2026-27 is FINAL as of 2026-07-01. The league set these figures and they
+    # replace the June projection this file used to carry (cap 165.0M, tax 201.0M,
+    # apron1 209.1M, apron2 222.0M, TPMLE 6.065M). The apron2 move of $314,000 is
+    # load-bearing: it flips whether a full-TPMLE signing fits for a team sitting
+    # right under the line. Verified 2026-08-26 against NBA.com and Hoops Rumors.
     "2026-27": {
-        "salary_cap": 165_000_000, "luxury_tax": 201_000_000,
-        "first_apron": 209_100_000, "second_apron": 222_000_000,
-        "min_team_salary": 147_000_000,
-        "full_mle": 15_048_000, "taxpayer_mle": 6_065_000,
-        "room_exception": 9_369_000, "bae": 5_478_000,
-        "match_t1": 8_000_000, "match_t2": 30_940_000,
-        "min_scale": None, "is_projection": True,   # min_scale scaled below
+        "salary_cap": 164_961_000, "luxury_tax": 200_428_000,
+        "first_apron": 209_015_000, "second_apron": 221_686_000,
+        "min_team_salary": 148_465_000,
+        "full_mle": 15_044_000, "taxpayer_mle": 6_064_000,
+        "room_exception": 9_366_000, "bae": 5_477_000,
+        "match_t1": 8_000_000, "match_t2": 30_934_000,
+        "min_scale": None, "is_projection": False,   # min_scale scaled below
     },
 }
 
@@ -87,6 +92,29 @@ RULE_BLOCK = {
         "first_apron": ["full_mle", "bae", "sign_and_trade_acquire", "use_any_tpe_MIN"],
         "second_apron": ["taxpayer_mle"],
     },
+    # Contract terms each exception permits. Verified 2026-08-26 (Hoops Rumors,
+    # "Values Of 2026/27 Mid-Level, Bi-Annual Exceptions"). The taxpayer MLE's
+    # two-year cap is why a reported 2-year Kuminga deal is consistent with the
+    # TPMLE and could not have been three.
+    "exception_terms": {
+        "full_mle": {"max_years": 4, "max_raise_pct": 0.05, "hard_caps_at": "first_apron"},
+        "taxpayer_mle": {"max_years": 2, "max_raise_pct": 0.05, "hard_caps_at": "second_apron"},
+        "room_exception": {"max_years": 3, "max_raise_pct": 0.05, "hard_caps_at": None},
+        "bae": {"max_years": 2, "max_raise_pct": 0.05, "hard_caps_at": "first_apron"},
+    },
+    # Bird rights: service-time grades and what each permits as a starting salary.
+    # Encoded here (item 13) because it previously existed only as prose in
+    # offseason/docs/nba-roster-rules-reference.md. Years = seasons with the team
+    # without leaving as a free agent. An opt-out ENDS the contract, so a player who
+    # opts out after year one of a two-year deal has ONE season of service.
+    "bird_rights": {
+        "full_bird": {"seasons_required": 3, "max_years": 5, "max_raise_pct": 0.08,
+                      "starting_salary_rule": "up to the max"},
+        "early_bird": {"seasons_required": 2, "max_years": 4, "max_raise_pct": 0.05,
+                       "starting_salary_rule": "greater of 175% of prior salary or 105% of league average"},
+        "non_bird": {"seasons_required": 1, "max_years": 4, "max_raise_pct": 0.05,
+                     "starting_salary_rule": "greater of 120% of prior salary or 120% of the minimum"},
+    },
     "repeater_lookback_years": 4,
     "repeater_threshold_years": 3,
     "frozen_pick": {
@@ -108,6 +136,19 @@ RULE_BLOCK = {
     "stepien_rule": "cannot trade a future first that leaves the team without a "
                     "first in two consecutive future drafts; tradeable window is "
                     "7 drafts out",
+}
+
+
+SOURCE_BY_SEASON = {
+    "2025-26": "NBA PR, 'NBA Salary Cap for 2025-26 season set at $154.647 million' "
+               "(https://pr.nba.com/nba-salary-cap-2025-26-season). FINAL.",
+    "2026-27": "FINAL, effective 12:01am ET 2026-07-01. Cap/tax/apron/min-team-salary: "
+               "NBA.com, 'NBA sets salary cap for 2026-27 season at $164.961 million' "
+               "(https://www.nba.com/news/nba-salary-cap-2026-27-season). Exception values "
+               "(MLE/TPMLE/room/BAE) and their term limits: Hoops Rumors, 'Values Of 2026/27 "
+               "Mid-Level, Bi-Annual Exceptions' "
+               "(https://www.hoopsrumors.com/2026/07/values-of-2026-27-mid-level-bi-annual-exceptions.html). "
+               "Verified 2026-08-26 for the Kuminga project (item 1).",
 }
 
 
@@ -134,7 +175,7 @@ def build():
         row["min_salary_by_yos"] = a["min_scale"]
         row.update(RULE_BLOCK)
         row["is_projection"] = a["is_projection"]
-        row["source"] = "NBA PR (2025-26 final); Hoops Rumors / reporting (2026-27 proj)"
+        row["source"] = SOURCE_BY_SEASON[season]
         row["as_of_date"] = today
         rows.append(row)
 
@@ -157,9 +198,11 @@ def build():
     payload = {
         "built": today,
         "growth_assumption_outyears": GROWTH,
-        "notes": "2025-26 final; 2026-27 researched projection; 2027-28+ scaled. "
-                 "Confirm flags mark figures the rules reference says need a "
-                 "primary-source check before publication.",
+        "notes": "2025-26 and 2026-27 are FINAL (league-set); 2027-28+ scaled forward. "
+                 "2026-27 was upgraded from projection to final on 2026-08-26 against "
+                 "NBA.com + Hoops Rumors; see source field. Confirm flags mark figures "
+                 "the rules reference still says need a primary-source check "
+                 "(first-apron matching %, exact tax bracket rates, frozen-pick window).",
         "seasons": {r["season"]: r for r in rows},
     }
     with open(OUT, "w", encoding="utf-8") as fh:
