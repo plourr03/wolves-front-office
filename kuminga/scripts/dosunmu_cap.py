@@ -83,10 +83,22 @@ def main():
 
         # --- pre-Kuminga basis, the cleanest read on what his salary does --------
         b_with = state("13 players, Dosunmu on the book", pre, 13)
-        b_out = state("12 players, Dosunmu gone", pre - sal, 12)
-        # honest version: they still have to reach the 14-man floor
-        b_out14 = state("14 players, Dosunmu gone + 2 minimums",
-                        pre - sal + 2 * rookie_min, 14)
+        b_out = state("12 players, Dosunmu gone (NOT a legal roster)", pre - sal, 12)
+        # --- D1: the counterfactual at a LEGAL roster ---------------------------
+        # A veteran with 3+ years of service on a ONE-YEAR minimum is charged the
+        # TWO-YEAR minimum against team salary; the league pays the difference. That
+        # is the correct charge for a replacement guard, and it is not the rookie
+        # minimum. One-year deals only; a multi-year minimum counts in full.
+        #   https://www.hoopsrumors.com/2026/03/hoops-rumors-glossary-minimum-salary-exception-5.html
+        vet_min = float(k["min_salary_by_yos"]["2"])
+        base12 = pre - sal
+        # the 14th man is the swing: cheapest possible, or another veteran
+        s_cheap = base12 + vet_min + rookie_min
+        s_vet = base12 + vet_min + vet_min
+        b_cheap = state("14 players, Dosunmu gone + vet-min guard + rookie min",
+                        s_cheap, 14)
+        b_vet = state("14 players, Dosunmu gone + vet-min guard + vet min",
+                      s_vet, 14)
         # --- with Kuminga signed -------------------------------------------------
         state("14 players, Kuminga signed (actual)", withk, 14)
         state("13 players, Kuminga signed, Dosunmu gone", withk - sal, 13)
@@ -98,23 +110,39 @@ def main():
                f"{int(d.years_left)} years, rising to {money(float(d.salary_2028_29))} "
                f"by 2028-29")
         r.note(f"TAX. On the book they are {money(pre - tax_line)} over the tax line and "
-               f"owe about {money(b_with)}. Take his salary off and they are "
-               f"{money(tax_line - (pre - sal))} UNDER it, owing nothing.")
-        r.note(f"  So the marginal tax cost of the contract is about {money(b_with - b_out)}, "
-               f"i.e. the whole bill: his contract is the only reason they are a taxpayer "
-               f"on this basis.")
-        r.note(f"  Filling to the 14-man floor with two minimums instead: "
-               f"{money(pre - sal + 2 * rookie_min - tax_line)} vs the tax line, bill "
-               f"about {money(b_out14)}.")
-        room1 = ap1 - (pre - sal)
-        r.note(f"EXCEPTION TIER. Without him, pre-Kuminga salary is "
-               f"{money(pre - sal)}, which is {money(room1)} under the FIRST apron. The "
-               f"non-taxpayer mid-level is {money(full_mle)} and using it hard-caps at the "
-               f"first apron, so they could have spent up to {money(min(full_mle, room1))} "
-               f"on a free agent instead of the {money(tmle)} taxpayer exception.")
-        r.note(f"  That is the sharpest version of the cap claim: his contract is why the "
-               f"tool available to sign Kuminga was {money(tmle)} rather than up to "
-               f"{money(min(full_mle, room1))}.")
+               f"owe about {money(b_with)} (est).")
+        r.note(f"  Bare subtraction leaves {money(tax_line - (pre - sal))} under the line, "
+               f"but that is a 12-man roster and therefore not a team. See D1 below for "
+               f"the figure that can actually be printed.")
+        r.note("--- D1: THE SAME COUNTERFACTUAL AT A LEGAL 14-MAN ROSTER ---")
+        r.note(f"  A 12-man roster is not legal, so the honest version replaces him. "
+               f"Replacement guard at the veteran minimum is charged {money(vet_min)}, "
+               f"the TWO-year figure, not the {money(3877000.0)} a long veteran actually "
+               f"earns; the league pays the difference on a one-year deal.")
+        for lab, tot, bill in (("14th man at the rookie minimum", s_cheap, b_cheap),
+                               ("14th man at a veteran minimum", s_vet, b_vet)):
+            d_tax = tot - tax_line
+            r.note(f"  [{lab}] team salary {money(tot)} | "
+                   f"{money(abs(d_tax))} {'OVER' if d_tax > 0 else 'under'} the tax line "
+                   f"(bill about {money(bill)}, est) | "
+                   f"{money(ap1 - tot)} under the first apron")
+        lo, hi = min(ap1 - s_vet, ap1 - s_cheap), max(ap1 - s_vet, ap1 - s_cheap)
+        r.note(f"  USABLE NON-TAXPAYER MLE at a full roster: the exception is "
+               f"{money(full_mle)} but using it hard-caps at the first apron, so only "
+               f"{money(min(full_mle, lo))} to {money(min(full_mle, hi))} of it is "
+               f"actually spendable, depending on who fills the last spot.")
+        r.note(f"  THE COMPARISON, stated as it must be written: up to "
+               f"{money(min(full_mle, lo))} to {money(min(full_mle, hi))} at a full "
+               f"roster, against the {money(tmle)} taxpayer exception they actually had.")
+        r.note(f"  CORRECTION TO THE EARLIER FIGURE. The {money(min(full_mle, ap1 - base12))} "
+               f"reported before was computed at a 12-man roster, which is not a legal "
+               f"team. At 14 the usable exception is {money(min(full_mle, hi))} or less.")
+        r.note("  AND THE TAX CLAIM SOFTENS. At a legal roster the no-Dosunmu team sits "
+               f"{money(abs(s_cheap - tax_line))} under the line in the cheap version and "
+               f"{money(abs(s_vet - tax_line))} OVER it in the veteran version. It "
+               "straddles the tax line rather than clearing it. Do NOT write 'owing "
+               "nothing'; write that his contract moves them from ~$15.4M over the line "
+               "to roughly level with it.")
         r.note(f"APRON. With Kuminga signed they are {money(withk - ap2)} over the second "
                f"apron. Without Dosunmu the same roster sits {money(ap2 - (withk - sal))} "
                f"UNDER it.")

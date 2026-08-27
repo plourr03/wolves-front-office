@@ -117,15 +117,19 @@ The rule being applied is worth stating once in the piece: **if a verdict change
 
 **The uncomfortable one, which now stays in. It is two separate claims and the piece must not blur them.**
 
-**(a) The on-court claim.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
+**(a) The cap arithmetic, which needs no model at all** `[dosunmu_cap_20260827T152542Z]`. Ayo Dosunmu is on $19,310,345 this season. With him on the book, Minnesota is **$15,443,829 over the tax line**, facing a bill of roughly **$30.9M (est)**.
 
-**What that counterfactual is, stated plainly, because it is the thing most likely to be misread.** It is **"lose him for nothing"**, not "spend the money elsewhere". Minnesota was over the cap. An over-the-cap team has exceptions, not room, so his $19,310,345 was never convertible into a better guard at that price. The alternative being priced is his minutes going to Ball, Edwards, Clark and Hyland, and nobody arriving. That is a real option and it is the one the model answers.
+Take his salary off and put a legal team back on the floor, which means a replacement guard at the veteran minimum plus one more contract to reach the 14-man roster the CBA requires. On a one-year deal a veteran with three or more years of service is charged the two-year minimum, **$2,449,000**, and the league pays the rest. That team lands **within about a million dollars of the tax line either side**: $59,516 under it if the last spot goes to a rookie minimum, $1,031,484 over it if it goes to another veteran `[same]`.
 
-**(b) The cap claim, which is separate and larger** `[dosunmu_cap_20260827T144259Z]`. On the pre-Kuminga book Minnesota is $15,443,829 over the tax line and owes roughly **$30.9M in tax (est)**. Take his salary off and they are **$3,866,516 under the line, owing nothing**, and still under it after filling to the 14-man floor with two minimum contracts. His is the contract that makes them a taxpayer.
+So the accurate version is not that his contract makes them a taxpayer outright. It is that **his contract is the difference between roughly level with the tax line and $15.4M past it.**
 
-It also set the size of the tool they signed Kuminga with. Without him they would sit **$12,453,516 under the first apron**, where the non-taxpayer mid-level is available. **The exception available to chase a forward would have been up to $12.45M rather than $6,064,000** `[same]`.
+It also set the size of the tool they signed Kuminga with, and this is the part that connects to the lede. Without him, that legal roster sits **$7.56M to $8.65M under the first apron**, where the non-taxpayer mid-level lives. Using that exception hard-caps a team at the first apron, so the whole $15,044,000 was never spendable either. What was actually available was **up to $7.6M to $8.6M at a full roster, against the $6,064,000 taxpayer exception they had** `[same]`. Call it an extra $1.5M to $2.6M of buying power to chase a forward.
 
-**Why the two claims must stay apart.** (a) says the minutes are worth less than the guards behind him. (b) says the money bought tax liability and a smaller exception. Both are defensible; together they are *not* "they should have let him walk", because (a)'s counterfactual is losing him for nothing and getting worse on the floor. The honest composite is that Minnesota paid a taxpayer's price for a player their own minutes model grades below his replacements, and the bill came due as a $6M exception instead of a $12M one.
+**(b) The on-court finding.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
+
+**One sentence on what kind of claim each is, because they are not the same kind.** The cap half is arithmetic on contracts and CBA thresholds, and it is true regardless of what anyone thinks of the player; **the on-court half is a model claim about impact metrics**, and it inherits every assumption those metrics carry, including the minutes rule described in the methods note.
+
+**And the two counterfactuals are different, which is why they do not simply add up.** The on-court number prices **losing him for nothing**: Minnesota was over the cap, an over-the-cap team has exceptions rather than room, and his salary was never convertible into a better guard. The cap number prices something else entirely, **the exception his absence would have unlocked**, which is a tool for signing a different player at a different position. One says the guards behind him are better than he is. The other says the money bought tax exposure and a smaller exception. Reported together, they describe a cost; neither one, nor both, establishes what Minnesota should have done instead.
 
 ---
 
@@ -176,6 +180,17 @@ Structure it as three claims of decreasing confidence.
 ## Methods note
 
 Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separately end to end and never averaged; a claim ships only if all four agree on the sign. Title probabilities come from a bracket simulation calibrated against three prior seasons of betting markets. Minutes are allocated by a league-wide rank score with a per-player ceiling of prior load plus three, capped at 36.
+
+**Why this piece reports signs and never rankings.** The four views agree far more often on direction than on size, and a ranking is a claim about size. The worked example is the DiVincenzo injury in the slot-aware run `[compare_slot_shapley_20260827T134414Z]`:
+
+| View | Largest single negative | The injury | Its rank |
+|---|---|---|---|
+| consensus | depth bundle, -0.332 | -0.218 | 4th of 8 |
+| RAPM | Dosunmu retained, -0.443 | -0.189 | 4th of 8 |
+| box | **the injury, -0.356** | -0.356 | **1st of 8** |
+| DARKO | Dosunmu retained, -0.758 | -0.627 | 3rd of 8 |
+
+All four views agree the injury hurt. They do not agree it hurt most: it leads under one view, and under RAPM it is the *smallest* negative on the board. "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily. That is the whole editorial rule in one example.
 
 **Positional minute budgets are each team's own 2025-26 shape, not a league average.** For Minnesota that assumes a **double-big allocation the current roster cannot repeat**: last season's 53.7 centre minutes a game were Gobert plus Reid, and Reid is gone. The budget is the right choice for measuring what the departures cost, because it holds the shape fixed while the personnel changes, and it is the wrong choice for predicting how Finch will actually play this team. Read every Shapley figure here as "what these moves did to last season's shape", not as a rotation forecast `[build_rotations_20260827T133313Z]`.
 

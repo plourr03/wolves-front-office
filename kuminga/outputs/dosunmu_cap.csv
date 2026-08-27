@@ -1,6 +1,7 @@
 scenario,n_players,team_salary,vs_tax_line,est_tax_bill,vs_first_apron,vs_second_apron
 "13 players, Dosunmu on the book",13,215871829.0,15443829.0,30858187.75,-6856829.0,5814171.0
-"12 players, Dosunmu gone",12,196561484.0,-3866516.0,0.0,12453516.0,25124516.0
-"14 players, Dosunmu gone + 2 minimums",14,199277484.0,-1150516.0,0.0,9737516.0,22408516.0
+"12 players, Dosunmu gone (NOT a legal roster)",12,196561484.0,-3866516.0,0.0,12453516.0,25124516.0
+"14 players, Dosunmu gone + vet-min guard + rookie min",14,200368484.0,-59516.0,0.0,8646516.0,21317516.0
+"14 players, Dosunmu gone + vet-min guard + vet min",14,201459484.0,1031484.0,1547226.0,7555516.0,20226516.0
 "14 players, Kuminga signed (actual)",14,221935829.0,21507829.0,61170016.75,-12920829.0,-249829.0
 "13 players, Kuminga signed, Dosunmu gone",13,202625484.0,2197484.0,3296226.0,6389516.0,19060516.0

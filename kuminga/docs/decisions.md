@@ -558,3 +558,41 @@ Two facts added ahead of the fill-robustness discussion, both with run IDs:
 - **Under strict eligibility, 23.3 of Kuminga's 26 minutes have nobody to go to.** Behind Lyles there is no eligible 4 `[slot_robustness_20260827T133141Z]`. The line the section now carries: Minnesota did not sign a power forward into a crowded room, they signed one into an empty one.
 
 The Lyles split then arrives as the honest narrowing rather than as a hedge bolted on at the end: it is the one failing fill a coach could actually choose, and the four views disagree about it.
+
+### D40. The Dosunmu cap claim shrinks by a third once the roster has to be legal (D1)
+
+**Change to a previously reported figure, per the standing rule.**
+
+| Figure | Before (D36) | After (D40) |
+|---|---|---|
+| Usable exception without him | **$12,453,516** | **$7,555,516 to $8,646,516** |
+| Advantage over the taxpayer MLE | $6.39M | **$1.49M to $2.58M** |
+| Tax position without him | "$3,866,516 under, owing nothing" | **$59,516 under to $1,031,484 over** |
+
+**What was wrong.** D36 computed the counterfactual by subtracting his salary and stopping, which leaves **twelve** players. That is not a team, it is a violation of Article XXIX Section 2(a). Replacing him and filling to the 14-man floor puts most of the apparent room straight back on the books.
+
+**The replacement charge, verified rather than assumed.** A veteran with three or more years of service signing a **one-year** minimum is charged the **two-year** minimum against team salary, **$2,449,000** for 2026-27, with the league paying the difference against the $3,877,000 such a player actually earns. Multi-year minimums count in full. So the right charge for a replacement guard is neither the rookie minimum nor what the player takes home. Source: Hoops Rumors glossary, minimum salary exception (hoopsrumors.com/2026/03/hoops-rumors-glossary-minimum-salary-exception-5.html), consistent with the CBA minimum-salary exception.
+
+**Both figures are ranges because the last roster spot swings them.** Fill the 14th slot with a rookie minimum and they land $59,516 under the tax line with $8,646,516 under the first apron; fill it with another veteran minimum and they are $1,031,484 over the line with $7,555,516 of room. The piece quotes the range, and the conservative end leads.
+
+**Two claims are retired.** "His is the contract that makes them a taxpayer" overstates it: at a legal roster the no-Dosunmu team **straddles** the tax line. The printable version is that his contract is the difference between roughly level with the line and $15,443,829 past it. And "the tool would have been up to $12.45M" is replaced by **"up to $7.6M to $8.6M at a full roster, against $6,064,000"**, an extra $1.5M to $2.6M of buying power. Still a real finding, and a third of the size of the one that nearly went in.
+
+**Also corrected in the run log itself.** The `dosunmu_cap` notes previously printed the 12-man subtraction as a headline before correcting it further down, which would have left a superseded number sitting in the provenance trail. The note now says the bare subtraction is not a team and points at the legal-roster figure.
+
+`dosunmu_cap_20260827T152542Z`.
+
+### D41. Dosunmu rewritten cap-first, and the two claims labelled by kind (D2)
+
+The paragraph now runs **cap arithmetic first, on-court finding second**, because the cap half needs no model and the on-court half does. The sentence separating them, in full:
+
+> The cap half is arithmetic on contracts and CBA thresholds, and it is true regardless of what anyone thinks of the player; **the on-court half is a model claim about impact metrics**, and it inherits every assumption those metrics carry, including the minutes rule described in the methods note.
+
+The differing counterfactuals are kept explicit: the on-court number prices **losing him for nothing**, the cap number prices **the exception his absence would have unlocked**, and they are about different players at different positions, which is why they do not add. The paragraph closes on the boundary rather than a recommendation: "Reported together, they describe a cost; neither one, nor both, establishes what Minnesota should have done instead." **"Should have let him walk" does not appear**, and the structure is built so a drafting pass cannot arrive there by accident.
+
+### D42. The per-view table is now the worked example for the whole editorial rule (D3)
+
+Moved the P2 ranking table into the methods appendix under the heading "Why this piece reports signs and never rankings", which is what it actually demonstrates. All four views agree the DiVincenzo injury hurt; they place it 4th, 4th, 1st and 3rd of eight. The contrast the section draws:
+
+> "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily.
+
+Better placed here than buried in section 4 as a do-not-write, because it generalises: it is the reason the piece carries bands rather than midpoints, signs rather than orderings, and four views rather than one. Section 4 keeps the short version.

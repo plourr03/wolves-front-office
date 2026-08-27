@@ -243,8 +243,6 @@ def main():
         if dc is not None:
             g = {r_["scenario"]: r_ for _, r_ in dc.iterrows()}
             on = g["13 players, Dosunmu on the book"]
-            off = g["12 players, Dosunmu gone"]
-            off14 = g["14 players, Dosunmu gone + 2 minimums"]
             add("Dosunmu (b) cap", "2026-27 salary", "$19,310,345",
                 "5 years; $86,510,348 across the 4 years in the contract book",
                 "FACT", rid_dc,
@@ -252,16 +250,27 @@ def main():
             add("Dosunmu (b) cap", "MIN vs the tax line, with him",
                 f"${on.vs_tax_line:,.0f} over", f"est tax bill ${on.est_tax_bill:,.0f}",
                 "FACT", rid_dc, "tax rates flagged CONFIRM in the constants; label est")
-            add("Dosunmu (b) cap", "MIN vs the tax line, without him",
-                f"${-off.vs_tax_line:,.0f} under", "no tax bill", "FACT", rid_dc,
-                f"still under after filling to 14 men: "
-                f"${-off14.vs_tax_line:,.0f} under, no bill. His is the contract that "
-                f"makes them a taxpayer.")
-            add("Dosunmu (b) cap", "exception tier without him",
-                f"${off.vs_first_apron:,.0f} under the first apron",
-                "non-taxpayer mid-level available", "FACT", rid_dc,
-                "so the tool to chase a forward would have been up to $12,453,516 "
-                "rather than the $6,064,000 taxpayer exception")
+            cheap = g["14 players, Dosunmu gone + vet-min guard + rookie min"]
+            vet = g["14 players, Dosunmu gone + vet-min guard + vet min"]
+            add("Dosunmu (b) cap", "MIN vs the tax line, without him, LEGAL 14-man roster",
+                f"${-cheap.vs_tax_line:,.0f} under to ${vet.vs_tax_line:,.0f} over",
+                "replacement guard at the vet min, plus one more to reach 14",
+                "FACT", rid_dc,
+                "it STRADDLES the line; do not write 'owing nothing'. His contract is the "
+                "difference between roughly level with the tax line and $15,443,829 past it. "
+                "The $3,866,516-under figure is a 12-man roster and is not printable.")
+            add("Dosunmu (b) cap", "veteran-minimum cap charge",
+                "$2,449,000", "the 2-year minimum, not the $3,877,000 earned",
+                "FACT", "CBA minimum salary exception",
+                "a 3+ year veteran on a ONE-YEAR minimum is charged the 2-year figure and "
+                "the league pays the difference; multi-year minimums count in full")
+            add("Dosunmu (b) cap", "usable non-taxpayer MLE at a full roster",
+                f"${vet.vs_first_apron:,.0f} to ${cheap.vs_first_apron:,.0f}",
+                "exception is $15,044,000 but hard-caps at the first apron",
+                "FACT", rid_dc,
+                "WRITE IT AS: up to $7.6M to $8.6M at a full roster, against the "
+                "$6,064,000 taxpayer exception. An extra $1.5M to $2.6M of buying power, "
+                "NOT the $12,453,516 first reported at an illegal 12-man roster.")
             add("Dosunmu (b) cap", "second-apron distance without him",
                 f"${g['13 players, Kuminga signed, Dosunmu gone'].vs_second_apron:,.0f} under",
                 "same roster, Kuminga signed", "FACT", rid_dc,
