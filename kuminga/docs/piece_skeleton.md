@@ -8,42 +8,40 @@
 
 ## 1. The deal that cannot happen yet
 
-**The lede.** Minnesota agreed to terms with Jonathan Kuminga on Wednesday and, as of Thursday, could not sign him for the money they had agreed to pay him.
+**The lede.** Minnesota agreed to terms with Jonathan Kuminga and, as of Thursday, could not sign him for the money they had agreed to pay him. They are **$1,999,829 short.**
 
-The arithmetic, and it is close enough to be the story:
+**Start with the basis, because the basis is the story.** The number that governs an apron is not a team's payroll. It is **Apron Team Salary**, which takes team salary, removes free-agent cap holds, and **adds back unlikely bonuses**, the incentives a player did not earn last season and so is not presumed to earn this one. Minnesota carries **$1,750,000** of them: **$1,000,000 for Jaden McDaniels and $750,000 for Donte DiVincenzo** `[cap_reconciliation_20260827T191905Z]`. They do not count against the cap or the tax. They count against the apron.
 
-- Contracted 2026-27 salary, 13 players: **$215,871,829** `[cap_reconciliation_20260827T123553Z]`
-- Add Kuminga at the taxpayer mid-level exception: **$221,935,829** `[same]`
-- The second apron: **$221,686,000** `[league_year_constants, verified against NBA.com]`
-- **They are $249,829 over.** `[eval_signing_20260827T123804Z]`
+The arithmetic:
 
-That is less than a rookie-minimum contract. Using the taxpayer MLE hard-caps a team at the second apron for the rest of the league year, and the test is where you sit **after** the signing, not before. So the exception was available to them (they sit in the first-apron tier) and impossible to fit **in full**.
+- Contracted 2026-27 salary, 13 players: **$215,871,829**
+- Plus unlikely bonuses: **$217,621,829** ← *the apron basis*
+- Add Kuminga at the taxpayer mid-level exception: **$223,685,829**
+- The second apron: **$221,686,000**
+- **They are $1,999,829 over.** `[same]`
 
-**Now the loophole, before a reader with a calculator finds it.** An exception can be used partially. Minnesota sits **$5,814,171** below the second apron, so a first-year salary of exactly that fits, lands team salary on **$221,686,000 to the dollar**, and is legal, because the hard cap prohibits *exceeding* the apron rather than reaching it `[lede_loophole_20260827T134245Z]`. That is 95.9% of the exception. So the precise claim is not that they could not sign him. It is that **they could not sign him to the full taxpayer mid-level exception**, and the gap is 4.1% of it.
+*Independent agreement.* Spotrac publishes Minnesota's second-apron room as **$4,064,172**. We compute **$4,064,171**, one dollar apart, the dollar being McDaniels at $26,200,000 there against $26,200,001 in Basketball-Reference, SalarySwish and our own book.
 
-Two things close the loophole, and both belong in the piece:
+Using the taxpayer MLE hard-caps a team at the second apron for the rest of the league year, and the test is where you sit **after** the signing, not before.
 
-- **It costs Kuminga $512,149** over the two years, at the 5% maximum raise `[same]`. Someone has to volunteer that, and the player who just turned down the Lakers to protect his own optionality is not the obvious volunteer.
-- **It freezes the roster at 14 for the season.** At exactly the apron, Minnesota cannot sign a fifteenth man, take back a dollar in any trade, or replace an injured player. Carry a fifteenth on the rookie minimum and Kuminga's ceiling drops to **$4,456,171**, 73.5% of the exception `[same]`.
+**The loophole, before a reader with a calculator finds it.** An exception may be used partially. Minnesota sits $4,064,171 below the second apron, so a first-year salary of exactly that fits and lands team salary on $221,686,000 to the dollar, which is legal because the hard cap prohibits *exceeding* the apron rather than reaching it `[lede_loophole_20260827T191752Z]`. But that is only **67% of the exception**, and it costs Kuminga **$4,099,649** across the two years. This is no longer a rounding-error loophole. It is a $4M pay cut on top of the one he already took, which is why nobody is going to take it.
 
-So the Green move is not only about the last $249,829. It is about being able to field a normal roster afterwards.
+**Hence Saturday.** Josh Green's $14,679,012 is what has to move.
 
-**Hence Saturday.** August 29 is the last day to waive a player and stretch his 2026-27 salary. Josh Green's $14,679,012 is what has to move.
+**And Saturday is a real deadline, not a convenience.** The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an **August 31** cut-off. Green has no salary beyond 2026-27. **If a waiver request is not reported by end of day Friday August 29 ET, the stretch branch ceases to exist** and a trade is the only route left `[gaps_remaining, stretch deadline]`.
 
-**The two branches, at a legal roster** `[cap_reconciliation_20260827T123553Z]`. "Legal" means the 14-man floor: CBA **Article XXIX, Section 2(a)** requires 14 or 15 players on the Active and Inactive Lists through the regular season, and **Section 2(b)(i)** allows 12 or 13 for no more than two consecutive weeks at a time and 28 days in total `[CBA text; cbaguide.com]`:
+**The two branches, at a legal 14-man roster** `[cap_reconciliation_20260827T191905Z]`. "Legal" means the 14-man floor: CBA **Article XXIX, Section 2(a)**, with **2(b)(i)** allowing 12 or 13 for two consecutive weeks at a time and 28 days total.
 
-| | Team salary | vs first apron |
-|---|---|---|
-| Trade Green, 14 players | $208,614,817 | **$400,183 under** |
-| Stretch Green, 14 players | $213,507,821 | $4,492,821 over |
+| | Apron salary | vs first apron | vs second apron |
+|---|---|---|---|
+| Trade Green, 14 players | $210,364,580 | **$1,349,580 over** | $11,321,420 under |
+| Stretch Green, 14 players | $215,257,584 | **$6,242,584 over** | $6,428,416 under |
 
-Two things fall out of that $400,183. A **fifteenth** man on a rookie minimum puts the trade branch $957,817 over the first apron by itself. And a Green trade **can** bring salary back: there is **$13,071,183 of room under the second-apron hard cap** at fourteen players `[cap_branches_20260827T023847Z]`, and the hard cap, not the matching rules, is what binds. But **any incoming salary above $400,183 makes Minnesota a first-apron team for the season.**
+**Both branches are first-apron teams.** There is no version of this that keeps Minnesota under the first apron at a legal roster, so the four first-apron restrictions apply either way: no sign-and-trade acquisition, no bi-annual exception, no prior-year trade exceptions, and tighter matching. The last of those has a price the piece should name: Minnesota holds **$17,350,158** of live prior-year trade exceptions, the Mike Conley $10,774,038 expiring 2/3/2027 and the Rob Dillingham $6,576,120 expiring 2/5/2027, and being over the first apron makes them unusable.
 
-**What that costs, and it is four things.** Above the first apron a team cannot acquire a player by **sign-and-trade**; cannot use the **bi-annual exception**, worth $5,477,000; cannot use a **trade exception generated in a prior year**; and has **tighter trade matching**, meaning it cannot aggregate two salaries to match one larger one and cannot take back more than it sends out. (The fifth usual restriction, losing the non-taxpayer mid-level, is already moot: they are signing Kuminga with the taxpayer version.)
+A Green trade can still bring salary back, up to the **$11,321,420** of room under the second-apron hard cap, and the hard cap binds before the matching rules do. What it cannot do is buy back the tier.
 
-So the pure salary dump is **not the only legal option**. It is the only one that keeps them under the first apron, and every other exit has a price.
-
-*Optional colour:* stretching costs roughly $10.9M more in tax in 2026-27 alone and leaves $4,893,004 of dead money in each of the next two seasons, the second of which lands in Edwards's walk year.
+*On the tax, and note the basis changes.* Tax is charged on **regular team salary, which excludes unlikely bonuses** unless they are actually earned. On that basis the trade branch owes roughly **$8.7M (est)** and the stretch branch roughly **$17.0M (est)**, and stretching leaves $4,893,004 of dead money in each of the next two seasons, the second landing in Edwards's walk year.
 
 ---
 

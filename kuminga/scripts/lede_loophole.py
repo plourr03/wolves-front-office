@@ -62,12 +62,15 @@ def main():
         raise_pct = float(k["exception_terms"]["taxpayer_mle"]["max_raise_pct"])
         rookie_min = float(k["min_salary_by_yos"]["0"])
 
-        rec = pd.read_csv(RECON)
-        pre = float(rec[rec.component.str.startswith(str(CONTRACTED_PLAYERS))].amount.iloc[0])
+        # APRON basis, from the single canonical source. Using the contracted-13 row
+        # here is what produced the 8x error in the first published version.
+        canon = json.load(open(os.path.join(REPO, "kuminga", "outputs",
+                                            "cap_canonical.json"), encoding="utf-8"))
+        pre = float(canon["pre_kuminga_apron"])
 
         room = apron2 - pre
         shortfall = tmle - room
-        assert abs(shortfall - 249_829) < 1, f"shortfall drifted: {shortfall}"
+        assert abs(shortfall - 1_999_829) < 1, f"shortfall drifted: {shortfall}"
 
         # --- the 14-man version: Kuminga IS the 14th man --------------------
         max14 = room
@@ -85,8 +88,10 @@ def main():
         rows = [
             dict(item="second apron, 2026-27", amount=apron2,
                  note="league_year_constants, verified against NBA.com"),
-            dict(item=f"contracted salary, {CONTRACTED_PLAYERS} players", amount=pre,
-                 note="canonical apron basis; Green in, Kuminga out"),
+            dict(item=f"APRON basis, {CONTRACTED_PLAYERS} players + unlikely bonuses",
+                 amount=pre,
+                 note="contracted $215,871,829 + $1,750,000 unlikely bonuses "
+                      "(McDaniels $1.0M, DiVincenzo $750k); Green in, Kuminga out"),
             dict(item="ROOM under the second apron", amount=room,
                  note="this is the number the lede has to survive"),
             dict(item="full taxpayer MLE", amount=tmle, note="the exception as a whole"),

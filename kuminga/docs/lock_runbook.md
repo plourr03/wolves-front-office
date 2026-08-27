@@ -48,6 +48,21 @@ Shedding Green is not free, and the piece currently prices it as if it were. On 
 
 **Until it resolves** the sheet carries a row reading `PENDING GREEN RESOLUTION`, so the hole is visible on the gate rather than silently absent.
 
+## L1d. THE STRETCH DEADLINE IS A DATE CONDITION (ADDENDUM)
+
+The branch table has always modelled trade-vs-stretch as two standing options. It is not.
+
+**The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an August 31 cut-off.** Green has no salary beyond 2026-27.
+
+**The rule, applied literally:**
+- If a **waiver request is reported by end of day Friday 2026-08-29 ET**, both branches stay live and the lock proceeds as written.
+- **If it is not, the stretch branch ceases to exist.** Retire it in `cap_branches.md`, delete the stretch row from the branch table in section 1, and remove the stretch tax and dead-money figures from the piece. Trade becomes the only branch and the section-1 table collapses to one row.
+- If Green is still on the roster after August 31 with no move at all, neither branch has happened and Kuminga still cannot be signed to the full exception. That is a third outcome the piece does not currently describe.
+
+## L1e. All-30 roster re-pull (ADDENDUM)
+
+At lock, re-pull `roster_snapshot` for all 30 teams, diff against the 2026-08-26 snapshot, and log every change. The league-wide layer is stale the moment anyone else signs anyone, and section 6 and the companion league skeleton both depend on it. **See also the R3 finding below: that layer has known contract-book errors and should not be published until they are resolved.**
+
 ## L2. The signing becomes official
 
 1. Verify the announced dollars against R4 ($6,064,000 / $6,367,200 player option / $12,431,200 total).
@@ -102,4 +117,6 @@ figure against `final_numbers.csv` before rendering.
 - The canonical apron basis: contracted salary only, no placeholder, no cap holds.
 - The four-view structure. Never average the forks into one number.
 - The quotability bar: posterior sd above 1.5 is not quotable.
+- **Every lede figure must be independently recomputed from raw sources, in a context with no access to `kuminga/scripts` or `kuminga/lib`, before publication.** This is not optional and it is not a formality. The first published lede said Minnesota was $249,829 over the second apron. The real figure is $1,999,829, an 8x error, because the apron basis omitted unlikely bonuses. Every script in the project reproduced the wrong number perfectly, because they all inherited the same wrong basis. Only a check that refuses to read our own code catches that class of error.
+- The apron basis itself: **Apron Team Salary = contracted salary + unlikely bonuses, cap holds excluded**, published once to `outputs/cap_canonical.json` and read from there by every consumer. Never re-derive it from a component row.
 - The standing rule that a title-odds point estimate does not ship, which the three-season backtest now supports quantitatively (error 1.4 to 2.3pp against a spread of 2.1pp).

@@ -67,8 +67,10 @@ def main():
                  d.salary_2029_30]
         known = float(pd.Series(years).dropna().sum())
 
-        rec = pd.read_csv(RECON)
-        pre = float(rec[rec["component"].str.startswith("13")].amount.iloc[0])
+        # APRON basis from the canonical source (contracted + unlikely bonuses).
+        canon = json.load(open(os.path.join(REPO, "kuminga", "outputs",
+                                            "cap_canonical.json"), encoding="utf-8"))
+        pre = float(canon["pre_kuminga_apron"])
         withk = pre + tmle
 
         rows = []

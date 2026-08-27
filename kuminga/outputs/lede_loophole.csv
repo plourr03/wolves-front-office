@@ -1,11 +1,11 @@
 item,amount,note
 "second apron, 2026-27",221686000.0,"league_year_constants, verified against NBA.com"
-"contracted salary, 13 players",215871829.0,"canonical apron basis; Green in, Kuminga out"
-ROOM under the second apron,5814171.0,this is the number the lede has to survive
+"APRON basis, 13 players + unlikely bonuses",217621829.0,"contracted $215,871,829 + $1,750,000 unlikely bonuses (McDaniels $1.0M, DiVincenzo $750k); Green in, Kuminga out"
+ROOM under the second apron,4064171.0,this is the number the lede has to survive
 full taxpayer MLE,6064000.0,the exception as a whole
-shortfall against the FULL exception,249829.0,"the $249,829 already in the piece"
-"max first-year salary, 14-man roster",5814171.0,"95.9% of the exception; lands exactly ON the apron, which is legal because the rule prohibits EXCEEDING it"
-"max first-year salary, 15-man roster",4456171.0,"73.5% of the exception, after a rookie-minimum 15th man at $1,358,000"
-two-year value of the loophole deal,11919050.55,"$5,814,171 then $6,104,880 at the 5% maximum raise"
+shortfall against the FULL exception,1999829.0,"the $249,829 already in the piece"
+"max first-year salary, 14-man roster",4064171.0,"67.0% of the exception; lands exactly ON the apron, which is legal because the rule prohibits EXCEEDING it"
+"max first-year salary, 15-man roster",2706408.0,"44.6% of the exception, after a rookie-minimum 15th man at $1,357,763"
+two-year value of the loophole deal,8331550.55,"$4,064,171 then $4,267,380 at the 5% maximum raise"
 two-year value as reported,12431200.0,"$6,064,000 then $6,367,200 player option"
-what the loophole costs KUMINGA,512149.44999999925,the reason it is a loophole and not a plan
+what the loophole costs KUMINGA,4099649.45,the reason it is a loophole and not a plan

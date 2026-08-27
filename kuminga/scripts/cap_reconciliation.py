@@ -114,6 +114,25 @@ def main():
         ]
         rc = pd.DataFrame(rec)
         rc.to_csv(OUT_REC, index=False)
+        # ONE canonical basis, written once and read by every downstream script, so a
+        # consumer can never re-derive it from the wrong component again.
+        canon = dict(
+            basis="Apron Team Salary = contracted salary + unlikely bonuses "
+                  "(cap holds excluded)",
+            contracted_13=base_13, unlikely_bonuses=unlikely,
+            pre_kuminga_apron=base_13 + unlikely,
+            with_kuminga_apron=base_13 + unlikely + KUMINGA,
+            second_apron=apron2, first_apron=float(k["first_apron"]),
+            tax_line=float(k["luxury_tax"]),
+            overage_vs_second_apron=base_13 + unlikely + KUMINGA - apron2,
+            rule_source_1="https://www.hoopsrumors.com/2025/01/hoops-rumors-glossary-tax-aprons-2.html",
+            rule_source_2="https://cbaguide.com/thresholds/apron/",
+            cross_check="Spotrac 2nd Apron Space $4,064,172 vs ours "
+                        f"${apron2 - (base_13 + unlikely):,.0f}",
+            as_of="2026-08-27")
+        with open(os.path.join(REPO, "kuminga", "outputs", "cap_canonical.json"),
+                  "w", encoding="utf-8") as fh:
+            json.dump(canon, fh, indent=1)
 
         canonical_pre = base_13 + unlikely
         canonical_with_k = canonical_pre + KUMINGA

@@ -50,3 +50,284 @@ UTA       -3.63      -4.38   0.59 -5.39 -3.20
 [run] run_sim_20260827T171154Z
   [run_sim_20260827T171154Z] expected wins = 41.0 + 2.239 * net
   [run_sim_20260827T171154Z] fork consensus: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T171154Z] fork rapm: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T171154Z] fork box: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T171154Z] fork darko: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T171154Z] wrote 120 rows: 4 forks x 30 teams
+  [run_sim_20260827T171154Z]   MIN [consensus]: title 2.95% -> 2.33% (-0.62pp), net +2.16 -> +2.09, wins 45.8 -> 45.7
+  [run_sim_20260827T171154Z]   MIN [rapm]: title 2.95% -> 3.02% (+0.07pp), net +2.16 -> +2.84, wins 45.8 -> 47.4
+  [run_sim_20260827T171154Z]   MIN [box]: title 2.92% -> 4.13% (+1.21pp), net +2.16 -> +3.52, wins 45.8 -> 48.9
+  [run_sim_20260827T171154Z]   MIN [darko]: title 2.95% -> 4.83% (+1.88pp), net +2.16 -> +3.59, wins 45.8 -> 49.0
+[run] run_sim_20260827T171154Z -> ok
+
+MINNESOTA, all four forks:
+     fork  net_baseline  net_current  net_delta  wins_current  title_baseline  title_current  title_delta
+consensus        2.1576       2.0875    -0.0701       45.6739          0.0295         0.0233      -0.0062
+     rapm        2.1576       2.8385     0.6809       47.3555          0.0295         0.0302       0.0007
+      box        2.1576       3.5224     1.3647       48.8865          0.0292         0.0413       0.0121
+    darko        2.1576       3.5919     1.4342       49.0422          0.0295         0.0483       0.0188
+
+Title-odds change from the offseason (pp), by fork:
+fork        box  consensus  darko  rapm  mean
+team_abbr                                    
+SAS        0.22       7.07   3.02  8.27  4.64
+BOS       -0.50       5.01   1.25  5.68  2.86
+CHA        2.01       5.69  -3.84  6.85  2.68
+PHI        0.48       3.76   3.40  2.60  2.56
+MIA        0.48       1.59   4.28  1.56  1.98
+LAL        3.01       0.79  -0.10  0.47  1.04
+HOU        1.29       0.13   1.45  0.83  0.92
+POR        1.85       0.57  -0.27  0.82  0.74
+MIN        1.21      -0.62   1.88  0.07  0.63
+ATL       -0.53       0.09   2.63 -0.09  0.52
+ORL        0.70       0.29   0.16  0.52  0.42
+CHI        0.00       0.02   0.19  0.01  0.06
+DAL        0.00       0.00   0.00  0.00  0.00
+BKN        0.00       0.00   0.00  0.00  0.00
+WAS        0.00       0.00   0.00  0.00  0.00
+UTA        0.00       0.00   0.00  0.00  0.00
+NOP        0.00      -0.00   0.01 -0.00  0.00
+SAC        0.00       0.00   0.00  0.00  0.00
+MIL        0.00       0.00   0.00  0.00  0.00
+IND        0.00       0.00   0.00  0.00  0.00
+MEM       -0.00      -0.00   0.00 -0.00  0.00
+LAC       -1.09      -0.01  -0.26  0.36 -0.25
+GSW       -0.37      -0.49  -0.46 -0.49 -0.45
+PHX       -0.76      -1.00   0.77 -1.26 -0.56
+DEN        0.15      -2.14  -1.44 -2.99 -1.60
+TOR       -1.70      -2.08  -1.51 -2.31 -1.90
+CLE        0.39      -3.20  -2.93 -3.32 -2.26
+OKC       -1.44      -2.81  -1.26 -4.79 -2.58
+NYK       -2.58      -4.41  -4.78 -4.42 -4.05
+DET       -2.84      -8.26  -2.18 -8.36 -5.41
+[run] build_fcurve_20260827T171810Z
+  [build_fcurve_20260827T171810Z] fork consensus: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T171810Z]   consensus: title ranges 0.00% at net -4.0 to 22.59% at net +10.0
+  [build_fcurve_20260827T171810Z] fork rapm: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T171810Z]   rapm: title ranges 0.00% at net -4.0 to 21.71% at net +10.0
+  [build_fcurve_20260827T171810Z] fork box: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T171810Z]   box: title ranges 0.00% at net -4.0 to 23.94% at net +10.0
+  [build_fcurve_20260827T171810Z] fork darko: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T171810Z]   darko: title ranges 0.00% at net -4.0 to 24.88% at net +10.0
+  [build_fcurve_20260827T171810Z] wrote 116 grid rows
+[run] build_fcurve_20260827T171810Z -> ok
+ min_net  title     cf  finals
+    -4.0 0.0000 0.0003  0.0001
+    -3.5 0.0000 0.0008  0.0002
+    -3.0 0.0001 0.0020  0.0005
+    -2.5 0.0006 0.0044  0.0015
+    -2.0 0.0009 0.0087  0.0029
+    -1.5 0.0015 0.0150  0.0044
+    -1.0 0.0030 0.0245  0.0080
+    -0.5 0.0042 0.0365  0.0116
+     0.0 0.0063 0.0504  0.0165
+     0.5 0.0099 0.0691  0.0253
+     1.0 0.0140 0.0882  0.0332
+     1.5 0.0184 0.1091  0.0425
+     2.0 0.0223 0.1291  0.0507
+     2.5 0.0268 0.1510  0.0597
+     3.0 0.0319 0.1701  0.0689
+     3.5 0.0390 0.1934  0.0823
+     4.0 0.0462 0.2126  0.0957
+     4.5 0.0538 0.2348  0.1076
+     5.0 0.0621 0.2572  0.1204
+     5.5 0.0729 0.2826  0.1369
+     6.0 0.0840 0.3090  0.1532
+     6.5 0.0964 0.3367  0.1711
+     7.0 0.1089 0.3666  0.1894
+     7.5 0.1263 0.4003  0.2126
+     8.0 0.1435 0.4366  0.2375
+     8.5 0.1631 0.4718  0.2633
+     9.0 0.1826 0.5067  0.2887
+     9.5 0.2034 0.5410  0.3142
+    10.0 0.2259 0.5744  0.3401
+[run] shapley_20260827T174538Z
+  [shapley_20260827T174538Z] MIN player attributes available for 23 players
+  [shapley_20260827T174538Z] enumerating 256 coalitions
+  [shapley_20260827T174538Z] consensus: v(none)=2.797% v(all)=2.305% total=-0.491pp
+  [shapley_20260827T174538Z] rapm: v(none)=3.063% v(all)=2.963% total=-0.100pp
+  [shapley_20260827T174538Z] box: v(none)=2.267% v(all)=4.179% total=+1.912pp
+  [shapley_20260827T174538Z] darko: v(none)=3.504% v(all)=4.845% total=+1.341pp
+  [shapley_20260827T174538Z] NAMED SCENARIOS (title %, by fork):
+  [shapley_20260827T174538Z]   kept_reid_and_added_ball                 consensus= 3.79 rapm= 4.89 box= 4.35 darko= 5.47  mean= 4.63  band [3.79, 5.47]
+  [shapley_20260827T174538Z]   actual_but_healthy_divincenzo            consensus= 2.49 rapm= 2.94 box= 4.29 darko= 6.27  mean= 4.00  band [2.49, 6.27]
+  [shapley_20260827T174538Z]   what_actually_happened                   consensus= 2.31 rapm= 2.96 box= 4.18 darko= 4.85  mean= 3.57  band [2.31, 4.85]
+  [shapley_20260827T174538Z]   joanbet_shape_retool_randle_slot_only    consensus= 2.77 rapm= 3.91 box= 3.20 darko= 2.80  mean= 3.17  band [2.77, 3.91]
+  [shapley_20260827T174538Z]   did_nothing                              consensus= 2.80 rapm= 3.06 box= 2.27 darko= 3.50  mean= 2.91  band [2.27, 3.50]
+  [shapley_20260827T174538Z]   actual_without_kuminga                   consensus= 0.94 rapm= 1.37 box= 3.51 darko= 4.39  mean= 2.55  band [0.94, 4.39]
+  [shapley_20260827T174538Z] SHAPLEY (pp of title probability):
+  [shapley_20260827T174538Z]   ball_in            consensus=+0.920 rapm=+0.843 box=+1.196 darko=+2.559  mean=+1.380  ALL POSITIVE
+  [shapley_20260827T174538Z]   other_departures   consensus=-0.160 rapm=+0.479 box=+0.184 darko=+1.875  mean=+0.594  MIXED
+  [shapley_20260827T174538Z]   randle_out         consensus=+0.329 rapm=+0.598 box=+0.660 darko=+0.547  mean=+0.534  ALL POSITIVE
+  [shapley_20260827T174538Z]   kuminga_in         consensus=+0.486 rapm=+0.603 box=+0.060 darko=-0.516  mean=+0.158  MIXED
+  [shapley_20260827T174538Z]   depth              consensus=+0.112 rapm=-0.092 box=+0.506 darko=-0.013  mean=+0.128  MIXED
+  [shapley_20260827T174538Z]   ddv_injury         consensus=-0.293 rapm=-0.042 box=-0.318 darko=-1.474  mean=-0.532  ALL NEGATIVE
+  [shapley_20260827T174538Z]   dosunmu_retained   consensus=-0.501 rapm=-0.783 box=-0.017 darko=-0.897  mean=-0.550  ALL NEGATIVE
+  [shapley_20260827T174538Z]   reid_out           consensus=-1.385 rapm=-1.706 box=-0.360 darko=-0.739  mean=-1.047  ALL NEGATIVE
+[run] shapley_20260827T174538Z -> ok
+
+fork                box  consensus  darko   rapm sign_agreement  mean_pp
+move                                                                    
+ball_in           1.196      0.920  2.559  0.843   ALL POSITIVE    1.380
+other_departures  0.184     -0.160  1.875  0.479          MIXED    0.594
+randle_out        0.660      0.329  0.547  0.598   ALL POSITIVE    0.534
+kuminga_in        0.060      0.486 -0.516  0.603          MIXED    0.158
+depth             0.506      0.112 -0.013 -0.092          MIXED    0.128
+ddv_injury       -0.318     -0.293 -1.474 -0.042   ALL NEGATIVE   -0.532
+dosunmu_retained -0.017     -0.501 -0.897 -0.783   ALL NEGATIVE   -0.550
+reid_out         -0.360     -1.385 -0.739 -1.706   ALL NEGATIVE   -1.047
+
+Order dependence (consensus fork), marginal contribution across 2000 random orderings:
+            move  mean_pp  min_pp  max_pp  spread_pp
+      randle_out    0.334  -1.030   2.029      3.059
+        reid_out   -1.363  -2.980  -0.559      2.422
+         ball_in    0.914   0.089   2.582      2.493
+dosunmu_retained   -0.526  -2.317   0.583      2.900
+           depth    0.116  -2.722   1.021      3.742
+      ddv_injury   -0.289  -1.910   0.978      2.888
+      kuminga_in    0.479  -0.521   2.163      2.684
+other_departures   -0.157  -1.215   2.729      3.944
+[run] shapley_20260827T174541Z
+  [shapley_20260827T174541Z] MIN player attributes available for 23 players
+  [shapley_20260827T174541Z] enumerating 256 coalitions
+  [shapley_20260827T174541Z] consensus: v(none)=0.498% v(all)=0.908% total=+0.410pp
+  [shapley_20260827T174541Z] rapm: v(none)=0.685% v(all)=1.580% total=+0.895pp
+  [shapley_20260827T174541Z] box: v(none)=1.702% v(all)=2.992% total=+1.289pp
+  [shapley_20260827T174541Z] darko: v(none)=0.855% v(all)=2.539% total=+1.684pp
+  [shapley_20260827T174541Z] NAMED SCENARIOS (title %, by fork):
+  [shapley_20260827T174541Z]   kept_reid_and_added_ball                 consensus= 1.56 rapm= 2.49 box= 3.24 darko= 2.53  mean= 2.46  band [1.56, 3.24]
+  [shapley_20260827T174541Z]   actual_but_healthy_divincenzo            consensus= 1.19 rapm= 1.83 box= 3.08 darko= 3.08  mean= 2.30  band [1.19, 3.08]
+  [shapley_20260827T174541Z]   actual_without_kuminga                   consensus= 0.71 rapm= 1.21 box= 3.06 darko= 3.47  mean= 2.11  band [0.71, 3.47]
+  [shapley_20260827T174541Z]   what_actually_happened                   consensus= 0.91 rapm= 1.58 box= 2.99 darko= 2.54  mean= 2.00  band [0.91, 2.99]
+  [shapley_20260827T174541Z]   joanbet_shape_retool_randle_slot_only    consensus= 0.81 rapm= 1.57 box= 2.46 darko= 1.55  mean= 1.60  band [0.81, 2.46]
+  [shapley_20260827T174541Z]   did_nothing                              consensus= 0.50 rapm= 0.69 box= 1.70 darko= 0.85  mean= 0.94  band [0.50, 1.70]
+  [shapley_20260827T174541Z] SHAPLEY (pp of title probability):
+  [shapley_20260827T174541Z]   other_departures   consensus=+0.842 rapm=+1.195 box=+0.621 darko=+3.033  mean=+1.423  ALL POSITIVE
+  [shapley_20260827T174541Z]   ball_in            consensus=+0.447 rapm=+0.559 box=+0.800 darko=+1.126  mean=+0.733  ALL POSITIVE
+  [shapley_20260827T174541Z]   randle_out         consensus=+0.127 rapm=+0.291 box=+0.350 darko=+0.211  mean=+0.245  ALL POSITIVE
+  [shapley_20260827T174541Z]   kuminga_in         consensus=+0.172 rapm=+0.272 box=+0.037 darko=-0.355  mean=+0.031  MIXED
+  [shapley_20260827T174541Z]   ddv_injury         consensus=-0.186 rapm=-0.125 box=-0.197 darko=-0.571  mean=-0.270  ALL NEGATIVE
+  [shapley_20260827T174541Z]   depth              consensus=-0.277 rapm=-0.275 box=+0.075 darko=-0.790  mean=-0.317  MIXED
+  [shapley_20260827T174541Z]   reid_out           consensus=-0.415 rapm=-0.560 box=-0.305 darko=-0.148  mean=-0.357  ALL NEGATIVE
+  [shapley_20260827T174541Z]   dosunmu_retained   consensus=-0.300 rapm=-0.462 box=-0.091 darko=-0.822  mean=-0.418  ALL NEGATIVE
+[run] shapley_20260827T174541Z -> ok
+
+fork                box  consensus  darko   rapm sign_agreement  mean_pp
+move                                                                    
+other_departures  0.621      0.842  3.033  1.195   ALL POSITIVE    1.423
+ball_in           0.800      0.447  1.126  0.559   ALL POSITIVE    0.733
+randle_out        0.350      0.127  0.211  0.291   ALL POSITIVE    0.245
+kuminga_in        0.037      0.172 -0.355  0.272          MIXED    0.031
+ddv_injury       -0.197     -0.186 -0.571 -0.125   ALL NEGATIVE   -0.270
+depth             0.075     -0.277 -0.790 -0.275          MIXED   -0.317
+reid_out         -0.305     -0.415 -0.148 -0.560   ALL NEGATIVE   -0.357
+dosunmu_retained -0.091     -0.300 -0.822 -0.462   ALL NEGATIVE   -0.418
+
+Order dependence (consensus fork), marginal contribution across 2000 random orderings:
+            move  mean_pp  min_pp  max_pp  spread_pp
+      randle_out    0.124  -0.367   1.005      1.373
+        reid_out   -0.401  -1.995  -0.018      1.977
+         ball_in    0.453   0.167   1.578      1.411
+dosunmu_retained   -0.302  -1.189  -0.007      1.183
+           depth   -0.274  -1.388   0.529      1.917
+      ddv_injury   -0.187  -1.168   0.164      1.332
+      kuminga_in    0.174  -0.320   0.974      1.294
+other_departures    0.825  -0.206   2.597      2.803
+[run] slot_analysis_20260827T174545Z
+  [slot_analysis_20260827T174545Z] MIN slot pool (eligible at the 4): Jaden McDaniels, Jonathan Kuminga, Joan Beringer, Terrence Shannon Jr., Trey Lyles
+  [slot_analysis_20260827T174545Z] NOT eligible: [14th man placeholder], Anthony Edwards, LaMelo Ball, Rudy Gobert, Ayo Dosunmu, Donte DiVincenzo, Jaylen Clark, Bones Hyland, Isaiah Evans
+  [slot_analysis_20260827T174545Z] Kuminga's 26.0 minutes redistribute within the slot to: Terrence Shannon Jr. +15.5, Jaden McDaniels +2.7
+  [slot_analysis_20260827T174545Z]   7.8 minutes could not be placed inside the slot pool (everyone eligible is at his ceiling)
+  [slot_analysis_20260827T174545Z] THE PLAYER WHO OTHERWISE FILLS THE 4: Terrence Shannon Jr.
+  [slot_analysis_20260827T174545Z] [consensus] with 2.31% | without 0.99% | MARGINAL +1.312pp | Kuminga +1.78 vs Terrence Shannon Jr. -1.84
+  [slot_analysis_20260827T174545Z] [rapm     ] with 2.96% | without 1.45% | MARGINAL +1.517pp | Kuminga +1.82 vs Terrence Shannon Jr. -1.87
+  [slot_analysis_20260827T174545Z] [box      ] with 4.18% | without 3.50% | MARGINAL +0.682pp | Kuminga +0.52 vs Terrence Shannon Jr. -0.53
+  [slot_analysis_20260827T174545Z] [darko    ] with 4.85% | without 4.46% | MARGINAL +0.385pp | Kuminga -0.55 vs Terrence Shannon Jr. -1.66
+  [slot_analysis_20260827T174545Z] SLOT-CONSTRAINED VERDICT for kuminga_in: ALL POSITIVE [+0.385, +1.517]pp
+  [slot_analysis_20260827T174545Z] ALTERNATIVES under the slot rule:
+  [slot_analysis_20260827T174545Z]   Josh Minott        Forward         pf=True  afford=True  sd=2.10 mean +1.25pp ALL POSITIVE  quotable=False posterior sd 2.10 exceeds 1.5
+  [slot_analysis_20260827T174545Z]   Jaxson Hayes       Center-Forward  pf=False afford=True  sd=1.71 mean +0.21pp ALL POSITIVE  quotable=False centre-first listing, not a 4
+  [slot_analysis_20260827T174545Z]   Kenrich Williams   Guard-Forward   pf=True  afford=True  sd=1.87 mean -0.40pp MIXED         quotable=False posterior sd 1.87 exceeds 1.5
+  [slot_analysis_20260827T174545Z]   Al Horford         Center-Forward  pf=False afford=False sd=1.56 mean +0.22pp MIXED         quotable=False centre-first listing, not a 4
+  [slot_analysis_20260827T174545Z]   Dean Wade          Forward-Center  pf=True  afford=False sd=1.61 mean +1.02pp MIXED         quotable=False posterior sd 1.61 exceeds 1.5
+[run] slot_analysis_20260827T174545Z -> ok
+
+     fork  min_net_with  min_net_without  title_with  title_without  marginal_pp  kuminga_net               filler  filler_net  surplus_vs_filler
+consensus         2.087            0.508       0.023          0.010        1.312        1.783 Terrence Shannon Jr.      -1.838              3.621
+     rapm         2.839            1.229       0.030          0.014        1.517        1.823 Terrence Shannon Jr.      -1.868              3.691
+      box         3.522            3.042       0.042          0.035        0.682        0.523 Terrence Shannon Jr.      -0.528              1.051
+    darko         3.592            3.357       0.048          0.045        0.385       -0.547 Terrence Shannon Jr.      -1.658              1.111
+
+          player listed_position  pf_eligible  salary  affordable_on_tpmle  consensus_net  net_sd  posterior_sd  pp_consensus  pp_rapm  pp_box  pp_darko  mean_pp sign_agreement  quotable              exclusion_reason
+     Josh Minott         Forward         True 4500000                 True           2.58    2.10          2.10          0.69     0.37    1.93      2.00     1.25   ALL POSITIVE     False posterior sd 2.10 exceeds 1.5
+    Jaxson Hayes  Center-Forward        False 6000000                 True           1.72    1.71          1.71          0.04     0.03    0.13      0.65     0.21   ALL POSITIVE     False centre-first listing, not a 4
+Kenrich Williams   Guard-Forward         True 5000000                 True           0.70    1.87          1.87         -0.64    -0.96   -0.26      0.24    -0.40          MIXED     False posterior sd 1.87 exceeds 1.5
+      Al Horford  Center-Forward        False 6822000                False           2.86    1.56          1.56          0.54     0.60    0.26     -0.50     0.22          MIXED     False centre-first listing, not a 4
+       Dean Wade  Forward-Center         True 9000000                False           3.74    1.62          1.61          1.06     2.03   -0.35      1.34     1.02          MIXED     False posterior sd 1.61 exceeds 1.5
+[run] eval_signing_20260827T174546Z
+  [eval_signing_20260827T174546Z] Kuminga net by fork: consensus=+1.33, rapm=+1.37, box=+0.07, darko=-1.00
+  [eval_signing_20260827T174546Z]   consensus: salary = 19,591,730 + 3,167,438*net | net = 0.096 + 5.872e-08*salary | R2=0.186 n=198
+  [eval_signing_20260827T174546Z]   rapm: salary = 21,035,045 + 2,423,669*net | net = 0.148 + 5.145e-08*salary | R2=0.125 n=198
+  [eval_signing_20260827T174546Z]   box: salary = 19,845,748 + 5,819,113*net | net = 0.040 + 3.066e-08*salary | R2=0.178 n=198
+  [eval_signing_20260827T174546Z]   darko: salary = 20,739,104 + 4,728,131*net | net = -0.964 + 7.100e-08*salary | R2=0.336 n=192
+  [eval_signing_20260827T174546Z] KUMINGA SURPLUS, impact units (positive = better than his price buys):
+  [eval_signing_20260827T174546Z]   [consensus] at $ 6.06M -> surplus_net +0.88 | market $11.5M | dollar_gap $+5.4M
+  [eval_signing_20260827T174546Z]   [consensus] at $24.30M -> surplus_net -0.19 | market $11.5M | dollar_gap $-12.8M
+  [eval_signing_20260827T174546Z]   [rapm     ] at $ 6.06M -> surplus_net +0.91 | market $11.7M | dollar_gap $+5.6M
+  [eval_signing_20260827T174546Z]   [rapm     ] at $24.30M -> surplus_net -0.03 | market $11.7M | dollar_gap $-12.6M
+  [eval_signing_20260827T174546Z]   [box      ] at $ 6.06M -> surplus_net -0.16 | market $6.0M | dollar_gap $-0.1M
+  [eval_signing_20260827T174546Z]   [box      ] at $24.30M -> surplus_net -0.72 | market $6.0M | dollar_gap $-18.3M
+  [eval_signing_20260827T174546Z]   [darko    ] at $ 6.06M -> surplus_net -0.47 | market $2.7M | dollar_gap $-3.3M
+  [eval_signing_20260827T174546Z]   [darko    ] at $24.30M -> surplus_net -1.76 | market $2.7M | dollar_gap $-21.6M
+  [eval_signing_20260827T174546Z] age-restricted reference set (22-25, non-rookie-scale): 73 players
+  [eval_signing_20260827T174546Z] observed rejected bids: CHI (terms undisclosed), LAL $12.0M/yr x3, POR (terms undisclosed)
+  [eval_signing_20260827T174546Z] MARKET COMPARISON (model market value vs the best real bid):
+  [eval_signing_20260827T174546Z]   [consensus] all-ages $ 11.5M | age 22-25 $  2.9M (bias -8.5M) | best real bid $12.0M | AGREES (within 25%)
+  [eval_signing_20260827T174546Z]   [rapm     ] all-ages $ 11.7M | age 22-25 $  3.6M (bias -8.1M) | best real bid $12.0M | AGREES (within 25%)
+  [eval_signing_20260827T174546Z]   [box      ] all-ages $  6.0M | age 22-25 $  2.6M (bias -3.4M) | best real bid $12.0M | disagrees (within 25%)
+  [eval_signing_20260827T174546Z]   [darko    ] all-ages $  2.7M | age 22-25 $  2.3M (bias -0.4M) | best real bid $12.0M | disagrees (within 25%)
+  [eval_signing_20260827T174546Z]   => 2 of 4 views agree with the Lakers bid within 25%
+  [eval_signing_20260827T174546Z] canonical pre-Kuminga apron salary: $215,871,829 (team_state $223,293,829 minus Kuminga $6,064,000 minus the $1,358,000 placeholder)
+  [eval_signing_20260827T174546Z] CAP [green_on_books, tier first_apron]: $215,871,829 + $6,064,000 = $221,935,829 vs apron2 $221,686,000 -> OVER by $249,829
+  [eval_signing_20260827T174546Z] CAP [green_removed, tier taxpayer]: $201,192,817 + $6,064,000 = $207,256,817 vs apron2 $221,686,000 -> FITS
+[run] eval_signing_20260827T174546Z -> ok
+
+     fork          price_label   salary  kuminga_net  surplus_net  market_salary_pctile  dollar_gap  linear_par_dollars
+consensus taxpayer_mle_2026_27  6064000          1.3          0.9            11465654.4   5401654.4          23804422.4
+consensus  atl_option_declined 24300000          1.3         -0.2            11465654.4 -12834345.6          23804422.4
+     rapm taxpayer_mle_2026_27  6064000          1.4          0.9            11690702.8   5626702.8          24355471.4
+     rapm  atl_option_declined 24300000          1.4         -0.0            11690702.8 -12609297.2          24355471.4
+      box taxpayer_mle_2026_27  6064000          0.1         -0.2             5988552.3    -75447.7          20253085.6
+      box  atl_option_declined 24300000          0.1         -0.7             5988552.3 -18311447.7          20253085.6
+    darko taxpayer_mle_2026_27  6064000         -1.0         -0.5             2730686.1  -3333313.9          16010973.3
+    darko  atl_option_declined 24300000         -1.0         -1.8             2730686.1 -21569313.9          16010973.3
+[run] player_option_20260827T174547Z
+  [player_option_20260827T174547Z] Kuminga posterior sd on net (off+def in quadrature): 1.58
+  [player_option_20260827T174547Z] cap growth to 2027-28: x1.0700
+  [player_option_20260827T174547Z] Non-Bird ceiling on a re-sign: $7,640,640
+  [player_option_20260827T174547Z] market curve [consensus]: MarketCurve(consensus, n=368, $2.2M-$62.6M)
+  [player_option_20260827T174547Z] [consensus/flat    ] median market $ 13.2M | P(opt out) 0.75 | P(above Non-Bird) 0.69 | P(MIN retains) 0.31 | option EV to him $11.7M
+  [player_option_20260827T174547Z] [consensus/improves] median market $ 16.7M | P(opt out) 0.84 | P(above Non-Bird) 0.79 | P(MIN retains) 0.21 | option EV to him $16.1M
+  [player_option_20260827T174547Z] [consensus/declines] median market $  8.7M | P(opt out) 0.65 | P(above Non-Bird) 0.57 | P(MIN retains) 0.43 | option EV to him $8.1M
+  [player_option_20260827T174547Z] market curve [rapm]: MarketCurve(rapm, n=368, $2.2M-$62.6M)
+  [player_option_20260827T174547Z] [rapm     /flat    ] median market $ 12.5M | P(opt out) 0.80 | P(above Non-Bird) 0.72 | P(MIN retains) 0.28 | option EV to him $11.7M
+  [player_option_20260827T174547Z] [rapm     /improves] median market $ 17.2M | P(opt out) 0.87 | P(above Non-Bird) 0.82 | P(MIN retains) 0.18 | option EV to him $16.0M
+  [player_option_20260827T174547Z] [rapm     /declines] median market $  9.9M | P(opt out) 0.70 | P(above Non-Bird) 0.61 | P(MIN retains) 0.39 | option EV to him $8.2M
+  [player_option_20260827T174547Z] market curve [box]: MarketCurve(box, n=368, $2.2M-$62.6M)
+  [player_option_20260827T174547Z] [box      /flat    ] median market $  6.4M | P(opt out) 0.50 | P(above Non-Bird) 0.46 | P(MIN retains) 0.54 | option EV to him $10.3M
+  [player_option_20260827T174547Z] [box      /improves] median market $ 11.3M | P(opt out) 0.63 | P(above Non-Bird) 0.59 | P(MIN retains) 0.41 | option EV to him $15.0M
+  [player_option_20260827T174547Z] [box      /declines] median market $  3.0M | P(opt out) 0.38 | P(above Non-Bird) 0.34 | P(MIN retains) 0.66 | option EV to him $6.6M
+  [player_option_20260827T174547Z] HEADLINE (flat aging, across forks): P(opt out) 0.50-0.80, P(Minnesota retains) 0.28-0.54
+[run] player_option_20260827T174547Z -> ok
+
+     fork    aging  median_market_2027  p_opt_out  p_market_above_non_bird  p_minnesota_retains  ev_of_option_to_player
+consensus     flat        13165570.283      0.755                    0.691                0.309            11687676.323
+consensus improves        16748373.551      0.843                    0.794                0.206            16092580.466
+consensus declines         8746395.857      0.646                    0.573                0.427             8125753.952
+     rapm     flat        12509032.875      0.796                    0.723                0.277            11734659.704
+     rapm improves        17154178.970      0.873                    0.817                0.183            16030539.774
+     rapm declines         9867662.726      0.696                    0.611                0.389             8226065.243
+      box     flat         6407741.170      0.505                    0.465                0.535            10340797.808
+      box improves        11281310.397      0.627                    0.588                0.412            15034647.645
+      box declines         3045000.000      0.380                    0.343                0.657             6632436.108
+AGED_PIPELINE_DONE

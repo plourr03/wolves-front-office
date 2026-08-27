@@ -154,9 +154,9 @@
    "match_t1": 8000000,
    "match_t2": 30934000,
    "min_salary_by_yos": {
-    "0": 1358000,
+    "0": 1357763,
     "1": 2185000,
-    "2": 2449000,
+    "2": 2449421,
     "3": 2538000,
     "4": 2626000,
     "5": 2846000,
@@ -164,7 +164,7 @@
     "7": 3286000,
     "8": 3507000,
     "9": 3524000,
-    "10+": 3877000
+    "10+": 3876529
    },
    "trade_matching": {
     "under_first_apron_brackets": [
@@ -315,7 +315,8 @@
     }
    ],
    "tax_bracket_increment": 6064000,
-   "tax_brackets_source": "2023 CBA schedule. Increment is $5,000,000 indexed to the cap: 5,000,000 * 164,961,000 / 136,021,000 = 6,063,806 -> $6,064,000. Non-repeater rates 1.00/1.25/3.50/4.75 then +0.50 per bracket; repeater adds 2.00 to each. Verified 2026-08-27 against Hoops Rumors luxury-tax glossary and CBA Guide, which agree. REPLACES a pre-2023-CBA table ($5,000,000 width, rates 1.50/1.75/2.50/4.75/5.75) that overstated Minnesota's bill by 22-50%."
+   "tax_brackets_source": "2023 CBA schedule. Increment is $5,000,000 indexed to the cap: 5,000,000 * 164,961,000 / 136,021,000 = 6,063,806 -> $6,064,000. Non-repeater rates 1.00/1.25/3.50/4.75 then +0.50 per bracket; repeater adds 2.00 to each. Verified 2026-08-27 against Hoops Rumors luxury-tax glossary and CBA Guide, which agree. REPLACES a pre-2023-CBA table ($5,000,000 width, rates 1.50/1.75/2.50/4.75/5.75) that overstated Minnesota's bill by 22-50%.",
+   "min_salary_source": "Exact 2026-27 scale minimums cross-checked against real contracts 2026-08-27: rookie min $1,357,763 (Isaiah Evans, Basketball-Reference and Spotrac), 2-YOS $2,449,421 (Trey Lyles' cap charge), 10+ YOS $3,876,529 (Lyles' base). REPLACES values rounded to the nearest $1,000."
   },
   "2027-28": {
    "season": "2027-28",

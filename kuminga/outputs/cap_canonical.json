@@ -1,0 +1,15 @@
+{
+ "basis": "Apron Team Salary = contracted salary + unlikely bonuses (cap holds excluded)",
+ "contracted_13": 215871829.0,
+ "unlikely_bonuses": 1750000.0,
+ "pre_kuminga_apron": 217621829.0,
+ "with_kuminga_apron": 223685829.0,
+ "second_apron": 221686000,
+ "first_apron": 209015000.0,
+ "tax_line": 200428000.0,
+ "overage_vs_second_apron": 1999829.0,
+ "rule_source_1": "https://www.hoopsrumors.com/2025/01/hoops-rumors-glossary-tax-aprons-2.html",
+ "rule_source_2": "https://cbaguide.com/thresholds/apron/",
+ "cross_check": "Spotrac 2nd Apron Space $4,064,172 vs ours $4,064,171",
+ "as_of": "2026-08-27"
+}

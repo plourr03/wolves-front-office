@@ -39,7 +39,8 @@ CONTRACTS = os.path.join(REPO, "offseason", "data", "nba_contracts_2026_27_verif
 RECON = os.path.join(REPO, "kuminga", "outputs", "cap_reconciliation.csv")
 OUT = os.path.join(REPO, "kuminga", "outputs", "dosunmu_final_states.csv")
 
-ACTUAL_TRADE_BRANCH = 208_614_817     # Green out, Kuminga at the taxpayer MLE, 14 men
+# read from the canonical branch table rather than hardcoded: the old literal
+# 208,614,817 was on the contracted basis and is 1,750,000 low on the apron basis.
 PROBE_SALARIES = [8_000_000, 9_000_000]
 
 
@@ -49,7 +50,7 @@ def money(x):
 
 def main():
     with runlog.run("dosunmu_final_states",
-                    inputs={"actual_branch": ACTUAL_TRADE_BRANCH}) as r:
+                    inputs={"basis": "apron for thresholds, regular for tax"}) as r:
         k = json.load(open(CONST, encoding="utf-8"))["seasons"]["2026-27"]
         tax_line, ap1, ap2 = (float(k["luxury_tax"]), float(k["first_apron"]),
                               float(k["second_apron"]))
@@ -61,14 +62,27 @@ def main():
         ct = pd.read_csv(CONTRACTS)
         dos = float(ct[ct.player == "Ayo Dosunmu"].salary_2026_27.iloc[0])
         green = float(ct[ct.player == "Josh Green"].salary_2026_27.iloc[0])
-        rec = pd.read_csv(RECON)
-        pre = float(rec[rec["component"].str.startswith("13")].amount.iloc[0])
+        # APRON basis from the canonical source (contracted + unlikely bonuses).
+        canon = json.load(open(os.path.join(REPO, "kuminga", "outputs",
+                                            "cap_canonical.json"), encoding="utf-8"))
+        pre = float(canon["pre_kuminga_apron"])
+        unlikely = float(canon["unlikely_bonuses"])
+        br = pd.read_csv(os.path.join(REPO, "kuminga", "outputs",
+                                      "cap_branches_canonical.csv"))
+        actual_trade = float(br[(br.branch == "trade")
+                                & (br.n_players == 14)].apron_team_salary.iloc[0])
 
         rows = []
 
         def st(state, roster, salary, note=""):
-            over = salary - tax_line
-            rows.append(dict(state=state, n_players=roster, payroll=salary,
+            """`salary` is APRON Team Salary. Tax is charged on REGULAR team salary,
+            which EXCLUDES unlikely bonuses unless they are actually earned, so the tax
+            basis is the apron figure minus those bonuses. Reporting a tax bill off the
+            apron figure overstates it."""
+            tax_basis = salary - unlikely
+            over = tax_basis - tax_line
+            rows.append(dict(state=state, n_players=roster,
+                             apron_payroll=salary, tax_basis_payroll=tax_basis,
                              vs_tax_line=over,
                              est_tax_bill=tax_bill(max(over, 0.0), brackets),
                              vs_first_apron=ap1 - salary, vs_second_apron=ap2 - salary,
@@ -87,7 +101,7 @@ def main():
         st("ACTUAL: Dosunmu + Green + Kuminga at the taxpayer MLE", 14, pre + tmle,
            "cannot be signed, over the second apron hard cap")
         st("ACTUAL: Green traded out, Kuminga at the taxpayer MLE", 14,
-           float(ACTUAL_TRADE_BRANCH), "the trade branch in the piece")
+           actual_trade, "the trade branch in the piece, APRON basis")
 
         # ---- the counterfactual: Dosunmu gone, Green KEPT ---------------------
         base12 = pre - dos
@@ -130,11 +144,11 @@ def main():
         cf_v = df[df.state == "CF: veteran min (2-yr charge) + Kuminga at the ceiling"].iloc[0]
         r.note("")
         r.note("THE TWO FINAL STATES, side by side:")
-        r.note(f"  ACTUAL          {money(act.payroll)} at 14 | "
-               f"{money(act.vs_tax_line)} over the tax line | est tax "
+        r.note(f"  ACTUAL          {money(act.apron_payroll)} apron at 14 | "
+               f"{money(act.vs_tax_line)} over the tax line (regular basis) | est tax "
                f"{money(act.est_tax_bill)} | Kuminga at {money(tmle)} | Green GONE")
-        r.note(f"  COUNTERFACTUAL  {money(cf_v.payroll)} at 14 | "
-               f"{money(cf_v.vs_tax_line)} over the tax line | est tax "
+        r.note(f"  COUNTERFACTUAL  {money(cf_v.apron_payroll)} apron at 14 | "
+               f"{money(cf_v.vs_tax_line)} over the tax line (regular basis) | est tax "
                f"{money(cf_v.est_tax_bill)} | Kuminga up to "
                f"{money(ceilings['veteran min (2-yr charge)'])} | Green KEPT")
         r.note("")
@@ -154,7 +168,7 @@ def main():
         r.output(OUT, rows=len(df))
 
     print()
-    print(df.to_string(index=False, float_format=lambda x: f"{x:,.0f}"))
+    print(df.drop(columns=["note"]).to_string(index=False, float_format=lambda x: f"{x:,.0f}"))
 
 
 if __name__ == "__main__":
