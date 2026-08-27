@@ -90,6 +90,9 @@ def main():
         hotbase_by_fork = {f: float(st[(st.fork == f) & (st.team_abbr == "MIN")].hot_baseline.iloc[0])
                            for f in FORKS}
 
+        league = pool[pool.scenario == "current"]
+        league_mpg = league.prior_mpg.to_numpy()
+        league_net = league.consensus_net.to_numpy()
         mn = pool[(pool.team_abbr == "MIN") & (pool.scenario == "current")].copy()
         r.note(f"MIN current pool: {len(mn)} players")
 
@@ -113,7 +116,16 @@ def main():
                 imp = dict(imp)
                 base = dict(imp[kid])
                 mult = A.PLAYOFF_OFF_MULT.get(base.get("read", ""), 1.0)
-                base["off"] = base["off"] * mult
+                # DO NOT multiply the offensive term directly. Kuminga's offensive
+                # value is NEGATIVE under the consensus (-0.53) and under DARKO, and
+                # multiplying a negative number by 0.92 makes it larger, i.e. the
+                # "slips" penalty would IMPROVE him. alebron hit this exact inversion
+                # and solved it by applying the adjustment to net rather than to
+                # offense. Here the haircut is expressed as a strictly non-positive
+                # penalty scaled by the magnitude of his offensive load, so it is
+                # always a reduction regardless of sign.
+                penalty = (1.0 - mult) * abs(base["off"])
+                base["off"] = base["off"] - penalty
                 imp[kid] = base
             if kum_override is not None:
                 kid = str(int(roster[roster.player_name == KUMINGA].player_id.iloc[0]))
@@ -168,13 +180,17 @@ def main():
 
         # ---------------- item 17: counterfactual fives ------------------------
         cf_rows = []
+        # The "next wing up" must be AVAILABLE. Without the rs_avail filter this
+        # resolved to Donte DiVincenzo, who is out for the season under R7, which
+        # would have made the counterfactual a lineup nobody can field.
         wings = mn[(mn.player_name != KUMINGA)
+                   & (mn.rs_avail > 0)
                    & (~mn.player_name.isin(["Anthony Edwards", "LaMelo Ball",
                                             "Rudy Gobert", "Jaden McDaniels",
                                             "Joan Beringer", "[14th man placeholder]"]))]
         next_wing = wings.sort_values("consensus_net", ascending=False).iloc[0]
         r.note(f"'next wing up' resolves to {next_wing.player_name} "
-               f"(consensus {next_wing.consensus_net:+.2f})")
+               f"(consensus {next_wing.consensus_net:+.2f}, available)")
 
         variants = {"actual": None, "beringer_4": "Joan Beringer",
                     "mcdaniels_4_next_wing": next_wing.player_name}
@@ -188,10 +204,17 @@ def main():
                 if vname == "actual":
                     pass
                 elif replacement in set(mn.player_name):
-                    # Already on the roster: drop Kuminga, the slot reallocates
-                    # internally to players already there.
-                    ros = ros[ros.player_name != KUMINGA]
-                    note = f"Kuminga removed; minutes reallocate, {replacement} promoted"
+                    # Already on the roster. Hand Kuminga's OWN minutes to this
+                    # player specifically, rather than letting the heuristic spread
+                    # them across the whole rotation. Without this, "Beringer at the
+                    # 4" and "McDaniels at the 4 with the next wing" both reduce to
+                    # "remove Kuminga" and return byte-identical numbers, which reads
+                    # as two analyses when it is one.
+                    kmin = float(ros[ros.player_name == KUMINGA].prior_mpg.iloc[0])
+                    ros = ros[ros.player_name != KUMINGA].copy()
+                    i = ros.player_name == replacement
+                    ros.loc[i, "prior_mpg"] = ros.loc[i, "prior_mpg"] + kmin
+                    note = f"{replacement} absorbs Kuminga's minutes directly"
                 else:
                     # An outside signing: swap Kuminga's row for his.
                     row = value[value.player_name == replacement]
@@ -200,9 +223,15 @@ def main():
                     rw = row.iloc[0]
                     ros = ros[ros.player_name != KUMINGA].copy()
                     prior = mn[mn.player_name == KUMINGA].prior_mpg.iloc[0]
+                    # rank_score must be on the SAME league-wide scale as everyone
+                    # else, so it is computed against the full pool's distributions
+                    # rather than re-ranked inside this roster.
+                    pct_m = float((league_mpg < prior).mean())
+                    pct_n = float((league_net < rw.consensus_net).mean())
                     ros = pd.concat([ros, pd.DataFrame([dict(
                         player_id=rw.player_id, player_name=replacement,
                         consensus_net=rw.consensus_net, prior_mpg=prior,
+                        rank_score=0.5 * pct_m + 0.5 * pct_n,
                         rs_avail=1.0)])], ignore_index=True)
                     note = f"{replacement} signed instead of Kuminga"
                 net, title = price(ros, fork)

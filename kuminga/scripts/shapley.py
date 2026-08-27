@@ -101,13 +101,23 @@ BASELINE_AND_MOVE = {"Ayo Dosunmu", "Bones Hyland", "Jaylen Clark"}
 
 
 def allocate(players: pd.DataFrame, curve: pd.Series) -> dict:
-    """The item-8 minutes heuristic, applied to one coalition's roster."""
+    """The item-8 minutes heuristic, applied to one coalition's roster.
+
+    IMPORTANT: `rank_score` must be the LEAGUE-WIDE score computed once in
+    build_rotations, not re-ranked within this roster. Re-ranking inside the
+    coalition makes a player's standing depend on which teammates happen to be in
+    it, because the score is a blend of two percentiles and a blend of percentiles
+    is not order-preserving under a change of reference set. For Shapley that is a
+    correctness bug, not a nuance: the same player appears in 128 different rosters
+    and would carry a different rank in each, injecting interaction effects that are
+    artefacts of the ranking rather than of the roster.
+    """
     g = players[players.rs_avail > 0].copy()
     if g.empty:
         return {}
-    g["pct_mpg"] = g.prior_mpg.rank(pct=True)
-    g["pct_net"] = g.consensus_net.rank(pct=True)
-    g["rank_score"] = MPG_WEIGHT * g.pct_mpg + (1 - MPG_WEIGHT) * g.pct_net
+    if "rank_score" not in g.columns or g.rank_score.isna().any():
+        raise ValueError("allocate() requires a precomputed league-wide rank_score; "
+                         f"missing for {g[g.get('rank_score', pd.Series()).isna()].player_name.tolist() if 'rank_score' in g else 'all rows'}")
     g = g.sort_values("rank_score", ascending=False).head(ROTATION_SIZE).reset_index(drop=True)
     g["rot_rank"] = g.index + 1
     cm = g.rot_rank.map(lambda i: curve.get(float(i), curve.iloc[-1]))
@@ -157,13 +167,14 @@ def main():
                 a = attrs.loc[k]
                 rows.append(dict(player_id=a.player_id, player_name=n,
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
-                                 rs_avail=1.0))
+                                 rank_score=a.rank_score, rs_avail=1.0))
             # DiVincenzo: present either way; the move flips his availability.
             k = nkey("Donte DiVincenzo")
             if k in attrs.index:
                 a = attrs.loc[k]
                 rows.append(dict(player_id=a.player_id, player_name="Donte DiVincenzo",
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
+                                 rank_score=a.rank_score,
                                  rs_avail=0.0 if "ddv_injury" in coalition else 1.0))
             return pd.DataFrame(rows)
 

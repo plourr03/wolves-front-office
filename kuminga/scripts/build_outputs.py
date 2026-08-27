@@ -106,6 +106,21 @@ def main():
             if df is None:
                 r.note(f"  {src}: MISSING, skipped")
                 continue
+            # Counterfactuals and Shapley both ship with a sign-agreement column,
+            # because under R1 that is the publishable claim, not the point estimate.
+            if dest == "T6_counterfactual_fives.csv" and "title_vs_actual_pp" in df.columns:
+                pv = df.pivot_table(index="variant", columns="fork",
+                                    values="title_vs_actual_pp")
+                pv["mean_pp"] = pv[FORKS].mean(axis=1)
+                pv["sign_agreement"] = np.where(
+                    (pv[FORKS] > 0).all(axis=1), "ALL POSITIVE",
+                    np.where((pv[FORKS] < 0).all(axis=1), "ALL NEGATIVE", "MIXED"))
+                pv.sort_values("mean_pp", ascending=False).to_csv(
+                    os.path.join(OUTDIR, dest))
+                r.note(f"  {dest}: {len(pv)} variants; "
+                       f"{int((pv.sign_agreement=='ALL POSITIVE').sum())} beat the actual "
+                       "signing under ALL FOUR views")
+                continue
             df.to_csv(os.path.join(OUTDIR, dest))
             r.note(f"  {dest}: {len(df)} rows")
 
