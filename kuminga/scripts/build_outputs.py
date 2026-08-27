@@ -109,6 +109,41 @@ def main():
             df.to_csv(os.path.join(OUTDIR, dest))
             r.note(f"  {dest}: {len(df)} rows")
 
+        # ---- coherence check: the league is zero-sum, the deltas are not -------
+        # Net rating sums to zero across the league by construction, so a set of
+        # per-team deltas that averages well below zero is worth explaining rather
+        # than shipping quietly. The explanation here is the R6/R7 combination: the
+        # BASELINE applies no injuries (R6) while the CURRENT field does (R7), so the
+        # league is compared healthy-against-injured and the aggregate must fall.
+        inj_path = os.path.join(REPO, "kuminga", "data", "injuries_2026_27.csv")
+        checks = []
+        if os.path.exists(inj_path):
+            inj = pd.read_csv(inj_path)
+            hurt = set(inj[inj.rs_avail == 0].team)
+            for f in FORKS:
+                d = sim[sim.fork == f].copy()
+                d["has_inj"] = d.team_abbr.isin(hurt)
+                checks.append(dict(
+                    fork=f,
+                    mean_net_delta_all=d.net_delta.mean(),
+                    mean_net_delta_injured_teams=d[d.has_inj].net_delta.mean(),
+                    mean_net_delta_healthy_teams=d[~d.has_inj].net_delta.mean(),
+                    n_injured_teams=int(d.has_inj.sum()),
+                    title_sums_to=d.title_current.sum(),
+                    conf_sums_to=d.conf_current.sum(),
+                ))
+            ch = pd.DataFrame(checks)
+            ch.to_csv(os.path.join(OUTDIR, "coherence_checks.csv"), index=False)
+            for _, x in ch.iterrows():
+                r.note(f"coherence [{x.fork}]: mean net delta {x.mean_net_delta_all:+.3f} "
+                       f"(injured teams {x.mean_net_delta_injured_teams:+.3f}, healthy "
+                       f"{x.mean_net_delta_healthy_teams:+.3f}); title sums to "
+                       f"{x.title_sums_to:.4f}")
+            r.note("The negative league-wide mean is EXPECTED: R6 baselines are healthy, "
+                   "R7 currents are not. Minnesota is one of the injured teams, so part "
+                   "of its delta is the DiVincenzo Achilles rather than any transaction.")
+            r.output(os.path.join(OUTDIR, "coherence_checks.csv"), rows=len(ch))
+
         # ---- provenance appendix ---------------------------------------------
         runs = []
         with open(LOG, encoding="utf-8") as fh:

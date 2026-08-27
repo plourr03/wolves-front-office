@@ -1,6 +1,6 @@
 # Provenance appendix
 
-Assembled 2026-08-27T02:46:20.932361+00:00
+Assembled 2026-08-27T02:56:47.412777+00:00
 
 ## Frozen warehouse snapshot
 
@@ -47,9 +47,14 @@ Assembled 2026-08-27T02:46:20.932361+00:00
 | kuminga\outputs\kuminga_surplus_by_fork.csv        | 8      | eval_signing                 | eval_signing_20260827T024047Z                 | ok       |
 | kuminga\outputs\kuminga_cap_gate.json              |        | eval_signing                 | eval_signing_20260827T024047Z                 | ok       |
 | kuminga\outputs\player_option.csv                  | 9      | player_option                | player_option_20260827T024131Z                | ok       |
-| kuminga\outputs\T1_all30_before_after.csv          | 30     | build_outputs                | build_outputs_20260827T024552Z                | ok       |
-| kuminga\outputs\T2_west_ranking.csv                | 15     | build_outputs                | build_outputs_20260827T024552Z                | ok       |
-| kuminga\outputs\PROVENANCE.csv                     | 24     | build_outputs                | build_outputs_20260827T024552Z                | ok       |
+| kuminga\outputs\T1_all30_before_after.csv          | 30     | build_outputs                | build_outputs_20260827T024620Z                | ok       |
+| kuminga\outputs\T2_west_ranking.csv                | 15     | build_outputs                | build_outputs_20260827T024620Z                | ok       |
+| kuminga\outputs\PROVENANCE.csv                     | 27     | build_outputs                | build_outputs_20260827T024620Z                | ok       |
+| kuminga\outputs\figures\fig2_west_before_after.png |        | build_figures                | build_figures_20260827T024723Z                | ok       |
+| kuminga\data\stints_2025_26.parquet                | 12608  | build_stints_2026            | build_stints_2026_20260827T023401Z            | ok       |
+| kuminga\data\stints_2025_26_games.csv              | 256    | build_stints_2026            | build_stints_2026_20260827T023401Z            | ok       |
+| kuminga\outputs\lineup_evidence.csv                | 10     | lineup_evidence              | lineup_evidence_20260827T024925Z              | ok       |
+| kuminga\outputs\kuminga_shot_profile.csv           | 8      | lineup_evidence              | lineup_evidence_20260827T024925Z              | ok       |
 
 ## External sources
 

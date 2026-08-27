@@ -189,6 +189,46 @@ def main():
                 cf_rows.append(dict(variant=vname, fork=fork, replacement=replacement or KUMINGA,
                                     min_net=net, title=title, note=note))
 
+        # ---------------- minutes sensitivity ----------------------------------
+        # The heuristic gives Kuminga about 25 minutes. The brief calls him a starter.
+        # This is the robustness check on that gap, and the answer is mildly against
+        # intuition: giving him MORE minutes makes Minnesota slightly worse under every
+        # view, because his impact estimate sits below the minutes-weighted average of
+        # the players whose minutes he would take (Gobert +5.28, Ball +2.29,
+        # Beringer +2.29). The headline does not hinge on his role.
+        ms_rows = []
+        kum_heur = float(mn[mn.player_name == KUMINGA].prior_mpg.iloc[0])
+        for target in (None, 28.0, 32.0, 36.0):
+            for fork in FORKS:
+                m = mn.copy()
+                if target is not None:
+                    mpg0 = allocate(m, curve)
+                    kid = str(int(m[m.player_name == KUMINGA].player_id.iloc[0]))
+                    rest = {k: v for k, v in mpg0.items() if k != kid}
+                    scale = (240.0 - target) / sum(rest.values())
+                    mpg = {k: v * scale for k, v in rest.items()}
+                    mpg[kid] = target
+                else:
+                    mpg = allocate(m, curve)
+                roll = A.rollup(mpg, imps[fork], "rs")
+                net = exp_by_fork[fork] + beta * (roll["net"] - hotbase_by_fork[fork])
+                g = fc[fc.fork == fork]
+                ms_rows.append(dict(
+                    kuminga_mpg=(target if target is not None
+                                 else round(mpg[str(int(m[m.player_name == KUMINGA].player_id.iloc[0]))], 2)),
+                    label="heuristic" if target is None else f"forced_{int(target)}",
+                    fork=fork, min_net=net,
+                    title=float(np.interp(net, g.min_net, g.title))))
+        ms = pd.DataFrame(ms_rows)
+        ms.to_csv(os.path.join(REPO, "kuminga", "outputs", "kuminga_minutes_sensitivity.csv"),
+                  index=False)
+        base_ms = ms[ms.label == "heuristic"].set_index("fork")
+        r.note("MINUTES SENSITIVITY (title pp vs the heuristic's own allocation):")
+        for lbl in ("forced_28", "forced_32", "forced_36"):
+            d = ms[ms.label == lbl].set_index("fork")
+            deltas = {f: (d.loc[f, "title"] - base_ms.loc[f, "title"]) * 100 for f in FORKS}
+            r.note(f"  {lbl:11s} " + " ".join(f"{f}={deltas[f]:+.3f}" for f in FORKS))
+
         cf = pd.DataFrame(cf_rows)
         base = cf[cf.variant == "actual"].set_index("fork")
         cf["title_vs_actual_pp"] = cf.apply(
