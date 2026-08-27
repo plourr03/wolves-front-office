@@ -169,7 +169,7 @@ LAC,Isaiah Jackson,1630543,F,7000000,6400000,,,2,guaranteed,guaranteed,,,0.0,FAL
 LAC,Nicolas Batum,201587,G,5881680,,,,1,team_option,,,,0.0,FALSE,,0
 LAC,Kris Dunn,1627739,G,5684800,,,,1,guaranteed,,,,0.0,FALSE,,0
 LAC,Jordan Miller,1641757,G,5300000,5000000,5000000,,3,guaranteed,guaranteed,team_option,,0.0,FALSE,,0
-LAC,Bradley Beal,203078,G,3877000,3877000,3877000,3877000,4,guaranteed,player_option,guaranteed,guaranteed,0.0,FALSE,PHX,25807810
+LAC,Bradley Beal,203078,G,6424800,3877000,3877000,3877000,4,guaranteed,player_option,guaranteed,guaranteed,0.0,FALSE,PHX,19383010
 LAC,Yanic Konan Niederhäuser,1642949,C,2880960,3018480,5448356,,3,guaranteed,team_option,team_option,,0.0,FALSE,,0
 LAC,Kobe Sanders,1642920,G,2622139,2753246,2884353,3019474,4,guaranteed,guaranteed,guaranteed,team_option,0.0,FALSE,,0
 LAC,Yuki Kawamura,1642530,G,2449421,,,,1,guaranteed,,,,0.0,FALSE,,0
@@ -201,7 +201,7 @@ MEM,Cedric Coward,1642907,G,6001080,6286920,8342743,,3,guaranteed,team_option,te
 MEM,D'Angelo Russell,1626156,G,5969250,,,,1,player_option,,,,0.0,FALSE,,0
 MEM,Kris Murray,1631200,F,5315004,,,,1,team_option,,,,0.0,FALSE,,0
 MEM,Walter Clayton,1642383,G,4190520,4390320,6752312,,3,guaranteed,team_option,team_option,,0.0,FALSE,,0
-MEM,Olivier-Maxence Prosper,1641765,F,3877000,3877000,,,2,team_option,team_option,,,0.0,FALSE,DAL,3500172
+MEM,Olivier-Maxence Prosper,1641765,F,2497812,3877000,,,2,team_option,team_option,,,0.0,FALSE,DAL,1002360
 MEM,Cole Anthony,1630175,G,3700000,3700000,,,2,guaranteed,guaranteed,,,0.0,FALSE,,0
 MEM,AJ Johnson,1642358,G,3237120,5493394,,,2,team_option,team_option,,,0.0,FALSE,,0
 MEM,Scotty Pippen Jr.,1630590,G,2461462,2789215,,,2,guaranteed,guaranteed,,,0.0,FALSE,,0
@@ -309,7 +309,7 @@ PHI,Tyrese Maxey,1630178,G,40770520,43582280,46394040,,3,guaranteed,guaranteed,g
 PHI,VJ Edgecombe,1642845,G,11663880,12219720,15445727,,3,guaranteed,team_option,team_option,,0.0,FALSE,,0
 PHI,Dean Wade,1629731,F-C,9000000,9450000,9900000,10350000,4,guaranteed,guaranteed,guaranteed,guaranteed,0.0,FALSE,,0
 PHI,Anfernee Simons,1629014,G,6000000,6300000,,,2,guaranteed,player_option,,,0.0,FALSE,,0
-PHI,Kentavious Caldwell-Pope,203484,G,3877000,,,,1,player_option,,,,0.0,FALSE,MEM,20194392
+PHI,Kentavious Caldwell-Pope,203484,G,2449421,,,,1,player_option,,,,0.0,FALSE,MEM,17744971
 PHI,LeBron James,2544,F,3876529,4070355,,,2,guaranteed,player_option,,,0.0,FALSE,,0
 PHI,Dominick Barlow,1631230,F,3415000,,,,1,team_option,,,,0.0,FALSE,,0
 PHI,Ariel Hukporti,1630574,C,3400000,,,,1,guaranteed,,,,0.0,FALSE,,0
@@ -341,7 +341,7 @@ POR,Scoot Henderson,1630703,G,13585523,,,,1,team_option,,,,0.0,FALSE,,0
 POR,Deni Avdija,1630166,F,13125000,11875000,,,2,guaranteed,guaranteed,,,0.0,FALSE,,0
 POR,Donovan Clingan,1642270,C,7519920,9550298,,,2,team_option,team_option,,,0.0,FALSE,,0
 POR,Yang Hansen,1642905,C,4643520,4864920,7462788,,3,guaranteed,team_option,team_option,,0.0,FALSE,,0
-POR,Damian Lillard,203081,G,3877000,3877000,3877000,3877000,4,guaranteed,player_option,guaranteed,guaranteed,0.0,FALSE,MIL,35915403
+POR,Damian Lillard,203081,G,13398800,3877000,3877000,3877000,4,guaranteed,player_option,guaranteed,guaranteed,0.0,FALSE,MIL,21311053
 POR,Micah Potter,1630695,C,2801346,,,,1,guaranteed,,,,0.0,FALSE,,0
 POR,Vít Krejčí,1630249,G,2667944,3005085,,,2,guaranteed,team_option,,,0.0,FALSE,,0
 POR,Sidy Cissoko,1631321,G,2497812,,,,1,guaranteed,,,,0.0,FALSE,,0

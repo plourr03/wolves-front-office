@@ -13,6 +13,7 @@ is idempotent: re-running after another verified_contracts rebuild reapplies cle
 """
 from __future__ import annotations
 
+import json
 import os
 import sys
 
@@ -27,6 +28,7 @@ from kuminga.lib import runlog  # noqa: E402
 VERIFIED = os.path.join(REPO, "offseason", "data", "nba_contracts_2026_27_verified.csv")
 SUPP = os.path.join(REPO, "kuminga", "data", "transaction_supplement.csv")
 ROSTER_SNAP = os.path.join(REPO, "kuminga", "data", "roster_snapshot_2026_27.csv")
+DUPV = os.path.join(REPO, "kuminga", "data", "dup_resolution_verified.json")
 
 KUMINGA_ID = "1630228"
 TF = {"PHO": "PHX", "BRK": "BKN", "CHO": "CHA"}
@@ -153,6 +155,34 @@ def main():
             add.append(rr)
         r.note(f"restored {n_restored} unresolved players (mostly the 2026 draft class), "
                f"${restored_salary:,.0f} of 2026-27 salary")
+
+        # --- verified dead-money correction ---------------------------------------
+        # verified_contracts.py identifies the active/dead split correctly but fills
+        # both the active salary and the dead-money amount with the CONTRACT TABLE's
+        # copied figure, which is neither. The active player gets a flat $3,877,000
+        # vet-min guess and the dead team gets the active player's salary. Externally
+        # verified figures replace both. See kuminga/data/dup_resolution_verified.json.
+        if os.path.exists(DUPV):
+            with open(DUPV, encoding="utf-8") as fh:
+                dv = json.load(fh)
+            n_fix = 0
+            for name, spec in dv.items():
+                if name.startswith("_"):
+                    continue
+                m = df.player.map(nkey) == nkey(name)
+                if not m.any():
+                    r.note(f"  WARNING: {name} not found in verified contracts")
+                    continue
+                old_sal = df.loc[m, "salary_2026_27"].iloc[0]
+                old_dead = df.loc[m, "dead_money_2026_27"].iloc[0]
+                df.loc[m, "salary_2026_27"] = str(int(spec["active_salary_2026_27"]))
+                df.loc[m, "dead_money_2026_27"] = str(int(spec["dead_money_2026_27"]))
+                df.loc[m, "dead_money_teams"] = spec["dead_team"]
+                n_fix += 1
+                r.note(f"  {name}: active {spec['active_team']} ${old_sal} -> "
+                       f"${spec['active_salary_2026_27']:,} | dead {spec['dead_team']} "
+                       f"${old_dead} -> ${spec['dead_money_2026_27']:,}")
+            r.note(f"applied {n_fix} verified dead-money corrections")
 
         out = pd.concat([df, pd.DataFrame(add)], ignore_index=True)
         out.to_csv(VERIFIED, index=False)

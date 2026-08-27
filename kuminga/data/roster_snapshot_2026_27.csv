@@ -103,7 +103,7 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,CLE,Meleek Thomas,,thomame01,standard,1357763.0,guaranteed,6346496.0,,,2026-07-01,Signing,Cleveland Cavaliers signed guard Meleek Thomas to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,CLE,Ricky Rubio,201937.0,rubiori01,standard,424672.0,guaranteed,424672.0,35.9,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,CLE,"Ernest Udeh, Jr",,,two_way,0.0,two_way,,,,,,,official,nba_transactions 2026-07-01
-2026-08-26,2026-27,DAL,[dead] Olivier-Maxence Prosper,1641765.0,,dead_money,668240.0,dead_money,,24.2,Forward,,,,derived,waived 2025-08-29; fallback: stretch over 3y
+2026-08-26,2026-27,DAL,[dead] Olivier-Maxence Prosper,1641765.0,,dead_money,1002360.0,dead_money,,24.2,Forward,,,,derived,waived 2025-08-29; verified
 2026-08-26,2026-27,DAL,Kyrie Irving,202681.0,irvinky01,standard,39491282.0,guaranteed,39491282.0,34.5,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,DAL,P.J. Washington,1629023.0,washipj01,standard,19813044.0,guaranteed,88762440.0,28.1,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,DAL,Klay Thompson,202691.0,thompkl01,standard,17460317.0,guaranteed,17460317.0,36.6,Guard,2026-08-23,Signing,Miami Heat signed guard Klay Thompson to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -207,6 +207,7 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,LAC,Keaton Wagler,,wagleke01,standard,9674760.0,guaranteed,19833000.0,,,2026-07-03,Signing,LA Clippers signed guard Keaton Wagler to a Rookie Scale Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Brook Lopez,201572.0,lopezbr01,standard,9187500.0,team_option,9187500.0,38.5,Center,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Isaiah Jackson,1630543.0,jacksis01,standard,7000000.0,guaranteed,13400000.0,24.7,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
+2026-08-26,2026-27,LAC,Bradley Beal,203078.0,bealbr01,standard,6424800.0,guaranteed,6424800.0,33.3,Guard,2026-08-13,Signing,LA Clippers re-signed guard Bradley Beal to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Nicolas Batum,201587.0,batumni01,standard,5881680.0,team_option,,37.8,Guard-Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Kris Dunn,1627739.0,dunnkr01,standard,5684800.0,guaranteed,,32.5,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Jordan Miller,1641757.0,millejo02,standard,5300000.0,guaranteed,5300000.0,26.7,Guard,2026-07-09,Signing,LA Clippers re-signed guard Jordan Miller to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -216,7 +217,6 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,LAC,Cam Christie,1642353.0,chrisca02,standard,2296271.0,guaranteed,,21.2,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Johni Broome,1641780.0,broomjo01,standard,2150917.0,guaranteed,2150917.0,24.2,Forward,2026-07-28,Trade,LA Clippers received forward Johni Broome from Philadelphia 76ers.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Baba Miller,,milleba01,standard,1705630.0,guaranteed,4000000.0,,,2026-07-09,Signing,LA Clippers signed forward Baba Miller to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
-2026-08-26,2026-27,LAC,Bradley Beal,203078.0,bealbr01,standard,1606200.0,guaranteed,6424800.0,33.3,Guard,2026-08-13,Signing,LA Clippers re-signed guard Bradley Beal to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,LAC,Jalen Pickett,1629618.0,,two_way,0.0,two_way,,26.9,Guard,2026-08-12,Signing,LA Clippers signed guard Jalen Pickett to a Two-Way Contract.,official,nba_transactions 2026-08-12
 2026-08-26,2026-27,LAC,Jamarion Sharp,,,two_way,0.0,two_way,,,,2026-08-06,Signing,LA Clippers signed center Jamarion Sharp to a Two-Way Contract.,official,nba_transactions 2026-08-06
 2026-08-26,2026-27,LAC,Nick Martinelli,,,two_way,0.0,two_way,,,,2026-07-05,Signing,LA Clippers signed forward Nick Martinelli to a Two-Way Contract.,official,nba_transactions 2026-07-05
@@ -239,7 +239,7 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,LAL,Ak Okereke,,,two_way,0.0,two_way,,,,2026-07-03,Signing,Los Angeles Lakers signed forward AK Okereke to a Two-Way Contract.,official,nba_transactions 2026-07-03
 2026-08-26,2026-27,LAL,Arthur Kaluma,,,two_way,0.0,two_way,,,,2026-07-21,Signing,Los Angeles Lakers signed forward Arthur Kaluma to a Two-Way Contract.,official,nba_transactions 2026-07-21
 2026-08-26,2026-27,LAL,Chris Manon,,,two_way,0.0,two_way,,,,2026-07-03,Signing,Los Angeles Lakers re-signed guard Chris Manon to a Two-Way Contract.,official,nba_transactions 2026-07-03
-2026-08-26,2026-27,MEM,[dead] Kentavious Caldwell-Pope,203484.0,,dead_money,5914990.333333333,dead_money,,33.6,Guard,2026-08-05,Signing,Philadelphia 76ers signed guard Kentavious Caldwell-Pope to a Contract.,derived,waived 2026-07-25; fallback: stretch over 3y
+2026-08-26,2026-27,MEM,[dead] Kentavious Caldwell-Pope,203484.0,,dead_money,17744971.0,dead_money,,33.6,Guard,2026-08-05,Signing,Philadelphia 76ers signed guard Kentavious Caldwell-Pope to a Contract.,derived,waived 2026-07-25; verified
 2026-08-26,2026-27,MEM,Jerami Grant,203924.0,grantje01,standard,34206898.0,guaranteed,34206898.0,32.6,Forward,2026-06-29,Trade,Memphis Grizzlies received forward Jerami Grant from Portland Trail Blazers.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Isaiah Stewart,1630191.0,stewais01,standard,15000000.0,guaranteed,15000000.0,25.4,Forward-Center,2026-07-08,Trade,Memphis Grizzlies received forward Isaiah Stewart from Detroit Pistons.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Brandon Clarke,1629634.0,clarkbr01,standard,12500000.0,guaranteed,12500000.0,30.0,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -255,11 +255,11 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,MEM,Karim LÃ³pez,,lopezka01,standard,3746760.0,guaranteed,7681080.0,,,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Cole Anthony,1630175.0,anthoco01,standard,3700000.0,guaranteed,7400000.0,26.4,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,AJ Johnson,1642358.0,johnsaj01,standard,3237120.0,team_option,3237120.0,21.8,Guard,2026-07-08,Trade,Memphis Grizzlies received guard AJ Johnson from Dallas Mavericks.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
+2026-08-26,2026-27,MEM,Olivier-Maxence Prosper,1641765.0,prospol01,standard,2497812.0,team_option,2497812.0,24.2,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Scotty Pippen Jr.,1630590.0,pippesc02,standard,2461462.0,guaranteed,,25.9,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Cam Spencer,1642285.0,spencca01,standard,2411090.0,guaranteed,5027844.0,26.5,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,GG Jackson II,,jacksgg01,standard,2406205.0,team_option,2406205.0,,,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Jaylen Wells,1642377.0,wellsja01,standard,2296271.0,guaranteed,,23.1,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
-2026-08-26,2026-27,MEM,Olivier-Maxence Prosper,1641765.0,prospol01,standard,1248906.0,team_option,2497812.0,24.2,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MEM,Mamadi Diakite,1629603.0,diakima01,standard,464050.0,guaranteed,464050.0,29.7,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MIA,Giannis Antetokounmpo,203507.0,antetgi01,standard,58456566.0,guaranteed,58456566.0,31.8,Forward,2026-07-06,Trade,Miami Heat received forward Giannis Antetokounmpo from Milwaukee Bucks.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MIA,Bam Adebayo,1628389.0,adebaba01,standard,49800000.0,guaranteed,103584000.0,29.2,Center-Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -275,7 +275,7 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,MIA,Ryan Conwell,,conwery01,standard,1357763.0,guaranteed,3652133.0,,,2026-07-01,Signing,Miami Heat signed guard Ryan Conwell to a Contract.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MIA,Tre Donaldson,,,two_way,0.0,two_way,,,,2026-07-03,Signing,Miami Heat signed guard Tre Donaldson to a Two-Way Contract.,official,nba_transactions 2026-07-03
 2026-08-26,2026-27,MIA,Vladislav Goldin,1642884.0,,two_way,0.0,two_way,,25.4,Center,2026-07-16,Signing,Miami Heat re-signed center Vladislav Goldin to a Two-Way Contract.,official,nba_transactions 2026-07-16
-2026-08-26,2026-27,MIL,[dead] Damian Lillard,203081.0,,dead_money,18013282.4,dead_money,,36.2,Guard,,,,derived,waived 2025-07-06; fallback: stretch over 5y
+2026-08-26,2026-27,MIL,[dead] Damian Lillard,203081.0,,dead_money,21311053.0,dead_money,,36.2,Guard,,,,derived,waived 2025-07-06; verified
 2026-08-26,2026-27,MIL,Tyler Herro,1629639.0,herroty01,standard,33000000.0,guaranteed,33000000.0,26.7,Guard,2026-07-06,Trade,Milwaukee Bucks received guard Tyler Herro from Miami Heat.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MIL,Myles Turner,1626167.0,turnemy01,standard,26584164.0,guaranteed,54434241.0,30.5,Center-Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,MIL,Kyle Kuzma,1628398.0,kuzmaky01,standard,20345152.0,guaranteed,20345152.0,31.2,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -393,7 +393,7 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,PHI,Adem Bona,1641737.0,bonaad01,standard,2296271.0,guaranteed,,23.5,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,PHI,Caleb Love,1631126.0,,two_way,0.0,two_way,,25.0,Guard,2026-07-05,Signing,Philadelphia 76ers signed guard Caleb Love to a Two-Way Contract.,official,nba_transactions 2026-07-05
 2026-08-26,2026-27,PHI,Rayan Rupert,1641712.0,,two_way,0.0,two_way,,22.3,Guard-Forward,2026-07-08,Signing,Philadelphia 76ers signed guard Rayan Rupert to a Two-Way Contract.,official,nba_transactions 2026-07-08
-2026-08-26,2026-27,PHX,[dead] Bradley Beal,203078.0,,dead_money,15506408.0,dead_money,,33.3,Guard,2026-08-13,Signing,LA Clippers re-signed guard Bradley Beal to a Contract.,derived,waived 2025-07-16; fallback: stretch over 5y
+2026-08-26,2026-27,PHX,[dead] Bradley Beal,203078.0,,dead_money,19383010.0,dead_money,,33.3,Guard,2026-08-13,Signing,LA Clippers re-signed guard Bradley Beal to a Contract.,derived,waived 2025-07-16; verified
 2026-08-26,2026-27,PHX,Devin Booker,1626164.0,bookede01,standard,57078728.0,guaranteed,182159872.0,29.9,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,PHX,Jalen Green,1630224.0,greenja05,standard,36251166.0,guaranteed,36251166.0,24.6,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,PHX,Miles Bridges,1628970.0,bridgmi02,standard,22826087.0,guaranteed,22826087.0,28.5,Forward,2026-07-13,Trade,Phoenix Suns received forward Miles Bridges from Charlotte Hornets.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
@@ -419,10 +419,10 @@ as_of_date,season,team_abbr,player_name,nba_player_id,br_player_id,slot_type,sal
 2026-08-26,2026-27,POR,Toumani Camara,1641739.0,camarto01,standard,18080358.0,guaranteed,81000000.0,26.4,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Robert Williams,,williro04,standard,13968254.0,guaranteed,18968254.0,,,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Scoot Henderson,1630703.0,hendesc01,standard,13585523.0,team_option,13585523.0,22.7,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
+2026-08-26,2026-27,POR,Damian Lillard,203081.0,lillada01,standard,13398800.0,guaranteed,13398800.0,36.2,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Deni Avdija,1630166.0,avdijde01,standard,13125000.0,guaranteed,25000000.0,25.7,Forward,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Donovan Clingan,1642270.0,clingdo01,standard,7519920.0,team_option,7519920.0,22.6,Center,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Yang Hansen,1642905.0,yangha01,standard,4643520.0,guaranteed,4643520.0,21.3,Center,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
-2026-08-26,2026-27,POR,Damian Lillard,203081.0,lillada01,standard,3349700.0,guaranteed,13398800.0,36.2,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Micah Potter,1630695.0,pottemi01,standard,2801346.0,guaranteed,2801346.0,28.5,Center,2026-07-10,AwardOnWaivers,Portland Trail Blazers claimed center Micah Potter off waivers.,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,VÃ­t KrejÄÃ­,1630249.0,krejcvi01,standard,2667944.0,guaranteed,,26.3,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"
 2026-08-26,2026-27,POR,Sidy Cissoko,1631321.0,cissosi01,standard,2497812.0,guaranteed,,22.5,Guard,,,,official,"nba_player_contracts (B-Ref), scraped 2026-08-26"

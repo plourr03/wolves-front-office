@@ -1,0 +1,72 @@
+{
+  "_note": "Externally verified resolution of the four players who appear on two teams' 2026-27 books. Researched 2026-08-26 against SalarySwish (primary cap site), HoopsHype, and Hoops Rumors reporting. Every one is a real two-team situation, NOT a scrape artifact: a dead-money row on the old team plus a real contract on the new one. The contract table's error is that it copies the SAME salary to both rows.",
+  "_as_of": "2026-08-26",
+  "_source_tier": "spotrac_bref_realgm (SalarySwish/HoopsHype are cap-site tier) + reporter tier for the buyout terms",
+
+  "Bradley Beal": {
+    "active_team": "LAC",
+    "active_salary_2026_27": 6424800,
+    "dead_team": "PHX",
+    "dead_money_2026_27": 19383010,
+    "dead_money_seasons": ["2025-26", "2026-27", "2027-28", "2028-29", "2029-30"],
+    "what_happened": "Waived and stretched by Phoenix 2025-07-16 after a partial buyout in which Beal gave back $13,879,830. PHX dead money $19,383,010/yr for five seasons ($96,915,050 total). Signed with the Clippers, declined a $5.62M player option in June 2026, re-signed with LAC in August 2026 on 2yr/$13.2M (Y1 $6,424,800; Y2 $6,746,040 player option; 15% trade kicker).",
+    "sources": [
+      "https://www.salaryswish.com/players/bradley-beal",
+      "https://www.salaryswish.com/teams/suns",
+      "https://hoopshype.com/salaries/phoenix-suns/"
+    ]
+  },
+
+  "Damian Lillard": {
+    "active_team": "POR",
+    "active_salary_2026_27": 13398800,
+    "dead_team": "MIL",
+    "dead_money_2026_27": 21311053,
+    "dead_money_seasons": ["2025-26", "2026-27", "2027-28", "2028-29", "2029-30"],
+    "what_happened": "Waived and stretched by MILWAUKEE 2025-07-01 (not Portland). Signed with Portland 2025-07-19, 3yr/~$42M with a 2027-28 player option and a no-trade clause. Portland carries him as a real contract and has no Lillard dead money at all; its only 2026-27 dead cap is Didi Louzada at $268,032.",
+    "CONFLICT": {
+      "description": "The two cap sites disagree on Milwaukee's dead-money figure. Recorded per R8 rather than silently resolved.",
+      "salaryswish": 21311053,
+      "salaryswish_basis": "applies an annual set-off credit of ~$1,205,551 against Lillard's new Portland salary",
+      "salaryswish_url": "https://www.salaryswish.com/players/damian-lillard",
+      "hoopshype": 22516603,
+      "hoopshype_basis": "raw $112,583,016 / 5 with no set-off",
+      "hoopshype_url": "https://hoopshype.com/salaries/milwaukee-bucks/",
+      "chosen": "salaryswish",
+      "why": "The set-off is a real CBA mechanism and the site that models it is the more complete treatment. The difference is $1,205,550 on one team's apron basis and does not move Milwaukee across any threshold."
+    },
+    "sources": [
+      "https://www.salaryswish.com/players/damian-lillard",
+      "https://www.salaryswish.com/teams/trailblazers"
+    ]
+  },
+
+  "Kentavious Caldwell-Pope": {
+    "active_team": "PHI",
+    "active_salary_2026_27": 2449421,
+    "active_salary_note": "cap HIT is $2,449,421 (the reduced minimum-salary cap charge); actual salary is $3,876,529. The apron basis uses the cap hit.",
+    "dead_team": "MEM",
+    "dead_money_2026_27": 17744971,
+    "dead_money_seasons": ["2026-27"],
+    "what_happened": "NOT stretched. Exercised his $21,621,500 player option with Memphis in June 2026, then agreed a buyout and was waived 2026-07-25, giving back exactly $3,876,529. Because it was a buyout of an expiring deal and was not stretched, Memphis carries $17,744,971 for 2026-27 ONLY, with nothing after. He then signed a one-year minimum with Philadelphia.",
+    "sources": [
+      "https://www.salaryswish.com/teams/grizzlies",
+      "https://www.salaryswish.com/teams/sixers",
+      "https://www.hoopsrumors.com/2026/07/caldwell-pope-to-sign-with-sixers-after-grizzlies-buyout.html"
+    ]
+  },
+
+  "Olivier-Maxence Prosper": {
+    "active_team": "MEM",
+    "active_salary_2026_27": 2497812,
+    "active_salary_note": "non-guaranteed for 2026-27 per SalarySwish",
+    "dead_team": "DAL",
+    "dead_money_2026_27": 1002360,
+    "dead_money_seasons": ["2025-26", "2026-27", "2027-28"],
+    "what_happened": "Waived and stretched by Dallas (SalarySwish dates the waiver 2025-08-29; some reports say Sept 2). Dallas declined the $5,259,383 team option for 2026-27 and stretched the remaining $3,007,080 across three seasons at $1,002,360/yr. Signed a two-way with Memphis 2025-09-04, converted to a standard two-year, $3,025,691 deal 2026-03-04.",
+    "sources": [
+      "https://www.salaryswish.com/players/olivier-maxence-prosper",
+      "https://hoopshype.com/salaries/dallas_mavericks/"
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 kind,team,player,detail,resolution
 stale_contract_row,ATL,Jonathan Kuminga,"$24,300,000 team option dropped: declined 2026-06-29 (ESPN), but the contract scrape still carries it as live.",dropped
-dead_money_split,PHI/MEM,Kentavious Caldwell-Pope,"contract book listed $20,194,392 on BOTH. Resolved: PHI active at $2,449,421 (fallback: remaining_guarantee / n_seasons); MEM dead money $5,914,990 (fallback: stretch over 3y).",split
-dead_money_split,LAC/PHX,Bradley Beal,"contract book listed $25,807,810 on BOTH. Resolved: LAC active at $1,606,200 (fallback: remaining_guarantee / n_seasons); PHX dead money $15,506,408 (fallback: stretch over 5y).",split
-dead_money_split,POR/MIL,Damian Lillard,"contract book listed $35,915,403 on BOTH. Resolved: POR active at $3,349,700 (fallback: remaining_guarantee / n_seasons); MIL dead money $18,013,282 (fallback: stretch over 5y).",split
-dead_money_split,MEM/DAL,Olivier-Maxence Prosper,"contract book listed $3,500,172 on BOTH. Resolved: MEM active at $1,248,906 (fallback: remaining_guarantee / n_seasons); DAL dead money $668,240 (fallback: stretch over 3y).",split
+dead_money_split,PHI/MEM,Kentavious Caldwell-Pope,"contract book listed $20,194,392 on BOTH. Resolved: PHI active at $2,449,421 (verified); MEM dead money $17,744,971 (verified).",split
+dead_money_split,LAC/PHX,Bradley Beal,"contract book listed $25,807,810 on BOTH. Resolved: LAC active at $6,424,800 (verified); PHX dead money $19,383,010 (verified).",split
+dead_money_split,POR/MIL,Damian Lillard,"contract book listed $35,915,403 on BOTH. Resolved: POR active at $13,398,800 (verified); MIL dead money $21,311,053 (verified).",split
+dead_money_split,MEM/DAL,Olivier-Maxence Prosper,"contract book listed $3,500,172 on BOTH. Resolved: MEM active at $2,497,812 (verified); DAL dead money $1,002,360 (verified).",split
 roster_below_season_floor,DEN,,12 standard contracts in August; must reach 14 by opening night. Normal for the date.,informational
 roster_below_season_floor,GSW,,13 standard contracts in August; must reach 14 by opening night. Normal for the date.,informational
 roster_below_season_floor,IND,,13 standard contracts in August; must reach 14 by opening night. Normal for the date.,informational
