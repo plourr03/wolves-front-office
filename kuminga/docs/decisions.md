@@ -596,3 +596,34 @@ Moved the P2 ranking table into the methods appendix under the heading "Why this
 > "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily.
 
 Better placed here than buried in section 4 as a do-not-write, because it generalises: it is the reason the piece carries bands rather than midpoints, signs rather than orderings, and four views rather than one. Section 4 keeps the short version.
+
+### D43. As final states, the Dosunmu re-signing cost roster and not money (F1, F2)
+
+**This is the third revision of the same figure, and the framing changed rather than the arithmetic.** Comparing two finished rosters, both legal, both fourteen men, both with Kuminga on them `[dosunmu_final_states_20260827T154349Z]`:
+
+| | Payroll | vs tax line | Est. tax | Kuminga at | Green |
+|---|---|---|---|---|---|
+| What happened | $208,614,817 | $8,186,817 over | ~$13.1M | $6,064,000 | traded away |
+| Dosunmu not re-signed | $209,015,000 | $8,587,000 over | ~$13.8M | up to $10,004,516 | **kept** |
+
+**The result that retires the tax framing entirely.** The two states are within $400,183 of each other on payroll and within about $700k on tax, and **the counterfactual is the more expensive one**. Both are taxpayers. So "his contract is the difference between roughly level with the tax line and $15.4M past it" (D40) is gone: it was an artifact of comparing a roster with Kuminga against one without him. The claim that replaces it is better and simpler. **Re-signing Dosunmu did not cost money. It cost Josh Green plus about four million dollars of Kuminga's first-year salary, at the same payroll and in the same tax bracket.**
+
+**Why Green must be shed, now stated as arithmetic in the piece.** With both contracts on the book, $215,871,829 + $6,064,000 = $221,935,829, which is $249,829 past the second apron. Dosunmu's $19,310,345 exceeds that overage by $19,060,516, so **without him Green stays and the signing still fits**. The Saturday deadline in section 1 traces to a July contract.
+
+**The ceiling, with its caveat attached.** Without Dosunmu, a replacement guard on a veteran minimum leaves $10,004,516 under the first apron at thirteen players, and that distance *is* the ceiling on Kuminga's first-year salary, because the non-taxpayer mid-level hard-caps there. The exception is worth $15,044,000 and **the whole of it was never spendable**, so the phrasing is fixed as **"up to $10,004,516 at a full roster"**. A rookie-minimum replacement lifts it to $11,095,516; $8M for Kuminga would leave room for a fifteenth man and $9M would not.
+
+**Figure supersession, logged because two of our own numbers now disagree.** The D40 figure of $7,555,516 to $8,646,516 filled to fourteen with minimums first and left the exception signee as a *fifteenth* man. Putting Kuminga inside the fourteen, which is the comparable roster, gives $10,004,516. Both are correct answers to different questions, and only one is the question the piece asks. The superseded row is still on `final_numbers.csv` under **"Dosunmu intermediates (do not quote)"**, labelled SUPERSEDED and marked NOT QUOTABLE, with a pointer to the final-state rows. The intermediate roster figures moved to their own appendix in the skeleton for the same reason: read alone, the 12-man line suggests Minnesota could have ducked the tax, and at a legal roster with Kuminga they land at roughly $209M either way.
+
+### D44. Keeping Josh Green is MIXED, so the salary dump carries no on-court cost (F4)
+
+Both cap branches assume Green leaves. That is a cap assumption that had never been asked as a basketball question, so it was priced as one coalition under the slot rule with Minnesota's own position budgets.
+
+**Verdict: MIXED, -0.48 to +0.01pp, mean -0.18pp** `[green_kept_20260827T154636Z]`. Only RAPM is positive, by 0.014pp. Per the rule set for this item, it **stays in the appendix and the piece attaches no on-court cost to losing Green.** Three of four views think the minutes are better spent elsewhere; they do not agree, so nothing is claimed either way.
+
+Two caveats recorded with it. The pooled rule gives Green 13.3 minutes and takes them proportionally across the whole guard group including Edwards, which is not how a rotation works. And his impacts span -0.22 (box) to -2.00 (DARKO), so the disagreement here is about the player rather than the method.
+
+**A bug that produced a plausible table before it produced an error.** `build_impacts` keys by **string** player id and returns a **dict per player**, not a float. The first version looked up `imps[f].get(float(GREEN_ID))` and reported all four impacts as NaN and Green's minutes as 0.00, while the marginal contributions printed as real numbers. That combination is incoherent, a player with no minutes cannot move the odds, which is what flagged it. The pricing path was in fact correct throughout, because `allocate_pooled` and `A.rollup` both key by `str(int(pid))`; only the diagnostics were wrong. **The lesson is that the diagnostic and the computation must share a key convention, or the diagnostic will vouch for something it never inspected.** An assertion now fails the run if Green draws no minutes.
+
+### D45. Section 4 magnitudes labelled (F3)
+
+The table row is now **"Dosunmu retained (on-court)"**, so a reader cannot take a Shapley number as a verdict on the contract. Added: applying the slot rule cut every magnitude in that table, by between a quarter and three quarters, and moved none of their signs. The looser rule flatters big effects by letting minutes flow to whoever the model rates highest, so the sizes shown are the conservative version and the signs are the finding.

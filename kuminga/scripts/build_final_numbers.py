@@ -252,7 +252,8 @@ def main():
                 "FACT", rid_dc, "tax rates flagged CONFIRM in the constants; label est")
             cheap = g["14 players, Dosunmu gone + vet-min guard + rookie min"]
             vet = g["14 players, Dosunmu gone + vet-min guard + vet min"]
-            add("Dosunmu (b) cap", "MIN vs the tax line, without him, LEGAL 14-man roster",
+            add("Dosunmu intermediates (do not quote)",
+                "MIN vs the tax line, without him, no Kuminga yet",
                 f"${-cheap.vs_tax_line:,.0f} under to ${vet.vs_tax_line:,.0f} over",
                 "replacement guard at the vet min, plus one more to reach 14",
                 "FACT", rid_dc,
@@ -264,14 +265,52 @@ def main():
                 "FACT", "CBA minimum salary exception",
                 "a 3+ year veteran on a ONE-YEAR minimum is charged the 2-year figure and "
                 "the league pays the difference; multi-year minimums count in full")
-            add("Dosunmu (b) cap", "usable non-taxpayer MLE at a full roster",
-                f"${vet.vs_first_apron:,.0f} to ${cheap.vs_first_apron:,.0f}",
-                "exception is $15,044,000 but hard-caps at the first apron",
-                "FACT", rid_dc,
-                "WRITE IT AS: up to $7.6M to $8.6M at a full roster, against the "
-                "$6,064,000 taxpayer exception. An extra $1.5M to $2.6M of buying power, "
-                "NOT the $12,453,516 first reported at an illegal 12-man roster.")
-            add("Dosunmu (b) cap", "second-apron distance without him",
+            add("Dosunmu intermediates (do not quote)",
+                "SUPERSEDED: MLE room with the signee as the 15th man",
+                f"${vet.vs_first_apron:,.0f} to ${cheap.vs_first_apron:,.0f}", "",
+                "NOT QUOTABLE", rid_dc,
+                "This filled to 14 with minimums FIRST and left the exception signee as a "
+                "15th man. The piece puts Kuminga IN the 14, which is the comparable "
+                "roster, and that ceiling is $10,004,516. Use the FINAL STATE rows.")
+            fs = load("dosunmu_final_states.csv")
+            rid_fs = last_run("dosunmu_final_states")
+            if fs is not None:
+                f = {r_["state"]: r_ for _, r_ in fs.iterrows()}
+                act = f["ACTUAL: Green traded out, Kuminga at the taxpayer MLE"]
+                cf = f["CF: veteran min (2-yr charge) + Kuminga at the ceiling"]
+                add("Dosunmu (b) cap", "FINAL STATE, what happened",
+                    f"${act.payroll:,.0f} at 14",
+                    f"${act.vs_tax_line:,.0f} over the tax line, est tax "
+                    f"${act.est_tax_bill:,.0f}", "FACT", rid_fs,
+                    "Kuminga at $6,064,000, Green traded away")
+                add("Dosunmu (b) cap", "FINAL STATE, Dosunmu not re-signed",
+                    f"${cf.payroll:,.0f} at 14",
+                    f"${cf.vs_tax_line:,.0f} over the tax line, est tax "
+                    f"${cf.est_tax_bill:,.0f}", "FACT", rid_fs,
+                    "Kuminga up to $10,004,516, Green KEPT. Both states are taxpayers at "
+                    "roughly the same payroll, so the re-signing did not cost money, it "
+                    "cost roster. Do not use a tax-saving framing.")
+                add("Dosunmu (b) cap", "Kuminga first-year ceiling without Dosunmu",
+                    "up to $10,004,516", "at a full roster; $11,095,516 with a rookie-min "
+                    "replacement", "FACT", rid_fs,
+                    "the non-taxpayer MLE is $15,044,000 but hard-caps at the first apron, "
+                    "so the whole exception was never spendable. Always write 'up to, at a "
+                    "full roster'.")
+                add("Dosunmu (b) cap", "why Green must be shed", "$249,829 over",
+                    "$215,871,829 + $6,064,000 vs the second apron", "FACT", rid_fs,
+                    "Dosunmu's $19,310,345 exceeds that overage by $19,060,516, so without "
+                    "him Green stays and the signing still fits")
+            gk = load("green_kept.csv")
+            rid_gk = last_run("green_kept")
+            if gk is not None:
+                x = gk.iloc[0]
+                add("Appendix", "keeping Josh Green, on the floor",
+                    f"{x.mean_pp:+.2f}pp mean", f"{x.lo_pp:+.2f} to {x.hi_pp:+.2f}pp",
+                    "NOT QUOTABLE", rid_gk,
+                    f"{x.sign_agreement}; only rapm is positive and by 0.01pp. The piece "
+                    f"attaches NO on-court cost to the salary dump.")
+            add("Dosunmu intermediates (do not quote)",
+                "second-apron distance without him",
                 f"${g['13 players, Kuminga signed, Dosunmu gone'].vs_second_apron:,.0f} under",
                 "same roster, Kuminga signed", "FACT", rid_dc,
                 "against $249,829 OVER with him")

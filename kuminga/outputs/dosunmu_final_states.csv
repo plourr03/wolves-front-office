@@ -1,0 +1,9 @@
+state,n_players,payroll,vs_tax_line,est_tax_bill,vs_first_apron,vs_second_apron,note
+ACTUAL: Dosunmu + Green + Kuminga at the taxpayer MLE,14,221935829.0,21507829.0,61170016.75,-12920829.0,-249829.0,"cannot be signed, over the second apron hard cap"
+"ACTUAL: Green traded out, Kuminga at the taxpayer MLE",14,208614817.0,8186817.0,13076929.75,400183.0,13071183.0,the trade branch in the piece
+CF: veteran min (2-yr charge) + Kuminga at the ceiling,14,209015000.0,8587000.0,13777250.0,0.0,12671000.0,"Kuminga at $10,004,516; lands exactly on the first apron"
+"CF: veteran min (2-yr charge) + Kuminga at $8,000,000",14,207010484.0,6582484.0,10269347.0,2004516.0,14675516.0,"15th man on the rookie min fits ($2,004,516 of apron room left)"
+"CF: veteran min (2-yr charge) + Kuminga at $9,000,000",14,208010484.0,7582484.0,12019347.0,1004516.0,13675516.0,"15th man on the rookie min does not fit ($1,004,516 of apron room left)"
+CF: rookie min + Kuminga at the ceiling,14,209015000.0,8587000.0,13777250.0,0.0,12671000.0,"Kuminga at $11,095,516; lands exactly on the first apron"
+"CF: rookie min + Kuminga at $8,000,000",14,205919484.0,5491484.0,8360097.0,3095516.0,15766516.0,"15th man on the rookie min fits ($3,095,516 of apron room left)"
+"CF: rookie min + Kuminga at $9,000,000",14,206919484.0,6491484.0,10110097.0,2095516.0,14766516.0,"15th man on the rookie min fits ($2,095,516 of apron room left)"

@@ -103,7 +103,9 @@ The one that genuinely narrows the claim is Lyles, because a coach could actuall
 | LaMelo Ball in | +0.67pp | **positive under all four views** |
 | Reid out | -0.26pp | **negative under all four** |
 | DiVincenzo's Achilles | -0.35pp | **negative under all four** |
-| Dosunmu retained at $19.3M/yr | -0.40pp | **negative under all four** |
+| Dosunmu retained (on-court) | -0.40pp | **negative under all four** |
+
+**One note on the magnitudes.** Applying the slot rule cut every number in this table, by between a quarter and three quarters, and moved none of their signs. The looser rule flatters big effects by letting minutes flow to whoever the model likes best. Read the sizes here as the conservative version and the signs as the finding.
 
 **What is missing from that table, and why.** The first draft of this section had "Randle out, +0.19pp, positive under all four". Applying the slot rule to him as well as to Kuminga takes it to **+0.07pp with no agreed sign** `[compare_slot_shapley_20260827T134414Z]`. It was the only player verdict that moved, and it does not come back. Letting Randle go is not a thing we can say helped. Two bundles moved too, the depth group and the other departures, so neither gets a sign either.
 
@@ -117,19 +119,26 @@ The rule being applied is worth stating once in the piece: **if a verdict change
 
 **The uncomfortable one, which now stays in. It is two separate claims and the piece must not blur them.**
 
-**(a) The cap arithmetic, which needs no model at all** `[dosunmu_cap_20260827T152542Z]`. Ayo Dosunmu is on $19,310,345 this season. With him on the book, Minnesota is **$15,443,829 over the tax line**, facing a bill of roughly **$30.9M (est)**.
+**(a) The cap arithmetic, which needs no model at all.** The honest way to see this is two finished rosters, both legal, both fourteen men, both with Kuminga on them `[dosunmu_final_states_20260827T154349Z]`:
 
-Take his salary off and put a legal team back on the floor, which means a replacement guard at the veteran minimum plus one more contract to reach the 14-man roster the CBA requires. On a one-year deal a veteran with three or more years of service is charged the two-year minimum, **$2,449,000**, and the league pays the rest. That team lands **within about a million dollars of the tax line either side**: $59,516 under it if the last spot goes to a rookie minimum, $1,031,484 over it if it goes to another veteran `[same]`.
+| | Payroll | vs the tax line | Est. tax | Kuminga at | Josh Green |
+|---|---|---|---|---|---|
+| **What happened** | $208,614,817 | $8,186,817 over | ~$13.1M | $6,064,000 | traded away |
+| **Dosunmu not re-signed** | $209,015,000 | $8,587,000 over | ~$13.8M | up to $10,004,516 | **kept** |
 
-So the accurate version is not that his contract makes them a taxpayer outright. It is that **his contract is the difference between roughly level with the tax line and $15.4M past it.**
+**Look at the first three columns before the last two.** They are nearly the same. Both rosters are taxpayers, both sit around $209M, both owe about $13M, and the counterfactual is very slightly the *more* expensive of the two. **Re-signing Ayo Dosunmu did not cost Minnesota money.** It cost them roster, and the last two columns are the whole story.
 
-It also set the size of the tool they signed Kuminga with, and this is the part that connects to the lede. Without him, that legal roster sits **$7.56M to $8.65M under the first apron**, where the non-taxpayer mid-level lives. Using that exception hard-caps a team at the first apron, so the whole $15,044,000 was never spendable either. What was actually available was **up to $7.6M to $8.6M at a full roster, against the $6,064,000 taxpayer exception they had** `[same]`. Call it an extra $1.5M to $2.6M of buying power to chase a forward.
+**What the re-signing bought, then, is two things.**
+
+**First, it is the reason Josh Green has to be shed at all.** With both contracts on the book, adding Kuminga at the full taxpayer exception gives $215,871,829 + $6,064,000 = $221,935,829, which is $249,829 past the second apron and cannot be done. Dosunmu's $19,310,345 is larger than that overage by $19,060,516, so **without him, Green stays and the signing still fits.** The Saturday deadline in section 1 exists because of a contract signed in July.
+
+**Second, it cut Kuminga's first-year ceiling by about four million dollars.** Without Dosunmu, a replacement guard on a veteran minimum puts Minnesota at $199,010,484 across thirteen players, $10,004,516 under the first apron. **That distance is the ceiling on Kuminga's first-year salary**, because using the non-taxpayer mid-level hard-caps a team at the first apron. Note what that means: the exception is worth $15,044,000, but the whole of it was never spendable. The right phrasing is **up to $10,004,516 at a full roster**, against the $6,064,000 he actually got. A cheaper replacement lifts it to $11,095,516; paying him $8M instead would leave room for a fifteenth man, and $9M would not `[same]`.
 
 **(b) The on-court finding.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
 
-**One sentence on what kind of claim each is, because they are not the same kind.** The cap half is arithmetic on contracts and CBA thresholds, and it is true regardless of what anyone thinks of the player; **the on-court half is a model claim about impact metrics**, and it inherits every assumption those metrics carry, including the minutes rule described in the methods note.
+**One sentence on what kind of claim each is, because they are not the same kind.** The cap half is arithmetic on contracts and CBA thresholds, and it is true regardless of what anyone thinks of the player; **the on-court half is a model claim about impact metrics**, and it inherits every assumption those metrics carry, including the minutes rule in the methods note.
 
-**And the two counterfactuals are different, which is why they do not simply add up.** The on-court number prices **losing him for nothing**: Minnesota was over the cap, an over-the-cap team has exceptions rather than room, and his salary was never convertible into a better guard. The cap number prices something else entirely, **the exception his absence would have unlocked**, which is a tool for signing a different player at a different position. One says the guards behind him are better than he is. The other says the money bought tax exposure and a smaller exception. Reported together, they describe a cost; neither one, nor both, establishes what Minnesota should have done instead.
+**And the two counterfactuals are different, which is why they do not add up.** The on-court number prices **losing him for nothing**: Minnesota was over the cap, an over-the-cap team has exceptions rather than room, and his salary was never convertible into a better guard. The cap number prices something else, **the exception and the roster spot his absence would have freed**, which is about a different player at a different position. Reported together they describe a cost; neither one, nor both, establishes what Minnesota should have done instead.
 
 ---
 
@@ -193,6 +202,29 @@ Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separ
 All four views agree the injury hurt. They do not agree it hurt most: it leads under one view, and under RAPM it is the *smallest* negative on the board. "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily. That is the whole editorial rule in one example.
 
 **Positional minute budgets are each team's own 2025-26 shape, not a league average.** For Minnesota that assumes a **double-big allocation the current roster cannot repeat**: last season's 53.7 centre minutes a game were Gobert plus Reid, and Reid is gone. The budget is the right choice for measuring what the departures cost, because it holds the shape fixed while the personnel changes, and it is the wrong choice for predicting how Finch will actually play this team. Read every Shapley figure here as "what these moves did to last season's shape", not as a rotation forecast `[build_rotations_20260827T133313Z]`.
+
+---
+
+## Appendix: keeping Josh Green, priced on the floor
+
+Both cap branches assume Green leaves, which is a cap assumption that was never asked as a basketball question. Priced as one coalition under the slot rule, **keeping him is MIXED: -0.48 to +0.01pp, mean -0.18pp** `[green_kept_20260827T154636Z]`. Only RAPM is positive and it is positive by a hundredth of a point.
+
+So the piece **does not** attach an on-court cost to the salary dump. If anything three of the four views think the minutes are better spent elsewhere, but they do not agree, so nothing is claimed. Two caveats travel with it: the pooled rule hands Green 13.3 minutes and takes them proportionally from the whole guard group, Edwards included, which is not how a rotation actually works; and his impacts run from -0.22 (box) to -2.00 (DARKO), a spread wide enough that the disagreement here is about him, not about the method.
+
+---
+
+## Appendix: the Dosunmu intermediate figures
+
+The final-state table in section 4 is the version that should be read. These are the intermediate numbers behind it, kept so the arithmetic can be checked `[dosunmu_cap_20260827T152542Z]`:
+
+| Roster | Payroll | vs the tax line |
+|---|---|---|
+| 13 players, Dosunmu on the book, no Kuminga | $215,871,829 | $15,443,829 over |
+| 12 players, Dosunmu gone *(not a legal roster)* | $196,561,484 | $3,866,516 under |
+| 14 players, vet-min replacement + rookie min | $200,368,484 | $59,516 under |
+| 14 players, vet-min replacement + vet min | $201,459,484 | $1,031,484 over |
+
+The 12-man line is why the intermediate figures are here rather than in the piece: read alone it suggests Minnesota could have ducked the tax entirely, and a legal roster with Kuminga on it lands them back at roughly $209M either way. **A replacement guard is charged the two-year minimum, $2,449,000**, when a veteran with three or more years signs a one-year minimum deal; the league pays the difference against the $3,877,000 he earns. Tax figures are estimates; the bracket rates are flagged for confirmation in the constants file.
 
 ---
 
