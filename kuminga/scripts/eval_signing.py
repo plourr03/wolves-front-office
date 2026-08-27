@@ -40,7 +40,7 @@ REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
 
-from kuminga.lib import runlog  # noqa: E402
+from kuminga.lib import market, runlog  # noqa: E402
 import evaluate_move as EM      # noqa: E402
 
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
@@ -132,17 +132,21 @@ def main():
                    f"net = {c:.3f} + {d:.3e}*salary | R2={r2:.3f} n={n}")
 
             knet = float(kum[fork])
+            mc = market.build(nets.rename(columns={fork: "_net"}).assign(**{fork: nets[fork]}),
+                              salary, fork, label=fork)
+            mkt = float(mc.salary(knet))
             for label, sal in (("taxpayer_mle_2026_27", TPMLE_2026_27),
                                ("atl_option_declined", ATL_OPTION)):
                 par_net = c + d * sal
-                par_dollars = a + b * knet
                 surp_rows.append(dict(
                     fork=fork, price_label=label, salary=sal,
                     kuminga_net=knet,
                     par_net_for_salary=par_net,
                     surplus_net=knet - par_net,
-                    par_dollars_for_net=par_dollars,
-                    dollar_gap=par_dollars - sal,
+                    market_salary_pctile=mkt,
+                    dollar_gap=mkt - sal,
+                    market_pctile=mc.percentile(knet),
+                    linear_par_dollars=a + b * knet,
                 ))
 
         curves = pd.DataFrame(curve_rows)
@@ -153,7 +157,8 @@ def main():
         r.note("KUMINGA SURPLUS, impact units (positive = better than his price buys):")
         for _, x in surp.iterrows():
             r.note(f"  [{x.fork:9s}] at ${x.salary/1e6:5.2f}M -> surplus_net "
-                   f"{x.surplus_net:+.2f} | dollar_gap ${x.dollar_gap/1e6:+.1f}M")
+                   f"{x.surplus_net:+.2f} | market ${x.market_salary_pctile/1e6:.1f}M "
+                   f"| dollar_gap ${x.dollar_gap/1e6:+.1f}M")
 
         # ---------------- cap side -------------------------------------------
         ts = pd.read_csv(TEAMSTATE)
@@ -193,7 +198,7 @@ def main():
 
     print()
     print(surp[["fork", "price_label", "salary", "kuminga_net", "surplus_net",
-                "dollar_gap"]].round(3).to_string(index=False))
+                "market_salary_pctile", "dollar_gap", "linear_par_dollars"]].round(1).to_string(index=False))
 
 
 if __name__ == "__main__":
