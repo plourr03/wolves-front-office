@@ -716,3 +716,70 @@ Fitted a one-year aging curve from `nba_player_season_bio`, on same-team year-ov
 **Second, and this is the finding: aging cancels out of this model by construction.** `exp_2026_27` comes from last season's measured team rating, and the impact model enters only as `beta x (roll[current] − roll[baseline])`. Both rollups were being built from the same aged impacts, so **every returning player's adjustment cancelled exactly** and the aged run reproduced the un-aged team strengths to all 120 rows. The fix is that the baseline rollup must use un-aged impacts, because it represents last season's roster at last season's ages. Now corrected, and the aged strengths do move.
 
 **What this means for reading any Shapley number in this project:** the model has never been able to see a roster simply getting older. It only ever sees the difference between who left and who arrived. That is a real limitation and it belongs in the methods note regardless of what the aged verdicts turn out to be.
+
+### D50. The corrected cap chain, on the apron basis (R1, R2)
+
+**Rule, with both citations.** Apron Team Salary = Team Salary **minus** free-agent cap holds **plus** unlikely bonuses. Hoops Rumors, tax-apron glossary: "the Aprons make adjustments to Team Salary by removing Cap Holds and adding Unlikely Bonuses, which is called Apron Team Salary" (hoopsrumors.com/2025/01/hoops-rumors-glossary-tax-aprons-2.html); The CBA Guide, The Aprons (cbaguide.com/thresholds/apron/). Minnesota's unlikely bonuses: **McDaniels $1,000,000, DiVincenzo $750,000**.
+
+Published once to `outputs/cap_canonical.json` and read from there by `lede_loophole`, `dosunmu_cap`, `dosunmu_final_states`, `eval_signing` and `cap_branches`. **No consumer re-derives the basis any more**, which is the structural fix: the 8x error propagated because five scripts each rebuilt the basis from a component row.
+
+| Figure | Old (contracted basis) | Corrected (apron basis) |
+|---|---|---|
+| Pre-Kuminga | $215,871,829 | **$217,621,829** |
+| With Kuminga | $221,935,829 | **$223,685,829** |
+| Over the second apron | $249,829 | **$1,999,829** |
+| Loophole first-year salary | $5,814,171 (95.9% of the MLE) | **$4,064,171 (67.0%)** |
+| Loophole cost to Kuminga | $512,149 | **$4,099,649** |
+| Trade branch, 13 / 14 / 15 | — | **$209,006,817 / $210,364,580 / $211,722,343** |
+| Stretch branch, 13 / 14 / 15 | — | **$213,899,821 / $215,257,584 / $216,615,347** |
+| Trade branch vs first apron at 14 | $400,183 UNDER | **$1,349,580 OVER** |
+| Stretch branch vs first apron at 14 | $4,492,821 over | **$6,242,584 over** |
+| Second-apron room, trade / stretch at 14 | $13,071,183 / $8,178,179 | **$11,321,420 / $6,428,416** |
+| No-Dosunmu counterfactual, Kuminga ceiling at 13 | up to $10,004,516 | **up to $8,254,095** (vet-min replacement), **$9,345,753** (rookie-min) |
+| Non-Bird 2027 ceiling | $7,640,640 | **$7,276,800** |
+
+**The finding that changes section 1's argument: both branches are first-apron teams.** The trade branch is $1,349,580 over, not $400,183 under. Every "the pure dump is the only version that keeps them under the first apron" sentence is deleted, because no version does. The four restrictions apply either way, and the one with a price tag attached is the prior-year trade exceptions: Minnesota holds **$17,350,158** live (Conley $10,774,038 to 2/3/2027, Dillingham $6,576,120 to 2/5/2027) and cannot use them.
+
+**Non-Bird, corrected basis.** 120% of the salary in the last season actually **played**. If he opts out after 2026-27 that is the year-one figure $6,064,000, giving **$7,276,800**. The old $7,640,640 took 120% of the *declined* option year, which is both wrong and self-contradictory, since in any world where $6,367,200 is the prior salary he has two seasons of service and holds Early Bird rights instead (175% = $11,142,600, per D-log U4).
+
+**R2, the tax basis, now stated on every tax row.** Tax is charged on **regular team salary, which excludes unlikely bonuses** unless earned. `cap_branches` and `dosunmu_final_states` now add the bonuses for apron thresholds and subtract them again for the tax calculation. Combined with the corrected 2023-CBA bracket table:
+
+- Trade branch: **$8,717,225 (est)**, was $13,076,930
+- Stretch branch: **~$16,974,544 (est)**
+- **Trade-vs-stretch difference: about $8.26M**, against the "roughly $10.9M" previously in the piece
+- Dosunmu final states: actual **$8,717,225** vs counterfactual **$7,030,250**, so the no-Dosunmu roster now **saves** about $1.69M in tax. Under the old wrong brackets the counterfactual looked $700k *more* expensive. **The direction of that comparison reversed.**
+
+The corrected trade-branch tax reproduces the independent check to the dollar ($8,717,225 both ways), which is the first time the two computations have agreed on a tax figure.
+
+### D51. R3 did not reconcile, and it found something worse than bonuses
+
+Compared our team salary to Spotrac's published apron allocation for all 30 teams. **15 of 30 differ by more than $2,000, and the differences are not one cause.**
+
+**Teams where ours is LOWER** (consistent with missing unlikely bonuses): 18 teams, $110,121,537 in total, median $3,417,722. Largest: MIL -$26,231,053, PHX -$19,383,010, MEM -$12,125,118, SAC -$9,334,251, WAS -$8,458,310, DEN -$8,386,921.
+
+**Teams where ours is HIGHER**, which bonuses cannot explain: **CLE +$42,317,307**, LAC +$8,331,101, HOU +$5,073,420, DAL +$4,739,328, BOS +$2,715,526.
+
+**CLE's gap is exactly James Harden's $42,317,307**, and our contract book has him on Cleveland. One player, one team, and the discrepancy matches to the dollar.
+
+**Roster counts are impossible for eight teams.** MEM 21 standard contracts, LAC 18, MIL 18, NOP 18, and DAL, ATL, PHX, CHA at 17. The maximum is 15.
+
+**Ruling: the all-30 layer is not publishable.** Apron tier flags differ on 8 teams between the two bases, including DEN moving into the second apron and CLE dropping from second apron to under the tax. Anything resting on the league-wide contract book, which is section 6's "seventeen of thirty changed apron tier", the West ranking, and every rival's title odds, is suspect until the book is repaired. Logged in `gaps_remaining.md` and flagged in the lock runbook. **Minnesota's own numbers are unaffected**, since the MIN book was verified player-for-player against the warehouse, Spotrac and Basketball-Reference in V1.
+
+### D52. Aging changes no quotable verdict (U1)
+
+Aged run is primary per the decision rule; un-aged preserved in `outputs/preaging/`.
+
+| Move | Un-aged | Aged | |
+|---|---|---|---|
+| other_departures | ALL POSITIVE +1.12 | ALL POSITIVE +1.42 | |
+| ball_in | ALL POSITIVE +0.67 | ALL POSITIVE +0.73 | survives |
+| randle_out | MIXED +0.07 | ALL POSITIVE +0.25 | **FLIPPED** |
+| kuminga_in | MIXED -0.06 | MIXED +0.03 | |
+| reid_out | ALL NEGATIVE -0.26 | ALL NEGATIVE -0.36 | survives |
+| ddv_injury | ALL NEGATIVE -0.35 | ALL NEGATIVE -0.27 | |
+| depth | ALL NEGATIVE -0.36 | MIXED -0.32 | **FLIPPED** |
+| dosunmu_retained | ALL NEGATIVE -0.40 | ALL NEGATIVE -0.42 | survives |
+
+**No currently-quotable verdict is lost.** `ball_in`, `reid_out` and `dosunmu_retained` survive both the slot rule and the aging adjustment. `randle_out` flips again, in the opposite direction this time, which settles it: a verdict that moves under two independent modelling choices is not a finding, and it stays retired. `depth` was already sign-less.
+
+MIN's title band rises across all four views, **1.57-3.81% to 2.33-4.83%**. That is mostly a level effect: the fitted curve is net-positive league-wide because of survivorship (players who decline leave and stop contributing deltas), so most teams gain. The band is what ships, and it moved.
