@@ -88,6 +88,7 @@ OUT_ROT = os.path.join(REPO, "kuminga", "outputs", "rotations_2026_27.csv")
 OUT_CURVE = os.path.join(REPO, "kuminga", "outputs", "minutes_rank_curve.csv")
 OUT_ROOK = os.path.join(REPO, "kuminga", "outputs", "rookie_priors.csv")
 OUT_POOL = os.path.join(REPO, "kuminga", "outputs", "player_pool_2026_27.csv")
+OUT_POOLSHARE = os.path.join(REPO, "kuminga", "outputs", "team_pool_shares.csv")
 
 TF = {"PHO": "PHX", "BRK": "BKN", "CHO": "CHA"}
 
@@ -295,6 +296,38 @@ def main():
 
         pool = pd.concat([pool_now, pool_base], ignore_index=True)
 
+        # ---- position pool (S1) --------------------------------------------------
+        # Primary listing decides the pool: Guard-Forward is a guard, Forward-Centre a
+        # forward. Rookies have no bio row, so their draft-board position is used.
+        pos_by_id = bio.set_index("player_id").position.to_dict()
+        draft_pos = {nkey(p["player"]): p.get("position", "") for p in raw["draft"]["picks"]}
+        def resolve_pos(row):
+            if pd.notna(row.player_id) and row.player_id in pos_by_id:
+                v = pos_by_id[row.player_id]
+                if isinstance(v, str) and v:
+                    return v
+            dp = draft_pos.get(nkey(row.player_name), "")
+            return {"G": "Guard", "F": "Forward", "C": "Center", "G-F": "Guard-Forward",
+                    "F-C": "Forward-Center", "F-G": "Forward-Guard",
+                    "C-F": "Center-Forward"}.get(dp, dp or "Forward")
+        pool["position"] = pool.apply(resolve_pos, axis=1)
+        pool["pool"] = pool.position.map(rotation.pool_of)
+        r.note("position pools: " + str(pool.pool.value_counts().to_dict()))
+
+        # Each team's OWN 2025-26 share of minutes by pool, which is the budget the
+        # slot-aware allocator uses. Saved so downstream scripts use the same numbers.
+        rsx = pg_adv[(pg_adv.season_type == "Regular Season") & (pg_adv.minutes_float > 0)].copy()
+        rsx["pool"] = rsx.player_id.map(pos_by_id).map(rotation.pool_of)
+        tri = tg[["team_id", "team_abbreviation"]].drop_duplicates().set_index("team_id").team_abbreviation
+        tot = rsx.groupby(["team_id", "pool"]).minutes_float.sum().unstack(fill_value=0)
+        shares = tot.div(tot.sum(axis=1), axis=0)
+        shares.index = shares.index.map(tri)
+        shares = shares.reindex(columns=["guard", "forward", "big"]).fillna(0.0)
+        shares.to_csv(OUT_POOLSHARE)
+        r.note("team pool shares saved; MIN big share "
+               f"{shares.loc['MIN','big']*240:.1f} min vs league mean "
+               f"{shares.big.mean()*240:.1f}")
+
         # ---- rank score (percentiles taken league-wide, within scenario) ---------
         pool["pct_mpg"] = pool.groupby("scenario").prior_mpg.rank(pct=True)
         pool["pct_net"] = pool.groupby("scenario").consensus_net.rank(pct=True)
@@ -325,6 +358,7 @@ def main():
         r.output(OUT_CURVE, rows=len(curve))
         r.output(OUT_ROOK, rows=60)
         r.output(OUT_POOL, rows=len(pool))
+        r.output(OUT_POOLSHARE, rows=30)
 
     print()
     mn = rot[(rot.scenario == "current") & (rot.team_abbr == "MIN")]

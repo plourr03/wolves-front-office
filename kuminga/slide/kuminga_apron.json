@@ -1,0 +1,39 @@
+{
+  "_provenance": {
+    "note": "Every figure on this slide is on kuminga/outputs/final_numbers.csv. Nothing else goes on it.",
+    "215871829": "cap_reconciliation_20260827T123553Z",
+    "6064000": "R4 reported terms; league_year_constants 2026-27 taxpayer_mle",
+    "221686000": "league_year_constants 2026-27, verified against NBA.com",
+    "249829": "eval_signing_20260827T123804Z",
+    "5814171": "lede_loophole_20260827T134245Z",
+    "14679012": "cap_reconciliation_20260827T123553Z (Josh Green 2026-27)",
+    "as_of": "2026-08-26 contract book; drafted 2026-08-27 for a 2026-08-28 post"
+  },
+  "brand": "WOLVES TO A T",
+  "brand_tag": "TIMBERWOLVES ANALYTICS",
+  "dateline": "THE APRON \u00b7 08.28.26",
+  "headline": ["SHORT BY", "$249,829."],
+  "accent_line": 1,
+  "subhead": [
+    "Minnesota agreed to terms with Jonathan Kuminga.",
+    "The exception they'd pay him from doesn't fit."
+  ],
+  "tiles": [
+    {"num": "$215.9M",  "label": "ON THE BOOKS",       "detail": ["13 contracted players.", "$215,871,829 exact."]},
+    {"num": "$6.06M",   "label": "TAXPAYER MID-LEVEL", "detail": ["Kuminga, 2 yrs / $12.4M.", "Reported, not official."]},
+    {"num": "$221.7M",  "label": "THE SECOND APRON",   "detail": ["A hard cap the moment", "they use the exception."]},
+    {"num": "$249,829", "label": "OVER THE LINE",      "detail": ["Less than a rookie", "minimum contract."]}
+  ],
+  "catch": {
+    "label": "THE CATCH",
+    "text": "They can pay Kuminga $5,814,171 today. Just not the full exception."
+  },
+  "context": {
+    "label": "WHAT HAS TO MOVE",
+    "text": "Josh Green $14,679,012  \u00b7  stretch deadline Sat 08.29"
+  },
+  "footer_right": [
+    "Cap: verified contracts as of 08.26.26.",
+    "Terms reported (ESPN), not yet official."
+  ]
+}

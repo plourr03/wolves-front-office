@@ -431,3 +431,80 @@ The spine is essentially **unbiased** (+0.27 wins) and its ordering correlates 0
 
 **Scope of the claim, stated so it is not overread.** This is highly sensitive to who is identified as the filler. Shannon Jr. is a Guard-Forward with 12.5 prior minutes a game and a poor rating; if Minnesota signs another forward with the roster spot the 14-man minimum requires, the alternative improves and Kuminga's margin narrows. The finding is "against the forward currently on the roster", not "against any forward they could get".
 
+
+### D31. The slot constraint applied to every player-specific move, and the one verdict it costs us (S1)
+
+C3 constrained only Kuminga's minutes to his position. That was inconsistent: if the counterfactual for a forward is "another forward plays", the same has to be true for a guard and for a big, or the constraint is being applied wherever it helps. S1 applies it to the whole Shapley set.
+
+**The mechanism.** `rotation.allocate_pooled` splits the 240 team minutes into three position budgets (guard, forward, big) from the primary listing in `nba_player_bio`, and water-fills within each pool against the same per-player ceiling the C2 run uses. Removing a guard means the freed minutes stay in the guard budget.
+
+| Move | Pool | Unconstrained | Slot-aware | Mean, before to after |
+|---|---|---|---|---|
+| other_departures | bundle | MIXED | **ALL POSITIVE** | +0.15 to +1.12 |
+| ball_in | guard | ALL POSITIVE | ALL POSITIVE | +1.30 to +0.67 |
+| randle_out | frontcourt | ALL POSITIVE | **MIXED** | +0.19 to +0.07 |
+| kuminga_in | forward | MIXED | MIXED | -0.04 to -0.06 |
+| reid_out | frontcourt | ALL NEGATIVE | ALL NEGATIVE | -0.98 to -0.26 |
+| ddv_injury | availability | ALL NEGATIVE | ALL NEGATIVE | -0.72 to -0.35 |
+| depth | bundle | MIXED | **ALL NEGATIVE** | +0.10 to -0.36 |
+| dosunmu_retained | guard | ALL NEGATIVE | ALL NEGATIVE | -0.52 to -0.40 |
+
+**One player-specific verdict flipped: `randle_out`.** It goes ALL POSITIVE to MIXED (consensus -0.007, RAPM +0.117, box +0.133, DARKO +0.021). Per Bobby's rule it **loses its QUOTABLE label**. "Letting Randle go helped" is no longer a claim the piece can make. What survives is the weaker and more honest version: the effect is small and the four views do not agree on its sign, which is a different sentence and belongs in the honesty rail rather than the verdict.
+
+Two bundles also flipped (`other_departures`, `depth`). They are not player-specific so the rule does not bite, but they should not be quoted with a sign either, because a verdict that moves this much on a modelling choice is not a finding.
+
+**Dosunmu, which is what Bobby actually held back.** He survives: ALL NEGATIVE both ways, mean -0.52 to -0.40, slot-aware band [-0.758, -0.126]. Constraining his minutes to the guard pool, which was the specific worry (his replacement was being drawn from the whole roster, so the counterfactual roster was implausibly good), moves him a tenth of a percentage point and does not touch the sign. **He is now quotable.** The D29 caveat still attaches: the move set has no "replacement guard" to sign, so this is "retaining Dosunmu at his minutes versus his minutes going to the guards already on the roster", not "versus any guard available".
+
+**Why MIN needs its own pool budget, and the artifact it would otherwise have created.** The first pooled run used league-average shares (guard 49.81%, forward 36.11%, big 14.08% of 240 minutes). Under that budget `reid_out` flipped to MIXED. It is an artifact: **Minnesota played the most big minutes in the league last season, 53.7 a game against a league mean of 33.8, rank 1 of 30.** Gobert at 31.3 and Reid at 26.1 cannot both fit inside a 33.8-minute budget, so the league-average version deleted the double-big shape that is the whole reason Reid's departure matters. `allocate_pooled` now takes a `budget_share` argument and the Shapley run passes Minnesota's own 2025-26 shares from `team_pool_shares.csv`. With the team budget `reid_out` returns to ALL NEGATIVE. **Reported because it was nearly a published flip caused by a default, not by the data.**
+
+**Which run is primary.** The slot-aware run, for the C3 reason: a counterfactual that hands a departing player's minutes to whoever the model rates highest is not available to a coach. The unconstrained table is preserved in `shapley_min.csv`; the slot-aware one is `shapley_min_POOLED.csv` and the comparison is `outputs/S1_shapley_slot_comparison.csv` (run `compare_slot_shapley_20260827T133633Z`).
+
+### D32. The Kuminga finding does not survive every fill, so the claim gets narrowed (S2)
+
+C3's answer depended on identifying Terrence Shannon Jr. as the man who takes the 4 minutes. S2 re-prices the same marginal contribution under five different answers to "who fills the slot".
+
+| Variant | Filled by | Verdict | Band (pp) |
+|---|---|---|---|
+| A. C3 default | McDaniels +2.7, Shannon +15.5 | ALL POSITIVE | +0.140 to +1.226 |
+| B. Lyles forced | Lyles +26.0 | **MIXED** | -0.912 to +0.684 |
+| C. McDaniels slides | McDaniels +19.5, then next wing | ALL POSITIVE | +0.140 to +1.204 |
+| D. Beringer forced | Beringer +26.0 | **ALL NEGATIVE** | -3.046 to -0.394 |
+| E. Forward / Forward-Centre only | McDaniels +2.7 (23.3 unplaced) | **MIXED** | -0.912 to +0.665 |
+
+**Ruling: all-positive does NOT survive every fill.** Per Bobby's decision rule the section claim reads **"against the most likely internal alternative"**, never "against any internal alternative", and the three failing fills are named: Lyles forced into the role, Beringer forced into the role, and the tighter Forward-or-Forward-Centre eligibility rule.
+
+**Why the two "forced" variants are fair tests and not straw men.** Under last season's minutes both Lyles and Beringer have zero headroom: Lyles played 6.0 a game so his ceiling is 9.0 and the rotation already has him at exactly 9.0; Beringer played 7.85 so his ceiling is 10.85 and he is already at 10.85. That is the only reason the C3 fill order skipped past them to Shannon. But "if Lyles were the starter" is a question about a role Finch could assign, not about last season's usage, so B and D lift the ceiling to 36.0 for the named filler. **Reading D correctly: it says a Kuminga-to-Beringer swap is a downgrade under all four views, which is a finding about Beringer, not evidence against Kuminga.** B is the one that genuinely narrows the claim, because Lyles at starter minutes is a real thing a coach might do and the four views split on it.
+
+**Variant E and the rule collision.** C3 calls a player eligible at the 4 if the listing contains "Forward" and is not centre-first, which admits Shannon (Guard-Forward). The S1 pool rule keys on the *primary* listing, which makes Shannon a guard. The two rules disagree about exactly the one player C3's answer turns on. E applies the strictest reading (Forward or Forward-Centre only) and leaves **23.3 of Kuminga's 26.0 minutes unplaceable**, which is itself the honest result: under a strict positional reading Minnesota does not have a backup 4, and that is closer to the argument for the signing than to an argument against it. Say that, rather than picking the rule that gives the nicer number.
+
+`outputs/slot_robustness.csv`, run `slot_robustness_20260827T130634Z`.
+
+### D33. The lede was overstated, and a reader with a calculator would have caught it (S3)
+
+"Could not legally sign him" is false as written. **An exception may be used partially.** Minnesota sits $5,814,171 below the second apron, so a first-year salary of exactly that fits, puts team salary on $221,686,000 to the dollar, and is legal, because the hard cap prohibits *exceeding* the apron rather than reaching it. That is 95.9% of the taxpayer mid-level.
+
+**Change to a previously reported figure:** none. $249,829 is unchanged and correct. What changes is the sentence it supports. **Before:** "could not legally sign him." **After:** "could not sign him for the money they had agreed to pay him", with the loophole stated in the piece rather than left for a reader to find.
+
+Two things close the loophole and both are now in section 1:
+- **It costs Kuminga $512,149** over two years at the 5% maximum raise. The player who just declined the Lakers to protect his own optionality is not the obvious person to volunteer it.
+- **It freezes the roster at 14 for the season.** Exactly on the apron, Minnesota cannot sign a fifteenth man, absorb a dollar in any trade, or replace an injured player. Carry a fifteenth at the rookie minimum and Kuminga's ceiling falls to $4,456,171, 73.5% of the exception.
+
+**CBA verification, both checked 2026-08-27 per R8.** The roster minimum is **Article XXIX, Section 2(a)**: 14 or 15 players on the Active and Inactive Lists during the regular season. **Section 2(b)(i)** permits 12 or 13 for no more than two consecutive weeks at a time and 28 days in total, so "14-man roster" is a season-long floor with a short grace period, not a daily requirement. Sources: the CBA full text mirror (atlhawksfanatic.github.io/NBA-CBA/miscellaneous.html) and cbaguide.com/eligibility/rosters/. The hard-cap verb is **exceed**, confirmed against Larry Coon's Salary Cap FAQ (cbafaq.com/salarycap17.htm), which is what makes the partial-exception figure land on the dollar rather than a dollar under.
+
+`outputs/lede_loophole.csv`, `outputs/lede_loophole.md`, run `lede_loophole_20260827T134245Z`.
+
+### D34. Skeleton edits, and the one that was not on the list (S4)
+
+Applied as briefed: the win-total backtest into section 6's honesty rail (**this model missed by 8.80 wins on average over three seasons, the betting market by 7.47**, and the market tracked actual wins better in all three); the single-fork play-in sentence removed and replaced with what the band itself says; "adjudicates" softened to "consistent with", since one bid is one observation and not an adjudication; the sign-and-trade caveat moved to sit directly beside the 4% figure rather than living elsewhere; and the age corrected to **23, turning 24 in October** (born 2002-10-06, verified against the frozen `player_bio` snapshot).
+
+**Not on the list, but forced by S1.** Section 4 had to be rebuilt, because its table and its thesis sentence both depended on verdicts that S1 retired. The Randle row is gone. The thesis sentence, "hold the injury out and the transactions were mildly positive", is **ALL POSITIVE under the slot-aware run and MIXED under the unpooled one**, so it flips on a modelling choice and cannot carry a sign. It is replaced by the claim that does survive: the Achilles is the largest single negative under every view, and it is the only item on the board nobody chose. Section 7's verdict was brought in line at the same time, and now names the two load-bearing words in its own central claim.
+
+**A bug in the numbers sheet, caught by an exception rather than by a wrong answer.** `build_final_numbers.py` built a lookup with `{x.item: ...}` over `df.iterrows()`. `Series.item` is a **method**, so the dict was keyed by bound method objects and every lookup missed. It raised a KeyError on a key that was plainly present in the CSV, which is why it was found immediately. Worth recording because the same collision is silent when the shadowed name is used for something other than a lookup: `.name`, `.count`, `.size`, `.min` and `.max` are all columns this project could plausibly create. **Index by string, not by attribute, on any frame whose column names are not controlled here.**
+
+### D35. The Friday slide (S5)
+
+Rendered: `kuminga/slide/kuminga_apron.png`, config `kuminga/slide/kuminga_apron.json`, plus a 319-word companion at `kuminga/slide/kuminga_apron_post.txt`.
+
+Four tiles carry the arithmetic ($215.9M on the books, $6.06M exception, $221.7M apron, $249,829 over), the catch line carries the S3 loophole ("They can pay Kuminga $5,814,171 today. Just not the full exception."), and the footer credits the contract book as of 2026-08-26 and flags the terms as reported rather than official. Every figure on the slide is on `final_numbers.csv`; the config carries a `_provenance` block mapping each number to the run that produced it, since a run ID cannot go on a public post.
+
+**The renderer had to be localised, and it would have failed quietly.** The skill bundle ships `FONT_DIR = "/usr/share/fonts/truetype/dejavu/"`. On Windows every `ImageFont.truetype` call raises OSError, the handler falls through to `ImageFont.load_default()`, and the script **renders a 1080x1350 slide in a tiny bitmap font and exits 0**. A copy now lives at `kuminga/slide/render_slide.py` mapped to the same Windows faces the approved lamelo carousel uses (bahnschrift condensed, Segoe UI, Consolas Bold for numerals), with an `_assert_fonts()` guard that refuses to render rather than emitting a broken slide. The skill bundle itself is untouched.

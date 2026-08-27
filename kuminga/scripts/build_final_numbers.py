@@ -90,6 +90,35 @@ def main():
             add("The deal that cannot happen yet", "a 15th man in the trade branch",
                 f"${-t15.vs_first_apron:,.0f} over the first apron", "", "FACT", rid_cap,
                 "so any salary returning in a Green trade crosses it")
+        # ---- S3: the loophole, so the lede survives a reader with a calculator
+        lp = load("lede_loophole.csv")
+        rid_lp = last_run("lede_loophole")
+        if lp is not None:
+            # NB: x.item is Series.item, the METHOD. Must index by name.
+            g = dict(zip(lp["item"], lp["amount"].astype(float)))
+            add("The deal that cannot happen yet", "room under the second apron",
+                f"${g['ROOM under the second apron']:,.0f}", "", "FACT", rid_lp,
+                "an exception may be used PARTIALLY, so this much of it fits")
+            add("The deal that cannot happen yet",
+                "max first-year salary at a 14-man roster",
+                f"${g['max first-year salary, 14-man roster']:,.0f}",
+                "95.9% of the taxpayer MLE", "FACT", rid_lp,
+                "lands team salary on the apron to the dollar, which is legal because "
+                "the hard cap prohibits EXCEEDING it; so the accurate lede is 'could "
+                "not sign him to the FULL exception'")
+            add("The deal that cannot happen yet",
+                "max first-year salary at a 15-man roster",
+                f"${g['max first-year salary, 15-man roster']:,.0f}",
+                "73.5% of the taxpayer MLE", "FACT", rid_lp,
+                "after a rookie-minimum 15th man")
+            add("The deal that cannot happen yet", "what the loophole costs Kuminga",
+                f"${g['what the loophole costs KUMINGA']:,.0f}", "over two years",
+                "FACT", rid_lp, "at the 5% maximum raise; the reason it is a loophole "
+                "and not a plan")
+            add("The deal that cannot happen yet", "regular-season roster minimum",
+                "14 or 15 players", "12 or 13 allowed for 2 consecutive weeks and 28 "
+                "days total", "FACT", "CBA Article XXIX Sec 2(a), 2(b)(i)",
+                "verified 2026-08-27 against CBA text and cbaguide.com")
 
         # ---- price and market -------------------------------------------------
         mk = load("market_comparison.csv")
@@ -133,6 +162,25 @@ def main():
                 f"{sc.marginal_pp.min():+.3f} to {sc.marginal_pp.max():+.3f}pp",
                 v, "QUOTABLE AS BAND" if v != "MIXED" else "NOT QUOTABLE", rid_slot,
                 f"his minutes can only go to {sc.filler.iloc[0]}")
+        sr = load("slot_robustness.csv")
+        rid_sr = last_run("slot_robustness")
+        if sr is not None:
+            ok = sr[sr.sign_agreement == "ALL POSITIVE"].variant.tolist()
+            bad = sr[sr.sign_agreement != "ALL POSITIVE"].variant.tolist()
+            add("The slot he inherits", "fills where all-positive HOLDS",
+                f"{len(ok)} of {len(sr)}", "; ".join(ok), "FACT", rid_sr,
+                "so the claim is 'against the MOST LIKELY internal alternative', "
+                "never 'against any internal alternative'")
+            add("The slot he inherits", "fills where all-positive FAILS",
+                f"{len(bad)} of {len(sr)}", "; ".join(bad), "FACT", rid_sr,
+                "name these in the piece rather than hedging")
+            for _, x in sr.iterrows():
+                add("The slot he inherits", f"fill variant {x.variant}",
+                    f"{x.mean_pp:+.2f}pp mean", f"{x.lo_pp:+.2f} to {x.hi_pp:+.2f}pp",
+                    "QUOTABLE AS BAND" if x.sign_agreement != "MIXED" else "NOT QUOTABLE",
+                    rid_sr, f"{x.sign_agreement}"
+                    + (f"; {x.unplaced_minutes:.1f} min unplaced"
+                       if x.unplaced_minutes > 0.01 else ""))
         le = load("lineup_evidence.csv")
         rid_le = last_run("lineup_evidence")
         if le is not None:
@@ -152,16 +200,41 @@ def main():
                         "small sample; the sign reversal between teams is the point")
 
         # ---- what moved the offseason ----------------------------------------
-        sh = load("shapley_min.csv", index_col=0)
+        # PRIMARY is the slot-aware run (D31): a departing player's minutes go to his
+        # own position group. The unpooled run is kept only to test which verdicts
+        # survive the change, and a verdict that does not survive is not quotable.
+        sh = load("shapley_min_POOLED.csv", index_col=0)
+        cmp_ = load("S1_shapley_slot_comparison.csv")
         rid_sh = last_run("shapley")
+        rid_cmp = last_run("compare_slot_shapley")
+        flipped = set(cmp_[cmp_.flipped].move) if cmp_ is not None else set()
         if sh is not None:
             for mv, x in sh.iterrows():
-                verdict = ("QUOTABLE AS BAND" if x.sign_agreement != "MIXED"
-                           else "NOT QUOTABLE")
+                agreed = x.sign_agreement != "MIXED"
+                verdict = ("NOT QUOTABLE" if (mv in flipped or not agreed)
+                           else "QUOTABLE AS BAND")
+                note = x.sign_agreement
+                if mv in flipped:
+                    note += "; FLIPPED under the unpooled minutes rule, so no sign"
                 add("What moved the offseason", f"Shapley: {mv}",
                     f"{x.mean_pp:+.2f}pp mean",
                     f"{min(x[f] for f in FORKS):+.2f} to {max(x[f] for f in FORKS):+.2f}pp",
-                    verdict, rid_sh, x.sign_agreement)
+                    verdict, rid_sh, note)
+            exi = sh.drop(index="ddv_injury", errors="ignore")[FORKS].sum()
+            sign = ("ALL POSITIVE" if (exi > 0).all() else
+                    "ALL NEGATIVE" if (exi < 0).all() else "MIXED")
+            add("What moved the offseason", "transactions excluding the injury",
+                f"{exi.mean():+.2f}pp mean",
+                f"{exi.min():+.2f} to {exi.max():+.2f}pp", "NOT QUOTABLE", rid_sh,
+                f"{sign} here but MIXED under the unpooled rule, so it flips and "
+                f"cannot carry a sign")
+        if cmp_ is not None:
+            add("What moved the offseason", "player verdicts that survive the slot rule",
+                f"{int(cmp_[cmp_.quotable].shape[0])} of "
+                f"{int(cmp_.player_specific.sum())}",
+                "; ".join(cmp_[cmp_.quotable].move), "FACT", rid_cmp,
+                "flipped and dropped: "
+                + (", ".join(cmp_[cmp_.player_specific & cmp_.flipped].move) or "none"))
 
         # ---- the structural risk ---------------------------------------------
         po = load("player_option.csv")

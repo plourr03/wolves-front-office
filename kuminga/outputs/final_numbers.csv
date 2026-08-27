@@ -5,6 +5,11 @@ The deal that cannot happen yet,amount over the second apron,"$249,829","second 
 The deal that cannot happen yet,trade branch at a legal 14-man roster,"$208,614,817","$400,183 under the first apron",FACT,cap_reconciliation_20260827T123553Z,
 The deal that cannot happen yet,stretch branch at 14,"$213,507,821","$4,492,821 OVER the first apron",FACT,cap_reconciliation_20260827T123553Z,
 The deal that cannot happen yet,a 15th man in the trade branch,"$957,817 over the first apron",,FACT,cap_reconciliation_20260827T123553Z,so any salary returning in a Green trade crosses it
+The deal that cannot happen yet,room under the second apron,"$5,814,171",,FACT,lede_loophole_20260827T134245Z,"an exception may be used PARTIALLY, so this much of it fits"
+The deal that cannot happen yet,max first-year salary at a 14-man roster,"$5,814,171",95.9% of the taxpayer MLE,FACT,lede_loophole_20260827T134245Z,"lands team salary on the apron to the dollar, which is legal because the hard cap prohibits EXCEEDING it; so the accurate lede is 'could not sign him to the FULL exception'"
+The deal that cannot happen yet,max first-year salary at a 15-man roster,"$4,456,171",73.5% of the taxpayer MLE,FACT,lede_loophole_20260827T134245Z,after a rookie-minimum 15th man
+The deal that cannot happen yet,what the loophole costs Kuminga,"$512,149",over two years,FACT,lede_loophole_20260827T134245Z,at the 5% maximum raise; the reason it is a loophole and not a plan
+The deal that cannot happen yet,regular-season roster minimum,14 or 15 players,12 or 13 allowed for 2 consecutive weeks and 28 days total,FACT,"CBA Article XXIX Sec 2(a), 2(b)(i)",verified 2026-08-27 against CBA text and cbaguide.com
 The price and the market,"Kuminga market value, four views",$2.7M to $11.7M,all-ages percentile map,QUOTABLE AS BAND,eval_signing_20260827T123804Z,
 The price and the market,"best real bid (Lakers, rejected)",$12.0M/yr over 3 years,"~$36M total, sign-and-trade",FACT,eval_signing_20260827T123804Z,"Anthony Slater, ESPN"
 The price and the market,views agreeing with the real bid within 25%,2 of 4,"consensus $11.5M, RAPM $11.7M vs a $12.0M bid",QUOTABLE,eval_signing_20260827T123804Z,the two possession-based views land within 4%; box and DARKO do not
@@ -12,18 +17,27 @@ The price and the market,age-restricted market value (22-25),$2.3M to $3.6M,"n=3
 The price and the market,surplus in impact units at the MLE,-0.47 to +0.91,2 of 4 positive,NOT QUOTABLE,eval_signing_20260827T123804Z,views disagree on sign
 The price and the market,surplus at Atlanta's declined $24.3M option,-1.76 to -0.03,all four negative,QUOTABLE,eval_signing_20260827T123804Z,all four views agree Atlanta was right to decline
 The slot he inherits,"Kuminga marginal contribution, slot-constrained",+0.140 to +1.226pp,ALL POSITIVE,QUOTABLE AS BAND,slot_analysis_20260827T131606Z,his minutes can only go to Terrence Shannon Jr.
+The slot he inherits,fills where all-positive HOLDS,2 of 5,A_c3_default_shannon; C_mcdaniels_slides,FACT,slot_robustness_20260827T133141Z,"so the claim is 'against the MOST LIKELY internal alternative', never 'against any internal alternative'"
+The slot he inherits,fills where all-positive FAILS,3 of 5,B_lyles_fills; D_beringer_fills; E_tight_rule_F_or_FC,FACT,slot_robustness_20260827T133141Z,name these in the piece rather than hedging
+The slot he inherits,fill variant A_c3_default_shannon,+0.70pp mean,+0.14 to +1.23pp,QUOTABLE AS BAND,slot_robustness_20260827T133141Z,ALL POSITIVE; 7.8 min unplaced
+The slot he inherits,fill variant B_lyles_fills,+0.09pp mean,-0.91 to +0.68pp,NOT QUOTABLE,slot_robustness_20260827T133141Z,MIXED
+The slot he inherits,fill variant C_mcdaniels_slides,+0.70pp mean,+0.14 to +1.20pp,QUOTABLE AS BAND,slot_robustness_20260827T133141Z,ALL POSITIVE; 6.5 min unplaced
+The slot he inherits,fill variant D_beringer_fills,-1.48pp mean,-3.05 to -0.39pp,QUOTABLE AS BAND,slot_robustness_20260827T133141Z,ALL NEGATIVE
+The slot he inherits,fill variant E_tight_rule_F_or_FC,+0.10pp mean,-0.91 to +0.66pp,NOT QUOTABLE,slot_robustness_20260827T133141Z,MIXED; 23.3 min unplaced
 The slot he inherits,Randle+Gobert net rating,+3.10,"3,443 possessions",FACT,lineup_evidence_20260827T024925Z,"descriptive on/off, not an effect"
 The slot he inherits,Reid+Gobert net rating,+6.83,"2,253 possessions",FACT,lineup_evidence_20260827T024925Z,"descriptive on/off, not an effect"
 The slot he inherits,Kuminga on/off at GSW,-6.53,971 possessions,FACT,lineup_evidence_20260827T024925Z,small sample; the sign reversal between teams is the point
 The slot he inherits,Kuminga on/off at ATL,+2.90,"1,077 possessions",FACT,lineup_evidence_20260827T024925Z,small sample; the sign reversal between teams is the point
-What moved the offseason,Shapley: ball_in,+1.30pp mean,+0.81 to +2.39pp,QUOTABLE AS BAND,shapley_20260827T131301Z,ALL POSITIVE
-What moved the offseason,Shapley: randle_out,+0.19pp mean,+0.05 to +0.28pp,QUOTABLE AS BAND,shapley_20260827T131301Z,ALL POSITIVE
-What moved the offseason,Shapley: other_departures,+0.15pp mean,-0.50 to +1.33pp,NOT QUOTABLE,shapley_20260827T131301Z,MIXED
-What moved the offseason,Shapley: depth,+0.10pp mean,-0.16 to +0.39pp,NOT QUOTABLE,shapley_20260827T131301Z,MIXED
-What moved the offseason,Shapley: kuminga_in,-0.04pp mean,-0.73 to +0.40pp,NOT QUOTABLE,shapley_20260827T131301Z,MIXED
-What moved the offseason,Shapley: dosunmu_retained,-0.52pp mean,-0.86 to -0.02pp,QUOTABLE AS BAND,shapley_20260827T131301Z,ALL NEGATIVE
-What moved the offseason,Shapley: ddv_injury,-0.72pp mean,-1.64 to -0.24pp,QUOTABLE AS BAND,shapley_20260827T131301Z,ALL NEGATIVE
-What moved the offseason,Shapley: reid_out,-0.98pp mean,-1.60 to -0.37pp,QUOTABLE AS BAND,shapley_20260827T131301Z,ALL NEGATIVE
+What moved the offseason,Shapley: other_departures,+1.12pp mean,+0.33 to +2.61pp,NOT QUOTABLE,shapley_20260827T134406Z,"ALL POSITIVE; FLIPPED under the unpooled minutes rule, so no sign"
+What moved the offseason,Shapley: ball_in,+0.67pp mean,+0.37 to +0.99pp,QUOTABLE AS BAND,shapley_20260827T134406Z,ALL POSITIVE
+What moved the offseason,Shapley: randle_out,+0.07pp mean,-0.01 to +0.13pp,NOT QUOTABLE,shapley_20260827T134406Z,"MIXED; FLIPPED under the unpooled minutes rule, so no sign"
+What moved the offseason,Shapley: kuminga_in,-0.06pp mean,-0.41 to +0.16pp,NOT QUOTABLE,shapley_20260827T134406Z,MIXED
+What moved the offseason,Shapley: reid_out,-0.26pp mean,-0.43 to -0.07pp,QUOTABLE AS BAND,shapley_20260827T134406Z,ALL NEGATIVE
+What moved the offseason,Shapley: ddv_injury,-0.35pp mean,-0.63 to -0.19pp,QUOTABLE AS BAND,shapley_20260827T134406Z,ALL NEGATIVE
+What moved the offseason,Shapley: depth,-0.36pp mean,-0.64 to -0.09pp,NOT QUOTABLE,shapley_20260827T134406Z,"ALL NEGATIVE; FLIPPED under the unpooled minutes rule, so no sign"
+What moved the offseason,Shapley: dosunmu_retained,-0.40pp mean,-0.76 to -0.13pp,QUOTABLE AS BAND,shapley_20260827T134406Z,ALL NEGATIVE
+What moved the offseason,transactions excluding the injury,+0.78pp mean,+0.15 to +1.74pp,NOT QUOTABLE,shapley_20260827T134406Z,"ALL POSITIVE here but MIXED under the unpooled rule, so it flips and cannot carry a sign"
+What moved the offseason,player verdicts that survive the slot rule,3 of 5,ball_in; reid_out; dosunmu_retained,FACT,compare_slot_shapley_20260827T134414Z,flipped and dropped: randle_out
 The structural risk,P(Kuminga opts out after year one),0.50 to 0.80,flat aging,QUOTABLE AS BAND,player_option_20260827T024131Z,"first-pass model, not calibrated"
 The structural risk,P(Minnesota can retain him),0.28 to 0.54,flat aging,QUOTABLE AS BAND,player_option_20260827T024131Z,"Non-Bird caps a re-sign start at $7,640,640"
 The structural risk,Non-Bird re-sign ceiling in 2027,"$7,640,640",120% of the year-two salary,FACT,league_year_constants,confirmed from CBA text: a declined option year is never covered

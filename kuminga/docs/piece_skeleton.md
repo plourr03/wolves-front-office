@@ -8,7 +8,7 @@
 
 ## 1. The deal that cannot happen yet
 
-**The lede.** Minnesota agreed to terms with Jonathan Kuminga on Wednesday and, as of Thursday, could not legally sign him.
+**The lede.** Minnesota agreed to terms with Jonathan Kuminga on Wednesday and, as of Thursday, could not sign him for the money they had agreed to pay him.
 
 The arithmetic, and it is close enough to be the story:
 
@@ -17,11 +17,20 @@ The arithmetic, and it is close enough to be the story:
 - The second apron: **$221,686,000** `[league_year_constants, verified against NBA.com]`
 - **They are $249,829 over.** `[eval_signing_20260827T123804Z]`
 
-That is less than a rookie-minimum contract. Using the taxpayer MLE hard-caps a team at the second apron for the rest of the league year, and the test is where you sit **after** the signing, not before. So the exception was available to them (they sit in the first-apron tier) and impossible to fit.
+That is less than a rookie-minimum contract. Using the taxpayer MLE hard-caps a team at the second apron for the rest of the league year, and the test is where you sit **after** the signing, not before. So the exception was available to them (they sit in the first-apron tier) and impossible to fit **in full**.
+
+**Now the loophole, before a reader with a calculator finds it.** An exception can be used partially. Minnesota sits **$5,814,171** below the second apron, so a first-year salary of exactly that fits, lands team salary on **$221,686,000 to the dollar**, and is legal, because the hard cap prohibits *exceeding* the apron rather than reaching it `[lede_loophole_20260827T134245Z]`. That is 95.9% of the exception. So the precise claim is not that they could not sign him. It is that **they could not sign him to the full taxpayer mid-level exception**, and the gap is 4.1% of it.
+
+Two things close the loophole, and both belong in the piece:
+
+- **It costs Kuminga $512,149** over the two years, at the 5% maximum raise `[same]`. Someone has to volunteer that, and the player who just turned down the Lakers to protect his own optionality is not the obvious volunteer.
+- **It freezes the roster at 14 for the season.** At exactly the apron, Minnesota cannot sign a fifteenth man, take back a dollar in any trade, or replace an injured player. Carry a fifteenth on the rookie minimum and Kuminga's ceiling drops to **$4,456,171**, 73.5% of the exception `[same]`.
+
+So the Green move is not only about the last $249,829. It is about being able to field a normal roster afterwards.
 
 **Hence Saturday.** August 29 is the last day to waive a player and stretch his 2026-27 salary. Josh Green's $14,679,012 is what has to move.
 
-**The two branches, at a legal roster** `[cap_reconciliation_20260827T123553Z]`:
+**The two branches, at a legal roster** `[cap_reconciliation_20260827T123553Z]`. "Legal" means the 14-man floor: CBA **Article XXIX, Section 2(a)** requires 14 or 15 players on the Active and Inactive Lists through the regular season, and **Section 2(b)(i)** allows 12 or 13 for no more than two consecutive weeks at a time and 28 days in total `[CBA text; cbaguide.com]`:
 
 | | Team salary | vs first apron |
 |---|---|---|
@@ -44,7 +53,9 @@ Two things fall out of that $400,183. A **fifteenth** man on a rookie minimum pu
 
 The two possession-based views land **within four percent of that real bid**. The box and DARKO views are off by a factor of two and four. `[eval_signing_20260827T123804Z, QUOTABLE]`
 
-That is the first thing in this project that adjudicates between the four views using something outside the model, and it points the same way twice.
+*The caveat travels with the number.* The Lakers figure was a **sign-and-trade**, which is a different instrument from a taxpayer-exception signing: the price includes what Golden State had to be paid to cooperate and what Los Angeles was willing to hard-cap itself to do. It is a real number and it is the only real number we have, but it is not the same good being priced.
+
+That is the first thing in this project that is **consistent with** the possession-based views over the box-based ones using something outside the model. One bid is not an adjudication. It is one observation, it is the only one we have, and it points the same way twice.
 
 **Why he took less.** His camp's stated reason is control: a shorter prove-it deal that lets him reach free agency again in 2027 `[ESPN]`. Hold that thought for section 5.
 
@@ -66,25 +77,35 @@ Constrain his minutes to players actually eligible at the 4, and the man who fil
 
 **That is the case for the signing.** Not that he is good in the abstract. That the alternative on this roster is bad.
 
+**And here is exactly how far that claim goes, which is not as far as it first looks.** The answer depends on naming the man who takes the minutes, so we re-priced it under five different answers `[slot_robustness_20260827T133141Z]`. It holds against Shannon and it holds if Jaden McDaniels slides down to the 4. It does **not** hold under three others: Trey Lyles promoted into the role (mixed, -0.91 to +0.68), Joan Beringer promoted into the role (negative under all four), or a strict reading of eligibility that counts only players listed Forward or Forward-Centre.
+
+So the claim is **against the most likely internal alternative**, never "against any internal alternative". Two of those three failures are worth a sentence each rather than a hedge:
+
+- The Beringer version says a Kuminga-to-Beringer swap is a downgrade under every view. That is a finding about a rookie centre, not evidence against Kuminga.
+- The strict-eligibility version leaves **23.3 of his 26 minutes with nobody to give them to**, which is the most revealing result of the five. Read literally, Minnesota does not have a backup power forward. That is closer to an argument for the signing than against it.
+
+The one that genuinely narrows the claim is Lyles, because a coach could actually do that, and the four views split on whether it would be worse.
+
 ---
 
 ## 4. What moved the offseason
 
-**Only the signs that survived.** Exact Shapley over 256 coalitions, minutes ceiling applied, contributions summing to the whole with no residual `[shapley_20260827T131301Z]`.
+**Only the signs that survived.** Exact Shapley over 256 coalitions, minutes ceiling applied, contributions summing to the whole with no residual. Every move is priced under the same slot rule section 3 uses: a departing player's minutes go to his own position group, not to whoever the model likes best `[shapley_20260827T134406Z]`.
 
 | Move | Mean | Verdict |
 |---|---|---|
-| LaMelo Ball in | +1.30pp | **positive under all four views** |
-| Randle out | +0.19pp | **positive under all four** |
-| Reid out | -0.98pp | **negative under all four** |
-| DiVincenzo's Achilles | -0.72pp | **negative under all four** |
-| Dosunmu retained at $19.3M/yr | -0.52pp | **negative under all four** |
+| LaMelo Ball in | +0.67pp | **positive under all four views** |
+| Reid out | -0.26pp | **negative under all four** |
+| DiVincenzo's Achilles | -0.35pp | **negative under all four** |
+| Dosunmu retained at $19.3M/yr | -0.40pp | **negative under all four** |
 
-Three moves have no agreed sign and must not be given one: the depth bundle, the other departures, and, unconstrained, Kuminga himself.
+**What is missing from that table, and why.** The first draft of this section had "Randle out, +0.19pp, positive under all four". Applying the slot rule to him as well as to Kuminga takes it to **+0.07pp with no agreed sign** `[compare_slot_shapley_20260827T134414Z]`. It was the only player verdict that moved, and it does not come back. Letting Randle go is not a thing we can say helped. Two bundles moved too, the depth group and the other departures, so neither gets a sign either.
 
-**The sentence this section exists for:** hold the injury out and the transactions were mildly positive. The Achilles is what actually cost them. `[shapley_20260827T131301Z]`
+The rule being applied is worth stating once in the piece: **if a verdict changes when we change a modelling assumption, it is not a finding, and it does not get quoted.** Four of nine survived that test.
 
-**The uncomfortable one, which should stay in:** re-signing Ayo Dosunmu at five years and $112M grades negative under all four views. That is a real finding and it is also the one most likely to be wrong for a reason the model cannot see, since the model prices minutes and impact and not what a guard rotation costs to replace.
+**The sentence this section is tempted by, and cannot have.** Hold the injury out and the remaining transactions are positive under all four views here, but under the looser minutes rule the same total is mixed. It flips. So the honest version is the weaker one: the Achilles is the single largest negative on the board under every view we have, and it is the only thing on that list that nobody chose.
+
+**The uncomfortable one, which now stays in.** Re-signing Ayo Dosunmu at five years and $112M grades negative under all four views, and it was the verdict most likely to be an artifact of handing his minutes to better players. Constraining them to the guards actually on the roster moves it by a tenth of a point and does not touch the sign: **-0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE]`. The caveat that survives is different and smaller: the counterfactual is his minutes going to guards already here, not to a replacement Minnesota would have signed.
 
 ---
 
@@ -98,7 +119,7 @@ The first-pass option model puts **P(he opts out) at 0.50 to 0.80** and **P(Minn
 
 **And his camp said the quiet part out loud.** The stated reason for taking roughly half the Lakers' annual money was to get back to free agency in 2027. The model prices that event at a coin flip or worse; the player is describing it as the plan.
 
-**So the honest framing of the deal:** Minnesota is buying one year of a 24-year-old at half his market price, and the most likely single outcome is that they lose him for nothing.
+**So the honest framing of the deal:** Minnesota is buying one year of a **23-year-old who turns 24 in October** at half his market price, and the most likely single outcome is that they lose him for nothing.
 
 ---
 
@@ -108,11 +129,13 @@ Every team's roster was rebuilt the same way and run through the same pipeline. 
 
 **Minnesota moves from fifth to sixth in the West** `[build_outputs_20260827T131629Z, directional]`, passed by the Lakers.
 
-**The number to lead with here is not a title probability.** Minnesota's chance of finishing top six and skipping the play-in falls from **73% on the baseline to a band of 39% to 84%** across the four views `[seed_distribution, band]`. The consensus view says they are now more likely than not to be in the play-in.
+**The number to lead with here is not a title probability.** Minnesota's chance of finishing top six and skipping the play-in falls from **73% on the baseline to a band of 39% to 84%** across the four views `[seed_distribution, band]`. That band spans "comfortably safe" to "more likely than not in the play-in", which is the finding: the four views do not agree on whether this is a top-six team.
 
 Title odds for the piece, as a band and never as a midpoint: **1.63% to 3.74%** after the offseason `[run_sim_20260827T124337Z, QUOTABLE AS BAND]`.
 
 **And the honesty rail that belongs in the piece, not a footnote.** A three-season backtest of this calibration against the betting market puts its title-odds error at **1.4 to 2.3 percentage points** `[backtest_calibration_20260827T124932Z]`. Minnesota's entire four-view spread is 2.1 points. The measurement error is the same size as the thing being measured, which is why this piece quotes bands and refuses point estimates.
+
+**The same backtest on win totals, which is the less flattering half and runs anyway.** Against actual results over those three seasons, this model missed by **8.80 wins on average. The betting market missed by 7.47** `[same]`. The market was closer in two of the three seasons and tracked actual wins better in all three. Nothing here is a claim to beat the market. It is a claim to be explicit about a set of assumptions, which is a different and smaller thing, and it is why every seed and title figure above is a band.
 
 ---
 
@@ -120,9 +143,9 @@ Title odds for the piece, as a band and never as a midpoint: **1.63% to 3.74%** 
 
 Structure it as three claims of decreasing confidence.
 
-**What we know.** The signing is a bargain against the only real market price we can observe, and all four views agree Atlanta was right to let him go at $24.3M. The deal could not be executed until Green moved, by $249,829.
+**What we know.** The signing is a bargain against the only real market price we can observe, and all four views agree Atlanta was right to let him go at $24.3M. And they could not sign him to the full exception until Green moved: the gap was $249,829, and closing it any other way meant a 14-man roster frozen for the season.
 
-**What we believe.** Against the player who would actually take those minutes, Kuminga is worth something positive to Minnesota's title odds under every view we have. That is a narrower claim than "good signing" and it is the one the evidence supports.
+**What we believe.** Against the player who would most likely take those minutes, Kuminga is worth something positive to Minnesota's title odds under every view we have. Two words in that sentence are load-bearing. **Most likely**, because promote a different forward into the slot and the four views stop agreeing. And **those minutes**, because the case rests on the alternative being poor, not on the player being good.
 
 **What we cannot say.** Whether the offseason as a whole helped. The four views disagree on the sign, and the measurement error is as large as the effect. Anyone who tells you the Wolves' title odds went up or down by a specific amount this summer is reporting their choice of impact metric, not a fact about the team.
 

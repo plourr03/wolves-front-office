@@ -62,8 +62,9 @@ FCURVE = os.path.join(REPO, "kuminga", "outputs", "fcurve_min.csv")
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
 DARKO = os.path.join(REPO, "offseason", "data", "darko-dpm-leaderboard.csv")
 STR = os.path.join(REPO, "kuminga", "outputs", "team_strengths_2026_27.csv")
-OUT = os.path.join(REPO, "kuminga", "outputs", "shapley_min.csv")
-OUT_ORD = os.path.join(REPO, "kuminga", "outputs", "shapley_order_spread.csv")
+SUFFIX = "_POOLED" if "--pooled" in sys.argv else ""
+OUT = os.path.join(REPO, "kuminga", "outputs", f"shapley_min{SUFFIX}.csv")
+OUT_ORD = os.path.join(REPO, "kuminga", "outputs", f"shapley_order_spread{SUFFIX}.csv")
 
 ROTATION_SIZE = 10
 CURVE_WEIGHT = 0.5
@@ -100,12 +101,28 @@ PRESENT_UNLESS_APPLIED = set(sum(REMOVE_WHEN_APPLIED.values(), []))
 BASELINE_AND_MOVE = {"Ayo Dosunmu", "Bones Hyland", "Jaylen Clark"}
 
 
-allocate = rotation.allocate   # single source of truth (kuminga/lib/rotation.py)
+# S1: --pooled switches to the position-pool allocator, so EVERY player-specific move
+# is slot-constrained, not just Kuminga. Default remains the unpooled ceiling version
+# so the two can be compared.
+POOLED = "--pooled" in sys.argv
+if POOLED:
+    _SHARE = pd.read_csv(os.path.join(REPO, "kuminga", "outputs",
+                                      "team_pool_shares.csv"), index_col=0)
+    _MIN_BUDGET = _SHARE.loc["MIN"].to_dict()
+
+    def allocate(players, curve):
+        # Minnesota's OWN prior-season pool shape, not the league average.
+        return rotation.allocate_pooled(players, curve, budget_share=_MIN_BUDGET)
+else:
+    allocate = rotation.allocate
 
 
 def main():
     with runlog.run("shapley", inputs={"pool": POOL, "fcurve": FCURVE,
-                                       "moves": MOVES, "coalitions": 2 ** len(MOVES)}) as r:
+                                       "moves": MOVES, "coalitions": 2 ** len(MOVES),
+                                       "minutes_rule": "pooled" if POOLED else "unpooled",
+                                       "pool_budget": _MIN_BUDGET if POOLED else None,
+                                       "output": OUT}) as r:
         pool = pd.read_csv(POOL)
         curve = pd.read_csv(CURVE, index_col=0).iloc[:, 0]
         fc = pd.read_csv(FCURVE)
@@ -143,14 +160,15 @@ def main():
                 a = attrs.loc[k]
                 rows.append(dict(player_id=a.player_id, player_name=n,
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
-                                 rank_score=a.rank_score, rs_avail=1.0))
+                                 rank_score=a.rank_score, pool=a.get("pool", "forward"),
+                                 rs_avail=1.0))
             # DiVincenzo: present either way; the move flips his availability.
             k = nkey("Donte DiVincenzo")
             if k in attrs.index:
                 a = attrs.loc[k]
                 rows.append(dict(player_id=a.player_id, player_name="Donte DiVincenzo",
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
-                                 rank_score=a.rank_score,
+                                 rank_score=a.rank_score, pool=a.get("pool", "guard"),
                                  rs_avail=0.0 if "ddv_injury" in coalition else 1.0))
             return pd.DataFrame(rows)
 
@@ -251,7 +269,7 @@ def main():
         npiv["mean"] = npiv.mean(axis=1)
         npiv["min"] = npiv[FORKS].min(axis=1)
         npiv["max"] = npiv[FORKS].max(axis=1)
-        npiv.to_csv(os.path.join(REPO, "kuminga", "outputs", "named_scenarios.csv"))
+        npiv.to_csv(os.path.join(REPO, "kuminga", "outputs", f"named_scenarios{SUFFIX}.csv"))
         r.note("NAMED SCENARIOS (title %, by fork):")
         for s_, x in npiv.sort_values("mean", ascending=False).iterrows():
             r.note(f"  {s_:40s} " + " ".join(f"{f}={x[f]:5.2f}" for f in FORKS) +

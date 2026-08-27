@@ -41,11 +41,33 @@ python -c "import sys;sys.path.insert(0,'postmortem');from lib import db;print(d
 ```bash
 python kuminga/scripts/build_outputs.py
 python kuminga/scripts/build_figures.py
+python kuminga/scripts/shapley.py                  # unpooled, the robustness check
+python kuminga/scripts/shapley.py --pooled         # PRIMARY, the slot-aware run
+python kuminga/scripts/compare_slot_shapley.py     # which verdicts survive
+python kuminga/scripts/slot_robustness.py          # which fills the slot claim survives
+python kuminga/scripts/lede_loophole.py            # the partial-exception arithmetic
 python kuminga/scripts/reconcile_figures.py
 python kuminga/scripts/build_final_numbers.py
 ```
 
 `final_numbers.md` is the gate: if a figure is not on it, it does not go in the piece.
+
+**Order matters.** `build_final_numbers.py` reads `shapley_min_POOLED.csv` as primary and
+`shapley_min.csv` only to decide which verdicts flipped, so both Shapley runs and the
+comparison must be current or a retired verdict silently comes back as quotable.
+
+## L3b. Re-render the slide
+
+`kuminga/slide/kuminga_apron.json` is written against the unresolved state: the headline
+is "SHORT BY $249,829" and the context line reads "stretch deadline Sat 08.29". Once Green
+moves, that slide is stale in both places and must not post.
+
+```bash
+python kuminga/slide/render_slide.py kuminga/slide/kuminga_apron.json kuminga/slide/kuminga_apron.png
+```
+
+Update the `_provenance` block with the new run IDs at the same time, and re-check every
+figure against `final_numbers.csv` before rendering.
 
 ## L4. Refresh the skeleton
 
