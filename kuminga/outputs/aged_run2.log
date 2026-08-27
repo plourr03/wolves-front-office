@@ -51,3 +51,54 @@ IND       -4.21      -6.10  -3.64 -6.92 -5.22
   [run_sim_20260827T194456Z] expected wins = 41.0 + 2.239 * net
   [run_sim_20260827T194456Z] fork consensus: 5 seeds x 20,000 sims x 2 fields done
   [run_sim_20260827T194456Z] fork rapm: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T194456Z] fork box: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T194456Z] fork darko: 5 seeds x 20,000 sims x 2 fields done
+  [run_sim_20260827T194456Z] wrote 120 rows: 4 forks x 30 teams
+  [run_sim_20260827T194456Z]   MIN [consensus]: title 2.95% -> 2.39% (-0.56pp), net +2.16 -> -0.31, wins 45.8 -> 40.3
+  [run_sim_20260827T194456Z]   MIN [rapm]: title 2.95% -> 3.07% (+0.12pp), net +2.16 -> +0.44, wins 45.8 -> 42.0
+  [run_sim_20260827T194456Z]   MIN [box]: title 2.91% -> 4.12% (+1.21pp), net +2.16 -> +1.13, wins 45.8 -> 43.5
+  [run_sim_20260827T194456Z]   MIN [darko]: title 2.94% -> 5.13% (+2.19pp), net +2.16 -> +1.41, wins 45.8 -> 44.2
+[run] run_sim_20260827T194456Z -> ok
+
+MINNESOTA, all four forks:
+     fork  net_baseline  net_current  net_delta  wins_current  title_baseline  title_current  title_delta
+consensus        2.1576      -0.3081    -2.4657       40.3102          0.0295         0.0239      -0.0056
+     rapm        2.1576       0.4430    -1.7147       41.9918          0.0295         0.0307       0.0012
+      box        2.1576       1.1268    -1.0308       43.5229          0.0291         0.0412       0.0121
+    darko        2.1576       1.4127    -0.7449       44.1630          0.0294         0.0513       0.0219
+
+Title-odds change from the offseason (pp), by fork:
+fork        box  consensus  darko  rapm  mean
+team_abbr                                    
+SAS        0.41       7.40   3.11  8.71  4.91
+CHA        2.13       5.89  -3.85  6.97  2.78
+PHI        0.41       3.72   3.11  2.53  2.44
+BOS       -0.84       4.59   0.80  5.18  2.43
+MIA        0.23       1.25   4.66  1.33  1.87
+LAL        3.48       1.11   0.09  0.77  1.36
+POR        2.04       0.65  -0.20  0.91  0.85
+ATL       -0.32       0.42   3.00  0.21  0.83
+MIN        1.21      -0.56   2.19  0.12  0.74
+ORL        0.71       0.28   0.11  0.52  0.40
+HOU        0.62      -0.52   1.17  0.14  0.35
+CHI        0.01       0.02   0.35  0.01  0.10
+NOP        0.02      -0.00   0.02 -0.00  0.01
+DAL        0.01       0.01   0.00  0.00  0.00
+WAS        0.00       0.00   0.00  0.00  0.00
+UTA        0.00       0.00   0.00  0.00  0.00
+MEM       -0.00      -0.00   0.00 -0.00  0.00
+SAC        0.00       0.00   0.00  0.00  0.00
+BKN        0.00       0.00   0.00  0.00  0.00
+IND        0.00       0.00   0.00  0.00  0.00
+MIL        0.00       0.00   0.00  0.00  0.00
+PHX       -0.57      -0.90   0.89 -1.14 -0.43
+GSW       -0.42      -0.49  -0.47 -0.49 -0.47
+LAC       -1.27      -0.43  -0.67 -0.09 -0.62
+DEN        0.43      -1.95  -1.36 -2.84 -1.43
+TOR       -1.49      -1.94  -1.25 -2.21 -1.72
+OKC       -0.91      -2.27  -0.91 -4.22 -2.08
+CLE        0.15      -3.32  -3.16 -3.41 -2.44
+NYK       -2.67      -4.41  -4.85 -4.46 -4.10
+DET       -3.35      -8.56  -2.81 -8.54 -5.82
+[run] build_fcurve_20260827T195120Z
+  [build_fcurve_20260827T195120Z] fork consensus: field of 30 teams, sweeping MIN over 29 grid points

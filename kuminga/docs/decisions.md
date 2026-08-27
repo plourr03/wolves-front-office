@@ -815,3 +815,26 @@ So there is no contradiction to explain. One check was external and failed; the 
 - Only **4 players appear on two teams** for 2026-27 in the warehouse (Lillard MIL/POR, Beal LAC/PHO, Caldwell-Pope MEM/PHI, Prosper DAL/MEM, $170,835,554 total). Cross-team duplication therefore explains only a small part of the over-count; the rest is most likely waived and dead-money rows being carried as standard contracts.
 
 **Consequence, stated before the branch is taken.** `roster_snapshot_2026_27.csv` does NOT pass a player-level sanity check, so the G4 branch is already determined: it is the rebuild branch, not the re-run branch. Every sim-derived figure is provisional. The full per-team membership comparison against Spotrac team pages is in progress.
+
+### D54. Roster v2, and a correction to my own diagnosis (G4 rebuild)
+
+**First, the correction, because I reported the cause wrongly.** I told Bobby our book had players on the wrong teams. **It does not.** Spotrac's own pages place James Harden on Cleveland and Giannis Antetokounmpo on Miami, exactly as our book does. The team assignments were right and my diagnosis was wrong.
+
+The real defects are two membership rules we never modelled:
+
+- **PENDING TRANSACTIONS.** Spotrac lists reported-but-unofficial moves in a separate section and excludes them from team totals. Our book folded them in at full value. Kuminga on Minnesota is one; so are Harden on Cleveland (Spotrac $29,938,272 pending, our book $42,317,307 active) and Giannis on Miami.
+- **DEAD MONEY.** Waived players still count against the team that waived them. Phoenix's entire $19,383,010 gap is Bradley Beal's waived salary; most of Milwaukee's is Damian Lillard's $21,311,053, and Spotrac shows Lillard on BOTH Milwaukee (WAIVED) and Portland (active, $13,398,000).
+
+Both are rules, not roster errors, which is exactly why the league aggregate was within 0.63% while individual teams were tens of millions apart. **The abs/net ratio of 4.9x told me the errors cancelled; I read that as misassignment when it was actually a systematic rule omission in both directions.**
+
+**v2, built from all 30 Spotrac team cap pages.** `kuminga/data/roster_snapshot_2026_27_v2.csv`, sha256 `84d52c5f6f30ed6ba54ca0aa5d56eb7cd21edb2866d58261a90ac434c78d17fa`, 622 rows, 30 teams, statuses standard / non_guaranteed / dead_money / pending / cap_hold, with the **unlikely-incentives column carried per player** for the first time. Parsed standard counts match Spotrac's own header on every team.
+
+**GATE A: FAIL, and the gate is what is wrong, not the data.** Seven teams sit outside 13-15 standard: ATL 17, CHA 17, MIL 17, DAL 16, LAC 16, LAL 16, MEM 22. **Six of those are Spotrac's own published counts**, parsed to match their header exactly. Teams legitimately carry more than fifteen under contract in August and must cut down before the season; **13-to-15 is a regular-season rule, not an August one.** A gate that rejects the reference source's own data is mis-specified. It needs re-stating before it can gate anything.
+
+**GATE B: FAIL, but 25 of 30 clear at exactly $0.** The sum of absolute differences falls from **$183,047,636 to $9,428,578**, a 98% reduction. Five teams remain: WAS -$5,458,310, DEN -$1,091,658, DAL -$264,305, TOR -$264,305 (the identical figure on two teams suggests one shared cause still unfound), and MEM, which the proxy serves in a three-column layout with no incentives columns at all, so its incentives are marked unknown rather than silently zero.
+
+**MINNESOTA, the specific line required.** 13 standard contracts, cap hits summing to **$215,871,828**, plus **$1,750,000** of unlikely incentives (McDaniels $1,000,000, DiVincenzo $750,000) = **$217,621,828**, against Spotrac's $217,621,828. **A difference of zero.** The one dollar against our own $215,871,829 is McDaniels, where Basketball-Reference, SalarySwish and our book say $26,200,001 and Spotrac says $26,200,000. **Kuminga's status in v2 is `pending`**, matching `reported_pending_official` in the supplement. The only name difference against v1 is Bones vs Nah'Shon Hyland, the same player.
+
+**Membership diff overall:** 97 differing names across 28 teams, written to `outputs/roster_v2_membership_diff.csv`.
+
+**FAIL CLOSED. Step 6 was not run.** No pipeline re-run, no aged pipeline, no 200k sim, no noise floor. The league-wide quarantine stays in force. Minnesota's chain is unaffected and is now confirmed by an external reference at zero difference.
