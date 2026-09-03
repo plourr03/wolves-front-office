@@ -22,5 +22,21 @@
     "evaluate_move_legal": true,
     "failing_constraint": "",
     "hard_cap_level": "second_apron"
+  },
+  "actual_post_trade": {
+    "basis": "canonical post-trade: Green out, Williams in, Konchar waived and stretched, plus unlikely bonuses",
+    "trade_date": "2026-08-29",
+    "tier_before_signing": "first_apron",
+    "tier_after_signing": "first_apron",
+    "apron_salary_before": 211013416.0,
+    "apron_salary_after_signing": 217077416.0,
+    "second_apron": 221686000,
+    "room_after_signing": 4608584.0,
+    "over_first_apron_after_signing": 8062416.0,
+    "fits_under_hard_cap": true,
+    "evaluate_move_legal": true,
+    "failing_constraint": "",
+    "hard_cap_level": "second_apron",
+    "reconciles_to_spotrac": true
   }
 }

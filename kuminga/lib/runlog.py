@@ -50,7 +50,15 @@ class _Run:
 
     def note(self, msg: str):
         self.notes.append(msg)
-        print(f"  [{self.run_id}] {msg}", flush=True)
+        # The Windows console is cp1252 and raises on any name carrying a diacritic,
+        # which killed a run mid-way through printing a roster. A log line must never
+        # be able to fail the job it is logging.
+        line = f"  [{self.run_id}] {msg}"
+        try:
+            print(line, flush=True)
+        except UnicodeEncodeError:
+            enc = getattr(sys.stdout, "encoding", None) or "ascii"
+            print(line.encode(enc, "replace").decode(enc, "replace"), flush=True)
 
 
 @contextmanager

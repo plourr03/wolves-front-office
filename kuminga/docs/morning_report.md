@@ -3,6 +3,11 @@
 **Run:** overnight 2026-08-26 into 2026-08-27. **Frozen snapshot:** `wh_cf31d54027f4e098`.
 **Scope:** work order items 1 through 19. Sixteen completed, one blocked on terms of use, two partially limited. Details at the end.
 
+> **CORRECTED 2026-09-03, banner only, body left intact as the trail.** Two figures in this report are wrong and are superseded by `outputs/cap_canonical.json` and D-log entries 684, 730 and D55.
+> 1. **The apron basis omitted unlikely bonuses.** Minnesota is **$1,999,829** over the second apron with Kuminga on the books, not $249,829. Apron Team Salary is $217,621,829 (contracted $215,871,829 plus $1,750,000 of unlikely incentives), and adding $6,064,000 gives $223,685,829.
+> 2. **"With Green's $14,679,012 removed the same signing sits $14.4M under it" did not happen.** Minnesota traded Green on 2026-08-29 and took back Cody Williams ($6,015,600) and John Konchar ($6,165,000), waiving and stretching Konchar at $2,055,000 over three seasons. The actual post-signing position is **$4,608,584 under** the hard cap, not $14.4M.
+
+
 ---
 
 ## The plain-language version

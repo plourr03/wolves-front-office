@@ -80,7 +80,9 @@ TEAM_MINUTES = rotation.TEAM_MINUTES
 REPLACEMENT_NET = -2.0           # consensus_net for an unmatched / placeholder body
 USE_CEILING = os.environ.get("KUMINGA_NO_CEILING", "") != "1"
 
-SNAP = os.path.join(REPO, "kuminga", "data", "roster_snapshot_2026_27.csv")
+# v1 failed both G4 gates. The sim now reads the gate-passing v3 book, mapped
+# into this schema by adapt_roster_v3.py.
+SNAP = os.path.join(REPO, "kuminga", "data", "roster_snapshot_2026_27_SIM.csv")
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
 DARKO = os.path.join(REPO, "offseason", "data", "darko-dpm-leaderboard.csv")
 INJ = os.path.join(REPO, "kuminga", "data", "injuries_2026_27.csv")
@@ -283,10 +285,18 @@ def main():
         # they do to the cap sheet, not to the team on the floor, so the strength and
         # attribution work runs once with Green removed and only the cap outputs fork.
         # He stays in the contract book and in team_state, which is where the fork lives.
-        n_before = len(cur)
-        cur = cur[cur.player_name.map(nkey) != nkey("Josh Green")]
-        r.note(f"R3: removed Josh Green from the projected rotation pool "
-               f"({n_before} -> {len(cur)} rostered players)")
+        # WAS: an unconditional by-name removal of Josh Green, because both cap
+        # branches had him leaving Minnesota and neither had him anywhere else. On
+        # 2026-08-29 he was TRADED TO UTAH, so that line would now delete a real Jazz
+        # rotation player from the league and understate Utah by 14.7M of salary and
+        # roughly 25 minutes a night. The roster book already reflects the trade, so
+        # the special case is gone and replaced by an assertion that it stays gone.
+        _g = cur[cur.player_name.map(nkey) == nkey("Josh Green")]
+        assert len(_g) <= 1, "Josh Green on more than one roster"
+        r.note("Josh Green: on %s in the roster book (traded 2026-08-29); no by-name "
+               "removal is applied any more" % (list(_g.team_abbr)[0] if len(_g)
+                                                else "NO TEAM"))
+        assert "MIN" not in set(_g.team_abbr), "Green still on Minnesota"
         pool_now = build_pool(cur, "team_abbr", "player_name", "nba_player_id", "current")
 
         # R6 baseline: the 2025-26 end-of-season roster, NO injuries applied.

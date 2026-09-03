@@ -96,7 +96,7 @@ def main():
                  note="this is the number the lede has to survive"),
             dict(item="full taxpayer MLE", amount=tmle, note="the exception as a whole"),
             dict(item="shortfall against the FULL exception", amount=shortfall,
-                 note="the $249,829 already in the piece"),
+                 note="the shortfall the lede carries"),
             dict(item="max first-year salary, 14-man roster", amount=max14,
                  note=f"{pct14:.1%} of the exception; lands exactly ON the apron, "
                       f"which is legal because the rule prohibits EXCEEDING it"),
@@ -128,7 +128,7 @@ def main():
                "14th man is required but not required every single day.")
         r.note("RULING: the lede changes from 'could not legally sign him' to 'could not "
                "sign him to the full taxpayer mid-level exception'. The Green move buys "
-               "the last $249,829 AND the room to carry a normal roster.")
+               "the whole $1,999,829 AND the room to carry a normal roster.")
 
         with open(OUT_MD, "w", encoding="utf-8") as f:
             f.write("# The loophole in the lede (S3)\n\n")

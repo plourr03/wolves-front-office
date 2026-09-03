@@ -6,9 +6,9 @@
 
 ---
 
-## 1. The deal that cannot happen yet
+## 1. The deal that could not happen
 
-**The lede.** Minnesota agreed to terms with Jonathan Kuminga and, as of Thursday, could not sign him for the money they had agreed to pay him. They are **$1,999,829 short.**
+**The lede.** Minnesota agreed to terms with Jonathan Kuminga on a Wednesday in late August and then could not sign him for the money they had agreed to pay him. They were **$1,999,829 short.** It took them three days and a trade to find it.
 
 **Start with the basis, because the basis is the story.** The number that governs an apron is not a team's payroll. It is **Apron Team Salary**, which takes team salary, removes free-agent cap holds, and **adds back unlikely bonuses**, the incentives a player did not earn last season and so is not presumed to earn this one. Minnesota carries **$1,750,000** of them: **$1,000,000 for Jaden McDaniels and $750,000 for Donte DiVincenzo** `[cap_reconciliation_20260827T191905Z]`. They do not count against the cap or the tax. They count against the apron.
 
@@ -18,7 +18,7 @@ The arithmetic:
 - Plus unlikely bonuses: **$217,621,829** ← *the apron basis*
 - Add Kuminga at the taxpayer mid-level exception: **$223,685,829**
 - The second apron: **$221,686,000**
-- **They are $1,999,829 over.** `[same]`
+- **They were $1,999,829 over.** `[same]`
 
 *Independent agreement.* Spotrac publishes Minnesota's second-apron room as **$4,064,172**. We compute **$4,064,171**, one dollar apart, the dollar being McDaniels at $26,200,000 there against $26,200,001 in Basketball-Reference, SalarySwish and our own book.
 
@@ -26,20 +26,39 @@ Using the taxpayer MLE hard-caps a team at the second apron for the rest of the 
 
 **The loophole, before a reader with a calculator finds it.** An exception may be used partially. Minnesota sits $4,064,171 below the second apron, so a first-year salary of exactly that fits and lands team salary on $221,686,000 to the dollar, which is legal because the hard cap prohibits *exceeding* the apron rather than reaching it `[lede_loophole_20260827T191752Z]`. But that is only **67% of the exception**, and it costs Kuminga **$4,099,649** across the two years. This is no longer a rounding-error loophole. It is a $4M pay cut on top of the one he already took, which is why nobody is going to take it.
 
-**Hence Saturday.** Josh Green's $14,679,012 is what has to move.
+**Hence Saturday.** Josh Green's $14,679,012 is what had to move.
 
-**And Saturday is a real deadline, not a convenience.** The current season's salary can only be stretched if the player clears waivers, and waivers run 48 hours, against an **August 31** cut-off. Green has no salary beyond 2026-27. **If a waiver request is not reported by end of day Saturday August 29 ET, the stretch branch ceases to exist** and a trade is the only route left `[gaps_remaining, stretch deadline]`.
+**And Saturday was a real deadline, not a convenience.** A stretched salary only reaches the current season if the player clears waivers, waivers run 48 hours, and the cut-off is August 31. Hoops Rumors put it flatly on the morning of the 29th: "Today is the deadline to waive and stretch contracts ahead of the upcoming season." Minnesota had one working day.
 
-**The two branches, at a legal 14-man roster** `[cap_reconciliation_20260827T191905Z]`. "Legal" means the 14-man floor: CBA **Article XXIX, Section 2(a)**, with **2(b)(i)** allowing 12 or 13 for two consecutive weeks at a time and 28 days total.
+**And then they did neither branch.** On Saturday, August 29, Minnesota traded Josh Green and cash to Utah for **Cody Williams** ($6,015,600) and **John Konchar** ($6,165,000), and waived Konchar the same afternoon, stretching him across three seasons at **$2,055,000 a year**. They did not trade Green to clear the money. They did not stretch Green. **They traded Green for a contract they could stretch, and stretched that instead.**
 
-| | Apron salary | vs first apron | vs second apron |
+That is the move the model never considered, and it is worth stopping on, because it is the most front-office thing in the whole sequence. A salary dump normally costs a pick. This one did not. **No draft pick and no swap changed hands in either direction.** Minnesota's price was cash, plus $2,055,000 a year of dead money for three years, and in exchange for absorbing that they came away with the **tenth pick in the 2024 draft** on a rookie contract with a 2027-28 club option.
+
+**What we modelled against what they did** `[green_resolution_20260903T225927Z]`:
+
+| | Apron salary, Kuminga signed | vs first apron | vs second apron |
 |---|---|---|---|
-| Trade Green, 14 players | $210,364,580 | **$1,349,580 over** | $11,321,420 under |
-| Stretch Green, 14 players | $215,257,584 | **$6,242,584 over** | $6,428,416 under |
+| Modelled: trade Green, minimum 14th man | $210,364,580 | $1,349,580 over | $11,321,420 under |
+| Modelled: stretch Green | $215,257,584 | $6,242,584 over | $6,428,416 under |
+| **Actual: trade Green, stretch Konchar, keep Williams** | **$217,077,416** | **$8,062,416 over** | **$4,608,584 under** |
 
-**Both branches are first-apron teams.** There is no version of this that keeps Minnesota under the first apron at a legal roster, so the four first-apron restrictions apply either way: no sign-and-trade acquisition, no bi-annual exception, no prior-year trade exceptions, and tighter matching. The last of those has a price the piece should name: Minnesota holds **$17,350,158** of live prior-year trade exceptions, the Mike Conley $10,774,038 expiring 2/3/2027 and the Rob Dillingham $6,576,120 expiring 2/5/2027, and being over the first apron makes them unusable.
+**They spent $6,712,836 more hard-cap room than the cheapest route available to them, and they spent it on a player.** The modelled trade branch filled the fourteenth slot with a minimum body. Minnesota filled it with Cody Williams and ate Konchar's dead money to do it. That is a choice, not an accident, and section 5 is where it gets priced.
 
-A Green trade can still bring salary back, up to the **$11,321,420** of room under the second-apron hard cap, and the hard cap binds before the matching rules do. What it cannot do is buy back the tier.
+**The chain, end to end** `[cap_canonical.json, post_trade]`:
+
+- Pre-trade apron basis: **$217,621,829**
+- Out, Josh Green: **-$14,679,012**
+- In, Cody Williams and John Konchar: **+$12,180,600**
+- Waive Konchar, stretch over three seasons: **-$4,110,000**
+- Post-trade: **$211,013,416**
+- Add Kuminga at the full exception: **$217,077,416**
+- Room under the second-apron hard cap: **$4,608,584**
+
+*Independent agreement, and this is the strongest check in the piece.* Spotrac publishes two apron figures per team that are computed separately: first-apron space and second-apron space. Minnesota's are **-$1,998,416** and **$10,672,584**. Both imply an Apron Team Salary of **$211,013,416**. So does the itemised breakdown at the foot of their own page. **All three agree with ours to the dollar, at zero difference.**
+
+**Minnesota is a first-apron team for 2026-27**, $8,062,416 over that line, so the four first-apron restrictions apply: no sign-and-trade acquisition, no bi-annual exception, no use of prior-year trade exceptions, and tighter salary matching. The last has a price worth naming: Minnesota holds **$17,350,158** of live prior-year trade exceptions, the Mike Conley $10,774,038 expiring 2/3/2027 and the Rob Dillingham $6,576,120 expiring 2/5/2027, and being over the first apron makes them unusable.
+
+**And the hard cap did not go away when the signing cleared.** The taxpayer mid-level hard-caps Minnesota at the second apron for the whole league year. They have **$4,608,584** of room under it, which is roughly one veteran-minimum addition plus change, and every in-season move has to fit inside it.
 
 *On the tax, and note the basis changes.* Tax is charged on **regular team salary, which excludes unlikely bonuses** unless they are actually earned. On that basis the trade branch owes roughly **$8.7M (est)** and the stretch branch roughly **$17.0M (est)**, and stretching leaves $4,893,004 of dead money in each of the next two seasons, the second landing in Edwards's walk year.
 
@@ -128,17 +147,19 @@ The rule being applied is worth stating once in the piece: **if a verdict change
 | **What happened** | $208,614,817 | $8,186,817 over | ~$13.1M | $6,064,000 | traded away |
 | **Dosunmu not re-signed** | $209,015,000 | $8,587,000 over | ~$13.8M | up to $10,004,516 | **kept** |
 
-**Look at the first three columns before the last two.** They are nearly the same. Both rosters are taxpayers, both sit around $209M, both owe about $13M, and the counterfactual is very slightly the *more* expensive of the two. **Re-signing Ayo Dosunmu did not cost Minnesota money.** What it cost is two things, and neither of them is Josh Green the player: **the asset cost of having to move Green for nothing**, which is not known until Saturday `[PENDING GREEN RESOLUTION]`, plus **about four million dollars of Kuminga's first-year ceiling**.
+**Look at the first three columns before the last two.** They are nearly the same. Both rosters are taxpayers, both sit around $209M, both owe about $13M, and the counterfactual is very slightly the *more* expensive of the two. **Re-signing Ayo Dosunmu did not cost Minnesota money.** What it cost is two things, and neither of them is Josh Green the player: **the asset cost of having to move Green**, which is now known and was smaller than any branch assumed `[green_resolution_20260903T225927Z]`, plus **about four million dollars of Kuminga's first-year ceiling**.
 
 **What the re-signing bought, then, is two things.**
 
-**First, it is why Josh Green has to be moved for nothing.** Be precise about what is lost here, because it is not the player. Green was **the matching salary in the LaMelo Ball trade**, on an expiring one-year deal at $14,679,012, and priced on the floor his departure is a wash: keeping him grades **mixed across the four views, -0.48 to +0.01pp** `[green_kept_20260827T154636Z]`. Nothing in this project says Minnesota will miss him.
+**First, it is why Josh Green had to be moved.** Be precise about what is lost here, because it is not the player. Green was **the matching salary in the LaMelo Ball trade**, on an expiring one-year deal at $14,679,012, and priced on the floor his departure is a wash: keeping him grades **mixed across the four views, -0.48 to +0.01pp** `[green_kept_20260827T154636Z]`. Nothing in this project says Minnesota will miss him.
 
-**What the re-signing removes is keeping him, and it makes every other exit cost something.** With both contracts on the book, adding Kuminga at the full taxpayer exception gives $215,871,829 + $6,064,000 = $221,935,829, which is $249,829 past the second apron and cannot be done, so **Green cannot be kept**.
+**What the re-signing removes is keeping him, and it makes every other exit cost something.** With both contracts on the book, adding Kuminga at the full taxpayer exception gives $217,621,829 + $6,064,000 = $223,685,829, which is $1,999,829 past the second apron and cannot be done, so **Green cannot be kept**.
 
-He *can* be traded for salary. There is **$13,071,183 of room under the second-apron hard cap** at a fourteen-man roster `[cap_branches_20260827T023847Z]`, so a real player can come back. But **any incoming salary above $400,183 makes Minnesota a first-apron team for the season**, with the four restrictions section 1 lists: no sign-and-trade acquisition, no bi-annual exception, no prior-year trade exceptions, and tighter matching. So there are two exits and both are charged for. A **pure dump** costs whatever pick or swap has to be attached to move a $14.7M expiring contract for nothing. A **trade that brings something back** costs the apron restrictions instead, for the rest of the season.
+He *could* be traded for salary, and that is the exit Minnesota took. There was **$13,071,183 of room under the second-apron hard cap** at a fourteen-man roster `[cap_branches_20260827T023847Z]`, so a real player could come back, and one did: Minnesota absorbed **$12,180,600** of incoming salary, just inside that ceiling. The cost was the tier. **Any meaningful incoming salary made Minnesota a first-apron team for the season**, with the four restrictions section 1 lists, and they now sit **$8,062,416** over that line.
 
-Dosunmu's $19,310,345 is larger than the $249,829 overage by $19,060,516, so **without him, Green stays and neither exit is needed.** The Saturday deadline in section 1 traces back to a contract agreed in June.
+**The part the piece predicted wrong, and it is worth saying so.** This section anticipated two exits, both charged for: a pure dump costing "whatever pick or swap has to be attached to move a $14.7M expiring contract for nothing", or a trade back costing the apron restrictions. Minnesota found a third. **They paid no pick and no swap at all**, took the apron hit they were taking anyway, and turned the dump into an acquisition. The only asset cost is **$2,055,000 a year of Konchar's dead money for three seasons**, $4,110,000 of which lands in 2027-28 and 2028-29, and against that they hold a 22-year-old former top-ten pick with a club option. **A $14.7M expiring contract was not the liability this piece assumed it was**, and the reason is that Utah wanted the player.
+
+Dosunmu's $19,310,345 is larger than the $1,999,829 overage by $17,310,516, so **without him, Green stays and neither exit is needed.** The Saturday deadline in section 1 traces back to a contract agreed in June.
 
 **And the two sit three days apart.** Minnesota agreed to re-sign Dosunmu on the night of Monday **June 22**. It agreed the trade that brought Ball and Green in, and sent Naz Reid out, on Thursday **June 25**. The league processed both on **July 10**, which is why the transaction log dates them identically and cannot be used to order them `[ESPN, Charania 06.23 and Youngmisuk 06.25]`.
 
@@ -198,7 +219,7 @@ Title odds for the piece, as a band and never as a midpoint: **1.63% to 3.74%** 
 
 Structure it as three claims of decreasing confidence.
 
-**What we know.** The signing is a bargain against the only real market price we can observe, and all four views agree Atlanta was right to let him go at $24.3M. And they could not sign him to the full exception until Green moved: the gap was $249,829, and closing it any other way meant a 14-man roster frozen for the season.
+**What we know.** The signing is a bargain against the only real market price we can observe, and all four views agree Atlanta was right to let him go at $24.3M. And they could not sign him to the full exception until Green moved: the gap was $1,999,829, and closing it any other way meant a 14-man roster frozen for the season.
 
 **What we believe.** Against the player who would most likely take those minutes, Kuminga is worth something positive to Minnesota's title odds under every view we have. Two words in that sentence are load-bearing. **Most likely**, because promote a different forward into the slot and the four views stop agreeing. And **those minutes**, because the case rests on the alternative being poor, not on the player being good.
 

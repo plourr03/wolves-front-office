@@ -102,3 +102,166 @@ NYK       -2.67      -4.41  -4.85 -4.46 -4.10
 DET       -3.35      -8.56  -2.81 -8.54 -5.82
 [run] build_fcurve_20260827T195120Z
   [build_fcurve_20260827T195120Z] fork consensus: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T195120Z]   consensus: title ranges 0.13% at net -4.0 to 33.68% at net +10.0
+  [build_fcurve_20260827T195120Z] fork rapm: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T195120Z]   rapm: title ranges 0.13% at net -4.0 to 32.86% at net +10.0
+  [build_fcurve_20260827T195120Z] fork box: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T195120Z]   box: title ranges 0.14% at net -4.0 to 35.33% at net +10.0
+  [build_fcurve_20260827T195120Z] fork darko: field of 30 teams, sweeping MIN over 29 grid points
+  [build_fcurve_20260827T195120Z]   darko: title ranges 0.23% at net -4.0 to 36.21% at net +10.0
+  [build_fcurve_20260827T195120Z] wrote 116 grid rows
+[run] build_fcurve_20260827T195120Z -> ok
+ min_net  title     cf  finals
+    -4.0 0.0013 0.0131  0.0041
+    -3.5 0.0027 0.0224  0.0071
+    -3.0 0.0043 0.0340  0.0112
+    -2.5 0.0068 0.0471  0.0162
+    -2.0 0.0095 0.0642  0.0234
+    -1.5 0.0128 0.0828  0.0312
+    -1.0 0.0178 0.1038  0.0410
+    -0.5 0.0230 0.1258  0.0517
+     0.0 0.0265 0.1455  0.0587
+     0.5 0.0315 0.1665  0.0690
+     1.0 0.0379 0.1885  0.0810
+     1.5 0.0451 0.2089  0.0936
+     2.0 0.0520 0.2264  0.1040
+     2.5 0.0614 0.2504  0.1182
+     3.0 0.0709 0.2752  0.1327
+     3.5 0.0816 0.3012  0.1485
+     4.0 0.0951 0.3293  0.1663
+     4.5 0.1077 0.3600  0.1857
+     5.0 0.1231 0.3914  0.2078
+     5.5 0.1402 0.4279  0.2319
+     6.0 0.1592 0.4638  0.2569
+     6.5 0.1788 0.4993  0.2811
+     7.0 0.2002 0.5347  0.3071
+     7.5 0.2232 0.5698  0.3346
+     8.0 0.2445 0.6033  0.3607
+     8.5 0.2653 0.6311  0.3849
+     9.0 0.2899 0.6590  0.4109
+     9.5 0.3136 0.6827  0.4372
+    10.0 0.3368 0.7044  0.4619
+[run] shapley_20260827T201925Z
+  [shapley_20260827T201925Z] MIN player attributes available for 23 players
+  [shapley_20260827T201925Z] enumerating 256 coalitions
+  [shapley_20260827T201925Z] consensus: v(none)=2.615% v(all)=2.433% total=-0.182pp
+  [shapley_20260827T201925Z] rapm: v(none)=2.877% v(all)=3.014% total=+0.137pp
+  [shapley_20260827T201925Z] box: v(none)=2.028% v(all)=4.132% total=+2.105pp
+  [shapley_20260827T201925Z] darko: v(none)=3.133% v(all)=5.164% total=+2.031pp
+  [shapley_20260827T201925Z] NAMED SCENARIOS (title %, by fork):
+  [shapley_20260827T201925Z]   kept_reid_and_added_ball                 consensus= 3.83 rapm= 4.95 box= 4.32 darko= 5.70  mean= 4.70  band [3.83, 5.70]
+  [shapley_20260827T201925Z]   actual_but_healthy_divincenzo            consensus= 2.55 rapm= 2.95 box= 4.21 darko= 6.51  mean= 4.06  band [2.55, 6.51]
+  [shapley_20260827T201925Z]   what_actually_happened                   consensus= 2.43 rapm= 3.01 box= 4.13 darko= 5.16  mean= 3.69  band [2.43, 5.16]
+  [shapley_20260827T201925Z]   joanbet_shape_retool_randle_slot_only    consensus= 2.89 rapm= 4.02 box= 3.28 darko= 3.12  mean= 3.33  band [2.89, 4.02]
+  [shapley_20260827T201925Z]   actual_without_kuminga                   consensus= 1.05 rapm= 1.53 box= 3.67 darko= 4.88  mean= 2.78  band [1.05, 4.88]
+  [shapley_20260827T201925Z]   did_nothing                              consensus= 2.62 rapm= 2.88 box= 2.03 darko= 3.13  mean= 2.66  band [2.03, 3.13]
+  [shapley_20260827T201925Z] SHAPLEY (pp of title probability):
+  [shapley_20260827T201925Z]   ball_in            consensus=+0.863 rapm=+0.772 box=+1.081 darko=+2.484  mean=+1.300  ALL POSITIVE
+  [shapley_20260827T201925Z]   other_departures   consensus=+0.047 rapm=+0.681 box=+0.425 darko=+2.231  mean=+0.846  ALL POSITIVE
+  [shapley_20260827T201925Z]   randle_out         consensus=+0.447 rapm=+0.715 box=+0.775 darko=+0.749  mean=+0.672  ALL POSITIVE
+  [shapley_20260827T201925Z]   depth              consensus=+0.093 rapm=-0.126 box=+0.449 darko=+0.168  mean=+0.146  MIXED
+  [shapley_20260827T201925Z]   kuminga_in         consensus=+0.474 rapm=+0.569 box=+0.021 darko=-0.566  mean=+0.124  MIXED
+  [shapley_20260827T201925Z]   ddv_injury         consensus=-0.247 rapm=-0.015 box=-0.267 darko=-1.415  mean=-0.486  ALL NEGATIVE
+  [shapley_20260827T201925Z]   dosunmu_retained   consensus=-0.482 rapm=-0.778 box=-0.042 darko=-0.928  mean=-0.558  ALL NEGATIVE
+  [shapley_20260827T201925Z]   reid_out           consensus=-1.377 rapm=-1.683 box=-0.338 darko=-0.691  mean=-1.022  ALL NEGATIVE
+[run] shapley_20260827T201925Z -> ok
+
+fork                box  consensus  darko   rapm sign_agreement  mean_pp
+move                                                                    
+ball_in           1.081      0.863  2.484  0.772   ALL POSITIVE    1.300
+other_departures  0.425      0.047  2.231  0.681   ALL POSITIVE    0.846
+randle_out        0.775      0.447  0.749  0.715   ALL POSITIVE    0.672
+depth             0.449      0.093  0.168 -0.126          MIXED    0.146
+kuminga_in        0.021      0.474 -0.566  0.569          MIXED    0.124
+ddv_injury       -0.267     -0.247 -1.415 -0.015   ALL NEGATIVE   -0.486
+dosunmu_retained -0.042     -0.482 -0.928 -0.778   ALL NEGATIVE   -0.558
+reid_out         -0.338     -1.377 -0.691 -1.683   ALL NEGATIVE   -1.022
+
+Order dependence (consensus fork), marginal contribution across 2000 random orderings:
+            move  mean_pp  min_pp  max_pp  spread_pp
+      randle_out    0.451  -0.758   2.096      2.854
+        reid_out   -1.359  -2.830  -0.510      2.320
+         ball_in    0.856   0.013   2.357      2.344
+dosunmu_retained   -0.502  -2.208   0.500      2.708
+           depth    0.098  -2.504   0.956      3.461
+      ddv_injury   -0.245  -1.741   0.939      2.681
+      kuminga_in    0.469  -0.462   1.988      2.450
+other_departures    0.049  -0.727   2.651      3.378
+[run] shapley_20260827T201928Z
+  [shapley_20260827T201928Z] MIN player attributes available for 23 players
+  [shapley_20260827T201928Z] enumerating 256 coalitions
+  [shapley_20260827T201928Z] consensus: v(none)=0.684% v(all)=1.090% total=+0.405pp
+  [shapley_20260827T201928Z] rapm: v(none)=0.843% v(all)=1.872% total=+1.028pp
+  [shapley_20260827T201928Z] box: v(none)=1.963% v(all)=3.287% total=+1.324pp
+  [shapley_20260827T201928Z] darko: v(none)=0.993% v(all)=3.015% total=+2.022pp
+  [shapley_20260827T201928Z] NAMED SCENARIOS (title %, by fork):
+  [shapley_20260827T201928Z]   kept_reid_and_added_ball                 consensus= 1.84 rapm= 2.75 box= 3.59 darko= 3.04  mean= 2.80  band [1.84, 3.59]
+  [shapley_20260827T201928Z]   actual_but_healthy_divincenzo            consensus= 1.33 rapm= 2.17 box= 3.34 darko= 3.60  mean= 2.61  band [1.33, 3.60]
+  [shapley_20260827T201928Z]   actual_without_kuminga                   consensus= 0.91 rapm= 1.44 box= 3.33 darko= 4.07  mean= 2.44  band [0.91, 4.07]
+  [shapley_20260827T201928Z]   what_actually_happened                   consensus= 1.09 rapm= 1.87 box= 3.29 darko= 3.02  mean= 2.32  band [1.09, 3.29]
+  [shapley_20260827T201928Z]   joanbet_shape_retool_randle_slot_only    consensus= 1.05 rapm= 1.95 box= 2.83 darko= 1.90  mean= 1.93  band [1.05, 2.83]
+  [shapley_20260827T201928Z]   did_nothing                              consensus= 0.68 rapm= 0.84 box= 1.96 darko= 0.99  mean= 1.12  band [0.68, 1.96]
+  [shapley_20260827T201928Z] SHAPLEY (pp of title probability):
+  [shapley_20260827T201928Z]   other_departures   consensus=+0.852 rapm=+1.245 box=+0.566 darko=+3.242  mean=+1.476  ALL POSITIVE
+  [shapley_20260827T201928Z]   ball_in            consensus=+0.462 rapm=+0.586 box=+0.788 darko=+1.161  mean=+0.749  ALL POSITIVE
+  [shapley_20260827T201928Z]   randle_out         consensus=+0.210 rapm=+0.417 box=+0.502 darko=+0.370  mean=+0.375  ALL POSITIVE
+  [shapley_20260827T201928Z]   kuminga_in         consensus=+0.173 rapm=+0.273 box=+0.008 darko=-0.427  mean=+0.007  MIXED
+  [shapley_20260827T201928Z]   ddv_injury         consensus=-0.179 rapm=-0.109 box=-0.181 darko=-0.575  mean=-0.261  ALL NEGATIVE
+  [shapley_20260827T201928Z]   depth              consensus=-0.278 rapm=-0.261 box=+0.136 darko=-0.649  mean=-0.263  MIXED
+  [shapley_20260827T201928Z]   reid_out           consensus=-0.476 rapm=-0.603 box=-0.376 darko=-0.166  mean=-0.405  ALL NEGATIVE
+  [shapley_20260827T201928Z]   dosunmu_retained   consensus=-0.358 rapm=-0.520 box=-0.119 darko=-0.935  mean=-0.483  ALL NEGATIVE
+[run] shapley_20260827T201928Z -> ok
+
+fork                box  consensus  darko   rapm sign_agreement  mean_pp
+move                                                                    
+other_departures  0.566      0.852  3.242  1.245   ALL POSITIVE    1.476
+ball_in           0.788      0.462  1.161  0.586   ALL POSITIVE    0.749
+randle_out        0.502      0.210  0.370  0.417   ALL POSITIVE    0.375
+kuminga_in        0.008      0.173 -0.427  0.273          MIXED    0.007
+ddv_injury       -0.181     -0.179 -0.575 -0.109   ALL NEGATIVE   -0.261
+depth             0.136     -0.278 -0.649 -0.261          MIXED   -0.263
+reid_out         -0.376     -0.476 -0.166 -0.603   ALL NEGATIVE   -0.405
+dosunmu_retained -0.119     -0.358 -0.935 -0.520   ALL NEGATIVE   -0.483
+
+Order dependence (consensus fork), marginal contribution across 2000 random orderings:
+            move  mean_pp  min_pp  max_pp  spread_pp
+      randle_out    0.207  -0.015   1.109      1.125
+        reid_out   -0.463  -1.856  -0.052      1.804
+         ball_in    0.468   0.203   1.313      1.110
+dosunmu_retained   -0.360  -1.201  -0.079      1.122
+           depth   -0.275  -1.368   0.264      1.632
+      ddv_injury   -0.181  -0.923   0.270      1.192
+      kuminga_in    0.174  -0.321   0.871      1.192
+other_departures    0.836  -0.046   2.542      2.588
+[run] slot_analysis_20260827T201932Z
+  [slot_analysis_20260827T201932Z] MIN slot pool (eligible at the 4): Jaden McDaniels, Jonathan Kuminga, Joan Beringer, Terrence Shannon Jr., Trey Lyles
+  [slot_analysis_20260827T201932Z] NOT eligible: [14th man placeholder], Anthony Edwards, LaMelo Ball, Rudy Gobert, Ayo Dosunmu, Donte DiVincenzo, Jaylen Clark, Bones Hyland, Isaiah Evans
+  [slot_analysis_20260827T201932Z] Kuminga's 26.0 minutes redistribute within the slot to: Terrence Shannon Jr. +15.5, Jaden McDaniels +2.7
+  [slot_analysis_20260827T201932Z]   7.8 minutes could not be placed inside the slot pool (everyone eligible is at his ceiling)
+  [slot_analysis_20260827T201932Z] THE PLAYER WHO OTHERWISE FILLS THE 4: Terrence Shannon Jr.
+  [slot_analysis_20260827T201932Z] [consensus] with 2.43% | without 1.06% | MARGINAL +1.368pp | Kuminga +1.39 vs Terrence Shannon Jr. -2.25
+  [slot_analysis_20260827T201932Z] [rapm     ] with 3.01% | without 1.55% | MARGINAL +1.463pp | Kuminga +1.43 vs Terrence Shannon Jr. -2.28
+  [slot_analysis_20260827T201932Z] [box      ] with 4.13% | without 3.59% | MARGINAL +0.538pp | Kuminga +0.13 vs Terrence Shannon Jr. -0.94
+  [slot_analysis_20260827T201932Z] [darko    ] with 5.16% | without 4.87% | MARGINAL +0.297pp | Kuminga -0.94 vs Terrence Shannon Jr. -2.07
+  [slot_analysis_20260827T201932Z] SLOT-CONSTRAINED VERDICT for kuminga_in: ALL POSITIVE [+0.297, +1.463]pp
+  [slot_analysis_20260827T201932Z] ALTERNATIVES under the slot rule:
+  [slot_analysis_20260827T201932Z]   Josh Minott        Forward         pf=True  afford=True  sd=2.10 mean +1.27pp ALL POSITIVE  quotable=False posterior sd 2.10 exceeds 1.5
+  [slot_analysis_20260827T201932Z]   Jaxson Hayes       Center-Forward  pf=False afford=True  sd=1.71 mean +0.24pp ALL POSITIVE  quotable=False centre-first listing, not a 4
+  [slot_analysis_20260827T201932Z]   Kenrich Williams   Guard-Forward   pf=True  afford=True  sd=1.87 mean -0.52pp MIXED         quotable=False posterior sd 1.87 exceeds 1.5
+  [slot_analysis_20260827T201932Z]   Al Horford         Center-Forward  pf=False afford=False sd=1.56 mean +0.06pp MIXED         quotable=False centre-first listing, not a 4
+  [slot_analysis_20260827T201932Z]   Dean Wade          Forward-Center  pf=True  afford=False sd=1.61 mean +1.03pp MIXED         quotable=False posterior sd 1.61 exceeds 1.5
+[run] slot_analysis_20260827T201932Z -> ok
+
+     fork  min_net_with  min_net_without  title_with  title_without  marginal_pp  kuminga_net               filler  filler_net  surplus_vs_filler
+consensus        -0.308           -1.826       0.024          0.011        1.368        1.385 Terrence Shannon Jr.      -2.252              3.638
+     rapm         0.443           -1.104       0.030          0.016        1.463        1.425 Terrence Shannon Jr.      -2.282              3.708
+      box         1.127            0.708       0.041          0.036        0.538        0.125 Terrence Shannon Jr.      -0.942              1.068
+    darko         1.413            1.239       0.052          0.049        0.297       -0.945 Terrence Shannon Jr.      -2.072              1.128
+
+          player listed_position  pf_eligible  salary  affordable_on_tpmle  consensus_net  net_sd  posterior_sd  pp_consensus  pp_rapm  pp_box  pp_darko  mean_pp sign_agreement  quotable              exclusion_reason
+     Josh Minott         Forward         True 4500000                 True           2.58    2.10          2.10          0.63     0.39    1.94      2.11     1.27   ALL POSITIVE     False posterior sd 2.10 exceeds 1.5
+    Jaxson Hayes  Center-Forward        False 6000000                 True           1.72    1.71          1.71          0.04     0.05    0.16      0.71     0.24   ALL POSITIVE     False centre-first listing, not a 4
+Kenrich Williams   Guard-Forward         True 5000000                 True           0.70    1.87          1.87         -0.84    -0.97   -0.35      0.09    -0.52          MIXED     False posterior sd 1.87 exceeds 1.5
+      Al Horford  Center-Forward        False 6822000                False           2.86    1.56          1.56          0.37     0.47    0.14     -0.72     0.06          MIXED     False centre-first listing, not a 4
+       Dean Wade  Forward-Center         True 9000000                False           3.74    1.62          1.61          1.00     2.05   -0.34      1.41     1.03          MIXED     False posterior sd 1.61 exceeds 1.5
+CORRECTED_AGED_DONE

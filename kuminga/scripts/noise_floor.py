@@ -107,6 +107,42 @@ def main():
         lost = rr[(rr.sign_agreement != "MIXED") & (~rr.survives)].move.tolist()
         r.note(f"SURVIVE the floor: {surv if surv else 'none'}")
         r.note(f"HAD an agreed sign but FAIL the floor: {lost if lost else 'none'}")
+        # ---- the floor applied to the SLOT analysis --------------------------
+        # The pooled Shapley above spreads a departing player's minutes across his whole
+        # position group, which is not how a rotation works and is documented as such.
+        # The claim the piece actually makes about Kuminga lives in slot_robustness:
+        # against the most likely internal alternative at the 4. That claim has never
+        # been tested against the machinery's own error, so it is tested here.
+        sr_path = os.path.join(OUTDIR, "slot_robustness.csv")
+        sr = pd.read_csv(sr_path) if os.path.exists(sr_path) else None
+        if sr is not None:
+            r.note("")
+            r.note("SLOT-FILL VARIANTS re-tested against the same per-fork floor:")
+            out = []
+            for _, x in sr.iterrows():
+                vals = {f: float(x["pp_" + f]) for f in FORKS}
+                clears = {f: abs(v) >= floors[f] for f, v in vals.items()}
+                agreed = x.sign_agreement != "MIXED"
+                surv = bool(agreed and all(clears.values()))
+                out.append(dict(variant=x.variant, sign_agreement=x.sign_agreement,
+                                mean_pp=float(x.mean_pp),
+                                min_abs_pp=min(abs(v) for v in vals.values()),
+                                n_forks_clearing=sum(clears.values()), survives=surv,
+                                **{"clears_" + f: clears[f] for f in FORKS}))
+                r.note("  %-22s %-13s smallest |view| %.3fpp, %d/4 clear -> %s"
+                       % (x.variant, x.sign_agreement,
+                          min(abs(v) for v in vals.values()), sum(clears.values()),
+                          "SURVIVES" if surv else
+                          ("fails floor" if agreed else "no agreed sign")))
+            so = pd.DataFrame(out)
+            so.to_csv(os.path.join(OUTDIR, "noise_floor_slot%s.csv"
+                                   % ("_AGED" if AGED else "")), index=False)
+            surv = so[so.survives].variant.tolist()
+            r.note("  SLOT variants surviving BOTH the sign test and the floor: %s"
+                   % (surv if surv else "none"))
+            r.note("  This is the test the section-5 claim has to pass, and it is the "
+                   "one that decides whether 'positive under every view' is publishable.")
+
         r.output(OUT, rows=len(rr))
 
     print()

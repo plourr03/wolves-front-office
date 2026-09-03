@@ -6,7 +6,7 @@
 | APRON basis, 13 players + unlikely bonuses | 217,621,829 | contracted $215,871,829 + $1,750,000 unlikely bonuses (McDaniels $1.0M, DiVincenzo $750k); Green in, Kuminga out |
 | ROOM under the second apron                |   4,064,171 | this is the number the lede has to survive                                                                       |
 | full taxpayer MLE                          |   6,064,000 | the exception as a whole                                                                                         |
-| shortfall against the FULL exception       |   1,999,829 | the $249,829 already in the piece                                                                                |
+| shortfall against the FULL exception       |   1,999,829 | the shortfall the lede carries                                                                                   |
 | max first-year salary, 14-man roster       |   4,064,171 | 67.0% of the exception; lands exactly ON the apron, which is legal because the rule prohibits EXCEEDING it       |
 | max first-year salary, 15-man roster       |   2,706,408 | 44.6% of the exception, after a rookie-minimum 15th man at $1,357,763                                            |
 | two-year value of the loophole deal        |   8,331,551 | $4,064,171 then $4,267,380 at the 5% maximum raise                                                               |

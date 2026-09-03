@@ -297,6 +297,50 @@ def main():
             r.note(f"CAP [{branch}, tier {state['tier']}]: ${before:,.0f} + "
                    f"${TPMLE_2026_27:,} = ${post:,.0f} vs apron2 ${apron2:,} -> {verdict}")
 
+        # ---- the branch that actually happened -------------------------------
+        # green_on_books and green_removed are both counterfactuals now. The first is
+        # the problem the piece opens on; the second is a dump with nothing coming
+        # back, which is NOT what Minnesota did. They took back Cody Williams and ate
+        # Konchar's stretched dead money, so the real post-trade basis is $6,712,836
+        # higher than green_removed and lands them over the FIRST apron, not under it.
+        _pt = _canon.get("post_trade")
+        if _pt:
+            before = float(_pt["post_trade_apron"])
+            post = float(_pt["with_kuminga_apron"])
+            state = dict(base)
+            state["apron_team_salary"] = before
+            state["distance_to_second_apron"] = apron2 - before
+            state["distance_to_first_apron"] = const["first_apron"] - before
+            state["tier"] = tier_for(before)
+            state["taxpayer_mle_available"] = state["tier"] != "second_apron"
+            res = EM.evaluate_move(
+                state, const, outgoing=[],
+                incoming=[{"salary": TPMLE_2026_27, "label": "Jonathan Kuminga"}],
+                exception_used="taxpayer_mle")
+            gate["actual_post_trade"] = {
+                "basis": "canonical post-trade: Green out, Williams in, Konchar "
+                         "waived and stretched, plus unlikely bonuses",
+                "trade_date": _pt["trade_date"],
+                "tier_before_signing": state["tier"],
+                "tier_after_signing": tier_for(post),
+                "apron_salary_before": before,
+                "apron_salary_after_signing": post,
+                "second_apron": apron2,
+                "room_after_signing": apron2 - post,
+                "over_first_apron_after_signing": post - const["first_apron"],
+                "fits_under_hard_cap": bool(post <= apron2),
+                "evaluate_move_legal": bool(res["legal"]),
+                "failing_constraint": res["failing_constraint"],
+                "hard_cap_level": res["hard_cap_level"],
+                "reconciles_to_spotrac": _pt.get("reconciles_both_anchors"),
+            }
+            r.note(f"CAP [actual_post_trade, tier {state['tier']}]: ${before:,.0f} + "
+                   f"${TPMLE_2026_27:,} = ${post:,.0f} vs apron2 ${apron2:,} -> "
+                   f"{'FITS' if post <= apron2 else 'OVER'} with "
+                   f"${apron2 - post:,.0f} to spare; "
+                   f"{post - const['first_apron']:+,.0f} vs the first apron "
+                   f"(tier after signing: {tier_for(post)})")
+
         json.dump(gate, open(OUT_GATE, "w", encoding="utf-8"), indent=2)
         r.output(OUT_CURVES, rows=len(curves))
         r.output(OUT_SURPLUS, rows=len(surp))

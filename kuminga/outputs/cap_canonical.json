@@ -11,5 +11,31 @@
  "rule_source_1": "https://www.hoopsrumors.com/2025/01/hoops-rumors-glossary-tax-aprons-2.html",
  "rule_source_2": "https://cbaguide.com/thresholds/apron/",
  "cross_check": "Spotrac 2nd Apron Space $4,064,172 vs ours $4,064,171",
- "as_of": "2026-08-27"
+ "as_of": "2026-08-27",
+ "post_trade": {
+  "as_of": "2026-09-03",
+  "trade_date": "2026-08-29",
+  "basis": "Apron Team Salary = contracted salary + unlikely bonuses (cap holds excluded)",
+  "n_standard": 13,
+  "post_trade_apron": 211013416.0,
+  "with_kuminga_apron": 217077416.0,
+  "kuminga_y1": 6064000.0,
+  "kuminga_y2": 6367200.0,
+  "room_under_second_apron_pre_kuminga": 10672584.0,
+  "room_under_second_apron_with_kuminga": 4608584.0,
+  "over_first_apron_with_kuminga": 8062416.0,
+  "dead_money_2026_27": 2055000.0,
+  "dead_money_2027_28": 2055000.0,
+  "dead_money_2028_29": 2055000.0,
+  "picks_attached": "none",
+  "external_anchor_first_apron_space": -1998416.0,
+  "external_anchor_second_apron_space": 10672584.0,
+  "reconciles_both_anchors": true,
+  "sources": [
+   "https://www.hoopsrumors.com/2026/08/timberwolves-to-trade-josh-green-to-jazz.html",
+   "https://www.espn.com/nba/story/_/id/49759209/wolves-trade-3-d-wing-josh-green-jazaz",
+   "https://www.nba.com/news/jazz-trade-cody-williams-john-konchar-to-timberwolves-for-josh-green",
+   "https://www.hoopsrumors.com/2026/08/timberwolves-waive-john-konchar.html"
+  ]
+ }
 }

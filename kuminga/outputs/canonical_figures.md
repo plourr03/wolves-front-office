@@ -4,10 +4,10 @@ Where two numbers in this project describe nearly the same thing, this table say
 
 | label                                   | object                                                                               | source                             | canonical   |   consensus |   rapm |   box |   darko |   mean |   lo |   hi |
 |:----------------------------------------|:-------------------------------------------------------------------------------------|:-----------------------------------|:------------|------------:|-------:|------:|--------:|-------:|-----:|-----:|
-| Minnesota before the offseason          | R6 baseline: the 2025-26 end-of-season roster, 18 players, no injuries               | run_sim.py (direct simulation)     | True        |        2.95 |   2.95 |  2.93 |    2.95 |   2.94 | 2.93 | 2.95 |
-| Minnesota if the free agents had walked | Shapley empty coalition: no moves AND no re-signings, 15 players + a 14th-man charge | shapley.py (f-curve interpolation) | False       |        3.07 |   3.36 |  2.54 |    3.67 |   3.16 | 2.54 | 3.67 |
-| Minnesota after the offseason           | the current roster, Green removed per R3                                             | run_sim.py (direct simulation)     | True        |        1.57 |   2.15 |  2.96 |    3.81 |   2.62 | 1.57 | 3.81 |
-| Minnesota after the offseason (f-curve) | the same roster, priced by interpolation                                             | shapley.py (f-curve interpolation) | False       |        1.63 |   2.17 |  3.01 |    3.74 |   2.64 | 1.63 | 3.74 |
+| Minnesota before the offseason          | R6 baseline: the 2025-26 end-of-season roster, 18 players, no injuries               | run_sim.py (direct simulation)     | True        |        2.95 |   2.95 |  2.92 |    2.95 |   2.94 | 2.92 | 2.95 |
+| Minnesota if the free agents had walked | Shapley empty coalition: no moves AND no re-signings, 15 players + a 14th-man charge | shapley.py (f-curve interpolation) | False       |        3.16 |   3.49 |  2.59 |    3.79 |   3.26 | 2.59 | 3.79 |
+| Minnesota after the offseason           | the current roster, Green removed per R3                                             | run_sim.py (direct simulation)     | True        |        0.60 |   1.09 |  1.67 |    2.39 |   1.44 | 0.60 | 2.39 |
+| Minnesota after the offseason (f-curve) | the same roster, priced by interpolation                                             | shapley.py (f-curve interpolation) | False       |        1.78 |   2.38 |  2.96 |    3.88 |   2.75 | 1.78 | 3.88 |
 
 ## Notes
 
@@ -20,4 +20,4 @@ Where two numbers in this project describe nearly the same thing, this table say
 **Minnesota after the offseason (f-curve)** (secondary): Used only so 256 coalitions are affordable. Differs from the direct sim by interpolation error alone.
 
 
-f-curve interpolation error against the direct simulation is at most 0.072pp across the four forks. That is the price of pricing 256 coalitions by interpolation instead of simulating each one, and it is small relative to the fork spread.
+f-curve interpolation error against the direct simulation is at most 1.489pp across the four forks. That is the price of pricing 256 coalitions by interpolation instead of simulating each one, and it is small relative to the fork spread.

@@ -838,3 +838,79 @@ Both are rules, not roster errors, which is exactly why the league aggregate was
 **Membership diff overall:** 97 differing names across 28 teams, written to `outputs/roster_v2_membership_diff.csv`.
 
 **FAIL CLOSED. Step 6 was not run.** No pipeline re-run, no aged pipeline, no 200k sim, no noise floor. The league-wide quarantine stays in force. Minnesota's chain is unaffected and is now confirmed by an external reference at zero difference.
+
+
+### D55. The Green branch resolved, and two stale figures found in the body of the piece
+
+**What happened, sourced.** On Saturday **2026-08-29** Minnesota traded **Josh Green** ($14,679,012, expiring) and cash to Utah for **Cody Williams** ($6,015,600) and **John Konchar** ($6,165,000), then waived Konchar the same day and stretched him at **$2,055,000 across three seasons**. Sources: Hoops Rumors trade report (reported 2:05am, official 10:04am ET), ESPN, NBA.com, and the Hoops Rumors waiver report.
+
+- https://www.hoopsrumors.com/2026/08/timberwolves-to-trade-josh-green-to-jazz.html
+- https://www.espn.com/nba/story/_/id/49759209/wolves-trade-3-d-wing-josh-green-jazaz
+- https://www.nba.com/news/jazz-trade-cody-williams-john-konchar-to-timberwolves-for-josh-green
+- https://www.hoopsrumors.com/2026/08/timberwolves-waive-john-konchar.html
+
+**The asset cost, which is the lock addendum's open question, now closed. NO PICK AND NO SWAP CHANGED HANDS, in either direction.** ESPN states it explicitly and neither Hoops Rumors nor NBA.com lists one. The real cost is **$2,055,000 of dead money in each of 2026-27, 2027-28 and 2028-29**, so **$4,110,000 lands in the two seasons the 2027 flexibility thesis depends on**. Against that, Minnesota **received** Cody Williams, the tenth pick in the 2024 draft, on a rookie deal with a 2027-28 club option at $7,669,890. Cash considerations changed hands and the sources disagree on direction (NBA.com and ESPN say Minnesota sent cash, Hoops Rumors places it incoming). Cash does not count against team salary or the aprons either way, so the disagreement is logged and not resolved.
+
+**A branch nobody modelled.** The project priced "trade Green" and "stretch Green" as two separate routes. Minnesota did neither. It **traded Green and stretched a different player acquired in the same deal**, using Konchar's incoming contract as the stretch vehicle. Both branches in the cap table are therefore counterfactuals now, and the actual path sits **$6,712,836 above** the cheaper of the two modelled branches ($210,364,580 for trade-Green-plus-a-minimum-14th-man), because Minnesota spent that room on Williams instead of a minimum body.
+
+**A prediction that held.** The skeleton said the stretch route died at end of day Saturday August 29 because waivers run 48 hours against an August 31 cut-off. Hoops Rumors wrote that day: "Today is the deadline to waive and stretch contracts ahead of the upcoming season." The date is confirmed by two sources. **The 48-hour mechanism remains this project's inference for why the date is the 29th and not the 31st, and it is flagged as an inference, not a sourced fact.**
+
+**EXTERNAL RECONCILIATION, and it is the strongest one this project has.** Spotrac publishes two apron figures per team that are independent of each other and of us. On the refreshed Minnesota page (frozen at sha256 `9044db52...`), 13 standard contracts plus Konchar's dead money plus $1,750,000 of unlikely incentives give **$211,013,416**. Their 1st Apron Space of -$1,998,416 implies $211,013,416. Their 2nd Apron Space of $10,672,584 implies $211,013,416. **Both anchors clear at exactly zero.** Signing Kuminga at $6,064,000 gives **$217,077,416**, which is **$4,608,584 under the second-apron hard cap** and **$8,062,416 over the first apron**. Minnesota is a first-apron team for 2026-27.
+
+**CHANGES TO PREVIOUSLY REPORTED FIGURES.** The apron-basis correction of D-log 684/730 reached the lede but **not the body**. Three passages in `piece_skeleton.md` and one row of `final_numbers.md` were still on the pre-correction basis and are corrected here:
+
+| where | before | after |
+|---|---|---|
+| skeleton, why Green must be shed | $215,871,829 + $6,064,000 = $221,935,829, **$249,829** past the second apron | $217,621,829 + $6,064,000 = $223,685,829, **$1,999,829** past |
+| skeleton, Dosunmu vs the overage | larger by **$19,060,516** | larger by **$17,310,516** |
+| skeleton, section on what we know | the gap was **$249,829** | the gap was **$1,999,829** |
+| `final_numbers.md`, why Green must be shed | exceeds that overage by **$19,060,516** | by **$17,310,516** |
+
+That last one was **internally inconsistent inside a single row**: the overage had been updated to $1,999,829 while the difference derived from it was still computed off $249,829. `final_numbers.md` row 97 already carried the correct $17,310,516, so the table disagreed with itself. **Lesson recorded: correcting a basis means re-deriving every figure computed from it, not just the figure itself.** A grep for the old number would have caught this weeks ago and is now a lock-runbook step.
+
+**Kuminga's status.** Still listed as **Pending** on Spotrac as of 2026-09-03, at $6,064,000, although reporting treats the signing as done and the trade that enabled it was official on 2026-08-29. Terms: two years, $12.4M, **player option on year two**, taxpayer mid-level exception, agreed 2026-08-26. Our $6,064,000 and $6,367,200 (5% raise) sum to $12,431,200, which is the reported "$12.4 million", so the year-one figure is confirmed from the outside.
+
+**`morning_report.md` is a dated artifact from 2026-08-27 and has been banner-corrected rather than rewritten, to preserve the trail.**
+
+
+### D56. Gates A and B both PASS on roster v3, and the sim is rewired onto it
+
+**Gate A was re-specified, and that overturns a G4 verdict.** The old gate demanded 13 to 15 standard contracts and failed seven teams, six of them on Spotrac's own published counts. **The gate was wrong, not the data.** 13-to-15 is a regular-season rule; in the offseason a team may carry up to 20 standard contracts and must cut down before opening night. Gate A v2 tests what actually protects downstream work:
+
+1. parsed standard count equals Spotrac's own header count (30 of 30)
+2. standard contracts at most 20 (30 of 30)
+3. two-way contracts at most 3 (30 of 30)
+
+The 13-15 range is now reported as informational. Six teams sit above 15 and none below 13, which is exactly what an August snapshot should look like. **The old gate's real value was catching a parse that drops or duplicates players, and test 1 does that directly instead of by proxy.**
+
+**Gate B was re-specified too, because the old one could not say WHERE a team failed.** Spotrac itemises its own total at the foot of every team page, so the comparison decomposes:
+
+| component | result |
+|---|---|
+| B1, active roster | **30 of 30** to the dollar |
+| B2, dead money | **30 of 30** to the dollar |
+| B3, unlikely bonuses | 26 of 30 complete; WAS short $5,458,310, DEN $1,091,658, DAL and TOR $264,305 each |
+| apron after taking bonuses from the reference total | **30 of 30** |
+
+**The cause of the four is now known and it is not ours.** Spotrac's per-player table renders unlikely bonuses as "-" for contracts their own total includes. Active roster and dead money match to the dollar on all four teams, so membership and cap hits are right and only the bonus column is incomplete. The team's bonus total is therefore taken from their total as a residual and the per-player column is used only for colour. **DAL and TOR being short by the identical $264,305 is still unexplained and is logged as such.**
+
+**One team's apron TIER depends on those missing bonuses: Denver, first apron on the per-player column, second apron on the total.** No published figure in this piece depends on Denver's tier, but it is recorded because a league-wide cap claim would.
+
+**Sum of absolute differences: $183,047,636 (v1) to $9,428,578 (v2) to $0 (v3).**
+
+**WHAT GATE B DOES NOT PROVE, stated plainly.** Our rows are parsed FROM Spotrac and their itemised totals are sums of that same table, so B1 and B2 are **parse-fidelity tests, not independent-truth tests**. They catch the v1 failure mode and nothing else. **The roster book is now single-sourced to Spotrac.** v1 came from Basketball-Reference; a cross-source check between the two publishers is the real test and it has not been run. Logged as an open risk, not claimed as passed.
+
+**THE SIM IS NOW REWIRED ONTO THE GATE-PASSING BOOK.** `build_rotations.py` read the v1 table, which failed both gates, so every sim figure in the project was built on it. It now reads `roster_snapshot_2026_27_SIM.csv`, produced by `adapt_roster_v3.py`. **115 roster changes across 28 teams**, most changed UTA 10, MEM 10, CHA 8, NOP 8.
+
+**Pending transactions: the two layers legitimately disagree, and this is the resolution.** The CAP layer EXCLUDES them, because under the CBA an unofficial move is not team salary. The SIM layer INCLUDES them, because the question is who plays for whom and a reported trade means the player plays there. Excluding them would leave James Harden unrostered and Kuminga off Minnesota. **This is two different questions, not a bug, and the earlier "cap layer vs sim layer" confusion was the two being conflated.** Spotrac also lists a pending player on the acquiring team while his old team still lists him active, so the Clippers-Raptors deal put Ingram, Dick and Leonard on two rosters each; the pending row wins and the origin row is dropped.
+
+**A LANDMINE FOUND AND DEFUSED.** `build_rotations.py` carried an unconditional by-name removal of Josh Green, from the R3 work, when both branches had him leaving Minnesota and neither had him anywhere else. **He is now a Utah Jazz player.** That line would have deleted a real rotation player from the league and understated Utah by $14,679,012 and roughly 25 minutes a night. Replaced with an assertion that he is on exactly one roster and that it is not Minnesota.
+
+**TWO DEFECTS I INTRODUCED IN THIS SESSION AND FIXED, recorded because one of them changed a number.**
+
+- **A word-boundary escape did not survive being written to disk.** The suffix-stripping regex was meant to be `(jr|sr|ii|iii|iv|v)` and landed on disk as a bare alternation wrapped in literal backspace bytes, which would delete the letter v from the middle of ordinary names (Davion, Ivica). It inflated id resolution to 406 of 444 with some false matches; the corrected tokeniser gives **403 of 444**, which is the honest number. Regexes over whole names are now replaced with token splitting, which cannot fail that way.
+- **`runlog.note` could kill the run it was logging.** The Windows console is cp1252 and raised `UnicodeEncodeError` on a roster containing a name with a diacritic, failing the job mid-way. Now encoding-safe.
+
+**DiVincenzo is out of Minnesota's projected rotation, and that is correct, not a defect.** `rs_avail = 0.0` traces to a torn right Achilles on 2026-04-25, surgically repaired, classified long-term out under R7 with both sides of the timeline sourced and a playoff sensitivity at 80%. See D8. **Minnesota signed Kuminga while the man who led their 2025-26 RAPM sample is out for the season**, which is context the piece should carry.
+
+**Minnesota after the rewire:** 14 players, Kuminga in at 25.2 mpg, and **Cody Williams enters the rotation at 21.1 mpg on a consensus impact of -3.86**, the worst on the roster. Josh Green sits on Utah. Every sim-derived figure is being regenerated against this book.

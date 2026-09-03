@@ -108,6 +108,45 @@ def main():
             add("The deal that cannot happen yet", "a 15th man in the trade branch",
                 f"${-t15.vs_first_apron:,.0f} over the first apron", "", "FACT", rid_cap,
                 "so any salary returning in a Green trade crosses it")
+        # ---- the trade that resolved it, 2026-08-29 --------------------------
+        # The rows above describe the PRE-TRADE state, which is the problem the piece
+        # opens on. These describe how it was solved. Both belong on the sheet: the
+        # first set is the lede, the second is what actually happened.
+        _canon = json.load(open(os.path.join(OUTDIR, "cap_canonical.json"),
+                                encoding="utf-8"))
+        pt = _canon.get("post_trade")
+        rid_gr = last_run("green_resolution")
+        if pt:
+            add("The deal that could not happen", "post-trade apron, pre-Kuminga",
+                f"${pt['post_trade_apron']:,.0f}",
+                f"{pt['n_standard']} standard + $2,055,000 Konchar dead money + "
+                f"$1,750,000 unlikely bonuses", "FACT", rid_gr,
+                "Green out, Cody Williams in, Konchar waived and stretched. Reconciles "
+                "to Spotrac's first-apron space, second-apron space and their own "
+                "itemised total, all three, at ZERO difference.")
+            add("The deal that could not happen", "FINAL apron salary, Kuminga signed",
+                f"${pt['with_kuminga_apron']:,.0f}", "14 players", "FACT", rid_gr)
+            add("The deal that could not happen", "room under the hard cap after signing",
+                f"${pt['room_under_second_apron_with_kuminga']:,.0f}",
+                "second apron $221,686,000, hard cap for the whole league year",
+                "FACT", rid_gr,
+                "roughly one veteran minimum plus change; every in-season move fits "
+                "inside this")
+            add("The deal that could not happen", "over the first apron, after signing",
+                f"${pt['over_first_apron_with_kuminga']:,.0f}",
+                "first apron $209,015,000", "FACT", rid_gr,
+                "Minnesota is a FIRST-APRON team for 2026-27, with the four "
+                "restrictions that carries")
+            add("The deal that could not happen", "dead money created by the dump",
+                f"${pt['dead_money_2026_27']:,.0f} x 3 seasons",
+                "2026-27, 2027-28, 2028-29", "FACT", rid_gr,
+                "$4,110,000 of it lands in 2027-28 and 2028-29, the two seasons the "
+                "2027 flexibility thesis depends on")
+            add("The deal that could not happen", "draft picks attached to the dump",
+                "NONE", "no pick and no swap, either direction", "FACT", rid_gr,
+                "and Minnesota received Cody Williams, No. 10 in 2024, on a rookie "
+                "deal with a 2027-28 club option at $7,669,890")
+
         # ---- S3: the loophole, so the lede survives a reader with a calculator
         lp = load("lede_loophole.csv")
         rid_lp = last_run("lede_loophole")
@@ -424,14 +463,34 @@ def main():
                 f"{m.title_delta.min()*100:+.2f} to {m.title_delta.max()*100:+.2f}pp",
                 "NOT QUOTABLE", rid_sim, "the four views disagree on sign")
 
-        add("QUARANTINE", "league-wide cap and apron claims",
-            "NOT QUOTABLE", "30 of 30 teams fail to reconcile within $2,000",
-            "NOT QUOTABLE", "apron_reconcile_all30_20260827T191607Z",
-            "Absolute per-team differences are 4.9x the net gap, so the errors cancel: "
-            "players sit on different teams in our book than in Spotrac's (Harden on CLE, "
-            "Giannis on MIA, 8 teams over the 15-man limit). MIN reconciles exactly and "
-            "stays quotable. The SIM FIELD IS UNAFFECTED: it reads rotations and impacts, "
-            "not apron figures. See gaps_remaining item 13.")
+        # The quarantine is now driven by the gates rather than asserted. It was raised
+        # when 30 of 30 teams failed to reconcile, and the stated cause at the time was
+        # wrong: our book did NOT have players on the wrong teams. The real causes were
+        # pending transactions and dead money, both membership rules we had not modelled.
+        # See D54 and D56.
+        _gj = os.path.join(OUTDIR, "roster_v3_gates.json")
+        if os.path.exists(_gj):
+            g3 = json.load(open(_gj, encoding="utf-8"))
+            rid_g3 = last_run("roster_v3_gates")
+            if g3.get("gate_a") and g3.get("gate_b"):
+                add("League-wide cap layer", "roster book, gates A and B",
+                    "BOTH PASS", "30 of 30 on membership and on dollars", "FACT", rid_g3,
+                    "Gate A v2 is offseason-aware (parse-faithful, <=20 standard, <=3 "
+                    "two-way); the old 13-15 gate applied a regular-season rule to an "
+                    "August snapshot and failed six teams for being legal. Gate B "
+                    "decomposes: active roster 30/30 and dead money 30/30 to the dollar, "
+                    "apron 30/30. Absolute differences went $183,047,636 to $0.")
+                add("League-wide cap layer", "single-source risk", "OPEN",
+                    "the roster book is sourced only to Spotrac", "CAVEAT", rid_g3,
+                    "B1 and B2 compare our parse against Spotrac's own totals, so they "
+                    "are parse-fidelity tests, not independent-truth tests. A cross-check "
+                    "against a second publisher has not been run. Four teams (WAS, DEN, "
+                    "DAL, TOR) have unlikely bonuses Spotrac includes in its total but "
+                    "does not render per player; DEN's apron TIER depends on them.")
+            else:
+                add("QUARANTINE", "league-wide cap and apron claims", "NOT QUOTABLE",
+                    "gate A %s, gate B %s" % (g3.get("gate_a"), g3.get("gate_b")),
+                    "NOT QUOTABLE", rid_g3, "fail closed; see D56")
         # ---- the honesty rail --------------------------------------------------
         bt = load("backtest_calibration_summary.csv")
         rid_bt = last_run("backtest_calibration")
