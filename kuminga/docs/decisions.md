@@ -961,3 +961,49 @@ The 13-15 range is now reported as informational. Six teams sit above 15 and non
 **All four views now agree the offseason lowered Minnesota's title odds.** They did not agree before. The driver is DiVincenzo's Achilles plus the Green-for-Williams swap, and the Williams half of that is the assumption above.
 
 **Pooled Shapley against the floor:** `other_departures`, `ball_in` and `ddv_injury` survive at 4 of 4. **`dosunmu_retained` is ALL NEGATIVE at -0.412pp but clears only 3 of 4 and fails the floor**, so the D-log's earlier "SURVIVES, now quotable" is superseded: it survives the SLOT rule but not the noise floor. `kuminga_in` on the pooled basis is MIXED at -0.068pp, which is why the pooled run has never been the basis for the section-5 claim.
+
+
+### D58. Full audit pass. Six defects found, five of them in figures already reported
+
+Asked to double-check everything, so everything was re-derived rather than re-read. **Six defects, listed worst first.** All are fixed and every affected number is regenerated.
+
+**1. A counterfactual was published as a fact.** `dosunmu_final_states.py` had a row labelled `ACTUAL: Green traded out` carrying **$210,364,580**, which is the MODELLED trade branch (Green out, a minimum fourteenth man in). `build_final_numbers.py` reads exactly that row and publishes it as **"FINAL STATE, what happened"**. The real figure is **$217,077,416**. The label said one thing and the number was another, and it reached the canonical sheet. Fixed: the modelled branch is relabelled MODELLED, and the ACTUAL row now reads from `cap_canonical.json` post_trade.
+
+**2. And correcting it overturns the Dosunmu conclusion, which now needs three states rather than two.**
+
+| | payroll, tax basis | vs the tax line | est. tax |
+|---|---|---|---|
+| What happened | $215,327,416 | $14,899,416 | **~$23.3M** |
+| The same move, done cheapest | $208,614,580 | $8,186,580 | ~$8.7M |
+| Dosunmu not re-signed, Green kept | $207,265,000 | $6,837,000 | ~$7.0M |
+
+The old two-state table compared the MODELLED branch against the counterfactual, found them close, and concluded **"re-signing Ayo Dosunmu did not cost Minnesota money"**. **That conclusion survives, but only for the bottom two rows.** What the old table hid is the top row: taking Cody Williams and John Konchar back instead of a minimum body costs **$6,712,836 of payroll and roughly $14.6M more tax**, because it pushes Minnesota out of the 1.25 bracket and into the 3.50 one. **Roughly $20M all in for one season of Cody Williams.** The Dosunmu contract forced the dump; it did not force the acquisition. **Two decisions were tangled together and only the second is expensive.**
+
+**3. The option model ran on the wrong Non-Bird ceiling.** `player_option.py` set `NON_BIRD_CAP = 1.20 x Y2_OPTION = $7,640,640`. Non-Bird caps a re-signing start at 120% of the **prior season's** salary, and if he declines the option he never earns year two, so the base is year one: **$7,276,800**. The error overstated the ceiling by $363,840 and made Minnesota look more able to retain him than it is. **`build_final_numbers.py` already carried the correct $7,276,800 in prose while the model ran on the wrong number**, so the sheet and the model had disagreed for some time and nothing caught it. Fixed. P(Minnesota retains) moves from **0.28-0.54 to 0.26-0.53**.
+
+**4. Two scripts wrote the same file and the destructive one won.** `cap_reconciliation.py` rebuilds `cap_canonical.json` from scratch; `green_resolution.py` adds the `post_trade` block to it. Re-running `cap_reconciliation` during this audit **silently deleted post_trade and took all six post-trade rows off `final_numbers.csv`**, with no error anywhere. Fixed by making the write a MERGE that preserves what the other script owns, and proven by re-running it. A scan for other true multi-writer outputs found **none**; this was the only one.
+
+**5. Five stale inputs were still feeding the live sheet**, all built before the roster rebuild: `green_kept`, `dosunmu_cap`, `dosunmu_final_states`, `cap_reconciliation` / `cap_branches_canonical` and `lineup_evidence`. All re-run. `cap_reconciliation` reproduces the pre-trade figures exactly, which is the check that the rebuild did not disturb the historical chain. `build_figures.py`, in the L3 runbook list, had never been run this cycle; run.
+
+**6. The published cap chain did not add up.** The steps start on our contract book (McDaniels $26,200,001) and end on Spotrac's parse ($26,200,000), so the printed chain summed to $211,013,417 and landed on $211,013,416. **A reader with a calculator finds a dollar that does not close.** The dollar is now carried as an explicit step rather than absorbed.
+
+**STALE FIGURES IN THE PIECE, corrected.** The skeleton was checked line by line against the regenerated outputs. Every one of these was wrong:
+
+| figure | was | now |
+|---|---|---|
+| noise floor, per view | 0.24 to 0.45pp | **0.08 to 0.35pp** |
+| verdicts surviving the floor | two of eight | **three of eight** |
+| title odds band | 1.63% to 3.74% | **0.66% to 2.37%** |
+| four-view spread | 2.1 points | **1.7 points** |
+| P(avoids the play-in) | 39% to 84% | **17% to 64%** |
+| keeping Green, on the floor | -0.48 to +0.01pp | **-0.29 to +0.02pp** |
+| Dosunmu on-court | -0.13 to -0.76pp | **-0.12 to -0.78pp** |
+| P(Minnesota retains him) | 0.28 to 0.54 | **0.26 to 0.53** |
+| Non-Bird ceiling | $7,640,640 | **$7,276,800** |
+| methods, injury rank table | all four rows | **all four rows refreshed** |
+
+The methods table also said the injury is "the smallest negative on the board" under RAPM. It is now **fourth of eight** under RAPM, so the sentence was wrong as well as the numbers, and it has been rewritten.
+
+**ONE CLAIM PULLED RATHER THAN UPDATED.** "Seventeen of thirty changed apron tier since June" came from a June baseline built on the pre-rebuild contract book, carrying the same pending-transaction and dead-money defects the rebuild fixed. Recomputing the current side on the corrected book gives **twenty-eight of thirty**, and the difference is mostly a change of basis, not a change of tier. **Neither figure is quotable until the June baseline is rebuilt on the same basis.** Marked as such in the piece.
+
+**CHECKS THAT PASSED, recorded so they are not re-run blind.** No control characters anywhere in `scripts/` or `lib/` (the earlier backspace-escape defect is the only one and it is gone). 73 runs this session, one failure, and that failure is the known `UnicodeEncodeError` already fixed. Both gates still PASS 30 of 30. Green's per-fork impacts (-0.22 box to -2.00 DARKO) verified unchanged. The West claim "fifth to sixth, passed by the Lakers" verified correct against `T2_west_ranking`. The Kuminga on/off figure of -6.53 verified as the on/off DIFFERENTIAL (-5.56 on, +0.97 off), not the on rating. Every figure now quoted in the piece, including the Williams sensitivity and the slot-level floor results, is on `final_numbers.csv` with an explicit verdict.

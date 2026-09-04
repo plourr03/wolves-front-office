@@ -130,8 +130,19 @@ def main():
             cross_check="Spotrac 2nd Apron Space $4,064,172 vs ours "
                         f"${apron2 - (base_13 + unlikely):,.0f}",
             as_of="2026-08-27")
-        with open(os.path.join(REPO, "kuminga", "outputs", "cap_canonical.json"),
-                  "w", encoding="utf-8") as fh:
+        # MERGE, do not clobber. This script owns the PRE-TRADE keys; green_resolution.py
+        # owns the `post_trade` block. Both write this one file, and rebuilding it from
+        # scratch here silently deleted post_trade and took six rows off
+        # final_numbers.csv with it, with no error anywhere. Whoever writes second must
+        # preserve what the other owns.
+        _cp = os.path.join(REPO, "kuminga", "outputs", "cap_canonical.json")
+        if os.path.exists(_cp):
+            _prev = json.load(open(_cp, encoding="utf-8"))
+            if "post_trade" in _prev:
+                canon["post_trade"] = _prev["post_trade"]
+                r.note("preserved the existing post_trade block (trade dated %s)"
+                       % _prev["post_trade"].get("trade_date"))
+        with open(_cp, "w", encoding="utf-8") as fh:
             json.dump(canon, fh, indent=1)
 
         canonical_pre = base_13 + unlikely

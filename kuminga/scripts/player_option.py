@@ -19,10 +19,10 @@ ONE season with the team, and a declined option year is never "covered by a play
 contract", Minnesota holds NON-BIRD rights only. That caps a re-signing start at the
 greater of 120% of his prior salary or 120% of the minimum:
 
-  120% x $6,367,200 = $7,640,640
+  120% x $6,064,000 = $7,276,800 (year ONE; the declined option year is never paid)
 
-So there is a window. If his market lands between $6,367,200 and $7,640,640 he opts
-out and Minnesota can still match. Above $7,640,640, Minnesota cannot, and the only
+So there is a window. If his market lands between $6,367,200 and $7,276,800 he opts
+out and Minnesota can still match. Above $7,276,800, Minnesota cannot, and the only
 route back is cap space it will not have or a sign-and-trade it may not be permitted
 to use. That gap, not the opt-out itself, is the risk.
 
@@ -56,8 +56,15 @@ CONST = os.path.join(REPO, "offseason", "data", "league_year_constants.json")
 OUT = os.path.join(REPO, "kuminga", "outputs", "player_option.csv")
 
 KUMINGA_ID = 1630228
+Y1_SALARY = 6_064_000
 Y2_OPTION = 6_367_200
-NON_BIRD_CAP = round(1.20 * Y2_OPTION)
+# Non-Bird caps a re-signing start at 120% of the salary for the player's PRIOR
+# SEASON. If he declines the option he never earns the year-two figure, so the prior
+# season is year one. This was computed off Y2_OPTION, which overstated the ceiling by
+# $363,840 and made Minnesota look more able to retain him than it is.
+# build_final_numbers.py already carried the correct $7,276,800 in prose while the
+# model ran on the wrong number, so the sheet and the model disagreed.
+NON_BIRD_CAP = round(1.20 * Y1_SALARY)
 N_DRAWS = 200_000
 SEED = 20260827
 

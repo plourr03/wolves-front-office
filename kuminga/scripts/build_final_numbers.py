@@ -427,7 +427,7 @@ def main():
                 "year. If he opts IN instead he has two seasons of service and Early "
                 "Bird applies, 175% = $11,142,600.")
         add("The structural risk", "Non-Bird re-sign ceiling in 2027", "$7,276,800",
-            "120% of the year-two salary", "FACT", "league_year_constants",
+            "120% of the YEAR-ONE salary; the declined option year is never paid", "FACT", "league_year_constants",
             "confirmed from CBA text: a declined option year is never covered")
 
         # ---- the West ---------------------------------------------------------
@@ -491,6 +491,52 @@ def main():
                 add("QUARANTINE", "league-wide cap and apron claims", "NOT QUOTABLE",
                     "gate A %s, gate B %s" % (g3.get("gate_a"), g3.get("gate_b")),
                     "NOT QUOTABLE", rid_g3, "fail closed; see D56")
+        # ---- the Williams minutes assumption, and the slot-level floor -------
+        # Both are quoted in the piece, so both have to be on this sheet.
+        wm = load("williams_minutes_sensitivity.csv")
+        rid_wm = last_run("williams_minutes_sensitivity")
+        if wm is not None:
+            dflt = wm[wm.level == "model default"].iloc[0]
+            zero = wm[wm.level == "0"].iloc[0]
+            add("The Williams assumption", "Cody Williams projected minutes",
+                f"{dflt.williams_mpg:.1f} mpg", "allocated from a prior of 24.3 mpg on "
+                "a 27-win Utah team; impact -3.86, worst on the roster", "MODEL INPUT",
+                rid_wm, "NOT a sourced projection. No source says he plays this much "
+                "for Minnesota.")
+            add("The Williams assumption", "MIN title probability across his minutes",
+                f"{wm.title_mean.min():.2f}% to {wm.title_mean.max():.2f}%",
+                f"Williams at {dflt.williams_mpg:.1f} mpg down to 0", "QUOTABLE AS BAND",
+                rid_wm, f"a factor of {wm.title_mean.max()/wm.title_mean.min():.2f}x "
+                "from one assumption")
+            add("The Williams assumption", "Kuminga marginal at the model default",
+                f"{dflt.kuminga_mean_pp:+.3f}pp", str(dflt.kuminga_sign),
+                "NOT QUOTABLE" if dflt.kuminga_sign == "MIXED" else "FACT", rid_wm,
+                "the model's own default is the most pessimistic point in the range")
+            add("The Williams assumption", "Kuminga marginal if Williams does not play",
+                f"{zero.kuminga_mean_pp:+.3f}pp", str(zero.kuminga_sign), "FACT", rid_wm)
+
+        nfs = load("noise_floor_slot.csv")
+        rid_nfs = last_run("noise_floor")
+        if nfs is not None:
+            a = nfs[nfs.variant == "A_c3_default_shannon"]
+            if len(a):
+                a = a.iloc[0]
+                add("Verdict", "Kuminga vs the most likely internal fill",
+                    f"{a.mean_pp:+.3f}pp mean", str(a.sign_agreement),
+                    "QUOTABLE AS BAND" if a.survives else "SIGN ONLY, FAILS THE FLOOR",
+                    rid_nfs,
+                    f"smallest view {a.min_abs_pp:.3f}pp, {int(a.n_forks_clearing)} of 4 "
+                    "clear their own noise floor. Positive in sign under every view; "
+                    "too small for one view to resolve.")
+            d_ = nfs[nfs.variant == "D_beringer_fills"]
+            if len(d_):
+                d_ = d_.iloc[0]
+                add("Verdict", "Kuminga if Beringer fills the slot instead",
+                    f"{d_.mean_pp:+.3f}pp mean", str(d_.sign_agreement),
+                    "QUOTABLE AS BAND" if d_.survives else "NOT QUOTABLE", rid_nfs,
+                    f"{int(d_.n_forks_clearing)} of 4 clear the floor. The negative case "
+                    "is the statistically cleaner of the two.")
+
         # ---- the honesty rail --------------------------------------------------
         bt = load("backtest_calibration_summary.csv")
         rid_bt = last_run("backtest_calibration")

@@ -1,6 +1,6 @@
 # The Green branch, resolved
 
-As of 2026-09-03. Trade official 2026-08-29.
+As of 2026-09-04. Trade official 2026-08-29.
 
 | step | amount |
 |---|---:|
@@ -9,7 +9,8 @@ As of 2026-09-03. Trade official 2026-08-29.
 | in: Cody Williams | 6,015,600 |
 | in: John Konchar | 6,165,000 |
 | waive Konchar, stretch over 3 seasons | -4,110,000 |
-| post-trade Apron Team Salary (2026-09-03) | 211,013,416 |
+| McDaniels, our book $26,200,001 vs Spotrac $26,200,000 | -1 |
+| post-trade Apron Team Salary (2026-09-04) | 211,013,416 |
 | sign Kuminga, taxpayer MLE year 1 | 6,064,000 |
 | final Apron Team Salary | 217,077,416 |
 

@@ -100,8 +100,22 @@ def main():
                f"signing still fits. Green is being shed to pay for Dosunmu.")
         st("ACTUAL: Dosunmu + Green + Kuminga at the taxpayer MLE", 14, pre + tmle,
            "cannot be signed, over the second apron hard cap")
+        # WAS: this row was labelled ACTUAL but carried `actual_trade`, the MODELLED
+        # trade branch (Green out, a minimum 14th man in) at $210,364,580. On 2026-08-29
+        # Minnesota traded Green for Cody Williams and John Konchar, waived Konchar and
+        # stretched him, so the real final state is $217,077,416, higher by $6,712,836.
+        # build_final_numbers publishes this row as "FINAL STATE, what happened", so the
+        # mislabel put a counterfactual on the sheet as a fact. The modelled branch is
+        # kept, relabelled as modelled.
+        st("MODELLED: Green traded out, minimum 14th man, Kuminga at the taxpayer MLE",
+           14, actual_trade,
+           "counterfactual. NOT what happened; kept for the branch comparison")
+        pt = canon.get("post_trade")
+        assert pt, "cap_canonical.json has no post_trade block; run green_resolution.py"
         st("ACTUAL: Green traded out, Kuminga at the taxpayer MLE", 14,
-           actual_trade, "the trade branch in the piece, APRON basis")
+           float(pt["with_kuminga_apron"]),
+           "the real 2026-08-29 outcome: Green out, Cody Williams in, Konchar waived "
+           "and stretched at $2,055,000 x 3. Reconciles to Spotrac at zero.")
 
         # ---- the counterfactual: Dosunmu gone, Green KEPT ---------------------
         base12 = pre - dos

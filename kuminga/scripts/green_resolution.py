@@ -154,6 +154,15 @@ def main():
             ("in: Cody Williams", WILLIAMS_IN),
             ("in: John Konchar", KONCHAR_IN),
             ("waive Konchar, stretch over 3 seasons", -stretch_credit),
+            # The chain STARTS on our contract book (McDaniels $26,200,001, which is
+            # what Basketball-Reference and SalarySwish carry) and ENDS on Spotrac's
+            # parse (McDaniels $26,200,000). Without this line the published steps sum
+            # to $211,013,417 and land on $211,013,416, and a reader with a calculator
+            # finds a dollar of arithmetic that does not close. It is carried as a step
+            # rather than absorbed silently.
+            ("McDaniels, our book $26,200,001 vs Spotrac $26,200,000",
+             apron_now - (pre_apron - GREEN_OUT + WILLIAMS_IN + KONCHAR_IN
+                          - stretch_credit)),
             ("post-trade Apron Team Salary (%s)" % stamp[:10], apron_now),
             ("sign Kuminga, taxpayer MLE year 1", KUMINGA_Y1),
             ("final Apron Team Salary", with_k),

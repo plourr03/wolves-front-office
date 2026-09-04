@@ -1,6 +1,7 @@
 state,n_players,apron_payroll,tax_basis_payroll,vs_tax_line,est_tax_bill,vs_first_apron,vs_second_apron,note
 ACTUAL: Dosunmu + Green + Kuminga at the taxpayer MLE,14,223685829.0,221935829.0,21507829.0,50618187.75,-14670829.0,-1999829.0,"cannot be signed, over the second apron hard cap"
-"ACTUAL: Green traded out, Kuminga at the taxpayer MLE",14,210364580.0,208614580.0,8186580.0,8717225.0,-1349580.0,11321420.0,"the trade branch in the piece, APRON basis"
+"MODELLED: Green traded out, minimum 14th man, Kuminga at the taxpayer MLE",14,210364580.0,208614580.0,8186580.0,8717225.0,-1349580.0,11321420.0,counterfactual. NOT what happened; kept for the branch comparison
+"ACTUAL: Green traded out, Kuminga at the taxpayer MLE",14,217077416.0,215327416.0,14899416.0,23343956.0,-8062416.0,4608584.0,"the real 2026-08-29 outcome: Green out, Cody Williams in, Konchar waived and stretched at $2,055,000 x 3. Reconciles to Spotrac at zero."
 CF: veteran min (2-yr charge) + Kuminga at the ceiling,14,209015000.0,207265000.0,6837000.0,7030250.0,0.0,12671000.0,"Kuminga at $8,254,095; lands exactly on the first apron"
 "CF: veteran min (2-yr charge) + Kuminga at $8,000,000",14,208760905.0,207010905.0,6582905.0,6712631.25,254095.0,12925095.0,"15th man on the rookie min does not fit ($254,095 of apron room left)"
 "CF: veteran min (2-yr charge) + Kuminga at $9,000,000",14,209760905.0,208010905.0,7582905.0,7962631.25,-745905.0,11925095.0,"15th man on the rookie min does not fit ($-745,905 of apron room left)"

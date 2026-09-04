@@ -50,6 +50,7 @@ That is the move the model never considered, and it is worth stopping on, becaus
 - Out, Josh Green: **-$14,679,012**
 - In, Cody Williams and John Konchar: **+$12,180,600**
 - Waive Konchar, stretch over three seasons: **-$4,110,000**
+- Jaden McDaniels, our book $26,200,001 against Spotrac's $26,200,000: **-$1**
 - Post-trade: **$211,013,416**
 - Add Kuminga at the full exception: **$217,077,416**
 - Room under the second-apron hard cap: **$4,608,584**
@@ -142,16 +143,23 @@ The rule being applied is worth stating once in the piece: **if a verdict change
 
 **(a) The cap arithmetic, which needs no model at all.** The honest way to see this is two finished rosters, both legal, both fourteen men, both with Kuminga on them `[dosunmu_final_states_20260827T154349Z]`:
 
-| | Payroll | vs the tax line | Est. tax | Kuminga at | Josh Green |
-|---|---|---|---|---|---|
-| **What happened** | $208,614,817 | $8,186,817 over | ~$13.1M | $6,064,000 | traded away |
-| **Dosunmu not re-signed** | $209,015,000 | $8,587,000 over | ~$13.8M | up to $10,004,516 | **kept** |
+Three states, not two, because what Minnesota actually did and the cheapest version of the same move are not the same thing `[dosunmu_final_states]`. **Payroll here is the TAX basis, which excludes unlikely bonuses**, because tax is charged on team salary and not on the apron figure.
 
-**Look at the first three columns before the last two.** They are nearly the same. Both rosters are taxpayers, both sit around $209M, both owe about $13M, and the counterfactual is very slightly the *more* expensive of the two. **Re-signing Ayo Dosunmu did not cost Minnesota money.** What it cost is two things, and neither of them is Josh Green the player: **the asset cost of having to move Green**, which is now known and was smaller than any branch assumed `[green_resolution_20260903T225927Z]`, plus **about four million dollars of Kuminga's first-year ceiling**.
+| | Payroll, tax basis | vs the tax line | Est. tax | Kuminga at | Josh Green |
+|---|---|---|---|---|---|
+| **What happened** | $215,327,416 | $14,899,416 over | **~$23.3M** | $6,064,000 | traded, Williams back |
+| **The same move, done cheapest** | $208,614,580 | $8,186,580 over | ~$8.7M | $6,064,000 | traded for a minimum body |
+| **Dosunmu not re-signed** | $207,265,000 | $6,837,000 over | ~$7.0M | up to $10,004,516 | **kept** |
+
+**Compare the bottom two rows first, because that is the Dosunmu question.** They are close: both taxpayers, both around $208M, both owing single-digit millions, and the counterfactual is the cheaper of the two by about $1.7M. **Re-signing Ayo Dosunmu did not, by itself, cost Minnesota real money.** What it cost is the roster spot and about four million dollars of Kuminga's first-year ceiling.
+
+**Now compare the top two rows, because that is a different decision and it is the expensive one.** Both are the same forced move, Green out and Kuminga in at $6,064,000. The difference is only what came back. Taking Cody Williams and John Konchar instead of a minimum body costs **$6,712,836 of payroll and about $14.6M of additional tax**, because it pushes Minnesota out of the second tax bracket at 1.25 and into the third at 3.50. **Roughly $20M all in, for one season of a 22-year-old who has not been good yet.**
+
+That is the sentence the section has been missing. The Dosunmu contract forced the dump; it did not force the acquisition. **Two decisions are tangled here and only the second one is expensive.**
 
 **What the re-signing bought, then, is two things.**
 
-**First, it is why Josh Green had to be moved.** Be precise about what is lost here, because it is not the player. Green was **the matching salary in the LaMelo Ball trade**, on an expiring one-year deal at $14,679,012, and priced on the floor his departure is a wash: keeping him grades **mixed across the four views, -0.48 to +0.01pp** `[green_kept_20260827T154636Z]`. Nothing in this project says Minnesota will miss him.
+**First, it is why Josh Green had to be moved.** Be precise about what is lost here, because it is not the player. Green was **the matching salary in the LaMelo Ball trade**, on an expiring one-year deal at $14,679,012, and priced on the floor his departure is a wash: keeping him grades **mixed across the four views, -0.29 to +0.02pp** `[green_kept]`. Nothing in this project says Minnesota will miss him.
 
 **What the re-signing removes is keeping him, and it makes every other exit cost something.** With both contracts on the book, adding Kuminga at the full taxpayer exception gives $217,621,829 + $6,064,000 = $223,685,829, which is $1,999,829 past the second apron and cannot be done, so **Green cannot be kept**.
 
@@ -169,7 +177,7 @@ Dosunmu's $19,310,345 is larger than the $1,999,829 overage by $17,310,516, so *
 
 **And this is why the weight lands on this contract and not another.** Four moves are tangled together here, and three of them were not really separable choices. **Ball was the trade. Green was its matching salary. Kuminga was the target. Dosunmu was the optional one.**
 
-**(b) The on-court finding.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.13 to -0.76pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
+**(b) The on-court finding.** Against the guards actually on the roster, Dosunmu's minutes grade **negative under all four views, -0.12 to -0.78pp** `[shapley_20260827T134406Z, QUOTABLE AS BAND]`. This was the verdict most likely to be an artifact of handing his minutes to better players; constraining them to the guard rotation moves it a tenth of a point and does not touch the sign.
 
 **One sentence on what kind of claim each is, because they are not the same kind.** The cap half is arithmetic on contracts and CBA thresholds, and it is true regardless of what anyone thinks of the player; **the on-court half is a model claim about impact metrics**, and it inherits every assumption those metrics carry, including the minutes rule in the methods note.
 
@@ -181,13 +189,13 @@ Dosunmu's $19,310,345 is larger than the $1,999,829 overage by $17,310,516, so *
 
 The risk is not the player. It is the contract shape.
 
-Because a declined option year is never "covered by a player contract" under the CBA, opting out after one season leaves Minnesota with **Non-Bird rights only**, capping a re-signing start at 120% of his year-two salary: **$7,640,640** `[league_year_constants, verified from CBA text]`.
+Because a declined option year is never "covered by a player contract" under the CBA, opting out after one season leaves Minnesota with **Non-Bird rights only**, capping a re-signing start at 120% of his **year-one** salary, because a declined option year is never paid: **$7,276,800** `[league_year_constants, verified from CBA text]`.
 
-The first-pass option model puts **P(he opts out) at 0.50 to 0.80** and **P(Minnesota can keep him) at only 0.28 to 0.54** `[player_option_20260827T124131Z, band, labelled first pass]`.
+The first-pass option model puts **P(he opts out) at 0.50 to 0.80** and **P(Minnesota can keep him) at only 0.26 to 0.53** `[player_option_20260827T124131Z, band, labelled first pass]`.
 
 **And there is no way to negotiate around it during the season, which we checked rather than assumed.** A two-year contract is **categorically ineligible to be extended**. The waiting period is the second anniversary of signing for three- and four-year deals and the third for five- and six-year deals, and beneath that "a contract that only covers one or two seasons is ineligible to be extended" `[Hoops Rumors glossary, veteran contract extension; CBA Guide extensions table]`. Kuminga's second anniversary would arrive in the summer of 2028, after the deal has already expired. **Minnesota cannot buy the leverage back in February.** There is no extension, and renegotiation needs cap room a team $8M into the tax does not have.
 
-**But the retention door is not one door, and the piece had only described one of them.** Everything above is the branch where he **opts out**. If he instead **picks up the option and plays 2027-28**, Minnesota reaches the summer of 2028 with two consecutive seasons of his service and therefore **Early Bird rights**, which allow the greater of **175% of his prior salary, $11,142,600**, or 105% of the league-average salary, over up to four years `[Hoops Rumors glossary, Early Bird rights]`. That is a materially better position than the $7,640,640 Non-Bird cap.
+**But the retention door is not one door, and the piece had only described one of them.** Everything above is the branch where he **opts out**. If he instead **picks up the option and plays 2027-28**, Minnesota reaches the summer of 2028 with two consecutive seasons of his service and therefore **Early Bird rights**, which allow the greater of **175% of his prior salary, $11,142,600**, or 105% of the league-average salary, over up to four years `[Hoops Rumors glossary, Early Bird rights]`. That is a materially better position than the $7,276,800 Non-Bird cap.
 
 So the structure is: **opt out and Minnesota is nearly powerless; opt in and Minnesota is fine.** Which is exactly why the option year, and his camp's stated reason for wanting it, is the whole risk.
 
@@ -201,15 +209,17 @@ So the structure is: **opt out and Minnesota is nearly powerless; opt in and Min
 
 ## 6. The West, after everybody's summer
 
-Every team's roster was rebuilt the same way and run through the same pipeline. Seventeen of thirty changed apron tier since June `[diff_team_state]`.
+Every team's roster was rebuilt the same way and run through the same pipeline.
+
+**One claim that was here has been pulled.** An earlier draft said seventeen of thirty teams changed apron tier since June. That figure came from a June baseline built on the pre-rebuild contract book, which carried the pending-transaction and dead-money defects the September rebuild fixed. Recomputing the current side on the corrected book gives twenty-eight of thirty, and the gap between the two numbers is mostly a change of basis rather than a change of tier. **Neither figure is quotable until the June baseline is rebuilt on the same basis.**
 
 **Minnesota moves from fifth to sixth in the West** `[build_outputs_20260827T131629Z, directional]`, passed by the Lakers.
 
-**The number to lead with here is not a title probability.** Minnesota's chance of finishing top six and skipping the play-in falls from **73% on the baseline to a band of 39% to 84%** across the four views `[seed_distribution, band]`. That band spans "comfortably safe" to "more likely than not in the play-in", which is the finding: the four views do not agree on whether this is a top-six team.
+**The number to lead with here is not a title probability.** Minnesota's chance of finishing top six and skipping the play-in falls from **73% on the baseline to a band of 17% to 64%** across the four views `[seed_distribution, band]`. The whole band now sits below the baseline and its top end is under 65%, so the finding has hardened: on every view this is more likely to be a play-in team than it was, and on two of four it is more likely than not to be in the play-in.
 
-Title odds for the piece, as a band and never as a midpoint: **1.63% to 3.74%** after the offseason `[run_sim_20260827T124337Z, QUOTABLE AS BAND]`.
+Title odds for the piece, as a band and never as a midpoint: **0.66% to 2.37%** after the offseason `[run_sim_20260827T124337Z, QUOTABLE AS BAND]`.
 
-**And the honesty rail that belongs in the piece, not a footnote.** A three-season backtest of this calibration against the betting market puts its title-odds error at **1.4 to 2.3 percentage points** `[backtest_calibration_20260827T124932Z]`. Minnesota's entire four-view spread is 2.1 points. The measurement error is the same size as the thing being measured, which is why this piece quotes bands and refuses point estimates.
+**And the honesty rail that belongs in the piece, not a footnote.** A three-season backtest of this calibration against the betting market puts its title-odds error at **1.4 to 2.3 percentage points** `[backtest_calibration_20260827T124932Z]`. Minnesota's entire four-view spread is 1.7 points. The measurement error is the same size as the thing being measured, which is why this piece quotes bands and refuses point estimates.
 
 **The same backtest on win totals, which is the less flattering half and runs anyway.** Against actual results over those three seasons, this model missed by **8.80 wins on average. The betting market missed by 7.47** `[same]`. The market was closer in two of the three seasons and tracked actual wins better in all three. Nothing here is a claim to beat the market. It is a claim to be explicit about a set of assumptions, which is a different and smaller thing, and it is why every seed and title figure above is a band.
 
@@ -241,7 +251,7 @@ Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separ
 
 **The four views are not four independent measurements, and the piece should not imply they are.** They are built from overlapping data: the consensus view is constructed partly *from* the RAPM and box views, and all four ultimately read the same possessions and the same box scores. Four-way agreement is therefore weaker evidence than four independent instruments agreeing would be. It is a check that a finding does not depend on one modelling choice, not a confidence interval, and it is used here only to decide whether a claim gets a sign at all.
 
-**The noise floor, and how much it eats.** The machinery has its own error: Monte Carlo variation in the simulated seasons plus interpolation on the f-curve grid. At Minnesota's odds level that combines to a materiality floor of **0.24 to 0.45 percentage points** depending on the view `[noise_floor_20260827T194635Z]`. Re-testing every verdict against it, requiring an agreed sign *and* every individual view clearing the floor, **only two of eight survive**, and only one of those is a player move: LaMelo Ball's arrival. Reid out, Dosunmu retained and the DiVincenzo injury all have an agreed sign whose smallest view is inside the noise.
+**The noise floor, and how much it eats.** The machinery has its own error: Monte Carlo variation in the simulated seasons plus interpolation on the f-curve grid. At Minnesota's odds level that combines to a materiality floor of **0.08 to 0.35 percentage points** depending on the view `[noise_floor_20260827T194635Z]`. Re-testing every verdict against it, requiring an agreed sign *and* every individual view clearing the floor, **only three of eight survive**: the other-departures bundle, LaMelo Ball's arrival, and the DiVincenzo injury. Reid out, Dosunmu retained and the depth bundle all have an agreed sign whose smallest view is inside the noise, and so does Kuminga's own slot-fill result on one view of four.
 
 **That floor is our compute budget, not a law of nature.** Monte Carlo dominates it by roughly five to one over interpolation, and Monte Carlo error falls with the square root of the simulation count. The current figures come from 20,000 simulations per fork per seed. Ten times that would cut the floor by about a factor of three and several of these verdicts would clear it. Until that run happens, the honest statement is that the piece cannot resolve effects this small, not that the effects are zero.
 
@@ -249,12 +259,12 @@ Four impact views (in-house consensus, RAPM, box score, DARKO) are carried separ
 
 | View | Largest single negative | The injury | Its rank |
 |---|---|---|---|
-| consensus | depth bundle, -0.332 | -0.218 | 4th of 8 |
-| RAPM | Dosunmu retained, -0.443 | -0.189 | 4th of 8 |
-| box | **the injury, -0.356** | -0.356 | **1st of 8** |
-| DARKO | Dosunmu retained, -0.758 | -0.627 | 3rd of 8 |
+| consensus | Reid out, -0.316 | -0.239 | 4th of 8 |
+| RAPM | Reid out, -0.449 | -0.197 | 4th of 8 |
+| box | **the injury, -0.335** | -0.335 | **1st of 8** |
+| DARKO | Dosunmu retained, -0.783 | -0.650 | 2nd of 8 |
 
-All four views agree the injury hurt. They do not agree it hurt most: it leads under one view, and under RAPM it is the *smallest* negative on the board. "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily. That is the whole editorial rule in one example.
+All four views agree the injury hurt. They do not agree it hurt most: it leads under one view and sits fourth under two others. "The Achilles was the biggest blow of Minnesota's offseason" is the kind of sentence this data cannot support, while "the Achilles hurt, under every way we know how to measure it" is one it supports easily. That is the whole editorial rule in one example.
 
 **Positional minute budgets are each team's own 2025-26 shape, not a league average.** For Minnesota that assumes a **double-big allocation the current roster cannot repeat**: last season's 53.7 centre minutes a game were Gobert plus Reid, and Reid is gone. The budget is the right choice for measuring what the departures cost, because it holds the shape fixed while the personnel changes, and it is the wrong choice for predicting how Finch will actually play this team. Read every Shapley figure here as "what these moves did to last season's shape", not as a rotation forecast `[build_rotations_20260827T133313Z]`.
 
@@ -262,9 +272,9 @@ All four views agree the injury hurt. They do not agree it hurt most: it leads u
 
 ## Appendix: keeping Josh Green, priced on the floor
 
-Both cap branches assume Green leaves, which is a cap assumption that was never asked as a basketball question. Priced as one coalition under the slot rule, **keeping him is MIXED: -0.48 to +0.01pp, mean -0.18pp** `[green_kept_20260827T154636Z]`. Only RAPM is positive and it is positive by a hundredth of a point.
+Both cap branches assume Green leaves, which is a cap assumption that was never asked as a basketball question. Priced as one coalition under the slot rule, **keeping him is MIXED: -0.29 to +0.02pp, mean -0.09pp** `[green_kept_20260827T154636Z]`. Only RAPM is positive and it is positive by two hundredths of a point.
 
-So the piece **does not** attach an on-court cost to the salary dump. If anything three of the four views think the minutes are better spent elsewhere, but they do not agree, so nothing is claimed. Two caveats travel with it: the pooled rule hands Green 13.3 minutes and takes them proportionally from the whole guard group, Edwards included, which is not how a rotation actually works; and his impacts run from -0.22 (box) to -2.00 (DARKO), a spread wide enough that the disagreement here is about him, not about the method.
+So the piece **does not** attach an on-court cost to the salary dump. If anything three of the four views think the minutes are better spent elsewhere, but they do not agree, so nothing is claimed. Two caveats travel with it: the pooled rule hands Green 13.0 minutes and takes them proportionally from the whole guard group, Edwards included, which is not how a rotation actually works; and his impacts run from -0.22 (box) to -2.00 (DARKO), a spread wide enough that the disagreement here is about him, not about the method.
 
 ---
 
