@@ -62,21 +62,37 @@ If Kuminga picks up his 2027-28 player option, Minnesota reaches the 2028 offsea
 
 Status as of 2026-08-27: open. Two sources consulted (Hoops Rumors Early Bird glossary, CBA Guide).
 
-## 13. QUARANTINE: every league-wide cap claim (R3, 2026-08-27)
+## 13. CLOSED 2026-09-03: the league-wide cap quarantine is lifted
 
-**30 of 30 teams fail to reconcile within $2,000** against Spotrac's published 2026-27 apron allocations. `outputs/R3_apron_failure_table.csv`, run `apron_reconcile_all30_20260827T191607Z`.
+**Status: both gates pass, 30 of 30. The quarantine raised on 2026-08-27 is lifted.** `outputs/roster_v3_gates.json`, run `roster_v3_gates`.
 
-**The diagnostic that settles the cause.** The league aggregate is close: ours $5,854,937,618 against Spotrac's $5,892,133,056, a gap of $37,195,438 or **0.63%**. But the sum of the absolute per-team differences is **$183,047,636, 4.9x the net**. The errors cancel. If we were merely missing unlikely bonuses every difference would point the same way and the absolute sum would equal the net. **Players are sitting on different teams in the two books.**
+**FIRST, THE CORRECTION, because the diagnosis recorded here was wrong.** This item previously said "players are sitting on different teams in the two books" and cited James Harden on Cleveland and Giannis Antetokounmpo on Miami as proof. **That was wrong.** Spotrac's own pages put Harden on Cleveland and Giannis on Miami, exactly where our book had them. The team assignments were right the whole time.
 
-Confirmed by inspection: our book has **James Harden on Cleveland** (CLE is +$42,317,307, exactly his salary), **Giannis Antetokounmpo on Miami** rather than Milwaukee, and eight teams carry impossible roster counts (MEM 21 standard contracts, LAC/MIL/NOP 18, four more at 17, against a maximum of 15).
+**The real causes were two membership rules we had never modelled.**
 
-**Cause groups:** roster composition, 17 teams, $169,634,541 absolute. Non-standard rows beyond the 15-man limit, 3 teams, $2,948,660. Consistent with unlikely bonuses, 7 teams, $6,082,153. Unexplained, 2 teams, $68,281. And **MIN, which reconciles exactly**: +$4,314,001 = Kuminga's $6,064,000 in our book and not theirs, minus the $1,750,000 of unlikely bonuses in theirs and not our raw contracted figure.
+- **Pending transactions.** Spotrac lists reported-but-unofficial moves separately and excludes them from team totals. Our book folded them in at full value. Cleveland's $42,317,307 gap was not Harden being on the wrong team, it was Harden being counted at his full salary in our book while Spotrac carried him as a $29,938,272 pending row and excluded him from the total.
+- **Dead money.** Waived players still count against the team that waived them, and our book largely did not carry them. Phoenix's entire $19,383,010 gap was Bradley Beal's waived salary.
 
-**No single rule fix is available.** The dominant cause is not a rule; it is the contract book disagreeing with the world about who plays where. It needs a re-scrape and a player-level verification pass, not a formula change.
+Both cut in opposite directions, which is exactly why the league aggregate was within 0.63% while individual teams were tens of millions apart. **The 4.9x absolute-to-net ratio told me the errors cancelled; I read that as misassignment when it was a systematic rule omission in both directions.** The roster-count anomaly was the same story: rows for waived and pending players were being counted as standard contracts.
 
-**QUARANTINE, in force until 30 of 30 reconcile within $2,000:**
-- Every league-wide cap and apron claim is **NOT QUOTABLE**. That includes "seventeen of thirty changed apron tier", every rival's tier label, and the companion league skeleton, which cannot be written yet.
-- **Minnesota's own chain is unaffected and remains quotable.** It reconciles to the dollar, and it was separately verified player-for-player against the warehouse, Spotrac and Basketball-Reference.
-- **The simulation field stays live.** The sim reads rotations and impacts, not apron figures, so team strengths, title odds and the Shapley set are untouched by this. What is quarantined is the cap layer sitting beside them.
+**What actually closed it.** A full re-scrape of all 30 Spotrac team cap pages (2026-09-03), parsed into `roster_snapshot_2026_27_v3.csv` with dead money, pending transactions and per-player unlikely bonuses carried as distinct statuses for the first time.
 
-**To close:** re-verify `nba_contracts_2026_27_verified.csv` team assignments against a current source, drop non-standard rows from the apron basis, and add per-team unlikely bonuses. Then re-run `apron_reconcile_all30.py` and require 30 of 30.
+| gate | result |
+|---|---|
+| A, parse faithful vs Spotrac's own header count | **30 of 30** |
+| A, standard contracts within the offseason limit of 20 | **30 of 30** |
+| B1, active roster dollars | **30 of 30** to the dollar |
+| B2, dead money dollars | **30 of 30** to the dollar |
+| B, apron per team | **30 of 30** |
+
+Sum of absolute per-team differences: **$183,047,636 to $0.**
+
+**Gate A had to be re-specified, and that is a finding in itself.** The original 13-to-15 range failed seven teams, six of them on Spotrac's own published counts, because **13-to-15 is a regular-season rule**. In the offseason a team may carry up to 20 and must cut down before opening night. A gate that rejects the reference source's own data is mis-specified. See D56.
+
+**WHAT REPLACES THE QUARANTINE, because two real limitations remain.**
+
+- **Single-source risk, OPEN.** The roster book is now sourced only to Spotrac, and B1 and B2 compare our parse against Spotrac's own totals, so they are **parse-fidelity tests, not independent-truth tests**. v1 came from Basketball-Reference. A cross-publisher check has not been run and should be before any league-wide claim carries real weight.
+- **Unlikely bonuses on four teams.** Spotrac renders some unlikely bonuses as "-" per player while including them in its own total. WAS is short $5,458,310, DEN $1,091,658, DAL and TOR $264,305 each. Active roster and dead money match to the dollar on all four, so membership is right and only the bonus column is incomplete; the team total is used as the authority. **DAL and TOR being short by the identical figure is unexplained.** **Denver's apron TIER depends on those bonuses** (first apron on the per-player column, second apron on the total), so any claim about Denver's tier is still not quotable.
+
+**Minnesota is unaffected by both.** Its per-player bonus column is complete ($1,750,000 against $1,750,000 implied) and its apron reconciles to all three of Spotrac's separately-computed figures at zero difference.
+

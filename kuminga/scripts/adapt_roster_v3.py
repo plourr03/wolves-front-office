@@ -146,6 +146,32 @@ def main():
         v1 = v1.assign(k=v1.player_name.map(nkey))
         keep["nba_player_id"] = resolve(keep, id_map(v1, "player_name",
                                                      "nba_player_id"))
+
+        # FOURTH KEY: exact 2026-27 salary. Names alone miss NICKNAMES, which no
+        # normalisation catches. Spotrac lists "Nah'Shon Hyland" and v1 lists "Bones
+        # Hyland"; all three name keys failed, he fell to replacement level, dropped out
+        # of Minnesota's rotation entirely, and Cody Williams absorbed his 18 minutes at
+        # -3.86. That single miss moved Minnesota's minutes-weighted net by roughly 0.4
+        # points and roughly halved the modelled title probability. A cap hit to the
+        # dollar is a strong identifier, so it is used where it is UNIQUE in both books.
+        miss = keep.nba_player_id.isna()
+        if miss.any():
+            sal_v1 = v1.dropna(subset=["nba_player_id"])
+            g = sal_v1.groupby("salary_2026_27").nba_player_id.nunique()
+            uniq = set(g[g == 1].index)
+            smap = (sal_v1[sal_v1.salary_2026_27.isin(uniq)]
+                    .drop_duplicates("salary_2026_27")
+                    .set_index("salary_2026_27").nba_player_id)
+            # and the salary must be unique on OUR side too, or it identifies nothing
+            own = keep.groupby("cap_hit_2026_27").size()
+            ok_own = set(own[own == 1].index)
+            cand = keep.loc[miss & keep.cap_hit_2026_27.isin(ok_own), "cap_hit_2026_27"]
+            got = cand.map(smap)
+            keep.loc[got.dropna().index, "nba_player_id"] = got.dropna()
+            for i in got.dropna().index:
+                r.note("    salary key resolved %s (%s) -> id %d"
+                       % (keep.at[i, "player_name"], keep.at[i, "team_abbr"],
+                          int(keep.at[i, "nba_player_id"])))
         n_v1 = int(keep.nba_player_id.notna().sum())
 
         try:

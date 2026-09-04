@@ -914,3 +914,50 @@ The 13-15 range is now reported as informational. Six teams sit above 15 and non
 **DiVincenzo is out of Minnesota's projected rotation, and that is correct, not a defect.** `rs_avail = 0.0` traces to a torn right Achilles on 2026-04-25, surgically repaired, classified long-term out under R7 with both sides of the timeline sourced and a playoff sensitivity at 80%. See D8. **Minnesota signed Kuminga while the man who led their 2025-26 RAPM sample is out for the season**, which is context the piece should carry.
 
 **Minnesota after the rewire:** 14 players, Kuminga in at 25.2 mpg, and **Cody Williams enters the rotation at 21.1 mpg on a consensus impact of -3.86**, the worst on the roster. Josh Green sits on Utah. Every sim-derived figure is being regenerated against this book.
+
+
+### D57. A nickname cost Minnesota a rotation player, and Cody Williams is now carrying the headline
+
+**THE BUG, mine, found by checking a number I did not believe.** The v3 adapter resolves players to ids by name. Spotrac writes **Nah'Shon Hyland**; the old book wrote **Bones Hyland**. No amount of normalising catches a nickname, so he lost his id, fell to replacement level, dropped out of Minnesota's rotation entirely, and **Cody Williams absorbed his 18 minutes at an impact of -3.86**. Fixed by adding a fourth resolution key, **exact 2026-27 cap hit**, used only where the salary is unique in both books. It recovered Hyland and pulled Jokic, Jovic, Demin, Salaun, Jakucionis and Topic forward from a slower path. **This is the failure mode the project's own notes warn about (join on id, not name) and it still got through, because the guard was written for diacritics and the hazard was a nickname.**
+
+**And the fix did not explain the drop, which is the more important half.** Restoring Hyland moved Minnesota's minutes-weighted net from 1.362 to 1.394 against a committed 1.756. **It recovered 0.03 of a 0.39 fall.** The rest is Cody Williams, and it is an assumption rather than a finding.
+
+**THE ASSUMPTION.** `build_rotations` allocates from **prior minutes per appearance**. Williams played **24.3 a night for a 27-win Utah team**, so he inherits **19.2 minutes on Minnesota** at the worst impact on the roster. Minutes per appearance is a ROLE signal, and a role earned on a rebuilding team does not transfer to a contender carrying Shannon, Clark and Hyland for the same minutes. **Nothing sourced says Williams starts or plays 19 minutes.** So it was measured rather than argued: `williams_minutes_sensitivity.py`.
+
+| Williams mpg | MIN title probability | Kuminga marginal | sign |
+|---|---|---|---|
+| 19.2 (model default) | **1.49%** | +0.250pp | **MIXED** |
+| 16 | 1.78% | +0.539pp | ALL POSITIVE |
+| 12 | 2.02% | +0.777pp | ALL POSITIVE |
+| 8 | 2.24% | +1.000pp | ALL POSITIVE |
+| 4 | 2.44% | +1.195pp | ALL POSITIVE |
+| 0 | 2.73% | +1.438pp | ALL POSITIVE |
+
+**One assumption moves the title number by a factor of 1.83x, and it moves the Kuminga verdict across the publication threshold.** The model's own default is the single most pessimistic case in the range. **The section-5 claim is therefore CONDITIONAL and the piece must say so.**
+
+**THE FLOOR NOW BITES, and the earlier read was too generous.** Before the Hyland fix, slot variant A cleared 4 of 4 forks and I reported that the claim survived. **With Hyland restored it does not.** Kuminga's freed minutes now spread differently (Trey Lyles takes 9.0 of them), and variant A lands at [+0.115, +0.622]: still ALL POSITIVE in sign, but **darko's +0.115pp sits below darko's own noise floor of 0.349pp**.
+
+| slot variant | before Hyland fix | after |
+|---|---|---|
+| A, default | ALL POSITIVE [+0.483, +0.793], **4/4 clear, SURVIVES** | ALL POSITIVE [+0.115, +0.622], **3/4, FAILS the floor** |
+| C, McDaniels slides | ALL POSITIVE, 4/4, SURVIVES | ALL POSITIVE [+0.060, +0.584], 3/4, FAILS |
+| D, Beringer fills | ALL NEGATIVE, SURVIVES | ALL NEGATIVE [-2.088, -0.235], 4/4, **SURVIVES** |
+| B, Lyles fills | MIXED | MIXED |
+| E, tight rule | MIXED | MIXED |
+
+**Note the floor is deliberately conservative:** it prices the two f-curve evaluations as independent when they are strongly correlated, which the module documents. So variant A fails a floor built to be hard to pass, on one view of four. That is worth stating exactly rather than rounding either way.
+
+**THE HONEST SUMMARY OF THE KUMINGA CLAIM, which is a downgrade from what the piece says.** Against the most likely internal alternative he is positive in all four views, but the weakest view is not distinguishable from the machinery's own error, and the whole result is conditional on Cody Williams not eating nineteen minutes a night. **"Positive under every view" is defensible on sign and not on magnitude.**
+
+**HEADLINE FIGURES, before and after the roster rebuild.**
+
+| figure | before | after |
+|---|---|---|
+| MIN title probability | 3.58% (2.33 to 4.83) | **1.51% (0.66 to 2.37)** |
+| offseason title-odds change | +0.64pp, views disagree on sign | **-1.43pp (-2.29 to -0.58), all four negative** |
+| P(avoids the play-in) | 0.62 | **0.39** (baseline 0.73) |
+| West rank, before to after | #5 to #7 | #5 to #6 |
+
+**All four views now agree the offseason lowered Minnesota's title odds.** They did not agree before. The driver is DiVincenzo's Achilles plus the Green-for-Williams swap, and the Williams half of that is the assumption above.
+
+**Pooled Shapley against the floor:** `other_departures`, `ball_in` and `ddv_injury` survive at 4 of 4. **`dosunmu_retained` is ALL NEGATIVE at -0.412pp but clears only 3 of 4 and fails the floor**, so the D-log's earlier "SURVIVES, now quotable" is superseded: it survives the SLOT rule but not the noise floor. `kuminga_in` on the pooled basis is MIXED at -0.068pp, which is why the pooled run has never been the basis for the section-5 claim.
