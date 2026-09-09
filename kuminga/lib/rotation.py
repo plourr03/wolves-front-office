@@ -41,6 +41,23 @@ import pandas as pd
 ROTATION_SIZE = 10
 MPG_WEIGHT = 0.5          # weight on prior minutes in the rank score
 CURVE_WEIGHT = 0.5        # weight on the team-rank curve vs the player's own load
+
+# W1: TEAM-CHANGERS get a different blend. A player's prior minutes per appearance is a
+# ROLE signal, and a role earned on one team does not transfer to another. Cody Williams
+# averaged 24.3 for a 27-win Utah team and the model handed him 19 minutes on a
+# contender at an impact of -3.86, which was the single largest driver of Minnesota's
+# projected decline. Movers are therefore weighted toward the rank curve and away from
+# their own prior load. Incumbents keep the 50/50 blend. Applied identically to all 30.
+MOVER_CURVE_WEIGHT = 0.8
+
+
+def curve_weights(players, default=None):
+    """Per-player weight on the curve side of the blend. A `curve_weight` column wins;
+    otherwise everyone gets the default. Returned as an array aligned to `players`."""
+    d = CURVE_WEIGHT if default is None else float(default)
+    if "curve_weight" in players.columns:
+        return players.curve_weight.fillna(d).to_numpy(dtype=float)
+    return np.full(len(players), d, dtype=float)
 TEAM_MINUTES = 240.0
 CEILING_BONUS = 3.0       # minutes of room above a player's prior load
 CEILING_HARD_MAX = 36.0
@@ -113,8 +130,9 @@ def allocate_pooled(players: pd.DataFrame, curve: pd.Series,
             continue
         cm = np.arange(1, len(sub) + 1)
         curve_min = np.array([curve.get(float(i), curve.iloc[-1]) for i in cm])
-        desired = (CURVE_WEIGHT * curve_min
-                   + (1 - CURVE_WEIGHT) * sub.prior_mpg.to_numpy(dtype=float))
+        cw = curve_weights(sub)
+        desired = (cw * curve_min
+                   + (1.0 - cw) * sub.prior_mpg.to_numpy(dtype=float))
         desired = desired * sub.rs_avail.to_numpy(dtype=float)
         cap = ceiling_for(sub.prior_mpg.to_numpy()) * sub.rs_avail.to_numpy(dtype=float)
         take = _waterfill(desired, cap, budget)
@@ -185,7 +203,8 @@ def allocate(players: pd.DataFrame, curve: pd.Series, use_ceiling: bool = True) 
     r = g.iloc[:n].copy()
     r["rot_rank"] = np.arange(1, len(r) + 1)
     cm = r.rot_rank.map(lambda i: curve.get(float(i), curve.iloc[-1])).to_numpy(dtype=float)
-    desired = CURVE_WEIGHT * cm + (1 - CURVE_WEIGHT) * r.prior_mpg.to_numpy(dtype=float)
+    cw = curve_weights(r)
+    desired = cw * cm + (1.0 - cw) * r.prior_mpg.to_numpy(dtype=float)
     desired = desired * r.rs_avail.to_numpy(dtype=float)
     if desired.sum() <= 0:
         return {}

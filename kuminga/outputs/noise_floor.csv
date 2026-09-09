@@ -1,9 +1,9 @@
 move,sign_agreement,mean_pp,min_abs_pp,n_forks_clearing,survives,clears_consensus,clears_rapm,clears_box,clears_darko
-other_departures,ALL POSITIVE,1.14742479765219,0.2674026872899571,4,True,True,True,True,True
-ball_in,ALL POSITIVE,0.6756562516710135,0.4215049955411515,4,True,True,True,True,True
-randle_out,MIXED,0.0663319041545889,0.0094729053763736,0,False,False,False,False,False
-kuminga_in,MIXED,-0.0676715252437972,0.0965263264507643,3,False,True,True,False,True
-reid_out,ALL NEGATIVE,-0.2548810013886893,0.0553045428482979,2,False,True,True,False,False
-depth,ALL NEGATIVE,-0.3295060983239264,0.0658957802912652,3,False,True,True,False,True
-ddv_injury,ALL NEGATIVE,-0.3552572999910038,0.1974555081013251,4,True,True,True,True,True
-dosunmu_retained,ALL NEGATIVE,-0.4119549399990932,0.115653112819654,3,False,True,True,False,True
+other_departures,ALL POSITIVE,1.1142650151348037,0.2528710755652149,3,False,True,True,False,True
+ball_in,ALL POSITIVE,0.6517286403328406,0.4124847989494607,4,True,True,True,True,True
+randle_out,MIXED,0.0645936188850296,0.0072726838855071,1,False,False,True,False,False
+kuminga_in,MIXED,-0.0649789633479394,0.0935836327696947,1,False,False,True,False,False
+reid_out,ALL NEGATIVE,-0.2461655670600346,0.0530779181257536,2,False,True,True,False,False
+depth,ALL NEGATIVE,-0.3183563096128763,0.0656993310968129,3,False,True,True,False,True
+ddv_injury,ALL NEGATIVE,-0.3420216159929299,0.1870420509938503,4,True,True,True,True,True
+dosunmu_retained,ALL NEGATIVE,-0.3946807558693241,0.1101980543649732,3,False,True,True,False,True

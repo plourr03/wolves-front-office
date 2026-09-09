@@ -1007,3 +1007,43 @@ The methods table also said the injury is "the smallest negative on the board" u
 **ONE CLAIM PULLED RATHER THAN UPDATED.** "Seventeen of thirty changed apron tier since June" came from a June baseline built on the pre-rebuild contract book, carrying the same pending-transaction and dead-money defects the rebuild fixed. Recomputing the current side on the corrected book gives **twenty-eight of thirty**, and the difference is mostly a change of basis, not a change of tier. **Neither figure is quotable until the June baseline is rebuilt on the same basis.** Marked as such in the piece.
 
 **CHECKS THAT PASSED, recorded so they are not re-run blind.** No control characters anywhere in `scripts/` or `lib/` (the earlier backspace-escape defect is the only one and it is gone). 73 runs this session, one failure, and that failure is the known `UnicodeEncodeError` already fixed. Both gates still PASS 30 of 30. Green's per-fork impacts (-0.22 box to -2.00 DARKO) verified unchanged. The West claim "fifth to sixth, passed by the Lakers" verified correct against `T2_west_ranking`. The Kuminga on/off figure of -6.53 verified as the on/off DIFFERENTIAL (-5.56 on, +0.97 off), not the on rating. Every figure now quoted in the piece, including the Williams sensitivity and the slot-level floor results, is on `final_numbers.csv` with an explicit verdict.
+
+
+### D59. P0 lock, and the W1 team-changer minutes rule. One headline verdict is conditional, one is not
+
+**P0. THE SIGNING IS OFFICIAL.** Minnesota announced it themselves; Kuminga wears No. 24. Eleven rows across the supplement and both roster tables are promoted from `reported_pending_official` to `official` by `p0_lock_official.py`.
+
+- https://timberwolves.com/news/timberwolves-sign-jonathan-kuminga (team release)
+- https://heavy.com/sports/nba/minnesota-timberwolves/jonathan-kuminga-timberwolves-signing-number-24/
+
+**The team release discloses NO TERMS**, so promoting the status must not launder the dollars into facts. Every promoted row now carries `terms_status = terms_not_released_by_team`, on the row rather than in a comment, so a consumer of the CSV cannot pick up the money without the tag. The year-one figure survives the missing release on outside corroboration: Spotrac carried it at **$6,064,000**, the taxpayer mid-level exception to the dollar, and $6,064,000 plus the maximum 5% raise gives **$12,431,200**, the reported "$12.4M". Two outlets carry roughly $13.0M instead, a **$568,800** difference that changes no legality question under any branch. Flagged, not resolved. The standing "agreed, not signed" caveat is removed from the skeleton.
+
+**W1. THE RULE.** Desired minutes were a 50/50 blend of the empirical rank curve and a player's own prior minutes per appearance, for everyone. **Team-changers now go to 80/20 toward the curve; incumbents stay at 50/50.** Applied identically to all 30 teams per R2, in `lib/rotation.py` so both allocators inherit it. 89 players changed teams. The 47 current-scenario players with no 2025-26 row keep the incumbent blend, because there is no prior role to discount.
+
+**IT IS A RE-ANCHORING, NOT A DOWNGRADE, and the data says so.** Rank score is half impact, so a mover who is good on his new team moves UP and one who is not moves DOWN. **The correlation between a mover's impact and his minutes change under the rule is +0.774.** Movers losing minutes average +0.03 impact; movers gaining average +2.69. Movers shed 43.8 minutes league-wide and incumbents absorb 43.4.
+
+**THE LIMITATION, measured rather than asserted.** The rule re-optimises only MOVERS, so a badly-allocated incumbent stays badly allocated and a mover-heavy team gets a better-optimised rotation for a reason about the method, not the roster. **Mean team shift +0.020 net points, correlating 0.56 with the number of movers.** For Minnesota the shift is **+0.074, of which Cody Williams alone is 69%**; the remaining +0.023 sits at the league mean and therefore cancels in relative terms. **Minnesota's gain is the correction this was built for, not the artefact.** The old-default outputs are frozen at `outputs/w1_reference_old_default/` so the comparison is reproducible.
+
+**MINUTES.** Williams **19.24 to 16.08**, Kuminga **24.42 to 25.23**, Ball **29.65 to 30.62**.
+
+**EVERY HEADLINE VERDICT** `[w1_compare, williams_minutes_sensitivity]`:
+
+| regime | Williams | title | offseason delta | sign | P(top 6) | Kuminga slot |
+|---|---:|---:|---:|---|---:|---|
+| old default (50/50 all) | 19.24 | 1.51% | -1.43pp | ALL NEGATIVE | 0.39 | +0.407 ALL POSITIVE |
+| **W1 rule (80/20 movers)** | **16.08** | **1.68%** | **-1.26pp** | **ALL NEGATIVE** | **0.44** | **+0.488 ALL POSITIVE** |
+| rule, Williams at 16 | 16.0 | 1.66% | -0.94pp | ALL NEGATIVE | 0.44 | +0.441 ALL POSITIVE |
+| rule, Williams at 12 | 12.0 | 1.93% | -0.67pp | ALL NEGATIVE | 0.53 | +0.717 ALL POSITIVE |
+| rule, Williams at 8 | 8.0 | 2.17% | -0.44pp | **MIXED** | 0.60 | +0.951 ALL POSITIVE |
+| rule, Williams at 0 | 0.0 | 2.65% | +0.04pp | **MIXED** | 0.72 | +1.385 ALL POSITIVE |
+
+**THE TEST THE BRIEF ASKED FOR, answered both ways.**
+
+- **"The offseason hurt under all four views" is CONDITIONAL.** It holds while Williams plays **12 minutes or more** and breaks at 8. **DARKO is the view that breaks it**, turning positive at Williams at or below 8; box turns positive only at 0; consensus and RAPM stay negative across the whole range. **The piece must say the claim is conditional on Williams playing a real rotation role.**
+- **"Kuminga is positive in the slot under all four views" is UNCONDITIONAL** across the entire range, and it strengthens monotonically as Williams plays less, from +0.44pp to +1.39pp.
+
+**AND THE CONDITIONAL VERDICT IS ROBUST TO THE ESTIMATOR, which had to be checked.** The sign test is priced off the f-curve, and the f-curve and the season sim are known to disagree for Minnesota. Per-fork offsets at the rule's operating point are consensus -0.376, rapm -0.404, box -0.439, darko -0.020. Applying them to put the whole grid on the sim basis gives the **same breakpoint**: ALL NEGATIVE at 12 and above, MIXED at 8 and 0. **The conclusion does not depend on which estimator is used.**
+
+**THE NOISE FLOOR STILL BITES ON THE SLOT CLAIM, and by slightly more than before.** Under the rule, per-fork floors are consensus 0.121, rapm 0.094, box 0.260, **darko 0.479**. Slot variant A is ALL POSITIVE at [+0.174, +0.704] but DARKO's +0.174 sits below DARKO's own floor, so it clears **3 of 4**. DARKO's floor ROSE from 0.349 to 0.479 because the rule lifts Minnesota's DARKO net to +1.75, where the curve is steeper and Monte Carlo error is larger. **The claim is still positive in sign under every view and still not resolvable on one of them.** Variant D (Beringer fills) remains ALL NEGATIVE and clears 4 of 4. Variant E moved from MIXED to ALL POSITIVE.
+
+**A STRUCTURAL NOTE the rule leans on.** `allocate_pooled` indexes a TEAM-rank curve by WITHIN-POOL rank, so a pool's third-best forward is priced like a team's third-best player, and the shape inside a pool is flatter than reality. Raising the curve weight to 0.8 for movers leans harder on that approximation. It is pre-existing, it is not what W1 introduced, and it is recorded here so the next person does not rediscover it as a bug.

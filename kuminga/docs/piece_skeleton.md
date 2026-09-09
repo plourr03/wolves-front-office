@@ -2,7 +2,7 @@
 
 **Status:** drafted 2026-08-27, before the Green situation resolved. Every number carries its run ID in brackets. Nothing here may be quoted that is not on `outputs/final_numbers.md`.
 
-**The standing caveat that opens everything:** Kuminga has agreed, not signed. NBA.com's tracker separates "multiple reports" from "officially announced" and puts him in the first bucket; the league transaction log has no row. If that changes before publication, promote the status and re-verify the dollars.
+**Status, as of 2026-09-09: the signing is OFFICIAL.** Minnesota announced it themselves and Kuminga will wear No. 24. **The team release discloses no terms**, so every dollar figure in this piece is the reported structure, not a club-confirmed one, and is tagged as such on the sheet. The year-one figure is corroborated independently: Spotrac carried the contract at $6,064,000, which is the taxpayer mid-level exception to the dollar, and $6,064,000 plus a 5% raise gives $12,431,200, which is the widely reported "$12.4 million". Two outlets carry roughly $13.0M instead; that difference is $568,800, it does not change legality, and it is flagged rather than resolved.
 
 ---
 

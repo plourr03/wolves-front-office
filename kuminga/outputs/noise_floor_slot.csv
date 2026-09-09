@@ -1,6 +1,6 @@
 variant,sign_agreement,mean_pp,min_abs_pp,n_forks_clearing,survives,clears_consensus,clears_rapm,clears_box,clears_darko
-A_c3_default_shannon,ALL POSITIVE,0.4065656140359676,0.1148176267864706,3,False,True,True,True,False
-B_lyles_fills,MIXED,-0.0060072896522394,0.0,3,False,True,True,False,True
-C_mcdaniels_slides,ALL POSITIVE,0.3753817940036235,0.0599145490086918,3,False,True,True,True,False
-D_beringer_fills,ALL NEGATIVE,-0.963212481692352,0.2352600167564669,4,True,True,True,True,True
-E_tight_rule_F_or_FC,MIXED,0.3449570668235626,0.0028870974207584,3,False,True,True,True,False
+A_c3_default_shannon,ALL POSITIVE,0.4883970406239569,0.1735316371619637,3,False,True,True,True,False
+B_lyles_fills,MIXED,0.0268346770216599,0.0,3,False,True,True,False,True
+C_mcdaniels_slides,ALL POSITIVE,0.4712559669067474,0.1504302582449224,3,False,True,True,True,False
+D_beringer_fills,ALL NEGATIVE,-1.0953927360443243,0.289703811495091,4,True,True,True,True,True
+E_tight_rule_F_or_FC,ALL POSITIVE,0.4744319443012432,0.1504302582449224,3,False,True,True,True,False

@@ -343,6 +343,35 @@ def main():
         pool["pct_net"] = pool.groupby("scenario").consensus_net.rank(pct=True)
         pool["rank_score"] = MPG_WEIGHT * pool.pct_mpg + (1 - MPG_WEIGHT) * pool.pct_net
 
+        # ---- W1: the team-changer minutes rule -------------------------------
+        # Prior minutes per appearance is a ROLE signal, and a role earned on one team
+        # does not transfer to another. A player who moved is blended toward the rank
+        # curve and away from his own prior load; incumbents keep the 50/50 blend. The
+        # rule is mechanical and identical for all 30 teams, per R2.
+        #
+        # The BASELINE scenario is the 2025-26 end-of-season rosters, where by
+        # construction nobody has moved, so no baseline player is reweighted. That
+        # asymmetry is deliberate and is the point: the delta is supposed to price the
+        # offseason, and the offseason is exactly who moved.
+        _base_team = (pool[pool.scenario == "baseline"]
+                      .dropna(subset=["player_id"])
+                      .drop_duplicates("player_id")
+                      .set_index("player_id").team_abbr)
+        pool["team_2025_26"] = pool.player_id.map(_base_team)
+        pool["moved_teams"] = ((pool.scenario == "current")
+                               & pool.team_2025_26.notna()
+                               & (pool.team_abbr != pool.team_2025_26))
+        pool["curve_weight"] = np.where(pool.moved_teams,
+                                        rotation.MOVER_CURVE_WEIGHT,
+                                        rotation.CURVE_WEIGHT)
+        n_moved = int(pool.moved_teams.sum())
+        n_new = int(((pool.scenario == "current") & pool.team_2025_26.isna()).sum())
+        r.note(f"W1 team-changer rule: curve weight {rotation.CURVE_WEIGHT} for "
+               f"incumbents, {rotation.MOVER_CURVE_WEIGHT} for movers")
+        r.note(f"  {n_moved} players changed teams; {n_new} current-scenario players "
+               f"have no 2025-26 row (2026 draftees and unmatched) and keep the "
+               f"incumbent blend, because there is no prior role to discount")
+
         # ---- allocate minutes ----------------------------------------------------
         out = []
         r.note(f"minutes ceiling ENABLED: {USE_CEILING} "
