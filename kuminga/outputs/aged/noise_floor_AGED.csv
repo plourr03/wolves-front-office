@@ -1,0 +1,9 @@
+move,sign_agreement,mean_pp,min_abs_pp,n_forks_clearing,survives,clears_consensus,clears_rapm,clears_box,clears_darko
+other_departures,ALL POSITIVE,1.612533667651973,0.6680522017294901,4,True,True,True,True,True
+ball_in,ALL POSITIVE,0.8318521888044488,0.3935892804719946,4,True,True,True,True,True
+randle_out,ALL POSITIVE,0.6942755200991492,0.4551257891759893,4,True,True,True,True,True
+kuminga_in,MIXED,-0.075824810205567,0.0437215645850426,3,False,True,True,False,True
+ddv_injury,MIXED,-0.2336366260259325,0.0657565125495727,1,False,False,False,False,True
+depth,MIXED,-0.3613216847787387,0.2090746049898904,3,False,True,True,False,True
+dosunmu_retained,ALL NEGATIVE,-0.6104459447434922,0.1038121757306526,3,False,True,True,False,True
+reid_out,ALL NEGATIVE,-0.6125958063365966,0.2864964305780824,2,False,True,True,False,False

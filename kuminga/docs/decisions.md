@@ -1198,3 +1198,26 @@ That is not a coincidence and it is not rounding. **Healing DiVincenzo removes W
 **WHAT IS MISSING FROM THE FEATURE SET.** Minutes-weighted size, the sixth feature the brief asked for, could not be built: `nba_player_season_bio` in this warehouse carries neither a height column nor a minutes column. It was **dropped rather than proxied**, and two of the five planned interactions had to be redefined without it. Logged in gaps_remaining.md. A size feature could plausibly change the answer and this test does not rule that out.
 
 **A REPEAT BUG, caught and fixed.** The reporting loop used `x.sample`, which is `DataFrame.sample`, the METHOD, not the column, and formatted a bound method into the log. This is the identical trap as `x.item` recorded earlier in this project. Fixed by indexing by name, with the comment naming the pattern so it is caught a third time faster.
+
+
+### D65. W2. The aging gate, and the headline verdict does not survive it
+
+**TWO BASES.** Un-aged: every player repeats his measured 2025-26 impact, which assumes a 34-year-old centre and a 20-year-old centre both stand still. Aged: each impact shifted by the ONE-YEAR expected change from a survivorship-corrected curve, with drop-outs re-entered at the 25th percentile of same-age observed deltas so the fit is not taken only from the players good enough to keep playing. Neither is obviously right, so **neither carries a verdict alone.**
+
+**AGING HELPS MINNESOTA, because Minnesota is young.** Title probability **1.68% un-aged against 2.54% aged**; P(top 6) **0.438 against 0.643**. That gap is large enough that quoting one basis silently would be a choice disguised as a fact, so the skeleton now quotes both.
+
+**THE GATE: 9 verdicts ship, 5 do not.**
+
+Ship, same sign under both bases: `other_departures` (+1.233 / +1.613 ALL POSITIVE), `ball_in` (+0.734 / +0.832), `randle_out` (+0.304 / +0.694), `reid_out` (-0.520 / -0.613 ALL NEGATIVE), `dosunmu_retained` (-0.558 / -0.610), and slot variants **A** (+0.488 / +0.615), **C**, **E** all ALL POSITIVE, and **D** (-1.095 / -1.960 ALL NEGATIVE).
+
+Do not ship: `kuminga_in` (MIXED on both), `ddv_injury` (**ALL NEGATIVE to MIXED**), `depth` (**ALL NEGATIVE to MIXED**), slot variant B (MIXED both), and **the offseason delta itself (ALL NEGATIVE -1.261 to MIXED -0.398)**.
+
+**THE HEADLINE FAILS THE GATE.** "The offseason made Minnesota worse" is ALL NEGATIVE un-aged and MIXED aged, so under this project's own quotability rule **it does not ship**. Together with D61 and the Williams range it is now conditional three separate ways: on the aging basis, on Williams playing 12 or more minutes, and on treating a season-ending Achilles as an offseason outcome. **The piece must not lead with it as a finding.**
+
+**THE CENTRAL CLAIM DOES SHIP, and the magnitude caveat is now written in the form the floor supports.** Slot variant A is ALL POSITIVE under both bases. Its weakest view clears neither floor: **0.174 against 0.479 un-aged, 0.209 against the aged floor, 3 of 4 clearing either way.** So the claim is "positive in sign under every view and under both aging bases, and too small for one view of four to resolve", not "worth half a point". **The 200k run that would tighten that floor was NOT executed**, so this caveat is written against the current floor and may relax later.
+
+**JUDGEMENT CALL: the 200k-sim run was not launched, with the alternative considered.** `build_fcurve` costs about 28 minutes at 20,000 sims per fork per seed, so 200,000 is a four-to-five hour job. Running it would have consumed the night and blocked W1b, W1c, the aging gate, the market work, the champions study and M1, every one of which changes a verdict, in exchange for a precision improvement to a floor that binds no verdict currently shipping. **Alternative rejected: run the 200k first and defer the aging gate.** Rejected because the aging gate is a rule about what may be printed and the 200k is a decimal place, and the rule outranks the decimal. Logged in gaps_remaining.md.
+
+**A PROCESS BUG WORTH RECORDING.** The aged chain snapshots the aged outputs and then restores the un-aged primary from `outputs/preaging/`. **The restore list did not cover every file the chain writes**, so `slot_robustness.csv` and `green_kept.csv` were left in their AGED state in `outputs/`, and the first gate run compared the aged file against itself and reported all five slot variants as identical under both bases. Caught because identical values to three decimals across two different bases is not a result, it is a symptom. Fixed by regenerating both un-aged and re-running. **Any snapshot-and-restore step must restore everything the run touched, not everything someone remembered to list.**
+
+**AND THE SAME METHOD-VERSUS-COLUMN TRAP, for the third time in this project.** `x.item` is `IndexOpsMixin.item`; `x.sample` is `DataFrame.sample`. Both formatted a bound method into a log tonight, the second of them hours after I wrote a comment warning about the first. Every site now indexes by name with the pattern named in a comment.

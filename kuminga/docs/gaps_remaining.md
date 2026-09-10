@@ -96,3 +96,33 @@ Sum of absolute per-team differences: **$183,047,636 to $0.**
 
 **Minnesota is unaffected by both.** Its per-player bonus column is complete ($1,750,000 against $1,750,000 implied) and its apron reconciles to all three of Spotrac's separately-computed figures at zero difference.
 
+
+## 14. Overnight run of 2026-09-09/10: what did not finish, and why
+
+Recorded per the autonomy rule: failures go here and the run moves on.
+
+**BLOCKED ON AN EXTERNAL SOURCE**
+
+- **H1 champion feature columns.** Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity (returning minutes share), top-8 playoff health, ORtg and DRtg ranks. Basketball-Reference returns **403 to direct requests**, and the `r.jina.ai` proxy is **rate-limited on that entire domain until 2026-09-10 04:14 GMT** ("Anonymous access blocked ... DDoS attack suspected"). The warehouse cannot substitute: `nba_team_advanced_stats` is GAME level and has no season key, so every one of those columns needs a season aggregation that does not exist yet. **Not guessed.** Retry the B-Ref preseason-odds and team-summary pages after the block lifts.
+- **Champions table before 2023-24.** The project holds clean 30-team preseason odds for exactly three seasons. Extending back needs `basketball-reference.com/leagues/NBA_{year}_preseason_odds.html` (published, citable, courtesy sportsoddshistory.com) or a paste. **sportsbettingdime.com was found and rejected**: its past-seasons table names San Antonio as the 2026 champion when New York won 4-1. A source that misstates a champion is not usable for its odds either.
+
+**BLOCKED ON MISSING WAREHOUSE COLUMNS**
+
+- **Minutes-weighted size** as an M1 style feature. `nba_player_season_bio` carries neither a height column nor a minutes column in this warehouse. Dropped from the feature set rather than proxied, and two of the five planned interactions were redefined without it. **This could plausibly change the M1 answer and the held-out test does not rule that out.**
+- **N2 opponent distribution by seed.** `run_sim` does not persist the simulator's `matchups` block, so the expected first-round and second-round opponent distribution cannot be read off the existing run. The seed distribution itself IS available and is in the skeleton. Fix is one line in `run_sim` plus a re-run.
+
+**NOT REACHED, in priority order for the next session**
+
+- **M3** opponent cards for the West field. Unblocked in principle: M2 came out OFF, so the cards use net-rating series odds with style features descriptive only, exactly as the brief specifies.
+- **M4** Minnesota lineup study, **M5** usage accounting.
+- **N3** playoff translation, **N4** versatility index, **N5** fragility, **N7** late-clock and late-and-close splits.
+- **H3** separation, **H4** case files, **H5** Minnesota scored on the champion sheet. H4's Knicks case is the highest-value of these: the cheapest champion in the sample, fourth in the preseason market, finished UNDER its own win total and won four rounds.
+- **N8** full watch list. Four of the five claims are drafted in the skeleton from work that did complete.
+
+**RUN BUT NOT YET FOLDED IN**
+
+- **The 200k-sim run.** Not launched. `build_fcurve` costs roughly 28 minutes at 20,000 sims per fork per seed, so 200,000 is a four-to-five hour job that would have consumed the whole night and blocked everything above it. **Judgement call: the aged pipeline was run first because it is a quotability gate, and the 200k is a precision improvement to a floor that is already not the binding constraint on most verdicts.** Logged in decisions.md.
+
+**A STANDING RISK, not a gap**
+
+- The roster book remains **single-sourced to Spotrac**. The dollar gates are parse-fidelity tests, not independent-truth tests. Unchanged from D56.
