@@ -1112,3 +1112,40 @@ That is not a coincidence and it is not rounding. **Healing DiVincenzo removes W
 **AND IT IS A KNIFE EDGE, which has to travel with the claim.** Williams sits at rank score **0.3029** against Jaylen Clark's **0.3131**. **A gap of 0.0101 in a percentile blend decides whether Williams plays sixteen minutes a night or none at all**, and therefore decides roughly a point of title probability. This is the same brittleness W1b removed from the attribution allocator, except here it sits in the headline path, where a ten-man cut is the correct behaviour and cannot simply be deleted. It is a real property of a real rotation decision on a real bubble player, and the piece should present Williams' minutes as a coin-flip rotation call rather than a projection.
 
 **JUDGEMENT CALL, logged with the alternative.** The decomposition is computed with full re-allocation at each state rather than by holding the other eight players' minutes fixed and moving only the player in question. The alternative (hold others fixed) is simpler and would have made the components additive by construction, which is exactly why it was rejected: it would have hidden the interaction that is the finding. Full re-allocation is also what the sim itself does, so the components are on the same footing as the published number.
+
+### D62. The title market, de-vigged, and a calibration problem it exposes in our own model
+
+**INPUT.** Six books, hand-transcribed from a screenshot on 2026-09-09, title odds only. **Win totals are absent, so the win-total comparison this project has run before cannot be run.** Reported unavailable rather than quietly skipped.
+
+**THE 76ERS OUTLIER.** book_4 prices Philadelphia at **+2500** against a 750-to-900 range on the other five. That is not a price, it is a stale or mistranscribed line. **The median is robust to it by construction**: 875 with it in, 850 with it out, a 0.27pp difference in implied probability. So Philadelphia stays in the table on its median, and book_4 is excluded from any statement about book DISAGREEMENT, where a 2.9x outlier would dominate. With it excluded the widest genuine disagreements are NOP 2.14x, MEM 2.00x, LAC 2.00x, BKN 2.00x.
+
+**DE-VIG.** Raw implied probabilities sum to **1.2184, an overround of 21.8%**, matching the brief.
+
+| method | how | MIN |
+|---|---|---:|
+| proportional | divide through by 1.2184 | **3.16%** |
+| power | exponent k = 1.0871 so the powers sum to one | 2.90% |
+
+**THE PIECE QUOTES PROPORTIONAL**, and the reason is not that it is more nearly right. Power de-vig models a favourite-longshot bias whose size is not identified from one screenshot of six books, and it moves Minnesota by 0.26pp. Proportional is the transparent choice; the power column sits beside it so the sensitivity is visible rather than taken on faith. The two methods diverge most at the top of the board (SAS, 2.08pp), which is exactly where the favourite-longshot correction bites.
+
+**MODEL AGAINST MARKET: 20 of 30 teams differ by more than the materiality floor**, and the pattern is not flattering to us.
+
+| | market | model | gap |
+|---|---:|---:|---:|
+| BOS | 5.47% (rank 5) | **16.99% (rank 1)** | **+11.52pp** |
+| SAS | 22.96% (rank 1) | 13.88% (rank 3) | -9.08pp |
+| PHI | 8.42% (rank 3) | 2.48% (rank 12) | -5.94pp |
+| OKC | 22.49% (rank 2) | 16.68% (rank 2) | -5.81pp |
+| CHA | 0.81% (rank 19) | **5.86% (rank 5)** | **+5.05pp** |
+| DET | 3.16% (rank 6) | 8.11% (rank 4) | +4.95pp |
+| MIN | 3.16% (rank 6) | 1.68% (rank 14) | -1.48pp |
+
+**THIS IS A FINDING ABOUT THE MODEL, NOT ABOUT THE MARKET, AND THE PIECE SHOULD SAY SO.** Our model makes Boston the title favourite and Charlotte a top-five team. Neither is a defensible reading of these rosters, and the second is close to absurd. The framing rule for this project is that the odds are a prior; here the prior is almost certainly the better estimate and the divergence is diagnostic of our own compression toward the field. It belongs on the honesty rail beside the backtest, which already showed the market beating this model on win totals in all three seasons.
+
+**THE THREE ORDERING DISAGREEMENTS, named as required.**
+
+1. **MIN vs LAL.** Market has Minnesota ahead, 3.16% to 2.13%. The model has the Lakers ahead, 3.76% to 1.68%. **They disagree on the order.**
+2. **BOS against the market's top five.** The market's top five is SAS, OKC, PHI, NYK, BOS, with Boston fifth at 5.47%. The model ranks Boston **first** at 16.99%. This is the largest disagreement on the board and the one most likely to be ours.
+3. **The model's Minnesota number against the market's.** Market 3.16% at rank 6; model 1.68% at rank 14, four-view band 0.82% to 2.57%. **The market's number sits OUTSIDE our band**, which is the strongest statement available here: this is not two estimates overlapping within uncertainty, it is a disagreement our own spread does not cover.
+
+**Consequence for the piece:** Minnesota's 1.5% is roughly half what the market says. The piece must lead with that gap rather than bury it, and must not present the model number as if the market agreed.
