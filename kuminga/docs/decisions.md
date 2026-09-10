@@ -1047,3 +1047,44 @@ The methods table also said the injury is "the smallest negative on the board" u
 **THE NOISE FLOOR STILL BITES ON THE SLOT CLAIM, and by slightly more than before.** Under the rule, per-fork floors are consensus 0.121, rapm 0.094, box 0.260, **darko 0.479**. Slot variant A is ALL POSITIVE at [+0.174, +0.704] but DARKO's +0.174 sits below DARKO's own floor, so it clears **3 of 4**. DARKO's floor ROSE from 0.349 to 0.479 because the rule lifts Minnesota's DARKO net to +1.75, where the curve is steeper and Monte Carlo error is larger. **The claim is still positive in sign under every view and still not resolvable on one of them.** Variant D (Beringer fills) remains ALL NEGATIVE and clears 4 of 4. Variant E moved from MIXED to ALL POSITIVE.
 
 **A STRUCTURAL NOTE the rule leans on.** `allocate_pooled` indexes a TEAM-rank curve by WITHIN-POOL rank, so a pool's third-best forward is priced like a team's third-best player, and the shape inside a pool is flatter than reality. Raising the curve weight to 0.8 for movers leans harder on that approximation. It is pre-existing, it is not what W1 introduced, and it is recorded here so the next person does not rediscover it as a bug.
+
+
+### D60. W1b. The curve indexing was wrong in one layer only, and it is not the layer the headlines come from
+
+**THE FIRST FINDING IS THAT THE BRIEF'S PREMISE WAS HALF TRUE.** There are two allocators. `allocate()` ranks a roster team-wide and indexes the curve by that rank, and it is what `build_rotations` calls, so **every headline number already sat on correct indexing**: team strengths, title odds, the offseason delta, play-in. `allocate_pooled()` indexed the same team-rank curve by WITHIN-POOL rank, so a pool's third-best forward was priced like a team's third-best player, and it is called only by `shapley.py` and `green_kept.py`. **The defect was real but confined to the attribution layer.**
+
+Verified rather than assumed: re-running `build_rotations` with the index mode flipped gives 600 rotation rows with a maximum absolute minutes difference of **0.000000000**.
+
+**SO THE BRIEF'S DECISION RULE CANNOT FIRE AS WRITTEN.** It says W1b becomes primary if the offseason verdict changes. The offseason verdict cannot change under W1b, because W1b does not reach that computation. **I am adopting W1b as primary anyway, and departing from the letter of the rule on purpose.** The reason: indexing a curve by a rank it was not fitted on is not a modelling choice with a defensible alternative, it is a misuse, and adopting the correct version costs nothing in headline consistency precisely because it cannot move the headlines. **The alternative considered and rejected** was leaving pool-rank primary as the rule's default branch instructs; rejected because it would knowingly keep an incorrect indexing as the published basis for the attribution table the piece quotes in section 4. Pool-rank is retained as the recorded sensitivity.
+
+**WHAT THE PIECE QUOTES:** team-rank (W1b) for the pooled Shapley and the Green appendix; unchanged for everything else, because everything else was already team-rank.
+
+**A DESIGN ERROR I MADE AND CORRECTED MID-ITEM, because it changed the answer.** My first W1b implementation copied `allocate()`'s ten-man truncation into the attribution allocator. That produced three sign flips and, more tellingly, **crashed `green_kept`: Josh Green got zero minutes.** He lands 10th on his baseline rank score and 11th on the score recomputed against the current pool, so a hard cut moved his coalition value between 13 minutes and nothing on a **0.016 difference in a percentile blend**. The two allocators answer different questions: `allocate()` projects a rotation a coach will play, so cutting at ten is right; the pooled one prices coalitions for Shapley, where a hard cut makes marginal contributions discontinuous in a knife-edge ordering. **Attribution must not be that brittle.** The truncation is gone from the attribution allocator and the curve is extrapolated past rank 10 (linearly off the last two points, floored at 1 minute) rather than flat-lining every deep bench player at the tenth man's load. With that corrected, three sign flips became one.
+
+**POSITIONAL MINIMUMS replace hard pool budgets.** A pool must receive at least **60% of that team's own observed 2025-26 pool share**. A hard budget keeps the real constraint (a departing guard's minutes cannot land on a centre) but also imposes an artificial one (a pool must absorb its historical share even when the roster cannot support it), and the artificial half is what made each pool look like its own team. The 60% is a stated judgement call; alternatives were hard budgets (status quo) and no minimum at all (which lets a team field no bigs).
+
+**RESULT: one sign flip.**
+
+| move | pool-rank | team-rank (W1b) | |
+|---|---:|---:|---|
+| other_departures | +1.114 ALL POS | +1.233 ALL POS | |
+| ball_in | +0.652 ALL POS | +0.734 ALL POS | |
+| randle_out | +0.065 MIXED | **+0.304 ALL POSITIVE** | **FLIPPED** |
+| kuminga_in | -0.065 MIXED | -0.206 MIXED | |
+| ddv_injury | -0.342 ALL NEG | -0.354 ALL NEG | |
+| depth | -0.318 ALL NEG | -0.500 ALL NEG | |
+| reid_out | -0.246 ALL NEG | -0.520 ALL NEG | |
+| dosunmu_retained | -0.395 ALL NEG | -0.558 ALL NEG | |
+
+**The magnitudes on the big player moves roughly double** (Reid out -0.246 to -0.520, depth -0.318 to -0.500, Dosunmu -0.395 to -0.558). That is the expected direction and the clearest evidence the old indexing was wrong: a flat within-pool curve muted the cost of removing a rotation player, so **pool-rank indexing was compressing every attribution toward zero.**
+
+**THE FOUR FIGURES THE BRIEF ASKED FOR, and three of them are unchanged by construction:**
+
+- **Williams default minutes: 16.08, unchanged.** Set by `allocate()`, which W1b does not touch.
+- **Offseason delta sign: unchanged**, ALL NEGATIVE at the operating point, conditional below 12 Williams minutes exactly as D59 recorded.
+- **P(top 6): 0.44, unchanged.**
+- **Kuminga slot band: +0.174 to +0.704, mean +0.488, ALL POSITIVE, unchanged.** `slot_robustness` inherits minutes from `build_rotations` and runs its own fill, so it never used the pooled allocator either.
+
+**ONE VERDICT LOST THE NOISE FLOOR.** Survivors go from three to two. `ddv_injury` was ALL NEGATIVE clearing 4 of 4 under pool-rank and now clears 3 of 4, because team-rank indexing widens the per-fork spread. Surviving: `other_departures` and `ball_in`. **The DiVincenzo injury keeps its agreed sign and loses its magnitude claim.**
+
+**Green appendix under W1b:** he draws **11.52** minutes rather than 13.0, and keeping him grades **-0.247 to +0.031, mean -0.064, MIXED**. The conclusion is unchanged and slightly softer.
