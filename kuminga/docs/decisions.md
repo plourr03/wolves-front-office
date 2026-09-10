@@ -1249,3 +1249,35 @@ It had not. **The convention is `net = off - def`, where a negative def is good 
 - **San Antonio** starts from a measured net of +8.28 against Boston's +8.31 and gets a smaller rollup improvement (+1.67 against +2.66), so the model puts Boston ahead of the team the market makes favourite.
 
 **THE HONEST CONCLUSION.** The model's ordering correlates **0.78 to 0.80** with the market's, and the disagreements are **not traceable to a single fixable defect**. They are the accumulation of a minutes-weighted linear rollup over player impacts that are individually defensible and collectively produce a different league order. **F2 and F3 as specified will not close these gaps, because the causes they target are not present.** Saying so is more useful than applying two corrections that would move nothing and then reporting that the gaps persist.
+
+### D67. N2 and M4. The path is a first-round problem, and the model cannot ask the double-big question
+
+**N2. WHERE THE 1.68% COMES FROM.** Minnesota's modal seed is **7th (0.269)**, then 6th (0.252), then 8th (0.193). P(top 4) is **0.068**, P(top 6) **0.438**, P(play-in) **0.558**, P(miss entirely) 0.004.
+
+The path is almost perfectly uniform after the first round: **reach round 2 in 27.8% of seasons, then conference finals 39.4% of the time, finals 38.9%, title 39.4%.** Conditional on escaping the first round the title follows **6.0%** of the time. **Nearly all of Minnesota's title equity is in getting out of round one**, and the rest of the bracket is four coin flips of similar weight.
+
+**And the bracket is unkind.** The most likely first-round opponents are **San Antonio 0.261 and Oklahoma City 0.251**, which together is **51.2%** of first-round draws. Those are precisely the two teams Minnesota beats least often on the net-rating basis: **0.133 and 0.101**. The seed distribution and the matchup table point at the same problem from two directions.
+
+The simulator's matchup block was being discarded; `run_sim` now persists it (`sim_matchups_2026_27.csv`, 163 pairs per fork). The round-1 opponent distribution above is bracket-implied, treating Minnesota's seed and the opponent's as independent, and is labelled as the approximation it is.
+
+**M4. THE MODEL CANNOT ASK THE ONE STRUCTURAL QUESTION ABOUT THIS ROSTER.** 640 legal fives enumerated from the fourteen. **Ten have actually played together**; 533 composed fives have a four-view spread wide enough that they are not ranked at all, and the widest are listed rather than dropped quietly.
+
+Then both of the requested cuts came back empty, and the reason is not about the roster:
+
+**Minnesota has exactly ONE player pooled as a big: Rudy Gobert.** Joan Beringer, whom Spotrac lists as C and who is a seven-foot rookie centre, is carried as `Forward` by the position source and pooled as a forward. So:
+
+1. Every legal five must contain Gobert, which makes **"best five without Gobert" and "double big" empty by construction**, not because no such lineup grades well.
+2. Minnesota's own big-minutes budget is **53.7 a game**, taken from last season's Gobert-plus-Reid shape. One pooled big with a ceiling near 34 cannot absorb it, so **roughly 19 minutes of big budget spills into the other pools every night.**
+
+**This is the highest-priority correction for the next session.** The double-big question is the structural question about this roster, and the model currently cannot pose it.
+
+**THE OBSERVED REFERENCE, which is the most useful thing in M4.** From last season's stints:
+
+| pairing | off possessions | per 100 for | against | net |
+|---|---:|---:|---:|---:|
+| Naz Reid + Gobert | 2,256 | 113.3 | 106.4 | **+6.9** |
+| Julius Randle + Gobert | 3,445 | 117.4 | 114.3 | **+3.1** |
+
+Reid alongside Gobert was more than twice as good per possession as Randle alongside Gobert, on two-thirds the sample. **Reid is the one who left.** That is observed, not modelled, and it belongs in the piece next to any claim about what the frontcourt lost.
+
+**A METHOD NOTE CARRIED FORWARD.** Lineup three-point percentage here is weighted by three-point ATTEMPTS. An earlier pass in this project weighted it by minutes and handed Gobert, 0-for-7 from three on 2,710 minutes, the largest weight in the average, returning .280 for a group that shot .372.
