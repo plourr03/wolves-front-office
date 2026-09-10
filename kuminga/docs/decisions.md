@@ -1302,3 +1302,27 @@ Reid alongside Gobert was more than twice as good per possession as Randle along
 **SLOT VARIANTS: four of five survive.** A, C and E ALL POSITIVE; **D (Beringer fills) ALL NEGATIVE and clearing 4 of 4.** So both the positive and the negative case for Kuminga's slot are now statistically real, and the doubt moves from measurement to the rotation decision, which is where it belongs.
 
 **WHAT IS NOT YET CLAIMED.** The tightened floor is on the **un-aged** basis. A 200,000-sim AGED curve is running; until it lands, no "survives the tightened floor under both bases" claim is made, because the aged floor still comes from a 10,000-sim curve and the two are not comparable. The skeleton says un-aged only.
+
+### D69. The aged 200k, and the definitive shipping list
+
+The aged basis was re-run at 200,000 sims with a restore step that **snapshots every file the run can touch and restores all of them**, rather than the hand-listed subset that silently left `slot_robustness` and `green_kept` in an aged state after the first aged chain (D65). Verified afterwards by hash: all four checked outputs match the pre-run snapshot and Minnesota's consensus net is back to -0.4051.
+
+**Aged Monte Carlo error fell 3.19x** (0.001277 to 0.000401), less than the 4.82x achieved un-aged and less than the 4.47x theory, which is worth noting rather than smoothing over: the aged field sits at different net ratings where the curve is steeper, so the same sim count buys less precision.
+
+**THE DEFINITIVE LIST. Nine verdicts hold their sign under both aging bases and clear every view's noise floor under both.**
+
+| verdict | un-aged | aged | sign |
+|---|---:|---:|---|
+| other_departures | +1.253 | +1.593 | ALL POSITIVE |
+| ball_in | +0.751 | +0.819 | ALL POSITIVE |
+| randle_out | +0.315 | +0.688 | ALL POSITIVE |
+| reid_out | -0.511 | -0.610 | ALL NEGATIVE |
+| dosunmu_retained | -0.557 | -0.611 | ALL NEGATIVE |
+| slot A, Shannon fills | +0.518 | +0.589 | ALL POSITIVE |
+| slot C, McDaniels slides | +0.501 | +0.569 | ALL POSITIVE |
+| slot D, Beringer fills | -1.128 | -1.946 | ALL NEGATIVE |
+| slot E, tight rule | +0.504 | +0.568 | ALL POSITIVE |
+
+**FIVE STILL DO NOT SHIP**, and each for a stated reason: `kuminga_in` on the pooled basis is MIXED under both; `ddv_injury` and `depth` hold an agreed sign un-aged and go MIXED aged; slot B (Lyles fills) is MIXED under both; and **the offseason delta itself goes ALL NEGATIVE to MIXED**, so "the offseason made Minnesota worse" still does not ship.
+
+**Two verdicts survived at the start of this stretch and nine survive now. The difference is simulation count, not a change of mind**, and the piece should say so in exactly those terms rather than presenting the nine as if they had always been there.

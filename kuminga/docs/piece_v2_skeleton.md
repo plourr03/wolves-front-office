@@ -86,7 +86,9 @@ The favourite won **1 of 3**. The champion came from the top five **3 of 3**, an
 
 **And it survives the aging gate**, the strictest test this project applies: the same ALL POSITIVE sign under both the un-aged basis (+0.488) and the survivorship-corrected aged basis (+0.615) `[modeled, w2_aging_gate]`. Nine verdicts cleared that gate and five did not. This is one of the nine.
 
-**AND THE MAGNITUDE NOW CLEARS TOO, which it did not before.** The materiality floor was compute, not physics. A 200,000-simulation f-curve, run as four concurrent per-fork sweeps, cut Monte Carlo error by **4.82x** (against a theoretical maximum of 4.47x) and took the worst-fork floor from **0.349pp to 0.072pp** `[modeled, noise_floor]`. Against that floor, slot variant A is ALL POSITIVE with a smallest view of **0.215pp and 4 of 4 views clearing**. It survives.
+**AND THE MAGNITUDE NOW CLEARS TOO, UNDER BOTH AGING BASES.** The materiality floor was compute, not physics. A 200,000-simulation f-curve, run as four concurrent per-fork sweeps, cut Monte Carlo error by **4.82x** un-aged and **3.19x** aged, taking the worst-fork floor from **0.349pp to 0.072pp** `[modeled, noise_floor]`. Against that floor slot variant A is ALL POSITIVE with **4 of 4 views clearing on both bases**: smallest view **0.215pp un-aged and 0.182pp aged**. It survives both times.
+
+**Nine verdicts now hold their sign under both aging bases AND clear every view's own error bar under both** `[w2_aging_gate, noise_floor]`: the other-departures bundle, Ball in, Randle out, Reid out, Dosunmu retained, and slot variants A, C, D and E. At the start of this work two verdicts survived. **The difference is simulation count, not a change of mind.**
 
 So the caveat this section carried through two drafts is now retired on the evidence rather than argued away: it read "positive under every view, and too small for one view of four to resolve", and **that was a statement about our simulation budget, not about Kuminga**. The form the tightened floor supports is simply: **positive under every view, and every view clears its own error bar.**
 
