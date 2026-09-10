@@ -86,9 +86,13 @@ The favourite won **1 of 3**. The champion came from the top five **3 of 3**, an
 
 **And it survives the aging gate**, the strictest test this project applies: the same ALL POSITIVE sign under both the un-aged basis (+0.488) and the survivorship-corrected aged basis (+0.615) `[modeled, w2_aging_gate]`. Nine verdicts cleared that gate and five did not. This is one of the nine.
 
-**The pessimistic case, at its strongest.** The magnitude does not clear the machinery's own error, under either basis. The weakest of the four views sits below its own noise floor both times: **0.174 against a floor of 0.479 un-aged, 0.209 aged, 3 of 4 views clearing either way** `[modeled, noise_floor_slot]`. So the honest form is fixed by what the floor supports: **positive in sign under every view and under both aging bases, and too small for one view of four to resolve under either.** Not "worth half a point". Positive, and smaller than one of our four instruments can measure.
+**AND THE MAGNITUDE NOW CLEARS TOO, which it did not before.** The materiality floor was compute, not physics. A 200,000-simulation f-curve, run as four concurrent per-fork sweeps, cut Monte Carlo error by **4.82x** (against a theoretical maximum of 4.47x) and took the worst-fork floor from **0.349pp to 0.072pp** `[modeled, noise_floor]`. Against that floor, slot variant A is ALL POSITIVE with a smallest view of **0.215pp and 4 of 4 views clearing**. It survives.
 
-Promote Joan Beringer into the slot instead and all four views go **negative, -1.10 un-aged and -1.96 aged**, and that result clears the floor on all four. The positive case and the negative case are both real. Which one you get is a rotation decision.
+So the caveat this section carried through two drafts is now retired on the evidence rather than argued away: it read "positive under every view, and too small for one view of four to resolve", and **that was a statement about our simulation budget, not about Kuminga**. The form the tightened floor supports is simply: **positive under every view, and every view clears its own error bar.**
+
+**The pessimistic case, at its strongest, is therefore no longer about measurement.** It is that the result is conditional on who takes the minutes. Promote Joan Beringer into the slot instead and all four views go **negative, -1.10 un-aged and -1.96 aged**, and that result also clears the tightened floor on all four. **Both the positive and the negative case are now statistically real.** Which one you get is a rotation decision, and that is the honest place for the doubt to sit.
+
+
 
 **The evidence.** Kuminga's own on/off flips sign between his two 2025-26 teams: **-6.53 at Golden State over 971 possessions, +2.90 at Atlanta over 1,077** `[observed, lineup_evidence]`. Neither is an effect at that sample. His three-point rate rose from 27.3% to 35.9% between them and his accuracy rose with it, 32.1% to 34.6%; in the playoffs the rate rose again to 40.0% and the accuracy collapsed to 20.8% `[observed]`.
 

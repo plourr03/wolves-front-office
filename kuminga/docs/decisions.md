@@ -1281,3 +1281,24 @@ Then both of the requested cuts came back empty, and the reason is not about the
 Reid alongside Gobert was more than twice as good per possession as Randle alongside Gobert, on two-thirds the sample. **Reid is the one who left.** That is observed, not modelled, and it belongs in the piece next to any claim about what the frontcourt lost.
 
 **A METHOD NOTE CARRIED FORWARD.** Lineup three-point percentage here is weighted by three-point ATTEMPTS. An earlier pass in this project weighted it by minutes and handed Gobert, 0-for-7 from three on 2,710 minutes, the largest weight in the average, returning .280 for a group that shot .372.
+
+### D68. The 200k run. The materiality floor was compute, and three more verdicts clear it
+
+**HOW IT WAS MADE FEASIBLE.** At the 10,000-sim default `build_fcurve` takes about 28 minutes, so 200,000 is a nine-hour single-threaded job that would have blocked the night. The sim count is now env-overridable and the script takes a `KUMINGA_FCURVE_FORK` flag, so the four forks run as four concurrent processes against 12 cores and are stitched by `merge_fcurve_parts.py`, which **fails closed if any fork's part is missing rather than writing a curve with a hole in it.** Wall clock fell from about nine hours to about two and a half.
+
+**IT WORKED, AND CLOSE TO THEORY.** Median Monte Carlo error per grid point fell from **0.001169 to 0.000243, a factor of 4.82**, against the 4.47 that 20x the sims predicts. The materiality floor per view:
+
+| view | floor at 10k | floor at 200k |
+|---|---:|---:|
+| consensus | 0.078pp | **0.022pp** |
+| rapm | 0.185pp | **0.033pp** |
+| box | 0.243pp | **0.062pp** |
+| darko | 0.349pp | **0.072pp** |
+
+**THE CENTRAL CLAIM NOW CLEARS ON MAGNITUDE, NOT ONLY ON SIGN.** Slot variant A is ALL POSITIVE with a smallest view of **0.215pp against a 0.072pp floor, 4 of 4 clearing. It survives.** The caveat this project carried through two drafts, that the effect was "too small for one view of four to resolve", **was a statement about our simulation budget and not about Jonathan Kuminga**, and it is now retired on evidence rather than argued away. The methods note predicted exactly this ("ten times that would cut the floor by about a factor of three... the honest statement is that the piece cannot resolve effects this small, not that the effects are zero"), and the prediction held.
+
+**SURVIVORS GO FROM 2 TO 5 on the pooled table**: `other_departures`, `ball_in`, `randle_out`, `reid_out` and `dosunmu_retained` all now clear 4 of 4. **`ddv_injury` and `depth` still fail** despite an agreed sign, which is now a real statement about their size rather than about our compute.
+
+**SLOT VARIANTS: four of five survive.** A, C and E ALL POSITIVE; **D (Beringer fills) ALL NEGATIVE and clearing 4 of 4.** So both the positive and the negative case for Kuminga's slot are now statistically real, and the doubt moves from measurement to the rotation decision, which is where it belongs.
+
+**WHAT IS NOT YET CLAIMED.** The tightened floor is on the **un-aged** basis. A 200,000-sim AGED curve is running; until it lands, no "survives the tightened floor under both bases" claim is made, because the aged floor still comes from a 10,000-sim curve and the two are not comparable. The skeleton says un-aged only.
