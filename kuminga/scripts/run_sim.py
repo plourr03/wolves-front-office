@@ -31,6 +31,7 @@ import bracket_sim as E         # noqa: E402
 
 STR = os.path.join(REPO, "kuminga", "outputs", "team_strengths_2026_27.csv")
 OUT = os.path.join(REPO, "kuminga", "outputs", "sim_all30_2026_27.csv")
+OUT_MATCH = os.path.join(REPO, "kuminga", "outputs", "sim_matchups_2026_27.csv")
 
 SEEDS = [1, 2, 3, 4, 5]
 FORKS = ["consensus", "rapm", "box", "darko"]
@@ -63,7 +64,7 @@ def main():
         wa, wb = float(p["wins_a"]), float(p["wins_b"])
         r.note(f"expected wins = {wa} + {wb} * net")
 
-        rows = []
+        rows, mrows = [], []
         for fork in FORKS:
             f = st[st.fork == fork]
             s_base = strengths_from(f, "net_baseline")
@@ -79,8 +80,17 @@ def main():
                 # cancels the draw and leaves only the roster change.
                 rb = E.simulate_league(s_base, n_sims=args.nsims, seed=seed,
                                        use_overlay=USE_OVERLAY)["teams"]
-                rc = E.simulate_league(s_cur, n_sims=args.nsims, seed=seed,
-                                       use_overlay=USE_OVERLAY)["teams"]
+                _full = E.simulate_league(s_cur, n_sims=args.nsims, seed=seed,
+                                          use_overlay=USE_OVERLAY)
+                rc = _full["teams"]
+                # N2: the simulator computes a matchup block (who meets whom, and who
+                # wins given they meet) and it was being thrown away, so the expected
+                # first- and second-round opponent distribution could not be read off
+                # any existing run. Kept here, one row per pair per fork per seed.
+                for k, v in _full.get("matchups", {}).items():
+                    mrows.append(dict(fork=fork, seed=seed, pair=k, a=v["a"], b=v["b"],
+                                      meet=v["meet"],
+                                      a_wins_given_meet=v["a_wins_given_meet"]))
                 for t in s_base:
                     for k in ("title", "conf", "r2", "cf", "finals"):
                         acc_b[t][k].append(rb[t][k])
@@ -106,6 +116,13 @@ def main():
 
         df = pd.DataFrame(rows)
         df.to_csv(OUT, index=False)
+        if mrows:
+            md = pd.DataFrame(mrows)
+            md = (md.groupby(["fork", "pair", "a", "b"])
+                  [["meet", "a_wins_given_meet"]].mean().reset_index())
+            md.to_csv(OUT_MATCH, index=False)
+            r.note("N2: wrote %d matchup rows to %s"
+                   % (len(md), os.path.relpath(OUT_MATCH, REPO)))
         r.note(f"wrote {len(df)} rows: {df.fork.nunique()} forks x {df.team_abbr.nunique()} teams")
 
         mn = df[df.team_abbr == "MIN"]

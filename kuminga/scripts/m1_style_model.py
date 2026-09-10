@@ -56,7 +56,7 @@ TRAIN = ["2023-24", "2024-25"]
 VALID = "2025-26"
 SEASON_ID = {"2023-24": 22023, "2024-25": 22024, "2025-26": 22025}
 PLAYOFF_ID = {"2023-24": 42023, "2024-25": 42024, "2025-26": 42025}
-FEATS = ["rim_rate", "fg3a_rate", "pace", "opp_tov_rate", "oreb_rate"]
+FEATS = ["rim_rate", "fg3a_rate", "pace", "opp_tov_rate", "oreb_rate", "size"]
 
 
 def zs(s):
@@ -113,13 +113,25 @@ def main():
         r.note("rim rate resolved for %d of %d team-seasons"
                % (int(sl.rim_rate.notna().sum() & sl.team.notna().sum()), len(sl)))
 
-        # MINUTES-WEIGHTED SIZE IS NOT AVAILABLE. `nba_player_season_bio` carries
-        # neither a height column nor a minutes column in this warehouse, so the sixth
-        # feature the brief asked for cannot be built without a new source. It is
-        # dropped rather than proxied, and logged in gaps_remaining.md.
-        bio = pd.DataFrame(columns=["season", "team", "size"])
-        r.note("minutes-weighted SIZE unavailable: no height or minutes column on "
-               "nba_player_season_bio. Dropped from the feature set, not proxied.")
+        # MINUTES-WEIGHTED SIZE. An earlier run recorded this as unavailable. That was
+        # WRONG and the cause was mine: I queried for `height_inches` when the column is
+        # `player_height_inches`, got nothing back, and wrote the gap up as a warehouse
+        # limitation. It is fully populated: 572, 569 and 582 non-null rows across the
+        # three seasons. Weighted by games played, since this table carries `gp` but no
+        # minutes column; games played is a weaker weight than minutes and is stated as
+        # such rather than silently substituted.
+        bio = db.query("""
+            select season_year as season, team_abbreviation as team,
+                   sum(player_height_inches * gp) / nullif(sum(gp), 0) as size
+            from nba.nba_player_season_bio
+            where season_type = 'Regular Season' and season_year in %(s)s
+              and player_height_inches is not null and gp > 0
+            group by 1, 2
+        """, {"s": tuple(SEASON_ID)})
+        bio["size"] = pd.to_numeric(bio["size"], errors="coerce")
+        r.note("games-weighted SIZE resolved for %d team-seasons, mean %.2f inches, "
+               "range %.2f to %.2f"
+               % (len(bio), bio["size"].mean(), bio["size"].min(), bio["size"].max()))
 
         # ---- team-season style features, REGULAR SEASON only ------------------
         rs = m[~m.is_playoff]
@@ -167,12 +179,15 @@ def main():
 
         # ---- FIVE interactions, chosen in advance -----------------------------
         # each is an OFFENCE style against the DEFENCE style that should blunt it
+        # With SIZE restored, two interactions go back to the forms originally planned:
+        # an offence attacking the rim against the defence's size, and offensive
+        # rebounding against size. Still five, still fixed before fitting.
         inter = {
+            "rim_vs_size":   gm["rim_rate_a"] * gm["size_b"],
+            "oreb_vs_size":  gm["oreb_rate_a"] * gm["size_b"],
             "three_vs_pace": gm["fg3a_rate_a"] * gm["pace_b"],
-            "rim_vs_rim":    gm["rim_rate_a"] * gm["rim_rate_b"],
             "pace_vs_pace":  gm["pace_a"] * gm["pace_b"],
             "tov_vs_three":  gm["opp_tov_rate_b"] * gm["fg3a_rate_a"],
-            "oreb_vs_pace":  gm["oreb_rate_a"] * gm["pace_b"],
         }
         for k, v in inter.items():
             gm[k] = v

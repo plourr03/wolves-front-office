@@ -108,7 +108,7 @@ Recorded per the autonomy rule: failures go here and the run moves on.
 
 **BLOCKED ON MISSING WAREHOUSE COLUMNS**
 
-- **Minutes-weighted size** as an M1 style feature. `nba_player_season_bio` carries neither a height column nor a minutes column in this warehouse. Dropped from the feature set rather than proxied, and two of the five planned interactions were redefined without it. **This could plausibly change the M1 answer and the held-out test does not rule that out.**
+- ~~**Minutes-weighted size** as an M1 style feature.~~ **CLOSED 2026-09-10, and the gap was my error, not the warehouse's.** I queried for `height_inches`; the column is **`player_height_inches`**, and it is fully populated (572, 569 and 582 non-null rows across the three seasons). Size is now in the feature set, weighted by games played because the table carries `gp` and no minutes column. **Re-tested: the held-out gain does NOT change sign.** With size and the two originally-planned interactions restored (rim against size, offensive rebounding against size), held-out MAE gains are **-0.0151 on 2025-26 games and -0.0265 on the postseasons**, against -0.0085 and -0.0395 without it. The overlay stays off. **The lesson is about the gap, not the feature: a null result from a query I wrote is evidence about my query first and the data second.**
 - **N2 opponent distribution by seed.** `run_sim` does not persist the simulator's `matchups` block, so the expected first-round and second-round opponent distribution cannot be read off the existing run. The seed distribution itself IS available and is in the skeleton. Fix is one line in `run_sim` plus a re-run.
 
 **NOT REACHED, in priority order for the next session**
