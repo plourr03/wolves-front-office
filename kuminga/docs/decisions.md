@@ -1221,3 +1221,31 @@ Do not ship: `kuminga_in` (MIXED on both), `ddv_injury` (**ALL NEGATIVE to MIXED
 **A PROCESS BUG WORTH RECORDING.** The aged chain snapshots the aged outputs and then restores the un-aged primary from `outputs/preaging/`. **The restore list did not cover every file the chain writes**, so `slot_robustness.csv` and `green_kept.csv` were left in their AGED state in `outputs/`, and the first gate run compared the aged file against itself and reported all five slot variants as identical under both bases. Caught because identical values to three decimals across two different bases is not a result, it is a symptom. Fixed by regenerating both un-aged and re-running. **Any snapshot-and-restore step must restore everything the run touched, not everything someone remembered to list.**
 
 **AND THE SAME METHOD-VERSUS-COLUMN TRAP, for the third time in this project.** `x.item` is `IndexOpsMixin.item`; `x.sample` is `DataFrame.sample`. Both formatted a bound method into a log tonight, the second of them hours after I wrote a comment warning about the first. Every site now indexes by name with the pattern named in a comment.
+
+
+### D66. F1. Five hypotheses for the model-market gap, and four of them are dead
+
+The market study left the model looking bad: Boston first, Charlotte fifth, 20 of 30 teams off by more than the floor. F1 was meant to find the defect. **It did not find one.** What follows is what was tested and ruled out, because a ruled-out cause is worth as much as a found one and F2 and F3 were specified on the assumption that two of these would fire.
+
+**FIRST, A BUG IN MY OWN DIAGNOSTIC, caught before it was reported.** The first run of this script computed player net impact as `off + def` and produced **Wembanyama at -3.95, Holmgren -1.54, Caruso -2.56, Derrick White -0.52**, against **Luka Garza +4.10 and Payton Pritchard +4.13 ahead of Tatum**. Every player it loved was a poor defender and every one it hated was elite, which is exactly what a flipped defensive sign looks like, and I was one step from reporting the model had inverted defence.
+
+It had not. **The convention is `net = off - def`, where a negative def is good defence**, documented in `build_strengths` and confirmed against the value file: max |net - (off-def)| across the league is **0.01**, against **14.15** for off+def. Corrected, Wembanyama is **+9.05**, the highest single impact in the sample. **The model was right and my diagnostic was wrong.** The check that caught it was not arithmetic; it was that the names were implausible.
+
+**THE 20 DISAGREEMENTS, ranked.** BOS +11.52, SAS -9.08, PHI -5.94, OKC -5.81, CHA +5.05, DET +4.95, NYK -3.89, HOU +3.84, IND -2.00, TOR +1.77, then LAL, MIA, DEN, CLE, **MIN -1.48**, GSW, PHX, ATL, ORL, WAS.
+
+**FOUR HYPOTHESES, TESTED AND DEAD.**
+
+1. **League-wide thin-sample inflation.** Rotation players at 24+ minutes on under 13,000 RAPM possessions average **+2.16** consensus; everyone else at 24+ minutes averages **+2.07**. A 0.09 gap. **There is no systematic thin-sample bias.**
+2. **Return-from-absence inflation.** Only **5 players** league-wide carry a measured impact with no 2025-26 row: Mikel Brown Jr., Lonnie Walker IV, Georges Niang, Trey Lyles, Mohamed Bamba. Their impacts run **-0.67 to +0.31** and three of the five do not crack a rotation. **F2 as specified has essentially nothing to touch.**
+3. **Wrong measured 2025-26 nets.** Correlation with actual per-game margins from `nba_games` is **0.9994**, mean absolute difference **0.167**. Charlotte really did post a +4.83 margin at 44-38.
+4. **Missing playoff rotation concentration.** `rollup()` has a documented playoff mode (top 9, offence reweighted by translation read) and **the sim never uses it**, so I expected wiring it in to lift San Antonio's Wembanyama and drop Boston's depth. It does not: **Boston stays rank 2, San Antonio rank 3, Charlotte rank 4**, and correlation with market rank improves only from **0.782 to 0.800**.
+
+**AND F3's PREMISE DOES NOT FIRE EITHER.** The question was whether the RAPM prior targets league average. **It does not: it targets a box-score prior.** Correlation of net RAPM with the box prior is 0.758 for low-sample players and 0.728 for high-sample; the low-sample standard deviation (1.807) is *smaller* than the high-sample one (2.237), which is what shrinkage toward an informative prior looks like rather than toward zero. Residuals against the box prior run +0.235 under 10k possessions, +0.609 at 10-20k, +0.747 above 20k, so **low-sample players are already pulled hardest toward their box prior**.
+
+**WHAT IS ACTUALLY LEFT, and it is specific rather than systematic.** The extremes are individual players with large impacts on moderate samples taking starter minutes.
+
+- **Charlotte** (model rollup rank 4, market rank 19) is carried by **Moussa Diabate +6.29 on 10,786 possessions at 28.7 minutes** and **Kon Knueppel +3.69 on 10,074 at 32.8**.
+- **Boston** (+11.52) has eight rotation players all positive, minutes-weighted +3.12, including **Neemias Queta +4.52 on 12,078 possessions at 24.9 minutes**. No single number is indefensible; the sum is.
+- **San Antonio** starts from a measured net of +8.28 against Boston's +8.31 and gets a smaller rollup improvement (+1.67 against +2.66), so the model puts Boston ahead of the team the market makes favourite.
+
+**THE HONEST CONCLUSION.** The model's ordering correlates **0.78 to 0.80** with the market's, and the disagreements are **not traceable to a single fixable defect**. They are the accumulation of a minutes-weighted linear rollup over player impacts that are individually defensible and collectively produce a different league order. **F2 and F3 as specified will not close these gaps, because the causes they target are not present.** Saying so is more useful than applying two corrections that would move nothing and then reporting that the gaps persist.

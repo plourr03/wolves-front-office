@@ -35,7 +35,10 @@ OUT = os.path.join(REPO, "kuminga", "outputs", "fcurve_min.csv")
 
 GRID = np.arange(-4.0, 10.01, 0.5)
 SEEDS = [1, 2, 3]
-NSIMS = 10000
+# Sim count is env-overridable so a high-precision run can be launched without
+# editing the default. The materiality floor scales as 1/sqrt(NSIMS), so 200,000 is
+# roughly a 4.5x tighter floor than the 10,000 default, at roughly 20x the wall clock.
+NSIMS = int(os.environ.get("KUMINGA_FCURVE_NSIMS", "10000"))
 FORKS = ["consensus", "rapm", "box", "darko"]
 OUTCOMES = ("title", "conf", "r2", "cf", "finals")
 
@@ -46,7 +49,14 @@ def main():
                                             "seeds": SEEDS, "nsims": NSIMS}) as r:
         st = pd.read_csv(STR)
         rows = []
-        for fork in FORKS:
+        # A single fork can be built on its own so the four can run as concurrent
+        # processes and be merged, which is the difference between a 200,000-sim run
+        # taking nine hours and taking two. Partial files are written per fork and
+        # merged by merge_fcurve_parts.py.
+        only = os.environ.get("KUMINGA_FCURVE_FORK")
+        forks = [only] if only else FORKS
+        out_path = OUT if not only else OUT.replace(".csv", ".part_%s.csv" % only)
+        for fork in forks:
             f = st[st.fork == fork]
             # The field is every team EXCEPT Minnesota, held at its current strength.
             field = {x.team_abbr: {"net": float(x.net_current), "net_sd": float(x.net_sd),
@@ -73,9 +83,9 @@ def main():
                    f"{GRID[0]:+.1f} to {done[-1]['title']*100:.2f}% at net {GRID[-1]:+.1f}")
 
         df = pd.DataFrame(rows)
-        df.to_csv(OUT, index=False)
+        df.to_csv(out_path, index=False)
         r.note(f"wrote {len(df)} grid rows")
-        r.output(OUT, rows=len(df))
+        r.output(out_path, rows=len(df))
 
     print(df[df.fork == "consensus"][["min_net", "title", "cf", "finals"]].round(4).to_string(index=False))
 
