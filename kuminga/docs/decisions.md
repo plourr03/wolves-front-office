@@ -1088,3 +1088,27 @@ Verified rather than assumed: re-running `build_rotations` with the index mode f
 **ONE VERDICT LOST THE NOISE FLOOR.** Survivors go from three to two. `ddv_injury` was ALL NEGATIVE clearing 4 of 4 under pool-rank and now clears 3 of 4, because team-rank indexing widens the per-fork spread. Surviving: `other_departures` and `ball_in`. **The DiVincenzo injury keeps its agreed sign and loses its magnitude claim.**
 
 **Green appendix under W1b:** he draws **11.52** minutes rather than 13.0, and keeping him grades **-0.247 to +0.031, mean -0.064, MIXED**. The conclusion is unchanged and slightly softer.
+
+
+### D61. W1c. The projected decline is the Achilles. The offseason itself does not grade negative
+
+Minnesota's offseason delta is one number carrying three different things: roster moves the front office chose, a season-ending injury it did not, and a modelling assumption about a player nobody has seen in a Minnesota uniform. Reported as one figure it invites the reader to hand all of it to the front office. Four states, each a full re-allocation of 240 minutes through the same allocator `build_rotations` uses, priced on the same f-curve `[w1c_decompose]`:
+
+| component | mean | band | sign |
+|---|---:|---|---|
+| published offseason delta | **-0.951pp** | [-1.752, -0.350] | ALL NEGATIVE |
+| what the DiVincenzo injury costs | **+1.714pp** | [+1.245, +2.889] | ALL POSITIVE |
+| what the Cody Williams load costs | +1.006pp | [+0.716, +1.185] | ALL POSITIVE |
+| both removed | +1.714pp | [+1.245, +2.889] | ALL POSITIVE |
+| interaction | **-1.006pp** | [-1.185, -0.716] | ALL NEGATIVE |
+| **remainder, the offseason itself** | **+0.762pp** | **[-0.403, +2.535]** | **MIXED** |
+
+**THE HEADLINE. Once the injury and the Williams assumption are both removed, the offseason stops being negative.** The remainder is MIXED with a positive mean: consensus -0.403, RAPM +0.022, box +0.895, DARKO +2.535. **Three of four views think the moves helped.** The number that belongs next to "the front office made this team worse" is +0.762pp MIXED, not -0.951pp ALL NEGATIVE, because the remainder is the only part of it the front office chose.
+
+**THE DIVINCENZO-WILLIAMS INTERACTION, and it is not a subtlety, it is the whole thing.** Removing the injury is worth +1.714pp. Removing the Williams load is worth +1.006pp. They would sum to +2.719pp. Removing **both** is worth +1.714pp, exactly the injury figure, so the interaction is **-1.006pp, exactly minus the Williams figure.**
+
+That is not a coincidence and it is not rounding. **Healing DiVincenzo removes Williams from the rotation by itself.** With DiVincenzo out, Minnesota's available players rank Williams tenth, inside a ten-man rotation, and he draws 16.1 minutes. With DiVincenzo healthy everyone shifts up one and Williams is eleventh, outside it, and draws none. So the second intervention has no effect once the first is applied. **The Williams problem and the DiVincenzo problem are the same problem.** Anyone adding the two repairs would overstate the combined fix by a full percentage point.
+
+**AND IT IS A KNIFE EDGE, which has to travel with the claim.** Williams sits at rank score **0.3029** against Jaylen Clark's **0.3131**. **A gap of 0.0101 in a percentile blend decides whether Williams plays sixteen minutes a night or none at all**, and therefore decides roughly a point of title probability. This is the same brittleness W1b removed from the attribution allocator, except here it sits in the headline path, where a ten-man cut is the correct behaviour and cannot simply be deleted. It is a real property of a real rotation decision on a real bubble player, and the piece should present Williams' minutes as a coin-flip rotation call rather than a projection.
+
+**JUDGEMENT CALL, logged with the alternative.** The decomposition is computed with full re-allocation at each state rather than by holding the other eight players' minutes fixed and moving only the player in question. The alternative (hold others fixed) is simpler and would have made the components additive by construction, which is exactly why it was rejected: it would have hidden the interaction that is the finding. Full re-allocation is also what the sim itself does, so the components are on the same footing as the published number.
