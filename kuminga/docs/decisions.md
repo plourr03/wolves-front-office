@@ -1176,3 +1176,25 @@ That is not a coincidence and it is not rounding. **Healing DiVincenzo removes W
 **What that does and does not license.** It is not a probability that Minnesota cannot win, and with n = 3 it is not a rate at all. It is a statement about the distance being asked for. The useful comparison is the 2025-26 Knicks: the cheapest champion in the sample at 8.27% and rank 4, a team that finished **under** its own win total and still won four rounds. That is the shape of the argument available to Minnesota, and it is the reason N1 is a champion case study rather than a curiosity.
 
 **WHAT IS MISSING, and it is most of the H1 column list.** Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity, playoff health and ORtg/DRtg ranks all need a season-level aggregation the warehouse does not have (its team advanced table is game level), and Basketball-Reference returns 403 to direct requests and to the proxy, which is rate-limited on that domain until 04:14 GMT. Those columns are in `gaps_remaining.md` rather than guessed. Seasons before 2023-24 need either that B-Ref page or a paste.
+
+### D64. M1/M2. The style overlay does not survive a held-out test, so it stays off
+
+**THE CLAIM UNDER TEST.** The postmortem found San Antonio suppressing Edwards' catch-and-shoot looks and pushing him into the floater zone, and concluded the Spurs' style was a bad matchup beyond what net ratings say. That is a style-interaction claim. If real, it should appear as predictable structure in the residuals of a net-rating margin model.
+
+**THE TEST, specified before it was run.** Five style features per team-season for all 30 (rim rate, three-point rate, pace, opponent turnover rate, offensive rebound rate), z-scored within season. A plain baseline: margin = a + b(net_A - net_B) + home. **Five interaction terms fixed in advance, not searched**: three_vs_pace, rim_vs_rim, pace_vs_pace, tov_vs_three, oreb_vs_pace. Fit on 2023-24 and 2024-25, validated on 2025-26 and separately on the three postseasons.
+
+| sample | n | base MAE | with style | gain |
+|---|---:|---:|---:|---:|
+| train, 2023-25 regular season | 2,455 | 10.626 | 10.629 | **-0.0034** |
+| HELD OUT, 2025-26 regular season | 1,225 | 11.086 | 11.095 | **-0.0085** |
+| HELD OUT, three postseasons | 251 | 12.478 | 12.517 | **-0.0395** |
+
+**M2 DECISION: THE OVERLAY STAYS OFF.** The out-of-sample gain is negative on both held-out samples, and it is negative on the postseason sample by the largest margin of the three, which is precisely where the thesis lives. The overlay is not merely unproven, it makes held-out predictions slightly worse. **The postseason sample is 251 games, roughly 43 series**, and that number travels with any playoff claim built on it.
+
+**Consequence, exactly as the brief specified:** M3's opponent cards use net-rating series odds with the style features shown as **descriptive only**, and the piece says **the San Antonio thesis could not be estimated from this data**. That is a finding, not a failure, and it should be written as one: a real effect in one seven-game series is not the same thing as a stable, transferable style interaction, and this test cannot tell them apart at n = 43 series.
+
+**Note the in-sample line, because it is the point.** Five interactions fitted on 2,455 games barely improved even the sample they were fitted on (MAE -0.0034, RMSE +0.0094). When a model cannot improve its own training data, there is nothing to overfit and nothing to transfer. That is cleaner evidence of no signal than a large in-sample gain that fails to carry.
+
+**WHAT IS MISSING FROM THE FEATURE SET.** Minutes-weighted size, the sixth feature the brief asked for, could not be built: `nba_player_season_bio` in this warehouse carries neither a height column nor a minutes column. It was **dropped rather than proxied**, and two of the five planned interactions had to be redefined without it. Logged in gaps_remaining.md. A size feature could plausibly change the answer and this test does not rule that out.
+
+**A REPEAT BUG, caught and fixed.** The reporting loop used `x.sample`, which is `DataFrame.sample`, the METHOD, not the column, and formatted a bound method into the log. This is the identical trap as `x.item` recorded earlier in this project. Fixed by indexing by name, with the comment naming the pattern so it is caught a third time faster.
