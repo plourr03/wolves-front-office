@@ -1149,3 +1149,30 @@ That is not a coincidence and it is not rounding. **Healing DiVincenzo removes W
 3. **The model's Minnesota number against the market's.** Market 3.16% at rank 6; model 1.68% at rank 14, four-view band 0.82% to 2.57%. **The market's number sits OUTSIDE our band**, which is the strongest statement available here: this is not two estimates overlapping within uncertainty, it is a disagreement our own spread does not cover.
 
 **Consequence for the piece:** Minnesota's 1.5% is roughly half what the market says. The piece must lead with that gap rather than bury it, and must not present the model number as if the market agreed.
+
+### D63. H1/H2. Three champions, and Minnesota is priced outside the band all three came from
+
+**FRAMING RULE, applied throughout: never "the odds were wrong."** The preseason market is a prior. The question is how good a prior it is and what information moved the winners inside it.
+
+**A SOURCE REJECTED BEFORE ANY OF ITS NUMBERS WERE USED.** sportsbettingdime.com's past-seasons table names **San Antonio** as the 2026 champion. San Antonio lost the Finals 4-1 to New York (Brunson Finals MVP, verified at Wikipedia's 2026 NBA Finals page). A source that misstates a champion cannot be trusted for the odds columns either, so none of it was taken. This matters because that table was the fastest route to ten seasons of history and it would have poisoned the base rates silently.
+
+**H1, n = 3 seasons**, built on the project's own hand-transcribed odds files (all 30 teams, with win totals and final records) and champions verified independently:
+
+| season | champion | preseason | implied | rank | favourite | favourite won? | record |
+|---|---|---|---:|---:|---|---|---|
+| 2023-24 | Boston | +450 | 14.69% | 1 | Boston | **yes** | 64-18, over |
+| 2024-25 | Oklahoma City | +675 | 10.80% | 2 | Boston (19.69%) | no | 68-14, over |
+| 2025-26 | New York | +900 | 8.27% | 4 | Oklahoma City (24.32%) | no | 53-29, **under** |
+
+**H2 BASE RATES, and every one is a count out of three, not a rate. The piece must write them that way.**
+
+- the preseason favourite won **1 of 3**
+- the champion came from the top 3 **2 of 3**; from the top 5 **3 of 3**; from the top 8 **3 of 3**
+- the champion beat its own win total **2 of 3**
+- champions' preseason implied probability: **median 10.80%, range 8.27% to 14.69%, median rank 2**
+
+**MINNESOTA ON THAT DISTRIBUTION.** Market **3.16%, rank 6**. Model **1.68%, rank 14**. **No champion in this sample started below 8.27% or worse than rank 4.** Minnesota's market price is outside that band by a factor of two and a half; its model price is outside by a factor of five.
+
+**What that does and does not license.** It is not a probability that Minnesota cannot win, and with n = 3 it is not a rate at all. It is a statement about the distance being asked for. The useful comparison is the 2025-26 Knicks: the cheapest champion in the sample at 8.27% and rank 4, a team that finished **under** its own win total and still won four rounds. That is the shape of the argument available to Minnesota, and it is the reason N1 is a champion case study rather than a curiosity.
+
+**WHAT IS MISSING, and it is most of the H1 column list.** Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity, playoff health and ORtg/DRtg ranks all need a season-level aggregation the warehouse does not have (its team advanced table is game level), and Basketball-Reference returns 403 to direct requests and to the proxy, which is rate-limited on that domain until 04:14 GMT. Those columns are in `gaps_remaining.md` rather than guessed. Seasons before 2023-24 need either that B-Ref page or a paste.
