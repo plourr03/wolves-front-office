@@ -18,7 +18,19 @@ The market says **3.16%**, sixth in the league, after de-vigging a 21.8% overrou
 
 **Lead with the gap, not the number.** The market's figure sits **outside** our four-view band. This is not two estimates overlapping inside their uncertainty; it is a disagreement our own spread does not cover, and the piece has to hold both numbers up rather than pick one.
 
-The honesty rail belongs here and not in a footnote: **20 of 30 teams differ from this model by more than its own materiality floor**, and the pattern is unflattering to us. The model makes **Boston the title favourite at 16.99% against a market rank of fifth**, and **Charlotte a top-five team at 5.86% against a market rank of nineteenth** `[modeled]`. Neither is a defensible reading of those rosters. When a model disagrees with the market about Minnesota by 1.5 points and about Boston by 11.5, the Minnesota disagreement should be read in that light.
+**The honesty rail, and it belongs here rather than in a footnote.**
+
+**The model and the market order the league at a correlation of 0.78 to 0.80** `[modeled, f4c]`. They agree about the shape of the league and disagree about twenty specific teams, and the disagreements are **not traceable to a single defect**. Five candidate explanations were tested and all five failed: thin-sample inflation (+2.16 against +2.07, no effect), return-from-absence pricing (five players league-wide, all marginal), wrong measured 2025-26 nets (correlation 0.9994 with actual margins), missing playoff rotation concentration (wiring it in moves Boston 2nd to 2nd), and shrinkage toward league average (the prior is a box-score prior, not league average) `[f1_disagreement_diagnosis]`.
+
+**The depth-versus-stars story is dead as a number.** Correlation between a team's impact concentration and model-minus-market is **-0.065** across 30 teams `[f4c]`. And concentration does not predict playoff margin either: adding it to a series model gains **+0.039 in sample and -0.034 held out** `[f4d]`, which is what overfitting looks like. **No series adjustment is applied.**
+
+**What can be said is which disagreements are the model's and which are the model arguing with itself.** Sixteen of the twenty are ALL-VIEWS, where all four forks sit on the same side of the market. Four are MIXED. **Boston is ALL-VIEWS**: every fork ranks it first or second, so it is not one instrument's artifact. **Charlotte is MIXED**: consensus and RAPM rank it fourth, box ninth and DARKO sixteenth, so most of Charlotte is a RAPM-family artifact and the piece should not defend it `[f4a]`.
+
+**And the four views are not four independent instruments.** Consensus and RAPM correlate at **0.963** across rotation players, with a mean absolute difference of 0.42; box correlates 0.700 with consensus and has roughly half the spread (sd 1.06 against 1.85) `[f4b]`. "All four agree" is therefore closer to "two-and-a-bit agree", and it is a check that a finding does not hinge on one modelling choice, never a confidence interval.
+
+**For Minnesota, both numbers go in the piece.** Market **3.16%, rank 6**. Model **1.68%, rank 14**, and Minnesota is **ALL-VIEWS below the market**: every fork puts them 13th to 16th. The market's number sits outside our four-view band, so this is not two estimates overlapping within uncertainty.
+
+**The rule this piece follows: it names which number it would bet on only where the four views agree.** On Minnesota they agree with each other and disagree with the market, and the piece says exactly that rather than pretending the gap away or claiming the market is wrong.
 
 **The number, and the condition it depends on:** 1.68% modelled against 3.16% priced, and the gap is only interpretable if you also accept that the same model has Boston first and Charlotte fifth.
 
