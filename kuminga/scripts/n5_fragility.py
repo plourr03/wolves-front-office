@@ -153,7 +153,7 @@ def main():
     from kuminga.lib import kfreeze, rotation, runlog
     import build_team_ratings as A
     import bracket_sim as E
-    from build_strengths import build_impacts, add_rookie_impacts, apply_aging
+    from build_strengths import build_impacts, add_rookie_impacts
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--aged", action="store_true")
@@ -175,8 +175,13 @@ def main():
                                        encoding="utf-8")
                        if '"n5_fragility_2' in x and '"ok"' in x]
             r.note("doc rewritten from the CSVs of the last ok n5_fragility run")
-            write_doc(r, R, NM, OUT_MD, sim_run=src_run[-1].split('"run_id": "')[1]
-                      .split('"')[0] if src_run else "unknown")
+            runs = [x.split('"run_id": "')[1].split('"')[0] for x in src_run]
+            aged_f = os.path.join(OUT_DIR, "n5_fragility_AGED.csv")
+            aged_nm = os.path.join(OUT_DIR, "n5_next_man_up_AGED.csv")
+            aged = ((pd.read_csv(aged_f), pd.read_csv(aged_nm))
+                    if os.path.exists(aged_f) and os.path.exists(aged_nm) else None)
+            write_doc(r, R, NM, OUT_MD, sim_run=", ".join(runs[-2:]) if runs else "unknown",
+                      aged=aged)
             r.output(OUT_MD)
         return
 
@@ -205,11 +210,13 @@ def main():
         darko = pd.read_csv(DARKO)
         darko.columns = [c.strip().lstrip("﻿") for c in darko.columns]
         bio, _ = kfreeze.load("player_bio")
+        # build_impacts applies aging ITSELF when KUMINGA_AGING=1, exactly as the aged
+        # leg of the chain runs it. A first --aged run called apply_aging separately
+        # without the variable set, aged nothing, and G3 caught it.
+        if args.aged:
+            os.environ["KUMINGA_AGING"] = "1"
         imps, _ = build_impacts(value, darko, bio)
         add_rookie_impacts(imps, rot)
-        if args.aged:
-            n_aged = apply_aging(imps)
-            r.note("aged basis: aging applied to %d player-view impacts" % n_aged)
         beta = float(E.load_e_params()["beta"])
 
         # G2 and G3
@@ -386,9 +393,11 @@ def main():
         if not args.aged:
             write_doc(r, R, NM, OUT_MD, sim_run=r.run_id)
             r.output(OUT_MD)
+        else:
+            r.note("aged basis written; run --doc-only to fold it into the doc")
 
 
-def write_doc(r, R, NM, path, sim_run):
+def write_doc(r, R, NM, path, sim_run, aged=None):
     L = []
     L.append("# N5: fragility\n")
     L.append("*As of 2026-09-16. MODELLED: un-aged primary after the D70 fixes, series "
@@ -466,11 +475,11 @@ def write_doc(r, R, NM, path, sim_run):
                           for t_ in po.index),
                 ", ".join("%s %.2f" % (t_, po.loc[t_, "team_net_drop"]) for t_ in po.index),
                 ""))
+    if aged is not None:
+        L.extend(both_bases(R, NM, aged[0], aged[1]))
     L.append("**What it does not show.** The team's playoff variance is held at "
              "full-roster values. "
-             "Injuries to more than one player, or to anyone outside the top three. And "
-             "the aged basis, which is run separately once the chain refreshes "
-             "`outputs/aged/`; until then these numbers carry the un-aged label.\n")
+             "Injuries to more than one player, or to anyone outside the top three.\n")
     L.append("*Method.* Minutes: `rotation.allocate` with the player's availability at "
              "zero, ceiling rule on, reproducing the published rotation exactly before any "
              "removal (gate G2). Strength: net plus beta times the change in the "
@@ -482,6 +491,63 @@ def write_doc(r, R, NM, path, sim_run):
              "`n5_next_man_up.csv`.\n")
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(L))
+
+
+def both_bases(R, NM, RA, NA):
+    """The W2 discipline: which N5 statements hold on BOTH aging bases."""
+    def summary(Rx, Nx):
+        m = Rx[Rx.why.str.startswith("top")]
+        n = Nx[Nx.why.str.startswith("top")]
+        full = m.groupby("team").title_full.mean()
+        drop = m.groupby(["team", "removed"]).drop_pp.mean()
+        net = n.groupby(["team", "removed"]).team_net_drop.mean()
+        out = {}
+        for t in full.index:
+            d, nt = drop.loc[t], net.loc[t]
+            out[t] = dict(full=full[t], drop=d.mean(), share=d.mean() / full[t],
+                          net=nt.mean(), big_name=nt.idxmax(), big=nt.max(),
+                          top_title_loss=d.idxmax())
+        return out
+    u, g = summary(R, NM), summary(RA, NA)
+    teams = list(u)
+    L = ["## Both aging bases\n",
+         "The same removals on the survivorship-corrected aged basis (outputs/aged/, "
+         "gated the same way). A statement belongs in the piece only if it holds on "
+         "both.\n",
+         "| team | title odds, un-aged / aged | mean drop, points | share of its odds | "
+         "mean net lost per removal | largest single net loss | biggest title-odds loss |",
+         "|---|---|---|---|---|---|---|"]
+    for t in teams:
+        L.append("| %s | %.2f%% / %.2f%% | %.2f / %.2f | %.0f%% / %.0f%% | %.2f / %.2f | "
+                 "%s %.2f / %s %.2f | %s / %s |"
+                 % (t, u[t]["full"], g[t]["full"], u[t]["drop"], g[t]["drop"],
+                    100 * u[t]["share"], 100 * g[t]["share"], u[t]["net"], g[t]["net"],
+                    u[t]["big_name"], u[t]["big"], g[t]["big_name"], g[t]["big"],
+                    u[t]["top_title_loss"], g[t]["top_title_loss"]))
+    L.append("")
+    others = [t for t in teams if t != "MIN"]
+    checks = [
+        ("Minnesota loses a larger share of its title odds than both contenders",
+         all(b["MIN"]["share"] > max(b[o]["share"] for o in others) for b in (u, g))),
+        ("Minnesota's largest single net loss is smaller than each contender's",
+         all(b["MIN"]["big"] < min(b[o]["big"] for o in others) for b in (u, g))),
+        ("Minnesota loses no more strength per removal on average than the contenders "
+         "(within 0.10 or less)",
+         all(b["MIN"]["net"] <= max(b[o]["net"] for o in others) + 0.10 for b in (u, g))),
+        ("The same Minnesota player is the biggest title-odds loss on both bases",
+         u["MIN"]["top_title_loss"] == g["MIN"]["top_title_loss"]),
+    ]
+    L.append("| statement | holds on both bases |")
+    L.append("|---|---|")
+    for s, ok in checks:
+        L.append("| %s | **%s** |" % (s, "yes" if ok else "no"))
+    L.append("")
+    if not checks[3][1]:
+        L.append("So the piece can say Minnesota's strength is spread and the contenders' "
+                 "is concentrated, and it cannot name which Minnesota player is the "
+                 "costliest to lose: %s on the un-aged basis, %s on the aged one.\n"
+                 % (u["MIN"]["top_title_loss"], g["MIN"]["top_title_loss"]))
+    return L
 
 
 def po_sentence(po):
@@ -524,8 +590,7 @@ def plain(team, per, NM):
     imp = top3[top3.team == "MIN"].groupby("removed").removed_net.agg(["min", "max"])
     return (
         "Take one of Minnesota's top three away for the playoffs and its title odds fall "
-        "from %.2f%% by %.2f points on average, %.0f%% of what it had. The biggest single "
-        "loss is %s (%.2f points). %s. "
+        "from %.2f%% by %.2f points on average, %.0f%% of what it had. %s. "
         "In strength, the three teams lose almost the same amount per removal on average "
         "(%s net points), but the contenders' loss sits in one player (%s) while "
         "Minnesota's is spread across three (its largest is %s, %.2f). Minnesota loses a "
@@ -534,7 +599,7 @@ def plain(team, per, NM):
         "Minnesota: how much each loss costs is only as good as each view's rating of the "
         "player, and the views disagree most on %s (impact %+.2f to %+.2f across the four), "
         "and his drop runs from %.2f to %.2f points across them. %s"
-        % (mn.full, mn.drop_mean, 100 * mn.rel, top.removed, top["drop"],
+        % (mn.full, mn.drop_mean, 100 * mn.rel,
            "; ".join("%s falls from %.2f%% by %.2f points on average (%.0f%%)"
                      % (t, team.loc[t, "full"], team.loc[t, "drop_mean"],
                         100 * team.loc[t, "rel"]) for t in others),

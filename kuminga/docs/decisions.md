@@ -1473,3 +1473,15 @@ Written up in full at `docs/case_file_knicks_2025_26.md`. The findings that matt
 - N2 round-one opponents: SAS 0.261 unchanged, OKC 0.251 -> 0.249, HOU 0.193 -> 0.195.
 
 **What the fix unlocked.** M4 now has fives with two bigs and fives without Gobert (before D70 both sets were empty by construction, because Beringer was pooled as a forward).
+
+### D78. M4 re-run: creation per game, an unavailable player removed, and a NaN that printed as zero; N5 on the aged basis
+
+**Run IDs.** `m4_lineup_study_20260916T224138Z`; N5 aged `n5_fragility_20260916T224233Z`; N5 doc `n5_fragility_doc_20260916T224756Z`.
+
+**M4, three defects fixed, before and after.**
+1. *Creation* summed season assist totals, not per game, charging players for games missed (Kuminga played 36). Before: range 304 to 1,403 per five. After: **1.8 to 18.9 assists per game**.
+2. *Availability.* M4 enumerated every Minnesota player including Donte DiVincenzo, whom the pipeline has out for 2026-27 (rs_avail 0). Before: 1,064 fives, **315 containing DiVincenzo**, and he was in the top two closing candidates. After: **749 fives**, none with him; 232 rankable, 5 observed, 161 double-big, 294 without Gobert. This defect predates D70 and was in the D67 enumeration too; D67's closing-candidate list should be read as superseded. Top closing candidate now: Edwards, Beringer, Ball, Gobert, Shannon.
+3. *Size.* A missing height is NaN, and NaN is truthy, so `if h` let it into the mean: 595 of 1,064 fives had a NaN size, which the log printed as 0.0, and `max()` over NaN could pick the wrong "biggest defender" for rim protection. After: NaN heights are excluded explicitly, 0 NaN sizes, and a genuinely missing value prints as n/a.
+Every ranked M4 list is now led by fives containing Joan Beringer, whose impact rests on a 2025-26 rookie sample; that is a property of the impact views, flagged here rather than filtered.
+
+**N5 aged basis.** A first `--aged` run called `apply_aging` without `KUMINGA_AGING=1`, aged nothing, and **gate G3 failed closed** (pricing off by 1.99). Fixed by setting the variable before `build_impacts`, which applies aging itself, exactly as the chain's aged leg does; all four gates then pass. Aged results: MIN 2.46% (sim_all30 aged 2.55%, different seeds), mean drop 0.93 pp (38%), mean net lost per removal 1.77; OKC 17.89%, 6.37 pp (36%), 2.25; SAS 16.60%, 5.20 pp (31%), 2.06. **Holds on both bases:** Minnesota loses a larger share of its odds; Minnesota's largest single net loss (Gobert, 3.25 / 2.27) is smaller than SGA's (4.01 / 3.82) and Wembanyama's (4.77 / 5.02); Minnesota loses no more strength per removal than the contenders. **Does not hold:** which Minnesota player is the costliest to lose in title odds (Gobert un-aged, Ball aged), so the piece does not name one. The un-aged "biggest single loss" sentence was removed from the N5 summary for that reason. On the aged basis one view prices Gobert's removal slightly positive (-0.06 pp), which is the aging adjustment on a 34-year-old meeting the box view's low read of his defence.

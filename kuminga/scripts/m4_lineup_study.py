@@ -69,6 +69,13 @@ def main():
 
         mn = pool[(pool.scenario == "current") & (pool.team_abbr == "MIN")].copy()
         mn = mn[mn.player_id.notna()].copy()
+        # AVAILABILITY. A player the pipeline has out for the season (rs_avail 0) cannot
+        # be in a five. The first versions enumerated him anyway, and Donte DiVincenzo
+        # (Achilles, out for 2026-27) led the closing candidates.
+        out_ = mn[mn.rs_avail <= 0].player_name.tolist()
+        mn = mn[mn.rs_avail > 0].copy()
+        r.note("excluded as unavailable for 2026-27 (rs_avail 0): %s"
+               % (", ".join(out_) if out_ else "none"))
         mn["pid"] = mn.player_id.astype(int).astype(str)
         r.note("Minnesota roster available to enumerate: %d players" % len(mn))
 
@@ -143,8 +150,11 @@ def main():
             fg3a = sum(recs[p].get("fg3a") or 0 for p in c)
             fg3m = sum(recs[p].get("fg3m") or 0 for p in c)
             fga = sum(recs[p].get("fga") or 0 for p in c)
-            heights = [recs[p].get("height") for p in c if recs[p].get("height")]
-            biggest = max(c, key=lambda p: recs[p].get("height") or 0)
+            # a missing height is NaN, and NaN is truthy, so `if h` let it through and
+            # made the mean NaN; and max() over NaN picked an arbitrary "biggest"
+            heights = [recs[p]["height"] for p in c if pd.notna(recs[p].get("height"))]
+            biggest = max(c, key=lambda p: recs[p]["height"]
+                          if pd.notna(recs[p].get("height")) else 0.0)
             rows.append(dict(
                 lineup=" / ".join(sorted(names)),
                 observed_poss=obs.get(frozenset(c), 0.0),
@@ -156,7 +166,11 @@ def main():
                 fg3a_rate=(fg3a / fga if fga else np.nan),
                 fg3_pct=(fg3m / fg3a if fg3a else np.nan),
                 rim_protect=float(imps["consensus"].get(biggest, {}).get("def", 0.0)),
-                creation=sum(recs[p].get("ast") or 0 for p in c),
+                # PER GAME. `nba_player_season_bio.ast` is a season TOTAL; summing totals
+                # (as a first version did, 1,150 for a five) charged a player for games
+                # he missed. Kuminga's 36 games halved his share.
+                creation=sum((recs[p].get("ast") or 0) / recs[p]["gp"]
+                             for p in c if (recs[p].get("gp") or 0) > 0),
                 size=(float(np.mean(heights)) if heights else np.nan),
                 has_gobert=any(recs[p]["player_name"] == "Rudy Gobert" for p in c),
                 n_bigs=sum(1 for p in c if recs[p]["pool"] == "big")))
@@ -177,11 +191,11 @@ def main():
                 return
             for _, x in sub.sort_values(by, ascending=asc).head(n).iterrows():
                 r.note("    %-58s net %+5.2f [%+.2f,%+.2f] | 3PA%% %s 3P%% %s | "
-                       "size %.1f | %s"
+                       "size %s | %s"
                        % (x.lineup[:58], x.net_mean, x.net_lo, x.net_hi,
                           "%.3f" % x.fg3a_rate if pd.notna(x.fg3a_rate) else " n/a ",
                           "%.3f" % x.fg3_pct if pd.notna(x.fg3_pct) else " n/a ",
-                          x["size"] if pd.notna(x["size"]) else 0,
+                          "%.1f" % x["size"] if pd.notna(x["size"]) else "n/a",
                           ("OBSERVED %d poss" % x.observed_poss)
                           if x.label == "OBSERVED" else "composed"))
 
