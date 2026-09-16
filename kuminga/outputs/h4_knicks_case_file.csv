@@ -1,0 +1,46 @@
+,value
+market_odds,900
+market_title_pct,8.268452029999942
+market_rank,4
+market_win_total,53.5
+favourite,Oklahoma City Thunder
+favourite_pct,24.318976558823355
+model_title_pct,4.63333333333333
+model_wins,47.51614531707317
+actual_wins,53
+model_win_miss,-5.483854682926832
+market_win_miss,0.5
+rs_record,53-29
+rs_margin,6.329268292682927
+pre_break_margin,6.163636363636364
+post_break_margin,6.666666666666667
+po_record,16-3
+po_margin,14.894736842105264
+po_games,19
+rs_margin_rank,5
+po_margin_rank,1
+po_teams,16
+lift,8.565468549422338
+lift_rank,1
+lift_second,SAS -0.78
+lift_mean,-7.394506735896023
+n_positive_lift,1
+cmp_lift,-9.1869918699187
+cmp_lift_rank,11
+series,ATL 4-2 (+17.5); PHI 4-0 (+22.2); CLE 4-0 (+19.2); SAS 4-1 (+2.4)
+top3_share_rs,0.3721795311046939
+top3_share_po,0.41953772350632357
+top5_share_rs,0.5786305124565612
+top5_share_po,0.6733536851286525
+top8_share_rs,0.7605109882041995
+top8_share_po,0.868512865242041
+top5_rs_games_missed,46
+top5_po_games_missed,2
+top8_po_games_missed,4
+top5_names,"Bridges, Brunson, Towns, Anunoby, Hart"
+continuity,0.8205178405364397
+continuity_rank,4
+continuity_median,0.6109601038017876
+cmp_continuity,0.8286570799569066
+cmp_continuity_rank,3
+style_ranks,"rim_rate 15, fg3a_rate 12, pace 24, opp_tov_rate 13, oreb_rate 5, size 23"

@@ -1347,3 +1347,21 @@ Separately, NBA.com's roster position lists several genuine centres as plain "Fo
 Both also contaminated the position audit (Brandon Miller appeared to be "listed C" because his id had absorbed Baba Miller's row). **Fix:** a third-key match now requires one first name to be a prefix of the other. Nic/Nicolas, Cam/Cameron and Herb/Herbert pass; Baba/Brandon and Mikel/Moses do not. Duplicate ids on 2026-27 rosters: **one to zero.** Both rookies now take draft-slot priors (Baba Miller -0.81 at 9.8 minutes; Mikel Brown Jr. +0.08 at 18.2). Nicolas Claxton still resolves.
 
 **WHAT MOVES AND WHAT DOES NOT.** The headline allocator `allocate()` is pool-blind, so **Minnesota's projected minutes are unchanged** by the position fix. The pool fix reaches the attribution layer (pooled Shapley, the Green appendix, M4). **The identity fix reaches the headline**: it changes the Clippers' and Nets' rosters, which changes the field, which changes the f-curve and therefore every Minnesota number. The full chain and both 200k curves are being re-run for that reason, and the nine-verdict shipping list in D69 is provisional until they land.
+
+### D71. H4/N1. The Knicks case file: the market priced the champion well, and the champion outran the price
+
+Written up in full at `docs/case_file_knicks_2025_26.md`. The findings that matter:
+
+**The market was close to right and our model was not.** Preseason the market had New York at **8.27%, rank 4, 53.5 wins**; they won **53**. The market missed the regular season by **0.5 wins**. This project's own preseason model had them at **4.63% and 47.5 wins**, a **5.5-win miss**, below the market on the eventual champion by 3.6 points, **which is the same direction the model sits on Minnesota now.**
+
+**The regular season was steady; the playoffs were a different team.** 53-29 at **+6.33**, rank 5, and **+6.16 before the All-Star break against +6.67 after**, so no late surge. Then **16-3 at +14.89**, rank 1 of 16, 2.35 times the regular-season margin. Series: ATL 4-2 (+17.5), PHI 4-0 (+22.2), CLE 4-0 (+19.2), SAS 4-1 (+2.4). Verified in the warehouse and against Wikipedia's 2026 playoffs page, game counts agreeing exactly.
+
+**The single most distinctive number: they were the ONLY one of 16 playoff teams whose margin improved in the playoffs.** Their change was **+8.57**; the next best was San Antonio at -0.78 and the average was **-7.40**, because playoff opponents are better. **Minnesota's change the same year was -9.19, rank 11.**
+
+**Three things moved, none visible in September.** Health reversed: the starting five missed **46 regular-season games and 2 playoff games**. The rotation shortened onto the starters: top-five minutes share **0.579 to 0.673**. And the bracket broke their way when San Antonio beat Oklahoma City, the preseason favourite, in seven.
+
+**Which H1 features would have flagged it.** Preseason rank (4) yes, and the market already priced it. Continuity (0.821, rank 4) only weakly, because **Minnesota's was higher (0.829, rank 3) and Minnesota went out in round two**. Style no, and the held-out test says style carries no playoff signal. **Regular-season health would have flagged them the WRONG way.** Minutes concentration is not a preseason quantity, and F4d found the regular-season version does not predict playoff margin.
+
+**A circular claim caught before commit.** The first draft marked the Knicks' 8.27% as a flag because it sat "inside the champions' band". The Knicks are one of the three champions that DEFINE that band and set its floor, so that is true by construction. It is now marked circular and not counted.
+
+**The sentence the piece can support:** the last champion was a team the market already had as a contender, which then got healthy, shortened its rotation onto its starters and played nine points better in April than in the regular season. Minnesota's case for a similar run starts from a lower price (3.16%, rank 6, outside the band) and a team whose margin went the other way last April.
