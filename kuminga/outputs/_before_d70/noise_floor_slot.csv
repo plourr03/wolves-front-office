@@ -1,0 +1,6 @@
+variant,sign_agreement,mean_pp,min_abs_pp,n_forks_clearing,survives,clears_consensus,clears_rapm,clears_box,clears_darko
+A_c3_default_shannon,ALL POSITIVE,0.5180772735092378,0.2145084355170166,4,True,True,True,True,True
+B_lyles_fills,MIXED,0.0266039667479516,0.0,3,False,True,True,False,True
+C_mcdaniels_slides,ALL POSITIVE,0.5012170179313883,0.1859520251077997,4,True,True,True,True,True
+D_beringer_fills,ALL NEGATIVE,-1.1281128765573865,0.2680894855212992,4,True,True,True,True,True
+E_tight_rule_F_or_FC,ALL POSITIVE,0.5038853065830236,0.1859520251077997,4,True,True,True,True,True

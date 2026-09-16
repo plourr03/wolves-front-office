@@ -1,0 +1,32 @@
+season_year,season_type,team_abbreviation,play_type,poss,poss_pct,ppp,percentile
+2024-25,Playoffs,GSW,Spotup,24,0.198,1.375,0.884
+2024-25,Playoffs,GSW,Transition,24,0.198,1.333,0.821
+2024-25,Playoffs,GSW,PRBallHandler,18,0.149,0.667,0.138
+2024-25,Playoffs,GSW,Isolation,15,0.124,0.800,0.205
+2024-25,Playoffs,GSW,Cut,11,0.091,1.091,0.179
+2024-25,Regular Season,GSW,Spotup,149,0.198,0.960,0.296
+2024-25,Regular Season,GSW,PRBallHandler,146,0.194,0.795,0.341
+2024-25,Regular Season,GSW,Transition,139,0.185,1.115,0.453
+2024-25,Regular Season,GSW,Cut,82,0.109,1.415,0.745
+2024-25,Regular Season,GSW,Isolation,56,0.075,0.661,0.129
+2024-25,Regular Season,GSW,Postup,52,0.069,0.865,0.271
+2024-25,Regular Season,GSW,OffRebound,34,0.045,1.088,0.530
+2024-25,Regular Season,GSW,Handoff,33,0.044,0.970,0.566
+2024-25,Regular Season,GSW,Misc,21,0.028,0.333,0.268
+2024-25,Regular Season,GSW,PRRollMan,20,0.027,1.000,0.343
+2024-25,Regular Season,GSW,OffScreen,19,0.025,0.579,0.050
+2025-26,Playoffs,ATL,Spotup,17,0.221,0.647,0.118
+2025-26,Playoffs,ATL,Transition,14,0.182,1.286,0.800
+2025-26,Playoffs,ATL,PRBallHandler,11,0.143,1.273,0.941
+2025-26,Playoffs,ATL,Isolation,10,0.130,1.100,0.884
+2025-26,Playoffs,ATL,Postup,10,0.130,1.000,0.733
+2025-26,Regular Season,GSW,PRBallHandler,57,0.211,0.667,0.170
+2025-26,Regular Season,GSW,Spotup,49,0.181,0.878,0.173
+2025-26,Regular Season,GSW,Transition,47,0.174,1.085,0.396
+2025-26,Regular Season,GSW,Isolation,34,0.126,0.706,0.159
+2025-26,Regular Season,GSW,Cut,26,0.096,1.423,0.749
+2025-26,Regular Season,ATL,PRBallHandler,23,0.120,0.826,0.468
+2025-26,Regular Season,ATL,Isolation,22,0.115,1.182,0.947
+2025-26,Regular Season,GSW,OffRebound,19,0.070,0.895,0.184
+2025-26,Regular Season,GSW,Postup,18,0.067,0.778,0.143
+2025-26,Regular Season,ATL,Postup,10,0.052,0.900,0.295

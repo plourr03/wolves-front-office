@@ -1,0 +1,17 @@
+step,amount
+pre-trade Apron Team Salary (2026-08-27),217621829.0
+out: Josh Green,-14679012.0
+in: Cody Williams,6015600.0
+in: John Konchar,6165000.0
+"waive Konchar, stretch over 3 seasons",-4110000.0
+"McDaniels, our book $26,200,001 vs Spotrac $26,200,000",-1.0
+post-trade Apron Team Salary (2026-09-04),211013416.0
+"sign Kuminga, taxpayer MLE year 1",6064000.0
+final Apron Team Salary,217077416.0
+"room under second apron, pre-Kuminga",10672584.0
+"room under second apron, with Kuminga",4608584.0
+"over first apron, with Kuminga",8062416.0
+"over tax line, with Kuminga",16649416.0
+dead money 2026-27,2055000.0
+dead money 2027-28,2055000.0
+dead money 2028-29,2055000.0

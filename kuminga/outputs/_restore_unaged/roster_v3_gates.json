@@ -1,0 +1,11 @@
+{
+ "gate_a": true,
+ "gate_b": true,
+ "b1_active": 30,
+ "b2_dead": 30,
+ "b3_unlikely_complete": 26,
+ "teams_matching_apron": 30,
+ "single_source_risk": "roster book is sourced only to Spotrac",
+ "min_apron": 211013416.0,
+ "min_tier": "first_apron"
+}

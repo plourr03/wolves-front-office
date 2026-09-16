@@ -1,0 +1,9 @@
+component,amount,counts_toward_apron,note
+"13 contracted players (nba_player_contracts, 2026-08-26)",215871829.0,True,"Green in, Kuminga out. This is the Phase 0 A.11 figure."
+"Jonathan Kuminga, taxpayer MLE",6064000.0,True,"Counts once signed. Status: reported, not officially announced."
+R4 14th-man placeholder,1358000.0,False,NOT a CBA charge. A team is charged for empty slots only below TWELVE players; Minnesota is at 13. Shown separately as roster fill.
+incomplete roster charge,0.0,True,"Zero, correctly: the charge applies only below 12 players."
+dead money,0.0,True,Zero on the current book. Non-zero only in the stretch branch.
+free-agent cap holds,16484548.0,False,CAP basis only. Never quote the cap-basis total as an apron figure.
+two-way contracts (Enrique Freeman),0.0,False,Excluded from team salary.
+UNLIKELY BONUSES,1750000.0,True,"Apron Team Salary = Team Salary MINUS cap holds PLUS unlikely bonuses. Unlikely bonuses are excluded from cap and tax salary but INCLUDED in the apron figure. McDaniels $1,000,000 and DiVincenzo $750,000. Verified 2026-08-27 against the Hoops Rumors tax-apron glossary and the CBA Guide, and against Spotrac's own computed 2nd Apron Space of $4,064,172."

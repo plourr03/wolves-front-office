@@ -1,0 +1,6 @@
+{
+ "gate_a": false,
+ "gate_b": false,
+ "teams_within_tol": 25,
+ "abs_diff": 9428578.0
+}

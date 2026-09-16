@@ -1,0 +1,5 @@
+step,min_net,overlay,title_pct,delta_from_previous
+"0. this pipeline, R6 healthy baseline, overlay off",2.1576212195121958,False,2.816666666666667,
+1. Minnesota moved to June's net (DiVincenzo out),1.36,False,2.083333333333333,-0.7333333333333338
+2. archetype matchup overlay switched ON,1.36,True,1.9733333333333336,-0.10999999999999943
+"3. June's reported figure (e_baseline.md, 2026-06-13)",1.36,True,1.7,-0.27333333333333365

@@ -1455,3 +1455,21 @@ Written up in full at `docs/case_file_knicks_2025_26.md`. The findings that matt
 **Two errors caught before commit.** (1) The next-man-up names were built by zipping a dropna'd id column against the unfiltered name column, which shifted every name after the first missing id; Hartenstein was listed as absorbing his own minutes. Minutes and all numbers were unaffected. Fixed, with an assertion that a removed player cannot gain minutes. (2) The first draft of the doc said a tighter playoff rotation "would make every loss a little larger." That was asserted, not measured, and it was wrong in direction for Minnesota. The allocator's ten-man rotations sit near their ceilings, so a removed player's minutes go mostly to the eleventh and twelfth men (Minnesota: Isaiah Evans and Trey Lyles). **Measured with the pipeline's own playoff rollup (top nine, rescaled):** Minnesota's mean loss shrinks 2.30 to 1.95, OKC's grows 2.32 to 2.52, SAS's 2.25 to 2.36. Tightening removes Minnesota's weak replacements and the contenders' strong benches, so on the playoff reading Minnesota loses the least strength per removal of the three. That is a sensitivity on net, not re-simulated title odds, and the doc says so.
 
 **Pending.** The aged basis (`python kuminga/scripts/n5_fragility.py --aged`) runs after the chain refreshes `outputs/aged/`; until then N5 carries the un-aged label.
+
+### D77. The D70 chain landed: the fixes barely move the headline and the shipping list holds at nine
+
+**Run.** Chain `chain_d70.sh`, 17:32 to 22:39 UTC, every step ok: un-aged leg (roster, rotations, strengths, sim, 200k f-curves x4, attribution, W1c, N2, M4, market, F4), full un-aged snapshot (108 files), aged leg (strengths, sim, 200k f-curves x4, pooled Shapley, slot robustness, Green, seeds, aged noise floor), full restore, W2 gate, final numbers. Comparison `d70_before_after_20260916T224006Z` against the frozen pre-fix outputs in `outputs/_before_d70/`.
+
+**Restore verified.** All 108 snapshot files are back in `outputs/` byte for byte, except `final_numbers.csv` and `w2_aging_gate.csv`, which the gate steps rewrite after the restore by design. `outputs/` equals `outputs/preaging/` (MIN consensus net -0.405, un-aged); `outputs/aged/` differs (MIN -1.750). No file committed during the run (M3, M5, N3, N4, N5) was touched.
+
+**Before and after, logged per the rule on changed figures.**
+- MIN title probability, un-aged: 1.68% [0.82, 2.57] -> **1.69% [0.82, 2.62]**.
+- MIN offseason delta: -1.26 pp [-2.13, -0.37] -> **-1.25 [-2.13, -0.33]**.
+- Shipping list (sign holds on both aging bases): **9 before, 9 after**, the same nine items (other_departures, ball_in, randle_out, reid_out, dosunmu_retained, slot A, C, D, E).
+- Un-aged noise-floor survivors: ddv_injury **added** (all four views now clear the floor, mean -0.362). It still does not ship: on the aged basis its sign is MIXED (mean -0.241).
+- Slot A mean: +0.518 -> +0.517, all positive.
+- W1c: offseason delta -0.951 -> -0.965; injury cost +1.714 -> +1.728; Williams cost +1.006 -> +1.029; interaction -1.006 -> -1.029; remainder +0.762 unchanged.
+- Market vs model, MIN: model rank 14 unchanged, model 1.68% -> 1.69%; teams off by more than the floor 20 unchanged. LAC model 0.24% -> 0.13%; BKN 0.00% unchanged.
+- N2 round-one opponents: SAS 0.261 unchanged, OKC 0.251 -> 0.249, HOU 0.193 -> 0.195.
+
+**What the fix unlocked.** M4 now has fives with two bigs and fives without Gobert (before D70 both sets were empty by construction, because Beringer was pooled as a forward).
