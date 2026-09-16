@@ -1326,3 +1326,24 @@ The aged basis was re-run at 200,000 sims with a restore step that **snapshots e
 **FIVE STILL DO NOT SHIP**, and each for a stated reason: `kuminga_in` on the pooled basis is MIXED under both; `ddv_injury` and `depth` hold an agreed sign un-aged and go MIXED aged; slot B (Lyles fills) is MIXED under both; and **the offseason delta itself goes ALL NEGATIVE to MIXED**, so "the offseason made Minnesota worse" still does not ship.
 
 **Two verdicts survived at the start of this stretch and nine survive now. The difference is simulation count, not a change of mind**, and the piece should say so in exactly those terms rather than presenting the nine as if they had always been there.
+
+### D70. The Beringer fix turned out to be two league-wide defects, and one of them was mine
+
+**Asked to fix Joan Beringer's classification. The audit found the problem was never Beringer.**
+
+**DEFECT ONE: THE POOL RULE SENT EVERY "Forward-Center" TO THE FORWARD POOL.** `pool_of` took the primary listing only. Across all 2026-27 rosters that put **Victor Wembanyama, Domantas Sabonis, Anthony Davis, Onyeka Okongwu, Daniel Gafford, Santi Aldama, Isaiah Stewart, Sandro Mamukelashvili, Zach Collins and Moritz Wagner** in the forward pool. **Detroit had zero pooled bigs; Chicago, Denver, the Lakers, Minnesota and Toronto had exactly one.** Every double-big lineup in the league was impossible to evaluate.
+
+Separately, NBA.com's roster position lists several genuine centres as plain "Forward": **Beringer, Kevon Looney, Paul Reed, Adem Bona, Oso Ighodaro, Jaylin Williams**, where Spotrac lists all of them C.
+
+**Fix, applied league-wide.** (1) Any listing containing "Center" is a big. (2) Where Spotrac lists a player C, he is treated as Center; nine players were promoted. **The override only ever adds centres**: Spotrac also lists a few genuine bigs at PF (Evan Mobley, Alex Sarr), and demoting them would recreate the defect from the other side. (3) The same rule classifies BOTH the 2026-27 pool and the historical pool shares that set each team's big budget, so the budget and the roster are measured the same way.
+
+**Result.** Pooled bigs 139 to 211. Teams with one or fewer bigs: six to **one** (Toronto). Minnesota's bigs are now **Gobert and Beringer**. Detroit's are John Collins and Paul Reed. **Minnesota's historical big share rises from 53.7 to 89.2 minutes a game**, because Naz Reid was a Forward-Center all along and is now counted, which is the double-big shape this roster is being measured against.
+
+**DEFECT TWO, AND IT WAS MINE: AN IDENTITY COLLISION IN THE ROSTER ADAPTER.** The third name key (first initial plus surname) only checked that a key was unambiguous inside the SOURCE, not that the roster name was the same person. Two 2026 rookies absent from the source hit other real players:
+
+- **Baba Miller (LAC) resolved to Brandon Miller.** The Clippers were carrying Brandon Miller's impact and **30.3 minutes a night** for a second-round rookie.
+- **Mikel Brown Jr. (BKN) resolved to Moses Brown**, a seven-foot-two centre, in place of a guard.
+
+Both also contaminated the position audit (Brandon Miller appeared to be "listed C" because his id had absorbed Baba Miller's row). **Fix:** a third-key match now requires one first name to be a prefix of the other. Nic/Nicolas, Cam/Cameron and Herb/Herbert pass; Baba/Brandon and Mikel/Moses do not. Duplicate ids on 2026-27 rosters: **one to zero.** Both rookies now take draft-slot priors (Baba Miller -0.81 at 9.8 minutes; Mikel Brown Jr. +0.08 at 18.2). Nicolas Claxton still resolves.
+
+**WHAT MOVES AND WHAT DOES NOT.** The headline allocator `allocate()` is pool-blind, so **Minnesota's projected minutes are unchanged** by the position fix. The pool fix reaches the attribution layer (pooled Shapley, the Green appendix, M4). **The identity fix reaches the headline**: it changes the Clippers' and Nets' rosters, which changes the field, which changes the f-curve and therefore every Minnesota number. The full chain and both 200k curves are being re-run for that reason, and the nine-verdict shipping list in D69 is provisional until they land.

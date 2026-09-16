@@ -72,8 +72,17 @@ POOL_BUDGET = {"guard": 0.4981, "forward": 0.3611, "big": 0.1408}
 
 
 def pool_of(position) -> str:
+    """Pool from a listed position.
+
+    ANY LISTING CONTAINING "Center" IS A BIG. The rule used to take the PRIMARY listing
+    only, so "Forward-Center" went to the forward pool. An audit of every 2026-27 roster
+    found that sent Victor Wembanyama, Domantas Sabonis, Anthony Davis, Onyeka Okongwu,
+    Daniel Gafford, Isaiah Stewart and others to forward, left Detroit with ZERO pooled
+    bigs and five teams with exactly one, and made every double-big lineup in the league
+    impossible to evaluate. A hyphenated listing that includes Center means the player
+    plays the 5, which is the only thing this pool exists to decide."""
     p = str(position or "")
-    if p.startswith("Center"):
+    if "Center" in p:
         return "big"
     if p.startswith("Guard"):
         return "guard"

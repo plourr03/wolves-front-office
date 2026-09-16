@@ -120,27 +120,51 @@ def main():
                 keep[keep.k.duplicated(keep=False)].player_name.unique())
 
         # ---- id resolution --------------------------------------------------
+        def first_name(s):
+            parts = _tokens(s)
+            return parts[0] if parts else ""
+
         def id_map(df, name_col, id_col):
             """Three keys, tried strictest first. Ambiguous keys are DROPPED rather
             than guessed: two different players sharing a first initial and surname
-            must not silently collapse into one."""
+            must not silently collapse into one. For the third key the source's first
+            name travels with the id, so resolve() can check it."""
             d = df.dropna(subset=[id_col]).copy()
             out = []
             for fn in (nkey, nkey2, nkey3):
                 d["_k"] = d[name_col].map(fn)
                 g = d.dropna(subset=["_k"]).groupby("_k")[id_col].nunique()
                 ok = set(g[g == 1].index)
-                out.append(d[d._k.isin(ok)].drop_duplicates("_k")
-                           .set_index("_k")[id_col])
+                sub = d[d._k.isin(ok)].drop_duplicates("_k").set_index("_k")
+                out.append((sub[id_col], sub[name_col].map(first_name)))
             return out
 
         def resolve(keydf, maps):
+            """THE FIRST-INITIAL KEY NEEDS CORROBORATION, because the uniqueness guard
+            above only proves a key is unambiguous INSIDE THE SOURCE. It says nothing
+            about whether the roster name is the same person. Two 2026 rookies absent
+            from the source proved it: Baba Miller resolved to Brandon Miller ("bmiller")
+            and Mikel Brown Jr. to Moses Brown ("mbrown"), so the Clippers were carrying
+            Brandon Miller's impact and 30 minutes, and Brooklyn a 7-foot-2 centre in
+            place of a guard. A third-key match is now accepted only when one first name
+            is a prefix of the other: Nic/Nicolas, Cam/Cameron and Herb/Herbert pass;
+            Baba/Brandon and Mikel/Moses do not."""
             got = pd.Series(index=keydf.index, dtype="float64")
-            for fn, m in zip((nkey, nkey2, nkey3), maps):
+            names = keydf["player_name"]
+            for i, (fn, (m, src_first)) in enumerate(zip((nkey, nkey2, nkey3), maps)):
                 miss = got.isna()
                 if not miss.any():
                     break
-                got.loc[miss] = keydf.loc[miss, "player_name"].map(fn).map(m)
+                keys = names[miss].map(fn)
+                cand = keys.map(m)
+                if i == 2:
+                    ours = names[miss].map(first_name)
+                    theirs = keys.map(src_first)
+                    ok = [(isinstance(a, str) and isinstance(b, str) and a and b
+                           and (a.startswith(b) or b.startswith(a)))
+                          for a, b in zip(ours, theirs)]
+                    cand = cand.where(pd.Series(ok, index=cand.index))
+                got.loc[miss] = cand
             return got
 
         v1 = v1.assign(k=v1.player_name.map(nkey))

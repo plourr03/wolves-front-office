@@ -310,6 +310,27 @@ def main():
         # Primary listing decides the pool: Guard-Forward is a guard, Forward-Centre a
         # forward. Rookies have no bio row, so their draft-board position is used.
         pos_by_id = bio.set_index("player_id").position.to_dict()
+
+        # SPOTRAC OVERRIDE FOR CENTRES. NBA.com's roster position is loose: it lists Joan
+        # Beringer, a seven-foot rookie, as "Forward", and the same for Kevon Looney,
+        # Paul Reed, Adem Bona, Oso Ighodaro and Jaylin Williams. Spotrac's current
+        # listing calls all of them C. Where Spotrac says C the player is treated as a
+        # Center, league-wide. The override is one-directional on purpose: it only ever
+        # ADDS centres. Spotrac also lists a few genuine bigs (Evan Mobley, Alex Sarr) at
+        # PF, and demoting them would recreate the problem this fixes from the other side.
+        # Applied to BOTH the 2026-27 pool and the historical pool shares below, so a
+        # team's big budget and its big roster are classified by the same rule.
+        _sim = pd.read_csv(SNAP)
+        _spc = set(_sim[_sim.position.astype(str).str.upper() == "C"]
+                   .nba_player_id.dropna().astype(int))
+        n_over = 0
+        for _pid in _spc:
+            cur_pos = pos_by_id.get(_pid)
+            if not (isinstance(cur_pos, str) and "Center" in cur_pos):
+                pos_by_id[_pid] = "Center"
+                n_over += 1
+        r.note(f"position source: NBA.com bio, with {n_over} players promoted to Center "
+               f"where Spotrac lists them C")
         draft_pos = {nkey(p["player"]): p.get("position", "") for p in raw["draft"]["picks"]}
         def resolve_pos(row):
             if pd.notna(row.player_id) and row.player_id in pos_by_id:
