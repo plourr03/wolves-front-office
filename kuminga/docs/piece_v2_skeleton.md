@@ -1,10 +1,10 @@
 # Piece 2 skeleton: the season preview
 
-**Status: drafted 2026-09-10 during the overnight run. Supersedes `piece_skeleton.md`.**
+**Status: restructured into eight sections. Rendered from `piece_v2_skeleton.template.md` by `render_piece.py`; every number comes from `outputs/final_numbers.csv` by key, and `reconcile_figures.py` fails if a digit reaches this page any other way.**
 
-**Labelling rule, applied to every number below.** `[observed]` means it happened and is in the data. `[composed]` means it is a real measurement re-weighted or re-combined by us. `[modeled]` means it comes out of the simulation. `[assumed]` means we chose it and the piece must say so. Every figure carries a run ID. **If a number is not on `final_numbers.csv` it does not go in the piece.**
+**Labelling rule.** `[observed]` happened and is in the data. `[composed]` is a real measurement recombined by us. `[modeled]` comes out of the simulation or an impact view. `[assumed]` is our choice and the piece says so. Run IDs for every figure are on the sheet.
 
-**Framing rule for every market comparison in this piece: never "the odds were wrong."** The market is a prior. The piece shows how good a prior it is and what information moved the winners inside it.
+**Framing rule for every market comparison: never "the odds were wrong."** The market is a prior. The piece shows how good a prior it is and what information moved the winners inside it.
 
 **Structural rule: no section ends in a verdict.** Each ends with its number and the condition that number depends on.
 
@@ -12,192 +12,221 @@
 
 ## 1. The number
 
-Minnesota's modelled title probability for 2026-27 is **1.68%**, four-view band **0.82% to 2.57%**, on the un-aged basis `[modeled, run_sim]`. On the survivorship-corrected aged basis it is **2.54%, band 1.28% to 3.71%** `[modeled, w2_aging_gate]`. **Aging helps Minnesota, because Minnesota is young**, and the piece quotes both rather than picking.
+Minnesota's modelled title probability for the season is **1.69% `[modeled, run_sim]`**, four-view band **0.82% to 2.62%**, on the un-aged basis. On the survivorship-corrected aged basis it is **2.55% `[modeled, run_sim]`**, band 1.29% to 3.73%: aging helps Minnesota because Minnesota is young, so the piece quotes both. The market says **3.16% `[observed, market_devig]`, 6th**, after removing a 21.8% overround proportionally.
 
-The market says **3.16%**, sixth in the league, after de-vigging a 21.8% overround proportionally `[observed, market_devig]`.
+**The disagreement is all-views on the primary basis, and holds in rank on both.** On the un-aged basis every one of the four views prices Minnesota below the market and ranks it in the range 13 to 16 against the market's 6th `[modeled, f4_per_view_disagreement]`; the market's number sits outside the model's whole band. On the aged basis every view still ranks Minnesota below the market (9 to 15), but 2 of the four views price it above the market's 3.16% (box 3.33%, DARKO 3.73%), so in probability the aged disagreement is **mixed** `[modeled, r5_honesty_rail_bases]`. The piece can say the model ranks Minnesota lower than the market does on both bases; it cannot say every view prices Minnesota below the market on both.
 
-**Lead with the gap, not the number.** The market's figure sits **outside** our four-view band. This is not two estimates overlapping inside their uncertainty; it is a disagreement our own spread does not cover, and the piece has to hold both numbers up rather than pick one.
+**The honesty rail.** The model and the market order the league at a rank correlation of **0.78 to 0.82** across the four views, 0.77 to 0.80 on the aged basis `[composed, market_devig, r5_honesty_rail_bases]`. They agree about the shape of the league and disagree about 20 specific teams, and **16 of those 20 are all-views**, where every view sits on the same side of the market; on the aged basis it is 15 of 17. The disagreements do not trace to a single fixable defect (F1). The four views are not independent instruments either: consensus and RAPM move together, so "all four agree" is a check that a finding does not hinge on one modelling choice, never a confidence interval.
 
-**The honesty rail, and it belongs here rather than in a footnote.**
+**The model's biggest falsifiable claim is Boston.** The model makes Boston a **17.00% `[modeled, market_devig]`** title team against a market price of **5.47%**, and it does so in every view; on the aged basis it is 13.49%, still all-views. Named, with a date: **if Boston's net rating through its 30th game, around the end of December, is below -1.5 per 100 possessions, the market's read of Boston beats the model's** `[composed, n8_watch_list]`. The model's own range for Boston is +3.5 to +9.0, and a 30-game net rating carries about 3.1 points of pure chance, so the threshold sits where chance alone would rarely put a team the model has right. The same field prices every Minnesota number, so a Boston miss is a Minnesota caveat too.
 
-**The model and the market order the league at a correlation of 0.78 to 0.80** `[modeled, f4c]`. They agree about the shape of the league and disagree about twenty specific teams, and the disagreements are **not traceable to a single defect**. Five candidate explanations were tested and all five failed: thin-sample inflation (+2.16 against +2.07, no effect), return-from-absence pricing (five players league-wide, all marginal), wrong measured 2025-26 nets (correlation 0.9994 with actual margins), missing playoff rotation concentration (wiring it in moves Boston 2nd to 2nd), and shrinkage toward league average (the prior is a box-score prior, not league average) `[f1_disagreement_diagnosis]`.
+**The 7 verdicts that ship** hold their sign on both aging bases and clear every view's noise floor on both, at 200,000 simulations per view `[modeled, w2_aging_gate, noise_floor]`. It was 9 before this pass; the change is explained below the table.
 
-**The depth-versus-stars story is dead as a number.** Correlation between a team's impact concentration and model-minus-market is **-0.065** across 30 teams `[f4c]`. And concentration does not predict playoff margin either: adding it to a series model gains **+0.039 in sample and -0.034 held out** `[f4d]`, which is what overfitting looks like. **No series adjustment is applied.**
+| verdict | un-aged, mean points of title odds | aged | sign, un-aged / aged | views clearing, un-aged, aged |
+|---|---:|---:|---|---|
+| LaMelo Ball in | +0.68 | +0.78 | all positive / all positive | 4/4, 4/4 |
+| Naz Reid out | -0.42 | -0.51 | all negative / all negative | 4/4, 4/4 |
+| DiVincenzo's Achilles (not a transaction) | -0.42 | -0.33 | all negative / all negative | 4/4, 4/4 |
+| Kuminga slot, default allocation | +0.52 | +0.58 | all positive / all positive | 4/4, 4/4 |
+| Kuminga slot, McDaniels slides | +0.50 | +0.56 | all positive / all positive | 4/4, 4/4 |
+| Kuminga slot, Beringer fills | -1.13 | -1.94 | all negative / all negative | 4/4, 4/4 |
+| Kuminga slot, tight eligibility rule | +0.50 | +0.56 | all positive / all positive | 4/4, 4/4 |
 
-**What can be said is which disagreements are the model's and which are the model arguing with itself.** Sixteen of the twenty are ALL-VIEWS, where all four forks sit on the same side of the market. Four are MIXED. **Boston is ALL-VIEWS**: every fork ranks it first or second, so it is not one instrument's artifact. **Charlotte is MIXED**: consensus and RAPM rank it fourth, box ninth and DARKO sixteenth, so most of Charlotte is a RAPM-family artifact and the piece should not defend it `[f4a]`.
+*Notes.* Two of the 7 are Minnesota's own transactions (Ball in, Reid out). One is an injury, which ships as a cost and is not a verdict on the front office. Four compare Kuminga against different internal alternatives for his minutes: positive against three of them, negative against Beringer. A view "clears" when its value is larger than its noise floor in either direction, so a verdict can clear every view and still fail on sign.
 
-**And the four views are not four independent instruments.** Consensus and RAPM correlate at **0.963** across rotation players, with a mean absolute difference of 0.42; box correlates 0.700 with consensus and has roughly half the spread (sd 1.06 against 1.85) `[f4b]`. "All four agree" is therefore closer to "two-and-a-bit agree", and it is a check that a finding does not hinge on one modelling choice, never a confidence interval.
+**What no longer ships, and why.** Until this pass the decomposition priced every combination of moves on a roster without Cody Williams, the player the Green trade brought back, and without the rule that gives new arrivals their minutes. Priced with the headline simulation's own minutes rule, its version of the actual roster sat 1.24 points of title odds from that simulation on the un-aged basis; it now sits within 0.08 on either basis, which is interpolation. The pooled rule the verdicts use spreads minutes across more of the bench by design and sits up to 0.83 below. With both corrected, 3 verdicts that shipped no longer do `[modeled, r5_shapley_williams]`:
 
-**For Minnesota, both numbers go in the piece.** Market **3.16%, rank 6**. Model **1.68%, rank 14**, and Minnesota is **ALL-VIEWS below the market**: every fork puts them 13th to 16th. The market's number sits outside our four-view band, so this is not two estimates overlapping within uncertainty.
+| verdict | un-aged, mean points of title odds | aged | sign, un-aged / aged | views clearing, un-aged, aged |
+|---|---:|---:|---|---|
+| Other departures (a bundle of seven) | +0.36 | +0.71 | mixed / all positive | 4/4, 4/4 |
+| Julius Randle out | +0.07 | +0.34 | all positive / all positive | 2/4, 4/4 |
+| Ayo Dosunmu re-signed | -0.16 | -0.22 | mixed / mixed | 3/4, 3/4 |
 
-**The rule this piece follows: it names which number it would bet on only where the four views agree.** On Minnesota they agree with each other and disagree with the market, and the piece says exactly that rather than pretending the gap away or claiming the market is wrong.
+The departures bundle is seven players; split into them, 0 ships on its own, and Kyle Anderson comes closest (+0.08 un-aged, +0.37 aged, views clearing 3/4, 4/4) `[modeled, r2_departures]`. Randle out's history of flips is in the appendix.
 
-**The number, and the condition it depends on:** 1.68% modelled against 3.16% priced, and the gap is only interpretable if you also accept that the same model has Boston first and Charlotte fifth.
-
----
-
-## 2. What the number hides
-
-The published offseason delta is **-0.951pp, ALL NEGATIVE across four views** `[modeled, w1c_decompose]`. Read alone it says the front office made the team worse. It is carrying three different things.
-
-| component | mean | band | sign |
-|---|---:|---|---|
-| published offseason delta | -0.951pp | [-1.752, -0.350] | ALL NEGATIVE |
-| what the DiVincenzo injury costs | **+1.714pp** | [+1.245, +2.889] | ALL POSITIVE |
-| what the Cody Williams minutes cost | +1.006pp | [+0.716, +1.185] | ALL POSITIVE |
-| interaction | -1.006pp | [-1.185, -0.716] | ALL NEGATIVE |
-| **remainder, the offseason itself** | **+0.762pp** | **[-0.403, +2.535]** | **MIXED** |
-
-**Once the injury and the minutes assumption come out, the offseason stops grading negative.** Three of four views think the moves helped `[modeled]`.
-
-**The interaction is the whole story and it is exactly minus the Williams figure.** That is not rounding. **Healing DiVincenzo removes Williams from the rotation by itself**: with DiVincenzo out Williams ranks tenth and plays 16.1 minutes, with him healthy Williams is eleventh and plays none. The two repairs are one repair. Anyone adding them overstates the fix by a full point.
-
-**And it is a knife edge.** Williams sits at rank score **0.3029** against Jaylen Clark's **0.3131** `[composed, build_rotations]`. A gap of **0.0101 in a percentile blend** decides sixteen minutes a night or zero, and therefore about a point of title probability. Present his minutes as a rotation coin-flip, never as a projection.
-
-**And the headline delta fails the aging gate outright.** ALL NEGATIVE un-aged at -1.261pp, **MIXED aged at -0.398pp** `[modeled, w2_aging_gate]`. Under this project's own quotability rule a verdict ships only if it holds under both bases, so **"the offseason made Minnesota worse" does not ship.** It is conditional three separate ways: on the aging basis, on Cody Williams playing 12 or more minutes, and on counting a season-ending Achilles as an offseason outcome.
-
-**The number, and the condition:** the offseason itself is +0.762pp MIXED, and the negative headline it replaces survives neither the aging gate nor the Williams range.
+**The number, and the condition:** 1.69% modelled (2.55% aged) against 3.16% priced; the model ranks Minnesota lower than the market on both bases, the gap in probability is all-views only un-aged, and it is only as trustworthy as a model that also makes Boston a 17.00% team, which December will test.
 
 ---
 
-## 3. What champions had
+## 2. What the odds get right
 
-**n = 3. Every figure in this section is a count out of three, not a rate, and must be written that way** `[observed, champions_table]`.
+**The things argued about in September are mostly unmeasurable, and the tests say so.**
 
-| season | champion | preseason | implied | rank | favourite won? |
-|---|---|---|---:|---:|---|
-| 2023-24 | Boston | +450 | 14.69% | 1 | yes |
-| 2024-25 | Oklahoma City | +675 | 10.80% | 2 | no |
-| 2025-26 | New York | +900 | 8.27% | 4 | no |
+**Style matchups.** Style interactions fixed in advance, fitted on two seasons and held out, made predictions **worse**: held-out mean absolute error rose by 0.0151 on 1,225 regular-season games and by 0.0265 on 251 postseason games `[modeled, m1_style_model]`. The San Antonio thesis could not be estimated from this data, and the series model runs without a style overlay.
 
-The favourite won **1 of 3**. The champion came from the top five **3 of 3**, and from the top four **3 of 3**. Champions' preseason implied probability ran **8.27% to 14.69%, median 10.80%**.
+**Playoff translation, and "defense travels."** Nothing tested translates. Eight candidate features, fixed before the fit, on 195 playoff series going back to the 2014 postseason: **0 of 8** add out-of-sample signal once the test allows for trying eight things at once, and that sample could detect an effect of about 0.95 to 1.15 points per game `[modeled, n3_playoff_translation]`. **"Defense travels" is not supported, and the estimate points the other way:** at equal net rating, a team whose rating leans on defense did **-0.85 points per game** in its series per standard deviation (standard error 0.34, p 0.011 against a bar of 0.0063). Its single-test interval tops out at -0.18. Earlier and recent history agree (-0.87 and -0.86), and three-point luck does not explain it (-0.77 with luck added). It misses the bar, so it changes nothing in the model.
 
-**Minnesota is priced at 3.16% and rank 6 on the market, 1.68% and rank 14 on the model.** No champion in this sample started below 8.27% or worse than rank 4.
+**Versatility.** Under the series model the piece uses, a team's swing in series odds across the contender field is net rating restated (rank correlation 1.00 outside the field) `[modeled, n4_versatility_index]`. In the games themselves, a repeatable matchup effect is worth about 0.65 points per game since the 2013-14 season and 0.00 over 34,357 games since 1997-98, with a ceiling of 1.25, worth at most 9 points of series probability in an even series `[observed]`.
 
-**The useful comparison is the team that just did it.** The 2025-26 Knicks were the cheapest champion here at 8.27%, started fourth, **finished under their own win total at 53-29, and won four rounds anyway** `[observed]`. That is the shape of the argument available to Minnesota and it is why the Knicks are a case file rather than a curiosity.
+**Individual matchups.** A pairing of thirty possessions carries a standard error of 0.14 points per matchup possession, and a team's main defender on a star normally holds him 0.05 to 0.10 below his average. Judged against that norm, 2 of 79 observed West-field matchups beat it by two standard errors, where chance alone gives about 2.3 `[observed, m3_opponent_cards]`.
 
-**The number, and the condition:** the champions' band is 8.27% to 14.69% at n = 3, and Minnesota sits outside it on both the market and the model.
+**Champions, as honest counts.** Across the 3 clean seasons the preseason favourite won **1 of 3**, and the champion came from the market's top five **3 of 3**, priced between 8.27% and 14.69% `[observed, champions_table]`. Set against the 14 top-five teams that did not win, only 3 of 20 features separate the champions: offensive rank, defensive rank and continuity. No style feature does `[observed, h1_h3_h5_profile]`.
+
+**The Knicks, the last champion.** The market had them at **8.27%, 4th, 53.5 wins**; they won 53. This project's model had them at 4.63% `[observed, h4_knicks_case_file]`. The regular season was steady: +6.33 per game, +6.16 before the break and +6.67 after. Then the playoffs were a different team: **16-3 at +14.89**, and they were the only one of 16 playoff teams whose margin improved (+8.57, against an average of -7.39; Minnesota's was -9.19). What moved was not visible in September. Their top five players missed 46 regular-season games and 2 in the playoffs; the top five's share of minutes went from 0.579 to 0.673; and the bracket broke their way.
+
+**The number, and the condition:** 0 of 8 translation features survive, and the conclusion rests on the belief that what decided last year's title (health, a shortened rotation, a bracket) was not knowable until April.
+
+---
+
+## 3. What the odds can't see, and what it means for Minnesota
+
+**Health and fragility.** Take one of Minnesota's top three players away for the playoffs and its title odds fall by **0.82 points on average, 49% of what it has** (38% aged); Oklahoma City loses 6.20 (37%) and San Antonio 5.11 (37%) `[modeled, n5_fragility]`. In strength the three lose about the same per player: **2.30, 2.32 and 2.25 points of net rating**. The contenders' loss sits in one star (Shai Gilgeous-Alexander 4.01, Victor Wembanyama 4.77); Minnesota's is spread across the three. With a tightened playoff rotation Minnesota loses the least of the three: 1.95 against 2.52 and 2.36. On the aged basis Minnesota loses 1.77 per player against 2.25 and 2.06, so the spread-not-concentrated reading holds on both bases. **Which Minnesota player is costliest to lose does not hold on both bases, and the piece does not name one.**
+
+**The rotation.** The model gives Cody Williams **16.1 minutes a night** `[assumed, build_rotations]`. He is the lowest-ranked of the ten men who play, **0.0101** behind Jaylen Clark on the rank score that orders the rotation (Williams 0.3041, Clark 0.3142) `[composed, build_rotations]`. With DiVincenzo out, both play; with DiVincenzo healthy, the man cut is Williams, and he plays none. That gap is the whole difference between 16.1 minutes and zero. **Below 12.0 minutes a night, the four views stop agreeing that the offseason made Minnesota worse** `[modeled, williams_minutes_sensitivity]`. Double-big lineups can now be evaluated: 161 of 749 legal fives use two bigs, and 294 play without Gobert `[composed, m4_lineup_study]`. Every one of the 10 best-graded fives includes Joan Beringer, whose rating rests on a rookie season of 7.9 minutes a game: **those fives are composed, not observed, and rest on a rookie sample.** Only 5 of the 749 fives have ever played together. Last season's two Gobert frontcourts were level on correct points: +3.2 with Reid and +3.3 with Randle per 100 possessions `[observed, lineup_evidence]`.
+
+**Usage.** Last season's usage does not fit on one floor. The projected top five adds up to the **87th percentile** of 7,380 league starting fives; with Kuminga in for Dosunmu it is the **96th**, and the **98th** at three-season rates. Last season's actual five was the 56th `[composed, m5_usage_accounting]`. New star pairings have cost usage, not efficiency: at the level where Edwards and Ball sit, **-1.5 points of usage (standard error 0.9) and +0.8 of true shooting**, on only 9 cases `[observed]`.
+
+**The path.** Minnesota's most likely seed is **7th (27%)**, and its chance of a top-six seed is **44%** `[modeled, seed_distribution]`. Its first-round opponent is San Antonio or Oklahoma City **51%** of the time, the two teams it beats least. It reaches the second round 28% of the time, and once there wins the title 6.0% of the time: **title equity is a first-round problem** `[modeled, n2_path]`.
+
+**The number, and the condition:** losing any one of its top three costs Minnesota about 49% of its title odds on average (38% aged), and every rotation figure above depends on Williams' 16.1 minutes surviving a coaching staff.
 
 ---
 
 ## 4. Kuminga, better and worse
 
-**The optimistic case, at its strongest.** He is 23, he cost the taxpayer mid-level, and against the player most likely to take his minutes he grades positive **under all four views, +0.174 to +0.704pp, mean +0.488** `[modeled, slot_robustness]`. That verdict is **unconditional across the entire Cody Williams minutes range**, strengthening from +0.44pp to +1.39pp as Williams plays less `[modeled, williams_minutes_sensitivity]`. It is the one claim in this project that got sturdier every time it was stress-tested.
+**Better.**
 
-**And it survives the aging gate**, the strictest test this project applies: the same ALL POSITIVE sign under both the un-aged basis (+0.488) and the survivorship-corrected aged basis (+0.615) `[modeled, w2_aging_gate]`. Nine verdicts cleared that gate and five did not. This is one of the nine.
+- **He beats the most likely internal fill for his minutes** `[modeled, slot_robustness]`: +0.52 points of title odds un-aged and +0.58 aged, positive in every view and clearing every view's floor on both bases (4/4, 4/4) at 200,000 simulations. It clears on size, not just sign.
+- **As a defender assigned to a top scorer**, he held scorers slightly below the norm: percentile 23 of 309 defenders, where low is good (-1.3 standard errors, inside the noise; 13 pairings, 711 possessions) `[observed, n6_kuminga_ledger]`.
+- **He is not a primary creator competing for Edwards' and Ball's shots:** usage 0.226 last season, below the high-usage line, with 44% of his makes unassisted (percentile 69, on 157 makes) `[observed]`.
 
-**AND THE MAGNITUDE NOW CLEARS TOO, UNDER BOTH AGING BASES.** The materiality floor was compute, not physics. A 200,000-simulation f-curve, run as four concurrent per-fork sweeps, cut Monte Carlo error by **4.82x** un-aged and **3.19x** aged, taking the worst-fork floor from **0.349pp to 0.072pp** `[modeled, noise_floor]`. Against that floor slot variant A is ALL POSITIVE with **4 of 4 views clearing on both bases**: smallest view **0.215pp un-aged and 0.182pp aged**. It survives both times.
+**Worse, or uncertain.**
 
-**Nine verdicts now hold their sign under both aging bases AND clear every view's own error bar under both** `[w2_aging_gate, noise_floor]`: the other-departures bundle, Ball in, Randle out, Reid out, Dosunmu retained, and slot variants A, C, D and E. At the start of this work two verdicts survived. **The difference is simulation count, not a change of mind.**
+- **The slot verdict depends on who the alternative was.** If Beringer took those minutes instead, the comparison runs the other way: -1.13 un-aged and -1.94 aged, and that also clears `[modeled]`.
+- **As a scorer against the defender a team assigns him**, he sits about at the norm: percentile 36 of 245 (-0.2 standard errors, 29 pairings, 1,415 possessions over three seasons; last season alone gives 3 pairings, too few) `[observed]`.
+- **Next to a non-shooting centre at Golden State**, his units were -2.1 per 100 possessions against +0.6 without one, on 5,340 and 5,672 possessions, with a three-point attempt rate of 0.430 against 0.448. The gap is inside the noise (standard error 3.5), but it is the Gobert question in miniature `[observed]`.
+- **In the playoffs, all of it pooled:** 40 games and 1,139 possessions, **on-court net -16.2**. In the 23 games with lineup data, with garbage time removed, his team was -16.0 per 100 possessions worse with him on than off (standard error 8.4). Small, and confounded by who else was on the floor, but not explained by blowouts `[observed]`.
+- **He adds to the crunch:** the projected five with him in is the 96th-percentile usage five `[composed]`.
 
-So the caveat this section carried through two drafts is now retired on the evidence rather than argued away: it read "positive under every view, and too small for one view of four to resolve", and **that was a statement about our simulation budget, not about Kuminga**. The form the tightened floor supports is simply: **positive under every view, and every view clears its own error bar.**
+**The contract, in one paragraph.** Two years from the taxpayer mid-level exception: **$6,064,000** this season and **$6,367,200** next, a player option on the second year, $12,431,200 in all; the team release disclosed no terms, so these are reported figures `[observed]`. If he opts out after one season, he has one season of service and Minnesota holds only Non-Bird rights, which cap a re-signing at **$7,276,800**. If he opts in and plays both, Minnesota holds Early Bird rights. The option model has him opting out with probability **0.50 to 0.80** across the views `[modeled, player_option]`.
 
-**The pessimistic case, at its strongest, is therefore no longer about measurement.** It is that the result is conditional on who takes the minutes. Promote Joan Beringer into the slot instead and all four views go **negative, -1.10 un-aged and -1.96 aged**, and that result also clears the tightened floor on all four. **Both the positive and the negative case are now statistically real.** Which one you get is a rotation decision, and that is the honest place for the doubt to sit.
-
-
-
-**The evidence.** Kuminga's own on/off flips sign between his two 2025-26 teams: **-6.53 at Golden State over 971 possessions, +2.90 at Atlanta over 1,077** `[observed, lineup_evidence]`. Neither is an effect at that sample. His three-point rate rose from 27.3% to 35.9% between them and his accuracy rose with it, 32.1% to 34.6%; in the playoffs the rate rose again to 40.0% and the accuracy collapsed to 20.8% `[observed]`.
-
-**The number, and the condition:** +0.488pp mean, positive under every view, conditional on the alternative being Shannon or Williams rather than Beringer, and not resolvable on one view of four.
-
----
-
-## 5. The rotation
-
-**The optimistic case.** The minutes rule now prices a player who changed teams on the rank he earns with his new team rather than the role he left, applied identically to all 30 `[assumed, rotation.MOVER_CURVE_WEIGHT = 0.8]`. Under it Kuminga rises to 25.2 minutes and Ball to 30.6, and the correlation between a mover's impact and his minutes change is **+0.774** league-wide, which is the rule working `[composed, build_rotations]`.
-
-**The pessimistic case.** The rule re-optimises **only movers**. A badly-allocated incumbent stays badly allocated, so a mover-heavy team gets a better rotation for a reason about the method rather than the roster. League-wide the mean team gain is **+0.020 net points and it correlates 0.56 with the number of movers** `[modeled]`. Minnesota gains +0.074, and **69% of that is Cody Williams alone**; the rest sits at the league mean and cancels.
-
-**The evidence.** Projected minutes: Edwards 34.8, Gobert 34.3, McDaniels 30.4, Ball 30.6, Dosunmu 25.4, Kuminga 25.2, Williams 16.1, Hyland 17.5, Clark 14.8, Beringer 10.9 `[composed]`.
-
-**The number, and the condition:** Williams at 16.1 minutes, and everything in section 2 depends on that surviving contact with a coaching staff.
+**The number, and the condition:** +0.52 points of title odds against the default fill, conditional on the alternative not being Beringer and on one season that the option may make the only one.
 
 ---
 
-## 6. The matchups
+## 5. Edwards, and why Ball is here
 
-**The optimistic case.** The postmortem found San Antonio actively suppressing Edwards' catch-and-shoot looks and pushing him into the floater zone. If style matchups are real and estimable, Minnesota's path can be read rather than guessed.
+**Edwards is the most guardable star one-on-one.** Across the league last season, the defender a team assigned to Edwards held him further under his own level than that assignment holds almost any other scorer: **percentile 1 of 150 top scorers**, -5.6 standard errors over 21 pairings `[observed, m3_primary_defender_check]`. It survives both confound checks: a baseline built only from rotation defenders (percentile 1) and dropping the playoffs (percentile 5; both together, 5). Over three seasons he is the **lowest of 245 scorers** (percentile 0, -8.6 standard errors, 72 pairings) `[observed, n6_kuminga_ledger]`.
 
-**The pessimistic case, and it is the one the data supports.** **It could not be estimated.** Five style interactions fixed in advance, fitted on 2023-25 and held out on 2025-26 and on three postseasons, made predictions **worse on both held-out samples**: MAE gain -0.0085 on 1,225 regular-season games and **-0.0395 on 251 postseason games, roughly 43 series** `[modeled, m1_style_model]`.
+**The creators.** Edwards made **61%** of his baskets unassisted (percentile 95), Ball **55%** (percentile 84), and Dosunmu 35%, at the league median of 35% `[observed, m5_usage_accounting]`.
 
-**So the overlay is off, and the piece says so plainly: the San Antonio thesis could not be estimated from this data.** Style features appear on the opponent cards as **descriptive only**.
+**The pairing base rate.** New high-usage pairings cost usage, not efficiency: adjusted for who the players were, -0.4 points of usage and -0.1 of true shooting across 34 player-seasons, and -1.5 and +0.8 at the star level where Edwards (0.309) and Ball (0.306) sit `[observed]`.
 
-The cleanest evidence of no signal is the training line: five interactions fitted on 2,455 games barely improved **the sample they were fitted on**. There was nothing to overfit, so there was nothing to transfer.
+**The argument.** If a team's assigned defender can hold Edwards this reliably, the fix is not a better Edwards but a second creator the assignment cannot also cover. That is why Ball is here, and the base rate says the pairing should cost shots, not efficiency.
 
-**The number, and the condition:** a held-out MAE gain of -0.0395 over 43 series, and the honest caveat that a real effect in one seven-game series and a stable transferable style interaction are different things this test cannot separate.
-
----
-
-## 7. Versatility
-
-**Not estimated this run.** The versatility index depends on the M2 series model, and M2 came out off. Ranking all 30 by the spread of series win probability across the contender field would inherit exactly the structure the held-out test rejected.
-
-**What can be said instead:** the seed distribution below is the real matchup exposure, and it is wide.
-
-**The number, and the condition:** deferred to `gaps_remaining.md`, conditional on a series model that survives a held-out test.
+**The number, and the condition:** percentile 1 as a scorer against his assigned defender, and the argument holds only if Ball draws that assignment often enough to loosen it.
 
 ---
 
-## 8. Fragility
+## 6. Clutch
 
-**Not estimated this run.** Removing each team's top three players for the playoffs and re-simulating is specified in N5 and was not reached.
+**In the last five minutes of a close game, everyone gets worse and more baskets come unassisted.** Across the league since the 2023-24 season, effective shooting falls from **0.544 to 0.502** and the unassisted share of makes rises from **37% to 45%** `[observed, n7_late_clock]`. Of 22 creators with enough clutch shots, **2** beat that drop by two standard errors (Derrick White +2.3, Jamal Murray +2.0), where chance alone gives about 1.0. Edwards shot 0.546 on 306 clutch attempts (+1.3 standard errors beyond the drop) and Ball 0.460 on 100 (-0.1): **both inside the noise.**
 
-**What is already known and belongs here:** Minnesota is currently playing without the man who led its 2025-26 RAPM sample, and section 2 prices that at **+1.714pp of title probability, ALL POSITIVE across four views** `[modeled]`. The fragility question has already been answered once this year, involuntarily.
+*Late clock, withheld.* Play-by-play does not record the shot clock, and the reconstruction read within two seconds of zero at recorded violations only 79.9% of the time against a bar of 80% set in advance, so no late-clock split is published.
 
-**The number, and the condition:** +1.714pp for one player's availability, conditional on the R7 reading that he misses the regular season entirely.
-
----
-
-## 9. Mouths to feed
-
-**The optimistic case.** Ball, Edwards, Kuminga and Dosunmu is a lot of shot creation for a team that lacked a secondary creator, which this project's own earlier work named as the missing piece.
-
-**The pessimistic case.** Four players who need the ball, one of whom is on a two-year deal with an opt-out and a stated plan to reach free agency, and a centre whose roll volume already fell 41%.
-
-**Not estimated this run.** The usage accounting in M5 (projected-unit usage sums against the league starting-five distribution, three-season base rates for high-usage pairings, assisted and unassisted shares) was not reached.
-
-**The number, and the condition:** deferred, conditional on the play-by-play pull in M5.
+**The number, and the condition:** 2 of 22 creators beat the clutch drop, about what chance gives.
 
 ---
 
-## 10. What to watch
+## 7. What to watch
 
-Five falsifiable claims, each with a metric, a current value and the threshold that flips it. **This list is provisional because N8 was not completed; these are the four that fall out of work that was.**
+Five claims, each checked at a team's 20th game, late November `[composed, n8_watch_list]`.
 
-1. **Cody Williams' minutes.** Current projection 16.1 `[assumed]`. **Below 8 a night and the offseason verdict flips from ALL NEGATIVE to MIXED** `[modeled]`. This is the single highest-leverage number in the preview.
-2. **DiVincenzo's availability.** Currently 0 games `[observed, R7]`. Any real return is worth up to +1.714pp, and it removes Williams from the rotation as a side effect.
-3. **Minnesota's top-six finish.** Modelled at 0.44, band 0.22 to 0.67 `[modeled]`. The modal seed is 7th at 0.269, barely ahead of 6th at 0.252.
-4. **The Boston check on our own model.** If Boston is not a top-two team by January, the model's league-wide ordering is wrong in a way that also touches Minnesota's number.
+| claim | now | flips if |
+|---|---|---|
+| Cody Williams' minutes decide whether the offseason verdict holds | 16.1 a night (model default) | **below 12.0 a night** |
+| Minnesota's level is inside the model's range | model range -1.7 to +1.8 (four views, both aging bases) | **above +7.5 or below -7.5** |
+| The model's two largest disagreements with the market | BOS: model 17.0% title odds vs market 5.5%, model net range +3.5 to +9.0. SAS: model 13.9% vs market 23.0%, range +4.1 to +8.1 | **BOS below -2.2; SAS above +13.8** |
+| The Edwards-Ball pairing costs usage, not efficiency | 2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons) | **Edwards below 0.547, or Ball below 0.476** |
+| Minnesota is not on a champion's path | projected rank 15 (un-aged) / 14 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2 | **3 or better (test); 11 or better (checkpoint)** |
 
-**The number, and the condition:** eight minutes of Cody Williams is the threshold that moves the headline, and it depends on a rotation decision no one has made yet.
-
----
-
-## 11. The bill
-
-The signing is **official**; Kuminga wears No. 24; **the team release discloses no terms**, so every dollar here is reported rather than club-confirmed `[observed, p0_lock_official]`.
-
-Two years, **$6,064,000 then $6,367,200**, total **$12,431,200**, player option on year two, taxpayer mid-level exception. Year one is corroborated from outside the reporting: Spotrac carried it at the taxpayer exception to the dollar. Two outlets say roughly $13.0M instead, a $568,800 difference that changes no legality question and is flagged rather than resolved.
-
-**The chain, which closes to the dollar** `[observed, green_resolution]`: $217,621,829, minus Green's $14,679,012, plus Williams and Konchar at $12,180,600, minus $4,110,000 for stretching Konchar, minus $1 for the McDaniels penny, equals **$211,013,416**. Add Kuminga and it is **$217,077,416**, which is **$4,608,584 under the hard cap** and **$8,062,416 over the first apron**.
-
-Spotrac publishes three separately-computed figures for Minnesota and **all three agree with ours at zero difference**.
-
-**What the Green dump cost: no pick and no swap, either direction.** Cash, plus $2,055,000 a year of dead money for three seasons, $4,110,000 of it landing in 2027-28 and 2028-29. Against that they hold Cody Williams, the tenth pick in 2024, with a 2027-28 club option.
-
-**And the part that is expensive is not the part people will blame.** Re-signing Dosunmu did not cost real money: the cheapest legal version of the forced move and the no-Dosunmu counterfactual sit within $1.7M of each other. **Taking Williams and Konchar back instead of a minimum body cost $6,712,836 of payroll and roughly $14.6M more tax**, because it crosses into the 3.50 bracket. Roughly $20M all in, for one season of a 22-year-old who has not been good yet.
-
-**The number, and the condition:** $4,608,584 of hard-cap room for the whole league year, and it is only enough for one minimum addition if nothing goes wrong.
+**The number, and the condition:** 12.0 minutes of Cody Williams is the threshold that moves the headline verdict, and it depends on a rotation decision no one has made yet.
 
 ---
 
-## Appendix: what this preview could not estimate
+## 8. The bill
 
-Carried here rather than left implicit. Full detail in `gaps_remaining.md`.
+**The cap chain closes to the dollar** `[observed, green_resolution]`: $217,621,829, minus Green's $14,679,012, plus Williams at $6,015,600 and Konchar at $6,165,000, minus $4,110,000 for stretching Konchar, minus $1 for the McDaniels rounding, equals **$211,013,416**. Add Kuminga's $6,064,000 and it is **$217,077,416**: **$4,608,584 under the hard cap** and **$8,062,416 over the first apron**.
 
-- **The style overlay** (M2), tested and rejected on held-out data.
-- **Opponent cards** (M3), **lineup study** (M4), **usage accounting** (M5).
-- **Playoff translation** (N3), **versatility index** (N4), **fragility** (N5), **late-clock splits** (N7).
-- **Most of the champions column list** (H1): net-rating ranks, seeds, playoff net rating, continuity, health. Basketball-Reference returned 403 directly and its proxy is rate-limited on that domain.
-- **Seasons before 2023-24** in the champions table, which need a B-Ref page or a paste.
-- **Minutes-weighted size** as a style feature: no height or minutes column on the warehouse bio table.
+**What the Green dump cost: no pick and no swap, either direction.** Cash, and $2,055,000 a year of Konchar dead money for three seasons, $4,110,000 of it landing in the two seasons after this one `[observed, green_asset_cost]`. Minnesota holds Cody Williams in return, with a club option of $7,669,890.
+
+**Dosunmu forced the dump, not the acquisition.** With Dosunmu, Green and Kuminga all on the books Minnesota was **$1,999,829 over the hard cap**, so something had to go. But the cheapest legal version of that move, a minimum player instead of Williams and Konchar, left Minnesota at $210,364,580 and about $8.7M of tax; what happened left it at $217,077,416 and about $23.3M. **Taking Williams and Konchar back cost $6,712,836 of payroll and about $14.6M more tax** `[observed, dosunmu_final_states]`. Not re-signing Dosunmu at all would have kept Green, added a minimum guard, and let Minnesota pay Kuminga up to $8,254,095 from the non-taxpayer mid-level, landing exactly on the first apron with about $7.0M of tax.
+
+**The option.** $6,064,000 now, $6,367,200 next season at his choice, and a Non-Bird ceiling of $7,276,800 if he leaves after one.
+
+**The number, and the condition:** $4,608,584 of hard-cap room for the whole league year, enough for one minimum addition if nothing goes wrong.
+
+---
+
+## Appendix
+
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which misattribute baskets and have not been re-checked outside this project (D84).
+
+**Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
+
+| player | possessions | consensus | RAPM | box | DARKO |
+|---|---:|---:|---:|---:|---:|
+| Derrick White (BOS) | 34,187 | +4.50 | +4.52 | +1.59 | +2.00 |
+| Jayson Tatum (BOS) | 27,912 | +4.32 | +4.06 | +1.81 | +4.00 |
+| Neemias Queta (BOS) | 12,078 | +4.52 | +4.97 | +1.61 | +2.00 |
+| Payton Pritchard (BOS) | 28,044 | +2.75 | +3.08 | +0.86 | +1.00 |
+| Paul George (BOS) | 22,107 | +2.69 | +2.54 | +0.91 | +1.00 |
+| Mitchell Robinson (BOS) | 11,805 | +2.88 | +2.50 | +1.55 | +3.00 |
+| Moussa Diabate (CHA) | 10,786 | +6.29 | +6.29 | +0.51 | +1.00 |
+| Kon Knueppel (CHA) | 10,074 | +3.70 | +4.10 | +0.90 | +0.00 |
+| Naz Reid (CHA) | 29,463 | +3.15 | +3.27 | +0.87 | +1.00 |
+| Cade Cunningham (DET) | 30,366 | +3.63 | +3.34 | +0.99 | +4.00 |
+| Ausar Thompson (DET) | 21,715 | +3.39 | +3.57 | +1.13 | +1.00 |
+| Paul Reed (DET) | 11,888 | +3.82 | +3.67 | +2.57 | +2.00 |
+| Javonte Green (DET) | 12,133 | +2.41 | +2.56 | +0.95 | +1.00 |
+| Amen Thompson (HOU) | 28,927 | +3.48 | +3.11 | +1.09 | +1.00 |
+| Alperen Sengun (HOU) | 29,974 | +2.37 | +2.37 | +1.45 | +2.00 |
+| Tari Eason (HOU) | 15,866 | +3.08 | +3.68 | +1.38 | +2.00 |
+| Steven Adams (HOU) | 7,157 | +3.22 | +4.20 | +0.20 | +2.00 |
+| Marcus Smart (HOU) | 13,546 | +2.27 | +3.27 | -0.17 | +1.00 |
+| Kevin Durant (HOU) | 32,027 | +1.78 | +1.02 | +1.06 | +3.00 |
+| Pascal Siakam (IND) | 34,405 | +3.22 | +3.75 | +1.23 | +1.00 |
+| Ivica Zubac (IND) | 24,588 | +2.74 | +2.61 | +0.67 | +2.00 |
+| Karl-Anthony Towns (NYK) | 33,296 | +3.85 | +3.86 | +1.20 | +3.00 |
+| Jalen Brunson (NYK) | 36,515 | +2.70 | +2.75 | +1.15 | +3.00 |
+| OG Anunoby (NYK) | 32,031 | +2.65 | +2.80 | +0.58 | +4.00 |
+| Miles McBride (NYK) | 18,664 | +3.03 | +3.84 | +0.13 | +1.00 |
+| Josh Hart (NYK) | 35,827 | +2.13 | +1.64 | -0.04 | +0.00 |
+| Shai Gilgeous-Alexander (OKC) | 37,420 | +7.54 | +6.82 | +4.22 | +6.00 |
+| Chet Holmgren (OKC) | 30,933 | +4.82 | +4.78 | +2.50 | +5.00 |
+| Isaiah Hartenstein (OKC) | 24,440 | +4.74 | +4.69 | +1.36 | +3.00 |
+| Jalen Williams (OKC) | 24,660 | +2.78 | +1.92 | +1.65 | +2.00 |
+| Alex Caruso (OKC) | 21,281 | +4.26 | +4.22 | +1.90 | +2.00 |
+| Ajay Mitchell (OKC) | 9,940 | +2.81 | +2.94 | +0.83 | +1.00 |
+| Jaylin Williams (OKC) | 9,600 | +2.63 | +1.72 | +1.76 | +1.00 |
+| Joel Embiid (PHI) | 14,567 | +4.70 | +3.56 | +2.58 | +4.00 |
+| Tyrese Maxey (PHI) | 31,485 | +2.69 | +2.31 | +1.69 | +3.00 |
+| Dean Wade (PHI) | 16,627 | +3.73 | +4.72 | +0.24 | +1.00 |
+| LeBron James (PHI) | 28,286 | +2.77 | +1.27 | +1.52 | +2.00 |
+| Victor Wembanyama (SAS) | 24,823 | +9.05 | +8.88 | +4.85 | +6.00 |
+| Dylan Harper (SAS) | 8,520 | +3.58 | +4.15 | +0.91 | +1.00 |
+| Tobias Harris (SAS) | 29,161 | +2.68 | +3.02 | +0.24 | +1.00 |
+| Luke Kornet (SAS) | 17,657 | +3.84 | +3.52 | +1.74 | +1.00 |
+| De'Aaron Fox (SAS) | 31,481 | +2.34 | +2.39 | +1.42 | +2.00 |
+| Julian Champagnie (SAS) | 24,840 | +1.96 | +2.54 | +0.65 | +2.00 |
+| Kawhi Leonard (TOR) | 23,329 | +5.95 | +5.94 | +2.48 | +6.00 |
+| Scottie Barnes (TOR) | 28,956 | +2.82 | +1.82 | +1.71 | +2.00 |
+| Immanuel Quickley (TOR) | 20,531 | +1.59 | +1.14 | +1.31 | +1.00 |
+
+**The market against each view, for the largest disagreements and Minnesota** (title odds) `[modeled]`:
+
+| team | market | consensus | RAPM | box | DARKO | views |
+|---|---:|---:|---:|---:|---:|---|
+| MIN | 3.16% | 0.82% | 1.20% | 2.11% | 2.62% | ALL-VIEWS |
+| HOU | 1.61% | 5.03% | 5.09% | 5.27% | 6.41% | ALL-VIEWS |
+| DET | 3.16% | 5.02% | 5.17% | 10.48% | 11.76% | ALL-VIEWS |
+| CHA | 0.81% | 8.21% | 9.44% | 5.20% | 0.58% | MIXED |
+| OKC | 22.49% | 16.31% | 15.05% | 17.58% | 17.92% | ALL-VIEWS |
+| SAS | 22.96% | 16.15% | 17.52% | 9.77% | 12.12% | ALL-VIEWS |
+| PHI | 8.42% | 3.62% | 2.78% | 0.53% | 3.01% | ALL-VIEWS |
+| NYK | 8.21% | 3.71% | 3.86% | 6.08% | 3.59% | ALL-VIEWS |
+| BOS | 5.47% | 19.28% | 20.49% | 13.27% | 14.94% | ALL-VIEWS |
+
+**Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is -1.25 points un-aged and all-negative, but -0.39 and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is -0.965: take out the DiVincenzo injury (+1.728) and the Williams minutes (+1.029), which overlap completely (-1.029, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **+0.762**, mixed across views `[modeled, w1c_decompose]`.
+
+**Randle out's flip history.** All-positive under the first minutes rules (D29). Mixed once the slot-aware allocator arrived, and it lost its quotable label (D31). All-positive again on the aged basis, when it was still held back as unstable (D52). All-positive on team-rank curve indexing, which became primary (D60). It has held its sign on both aging bases since the aging gate (D65), cleared every floor at full simulation count (D69), survived the D70 fixes (D77) and the departures split (D81). **It stopped shipping at D85**, when Cody Williams entered every coalition and new arrivals got their minutes by the headline's rule: +0.07 un-aged, +0.34 aged, views clearing 2/4, 4/4. Under the headline's team-rank allocator it turns negative un-aged, so its sign is not stable either.

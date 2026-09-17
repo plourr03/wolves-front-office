@@ -103,26 +103,46 @@ Recorded per the autonomy rule: failures go here and the run moves on.
 
 **BLOCKED ON AN EXTERNAL SOURCE**
 
-- **H1 champion feature columns.** Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity (returning minutes share), top-8 playoff health, ORtg and DRtg ranks. Basketball-Reference returns **403 to direct requests**, and the `r.jina.ai` proxy is **rate-limited on that entire domain until 2026-09-10 04:14 GMT** ("Anonymous access blocked ... DDoS attack suspected"). The warehouse cannot substitute: `nba_team_advanced_stats` is GAME level and has no season key, so every one of those columns needs a season aggregation that does not exist yet. **Not guessed.** Retry the B-Ref preseason-odds and team-summary pages after the block lifts.
+- ~~**H1 champion feature columns.**~~ **CLOSED 2026-09-17 (R6, D83)** for the three clean seasons, via Basketball-Reference snapshots frozen in `data/bref/`; the pre-playoff odds and odds-history columns stay open for a pasted source. Original entry: Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity (returning minutes share), top-8 playoff health, ORtg and DRtg ranks. Basketball-Reference returns **403 to direct requests**, and the `r.jina.ai` proxy is **rate-limited on that entire domain until 2026-09-10 04:14 GMT** ("Anonymous access blocked ... DDoS attack suspected"). The warehouse cannot substitute: `nba_team_advanced_stats` is GAME level and has no season key, so every one of those columns needs a season aggregation that does not exist yet. **Not guessed.** Retry the B-Ref preseason-odds and team-summary pages after the block lifts.
 - **Champions table before 2023-24.** The project holds clean 30-team preseason odds for exactly three seasons. Extending back needs `basketball-reference.com/leagues/NBA_{year}_preseason_odds.html` (published, citable, courtesy sportsoddshistory.com) or a paste. **sportsbettingdime.com was found and rejected**: its past-seasons table names San Antonio as the 2026 champion when New York won 4-1. A source that misstates a champion is not usable for its odds either.
 
 **BLOCKED ON MISSING WAREHOUSE COLUMNS**
 
 - ~~**Minutes-weighted size** as an M1 style feature.~~ **CLOSED 2026-09-10, and the gap was my error, not the warehouse's.** I queried for `height_inches`; the column is **`player_height_inches`**, and it is fully populated (572, 569 and 582 non-null rows across the three seasons). Size is now in the feature set, weighted by games played because the table carries `gp` and no minutes column. **Re-tested: the held-out gain does NOT change sign.** With size and the two originally-planned interactions restored (rim against size, offensive rebounding against size), held-out MAE gains are **-0.0151 on 2025-26 games and -0.0265 on the postseasons**, against -0.0085 and -0.0395 without it. The overlay stays off. **The lesson is about the gap, not the feature: a null result from a query I wrote is evidence about my query first and the data second.**
-- **N2 opponent distribution by seed.** `run_sim` does not persist the simulator's `matchups` block, so the expected first-round and second-round opponent distribution cannot be read off the existing run. The seed distribution itself IS available and is in the skeleton. Fix is one line in `run_sim` plus a re-run.
+- ~~**N2 opponent distribution by seed.**~~ **CLOSED** (N2 path: modal seed, first-round opponent mix, title equity conditional on reaching the second round, all on the sheet). Original entry: `run_sim` does not persist the simulator's `matchups` block, so the expected first-round and second-round opponent distribution cannot be read off the existing run. The seed distribution itself IS available and is in the skeleton. Fix is one line in `run_sim` plus a re-run.
 
-**NOT REACHED, in priority order for the next session**
+**NOT REACHED at the time, ALL NOW DONE (status 2026-09-17)**
 
-- **M3** opponent cards for the West field. Unblocked in principle: M2 came out OFF, so the cards use net-rating series odds with style features descriptive only, exactly as the brief specifies.
-- **M4** Minnesota lineup study, **M5** usage accounting.
-- **N3** playoff translation, **N4** versatility index, **N5** fragility, **N7** late-clock and late-and-close splits.
-- **H3** separation, **H4** case files, **H5** Minnesota scored on the champion sheet. H4's Knicks case is the highest-value of these: the cheapest champion in the sample, fourth in the preseason market, finished UNDER its own win total and won four rounds.
-- **N8** full watch list. Four of the five claims are drafted in the skeleton from work that did complete.
+- ~~**M3** opponent cards~~ done. ~~**M4** lineup study~~ done, post-fix numbers (D84). ~~**M5** usage accounting~~ done, in sections 3 and 5.
+- ~~**N3** playoff translation~~ done. ~~**N4** versatility index~~ done. ~~**N5** fragility~~ done. ~~**N7** clutch~~ done; **the late-clock split is WITHHELD** (reconstruction 79.9% against an 80% bar set in advance).
+- ~~**H3** separation, **H4** case files, **H5** Minnesota on the champion sheet~~ done (D83, and the Knicks file in section 2).
+- ~~**N8** full watch list~~ done, with a December game-30 checkpoint for Boston added in R4.
 
 **RUN BUT NOT YET FOLDED IN**
 
-- **The 200k-sim run.** Not launched. `build_fcurve` costs roughly 28 minutes at 20,000 sims per fork per seed, so 200,000 is a four-to-five hour job that would have consumed the whole night and blocked everything above it. **Judgement call: the aged pipeline was run first because it is a quotability gate, and the 200k is a precision improvement to a floor that is already not the binding constraint on most verdicts.** Logged in decisions.md.
+- ~~**The 200k-sim run.**~~ **DONE**: every f-curve view is at 200,000 simulations and the floors are computed from it. Original entry: Not launched. `build_fcurve` costs roughly 28 minutes at 20,000 sims per fork per seed, so 200,000 is a four-to-five hour job that would have consumed the whole night and blocked everything above it. **Judgement call: the aged pipeline was run first because it is a quotability gate, and the 200k is a precision improvement to a floor that is already not the binding constraint on most verdicts.** Logged in decisions.md.
 
 **A STANDING RISK, not a gap**
 
 - The roster book remains **single-sourced to Spotrac**. The dollar gates are parse-fidelity tests, not independent-truth tests. Unchanged from D56.
+
+
+## 15. After the restructure and consistency pass of 2026-09-17: what is still open
+
+**WITHHELD, by rule**
+
+- **Late-clock split.** Play-by-play has no shot clock; the reconstruction read within two seconds of zero at recorded violations 79.9% of the time against a bar of 80% fixed in advance. One methods sentence in section 6. Clutch ships.
+
+**OPEN, awaiting a source**
+
+- **Pre-playoff odds and every odds-history column before the clean seasons** (H1). Left blank in `h1_champion_sheet.csv` for a pasted source; B-Ref's preseason-odds pages are the citable route.
+
+**FLAGGED, not fixed**
+
+- **The shared stint pipeline's point columns** (`postmortem/lib/lineup_aggregation.py`) credit possession points to the tracked offense and misattribute about 3.4% of points. This project rebuilds points from made shots (D82, D84). Any other project that reads those columns is exposed; not changed here because the library is shared.
+- **The attribution allocator is a choice the shipping list depends on** (D85). Under the pooled rule the piece uses, Ball in, Reid out and the DiVincenzo injury ship. Under the team-rank allocator the headline simulation uses, the same three ship and depth ships too, while Randle out turns negative un-aged. The piece quotes the pooled rule (S1, W1b) and says Randle out's sign is not stable.
+- **Duplicate run ID.** Two `noise_floor` runs started in the same second on 2026-09-17 (`noise_floor_20260917T141326Z`, un-aged and aged). Both superseded by later runs with distinct IDs; `runlog` has no collision guard.
+
+**A STANDING RISK, unchanged**
+
+- The roster book is single-sourced to Spotrac (D56).

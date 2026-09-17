@@ -28,7 +28,8 @@ be labelled "let the free agents walk", never "did nothing".
 COLLISION 2: the actual-roster band is 1.67-3.83 in one place and 1.71-3.77 in
 another. The first is the direct simulation; the second is the f-curve interpolation
 used to price coalitions cheaply. The rosters are identical (verified), so the gap is
-purely interpolation plus Monte Carlo noise. The DIRECT SIM is canonical because it is
+purely interpolation plus Monte Carlo noise. D85: that stopped being true when Cody
+Williams joined the simulated roster and not the Shapley one; the check is now a gate. The DIRECT SIM is canonical because it is
 simulated at higher precision (5 seeds x 20,000 vs 3 x 10,000) and on a continuous net
 rather than a 0.5-wide grid.
 
@@ -37,6 +38,7 @@ rather than a 0.5-wide grid.
 from __future__ import annotations
 
 import os
+import re
 import sys
 
 import numpy as np
@@ -89,7 +91,9 @@ def main():
             "the current roster, Green removed per R3",
             "run_sim.py (direct simulation)", True,
             {f: mn.loc[f, "title_current"] * 100 for f in FORKS},
-            "CANONICAL. Band 1.67 to 3.83.")
+            "CANONICAL. Band %.2f to %.2f." % (
+                min(mn.loc[f, "title_current"] * 100 for f in FORKS),
+                max(mn.loc[f, "title_current"] * 100 for f in FORKS)))
 
         add("Minnesota after the offseason (f-curve)",
             "the same roster, priced by interpolation",
@@ -108,6 +112,14 @@ def main():
         r.note(f"f-curve interpolation error vs direct sim, per fork: "
                + ", ".join(f"{f}={e:+.3f}pp" for f, e in zip(FORKS, err)))
         r.note(f"  max |error| = {np.abs(err).max():.3f}pp")
+        # D85: this gap was 1.24pp for weeks and was read as interpolation. It was the
+        # attribution roster missing a player. Interpolation alone is under 0.1pp, so a
+        # gap above the limit means the two rosters differ, and that is fatal.
+        C1_LIMIT = 0.15
+        if np.abs(err).max() > C1_LIMIT:
+            raise RuntimeError("C1 failed: f-curve pricing of the actual roster is %.3fpp from the "
+                               "direct simulation (limit %.2f). The Shapley grand coalition is not "
+                               "the simulated roster." % (np.abs(err).max(), C1_LIMIT))
 
         base_r6 = np.array([mn.loc[f, "title_baseline"] * 100 for f in FORKS])
         base_sh = np.array([named.loc["did_nothing", f] for f in FORKS])
@@ -133,6 +145,60 @@ def main():
 
         r.output(OUT, rows=len(df))
         r.output(OUT_MD)
+
+        # ---- C2: the skeleton gate ---------------------------------------------------
+        # Every figure the piece quotes must be on the final numbers sheet with a run ID.
+        # The skeleton and the morning report are rendered from templates by sheet key, so
+        # the test is: (1) every key used exists and carries a run ID, (2) the MASKED
+        # render (values replaced by a sentinel) contains no digit outside a short
+        # allowlist, and (3) no retracted or superseded figure survives in the text.
+        sheet = pd.read_csv(os.path.join(OUTDIR, "final_numbers.csv"), dtype=str).set_index("key")
+        used = pd.read_csv(os.path.join(OUTDIR, "render_keys_used.csv")).key
+        no_run = [k for k in used if not str(sheet.loc[k, "run_id"]).strip() or
+                  str(sheet.loc[k, "run_id"]) in ("nan", "n/a")]
+        allow = [r"^#+\s*\d+\.", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
+                 r"`[^`]*`", r"\u27e6\u27e7", r"\b[Pp]iece 2\b", r"\bsections? \d\b"]
+        retracted = ["6.53", "+2.90", "+6.83", "twice as good", "below 8 a night",
+                     "Shannon fills", "0.3029", "0.3131", "+1.253", "+1.714", "1.68%",
+                     "+0.488", "Not estimated this run", "not reached", "2.54%", "0.78 to 0.80",
+                     # D85
+                     "ships because of one player", "clears on his own", "a bundle of 7",
+                     "fails it when the bundle is split", "ships on one player",
+                     "The disagreement is all-views, so it is real"]
+        report = []
+        for doc in ("piece_v2_skeleton.md", "morning_report_v2.md"):
+            masked = open(os.path.join(OUTDIR, doc.replace(".md", ".masked.md")),
+                          encoding="utf-8").read()
+            strays = []
+            for i, line in enumerate(masked.splitlines(), 1):
+                clean = line
+                for pat in allow:
+                    clean = re.sub(pat, " ", clean)
+                for m in re.finditer(r"\d", clean):
+                    strays.append("%s:%d: %s" % (doc, i, line.strip()[:120]))
+                    break
+            rendered = open(os.path.join(REPO, "kuminga", "docs", doc), encoding="utf-8").read()
+            stale = [s for s in retracted if s in rendered]
+            report.append(dict(document=doc, stray_digit_lines=len(strays),
+                               stale_figures=len(stale), stale="; ".join(stale)))
+            for s in strays:
+                r.note("STRAY DIGIT %s" % s)
+            for s in stale:
+                r.note("STALE FIGURE in %s: %s" % (doc, s))
+        skel = open(os.path.join(REPO, "kuminga", "docs", "piece_v2_skeleton.md"), encoding="utf-8").read()
+        must = {"headline title odds": sheet.loc["title", "value"],
+                "Williams threshold": sheet.loc["williams_threshold", "value"]}
+        missing = [k for k, v in must.items() if v not in skel]
+        rep = pd.DataFrame(report)
+        rep.to_csv(os.path.join(OUTDIR, "reconcile_skeleton.csv"), index=False)
+        r.note("C2: %d sheet keys used, %d without a run ID; stray digits %s; stale figures %s; "
+               "required figures missing %s" % (len(used), len(no_run),
+                                                dict(zip(rep.document, rep.stray_digit_lines)),
+                                                dict(zip(rep.document, rep.stale_figures)), missing))
+        if no_run or rep.stray_digit_lines.sum() or rep.stale_figures.sum() or missing:
+            raise RuntimeError("C2 failed: the skeleton quotes a figure that is not on the sheet, "
+                               "or carries a retracted one")
+        r.output(os.path.join(OUTDIR, "reconcile_skeleton.csv"), rows=len(rep))
 
     print()
     print(df[["label", "canonical"] + FORKS + ["mean", "lo", "hi"]].round(2).to_string(index=False))

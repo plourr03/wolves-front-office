@@ -57,6 +57,7 @@ OUT_MD = os.path.join(REPO, "kuminga", "docs", "n8_watch_list.md")
 
 FORKS = ["consensus", "rapm", "box", "darko"]
 N_CHECK = 20
+N_DEC = 30                # the December checkpoint: a team's thirtieth game, around 31 Dec
 Z = 1.645                 # one-sided 5%
 NOISE_SEASONS = range(2013, 2026)
 CHAMP_SEASONS = range(1997, 2026)
@@ -160,6 +161,17 @@ def main():
         sd_game = float((g2.pp100 - g2.lvl).std())
         sig20_b = sd_game / np.sqrt(N_CHECK)
         SIG = max(sig20, sig20_b)
+        # the December checkpoint, same construction at 30 games
+        per30 = []
+        for (s, t_), d in g.groupby(["season", "team"]):
+            if len(d) < N_DEC + 20:
+                continue
+            per30.append(dict(first=net100(d[d.k <= N_DEC]), rest=net100(d[d.k > N_DEC]),
+                              n_rest=int((d.k > N_DEC).sum())))
+        per30 = pd.DataFrame(per30)
+        sig30 = float(np.sqrt((per30["first"] - per30.rest).var() * per30.n_rest.mean()
+                              / (N_DEC + per30.n_rest.mean())))
+        SIG30 = max(sig30, sd_game / np.sqrt(N_DEC))
         r.note("noise, 20-game net rating per 100: split-season %.2f (from %d team-seasons), "
                "game-level %.2f; using %.2f" % (sig20, len(per), sig20_b, SIG))
 
@@ -192,6 +204,22 @@ def main():
         up, down = m.gap.idxmax(), m.gap.idxmin()
         ulo, uhi, _, _ = model_range(up)
         dlo, dhi, _, _ = model_range(down)
+        dec = pd.DataFrame([dict(checkpoint="December (game %d)" % N_DEC, n_games=N_DEC,
+                                 noise=SIG30, team=up, direction="model above market",
+                                 model_title=100 * m.loc[up, "model_mean"],
+                                 market_title=100 * m.loc[up, "market_prop"],
+                                 range_lo=ulo, range_hi=uhi, threshold=ulo - Z * SIG30,
+                                 flips_if="net rating per 100 below"),
+                            dict(checkpoint="December (game %d)" % N_DEC, n_games=N_DEC,
+                                 noise=SIG30, team=down, direction="model below market",
+                                 model_title=100 * m.loc[down, "model_mean"],
+                                 market_title=100 * m.loc[down, "market_prop"],
+                                 range_lo=dlo, range_hi=dhi, threshold=dhi + Z * SIG30,
+                                 flips_if="net rating per 100 above")])
+        dec.to_csv(OUT.replace(".csv", "_december.csv"), index=False)
+        r.note("December checkpoint (game %d): noise %.2f per 100; %s flips below %+.1f, %s "
+               "above %+.1f" % (N_DEC, SIG30, up, ulo - Z * SIG30, down, dhi + Z * SIG30))
+        r.output(OUT.replace(".csv", "_december.csv"), rows=len(dec))
         r.note("3. largest model-market gaps: %s model %.1f%% vs market %.1f%%; %s model %.1f%% "
                "vs market %.1f%%" % (up, 100 * m.loc[up, "model_mean"],
                                     100 * m.loc[up, "market_prop"], down,
@@ -259,8 +287,8 @@ def main():
             n=4, claim="The Edwards-Ball pairing costs usage, not efficiency",
             metric="True shooting, first %d games, Anthony Edwards and LaMelo Ball" % N_CHECK,
             label="observed base rate, measured noise",
-            current=("2025-26 true shooting: Edwards %.3f, Ball %.3f. Base rate for a new "
-                     "high-usage pairing: %+.1f points of true shooting (%d player-seasons)"
+            current=("2025-26 true shooting: Edwards %.3f, Ball %.3f. Unadjusted base rate for a "
+                     "new high-usage pairing: %+.1f points of true shooting (%d player-seasons)"
                      % (c26.loc["Anthony Edwards", "ts_2025_26"],
                         c26.loc["LaMelo Ball", "ts_2025_26"], 100 * mean_dts, len(tr))),
             threshold="Edwards below %.3f, or Ball below %.3f" % (thr["Anthony Edwards"],

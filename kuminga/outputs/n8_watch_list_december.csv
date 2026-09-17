@@ -1,0 +1,3 @@
+checkpoint,n_games,noise,team,direction,model_title,market_title,range_lo,range_hi,threshold,flips_if
+December (game 30),30,3.0620132898441685,BOS,model above market,16.995250000000002,5.4714524138022895,3.5167304965035817,8.989680389804645,-1.5202813652900757,net rating per 100 below
+December (game 30),30,3.0620132898441685,SAS,model below market,13.889749999999989,22.95714299497466,4.1493843790584135,8.065097828657173,13.102109690450831,net rating per 100 above

@@ -1,81 +1,737 @@
-section,figure,value,band,verdict,run_id,note
-The deal that cannot happen yet,"MIN 2026-27 apron salary, pre-Kuminga","$217,621,829","13 contracted + $1,750,000 unlikely bonuses",FACT,cap_reconciliation_20260904T013922Z,"APRON basis. Unlikely bonuses count toward the apron though not the cap or tax. Contracted alone is $215,871,829 and is NOT an apron figure."
-The deal that cannot happen yet,with Kuminga at the taxpayer MLE,"$223,685,829",14 contracts + unlikely bonuses,FACT,cap_reconciliation_20260904T013922Z,
-The deal that cannot happen yet,amount over the second apron,"$1,999,829","second apron $221,686,000",FACT,eval_signing_20260916T195836Z,less than a rookie-minimum contract
-The deal that cannot happen yet,trade branch at a legal 14-man roster,"$210,364,580","$1,349,580 OVER the first apron",FACT,cap_reconciliation_20260904T013922Z,the trade branch is a FIRST-APRON team at a legal roster; there is no version of this that stays under it
-The deal that cannot happen yet,stretch branch at 14,"$215,257,584","$6,242,584 OVER the first apron",FACT,cap_reconciliation_20260904T013922Z,
-The deal that cannot happen yet,salary a Green trade can bring back,"$11,321,420",room under the SECOND apron hard cap at 14,FACT,cap_reconciliation_20260904T013922Z,"the hard cap binds before the matching rules do (Green out is $14,679,012). A trade CAN return a player; it is not prohibited."
-The deal that cannot happen yet,first-apron room in the trade branch,"NONE, $1,349,580 OVER",they are a first-apron team before anything comes back,FACT,cap_reconciliation_20260904T013922Z,"four restrictions: no sign-and-trade acquisition, no bi-annual ($5,477,000), no prior-year trade exceptions, tighter matching (no aggregating, no taking back more than sent). Losing the non-taxpayer MLE is moot; they are using the taxpayer version on Kuminga."
-The deal that cannot happen yet,a 15th man in the trade branch,"$2,707,343 over the first apron",,FACT,cap_reconciliation_20260904T013922Z,so any salary returning in a Green trade crosses it
-The deal that could not happen,"post-trade apron, pre-Kuminga","$211,013,416","13 standard + $2,055,000 Konchar dead money + $1,750,000 unlikely bonuses",FACT,green_resolution_20260904T014022Z,"Green out, Cody Williams in, Konchar waived and stretched. Reconciles to Spotrac's first-apron space, second-apron space and their own itemised total, all three, at ZERO difference."
-The deal that could not happen,"FINAL apron salary, Kuminga signed","$217,077,416",14 players,FACT,green_resolution_20260904T014022Z,
-The deal that could not happen,room under the hard cap after signing,"$4,608,584","second apron $221,686,000, hard cap for the whole league year",FACT,green_resolution_20260904T014022Z,roughly one veteran minimum plus change; every in-season move fits inside this
-The deal that could not happen,"over the first apron, after signing","$8,062,416","first apron $209,015,000",FACT,green_resolution_20260904T014022Z,"Minnesota is a FIRST-APRON team for 2026-27, with the four restrictions that carries"
-The deal that could not happen,dead money created by the dump,"$2,055,000 x 3 seasons","2026-27, 2027-28, 2028-29",FACT,green_resolution_20260904T014022Z,"$4,110,000 of it lands in 2027-28 and 2028-29, the two seasons the 2027 flexibility thesis depends on"
-The deal that could not happen,draft picks attached to the dump,NONE,"no pick and no swap, either direction",FACT,green_resolution_20260904T014022Z,"and Minnesota received Cody Williams, No. 10 in 2024, on a rookie deal with a 2027-28 club option at $7,669,890"
-The deal that cannot happen yet,room under the second apron,"$4,064,171",,FACT,lede_loophole_20260916T195839Z,"an exception may be used PARTIALLY, so this much of it fits"
-The deal that cannot happen yet,max first-year salary at a 14-man roster,"$4,064,171",95.9% of the taxpayer MLE,FACT,lede_loophole_20260916T195839Z,"lands team salary on the apron to the dollar, which is legal because the hard cap prohibits EXCEEDING it; so the accurate lede is 'could not sign him to the FULL exception'"
-The deal that cannot happen yet,max first-year salary at a 15-man roster,"$2,706,408",73.5% of the taxpayer MLE,FACT,lede_loophole_20260916T195839Z,after a rookie-minimum 15th man
-The deal that cannot happen yet,what the loophole costs Kuminga,"$4,099,649",over two years,FACT,lede_loophole_20260916T195839Z,at the 5% maximum raise; the reason it is a loophole and not a plan
-The deal that cannot happen yet,regular-season roster minimum,14 or 15 players,12 or 13 allowed for 2 consecutive weeks and 28 days total,FACT,"CBA Article XXIX Sec 2(a), 2(b)(i)",verified 2026-08-27 against CBA text and cbaguide.com
-The price and the market,"Kuminga market value, four views",$2.7M to $11.7M,all-ages percentile map,QUOTABLE AS BAND,eval_signing_20260916T195836Z,
-The price and the market,"best real bid (Lakers, rejected)",$12.0M/yr over 3 years,"~$36M total, sign-and-trade",FACT,eval_signing_20260916T195836Z,"Anthony Slater, ESPN"
-The price and the market,views agreeing with the real bid within 25%,2 of 4,"consensus $11.5M, RAPM $11.7M vs a $12.0M bid",QUOTABLE,eval_signing_20260916T195836Z,the two possession-based views land within 4%; box and DARKO do not
-The price and the market,age-restricted market value (22-25),$2.3M to $3.6M,"n=38, bimodal",NOT QUOTABLE,eval_signing_20260916T195836Z,"measures the age structure of NBA pay, not his value"
-The price and the market,surplus in impact units at the MLE,-0.47 to +0.91,2 of 4 positive,NOT QUOTABLE,eval_signing_20260916T195836Z,views disagree on sign
-The price and the market,surplus at Atlanta's declined $24.3M option,-1.76 to -0.03,all four negative,QUOTABLE,eval_signing_20260916T195836Z,all four views agree Atlanta was right to decline
-The slot he inherits,"Kuminga marginal contribution, slot-constrained",+0.205 to +0.754pp,ALL POSITIVE,QUOTABLE AS BAND,slot_analysis_20260916T195828Z,his minutes can only go to Cody Williams
-The slot he inherits,fills where all-positive HOLDS,3 of 5,A_c3_default_shannon; C_mcdaniels_slides; E_tight_rule_F_or_FC,FACT,slot_robustness_20260916T223920Z,"so the claim is 'against the MOST LIKELY internal alternative', never 'against any internal alternative'"
-The slot he inherits,fills where all-positive FAILS,2 of 5,B_lyles_fills; D_beringer_fills,FACT,slot_robustness_20260916T223920Z,name these in the piece rather than hedging
-The slot he inherits,fill variant A_c3_default_shannon,+0.52pp mean,+0.21 to +0.75pp,QUOTABLE AS BAND,slot_robustness_20260916T223920Z,ALL POSITIVE
-The slot he inherits,fill variant B_lyles_fills,+0.03pp mean,-0.57 to +0.39pp,NOT QUOTABLE,slot_robustness_20260916T223920Z,MIXED
-The slot he inherits,fill variant C_mcdaniels_slides,+0.50pp mean,+0.18 to +0.73pp,QUOTABLE AS BAND,slot_robustness_20260916T223920Z,ALL POSITIVE
-The slot he inherits,fill variant D_beringer_fills,-1.13pp mean,-2.49 to -0.27pp,QUOTABLE AS BAND,slot_robustness_20260916T223920Z,ALL NEGATIVE
-The slot he inherits,fill variant E_tight_rule_F_or_FC,+0.50pp mean,+0.18 to +0.74pp,QUOTABLE AS BAND,slot_robustness_20260916T223920Z,ALL POSITIVE; 0.7 min unplaced
-The slot he inherits,Randle+Gobert net rating,+3.10,"3,443 possessions",FACT,lineup_evidence_20260904T013228Z,"descriptive on/off, not an effect"
-The slot he inherits,Reid+Gobert net rating,+6.83,"2,253 possessions",FACT,lineup_evidence_20260904T013228Z,"descriptive on/off, not an effect"
-The slot he inherits,Kuminga on/off at GSW,-6.53,971 possessions,FACT,lineup_evidence_20260904T013228Z,small sample; the sign reversal between teams is the point
-The slot he inherits,Kuminga on/off at ATL,+2.90,"1,077 possessions",FACT,lineup_evidence_20260904T013228Z,small sample; the sign reversal between teams is the point
-What moved the offseason,Shapley: other_departures,+1.20pp mean,+0.32 to +2.88pp,NOT QUOTABLE,shapley_20260916T223917Z,"ALL POSITIVE; FLIPPED under the unpooled minutes rule, so no sign"
-What moved the offseason,Shapley: ball_in,+0.78pp mean,+0.40 to +1.44pp,QUOTABLE AS BAND,shapley_20260916T223917Z,ALL POSITIVE
-What moved the offseason,Shapley: randle_out,+0.35pp mean,+0.25 to +0.47pp,QUOTABLE AS BAND,shapley_20260916T223917Z,ALL POSITIVE
-What moved the offseason,Shapley: kuminga_in,-0.20pp mean,-0.75 to +0.11pp,NOT QUOTABLE,shapley_20260916T223917Z,MIXED
-What moved the offseason,Shapley: ddv_injury,-0.36pp mean,-0.87 to -0.04pp,QUOTABLE AS BAND,shapley_20260916T223917Z,ALL NEGATIVE
-What moved the offseason,Shapley: reid_out,-0.49pp mean,-0.87 to -0.21pp,QUOTABLE AS BAND,shapley_20260916T223917Z,ALL NEGATIVE
-What moved the offseason,Shapley: depth,-0.49pp mean,-0.77 to -0.02pp,NOT QUOTABLE,shapley_20260916T223917Z,"ALL NEGATIVE; FLIPPED under the unpooled minutes rule, so no sign"
-What moved the offseason,Shapley: dosunmu_retained,-0.54pp mean,-0.85 to -0.10pp,QUOTABLE AS BAND,shapley_20260916T223917Z,ALL NEGATIVE
-What moved the offseason,transactions excluding the injury,+0.62pp mean,-0.41 to +2.32pp,NOT QUOTABLE,shapley_20260916T223917Z,"MIXED here but MIXED under the unpooled rule, so it flips and cannot carry a sign"
-Dosunmu (a) on-court,his minutes vs the guards on the roster,-0.54pp mean,-0.85 to -0.10pp,QUOTABLE AS BAND,shapley_20260916T223917Z,"counterfactual is LOSE HIM FOR NOTHING, not spend the money elsewhere: Minnesota was over the cap, so the salary was never convertible into a replacement at that price"
-Dosunmu (b) cap,2026-27 salary,"$19,310,345","5 years; $86,510,348 across the 4 years in the contract book",FACT,dosunmu_cap_20260904T013155Z,the reported $112M total includes a 5th year not carried in the book
-Dosunmu (b) cap,"MIN vs the tax line, with him","$17,193,829 over","est tax bill $31,374,402",FACT,dosunmu_cap_20260904T013155Z,tax rates flagged CONFIRM in the constants; label est
-Dosunmu intermediates (do not quote),"MIN vs the tax line, without him, no Kuminga yet","$-1,690,668 under to $2,782,326 over","replacement guard at the vet min, plus one more to reach 14",FACT,dosunmu_cap_20260904T013155Z,"it STRADDLES the line; do not write 'owing nothing'. His contract is the difference between roughly level with the tax line and $15,443,829 past it. The $3,866,516-under figure is a 12-man roster and is not printable."
-Dosunmu (b) cap,veteran-minimum cap charge,"$2,449,000","the 2-year minimum, not the $3,877,000 earned",FACT,CBA minimum salary exception,a 3+ year veteran on a ONE-YEAR minimum is charged the 2-year figure and the league pays the difference; multi-year minimums count in full
-Dosunmu intermediates (do not quote),SUPERSEDED: MLE room with the signee as the 15th man,"$5,804,674 to $6,896,332",,NOT QUOTABLE,dosunmu_cap_20260904T013155Z,"This filled to 14 with minimums FIRST and left the exception signee as a 15th man. The piece puts Kuminga IN the 14, which is the comparable roster, and that ceiling is $10,004,516. Use the FINAL STATE rows."
-Dosunmu (b) cap,"FINAL STATE, what happened","$217,077,416 at 14","$14,899,416 over the tax line, est tax $23,343,956",FACT,dosunmu_final_states_20260904T014033Z,"Kuminga at $6,064,000, Green traded away"
-Dosunmu (b) cap,"FINAL STATE, Dosunmu not re-signed","$209,015,000 at 14","$6,837,000 over the tax line, est tax $7,030,250",FACT,dosunmu_final_states_20260904T014033Z,"Kuminga up to $8,254,095, Green KEPT. Both states are taxpayers at roughly the same payroll, so the re-signing did not cost money, it cost roster. Do not use a tax-saving framing."
-Dosunmu (b) cap,Kuminga first-year ceiling without Dosunmu,"up to $8,254,095","at a full roster; $9,345,753 with a rookie-min replacement",FACT,dosunmu_final_states_20260904T014033Z,"the non-taxpayer MLE is $15,044,000 but hard-caps at the first apron, so the whole exception was never spendable. Always write 'up to, at a full roster'."
-Dosunmu (b) cap,asset cost of shedding Green,"no draft pick and no swap, either direction","cash considerations (direction disputed), plus $2,055,000 a year of Konchar dead money for three seasons ($4,110,000 of it in 2027-28 and 2028-29). Minnesota RECEIVED Cody Williams, the No. 10 pick in 2024, on a rookie deal with a 2027-28 club option at $7,669,890.",FACT,n/a,https://www.hoopsrumors.com/2026/08/timberwolves-to-trade-josh-green-to-jazz.html | https://www.espn.com/nba/story/_/id/49759209/wolves-trade-3-d-wing-josh-green-jazaz | https://www.nba.com/news/jazz-trade-cody-williams-john-konchar-to-timberwolves-for-josh-green | https://www.hoopsrumors.com/2026/08/timberwolves-waive-john-konchar.html
-Dosunmu (b) cap,Dosunmu agreed vs the Ball/Green trade,"Dosunmu first, by 3 days",agreed 2026-06-22 (Mon night) vs 2026-06-25 (Thu); both official 2026-07-10,FACT,ESPN 49150075 + 49175343; NBA.com corroboration,"nba_transactions dates BOTH 2026-07-10 and cannot order them: additional_sort is 0 for signings and the counterparty team id for trades, group_sort is a type-prefixed group id, created_at is our ingest batch. Reported-first is NOT decided-first; do not claim causal ordering."
-Dosunmu (b) cap,why Green must be shed,"$1,999,829 over","$217,621,829 + $6,064,000 vs the second apron",FACT,dosunmu_final_states_20260904T014033Z,"Dosunmu's $19,310,345 exceeds that overage by $19,060,516, so without him Green stays and the signing still fits"
-Appendix,"keeping Josh Green, on the floor",-0.06pp mean,-0.25 to +0.03pp,NOT QUOTABLE,green_kept_20260916T223922Z,MIXED; only rapm is positive and by 0.01pp. The piece attaches NO on-court cost to the salary dump.
-Dosunmu intermediates (do not quote),second-apron distance without him,"$17,310,516 under","same roster, Kuminga signed",FACT,dosunmu_cap_20260904T013155Z,"against $1,999,829 OVER with him"
-What moved the offseason,is the injury the largest single negative?,under 2 of 4 views,"only: box, darko",NOT QUOTABLE,shapley_20260916T223917Z,"rank 4 of 8 on the mean, behind dosunmu_retained and depth; under rapm it is the SMALLEST negative. Say 'negative under all four and the only item nobody chose', never 'the largest'."
-What moved the offseason,player verdicts that survive the slot rule,4 of 5,ball_in; randle_out; reid_out; dosunmu_retained,FACT,compare_slot_shapley_20260916T195824Z,flipped and dropped: none
-The structural risk,P(Kuminga opts out after year one),0.50 to 0.80,flat aging,QUOTABLE AS BAND,player_option_20260916T195829Z,"first-pass model, not calibrated"
-The structural risk,P(Minnesota can retain him),0.26 to 0.53,flat aging,QUOTABLE AS BAND,player_option_20260916T195829Z,"Non-Bird caps a re-sign start at $7,276,800, which is 120% of the YEAR-ONE salary he last played on; the old $7,640,640 used the declined option year. If he opts IN instead he has two seasons of service and Early Bird applies, 175% = $11,142,600."
-The structural risk,Non-Bird re-sign ceiling in 2027,"$7,276,800",120% of the YEAR-ONE salary; the declined option year is never paid,FACT,league_year_constants,confirmed from CBA text: a declined option year is never covered
-The West,"P(MIN avoids the play-in), baseline",0.73,0.73 to 0.73,QUOTABLE AS BAND,seed_distribution_20260916T223924Z,
-The West,"P(MIN avoids the play-in), after the offseason",0.44,0.22 to 0.69,QUOTABLE AS BAND,seed_distribution_20260916T223924Z,the widest and most legible result
-The West,"MIN West rank, before and after",#5 to #6,mean of four views,DIRECTIONAL,build_outputs_20260916T195840Z,
-The West,"MIN title probability, after",1.69%,0.82% to 2.62%,QUOTABLE AS BAND,run_sim_20260916T195902Z,never quote the midpoint alone
-The West,MIN offseason title-odds change,-1.25pp,-2.13 to -0.33pp,NOT QUOTABLE,run_sim_20260916T195902Z,the four views disagree on sign
-League-wide cap layer,"roster book, gates A and B",BOTH PASS,30 of 30 on membership and on dollars,FACT,roster_v3_gates_20260904T013842Z,"Gate A v2 is offseason-aware (parse-faithful, <=20 standard, <=3 two-way); the old 13-15 gate applied a regular-season rule to an August snapshot and failed six teams for being legal. Gate B decomposes: active roster 30/30 and dead money 30/30 to the dollar, apron 30/30. Absolute differences went $183,047,636 to $0."
-League-wide cap layer,single-source risk,OPEN,the roster book is sourced only to Spotrac,CAVEAT,roster_v3_gates_20260904T013842Z,"B1 and B2 compare our parse against Spotrac's own totals, so they are parse-fidelity tests, not independent-truth tests. A cross-check against a second publisher has not been run. Four teams (WAS, DEN, DAL, TOR) have unlikely bonuses Spotrac includes in its total but does not render per player; DEN's apron TIER depends on them."
-The Williams assumption,Cody Williams projected minutes,16.1 mpg,"allocated from a prior of 24.3 mpg on a 27-win Utah team; impact -3.86, worst on the roster",MODEL INPUT,williams_minutes_sensitivity_20260916T195842Z,NOT a sourced projection. No source says he plays this much for Minnesota.
-The Williams assumption,MIN title probability across his minutes,1.69% to 2.71%,Williams at 16.1 mpg down to 0,QUOTABLE AS BAND,williams_minutes_sensitivity_20260916T195842Z,a factor of 1.60x from one assumption
-The Williams assumption,Kuminga marginal at the model default,+0.465pp,ALL POSITIVE,FACT,williams_minutes_sensitivity_20260916T195842Z,the model's own default is the most pessimistic point in the range
-The Williams assumption,Kuminga marginal if Williams does not play,+1.441pp,ALL POSITIVE,FACT,williams_minutes_sensitivity_20260916T195842Z,
-Verdict,Kuminga vs the most likely internal fill,+0.517pp mean,ALL POSITIVE,QUOTABLE AS BAND,noise_floor_20260916T223927Z,"smallest view 0.205pp, 4 of 4 clear their own noise floor. Positive in sign under every view; too small for one view to resolve."
-Verdict,Kuminga if Beringer fills the slot instead,-1.126pp mean,ALL NEGATIVE,QUOTABLE AS BAND,noise_floor_20260916T223927Z,4 of 4 clear the floor. The negative case is the statistically cleaner of the two.
-Calibration,"title-odds error vs the market, 3-season backtest",1.44 to 2.35pp,mean absolute error,FACT,backtest_calibration_20260903T235222Z,the same size as Minnesota's entire fork spread
-Calibration,win-total error vs the market,8.80 vs 7.47,model vs market MAE,FACT,backtest_calibration_20260903T235222Z,model bias +0.27 wins
+key,section,figure,value,label,verdict,run_id,source
+title,1. The number,"MIN title probability, mean of four views",1.69%,MODELED,QUOTABLE AS BAND,run_sim_20260916T173222Z,sim_all30_2026_27.csv
+title_lo,1. The number,four-view low,0.82%,MODELED,QUOTABLE AS BAND,run_sim_20260916T173222Z,sim_all30_2026_27.csv
+title_hi,1. The number,four-view high,2.62%,MODELED,QUOTABLE AS BAND,run_sim_20260916T173222Z,sim_all30_2026_27.csv
+title_aged,1. The number,"MIN title probability, mean of four views_aged",2.55%,MODELED,QUOTABLE AS BAND,run_sim_20260916T195902Z,sim_all30_2026_27.csv
+title_lo_aged,1. The number,four-view low_aged,1.29%,MODELED,QUOTABLE AS BAND,run_sim_20260916T195902Z,sim_all30_2026_27.csv
+title_hi_aged,1. The number,four-view high_aged,3.73%,MODELED,QUOTABLE AS BAND,run_sim_20260916T195902Z,sim_all30_2026_27.csv
+mkt_min,1. The number,"MIN market title odds, proportional de-vig",3.16%,OBSERVED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+mkt_min_rank,1. The number,MIN market rank,6,OBSERVED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+model_min_rank,1. The number,MIN model rank,14,MODELED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+overround,1. The number,six-book overround,21.8%,OBSERVED,FACT,market_devig_20260916T195853Z,market_devig_2026_27.csv
+rankcorr_lo,1. The number,"model-market rank correlation, lowest view",0.78,COMPOSED,QUOTABLE AS BAND,market_devig_20260916T195853Z,market_devig_2026_27.csv (Spearman per view)
+rankcorr_hi,1. The number,"model-market rank correlation, highest view",0.82,COMPOSED,QUOTABLE AS BAND,market_devig_20260916T195853Z,market_devig_2026_27.csv (Spearman per view)
+n_disagree,1. The number,teams where model and market differ by more than 0.5 points,20,COMPOSED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+n_allviews,1. The number,"of those, disagreements where all four views sit on one side",16,COMPOSED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+min_view_ranks,1. The number,MIN rank in each view,13 to 16,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+rankcorr_lo_aged,1. The number,"model-market rank correlation, lowest view, aged",0.77,COMPOSED,QUOTABLE AS BAND,r5_honesty_rail_bases_20260917T135933Z,r5_honesty_rail_bases.csv
+rankcorr_hi_aged,1. The number,"model-market rank correlation, highest view, aged",0.80,COMPOSED,QUOTABLE AS BAND,r5_honesty_rail_bases_20260917T135933Z,r5_honesty_rail_bases.csv
+n_disagree_aged,1. The number,"disagreements over 0.5 points, aged",17,COMPOSED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_honesty_rail_bases.csv
+n_allviews_aged,1. The number,"of those, all-views, aged",15,COMPOSED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_honesty_rail_bases.csv
+min_view_ranks_aged,1. The number,"MIN rank in each view, aged",9 to 15,MODELED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+min_label_aged,1. The number,"MIN disagreement label, aged",mixed,MODELED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+min_above_aged,1. The number,"MIN views above the market, aged",2,MODELED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+min_box_aged,1. The number,"MIN box view, aged",3.33%,MODELED,QUOTABLE AS BAND,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+min_darko_aged,1. The number,"MIN DARKO view, aged",3.73%,MODELED,QUOTABLE AS BAND,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+model_bos_aged,1. The number,"BOS model title odds, mean of four views, aged",13.49%,MODELED,QUOTABLE AS BAND,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+bos_label_aged,1. The number,"BOS disagreement label, aged",all-views,MODELED,QUOTABLE,r5_honesty_rail_bases_20260917T135933Z,r5_disagreements_bases.csv
+model_bos,1. The number,BOS model title odds,17.00%,MODELED,QUOTABLE AS BAND,market_devig_20260916T195853Z,market_devig_2026_27.csv
+mkt_bos,1. The number,BOS market title odds,5.47%,OBSERVED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+model_sas,1. The number,SAS model title odds,13.89%,MODELED,QUOTABLE AS BAND,market_devig_20260916T195853Z,market_devig_2026_27.csv
+mkt_sas,1. The number,SAS market title odds,22.96%,OBSERVED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+model_cha,1. The number,CHA model title odds,5.86%,MODELED,QUOTABLE AS BAND,market_devig_20260916T195853Z,market_devig_2026_27.csv
+mkt_cha,1. The number,CHA market title odds,0.81%,OBSERVED,QUOTABLE,market_devig_20260916T195853Z,market_devig_2026_27.csv
+bos_dec_threshold,1. The number,"Boston December (game 30) threshold, net per 100",-1.5,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list_december.csv
+bos_dec_game,1. The number,December checkpoint game,30,ASSUMED,FACT,n8_watch_list_20260917T140224Z,n8_watch_list_december.csv
+bos_range_lo,1. The number,Boston model net range low,+3.5,MODELED,QUOTABLE AS BAND,n8_watch_list_20260917T140224Z,n8_watch_list_december.csv
+bos_range_hi,1. The number,Boston model net range high,+9.0,MODELED,QUOTABLE AS BAND,n8_watch_list_20260917T140224Z,n8_watch_list_december.csv
+dec_noise,1. The number,30-game net rating noise per 100,3.1,OBSERVED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list_december.csv
+v_ball_in_label,1. The number,verdict label,LaMelo Ball in,FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_ball_in_u,1. The number,"LaMelo Ball in, un-aged mean pp",+0.68,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ball_in_a,1. The number,"LaMelo Ball in, aged mean pp",+0.78,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ball_in_clear,1. The number,"LaMelo Ball in, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_ball_in_signs,1. The number,"LaMelo Ball in, sign un-aged / aged",all positive / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ball_in_ships,1. The number,LaMelo Ball in ships,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_ball_in_preship,1. The number,LaMelo Ball in shipped before D85,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_reid_out_label,1. The number,verdict label,Naz Reid out,FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_reid_out_u,1. The number,"Naz Reid out, un-aged mean pp",-0.42,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_reid_out_a,1. The number,"Naz Reid out, aged mean pp",-0.51,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_reid_out_clear,1. The number,"Naz Reid out, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_reid_out_signs,1. The number,"Naz Reid out, sign un-aged / aged",all negative / all negative,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_reid_out_ships,1. The number,Naz Reid out ships,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_reid_out_preship,1. The number,Naz Reid out shipped before D85,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_other_departures_label,1. The number,verdict label,Other departures (a bundle of seven),FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_other_departures_u,1. The number,"Other departures (a bundle of seven), un-aged mean pp",+0.36,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_other_departures_a,1. The number,"Other departures (a bundle of seven), aged mean pp",+0.71,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_other_departures_clear,1. The number,"Other departures (a bundle of seven), views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_other_departures_signs,1. The number,"Other departures (a bundle of seven), sign un-aged / aged",mixed / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_other_departures_ships,1. The number,Other departures (a bundle of seven) ships,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_other_departures_preship,1. The number,Other departures (a bundle of seven) shipped before D85,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_randle_out_label,1. The number,verdict label,Julius Randle out,FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_randle_out_u,1. The number,"Julius Randle out, un-aged mean pp",+0.07,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_randle_out_a,1. The number,"Julius Randle out, aged mean pp",+0.34,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_randle_out_clear,1. The number,"Julius Randle out, views clearing the floor un-aged / aged","2/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_randle_out_signs,1. The number,"Julius Randle out, sign un-aged / aged",all positive / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_randle_out_ships,1. The number,Julius Randle out ships,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_randle_out_preship,1. The number,Julius Randle out shipped before D85,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_dosunmu_retained_label,1. The number,verdict label,Ayo Dosunmu re-signed,FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_dosunmu_retained_u,1. The number,"Ayo Dosunmu re-signed, un-aged mean pp",-0.16,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_dosunmu_retained_a,1. The number,"Ayo Dosunmu re-signed, aged mean pp",-0.22,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_dosunmu_retained_clear,1. The number,"Ayo Dosunmu re-signed, views clearing the floor un-aged / aged","3/4, 3/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_dosunmu_retained_signs,1. The number,"Ayo Dosunmu re-signed, sign un-aged / aged",mixed / mixed,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_dosunmu_retained_ships,1. The number,Ayo Dosunmu re-signed ships,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_dosunmu_retained_preship,1. The number,Ayo Dosunmu re-signed shipped before D85,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_depth_label,1. The number,verdict label,Depth signings and re-signings,FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_depth_u,1. The number,"Depth signings and re-signings, un-aged mean pp",+0.06,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_depth_a,1. The number,"Depth signings and re-signings, aged mean pp",+0.13,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_depth_clear,1. The number,"Depth signings and re-signings, views clearing the floor un-aged / aged","3/4, 2/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_depth_signs,1. The number,"Depth signings and re-signings, sign un-aged / aged",mixed / mixed,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_depth_ships,1. The number,Depth signings and re-signings ships,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_depth_preship,1. The number,Depth signings and re-signings shipped before D85,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_kuminga_in_label,1. The number,verdict label,Kuminga in (pooled),FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_kuminga_in_u,1. The number,"Kuminga in (pooled), un-aged mean pp",+0.02,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_kuminga_in_a,1. The number,"Kuminga in (pooled), aged mean pp",+0.10,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_kuminga_in_clear,1. The number,"Kuminga in (pooled), views clearing the floor un-aged / aged","3/4, 3/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_kuminga_in_signs,1. The number,"Kuminga in (pooled), sign un-aged / aged",mixed / mixed,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_kuminga_in_ships,1. The number,Kuminga in (pooled) ships,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_kuminga_in_preship,1. The number,Kuminga in (pooled) shipped before D85,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_ddv_injury_label,1. The number,verdict label,DiVincenzo's Achilles (not a transaction),FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_ddv_injury_u,1. The number,"DiVincenzo's Achilles (not a transaction), un-aged mean pp",-0.42,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ddv_injury_a,1. The number,"DiVincenzo's Achilles (not a transaction), aged mean pp",-0.33,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ddv_injury_clear,1. The number,"DiVincenzo's Achilles (not a transaction), views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_ddv_injury_signs,1. The number,"DiVincenzo's Achilles (not a transaction), sign un-aged / aged",all negative / all negative,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_ddv_injury_ships,1. The number,DiVincenzo's Achilles (not a transaction) ships,yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_ddv_injury_preship,1. The number,DiVincenzo's Achilles (not a transaction) shipped before D85,no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_A_c3_default_shannon_label,1. The number,verdict label,"Kuminga slot, default allocation",FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_A_c3_default_shannon_u,1. The number,"Kuminga slot, default allocation, un-aged mean pp",+0.52,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_A_c3_default_shannon_a,1. The number,"Kuminga slot, default allocation, aged mean pp",+0.58,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_A_c3_default_shannon_clear,1. The number,"Kuminga slot, default allocation, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_A_c3_default_shannon_signs,1. The number,"Kuminga slot, default allocation, sign un-aged / aged",all positive / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_A_c3_default_shannon_ships,1. The number,"Kuminga slot, default allocation ships",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_A_c3_default_shannon_preship,1. The number,"Kuminga slot, default allocation shipped before D85",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_C_mcdaniels_slides_label,1. The number,verdict label,"Kuminga slot, McDaniels slides",FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_C_mcdaniels_slides_u,1. The number,"Kuminga slot, McDaniels slides, un-aged mean pp",+0.50,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_C_mcdaniels_slides_a,1. The number,"Kuminga slot, McDaniels slides, aged mean pp",+0.56,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_C_mcdaniels_slides_clear,1. The number,"Kuminga slot, McDaniels slides, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_C_mcdaniels_slides_signs,1. The number,"Kuminga slot, McDaniels slides, sign un-aged / aged",all positive / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_C_mcdaniels_slides_ships,1. The number,"Kuminga slot, McDaniels slides ships",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_C_mcdaniels_slides_preship,1. The number,"Kuminga slot, McDaniels slides shipped before D85",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_D_beringer_fills_label,1. The number,verdict label,"Kuminga slot, Beringer fills",FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_D_beringer_fills_u,1. The number,"Kuminga slot, Beringer fills, un-aged mean pp",-1.13,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_D_beringer_fills_a,1. The number,"Kuminga slot, Beringer fills, aged mean pp",-1.94,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_D_beringer_fills_clear,1. The number,"Kuminga slot, Beringer fills, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_D_beringer_fills_signs,1. The number,"Kuminga slot, Beringer fills, sign un-aged / aged",all negative / all negative,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_D_beringer_fills_ships,1. The number,"Kuminga slot, Beringer fills ships",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_D_beringer_fills_preship,1. The number,"Kuminga slot, Beringer fills shipped before D85",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_E_tight_rule_F_or_FC_label,1. The number,verdict label,"Kuminga slot, tight eligibility rule",FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_E_tight_rule_F_or_FC_u,1. The number,"Kuminga slot, tight eligibility rule, un-aged mean pp",+0.50,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_E_tight_rule_F_or_FC_a,1. The number,"Kuminga slot, tight eligibility rule, aged mean pp",+0.56,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_E_tight_rule_F_or_FC_clear,1. The number,"Kuminga slot, tight eligibility rule, views clearing the floor un-aged / aged","4/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_E_tight_rule_F_or_FC_signs,1. The number,"Kuminga slot, tight eligibility rule, sign un-aged / aged",all positive / all positive,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_E_tight_rule_F_or_FC_ships,1. The number,"Kuminga slot, tight eligibility rule ships",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_E_tight_rule_F_or_FC_preship,1. The number,"Kuminga slot, tight eligibility rule shipped before D85",yes,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+v_B_lyles_fills_label,1. The number,verdict label,"Kuminga slot, Lyles fills",FACT,FACT,w2_aging_gate_20260917T142258Z,build_final_numbers VERDICTS
+v_B_lyles_fills_u,1. The number,"Kuminga slot, Lyles fills, un-aged mean pp",+0.03,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_B_lyles_fills_a,1. The number,"Kuminga slot, Lyles fills, aged mean pp",-0.08,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_B_lyles_fills_clear,1. The number,"Kuminga slot, Lyles fills, views clearing the floor un-aged / aged","3/4, 4/4",MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,noise_floor*.csv
+v_B_lyles_fills_signs,1. The number,"Kuminga slot, Lyles fills, sign un-aged / aged",mixed / mixed,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+v_B_lyles_fills_ships,1. The number,"Kuminga slot, Lyles fills ships",no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+v_B_lyles_fills_preship,1. The number,"Kuminga slot, Lyles fills shipped before D85",no,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv"
+n_ship,1. The number,verdicts that ship,7,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,"w2_aging_gate.csv, noise_floor*.csv"
+n_ship_pre,1. The number,verdicts that shipped before D85,9,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,pre_d85/w2_aging_gate.csv
+n_retired,1. The number,verdicts that shipped before D85 and do not now,3,MODELED,QUOTABLE,w2_aging_gate_20260917T142258Z,pre_d85 vs current
+d85_residual,1. The number,"post-D85 attribution roster vs direct simulation, worst view pp, both bases",0.08,MODELED,QUOTABLE,r5_shapley_williams_20260917T142450Z,r5_shapley_williams_vall.csv
+d85_pooled_gap,1. The number,"post-D85 pooled attribution rule vs direct simulation, worst view pp, both bases",0.83,MODELED,QUOTABLE,r5_shapley_williams_20260917T142450Z,r5_shapley_williams_vall.csv
+d85_gap_before,1. The number,"pre-D85 attribution roster vs direct simulation, worst view pp, un-aged",1.24,MODELED,QUOTABLE,r5_shapley_williams_20260917T142450Z,r5_shapley_williams_vall.csv
+williams_bio,1. The number,Cody Williams consensus impact,-3.86,MODELED,QUOTABLE,build_rotations_20260916T173214Z,player_pool_2026_27.csv
+anderson_u,1. The number,"Kyle Anderson departure, un-aged pp",+0.08,MODELED,QUOTABLE,r2_departures_20260917T142300Z,r2_departures_split_shapley_verdicts.csv
+anderson_a,1. The number,"Kyle Anderson departure, aged pp",+0.37,MODELED,QUOTABLE,r2_departures_20260917T142300Z,r2_departures_split_shapley_verdicts.csv
+anderson_clear,1. The number,"Kyle Anderson departure, views clearing un-aged / aged","3/4, 4/4",MODELED,QUOTABLE,r2_departures_20260917T142300Z,r2_departures_split_shapley_verdicts.csv
+n_dep_ship,1. The number,departures that ship on their own,0,MODELED,QUOTABLE,r2_departures_20260917T142300Z,r2_departures_split_shapley_verdicts.csv
+n_departures,1. The number,players in the other-departures bundle,7,FACT,FACT,r2_departures_20260917T142300Z,r2_departures_split_shapley_verdicts.csv
+sims,1. The number,simulations per f-curve view,"200,000",ASSUMED,FACT,merge_fcurve_parts_20260916T195816Z,build_fcurve KUMINGA_FCURVE_NSIMS
+per100,1. The number,"rating basis, possessions",100,FACT,FACT,n8_watch_list_20260917T140224Z,definition
+m1_rs_gain,2. What the odds get right,"style overlay held-out MAE gain, 2025-26 regular season",-0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+m1_rs_worse,2. What the odds get right,"held-out MAE increase, regular season",0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+m1_po_worse,2. What the odds get right,"held-out MAE increase, postseasons",0.0265,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+m1_rs_n,2. What the odds get right,held-out regular-season games,"1,225",OBSERVED,FACT,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+m1_po_gain,2. What the odds get right,"style overlay held-out MAE gain, three postseasons",-0.0265,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+m1_po_n,2. What the odds get right,held-out postseason games,251,OBSERVED,FACT,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
+n3_start,2. What the odds get right,first postseason in the longer N3 sample,2014,FACT,FACT,n3_playoff_translation_20260916T212714Z,n3_playoff_translation.py FIRST
+n3_series,2. What the odds get right,"series, 2014-26",195,OBSERVED,FACT,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+n3_series_primary,2. What the odds get right,"series, three project postseasons",45,OBSERVED,FACT,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+n3_mde_lo,2. What the odds get right,"smallest detectable effect, 13 seasons, low",0.95,COMPOSED,QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+n3_mde_hi,2. What the odds get right,"smallest detectable effect, 13 seasons, high",1.15,COMPOSED,QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+n3_n_translating,2. What the odds get right,features that translate,0,MODELED,QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+n3_n_features,2. What the odds get right,candidate translation features,8,ASSUMED,FACT,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_coef,2. What the odds get right,"defence share, points per game per SD",-0.85,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_se,2. What the odds get right,defence share SE,0.34,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_p,2. What the odds get right,defence share permutation p,0.011,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_bar,2. What the odds get right,Bonferroni bar,0.0063,ASSUMED,FACT,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_ci_hi,2. What the odds get right,defence share single-test 95% interval upper end,-0.18,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests.csv
+ds_early,2. What the odds get right,defence share 2014-23 only,-0.87,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests_posthoc.csv
+ds_late,2. What the odds get right,defence share 2024-26 only,-0.86,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests_posthoc.csv
+ds_luck,2. What the odds get right,defence share with three-point luck added,-0.77,MODELED,NOT QUOTABLE,n3_playoff_translation_20260916T212714Z,n3_translation_tests_posthoc.csv
+n4_sd13,2. What the odds get right,"true matchup effect SD, 2013-26, points per game",0.65,OBSERVED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_sd13_up,2. What the odds get right,"upper 95%, 2013-26",1.77,OBSERVED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_sd97,2. What the odds get right,"true matchup effect SD, 1997-2026",0.00,OBSERVED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_sd97_up,2. What the odds get right,"upper 95%, 1997-2026",1.25,OBSERVED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_series_up,2. What the odds get right,series points at the tighter upper bound,9,MODELED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_rankcorr,2. What the odds get right,spread vs own net rank correlation outside the field,1.00,MODELED,QUOTABLE,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_start13,2. What the odds get right,"first season, primary window",2013-14,FACT,FACT,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_start97,2. What the odds get right,"first season, extended window",1997-98,FACT,FACT,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+n4_games97,2. What the odds get right,"regular-season games, 1997-2026","34,357",OBSERVED,FACT,n4_versatility_index_20260916T213612Z,n4_matchup_repeatability.csv
+m3_se30,2. What the odds get right,matchup SE at 30 possessions,0.14,OBSERVED,QUOTABLE,m3_opponent_cards_20260916T201505Z,m3_opponent_cards.md
+m3_norm_lo,2. What the odds get right,"primary-defender norm, low",0.05,OBSERVED,QUOTABLE,m3_opponent_cards_20260916T201505Z,m3_opponent_cards.md
+m3_norm_hi,2. What the odds get right,"primary-defender norm, high",0.10,OBSERVED,QUOTABLE,m3_opponent_cards_20260916T201505Z,m3_opponent_cards.md
+m3_edges,2. What the odds get right,"matchups beyond the norm by 2 SEs, above",2,OBSERVED,QUOTABLE,m3_opponent_cards_20260916T201505Z,m3_key_matchups.csv
+m3_rows,2. What the odds get right,observed West-field primary matchups,79,OBSERVED,FACT,m3_opponent_cards_20260916T201505Z,m3_key_matchups.csv
+m3_chance,2. What the odds get right,"expected by chance, above",2.3,OBSERVED,QUOTABLE,m3_opponent_cards_20260916T201505Z,m3_opponent_cards.md
+h2_n,2. What the odds get right,clean seasons,3,FACT,FACT,champions_table_20260916T195856Z,champions_h2_base_rates.csv
+h2_fav,2. What the odds get right,favourite won,1,OBSERVED,QUOTABLE,champions_table_20260916T195856Z,champions_h2_base_rates.csv
+h2_top5,2. What the odds get right,champion from the top five,3,OBSERVED,QUOTABLE,champions_table_20260916T195856Z,champions_h2_base_rates.csv
+h2_lo,2. What the odds get right,"champions' preseason price, low",8.27%,OBSERVED,QUOTABLE,champions_table_20260916T195856Z,champions_h2_base_rates.csv
+h2_hi,2. What the odds get right,"champions' preseason price, high",14.69%,OBSERVED,QUOTABLE,champions_table_20260916T195856Z,champions_h2_base_rates.csv
+h3_n_non,2. What the odds get right,preseason top-5 non-champions,14,OBSERVED,FACT,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
+h3_n_sep,2. What the odds get right,features that separate,3,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
+h3_n_feat,2. What the odds get right,features compared,20,OBSERVED,FACT,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
+nyk_mkt,2. What the odds get right,Knicks preseason market price,8.27%,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_rank,2. What the odds get right,Knicks preseason market rank,4,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_wt,2. What the odds get right,Knicks win total,53.5,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_wins,2. What the odds get right,Knicks wins,53,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_model,2. What the odds get right,our model's Knicks price,4.63%,MODELED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_rs,2. What the odds get right,Knicks regular-season margin,+6.33,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_pre,2. What the odds get right,before the break,+6.16,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_post,2. What the odds get right,after the break,+6.67,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_po_rec,2. What the odds get right,Knicks playoff record,16-3,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_po,2. What the odds get right,Knicks playoff margin,+14.89,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_lift,2. What the odds get right,Knicks playoff lift,+8.57,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_po_teams,2. What the odds get right,playoff teams,16,OBSERVED,FACT,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_lift_mean,2. What the odds get right,Knicks lift_mean,-7.39,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_cmp_lift,2. What the odds get right,Knicks cmp_lift,-9.19,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_cmp_lift_rank,2. What the odds get right,Knicks cmp_lift_rank,11,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_n_positive_lift,2. What the odds get right,Knicks n_positive_lift,1,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_top5_rs_games_missed,2. What the odds get right,Knicks top5_rs_games_missed,46,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_top5_po_games_missed,2. What the odds get right,Knicks top5_po_games_missed,2,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_top5_share_rs,2. What the odds get right,Knicks top5_share_rs,0.579,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+nyk_top5_share_po,2. What the odds get right,Knicks top5_share_po,0.673,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+n5_min_full,3. What the odds can't see,MIN full-roster title odds,1.66%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_min_drop,3. What the odds can't see,MIN mean drop,0.82,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_min_share,3. What the odds can't see,MIN share of odds lost,49%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_min_net,3. What the odds can't see,MIN mean net lost per removal,2.30,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_min_big,3. What the odds can't see,MIN largest single net loss,3.25,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_min_bigname,3. What the odds can't see,"MIN largest single loss, player",Rudy Gobert,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_min_po,3. What the odds can't see,"MIN mean net lost, playoff rollup",1.95,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up.csv
+n5_okc_full,3. What the odds can't see,OKC full-roster title odds,16.73%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_okc_drop,3. What the odds can't see,OKC mean drop,6.20,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_okc_share,3. What the odds can't see,OKC share of odds lost,37%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_okc_net,3. What the odds can't see,OKC mean net lost per removal,2.32,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_okc_big,3. What the odds can't see,OKC largest single net loss,4.01,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_okc_bigname,3. What the odds can't see,"OKC largest single loss, player",Shai Gilgeous-Alexander,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_okc_po,3. What the odds can't see,"OKC mean net lost, playoff rollup",2.52,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up.csv
+n5_sas_full,3. What the odds can't see,SAS full-roster title odds,13.76%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_sas_drop,3. What the odds can't see,SAS mean drop,5.11,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_sas_share,3. What the odds can't see,SAS share of odds lost,37%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T220325Z,n5_fragility*.csv
+n5_sas_net,3. What the odds can't see,SAS mean net lost per removal,2.25,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_sas_big,3. What the odds can't see,SAS largest single net loss,4.77,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_sas_bigname,3. What the odds can't see,"SAS largest single loss, player",Victor Wembanyama,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up*.csv
+n5_sas_po,3. What the odds can't see,"SAS mean net lost, playoff rollup",2.36,MODELED,QUOTABLE,n5_fragility_20260916T220325Z,n5_next_man_up.csv
+n5_min_full_aged,3. What the odds can't see,MIN full-roster title odds_aged,2.46%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_min_drop_aged,3. What the odds can't see,MIN mean drop_aged,0.93,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_min_share_aged,3. What the odds can't see,MIN share of odds lost_aged,38%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_min_net_aged,3. What the odds can't see,MIN mean net lost per removal_aged,1.77,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_min_big_aged,3. What the odds can't see,MIN largest single net loss_aged,2.27,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_min_bigname_aged,3. What the odds can't see,"MIN largest single loss, player_aged",Rudy Gobert,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_okc_full_aged,3. What the odds can't see,OKC full-roster title odds_aged,17.89%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_okc_drop_aged,3. What the odds can't see,OKC mean drop_aged,6.37,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_okc_share_aged,3. What the odds can't see,OKC share of odds lost_aged,36%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_okc_net_aged,3. What the odds can't see,OKC mean net lost per removal_aged,2.25,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_okc_big_aged,3. What the odds can't see,OKC largest single net loss_aged,3.82,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_okc_bigname_aged,3. What the odds can't see,"OKC largest single loss, player_aged",Shai Gilgeous-Alexander,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_sas_full_aged,3. What the odds can't see,SAS full-roster title odds_aged,16.60%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_sas_drop_aged,3. What the odds can't see,SAS mean drop_aged,5.20,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_sas_share_aged,3. What the odds can't see,SAS share of odds lost_aged,31%,MODELED,QUOTABLE AS BAND,n5_fragility_20260916T224233Z,n5_fragility*.csv
+n5_sas_net_aged,3. What the odds can't see,SAS mean net lost per removal_aged,2.06,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_sas_big_aged,3. What the odds can't see,SAS largest single net loss_aged,5.02,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+n5_sas_bigname_aged,3. What the odds can't see,"SAS largest single loss, player_aged",Victor Wembanyama,MODELED,QUOTABLE,n5_fragility_20260916T224233Z,n5_next_man_up*.csv
+williams_mpg,3. What the odds can't see,Cody Williams projected minutes,16.1,ASSUMED,NOT QUOTABLE,build_rotations_20260916T173214Z,rotations_2026_27.csv
+rs_williams,3. What the odds can't see,Williams rank score,0.3041,COMPOSED,DESCRIPTIVE,build_rotations_20260916T173214Z,player_pool_2026_27.csv
+rs_clark,3. What the odds can't see,Jaylen Clark rank score,0.3142,COMPOSED,DESCRIPTIVE,build_rotations_20260916T173214Z,player_pool_2026_27.csv
+rs_gap,3. What the odds can't see,rank-score gap,0.0101,COMPOSED,DESCRIPTIVE,build_rotations_20260916T173214Z,player_pool_2026_27.csv
+williams_threshold,3. What the odds can't see,Williams minutes below which the offseason verdict turns MIXED,12.0,MODELED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w1c_offseason_delta,3. What the odds can't see,"published offseason delta, mean pp",-0.965,MODELED,QUOTABLE AS BAND,w1c_decompose_20260916T195846Z,w1c_delta_decomposition.csv
+w1c_injury_cost,3. What the odds can't see,"DiVincenzo injury cost, mean pp",+1.728,MODELED,QUOTABLE AS BAND,w1c_decompose_20260916T195846Z,w1c_delta_decomposition.csv
+w1c_williams_cost,3. What the odds can't see,"Williams minutes cost, mean pp",+1.029,MODELED,QUOTABLE AS BAND,w1c_decompose_20260916T195846Z,w1c_delta_decomposition.csv
+w1c_interaction,3. What the odds can't see,"interaction, mean pp",-1.029,MODELED,QUOTABLE AS BAND,w1c_decompose_20260916T195846Z,w1c_delta_decomposition.csv
+w1c_remainder,3. What the odds can't see,"remainder, mean pp",+0.762,MODELED,QUOTABLE AS BAND,w1c_decompose_20260916T195846Z,w1c_delta_decomposition.csv
+m4_fives,3. What the odds can't see,"legal fives, DiVincenzo excluded",749,COMPOSED,FACT,m4_lineup_study_20260917T133633Z,m4_lineups.csv
+m4_double,3. What the odds can't see,double-big fives,161,COMPOSED,FACT,m4_lineup_study_20260917T133633Z,m4_lineups.csv
+m4_nogobert,3. What the odds can't see,fives without Gobert,294,COMPOSED,FACT,m4_lineup_study_20260917T133633Z,m4_lineups.csv
+m4_observed,3. What the odds can't see,fives that have played together,5,OBSERVED,FACT,m4_lineup_study_20260917T133633Z,m4_lineups.csv
+m4_top10_beringer,3. What the odds can't see,"of the ten best rankable fives, how many include Beringer",10,COMPOSED,DESCRIPTIVE,m4_lineup_study_20260917T133633Z,m4_lineups.csv
+beringer_prior,3. What the odds can't see,Beringer 2025-26 minutes per game,7.9,OBSERVED,FACT,build_rotations_20260916T173214Z,player_pool_2026_27.csv
+reid_gobert,3. What the odds can't see,"Reid + Gobert net per 100, rebuilt points",+3.2,OBSERVED,DESCRIPTIVE,lineup_evidence_20260917T133631Z,lineup_evidence.csv
+randle_gobert,3. What the odds can't see,"Randle + Gobert net per 100, rebuilt points",+3.3,OBSERVED,DESCRIPTIVE,lineup_evidence_20260917T133631Z,lineup_evidence.csv
+m5_top,3. What the odds can't see,projected top five usage sum,1.121,COMPOSED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_top_pct,3. What the odds can't see,percentile,87,COMPOSED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_kin,3. What the odds can't see,Kuminga-in five usage sum,1.150,COMPOSED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_kin_pct,3. What the odds can't see,percentile,96,COMPOSED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_kin3_pct,3. What the odds can't see,percentile at three-season rates,98,COMPOSED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_obs_pct,3. What the odds can't see,"last season's actual five, percentile",56,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_league_fives,3. What the odds can't see,league starting fives,"7,380",OBSERVED,FACT,m5_usage_accounting_20260916T203535Z,m5_unit_usage.csv
+m5_adj_usg,3. What the odds can't see,"adjusted pairing effect on usage, points",-0.4,OBSERVED,DIRECTIONAL,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_adj_ts,3. What the odds can't see,"adjusted pairing effect on true shooting, points",-0.1,OBSERVED,DIRECTIONAL,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_star_usg,3. What the odds can't see,star-tier pairing effect on usage,-1.5,OBSERVED,DIRECTIONAL,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_star_usg_se,3. What the odds can't see,star-tier usage SE,0.9,OBSERVED,DIRECTIONAL,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_star_ts,3. What the odds can't see,star-tier pairing effect on true shooting,+0.8,OBSERVED,DIRECTIONAL,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_star_n,3. What the odds can't see,star-tier treated player-seasons,9,OBSERVED,FACT,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+m5_treated,3. What the odds can't see,player-seasons with a new high-usage partner,34,OBSERVED,FACT,m5_usage_accounting_20260916T203535Z,m5_pairing_base_rates.csv
+n2_modal,3. What the odds can't see,modal seed,7th,MODELED,QUOTABLE,seed_distribution_20260916T195831Z,seed_distribution.csv
+n2_modal_p,3. What the odds can't see,modal seed probability,27%,MODELED,QUOTABLE,seed_distribution_20260916T195831Z,seed_distribution.csv
+n2_top6,3. What the odds can't see,P(top six),44%,MODELED,QUOTABLE,seed_distribution_20260916T195831Z,seed_distribution.csv
+n2_sas_okc,3. What the odds can't see,P(first-round opponent is SAS or OKC),51%,MODELED,QUOTABLE,n2_path_20260916T195847Z,n2_round1_opponents.csv
+n2_r2,3. What the odds can't see,P(reach round two),28%,MODELED,QUOTABLE AS BAND,n2_path_20260916T195847Z,n2_path.csv
+n2_cond,3. What the odds can't see,P(title | escape round one),6.0%,MODELED,QUOTABLE AS BAND,n2_path_20260916T195847Z,n2_path.csv
+k_scorer_pct,"4. Kuminga, better and worse","Kuminga scorer percentile, 2023-26",36,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_scorer_z,"4. Kuminga, better and worse",Kuminga scorer SEs,-0.2,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_scorer_n,"4. Kuminga, better and worse",Kuminga scorer pairings,29,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_scorer_poss,"4. Kuminga, better and worse",Kuminga scorer possessions,"1,415",OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_scorer_ref,"4. Kuminga, better and worse",reference scorers,245,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_defender_pct,"4. Kuminga, better and worse","Kuminga defender percentile, 2023-26",23,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_defender_z,"4. Kuminga, better and worse",Kuminga defender SEs,-1.3,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_defender_n,"4. Kuminga, better and worse",Kuminga defender pairings,13,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_defender_poss,"4. Kuminga, better and worse",Kuminga defender possessions,711,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_defender_ref,"4. Kuminga, better and worse",reference defenders,309,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+k_scorer_n26,"4. Kuminga, better and worse",Kuminga scorer pairings 2025-26,3,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+e_scorer_pct3,"4. Kuminga, better and worse","Edwards scorer percentile, 2023-26",0,OBSERVED,QUOTABLE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+e_scorer_z3,"4. Kuminga, better and worse","Edwards scorer SEs, 2023-26",-8.6,OBSERVED,QUOTABLE,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+e_scorer_n3,"4. Kuminga, better and worse","Edwards scorer pairings, 2023-26",72,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_primary_defender.csv
+gsw_with,"4. Kuminga, better and worse","GSW units with a non-shooting centre, net",-2.1,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_without,"4. Kuminga, better and worse","without one, net",+0.6,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_with_poss,"4. Kuminga, better and worse",possessions with,"5,340",OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_without_poss,"4. Kuminga, better and worse",possessions without,"5,672",OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_with_3par,"4. Kuminga, better and worse",3PA rate with,0.430,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_without_3par,"4. Kuminga, better and worse",3PA rate without,0.448,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_gsw_analog.csv
+gsw_se,"4. Kuminga, better and worse",difference game-bootstrap SE,3.5,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_ledger.csv
+po_games,"4. Kuminga, better and worse",Kuminga postseason games,40,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_postseason.csv
+po_poss,"4. Kuminga, better and worse",postseason possessions,"1,139",OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_postseason.csv
+po_net,"4. Kuminga, better and worse",postseason on-court net,-16.2,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_postseason.csv
+po_onoff,"4. Kuminga, better and worse","postseason on-off, garbage time out",-16.0,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_ledger.csv
+po_onoff_se,"4. Kuminga, better and worse",on-off SE,8.4,OBSERVED,DESCRIPTIVE,n6_kuminga_ledger_20260917T133322Z,n6_ledger.csv
+po_onoff_games,"4. Kuminga, better and worse",stint games,23,OBSERVED,FACT,n6_kuminga_ledger_20260917T133322Z,n6_ledger.csv
+k_usg,"4. Kuminga, better and worse",Kuminga usage 2025-26,0.226,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+k_unast,"4. Kuminga, better and worse",Kuminga unassisted share 2025-26,44%,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+k_unast_pct,"4. Kuminga, better and worse",percentile,69,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+k_makes,"4. Kuminga, better and worse",Kuminga makes 2025-26,157,OBSERVED,FACT,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+k_y1,"4. Kuminga, better and worse",Kuminga year one,"$6,064,000",FACT,FACT,green_resolution_20260904T014022Z,cap_canonical.json
+k_y2,"4. Kuminga, better and worse","Kuminga year two, player option","$6,367,200",FACT,FACT,green_resolution_20260904T014022Z,cap_canonical.json
+k_total,"4. Kuminga, better and worse",Kuminga total,"$12,431,200",FACT,FACT,green_resolution_20260904T014022Z,cap_canonical.json
+k_nonbird,"4. Kuminga, better and worse",Non-Bird ceiling after an opt-out,"$7,276,800",FACT,FACT,green_resolution_20260904T014022Z,cap_canonical.json (120% of year one)
+k_optout_lo,"4. Kuminga, better and worse","P(opt out), low across views, flat aging",0.50,MODELED,QUOTABLE AS BAND,player_option_20260916T195829Z,player_option.csv
+k_optout_hi,"4. Kuminga, better and worse","P(opt out), high",0.80,MODELED,QUOTABLE AS BAND,player_option_20260916T195829Z,player_option.csv
+e_pct_shipped,"5. Edwards, and why Ball is here","Edwards percentile, M3 basis",1,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_z_shipped,"5. Edwards, and why Ball is here","Edwards SEs, M3 basis",-5.6,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_pct_A,"5. Edwards, and why Ball is here","Edwards percentile, rotation-defender baseline",1,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_z_A,"5. Edwards, and why Ball is here","Edwards SEs, rotation-defender baseline",-5.3,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_pct_B,"5. Edwards, and why Ball is here","Edwards percentile, regular season only",5,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_z_B,"5. Edwards, and why Ball is here","Edwards SEs, regular season only",-3.4,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_pct_C,"5. Edwards, and why Ball is here","Edwards percentile, both",5,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_z_C,"5. Edwards, and why Ball is here","Edwards SEs, both",-3.1,OBSERVED,QUOTABLE,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_n_off,"5. Edwards, and why Ball is here",top scorers in the reference,150,OBSERVED,FACT,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+e_pairings,"5. Edwards, and why Ball is here",Edwards primary pairings 2025-26,21,OBSERVED,FACT,m3_primary_defender_check_20260916T201455Z,m3_primary_defender_check.csv
+cr_edw,"5. Edwards, and why Ball is here","Anthony Edwards unassisted share of makes, 2025-26",61%,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_edw_pct,"5. Edwards, and why Ball is here",Anthony Edwards percentile,95,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+usg_edw,"5. Edwards, and why Ball is here",Anthony Edwards usage 2025-26,0.309,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_ball,"5. Edwards, and why Ball is here","LaMelo Ball unassisted share of makes, 2025-26",55%,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_ball_pct,"5. Edwards, and why Ball is here",LaMelo Ball percentile,84,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+usg_ball,"5. Edwards, and why Ball is here",LaMelo Ball usage 2025-26,0.306,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_dos,"5. Edwards, and why Ball is here","Ayo Dosunmu unassisted share of makes, 2025-26",35%,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_dos_pct,"5. Edwards, and why Ball is here",Ayo Dosunmu percentile,51,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+usg_dos,"5. Edwards, and why Ball is here",Ayo Dosunmu usage 2025-26,0.197,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cr_median,"5. Edwards, and why Ball is here",league median unassisted share,35%,OBSERVED,QUOTABLE,m5_usage_accounting_20260916T203535Z,m5_creation_shares.csv
+cl_start,6. Clutch,first season in the pooled clutch window,2023-24,FACT,FACT,n7_late_clock_20260916T230449Z,n7_late_clock.py PREFIXES
+cl_efg_all,6. Clutch,"league eFG, all shots 2023-26",0.544,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_efg_clutch,6. Clutch,"league eFG, clutch",0.502,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_un_all,6. Clutch,"league unassisted share, all",37%,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_un_clutch,6. Clutch,"league unassisted share, clutch",45%,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_n_ok,6. Clutch,creators with enough clutch shots,22,OBSERVED,FACT,n7_late_clock_20260916T230449Z,"n7_late_clock_splits.csv, n7_shots.parquet"
+cl_n_big,6. Clutch,beyond the league drop by 2 SEs,2,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_chance,6. Clutch,expected by chance,1.0,COMPOSED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_big1,6. Clutch,creator beyond the drop,Derrick White,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_big1_z,6. Clutch,SEs,+2.3,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_big2,6. Clutch,creator beyond the drop,Jamal Murray,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_big2_z,6. Clutch,SEs,+2.0,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_edw_efg,6. Clutch,Anthony Edwards clutch eFG,0.546,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_edw_fga,6. Clutch,Anthony Edwards clutch attempts,306,OBSERVED,FACT,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_edw_z,6. Clutch,"Anthony Edwards beyond the drop, SEs",+1.3,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+cl_ball_efg,6. Clutch,LaMelo Ball clutch eFG,0.460,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_ball_fga,6. Clutch,LaMelo Ball clutch attempts,100,OBSERVED,FACT,n7_late_clock_20260916T230449Z,n7_late_clock_splits.csv
+cl_ball_z,6. Clutch,"LaMelo Ball beyond the drop, SEs",-0.1,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
+lc_g1,6. Clutch,"late-clock reconstruction accuracy, within 2 s",79.9%,OBSERVED,WITHHELD,n7_late_clock_20260916T230449Z,n7_gates.csv
+lc_bar,6. Clutch,bar set in advance,80%,ASSUMED,FACT,n7_late_clock_20260916T230449Z,n7_late_clock.py MIN_G1
+w1_claim,7. What to watch,claim 1,Cody Williams' minutes decide whether the offseason verdict holds,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w1_now,7. What to watch,claim 1 current value,16.1 a night (model default),ASSUMED INPUT,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w1_flip,7. What to watch,claim 1 flips if,below 12.0 a night,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w2_claim,7. What to watch,claim 2,Minnesota's level is inside the model's range,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w2_now,7. What to watch,claim 2 current value,"model range -1.7 to +1.8 (four views, both aging bases)",MODELLED RANGE,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w2_flip,7. What to watch,claim 2 flips if,above +7.5 or below -7.5,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w3_claim,7. What to watch,claim 3,The model's two largest disagreements with the market,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w3_now,7. What to watch,claim 3 current value,"BOS: model 17.0% title odds vs market 5.5%, model net range +3.5 to +9.0. SAS: model 13.9% vs market 23.0%, range +4.1 to +8.1",MODELLED RANGE,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w3_flip,7. What to watch,claim 3 flips if,BOS below -2.2; SAS above +13.8,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w4_claim,7. What to watch,claim 4,"The Edwards-Ball pairing costs usage, not efficiency",COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w4_now,7. What to watch,claim 4 current value,"2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons)",OBSERVED BASE RATE,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w4_flip,7. What to watch,claim 4 flips if,"Edwards below 0.547, or Ball below 0.476",COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w5_claim,7. What to watch,claim 5,Minnesota is not on a champion's path,COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w5_now,7. What to watch,claim 5 current value,"projected rank 15 (un-aged) / 14 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2",OBSERVED HISTORY,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w5_flip,7. What to watch,claim 5 flips if,3 or better (test); 11 or better (checkpoint),COMPOSED,QUOTABLE,n8_watch_list_20260917T140224Z,n8_watch_list.csv
+w_game,7. What to watch,checkpoint game,20,ASSUMED,FACT,n8_watch_list_20260917T140224Z,n8_watch_list.py N_CHECK
+chain_start,8. The bill,pre-trade Apron Team Salary (2026-08-27),"$217,621,829",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_green,8. The bill,out: Josh Green,"$14,679,012",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_williams,8. The bill,in: Cody Williams,"$6,015,600",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_konchar,8. The bill,in: John Konchar,"$6,165,000",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_stretch,8. The bill,"waive Konchar, stretch over 3 seasons","$4,110,000",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_dollar,8. The bill,"McDaniels, our book $26,200,001 vs Spotrac $26,200,000",$1,FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_post,8. The bill,post-trade Apron Team Salary (2026-09-04),"$211,013,416",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_kuminga,8. The bill,"sign Kuminga, taxpayer MLE year 1","$6,064,000",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+chain_final,8. The bill,final Apron Team Salary,"$217,077,416",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+room_hard_cap,8. The bill,"room under second apron, with Kuminga","$4,608,584",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+over_first,8. The bill,"over first apron, with Kuminga","$8,062,416",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+over_tax,8. The bill,"over tax line, with Kuminga","$16,649,416",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+dead_year,8. The bill,dead money 2026-27,"$2,055,000",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
+dead_future,8. The bill,Konchar dead money in 2027-28 and 2028-29,"$4,110,000",FACT,FACT,green_resolution_20260904T014022Z,green_asset_cost.csv
+williams_option,8. The bill,Williams 2027-28 club option,"$7,669,890",FACT,FACT,green_resolution_20260904T014022Z,green_asset_cost.csv detail
+dos_nodos_kuminga,8. The bill,no-Dosunmu branch: most Kuminga could be paid from the non-taxpayer MLE,"$8,254,095",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv note
+dos_stuck_over,8. The bill,"Dosunmu + Green + Kuminga, over the hard cap by","$1,999,829",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_happened_pay,8. The bill,"dos_happened payroll, tax basis","$215,327,416",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_happened_apron,8. The bill,"dos_happened payroll, apron basis","$217,077,416",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_happened_tax,8. The bill,dos_happened estimated tax,$23.3M,FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_cheapest_pay,8. The bill,"dos_cheapest payroll, tax basis","$208,614,580",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_cheapest_apron,8. The bill,"dos_cheapest payroll, apron basis","$210,364,580",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_cheapest_tax,8. The bill,dos_cheapest estimated tax,$8.7M,FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_nodos_pay,8. The bill,"dos_nodos payroll, tax basis","$207,265,000",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_nodos_apron,8. The bill,"dos_nodos payroll, apron basis","$209,015,000",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_nodos_tax,8. The bill,dos_nodos estimated tax,$7.0M,FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_dump_payroll,8. The bill,extra payroll from taking Williams and Konchar,"$6,712,836",FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+dos_dump_tax,8. The bill,extra tax,$14.6M,FACT,FACT,dosunmu_final_states_20260904T014033Z,dosunmu_final_states.csv
+off_delta_u,Appendix,"offseason delta, un-aged",-1.25,MODELED,NOT QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+off_delta_a,Appendix,"offseason delta, aged",-0.39,MODELED,NOT QUOTABLE,w2_aging_gate_20260917T142258Z,w2_aging_gate.csv
+tail00_player,Appendix,tail player,Derrick White (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail00_poss,Appendix,possessions,"34,187",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail00_consensus,Appendix,consensus,+4.50,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail00_rapm,Appendix,rapm,+4.52,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail00_box,Appendix,box,+1.59,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail00_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_player,Appendix,tail player,Jayson Tatum (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_poss,Appendix,possessions,"27,912",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_consensus,Appendix,consensus,+4.32,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_rapm,Appendix,rapm,+4.06,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_box,Appendix,box,+1.81,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail01_darko,Appendix,darko,+4.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_player,Appendix,tail player,Neemias Queta (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_poss,Appendix,possessions,"12,078",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_consensus,Appendix,consensus,+4.52,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_rapm,Appendix,rapm,+4.97,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_box,Appendix,box,+1.61,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail02_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_player,Appendix,tail player,Payton Pritchard (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_poss,Appendix,possessions,"28,044",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_consensus,Appendix,consensus,+2.75,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_rapm,Appendix,rapm,+3.08,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_box,Appendix,box,+0.86,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail03_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_player,Appendix,tail player,Paul George (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_poss,Appendix,possessions,"22,107",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_consensus,Appendix,consensus,+2.69,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_rapm,Appendix,rapm,+2.54,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_box,Appendix,box,+0.91,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail04_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_player,Appendix,tail player,Mitchell Robinson (BOS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_poss,Appendix,possessions,"11,805",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_consensus,Appendix,consensus,+2.88,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_rapm,Appendix,rapm,+2.50,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_box,Appendix,box,+1.55,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail05_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_player,Appendix,tail player,Moussa Diabate (CHA),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_poss,Appendix,possessions,"10,786",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_consensus,Appendix,consensus,+6.29,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_rapm,Appendix,rapm,+6.29,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_box,Appendix,box,+0.51,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail06_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_player,Appendix,tail player,Kon Knueppel (CHA),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_poss,Appendix,possessions,"10,074",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_consensus,Appendix,consensus,+3.70,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_rapm,Appendix,rapm,+4.10,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_box,Appendix,box,+0.90,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail07_darko,Appendix,darko,+0.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_player,Appendix,tail player,Naz Reid (CHA),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_poss,Appendix,possessions,"29,463",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_consensus,Appendix,consensus,+3.15,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_rapm,Appendix,rapm,+3.27,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_box,Appendix,box,+0.87,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail08_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_player,Appendix,tail player,Cade Cunningham (DET),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_poss,Appendix,possessions,"30,366",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_consensus,Appendix,consensus,+3.63,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_rapm,Appendix,rapm,+3.34,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_box,Appendix,box,+0.99,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail09_darko,Appendix,darko,+4.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_player,Appendix,tail player,Ausar Thompson (DET),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_poss,Appendix,possessions,"21,715",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_consensus,Appendix,consensus,+3.39,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_rapm,Appendix,rapm,+3.57,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_box,Appendix,box,+1.13,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail10_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_player,Appendix,tail player,Paul Reed (DET),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_poss,Appendix,possessions,"11,888",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_consensus,Appendix,consensus,+3.82,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_rapm,Appendix,rapm,+3.67,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_box,Appendix,box,+2.57,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail11_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_player,Appendix,tail player,Javonte Green (DET),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_poss,Appendix,possessions,"12,133",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_consensus,Appendix,consensus,+2.41,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_rapm,Appendix,rapm,+2.56,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_box,Appendix,box,+0.95,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail12_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_player,Appendix,tail player,Amen Thompson (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_poss,Appendix,possessions,"28,927",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_consensus,Appendix,consensus,+3.48,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_rapm,Appendix,rapm,+3.11,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_box,Appendix,box,+1.09,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail13_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_player,Appendix,tail player,Alperen Sengun (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_poss,Appendix,possessions,"29,974",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_consensus,Appendix,consensus,+2.37,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_rapm,Appendix,rapm,+2.37,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_box,Appendix,box,+1.45,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail14_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_player,Appendix,tail player,Tari Eason (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_poss,Appendix,possessions,"15,866",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_consensus,Appendix,consensus,+3.08,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_rapm,Appendix,rapm,+3.68,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_box,Appendix,box,+1.38,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail15_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_player,Appendix,tail player,Steven Adams (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_poss,Appendix,possessions,"7,157",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_consensus,Appendix,consensus,+3.22,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_rapm,Appendix,rapm,+4.20,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_box,Appendix,box,+0.20,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail16_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_player,Appendix,tail player,Marcus Smart (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_poss,Appendix,possessions,"13,546",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_consensus,Appendix,consensus,+2.27,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_rapm,Appendix,rapm,+3.27,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_box,Appendix,box,-0.17,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail17_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_player,Appendix,tail player,Kevin Durant (HOU),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_poss,Appendix,possessions,"32,027",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_consensus,Appendix,consensus,+1.78,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_rapm,Appendix,rapm,+1.02,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_box,Appendix,box,+1.06,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail18_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_player,Appendix,tail player,Pascal Siakam (IND),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_poss,Appendix,possessions,"34,405",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_consensus,Appendix,consensus,+3.22,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_rapm,Appendix,rapm,+3.75,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_box,Appendix,box,+1.23,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail19_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_player,Appendix,tail player,Ivica Zubac (IND),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_poss,Appendix,possessions,"24,588",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_consensus,Appendix,consensus,+2.74,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_rapm,Appendix,rapm,+2.61,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_box,Appendix,box,+0.67,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail20_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_player,Appendix,tail player,Karl-Anthony Towns (NYK),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_poss,Appendix,possessions,"33,296",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_consensus,Appendix,consensus,+3.85,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_rapm,Appendix,rapm,+3.86,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_box,Appendix,box,+1.20,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail21_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_player,Appendix,tail player,Jalen Brunson (NYK),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_poss,Appendix,possessions,"36,515",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_consensus,Appendix,consensus,+2.70,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_rapm,Appendix,rapm,+2.75,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_box,Appendix,box,+1.15,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail22_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_player,Appendix,tail player,OG Anunoby (NYK),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_poss,Appendix,possessions,"32,031",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_consensus,Appendix,consensus,+2.65,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_rapm,Appendix,rapm,+2.80,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_box,Appendix,box,+0.58,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail23_darko,Appendix,darko,+4.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_player,Appendix,tail player,Miles McBride (NYK),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_poss,Appendix,possessions,"18,664",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_consensus,Appendix,consensus,+3.03,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_rapm,Appendix,rapm,+3.84,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_box,Appendix,box,+0.13,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail24_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_player,Appendix,tail player,Josh Hart (NYK),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_poss,Appendix,possessions,"35,827",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_consensus,Appendix,consensus,+2.13,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_rapm,Appendix,rapm,+1.64,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_box,Appendix,box,-0.04,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail25_darko,Appendix,darko,+0.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_player,Appendix,tail player,Shai Gilgeous-Alexander (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_poss,Appendix,possessions,"37,420",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_consensus,Appendix,consensus,+7.54,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_rapm,Appendix,rapm,+6.82,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_box,Appendix,box,+4.22,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail26_darko,Appendix,darko,+6.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_player,Appendix,tail player,Chet Holmgren (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_poss,Appendix,possessions,"30,933",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_consensus,Appendix,consensus,+4.82,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_rapm,Appendix,rapm,+4.78,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_box,Appendix,box,+2.50,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail27_darko,Appendix,darko,+5.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_player,Appendix,tail player,Isaiah Hartenstein (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_poss,Appendix,possessions,"24,440",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_consensus,Appendix,consensus,+4.74,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_rapm,Appendix,rapm,+4.69,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_box,Appendix,box,+1.36,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail28_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_player,Appendix,tail player,Jalen Williams (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_poss,Appendix,possessions,"24,660",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_consensus,Appendix,consensus,+2.78,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_rapm,Appendix,rapm,+1.92,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_box,Appendix,box,+1.65,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail29_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_player,Appendix,tail player,Alex Caruso (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_poss,Appendix,possessions,"21,281",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_consensus,Appendix,consensus,+4.26,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_rapm,Appendix,rapm,+4.22,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_box,Appendix,box,+1.90,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail30_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_player,Appendix,tail player,Ajay Mitchell (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_poss,Appendix,possessions,"9,940",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_consensus,Appendix,consensus,+2.81,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_rapm,Appendix,rapm,+2.94,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_box,Appendix,box,+0.83,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail31_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_player,Appendix,tail player,Jaylin Williams (OKC),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_poss,Appendix,possessions,"9,600",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_consensus,Appendix,consensus,+2.63,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_rapm,Appendix,rapm,+1.72,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_box,Appendix,box,+1.76,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail32_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_player,Appendix,tail player,Joel Embiid (PHI),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_poss,Appendix,possessions,"14,567",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_consensus,Appendix,consensus,+4.70,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_rapm,Appendix,rapm,+3.56,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_box,Appendix,box,+2.58,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail33_darko,Appendix,darko,+4.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_player,Appendix,tail player,Tyrese Maxey (PHI),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_poss,Appendix,possessions,"31,485",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_consensus,Appendix,consensus,+2.69,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_rapm,Appendix,rapm,+2.31,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_box,Appendix,box,+1.69,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail34_darko,Appendix,darko,+3.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_player,Appendix,tail player,Dean Wade (PHI),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_poss,Appendix,possessions,"16,627",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_consensus,Appendix,consensus,+3.73,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_rapm,Appendix,rapm,+4.72,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_box,Appendix,box,+0.24,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail35_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_player,Appendix,tail player,LeBron James (PHI),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_poss,Appendix,possessions,"28,286",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_consensus,Appendix,consensus,+2.77,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_rapm,Appendix,rapm,+1.27,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_box,Appendix,box,+1.52,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail36_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_player,Appendix,tail player,Victor Wembanyama (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_poss,Appendix,possessions,"24,823",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_consensus,Appendix,consensus,+9.05,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_rapm,Appendix,rapm,+8.88,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_box,Appendix,box,+4.85,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail37_darko,Appendix,darko,+6.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_player,Appendix,tail player,Dylan Harper (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_poss,Appendix,possessions,"8,520",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_consensus,Appendix,consensus,+3.58,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_rapm,Appendix,rapm,+4.15,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_box,Appendix,box,+0.91,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail38_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_player,Appendix,tail player,Tobias Harris (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_poss,Appendix,possessions,"29,161",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_consensus,Appendix,consensus,+2.68,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_rapm,Appendix,rapm,+3.02,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_box,Appendix,box,+0.24,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail39_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_player,Appendix,tail player,Luke Kornet (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_poss,Appendix,possessions,"17,657",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_consensus,Appendix,consensus,+3.84,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_rapm,Appendix,rapm,+3.52,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_box,Appendix,box,+1.74,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail40_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_player,Appendix,tail player,De'Aaron Fox (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_poss,Appendix,possessions,"31,481",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_consensus,Appendix,consensus,+2.34,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_rapm,Appendix,rapm,+2.39,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_box,Appendix,box,+1.42,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail41_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_player,Appendix,tail player,Julian Champagnie (SAS),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_poss,Appendix,possessions,"24,840",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_consensus,Appendix,consensus,+1.96,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_rapm,Appendix,rapm,+2.54,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_box,Appendix,box,+0.65,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail42_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_player,Appendix,tail player,Kawhi Leonard (TOR),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_poss,Appendix,possessions,"23,329",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_consensus,Appendix,consensus,+5.95,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_rapm,Appendix,rapm,+5.94,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_box,Appendix,box,+2.48,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail43_darko,Appendix,darko,+6.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_player,Appendix,tail player,Scottie Barnes (TOR),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_poss,Appendix,possessions,"28,956",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_consensus,Appendix,consensus,+2.82,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_rapm,Appendix,rapm,+1.82,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_box,Appendix,box,+1.71,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail44_darko,Appendix,darko,+2.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_player,Appendix,tail player,Immanuel Quickley (TOR),OBSERVED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_poss,Appendix,possessions,"20,531",OBSERVED,FACT,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_consensus,Appendix,consensus,+1.59,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_rapm,Appendix,rapm,+1.14,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_box,Appendix,box,+1.31,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+tail45_darko,Appendix,darko,+1.00,MODELED,DESCRIPTIVE,f4_per_view_disagreement_20260916T195855Z,f4b_tail_players.csv
+pv_bos_mkt,Appendix,BOS market,5.47%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_bos_consensus,Appendix,BOS consensus,19.28%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_bos_rapm,Appendix,BOS rapm,20.49%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_bos_box,Appendix,BOS box,13.27%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_bos_darko,Appendix,BOS darko,14.94%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_bos_label,Appendix,BOS label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_mkt,Appendix,SAS market,22.96%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_consensus,Appendix,SAS consensus,16.15%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_rapm,Appendix,SAS rapm,17.52%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_box,Appendix,SAS box,9.77%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_darko,Appendix,SAS darko,12.12%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_sas_label,Appendix,SAS label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_mkt,Appendix,PHI market,8.42%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_consensus,Appendix,PHI consensus,3.62%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_rapm,Appendix,PHI rapm,2.78%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_box,Appendix,PHI box,0.53%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_darko,Appendix,PHI darko,3.01%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_phi_label,Appendix,PHI label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_mkt,Appendix,OKC market,22.49%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_consensus,Appendix,OKC consensus,16.31%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_rapm,Appendix,OKC rapm,15.05%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_box,Appendix,OKC box,17.58%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_darko,Appendix,OKC darko,17.92%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_okc_label,Appendix,OKC label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_mkt,Appendix,CHA market,0.81%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_consensus,Appendix,CHA consensus,8.21%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_rapm,Appendix,CHA rapm,9.44%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_box,Appendix,CHA box,5.20%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_darko,Appendix,CHA darko,0.58%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_cha_label,Appendix,CHA label,MIXED,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_mkt,Appendix,DET market,3.16%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_consensus,Appendix,DET consensus,5.02%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_rapm,Appendix,DET rapm,5.17%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_box,Appendix,DET box,10.48%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_darko,Appendix,DET darko,11.76%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_det_label,Appendix,DET label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_mkt,Appendix,NYK market,8.21%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_consensus,Appendix,NYK consensus,3.71%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_rapm,Appendix,NYK rapm,3.86%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_box,Appendix,NYK box,6.08%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_darko,Appendix,NYK darko,3.59%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_nyk_label,Appendix,NYK label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_mkt,Appendix,HOU market,1.61%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_consensus,Appendix,HOU consensus,5.03%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_rapm,Appendix,HOU rapm,5.09%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_box,Appendix,HOU box,5.27%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_darko,Appendix,HOU darko,6.41%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_hou_label,Appendix,HOU label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_mkt,Appendix,MIN market,3.16%,OBSERVED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_consensus,Appendix,MIN consensus,0.82%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_rapm,Appendix,MIN rapm,1.20%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_box,Appendix,MIN box,2.11%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_darko,Appendix,MIN darko,2.62%,MODELED,QUOTABLE AS BAND,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
+pv_min_label,Appendix,MIN label,ALL-VIEWS,MODELED,QUOTABLE,f4_per_view_disagreement_20260916T195855Z,f4a_per_view_disagreement.csv
