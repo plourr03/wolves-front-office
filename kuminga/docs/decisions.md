@@ -1520,3 +1520,29 @@ Every ranked M4 list is now led by fives containing Joan Beringer, whose impact 
 **Two errors caught before commit.** The first champion detection read the round from the game id, which only encodes it from 2000-01, and silently found 25 of 29 champions; now it fails closed unless every season resolves. The first version of claim 5 used only the historical checkpoint; with noise tripping it 37% of the time it was not a test, so the noise-calibrated threshold was added.
 
 **Not done, and why.** H5 asks for champion-profile gaps to be routed here with thresholds from the champions' ranges; H1's table has only odds columns for three seasons, so claim 5 draws its range from `nba_games` directly instead. N6 (the Kuminga ledger) is not built, so no claim is about Kuminga himself; the one Kuminga lever the model exposes, his minutes, moves title odds by less than 0.1 points between 25 and 36 a night and would not flip anything.
+
+### D81. R2. "Other departures" is seven players, and it ships on Kyle Anderson
+
+**Run ID.** `r2_departures_20260917T131128Z`. MODELLED, pooled attribution, both aging bases. Outputs: `r2_departures_players.csv`, `r2_departures_split_shapley.csv` (and `_verdicts`), `r2_departures_absorbers.csv`.
+
+**Gates.** G1: with the original eight moves the script reproduces `shapley_min_POOLED.csv` to 1e-16 on both bases, so the split runs the published machinery. G2: per-view floors reproduce both published floor tables' clearing counts (un-aged 0.022 / 0.032 / 0.064 / 0.072; aged 0.056 / 0.076 / 0.090 / 0.101).
+
+**The bundle.** Mike Conley (54 Minnesota games in 2025-26 at 18.4 mpg; impact +1.49 / +0.95 / +0.91 / -1.00 across consensus / RAPM / box / DARKO), Kyle Anderson (19 games, 19.1 mpg; +0.58 / -0.77 / +0.16 / -1.00), Joe Ingles (27 games, 5.7; +0.48 / +0.70 / -0.21 / -3.00), Julian Phillips (13 games, 7.2; -0.04 / +0.75 / -0.33 / 0.00), and three two-way players, Rocco Zikarsky, Zyon Pullin and Enrique Freeman (4 to 5 games each). **The three two-way players have NO impact in consensus, RAPM or box** (source "replacement"), so the rollup counts their minutes at zero, league average; only DARKO rates them (-2 to -3).
+
+**Where the minutes go.** Had the seven stayed with every other move made, the pooled allocator gives them 55.8 minutes a night (Conley 15.1, Anderson 13.9, Zikarsky 8.3, Phillips 6.6, Ingles 4.6, Freeman 3.8, Pullin 3.5). Without them it spreads those minutes across the roster: Edwards +7.0, McDaniels +6.1, Dosunmu +6.0, Ball +6.0, Evans +5.7, Hyland +5.2, Shannon +5.1, Lyles +5.1, Kuminga +4.9, Clark +4.7.
+
+**The split, 14 moves, exact, mean pp un-aged / aged, views clearing.**
+
+| member | un-aged | aged | sign | clears | ships |
+|---|---:|---:|---|---|---|
+| **Kyle Anderson** | **+0.286** | **+0.646** | ALL POSITIVE both | 4/4, 4/4 | **yes** |
+| Zyon Pullin | +0.189 | +0.170 | ALL POSITIVE both | 3/4, 2/4 | no |
+| Enrique Freeman | +0.163 | +0.137 | ALL POSITIVE both | 4/4, 3/4 | no |
+| Rocco Zikarsky | +0.147 | +0.125 | ALL POSITIVE both | 3/4, 2/4 | no |
+| Joe Ingles | +0.127 | +0.115 | MIXED both | | no |
+| Julian Phillips | +0.066 | +0.028 | MIXED both | | no |
+| Mike Conley | +0.003 | +0.158 | MIXED both | | no |
+
+**Reading.** The bundle verdict is carried by one departure, Anderson, and his value is not that he was bad by every view (consensus and box rate him slightly positive) but that his 14 minutes go to better players. Conley leaving does not register as a gain or a loss. The two-way trio's positive sign is minutes displacement plus DARKO alone, and none of them clears. Members sum to less than the bundle (un-aged consensus +0.450 against +0.625), the interaction the bundle hides. **For the piece:** "other departures helped" becomes "letting Kyle Anderson's minutes go to the players who replaced them helped", and the bundle is described as seven players of whom one carries the verdict.
+
+**A granularity sensitivity found in passing, and it touches a shipping verdict.** Splitting the bundle changes the other moves' Shapley values, because Shapley depends on how moves are grouped. ball_in, randle_out and reid_out still ship in the 14-move game. **dosunmu_retained does not**: its aged box value is -0.084 against a 0.090 floor (in the published eight-move game it is -0.100, clearing by 0.010). It stays on the shipping list, because the eight-move decomposition is the one the list was defined on, but it is marked as clearing one aged view by 0.010 and failing it under the split, and the piece should not lean on it.
