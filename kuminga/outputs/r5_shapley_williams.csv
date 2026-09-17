@@ -1,0 +1,433 @@
+fork,move,shapley_pp,basis,version,game
+consensus,randle_out,0.2508607060598124,unaged,before_d85,eight moves
+consensus,reid_out,-0.6461569756995589,unaged,before_d85,eight moves
+consensus,ball_in,0.4083678108496401,unaged,before_d85,eight moves
+consensus,dosunmu_retained,-0.4885099389438192,unaged,before_d85,eight moves
+consensus,depth,-0.5902614499027785,unaged,before_d85,eight moves
+consensus,ddv_injury,-0.17692315707338754,unaged,before_d85,eight moves
+consensus,kuminga_in,0.0408354977614132,unaged,before_d85,eight moves
+consensus,other_departures,0.6247826510865245,unaged,before_d85,eight moves
+rapm,randle_out,0.4740632733824863,unaged,before_d85,eight moves
+rapm,reid_out,-0.866791942995949,unaged,before_d85,eight moves
+rapm,ball_in,0.39971461458940677,unaged,before_d85,eight moves
+rapm,dosunmu_retained,-0.7267604335847588,unaged,before_d85,eight moves
+rapm,depth,-0.774287814904112,unaged,before_d85,eight moves
+rapm,ddv_injury,-0.03795995995878118,unaged,before_d85,eight moves
+rapm,kuminga_in,0.11493890248350135,unaged,before_d85,eight moves
+rapm,other_departures,0.9740850065922612,unaged,before_d85,eight moves
+box,randle_out,0.31824162292109676,unaged,before_d85,eight moves
+box,reid_out,-0.21390602893018654,unaged,before_d85,eight moves
+box,ball_in,0.8611143162382173,unaged,before_d85,eight moves
+box,dosunmu_retained,-0.10442254559550766,unaged,before_d85,eight moves
+box,depth,-0.01964704802124929,unaged,before_d85,eight moves
+box,ddv_injury,-0.3622727302294597,unaged,before_d85,eight moves
+box,kuminga_in,-0.19883774461345918,unaged,before_d85,eight moves
+box,other_departures,0.31513374574000413,unaged,before_d85,eight moves
+darko,randle_out,0.36974045660421967,unaged,before_d85,eight moves
+darko,reid_out,-0.21809597008677356,unaged,before_d85,eight moves
+darko,ball_in,1.441811669943153,unaged,before_d85,eight moves
+darko,dosunmu_retained,-0.8499890448416938,unaged,before_d85,eight moves
+darko,depth,-0.56161563680692,unaged,before_d85,eight moves
+darko,ddv_injury,-0.86911737660255,unaged,before_d85,eight moves
+darko,kuminga_in,-0.7469549025074375,unaged,before_d85,eight moves
+darko,other_departures,2.8825009683555716,unaged,before_d85,eight moves
+consensus,randle_out,0.03900150368033606,unaged,williams_only,eight moves
+consensus,reid_out,-0.3795000748828848,unaged,williams_only,eight moves
+consensus,ball_in,0.2904574431488449,unaged,williams_only,eight moves
+consensus,dosunmu_retained,-0.1301733157887226,unaged,williams_only,eight moves
+consensus,depth,-0.06608999305096905,unaged,williams_only,eight moves
+consensus,ddv_injury,-0.20193417268083644,unaged,williams_only,eight moves
+consensus,kuminga_in,0.11097887275119953,unaged,williams_only,eight moves
+consensus,other_departures,0.01584448264027838,unaged,williams_only,eight moves
+rapm,randle_out,0.14825327543485262,unaged,williams_only,eight moves
+rapm,reid_out,-0.5378318912675767,unaged,williams_only,eight moves
+rapm,ball_in,0.34877843608067405,unaged,williams_only,eight moves
+rapm,dosunmu_retained,-0.23498754510180142,unaged,williams_only,eight moves
+rapm,depth,-0.11189975066235552,unaged,williams_only,eight moves
+rapm,ddv_injury,-0.1766126358985424,unaged,williams_only,eight moves
+rapm,kuminga_in,0.18669443712786224,unaged,williams_only,eight moves
+rapm,other_departures,0.15598041131617452,unaged,williams_only,eight moves
+box,randle_out,0.14094589062777432,unaged,williams_only,eight moves
+box,reid_out,-0.23565731459679615,unaged,williams_only,eight moves
+box,ball_in,0.7415407262845493,unaged,williams_only,eight moves
+box,dosunmu_retained,0.02783006498450821,unaged,williams_only,eight moves
+box,depth,0.22786468705769483,unaged,williams_only,eight moves
+box,ddv_injury,-0.36943846220380655,unaged,williams_only,eight moves
+box,kuminga_in,-0.04933970830390347,unaged,williams_only,eight moves
+box,other_departures,-0.06031988357357817,unaged,williams_only,eight moves
+darko,randle_out,0.060236038120393326,unaged,williams_only,eight moves
+darko,reid_out,-0.27430994048955337,unaged,williams_only,eight moves
+darko,ball_in,1.0667151005899487,unaged,williams_only,eight moves
+darko,dosunmu_retained,-0.34913966585786843,unaged,williams_only,eight moves
+darko,depth,-0.012600735225666505,unaged,williams_only,eight moves
+darko,ddv_injury,-0.7087699508630853,unaged,williams_only,eight moves
+darko,kuminga_in,-0.30287049413661055,unaged,williams_only,eight moves
+darko,other_departures,1.4024265083990985,unaged,williams_only,eight moves
+consensus,randle_out,0.018858735773610052,unaged,after_d85,eight moves
+consensus,reid_out,-0.4605225545942962,unaged,after_d85,eight moves
+consensus,ball_in,0.35281354565305106,unaged,after_d85,eight moves
+consensus,dosunmu_retained,-0.12398038156557697,unaged,after_d85,eight moves
+consensus,depth,-0.02829191372737911,unaged,after_d85,eight moves
+consensus,ddv_injury,-0.24753125018570432,unaged,after_d85,eight moves
+consensus,kuminga_in,0.15178653961188102,unaged,after_d85,eight moves
+consensus,other_departures,-0.02417243726636308,unaged,after_d85,eight moves
+rapm,randle_out,0.12999148215224068,unaged,after_d85,eight moves
+rapm,reid_out,-0.6316481335653329,unaged,after_d85,eight moves
+rapm,ball_in,0.41391616944512966,unaged,after_d85,eight moves
+rapm,dosunmu_retained,-0.23382263303499967,unaged,after_d85,eight moves
+rapm,depth,-0.06887586723149239,unaged,after_d85,eight moves
+rapm,ddv_injury,-0.21716834687926742,unaged,after_d85,eight moves
+rapm,kuminga_in,0.23510307152448057,unaged,after_d85,eight moves
+rapm,other_departures,0.12408102870149738,unaged,after_d85,eight moves
+box,randle_out,0.11638071530502589,unaged,after_d85,eight moves
+box,reid_out,-0.27348834062915606,unaged,after_d85,eight moves
+box,ball_in,0.794951810618821,unaged,after_d85,eight moves
+box,dosunmu_retained,0.05306333840582494,unaged,after_d85,eight moves
+box,depth,0.2886595965174854,unaged,after_d85,eight moves
+box,ddv_injury,-0.40919846180551245,unaged,after_d85,eight moves
+box,kuminga_in,-0.024939840971100927,unaged,after_d85,eight moves
+box,other_departures,-0.0997017268317444,unaged,after_d85,eight moves
+darko,randle_out,0.01897264942509051,unaged,after_d85,eight moves
+darko,reid_out,-0.3280729467231782,unaged,after_d85,eight moves
+darko,ball_in,1.170004393658219,unaged,after_d85,eight moves
+darko,dosunmu_retained,-0.34006216533748757,unaged,after_d85,eight moves
+darko,depth,0.05742480691335613,unaged,after_d85,eight moves
+darko,ddv_injury,-0.7872889708517705,unaged,after_d85,eight moves
+darko,kuminga_in,-0.28403968354540626,unaged,after_d85,eight moves
+darko,other_departures,1.4439625512527643,unaged,after_d85,eight moves
+consensus,randle_out,0.10478283509522705,unaged,before_d85_teamrank,eight moves
+consensus,reid_out,-1.1894218680120294,unaged,before_d85_teamrank,eight moves
+consensus,ball_in,0.7440115903830207,unaged,before_d85_teamrank,eight moves
+consensus,dosunmu_retained,-0.5110551484246861,unaged,before_d85_teamrank,eight moves
+consensus,depth,-0.15258415605280956,unaged,before_d85_teamrank,eight moves
+consensus,ddv_injury,-0.37424239780451724,unaged,before_d85_teamrank,eight moves
+consensus,kuminga_in,0.22237683960100268,unaged,before_d85_teamrank,eight moves
+consensus,other_departures,-0.2624236868673468,unaged,before_d85_teamrank,eight moves
+rapm,randle_out,0.35766503933831206,unaged,before_d85_teamrank,eight moves
+rapm,reid_out,-1.5052229933632983,unaged,before_d85_teamrank,eight moves
+rapm,ball_in,0.6791237889565935,unaged,before_d85_teamrank,eight moves
+rapm,dosunmu_retained,-0.8197880070074341,unaged,before_d85_teamrank,eight moves
+rapm,depth,-0.4259991787800237,unaged,before_d85_teamrank,eight moves
+rapm,ddv_injury,-0.15394286031487553,unaged,before_d85_teamrank,eight moves
+rapm,kuminga_in,0.2959213435184118,unaged,before_d85_teamrank,eight moves
+rapm,other_departures,0.33125410887986256,unaged,before_d85_teamrank,eight moves
+box,randle_out,0.32719367843199565,unaged,before_d85_teamrank,eight moves
+box,reid_out,-0.3135592359516756,unaged,before_d85_teamrank,eight moves
+box,ball_in,1.1002561294981028,unaged,before_d85_teamrank,eight moves
+box,dosunmu_retained,-0.05567974742700498,unaged,before_d85_teamrank,eight moves
+box,depth,0.25940816234777464,unaged,before_d85_teamrank,eight moves
+box,ddv_injury,-0.4886040814982554,unaged,before_d85_teamrank,eight moves
+box,kuminga_in,-0.17107468580140045,unaged,before_d85_teamrank,eight moves
+box,other_departures,-0.12891862541343635,unaged,before_d85_teamrank,eight moves
+darko,randle_out,0.21473529142722758,unaged,before_d85_teamrank,eight moves
+darko,reid_out,-0.5928628567322742,unaged,before_d85_teamrank,eight moves
+darko,ball_in,2.2882580146227545,unaged,before_d85_teamrank,eight moves
+darko,dosunmu_retained,-0.901269172825752,unaged,before_d85_teamrank,eight moves
+darko,depth,-0.12693857475199302,unaged,before_d85_teamrank,eight moves
+darko,ddv_injury,-1.549264750366514,unaged,before_d85_teamrank,eight moves
+darko,kuminga_in,-0.7711195845709558,unaged,before_d85_teamrank,eight moves
+darko,other_departures,1.516621484359919,unaged,before_d85_teamrank,eight moves
+consensus,randle_out,-0.341706933097812,unaged,after_d85_teamrank,eight moves
+consensus,reid_out,-1.294909574187411,unaged,after_d85_teamrank,eight moves
+consensus,ball_in,0.9630359447100457,unaged,after_d85_teamrank,eight moves
+consensus,dosunmu_retained,0.034909732698301506,unaged,after_d85_teamrank,eight moves
+consensus,depth,0.7188643632721808,unaged,after_d85_teamrank,eight moves
+consensus,ddv_injury,-0.6858565229990479,unaged,after_d85_teamrank,eight moves
+consensus,kuminga_in,0.5682564029924533,unaged,after_d85_teamrank,eight moves
+consensus,other_departures,-0.9672959306458442,unaged,after_d85_teamrank,eight moves
+rapm,randle_out,-0.2150513253870139,unaged,after_d85_teamrank,eight moves
+rapm,reid_out,-1.5712778851360298,unaged,after_d85_teamrank,eight moves
+rapm,ball_in,0.9918360054477517,unaged,after_d85_teamrank,eight moves
+rapm,dosunmu_retained,-0.11291145414681408,unaged,after_d85_teamrank,eight moves
+rapm,depth,0.645128588375913,unaged,after_d85_teamrank,eight moves
+rapm,ddv_injury,-0.5745239406961162,unaged,after_d85_teamrank,eight moves
+rapm,kuminga_in,0.6872933842596607,unaged,after_d85_teamrank,eight moves
+rapm,other_departures,-0.5635365169512017,unaged,after_d85_teamrank,eight moves
+box,randle_out,-0.04471017668975863,unaged,after_d85_teamrank,eight moves
+box,reid_out,-0.5751551714228348,unaged,after_d85_teamrank,eight moves
+box,ball_in,1.2158561687160006,unaged,after_d85_teamrank,eight moves
+box,dosunmu_retained,0.2303346724757514,unaged,after_d85_teamrank,eight moves
+box,depth,0.7894385421304209,unaged,after_d85_teamrank,eight moves
+box,ddv_injury,-0.7214215034619579,unaged,after_d85_teamrank,eight moves
+box,kuminga_in,0.10603842138648428,unaged,after_d85_teamrank,eight moves
+box,other_departures,-0.6957789324553231,unaged,after_d85_teamrank,eight moves
+darko,randle_out,-0.2779415296683127,unaged,after_d85_teamrank,eight moves
+darko,reid_out,-0.8986430113050858,unaged,after_d85_teamrank,eight moves
+darko,ball_in,2.2531338183720133,unaged,after_d85_teamrank,eight moves
+darko,dosunmu_retained,-0.2564947674751748,unaged,after_d85_teamrank,eight moves
+darko,depth,0.8453915410065963,unaged,after_d85_teamrank,eight moves
+darko,ddv_injury,-1.6590161894997106,unaged,after_d85_teamrank,eight moves
+darko,kuminga_in,-0.17416049578528522,unaged,after_d85_teamrank,eight moves
+darko,other_departures,0.16752331944832624,unaged,after_d85_teamrank,eight moves
+consensus,randle_out,0.02444300383428826,unaged,after_d85,split departures
+consensus,reid_out,-0.45280105636249024,unaged,after_d85,split departures
+consensus,ball_in,0.35145366140681505,unaged,after_d85,split departures
+consensus,dosunmu_retained,-0.1184192324402343,unaged,after_d85,split departures
+consensus,depth,-0.007489662051276683,unaged,after_d85,split departures
+consensus,ddv_injury,-0.24704104242050354,unaged,after_d85,split departures
+consensus,kuminga_in,0.15099678361665328,unaged,after_d85,split departures
+consensus,dep:Mike Conley,-0.18561325465374304,unaged,after_d85,split departures
+consensus,dep:Kyle Anderson,-0.034864561546911504,unaged,after_d85,split departures
+consensus,dep:Joe Ingles,-0.0022574061741184636,unaged,after_d85,split departures
+consensus,dep:Julian Phillips,0.045315765523650325,unaged,after_d85,split departures
+consensus,dep:Rocco Zikarsky,0.037234849904974616,unaged,after_d85,split departures
+consensus,dep:Zyon Pullin,0.03650064179089291,unaged,after_d85,split departures
+consensus,dep:Enrique Freeman,0.04150179327122588,unaged,after_d85,split departures
+rapm,randle_out,0.13352994954272862,unaged,after_d85,split departures
+rapm,reid_out,-0.6212910418389562,unaged,after_d85,split departures
+rapm,ball_in,0.4126184870090087,unaged,after_d85,split departures
+rapm,dosunmu_retained,-0.22319822156211866,unaged,after_d85,split departures
+rapm,depth,-0.04106694572192355,unaged,after_d85,split departures
+rapm,ddv_injury,-0.22003288305624838,unaged,after_d85,split departures
+rapm,kuminga_in,0.23346650558147206,unaged,after_d85,split departures
+rapm,dep:Mike Conley,-0.1609489336172869,unaged,after_d85,split departures
+rapm,dep:Kyle Anderson,0.18854913779473415,unaged,after_d85,split departures
+rapm,dep:Joe Ingles,-0.02818775500033927,unaged,after_d85,split departures
+rapm,dep:Julian Phillips,-0.029329387405711192,unaged,after_d85,split departures
+rapm,dep:Rocco Zikarsky,0.03473331042281828,unaged,after_d85,split departures
+rapm,dep:Zyon Pullin,0.03278502057984929,unaged,after_d85,split departures
+rapm,dep:Enrique Freeman,0.03994952838422903,unaged,after_d85,split departures
+box,randle_out,0.1183921939868912,unaged,after_d85,split departures
+box,reid_out,-0.26952859990277117,unaged,after_d85,split departures
+box,ball_in,0.7853805349465682,unaged,after_d85,split departures
+box,dosunmu_retained,0.05060070069386106,unaged,after_d85,split departures
+box,depth,0.2890914514625306,unaged,after_d85,split departures
+box,ddv_injury,-0.40347642209494633,unaged,after_d85,split departures
+box,kuminga_in,-0.025798120461343374,unaged,after_d85,split departures
+box,dep:Mike Conley,-0.2603157905556425,unaged,after_d85,split departures
+box,dep:Kyle Anderson,-0.020392428013215717,unaged,after_d85,split departures
+box,dep:Joe Ingles,0.03863803798530874,unaged,after_d85,split departures
+box,dep:Julian Phillips,0.07392465093118196,unaged,after_d85,split departures
+box,dep:Rocco Zikarsky,0.022924083101367072,unaged,after_d85,split departures
+box,dep:Zyon Pullin,0.023053531926206947,unaged,after_d85,split departures
+box,dep:Enrique Freeman,0.02323326660364677,unaged,after_d85,split departures
+darko,randle_out,-0.009130095901933777,unaged,after_d85,split departures
+darko,reid_out,-0.32419178875009674,unaged,after_d85,split departures
+darko,ball_in,1.106722026767778,unaged,after_d85,split departures
+darko,dosunmu_retained,-0.2766734636532753,unaged,after_d85,split departures
+darko,depth,0.16267680570814702,unaged,after_d85,split departures
+darko,ddv_injury,-0.7486949609613383,unaged,after_d85,split departures
+darko,kuminga_in,-0.2218546091899371,unaged,after_d85,split departures
+darko,dep:Mike Conley,0.17608134962382208,unaged,after_d85,split departures
+darko,dep:Kyle Anderson,0.18129282135727018,unaged,after_d85,split departures
+darko,dep:Joe Ingles,0.2558708707408746,unaged,after_d85,split departures
+darko,dep:Julian Phillips,-0.032033685555948585,unaged,after_d85,split departures
+darko,dep:Rocco Zikarsky,0.19815426107427048,unaged,after_d85,split departures
+darko,dep:Zyon Pullin,0.285835575010269,unaged,after_d85,split departures
+darko,dep:Enrique Freeman,0.19684552852168566,unaged,after_d85,split departures
+consensus,randle_out,0.5161212132738582,aged,before_d85,eight moves
+consensus,reid_out,-0.7573142548911096,aged,before_d85,eight moves
+consensus,ball_in,0.44052125750038784,aged,before_d85,eight moves
+consensus,dosunmu_retained,-0.5322081131718579,aged,before_d85,eight moves
+consensus,depth,-0.5079068882535276,aged,before_d85,eight moves
+consensus,ddv_injury,-0.07264202734068655,aged,before_d85,eight moves
+consensus,kuminga_in,0.1714136525133021,aged,before_d85,eight moves
+consensus,other_departures,0.8413516344926357,aged,before_d85,eight moves
+rapm,randle_out,0.8029978734003844,aged,before_d85,eight moves
+rapm,reid_out,-0.9957944012442871,aged,before_d85,eight moves
+rapm,ball_in,0.4267201416314302,aged,before_d85,eight moves
+rapm,dosunmu_retained,-0.7898945823609804,aged,before_d85,eight moves
+rapm,depth,-0.6775846179019789,aged,before_d85,eight moves
+rapm,ddv_injury,0.10004914749691654,aged,before_d85,eight moves
+rapm,kuminga_in,0.27899975496706064,aged,before_d85,eight moves
+rapm,other_departures,1.2369912911549124,aged,before_d85,eight moves
+box,randle_out,0.7061555269087125,aged,before_d85,eight moves
+box,reid_out,-0.2867827417570633,aged,before_d85,eight moves
+box,ball_in,0.9085721968082217,aged,before_d85,eight moves
+box,dosunmu_retained,-0.10031116616852605,aged,before_d85,eight moves
+box,depth,0.2126366639661592,aged,before_d85,eight moves
+box,ddv_injury,-0.2005988935982703,aged,before_d85,eight moves
+box,kuminga_in,-0.04079326341645101,aged,before_d85,eight moves
+box,other_departures,0.6262360760567371,aged,before_d85,eight moves
+darko,randle_out,0.7797481588019097,aged,before_d85,eight moves
+darko,reid_out,-0.3057193926693839,aged,before_d85,eight moves
+darko,ball_in,1.6264041677774372,aged,before_d85,eight moves
+darko,dosunmu_retained,-0.966971138854179,aged,before_d85,eight moves
+darko,depth,-0.4306488058491169,aged,before_d85,eight moves
+darko,ddv_injury,-0.7893547796728559,aged,before_d85,eight moves
+darko,kuminga_in,-0.6739661633641932,aged,before_d85,eight moves
+darko,other_departures,3.444981714326606,aged,before_d85,eight moves
+consensus,randle_out,0.19163424628150083,aged,williams_only,eight moves
+consensus,reid_out,-0.4713284147216018,aged,williams_only,eight moves
+consensus,ball_in,0.345197461061183,aged,williams_only,eight moves
+consensus,dosunmu_retained,-0.16644496263643688,aged,williams_only,eight moves
+consensus,depth,-0.029107771505282695,aged,williams_only,eight moves
+consensus,ddv_injury,-0.15894789961367042,aged,williams_only,eight moves
+consensus,kuminga_in,0.18990622741921714,aged,williams_only,eight moves
+consensus,other_departures,0.17207896604286632,aged,williams_only,eight moves
+rapm,randle_out,0.36751462071006175,aged,williams_only,eight moves
+rapm,reid_out,-0.671273942727225,aged,williams_only,eight moves
+rapm,ball_in,0.4022592533114424,aged,williams_only,eight moves
+rapm,dosunmu_retained,-0.30300823636606206,aged,williams_only,eight moves
+rapm,depth,-0.07001402242286303,aged,williams_only,eight moves
+rapm,ddv_injury,-0.10303478866117914,aged,williams_only,eight moves
+rapm,kuminga_in,0.29696863330723533,aged,williams_only,eight moves
+rapm,other_departures,0.38252081724229436,aged,williams_only,eight moves
+box,randle_out,0.4763186491243832,aged,williams_only,eight moves
+box,reid_out,-0.30022146977943737,aged,williams_only,eight moves
+box,ball_in,0.8092934602786616,aged,williams_only,eight moves
+box,dosunmu_retained,0.0072177354359192186,aged,williams_only,eight moves
+box,depth,0.3668315670833098,aged,williams_only,eight moves
+box,ddv_injury,-0.24010205058424533,aged,williams_only,eight moves
+box,kuminga_in,0.047389716126459466,aged,williams_only,eight moves
+box,other_departures,0.28717402115910834,aged,williams_only,eight moves
+darko,randle_out,0.3570962851764912,aged,williams_only,eight moves
+darko,reid_out,-0.3367976680485388,aged,williams_only,eight moves
+darko,ball_in,1.2734042653929052,aged,williams_only,eight moves
+darko,dosunmu_retained,-0.46481204968817946,aged,williams_only,eight moves
+darko,depth,0.0355223306453778,aged,williams_only,eight moves
+darko,ddv_injury,-0.6850765776741055,aged,williams_only,eight moves
+darko,kuminga_in,-0.29398765334161153,aged,williams_only,eight moves
+darko,other_departures,2.007974325795595,aged,williams_only,eight moves
+consensus,randle_out,0.18967568776101304,aged,after_d85,eight moves
+consensus,reid_out,-0.5610898224417101,aged,after_d85,eight moves
+consensus,ball_in,0.4105217134390775,aged,after_d85,eight moves
+consensus,dosunmu_retained,-0.16360253743867942,aged,after_d85,eight moves
+consensus,depth,0.017641934054115935,aged,after_d85,eight moves
+consensus,ddv_injury,-0.19476868454419835,aged,after_d85,eight moves
+consensus,kuminga_in,0.23845785692779448,aged,after_d85,eight moves
+consensus,other_departures,0.15070190112249557,aged,after_d85,eight moves
+rapm,randle_out,0.3644374971202219,aged,after_d85,eight moves
+rapm,reid_out,-0.7637443170846492,aged,after_d85,eight moves
+rapm,ball_in,0.4615327594665148,aged,after_d85,eight moves
+rapm,dosunmu_retained,-0.29751508153520256,aged,after_d85,eight moves
+rapm,depth,-0.01564852957500067,aged,after_d85,eight moves
+rapm,ddv_injury,-0.12933255470144261,aged,after_d85,eight moves
+rapm,kuminga_in,0.35266512658486804,aged,after_d85,eight moves
+rapm,other_departures,0.3659969955124037,aged,after_d85,eight moves
+box,randle_out,0.4699383288711498,aged,after_d85,eight moves
+box,reid_out,-0.32239804412580847,aged,after_d85,eight moves
+box,ball_in,0.853740686762975,aged,after_d85,eight moves
+box,dosunmu_retained,0.029004737864999474,aged,after_d85,eight moves
+box,depth,0.42240350226016604,aged,after_d85,eight moves
+box,ddv_injury,-0.2586910737599475,aged,after_d85,eight moves
+box,kuminga_in,0.06992581954742544,aged,after_d85,eight moves
+box,other_departures,0.26373706472520014,aged,after_d85,eight moves
+darko,randle_out,0.3323746727207504,aged,after_d85,eight moves
+darko,reid_out,-0.38760123209172365,aged,after_d85,eight moves
+darko,ball_in,1.3770661509437387,aged,after_d85,eight moves
+darko,dosunmu_retained,-0.45927671853942653,aged,after_d85,eight moves
+darko,depth,0.11519255056593822,aged,after_d85,eight moves
+darko,ddv_injury,-0.7526964778921097,aged,after_d85,eight moves
+darko,kuminga_in,-0.27124430917567277,aged,after_d85,eight moves
+darko,other_departures,2.0647202490433365,aged,after_d85,eight moves
+consensus,randle_out,0.488097713133992,aged,before_d85_teamrank,eight moves
+consensus,reid_out,-1.2515909419763864,aged,before_d85_teamrank,eight moves
+consensus,ball_in,0.7380106781718873,aged,before_d85_teamrank,eight moves
+consensus,dosunmu_retained,-0.5398190666975812,aged,before_d85_teamrank,eight moves
+consensus,depth,-0.10875251373632713,aged,before_d85_teamrank,eight moves
+consensus,ddv_injury,-0.19514864410690425,aged,before_d85_teamrank,eight moves
+consensus,kuminga_in,0.38199546940726875,aged,before_d85_teamrank,eight moves
+consensus,other_departures,0.2549195073681474,aged,before_d85_teamrank,eight moves
+rapm,randle_out,0.7850510323611707,aged,before_d85_teamrank,eight moves
+rapm,reid_out,-1.5545563129522215,aged,before_d85_teamrank,eight moves
+rapm,ball_in,0.6598907175,aged,before_d85_teamrank,eight moves
+rapm,dosunmu_retained,-0.8428425104903365,aged,before_d85_teamrank,eight moves
+rapm,depth,-0.3638124882814411,aged,before_d85_teamrank,eight moves
+rapm,ddv_injury,0.06324982409242047,aged,before_d85_teamrank,eight moves
+rapm,kuminga_in,0.4718634791838902,aged,before_d85_teamrank,eight moves
+rapm,other_departures,0.9182743333863777,aged,before_d85_teamrank,eight moves
+box,randle_out,0.8315062553370877,aged,before_d85_teamrank,eight moves
+box,reid_out,-0.30925681767804203,aged,before_d85_teamrank,eight moves
+box,ball_in,1.0652278913568374,aged,before_d85_teamrank,eight moves
+box,dosunmu_retained,-0.06908538270311901,aged,before_d85_teamrank,eight moves
+box,depth,0.36212748623238006,aged,before_d85_teamrank,eight moves
+box,ddv_injury,-0.23403562727544452,aged,before_d85_teamrank,eight moves
+box,kuminga_in,-0.004668062695219125,aged,before_d85_teamrank,eight moves
+box,other_departures,0.5540178819157046,aged,before_d85_teamrank,eight moves
+darko,randle_out,0.7985228340380601,aged,before_d85_teamrank,eight moves
+darko,reid_out,-0.6346199614394096,aged,before_d85_teamrank,eight moves
+darko,ball_in,2.370756454366104,aged,before_d85_teamrank,eight moves
+darko,dosunmu_retained,-0.9702926171584852,aged,before_d85_teamrank,eight moves
+darko,depth,-0.028435668959164034,aged,before_d85_teamrank,eight moves
+darko,ddv_injury,-1.3391597536442907,aged,before_d85_teamrank,eight moves
+darko,kuminga_in,-0.6097385953004136,aged,before_d85_teamrank,eight moves
+darko,other_departures,2.348631638527595,aged,before_d85_teamrank,eight moves
+consensus,randle_out,-0.041887575059959534,aged,after_d85_teamrank,eight moves
+consensus,reid_out,-1.3559405795584958,aged,after_d85_teamrank,eight moves
+consensus,ball_in,0.9304649620678842,aged,after_d85_teamrank,eight moves
+consensus,dosunmu_retained,-0.03850798613989474,aged,after_d85_teamrank,eight moves
+consensus,depth,0.6849955201897163,aged,after_d85_teamrank,eight moves
+consensus,ddv_injury,-0.5446044076408226,aged,after_d85_teamrank,eight moves
+consensus,kuminga_in,0.6370392359864175,aged,after_d85_teamrank,eight moves
+consensus,other_departures,-0.5236396296395534,aged,after_d85_teamrank,eight moves
+rapm,randle_out,0.13398984429864588,aged,after_d85_teamrank,eight moves
+rapm,reid_out,-1.6412841100601563,aged,after_d85_teamrank,eight moves
+rapm,ball_in,0.9352808233576279,aged,after_d85_teamrank,eight moves
+rapm,dosunmu_retained,-0.20871272825752754,aged,after_d85_teamrank,eight moves
+rapm,depth,0.6020946609442286,aged,after_d85_teamrank,eight moves
+rapm,ddv_injury,-0.39892338270986416,aged,after_d85_teamrank,eight moves
+rapm,kuminga_in,0.7600528775068487,aged,after_d85_teamrank,eight moves
+rapm,other_departures,-0.033690754283128344,aged,after_d85_teamrank,eight moves
+box,randle_out,0.45957783330849294,aged,after_d85_teamrank,eight moves
+box,reid_out,-0.5312337201994667,aged,after_d85_teamrank,eight moves
+box,ball_in,1.1335170748832009,aged,after_d85_teamrank,eight moves
+box,dosunmu_retained,0.13095703074449597,aged,after_d85_teamrank,eight moves
+box,depth,0.7152443965994848,aged,after_d85_teamrank,eight moves
+box,ddv_injury,-0.4608356821140494,aged,after_d85_teamrank,eight moves
+box,kuminga_in,0.15914670641579184,aged,after_d85_teamrank,eight moves
+box,other_departures,0.04221963793861186,aged,after_d85_teamrank,eight moves
+darko,randle_out,0.2505360055927062,aged,after_d85_teamrank,eight moves
+darko,reid_out,-0.9239033427685492,aged,after_d85_teamrank,eight moves
+darko,ball_in,2.316688847197174,aged,after_d85_teamrank,eight moves
+darko,dosunmu_retained,-0.41573109128973784,aged,after_d85_teamrank,eight moves
+darko,depth,0.8205766366550679,aged,after_d85_teamrank,eight moves
+darko,ddv_injury,-1.5142939598721892,aged,after_d85_teamrank,eight moves
+darko,kuminga_in,-0.15034007816379336,aged,after_d85_teamrank,eight moves
+darko,other_departures,1.0352934282877013,aged,after_d85_teamrank,eight moves
+consensus,randle_out,0.19272382481996325,aged,after_d85,split departures
+consensus,reid_out,-0.549263910822447,aged,after_d85,split departures
+consensus,ball_in,0.4061354000666678,aged,after_d85,split departures
+consensus,dosunmu_retained,-0.1564866712074484,aged,after_d85,split departures
+consensus,depth,0.03545737952030443,aged,after_d85,split departures
+consensus,ddv_injury,-0.1941798836393674,aged,after_d85,split departures
+consensus,kuminga_in,0.23605401773737952,aged,after_d85,split departures
+consensus,dep:Mike Conley,-0.12921827986004625,aged,after_d85,split departures
+consensus,dep:Kyle Anderson,0.13968540380486621,aged,after_d85,split departures
+consensus,dep:Joe Ingles,-0.014787527655260263,aged,after_d85,split departures
+consensus,dep:Julian Phillips,0.03761522084390859,aged,after_d85,split departures
+consensus,dep:Rocco Zikarsky,0.02756739974853428,aged,after_d85,split departures
+consensus,dep:Zyon Pullin,0.025805100392881298,aged,after_d85,split departures
+consensus,dep:Enrique Freeman,0.030430575129972583,aged,after_d85,split departures
+rapm,randle_out,0.361725852177292,aged,after_d85,split departures
+rapm,reid_out,-0.7485728816587855,aged,after_d85,split departures
+rapm,ball_in,0.4564264488677293,aged,after_d85,split departures
+rapm,dosunmu_retained,-0.28450592463705554,aged,after_d85,split departures
+rapm,depth,0.00824165579772683,aged,after_d85,split departures
+rapm,ddv_injury,-0.1340402519254119,aged,after_d85,split departures
+rapm,kuminga_in,0.3463676484239674,aged,after_d85,split departures
+rapm,dep:Mike Conley,-0.07335563976082085,aged,after_d85,split departures
+rapm,dep:Kyle Anderson,0.450179970532644,aged,after_d85,split departures
+rapm,dep:Joe Ingles,-0.047570426799612556,aged,after_d85,split departures
+rapm,dep:Julian Phillips,-0.05568292967997119,aged,after_d85,split departures
+rapm,dep:Rocco Zikarsky,0.0192845210450366,aged,after_d85,split departures
+rapm,dep:Zyon Pullin,0.016572563291264452,aged,after_d85,split departures
+rapm,dep:Enrique Freeman,0.023321290113710594,aged,after_d85,split departures
+box,randle_out,0.4596867974709978,aged,after_d85,split departures
+box,reid_out,-0.3224158416813517,aged,after_d85,split departures
+box,ball_in,0.8386694194238492,aged,after_d85,split departures
+box,dosunmu_retained,0.024776090905442263,aged,after_d85,split departures
+box,depth,0.4103447441126557,aged,after_d85,split departures
+box,ddv_injury,-0.2524568979006773,aged,after_d85,split departures
+box,kuminga_in,0.06680383721087331,aged,after_d85,split departures
+box,dep:Mike Conley,-0.10436039204944111,aged,after_d85,split departures
+box,dep:Kyle Anderson,0.3494262217837498,aged,after_d85,split departures
+box,dep:Joe Ingles,0.024534013371307884,aged,after_d85,split departures
+box,dep:Julian Phillips,0.05540306912961106,aged,after_d85,split departures
+box,dep:Rocco Zikarsky,-0.00677198024380811,aged,after_d85,split departures
+box,dep:Zyon Pullin,-0.007080285244195306,aged,after_d85,split departures
+box,dep:Enrique Freeman,-0.00889777414285336,aged,after_d85,split departures
+darko,randle_out,0.2593743359344844,aged,after_d85,split departures
+darko,reid_out,-0.3995874942307852,aged,after_d85,split departures
+darko,ball_in,1.317936873143829,aged,after_d85,split departures
+darko,dosunmu_retained,-0.37625956105662095,aged,after_d85,split departures
+darko,depth,0.23588162859941023,aged,after_d85,split departures
+darko,ddv_injury,-0.7302883630773975,aged,after_d85,split departures
+darko,kuminga_in,-0.19922595360974152,aged,after_d85,split departures
+darko,dep:Mike Conley,0.3781467334231541,aged,after_d85,split departures
+darko,dep:Kyle Anderson,0.5344629240570405,aged,after_d85,split departures
+darko,dep:Joe Ingles,0.29933397259101735,aged,after_d85,split departures
+darko,dep:Julian Phillips,-0.06400233906724578,aged,after_d85,split departures
+darko,dep:Rocco Zikarsky,0.22025753523507766,aged,after_d85,split departures
+darko,dep:Zyon Pullin,0.3269181755140725,aged,after_d85,split departures
+darko,dep:Enrique Freeman,0.2155864181185365,aged,after_d85,split departures

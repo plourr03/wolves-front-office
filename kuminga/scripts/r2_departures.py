@@ -113,13 +113,14 @@ def main():
                 rows.append(dict(player_id=a.player_id, player_name=n,
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
                                  rank_score=a.rank_score, pool=a.get("pool", "forward"),
-                                 rs_avail=1.0))
+                                 rs_avail=1.0, curve_weight=a.curve_weight))
             k = SH.nkey("Donte DiVincenzo")
             a = attrs.loc[k]
             rows.append(dict(player_id=a.player_id, player_name="Donte DiVincenzo",
                              consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
                              rank_score=a.rank_score, pool=a.get("pool", "guard"),
-                             rs_avail=0.0 if "ddv_injury" in coal else 1.0))
+                             rs_avail=0.0 if "ddv_injury" in coal else 1.0,
+                             curve_weight=a.curve_weight))  # D85, as shapley.py
             return pd.DataFrame(rows)
 
         def shapley(moves, remove, add, imps, st, fc):

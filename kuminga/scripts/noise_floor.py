@@ -38,9 +38,12 @@ sys.path.insert(0, REPO)
 from kuminga.lib import runlog  # noqa: E402
 
 AGED = "--aged" in sys.argv
-SRC = os.path.join(REPO, "kuminga", "outputs") if AGED else \
+# D85: the aged inputs live in outputs/aged. They used to be read from outputs/ while the
+# aged chain had them swapped in, and the results moved afterwards.
+SRC = os.path.join(REPO, "kuminga", "outputs", "aged") if AGED else \
       os.path.join(REPO, "kuminga", "outputs", "preaging")
-OUTDIR = os.path.join(REPO, "kuminga", "outputs")
+OUTDIR = os.path.join(REPO, "kuminga", "outputs", "aged") if AGED else \
+    os.path.join(REPO, "kuminga", "outputs")
 OUT = os.path.join(OUTDIR, f"noise_floor{'_AGED' if AGED else ''}.csv")
 FORKS = ["consensus", "rapm", "box", "darko"]
 FLOOR_MULT = 2.0
@@ -48,7 +51,7 @@ FLOOR_MULT = 2.0
 
 def main():
     tag = "aged" if AGED else "un-aged primary"
-    with runlog.run("noise_floor", inputs={"basis": tag, "mult": FLOOR_MULT}) as r:
+    with runlog.run("noise_floor", inputs={"basis": tag, "mult": FLOOR_MULT, "src": SRC}) as r:
         fc = pd.read_csv(os.path.join(SRC, "fcurve_min.csv"))
         st = pd.read_csv(os.path.join(SRC, "team_strengths_2026_27.csv"))
         sh = pd.read_csv(os.path.join(SRC, "shapley_min_POOLED.csv"), index_col=0)
@@ -113,7 +116,7 @@ def main():
         # The claim the piece actually makes about Kuminga lives in slot_robustness:
         # against the most likely internal alternative at the 4. That claim has never
         # been tested against the machinery's own error, so it is tested here.
-        sr_path = os.path.join(OUTDIR, "slot_robustness.csv")
+        sr_path = os.path.join(SRC, "slot_robustness.csv")
         sr = pd.read_csv(sr_path) if os.path.exists(sr_path) else None
         if sr is not None:
             r.note("")

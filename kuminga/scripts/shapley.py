@@ -21,7 +21,15 @@ unexplained residual:
   8 other_departures    Conley, Anderson, Ingles, Phillips, Zikarsky, Pullin, Freeman
 
 Josh Green appears in no coalition: per R3 both branches have him off the roster, so he
-is not a lever, he is a precondition.
+is not a lever, he is a precondition. The same goes for what came back for him: Cody
+Williams is in EVERY coalition (D85). Until D85 this list carried a "[14th man
+placeholder]" with no attributes, which was silently skipped, so every coalition was
+priced without the player the simulated roster gives 16.1 minutes.
+
+BASES. `--aged` reads the aged strengths and f-curve from outputs/aged, turns aging on
+for the impacts, and writes into outputs/aged. Without it the un-aged run writes to
+outputs/ and mirrors its tables into outputs/preaging, the frozen un-aged copy the
+floor and the aging gate read.
 
 ORDER DEPENDENCE. Shapley averages a move's marginal contribution over all 8! = 40,320
 orderings, which is exactly the point: these moves interact (Kuminga's value depends on
@@ -32,13 +40,14 @@ should be read as a range.
 
 Per R1 the publishable claim is SIGN AGREEMENT ACROSS FORKS, not the point estimate.
 
-    python kuminga/scripts/shapley.py
+    python kuminga/scripts/shapley.py [--pooled] [--aged]
 """
 from __future__ import annotations
 
 import itertools
 import json
 import os
+import shutil
 import sys
 from math import factorial
 
@@ -62,9 +71,17 @@ FCURVE = os.path.join(REPO, "kuminga", "outputs", "fcurve_min.csv")
 VALUE = os.path.join(REPO, "offseason", "data", "player_value.csv")
 DARKO = os.path.join(REPO, "offseason", "data", "darko-dpm-leaderboard.csv")
 STR = os.path.join(REPO, "kuminga", "outputs", "team_strengths_2026_27.csv")
+AGED = "--aged" in sys.argv
+BASIS_DIR = os.path.join(REPO, "kuminga", "outputs", "aged") if AGED else \
+    os.path.join(REPO, "kuminga", "outputs")
+PREAGING = os.path.join(REPO, "kuminga", "outputs", "preaging")
+if AGED:
+    FCURVE = os.path.join(BASIS_DIR, "fcurve_min.csv")
+    STR = os.path.join(BASIS_DIR, "team_strengths_2026_27.csv")
 SUFFIX = "_POOLED" if "--pooled" in sys.argv else ""
-OUT = os.path.join(REPO, "kuminga", "outputs", f"shapley_min{SUFFIX}.csv")
-OUT_ORD = os.path.join(REPO, "kuminga", "outputs", f"shapley_order_spread{SUFFIX}.csv")
+OUT = os.path.join(BASIS_DIR, f"shapley_min{SUFFIX}.csv")
+OUT_ORD = os.path.join(BASIS_DIR, f"shapley_order_spread{SUFFIX}.csv")
+OUT_NAMED = os.path.join(BASIS_DIR, f"named_scenarios{SUFFIX}.csv")
 
 ROTATION_SIZE = 10
 CURVE_WEIGHT = 0.5
@@ -72,8 +89,10 @@ MPG_WEIGHT = 0.5
 TEAM_MINUTES = 240.0
 FORKS = ["consensus", "rapm", "box", "darko"]
 
+# D85: Cody Williams replaces the "[14th man placeholder]", which had no attributes and
+# was skipped, so no coalition contained the Green trade's return.
 ALWAYS = ["Anthony Edwards", "Rudy Gobert", "Jaden McDaniels", "Joan Beringer",
-          "Terrence Shannon Jr.", "[14th man placeholder]"]
+          "Terrence Shannon Jr.", "Cody Williams"]
 
 MOVES = [
     "randle_out", "reid_out", "ball_in", "dosunmu_retained",
@@ -118,7 +137,10 @@ else:
 
 
 def main():
-    with runlog.run("shapley", inputs={"pool": POOL, "fcurve": FCURVE,
+    os.environ["KUMINGA_AGING"] = "1" if AGED else "0"
+    with runlog.run("shapley", inputs={"pool": POOL, "fcurve": FCURVE, "strengths": STR,
+                                       "basis": "aged" if AGED else "unaged",
+                                       "always": ALWAYS,
                                        "moves": MOVES, "coalitions": 2 ** len(MOVES),
                                        "minutes_rule": "pooled" if POOLED else "unpooled",
                                        "pool_budget": _MIN_BUDGET if POOLED else None,
@@ -142,7 +164,9 @@ def main():
         needed = set(ALWAYS) | PRESENT_UNLESS_APPLIED | set(sum(ADD_WHEN_APPLIED.values(), [])) | {"Donte DiVincenzo"}
         missing = [n for n in needed if nkey(n) not in attrs.index]
         if missing:
-            r.note(f"WARNING: no attributes for {missing}")
+            # D85: a name with no attributes is silently dropped from every coalition,
+            # which is how Cody Williams went missing. Fatal now.
+            raise RuntimeError(f"no attributes for {missing}")
 
         def roster_for(coalition: frozenset) -> pd.DataFrame:
             names = list(ALWAYS)
@@ -158,10 +182,13 @@ def main():
                 if k not in attrs.index:
                     continue
                 a = attrs.loc[k]
+                # D85: curve_weight carries the W1 team-changer rule (0.8 for movers).
+                # Rows built without it fell back to 0.5 for everyone, so the attribution
+                # allocated minutes by a different rule from the headline simulation.
                 rows.append(dict(player_id=a.player_id, player_name=n,
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
                                  rank_score=a.rank_score, pool=a.get("pool", "forward"),
-                                 rs_avail=1.0))
+                                 rs_avail=1.0, curve_weight=a.curve_weight))
             # DiVincenzo: present either way; the move flips his availability.
             k = nkey("Donte DiVincenzo")
             if k in attrs.index:
@@ -169,8 +196,18 @@ def main():
                 rows.append(dict(player_id=a.player_id, player_name="Donte DiVincenzo",
                                  consensus_net=a.consensus_net, prior_mpg=a.prior_mpg,
                                  rank_score=a.rank_score, pool=a.get("pool", "guard"),
-                                 rs_avail=0.0 if "ddv_injury" in coalition else 1.0))
+                                 rs_avail=0.0 if "ddv_injury" in coalition else 1.0,
+                                 curve_weight=a.curve_weight))
             return pd.DataFrame(rows)
+
+        # D85: the grand coalition must be the simulated current roster, player for player
+        cur_ids = set(mn[mn.scenario == "current"].player_id.astype(int))
+        grand_ids = set(roster_for(frozenset(MOVES)).player_id.astype(int))
+        r.note("grand coalition %d players, simulated current roster %d, identical: %s"
+               % (len(grand_ids), len(cur_ids), grand_ids == cur_ids))
+        if grand_ids != cur_ids:
+            raise RuntimeError("grand coalition differs from the simulated roster: missing %s, "
+                               "extra %s" % (sorted(cur_ids - grand_ids), sorted(grand_ids - cur_ids)))
 
         # ---- value function: coalition -> P(title) per fork ---------------------
         p = E.load_e_params()
@@ -269,7 +306,7 @@ def main():
         npiv["mean"] = npiv.mean(axis=1)
         npiv["min"] = npiv[FORKS].min(axis=1)
         npiv["max"] = npiv[FORKS].max(axis=1)
-        npiv.to_csv(os.path.join(REPO, "kuminga", "outputs", f"named_scenarios{SUFFIX}.csv"))
+        npiv.to_csv(OUT_NAMED)
         r.note("NAMED SCENARIOS (title %, by fork):")
         for s_, x in npiv.sort_values("mean", ascending=False).iterrows():
             r.note(f"  {s_:40s} " + " ".join(f"{f}={x[f]:5.2f}" for f in FORKS) +
@@ -290,6 +327,11 @@ def main():
                    f"  mean={x.mean_pp:+.3f}  {x.sign_agreement}")
         r.output(OUT, rows=len(piv))
         r.output(OUT_ORD, rows=len(ordf))
+        r.output(OUT_NAMED, rows=len(npiv))
+        if not AGED and os.path.isdir(PREAGING):
+            for p_ in (OUT, OUT_ORD, OUT_NAMED):
+                shutil.copy2(p_, PREAGING)
+                r.output(os.path.join(PREAGING, os.path.basename(p_)))
 
     print()
     print(piv.round(3).to_string())
