@@ -56,7 +56,12 @@ def has(lineup_id: str, pid: int) -> bool:
 
 def agg(df: pd.DataFrame) -> dict:
     po, pd_ = df.possessions_off.sum(), df.possessions_def.sum()
-    pf, pa = df.points_for.sum(), df.points_against.sum()
+    # Points rebuilt from made shots (D82). The stint pipeline's points_for credits a
+    # possession's points to the team its possession tracker thinks had the ball and misses
+    # the box score by about 3.4% of points; the made-shot counts are attributed to the team
+    # that scored and reconcile to the box score exactly.
+    pf = (2 * df.fgm_off + df.fg3m_off + df.ftm_off).sum()
+    pa = (2 * df.fgm_def + df.fg3m_def + df.ftm_def).sum()
     fga, fg3a = df.fga_off.sum(), df.fg3a_off.sum()
     fg3m = df.fg3m_off.sum()
     return dict(

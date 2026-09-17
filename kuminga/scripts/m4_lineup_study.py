@@ -255,7 +255,9 @@ def main():
                 sel = st2[st2.lineup_id.astype(str).str.contains(ia[0])
                           & st2.lineup_id.astype(str).str.contains(ib[0])]
                 poss = float(sel.possessions_off.sum())
-                pf, pa = float(sel.points_for.sum()), float(sel.points_against.sum())
+                # points rebuilt from made shots (D82): points_for misattributes ~3.4%
+                pf = float((2 * sel.fgm_off + sel.fg3m_off + sel.ftm_off).sum())
+                pa = float((2 * sel.fgm_def + sel.fg3m_def + sel.ftm_def).sum())
                 dpos = float(sel.possessions_def.sum()) or 1.0
                 r.note("    %-14s + %-12s %7.0f off poss | %.1f per 100 for, %.1f "
                        "against, net %+.1f"

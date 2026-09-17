@@ -1575,3 +1575,29 @@ Every ranked M4 list is now led by fives containing Joan Beringer, whose impact 
 **H3, champions (3) against preseason top-5 non-champions (14, ties at fifth included, which brings in Dallas, Denver and Minnesota in 2024-25 and Minnesota again in 2025-26).** Pre-stated rule: separates if no more than a quarter of non-champions sit inside the champions' range. **Three separate: offence rank (champions 1, 3, 3; 2 of 14 inside), defence rank (3, 1, 7; 3 of 14), continuity (0.69 to 0.85; 2 of 14).** Nothing else does, including preseason price, net rating rank, seed, best-player VORP, age, playoff health, and every style feature. **Where H3 meets N3:** none of the separating features is a style or translation feature, so they do not overlap; every style feature H3 examined (pace, three-point rate, offensive rebounding, turnovers forced, defence share, rim rate, size, top-three minutes) also fails to separate here, which agrees with N3's thirteen-season null. With three champions a range is wide or narrow by chance, and the doc says so.
 
 **H5, Minnesota.** Outside the champions' range and short of it: preseason price (3.16%, #6), net rating rank (10th in 2025-26), offence rank (12th), defence rank (8th), post-All-Star rank (18th), seed (6th), playoff minus regular season (-8.9), and continuity (0.57 projected for 2026-27, against 0.69 to 0.85). Inside: best player VORP (Edwards 3.5), top-8 age, top-8 playoff games missed, and most style features. Outside and ABOVE, with no better direction assigned: defence share and rim rate (a first draft called these "the good side"; style features have no good side, and N3 found defence share points the other way). **Routed to N8 as season-long checkpoints:** net rating rank 5th or better, offence 3rd or better, defence 7th or better, post-All-Star rank 8th or better, seed 3rd or better, playoff margin within 4.37 of the regular season. Continuity and preseason price are set by the roster and the market and cannot close in-season.
+
+### D84. The stint points defect reaches two sentences the piece was going to make
+
+**Run IDs.** `lineup_evidence_20260917T133631Z`, `m4_lineup_study_20260917T133633Z`. Both scripts now rebuild stint points from made shots (D82) instead of the pipeline's `points_for` / `points_against`, which misattribute about 3.4% of points to the wrong team.
+
+**Before and after, logged per the rule on changed figures.** Per 100 possessions, 2025-26, same possessions.
+
+| figure | before | after |
+|---|---:|---:|
+| Randle + Gobert, net (3,443 possessions) | +3.10 | **+3.31** |
+| **Reid + Gobert, net (2,253)** | **+6.83** | **+3.19** |
+| Randle + Reid, net (2,653) | +2.46 | +3.06 |
+| Gobert without Randle or Reid (180) | +3.89 | +6.55 |
+| Kuminga ON at GSW (971) | -5.56 | -1.37 |
+| Kuminga OFF at GSW (7,083) | +0.97 | -0.69 |
+| **Kuminga ON minus OFF at GSW** | **-6.53** | **-0.69** |
+| Kuminga ON at ATL (1,077) | +4.04 | +1.22 |
+| Kuminga OFF at ATL (7,682) | +1.14 | +0.69 |
+| **Kuminga ON minus OFF at ATL** | **+2.90** | **+0.52** |
+
+**Two findings retracted.**
+
+1. **"Reid alongside Gobert was more than twice as good per possession as Randle alongside Gobert, and Reid is the one who left" (D67, M4) is withdrawn.** On correct points the two pairings are indistinguishable (+3.19 against +3.31). The contrast was the pipeline crediting baskets to the wrong team.
+2. **"Kuminga's own on/off flips sign between his two 2025-26 teams: -6.53 at Golden State, +2.90 at Atlanta" (skeleton section 4) is withdrawn.** On correct points both are near zero (-0.69 and +0.52) on under 1,100 on-court possessions each: no sign and no flip worth writing.
+
+**Wider reach, flagged rather than chased.** `postmortem/lib/lineup_aggregation.py` is shared. Any earlier lineup net rating built on its `points_for` (postmortem lineup findings, earlier Wolves pairing work) carries the same kind of error and should be re-checked with points rebuilt from made shots before it is quoted again. Not re-run here, because it is outside this project's scope.
