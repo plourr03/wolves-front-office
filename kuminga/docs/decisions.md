@@ -1499,3 +1499,24 @@ Every ranked M4 list is now led by fives containing Joan Beringer, whose impact 
 **Decision 4: clutch is judged against the league's own clutch drop.** League, 2023-26: eFG 0.544 overall, 0.502 in the clutch; unassisted share of makes 0.37 to 0.45. Each creator's clutch-minus-overall eFG is taken net of that drop, with a standard error from his own clutch shots. Thin below 50 attempts or 25 makes. Creators: Minnesota's five from M5; each N4 contender's three highest 2025-26 usage rates among its projected top eight with 1,000+ minutes.
 
 **Result, 2023-26 pooled.** Of 22 creators with enough clutch shots, 2 differ from the league's drop by two SEs or more: Derrick White +0.144 (+2.3), Jamal Murray +0.084 (+2.0); chance alone would give about 1.0. Minnesota: Anthony Edwards 0.546 on 306 clutch attempts, +0.046 beyond the drop (+1.3 SEs), 67% unassisted against 60% overall; LaMelo Ball 0.460 on 100, -0.005 (-0.1), 72% unassisted against 59%; Dosunmu 0.526 on 58 (-0.2); Kuminga and Hyland thin. 2025-26 alone: Edwards 0.622 on 90 (+1.7 SEs); everyone else on Minnesota thin. The doc asserts the "inside the noise" sentence for Edwards and Ball in code, so it fails rather than prints if the numbers change.
+
+### D80. N8. The watch list: five claims, every threshold computed, and one skeleton figure corrected
+
+**Run ID.** `n8_watch_list_20260917T010057Z`. As of 2026-09-16; checkpoint is each team's twentieth game. Doc: `docs/n8_watch_list.md`.
+
+**Decision 1: claims must be judgeable by late November and tied to something the preview depends on.** Two of the skeleton's four provisional claims fail that: DiVincenzo's availability (out for the season) and a top-six finish (a season-end outcome). Both dropped from the watch list; the DiVincenzo number stays in the rotation section.
+
+**Decision 2: every threshold computed, and level thresholds noise-adjusted.** Twenty-game net-rating noise measured from 390 team-seasons 2013-14 to 2025-26: 3.47 per 100 (split-season), 3.07 (game-level); the larger is used. Level thresholds sit 1.645 noise units beyond the model's range, and the range spans four views on BOTH aging bases, so a claim cannot flip on the aging choice or on chance.
+
+**The five.**
+1. **Cody Williams' minutes**: model 16.1; flips **below 12.0 a night**, where the DARKO view's offseason delta turns positive and the verdict goes ALL NEGATIVE to MIXED.
+2. **Minnesota's net rating after 20 games**: model range -1.75 to +1.76; flips above **+7.5** or below **-7.5**.
+3. **The model's two largest market disagreements**: Boston (model 17.0% vs market 5.5%, net range +3.5 to +9.0) flips below **-2.2**; San Antonio (13.9% vs 23.0%, +4.1 to +8.1) flips above **+13.8**.
+4. **Edwards-Ball pairing costs usage, not efficiency**: base rate -0.3 TS points (SD 2.8, 34 player-seasons), 20-game TS noise 0.030 (414 high-usage player-seasons); flips if Edwards is below **0.547** or Ball below **0.476** (from 0.617 and 0.546).
+5. **Champion's path**: every champion since 1997-98 (29, detected as the winner of each season's last playoff game) ranked 11th or better in net rating after 20 games (worst: 2005-06 Miami, 2022-23 Denver; median 2nd); Minnesota projects 15th un-aged, 14th aged. Two thresholds, labelled: the TEST is **3rd or better**, which noise alone reaches 4.4% of the time under the model (59% of champions were there); the CHECKPOINT is **11th or better**, which noise alone reaches 37.2% of the time and so proves little.
+
+**Correction to a previously drafted figure, before and after.** The skeleton (section 10) said Williams "below 8 a night" flips the verdict. Before: 8. After: **12.0**. Cause: 8 was the first grid point at which the pattern read MIXED, not the crossing; interpolating DARKO's delta between 12 (-0.0024) and 8 (+0.2372) puts the zero at 11.96. The pre-D70 file gives the same crossing, so this is a reading error, not a D70 change. The flip sits on a delta of -0.002 points at 12, and the doc says so. The skeleton's section 10 is superseded by this doc and needs the consistency pass.
+
+**Two errors caught before commit.** The first champion detection read the round from the game id, which only encodes it from 2000-01, and silently found 25 of 29 champions; now it fails closed unless every season resolves. The first version of claim 5 used only the historical checkpoint; with noise tripping it 37% of the time it was not a test, so the noise-calibrated threshold was added.
+
+**Not done, and why.** H5 asks for champion-profile gaps to be routed here with thresholds from the champions' ranges; H1's table has only odds columns for three seasons, so claim 5 draws its range from `nba_games` directly instead. N6 (the Kuminga ledger) is not built, so no claim is about Kuminga himself; the one Kuminga lever the model exposes, his minutes, moves title odds by less than 0.1 points between 25 and 36 a night and would not flip anything.
