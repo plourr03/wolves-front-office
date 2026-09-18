@@ -1,5 +1,7 @@
 # Gobert career arc visualization
 
+> **EXPOSED, NOT YET RECOMPUTED (D88).** The RAPM figures below are fitted on possession-level points credited to the possession's offensive team, which is the same root cause as the stint points defect fixed on 2026-09-18: about 3.4% of points go to the wrong team, mirrored between the two teams. The stint layer is fixed and recomputed; the RAPM fit is not. Treat every RAPM number here as unverified until it is re-fitted. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+
 **Date:** 2026-05-17
 **Status:** Visualization addendum to the weighted-recent RAPM findings. One chart, decision-relevant insight.
 **Chart:** `outputs/charts/q8_player_decisions/gobert_career_arc.png`

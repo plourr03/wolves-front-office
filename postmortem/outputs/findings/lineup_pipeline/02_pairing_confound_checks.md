@@ -1,4 +1,6 @@
 # Confound checks: Gobert+Naz and Gobert+Randle pairings
+> **CORRECTED 2026-09-18 (D88).** The lineup net ratings, on/off figures and pairing figures below were computed on stint points that credited about 3.4% of points to the wrong team. Regular-season figures move by under 2 points per 100. Playoff figures move by up to 17 and five change sign. Before and after for every figure: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`. Do not quote a playoff figure from this document without checking it there.
+
 **Date:** 2026-05-17
 **Cohorts:** 2025-26 playoffs, gt-filtered Wolves stints.
 **Context variables:** series (R1 vs DEN / R2 vs SAS), Edwards game-availability status (DNP / Limited / Normal), Edwards on-floor flag (whether Ant was actually in this specific lineup_id), score margin at stint start.

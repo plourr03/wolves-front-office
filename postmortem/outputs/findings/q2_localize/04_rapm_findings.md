@@ -1,5 +1,7 @@
 # RAPM findings: multi-season pooled adjusted impact
 
+> **EXPOSED, NOT YET RECOMPUTED (D88).** The RAPM figures below are fitted on possession-level points credited to the possession's offensive team, which is the same root cause as the stint points defect fixed on 2026-09-18: about 3.4% of points go to the wrong team, mirrored between the two teams. The stint layer is fixed and recomputed; the RAPM fit is not. Treat every RAPM number here as unverified until it is re-fitted. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+
 **Date:** 2026-05-17
 **Status:** First RAPM build. 3-season pooled (2023-24, 2024-25, 2025-26). Wolves-games-only sample (see Section 6 caveat).
 **Sample:** 289 Wolves games (RS + PO), 55,670 possessions, 565 qualifying players (>= 50 possessions).

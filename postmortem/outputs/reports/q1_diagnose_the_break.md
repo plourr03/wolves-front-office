@@ -1,5 +1,7 @@
 # Q1: Diagnose the Break
 
+> **EXPOSED, NOT YET RECOMPUTED (D88).** The possession-grain splits below (halfcourt, transition, clutch) attribute points by the possession's offensive team, which misattributes about 3.4% of points, mirrored between the two teams. The team-level box-score ratings in this report are unaffected. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+
 **Status:** v2. Team-level diagnostic plus PBP-derived halfcourt-vs-transition, clutch, and shot-zone splits. Some pieces still pending: opponent-strength adjusted ORtg, league-wide comparators for the PBP splits (Wolves-only for now).
 
 **Sample:** 2025-26 Wolves through 11 playoff games (5-game first round vs Denver, 6 games into round 2 vs San Antonio, currently down 3-2). Regular-season comparison uses all 82 games. League historical norms use all playoff team-seasons 2014-15 through 2024-25.

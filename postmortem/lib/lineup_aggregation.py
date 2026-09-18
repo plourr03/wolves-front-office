@@ -32,17 +32,19 @@ opponent-adjusted ratings.
 
 v1 caveats (preserved from `lib/lineups.py`):
 
-- AND-1 free-throw attribution can be off by ~5 points per team per game.
-  Validated on the 12 Wolves 2025-26 playoff games: mean absolute error per
-  team-game = 4.92 points, std = 5.71. The error is perfectly mirrored (when
-  team A is over by X, team B is under by X), which is the AND-1 attribution
-  signature. Per-team mean error is small (MIN +2.58, opponents -2.58 across
-  12 games). For lineup-level analysis, the bias is approximately random
-  across lineups (AND-1s happen in many configurations) but is not random
-  within stints. **Individual lineup ORtg and DRtg numbers are noisy by ~5
-  ppp.** Lineup NET ratings are mostly unaffected because errors on
-  offensive possessions for lineup L are mirrored by errors on defensive
-  possessions for L's opponents in the same possessions.
+- ~~AND-1 free-throw attribution can be off by ~5 points per team per game.~~
+  **FIXED 2026-09-18 (D88).** `points_for` and `points_against` are now rebuilt
+  from made-shot events (2*fgm + fg3m + ftm), which are attributed to the stint
+  containing each shot, instead of from possession `points_scored`, which was
+  attributed to the stint containing the possession's timestamp. That misplaced
+  the points of any possession spanning a substitution and of and-1 free throws
+  shot after the clock stopped: mean absolute error 4.92 points per team-game,
+  std 5.71, perfectly mirrored between the two teams, about 3.4% of all points.
+  Stint points now reconcile to the box score exactly (`validate_stint_points.py`).
+  The old figures are kept per stint as `points_for_possession_basis` and
+  `points_against_possession_basis` for diagnosis only. Any ORtg, DRtg, net
+  rating, on/off or plus-minus computed from this library before that date is
+  wrong by up to ~5 points per 100 on small samples and should be recomputed.
 - v1 captures 1184 of 1210 advanced-stats possessions for the Wolves'
   12-game playoff sample (~98% coverage). Missing possessions are mostly
   end-of-period heaves and edge cases the v1 end_reason taxonomy does not
@@ -299,6 +301,23 @@ def derive_stints(annotated: pd.DataFrame, possessions: pd.DataFrame) -> pd.Data
             if other_stint is not None:
                 stints.at[other_stint, f"{k}_def"] += v
 
+    # D88: POINTS COME FROM MADE SHOTS, not from possession `points_scored`.
+    #
+    # The possession loop above credits a possession's points to whichever stint
+    # contains that possession's lookup timestamp. When a possession spans a
+    # substitution, or when an and-1 free throw is shot after the clock stopped, the
+    # points land in the wrong stint. Measured at 4.92 points per team-game (mirrored
+    # between the two teams, the and-1 signature) and about 3.4% of all points.
+    #
+    # Every made-shot EVENT is already attributed to the stint that contains it in the
+    # loop above, so points rebuilt from made shots reconcile to the box score exactly:
+    # 2 per made field goal, plus 1 more for a three, plus 1 per made free throw.
+    # The possession-basis figures are kept beside them for diagnosis, never for rating.
+    stints["points_for_possession_basis"] = stints["points_for"]
+    stints["points_against_possession_basis"] = stints["points_against"]
+    stints["points_for"] = (2 * stints["fgm_off"] + stints["fg3m_off"] + stints["ftm_off"])
+    stints["points_against"] = (2 * stints["fgm_def"] + stints["fg3m_def"] + stints["ftm_def"])
+
     # Compute garbage-time flag: is the entire stint in garbage time?
     # Garbage time = period 4 (or OT) AND last 3 minutes AND |score margin| >= 15.
     # For v1 simplification, mark stints as in_garbage_time if they start in
@@ -389,6 +408,11 @@ def aggregate_lineup_totals(
         "points_for": ("points_for", "sum"),
         "points_against": ("points_against", "sum"),
     }
+    # D88: carry the diagnostic possession-basis totals through when present, so a
+    # consumer can see how far the old basis was off without recomputing stints.
+    for c in ("points_for_possession_basis", "points_against_possession_basis"):
+        if c in df.columns:
+            agg_spec[c] = (c, "sum")
     for c in shot_cols:
         agg_spec[c] = (c, "sum")
     g = df.groupby(["team_id", "lineup_id"], as_index=False).agg(**agg_spec)

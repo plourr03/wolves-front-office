@@ -1,5 +1,7 @@
 # Q2: 2024-25 vs 2025-26 lineup-grain comparison
 
+> **CORRECTED 2026-09-18 (D88).** The lineup net ratings, on/off figures and pairing figures below were computed on stint points that credited about 3.4% of points to the wrong team. Regular-season figures move by under 2 points per 100. Playoff figures move by up to 17 and five change sign. Before and after for every figure: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`. Do not quote a playoff figure from this document without checking it there.
+
 **Date:** 2026-05-17
 **Status:** First lineup-grain look at the year-over-year change, using the PBP normalization shim that landed earlier today. Updates several Q2 corrections claims.
 **Sample:** 2024-25 (97 Wolves games), 2025-26 (94 Wolves games); both processed through the lineup pipeline now that the legacy PBP format is handled.

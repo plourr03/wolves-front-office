@@ -1,3 +1,5 @@
+> **EXPOSED, NOT YET RECOMPUTED (D88).** The RAPM figures below are fitted on possession-level points credited to the possession's offensive team, which is the same root cause as the stint points defect fixed on 2026-09-18: about 3.4% of points go to the wrong team, mirrored between the two teams. The stint layer is fixed and recomputed; the RAPM fit is not. Treat every RAPM number here as unverified until it is re-fitted. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+
 ---
 title: How They Got Here
 dek: Two seasons ago the Wolves ran a normal NBA offense. Now it is one of the most pickup-style in the league. The trade everyone blames is not the main reason it drifted.
