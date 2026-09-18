@@ -37,6 +37,7 @@ rather than a 0.5-wide grid.
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import sys
@@ -51,6 +52,7 @@ sys.path.insert(0, REPO)
 from kuminga.lib import runlog  # noqa: E402
 
 OUTDIR = os.path.join(REPO, "kuminga", "outputs")
+LOG = os.path.join(REPO, "kuminga", "logs", "runs.jsonl")
 FORKS = ["consensus", "rapm", "box", "darko"]
 OUT = os.path.join(OUTDIR, "canonical_figures.csv")
 OUT_MD = os.path.join(OUTDIR, "canonical_figures.md")
@@ -199,6 +201,24 @@ def main():
             raise RuntimeError("C2 failed: the skeleton quotes a figure that is not on the sheet, "
                                "or carries a retracted one")
         r.output(os.path.join(OUTDIR, "reconcile_skeleton.csv"), rows=len(rep))
+
+        # ---- C3: run ids are unique, and every id a figure cites resolves to one run ----
+        # D86. Two `noise_floor` runs shared an id, which made provenance ambiguous for any
+        # figure citing it. Ids are reserved now; duplicates already in the log are marked
+        # (`mark_duplicate_runs.py`), and an UNMARKED duplicate fails here.
+        log = [json.loads(line) for line in open(LOG, encoding="utf-8") if line.strip()]
+        counts = {}
+        for d in log:
+            counts[d["run_id"]] = counts.get(d["run_id"], 0) + 1
+        dups = {k: v for k, v in counts.items() if v > 1}
+        unmarked = sorted(k for k in dups if not all(d.get("duplicate_id_legacy")
+                                                     for d in log if d["run_id"] == k))
+        cited = sorted(set(sheet.run_id.dropna()) & set(dups))
+        r.note("C3: %d records, %d distinct ids, %d duplicated (all marked: %s); figures citing a "
+               "duplicated id: %s" % (len(log), len(counts), len(dups), not unmarked, cited or "none"))
+        if unmarked or cited:
+            raise RuntimeError("C3 failed: unmarked duplicate run ids %s, or figures citing an "
+                               "ambiguous id %s" % (unmarked, cited))
 
     print()
     print(df[["label", "canonical"] + FORKS + ["mean", "lo", "hi"]].round(2).to_string(index=False))
