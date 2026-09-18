@@ -233,9 +233,41 @@ def main():
             return bool(g.loc[item, "unaged_sign"] != "MIXED" and g.loc[item, "unaged_sign"] == g.loc[item, "aged_sign"]
                         and int(u.loc[item, "n_forks_clearing"]) == 4 and int(a.loc[item, "n_forks_clearing"]) == 4)
 
+        # D87: the shipping rule is four cells, two aging bases x two minutes allocators.
+        # r7_allocator_agreement.py is the authority; its pooled cells must agree with the
+        # two-cell computation above, or one of the two files is stale.
+        r7 = csv("r7_allocator_verdicts.csv").set_index("item")
+        rr7 = rid("r7_allocator_agreement")
         n_ship = n_retired = 0
         for order, (item, lab) in enumerate(VERDICTS):
-            now, before = ships(gate, nf_u, nf_a, item), ships(pre_gate, pre_u, pre_a, item)
+            two_cell = ships(gate, nf_u, nf_a, item)
+            pooled_two_cell = bool(
+                r7.loc[item, "pooled_unaged_sign"] != "MIXED"
+                and r7.loc[item, "pooled_unaged_sign"] == r7.loc[item, "pooled_aged_sign"]
+                and int(r7.loc[item, "pooled_unaged_clear"]) == 4
+                and int(r7.loc[item, "pooled_aged_clear"]) == 4)
+            if two_cell != pooled_two_cell:
+                raise RuntimeError("%s: the aging gate and r7 disagree on the pooled cells; one "
+                                   "of the two is stale" % item)
+            now, before = bool(r7.loc[item, "ships_all_four"]), ships(pre_gate, pre_u, pre_a, item)
+            F("v_%s_pooled_u" % item, S, "%s, pooled un-aged mean pp" % lab,
+              sgn(r7.loc[item, "pooled_unaged_mean"], 2), "MODELED", "QUOTABLE", rr7,
+              "r7_allocator_verdicts.csv")
+            F("v_%s_pooled_a" % item, S, "%s, pooled aged mean pp" % lab,
+              sgn(r7.loc[item, "pooled_aged_mean"], 2), "MODELED", "QUOTABLE", rr7,
+              "r7_allocator_verdicts.csv")
+            F("v_%s_tr_u" % item, S, "%s, team-rank un-aged mean pp" % lab,
+              sgn(r7.loc[item, "teamrank_unaged_mean"], 2), "MODELED", "QUOTABLE", rr7,
+              "r7_allocator_verdicts.csv")
+            F("v_%s_tr_a" % item, S, "%s, team-rank aged mean pp" % lab,
+              sgn(r7.loc[item, "teamrank_aged_mean"], 2), "MODELED", "QUOTABLE", rr7,
+              "r7_allocator_verdicts.csv")
+            F("v_%s_cells" % item, S, "%s, views clearing in the four cells" % lab,
+              "%d/4, %d/4, %d/4, %d/4" % tuple(int(r7.loc[item, c]) for c in (
+                  "pooled_unaged_clear", "pooled_aged_clear", "teamrank_unaged_clear",
+                  "teamrank_aged_clear")), "MODELED", "QUOTABLE", rr7, "r7_allocator_verdicts.csv")
+            F("v_%s_two_cell" % item, S, "%s ships on the two-cell rule (pooled only)" % lab,
+              "yes" if two_cell else "no", "MODELED", "QUOTABLE", rr7, "r7_allocator_verdicts.csv")
             n_ship += now
             n_retired += before and not now
             F("v_%s_label" % item, S, "verdict label", lab, "FACT", "FACT", rw2, "build_final_numbers VERDICTS")
@@ -259,6 +291,16 @@ def main():
           "pre_d85/w2_aging_gate.csv")
         F("n_retired", S, "verdicts that shipped before D85 and do not now", n_retired, "MODELED", "QUOTABLE",
           rw2, "pre_d85 vs current")
+        F("n_ship_two_cell", S, "verdicts that ship on the two-cell rule (pooled only)",
+          int(sum(ships(gate, nf_u, nf_a, i) for i, _ in VERDICTS)), "MODELED", "QUOTABLE", rr7,
+          "w2_aging_gate.csv, noise_floor*.csv")
+        F("n_candidates", S, "candidate verdicts tested", len(VERDICTS), "FACT", "FACT", rr7,
+          "r7_allocator_verdicts.csv")
+        r7s = csv("r7_allocator_slots.csv")
+        for alloc, key in (("pooled", "k_min_pooled"), ("teamrank", "k_min_teamrank")):
+            F(key, S, "Kuminga minutes under the %s allocator" % alloc,
+              "%.1f" % r7s[r7s.allocator == alloc].kuminga_minutes.iloc[0], "MODELED", "QUOTABLE",
+              rr7, "r7_allocator_slots.csv")
         r5v = csv("r5_shapley_williams_vall.csv")
         rr5w = rid("r5_shapley_williams")
         g4 = r5v[r5v.version == "after_d85_teamrank"]

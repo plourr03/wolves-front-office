@@ -55,6 +55,15 @@ def table(name, sheet):
         rows = ["| %s | {{pv_%s_mkt}} | %s | {{pv_%s_label}} |" % (
             t.upper(), t, " | ".join("{{pv_%s_%s}}" % (t, f) for f in FORKS), t) for t in teams]
         return "\n".join(head + rows)
+    if name == "allocators":
+        items = [k[2:-6] for k in keys if k.startswith("v_") and k.endswith("_label")
+                 and sheet.loc["v_%s_ships" % k[2:-6], "value"] == "yes"]
+        head = ["| verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | "
+                "team-rank, aged | views clearing in each cell |",
+                "|---|---:|---:|---:|---:|---|"]
+        rows = ["| {{v_%s_label}} | {{v_%s_pooled_u}} | {{v_%s_pooled_a}} | {{v_%s_tr_u}} | "
+                "{{v_%s_tr_a}} | {{v_%s_cells}} |" % ((i,) * 6) for i in items]
+        return "\n".join(head + rows)
     if name in ("ship", "retired"):
         items = [k[2:-6] for k in keys if k.startswith("v_") and k.endswith("_label")]
         if name == "ship":
