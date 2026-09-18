@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260917T143240Z`. 736 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260918T180620Z`. 818 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -43,6 +43,12 @@
 | `bos_range_lo` | Boston model net range low | +3.5 | MODELED | QUOTABLE AS BAND | `n8_watch_list_20260917T140224Z` |
 | `bos_range_hi` | Boston model net range high | +9.0 | MODELED | QUOTABLE AS BAND | `n8_watch_list_20260917T140224Z` |
 | `dec_noise` | 30-game net rating noise per 100 | 3.1 | OBSERVED | QUOTABLE | `n8_watch_list_20260917T140224Z` |
+| `v_ball_in_pooled_u` | LaMelo Ball in, pooled un-aged mean pp | +0.68 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ball_in_pooled_a` | LaMelo Ball in, pooled aged mean pp | +0.78 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ball_in_tr_u` | LaMelo Ball in, team-rank un-aged mean pp | +1.36 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ball_in_tr_a` | LaMelo Ball in, team-rank aged mean pp | +1.33 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ball_in_cells` | LaMelo Ball in, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ball_in_two_cell` | LaMelo Ball in ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_ball_in_label` | verdict label | LaMelo Ball in | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_ball_in_u` | LaMelo Ball in, un-aged mean pp | +0.68 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ball_in_a` | LaMelo Ball in, aged mean pp | +0.78 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -50,6 +56,12 @@
 | `v_ball_in_signs` | LaMelo Ball in, sign un-aged / aged | all positive / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ball_in_ships` | LaMelo Ball in ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ball_in_preship` | LaMelo Ball in shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_reid_out_pooled_u` | Naz Reid out, pooled un-aged mean pp | -0.42 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_reid_out_pooled_a` | Naz Reid out, pooled aged mean pp | -0.51 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_reid_out_tr_u` | Naz Reid out, team-rank un-aged mean pp | -1.08 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_reid_out_tr_a` | Naz Reid out, team-rank aged mean pp | -1.11 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_reid_out_cells` | Naz Reid out, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_reid_out_two_cell` | Naz Reid out ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_reid_out_label` | verdict label | Naz Reid out | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_reid_out_u` | Naz Reid out, un-aged mean pp | -0.42 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_reid_out_a` | Naz Reid out, aged mean pp | -0.51 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -57,6 +69,12 @@
 | `v_reid_out_signs` | Naz Reid out, sign un-aged / aged | all negative / all negative | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_reid_out_ships` | Naz Reid out ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_reid_out_preship` | Naz Reid out shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_other_departures_pooled_u` | Other departures (a bundle of seven), pooled un-aged mean pp | +0.36 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_other_departures_pooled_a` | Other departures (a bundle of seven), pooled aged mean pp | +0.71 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_other_departures_tr_u` | Other departures (a bundle of seven), team-rank un-aged mean pp | -0.51 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_other_departures_tr_a` | Other departures (a bundle of seven), team-rank aged mean pp | +0.13 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_other_departures_cells` | Other departures (a bundle of seven), views clearing in the four cells | 4/4, 4/4, 4/4, 2/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_other_departures_two_cell` | Other departures (a bundle of seven) ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_other_departures_label` | verdict label | Other departures (a bundle of seven) | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_other_departures_u` | Other departures (a bundle of seven), un-aged mean pp | +0.36 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_other_departures_a` | Other departures (a bundle of seven), aged mean pp | +0.71 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -64,6 +82,12 @@
 | `v_other_departures_signs` | Other departures (a bundle of seven), sign un-aged / aged | mixed / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_other_departures_ships` | Other departures (a bundle of seven) ships | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_other_departures_preship` | Other departures (a bundle of seven) shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_randle_out_pooled_u` | Julius Randle out, pooled un-aged mean pp | +0.07 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_randle_out_pooled_a` | Julius Randle out, pooled aged mean pp | +0.34 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_randle_out_tr_u` | Julius Randle out, team-rank un-aged mean pp | -0.22 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_randle_out_tr_a` | Julius Randle out, team-rank aged mean pp | +0.20 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_randle_out_cells` | Julius Randle out, views clearing in the four cells | 2/4, 4/4, 3/4, 3/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_randle_out_two_cell` | Julius Randle out ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_randle_out_label` | verdict label | Julius Randle out | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_randle_out_u` | Julius Randle out, un-aged mean pp | +0.07 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_randle_out_a` | Julius Randle out, aged mean pp | +0.34 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -71,6 +95,12 @@
 | `v_randle_out_signs` | Julius Randle out, sign un-aged / aged | all positive / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_randle_out_ships` | Julius Randle out ships | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_randle_out_preship` | Julius Randle out shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_dosunmu_retained_pooled_u` | Ayo Dosunmu re-signed, pooled un-aged mean pp | -0.16 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_dosunmu_retained_pooled_a` | Ayo Dosunmu re-signed, pooled aged mean pp | -0.22 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_dosunmu_retained_tr_u` | Ayo Dosunmu re-signed, team-rank un-aged mean pp | -0.03 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_dosunmu_retained_tr_a` | Ayo Dosunmu re-signed, team-rank aged mean pp | -0.13 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_dosunmu_retained_cells` | Ayo Dosunmu re-signed, views clearing in the four cells | 3/4, 3/4, 4/4, 3/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_dosunmu_retained_two_cell` | Ayo Dosunmu re-signed ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_dosunmu_retained_label` | verdict label | Ayo Dosunmu re-signed | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_dosunmu_retained_u` | Ayo Dosunmu re-signed, un-aged mean pp | -0.16 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_dosunmu_retained_a` | Ayo Dosunmu re-signed, aged mean pp | -0.22 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -78,6 +108,12 @@
 | `v_dosunmu_retained_signs` | Ayo Dosunmu re-signed, sign un-aged / aged | mixed / mixed | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_dosunmu_retained_ships` | Ayo Dosunmu re-signed ships | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_dosunmu_retained_preship` | Ayo Dosunmu re-signed shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_depth_pooled_u` | Depth signings and re-signings, pooled un-aged mean pp | +0.06 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_depth_pooled_a` | Depth signings and re-signings, pooled aged mean pp | +0.13 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_depth_tr_u` | Depth signings and re-signings, team-rank un-aged mean pp | +0.75 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_depth_tr_a` | Depth signings and re-signings, team-rank aged mean pp | +0.71 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_depth_cells` | Depth signings and re-signings, views clearing in the four cells | 3/4, 2/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_depth_two_cell` | Depth signings and re-signings ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_depth_label` | verdict label | Depth signings and re-signings | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_depth_u` | Depth signings and re-signings, un-aged mean pp | +0.06 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_depth_a` | Depth signings and re-signings, aged mean pp | +0.13 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -85,6 +121,12 @@
 | `v_depth_signs` | Depth signings and re-signings, sign un-aged / aged | mixed / mixed | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_depth_ships` | Depth signings and re-signings ships | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_depth_preship` | Depth signings and re-signings shipped before D85 | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_kuminga_in_pooled_u` | Kuminga in (pooled), pooled un-aged mean pp | +0.02 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_kuminga_in_pooled_a` | Kuminga in (pooled), pooled aged mean pp | +0.10 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_kuminga_in_tr_u` | Kuminga in (pooled), team-rank un-aged mean pp | +0.30 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_kuminga_in_tr_a` | Kuminga in (pooled), team-rank aged mean pp | +0.35 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_kuminga_in_cells` | Kuminga in (pooled), views clearing in the four cells | 3/4, 3/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_kuminga_in_two_cell` | Kuminga in (pooled) ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_kuminga_in_label` | verdict label | Kuminga in (pooled) | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_kuminga_in_u` | Kuminga in (pooled), un-aged mean pp | +0.02 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_kuminga_in_a` | Kuminga in (pooled), aged mean pp | +0.10 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -92,6 +134,12 @@
 | `v_kuminga_in_signs` | Kuminga in (pooled), sign un-aged / aged | mixed / mixed | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_kuminga_in_ships` | Kuminga in (pooled) ships | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_kuminga_in_preship` | Kuminga in (pooled) shipped before D85 | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_ddv_injury_pooled_u` | DiVincenzo's Achilles (not a transaction), pooled un-aged mean pp | -0.42 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ddv_injury_pooled_a` | DiVincenzo's Achilles (not a transaction), pooled aged mean pp | -0.33 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ddv_injury_tr_u` | DiVincenzo's Achilles (not a transaction), team-rank un-aged mean pp | -0.91 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ddv_injury_tr_a` | DiVincenzo's Achilles (not a transaction), team-rank aged mean pp | -0.73 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ddv_injury_cells` | DiVincenzo's Achilles (not a transaction), views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_ddv_injury_two_cell` | DiVincenzo's Achilles (not a transaction) ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_ddv_injury_label` | verdict label | DiVincenzo's Achilles (not a transaction) | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_ddv_injury_u` | DiVincenzo's Achilles (not a transaction), un-aged mean pp | -0.42 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ddv_injury_a` | DiVincenzo's Achilles (not a transaction), aged mean pp | -0.33 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -99,6 +147,12 @@
 | `v_ddv_injury_signs` | DiVincenzo's Achilles (not a transaction), sign un-aged / aged | all negative / all negative | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ddv_injury_ships` | DiVincenzo's Achilles (not a transaction) ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_ddv_injury_preship` | DiVincenzo's Achilles (not a transaction) shipped before D85 | no | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_A_c3_default_shannon_pooled_u` | Kuminga slot, default allocation, pooled un-aged mean pp | +0.44 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_A_c3_default_shannon_pooled_a` | Kuminga slot, default allocation, pooled aged mean pp | +0.57 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_A_c3_default_shannon_tr_u` | Kuminga slot, default allocation, team-rank un-aged mean pp | +0.52 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_A_c3_default_shannon_tr_a` | Kuminga slot, default allocation, team-rank aged mean pp | +0.58 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_A_c3_default_shannon_cells` | Kuminga slot, default allocation, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_A_c3_default_shannon_two_cell` | Kuminga slot, default allocation ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_A_c3_default_shannon_label` | verdict label | Kuminga slot, default allocation | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_A_c3_default_shannon_u` | Kuminga slot, default allocation, un-aged mean pp | +0.52 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_A_c3_default_shannon_a` | Kuminga slot, default allocation, aged mean pp | +0.58 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -106,6 +160,12 @@
 | `v_A_c3_default_shannon_signs` | Kuminga slot, default allocation, sign un-aged / aged | all positive / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_A_c3_default_shannon_ships` | Kuminga slot, default allocation ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_A_c3_default_shannon_preship` | Kuminga slot, default allocation shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_C_mcdaniels_slides_pooled_u` | Kuminga slot, McDaniels slides, pooled un-aged mean pp | +0.41 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_C_mcdaniels_slides_pooled_a` | Kuminga slot, McDaniels slides, pooled aged mean pp | +0.55 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_C_mcdaniels_slides_tr_u` | Kuminga slot, McDaniels slides, team-rank un-aged mean pp | +0.50 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_C_mcdaniels_slides_tr_a` | Kuminga slot, McDaniels slides, team-rank aged mean pp | +0.56 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_C_mcdaniels_slides_cells` | Kuminga slot, McDaniels slides, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_C_mcdaniels_slides_two_cell` | Kuminga slot, McDaniels slides ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_C_mcdaniels_slides_label` | verdict label | Kuminga slot, McDaniels slides | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_C_mcdaniels_slides_u` | Kuminga slot, McDaniels slides, un-aged mean pp | +0.50 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_C_mcdaniels_slides_a` | Kuminga slot, McDaniels slides, aged mean pp | +0.56 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -113,6 +173,12 @@
 | `v_C_mcdaniels_slides_signs` | Kuminga slot, McDaniels slides, sign un-aged / aged | all positive / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_C_mcdaniels_slides_ships` | Kuminga slot, McDaniels slides ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_C_mcdaniels_slides_preship` | Kuminga slot, McDaniels slides shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_D_beringer_fills_pooled_u` | Kuminga slot, Beringer fills, pooled un-aged mean pp | -0.81 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_D_beringer_fills_pooled_a` | Kuminga slot, Beringer fills, pooled aged mean pp | -1.42 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_D_beringer_fills_tr_u` | Kuminga slot, Beringer fills, team-rank un-aged mean pp | -1.13 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_D_beringer_fills_tr_a` | Kuminga slot, Beringer fills, team-rank aged mean pp | -1.94 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_D_beringer_fills_cells` | Kuminga slot, Beringer fills, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_D_beringer_fills_two_cell` | Kuminga slot, Beringer fills ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_D_beringer_fills_label` | verdict label | Kuminga slot, Beringer fills | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_D_beringer_fills_u` | Kuminga slot, Beringer fills, un-aged mean pp | -1.13 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_D_beringer_fills_a` | Kuminga slot, Beringer fills, aged mean pp | -1.94 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -120,6 +186,12 @@
 | `v_D_beringer_fills_signs` | Kuminga slot, Beringer fills, sign un-aged / aged | all negative / all negative | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_D_beringer_fills_ships` | Kuminga slot, Beringer fills ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_D_beringer_fills_preship` | Kuminga slot, Beringer fills shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_E_tight_rule_F_or_FC_pooled_u` | Kuminga slot, tight eligibility rule, pooled un-aged mean pp | +0.44 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_E_tight_rule_F_or_FC_pooled_a` | Kuminga slot, tight eligibility rule, pooled aged mean pp | +0.57 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_E_tight_rule_F_or_FC_tr_u` | Kuminga slot, tight eligibility rule, team-rank un-aged mean pp | +0.50 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_E_tight_rule_F_or_FC_tr_a` | Kuminga slot, tight eligibility rule, team-rank aged mean pp | +0.56 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_E_tight_rule_F_or_FC_cells` | Kuminga slot, tight eligibility rule, views clearing in the four cells | 4/4, 4/4, 4/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_E_tight_rule_F_or_FC_two_cell` | Kuminga slot, tight eligibility rule ships on the two-cell rule (pooled only) | yes | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_E_tight_rule_F_or_FC_label` | verdict label | Kuminga slot, tight eligibility rule | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_E_tight_rule_F_or_FC_u` | Kuminga slot, tight eligibility rule, un-aged mean pp | +0.50 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_E_tight_rule_F_or_FC_a` | Kuminga slot, tight eligibility rule, aged mean pp | +0.56 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -127,6 +199,12 @@
 | `v_E_tight_rule_F_or_FC_signs` | Kuminga slot, tight eligibility rule, sign un-aged / aged | all positive / all positive | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_E_tight_rule_F_or_FC_ships` | Kuminga slot, tight eligibility rule ships | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_E_tight_rule_F_or_FC_preship` | Kuminga slot, tight eligibility rule shipped before D85 | yes | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `v_B_lyles_fills_pooled_u` | Kuminga slot, Lyles fills, pooled un-aged mean pp | +0.01 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_B_lyles_fills_pooled_a` | Kuminga slot, Lyles fills, pooled aged mean pp | -0.06 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_B_lyles_fills_tr_u` | Kuminga slot, Lyles fills, team-rank un-aged mean pp | +0.03 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_B_lyles_fills_tr_a` | Kuminga slot, Lyles fills, team-rank aged mean pp | -0.08 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_B_lyles_fills_cells` | Kuminga slot, Lyles fills, views clearing in the four cells | 3/4, 4/4, 3/4, 4/4 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `v_B_lyles_fills_two_cell` | Kuminga slot, Lyles fills ships on the two-cell rule (pooled only) | no | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `v_B_lyles_fills_label` | verdict label | Kuminga slot, Lyles fills | FACT | FACT | `w2_aging_gate_20260917T142258Z` |
 | `v_B_lyles_fills_u` | Kuminga slot, Lyles fills, un-aged mean pp | +0.03 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `v_B_lyles_fills_a` | Kuminga slot, Lyles fills, aged mean pp | -0.08 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
@@ -137,6 +215,10 @@
 | `n_ship` | verdicts that ship | 7 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `n_ship_pre` | verdicts that shipped before D85 | 9 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
 | `n_retired` | verdicts that shipped before D85 and do not now | 3 | MODELED | QUOTABLE | `w2_aging_gate_20260917T142258Z` |
+| `n_ship_two_cell` | verdicts that ship on the two-cell rule (pooled only) | 7 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `n_candidates` | candidate verdicts tested | 13 | FACT | FACT | `r7_allocator_agreement_20260918T175225Z` |
+| `k_min_pooled` | Kuminga minutes under the pooled allocator | 22.0 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
+| `k_min_teamrank` | Kuminga minutes under the teamrank allocator | 25.2 | MODELED | QUOTABLE | `r7_allocator_agreement_20260918T175225Z` |
 | `d85_residual` | post-D85 attribution roster vs direct simulation, worst view pp, both bases | 0.08 | MODELED | QUOTABLE | `r5_shapley_williams_20260917T142450Z` |
 | `d85_pooled_gap` | post-D85 pooled attribution rule vs direct simulation, worst view pp, both bases | 0.83 | MODELED | QUOTABLE | `r5_shapley_williams_20260917T142450Z` |
 | `d85_gap_before` | pre-D85 attribution roster vs direct simulation, worst view pp, un-aged | 1.24 | MODELED | QUOTABLE | `r5_shapley_williams_20260917T142450Z` |

@@ -20,7 +20,7 @@ Minnesota's modelled title probability for the season is **⟦⟧ `[tag]`**, fou
 
 **The model's biggest falsifiable claim is Boston.** The model makes Boston a **⟦⟧ `[tag]`** title team against a market price of **⟦⟧**, and it does so in every view; on the aged basis it is ⟦⟧, still ⟦⟧. Named, with a date: **if Boston's net rating through its ⟦⟧th game, around the end of December, is below ⟦⟧ per ⟦⟧ possessions, the market's read of Boston beats the model's** `[composed, n8_watch_list]`. The model's own range for Boston is ⟦⟧ to ⟦⟧, and a ⟦⟧-game net rating carries about ⟦⟧ points of pure chance, so the threshold sits where chance alone would rarely put a team the model has right. The same field prices every Minnesota number, so a Boston miss is a Minnesota caveat too.
 
-**The ⟦⟧ verdicts that ship** hold their sign on both aging bases and clear every view's noise floor on both, at ⟦⟧ simulations per view `[modeled, w2_aging_gate, noise_floor]`. It was ⟦⟧ before this pass; the change is explained below the table.
+**The ⟦⟧ verdicts that ship** hold their sign in all four cells of the rule, two aging bases by two minutes allocators, and clear every view's noise floor in each, at ⟦⟧ simulations per view `[modeled, w2_aging_gate, noise_floor, r7_allocator_agreement]`. It was ⟦⟧ before the corrections below, out of ⟦⟧ candidates.
 
 | verdict | un-aged, mean points of title odds | aged | sign, un-aged / aged | views clearing, un-aged, aged |
 |---|---:|---:|---|---|
@@ -32,7 +32,7 @@ Minnesota's modelled title probability for the season is **⟦⟧ `[tag]`**, fou
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 
-*Notes.* Two of the ⟦⟧ are Minnesota's own transactions (Ball in, Reid out). One is an injury, which ships as a cost and is not a verdict on the front office. Four compare Kuminga against different internal alternatives for his minutes: positive against three of them, negative against Beringer. A view "clears" when its value is larger than its noise floor in either direction, so a verdict can clear every view and still fail on sign.
+*Notes.* Two of the ⟦⟧ are Minnesota's own transactions (Ball in, Reid out). One is an injury, which ships as a cost and is not a verdict on the front office. Four compare Kuminga against different internal alternatives for his minutes: positive against three of them, negative against Beringer. A view "clears" when its value is larger than its noise floor in either direction, so a verdict can clear every view and still fail on sign. **The allocator test is the newest of the four cells and it changed nothing:** the same seven survive whether minutes are allocated team-wide, as the headline simulation does, or inside position groups, as the attribution layer does, and the count on the looser two-cell rule is the same ⟦⟧ `[modeled, r7_allocator_agreement]`. The sizes do move with the allocator, which is why the table gives the pooled figures and the appendix gives both.
 
 **What no longer ships, and why.** Until this pass the decomposition priced every combination of moves on a roster without Cody Williams, the player the Green trade brought back, and without the rule that gives new arrivals their minutes. Priced with the headline simulation's own minutes rule, its version of the actual roster sat ⟦⟧ points of title odds from that simulation on the un-aged basis; it now sits within ⟦⟧ on either basis, which is interpolation. The pooled rule the verdicts use spreads minutes across more of the bench by design and sits up to ⟦⟧ below. With both corrected, ⟦⟧ verdicts that shipped no longer do `[modeled, r5_shapley_williams]`:
 
@@ -42,7 +42,7 @@ Minnesota's modelled title probability for the season is **⟦⟧ `[tag]`**, fou
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 
-The departures bundle is seven players; split into them, ⟦⟧ ships on its own, and Kyle Anderson comes closest (⟦⟧ un-aged, ⟦⟧ aged, views clearing ⟦⟧) `[modeled, r2_departures]`. Randle out's history of flips is in the appendix.
+None of the three survives the allocator cell either: under the headline's own minutes rule other departures is ⟦⟧ un-aged against ⟦⟧ pooled, Randle out turns negative (⟦⟧), and Dosunmu re-signed stays mixed `[modeled, r7_allocator_agreement]`. The departures bundle is seven players; split into them, ⟦⟧ ships on its own, and Kyle Anderson comes closest (⟦⟧ un-aged, ⟦⟧ aged, views clearing ⟦⟧) `[modeled, r2_departures]`. Randle out's history of flips is in the appendix.
 
 **The number, and the condition:** ⟦⟧ modelled (⟦⟧ aged) against ⟦⟧ priced; the model ranks Minnesota lower than the market on both bases, the gap in probability is all-views only un-aged, and it is only as trustworthy as a model that also makes Boston a ⟦⟧ team, which December will test.
 
@@ -160,7 +160,7 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 
 ## Appendix
 
-**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which misattribute baskets and have not been re-checked outside this project (D84).
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. The library is fixed and the postmortem figures are recomputed (D88); what remains is the possession-grain version of the same defect, which reaches RAPM and is not re-fitted.
 
 **Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
 
@@ -218,15 +218,29 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| BOS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | HOU | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| DET | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| CHA | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | SAS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | PHI | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | NYK | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| BOS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| DET | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| CHA | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is ⟦⟧ points un-aged and all-negative, but ⟦⟧ and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is ⟦⟧: take out the DiVincenzo injury (⟦⟧) and the Williams minutes (⟦⟧), which overlap completely (⟦⟧, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **⟦⟧**, mixed across views `[modeled, w1c_decompose]`.
+
+**The seven shipping verdicts under both allocators** (mean points of title odds, pooled un-aged / pooled aged / team-rank un-aged / team-rank aged, then views clearing in each cell) `[modeled, r7_allocator_agreement]`:
+
+| verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | team-rank, aged | views clearing in each cell |
+|---|---:|---:|---:|---:|---|
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+
+Kuminga's minutes are ⟦⟧ under the headline's rule and ⟦⟧ under the pooled one, which is most of why the slot sizes differ between the two.
 
 **Randle out's flip history.** All-positive under the first minutes rules (D29). Mixed once the slot-aware allocator arrived, and it lost its quotable label (D31). All-positive again on the aged basis, when it was still held back as unstable (D52). All-positive on team-rank curve indexing, which became primary (D60). It has held its sign on both aging bases since the aging gate (D65), cleared every floor at full simulation count (D69), survived the D70 fixes (D77) and the departures split (D81). **It stopped shipping at D85**, when Cody Williams entered every coalition and new arrivals got their minutes by the headline's rule: ⟦⟧ un-aged, ⟦⟧ aged, views clearing ⟦⟧. Under the headline's team-rank allocator it turns negative un-aged, so its sign is not stable either.

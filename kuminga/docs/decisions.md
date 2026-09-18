@@ -1649,3 +1649,59 @@ Every ranked M4 list is now led by fives containing Joan Beringer, whose impact 
 **DUPLICATE RUN ID.** Two `noise_floor` runs (un-aged, aged) started in the same second and both logged `noise_floor_20260917T141326Z`. Both are superseded by later runs with distinct IDs. `runlog` has no collision guard; recorded in gaps_remaining.md.
 
 **THE LESSON.** A reconciliation gap that had been 0.07 and became 1.49 was read for two weeks as the same kind of number it used to be. A check that prints a figure without a limit is a log line, not a gate.
+
+### D86. Run ids are unique by construction, and the six that collided are marked
+
+**Run IDs.** `mark_duplicate_runs_20260918T174914Z`; gate `reconcile_figures_20260918T180652Z`. As of 2026-09-18.
+
+**THE DEFECT.** A run id is the script name plus the start time to the second, so two runs starting in the same second got the same id. The log held **514 records under 502 ids**: the two `noise_floor` runs of D85 (un-aged then aged, back to back) and five `build_fcurve` groups where four forks ran in parallel and shared one second. A duplicate id makes provenance ambiguous for every figure citing it, which is the one thing the run log exists to prevent.
+
+**THE FIX, in `lib/runlog.py`.** The id is now RESERVED before the run starts: an `O_EXCL` marker file under `logs/ids/`, which is atomic across processes, plus the ids already in the log. On a collision the timestamp walks forward one second at a time, so the id keeps its shape and `started_utc` stays the true start; the record carries `id_bumped_seconds` and a note. A second guard at write time refuses to append an id the log already holds, bumping instead of losing the record, which covers a log edited or merged by hand. Verified on three runs forced into the same second: ids distinct, bumps 0, 1, 2. `logs/ids/` is gitignored.
+
+**THE MARKING, once, in `mark_duplicate_runs.py`.** Every record in a colliding group now carries `duplicate_id_legacy`, a count and a reason. The two `noise_floor` records also carry `superseded_by`, resolved per basis: un-aged by `noise_floor_20260917T142255Z`, aged by `noise_floor_20260917T142257Z`. Gate G1 refused to run if any figure on the sheet cited a duplicated id (none did). G2 checked the rewritten log record for record, 514 before and after, and the pre-D86 log is backed up at `logs/backup/runs_pre_d86.jsonl` (sha256 `24a36f844e34baa3...`). The `build_fcurve` groups are marked legacy and not superseded: each record is a real fork.
+
+**THE GATE, C3 in `reconcile_figures.py`.** Fails on any duplicate id that is not marked, and on any figure citing a duplicated id. Current: 528 records, 516 distinct ids, 6 duplicated and all marked, 0 figures citing one.
+
+
+### D87. The shipping rule is four cells: both aging bases and both minutes allocators. All seven hold
+
+**Run IDs.** `r7_allocator_agreement_20260918T175225Z`; sheet `build_final_numbers_20260918T180620Z`; render `render_piece_20260918T180651Z`; gate `reconcile_figures_20260918T180652Z`. As of 2026-09-18.
+
+**WHY.** D85 recorded the allocator as an open dependency: the pooled rule the attribution layer uses and the team-rank rule the headline simulation uses disagree about sizes, and under team-rank `randle_out` turned negative. Leaving that as a caveat put the reader one paragraph away from a verdict that depends on a modelling choice. The rule now has four cells per verdict, two aging bases by two allocators, and a verdict ships only if its sign is the same in all four, is not MIXED in any, and all four views clear their floor in every cell.
+
+**WHAT HAD TO BE BUILT.** `slot_robustness.py` only ever ran on the team-rank rotation, so the slot variants had no pooled figures. `r7_allocator_agreement.py` recomputes all five variants under both allocators on both bases, starting from `allocate_pooled` on the same roster and handing Kuminga's minutes down the same eligibility and ceiling rules. Gates: G1 the team-rank variants reproduce `slot_robustness.csv` and its aged counterpart to 1e-9 points; G2 the floors reproduce the published clearing counts; G3 the pooled allocation is 240 minutes over 13 players with Kuminga on it. Moves come from `r5_shapley_williams.py`, which already prices the eight-move game under both allocators.
+
+**THE ANSWER: 7 of 13 candidates ship, the same seven as D85.** Nothing dropped and nothing was added.
+
+| verdict | pooled, un-aged / aged | team-rank, un-aged / aged | clearing |
+|---|---:|---:|---|
+| ball_in | +0.68 / +0.78 | +1.36 / +1.33 | 4,4,4,4 |
+| reid_out | -0.42 / -0.51 | -1.09 / -1.11 | 4,4,4,4 |
+| ddv_injury | -0.42 / -0.33 | -0.91 / -0.73 | 4,4,4,4 |
+| slot A, default | +0.44 / +0.57 | +0.52 / +0.58 | 4,4,4,4 |
+| slot C, McDaniels slides | +0.41 / +0.55 | +0.50 / +0.56 | 4,4,4,4 |
+| slot D, Beringer fills | -0.81 / -1.42 | -1.13 / -1.94 | 4,4,4,4 |
+| slot E, tight rule | +0.44 / +0.57 | +0.50 / +0.56 | 4,4,4,4 |
+
+**The six that fail, and where.** `other_departures` is MIXED un-aged pooled and MIXED both ways under team-rank (-0.52 un-aged). `randle_out` clears 2 of 4 views pooled un-aged and turns ALL NEGATIVE under team-rank (-0.22), so its sign is not stable across allocators either. `dosunmu_retained` is MIXED in all four cells. `depth` ships under team-rank alone (+0.75 / +0.71), which is exactly why one allocator is not enough. `kuminga_in` (the pooled Shapley move, not the slot comparison) is MIXED in all four. Slot B (Lyles fills) is MIXED in all four.
+
+**Sizes move with the allocator even when signs do not.** Kuminga has 25.2 minutes under the headline rule and 22.0 under the pooled one, which is most of the gap between the slot figures. Ball in is +0.68 pooled and +1.36 team-rank. The skeleton quotes the pooled figures in the table and gives all four cells in the appendix.
+
+**Sheet change.** `build_final_numbers.py` now takes ships from `r7_allocator_verdicts.csv` and asserts that its pooled cells agree with the aging gate and the floors, so a stale file fails the build instead of quietly changing a verdict.
+
+
+### D88. The stint points defect is fixed in the shared library, and every figure that rode on it is recomputed
+
+**Files.** Fix `postmortem/lib/lineup_aggregation.py`; validation `postmortem/scripts/validate_stint_points.py`; recompute `postmortem/scripts/recompute_stint_figures.py`; table `postmortem/outputs/tables/validation/d88_recomputed_figures.csv`; write-up `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`. As of 2026-09-18. (Postmortem has no run log; the kuminga runlog covers kuminga scripts only.)
+
+**THE FIX, at the source this time.** D82 found the defect and worked around it locally; D84 retracted two sentences. The library itself now rebuilds `points_for` and `points_against` from made-shot events (2*fgm + fg3m + ftm), which are attributed to the stint containing each shot, and keeps the possession-basis figures beside them as `points_*_possession_basis` for diagnosis. The library's own v1 caveat had measured the symptom as "AND-1 attribution noise" of about 5 points per team-game; that undersold it, because the points were not noisy, they were credited to the **wrong team**.
+
+**VALIDATED, not asserted.** On 24 Wolves games across three seasons and both season types, 48 team-games, against `nba_games.pts`: the made-shot basis is exact in 48 of 48; the possession basis is exact in 2 of 48, mean absolute error 4.25 points, largest 11.0, **3.89% of all points**, and the error sums to **exactly zero across the two teams of every game**. That mirroring is the proof of mechanism. Over Minnesota's 15 games in the 2024-25 playoffs the old basis gave Minnesota 68 points too few and its opponents exactly 68 too many.
+
+**RECOMPUTED: 41 published figures, every "before" reproducing the published number exactly.** Regular-season figures move by under 2 points per 100 and all stay inside their intervals. Playoff figures move by up to 17 and **five change sign**: the team's 2024-25 playoff net rating (-3.68 to +6.59, the only figure whose shift exceeds its own interval), Gobert + Reid with no Randle (+9.82 to -5.51), Gobert's playoff on/off (+1.6 to -11.27), Clark's (+4.7 to -4.23), and Edwards on with Randle off (+6.68 to -6.45). Randle's on/off goes from -16.30 to -4.71, so he is no longer the team's worst; DiVincenzo's goes from +18.4 to +35.56 with an interval excluding zero. A control with no points in it, three-point attempts per 100, is identical on both bases.
+
+**Sentences that no longer hold, in postmortem's own documents:** "the Gobert plus Reid pairing was positive in the playoffs" (the ordering survives, the sign does not), "Randle was the worst on/off on the team", "Gobert was positive on/off in the playoffs", and "the 2024-25 playoff run was negative on the lineup-grain pipeline". Every regular-season claim survives, including "Gobert plus Randle is not structurally bad". Banners pointing at the recompute are now at the top of the eight affected findings documents, the Q1 report, the article draft and the active Q5 prescription spec.
+
+**WHAT IS STILL EXPOSED, and deliberately not touched.** The mirrored error proves the possession table credits points to the wrong team, so the same root cause reaches everything fitted on possession-level points: postmortem's RAPM (`rapm.py`, `rapm_recent.py`), Q1's halfcourt, transition and clutch splits, and the fit engine's possession builder. **The published article draft's two RAPM claims** (Gobert's offence going from positive to clearly negative, DiVincenzo as the league's highest-impact player) are therefore unverified rather than refuted; re-fitting RAPM is its own job and was not done in passing. The fit engine's `src/stints/stint_builder.py` is a deliberate hash-pinned fork carrying the same defect, so fixing it breaks the pin by design and is Bobby's call; everything downstream of its 15,669-game panel (tripwire PAIR-DRTG, the jaden_calibration JD-COVER report) still carries it and is bannered.
+
+**The kuminga project's own figures do not change.** They already used rebuilt points, which is how the defect was found.

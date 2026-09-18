@@ -20,7 +20,7 @@ Minnesota's modelled title probability for the season is **1.69% `[modeled, run_
 
 **The model's biggest falsifiable claim is Boston.** The model makes Boston a **17.00% `[modeled, market_devig]`** title team against a market price of **5.47%**, and it does so in every view; on the aged basis it is 13.49%, still all-views. Named, with a date: **if Boston's net rating through its 30th game, around the end of December, is below -1.5 per 100 possessions, the market's read of Boston beats the model's** `[composed, n8_watch_list]`. The model's own range for Boston is +3.5 to +9.0, and a 30-game net rating carries about 3.1 points of pure chance, so the threshold sits where chance alone would rarely put a team the model has right. The same field prices every Minnesota number, so a Boston miss is a Minnesota caveat too.
 
-**The 7 verdicts that ship** hold their sign on both aging bases and clear every view's noise floor on both, at 200,000 simulations per view `[modeled, w2_aging_gate, noise_floor]`. It was 9 before this pass; the change is explained below the table.
+**The 7 verdicts that ship** hold their sign in all four cells of the rule, two aging bases by two minutes allocators, and clear every view's noise floor in each, at 200,000 simulations per view `[modeled, w2_aging_gate, noise_floor, r7_allocator_agreement]`. It was 9 before the corrections below, out of 13 candidates.
 
 | verdict | un-aged, mean points of title odds | aged | sign, un-aged / aged | views clearing, un-aged, aged |
 |---|---:|---:|---|---|
@@ -32,7 +32,7 @@ Minnesota's modelled title probability for the season is **1.69% `[modeled, run_
 | Kuminga slot, Beringer fills | -1.13 | -1.94 | all negative / all negative | 4/4, 4/4 |
 | Kuminga slot, tight eligibility rule | +0.50 | +0.56 | all positive / all positive | 4/4, 4/4 |
 
-*Notes.* Two of the 7 are Minnesota's own transactions (Ball in, Reid out). One is an injury, which ships as a cost and is not a verdict on the front office. Four compare Kuminga against different internal alternatives for his minutes: positive against three of them, negative against Beringer. A view "clears" when its value is larger than its noise floor in either direction, so a verdict can clear every view and still fail on sign.
+*Notes.* Two of the 7 are Minnesota's own transactions (Ball in, Reid out). One is an injury, which ships as a cost and is not a verdict on the front office. Four compare Kuminga against different internal alternatives for his minutes: positive against three of them, negative against Beringer. A view "clears" when its value is larger than its noise floor in either direction, so a verdict can clear every view and still fail on sign. **The allocator test is the newest of the four cells and it changed nothing:** the same seven survive whether minutes are allocated team-wide, as the headline simulation does, or inside position groups, as the attribution layer does, and the count on the looser two-cell rule is the same 7 `[modeled, r7_allocator_agreement]`. The sizes do move with the allocator, which is why the table gives the pooled figures and the appendix gives both.
 
 **What no longer ships, and why.** Until this pass the decomposition priced every combination of moves on a roster without Cody Williams, the player the Green trade brought back, and without the rule that gives new arrivals their minutes. Priced with the headline simulation's own minutes rule, its version of the actual roster sat 1.24 points of title odds from that simulation on the un-aged basis; it now sits within 0.08 on either basis, which is interpolation. The pooled rule the verdicts use spreads minutes across more of the bench by design and sits up to 0.83 below. With both corrected, 3 verdicts that shipped no longer do `[modeled, r5_shapley_williams]`:
 
@@ -42,7 +42,7 @@ Minnesota's modelled title probability for the season is **1.69% `[modeled, run_
 | Julius Randle out | +0.07 | +0.34 | all positive / all positive | 2/4, 4/4 |
 | Ayo Dosunmu re-signed | -0.16 | -0.22 | mixed / mixed | 3/4, 3/4 |
 
-The departures bundle is seven players; split into them, 0 ships on its own, and Kyle Anderson comes closest (+0.08 un-aged, +0.37 aged, views clearing 3/4, 4/4) `[modeled, r2_departures]`. Randle out's history of flips is in the appendix.
+None of the three survives the allocator cell either: under the headline's own minutes rule other departures is -0.51 un-aged against +0.36 pooled, Randle out turns negative (-0.22), and Dosunmu re-signed stays mixed `[modeled, r7_allocator_agreement]`. The departures bundle is seven players; split into them, 0 ships on its own, and Kyle Anderson comes closest (+0.08 un-aged, +0.37 aged, views clearing 3/4, 4/4) `[modeled, r2_departures]`. Randle out's history of flips is in the appendix.
 
 **The number, and the condition:** 1.69% modelled (2.55% aged) against 3.16% priced; the model ranks Minnesota lower than the market on both bases, the gap in probability is all-views only un-aged, and it is only as trustworthy as a model that also makes Boston a 17.00% team, which December will test.
 
@@ -160,7 +160,7 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 
 ## Appendix
 
-**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which misattribute baskets and have not been re-checked outside this project (D84).
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. The library is fixed and the postmortem figures are recomputed (D88); what remains is the possession-grain version of the same defect, which reaches RAPM and is not re-fitted.
 
 **Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
 
@@ -218,15 +218,29 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | 3.16% | 0.82% | 1.20% | 2.11% | 2.62% | ALL-VIEWS |
+| BOS | 5.47% | 19.28% | 20.49% | 13.27% | 14.94% | ALL-VIEWS |
 | HOU | 1.61% | 5.03% | 5.09% | 5.27% | 6.41% | ALL-VIEWS |
-| DET | 3.16% | 5.02% | 5.17% | 10.48% | 11.76% | ALL-VIEWS |
-| CHA | 0.81% | 8.21% | 9.44% | 5.20% | 0.58% | MIXED |
-| OKC | 22.49% | 16.31% | 15.05% | 17.58% | 17.92% | ALL-VIEWS |
 | SAS | 22.96% | 16.15% | 17.52% | 9.77% | 12.12% | ALL-VIEWS |
 | PHI | 8.42% | 3.62% | 2.78% | 0.53% | 3.01% | ALL-VIEWS |
 | NYK | 8.21% | 3.71% | 3.86% | 6.08% | 3.59% | ALL-VIEWS |
-| BOS | 5.47% | 19.28% | 20.49% | 13.27% | 14.94% | ALL-VIEWS |
+| OKC | 22.49% | 16.31% | 15.05% | 17.58% | 17.92% | ALL-VIEWS |
+| DET | 3.16% | 5.02% | 5.17% | 10.48% | 11.76% | ALL-VIEWS |
+| CHA | 0.81% | 8.21% | 9.44% | 5.20% | 0.58% | MIXED |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is -1.25 points un-aged and all-negative, but -0.39 and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is -0.965: take out the DiVincenzo injury (+1.728) and the Williams minutes (+1.029), which overlap completely (-1.029, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **+0.762**, mixed across views `[modeled, w1c_decompose]`.
+
+**The seven shipping verdicts under both allocators** (mean points of title odds, pooled un-aged / pooled aged / team-rank un-aged / team-rank aged, then views clearing in each cell) `[modeled, r7_allocator_agreement]`:
+
+| verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | team-rank, aged | views clearing in each cell |
+|---|---:|---:|---:|---:|---|
+| LaMelo Ball in | +0.68 | +0.78 | +1.36 | +1.33 | 4/4, 4/4, 4/4, 4/4 |
+| Naz Reid out | -0.42 | -0.51 | -1.08 | -1.11 | 4/4, 4/4, 4/4, 4/4 |
+| DiVincenzo's Achilles (not a transaction) | -0.42 | -0.33 | -0.91 | -0.73 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, default allocation | +0.44 | +0.57 | +0.52 | +0.58 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, McDaniels slides | +0.41 | +0.55 | +0.50 | +0.56 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, Beringer fills | -0.81 | -1.42 | -1.13 | -1.94 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, tight eligibility rule | +0.44 | +0.57 | +0.50 | +0.56 | 4/4, 4/4, 4/4, 4/4 |
+
+Kuminga's minutes are 25.2 under the headline's rule and 22.0 under the pooled one, which is most of why the slot sizes differ between the two.
 
 **Randle out's flip history.** All-positive under the first minutes rules (D29). Mixed once the slot-aware allocator arrived, and it lost its quotable label (D31). All-positive again on the aged basis, when it was still held back as unstable (D52). All-positive on team-rank curve indexing, which became primary (D60). It has held its sign on both aging bases since the aging gate (D65), cleared every floor at full simulation count (D69), survived the D70 fixes (D77) and the departures split (D81). **It stopped shipping at D85**, when Cody Williams entered every coalition and new arrivals got their minutes by the headline's rule: +0.07 un-aged, +0.34 aged, views clearing 2/4, 4/4. Under the headline's team-rank allocator it turns negative un-aged, so its sign is not stable either.

@@ -137,12 +137,17 @@ Recorded per the autonomy rule: failures go here and the run moves on.
 
 - **Pre-playoff odds and every odds-history column before the clean seasons** (H1). Left blank in `h1_champion_sheet.csv` for a pasted source; B-Ref's preseason-odds pages are the citable route.
 
-**FLAGGED, not fixed**
+**FLAGGED, and what is now fixed**
 
-- **The shared stint pipeline's point columns** (`postmortem/lib/lineup_aggregation.py`) credit possession points to the tracked offense and misattribute about 3.4% of points. This project rebuilds points from made shots (D82, D84). Any other project that reads those columns is exposed; not changed here because the library is shared.
-- **The attribution allocator is a choice the shipping list depends on** (D85). Under the pooled rule the piece uses, Ball in, Reid out and the DiVincenzo injury ship. Under the team-rank allocator the headline simulation uses, the same three ship and depth ships too, while Randle out turns negative un-aged. The piece quotes the pooled rule (S1, W1b) and says Randle out's sign is not stable.
-- **Duplicate run ID.** Two `noise_floor` runs started in the same second on 2026-09-17 (`noise_floor_20260917T141326Z`, un-aged and aged). Both superseded by later runs with distinct IDs; `runlog` has no collision guard.
+- ~~**The shared stint pipeline's point columns.**~~ **FIXED AT THE SOURCE 2026-09-18 (D88).** `postmortem/lib/lineup_aggregation.py` now rebuilds points from made shots, stint points reconcile to the box score exactly (48 of 48 team-games), and the 41 postmortem figures that rode on the old basis are recomputed with before and after logged. Five playoff figures change sign. **What remains** is the possession-grain version of the same defect: possession points are credited to the possession's offensive team, which is wrong for about 3.9% of points and reaches postmortem's RAPM, Q1's halfcourt/transition/clutch splits, and the fit engine's possession builder. Two RAPM claims in a published article draft are therefore unverified. Re-fitting RAPM is a separate job.
+- ~~**The attribution allocator is a choice the shipping list depends on.**~~ **CLOSED 2026-09-18 (D87).** The shipping rule is now four cells, two aging bases by two allocators, and all seven verdicts hold in every cell. `depth` ships under team-rank alone and therefore does not ship, which is the case that justified the test.
+- ~~**Duplicate run ID.**~~ **CLOSED 2026-09-18 (D86).** Run ids are now reserved with an atomic marker file before a run starts, so a collision bumps the timestamp instead of sharing an id. The six ids that already collided (two `noise_floor`, five `build_fcurve` fork groups) are marked, the `noise_floor` pair records which run supersedes it per basis, and `reconcile_figures.py` gate C3 fails on any unmarked duplicate or any figure citing one.
 
 **A STANDING RISK, unchanged**
 
 - The roster book is single-sourced to Spotrac (D56).
+
+**NEW, opened 2026-09-18 by D88**
+
+- **The possession grain.** `lib/pbp.reconstruct_possessions` credits a possession's points to its offensive team, which misplaces and-1 free throws the same way the stint layer did. Everything fitted on it is exposed: postmortem RAPM (and the two RAPM claims in `postmortem/articles/02_how_they_got_here_first_draft.md`), Q1's halfcourt, transition and clutch splits, the fit engine's `build_possessions.py`. The fix is the same shape as D88's (attribute points to the team that scored them) but it changes possession semantics, so it needs its own validation pass.
+- **The fit engine's pinned fork.** `counterfactual-fit-engine/src/stints/stint_builder.py` is a deliberate hash-pinned copy of the fixed library and still carries the defect. Fixing it breaks the pin by design, so it is Bobby's call. Downstream: the tripwire PAIR-DRTG markers and the jaden_calibration JD-COVER report, both bannered, both on a 15,669-game panel that needs a scheduled rebuild.

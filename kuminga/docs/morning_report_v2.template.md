@@ -24,6 +24,8 @@
 
 **Withheld:** the late-clock split (reconstruction {{lc_g1}} against a bar of {{lc_bar}}).
 
-**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; the shared stint pipeline's point columns, which misattribute baskets and are not fixed at the library level (flagged, not changed); and the shipping list's dependence on the attribution allocator (D85: the piece uses the pooled rule, under which Randle out is positive; under the headline's team-rank rule it turns negative un-aged).
+**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and the possession-grain version of the stint points defect, which reaches RAPM in the postmortem project and is not re-fitted (D88; the stint library itself is fixed and its figures recomputed).
+
+**Settled since:** the stint library is fixed at the source and every postmortem figure built on it is recomputed, with five playoff sign changes logged (D88). The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
 
 **To watch first:** Boston's net rating through its {{bos_dec_game}}th game against a threshold of {{bos_dec_threshold}}, and the five claims at game {{w_game}}.
