@@ -1,0 +1,21 @@
+feature,label,minnesota,basis,champ_lo,champ_hi,status,closable,separates
+pre_implied,preseason implied %,3.15660716180901,2026-27 (known now),8.268452029999942,14.689311809748046,"outside, short of it",set by the roster or the market,False
+pre_rank,preseason rank,6.0,2026-27 (known now),1.0,4.0,"outside, short of it",set by the roster or the market,False
+nrtg_rank,net rating rank,10.0,2025-26 actual,1.0,5.0,"outside, short of it",a season can close it,False
+ortg_rank,offence rank,12.0,2025-26 actual,1.0,3.0,"outside, short of it",a season can close it,True
+drtg_rank,defence rank,8.0,2025-26 actual,1.0,7.0,"outside, short of it",a season can close it,True
+post_asb_rank,post-All-Star net rank,18.0,2025-26 actual,1.0,8.0,"outside, short of it",a season can close it,False
+seed,seed,6.0,2025-26 actual,1.0,3.0,"outside, short of it",a season can close it,False
+po_minus_rs,playoff minus regular-season net,-8.913885144981197,2025-26 actual,-4.36982781500695,8.718485358500615,"outside, short of it",a season can close it,False
+best_vorp,best player VORP,3.5,2025-26 actual,3.3,8.9,inside the champions' range,set by the roster or the market,False
+top8_age,top-8 age,28.564361966236344,2025-26 actual,24.974013733674433,29.238687123713344,inside the champions' range,set by the roster or the market,False
+continuity,continuity,0.5657931714399481,2026-27 (known now),0.6907316103961204,0.8485149592388898,"outside, short of it",set by the roster or the market,True
+top8_po_games_missed,top-8 playoff games missed,12.0,2025-26 actual,4.0,12.0,inside the champions' range,a season can close it,False
+pace_z,pace (z),0.5517441854759932,2025-26 actual,-1.228593157193624,0.6034214740154151,inside the champions' range,set by the roster or the market,False
+fg3a_z,three-point rate (z),0.11675278538012163,2025-26 actual,-0.06181075985019985,2.718402703010401,inside the champions' range,set by the roster or the market,False
+oreb_z,offensive rebound rate (z),-0.09849563567758529,2025-26 actual,-0.39105380097387815,1.070463556979453,inside the champions' range,set by the roster or the market,False
+opp_tov_z,turnovers forced (z),0.23773083818849233,2025-26 actual,-1.6414014851504062,1.8905143707433885,inside the champions' range,set by the roster or the market,False
+def_share_z,defence share (z),0.4278646786532749,2025-26 actual,-1.1185354027559613,0.347743156360008,"outside, above",set by the roster or the market,False
+rim_rate,rim rate (z),0.3187811581207746,2025-26 actual,-1.2531405420509931,-0.0639902852515771,"outside, above",set by the roster or the market,False
+size,size (z),0.0041290660320479,2025-26 actual,-0.8723749235171206,1.0569575388426793,inside the champions' range,set by the roster or the market,False
+top3,top-three minutes share (z),0.4077800769186993,2025-26 actual,-0.0313532516647972,1.0215876174261374,inside the champions' range,set by the roster or the market,False

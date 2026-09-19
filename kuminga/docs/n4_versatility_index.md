@@ -1,62 +1,62 @@
 # N4: versatility index
 
-*As of 2026-09-16. Part 1 is MODELLED: 2026-27 strengths from the un-aged primary after the D70 fixes, series model with the style overlay off (M2). Part 2 is OBSERVED: regular seasons from `nba_games`. Run `n4_versatility_index_20260916T213612Z`.*
+*As of 2026-09-16. Part 1 is MODELLED: 2026-27 strengths from the un-aged primary after the D70 fixes, series model with the style overlay off (M2). Part 2 is OBSERVED: regular seasons from `nba_games`. Run `n4_versatility_index_20260919T234720Z`.*
 
-**In plain terms.** The index asks how much a team's chance of winning a series swings across the eight contenders. Under the series model this project uses, that swing is set entirely by the team's own net rating: for the 22 teams outside the field, ranking by swing is ranking by net rating (rank correlation 1.00 in every view). The model prices a series on the rating gap and home court and nothing else, so the index ranks where a team sits on the curve, not how versatile it is. DET tops it because its rating sits among the contenders, where series are closest to coin flips; Minnesota ranks 15 of 30. **Minnesota's best matchup in the field is CHA (29%) and its worst OKC (10%); within each view that order is the order of the opponents' net ratings.**
+**In plain terms.** The index asks how much a team's chance of winning a series swings across the eight contenders. Under the series model this project uses, that swing is set entirely by the team's own net rating: for the 22 teams outside the field, ranking by swing is ranking by net rating (rank correlation 1.00 in every view). The model prices a series on the rating gap and home court and nothing else, so the index ranks where a team sits on the curve, not how versatile it is. HOU tops it because its rating sits among the contenders, where series are closest to coin flips; Minnesota ranks 16 of 30. **Minnesota's best matchup in the field is MIA (26%) and its worst BOS (10%); within each view that order is the order of the opponents' net ratings.**
 
 The real question is whether versatility exists in the games themselves, which the model would then be missing. Across 15,669 regular-season games since 2013-14, the best estimate of a true, repeatable matchup effect (one team playing a particular opponent better than the ratings say) is **0.6 points per game**, and on 34,357 games since 1997-98 it is 0.0. On an even series those two estimates are worth about 5 and 0 points of series probability. The data cannot rule out an effect as large as 1.2 points per game (95% upper bound), which would be worth 9 points in an even series, so this is a small effect with a loose ceiling, not a proven zero. A team's spread of results across opponents does repeat from one season to the next (+0.26), but that is volatility, not versatility: how swingy a team's games are repeats more strongly (+0.30), and once it is removed the spread's repeat falls to -0.01.
 
 ## Part 1. The index as specified (MODELLED)
 
-Field, top 8 by modelled title odds: BOS (17.0%), OKC (16.7%), SAS (13.9%), DET (8.1%), CHA (5.9%), HOU (5.4%), TOR (4.9%), DEN (4.7%). A contender is scored against the other seven.
+Field, top 8 by modelled title odds: BOS (18.3%), OKC (14.7%), SAS (13.9%), DET (7.8%), HOU (6.8%), DEN (6.2%), TOR (5.8%), MIA (4.6%). A contender is scored against the other seven.
 
 | rank | team | net, 2026-27 | gap to field | spread (SD) [four views] | range | mean P(series) |
 |---:|---|---:|---:|---|---:|---:|
-| 1 | DET (field) | +5.29 | -0.15 | 0.160 [0.138, 0.180] | 0.451 | 0.492 |
-| 2 | SAS (field) | +6.93 | +1.49 | 0.155 [0.144, 0.175] | 0.445 | 0.622 |
-| 3 | TOR (field) | +4.05 | -1.39 | 0.149 [0.076, 0.187] | 0.413 | 0.381 |
-| 4 | HOU (field) | +4.07 | -1.37 | 0.149 [0.120, 0.183] | 0.452 | 0.373 |
-| 5 | NYK | +3.67 | -1.77 | 0.143 [0.130, 0.160] | 0.447 | 0.363 |
-| 6 | CHA (field) | +4.14 | -1.30 | 0.141 [0.068, 0.189] | 0.381 | 0.401 |
-| 7 | MIA | +3.66 | -1.78 | 0.140 [0.110, 0.172] | 0.444 | 0.359 |
-| 8 | LAL | +2.90 | -2.54 | 0.132 [0.107, 0.148] | 0.406 | 0.316 |
-| 9 | DEN (field) | +3.50 | -1.94 | 0.127 [0.097, 0.166] | 0.359 | 0.334 |
-| 10 | PHI | +2.52 | -2.91 | 0.124 [0.069, 0.158] | 0.396 | 0.289 |
-| 11 | OKC (field) | +7.65 | +2.21 | 0.123 [0.072, 0.171] | 0.363 | 0.690 |
-| 12 | BOS (field) | +7.89 | +2.45 | 0.113 [0.094, 0.140] | 0.347 | 0.708 |
-| 13 | ATL | +2.11 | -3.33 | 0.112 [0.075, 0.169] | 0.339 | 0.263 |
-| 14 | CLE | +1.72 | -3.72 | 0.109 [0.084, 0.143] | 0.344 | 0.246 |
-| 15 | **MIN** | +0.88 | -4.56 | 0.094 [0.062, 0.150] | 0.295 | 0.203 |
-| 16 | PHX | +0.64 | -4.80 | 0.092 [0.067, 0.151] | 0.286 | 0.191 |
-| 17 | ORL | +0.62 | -4.82 | 0.087 [0.070, 0.109] | 0.267 | 0.185 |
-| 18 | POR | +0.25 | -5.19 | 0.080 [0.070, 0.089] | 0.248 | 0.172 |
-| 19 | LAC | -1.88 | -7.32 | 0.054 [0.043, 0.068] | 0.166 | 0.096 |
-| 20 | GSW | -2.19 | -7.63 | 0.050 [0.033, 0.074] | 0.158 | 0.092 |
-| 21 | CHI | -2.36 | -7.80 | 0.050 [0.028, 0.086] | 0.156 | 0.085 |
-| 22 | DAL | -3.78 | -9.22 | 0.034 [0.025, 0.054] | 0.107 | 0.054 |
-| 23 | NOP | -4.71 | -10.15 | 0.029 [0.014, 0.061] | 0.092 | 0.044 |
-| 24 | MEM | -5.17 | -10.61 | 0.025 [0.013, 0.048] | 0.078 | 0.035 |
-| 25 | MIL | -5.18 | -10.61 | 0.023 [0.015, 0.032] | 0.071 | 0.035 |
-| 26 | BKN | -5.31 | -10.75 | 0.023 [0.011, 0.033] | 0.070 | 0.033 |
-| 27 | SAC | -6.42 | -11.86 | 0.017 [0.008, 0.034] | 0.054 | 0.023 |
-| 28 | IND | -6.36 | -11.80 | 0.017 [0.010, 0.034] | 0.053 | 0.023 |
-| 29 | UTA | -10.03 | -15.47 | 0.009 [0.001, 0.030] | 0.028 | 0.010 |
-| 30 | WAS | -9.49 | -14.93 | 0.008 [0.002, 0.024] | 0.026 | 0.010 |
+| 1 | HOU (field) | +5.04 | -0.82 | 0.149 [0.129, 0.176] | 0.390 | 0.434 |
+| 2 | SAS (field) | +7.19 | +1.33 | 0.140 [0.131, 0.147] | 0.395 | 0.615 |
+| 3 | DET (field) | +5.38 | -0.48 | 0.133 [0.124, 0.151] | 0.380 | 0.464 |
+| 4 | TOR (field) | +4.70 | -1.16 | 0.133 [0.082, 0.169] | 0.364 | 0.400 |
+| 5 | OKC (field) | +7.43 | +1.57 | 0.120 [0.070, 0.175] | 0.323 | 0.647 |
+| 6 | DEN (field) | +4.65 | -1.21 | 0.119 [0.077, 0.143] | 0.326 | 0.386 |
+| 7 | MIA (field) | +4.11 | -1.75 | 0.112 [0.104, 0.132] | 0.347 | 0.340 |
+| 8 | NYK | +3.72 | -2.14 | 0.104 [0.077, 0.127] | 0.296 | 0.329 |
+| 9 | CHA | +3.22 | -2.64 | 0.100 [0.054, 0.125] | 0.287 | 0.304 |
+| 10 | BOS (field) | +8.38 | +2.52 | 0.093 [0.070, 0.116] | 0.278 | 0.713 |
+| 11 | PHI | +3.04 | -2.82 | 0.091 [0.071, 0.111] | 0.260 | 0.285 |
+| 12 | ATL | +2.42 | -3.44 | 0.084 [0.073, 0.103] | 0.239 | 0.249 |
+| 13 | LAL | +1.82 | -4.04 | 0.081 [0.063, 0.125] | 0.231 | 0.230 |
+| 14 | CLE | +1.71 | -4.15 | 0.081 [0.060, 0.123] | 0.229 | 0.223 |
+| 15 | POR | +1.39 | -4.47 | 0.073 [0.038, 0.092] | 0.208 | 0.204 |
+| 16 | **MIN** | +1.02 | -4.84 | 0.066 [0.052, 0.077] | 0.187 | 0.184 |
+| 17 | PHX | +0.69 | -5.17 | 0.062 [0.056, 0.068] | 0.176 | 0.170 |
+| 18 | ORL | +0.22 | -5.64 | 0.057 [0.050, 0.068] | 0.162 | 0.149 |
+| 19 | CHI | -2.20 | -8.06 | 0.033 [0.028, 0.038] | 0.093 | 0.075 |
+| 20 | LAC | -2.81 | -8.67 | 0.028 [0.023, 0.040] | 0.080 | 0.062 |
+| 21 | GSW | -2.95 | -8.81 | 0.028 [0.018, 0.045] | 0.079 | 0.064 |
+| 22 | DAL | -3.01 | -8.87 | 0.027 [0.023, 0.029] | 0.074 | 0.057 |
+| 23 | BKN | -4.04 | -9.90 | 0.023 [0.009, 0.044] | 0.064 | 0.047 |
+| 24 | NOP | -4.02 | -9.87 | 0.020 [0.015, 0.027] | 0.056 | 0.042 |
+| 25 | MIL | -4.60 | -10.46 | 0.017 [0.011, 0.026] | 0.048 | 0.034 |
+| 26 | IND | -6.43 | -12.29 | 0.009 [0.006, 0.012] | 0.025 | 0.018 |
+| 27 | SAC | -6.85 | -12.71 | 0.008 [0.005, 0.012] | 0.022 | 0.015 |
+| 28 | MEM | -7.26 | -13.12 | 0.007 [0.004, 0.013] | 0.020 | 0.015 |
+| 29 | WAS | -8.97 | -14.83 | 0.004 [0.001, 0.008] | 0.012 | 0.008 |
+| 30 | UTA | -9.53 | -15.39 | 0.004 [0.001, 0.009] | 0.010 | 0.007 |
 
 **Minnesota against the field** (P wins the series, four-view band):
 
 | opponent | P(Minnesota wins) | four-view band | opponent net |
 |---|---:|---|---:|
-| CHA | **0.294** | 0.119 to 0.616 | +4.14 |
-| DEN | **0.288** | 0.225 to 0.363 | +3.50 |
-| TOR | **0.260** | 0.161 to 0.378 | +4.05 |
-| HOU | **0.255** | 0.191 to 0.312 | +4.07 |
-| DET | **0.189** | 0.172 to 0.204 | +5.29 |
-| SAS | **0.133** | 0.066 to 0.209 | +6.93 |
-| BOS | **0.102** | 0.047 to 0.163 | +7.89 |
-| OKC | **0.101** | 0.064 to 0.129 | +7.65 |
+| MIA | **0.262** | 0.181 to 0.342 | +4.11 |
+| TOR | **0.235** | 0.131 to 0.343 | +4.70 |
+| DEN | **0.232** | 0.160 to 0.321 | +4.65 |
+| HOU | **0.213** | 0.145 to 0.276 | +5.04 |
+| DET | **0.191** | 0.175 to 0.215 | +5.38 |
+| SAS | **0.130** | 0.063 to 0.196 | +7.19 |
+| OKC | **0.111** | 0.078 to 0.133 | +7.43 |
+| BOS | **0.098** | 0.034 to 0.158 | +8.38 |
 
-Best matchup CHA, worst OKC. Within each view the order is exactly the order of the opponents' net ratings, and cannot be anything else under this model. Averaged across the four views the order can cross where a team's rating differs a lot between views: CHA's band runs from 0.12 to 0.62, the widest here, so 'best matchup' is a statement about the average of four views that disagree. The four-view bands on Minnesota's eight series are 0.03 to 0.50 wide.
+Best matchup MIA, worst BOS. Within each view the order is exactly the order of the opponents' net ratings, and cannot be anything else under this model. Averaged across the four views the order can cross where a team's rating differs a lot between views: TOR's band runs from 0.13 to 0.34, the widest here, so 'best matchup' is a statement about the average of four views that disagree. The four-view bands on Minnesota's eight series are 0.04 to 0.21 wide.
 
 ## Part 2. Is there any versatility to measure? (OBSERVED)
 

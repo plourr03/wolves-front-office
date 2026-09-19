@@ -22,10 +22,11 @@ D59) never reached the attribution allocator. `williams_only` isolates the first
 Now that `shapley.py` carries the fix, this script is the before/after record. The
 pre-D85 tables are frozen in outputs/pre_d85 (SHA256SUMS alongside).
 
-  G1  the pre-D85 list reproduces the frozen pre-D85 tables, and the post-D85 list
-      reproduces the tables `shapley.py` now writes, on both bases (pooled), and the
-      un-aged team-rank tables likewise.
-  G2  the floors reproduce the published clearing counts, before and after.
+  G1  the post-D85 list reproduces the tables `shapley.py` now writes, on both bases and
+      both allocators. That is the enforced gate. The pre-D85 list is priced too, and its
+      difference from the frozen pre-D85 tables is REPORTED, not enforced: those tables were
+      priced on the impact spine of that day and D89 refit RAPM, so they cannot reproduce.
+  G2  the floors reproduce the published clearing counts for the current tables.
   G3  post-D85, the grand coalition's roster is exactly the simulated current roster
       (same 14 player ids).
   G4  reported, not enforced: post-D85, the team-rank grand coalition against the direct
@@ -214,19 +215,23 @@ def main():
             fl = floors_for(fc, st)
             floors[basis] = fl
             sub = "aged" if basis == "aged" else ""
+            # `strict` marks a reference that MUST reproduce. The pre-D85 tables were priced
+            # on the impact spine of that day; D89 refit RAPM, so they are a historical record
+            # and their difference is reported rather than enforced. The current tables still
+            # have to reproduce exactly, which is what checks this script against the pipeline.
             versions = [
-                # name, ALWAYS list, mover weights, allocator, published table, floor table
+                # name, ALWAYS list, mover weights, allocator, published table, floor table, strict
                 ("before_d85", BEFORE, False, None,
                  os.path.join(PRE, sub, "shapley_min_POOLED.csv"),
-                 os.path.join(PRE, sub, "noise_floor_AGED.csv" if sub else "noise_floor.csv")),
-                ("williams_only", AFTER, False, None, None, None),
-                ("after_d85", AFTER, True, None, cfg["shapley"], cfg["floor"]),
+                 os.path.join(PRE, sub, "noise_floor_AGED.csv" if sub else "noise_floor.csv"), False),
+                ("williams_only", AFTER, False, None, None, None, False),
+                ("after_d85", AFTER, True, None, cfg["shapley"], cfg["floor"], True),
                 ("before_d85_teamrank", BEFORE, False, teamrank,
-                 None if sub else os.path.join(PRE, "shapley_min.csv"), None),
+                 None if sub else os.path.join(PRE, "shapley_min.csv"), None, False),
                 ("after_d85_teamrank", AFTER, True, teamrank,
-                 os.path.join(OUT_DIR, sub, "shapley_min.csv"), None),
+                 os.path.join(OUT_DIR, sub, "shapley_min.csv"), None, True),
             ]
-            for version, always, wts, alloc, ref, ref_floor in versions:
+            for version, always, wts, alloc, ref, ref_floor, strict in versions:
                 sh, vall, vnone = game(SH.MOVES, always, SH.REMOVE_WHEN_APPLIED,
                                        SH.ADD_WHEN_APPLIED, imps, st, fc, alloc=alloc,
                                        weights=wts)
@@ -238,11 +243,15 @@ def main():
                     pubtab = pd.read_csv(ref, index_col=0)
                     gap = max(abs(float(pubtab.loc[x.move, x.fork]) - x.shapley_pp)
                               for _, x in sh.iterrows())
-                    msg = "G1 %s %s: reproduces %s to %.2e pp" % (
-                        basis, version, os.path.relpath(ref, OUT_DIR), gap)
+                    msg = "G1 %s %s: %s %s to %.2e pp" % (
+                        basis, version, "reproduces" if strict else "differs from",
+                        os.path.relpath(ref, OUT_DIR), gap)
                     if gap > 1e-6:
-                        raise RuntimeError("G1 failed: " + msg)
-                    if ref_floor:
+                        if strict:
+                            raise RuntimeError("G1 failed: " + msg)
+                        msg += " (expected: that table was priced before the D89 impact refit; "\
+                               "the D85 before/after record stands in decisions.md)"
+                    if strict and ref_floor:
                         pubf = pd.read_csv(ref_floor).set_index("move")
                         bad = [mv for mv in SH.MOVES
                                if sum(abs(float(pubtab.loc[mv, f])) >= fl[f] for f in FORKS)

@@ -1,0 +1,32 @@
+figure,before,after
+MIN title probability,"1.68 [0.82, 2.57]","1.69 [0.82, 2.62]"
+MIN offseason delta (pp),"-1.26 [-2.13, -0.37]","-1.25 [-2.13, -0.33]"
+other_departures,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+ball_in,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+randle_out,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+kuminga_in,MIXED no,MIXED no
+ddv_injury,ALL NEGATIVE no,ALL NEGATIVE no
+reid_out,ALL NEGATIVE SHIPS,ALL NEGATIVE SHIPS
+depth,ALL NEGATIVE no,ALL NEGATIVE no
+dosunmu_retained,ALL NEGATIVE SHIPS,ALL NEGATIVE SHIPS
+A_c3_default_shannon,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+B_lyles_fills,MIXED no,MIXED no
+C_mcdaniels_slides,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+D_beringer_fills,ALL NEGATIVE SHIPS,ALL NEGATIVE SHIPS
+E_tight_rule_F_or_FC,ALL POSITIVE SHIPS,ALL POSITIVE SHIPS
+offseason delta,ALL NEGATIVE no,ALL NEGATIVE no
+noise_floor,"other_departures, ball_in, randle_out, reid_out, dosunmu_retained","other_departures, ball_in, randle_out, ddv_injury, reid_out, dosunmu_retained"
+noise_floor_slot,"A_c3_default_shannon, C_mcdaniels_slides, D_beringer_fills, E_tight_rule_F_or_FC","A_c3_default_shannon, C_mcdaniels_slides, D_beringer_fills, E_tight_rule_F_or_FC"
+slot A mean pp (un-aged),0.5180772735092378,0.5165933865911644
+slot A sign (un-aged),ALL POSITIVE,ALL POSITIVE
+offseason_delta,-0.9513018723372338,-0.9653309940786173
+injury_cost,1.713523978233812,1.7276945584594037
+williams_cost,1.0059507100687783,1.0285750364841961
+interaction,-1.0059507100687783,-1.0285750364841961
+remainder,0.7622221058965784,0.7623635643807863
+MIN model rank,14,14
+MIN model pct,1.6804999999999948,1.6889999999999974
+teams off by more than floor,20,20
+LAC model pct (roster changed),0.2367499999999974,0.1327499999999975
+BKN model pct (roster changed),0.0,0.0
+top round-1 opponents,"SAS 0.261, OKC 0.251, HOU 0.193","SAS 0.261, OKC 0.249, HOU 0.195"

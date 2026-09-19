@@ -150,6 +150,10 @@ def run(name: str, inputs: dict | None = None):
         rec = {
             "run_id": r.run_id, "script": r.name, "status": r.status,
             "started_utc": r.started, "id_bumped_seconds": r.id_bumped_seconds,
+            # D90: the aging basis, recorded rather than inferred. It used to be read off
+            # the chain's clock boundaries in build_final_numbers, which went stale the
+            # moment the chain ran again and made the sheet cite the previous chain's runs.
+            "aging": os.environ.get("KUMINGA_AGING", "0"),
             "finished_utc": datetime.now(timezone.utc).isoformat(),
             "git_sha": _git_sha(), "python": sys.version.split()[0],
             "inputs": r.inputs, "outputs": r.outputs, "notes": r.notes,

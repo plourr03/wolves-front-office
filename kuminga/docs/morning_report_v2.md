@@ -6,11 +6,11 @@
 
 ## In plain language
 
-**The number.** Minnesota's modelled title odds are **1.69%** (band 0.82% to 2.62%), **2.55%** on the aged basis, against a market price of **3.16%, 6th**. On the primary basis all four views price Minnesota below the market (ranks 13 to 16). On the aged basis all four still rank it lower (9 to 15) but 2 views price it above 3.16%, so the probability gap is all-views only on the primary basis.
+**The number.** Minnesota's modelled title odds are **1.68%** (band 0.86% to 2.59%), **2.39%** on the aged basis, against a market price of **3.16%, 6th**. On the primary basis all four views price Minnesota below the market (ranks 13 to 16). On the aged basis all four still rank it lower (9 to 15) but 1 views price it above 3.16%, so the probability gap is all-views only on the primary basis.
 
-**What ships.** 7 verdicts hold their sign on both aging bases and clear every view's floor, down from 9: Ball in (+0.68 un-aged, +0.78 aged), Reid out (-0.42, -0.51), DiVincenzo's injury, and Kuminga against four internal alternatives for his minutes. The decomposition had been pricing every combination of moves without Cody Williams on the roster and without the new-arrival minutes rule; with both fixed, other departures, Randle out and Dosunmu re-signed no longer ship, and no single departure ships on its own. "The offseason made Minnesota worse" does not ship: -1.25 un-aged but mixed aged, and it turns mixed below 12.0 minutes of Cody Williams a night.
+**What ships.** 7 verdicts hold their sign on both aging bases and clear every view's floor, down from 9: Ball in (+0.79 un-aged, +0.91 aged), Reid out (-0.33, -0.40), DiVincenzo's injury, and Kuminga against four internal alternatives for his minutes. The decomposition had been pricing every combination of moves without Cody Williams on the roster and without the new-arrival minutes rule; with both fixed, other departures, Randle out and Dosunmu re-signed no longer ship, and no single departure ships on its own. "The offseason made Minnesota worse" does not ship: -1.25 un-aged but mixed aged, and it turns mixed below 12.6 minutes of Cody Williams a night.
 
-**Kuminga.** He beats the most likely internal fill for his minutes by +0.52 points un-aged and +0.58 aged, clearing on size. As a scorer and a defender against assigned matchups he sits at or slightly better than the norm. His playoff on-court record is poor (-16.2 per 100 possessions over 40 games) on a small, confounded sample. An opt-out after one season leaves Minnesota a Non-Bird ceiling of $7,276,800.
+**Kuminga.** He beats the most likely internal fill for his minutes by +0.55 points un-aged and +0.66 aged, clearing on size. As a scorer and a defender against assigned matchups he sits at or slightly better than the norm. His playoff on-court record is poor (-16.2 per 100 possessions over 40 games) on a small, confounded sample. An opt-out after one season leaves Minnesota a Non-Bird ceiling of $7,276,800.
 
 **What the evidence can't carry.** Style matchups, playoff translation, versatility and individual matchups all come back as nulls, and "defense travels" is not supported: the estimate is -0.85 points per game in the other direction, short of the bar.
 
@@ -24,8 +24,8 @@
 
 **Withheld:** the late-clock split (reconstruction 79.9% against a bar of 80%).
 
-**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and the possession-grain version of the stint points defect, which reaches RAPM in the postmortem project and is not re-fitted (D88; the stint library itself is fixed and its figures recomputed).
+**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and one hash-pinned fork of the old stint library in the fit engine, which is the last place the points defect lives (D89).
 
-**Settled since:** the stint library is fixed at the source and every postmortem figure built on it is recomputed, with five playoff sign changes logged (D88). The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
+**Settled since:** both points grains are fixed at the source, the lineup one and the possession one under it, and everything built on them is recomputed: five playoff sign changes in the postmortem lineup figures (D88), and RAPM refit across all four views with consensus re-derived (D89). Possession points now reconcile to the box score exactly. The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
 
-**To watch first:** Boston's net rating through its 30th game against a threshold of -1.5, and the five claims at game 20.
+**To watch first:** Boston's net rating through its 30th game against a threshold of -1.7, and the five claims at game 20.

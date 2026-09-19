@@ -161,7 +161,11 @@ def main():
         allow = [r"^#+\s*\d+\.", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
                  r"`[^`]*`", r"\u27e6\u27e7", r"\b[Pp]iece 2\b", r"\bsections? \d\b"]
         retracted = ["6.53", "+2.90", "+6.83", "twice as good", "below 8 a night",
-                     "Shannon fills", "0.3029", "0.3131", "+1.253", "+1.714", "1.68%",
+                     "Shannon fills", "0.3029", "0.3131", "+1.253", "+1.714",
+                     # "1.68%" was on this list as the pre-D70 headline. The D89 refit landed
+                     # the headline back on 1.68%, so it is the live figure again and listing it
+                     # would fail the gate on a number the sheet legitimately carries (D90).
+
                      "+0.488", "Not estimated this run", "not reached", "2.54%", "0.78 to 0.80",
                      # D85
                      "ships because of one player", "clears on his own", "a bundle of 7",

@@ -43,8 +43,13 @@ LOG = os.path.join(REPO, "kuminga", "logs", "runs.jsonl")
 OUT_CSV = os.path.join(OUT, "final_numbers.csv")
 OUT_MD = os.path.join(OUT, "final_numbers.md")
 FORKS = ["consensus", "rapm", "box", "darko"]
-AGED_START = "2026-09-16T19:58:59"
-AGED_END = "2026-09-16T22:39:31"
+# The aged leg of the CURRENT chain. Runs from 2026-09-19 onwards record their own basis
+# (`aging` in the run record, D90), so these windows are only a fallback for older runs,
+# which is why they name the chain they belong to.
+AGED_START = "2026-09-19T19:51:35"
+AGED_END = "2026-09-19T23:30:00"
+LEGACY_AGED_START = "2026-09-16T19:58:59"
+LEGACY_AGED_END = "2026-09-16T22:39:31"
 # every candidate verdict, in table order. Whether each ships is COMPUTED (D85): same
 # agreed sign on both aging bases and all four views clearing the floor on both.
 VERDICTS = [("ball_in", "LaMelo Ball in"), ("reid_out", "Naz Reid out"),
@@ -75,14 +80,25 @@ def runs():
 RUNS = runs()
 
 
+def _basis_of(d):
+    """A run's aging basis: recorded if the run wrote it, else inferred from which chain
+    leg its clock falls in. D90: recording beats inferring, because the inferred version
+    silently pointed at the previous chain once a new one ran."""
+    rec = d.get("aging")
+    if rec is not None:
+        return "aged" if str(rec) == "1" else "unaged"
+    ts = d["started_utc"][:19]
+    if AGED_START <= ts < AGED_END or LEGACY_AGED_START <= ts < LEGACY_AGED_END:
+        return "aged"
+    return "unaged"
+
+
 def rid(script, basis=None, minutes_rule=None):
     c = [d for d in RUNS if d.get("script") == script]
     if minutes_rule:
         c = [d for d in c if (d.get("inputs") or {}).get("minutes_rule") == minutes_rule]
-    if basis == "unaged":
-        c = [d for d in c if d["started_utc"][:19] < AGED_START]
-    elif basis == "aged":
-        c = [d for d in c if AGED_START <= d["started_utc"][:19] < AGED_END]
+    if basis in ("unaged", "aged"):
+        c = [d for d in c if _basis_of(d) == basis]
     if not c:
         raise RuntimeError("no successful run for %s (%s)" % (script, basis))
     return c[-1]["run_id"]

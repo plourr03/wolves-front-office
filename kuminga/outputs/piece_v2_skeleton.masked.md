@@ -14,7 +14,7 @@
 
 Minnesota's modelled title probability for the season is **⟦⟧ `[tag]`**, four-view band **⟦⟧ to ⟦⟧**, on the un-aged basis. On the survivorship-corrected aged basis it is **⟦⟧ `[tag]`**, band ⟦⟧ to ⟦⟧: aging helps Minnesota because Minnesota is young, so the piece quotes both. The market says **⟦⟧ `[tag]`, ⟦⟧th**, after removing a ⟦⟧ overround proportionally.
 
-**The disagreement is all-views on the primary basis, and holds in rank on both.** On the un-aged basis every one of the four views prices Minnesota below the market and ranks it in the range ⟦⟧ against the market's ⟦⟧th `[modeled, f4_per_view_disagreement]`; the market's number sits outside the model's whole band. On the aged basis every view still ranks Minnesota below the market (⟦⟧), but ⟦⟧ of the four views price it above the market's ⟦⟧ (box ⟦⟧, DARKO ⟦⟧), so in probability the aged disagreement is **⟦⟧** `[modeled, r5_honesty_rail_bases]`. The piece can say the model ranks Minnesota lower than the market does on both bases; it cannot say every view prices Minnesota below the market on both.
+**The disagreement is all-views on the primary basis, and holds in rank on both.** On the un-aged basis every one of the four views prices Minnesota below the market and ranks it in the range ⟦⟧ against the market's ⟦⟧th `[modeled, f4_per_view_disagreement]`; the market's number sits outside the model's whole band. On the aged basis every view still ranks Minnesota below the market (⟦⟧), but DARKO prices it above the market's ⟦⟧, at ⟦⟧ against a box view of ⟦⟧ just under it, so in probability the aged disagreement is **⟦⟧** on ⟦⟧ view of four `[modeled, r5_honesty_rail_bases]`. The piece can say the model ranks Minnesota lower than the market does on both bases; it cannot say every view prices Minnesota below the market on both.
 
 **The honesty rail.** The model and the market order the league at a rank correlation of **⟦⟧ to ⟦⟧** across the four views, ⟦⟧ to ⟦⟧ on the aged basis `[composed, market_devig, r5_honesty_rail_bases]`. They agree about the shape of the league and disagree about ⟦⟧ specific teams, and **⟦⟧ of those ⟦⟧ are all-views**, where every view sits on the same side of the market; on the aged basis it is ⟦⟧ of ⟦⟧. The disagreements do not trace to a single fixable defect (F1). The four views are not independent instruments either: consensus and RAPM move together, so "all four agree" is a check that a finding does not hinge on one modelling choice, never a confidence interval.
 
@@ -160,12 +160,20 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 
 ## Appendix
 
-**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. The library is fixed and the postmortem figures are recomputed (D88); what remains is the possession-grain version of the same defect, which reaches RAPM and is not re-fitted.
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. Both grains are fixed now, the lineup one and the possession one under it, and everything built on them is recomputed: the postmortem lineup figures (D88) and the RAPM the impact views ride on (D89). The impact spine behind this piece is the refit one.
 
 **Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
 
 | player | possessions | consensus | RAPM | box | DARKO |
 |---|---:|---:|---:|---:|---:|
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
@@ -219,13 +227,13 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 |---|---:|---:|---:|---:|---:|---|
 | MIN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | BOS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| HOU | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| SAS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| PHI | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| NYK | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | DET | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| CHA | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| SAS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| NYK | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| DEN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| PHI | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| HOU | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is ⟦⟧ points un-aged and all-negative, but ⟦⟧ and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is ⟦⟧: take out the DiVincenzo injury (⟦⟧) and the Williams minutes (⟦⟧), which overlap completely (⟦⟧, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **⟦⟧**, mixed across views `[modeled, w1c_decompose]`.
 

@@ -24,8 +24,8 @@
 
 **Withheld:** the late-clock split (reconstruction {{lc_g1}} against a bar of {{lc_bar}}).
 
-**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and the possession-grain version of the stint points defect, which reaches RAPM in the postmortem project and is not re-fitted (D88; the stint library itself is fixed and its figures recomputed).
+**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and one hash-pinned fork of the old stint library in the fit engine, which is the last place the points defect lives (D89).
 
-**Settled since:** the stint library is fixed at the source and every postmortem figure built on it is recomputed, with five playoff sign changes logged (D88). The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
+**Settled since:** both points grains are fixed at the source, the lineup one and the possession one under it, and everything built on them is recomputed: five playoff sign changes in the postmortem lineup figures (D88), and RAPM refit across all four views with consensus re-derived (D89). Possession points now reconcile to the box score exactly. The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
 
 **To watch first:** Boston's net rating through its {{bos_dec_game}}th game against a threshold of {{bos_dec_threshold}}, and the five claims at game {{w_game}}.

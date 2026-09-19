@@ -1,0 +1,7 @@
+feature,label,minnesota_2025_26,champions_range,threshold,checkable,separates
+nrtg_rank,net rating rank,10.0,1.00 to 5.00,net rating rank 5 or better,season end,False
+ortg_rank,offence rank,12.0,1.00 to 3.00,offence rank 3 or better,season end,True
+drtg_rank,defence rank,8.0,1.00 to 7.00,defence rank 7 or better,season end,True
+post_asb_rank,post-All-Star net rank,18.0,1.00 to 8.00,post-All-Star net rank 8 or better,after the All-Star break,False
+seed,seed,6.0,1.00 to 3.00,seed 3 or better,season end,False
+po_minus_rs,playoff minus regular-season net,-8.913885144981197,-4.37 to 8.72,playoff minus regular-season net -4.37 or better,the playoffs,False

@@ -1,0 +1,53 @@
+chain start 2026-09-19T11:09:53Z, nsims=200000
+[11:09:53] START adapt_roster_v3   
+[11:09:53] START build_rotations   
+[11:09:53] START build_strengths   
+[11:09:53] START run_sim   
+[11:09:53] START build_fcurve[consensus]   KUMINGA_FCURVE_FORK=consensus KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[rapm]   KUMINGA_FCURVE_FORK=rapm KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[box]   KUMINGA_FCURVE_FORK=box KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[darko]   KUMINGA_FCURVE_FORK=darko KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START merge_fcurve_parts   
+[11:09:53] START shapley   
+[11:09:53] START shapley  --pooled 
+[11:09:53] START compare_slot_shapley   
+[11:09:53] START slot_robustness   
+[11:09:53] START slot_analysis   
+[11:09:53] START player_option   
+[11:09:53] START seed_distribution   
+[11:09:53] START counterfactuals   
+[11:09:53] START eval_signing   
+[11:09:53] START green_kept   
+[11:09:53] START lede_loophole   
+[11:09:53] START build_outputs   
+[11:09:53] START williams_minutes_sensitivity   
+[11:09:53] START w1c_decompose   
+[11:09:53] START n2_path   
+[11:09:53] START m4_lineup_study   
+[11:09:53] START noise_floor   
+[11:09:53] START market_devig   
+[11:09:53] START f4_per_view_disagreement   
+[11:09:53] START champions_table   
+[11:09:53] START backtest_calibration   
+[11:09:53] START build_strengths   KUMINGA_AGING=1
+[11:09:53] START run_sim   KUMINGA_AGING=1
+[11:09:53] START build_fcurve[consensus,aged]   KUMINGA_AGING=1 KUMINGA_FCURVE_FORK=consensus KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[rapm,aged]   KUMINGA_AGING=1 KUMINGA_FCURVE_FORK=rapm KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[box,aged]   KUMINGA_AGING=1 KUMINGA_FCURVE_FORK=box KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START build_fcurve[darko,aged]   KUMINGA_AGING=1 KUMINGA_FCURVE_FORK=darko KUMINGA_FCURVE_NSIMS=200000
+[11:09:53] START merge_fcurve_parts   KUMINGA_AGING=1
+[11:09:53] START shapley  --aged KUMINGA_AGING=1
+[11:09:53] START shapley  --pooled --aged KUMINGA_AGING=1
+[11:09:53] START slot_robustness   KUMINGA_AGING=1
+[11:09:53] START green_kept   KUMINGA_AGING=1
+[11:09:53] START seed_distribution   KUMINGA_AGING=1
+[11:09:53] START noise_floor  --aged KUMINGA_AGING=1
+[11:09:53] START w2_aging_gate   
+[11:09:53] START r5_shapley_williams   
+[11:09:53] START r5_honesty_rail_bases   
+[11:09:53] START r2_departures   
+[11:09:53] START r7_allocator_agreement   
+[11:09:53] START build_final_numbers   
+[11:09:53] START render_piece   
+[11:09:53] START reconcile_figures   
+chain done in 0s

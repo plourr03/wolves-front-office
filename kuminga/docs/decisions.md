@@ -1765,3 +1765,43 @@ Consensus net, which is what three of the four views feed off: Ball +2.29 to +3.
 Neither claim needed the sentence changed, which is worth saying plainly: D88 flagged them as unverified, and the honest outcome of checking was that both survived.
 
 **STILL NOT FIXED, and now the only place the defect lives.** `counterfactual-fit-engine/src/stints/stint_builder.py` is a hash-pinned fork of the pre-D88 library. Fixing it breaks the pin by design, so it stays Bobby's call; the tripwire PAIR-DRTG markers and the jaden_calibration JD-COVER report run on its 15,669-game panel and are bannered as such. `lib/pbp.py`'s own possession builder retro-credits and-ones correctly and never carried the mirrored defect, so Q1's halfcourt, transition and clutch splits were not exposed; it was not re-validated end to end here because it takes its own play-by-play frame.
+
+### D90. The chain re-run on refit impacts. The headline barely moves, all seven verdicts hold, Charlotte's disagreement halves
+
+**Run IDs.** Chain `kuminga/logs/chain_20260919T113214Z.log`, 11:32 to 18:21 local, 6h49m, 44 steps ok. Un-aged sim `run_sim_20260919T163222Z`, aged `run_sim_20260919T195138Z`, eight 200k f-curve forks between them. Aged attribution re-run `shapley_20260919T232628Z` and `shapley_20260919T232632Z`, aged floor `noise_floor_20260919T232635Z`. Gates `w2_aging_gate_20260919T232645Z`, `r5_shapley_williams_20260919T232355Z`, `r7_allocator_agreement`, `r2_departures`. Refreshed on the new spine: `n5_fragility_20260919T233508Z` and its aged run, `n4_versatility_index_20260919T234720Z`, `n8_watch_list_20260919T233400Z`. Sheet `build_final_numbers_20260919T234738Z` (866 figures), render `render_piece_20260919T234829Z`, gate `reconcile_figures_20260919T234830Z`. Comparison `kuminga/docs/d90_refit_before_after.md`.
+
+**THE HEADLINE BARELY MOVES, WHICH IS THE POINT WORTH KEEPING.** Un-aged **1.69% to 1.68%** (band 0.82-2.62 to 0.86-2.59). Aged **2.55% to 2.39%** (1.29-3.73 to 1.18-3.59). Minnesota's own players mostly gained on the refit (Ball, Edwards, Kuminga all up), and the number still did not move, because every other team was refit too: what matters is position in the league, not the level.
+
+| basis | view | before | rank | after | rank |
+|---|---|---:|---:|---:|---:|
+| un-aged | consensus | 0.82% | 16 | 0.86% | 16 |
+| un-aged | rapm | 1.20% | 15 | 1.25% | 14 |
+| un-aged | box | 2.11% | 13 | 2.03% | 14 |
+| un-aged | darko | 2.62% | 13 | 2.59% | 13 |
+| aged | consensus | 1.29% | 15 | 1.18% | 15 |
+| aged | rapm | 1.85% | 13 | 1.75% | 14 |
+| aged | box | 3.33% | 12 | 3.03% | 13 |
+| aged | darko | 3.73% | 9 | 3.59% | 9 |
+
+**ALL SEVEN VERDICTS STILL SHIP, in all four cells.** Nothing dropped, nothing added, and none of the six that failed before comes close now. Sizes (pooled un-aged, before to after): ball_in +0.68 to **+0.79**, reid_out -0.42 to **-0.33**, ddv_injury -0.42 to **-0.39**, slot A +0.44 to **+0.44**, slot C +0.41 to **+0.42**, slot D -0.81 to **-0.72**, slot E +0.44 to **+0.44**. Under the team-rank allocator Ball in strengthens to **+1.56**. Of the six that do not ship, `randle_out` now turns negative in the pooled un-aged cell too (+0.07 to **-0.04**), so its sign is unstable in three of the four cells rather than two; `depth` still ships under team-rank alone (+0.50 / +0.55).
+
+**CHARLOTTE'S DISAGREEMENT HALVES, WITHOUT CHANGING CHARACTER.** Model **5.86% to 3.44%** un-aged against a market price of 0.81%, and **7.82% to 4.84%** aged. The label is unchanged (MIXED un-aged, ALL-VIEWS aged) and so is the count of views above the market (3 and 4), so the piece's treatment of Charlotte stands while the size of the claim comes down by a third to a half. The cause is in the refit: Diabate's net RAPM falls +6.30 to +5.05 and Reid's +3.27 to +2.72, the two Charlotte players the old attribution was flattering.
+
+**BOSTON'S DISAGREEMENT GROWS.** Model **17.00% to 18.33%** un-aged and **13.49% to 14.23%** aged, ALL-VIEWS on both bases before and after. Its model net range widens to +3.3 to +10.1, which moves the December threshold from -1.5 to **-1.7** per 100 through game 30 (`n8_watch_list`). Boston remains the model's biggest falsifiable claim, and slightly more so.
+
+**MINNESOTA'S AGED DISAGREEMENT NARROWS.** The aged basis had two views above the market and now has **one** (DARKO 3.59%; box 3.03% slips just under the market's 3.16%). It is still MIXED aged and still ALL-VIEWS un-aged, so the D85 sentence structure holds; the skeleton now names DARKO alone rather than two views.
+
+**THE HONESTY RAIL.** Un-aged rank correlation 0.78-0.82 to **0.78-0.83**, 20 disagreements, 16 all-views, all unchanged. Aged 0.77-0.80 to **0.73-0.82**, disagreements 17 to **19**, all-views 15 either way. The aged basis is where the refit shows up most, in both the rail and Minnesota's own number.
+
+**FRAGILITY MOVED, and it was not in the brief's list.** `n5_fragility` reads the impact spine, so leaving it would have mixed bases on one sheet: Minnesota's share of odds lost per top-three removal goes **49% to 54%** un-aged and 38% to **43%** aged. `n4_versatility_index` re-ran and still finds rank correlation 1.000 in every view, so that null is unchanged.
+
+**TWO ORDERING BUGS IN MY OWN CHAIN SCRIPT, both caught by gates rather than by reading.**
+1. `noise_floor`, `market_devig` and `f4_per_view_disagreement` read `outputs/preaging`, and the first version snapshotted to it at the END of the un-aged leg, so those three would have scored the refit run against the previous chain's inputs. Caught before the f-curves started, so the cost was eight minutes.
+2. `shapley --aged` reads `outputs/aged` for its f-curve and strengths (D85), and the second version filed the aged artifacts there only after the attribution step. The aged Shapley was therefore priced on the previous chain's aged inputs. **`r5_shapley_williams` G1 caught it**: the un-aged tables reproduced to 1.55e-15 while the aged ones were out by 0.47pp. The aged Shapley, the aged floor and the gates were re-run on the correct inputs; the f-curves did not need repeating. The chain now files the aged set before any step that reads it, and the docstring says why.
+3. `n5_fragility` and `n4_versatility_index` read a third snapshot directory, `outputs/_restore_unaged`, left by the old chain and not maintained by mine. n5's own G1 caught that too (strengths off by 3.47 against preaging). The chain now refreshes it alongside preaging.
+
+**PROVENANCE DEFECT FOUND AND FIXED.** `build_final_numbers` inferred each run's aging basis from two hard-coded chain-boundary timestamps. Once the chain ran again those windows were stale, so the rebuilt sheet cited **September 16 run IDs for figures computed on 19 September**, silently. `runlog` now records the basis on every run (`aging`, from `KUMINGA_AGING`), `rid()` prefers the recorded value and falls back to the windows only for older runs, and the window constants name the chain they belong to. Verified: the headline now cites `run_sim_20260919T163222Z` un-aged and `run_sim_20260919T195138Z` aged.
+
+**A RETRACTED FIGURE CAME BACK TO LIFE.** "1.68%" was on the reconcile gate's retracted list as the pre-D70 headline. The refit landed the headline back on 1.68%, so the gate failed on a number the sheet legitimately carries. Removed from the list with the reason recorded, which is the right resolution: the list exists to catch stale figures, not to forbid a value forever.
+
+**GATES.** C1 f-curve pricing against the direct simulation 0.051pp (limit 0.15). C2 741 sheet keys used, none without a run ID, no stray digits, no retracted phrases. C3 602 records, 590 distinct ids, six duplicated and all marked, no figure citing one. G4 in r5: the post-D85 team-rank grand coalition sits 0.051pp from the direct simulation.
