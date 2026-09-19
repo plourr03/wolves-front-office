@@ -44,7 +44,9 @@ SEASONS = [2023, 2024, 2025]          # 2023-24, 2024-25, 2025-26
 SEASON_TYPES = ["Regular Season", "Playoffs"]
 KEEP = ["game_id", "season_year", "season_type", "possession_number", "period",
         "offensive_team_id", "defensive_team_id", "points_scored", "end_reason",
-        "off_players_str", "def_players_str"]
+        "off_players_str", "def_players_str",
+        # D89: the pre-fix attribution, carried for diagnosis only
+        "points_scored_legacy"]
 
 
 def all_game_ids():
@@ -93,6 +95,10 @@ def process_one(game_id, season_year, season_type):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="process at most N games (smoke test)")
+    ap.add_argument("--shard", type=str, default=None,
+                    help="i/N: process only games whose index mod N == i. Lets the rebuild run "
+                         "as N parallel processes; each writes its own games and the cache is "
+                         "restartable either way (D89).")
     args = ap.parse_args()
     os.makedirs(CACHE, exist_ok=True)
 
@@ -100,6 +106,10 @@ def main():
     if args.limit:
         # for the smoke test, prefer non-Wolves games to confirm league coverage
         games = games[:args.limit]
+    if args.shard:
+        i, N = (int(x) for x in args.shard.split("/"))
+        games = [g for k, g in enumerate(games) if k % N == i]
+        print(f"shard {i}/{N}: {len(games)} games", flush=True)
     n = len(games)
     print(f"League possession build: {n} games across {SEASONS} (RS+PO). cache={CACHE}", flush=True)
 
