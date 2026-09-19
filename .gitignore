@@ -26,3 +26,8 @@ counterfactual-fit-engine/data/cache/stints/
 # skill_vectors samples (spec 7.4 handoff) are committed separately.
 counterfactual-fit-engine/outputs/skill_vectors/samples_*.npz
 counterfactual-fit-engine/outputs/skill_vectors/samples_*.health.json
+
+# D89: local before-state copies of the possession caches. The pre-fix content is in git
+# history (the revision before the D89 rebuild), so these copies are not committed.
+offseason/data/cache/possessions_league_pre_d89/
+postmortem/outputs/cache/q2_localize/possessions_pre_d89/

@@ -46,15 +46,22 @@ all subsequent free throws on the same trip absorbed), on a defensive
 rebound, on a turnover, or on end of period. An offensive rebound continues
 the same possession. This matches the NBA.com convention closely.
 
-**Known v1 possession-accounting caveat:** AND-1 free throws and other
-free-throw sequences that follow a made FG can be attributed to the wrong
-possession's offensive team in this v1. The total points per game match the
-box score exactly; the per-team attribution can be off by 3-5 points in a
-typical game. The lineup-level work that consumes possessions should be
-robust to this (per-lineup stats over many possessions will average out the
-per-game noise). v2 will refine FT attribution with explicit shooting-foul
-sequence tracking. This caveat is documented in the validation output for
-each game processed.
+**FIXED 2026-09-19 (D89), was a v1 caveat:** and-one free throws and other
+free-throw sequences following a made field goal were attributed to the wrong
+possession's offensive team. Game totals matched the box score, per-TEAM
+totals were off by 3 to 5 points a game, mirrored between the two teams, and
+the old note called that noise the consumers could average out. It was not
+noise: the points were credited to the other team, so anything fitted on
+possession points (RAPM above all) inherited a systematic error.
+
+Points are now credited to the team that scored them. The scorer is the
+offense for the open possession in the ordinary case; when he is not, the
+points go to that team's most recent possession, and anything still homeless
+is held for that team's next possession. Per-team possession points now
+reconcile to `nba_games.pts` exactly (`scripts/validate_possession_points.py`).
+`points_scored_legacy` keeps the old rule's value for diagnosis, and is
+approximate because the old rule also let an and-one free throw close the
+wrong possession.
 
 Starter derivation logic:
 
@@ -755,6 +762,7 @@ def derive_possessions(
       - defensive_team_id
       - start_action_number, end_action_number
       - points_scored (by the offensive team on this possession)
+      - points_scored_legacy (what the pre-D89 rule credited; diagnosis only)
       - end_reason (made_fg, def_rebound, turnover, end_of_period)
       - offensive_floor (frozenset of 5 player_ids)
       - defensive_floor (frozenset of 5 player_ids)
@@ -780,6 +788,8 @@ def derive_possessions(
     current_start_action = None
     current_period = None
     current_points = 0
+    current_points_legacy = 0
+    pending_points: dict[int, int] = {}
     poss_num = 0
 
     for _, row in annotated.iterrows():
@@ -801,6 +811,7 @@ def derive_possessions(
                     "start_action_number": current_start_action,
                     "end_action_number": action_num,
                     "points_scored": current_points,
+                    "points_scored_legacy": current_points_legacy,
                     "end_reason": "end_of_period",
                     "offensive_floor": row[floor_col[current_off_team]],
                     "defensive_floor": row[floor_col[[t for t in team_ids if t != current_off_team][0]]],
@@ -809,6 +820,7 @@ def derive_possessions(
             current_start_action = None
             current_period = period
             current_points = 0
+            current_points_legacy = 0
             continue
 
         if atype == "period" and row["sub_type"] == "end":
@@ -823,14 +835,54 @@ def derive_possessions(
             current_off_team = team_id
             current_start_action = action_num
             current_period = period
-            current_points = 0
+            current_points = pending_points.pop(team_id, 0)
+            current_points_legacy = 0
             poss_num += 1
 
-        # Score tracking.
+        # D89: AND-ONE FREE THROWS BELONG TO THE POSSESSION THAT JUST CLOSED.
+        #
+        # A made field goal ends the possession, so the bonus free throw arrives when the
+        # other team is already on offense. Crediting it to the open possession gave the
+        # point to the WRONG TEAM, which is why possession points missed the box score by
+        # about 3.9% with the error mirrored between the two teams. `lib/pbp.py` has always
+        # handled this by retro-crediting; this is the same rule.
+        #
+        # `points_scored_legacy` keeps what the old rule would have credited, for diagnosis.
+        # It is an approximation: the old rule also let an and-one free throw close the new
+        # possession, so legacy boundaries differ. The measured size of the old error comes
+        # from the frozen pre-D89 cache, not from this column.
+        # Points are credited to the team that SCORED them. The scorer is on offense for
+        # the open possession in the ordinary case; when he is not, the points belong to
+        # that team's most recent possession (the and-one, and any tracker slip). Anything
+        # that still finds no home is held and credited to that team's next possession, so
+        # every point lands on a possession of the team that scored it and the per-team
+        # totals reconcile to the box score exactly.
+        def credit(team: int, pts: int) -> None:
+            nonlocal current_points
+            if team == current_off_team:
+                current_points += pts
+                return
+            for prev in reversed(possessions):
+                if prev["offensive_team_id"] == team:
+                    prev["points_scored"] += pts
+                    return
+            pending_points[team] = pending_points.get(team, 0) + pts
+
+        scored = 0
         if atype in ("2pt", "3pt") and row["shot_result"] == "Made":
-            current_points += int(row.get("shot_value") or (3 if atype == "3pt" else 2))
-        if atype == "freethrow" and row["shot_result"] == "Made":
-            current_points += 1
+            scored = int(row.get("shot_value") or (3 if atype == "3pt" else 2))
+        elif atype == "freethrow" and row["shot_result"] == "Made":
+            scored = 1
+        if scored:
+            current_points_legacy += scored
+            credit(int(team_id), scored)
+
+        # An and-one free throw must not close the possession that is now open: the one it
+        # belongs to already closed on the made field goal (D89, as `lib/pbp.py` does).
+        if (atype == "freethrow" and possessions and team_id is not None
+                and team_id != current_off_team
+                and team_id == possessions[-1]["offensive_team_id"]):
+            continue
 
         # End-of-possession events.
         def_team = [t for t in team_ids if t != current_off_team][0] if current_off_team else None
@@ -879,6 +931,7 @@ def derive_possessions(
                 "start_action_number": current_start_action,
                 "end_action_number": action_num,
                 "points_scored": current_points,
+                "points_scored_legacy": current_points_legacy,
                 "end_reason": end_reason,
                 "offensive_floor": row[floor_col[current_off_team]],
                 "defensive_floor": row[floor_col[def_team]] if def_team else None,
@@ -892,6 +945,7 @@ def derive_possessions(
                 current_off_team = team_id  # the rebounding team
             current_start_action = action_num + 1 if action_num is not None else None
             current_points = 0
+            current_points_legacy = 0
             poss_num += 1
 
     return pd.DataFrame(possessions)
