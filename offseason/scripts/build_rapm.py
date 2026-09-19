@@ -26,6 +26,7 @@ Output: offseason/data/player_value.csv (joined to the crosswalk + playoff read)
 
 import os
 import sys
+import argparse
 import glob
 import csv
 import numpy as np
@@ -37,6 +38,9 @@ from sklearn.linear_model import Ridge, RidgeCV
 HERE = os.path.dirname(os.path.abspath(__file__))
 POSTMORTEM = os.path.abspath(os.path.join(HERE, "..", "..", "postmortem"))
 CACHE = os.path.join(HERE, "..", "data", "cache", "possessions_league")
+# D89: the possession points column and the cache directory are overridable, so the fit
+# can be run on the corrected points and on the pre-fix ones and the two compared.
+POINTS_COL = "points_scored"
 DATA = os.path.join(HERE, "..", "data")
 OUT = os.path.join(DATA, "player_value.csv")
 
@@ -65,7 +69,7 @@ def load_possessions(seasons=None):
     df = df.sort_values(["game_id", "possession_number"]).reset_index(drop=True)
 
     # approximate garbage-time filter: running absolute margin, drop 4th-period blowout
-    pts = df["points_scored"].to_numpy()
+    pts = df[POINTS_COL].to_numpy()
     off = df["offensive_team_id"].to_numpy()
     gid = df["game_id"].to_numpy()
     absm = np.zeros(len(df), dtype=np.int32)
@@ -110,7 +114,7 @@ def build_matrix(df):
     X_off = csr_matrix((np.ones(len(ro), np.float32), (ro, co)), shape=(n, R + 1))
     X_def = csr_matrix((np.ones(len(rd), np.float32), (rd, cd)), shape=(n, R + 1))
     X = hstack([X_off, X_def]).tocsr()
-    y = df["points_scored"].to_numpy(np.float32) * 100.0
+    y = df[POINTS_COL].to_numpy(np.float32) * 100.0
     w = df["season_year"].map(RECENCY).to_numpy(np.float32)
     return X, y, w, qualifying, R
 
@@ -251,6 +255,23 @@ def fit_rapm(seasons=None, box_feats=None):
 
 
 def main():
+    global CACHE, POINTS_COL, OUT
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--cache", default=None, help="possession cache directory to fit on")
+    ap.add_argument("--points-col", default="points_scored",
+                    help="points_scored (corrected) or points_scored_legacy (pre-D89)")
+    ap.add_argument("--out", default=None, help="output csv path")
+    args = ap.parse_args()
+    if args.cache:
+        CACHE = (args.cache if os.path.isabs(args.cache)
+                 else os.path.join(HERE, "..", "data", "cache", args.cache))
+    POINTS_COL = args.points_col
+    if args.out:
+        OUT = args.out if os.path.isabs(args.out) else os.path.join(DATA, args.out)
+    print("cache=%s" % CACHE, flush=True)
+    print("points column=%s" % POINTS_COL, flush=True)
+    print("out=%s" % OUT, flush=True)
+
     val = fit_rapm()
 
     # merge playoff translation (canonical full-window output only)
