@@ -1705,3 +1705,63 @@ Every ranked M4 list is now led by fives containing Joan Beringer, whose impact 
 **WHAT IS STILL EXPOSED, and deliberately not touched.** The mirrored error proves the possession table credits points to the wrong team, so the same root cause reaches everything fitted on possession-level points: postmortem's RAPM (`rapm.py`, `rapm_recent.py`), Q1's halfcourt, transition and clutch splits, and the fit engine's possession builder. **The published article draft's two RAPM claims** (Gobert's offence going from positive to clearly negative, DiVincenzo as the league's highest-impact player) are therefore unverified rather than refuted; re-fitting RAPM is its own job and was not done in passing. The fit engine's `src/stints/stint_builder.py` is a deliberate hash-pinned fork carrying the same defect, so fixing it breaks the pin by design and is Bobby's call; everything downstream of its 15,669-game panel (tripwire PAIR-DRTG, the jaden_calibration JD-COVER report) still carries it and is bannered.
 
 **The kuminga project's own figures do not change.** They already used rebuilt points, which is how the defect was found.
+
+### D89. The possession grain is fixed, RAPM is refit on it, and both article claims hold
+
+**Files.** Fix `postmortem/lib/lineups.py` (`derive_possessions`). Validation `postmortem/scripts/validate_possession_points.py`, table `postmortem/outputs/tables/validation/possession_points_reconciliation.csv`. Refit `offseason/scripts/build_rapm.py` (now takes `--cache`, `--points-col`, `--out`), consensus `offseason/scripts/d89_reconsensus.py`, comparison `offseason/scripts/d89_rapm_compare.py` with `offseason/outputs/d89_rapm_refit.md`. Claims `postmortem/scripts/d89_verify_article_claims.py` with `postmortem/outputs/findings/lineup_pipeline/04_d89_rapm_refit_and_article_claims.md`. As of 2026-09-19.
+
+**THE DEFECT, one grain below D88.** `derive_possessions` added every made shot to the open possession's points without checking who scored it. A made field goal ENDS the possession, so an and-one free throw arrived when the other team was already on offence and its point was credited to the opponent. D88 measured the symptom through the stint layer; this is the mechanism.
+
+**THE FIX.** Points go to the team that scored them. The scorer is the offence for the open possession in the ordinary case; when he is not, the points go to that team's most recent possession, and anything still homeless is held for that team's next possession. So every point lands on a possession of the team that scored it. `points_scored_legacy` keeps the old rule's value for diagnosis. A first attempt that only guarded the crediting (without the retro search) DROPPED 26 points in a single test game, which is how the technical-free-throw and tracker-slip cases surfaced; the search is what makes the reconciliation exact rather than merely closer.
+
+**VALIDATED THE SAME WAY AS THE STINT FIX.** League-wide sample, 48 games across 2023-24, 2024-25 and 2025-26, regular season and playoffs, 96 team-games, against `nba_games.pts`:
+
+| basis | mean error | mean absolute | largest | exact |
+|---|---:|---:|---:|---:|
+| corrected | +0.000 | 0.000 | 0 | **96 of 96** |
+| legacy | -0.042 | 3.167 | 10 | 14 of 96 |
+
+Legacy error is **2.84% of all points**, mirrored between the two teams of a game. By season-type the legacy mean absolute error ran 2.25 to 4.12 points per team-game. The league-wide and-one count is 18,960 on 329,012 made field goals (5.8%), which accounts for the bulk of the misattribution.
+
+**A SECOND CORRECTION CAME WITH IT.** An and-one free throw used to END a possession, so the old grid carried a phantom possession for each one. The rebuilt league cache has **2.05% fewer player-possessions** (7,409,012 to 7,256,903) and every removed possession ended in `made_ft`. Any per-100 denominator built on this cache moves by that much.
+
+**THE REBUILD.** `offseason/data/cache/possessions_league` regenerated for all 3,939 games (the pre-fix cache is frozen alongside as `possessions_league_pre_d89`), and `postmortem/outputs/cache/q2_localize/possessions` for its 289. `build_possessions_league.py` gained `--shard i/N` so the rebuild runs as parallel processes: four shards, twelve minutes.
+
+**THE REFIT, AND ITS GATE.** RAPM was fitted twice, once on the frozen pre-fix cache and once on the rebuilt one, same code and same selected ridge alpha (4000). The legacy-points fit reproduces the published `player_value.csv` to within 0.07 of net RAPM on identical possession counts, which is what licenses reading the before/after differences as the fix rather than as drift. **Consensus had to be re-derived too**, because it is a z-blend of RAPM with Basketball-Reference BPM (60/40 on offence, 75/25 on defence) computed in `build_external_triangulation.py`, not in `build_strengths.py`. That script fetches Basketball-Reference live and the host blocks this project, so `d89_reconsensus.py` re-derives consensus from the BBR columns already frozen in the old file, gated on reproducing the old consensus columns exactly (worst difference 0.0000 on all three, and the corroboration flag matches on 612 of 612 rows). Box and DARKO are untouched by construction.
+
+**THE DIRECTION OF THE BIAS IS ON RECORD.** A player who draws and-ones lost the point to his opponent under the old rule, so his offensive RAPM should rise on the fix. Split by and-one rate, reliable players only:
+
+| quartile | mean and-one rate | offensive shift | defensive shift | net shift |
+|---|---:|---:|---:|---:|
+| Q1 lowest | 0.023 | -0.050 | -0.029 | -0.020 |
+| Q2 | 0.044 | -0.046 | -0.010 | -0.036 |
+| Q3 | 0.060 | +0.096 | -0.123 | +0.219 |
+| Q4 highest | 0.084 | +0.105 | -0.023 | +0.128 |
+
+The correlation between a player's and-one rate and his offensive shift is **+0.176** (net **+0.113**): the predicted direction, weak at the individual level because a player's RAPM also moves through his teammates and opponents. Mean absolute shifts: 0.334 offence, 0.311 defence, 0.582 net, largest 2.49.
+
+**THE EIGHT NAMED PLAYERS** (league fit, offence / defence / net, before to after):
+
+| player | off | def | net | possessions | and-one rate |
+|---|---|---|---|---:|---:|
+| Jonathan Kuminga | -1.16 to -0.98 | -2.53 to -2.80 | **+1.37 to +1.82** | 17,628 | 0.075 |
+| Anthony Edwards | +3.39 to +4.15 | +2.21 to +2.02 | **+1.18 to +2.14** | 36,276 | 0.079 |
+| Rudy Gobert | -0.76 to -1.46 | -6.52 to -6.47 | **+5.76 to +5.01** | 33,083 | 0.091 |
+| LaMelo Ball | +4.18 to +5.10 | +2.23 to +1.24 | **+1.95 to +3.86** | 17,038 | 0.042 |
+| Naz Reid | +0.55 to +0.62 | -2.72 to -2.11 | **+3.27 to +2.72** | 28,945 | 0.044 |
+| Moussa Diabate | +3.31 to +2.76 | -2.98 to -2.29 | **+6.30 to +5.05** | 10,571 | 0.074 |
+| Kon Knueppel | +3.19 to +2.99 | -0.91 to -1.12 | **+4.10 to +4.11** | 9,854 | 0.045 |
+| Neemias Queta | +1.20 to +1.17 | -3.77 to -4.01 | **+4.97 to +5.18** | 11,730 | 0.052 |
+
+Consensus net, which is what three of the four views feed off: Ball +2.29 to +3.78, Edwards +1.88 to +2.66, Kuminga +1.33 to +1.65, Gobert +5.28 to +4.88, Reid +3.15 to +2.80. Mean absolute consensus shift 0.433, largest 1.96.
+
+**POSTMORTEM'S OWN RAPM, refit on its 289-game sample.** Mean absolute shift 0.234 offence and 0.432 net over 564 players. **Gobert is no longer the top net RAPM in that sample:** +6.18 at rank 1 becomes +4.77 at rank 3, behind Wembanyama (+6.28). Randle goes -0.88 to +0.41 and is no longer below replacement; Edwards goes -0.61 to +0.01; Reid +2.42 to +1.36; Conley -0.40 to +1.07; Dosunmu -1.79 to -3.45. The memory files carrying those numbers are corrected.
+
+**THE TWO ARTICLE CLAIMS, re-tested on their own sample and labelled against rules fixed before looking.**
+
+- **"Gobert's offensive impact has gone from positive in 2023-24 to clearly negative in 2025-26": VERIFIED.** On the refit the season-only fits give +2.62, -1.38, -4.12 against the published +2.70, -0.36, -3.20. The direction is the published one and the end point is sharper, well beyond a quarter of the fit's own spread (0.64).
+- **"By the 2025-26-only RAPM, DiVincenzo was the highest-impact player in the entire league sample": VERIFIED.** Rank 1 of 404 before and after, +4.84 to +4.86.
+
+Neither claim needed the sentence changed, which is worth saying plainly: D88 flagged them as unverified, and the honest outcome of checking was that both survived.
+
+**STILL NOT FIXED, and now the only place the defect lives.** `counterfactual-fit-engine/src/stints/stint_builder.py` is a hash-pinned fork of the pre-D88 library. Fixing it breaks the pin by design, so it stays Bobby's call; the tripwire PAIR-DRTG markers and the jaden_calibration JD-COVER report run on its 15,669-game panel and are bannered as such. `lib/pbp.py`'s own possession builder retro-credits and-ones correctly and never carried the mirrored defect, so Q1's halfcourt, transition and clutch splits were not exposed; it was not re-validated end to end here because it takes its own play-by-play frame.
