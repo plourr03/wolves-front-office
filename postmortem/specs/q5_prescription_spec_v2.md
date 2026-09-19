@@ -1,6 +1,6 @@
 # Q5: Prescription Specification (v2, post-diagnostic-completion)
 
-> **EXPOSED, NOT YET RECOMPUTED (D88).** This spec leans on Gobert's RAPM (+6.18 pooled, +1.98 in 2025-26) and on Q2 lineup figures. The stint layer those lineup figures come from was fixed on 2026-09-18 and recomputed (playoff figures move by up to 17 points per 100, five change sign); the RAPM fit shares the root cause and is not yet re-fitted. See `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md` before treating any of those numbers as settled.
+> **EXPOSED, NOT YET RECOMPUTED (D88).** This spec leans on Gobert's RAPM (+6.18 pooled, +1.98 in 2025-26) and on Q2 lineup figures. The stint layer those lineup figures come from was fixed on 2026-09-18 and recomputed (playoff figures move by up to 17 points per 100, five change sign); the RAPM fit has since been refit on the corrected possession grain (D89), so the Gobert RAPM figures quoted in this spec are superseded by `postmortem/outputs/findings/lineup_pipeline/04_d89_rapm_refit_and_article_claims.md`. See `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md` before treating any of those numbers as settled.
 
 **Project:** Timberwolves 2025-26 Postmortem
 **Analysis ID:** Q5

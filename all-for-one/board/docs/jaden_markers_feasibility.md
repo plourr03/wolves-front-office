@@ -1,6 +1,6 @@
 # Jaden Markers: Feasibility Pass
 
-> **EXPOSED, NOT YET RECOMPUTED (D88).** JD-COVER and any PAIR-DRTG marker here is built on `points_against` from the fit engine's forked stint builder, which credits about 3.4% of points to the wrong team. The upstream library is fixed as of 2026-09-18; the fork is hash-pinned and was deliberately left alone, so this panel still carries the defect. Small on/off windows are where it bites hardest. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+> **EXPOSED, NOT YET RECOMPUTED (D88).** JD-COVER and any PAIR-DRTG marker here is built on `points_against` from the fit engine's forked stint builder, which credits about 3.4% of points to the wrong team. The upstream library is fixed as of 2026-09-18 and the possession grain as of 2026-09-19 (D89); the fork is hash-pinned and was deliberately left alone, so this panel still carries the defect and is the last place it lives. Small on/off windows are where it bites hardest. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
 
 For `jaden_markers.md` (draft v0.1). Produced 2026-07-17 by the warehouse agent, in the slot after tripwire Phase 3 and before the Phase 4 stop. Coverage and grain only, no builds. The SPACE-ANT rule applies: no marker freezes on data the warehouse cannot produce; anything uncomputable is struck, not approximated.
 

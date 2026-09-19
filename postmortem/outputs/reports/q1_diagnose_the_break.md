@@ -1,6 +1,7 @@
 # Q1: Diagnose the Break
 
-> **EXPOSED, NOT YET RECOMPUTED (D88).** The possession-grain splits below (halfcourt, transition, clutch) attribute points by the possession's offensive team, which misattributes about 3.4% of points, mirrored between the two teams. The team-level box-score ratings in this report are unaffected. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+> **PARTLY SETTLED 2026-09-19 (D89).** The possession builder used for the halfcourt, transition and clutch splits below (`lib/pbp.py`) retro-credits and-one free throws correctly, so it never carried the mirrored misattribution that hit the lineup and RAPM grain; it was not re-validated end to end here because it takes its own play-by-play frame. The team-level box-score ratings in this report are unaffected. Detail: `postmortem/outputs/findings/lineup_pipeline/04_d89_rapm_refit_and_article_claims.md` and `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+
 
 **Status:** v2. Team-level diagnostic plus PBP-derived halfcourt-vs-transition, clutch, and shot-zone splits. Some pieces still pending: opponent-strength adjusted ORtg, league-wide comparators for the PBP splits (Wolves-only for now).
 

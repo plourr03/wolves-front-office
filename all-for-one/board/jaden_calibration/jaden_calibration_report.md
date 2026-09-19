@@ -1,6 +1,6 @@
 # Jaden Markers: Calibration Class
 
-> **EXPOSED, NOT YET RECOMPUTED (D88).** JD-COVER and any PAIR-DRTG marker here is built on `points_against` from the fit engine's forked stint builder, which credits about 3.4% of points to the wrong team. The upstream library is fixed as of 2026-09-18; the fork is hash-pinned and was deliberately left alone, so this panel still carries the defect. Small on/off windows are where it bites hardest. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
+> **EXPOSED, NOT YET RECOMPUTED (D88).** JD-COVER and any PAIR-DRTG marker here is built on `points_against` from the fit engine's forked stint builder, which credits about 3.4% of points to the wrong team. The upstream library is fixed as of 2026-09-18 and the possession grain as of 2026-09-19 (D89); the fork is hash-pinned and was deliberately left alone, so this panel still carries the defect and is the last place it lives. Small on/off windows are where it bites hardest. Detail: `postmortem/outputs/findings/lineup_pipeline/03_d88_points_fix_and_recompute.md`.
 
 Board_spec v2.0 / `jaden_markers.md` section 5. Produced 2026-07-17, in the slot after the tripwire Phase 4 stop. Scoped with the same extraction discipline as tripwire Scenario A (`build_reference_class.py`): arrivals foundation from game-level data, diacritic-safe, join on `nba_player_id` only, seed validation, curated log. Freezes NOTHING. Every threshold below is labelled PROPOSED / TUNE. No p-values; exact counts throughout. Descriptive, not causal.
 
