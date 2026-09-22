@@ -1,0 +1,776 @@
+{
+ "draft_NBA_2026": {
+  "bytes": 244655,
+  "fetched_at": "2026-09-22T19:02:21+00:00",
+  "sha256": "4eb9953d89a5e32e906ed2eabaf0474d26fb9cb8de7aa8c370127aa82cc37b06",
+  "url": "https://www.basketball-reference.com/draft/NBA_2026.html"
+ },
+ "leagues_NBA_2016": {
+  "bytes": 808498,
+  "fetched_at": "2026-09-22T19:09:38+00:00",
+  "sha256": "0c3c780cc046c8d4f881e2abf7e022c9284997cd616ca8f00a1b535b3386d649",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2016.html"
+ },
+ "leagues_NBA_2017": {
+  "bytes": 807139,
+  "fetched_at": "2026-09-22T19:12:59+00:00",
+  "sha256": "fccb8e597628ec589f57f806a7fb12137713c4db5a55210c1dd43ac0fc1049ba",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2017.html"
+ },
+ "leagues_NBA_2018": {
+  "bytes": 807857,
+  "fetched_at": "2026-09-22T19:13:47+00:00",
+  "sha256": "75475a05554e189a9c7afbe5e0d7cb9c0c77f426c3668d942af3bd876da3b631",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2018.html"
+ },
+ "leagues_NBA_2019": {
+  "bytes": 807734,
+  "fetched_at": "2026-09-22T19:14:21+00:00",
+  "sha256": "ef24ad605515b706f62099520d6d0944b9b4488fd5a5ca54949aa647deec30a7",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2019.html"
+ },
+ "leagues_NBA_2020": {
+  "bytes": 808851,
+  "fetched_at": "2026-09-22T19:15:11+00:00",
+  "sha256": "0de9906ab6b9282e12dd51f6b14ce0e95b198f1d20ba0933109601d437980383",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2020.html"
+ },
+ "leagues_NBA_2021": {
+  "bytes": 807367,
+  "fetched_at": "2026-09-22T19:15:49+00:00",
+  "sha256": "5a1cd1a4c9e9db549aac7af9da7cd5f760a08fba9eb8413299b88cb395ade52f",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2021.html"
+ },
+ "leagues_NBA_2022": {
+  "bytes": 808836,
+  "fetched_at": "2026-09-22T19:16:36+00:00",
+  "sha256": "929d6da3645b20b6669aa6d29cde6e461e0a7c9087b7a5cacf8bae0fd3d65891",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2022.html"
+ },
+ "leagues_NBA_2023": {
+  "bytes": 808108,
+  "fetched_at": "2026-09-22T19:17:05+00:00",
+  "sha256": "f250d0b38a139005183581f7fc499b03f48131eae6e26f50c1ad6c7e1825e407",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2023.html"
+ },
+ "leagues_NBA_2024": {
+  "bytes": 809918,
+  "fetched_at": "2026-09-22T19:17:47+00:00",
+  "sha256": "170ad0f1d3d7339ac1977d58ed38b83d65a48c5fa0c0b8abbf2d82671630f770",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2024.html"
+ },
+ "leagues_NBA_2025": {
+  "bytes": 812232,
+  "fetched_at": "2026-09-22T19:18:31+00:00",
+  "sha256": "4640a95367b15b0d72d4fb2a45ef08c078e640fcd8952aaca4092065f880380f",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2025.html"
+ },
+ "leagues_NBA_2026": {
+  "bytes": 811755,
+  "fetched_at": "2026-09-22T19:19:13+00:00",
+  "sha256": "f5630fe577a290bc1f08a4d94d45eaf7e20acd4f539bee4ab918f2380cd01d70",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2026.html"
+ },
+ "players_a_anderky01": {
+  "bytes": 1179509,
+  "fetched_at": "2026-09-22T19:13:34+00:00",
+  "sha256": "fd3644f9c14a3ddcfbb9973cb8ffbab14977bdfd42341adc9d4912aedb7bc20a",
+  "url": "https://www.basketball-reference.com/players/a/anderky01.html"
+ },
+ "players_a_antetgi01": {
+  "bytes": 1108434,
+  "fetched_at": "2026-09-22T19:16:08+00:00",
+  "sha256": "9a321fee792ad9406a9e0238b340504ea7e0051d6e12aaab9c3d7a34964b34fd",
+  "url": "https://www.basketball-reference.com/players/a/antetgi01.html"
+ },
+ "players_a_anunoog01": {
+  "bytes": 925723,
+  "fetched_at": "2026-09-22T19:19:36+00:00",
+  "sha256": "96cc623dc9f46d6b9247516805cda46a91131ebe2739554370ee27aa38980906",
+  "url": "https://www.basketball-reference.com/players/a/anunoog01.html"
+ },
+ "players_b_ballla01": {
+  "bytes": 457130,
+  "fetched_at": "2026-09-22T19:13:38+00:00",
+  "sha256": "9691415babb4fa5f8ab805200cc87846f295aa5c443a14fc1d0782ddb296f3cb",
+  "url": "https://www.basketball-reference.com/players/b/ballla01.html"
+ },
+ "players_b_berinjo01": {
+  "bytes": 405938,
+  "fetched_at": "2026-09-22T19:13:43+00:00",
+  "sha256": "ee277e4e94cb98541bed4672ed460f2a767f514a14443ac668d6c94376aefea8",
+  "url": "https://www.basketball-reference.com/players/b/berinjo01.html"
+ },
+ "players_b_bernaju01": {
+  "bytes": 294904,
+  "fetched_at": "2026-09-22T19:13:48+00:00",
+  "sha256": "6d2abf357b88a3d9f3cd511c807216ec32de60feac7ff9182451b2afa08c2888",
+  "url": "https://www.basketball-reference.com/players/b/bernaju01.html"
+ },
+ "players_b_braunch01": {
+  "bytes": 587678,
+  "fetched_at": "2026-09-22T19:17:43+00:00",
+  "sha256": "2690e0b6fc30fe35836d72fe67f40fa1292d90eea00dec8a85ce2e0e655f0ba5",
+  "url": "https://www.basketball-reference.com/players/b/braunch01.html"
+ },
+ "players_b_bridgmi01": {
+  "bytes": 901823,
+  "fetched_at": "2026-09-22T19:19:31+00:00",
+  "sha256": "1aaf1aaa2726ed4c062507e62aa9e87a498b20bcc5643bed50041ba8f9df39fe",
+  "url": "https://www.basketball-reference.com/players/b/bridgmi01.html"
+ },
+ "players_b_brownbr01": {
+  "bytes": 965805,
+  "fetched_at": "2026-09-22T19:17:32+00:00",
+  "sha256": "c06cc448f50fb4bf10518dd56807a7636ef7ef0502d67d9cc00567347ac12bb6",
+  "url": "https://www.basketball-reference.com/players/b/brownbr01.html"
+ },
+ "players_b_brownja02": {
+  "bytes": 953454,
+  "fetched_at": "2026-09-22T19:18:01+00:00",
+  "sha256": "15d19b7439c2a94679a4de57f110616a046f8721f613af0a3735d715cf305a13",
+  "url": "https://www.basketball-reference.com/players/b/brownja02.html"
+ },
+ "players_b_brunsja01": {
+  "bytes": 891357,
+  "fetched_at": "2026-09-22T19:19:22+00:00",
+  "sha256": "3c09263a7f271a8286fb052202a6398b920087f68532f7d36de1769aae444840",
+  "url": "https://www.basketball-reference.com/players/b/brunsja01.html"
+ },
+ "players_c_caldwke01": {
+  "bytes": 1065581,
+  "fetched_at": "2026-09-22T19:15:25+00:00",
+  "sha256": "444dfe1893763199faa438962fa278ecb36a47f960d796f5e4a8b72b23ddd81d",
+  "url": "https://www.basketball-reference.com/players/c/caldwke01.html"
+ },
+ "players_c_carusal01": {
+  "bytes": 865490,
+  "fetched_at": "2026-09-22T19:15:30+00:00",
+  "sha256": "95106ce6d83870e5d1ffd5c2cf69465f18860909dc5102806f2ee5abc5948b8b",
+  "url": "https://www.basketball-reference.com/players/c/carusal01.html"
+ },
+ "players_c_clarkia01": {
+  "bytes": 749783,
+  "fetched_at": "2026-09-22T19:13:41+00:00",
+  "sha256": "d1d34d6ad207f5269bb300476d8b5f70268fe5f1bbf90ac4bc7e68c53daf0952",
+  "url": "https://www.basketball-reference.com/players/c/clarkia01.html"
+ },
+ "players_c_clarkja02": {
+  "bytes": 476982,
+  "fetched_at": "2026-09-22T19:13:52+00:00",
+  "sha256": "2c2b6d749d948e45b81c631511b0a8c5ec4b6cbde3dd345ca1c8747913920314",
+  "url": "https://www.basketball-reference.com/players/c/clarkja02.html"
+ },
+ "players_c_conlemi01": {
+  "bytes": 1405774,
+  "fetched_at": "2026-09-22T19:13:59+00:00",
+  "sha256": "e4987f1f930359a683274293002bf9be05a359808214b32304e1f6dec588bf13",
+  "url": "https://www.basketball-reference.com/players/c/conlemi01.html"
+ },
+ "players_c_connapa01": {
+  "bytes": 989203,
+  "fetched_at": "2026-09-22T19:16:23+00:00",
+  "sha256": "73f66eba336635936ae19e362407d6b8410c180164598dff6cc752730cbb0466",
+  "url": "https://www.basketball-reference.com/players/c/connapa01.html"
+ },
+ "players_c_curryst01": {
+  "bytes": 1259102,
+  "fetched_at": "2026-09-22T19:13:08+00:00",
+  "sha256": "060a711846a1cabc7f7c11fef46a08fef589c324334b7b87a485f094713ce505",
+  "url": "https://www.basketball-reference.com/players/c/curryst01.html"
+ },
+ "players_d_davisan02": {
+  "bytes": 1194493,
+  "fetched_at": "2026-09-22T19:15:20+00:00",
+  "sha256": "1133a85331649623453e9748f6d2a37e3d48c1e9b5644a2874a1f1ac1feb5392",
+  "url": "https://www.basketball-reference.com/players/d/davisan02.html"
+ },
+ "players_d_dellama01": {
+  "bytes": 834225,
+  "fetched_at": "2026-09-22T19:12:54+00:00",
+  "sha256": "6c30c5d5f80b3d700e9ddd6a6697abfdf560445114efdd72e702905a591d632a",
+  "url": "https://www.basketball-reference.com/players/d/dellama01.html"
+ },
+ "players_d_dilliro01": {
+  "bytes": 517653,
+  "fetched_at": "2026-09-22T19:05:24+00:00",
+  "sha256": "f2b91de27c88aed72c24dda8187a55165dbf3d4090d204f1585622a7a7909074",
+  "url": "https://www.basketball-reference.com/players/d/dilliro01.html"
+ },
+ "players_d_divindo01": {
+  "bytes": 950464,
+  "fetched_at": "2026-09-22T19:14:04+00:00",
+  "sha256": "a72c2867f7f138401aec9e623948220afb147cff9d2fe03f7de43d0ff54d2fc6",
+  "url": "https://www.basketball-reference.com/players/d/divindo01.html"
+ },
+ "players_d_dortlu01": {
+  "bytes": 673923,
+  "fetched_at": "2026-09-22T19:18:54+00:00",
+  "sha256": "bcbac4cfea07bb68a9bb480f7c424daab5c7629af3886cda695dcb7c52884c60",
+  "url": "https://www.basketball-reference.com/players/d/dortlu01.html"
+ },
+ "players_d_dosunay01": {
+  "bytes": 685998,
+  "fetched_at": "2026-09-22T19:14:11+00:00",
+  "sha256": "242ef0cc66254da2eae4812e5b4352e94910ad8484de76fb452fc970e954254e",
+  "url": "https://www.basketball-reference.com/players/d/dosunay01.html"
+ },
+ "players_d_duranke01": {
+  "bytes": 1663039,
+  "fetched_at": "2026-09-22T19:13:22+00:00",
+  "sha256": "9a1079cfbc9cfe89300a33bc83bdb86528c2bb0990502ba93f61ae03bf168928",
+  "url": "https://www.basketball-reference.com/players/d/duranke01.html"
+ },
+ "players_e_edwaran01": {
+  "bytes": 726704,
+  "fetched_at": "2026-09-22T19:03:57+00:00",
+  "sha256": "512ced22895c54d4a883a567a59688bfb7475259a39812443f7a9a39103060de",
+  "url": "https://www.basketball-reference.com/players/e/edwaran01.html"
+ },
+ "players_e_evansis01": {
+  "bytes": 162916,
+  "fetched_at": "2026-09-22T19:05:11+00:00",
+  "sha256": "a2793e21000d7cd15a4b137a036025763b4789ba2841c04cc7d4d5e382ef0b1f",
+  "url": "https://www.basketball-reference.com/players/e/evansis01.html"
+ },
+ "players_f_forbebr01": {
+  "bytes": 859881,
+  "fetched_at": "2026-09-22T19:16:32+00:00",
+  "sha256": "93a6210be98958952715fe3b90b4ec3e7562ca1451c9ffb51054099469414782",
+  "url": "https://www.basketball-reference.com/players/f/forbebr01.html"
+ },
+ "players_f_freemen01": {
+  "bytes": 364239,
+  "fetched_at": "2026-09-22T19:14:16+00:00",
+  "sha256": "ca383a6431507da7ea373095a32755269eb4c5098060a8879185d502f98933b2",
+  "url": "https://www.basketball-reference.com/players/f/freemen01.html"
+ },
+ "players_g_gasolma01": {
+  "bytes": 1128656,
+  "fetched_at": "2026-09-22T19:14:47+00:00",
+  "sha256": "05eb0167e4941d0b08a74f3cd12c712d90b49be0ab067b2134188ffbe9615fa2",
+  "url": "https://www.basketball-reference.com/players/g/gasolma01.html"
+ },
+ "players_g_gilgesh01": {
+  "bytes": 899672,
+  "fetched_at": "2026-09-22T19:18:41+00:00",
+  "sha256": "4d4c8ed40427779b7d9398ffcb48807219c57a9c4e96bc30f52eb4797a7ca48c",
+  "url": "https://www.basketball-reference.com/players/g/gilgesh01.html"
+ },
+ "players_g_goberru01": {
+  "bytes": 1104203,
+  "fetched_at": "2026-09-22T19:14:22+00:00",
+  "sha256": "8cfb50e2e7267adfae9b0b69a93045d419f29ca764a4c76cee9cd9e5a10902b5",
+  "url": "https://www.basketball-reference.com/players/g/goberru01.html"
+ },
+ "players_g_gordoaa01": {
+  "bytes": 969939,
+  "fetched_at": "2026-09-22T19:17:23+00:00",
+  "sha256": "17b5736c8ea4492194e350a8a70b3c959e373ea0d86c4721023e19293fd969b3",
+  "url": "https://www.basketball-reference.com/players/g/gordoaa01.html"
+ },
+ "players_g_greenda02": {
+  "bytes": 1326712,
+  "fetched_at": "2026-09-22T19:14:52+00:00",
+  "sha256": "c7156186562f5e254ba2b4014b54cff7cf465b42dd17627fd0e809026f0fdd07",
+  "url": "https://www.basketball-reference.com/players/g/greenda02.html"
+ },
+ "players_g_greendr01": {
+  "bytes": 1099858,
+  "fetched_at": "2026-09-22T19:13:18+00:00",
+  "sha256": "e3537fc4d1abfa4564e02ebea1f80d541b7314f62913d31fea0c4ef92a86f0a9",
+  "url": "https://www.basketball-reference.com/players/g/greendr01.html"
+ },
+ "players_g_greenje02": {
+  "bytes": 1684532,
+  "fetched_at": "2026-09-22T19:17:38+00:00",
+  "sha256": "5acb6231c1a7d178eac7fb57e1d088e3c8c653d93e57c9d87bc308f45efd3147",
+  "url": "https://www.basketball-reference.com/players/g/greenje02.html"
+ },
+ "players_g_greenjo02": {
+  "bytes": 663948,
+  "fetched_at": "2026-09-22T19:14:26+00:00",
+  "sha256": "a74f7483b0a9d2b73834b7fbd5a8cca07dc9b51c57f54565561cebadf5234115",
+  "url": "https://www.basketball-reference.com/players/g/greenjo02.html"
+ },
+ "players_h_harteis01": {
+  "bytes": 927389,
+  "fetched_at": "2026-09-22T19:18:59+00:00",
+  "sha256": "5613a9186543d2f166f65b195ab06e1e5a1a6c58b8d5b1db6b849d9f391d235d",
+  "url": "https://www.basketball-reference.com/players/h/harteis01.html"
+ },
+ "players_h_hartjo01": {
+  "bytes": 874722,
+  "fetched_at": "2026-09-22T19:19:26+00:00",
+  "sha256": "ee61cd51e65548cbc822d684be646012995734dbfcf33f9ebe4dccc4338cfd5d",
+  "url": "https://www.basketball-reference.com/players/h/hartjo01.html"
+ },
+ "players_h_hausesa01": {
+  "bytes": 637843,
+  "fetched_at": "2026-09-22T19:18:20+00:00",
+  "sha256": "aabf8c08d962e6ca60ddf79ab22e52f337c79a33ad9e8789e6c72808a8c5c4ce",
+  "url": "https://www.basketball-reference.com/players/h/hausesa01.html"
+ },
+ "players_h_holidjr01": {
+  "bytes": 1304991,
+  "fetched_at": "2026-09-22T19:16:03+00:00",
+  "sha256": "46c934eeb0713180567974a96807239fdecde57245c9f2a4ebbc6d3e63b940dc",
+  "url": "https://www.basketball-reference.com/players/h/holidjr01.html"
+ },
+ "players_h_holmgch01": {
+  "bytes": 558783,
+  "fetched_at": "2026-09-22T19:18:50+00:00",
+  "sha256": "f3ea3165b74601abc623a34e36c0ebe9abf3b08fcfad137c493b28f11817de2b",
+  "url": "https://www.basketball-reference.com/players/h/holmgch01.html"
+ },
+ "players_h_horfoal01": {
+  "bytes": 1472216,
+  "fetched_at": "2026-09-22T19:18:11+00:00",
+  "sha256": "4f1982927795b6699389e07e4383d30c3ec235d247bb23228ffd65b2c2be952b",
+  "url": "https://www.basketball-reference.com/players/h/horfoal01.html"
+ },
+ "players_h_hylanbo01": {
+  "bytes": 793776,
+  "fetched_at": "2026-09-22T19:14:32+00:00",
+  "sha256": "a864aa432de9d9fdfb3e3796814566581c3248ee3e74156546e564641164e9f2",
+  "url": "https://www.basketball-reference.com/players/h/hylanbo01.html"
+ },
+ "players_i_ibakase01": {
+  "bytes": 1341686,
+  "fetched_at": "2026-09-22T19:15:01+00:00",
+  "sha256": "f59a43a04fb175002003a20468e1e7cfda3755c394c729b26268f800ddbe88b7",
+  "url": "https://www.basketball-reference.com/players/i/ibakase01.html"
+ },
+ "players_i_iguodan01": {
+  "bytes": 1432743,
+  "fetched_at": "2026-09-22T19:13:27+00:00",
+  "sha256": "5ef656b43730357fabe6ae5cd045fe89dc73df915eef41c5277c67211449afdd",
+  "url": "https://www.basketball-reference.com/players/i/iguodan01.html"
+ },
+ "players_i_inglejo01": {
+  "bytes": 1016918,
+  "fetched_at": "2026-09-22T19:05:38+00:00",
+  "sha256": "ec09d2e1b27318978e09b973b7c7baf66d472a298ec5d77f763c419bee17a14e",
+  "url": "https://www.basketball-reference.com/players/i/inglejo01.html"
+ },
+ "players_i_irvinky01": {
+  "bytes": 1228950,
+  "fetched_at": "2026-09-22T19:12:24+00:00",
+  "sha256": "3da03a59a1cb4d9b3e747405848eb41e319a21a44f5fb6771b25b65cf1bd762b",
+  "url": "https://www.basketball-reference.com/players/i/irvinky01.html"
+ },
+ "players_j_jamesle01": {
+  "bytes": 1943936,
+  "fetched_at": "2026-09-22T19:09:48+00:00",
+  "sha256": "ff23b23ea5d9838f82da75bb7891cdfb4efb7d8f50162d44d6bf0332ac52bcd0",
+  "url": "https://www.basketball-reference.com/players/j/jamesle01.html"
+ },
+ "players_j_jeffejo01": {
+  "bytes": 167302,
+  "fetched_at": "2026-09-22T19:05:20+00:00",
+  "sha256": "aa173cd433584b0e74ca151673544785c65ad54fb1a98b6cd17333a192554a9f",
+  "url": "https://www.basketball-reference.com/players/j/jeffejo01.html"
+ },
+ "players_j_jefferi01": {
+  "bytes": 1416647,
+  "fetched_at": "2026-09-22T19:12:44+00:00",
+  "sha256": "9848625cd346a1ad3026c6918e6343e43bab752734e2a088836944a5fe94f41d",
+  "url": "https://www.basketball-reference.com/players/j/jefferi01.html"
+ },
+ "players_j_jokicni01": {
+  "bytes": 1003075,
+  "fetched_at": "2026-09-22T19:17:19+00:00",
+  "sha256": "985c15b7938fd43a035808c1aa764d582e61b7564c076d2d97d05dddfa9d9677",
+  "url": "https://www.basketball-reference.com/players/j/jokicni01.html"
+ },
+ "players_j_juzanjo01": {
+  "bytes": 417554,
+  "fetched_at": "2026-09-22T19:05:47+00:00",
+  "sha256": "88b36088415fd9c9899f1ca9d1eb50a9d30351368b72323d1ca289b1a322e805",
+  "url": "https://www.basketball-reference.com/players/j/juzanjo01.html"
+ },
+ "players_k_kaufmtr01": {
+  "bytes": 159540,
+  "fetched_at": "2026-09-22T19:05:16+00:00",
+  "sha256": "b8d7ee93513a72aa7d3cead0d94ce4f9d96d4b6b8ac38aad084d62281cab48cc",
+  "url": "https://www.basketball-reference.com/players/k/kaufmtr01.html"
+ },
+ "players_k_konchjo01": {
+  "bytes": 739530,
+  "fetched_at": "2026-09-22T19:14:45+00:00",
+  "sha256": "58754429aaba13cb70587552dc878385cb63880f34d9652f376f2c6b83e3fe00",
+  "url": "https://www.basketball-reference.com/players/k/konchjo01.html"
+ },
+ "players_k_kuminjo01": {
+  "bytes": 740169,
+  "fetched_at": "2026-09-22T19:14:50+00:00",
+  "sha256": "d93493407af44e7d7aab1d58b5f4fadd9930f8b269d2923c02f9dbb8b41d4ea7",
+  "url": "https://www.basketball-reference.com/players/k/kuminjo01.html"
+ },
+ "players_k_kuzmaky01": {
+  "bytes": 833008,
+  "fetched_at": "2026-09-22T19:15:34+00:00",
+  "sha256": "a72c379f2198b0ae8fe075999f3fdb59f5f34ae2c26cb02122a36566d519a058",
+  "url": "https://www.basketball-reference.com/players/k/kuzmaky01.html"
+ },
+ "players_l_leonaka01": {
+  "bytes": 1304687,
+  "fetched_at": "2026-09-22T19:14:31+00:00",
+  "sha256": "5edbc4c3b7e1d82f8209505231c668b643a95c7cac89dcab05818db4c6319b90",
+  "url": "https://www.basketball-reference.com/players/l/leonaka01.html"
+ },
+ "players_l_livinsh01": {
+  "bytes": 1273527,
+  "fetched_at": "2026-09-22T19:13:37+00:00",
+  "sha256": "799497b2c36c77358d28f7f6a222fb519cf9111ea4a6cc9b3bf627c58790dbe4",
+  "url": "https://www.basketball-reference.com/players/l/livinsh01.html"
+ },
+ "players_l_looneke01": {
+  "bytes": 869346,
+  "fetched_at": "2026-09-22T19:14:03+00:00",
+  "sha256": "af03b489acb3ab969c0b087c8f3fc5421fdad4499ab72d8e020565d11a7fa914",
+  "url": "https://www.basketball-reference.com/players/l/looneke01.html"
+ },
+ "players_l_lopezbr01": {
+  "bytes": 1224021,
+  "fetched_at": "2026-09-22T19:16:18+00:00",
+  "sha256": "46965b587f1eeb5241c745bf3c06dace90802c82caf6a1f4e25e58351b76347b",
+  "url": "https://www.basketball-reference.com/players/l/lopezbr01.html"
+ },
+ "players_l_loveke01": {
+  "bytes": 1244598,
+  "fetched_at": "2026-09-22T19:12:40+00:00",
+  "sha256": "5a055f7e9da30debb5fe2830072fb2404074824422ad38db229bb1b8c962ba7b",
+  "url": "https://www.basketball-reference.com/players/l/loveke01.html"
+ },
+ "players_l_lowryky01": {
+  "bytes": 1536686,
+  "fetched_at": "2026-09-22T19:14:36+00:00",
+  "sha256": "e6c83fe238e08cdd2bcfaa6c5aa8a43ec83321157a4d7d7456360818037627cb",
+  "url": "https://www.basketball-reference.com/players/l/lowryky01.html"
+ },
+ "players_l_lylestr01": {
+  "bytes": 890841,
+  "fetched_at": "2026-09-22T19:14:54+00:00",
+  "sha256": "d2df59c01d36495ca59223189214d7add71bf6b3ee3f5eaf360b9f6c817d3a3a",
+  "url": "https://www.basketball-reference.com/players/l/lylestr01.html"
+ },
+ "players_m_mcbrimi01": {
+  "bytes": 618955,
+  "fetched_at": "2026-09-22T19:19:45+00:00",
+  "sha256": "4c2ad7d9500394b9f89e84456abcc4722df362f8cc2e484a5eb26475dfec9d7e",
+  "url": "https://www.basketball-reference.com/players/m/mcbrimi01.html"
+ },
+ "players_m_mcdanja02": {
+  "bytes": 657175,
+  "fetched_at": "2026-09-22T19:14:59+00:00",
+  "sha256": "a94c0d94a85bf2cc965543af6641c0207c5b00cb6de1d79e916dd166411c306e",
+  "url": "https://www.basketball-reference.com/players/m/mcdanja02.html"
+ },
+ "players_m_middlkh01": {
+  "bytes": 1128397,
+  "fetched_at": "2026-09-22T19:15:58+00:00",
+  "sha256": "abcdaf5d789517fc6ed6b5b83caf40d8941e3fae26d741cc7d5a0f779c10178a",
+  "url": "https://www.basketball-reference.com/players/m/middlkh01.html"
+ },
+ "players_m_millele01": {
+  "bytes": 560759,
+  "fetched_at": "2026-09-22T19:05:51+00:00",
+  "sha256": "0925357a27d7a7a3a99dd7e55f2104f9b01c6583d245973eb0d2727004ac51e4",
+  "url": "https://www.basketball-reference.com/players/m/millele01.html"
+ },
+ "players_m_morrima02": {
+  "bytes": 1336797,
+  "fetched_at": "2026-09-22T19:15:44+00:00",
+  "sha256": "959fb34f1619323227ece4acc0257a5279f1c9b72e9a260c0d4aaac13839114c",
+  "url": "https://www.basketball-reference.com/players/m/morrima02.html"
+ },
+ "players_m_murraja01": {
+  "bytes": 813383,
+  "fetched_at": "2026-09-22T19:17:14+00:00",
+  "sha256": "b11f977b6d85bce34de061522521a482669b2cec92e2d42faa540adace390433",
+  "url": "https://www.basketball-reference.com/players/m/murraja01.html"
+ },
+ "players_p_paytoga02": {
+  "bytes": 876264,
+  "fetched_at": "2026-09-22T19:17:00+00:00",
+  "sha256": "b2069e36d9bd1e1f7f13f35d1998d1f1a3704043d5adc401e4edaa503b8adccf",
+  "url": "https://www.basketball-reference.com/players/p/paytoga02.html"
+ },
+ "players_p_phillju01": {
+  "bytes": 547596,
+  "fetched_at": "2026-09-22T19:05:42+00:00",
+  "sha256": "ed78643fc9a9ebe45350c3a66574b0d7ae0e1ca46f908590f1df614225a58188",
+  "url": "https://www.basketball-reference.com/players/p/phillju01.html"
+ },
+ "players_p_poolejo01": {
+  "bytes": 681308,
+  "fetched_at": "2026-09-22T19:16:51+00:00",
+  "sha256": "4a6eb6bec2b6894af7561e3a502a71cbd4e520bd40f091cdbca9fd8db7c1f7b9",
+  "url": "https://www.basketball-reference.com/players/p/poolejo01.html"
+ },
+ "players_p_portemi01": {
+  "bytes": 747821,
+  "fetched_at": "2026-09-22T19:17:28+00:00",
+  "sha256": "56fc6895d5766f66a107d0165128677b2868a5cbfc670f9c153dc168e8457aaf",
+  "url": "https://www.basketball-reference.com/players/p/portemi01.html"
+ },
+ "players_p_porteot01": {
+  "bytes": 990816,
+  "fetched_at": "2026-09-22T19:16:55+00:00",
+  "sha256": "50b45ed3efa5e8ae5f11c595b12232880ead4c7df7725eb6ac7cfa767ddc6057",
+  "url": "https://www.basketball-reference.com/players/p/porteot01.html"
+ },
+ "players_p_portibo01": {
+  "bytes": 964148,
+  "fetched_at": "2026-09-22T19:16:27+00:00",
+  "sha256": "c1be953c1b73fae2647fddec749c102d01f2e6074b5366402aab2b79a8a7b8df",
+  "url": "https://www.basketball-reference.com/players/p/portibo01.html"
+ },
+ "players_p_porzikr01": {
+  "bytes": 975722,
+  "fetched_at": "2026-09-22T19:18:24+00:00",
+  "sha256": "3e359b98e30d4c3930d944e1402d88e458bd33b4de4713be79b193e6a953867d",
+  "url": "https://www.basketball-reference.com/players/p/porzikr01.html"
+ },
+ "players_p_powelno01": {
+  "bytes": 1109069,
+  "fetched_at": "2026-09-22T19:15:06+00:00",
+  "sha256": "1ec703cca40c6dd1234494df5dfcf65b9000e01e317e06d59560a276b7147e8b",
+  "url": "https://www.basketball-reference.com/players/p/powelno01.html"
+ },
+ "players_p_pritcpa01": {
+  "bytes": 700154,
+  "fetched_at": "2026-09-22T19:18:15+00:00",
+  "sha256": "c19e365b714d8ee3d5a34c95ff0cf2240661e0849216968853360b9312eb4ee5",
+  "url": "https://www.basketball-reference.com/players/p/pritcpa01.html"
+ },
+ "players_p_pullizy01": {
+  "bytes": 363067,
+  "fetched_at": "2026-09-22T19:05:29+00:00",
+  "sha256": "69a2f89e3f84aafd30388c3beabe316d6d1c3295d7d58f7d903867fb256312fb",
+  "url": "https://www.basketball-reference.com/players/p/pullizy01.html"
+ },
+ "players_r_randlju01": {
+  "bytes": 977660,
+  "fetched_at": "2026-09-22T19:15:04+00:00",
+  "sha256": "0dcb3842501d36a9f46992647065771a3197af82e3f5edc1f2ad3d44213830a4",
+  "url": "https://www.basketball-reference.com/players/r/randlju01.html"
+ },
+ "players_r_reidna01": {
+  "bytes": 679189,
+  "fetched_at": "2026-09-22T19:15:08+00:00",
+  "sha256": "cdd3ebe84ca5e78cf3e31500f6a696e599694bbb9608cb12c783fdd07004c4ab",
+  "url": "https://www.basketball-reference.com/players/r/reidna01.html"
+ },
+ "players_r_robinmi01": {
+  "bytes": 679552,
+  "fetched_at": "2026-09-22T19:19:54+00:00",
+  "sha256": "597190fe77338fa5a663a06bda0782ce041bfae9b9e39184f6f0388244313d6f",
+  "url": "https://www.basketball-reference.com/players/r/robinmi01.html"
+ },
+ "players_r_rondora01": {
+  "bytes": 1520666,
+  "fetched_at": "2026-09-22T19:15:39+00:00",
+  "sha256": "6264e6f2ed433068f807ce1c6427d653239d4308d75001799a7c451c56934dc3",
+  "url": "https://www.basketball-reference.com/players/r/rondora01.html"
+ },
+ "players_s_shamela01": {
+  "bytes": 999670,
+  "fetched_at": "2026-09-22T19:19:50+00:00",
+  "sha256": "a6661f564334215ca1c4d67828ddbeb33649e2be97e9262c5250afaf1f916b17",
+  "url": "https://www.basketball-reference.com/players/s/shamela01.html"
+ },
+ "players_s_shannte01": {
+  "bytes": 477759,
+  "fetched_at": "2026-09-22T19:14:41+00:00",
+  "sha256": "95634f1551ec2e0fb68935123b4cde6cbd851b41ea9928319e1d19a7daf00a95",
+  "url": "https://www.basketball-reference.com/players/s/shannte01.html"
+ },
+ "players_s_shumpim01": {
+  "bytes": 1025426,
+  "fetched_at": "2026-09-22T19:12:49+00:00",
+  "sha256": "e24fded814331fb28a9181c931dce638129f128dacde3ad7bd6d67ecd6d70dee",
+  "url": "https://www.basketball-reference.com/players/s/shumpim01.html"
+ },
+ "players_s_siakapa01": {
+  "bytes": 1002045,
+  "fetched_at": "2026-09-22T19:14:42+00:00",
+  "sha256": "55ff39573f85dd87bf536276ab66206611220cd215c2309936268fea954e1ca5",
+  "url": "https://www.basketball-reference.com/players/s/siakapa01.html"
+ },
+ "players_s_smithjr01": {
+  "bytes": 1307027,
+  "fetched_at": "2026-09-22T19:12:29+00:00",
+  "sha256": "d86f48df6299429a521f8608f600e6010b66bc4134f4a9bb61132661561fa5a3",
+  "url": "https://www.basketball-reference.com/players/s/smithjr01.html"
+ },
+ "players_t_tatumja01": {
+  "bytes": 933413,
+  "fetched_at": "2026-09-22T19:17:57+00:00",
+  "sha256": "7d9a88d2768e4c2d5f56f4d5e4f6e8961d22dd129f35facddf9f203aee9cd5d2",
+  "url": "https://www.basketball-reference.com/players/t/tatumja01.html"
+ },
+ "players_t_thompkl01": {
+  "bytes": 1079673,
+  "fetched_at": "2026-09-22T19:13:13+00:00",
+  "sha256": "a4e673bf06f9fa44e4c73a3b86c56ff6935a2ee0b456414577415544618821b4",
+  "url": "https://www.basketball-reference.com/players/t/thompkl01.html"
+ },
+ "players_t_thompst01": {
+  "bytes": 319617,
+  "fetched_at": "2026-09-22T19:15:12+00:00",
+  "sha256": "77671902cd935763234c8c7bf739b5b26385170aff041b2694982a553ac4b20f",
+  "url": "https://www.basketball-reference.com/players/t/thompst01.html"
+ },
+ "players_t_thomptr01": {
+  "bytes": 1180832,
+  "fetched_at": "2026-09-22T19:12:34+00:00",
+  "sha256": "8721ecfb8556ae8b7a07a4c7ad56c32db457e59b57113ce313ad1d58324fb416",
+  "url": "https://www.basketball-reference.com/players/t/thomptr01.html"
+ },
+ "players_t_townska01": {
+  "bytes": 1010368,
+  "fetched_at": "2026-09-22T19:19:40+00:00",
+  "sha256": "2aaf74a45a1f20dd3fdb688b0d88a692cb01e527e4eb49cda4a1cfa0d7d7eb8c",
+  "url": "https://www.basketball-reference.com/players/t/townska01.html"
+ },
+ "players_t_tuckepj01": {
+  "bytes": 1370153,
+  "fetched_at": "2026-09-22T19:16:13+00:00",
+  "sha256": "9e25d93dbd3e18646677438fd2e8f7bb8edd0ca01efae876e9d81531d1cf5cf0",
+  "url": "https://www.basketball-reference.com/players/t/tuckepj01.html"
+ },
+ "players_v_vanvlfr01": {
+  "bytes": 888161,
+  "fetched_at": "2026-09-22T19:14:57+00:00",
+  "sha256": "97ac83d7210910c3ae2f715486075fce2a03355ea1999a04d68129bd8a1a0294",
+  "url": "https://www.basketball-reference.com/players/v/vanvlfr01.html"
+ },
+ "players_w_wallaca01": {
+  "bytes": 536419,
+  "fetched_at": "2026-09-22T19:19:03+00:00",
+  "sha256": "51580df03cfc18d6dcbf68dc6aaebf33836f95693cc23f5dc971018865a12158",
+  "url": "https://www.basketball-reference.com/players/w/wallaca01.html"
+ },
+ "players_w_westda01": {
+  "bytes": 1186095,
+  "fetched_at": "2026-09-22T19:13:32+00:00",
+  "sha256": "7c07206862072847f89bc2ac5bff976d227eef9c256cab5a53194b83481d0daf",
+  "url": "https://www.basketball-reference.com/players/w/westda01.html"
+ },
+ "players_w_whitede01": {
+  "bytes": 929666,
+  "fetched_at": "2026-09-22T19:18:06+00:00",
+  "sha256": "38f48d3188a3d3b87915da8f8386f424ce42691b795392a25500838b2cb0e9a4",
+  "url": "https://www.basketball-reference.com/players/w/whitede01.html"
+ },
+ "players_w_wiggiaa01": {
+  "bytes": 589545,
+  "fetched_at": "2026-09-22T19:19:08+00:00",
+  "sha256": "a2762a6d78878232ff8e0e7c7cfc9ecacef64f9a390c28d4776fe6822f94d96e",
+  "url": "https://www.basketball-reference.com/players/w/wiggiaa01.html"
+ },
+ "players_w_wiggian01": {
+  "bytes": 1013885,
+  "fetched_at": "2026-09-22T19:16:46+00:00",
+  "sha256": "530eb97b514a9114744f054ef04824044418f189cf95d0b8741ccd3b696b378c",
+  "url": "https://www.basketball-reference.com/players/w/wiggian01.html"
+ },
+ "players_w_willico04": {
+  "bytes": 324038,
+  "fetched_at": "2026-09-22T19:15:17+00:00",
+  "sha256": "ed00912ce66c0636c4a4afe8dca5b1f998e6e7141bb34ea588ebeba5366b5205",
+  "url": "https://www.basketball-reference.com/players/w/willico04.html"
+ },
+ "players_w_willija06": {
+  "bytes": 589122,
+  "fetched_at": "2026-09-22T19:18:45+00:00",
+  "sha256": "4d9e2867d12a17a1d750647a5addc818780357f65be6f4ae408886fd047c07c4",
+  "url": "https://www.basketball-reference.com/players/w/willija06.html"
+ },
+ "players_y_youngni01": {
+  "bytes": 972027,
+  "fetched_at": "2026-09-22T19:14:10+00:00",
+  "sha256": "639584c39bd38e3cf99e9379cdfb79a8c14a231c358b8c40668e7a970a377b86",
+  "url": "https://www.basketball-reference.com/players/y/youngni01.html"
+ },
+ "players_z_zikarro01": {
+  "bytes": 287863,
+  "fetched_at": "2026-09-22T19:05:33+00:00",
+  "sha256": "578f3638b6d000b423530c6835aa3d6332404313a306fc040ae372a9c7114f16",
+  "url": "https://www.basketball-reference.com/players/z/zikarro01.html"
+ },
+ "teams_BOS_2024": {
+  "bytes": 933976,
+  "fetched_at": "2026-09-22T19:17:52+00:00",
+  "sha256": "bbff9856b0dfb3946f5eaeba2f14522df1867d0cfd393cc3117e767680d2edf4",
+  "url": "https://www.basketball-reference.com/teams/BOS/2024.html"
+ },
+ "teams_CLE_2016": {
+  "bytes": 905541,
+  "fetched_at": "2026-09-22T19:09:42+00:00",
+  "sha256": "cba5ef6af49a112add09e806794e4729f8bf58cb22f0d45ae062246462de1a19",
+  "url": "https://www.basketball-reference.com/teams/CLE/2016.html"
+ },
+ "teams_DEN_2023": {
+  "bytes": 913246,
+  "fetched_at": "2026-09-22T19:17:09+00:00",
+  "sha256": "101414e964119bf36524384533707a8d2eae83510aa5a88112033c38d693b2ef",
+  "url": "https://www.basketball-reference.com/teams/DEN/2023.html"
+ },
+ "teams_GSW_2017": {
+  "bytes": 903029,
+  "fetched_at": "2026-09-22T19:13:03+00:00",
+  "sha256": "17df40a89c528d65f06909040f833fd2ddc0b169c635f26484e33ca660126c8a",
+  "url": "https://www.basketball-reference.com/teams/GSW/2017.html"
+ },
+ "teams_GSW_2018": {
+  "bytes": 909876,
+  "fetched_at": "2026-09-22T19:13:52+00:00",
+  "sha256": "2b7164b28d776de00bfe109b9a767b633245a6db78447a7e4380ba19cfa1d82c",
+  "url": "https://www.basketball-reference.com/teams/GSW/2018.html"
+ },
+ "teams_GSW_2022": {
+  "bytes": 885163,
+  "fetched_at": "2026-09-22T19:16:41+00:00",
+  "sha256": "cd5162ea4dc094d2766d4cd7cf5607e55e7fb6579871541a6ceb8baccdc2a36c",
+  "url": "https://www.basketball-reference.com/teams/GSW/2022.html"
+ },
+ "teams_LAL_2020": {
+  "bytes": 962308,
+  "fetched_at": "2026-09-22T19:15:16+00:00",
+  "sha256": "e01a1926ab5d813d114db1e91fd5fb009c9e445f002eb805a170d5d43d5f42a1",
+  "url": "https://www.basketball-reference.com/teams/LAL/2020.html"
+ },
+ "teams_MIL_2021": {
+  "bytes": 1012197,
+  "fetched_at": "2026-09-22T19:15:53+00:00",
+  "sha256": "cb451f5dfc814ae01bd5b4eff2296f3eb0403a6a04629ae6a613e023583108ed",
+  "url": "https://www.basketball-reference.com/teams/MIL/2021.html"
+ },
+ "teams_MIN_2026": {
+  "bytes": 972929,
+  "fetched_at": "2026-09-22T19:02:26+00:00",
+  "sha256": "bf8b4d382a2245dec6cbfd064253b6247a6a6e0d14be863dd0b58436fe6db0d8",
+  "url": "https://www.basketball-reference.com/teams/MIN/2026.html"
+ },
+ "teams_NYK_2026": {
+  "bytes": 955108,
+  "fetched_at": "2026-09-22T19:19:17+00:00",
+  "sha256": "8d64175b691d2d3c6d383c92a70f87ee711061b479f46be719c9c1bbf6967824",
+  "url": "https://www.basketball-reference.com/teams/NYK/2026.html"
+ },
+ "teams_OKC_2025": {
+  "bytes": 929581,
+  "fetched_at": "2026-09-22T19:18:36+00:00",
+  "sha256": "0e336bb11c1b516bb7d493359dfd016dc9ed300f16dc077ae3d866cc63995a35",
+  "url": "https://www.basketball-reference.com/teams/OKC/2025.html"
+ },
+ "teams_TOR_2019": {
+  "bytes": 968152,
+  "fetched_at": "2026-09-22T19:14:26+00:00",
+  "sha256": "01f6d3df3d9292dcbc2b6a94106b53c1a67976ece8ac5460f6c5ccdcf47f3d2a",
+  "url": "https://www.basketball-reference.com/teams/TOR/2019.html"
+ }
+}
