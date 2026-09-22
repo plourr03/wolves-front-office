@@ -31,7 +31,11 @@ OUT = os.path.join(REPO, "kuminga", "outputs")
 DOCS = os.path.join(REPO, "kuminga", "docs")
 SHEET = os.path.join(OUT, "final_numbers.csv")
 DOCS_TO_RENDER = [("piece_v2_skeleton.template.md", "piece_v2_skeleton.md"),
-                  ("morning_report_v2.template.md", "morning_report_v2.md")]
+                  ("morning_report_v2.template.md", "morning_report_v2.md"),
+                  # the drafts are templates too, so every number in the prose is a sheet key
+                  # and the reconcile gate scans them the same way (D91)
+                  ("piece_v2_draft_full.template.md", "piece_v2_draft_full.md"),
+                  ("piece_v2_draft_short.template.md", "piece_v2_draft_short.md")]
 SENT = "⟦⟧"
 FORKS = ["consensus", "rapm", "box", "darko"]
 
@@ -79,8 +83,55 @@ def table(name, sheet):
     raise KeyError("unknown table %s" % name)
 
 
+def claims_table(text, sheet):
+    """Every paragraph's sheet keys and run IDs, built from the TEMPLATE so it cannot drift
+    from the prose. Keys, run IDs and the paragraph snippet are all code spans, which the
+    reconcile gate allows, so the table itself adds no unsourced digit (D91)."""
+    rows = []
+    section, n = "", 0
+    for line in text.split("\n"):
+        if line.startswith("#"):
+            # the document title is a level-one heading; what follows it is the summary
+            section = "summary" if line.startswith("# ") else line.lstrip("#").strip()
+            n = 0
+            continue
+        if not line.strip():
+            continue
+        n += 1
+        keys = [k for k in re.findall(r"\{\{([A-Za-z0-9_]+)(?:\|t)?\}\}", line)
+                if k != "CLAIMS_TABLE"]
+        if not keys:
+            continue
+        seen, uniq = set(), []
+        for k in keys:
+            if k not in seen:
+                seen.add(k)
+                uniq.append(k)
+        snippet = re.sub(r"\{\{([A-Za-z0-9_]+)(?:\|t)?\}\}", r"{\1}", line)
+        snippet = re.sub(r"\{\{[^}]*\}\}", "", snippet)
+        snippet = re.sub(r"[*`|#>]", "", snippet).strip()   # keep underscores: they are in key names
+        snippet = " ".join(snippet.split()[:7])
+        runs = []
+        labels = set()
+        for k in uniq:
+            if k in sheet.index:
+                r = sheet.loc[k]
+                rid = str(r.run_id)
+                if rid not in runs:
+                    runs.append(rid)
+                labels.add(str(r.label).split()[0].lower())
+        rows.append("| `%s` | `p%d` | `%s` | %s | %s | %s |" % (
+            section, n, snippet, ", ".join("`%s`" % k for k in uniq),
+            ", ".join("`%s`" % r for r in runs), ", ".join(sorted(labels))))
+    head = ["| section | paragraph | opens | sheet keys | run IDs | labels |",
+            "|---|---|---|---|---|---|"]
+    return "\n".join(head + rows)
+
+
 def render(text, sheet, used):
     text = re.sub(r"\{\{TABLE:([a-z]+)\}\}", lambda m: table(m.group(1), sheet), text)
+    if "{{CLAIMS_TABLE}}" in text:
+        text = text.replace("{{CLAIMS_TABLE}}", claims_table(text, sheet))
     full, masked = [], []
     pos = 0
     for m in re.finditer(r"\{\{([A-Za-z0-9_]+)(\|t)?\}\}", text):

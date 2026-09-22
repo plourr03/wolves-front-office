@@ -158,7 +158,7 @@ def main():
         used = pd.read_csv(os.path.join(OUTDIR, "render_keys_used.csv")).key
         no_run = [k for k in used if not str(sheet.loc[k, "run_id"]).strip() or
                   str(sheet.loc[k, "run_id"]) in ("nan", "n/a")]
-        allow = [r"^#+\s*\d+\.", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
+        allow = [r"^#+\s*\d+\.", r"^\s*\d+\.\s", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
                  r"`[^`]*`", r"\u27e6\u27e7", r"\b[Pp]iece 2\b", r"\bsections? \d\b"]
         retracted = ["6.53", "+2.90", "+6.83", "twice as good", "below 8 a night",
                      "Shannon fills", "0.3029", "0.3131", "+1.253", "+1.714",
@@ -172,7 +172,10 @@ def main():
                      "fails it when the bundle is split", "ships on one player",
                      "The disagreement is all-views, so it is real"]
         report = []
-        for doc in ("piece_v2_skeleton.md", "morning_report_v2.md"):
+        # D91: the drafts are gated exactly like the skeleton: no digit that is not on
+        # the sheet, no retracted phrase.
+        for doc in ("piece_v2_skeleton.md", "morning_report_v2.md",
+                    "piece_v2_draft_full.md", "piece_v2_draft_short.md"):
             masked = open(os.path.join(OUTDIR, doc.replace(".md", ".masked.md")),
                           encoding="utf-8").read()
             strays = []
@@ -195,6 +198,11 @@ def main():
         must = {"headline title odds": sheet.loc["title", "value"],
                 "Williams threshold": sheet.loc["williams_threshold", "value"]}
         missing = [k for k, v in must.items() if v not in skel]
+        # the full draft has to carry the same two figures (D91)
+        draft_path = os.path.join(REPO, "kuminga", "docs", "piece_v2_draft_full.md")
+        if os.path.exists(draft_path):
+            draft = open(draft_path, encoding="utf-8").read()
+            missing += ["draft: " + k for k, v in must.items() if v not in draft]
         rep = pd.DataFrame(report)
         rep.to_csv(os.path.join(OUTDIR, "reconcile_skeleton.csv"), index=False)
         r.note("C2: %d sheet keys used, %d without a run ID; stray digits %s; stale figures %s; "

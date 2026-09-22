@@ -148,10 +148,12 @@ min_label_aged
 min_view_ranks
 min_view_ranks_aged
 mkt_bos
+mkt_cha
 mkt_min
 mkt_min_rank
 model_bos
 model_bos_aged
+model_cha
 n2_cond
 n2_modal
 n2_modal_p
@@ -223,6 +225,7 @@ nyk_wt
 off_delta_a
 off_delta_u
 over_first
+over_tax
 overround
 per100
 po_games
