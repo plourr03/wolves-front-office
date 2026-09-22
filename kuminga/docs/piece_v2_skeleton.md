@@ -138,7 +138,7 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | Minnesota's level is inside the model's range | model range -1.5 to +1.8 (four views, both aging bases) | **above +7.5 or below -7.2** |
 | The model's two largest disagreements with the market | BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7 | **BOS below -2.4; SAS above +14.4** |
 | The Edwards-Ball pairing costs usage, not efficiency | 2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons) | **Edwards below 0.547, or Ball below 0.476** |
-| Minnesota is not on a champion's path | projected rank 16 (un-aged) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2 | **3 or better (test); 11 or better (checkpoint)** |
+| Minnesota is not on a champion's path | projected rank 16 (primary basis) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2 | **3 or better (test); 11 or better (checkpoint)** |
 
 **The number, and the condition:** 12.6 minutes of Cody Williams is the threshold that moves the headline verdict, and it depends on a rotation decision no one has made yet.
 
@@ -226,14 +226,14 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | 3.16% | 0.86% | 1.25% | 2.03% | 2.59% | ALL-VIEWS |
-| HOU | 1.61% | 6.73% | 7.58% | 5.90% | 7.16% | ALL-VIEWS |
-| BOS | 5.47% | 22.94% | 23.52% | 12.90% | 13.95% | ALL-VIEWS |
-| PHI | 8.42% | 4.02% | 3.37% | 0.75% | 3.59% | ALL-VIEWS |
-| SAS | 22.96% | 15.88% | 17.98% | 9.79% | 11.76% | ALL-VIEWS |
-| DET | 3.16% | 4.62% | 4.74% | 10.21% | 11.76% | ALL-VIEWS |
 | NYK | 8.21% | 3.30% | 3.41% | 5.86% | 3.66% | ALL-VIEWS |
-| OKC | 22.49% | 12.89% | 11.87% | 16.55% | 17.44% | ALL-VIEWS |
+| BOS | 5.47% | 22.94% | 23.52% | 12.90% | 13.95% | ALL-VIEWS |
+| HOU | 1.61% | 6.73% | 7.58% | 5.90% | 7.16% | ALL-VIEWS |
 | DEN | 3.16% | 6.04% | 4.57% | 8.72% | 5.40% | ALL-VIEWS |
+| DET | 3.16% | 4.62% | 4.74% | 10.21% | 11.76% | ALL-VIEWS |
+| OKC | 22.49% | 12.89% | 11.87% | 16.55% | 17.44% | ALL-VIEWS |
+| SAS | 22.96% | 15.88% | 17.98% | 9.79% | 11.76% | ALL-VIEWS |
+| PHI | 8.42% | 4.02% | 3.37% | 0.75% | 3.59% | ALL-VIEWS |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is -1.25 points un-aged and all-negative, but -0.54 and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is -0.753: take out the DiVincenzo injury (+1.806) and the Williams minutes (+1.048), which overlap completely (-1.048, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **+1.053**, mixed across views `[modeled, w1c_decompose]`.
 

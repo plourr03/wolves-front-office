@@ -6,7 +6,7 @@
 
 - **What the market says.** Minnesota is {{mkt_min}} to win the title, {{mkt_min_rank}}th in the league, once the bookmakers' margin is stripped out.
 - **What the model says.** {{title}} on the primary basis, and {{title_aged}} once you correct for aging. Every one of the four ways of measuring players ranks Minnesota below where the market has them, on both bases.
-- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way we can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
+- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way I can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
 - **What the offseason verdict depends on.** "The offseason made Minnesota worse" is the sentence this piece can't write. It holds only while Cody Williams plays {{williams_threshold}} minutes a night or more, and only on one of the two aging bases.
 - **What to watch.** Five claims with thresholds set now, checked at game {{w_game}}, and one bigger one about Boston checked at game {{bos_dec_game}}.
 
@@ -18,7 +18,7 @@ The model number averages four ways of scoring players (the "views") over {{sims
 
 The model and the market agree on the shape of the league and disagree about {{n_disagree}} specific teams, Minnesota among them. On the primary basis all four views price it below the market and rank it {{min_view_ranks}} against the market's {{mkt_min_rank}}th. On the aged basis every view still ranks it below the market, but one view prices it above, so the probability gap is all-views only on the primary basis.
 
-The model's biggest disagreement with the market isn't Minnesota, it's Boston: **{{model_bos}}** against a market price of {{mkt_bos}}, in every view, and it has a date. If Boston's net rating through game {{bos_dec_game}} is below {{bos_dec_threshold}} per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at {{cha_model_pre}}, about half of that gap over the market was a bug in our own data, found and fixed, and it's {{model_cha}} now against a market price of {{mkt_cha}}.
+The model's biggest disagreement with the market isn't Minnesota, it's Boston: **{{model_bos}}** against a market price of {{mkt_bos}}, in every view, and it has a date. If Boston's net rating through game {{bos_dec_game}} is below {{bos_dec_threshold}} per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at {{cha_model_pre}}, about half of that gap over the market was a bug in my own data, found and fixed, and it's {{model_cha}} now against a market price of {{mkt_cha}}.
 
 {{n_ship}} of {{n_candidates}} offseason verdicts are solid enough to print: they point the same way under both aging bases and both minutes rules, and every view clears the model's own noise. Two are Ball in and Reid out, one is DiVincenzo's Achilles, and four are the same Kuminga comparison under different rules for who else plays his minutes.
 
@@ -80,12 +80,12 @@ In the last five minutes of a close game everyone gets worse: league-wide, effec
 
 **The number, and the condition:** {{cl_n_big}} of {{cl_n_ok}} beat the clutch drop, about what chance gives.
 
-## 7. What to watch
-
-Five claims, thresholds set now, checked at game {{w_game}}. Williams: {{w1_flip}}. Minnesota's level: {{w2_flip}}. The two biggest market disagreements: {{w3_flip}}, with the bigger Boston test at game {{bos_dec_game}} below {{bos_dec_threshold}}. The Edwards and Ball pairing: {{w4_flip}}. The champion's path: {{w5_flip}}.
-
-## 8. The bill
+## 7. The bill
 
 The cap chain closes to the dollar: {{chain_start}} before the summer, **{{chain_final}}** after Green out, Williams and Konchar in, Konchar stretched, and Kuminga signed. And the Dosunmu arithmetic: with Dosunmu, Green and Kuminga all on the books Minnesota was {{dos_stuck_over}} over the hard cap, so the contract forced the dump, not the acquisition. Taking Williams and Konchar back instead of a minimum player cost {{dos_dump_payroll}} of payroll and about {{dos_dump_tax}} more tax.
 
 **The number, and the condition:** {{room_hard_cap}} of hard-cap room for the whole league year, enough for one minimum addition if nothing goes wrong.
+
+## 8. What to watch
+
+Five claims, thresholds set now, checked at game {{w_game}}. Williams: {{w1_flip}}. Minnesota's level: {{w2_flip}}. The two biggest market disagreements: {{w3_flip}}, with the bigger Boston test at game {{bos_dec_game}} below {{bos_dec_threshold}}. The Edwards and Ball pairing: {{w4_flip}}. The champion's path: {{w5_flip}}.

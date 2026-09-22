@@ -68,6 +68,16 @@ def table(name, sheet):
         rows = ["| {{v_%s_label}} | {{v_%s_pooled_u}} | {{v_%s_pooled_a}} | {{v_%s_tr_u}} | "
                 "{{v_%s_tr_a}} | {{v_%s_cells}} |" % ((i,) * 6) for i in items]
         return "\n".join(head + rows)
+    if name == "ship_pooled":
+        # the drafts' section-1 table: every row on the pooled allocator, the one the
+        # Kuminga section's prose uses, and no clearing column (the prose says it once)
+        items = [k[2:-6] for k in keys if k.startswith("v_") and k.endswith("_label")
+                 and sheet.loc["v_%s_ships" % k[2:-6], "value"] == "yes"]
+        head = ["| verdict | un-aged, mean points of title odds | aged | sign, un-aged / aged |",
+                "|---|---:|---:|---|"]
+        rows = ["| {{v_%s_label}} | {{v_%s_pooled_u}} | {{v_%s_pooled_a}} | {{v_%s_signs}} |"
+                % ((i,) * 4) for i in items]
+        return "\n".join(head + rows)
     if name in ("ship", "retired"):
         items = [k[2:-6] for k in keys if k.startswith("v_") and k.endswith("_label")]
         if name == "ship":
@@ -129,7 +139,10 @@ def claims_table(text, sheet):
 
 
 def render(text, sheet, used):
-    text = re.sub(r"\{\{TABLE:([a-z]+)\}\}", lambda m: table(m.group(1), sheet), text)
+    text = re.sub(r"\{\{TABLE:([a-z_]+)\}\}", lambda m: table(m.group(1), sheet), text)
+    if "{{TABLE:" in text:
+        raise KeyError("an unrendered table placeholder survived: %s"
+                       % re.findall(r"\{\{TABLE:[^}]*\}\}", text))
     if "{{CLAIMS_TABLE}}" in text:
         text = text.replace("{{CLAIMS_TABLE}}", claims_table(text, sheet))
     full, masked = [], []

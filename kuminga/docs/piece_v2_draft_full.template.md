@@ -6,7 +6,7 @@
 
 - **What the market says.** The betting market has Minnesota at {{mkt_min}} to win the title, {{mkt_min_rank}}th in the league, once you strip out the bookmakers' margin.
 - **What the model says.** {{title}} on the primary basis, with the four ways of measuring players spanning {{title_lo}} to {{title_hi}}, and {{title_aged}} once you correct for how players age. Every one of the four views ranks Minnesota below where the market has them, on both bases.
-- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way we can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
+- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way I can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
 - **What the offseason verdict depends on.** "The offseason made Minnesota worse" is the sentence this piece can't write. It holds only while Cody Williams plays {{williams_threshold}} minutes a night or more, and only on one of the two aging bases.
 - **What to watch.** Five claims with thresholds set now, checked at game {{w_game}}, and one bigger one about Boston checked at game {{bos_dec_game}}.
 
@@ -34,7 +34,7 @@ If you want to know whether to trust any of this, don't watch Minnesota. Watch B
 
 The same machinery prices Minnesota, so a Boston miss is a Minnesota caveat too.
 
-Charlotte is on the list as well, and it comes with a confession. The model first priced Charlotte at {{cha_model_pre}}, {{cha_gap_pre}} points over a market price of {{mkt_cha}}. About half of that gap was a bug in our own possession data, which we found and fixed; the model now has Charlotte at {{model_cha}}, a gap of {{cha_gap_now}}. What's left is the real disagreement, and it still runs in the same direction.
+Charlotte is on the list as well, and it comes with a confession. The model first priced Charlotte at {{cha_model_pre}}, {{cha_gap_pre}} points over a market price of {{mkt_cha}}. About half of that gap was a bug in my own possession data, which I found and fixed; the model now has Charlotte at {{model_cha}}, a gap of {{cha_gap_now}}. What's left is the real disagreement, and it still runs in the same direction.
 
 ### What actually ships
 
@@ -42,11 +42,11 @@ The model prices every offseason move Minnesota made, plus a few things that hap
 
 {{n_ship}} of {{n_candidates}} candidates clear that bar.
 
-{{TABLE:ship}}
+{{TABLE:ship_pooled}}
 
-Two of the seven are Minnesota's own decisions, Ball in and Reid out. One is an injury, DiVincenzo's Achilles, which ships as a cost and not as anyone's fault. Four are the same Kuminga comparison run under different rules for who else would have played his minutes: positive against three of them, negative if the answer is Beringer. The Kuminga section is about that.
+Every row is on the same minutes rule the Kuminga section uses, and every row clears all four views in all four cells, both aging bases by both minutes rules; the full four-cell table is in the appendix. Two of the seven are Minnesota's own decisions, Ball in and Reid out. One is an injury, DiVincenzo's Achilles, which ships as a cost and not as anyone's fault. Four are the same Kuminga comparison run under different rules for who else would have played his minutes: positive against three of them, negative if the answer is Beringer. The Kuminga section is about that.
 
-It was {{n_ship_pre}} before this pass. Three that used to ship don't anymore, the other departures as a bundle, Randle out and the Dosunmu re-signing, all retired after we found the attribution model had been pricing every combination of moves on a roster without Cody Williams on it. Randle out is the one fans will ask about. Its sign now depends on which minutes rule you use, which is exactly the verdict the rule exists to keep off the page.
+It was {{n_ship_pre}} before this pass. Three that used to ship don't anymore, the other departures as a bundle, Randle out and the Dosunmu re-signing, all retired after I found the attribution model had been pricing every combination of moves on a roster without Cody Williams on it. Randle out is the one fans will ask about. Its sign now depends on which minutes rule you use, which is exactly the verdict the rule exists to keep off the page.
 
 **The number, and the condition:** {{title}} modeled ({{title_aged}} aged) against {{mkt_min}} priced. The model ranks Minnesota below the market on both bases, the probability gap is all-views only on the primary basis, and all of it is only as trustworthy as a model that also makes Boston a {{model_bos}} team, which December will test.
 
@@ -56,25 +56,23 @@ Most of what gets argued about in September is unmeasurable, and this section is
 
 ### Style doesn't predict
 
-The first thing everyone wants is a style overlay: this team plays fast, that team packs the paint, surely that matters in a series. We built one. Style interactions fixed in advance, fitted on two seasons and tested on games those seasons never saw. It made predictions **worse**: the average error rose by {{m1_rs_worse}} on {{m1_rs_n}} held-out regular season games and by {{m1_po_worse}} on {{m1_po_n}} held-out playoff games. The San Antonio matchup thesis couldn't be estimated from this data, and the series model runs without any style term at all.
+The first thing everyone wants is a style overlay: this team plays fast, that team packs the paint, surely that matters in a series. I built one. Style interactions fixed in advance, fitted on two seasons and tested on games those seasons never saw. Adding style made predictions slightly worse: the average error in predicted margin rose by {{m1_rs_worse}} points per game on {{m1_rs_n}} held-out regular season games and by {{m1_po_worse}} points per game on {{m1_po_n}} held-out playoff games. The San Antonio matchup thesis couldn't be estimated from this data, and the series model runs without any style term at all.
 
 ### Nothing "translates" to the playoffs
 
-Then the translation question: is there some regular season trait that predicts playoff success beyond plain net rating? We fixed {{n3_n_features}} candidate features before looking, and tested them on {{n3_series}} playoff series going back to the {{n3_start}} postseason. **{{n3_n_translating}} of {{n3_n_features}}** added out-of-sample signal once you account for having tried eight things at once. That sample could have detected an effect of about {{n3_mde_lo}} to {{n3_mde_hi}} points per game, so this isn't a small-sample shrug.
+Then the translation question: is there some regular season trait that predicts playoff success beyond plain net rating? I fixed {{n3_n_features}} candidate features before looking, and tested them on {{n3_series}} playoff series going back to the {{n3_start}} postseason. **{{n3_n_translating}} of {{n3_n_features}}** added out-of-sample signal once you account for having tried eight things at once. That sample could have detected an effect of about {{n3_mde_lo}} to {{n3_mde_hi}} points per game, so this isn't a small-sample shrug.
 
 "Defense travels" deserves its own line because it's the one everybody believes. It is not supported, and the estimate points the other way. At equal net rating, a team whose rating leans on defense did **{{ds_coef}} points per game** in its series per standard deviation of that lean, with a standard error of {{ds_se}}. That's a p-value of {{ds_p}} against a bar of {{ds_bar}}, the bar being what you need after testing eight things. Its interval tops out at {{ds_ci_hi}}. Earlier seasons and recent seasons agree ({{ds_early}} and {{ds_late}}), and three-point luck doesn't explain it ({{ds_luck}} once you add luck). It misses the bar, so it changes nothing in the model. But if you were going to bet on defense traveling, you should know the sign.
 
 ### Versatility and matchups are mostly noise
 
-Versatility, the idea that some teams match up well against more of the field, turns out to be net rating restated. Under the series model, a team's swing in series odds across the contender field tracks its own net rating with a rank correlation of {{n4_rankcorr}} outside the field. In the games themselves, a repeatable matchup effect is worth about {{n4_sd13}} points per game since the {{n4_start13}} season and {{n4_sd97}} over {{n4_games97}} games since {{n4_start97}}. The ceiling on it is {{n4_sd97_up}}, which is worth at most {{n4_series_up}} points of series probability in an even series.
-
-Individual matchups, the "who guards Ant" question, are the same story in miniature. A pairing of thirty possessions carries a standard error of {{m3_se30}} points per matchup possession, and a team's main defender on a star normally holds him {{m3_norm_lo}} to {{m3_norm_hi}} below his own average, because stoppers get the hard possessions. Judged against that norm, {{m3_edges}} of {{m3_rows}} observed West-field matchups beat it by two standard errors, where chance alone would give about {{m3_chance}}.
+Versatility, the idea that some teams match up well against more of the field, turns out to be net rating restated: the better team is the better team against everybody. Under the series model, a team's swing in series odds across the contender field tracks its own net rating with a rank correlation of {{n4_rankcorr}} outside the field. In the games themselves, a repeatable matchup effect is worth about {{n4_sd13}} points per game since the {{n4_start13}} season and {{n4_sd97}} over {{n4_games97}} games since {{n4_start97}}. The ceiling on it is {{n4_sd97_up}}, which is worth at most {{n4_series_up}} points of series probability in an even series. Individual matchups, the "who guards Ant" question, are the same story in miniature. A pairing of thirty possessions carries a standard error of {{m3_se30}} points per matchup possession, and a team's main defender on a star normally holds him {{m3_norm_lo}} to {{m3_norm_hi}} below his own average, because stoppers get the hard possessions. Judged against that norm, {{m3_edges}} of {{m3_rows}} observed West-field matchups beat it by two standard errors, where chance alone would give about {{m3_chance}}.
 
 ### What champions actually looked like
 
-Base rates, as counts, on the {{h2_n}} clean seasons of odds we have. The preseason favorite won {{h2_fav}} of {{h2_n}}. The champion came from the market's top five {{h2_top5}} of {{h2_n}} times, priced between {{h2_lo}} and {{h2_hi}}. Set against the {{h3_n_non}} top-five teams that didn't win, only {{h3_n_sep}} of {{h3_n_feat}} features separate the champions: offensive rank, defensive rank and continuity. No style feature does.
+Base rates, as counts, on the {{h2_n}} clean seasons of odds I have. The preseason favorite won {{h2_fav}} of {{h2_n}}. The champion came from the market's top five {{h2_top5}} of {{h2_n}} times, priced between {{h2_lo}} and {{h2_hi}}. Set against the {{h3_n_non}} top-five teams that didn't win, only {{h3_n_sep}} of {{h3_n_feat}} features separate the champions: offensive rank, defensive rank and continuity. No style feature does.
 
-The Knicks are the file that shows why. The market had them at {{nyk_mkt}}, {{nyk_rank}}th, with a win total of {{nyk_wt}}. They won {{nyk_wins}}, right on it. This project's model had them at {{nyk_model}}. The regular season was steady: {{nyk_rs}} per game, {{nyk_pre}} before the break and {{nyk_post}} after. Then the playoffs were a different team, **{{nyk_po_rec}} at {{nyk_po}}**, and they were the only one of {{nyk_po_teams}} playoff teams whose margin improved ({{nyk_lift}}, against an average of {{nyk_lift_mean}}; Minnesota's was {{nyk_cmp_lift}}). What moved wasn't visible in September. Their top five players missed {{nyk_top5_rs_games_missed}} regular season games and {{nyk_top5_po_games_missed}} in the playoffs, the top five's share of the minutes went from {{nyk_top5_share_rs}} to {{nyk_top5_share_po}}, and the bracket broke their way.
+The Knicks are the file that shows why. The market had them at {{nyk_mkt}}, {{nyk_rank}}th, with a win total of {{nyk_wt}}. They won {{nyk_wins}}, right on it. This project's model had them at {{nyk_model}}, below the market, on the same side of the market where it now sits on Minnesota. The regular season was steady: {{nyk_rs}} per game, {{nyk_pre}} before the break and {{nyk_post}} after. Then the playoffs were a different team, **{{nyk_po_rec}} at {{nyk_po}}**, and they were the only one of {{nyk_po_teams}} playoff teams whose margin improved ({{nyk_lift}}, against an average of {{nyk_lift_mean}}; Minnesota's was {{nyk_cmp_lift}}). What moved wasn't visible in September. Their top five players missed {{nyk_top5_rs_games_missed}} regular season games and {{nyk_top5_po_games_missed}} in the playoffs, the top five's share of the minutes went from {{nyk_top5_share_rs}} to {{nyk_top5_share_po}}, and the bracket broke their way.
 
 **The number, and the condition:** {{n3_n_translating}} of {{n3_n_features}} translation features survive, and the conclusion rests on the belief that what decided last year's title (health, a shortened rotation, a bracket) wasn't knowable until April.
 
@@ -102,7 +100,7 @@ One thing from last season's data that people get wrong: the two Gobert frontcou
 
 Last season's usage doesn't fit on one floor. The projected top five adds up to the **{{m5_top_pct}}th percentile** of {{m5_league_fives}} league starting fives; with Kuminga in for Dosunmu it's the **{{m5_kin_pct}}th**, and the **{{m5_kin3_pct}}th** at three-season rates. Last season's actual five was the {{m5_obs_pct}}th. Somebody's shots go away.
 
-The base rate says whose. When a new high-usage pairing forms, the treated player's usage drops and his efficiency doesn't: adjusted for who the players were, {{m5_adj_usg}} points of usage and {{m5_adj_ts}} of true shooting across {{m5_treated}} player-seasons, and at the level where Edwards and Ball sit, {{m5_star_usg}} of usage (standard error {{m5_star_usg_se}}) and {{m5_star_ts}} of true shooting, on only {{m5_star_n}} cases. Pairings cost shots, not points per shot.
+The base rate says how much, not whose. When a high-usage player gains a new high-usage teammate (the study follows that player, so here it is Edwards gaining Ball and Ball gaining Edwards), his usage drops and his efficiency doesn't: adjusted for who the players were, {{m5_adj_usg}} points of usage and {{m5_adj_ts}} of true shooting across {{m5_treated}} player-seasons, and at the level where Edwards and Ball sit, {{m5_star_usg}} of usage (standard error {{m5_star_usg_se}}) and {{m5_star_ts}} of true shooting, on only {{m5_star_n}} cases. Pairings cost shots, not points per shot.
 
 ### The path
 
@@ -114,11 +112,10 @@ Minnesota's most likely seed is **{{n2_modal}} ({{n2_modal_p}})**, and its chanc
 
 The optimist: he's the athletic four they've been missing since Randle stopped being one, he's cheap, he's young, and he's an upgrade on whoever else was going to soak up those minutes. The pessimist: he couldn't stick in Golden State, his units cratered next to a non-shooting center, which is exactly what Gobert is, and his playoff numbers are ugly enough that you don't need a model.
 
-Here's the data, sorted into better and worse.
 
 ### Better
 
-He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_shannon_pooled_a}} aged, or {{v_A_c3_default_shannon_tr_u}} and {{v_A_c3_default_shannon_tr_a}} under the headline's own minutes rule. Every view clears its noise floor in all four of those cells ({{v_A_c3_default_shannon_cells}}). It clears on size, not just sign, and it clears under both allocators and both aging bases, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: {{k_min_teamrank}} a night under the headline's rule, {{k_min_pooled}} under the pooled one.
+He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_shannon_pooled_a}} aged, or {{v_A_c3_default_shannon_tr_u}} and {{v_A_c3_default_shannon_tr_a}} under the headline's own minutes rule. It clears on size, not just sign, and it clears every view under both bases and both minutes rules, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: {{k_min_teamrank}} a night under the headline's rule, {{k_min_pooled}} under the pooled one.
 
 As a defender assigned to a top scorer, in last season's data pooled with the two before it, he held scorers slightly below the norm: percentile {{k_defender_pct}} of {{k_defender_ref}} defenders, where low is good ({{k_defender_z}} standard errors, inside the noise; {{k_defender_n}} pairings, {{k_defender_poss}} possessions).
 
@@ -146,7 +143,6 @@ Two years from the taxpayer mid-level exception: **{{k_y1}}** this season and **
 
 The optimist: Ball is the second creator Ant has never had, defenses can't send everything at one guy anymore, and Ant's off-ball game is about to get room it's never had. The pessimist: two ball-dominant guards, one ball, neither one defends, and the usage crunch is going to land on somebody's efficiency.
 
-Here's the thing the evidence actually says about Edwards, and it's more specific than either.
 
 ### The most guardable star
 
@@ -162,7 +158,7 @@ Edwards made {{cr_edw}} of his baskets unassisted last season (percentile {{cr_e
 
 New high-usage pairings cost usage, not efficiency. Adjusted for who the players were, {{m5_adj_usg}} points of usage and {{m5_adj_ts}} of true shooting across {{m5_treated}} player-seasons, and {{m5_star_usg}} and {{m5_star_ts}} at the star level where Edwards ({{usg_edw}}) and Ball ({{usg_ball}}) sit.
 
-So the argument is simple, and it's the one genuinely opinionated sentence in this piece. If a team's assigned defender can hold Edwards this reliably, the fix isn't a better Edwards. It's a second creator the assignment can't also cover. That's why Ball is here, and the base rate says the pairing should cost shots, not efficiency.
+So the argument is simple, and it's the one opinionated sentence in this piece. If a team's assigned defender can hold Edwards this reliably, the fix isn't a better Edwards. It's a second creator the assignment can't also cover. That's why Ball is here, and the base rate says the pairing should cost shots, not efficiency.
 
 **The number, and the condition:** percentile {{e_pct_shipped}} as a scorer against his assigned defender, and the argument holds only if Ball draws that assignment often enough to loosen it.
 
@@ -174,11 +170,23 @@ In the last five minutes of a close game, everyone gets worse and more baskets c
 
 Edwards shot {{cl_edw_efg}} on {{cl_edw_fga}} clutch attempts, {{cl_edw_z}} standard errors better than the drop. Ball shot {{cl_ball_efg}} on {{cl_ball_fga}}, {{cl_ball_z}}. Both inside the noise. Neither the closer story nor the choker story survives contact with the sample size.
 
-One split you won't find here. The late-clock split, how each creator does when the shot clock is nearly out, was withheld. Play-by-play doesn't record the shot clock, so it has to be reconstructed, and our reconstruction read within two seconds of zero at recorded violations {{lc_g1}} of the time against a bar of {{lc_bar}} that was set in advance. It missed the bar, so it doesn't get printed.
+One split you won't find here. The late-clock split, how each creator does when the shot clock is nearly out, was withheld. Play-by-play doesn't record the shot clock, so it has to be reconstructed, and my reconstruction read within two seconds of zero at recorded violations {{lc_g1}} of the time against a bar of {{lc_bar}} that was set in advance. It missed the bar, so it doesn't get printed.
 
 **The number, and the condition:** {{cl_n_big}} of {{cl_n_ok}} creators beat the clutch drop, which is about what chance gives, and that holds until somebody's sample gets big enough to say otherwise.
 
-## 7. What to watch
+## 7. The bill
+
+The cap chain closes to the dollar, so here it is. {{chain_start}}, minus Green's {{chain_green}}, plus Williams at {{chain_williams}} and Konchar at {{chain_konchar}}, minus {{chain_stretch}} for stretching Konchar, minus {{chain_dollar}} for a rounding difference on McDaniels, equals **{{chain_post}}**. Add Kuminga's {{chain_kuminga}} and it's **{{chain_final}}**: **{{room_hard_cap}} under the hard cap**, {{over_first}} over the first apron and {{over_tax}} over the tax line.
+
+What the Green dump cost: no pick and no swap, in either direction. Cash, and {{dead_year}} a year of Konchar dead money for three seasons, {{dead_future}} of it landing in the two seasons after this one. Minnesota holds Cody Williams in return, with a club option of {{williams_option}}.
+
+And the Dosunmu arithmetic, which is only arithmetic. With Dosunmu, Green and Kuminga all on the books Minnesota was **{{dos_stuck_over}} over the hard cap**, so something had to go. The contract forced the dump, not the acquisition. But the cheapest legal version of that move, a minimum player instead of Williams and Konchar, would have left Minnesota at {{dos_cheapest_apron}} and about {{dos_cheapest_tax}} of tax; what happened left it at {{dos_happened_apron}} and about {{dos_happened_tax}}. Taking Williams and Konchar back cost {{dos_dump_payroll}} of payroll and about {{dos_dump_tax}} more tax. Not re-signing Dosunmu at all would have kept Green, added a minimum guard, and let Minnesota pay Kuminga up to {{dos_nodos_kuminga}} from the non-taxpayer mid-level, landing exactly on the first apron with about {{dos_nodos_tax}} of tax.
+
+The option, once more, because it's the one that decides next summer: {{k_y1}} now, {{k_y2}} next season at his choice, and a Non-Bird ceiling of {{k_nonbird}} if he leaves after one.
+
+**The number, and the condition:** {{room_hard_cap}} of hard-cap room for the whole league year, enough for one minimum addition if nothing goes wrong.
+
+## 8. What to watch
 
 Every conclusion above is conditional on something, so here are the conditions, written as tests with thresholds set now, before the season starts. Each is checked at a team's {{w_game}}th game, late November. The thresholds are set outside the noise a {{w_game}}-game sample carries, so an ordinary early-season wobble doesn't trip them.
 
@@ -194,18 +202,6 @@ Every conclusion above is conditional on something, so here are the conditions, 
 
 If Williams is under {{williams_threshold}} minutes at game {{w_game}}, the offseason verdict is officially unwritable and this piece said so in advance. If Boston is under {{bos_dec_threshold}} at game {{bos_dec_game}}, come back to section 1 and discount everything in it.
 
-## 8. The bill
-
-The cap chain closes to the dollar, so here it is. {{chain_start}}, minus Green's {{chain_green}}, plus Williams at {{chain_williams}} and Konchar at {{chain_konchar}}, minus {{chain_stretch}} for stretching Konchar, minus {{chain_dollar}} for a rounding difference on McDaniels, equals **{{chain_post}}**. Add Kuminga's {{chain_kuminga}} and it's **{{chain_final}}**: **{{room_hard_cap}} under the hard cap**, {{over_first}} over the first apron and {{over_tax}} over the tax line.
-
-What the Green dump cost: no pick and no swap, in either direction. Cash, and {{dead_year}} a year of Konchar dead money for three seasons, {{dead_future}} of it landing in the two seasons after this one. Minnesota holds Cody Williams in return, with a club option of {{williams_option}}.
-
-And the Dosunmu arithmetic, which is only arithmetic. With Dosunmu, Green and Kuminga all on the books Minnesota was **{{dos_stuck_over}} over the hard cap**, so something had to go. The contract forced the dump, not the acquisition. But the cheapest legal version of that move, a minimum player instead of Williams and Konchar, would have left Minnesota at {{dos_cheapest_apron}} and about {{dos_cheapest_tax}} of tax; what happened left it at {{dos_happened_apron}} and about {{dos_happened_tax}}. Taking Williams and Konchar back cost {{dos_dump_payroll}} of payroll and about {{dos_dump_tax}} more tax. Not re-signing Dosunmu at all would have kept Green, added a minimum guard, and let Minnesota pay Kuminga up to {{dos_nodos_kuminga}} from the non-taxpayer mid-level, landing exactly on the first apron with about {{dos_nodos_tax}} of tax.
-
-The option, once more, because it's the one that decides next summer: {{k_y1}} now, {{k_y2}} next season at his choice, and a Non-Bird ceiling of {{k_nonbird}} if he leaves after one.
-
-**The number, and the condition:** {{room_hard_cap}} of hard-cap room for the whole league year, enough for one minimum addition if nothing goes wrong.
-
 ## Methods appendix
 
 **The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of {{cons_rapm_corr}} across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
@@ -214,21 +210,25 @@ The option, once more, because it's the one that decides next summer: {{k_y1}} n
 
 **The quotability rule.** A verdict ships only if its sign holds under both aging bases and under both minutes allocators (the one the headline simulation uses, which ranks a roster team-wide and plays ten men, and the one the attribution uses, which hands minutes out inside position groups), and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own.
 
+**The four cells.** The shipping verdicts under both aging bases and both minutes allocators, mean points of title odds and the views clearing in each cell:
+
+{{TABLE:allocators}}
+
 **The simulation.** {{sims}} seasons per view, on both bases. Attribution prices every combination of Minnesota's offseason moves on a curve built from those simulations, and the curve is checked against the direct simulation every run.
 
 **The market.** Six books' title odds, de-vigged proportionally: the raw prices add to {{overround}} over a hundred, and each team's price is scaled back so the league sums to one.
 
 **What was withheld.** The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations {{lc_g1}} of the time against a bar of {{lc_bar}} fixed before the build, so no late-clock figure appears in the piece.
 
-**Corrections made during the work.** Two bugs in our own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, {{misplaced_lineup}} of all points on the {{val_lineup_teamgames}} team-games we checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced {{misplaced_possession}} of points across {{val_possession_teamgames}} team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from {{k_rapm_pre}} to {{k_rapm_post}} (consensus {{k_cons_pre}} to {{k_cons_post}}) and Ball's from {{ball_rapm_pre}} to {{ball_rapm_post}} (consensus {{ball_cons_pre}} to {{ball_cons_post}}); Edwards rose as well. The headline went from {{title_pre}} to {{title}}, and from {{title_aged_pre}} to {{title_aged}} on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+**Corrections made during the work.** Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, {{misplaced_lineup}} of all points on the {{val_lineup_teamgames}} team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced {{misplaced_possession}} of points across {{val_possession_teamgames}} team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from {{k_rapm_pre}} to {{k_rapm_post}} (consensus {{k_cons_pre}} to {{k_cons_post}}) and Ball's from {{ball_rapm_pre}} to {{ball_rapm_post}} (consensus {{ball_cons_pre}} to {{ball_cons_post}}); Edwards rose as well. The headline went from {{title_pre}} to {{title}}, and from {{title_aged_pre}} to {{title_aged}} on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
 
 ## Pull-quotes
 
-1. "The model has Minnesota at {{title}} to win the title. The market has {{mkt_min}}. Every one of the four ways we score players ranks Minnesota below where the market does." (`title`, `mkt_min`, `min_view_ranks`)
+1. "The model has Minnesota at {{title}} to win the title. The market has {{mkt_min}}. Every one of the four ways the model scores players ranks Minnesota below where the market does." (`title`, `mkt_min`, `min_view_ranks`)
 
 2. "If you want to know whether to trust the model, don't watch Minnesota. Watch Boston: {{model_bos}} against a market price of {{mkt_bos}}, and a net rating below {{bos_dec_threshold}} through game {{bos_dec_game}} means the market was right." (`model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game`)
 
-3. "Kuminga beats whoever else would have played his minutes, and it clears the model's own noise under every rule we can throw at it. The one thing that flips it is Joan Beringer taking those minutes instead." (`v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_cells`, `v_D_beringer_fills_pooled_u`)
+3. "Kuminga beats whoever else would have played his minutes, and it clears the model's own noise under every rule I can throw at it. The one thing that flips it is Joan Beringer taking those minutes instead." (`v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_cells`, `v_D_beringer_fills_pooled_u`)
 
 4. "'The offseason made Minnesota worse' is the sentence this piece can't write. It holds only while Cody Williams plays {{williams_threshold}} minutes a night or more, and only on one of the two aging bases." (`williams_threshold`, `off_delta_u`, `off_delta_a`)
 

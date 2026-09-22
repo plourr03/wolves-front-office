@@ -31,11 +31,11 @@ model_sas,1. The number,SAS model title odds,13.85%,MODELED,QUOTABLE AS BAND,mar
 mkt_sas,1. The number,SAS market title odds,22.96%,OBSERVED,QUOTABLE,market_devig_20260919T195044Z,market_devig_2026_27.csv
 model_cha,1. The number,CHA model title odds,3.44%,MODELED,QUOTABLE AS BAND,market_devig_20260919T195044Z,market_devig_2026_27.csv
 mkt_cha,1. The number,CHA market title odds,0.81%,OBSERVED,QUOTABLE,market_devig_20260919T195044Z,market_devig_2026_27.csv
-bos_dec_threshold,1. The number,"Boston December (game 30) threshold, net per 100",-1.7,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list_december.csv
-bos_dec_game,1. The number,December checkpoint game,30,ASSUMED,FACT,n8_watch_list_20260919T233400Z,n8_watch_list_december.csv
-bos_range_lo,1. The number,Boston model net range low,+3.3,MODELED,QUOTABLE AS BAND,n8_watch_list_20260919T233400Z,n8_watch_list_december.csv
-bos_range_hi,1. The number,Boston model net range high,+10.1,MODELED,QUOTABLE AS BAND,n8_watch_list_20260919T233400Z,n8_watch_list_december.csv
-dec_noise,1. The number,30-game net rating noise per 100,3.1,OBSERVED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list_december.csv
+bos_dec_threshold,1. The number,"Boston December (game 30) threshold, net per 100",-1.7,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
+bos_dec_game,1. The number,December checkpoint game,30,ASSUMED,FACT,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
+bos_range_lo,1. The number,Boston model net range low,+3.3,MODELED,QUOTABLE AS BAND,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
+bos_range_hi,1. The number,Boston model net range high,+10.1,MODELED,QUOTABLE AS BAND,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
+dec_noise,1. The number,30-game net rating noise per 100,3.1,OBSERVED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
 v_ball_in_pooled_u,1. The number,"LaMelo Ball in, pooled un-aged mean pp",+0.79,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
 v_ball_in_pooled_a,1. The number,"LaMelo Ball in, pooled aged mean pp",+0.91,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
 v_ball_in_tr_u,1. The number,"LaMelo Ball in, team-rank un-aged mean pp",+1.56,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
@@ -222,7 +222,7 @@ anderson_clear,1. The number,"Kyle Anderson departure, views clearing un-aged / 
 n_dep_ship,1. The number,departures that ship on their own,0,MODELED,QUOTABLE,r2_departures_20260919T232924Z,r2_departures_split_shapley_verdicts.csv
 n_departures,1. The number,players in the other-departures bundle,7,FACT,FACT,r2_departures_20260919T232924Z,r2_departures_split_shapley_verdicts.csv
 sims,1. The number,simulations per f-curve view,"200,000",ASSUMED,FACT,merge_fcurve_parts_20260919T195006Z,build_fcurve KUMINGA_FCURVE_NSIMS
-per100,1. The number,"rating basis, possessions",100,FACT,FACT,n8_watch_list_20260919T233400Z,definition
+per100,1. The number,"rating basis, possessions",100,FACT,FACT,n8_watch_list_20260922T160123Z,definition
 m1_rs_gain,2. What the odds get right,"style overlay held-out MAE gain, 2025-26 regular season",-0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
 m1_rs_worse,2. What the odds get right,"held-out MAE increase, regular season",0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
 m1_po_worse,2. What the odds get right,"held-out MAE increase, postseasons",0.0265,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
@@ -330,7 +330,7 @@ williams_mpg,3. What the odds can't see,Cody Williams projected minutes,16.1,ASS
 rs_williams,3. What the odds can't see,Williams rank score,0.3041,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
 rs_clark,3. What the odds can't see,Jaylen Clark rank score,0.3333,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
 rs_gap,3. What the odds can't see,rank-score gap,0.0293,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
-williams_threshold,3. What the odds can't see,Williams minutes below which the offseason verdict turns MIXED,12.6,MODELED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
+williams_threshold,3. What the odds can't see,Williams minutes below which the offseason verdict turns MIXED,12.6,MODELED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
 w1c_offseason_delta,3. What the odds can't see,"published offseason delta, mean pp",-0.753,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
 w1c_injury_cost,3. What the odds can't see,"DiVincenzo injury cost, mean pp",+1.806,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
 w1c_williams_cost,3. What the odds can't see,"Williams minutes cost, mean pp",+1.048,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
@@ -441,22 +441,22 @@ cl_ball_fga,6. Clutch,LaMelo Ball clutch attempts,100,OBSERVED,FACT,n7_late_cloc
 cl_ball_z,6. Clutch,"LaMelo Ball beyond the drop, SEs",-0.1,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
 lc_g1,6. Clutch,"late-clock reconstruction accuracy, within 2 s",79.9%,OBSERVED,WITHHELD,n7_late_clock_20260916T230449Z,n7_gates.csv
 lc_bar,6. Clutch,bar set in advance,80%,ASSUMED,FACT,n7_late_clock_20260916T230449Z,n7_late_clock.py MIN_G1
-w1_claim,7. What to watch,claim 1,Cody Williams' minutes decide whether the offseason verdict holds,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w1_now,7. What to watch,claim 1 current value,16.1 a night (model default),ASSUMED INPUT,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w1_flip,7. What to watch,claim 1 flips if,below 12.6 a night,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w2_claim,7. What to watch,claim 2,Minnesota's level is inside the model's range,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w2_now,7. What to watch,claim 2 current value,"model range -1.5 to +1.8 (four views, both aging bases)",MODELLED RANGE,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w2_flip,7. What to watch,claim 2 flips if,above +7.5 or below -7.2,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w3_claim,7. What to watch,claim 3,The model's two largest disagreements with the market,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w3_now,7. What to watch,claim 3 current value,"BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7",MODELLED RANGE,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w3_flip,7. What to watch,claim 3 flips if,BOS below -2.4; SAS above +14.4,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w4_claim,7. What to watch,claim 4,"The Edwards-Ball pairing costs usage, not efficiency",COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w4_now,7. What to watch,claim 4 current value,"2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons)",OBSERVED BASE RATE,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w4_flip,7. What to watch,claim 4 flips if,"Edwards below 0.547, or Ball below 0.476",COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w5_claim,7. What to watch,claim 5,Minnesota is not on a champion's path,COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w5_now,7. What to watch,claim 5 current value,"projected rank 16 (un-aged) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2",OBSERVED HISTORY,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w5_flip,7. What to watch,claim 5 flips if,3 or better (test); 11 or better (checkpoint),COMPOSED,QUOTABLE,n8_watch_list_20260919T233400Z,n8_watch_list.csv
-w_game,7. What to watch,checkpoint game,20,ASSUMED,FACT,n8_watch_list_20260919T233400Z,n8_watch_list.py N_CHECK
+w1_claim,7. What to watch,claim 1,Cody Williams' minutes decide whether the offseason verdict holds,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w1_now,7. What to watch,claim 1 current value,16.1 a night (model default),ASSUMED INPUT,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w1_flip,7. What to watch,claim 1 flips if,below 12.6 a night,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w2_claim,7. What to watch,claim 2,Minnesota's level is inside the model's range,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w2_now,7. What to watch,claim 2 current value,"model range -1.5 to +1.8 (four views, both aging bases)",MODELLED RANGE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w2_flip,7. What to watch,claim 2 flips if,above +7.5 or below -7.2,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w3_claim,7. What to watch,claim 3,The model's two largest disagreements with the market,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w3_now,7. What to watch,claim 3 current value,"BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7",MODELLED RANGE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w3_flip,7. What to watch,claim 3 flips if,BOS below -2.4; SAS above +14.4,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w4_claim,7. What to watch,claim 4,"The Edwards-Ball pairing costs usage, not efficiency",COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w4_now,7. What to watch,claim 4 current value,"2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons)",OBSERVED BASE RATE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w4_flip,7. What to watch,claim 4 flips if,"Edwards below 0.547, or Ball below 0.476",COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w5_claim,7. What to watch,claim 5,Minnesota is not on a champion's path,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w5_now,7. What to watch,claim 5 current value,"projected rank 16 (primary basis) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2",OBSERVED HISTORY,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w5_flip,7. What to watch,claim 5 flips if,3 or better (test); 11 or better (checkpoint),COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+w_game,7. What to watch,checkpoint game,20,ASSUMED,FACT,n8_watch_list_20260922T160123Z,n8_watch_list.py N_CHECK
 chain_start,8. The bill,pre-trade Apron Team Salary (2026-08-27),"$217,621,829",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
 chain_green,8. The bill,out: Josh Green,"$14,679,012",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
 chain_williams,8. The bill,in: Cody Williams,"$6,015,600",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv

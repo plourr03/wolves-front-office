@@ -361,7 +361,7 @@ def main():
         rows.append(dict(
             n=5, claim="Minnesota is not on a champion's path",
             metric="Minnesota's league rank in net rating after %d games" % N_CHECK,
-            current=("projected rank %d (un-aged) / %d (aged); the %d champions since 1997-98 "
+            current=("projected rank %d (primary basis) / %d (aged); the %d champions since 1997-98 "
                      "ranked %d at worst after 20 games (%s), median %.0f"
                      % (mrk[1], mrk[0], len(CH), worst20,
                         " and ".join("%s %s" % (x.season, x.champion)

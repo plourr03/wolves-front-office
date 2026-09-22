@@ -6,7 +6,7 @@
 
 - **What the market says.** Minnesota is 3.16% to win the title, 6th in the league, once the bookmakers' margin is stripped out.
 - **What the model says.** 1.68% on the primary basis, and 2.39% once you correct for aging. Every one of the four ways of measuring players ranks Minnesota below where the market has them, on both bases.
-- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way we can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
+- **What ships about Kuminga.** He beats the player who would otherwise have played his minutes, and the gap clears the model's own noise under every way I can test it. The one alternative that flips it is Joan Beringer taking those minutes instead.
 - **What the offseason verdict depends on.** "The offseason made Minnesota worse" is the sentence this piece can't write. It holds only while Cody Williams plays 12.6 minutes a night or more, and only on one of the two aging bases.
 - **What to watch.** Five claims with thresholds set now, checked at game 20, and one bigger one about Boston checked at game 30.
 
@@ -18,7 +18,7 @@ The model number averages four ways of scoring players (the "views") over 200,00
 
 The model and the market agree on the shape of the league and disagree about 20 specific teams, Minnesota among them. On the primary basis all four views price it below the market and rank it 13 to 16 against the market's 6th. On the aged basis every view still ranks it below the market, but one view prices it above, so the probability gap is all-views only on the primary basis.
 
-The model's biggest disagreement with the market isn't Minnesota, it's Boston: **18.33%** against a market price of 5.47%, in every view, and it has a date. If Boston's net rating through game 30 is below -1.7 per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at 5.86%, about half of that gap over the market was a bug in our own data, found and fixed, and it's 3.44% now against a market price of 0.81%.
+The model's biggest disagreement with the market isn't Minnesota, it's Boston: **18.33%** against a market price of 5.47%, in every view, and it has a date. If Boston's net rating through game 30 is below -1.7 per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at 5.86%, about half of that gap over the market was a bug in my own data, found and fixed, and it's 3.44% now against a market price of 0.81%.
 
 7 of 13 offseason verdicts are solid enough to print: they point the same way under both aging bases and both minutes rules, and every view clears the model's own noise. Two are Ball in and Reid out, one is DiVincenzo's Achilles, and four are the same Kuminga comparison under different rules for who else plays his minutes.
 
@@ -80,12 +80,12 @@ In the last five minutes of a close game everyone gets worse: league-wide, effec
 
 **The number, and the condition:** 2 of 22 beat the clutch drop, about what chance gives.
 
-## 7. What to watch
-
-Five claims, thresholds set now, checked at game 20. Williams: below 12.6 a night. Minnesota's level: above +7.5 or below -7.2. The two biggest market disagreements: BOS below -2.4; SAS above +14.4, with the bigger Boston test at game 30 below -1.7. The Edwards and Ball pairing: Edwards below 0.547, or Ball below 0.476. The champion's path: 3 or better (test); 11 or better (checkpoint).
-
-## 8. The bill
+## 7. The bill
 
 The cap chain closes to the dollar: $217,621,829 before the summer, **$217,077,416** after Green out, Williams and Konchar in, Konchar stretched, and Kuminga signed. And the Dosunmu arithmetic: with Dosunmu, Green and Kuminga all on the books Minnesota was $1,999,829 over the hard cap, so the contract forced the dump, not the acquisition. Taking Williams and Konchar back instead of a minimum player cost $6,712,836 of payroll and about $14.6M more tax.
 
 **The number, and the condition:** $4,608,584 of hard-cap room for the whole league year, enough for one minimum addition if nothing goes wrong.
+
+## 8. What to watch
+
+Five claims, thresholds set now, checked at game 20. Williams: below 12.6 a night. Minnesota's level: above +7.5 or below -7.2. The two biggest market disagreements: BOS below -2.4; SAS above +14.4, with the bigger Boston test at game 30 below -1.7. The Edwards and Ball pairing: Edwards below 0.547, or Ball below 0.476. The champion's path: 3 or better (test); 11 or better (checkpoint).
