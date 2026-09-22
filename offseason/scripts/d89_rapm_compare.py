@@ -36,6 +36,8 @@ try:
 except ImportError:
     pass
 from lib import db  # noqa: E402
+sys.path.insert(0, REPO)
+from kuminga.lib import runlog  # noqa: E402
 
 DATA = os.path.join(REPO, "offseason", "data")
 BEFORE = os.path.join(DATA, "player_value_pre_d89.csv")
@@ -96,10 +98,18 @@ def and_one_rates() -> pd.DataFrame:
 
 
 def main():
+    with runlog.run("d89_rapm_compare", inputs={"before": BEFORE, "after": AFTER}) as r:
+        _main(r)
+
+
+def _main(run):
     b = pd.read_csv(BEFORE)
     a = pd.read_csv(AFTER)
     keep = ["player_id", "player_name", "possessions", "off_rapm", "def_rapm", "net_rapm",
             "box_net_bpm", "reliable"]
+    # consensus rides along when both files carry it (they do after d89_reconsensus)
+    if "consensus_net" in b.columns and "consensus_net" in a.columns:
+        keep += ["consensus_off", "consensus_def", "consensus_net"]
     m = b[keep].merge(a[keep], on=["player_id", "player_name"], suffixes=("_before", "_after"))
     print("players before %d, after %d, matched %d" % (len(b), len(a), len(m)))
 
@@ -112,6 +122,8 @@ def main():
 
     for c in ("off_rapm", "def_rapm", "net_rapm"):
         m["d_" + c] = m[c + "_after"] - m[c + "_before"]
+    if "consensus_net_after" in m.columns:
+        m["d_consensus_net"] = m.consensus_net_after - m.consensus_net_before
     ao = and_one_rates()
     m = m.merge(ao[["player_id", "and_ones", "made_fg", "and_one_rate", "fta"]],
                 on="player_id", how="left")
@@ -163,10 +175,12 @@ def main():
         r = hit.sort_values("possessions_after", ascending=False).iloc[0]
         rows.append(r)
         print("  %-22s off %+6.2f -> %+6.2f | def %+6.2f -> %+6.2f | net %+6.2f -> %+6.2f | "
-              "poss %6d | and-one rate %s"
+              "poss %6d | and-one rate %s%s"
               % (r.player_name[:22], r.off_rapm_before, r.off_rapm_after, r.def_rapm_before,
                  r.def_rapm_after, r.net_rapm_before, r.net_rapm_after, r.possessions_after,
-                 ("%.3f" % r.and_one_rate) if pd.notna(r.and_one_rate) else "n/a"))
+                 ("%.3f" % r.and_one_rate) if pd.notna(r.and_one_rate) else "n/a",
+                 (" | consensus net %+.2f -> %+.2f" % (r.consensus_net_before, r.consensus_net_after))
+                 if "consensus_net_after" in m.columns else ""))
 
     os.makedirs(os.path.dirname(OUT_MD), exist_ok=True)
     with open(OUT_MD, "w", encoding="utf-8") as fh:
@@ -191,6 +205,21 @@ def main():
                         r.possessions_after,
                         ("%.3f" % r.and_one_rate) if pd.notna(r.and_one_rate) else "n/a"))
     print("\nwrote %s and %s" % (os.path.relpath(OUT, REPO), os.path.relpath(OUT_MD, REPO)))
+    # how much of "four views agree" is one view twice: consensus is a blend that leans on
+    # RAPM, so their player-level correlation is the honest measure of that overlap
+    if "consensus_net_after" in m.columns:
+        rel_a = m[m.reliable_after.astype(str).str.upper() == "TRUE"]
+        c_all = float(m.consensus_net_after.corr(m.net_rapm_after))
+        c_rel = float(rel_a.consensus_net_after.corr(rel_a.net_rapm_after))
+        c_bef = float(m.consensus_net_before.corr(m.net_rapm_before))
+        run.note("consensus-RAPM correlation across players, net: %.3f after (%.3f reliable only), "
+               "%.3f before" % (c_all, c_rel, c_bef))
+        print("consensus-RAPM correlation across players, net: %.3f after (%.3f reliable only), "
+              "%.3f before" % (c_all, c_rel, c_bef))
+    run.note("named players (net RAPM before -> after): " + "; ".join(
+        "%s %+.2f -> %+.2f" % (x.player_name, x.net_rapm_before, x.net_rapm_after) for x in rows))
+    run.output(OUT, rows=len(m))
+    run.output(OUT_MD)
 
 
 if __name__ == "__main__":

@@ -2,12 +2,19 @@ key
 anderson_a
 anderson_clear
 anderson_u
+ball_cons_post
+ball_cons_pre
+ball_rapm_post
+ball_rapm_pre
 beringer_prior
 bos_dec_game
 bos_dec_threshold
 bos_label_aged
 bos_range_hi
 bos_range_lo
+cha_gap_now
+cha_gap_pre
+cha_model_pre
 chain_dollar
 chain_final
 chain_green
@@ -35,6 +42,7 @@ cl_n_ok
 cl_start
 cl_un_all
 cl_un_clutch
+cons_rapm_corr
 cr_ball
 cr_ball_pct
 cr_dos
@@ -89,6 +97,8 @@ h2_top5
 h3_n_feat
 h3_n_non
 h3_n_sep
+k_cons_post
+k_cons_pre
 k_defender_n
 k_defender_pct
 k_defender_poss
@@ -100,6 +110,8 @@ k_min_teamrank
 k_nonbird
 k_optout_hi
 k_optout_lo
+k_rapm_post
+k_rapm_pre
 k_scorer_n
 k_scorer_n26
 k_scorer_pct
@@ -147,6 +159,8 @@ min_darko_aged
 min_label_aged
 min_view_ranks
 min_view_ranks_aged
+misplaced_lineup
+misplaced_possession
 mkt_bos
 mkt_cha
 mkt_min
@@ -625,10 +639,12 @@ tail53_poss
 tail53_rapm
 title
 title_aged
+title_aged_pre
 title_hi
 title_hi_aged
 title_lo
 title_lo_aged
+title_pre
 usg_ball
 usg_edw
 v_A_c3_default_shannon_a
@@ -719,6 +735,8 @@ v_reid_out_signs
 v_reid_out_tr_a
 v_reid_out_tr_u
 v_reid_out_u
+val_lineup_teamgames
+val_possession_teamgames
 w1_claim
 w1_flip
 w1_now

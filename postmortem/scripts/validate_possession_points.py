@@ -29,6 +29,8 @@ ROOT = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, ROOT)
 
 from lib import db, lineups  # noqa: E402
+sys.path.insert(0, os.path.join(ROOT, ".."))
+from kuminga.lib import runlog  # noqa: E402
 
 OUT = os.path.join(ROOT, "outputs", "tables", "validation", "possession_points_reconciliation.csv")
 SEASONS = [22023, 42023, 22024, 42024, 22025, 42025]
@@ -52,6 +54,11 @@ def sample_games(n_per_season: int, seasons: list[int]) -> pd.DataFrame:
 
 
 def main():
+    with runlog.run('validate_possession_points', inputs={"box_score": "nba_games.pts"}) as r:
+        _main(r)
+
+
+def _main(r):
     ap = argparse.ArgumentParser()
     ap.add_argument("--games", type=int, default=8, help="games per season")
     ap.add_argument("--seasons", type=int, nargs="*", default=SEASONS)
@@ -105,6 +112,10 @@ def main():
           % (pair["sum"].mean(), pair["sum"].abs().max()))
     print("  legacy absolute error as a share of all points: %.2f%%"
           % (100 * m.err_legacy.abs().sum() / m.box_points.sum()))
+    r.note("misplaced share, possession grain, legacy basis: %.2f%% of all points on %d team-games; "
+           "corrected basis exact on %d of %d" % (100 * m.err_legacy.abs().sum() / m.box_points.sum(),
+                                                  len(m), int((m.err_corrected == 0).sum()), len(m)))
+    r.output(OUT, rows=len(m))
     print("\nBY SEASON (corrected exact / team-games, legacy mean abs)")
     for sid, grp in m.groupby("season_id"):
         print("  %s  %3d/%3d exact   legacy %.2f"

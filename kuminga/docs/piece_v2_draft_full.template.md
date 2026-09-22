@@ -12,7 +12,7 @@
 
 ## 1. The number
 
-Here's the one number everything else in this piece hangs off. The model gives Minnesota a **{{title}}** chance of winning the title, and the market gives it **{{mkt_min}}**.
+Here's the number everything else hangs off. The model gives Minnesota a **{{title}}** chance of winning the title, and the market gives it **{{mkt_min}}**.
 
 Where each comes from, because the gap between them is the whole story. The market number is six sportsbooks' odds with the bookmakers' margin removed (their prices add up to {{overround}} over a hundred, and every team gets shaved back proportionally). The model number is a season simulated {{sims}} times per view, where a "view" is one of four ways of scoring how much each player helps his team, and {{title}} is the average of the four. The views themselves put Minnesota anywhere from {{title_lo}} to {{title_hi}}.
 
@@ -26,7 +26,7 @@ On the primary basis all four views price Minnesota below the market, and they r
 
 On the aged basis the picture softens. Every view still ranks Minnesota below the market ({{min_view_ranks_aged}}), but one of the four prices it above the market's {{mkt_min}} (the DARKO view, at {{min_darko_aged}}, with the box view at {{min_box_aged}} just under). So the careful statement is this: the model ranks Minnesota lower than the market on both bases, and it prices Minnesota lower than the market in every view only on the primary one.
 
-One caution before you lean on "all four views agree." The views aren't independent. Consensus is built partly out of RAPM, so when those two agree it's partly the same measurement twice. Four-way agreement means a finding doesn't hinge on one modeling choice. It isn't a confidence interval.
+One caution before you lean on "all four views agree." The views aren't independent. Consensus is built partly out of RAPM and tracks it at a correlation of {{cons_rapm_corr}} across players, so when those two agree it's largely the same measurement twice. Four-way agreement means a finding doesn't hinge on one modeling choice. It isn't a confidence interval.
 
 ### The model's biggest claim, and its expiry date
 
@@ -34,7 +34,7 @@ If you want to know whether to trust any of this, don't watch Minnesota. Watch B
 
 The same machinery prices Minnesota, so a Boston miss is a Minnesota caveat too.
 
-Charlotte is on the list as well, at {{model_cha}} against a market price of {{mkt_cha}}, and it comes with a confession. About half of the gap the model first showed there was a bug in our own possession data, which we found and fixed. What's left is the real disagreement, and it still runs in the same direction.
+Charlotte is on the list as well, and it comes with a confession. The model first priced Charlotte at {{cha_model_pre}}, {{cha_gap_pre}} points over a market price of {{mkt_cha}}. About half of that gap was a bug in our own possession data, which we found and fixed; the model now has Charlotte at {{model_cha}}, a gap of {{cha_gap_now}}. What's left is the real disagreement, and it still runs in the same direction.
 
 ### What actually ships
 
@@ -82,7 +82,7 @@ The Knicks are the file that shows why. The market had them at {{nyk_mkt}}, {{ny
 
 The optimist's version, said the way a fan would say it: this roster finally has a second creator next to Ant, the bench can shoot, the West is wide open behind the top two, and nobody's model prices chemistry or a young team's growth. The pessimist's version: they traded two proven bigs for a point guard who hasn't stayed healthy, a wing on a one-year deal and a rookie center, and the depth chart is one injury from Cody Williams playing real minutes.
 
-Both of those are about things the market prices badly. Here's what the data can and can't say about each.
+Both are about things the market prices badly. Here's what the data says about each.
 
 ### Health
 
@@ -114,11 +114,11 @@ Minnesota's most likely seed is **{{n2_modal}} ({{n2_modal_p}})**, and its chanc
 
 The optimist: he's the athletic four they've been missing since Randle stopped being one, he's cheap, he's young, and he's an upgrade on whoever else was going to soak up those minutes. The pessimist: he couldn't stick in Golden State, his units cratered next to a non-shooting center, which is exactly what Gobert is, and his playoff numbers are ugly enough that you don't need a model.
 
-Here's what the data says, sorted into what makes him look better and what makes him look worse.
+Here's the data, sorted into better and worse.
 
 ### Better
 
-He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_shannon_pooled_a}} aged, or {{v_A_c3_default_shannon_tr_u}} and {{v_A_c3_default_shannon_tr_a}} under the headline's own minutes rule. Every view clears its noise floor in all four of those cells ({{v_A_c3_default_shannon_cells}}). It clears on size, not just sign, and it clears under both allocators and both aging bases, which is the strictest test this piece applies to anything.
+He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_shannon_pooled_a}} aged, or {{v_A_c3_default_shannon_tr_u}} and {{v_A_c3_default_shannon_tr_a}} under the headline's own minutes rule. Every view clears its noise floor in all four of those cells ({{v_A_c3_default_shannon_cells}}). It clears on size, not just sign, and it clears under both allocators and both aging bases, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: {{k_min_teamrank}} a night under the headline's rule, {{k_min_pooled}} under the pooled one.
 
 As a defender assigned to a top scorer, in last season's data pooled with the two before it, he held scorers slightly below the norm: percentile {{k_defender_pct}} of {{k_defender_ref}} defenders, where low is good ({{k_defender_z}} standard errors, inside the noise; {{k_defender_n}} pairings, {{k_defender_poss}} possessions).
 
@@ -208,7 +208,7 @@ The option, once more, because it's the one that decides next summer: {{k_y1}} n
 
 ## Methods appendix
 
-**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM closely, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
+**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of {{cons_rapm_corr}} across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
 
 **The two aging bases.** The primary basis takes every player at last season's measured level. The aged basis shifts each player by the expected one-year change for his age, estimated league-wide. Aging helps Minnesota because Minnesota is young, so quoting only one basis would be a choice with a thumb on the scale, and the piece quotes both everywhere.
 
@@ -220,7 +220,7 @@ The option, once more, because it's the one that decides next summer: {{k_y1}} n
 
 **What was withheld.** The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations {{lc_g1}} of the time against a bar of {{lc_bar}} fixed before the build, so no late-clock figure appears in the piece.
 
-**Corrections made during the work.** Two bugs in our own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, so RAPM was refit on corrected points. Ball, Edwards and Kuminga all rose on the corrected data, and the headline didn't move, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+**Corrections made during the work.** Two bugs in our own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, {{misplaced_lineup}} of all points on the {{val_lineup_teamgames}} team-games we checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced {{misplaced_possession}} of points across {{val_possession_teamgames}} team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from {{k_rapm_pre}} to {{k_rapm_post}} (consensus {{k_cons_pre}} to {{k_cons_post}}) and Ball's from {{ball_rapm_pre}} to {{ball_rapm_post}} (consensus {{ball_cons_pre}} to {{ball_cons_post}}); Edwards rose as well. The headline went from {{title_pre}} to {{title}}, and from {{title_aged_pre}} to {{title_aged}} on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
 
 ## Pull-quotes
 
@@ -238,14 +238,7 @@ The option, once more, because it's the one that decides next summer: {{k_y1}} n
 
 ## Numbers wanted
 
-Figures the prose reached for that are not on the sheet. Each was written around rather than approximated. Add the key with its run ID and the sentence can carry the number.
-
-- The correlation between the consensus and RAPM views. The appendix says "closely"; the brief gives a value, and it needs a key and a run ID before it can appear.
-- Charlotte's model price before the refit, so "about half of the gap was a bug" can carry both numbers.
-- The headline before the refit, so the appendix can say it went from the old figure to {{title}} rather than "didn't move."
-- The share of possession points the old attribution credited to the wrong team, for the corrections paragraph.
-- Kuminga's and Ball's RAPM before and after the refit, for the corrections paragraph.
-- The pooled-versus-team-rank minutes for Kuminga ({{k_min_pooled}} against {{k_min_teamrank}}) are on the sheet but not used; they explain why the slot sizes differ between allocators and could go in section 4.
+None. The six figures the first draft wrote around are on the sheet with their run IDs and in the prose (D92).
 
 ## Claims table
 

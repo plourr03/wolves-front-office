@@ -12,7 +12,7 @@
 
 ## 1. The number
 
-Here's the one number everything else in this piece hangs off. The model gives Minnesota a **⟦⟧** chance of winning the title, and the market gives it **⟦⟧**.
+Here's the number everything else hangs off. The model gives Minnesota a **⟦⟧** chance of winning the title, and the market gives it **⟦⟧**.
 
 Where each comes from, because the gap between them is the whole story. The market number is six sportsbooks' odds with the bookmakers' margin removed (their prices add up to ⟦⟧ over a hundred, and every team gets shaved back proportionally). The model number is a season simulated ⟦⟧ times per view, where a "view" is one of four ways of scoring how much each player helps his team, and ⟦⟧ is the average of the four. The views themselves put Minnesota anywhere from ⟦⟧ to ⟦⟧.
 
@@ -26,7 +26,7 @@ On the primary basis all four views price Minnesota below the market, and they r
 
 On the aged basis the picture softens. Every view still ranks Minnesota below the market (⟦⟧), but one of the four prices it above the market's ⟦⟧ (the DARKO view, at ⟦⟧, with the box view at ⟦⟧ just under). So the careful statement is this: the model ranks Minnesota lower than the market on both bases, and it prices Minnesota lower than the market in every view only on the primary one.
 
-One caution before you lean on "all four views agree." The views aren't independent. Consensus is built partly out of RAPM, so when those two agree it's partly the same measurement twice. Four-way agreement means a finding doesn't hinge on one modeling choice. It isn't a confidence interval.
+One caution before you lean on "all four views agree." The views aren't independent. Consensus is built partly out of RAPM and tracks it at a correlation of ⟦⟧ across players, so when those two agree it's largely the same measurement twice. Four-way agreement means a finding doesn't hinge on one modeling choice. It isn't a confidence interval.
 
 ### The model's biggest claim, and its expiry date
 
@@ -34,7 +34,7 @@ If you want to know whether to trust any of this, don't watch Minnesota. Watch B
 
 The same machinery prices Minnesota, so a Boston miss is a Minnesota caveat too.
 
-Charlotte is on the list as well, at ⟦⟧ against a market price of ⟦⟧, and it comes with a confession. About half of the gap the model first showed there was a bug in our own possession data, which we found and fixed. What's left is the real disagreement, and it still runs in the same direction.
+Charlotte is on the list as well, and it comes with a confession. The model first priced Charlotte at ⟦⟧, ⟦⟧ points over a market price of ⟦⟧. About half of that gap was a bug in our own possession data, which we found and fixed; the model now has Charlotte at ⟦⟧, a gap of ⟦⟧. What's left is the real disagreement, and it still runs in the same direction.
 
 ### What actually ships
 
@@ -90,7 +90,7 @@ The Knicks are the file that shows why. The market had them at ⟦⟧, ⟦⟧th,
 
 The optimist's version, said the way a fan would say it: this roster finally has a second creator next to Ant, the bench can shoot, the West is wide open behind the top two, and nobody's model prices chemistry or a young team's growth. The pessimist's version: they traded two proven bigs for a point guard who hasn't stayed healthy, a wing on a one-year deal and a rookie center, and the depth chart is one injury from Cody Williams playing real minutes.
 
-Both of those are about things the market prices badly. Here's what the data can and can't say about each.
+Both are about things the market prices badly. Here's what the data says about each.
 
 ### Health
 
@@ -122,11 +122,11 @@ Minnesota's most likely seed is **⟦⟧ (⟦⟧)**, and its chance of a top-six
 
 The optimist: he's the athletic four they've been missing since Randle stopped being one, he's cheap, he's young, and he's an upgrade on whoever else was going to soak up those minutes. The pessimist: he couldn't stick in Golden State, his units cratered next to a non-shooting center, which is exactly what Gobert is, and his playoff numbers are ugly enough that you don't need a model.
 
-Here's what the data says, sorted into what makes him look better and what makes him look worse.
+Here's the data, sorted into better and worse.
 
 ### Better
 
-He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives ⟦⟧ points of title odds on the primary basis and ⟦⟧ aged, or ⟦⟧ and ⟦⟧ under the headline's own minutes rule. Every view clears its noise floor in all four of those cells (⟦⟧). It clears on size, not just sign, and it clears under both allocators and both aging bases, which is the strictest test this piece applies to anything.
+He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives ⟦⟧ points of title odds on the primary basis and ⟦⟧ aged, or ⟦⟧ and ⟦⟧ under the headline's own minutes rule. Every view clears its noise floor in all four of those cells (⟦⟧). It clears on size, not just sign, and it clears under both allocators and both aging bases, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: ⟦⟧ a night under the headline's rule, ⟦⟧ under the pooled one.
 
 As a defender assigned to a top scorer, in last season's data pooled with the two before it, he held scorers slightly below the norm: percentile ⟦⟧ of ⟦⟧ defenders, where low is good (⟦⟧ standard errors, inside the noise; ⟦⟧ pairings, ⟦⟧ possessions).
 
@@ -216,7 +216,7 @@ The option, once more, because it's the one that decides next summer: ⟦⟧ now
 
 ## Methods appendix
 
-**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM closely, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
+**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of ⟦⟧ across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
 
 **The two aging bases.** The primary basis takes every player at last season's measured level. The aged basis shifts each player by the expected one-year change for his age, estimated league-wide. Aging helps Minnesota because Minnesota is young, so quoting only one basis would be a choice with a thumb on the scale, and the piece quotes both everywhere.
 
@@ -228,7 +228,7 @@ The option, once more, because it's the one that decides next summer: ⟦⟧ now
 
 **What was withheld.** The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations ⟦⟧ of the time against a bar of ⟦⟧ fixed before the build, so no late-clock figure appears in the piece.
 
-**Corrections made during the work.** Two bugs in our own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, so RAPM was refit on corrected points. Ball, Edwards and Kuminga all rose on the corrected data, and the headline didn't move, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+**Corrections made during the work.** Two bugs in our own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, ⟦⟧ of all points on the ⟦⟧ team-games we checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced ⟦⟧ of points across ⟦⟧ team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from ⟦⟧ to ⟦⟧ (consensus ⟦⟧ to ⟦⟧) and Ball's from ⟦⟧ to ⟦⟧ (consensus ⟦⟧ to ⟦⟧); Edwards rose as well. The headline went from ⟦⟧ to ⟦⟧, and from ⟦⟧ to ⟦⟧ on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
 
 ## Pull-quotes
 
@@ -246,14 +246,7 @@ The option, once more, because it's the one that decides next summer: ⟦⟧ now
 
 ## Numbers wanted
 
-Figures the prose reached for that are not on the sheet. Each was written around rather than approximated. Add the key with its run ID and the sentence can carry the number.
-
-- The correlation between the consensus and RAPM views. The appendix says "closely"; the brief gives a value, and it needs a key and a run ID before it can appear.
-- Charlotte's model price before the refit, so "about half of the gap was a bug" can carry both numbers.
-- The headline before the refit, so the appendix can say it went from the old figure to ⟦⟧ rather than "didn't move."
-- The share of possession points the old attribution credited to the wrong team, for the corrections paragraph.
-- Kuminga's and Ball's RAPM before and after the refit, for the corrections paragraph.
-- The pooled-versus-team-rank minutes for Kuminga (⟦⟧ against ⟦⟧) are on the sheet but not used; they explain why the slot sizes differ between allocators and could go in section 4.
+None. The six figures the first draft wrote around are on the sheet with their run IDs and in the prose (D92).
 
 ## Claims table
 
@@ -265,14 +258,15 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `summary` | `p4` | `- What the model says. {title} on` | `title`, `title_lo`, `title_hi`, `title_aged` | `run_sim_20260919T163222Z`, `run_sim_20260919T195138Z` | modeled |
 | `summary` | `p6` | `- What the offseason verdict depends on.` | `williams_threshold` | `n8_watch_list_20260919T233400Z` | modeled |
 | `summary` | `p7` | `- What to watch. Five claims with` | `w_game`, `bos_dec_game` | `n8_watch_list_20260919T233400Z` | assumed |
-| `1. The number` | `p1` | `Here's the one number everything else in` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
+| `1. The number` | `p1` | `Here's the number everything else hangs off.` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `1. The number` | `p2` | `Where each comes from, because the gap` | `overround`, `sims`, `title`, `title_lo`, `title_hi` | `market_devig_20260919T195044Z`, `merge_fcurve_parts_20260919T195006Z`, `run_sim_20260919T163222Z` | assumed, modeled, observed |
 | `1. The number` | `p3` | `That's the primary basis, every player at` | `title_aged`, `title_lo_aged`, `title_hi_aged` | `run_sim_20260919T195138Z` | modeled |
 | `Why the gap is real, and where it isn't` | `p1` | `The honest way to compare a model` | `rankcorr_lo`, `rankcorr_hi`, `rankcorr_lo_aged`, `rankcorr_hi_aged`, `n_disagree`, `n_allviews` | `market_devig_20260919T195044Z`, `r5_honesty_rail_bases_20260919T232922Z`, `f4_per_view_disagreement_20260919T195046Z` | composed |
 | `Why the gap is real, and where it isn't` | `p2` | `On the primary basis all four views` | `min_view_ranks`, `mkt_min_rank` | `f4_per_view_disagreement_20260919T195046Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `Why the gap is real, and where it isn't` | `p3` | `On the aged basis the picture softens.` | `min_view_ranks_aged`, `mkt_min`, `min_darko_aged`, `min_box_aged` | `r5_honesty_rail_bases_20260919T232922Z`, `market_devig_20260919T195044Z` | modeled, observed |
+| `Why the gap is real, and where it isn't` | `p4` | `One caution before you lean on "all` | `cons_rapm_corr` | `d89_rapm_compare_20260922T010417Z` | composed |
 | `The model's biggest claim, and its expiry date` | `p1` | `If you want to know whether to` | `model_bos`, `mkt_bos`, `model_bos_aged`, `bos_dec_game`, `bos_dec_threshold`, `bos_range_lo`, `bos_range_hi`, `dec_noise` | `market_devig_20260919T195044Z`, `r5_honesty_rail_bases_20260919T232922Z`, `n8_watch_list_20260919T233400Z` | assumed, composed, modeled, observed |
-| `The model's biggest claim, and its expiry date` | `p3` | `Charlotte is on the list as well,` | `model_cha`, `mkt_cha` | `market_devig_20260919T195044Z` | modeled, observed |
+| `The model's biggest claim, and its expiry date` | `p3` | `Charlotte is on the list as well,` | `cha_model_pre`, `cha_gap_pre`, `mkt_cha`, `model_cha`, `cha_gap_now` | `market_devig_20260916T195853Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `What actually ships` | `p2` | `{n_ship} of {n_candidates} candidates clear that bar.` | `n_ship`, `n_candidates` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
 | `What actually ships` | `p5` | `{v_ball_in_label} {v_ball_in_u} {v_ball_in_a} {v_ball_in_signs} {v_ball_in_clear}` | `v_ball_in_label`, `v_ball_in_u`, `v_ball_in_a`, `v_ball_in_signs`, `v_ball_in_clear` | `w2_aging_gate_20260919T232645Z` | fact, modeled |
 | `What actually ships` | `p6` | `{v_reid_out_label} {v_reid_out_u} {v_reid_out_a} {v_reid_out_signs} {v_reid_out_clear}` | `v_reid_out_label`, `v_reid_out_u`, `v_reid_out_a`, `v_reid_out_signs`, `v_reid_out_clear` | `w2_aging_gate_20260919T232645Z` | fact, modeled |
@@ -300,7 +294,7 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `Usage` | `p2` | `The base rate says whose. When a` | `m5_adj_usg`, `m5_adj_ts`, `m5_treated`, `m5_star_usg`, `m5_star_usg_se`, `m5_star_ts`, `m5_star_n` | `m5_usage_accounting_20260916T203535Z` | observed |
 | `The path` | `p1` | `Minnesota's most likely seed is {n2_modal} ({n2_modal_p}),` | `n2_modal`, `n2_modal_p`, `n2_top6`, `n2_sas_okc`, `n2_r2`, `n2_cond` | `seed_distribution_20260919T195022Z`, `n2_path_20260919T195039Z` | modeled |
 | `The path` | `p2` | `The number, and the condition: losing any` | `n5_min_share`, `n5_min_share_aged`, `williams_mpg` | `n5_fragility_20260919T233508Z`, `n5_fragility_20260919T234118Z`, `build_rotations_20260919T163216Z` | assumed, modeled |
-| `Better` | `p1` | `He beats the most likely internal fill` | `v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_pooled_a`, `v_A_c3_default_shannon_tr_u`, `v_A_c3_default_shannon_tr_a`, `v_A_c3_default_shannon_cells` | `r7_allocator_agreement_20260919T233117Z` | modeled |
+| `Better` | `p1` | `He beats the most likely internal fill` | `v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_pooled_a`, `v_A_c3_default_shannon_tr_u`, `v_A_c3_default_shannon_tr_a`, `v_A_c3_default_shannon_cells`, `k_min_teamrank`, `k_min_pooled` | `r7_allocator_agreement_20260919T233117Z` | modeled |
 | `Better` | `p2` | `As a defender assigned to a top` | `k_defender_pct`, `k_defender_ref`, `k_defender_z`, `k_defender_n`, `k_defender_poss` | `n6_kuminga_ledger_20260917T133322Z` | observed |
 | `Better` | `p3` | `He's not a primary creator competing with` | `k_usg`, `k_unast`, `k_unast_pct`, `k_makes` | `m5_usage_accounting_20260916T203535Z` | observed |
 | `Worse, or uncertain` | `p1` | `The slot verdict depends on who the` | `v_D_beringer_fills_pooled_u`, `v_D_beringer_fills_pooled_a`, `v_D_beringer_fills_tr_u`, `v_D_beringer_fills_tr_a` | `r7_allocator_agreement_20260919T233117Z` | modeled |
@@ -330,13 +324,13 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `8. The bill` | `p3` | `And the Dosunmu arithmetic, which is only` | `dos_stuck_over`, `dos_cheapest_apron`, `dos_cheapest_tax`, `dos_happened_apron`, `dos_happened_tax`, `dos_dump_payroll`, `dos_dump_tax`, `dos_nodos_kuminga`, `dos_nodos_tax` | `dosunmu_final_states_20260904T014033Z` | fact |
 | `8. The bill` | `p4` | `The option, once more, because it's the` | `k_y1`, `k_y2`, `k_nonbird` | `green_resolution_20260904T014022Z` | fact |
 | `8. The bill` | `p5` | `The number, and the condition: {room_hard_cap} of` | `room_hard_cap` | `green_resolution_20260904T014022Z` | fact |
+| `Methods appendix` | `p1` | `The four views. Every player gets four` | `cons_rapm_corr` | `d89_rapm_compare_20260922T010417Z` | composed |
 | `Methods appendix` | `p4` | `The simulation. {sims} seasons per view, on` | `sims` | `merge_fcurve_parts_20260919T195006Z` | assumed |
 | `Methods appendix` | `p5` | `The market. Six books' title odds, de-vigged` | `overround` | `market_devig_20260919T195044Z` | observed |
 | `Methods appendix` | `p6` | `What was withheld. The late-clock split. The` | `lc_g1`, `lc_bar` | `n7_late_clock_20260916T230449Z` | assumed, observed |
+| `Methods appendix` | `p7` | `Corrections made during the work. Two bugs` | `misplaced_lineup`, `val_lineup_teamgames`, `misplaced_possession`, `val_possession_teamgames`, `k_rapm_pre`, `k_rapm_post`, `k_cons_pre`, `k_cons_post`, `ball_rapm_pre`, `ball_rapm_post`, `ball_cons_pre`, `ball_cons_post`, `title_pre`, `title`, `title_aged_pre`, `title_aged` | `validate_stint_points_20260922T010709Z`, `validate_possession_points_20260922T010307Z`, `d89_rapm_compare_20260922T010417Z`, `run_sim_20260916T173222Z`, `run_sim_20260919T163222Z`, `run_sim_20260916T195902Z`, `run_sim_20260919T195138Z` | fact, modeled, observed |
 | `Pull-quotes` | `p1` | `1. "The model has Minnesota at {title}` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `Pull-quotes` | `p2` | `2. "If you want to know whether` | `model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game` | `market_devig_20260919T195044Z`, `n8_watch_list_20260919T233400Z` | assumed, composed, modeled, observed |
 | `Pull-quotes` | `p4` | `4. "'The offseason made Minnesota worse' is` | `williams_threshold` | `n8_watch_list_20260919T233400Z` | modeled |
 | `Pull-quotes` | `p5` | `5. "One good defender, assigned to Edwards,` | `e_pct_shipped`, `e_n_off` | `m3_primary_defender_check_20260916T201455Z` | observed |
 | `Pull-quotes` | `p6` | `6. "'Defense travels' is not supported, and` | `ds_coef` | `n3_playoff_translation_20260916T212714Z` | modeled |
-| `Numbers wanted` | `p4` | `- The headline before the refit, so` | `title` | `run_sim_20260919T163222Z` | modeled |
-| `Numbers wanted` | `p7` | `- The pooled-versus-team-rank minutes for Kuminga ({k_min_pooled}` | `k_min_pooled`, `k_min_teamrank` | `r7_allocator_agreement_20260919T233117Z` | modeled |

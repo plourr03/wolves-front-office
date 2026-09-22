@@ -718,6 +718,58 @@ def main():
 
         # ================= APPENDIX ====================================================
         S = "Appendix"
+        # ---- D92: figures the drafts had to write around, now keyed ---------------------
+        # The pre-refit state is the snapshot chain.py preserved before the D90 run; the
+        # runs cited are the ones that produced those files at the time.
+        PRE = os.path.join(OUT, ".pre_refit_snapshot")
+        PRE_MARKET_RUN = "market_devig_20260916T195853Z"
+        PRE_SIM_RUN, PRE_SIM_RUN_AGED = "run_sim_20260916T173222Z", "run_sim_20260916T195902Z"
+        pre_m = pd.read_csv(os.path.join(PRE, "market_devig_2026_27.csv")).set_index("team_abbr")
+        F("cha_model_pre", S, "CHA model title odds before the refit", pct(pre_m.loc["CHA", "model_pct"]),
+          "MODELED", "QUOTABLE", PRE_MARKET_RUN, ".pre_refit_snapshot/market_devig_2026_27.csv")
+        F("cha_gap_pre", S, "CHA model minus market before the refit, points", sgn(pre_m.loc["CHA", "diff_pp"], 2),
+          "MODELED", "QUOTABLE", PRE_MARKET_RUN, ".pre_refit_snapshot/market_devig_2026_27.csv")
+        F("cha_gap_now", S, "CHA model minus market now, points", sgn(mk.loc["CHA", "diff_pp"], 2),
+          "MODELED", "QUOTABLE", rm, "market_devig_2026_27.csv")
+        for key, sub, run_ in (("title_pre", "", PRE_SIM_RUN), ("title_aged_pre", "aged", PRE_SIM_RUN_AGED)):
+            sim_pre = pd.read_csv(os.path.join(PRE, sub, "sim_all30_2026_27.csv"))
+            F(key, S, "MIN title probability before the refit, mean of four views%s" % (", aged" if sub else ""),
+              pct(100 * sim_pre[sim_pre.team_abbr == "MIN"].title_current.mean()), "MODELED", "QUOTABLE AS BAND",
+              run_, ".pre_refit_snapshot/%ssim_all30_2026_27.csv" % (sub + "/" if sub else ""))
+        cmp_ = pd.read_csv(os.path.join(REPO, "offseason", "data", "d89_rapm_before_after.csv"))
+        rcmp = rid("d89_rapm_compare")
+        F("cons_rapm_corr", S, "consensus-RAPM correlation across players, net, after the refit",
+          "%.3f" % cmp_.consensus_net_after.corr(cmp_.net_rapm_after), "COMPOSED", "QUOTABLE", rcmp,
+          "d89_rapm_before_after.csv")
+        F("cons_rapm_corr_pre", S, "consensus-RAPM correlation across players, net, before the refit",
+          "%.3f" % cmp_.consensus_net_before.corr(cmp_.net_rapm_before), "COMPOSED", "QUOTABLE", rcmp,
+          "d89_rapm_before_after.csv")
+        for who, nm in (("k", "Jonathan Kuminga"), ("ball", "LaMelo Ball")):
+            row_ = cmp_[cmp_.player_name == nm].iloc[0]
+            F(who + "_rapm_pre", S, "%s net RAPM before the refit" % nm, sgn(row_.net_rapm_before, 2), "MODELED",
+              "QUOTABLE", rcmp, "d89_rapm_before_after.csv")
+            F(who + "_rapm_post", S, "%s net RAPM after the refit" % nm, sgn(row_.net_rapm_after, 2), "MODELED",
+              "QUOTABLE", rcmp, "d89_rapm_before_after.csv")
+            F(who + "_cons_pre", S, "%s consensus net before the refit" % nm, sgn(row_.consensus_net_before, 2),
+              "MODELED", "QUOTABLE", rcmp, "d89_rapm_before_after.csv")
+            F(who + "_cons_post", S, "%s consensus net after the refit" % nm, sgn(row_.consensus_net_after, 2),
+              "MODELED", "QUOTABLE", rcmp, "d89_rapm_before_after.csv")
+        VAL = os.path.join(REPO, "postmortem", "outputs", "tables", "validation")
+        # measured on the FROZEN stint caches, built before either fix: a fresh build can no
+        # longer show the defect (D92)
+        st_ = pd.read_csv(os.path.join(VAL, "stint_points_reconciliation_cache.csv"))
+        F("misplaced_lineup", S, "share of points the old lineup pipeline credited to the wrong team",
+          pct(100 * st_.err_possession.abs().sum() / st_.box_points.sum()), "OBSERVED", "QUOTABLE",
+          rid("validate_stint_points"), "postmortem stint_points_reconciliation_cache.csv")
+        po_ = pd.read_csv(os.path.join(VAL, "possession_points_reconciliation.csv"))
+        F("misplaced_possession", S, "share of possession points the old attribution credited to the wrong team",
+          pct(100 * po_.err_legacy.abs().sum() / po_.box_points.sum()), "OBSERVED", "QUOTABLE",
+          rid("validate_possession_points"), "postmortem possession_points_reconciliation.csv")
+        F("val_lineup_teamgames", S, "team-games in the lineup-grain check", len(st_), "FACT", "FACT",
+          rid("validate_stint_points"), "postmortem stint_points_reconciliation_cache.csv")
+        F("val_possession_teamgames", S, "team-games in the possession-grain check", len(po_), "FACT", "FACT",
+          rid("validate_possession_points"), "postmortem possession_points_reconciliation.csv")
+
         F("off_delta_u", S, "offseason delta, un-aged", sgn(gate.loc["offseason delta", "unaged_mean"], 2), "MODELED", "NOT QUOTABLE", rw2, "w2_aging_gate.csv")
         F("off_delta_a", S, "offseason delta, aged", sgn(gate.loc["offseason delta", "aged_mean"], 2), "MODELED", "NOT QUOTABLE", rw2, "w2_aging_gate.csv")
         tail = csv("f4b_tail_players.csv")

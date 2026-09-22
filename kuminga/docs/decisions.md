@@ -1821,3 +1821,21 @@ Neither claim needed the sentence changed, which is worth saying plainly: D88 fl
 **NUMBERS WANTED.** Six figures the prose reached for that are not on the sheet, listed at the end of the full draft. Each was written around, not approximated: the consensus-RAPM correlation, Charlotte's model price before the refit, the headline before the refit, the share of possession points the old attribution misplaced, Kuminga's and Ball's RAPM before and after, and the pooled-versus-team-rank minutes for Kuminga (those two are on the sheet but unused).
 
 **ONE JUDGMENT CALL.** Dosunmu is arithmetic only, and the usage paragraph says "with Kuminga in for Dosunmu" the five is the 96th-percentile usage five. That is a lineup composition, not a claim about him, and it is the skeleton's own sentence; it is flagged here so the edit can decide.
+
+### D92. The six written-around figures are on the sheet, and two of them are not what the brief remembered
+
+**Run IDs.** `d89_rapm_compare_20260922T010417Z` (the RAPM and consensus before/after, and the consensus-RAPM correlation), `validate_stint_points_20260922T010709Z` (the lineup-grain share, on the frozen caches), `validate_possession_points_20260922T010307Z` (the possession-grain share), sheet `build_final_numbers` and gate `reconcile_figures` of 2026-09-22. Pre-refit figures cite the runs that produced the preserved snapshot: `market_devig_20260916T195853Z`, `run_sim_20260916T173222Z`, `run_sim_20260916T195902Z`.
+
+**THREE SCRIPTS HAD NO RUN ID, so their figures could not be cited.** `offseason/scripts/d89_rapm_compare.py` and the two postmortem validations live outside kuminga and never logged a run. They now open a kuminga run, log the headline figure as a note, and register their output, which is the smallest honest fix: the figure carries the ID of the run that produced it rather than a decision number.
+
+**THE CONSENSUS-RAPM CORRELATION IS 0.977, NOT 0.96.** The brief attributed 0.96 to F4. F4's run notes do not contain it and no document in the repo records it. Measured across players on the refit value layer, net consensus against net RAPM correlates at **0.977** (0.979 on reliable players only, 0.973 before the refit); across the thirty teams' title odds the two views correlate at 0.994. The sheet carries 0.977 with the compare run's ID and the drafts quote it. The point the brief was making survives and is if anything stronger: two of the four views are largely the same opinion.
+
+**THE LINEUP-GRAIN SHARE IS 3.36% ON THE FROZEN CACHES.** D88 measured 3.89% on a fresh 24-game build. That measurement cannot be repeated now, because both grains are fixed and a fresh build reconciles on both bases (the rerun returned 0.00%, which is the fix working, not the defect gone). So the share is measured where the old basis still exists: the frozen Q2 stint caches, 14,213 stints over 289 Wolves games, 578 team-games, old basis mean absolute error 3.76 points and **3.36% of all points**, made-shot basis exact on 578 of 578. That matches D82's original Minnesota measurement (3.36%) and is the better-supported figure; D88's 3.89% stands as what a small fresh sample showed at the time. The possession-grain share re-measured at **2.84%** on 96 team-games, as in D89.
+
+**CHARLOTTE, BOTH NUMBERS.** Pre-refit model price 5.86%, gap over the market +5.04 points (`market_devig_20260916T195853Z`; D66's +5.05 is the same figure from the 10 September run). Now 3.44% and +2.63. "About half" is 48% of the gap, which the prose can now say with both figures beside it.
+
+**THE HEADLINE, BOTH NUMBERS.** 1.69% to 1.68% un-aged, 2.55% to 2.39% aged, keyed from the preserved snapshot and the pre-refit aged simulation copied out of git into it.
+
+**KUMINGA AND BALL, BEFORE AND AFTER.** Kuminga net RAPM +1.37 to +1.82, consensus +1.33 to +1.65. Ball +1.95 to +3.86, consensus +2.29 to +3.78. The allocator minutes already on the sheet (25.2 team-rank, 22.0 pooled) now appear beside the slot sizes in section four.
+
+**Drafts.** Every written-around phrasing is replaced with the figure; the numbers-wanted list is empty. Full body 4,494 words, appendix 538; short 1,497. Gate clean on all four rendered documents. Plain-markdown copies for the edit are in `docs/export/`.

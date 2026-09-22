@@ -18,7 +18,7 @@ The model number averages four ways of scoring players (the "views") over ⟦⟧
 
 The model and the market agree on the shape of the league and disagree about ⟦⟧ specific teams, Minnesota among them. On the primary basis all four views price it below the market and rank it ⟦⟧ against the market's ⟦⟧th. On the aged basis every view still ranks it below the market, but one view prices it above, so the probability gap is all-views only on the primary basis.
 
-The model's biggest disagreement with the market isn't Minnesota, it's Boston: **⟦⟧** against a market price of ⟦⟧, in every view, and it has a date. If Boston's net rating through game ⟦⟧ is below ⟦⟧ per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: about half of the gap the model first showed there was a bug in our own data, found and fixed.
+The model's biggest disagreement with the market isn't Minnesota, it's Boston: **⟦⟧** against a market price of ⟦⟧, in every view, and it has a date. If Boston's net rating through game ⟦⟧ is below ⟦⟧ per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at ⟦⟧, about half of that gap over the market was a bug in our own data, found and fixed, and it's ⟦⟧ now against a market price of ⟦⟧.
 
 ⟦⟧ of ⟦⟧ offseason verdicts are solid enough to print: they point the same way under both aging bases and both minutes rules, and every view clears the model's own noise. Two are Ball in and Reid out, one is DiVincenzo's Achilles, and four are the same Kuminga comparison under different rules for who else plays his minutes.
 
@@ -52,7 +52,7 @@ The path: modal seed **⟦⟧**, and San Antonio or Oklahoma City in the first r
 
 The optimist: an athletic four, cheap, young, an upgrade on whoever else soaks up those minutes. The pessimist: he couldn't stick in Golden State and the playoff numbers are ugly.
 
-Better: he beats the most likely fill for his minutes by ⟦⟧ points of title odds on the primary basis (⟦⟧ aged), clearing every floor under both aging bases and both minutes rules. He isn't a primary creator competing for the ball: usage ⟦⟧, ⟦⟧ of makes unassisted.
+Better: he beats the most likely fill for his minutes by ⟦⟧ points of title odds on the primary basis (⟦⟧ aged), clearing every floor under both aging bases and both minutes rules.
 
 Worse, or uncertain: if Beringer took the minutes instead, it flips to ⟦⟧ and clears the other way, on a rookie sample. In the playoffs, all of it pooled, ⟦⟧ games and ⟦⟧ possessions, on-court net **⟦⟧**; with garbage time removed, ⟦⟧ worse on than off (standard error ⟦⟧). Small, and confounded by who else was on the floor, but blowouts don't explain it.
 

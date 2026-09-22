@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260919T234738Z`. 866 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260922T010759Z`. 885 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -532,6 +532,25 @@
 
 | key | figure | value | label | verdict | run |
 |---|---|---|---|---|---|
+| `cha_model_pre` | CHA model title odds before the refit | 5.86% | MODELED | QUOTABLE | `market_devig_20260916T195853Z` |
+| `cha_gap_pre` | CHA model minus market before the refit, points | +5.04 | MODELED | QUOTABLE | `market_devig_20260916T195853Z` |
+| `cha_gap_now` | CHA model minus market now, points | +2.63 | MODELED | QUOTABLE | `market_devig_20260919T195044Z` |
+| `title_pre` | MIN title probability before the refit, mean of four views | 1.69% | MODELED | QUOTABLE AS BAND | `run_sim_20260916T173222Z` |
+| `title_aged_pre` | MIN title probability before the refit, mean of four views, aged | 2.55% | MODELED | QUOTABLE AS BAND | `run_sim_20260916T195902Z` |
+| `cons_rapm_corr` | consensus-RAPM correlation across players, net, after the refit | 0.977 | COMPOSED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `cons_rapm_corr_pre` | consensus-RAPM correlation across players, net, before the refit | 0.973 | COMPOSED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `k_rapm_pre` | Jonathan Kuminga net RAPM before the refit | +1.37 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `k_rapm_post` | Jonathan Kuminga net RAPM after the refit | +1.82 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `k_cons_pre` | Jonathan Kuminga consensus net before the refit | +1.33 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `k_cons_post` | Jonathan Kuminga consensus net after the refit | +1.65 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `ball_rapm_pre` | LaMelo Ball net RAPM before the refit | +1.95 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `ball_rapm_post` | LaMelo Ball net RAPM after the refit | +3.86 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `ball_cons_pre` | LaMelo Ball consensus net before the refit | +2.29 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `ball_cons_post` | LaMelo Ball consensus net after the refit | +3.78 | MODELED | QUOTABLE | `d89_rapm_compare_20260922T010417Z` |
+| `misplaced_lineup` | share of points the old lineup pipeline credited to the wrong team | 3.36% | OBSERVED | QUOTABLE | `validate_stint_points_20260922T010709Z` |
+| `misplaced_possession` | share of possession points the old attribution credited to the wrong team | 2.84% | OBSERVED | QUOTABLE | `validate_possession_points_20260922T010307Z` |
+| `val_lineup_teamgames` | team-games in the lineup-grain check | 578 | FACT | FACT | `validate_stint_points_20260922T010709Z` |
+| `val_possession_teamgames` | team-games in the possession-grain check | 96 | FACT | FACT | `validate_possession_points_20260922T010307Z` |
 | `off_delta_u` | offseason delta, un-aged | -1.25 | MODELED | NOT QUOTABLE | `w2_aging_gate_20260919T232645Z` |
 | `off_delta_a` | offseason delta, aged | -0.54 | MODELED | NOT QUOTABLE | `w2_aging_gate_20260919T232645Z` |
 | `tail00_player` | tail player | Derrick White (BOS) | OBSERVED | DESCRIPTIVE | `f4_per_view_disagreement_20260919T195046Z` |

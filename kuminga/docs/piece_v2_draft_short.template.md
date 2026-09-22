@@ -18,7 +18,7 @@ The model number averages four ways of scoring players (the "views") over {{sims
 
 The model and the market agree on the shape of the league and disagree about {{n_disagree}} specific teams, Minnesota among them. On the primary basis all four views price it below the market and rank it {{min_view_ranks}} against the market's {{mkt_min_rank}}th. On the aged basis every view still ranks it below the market, but one view prices it above, so the probability gap is all-views only on the primary basis.
 
-The model's biggest disagreement with the market isn't Minnesota, it's Boston: **{{model_bos}}** against a market price of {{mkt_bos}}, in every view, and it has a date. If Boston's net rating through game {{bos_dec_game}} is below {{bos_dec_threshold}} per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: about half of the gap the model first showed there was a bug in our own data, found and fixed.
+The model's biggest disagreement with the market isn't Minnesota, it's Boston: **{{model_bos}}** against a market price of {{mkt_bos}}, in every view, and it has a date. If Boston's net rating through game {{bos_dec_game}} is below {{bos_dec_threshold}} per hundred possessions, the market's read beats the model's. Charlotte is on the list too, with a confession: the model first priced it at {{cha_model_pre}}, about half of that gap over the market was a bug in our own data, found and fixed, and it's {{model_cha}} now against a market price of {{mkt_cha}}.
 
 {{n_ship}} of {{n_candidates}} offseason verdicts are solid enough to print: they point the same way under both aging bases and both minutes rules, and every view clears the model's own noise. Two are Ball in and Reid out, one is DiVincenzo's Achilles, and four are the same Kuminga comparison under different rules for who else plays his minutes.
 
@@ -52,7 +52,7 @@ The path: modal seed **{{n2_modal}}**, and San Antonio or Oklahoma City in the f
 
 The optimist: an athletic four, cheap, young, an upgrade on whoever else soaks up those minutes. The pessimist: he couldn't stick in Golden State and the playoff numbers are ugly.
 
-Better: he beats the most likely fill for his minutes by {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis ({{v_A_c3_default_shannon_pooled_a}} aged), clearing every floor under both aging bases and both minutes rules. He isn't a primary creator competing for the ball: usage {{k_usg}}, {{k_unast}} of makes unassisted.
+Better: he beats the most likely fill for his minutes by {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis ({{v_A_c3_default_shannon_pooled_a}} aged), clearing every floor under both aging bases and both minutes rules.
 
 Worse, or uncertain: if Beringer took the minutes instead, it flips to {{v_D_beringer_fills_pooled_u}} and clears the other way, on a rookie sample. In the playoffs, all of it pooled, {{po_games}} games and {{po_poss}} possessions, on-court net **{{po_net}}**; with garbage time removed, {{po_onoff}} worse on than off (standard error {{po_onoff_se}}). Small, and confounded by who else was on the floor, but blowouts don't explain it.
 

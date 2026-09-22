@@ -1,6 +1,5 @@
 # Minnesota's title odds, what Kuminga changes, and what the market can't see
 
-*Draft, rendered from `piece_v2_draft_full.template.md`. Every number comes from `outputs/final_numbers.csv` by key and carries a run ID in the claims table at the end. The reconcile gate fails if a digit reaches this page any other way.*
 
 **The short version, in five bullets.**
 

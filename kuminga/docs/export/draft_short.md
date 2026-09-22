@@ -1,6 +1,5 @@
 # Minnesota's title odds, what Kuminga changes, and what the market can't see (the short version)
 
-*Draft, rendered from `piece_v2_draft_short.template.md`. Same claims and the same numbers as the full piece, fewer of them. Every number comes from `outputs/final_numbers.csv` by key.*
 
 **The short version, in five bullets.**
 
