@@ -1,0 +1,6 @@
+cohort,player_seasons,players,mean_games,median_games,p_ge_50,p_ge_60,p_ge_70,p_all,p_le_40
+A: injury history,20,16,56.7,61.4,0.75,0.55,0.25,0.0,0.2
+B: injury history and a healthy prior season,6,6,54.5,62.5,0.667,0.5,0.333,0.0,0.333
+"C: looser history, two of five prior seasons at 60% or less",85,62,61.7,67.0,0.776,0.694,0.412,0.047,0.118
+"D: injury history, age 22 to 29",41,32,57.0,63.0,0.732,0.61,0.268,0.0,0.22
+"band: same age and role, no history condition",617,329,64.9,70.0,0.833,0.721,0.517,0.068,0.1
