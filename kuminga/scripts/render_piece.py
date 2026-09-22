@@ -35,7 +35,9 @@ DOCS_TO_RENDER = [("piece_v2_skeleton.template.md", "piece_v2_skeleton.md"),
                   # the drafts are templates too, so every number in the prose is a sheet key
                   # and the reconcile gate scans them the same way (D91)
                   ("piece_v2_draft_full.template.md", "piece_v2_draft_full.md"),
-                  ("piece_v2_draft_short.template.md", "piece_v2_draft_short.md")]
+                  ("piece_v2_draft_short.template.md", "piece_v2_draft_short.md"),
+                  # the standalone methods document the series links to (C5)
+                  ("methods.template.md", "methods.md")]
 SENT = "⟦⟧"
 FORKS = ["consensus", "rapm", "box", "darko"]
 

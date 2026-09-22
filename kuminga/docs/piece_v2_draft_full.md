@@ -210,33 +210,9 @@ Every conclusion above is conditional on something, so here are the conditions, 
 
 If Williams is under 12.6 minutes at game 20, the offseason verdict is officially unwritable and this piece said so in advance. If Boston is under -1.7 at game 30, come back to section 1 and discount everything in it.
 
-## Methods appendix
+## Methods
 
-**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of 0.977 across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
-
-**The two aging bases.** The primary basis takes every player at last season's measured level. The aged basis shifts each player by the expected one-year change for his age, estimated league-wide. Aging helps Minnesota because Minnesota is young, so quoting only one basis would be a choice with a thumb on the scale, and the piece quotes both everywhere.
-
-**The quotability rule.** A verdict ships only if its sign holds under both aging bases and under both minutes allocators (the one the headline simulation uses, which ranks a roster team-wide and plays ten men, and the one the attribution uses, which hands minutes out inside position groups), and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own.
-
-**The four cells.** The shipping verdicts under both aging bases and both minutes allocators, mean points of title odds and the views clearing in each cell:
-
-| verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | team-rank, aged | views clearing in each cell |
-|---|---:|---:|---:|---:|---|
-| LaMelo Ball in | +0.79 | +0.91 | +1.56 | +1.58 | 4/4, 4/4, 4/4, 4/4 |
-| Naz Reid out | -0.33 | -0.40 | -1.03 | -1.05 | 4/4, 4/4, 4/4, 4/4 |
-| DiVincenzo's Achilles (not a transaction) | -0.39 | -0.33 | -1.00 | -0.83 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, default allocation | +0.44 | +0.56 | +0.55 | +0.66 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, McDaniels slides | +0.42 | +0.54 | +0.53 | +0.64 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, Beringer fills | -0.72 | -1.31 | -1.03 | -1.84 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, tight eligibility rule | +0.44 | +0.56 | +0.54 | +0.64 | 4/4, 4/4, 4/4, 4/4 |
-
-**The simulation.** 200,000 seasons per view, on both bases. Attribution prices every combination of Minnesota's offseason moves on a curve built from those simulations, and the curve is checked against the direct simulation every run.
-
-**The market.** Six books' title odds, de-vigged proportionally: the raw prices add to 21.8% over a hundred, and each team's price is scaled back so the league sums to one.
-
-**What was withheld.** The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations 79.9% of the time against a bar of 80% fixed before the build, so no late-clock figure appears in the piece.
-
-**Corrections made during the work.** Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, 3.36% of all points on the 578 team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced 2.84% of points across 96 team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from +1.37 to +1.82 (consensus +1.33 to +1.65) and Ball's from +1.95 to +3.86 (consensus +2.29 to +3.78); Edwards rose as well. The headline went from 1.69% to 1.68%, and from 2.55% to 2.39% on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+The four views, the two aging bases, the quotability rule, the four cells, the allocators, the noise floor, the simulation, the market, the labels on every figure and the corrections made during the work are in one place for the whole series: the methods document (`methods.md`), rendered from the same sheet as this draft.
 
 ## Pull-quotes
 
@@ -331,18 +307,6 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `8. What to watch` | `p5` | `{w4_claim}. Now: {w4_now}. Flips if: {w4_flip}.` | `w4_claim`, `w4_now`, `w4_flip` | `n8_watch_list_20260922T160123Z` | composed, observed |
 | `8. What to watch` | `p6` | `{w5_claim}. Now: {w5_now}. Flips if: {w5_flip}.` | `w5_claim`, `w5_now`, `w5_flip` | `n8_watch_list_20260922T160123Z` | composed, observed |
 | `8. What to watch` | `p7` | `If Williams is under {williams_threshold} minutes at` | `williams_threshold`, `w_game`, `bos_dec_threshold`, `bos_dec_game` | `n8_watch_list_20260922T160123Z` | assumed, composed, modeled |
-| `Methods appendix` | `p1` | `The four views. Every player gets four` | `cons_rapm_corr` | `d89_rapm_compare_20260922T010417Z` | composed |
-| `Methods appendix` | `p7` | `{v_ball_in_label} {v_ball_in_pooled_u} {v_ball_in_pooled_a} {v_ball_in_tr_u} {v_ball_in_tr_a} {v_ball_in_cells}` | `v_ball_in_label`, `v_ball_in_pooled_u`, `v_ball_in_pooled_a`, `v_ball_in_tr_u`, `v_ball_in_tr_a`, `v_ball_in_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p8` | `{v_reid_out_label} {v_reid_out_pooled_u} {v_reid_out_pooled_a} {v_reid_out_tr_u} {v_reid_out_tr_a} {v_reid_out_cells}` | `v_reid_out_label`, `v_reid_out_pooled_u`, `v_reid_out_pooled_a`, `v_reid_out_tr_u`, `v_reid_out_tr_a`, `v_reid_out_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p9` | `{v_ddv_injury_label} {v_ddv_injury_pooled_u} {v_ddv_injury_pooled_a} {v_ddv_injury_tr_u} {v_ddv_injury_tr_a} {v_ddv_injury_cells}` | `v_ddv_injury_label`, `v_ddv_injury_pooled_u`, `v_ddv_injury_pooled_a`, `v_ddv_injury_tr_u`, `v_ddv_injury_tr_a`, `v_ddv_injury_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p10` | `{v_A_c3_default_shannon_label} {v_A_c3_default_shannon_pooled_u} {v_A_c3_default_shannon_pooled_a} {v_A_c3_default_shannon_tr_u} {v_A_c3_default_shannon_tr_a} {v_A_c3_default_shannon_cells}` | `v_A_c3_default_shannon_label`, `v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_pooled_a`, `v_A_c3_default_shannon_tr_u`, `v_A_c3_default_shannon_tr_a`, `v_A_c3_default_shannon_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p11` | `{v_C_mcdaniels_slides_label} {v_C_mcdaniels_slides_pooled_u} {v_C_mcdaniels_slides_pooled_a} {v_C_mcdaniels_slides_tr_u} {v_C_mcdaniels_slides_tr_a} {v_C_mcdaniels_slides_cells}` | `v_C_mcdaniels_slides_label`, `v_C_mcdaniels_slides_pooled_u`, `v_C_mcdaniels_slides_pooled_a`, `v_C_mcdaniels_slides_tr_u`, `v_C_mcdaniels_slides_tr_a`, `v_C_mcdaniels_slides_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p12` | `{v_D_beringer_fills_label} {v_D_beringer_fills_pooled_u} {v_D_beringer_fills_pooled_a} {v_D_beringer_fills_tr_u} {v_D_beringer_fills_tr_a} {v_D_beringer_fills_cells}` | `v_D_beringer_fills_label`, `v_D_beringer_fills_pooled_u`, `v_D_beringer_fills_pooled_a`, `v_D_beringer_fills_tr_u`, `v_D_beringer_fills_tr_a`, `v_D_beringer_fills_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p13` | `{v_E_tight_rule_F_or_FC_label} {v_E_tight_rule_F_or_FC_pooled_u} {v_E_tight_rule_F_or_FC_pooled_a} {v_E_tight_rule_F_or_FC_tr_u} {v_E_tight_rule_F_or_FC_tr_a} {v_E_tight_rule_F_or_FC_cells}` | `v_E_tight_rule_F_or_FC_label`, `v_E_tight_rule_F_or_FC_pooled_u`, `v_E_tight_rule_F_or_FC_pooled_a`, `v_E_tight_rule_F_or_FC_tr_u`, `v_E_tight_rule_F_or_FC_tr_a`, `v_E_tight_rule_F_or_FC_cells` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
-| `Methods appendix` | `p14` | `The simulation. {sims} seasons per view, on` | `sims` | `merge_fcurve_parts_20260919T195006Z` | assumed |
-| `Methods appendix` | `p15` | `The market. Six books' title odds, de-vigged` | `overround` | `market_devig_20260919T195044Z` | observed |
-| `Methods appendix` | `p16` | `What was withheld. The late-clock split. The` | `lc_g1`, `lc_bar` | `n7_late_clock_20260916T230449Z` | assumed, observed |
-| `Methods appendix` | `p17` | `Corrections made during the work. Two bugs` | `misplaced_lineup`, `val_lineup_teamgames`, `misplaced_possession`, `val_possession_teamgames`, `k_rapm_pre`, `k_rapm_post`, `k_cons_pre`, `k_cons_post`, `ball_rapm_pre`, `ball_rapm_post`, `ball_cons_pre`, `ball_cons_post`, `title_pre`, `title`, `title_aged_pre`, `title_aged` | `validate_stint_points_20260922T010709Z`, `validate_possession_points_20260922T010307Z`, `d89_rapm_compare_20260922T010417Z`, `run_sim_20260916T173222Z`, `run_sim_20260919T163222Z`, `run_sim_20260916T195902Z`, `run_sim_20260919T195138Z` | fact, modeled, observed |
 | `Pull-quotes` | `p1` | `1. "The model has Minnesota at {title}` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `Pull-quotes` | `p2` | `2. "If you want to know whether` | `model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game` | `market_devig_20260919T195044Z`, `n8_watch_list_20260922T160123Z` | assumed, composed, modeled, observed |
 | `Pull-quotes` | `p4` | `4. "'The offseason made Minnesota worse' is` | `williams_threshold` | `n8_watch_list_20260922T160123Z` | modeled |

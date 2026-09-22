@@ -202,25 +202,9 @@ Every conclusion above is conditional on something, so here are the conditions, 
 
 If Williams is under {{williams_threshold}} minutes at game {{w_game}}, the offseason verdict is officially unwritable and this piece said so in advance. If Boston is under {{bos_dec_threshold}} at game {{bos_dec_game}}, come back to section 1 and discount everything in it.
 
-## Methods appendix
+## Methods
 
-**The four views.** Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of {{cons_rapm_corr}} across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion.
-
-**The two aging bases.** The primary basis takes every player at last season's measured level. The aged basis shifts each player by the expected one-year change for his age, estimated league-wide. Aging helps Minnesota because Minnesota is young, so quoting only one basis would be a choice with a thumb on the scale, and the piece quotes both everywhere.
-
-**The quotability rule.** A verdict ships only if its sign holds under both aging bases and under both minutes allocators (the one the headline simulation uses, which ranks a roster team-wide and plays ten men, and the one the attribution uses, which hands minutes out inside position groups), and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own.
-
-**The four cells.** The shipping verdicts under both aging bases and both minutes allocators, mean points of title odds and the views clearing in each cell:
-
-{{TABLE:allocators}}
-
-**The simulation.** {{sims}} seasons per view, on both bases. Attribution prices every combination of Minnesota's offseason moves on a curve built from those simulations, and the curve is checked against the direct simulation every run.
-
-**The market.** Six books' title odds, de-vigged proportionally: the raw prices add to {{overround}} over a hundred, and each team's price is scaled back so the league sums to one.
-
-**What was withheld.** The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations {{lc_g1}} of the time against a bar of {{lc_bar}} fixed before the build, so no late-clock figure appears in the piece.
-
-**Corrections made during the work.** Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, {{misplaced_lineup}} of all points on the {{val_lineup_teamgames}} team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced {{misplaced_possession}} of points across {{val_possession_teamgames}} team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from {{k_rapm_pre}} to {{k_rapm_post}} (consensus {{k_cons_pre}} to {{k_cons_post}}) and Ball's from {{ball_rapm_pre}} to {{ball_rapm_post}} (consensus {{ball_cons_pre}} to {{ball_cons_post}}); Edwards rose as well. The headline went from {{title_pre}} to {{title}}, and from {{title_aged_pre}} to {{title_aged}} on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+The four views, the two aging bases, the quotability rule, the four cells, the allocators, the noise floor, the simulation, the market, the labels on every figure and the corrections made during the work are in one place for the whole series: the methods document (`methods.md`), rendered from the same sheet as this draft.
 
 ## Pull-quotes
 

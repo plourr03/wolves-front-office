@@ -789,6 +789,10 @@ def main():
                 F(base + "_" + f, S, "%s %s" % (tm, f), pct(x["pct_" + f]), "MODELED", "QUOTABLE AS BAND", rf4, "f4a_per_view_disagreement.csv")
             F(base + "_label", S, "%s label" % tm, x.label, "MODELED", "QUOTABLE", rf4, "f4a_per_view_disagreement.csv")
 
+        # C5: the Bet series additions (C1 to C4) live on the same sheet
+        import bet_numbers
+        bet_numbers.add(F, rid, csv)
+
         df = pd.DataFrame(rows)
         missing = df[df.run_id.isna() | (df.run_id == "") | (df.run_id == "n/a")]
         if len(missing):

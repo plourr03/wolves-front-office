@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260922T160145Z`. 885 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260922T193535Z`. 1416 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -931,4 +931,540 @@
 | `pv_min_box` | MIN box | 2.03% | MODELED | QUOTABLE AS BAND | `f4_per_view_disagreement_20260919T195046Z` |
 | `pv_min_darko` | MIN darko | 2.59% | MODELED | QUOTABLE AS BAND | `f4_per_view_disagreement_20260919T195046Z` |
 | `pv_min_label` | MIN label | ALL-VIEWS | MODELED | QUOTABLE | `f4_per_view_disagreement_20260919T195046Z` |
+
+## C. The bet: additions for Parts 1, 3 and 4
+
+| key | figure | value | label | verdict | run |
+|---|---|---|---|---|---|
+| `c2_haz_2027_600` | Edwards departure hazard, 2026-27 season, team at .600 | 0.8% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2027_600_band` | 80%% interval | 0.4% to 1.2% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2028_600` | Edwards departure hazard, 2027-28 season, team at .600 | 7.3% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2028_600_band` | 80%% interval | 4.8% to 10% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2029_600` | Edwards departure hazard, 2028-29 season, team at .600 | 44% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2029_600_band` | 80%% interval | 35% to 53% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2033_600` | Edwards departure hazard, 2032-33 season, team at .600 | 14% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2033_600_band` | 80%% interval | 9.0% to 20% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2029_600` | P(Edwards departed by 2028-29), team at .600 | 48% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2029_600_band` | 80%% interval | 39% to 58% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2033_600` | P(Edwards departed by 2032-33), team at .600 | 56% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2033_600_band` | 80%% interval | 45% to 68% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2027_450` | Edwards departure hazard, 2026-27 season, team at .450 | 1.3% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2027_450_band` | 80%% interval | 0.7% to 2.0% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2028_450` | Edwards departure hazard, 2027-28 season, team at .450 | 12% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2028_450_band` | 80%% interval | 7.7% to 16% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2029_450` | Edwards departure hazard, 2028-29 season, team at .450 | 56% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2029_450_band` | 80%% interval | 47% to 66% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2033_450` | Edwards departure hazard, 2032-33 season, team at .450 | 22% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_haz_2033_450_band` | 80%% interval | 14% to 30% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2029_450` | P(Edwards departed by 2028-29), team at .450 | 62% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2029_450_band` | 80%% interval | 52% to 71% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2033_450` | P(Edwards departed by 2032-33), team at .450 | 71% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cum_2033_450_band` | 80%% interval | 60% to 81% | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_scen_high` | central scenario, team two-year win percentage | .600 | MODELED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_scen_low` | decline scenario, team two-year win percentage | .450 | MODELED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_first_season` | first season in the star-spells data | 1990 | OBSERVED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_calib_window` | calibration slope window set in advance | 0.8 to 1.2 | MODELED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_cba_year` | the collective bargaining agreement quoted | 2023 | OBSERVED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_stage_n` | star-seasons with two seasons left, within-three window observed | 192 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_within3` | of those, departed within three seasons | 44% | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_all` | walk-year departure rate, all star-seasons | 41% | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_all_n` | walk-year star-seasons | 536 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_600` | walk-year departure rate, team at .600 or better | 31% | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_600_n` | cases | 248 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_sub500` | walk-year departure rate, team under .500 | 56% | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_raw_walk_sub500_n` | cases | 118 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_n_spells` | star spells in the Part 1 model | 291 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_n_rows` | player-seasons | 1,264 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_n_departures` | departures | 228 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_walk_multiple` | walk-year odds multiple against two seasons left (from the M2 coefficient) | 66 | MODELED | QUOTABLE AS BAND | `c2_edwards_clock_20260922T191531Z` |
+| `c2_c_index` | Model B C-index on the sealed holdout | 0.907 | MODELED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_calibration` | Model B calibration slope (window 0.8 to 1.2, failed and printed) | 1.413 | MODELED | DESCRIPTIVE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2026_27` | Edwards salary 2026-27 | $48,924,624 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2026_27_m` | Edwards salary 2026-27, rounded | $48.9 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2027_28` | Edwards salary 2027-28 | $52,298,736 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2027_28_m` | Edwards salary 2027-28, rounded | $52.3 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2028_29` | Edwards salary 2028-29 | $55,672,848 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_salary_2028_29_m` | Edwards salary 2028-29, rounded | $55.7 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_ext_signed` | rookie scale extension signed | 2023-07-08 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_ext_window` | standard extension window opened (third anniversary) | 2026-07-08 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_games_2025_26` | Edwards regular-season games 2025-26 | 61 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_games_rule` | games required for All-NBA eligibility (Art. XXIX Sec. 6) | 65 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_walk_year` | walk year | 2028-29 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_free_agency` | unrestricted free agency | 2029-07-01 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_dvpe_window` | designated veteran extension window (if All-NBA 2026-27) | July 2027 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_dvpe_last` | last extension window before free agency (needs All-NBA 2027-28) | July 2028 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_std_ext_reported` | standard extension available now, as reported | two years, about $122 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c2_supermax_reported` | designated veteran extension as reported | four years, about $300 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
+| `c3_games_2020_21` | Ball games played 2020-21 | 51 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2020_21` | team games 2020-21 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2020_21` | share of team games 2020-21 | 71% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2020_21` | games missed 2020-21 | 21 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_2021_22` | Ball games played 2021-22 | 75 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2021_22` | team games 2021-22 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2021_22` | share of team games 2021-22 | 91% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2021_22` | games missed 2021-22 | 7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_2022_23` | Ball games played 2022-23 | 36 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2022_23` | team games 2022-23 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2022_23` | share of team games 2022-23 | 44% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2022_23` | games missed 2022-23 | 46 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_2023_24` | Ball games played 2023-24 | 22 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2023_24` | team games 2023-24 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2023_24` | share of team games 2023-24 | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2023_24` | games missed 2023-24 | 60 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_2024_25` | Ball games played 2024-25 | 47 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2024_25` | team games 2024-25 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2024_25` | share of team games 2024-25 | 57% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2024_25` | games missed 2024-25 | 35 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_2025_26` | Ball games played 2025-26 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_2025_26` | team games 2025-26 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_2025_26` | share of team games 2025-26 | 88% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_2025_26` | games missed 2025-26 | 10 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_mpa_2025_26` | Ball minutes per appearance 2025-26 | 27.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_games_total` | Ball games played, six seasons | 303 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_team_games_total` | team games, six seasons | 482 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_missed_total` | games missed, six seasons | 179 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_share_total` | share of team games, six seasons | 63% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_stretches` | missed stretches | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_stretches_sourced` | stretches with a sourced cause | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_surgeries` | stretches that ended in surgery | 3 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_n` | base rate A: injury history: player-seasons | 20 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_players` | players | 16 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_mean` | mean games | 56.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_median` | median games | 61.4 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_p50` | P(50 or more) | 75% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_p60` | P(60 or more) | 55% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_p70` | P(70 or more) | 25% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_a_p40` | P(40 or fewer) | 20% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_n` | base rate B: injury history and a healthy prior season: player-seasons | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_players` | players | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_mean` | mean games | 54.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_median` | median games | 62.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_p50` | P(50 or more) | 67% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_p60` | P(60 or more) | 50% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_p70` | P(70 or more) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_b_p40` | P(40 or fewer) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_n` | base rate C: looser history, two of five prior seasons at 60% or less: player-seasons | 85 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_players` | players | 62 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_mean` | mean games | 61.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_median` | median games | 67.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_p50` | P(50 or more) | 78% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_p60` | P(60 or more) | 69% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_p70` | P(70 or more) | 41% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_pall` | P(all games) | 5% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_c_p40` | P(40 or fewer) | 12% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_n` | base rate D: injury history, age 22 to 29: player-seasons | 41 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_players` | players | 32 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_mean` | mean games | 57.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_median` | median games | 63.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_p50` | P(50 or more) | 73% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_p60` | P(60 or more) | 61% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_p70` | P(70 or more) | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_d_p40` | P(40 or fewer) | 22% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_n` | base rate band: same age and role, no history condition: player-seasons | 617 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_players` | players | 329 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_mean` | mean games | 64.9 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_median` | median games | 70.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_p50` | P(50 or more) | 83% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_p60` | P(60 or more) | 72% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_p70` | P(70 or more) | 52% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_pall` | P(all games) | 7% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_band_p40` | P(40 or fewer) | 10% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_share` | base rate definition: a bad season is at most this share of team games | 60% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_seasons` | bad seasons required of the five prior | 3 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_age` | age band | 23 to 27 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_mpa` | minutes per appearance the season before, at least | 24 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_healthy` | healthy prior season, at least this share | 80% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_def_first` | first season in the base rate | 2001-02 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
+| `c3_title_50_u` | MIN title odds with Ball at 50 games, mean of views (unaged) | 1.52% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_50_u_band` | band across views | 0.64% to 2.47% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_drop_50_u` | drop from 82 games, points | 0.12 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_50_u` | P(top six) with Ball at 50 games (unaged) | 25.8% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_50_u_band` | band across views | 7.3% to 49.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_drop_50_u` | P(top six) drop from 82 games, points | 16.6 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_seed_50_u` | mean West seed | 7.25 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_net_drop_50_u` | regular-season net lost, mean of views | 0.84 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_ball_mpg_50_u` | Ball minutes per game in the allocation | 18.9 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_60_u` | MIN title odds with Ball at 60 games, mean of views (unaged) | 1.57% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_60_u_band` | band across views | 0.70% to 2.50% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_drop_60_u` | drop from 82 games, points | 0.07 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_60_u` | P(top six) with Ball at 60 games (unaged) | 31.5% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_60_u_band` | band across views | 10.9% to 56.7% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_drop_60_u` | P(top six) drop from 82 games, points | 10.9 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_seed_60_u` | mean West seed | 7.04 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_net_drop_60_u` | regular-season net lost, mean of views | 0.53 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_ball_mpg_60_u` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_70_u` | MIN title odds with Ball at 70 games, mean of views (unaged) | 1.60% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_70_u_band` | band across views | 0.74% to 2.53% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_drop_70_u` | drop from 82 games, points | 0.03 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_70_u` | P(top six) with Ball at 70 games (unaged) | 37.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_70_u_band` | band across views | 14.9% to 63.2% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_drop_70_u` | P(top six) drop from 82 games, points | 5.4 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_seed_70_u` | mean West seed | 6.85 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_net_drop_70_u` | regular-season net lost, mean of views | 0.26 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_ball_mpg_70_u` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_82_u` | MIN title odds with Ball at 82 games, mean of views (unaged) | 1.64% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_82_u_band` | band across views | 0.78% to 2.56% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_drop_82_u` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_82_u` | P(top six) with Ball at 82 games (unaged) | 42.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_82_u_band` | band across views | 19.6% to 68.9% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_top6_drop_82_u` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_seed_82_u` | mean West seed | 6.68 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_net_drop_82_u` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
+| `c3_ball_mpg_82_u` | Ball minutes per game in the allocation | 30.6 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
+| `c3_title_50_a` | MIN title odds with Ball at 50 games, mean of views (aged) | 2.19% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_50_a_band` | band across views | 0.90% to 3.47% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_drop_50_a` | drop from 82 games, points | 0.16 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_50_a` | P(top six) with Ball at 50 games (aged) | 45.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_50_a_band` | band across views | 18.7% to 75.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_drop_50_a` | P(top six) drop from 82 games, points | 16.8 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_seed_50_a` | mean West seed | 6.62 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_net_drop_50_a` | regular-season net lost, mean of views | 0.77 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_ball_mpg_50_a` | Ball minutes per game in the allocation | 18.9 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_60_a` | MIN title odds with Ball at 60 games, mean of views (aged) | 2.26% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_60_a_band` | band across views | 0.99% to 3.53% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_drop_60_a` | drop from 82 games, points | 0.09 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_60_a` | P(top six) with Ball at 60 games (aged) | 51.7% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_60_a_band` | band across views | 24.9% to 80.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_drop_60_a` | P(top six) drop from 82 games, points | 10.6 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_seed_60_a` | mean West seed | 6.39 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_net_drop_60_a` | regular-season net lost, mean of views | 0.49 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_ball_mpg_60_a` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_70_a` | MIN title odds with Ball at 70 games, mean of views (aged) | 2.32% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_70_a_band` | band across views | 1.07% to 3.59% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_drop_70_a` | drop from 82 games, points | 0.04 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_70_a` | P(top six) with Ball at 70 games (aged) | 57.3% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_70_a_band` | band across views | 31.4% to 84.8% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_drop_70_a` | P(top six) drop from 82 games, points | 5.1 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_seed_70_a` | mean West seed | 6.19 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_net_drop_70_a` | regular-season net lost, mean of views | 0.24 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_ball_mpg_70_a` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_82_a` | MIN title odds with Ball at 82 games, mean of views (aged) | 2.35% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_82_a_band` | band across views | 1.14% to 3.60% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_title_drop_82_a` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_82_a` | P(top six) with Ball at 82 games (aged) | 62.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_82_a_band` | band across views | 37.9% to 88.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_top6_drop_82_a` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_seed_82_a` | mean West seed | 6.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_net_drop_82_a` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
+| `c3_ball_mpg_82_a` | Ball minutes per game in the allocation | 30.6 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
+| `c1_n` | champions in the table | 11 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_first` | first season | 2015-16 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_last` | last season | 2025-26 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_team` | 2015-16 champion | CLE | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_record` | record | 57-25 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_rs` | RS net rating | +6.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_rs_rank` | RS net rating rank | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_post` | post-All-Star net rating | +6.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_post_rank` | post-All-Star net rating rank | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_po` | playoff net rating | +9.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_net_po_minus` | playoff minus RS net rating | +3.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_age` | top-8 mean age | 28.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_oldest` | top-8 oldest | 35.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_drafted` | top-8 drafted | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_traded` | top-8 traded for | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_signed` | top-8 signed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_returning` | top-8 returning from the season before | 7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_returning_share` | share of playoff minutes to returning players | 86% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_missed_rs` | top-8 RS games missed | 88 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_missed_po` | top-8 playoff games missed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_po_games` | playoff games | 21 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_top5_rs` | top-5 minutes share, RS | 59% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_top5_po` | top-5 minutes share, playoffs | 71% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2015_16_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_team` | 2016-17 champion | GSW | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_record` | record | 67-15 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_rs` | RS net rating | +11.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_rs_rank` | RS net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_post` | post-All-Star net rating | +9.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_post_rank` | post-All-Star net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_po` | playoff net rating | +12.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_net_po_minus` | playoff minus RS net rating | +1.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_age` | top-8 mean age | 29.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_oldest` | top-8 oldest | 36.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_drafted` | top-8 drafted | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_traded` | top-8 traded for | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_signed` | top-8 signed | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_returning` | top-8 returning from the season before | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_returning_share` | share of playoff minutes to returning players | 67% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_missed_rs` | top-8 RS games missed | 64 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_missed_po` | top-8 playoff games missed | 7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_po_games` | playoff games | 17 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_top5_rs` | top-5 minutes share, RS | 60% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_top5_po` | top-5 minutes share, playoffs | 68% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2016_17_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_team` | 2017-18 champion | GSW | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_record` | record | 58-24 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_seed` | seed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_rs` | RS net rating | +5.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_rs_rank` | RS net rating rank | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_post` | post-All-Star net rating | +0.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_post_rank` | post-All-Star net rating rank | 16 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_po` | playoff net rating | +10.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_net_po_minus` | playoff minus RS net rating | +4.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_age` | top-8 mean age | 29.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_oldest` | top-8 oldest | 34.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_drafted` | top-8 drafted | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_traded` | top-8 traded for | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_signed` | top-8 signed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_returning` | top-8 returning from the season before | 7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_returning_share` | share of playoff minutes to returning players | 89% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_missed_rs` | top-8 RS games missed | 113 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_missed_po` | top-8 playoff games missed | 15 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_po_games` | playoff games | 21 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_top5_rs` | top-5 minutes share, RS | 53% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_top5_po` | top-5 minutes share, playoffs | 67% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2017_18_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_team` | 2018-19 champion | TOR | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_record` | record | 58-24 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_seed` | seed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_rs` | RS net rating | +5.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_rs_rank` | RS net rating rank | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_post` | post-All-Star net rating | +7.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_post_rank` | post-All-Star net rating rank | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_po` | playoff net rating | +5.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_net_po_minus` | playoff minus RS net rating | -0.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_age` | top-8 mean age | 28.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_oldest` | top-8 oldest | 34.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_drafted` | top-8 drafted | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_traded` | top-8 traded for | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_signed` | top-8 signed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_returning` | top-8 returning from the season before | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_returning_share` | share of playoff minutes to returning players | 56% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_missed_rs` | top-8 RS games missed | 93 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_missed_po` | top-8 playoff games missed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_po_games` | playoff games | 24 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_top5_rs` | top-5 minutes share, RS | 56% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_top5_po` | top-5 minutes share, playoffs | 72% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2018_19_moves` | in-season moves touching the top 8 | Marc Gasol (traded for, 2019-02-07) | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_team` | 2019-20 champion | LAL | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_record` | record | 52-19 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_rs` | RS net rating | +5.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_rs_rank` | RS net rating rank | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_post` | post-All-Star net rating | +1.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_post_rank` | post-All-Star net rating rank | 10 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_po` | playoff net rating | +6.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_net_po_minus` | playoff minus RS net rating | +1.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_age` | top-8 mean age | 29.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_oldest` | top-8 oldest | 35.1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_drafted` | top-8 drafted | 0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_traded` | top-8 traded for | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_signed` | top-8 signed | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_returning` | top-8 returning from the season before | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_returning_share` | share of playoff minutes to returning players | 58% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_missed_rs` | top-8 RS games missed | 61 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_missed_po` | top-8 playoff games missed | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_po_games` | playoff games | 21 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_top5_rs` | top-5 minutes share, RS | 55% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_top5_po` | top-5 minutes share, playoffs | 63% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2019_20_moves` | in-season moves touching the top 8 | Markieff Morris (signed, 2020-02-23) | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_team` | 2020-21 champion | MIL | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_record` | record | 46-26 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_seed` | seed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_rs` | RS net rating | +5.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_rs_rank` | RS net rating rank | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_post` | post-All-Star net rating | +5.1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_post_rank` | post-All-Star net rating rank | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_po` | playoff net rating | +5.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_net_po_minus` | playoff minus RS net rating | -0.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_age` | top-8 mean age | 29.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_oldest` | top-8 oldest | 35.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_drafted` | top-8 drafted | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_traded` | top-8 traded for | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_signed` | top-8 signed | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_returning` | top-8 returning from the season before | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_returning_share` | share of playoff minutes to returning players | 55% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_missed_rs` | top-8 RS games missed | 54 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_missed_po` | top-8 playoff games missed | 8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_po_games` | playoff games | 23 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_top5_rs` | top-5 minutes share, RS | 57% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_top5_po` | top-5 minutes share, playoffs | 72% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2020_21_moves` | in-season moves touching the top 8 | P.J. Tucker (traded for, 2021-03-19) | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_team` | 2021-22 champion | GSW | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_record` | record | 53-29 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_seed` | seed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_rs` | RS net rating | +5.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_rs_rank` | RS net rating rank | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_post` | post-All-Star net rating | +2.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_post_rank` | post-All-Star net rating rank | 18 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_po` | playoff net rating | +4.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_net_po_minus` | playoff minus RS net rating | -0.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_age` | top-8 mean age | 28.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_oldest` | top-8 oldest | 33.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_drafted` | top-8 drafted | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_traded` | top-8 traded for | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_signed` | top-8 signed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_returning` | top-8 returning from the season before | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_returning_share` | share of playoff minutes to returning players | 70% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_missed_rs` | top-8 RS games missed | 152 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_missed_po` | top-8 playoff games missed | 13 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_po_games` | playoff games | 22 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_top5_rs` | top-5 minutes share, RS | 51% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_top5_po` | top-5 minutes share, playoffs | 69% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2021_22_moves` | in-season moves touching the top 8 | Gary Payton II (signed, 2021-10-19) | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_team` | 2022-23 champion | DEN | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_record` | record | 53-29 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_rs` | RS net rating | +3.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_rs_rank` | RS net rating rank | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_post` | post-All-Star net rating | +0.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_post_rank` | post-All-Star net rating rank | 16 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_po` | playoff net rating | +8.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_net_po_minus` | playoff minus RS net rating | +4.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_age` | top-8 mean age | 27.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_oldest` | top-8 oldest | 36.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_drafted` | top-8 drafted | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_traded` | top-8 traded for | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_signed` | top-8 signed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_returning` | top-8 returning from the season before | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_returning_share` | share of playoff minutes to returning players | 52% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_missed_rs` | top-8 RS games missed | 105 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_missed_po` | top-8 playoff games missed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_po_games` | playoff games | 20 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_top5_rs` | top-5 minutes share, RS | 57% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_top5_po` | top-5 minutes share, playoffs | 76% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2022_23_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_team` | 2023-24 champion | BOS | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_record` | record | 64-18 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_rs` | RS net rating | +11.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_rs_rank` | RS net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_post` | post-All-Star net rating | +14.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_post_rank` | post-All-Star net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_po` | playoff net rating | +8.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_net_po_minus` | playoff minus RS net rating | -3.0 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_age` | top-8 mean age | 29.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_oldest` | top-8 oldest | 37.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_drafted` | top-8 drafted | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_traded` | top-8 traded for | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_signed` | top-8 signed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_returning` | top-8 returning from the season before | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_returning_share` | share of playoff minutes to returning players | 76% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_missed_rs` | top-8 RS games missed | 87 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_missed_po` | top-8 playoff games missed | 12 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_po_games` | playoff games | 19 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_top5_rs` | top-5 minutes share, RS | 58% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_top5_po` | top-5 minutes share, playoffs | 76% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2023_24_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_team` | 2024-25 champion | OKC | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_record` | record | 68-14 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_seed` | seed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_rs` | RS net rating | +12.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_rs_rank` | RS net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_post` | post-All-Star net rating | +12.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_post_rank` | post-All-Star net rating rank | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_po` | playoff net rating | +8.6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_net_po_minus` | playoff minus RS net rating | -4.1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_age` | top-8 mean age | 25.5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_oldest` | top-8 oldest | 30.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_drafted` | top-8 drafted | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_traded` | top-8 traded for | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_signed` | top-8 signed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_returning` | top-8 returning from the season before | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_returning_share` | share of playoff minutes to returning players | 78% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_missed_rs` | top-8 RS games missed | 154 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_missed_po` | top-8 playoff games missed | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_po_games` | playoff games | 23 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_top5_rs` | top-5 minutes share, RS | 54% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_top5_po` | top-5 minutes share, playoffs | 65% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2024_25_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_team` | 2025-26 champion | NYK | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_record` | record | 53-29 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_seed` | seed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_rs` | RS net rating | +6.3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_rs_rank` | RS net rating rank | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_post` | post-All-Star net rating | +6.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_post_rank` | post-All-Star net rating rank | 8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_po` | playoff net rating | +15.4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_net_po_minus` | playoff minus RS net rating | +9.1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_age` | top-8 mean age | 28.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_oldest` | top-8 oldest | 30.9 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_drafted` | top-8 drafted | 1 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_traded` | top-8 traded for | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_signed` | top-8 signed | 2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_returning` | top-8 returning from the season before | 8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_returning_share` | share of playoff minutes to returning players | 91% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_missed_rs` | top-8 RS games missed | 141 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_missed_po` | top-8 playoff games missed | 3 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_po_games` | playoff games | 19 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_top5_rs` | top-5 minutes share, RS | 60% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_top5_po` | top-5 minutes share, playoffs | 68% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_2025_26_moves` | in-season moves touching the top 8 | none | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_age` | top-8 mean age across champions | 28.7 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_returning` | top-8 returning, mean across champions | 5.8 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_seed_1_n` | champions that were the 1 seed | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_top3_net_n` | champions in the top three of RS net rating | 5 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_top5_net_n` | champions in the top five of RS net rating | 10 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_worst_rs_rank` | worst RS net rating rank of a champion | 6 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_worst_post_rank` | worst post-All-Star net rating rank of a champion | 18 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_moves_n` | champions with an in-season move touching the top 8 | 4 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_top5_rs` | top-5 minutes share RS, mean | 56% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_top5_po` | top-5 minutes share playoffs, mean | 70% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_missed_rs` | top-8 RS games missed, mean | 101 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c1_mean_missed_po` | top-8 playoff games missed, mean | 6.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
+| `c4_in_n` | players in with a 2026-27 salary | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_in_total` | 2026-27 salary in | $75,840,737 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_in_total_m` | 2026-27 salary in, rounded | $75.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_out_n` | players out with a 2026-27 salary | 6 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_out_total` | 2026-27 salary out | $66,100,564 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_out_total_m` | 2026-27 salary out, rounded | $66.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_rows` | ledger rows | 37 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_single_sourced` | ledger rows with one source | 0 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_hylanbo01_retained_salary` | Bones Hyland 2026-27 salary (retained) | $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_hylanbo01_retained_salary_m` | Bones Hyland 2026-27 salary, rounded | $2.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_hylanbo01_retained_total` | Bones Hyland remaining contract: years, total | 1 years, $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_anderky01_out_salary` | Kyle Anderson 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_anderky01_out_salary_m` | Kyle Anderson 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_anderky01_out_total` | Kyle Anderson remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_conlemi01_out_salary` | Mike Conley 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_conlemi01_out_salary_m` | Mike Conley 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_conlemi01_out_total` | Mike Conley remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_evansis01_in_salary` | Isaiah Evans 2026-27 salary (in) | $1,357,763 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_evansis01_in_salary_m` | Isaiah Evans 2026-27 salary, rounded | $1.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_evansis01_in_total` | Isaiah Evans remaining contract: years, total | 4 years, $9,264,648 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_greenjo02_in_salary` | Josh Green 2026-27 salary (in) | $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_greenjo02_in_salary_m` | Josh Green 2026-27 salary, rounded | $14.7 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_greenjo02_in_total` | Josh Green remaining contract: years, total | 1 years, $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_ballla01_in_salary` | LaMelo Ball 2026-27 salary (in) | $40,770,520 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_ballla01_in_salary_m` | LaMelo Ball 2026-27 salary, rounded | $40.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_ballla01_in_total` | LaMelo Ball remaining contract: years, total | 3 years, $130,746,840 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_lylestr01_in_salary` | Trey Lyles 2026-27 salary (in) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_lylestr01_in_salary_m` | Trey Lyles 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_lylestr01_in_total` | Trey Lyles remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_randlju01_out_salary` | Julius Randle 2026-27 salary (out) | $33,333,334 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_randlju01_out_salary_m` | Julius Randle 2026-27 salary, rounded | $33.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_randlju01_out_total` | Julius Randle remaining contract: years, total | 2 years, $69,135,802 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_reidna01_out_salary` | Naz Reid 2026-27 salary (out) | $23,275,862 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_reidna01_out_salary_m` | Naz Reid 2026-27 salary, rounded | $23.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_reidna01_out_total` | Naz Reid remaining contract: years, total | 4 years, $103,448,276 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_dosunay01_retained_salary` | Ayo Dosunmu 2026-27 salary (retained) | $19,310,345 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_dosunay01_retained_salary_m` | Ayo Dosunmu 2026-27 salary, rounded | $19.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_dosunay01_retained_total` | Ayo Dosunmu remaining contract: years, total | 5 years, $112,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_clarkja02_retained_salary` | Jaylen Clark 2026-27 salary (retained) | $3,086,420 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_clarkja02_retained_salary_m` | Jaylen Clark 2026-27 salary, rounded | $3.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_clarkja02_retained_total` | Jaylen Clark remaining contract: years, total | 3 years, $10,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_phillju01_out_salary` | Julian Phillips 2026-27 salary (out) | $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_phillju01_out_salary_m` | Julian Phillips 2026-27 salary, rounded | $2.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_phillju01_out_total` | Julian Phillips remaining contract: years, total | 1 years, $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_willico04_in_salary` | Cody Williams 2026-27 salary (in) | $6,015,600 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_willico04_in_salary_m` | Cody Williams 2026-27 salary, rounded | $6.0 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_willico04_in_total` | Cody Williams remaining contract: years, total | 2 years, $13,685,490 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_konchjo01_in_salary` | John Konchar 2026-27 salary (in) | $4,504,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_konchjo01_in_salary_m` | John Konchar 2026-27 salary, rounded | $4.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_konchjo01_in_total` | John Konchar remaining contract: years, total | 3 years, $8,614,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_konchjo01_out_salary` | John Konchar 2026-27 salary (out) | $2,055,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_konchjo01_out_salary_m` | John Konchar 2026-27 salary, rounded | $2.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_kuminjo01_in_salary` | Jonathan Kuminga 2026-27 salary (in) | $6,064,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_kuminjo01_in_salary_m` | Jonathan Kuminga 2026-27 salary, rounded | $6.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_kuminjo01_in_total` | Jonathan Kuminga remaining contract: years, total | 2 years, $12,431,200 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_grades_read` | graded pieces fetched and read | 25 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_grades_whole_n` | national whole-offseason grades | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_grades_whole` | national whole-offseason grades, outlet and grade | ESPN C+; Bleacher Report D+; Bleacher Report B+; CBS Sports B; CBS Sports B; Yahoo Sports C; The Big Lead (Minute Media) A- | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_grades_trade_n` | national grades of the Ball trade alone | 8 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_grades_not_read` | pieces found but not read | 3 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
 
