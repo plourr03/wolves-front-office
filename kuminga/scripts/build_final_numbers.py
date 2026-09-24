@@ -455,6 +455,17 @@ def main():
             F("h3_%s_lo" % x.feature, S, "%s, champions' low" % x.label, "%.2f" % x.champ_lo, "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
             F("h3_%s_hi" % x.feature, S, "%s, champions' high" % x.label, "%.2f" % x.champ_hi, "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
             F("h3_%s_inside" % x.feature, S, "%s, non-champions inside the range" % x.label, int(x.non_inside), "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
+        td = csv("h3_tendency.csv")
+        F("h3t_n_champ", S, "tendency test: champions", int(td.n_champ.iloc[0]), "OBSERVED", "FACT", rh3, "h3_tendency.csv")
+        F("h3t_n_non", S, "tendency test: non-champions", int(td.n_non.iloc[0]), "OBSERVED", "FACT", rh3, "h3_tendency.csv")
+        F("h3t_lean_p", S, "tendency test: a feature leans below this two-sided p", "0.05", "ASSUMED", "FACT", rh3, "h1_h3_h5_profile.py LEAN_P")
+        F("h3t_n_lean", S, "features that lean", int(td.leans.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
+        F("h3t_lean_list", S, "the features that lean", "; ".join(td[td.leans].label) or "none", "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
+        med = lambda v: ("%.1f" % v).rstrip("0").rstrip(".")  # noqa: E731
+        for _, x in td.iterrows():
+            F("h3t_%s_champ_median" % x.feature, S, "%s, champions' median" % x.label, med(x.champ_median), "OBSERVED", "QUOTABLE", rh3, "h3_tendency.csv")
+            F("h3t_%s_non_median" % x.feature, S, "%s, non-champions' median" % x.label, med(x.non_median), "OBSERVED", "QUOTABLE", rh3, "h3_tendency.csv")
+            F("h3t_%s_p" % x.feature, S, "%s, two-sided rank-sum p" % x.label, "%.3f" % x.p_value, "OBSERVED", "QUOTABLE", rh3, "h3_tendency.csv")
         h1s = csv("h1_champion_sheet.csv")
         for _, x in h1s.iterrows():
             k1 = x.season.replace("-", "_")

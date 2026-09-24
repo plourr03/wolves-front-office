@@ -2024,3 +2024,22 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **Prose changed (sentence by sentence in the report).** Part 3: the Denver passage carries both continuity counts; the pattern paragraph carries 5.8 and 6.0 and 71% and 74%; the price paragraph's feature comparison is the eleven-season one, with the three-season list retired and the style comparison labeled; the Minnesota turn adds "and none was worse than sixth" and a new paragraph on Denver as the closest analog with the three differences. Part 4: the champion's path sentence. Feed version of Part 3 and the index updated. Methods page: both continuity definitions.
 
 **Gates.** Prose gate clean on fourteen documents; `audit_series.py` 552 checks, 0 problems (word map filled through twenty); reconcile clean; G1 and G2 in the profile run.
+
+### D105. The tendency line beside the range rule: medians and a rank-sum test for the five rank features, one sentence in Part 3, and the two tests on the methods page
+
+**Run IDs.** `h1_h3_h5_profile_20260924T201908Z`, `build_final_numbers_20260924T202012Z`, `render_piece_20260924T202013Z`, `reconcile_figures_20260924T202014Z`, `gate_prose_20260924T202015Z`, `audit_series_20260924T202016Z`. As of 2026-09-24.
+
+**What was added.** The range rule (D104) asks whether a feature is exclusive to champions and on eleven seasons answers no for everything. Bobby asked for the other question beside it: do champions lean somewhere the also-rans do not? For net-rating rank, post-All-Star rank, seed, offence rank and defence rank, `h1_h3_h5_profile.py` now reports the champions' median against the non-champions' median and a two-sided Mann-Whitney rank-sum p-value, 11 against 48, with a feature said to lean at p below 0.05 (`LEAN_P`, stated before the run). Output `outputs/h3_tendency.csv`; sheet keys `h3t_*` (medians, p-values, the lean list, the threshold as ASSUMED).
+
+**Result.**
+- Net-rating rank: champions' median 4 against 7, p 0.011, leans.
+- Seed: 1 against 4, p 0.002, leans.
+- Defence rank: 5 against 12, p 0.033, leans.
+- Offence rank: 3 against 7, p 0.114, does not clear the bar.
+- Post-All-Star rank: 5 against 10, p 0.212, does not clear the bar.
+
+**Prose.** One sentence in Part 3's pattern paragraph after the two range lines: no feature is exclusive to champions, but three lean, with the three median pairs, and offence and the second half named as not clearing the bar. Methods page: a paragraph on the two tests and what each answers, rendered from the sheet (the 48, the 11, the threshold, the lean list), placed before the C1 champions paragraph.
+
+**One gate adjusted.** G2 in the profile compared the html parser against the three-season snapshot run at git HEAD; HEAD now holds this script's own sheet, whose B-Ref columns are named differently, so G2 compares like with like whichever run HEAD holds. 21 values compared, 0 differ.
+
+**Gates.** Prose gate clean on fourteen documents; `audit_series.py` 558 checks, 0 problems; reconcile clean.

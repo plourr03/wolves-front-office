@@ -21,9 +21,13 @@ turnovers forced and defence share (B-Ref league page, z-scored within the seaso
 rim rate, size and top-three share. Reported on 2023-24 to 2025-26 as before and labeled as
 such; the same comparison on all eleven seasons is written to a second table for the record.
 
-RULE. A feature separates if no more than a quarter of the non-champions fall inside the
-champions' range (minimum to maximum), stated before the run. n is stated for every feature.
-Nothing here is a model.
+TWO TESTS. The RANGE RULE asks whether a feature is exclusive to champions: a feature
+separates if no more than a quarter of the non-champions fall inside the champions' range
+(minimum to maximum), stated before the run. The TENDENCY test asks whether champions lean
+somewhere the non-champions do not, without being exclusive: for net-rating rank,
+post-All-Star rank, seed, offence rank and defence rank, the champions' median against the
+non-champions' median and a two-sided Mann-Whitney rank-sum p-value, with n; a feature leans
+at p below LEAN_P. n is stated for every feature. Nothing here is a model.
 
 GATES, each fatal. G1: B-Ref NRtg against the warehouse net rating, every season,
 correlation at least 0.99. G2: for 2023-24 to 2025-26 the B-Ref-derived columns (NRtg and
@@ -48,6 +52,7 @@ import sys
 
 import numpy as np
 import pandas as pd
+from scipy.stats import mannwhitneyu
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -65,6 +70,7 @@ OUT_DIR = os.path.join(REPO, "kuminga", "outputs")
 OUT_H1 = os.path.join(OUT_DIR, "h1_champion_sheet.csv")
 OUT_H3 = os.path.join(OUT_DIR, "h3_separation.csv")
 OUT_H3S = os.path.join(OUT_DIR, "h3_separation_style_eleven.csv")
+OUT_TD = os.path.join(OUT_DIR, "h3_tendency.csv")
 OUT_H5 = os.path.join(OUT_DIR, "h5_minnesota_sheet.csv")
 OUT_R = os.path.join(OUT_DIR, "h5_watch_routes.csv")
 OUT_SAMPLE = os.path.join(OUT_DIR, "h3_sample.csv")
@@ -106,6 +112,9 @@ NUM = [
     ("size", "size (z)", None, "three"),
     ("top3", "top-three minutes share (z)", None, "three"),
 ]
+TENDENCY = [("nrtg_rank", "net rating rank"), ("post_asb_rank", "post-All-Star net rank"), ("seed", "seed"),
+            ("ortg_rank", "offence rank"), ("drtg_rank", "defence rank")]
+LEAN_P = 0.05
 CLOSABLE = {"nrtg_rank", "ortg_rank", "drtg_rank", "post_asb_rank", "seed", "po_minus_rs",
             "top8_po_games_missed", "top5_share_po", "tighten"}
 N3MAP = {"pace_z": "pace", "fg3a_z": "fg3a_rate", "oreb_z": "oreb_rate", "opp_tov_z": "opp_tov_rate",
@@ -275,12 +284,15 @@ def main():
                 if not len(nw):
                     continue
                 nw = nw.iloc[0]
-                for a, b in (("nrtg", "nrtg_bref"), ("nrtg_rank", "nrtg_rank_bref"), ("ortg_rank", "ortg_rank"),
-                             ("drtg_rank", "drtg_rank"), ("seed", "seed"), ("best_player", "best_player"),
-                             ("best_vorp", "best_vorp")):
+                # HEAD may hold the three-season snapshot run (its `nrtg` is B-Ref's) or a run of
+                # this script (which keeps B-Ref's under `nrtg_bref`): compare like with like
+                pairs = ((("nrtg_bref", "nrtg_bref"), ("nrtg_rank_bref", "nrtg_rank_bref")) if "nrtg_bref" in old.columns
+                         else (("nrtg", "nrtg_bref"), ("nrtg_rank", "nrtg_rank_bref")))
+                for a, b in pairs + (("ortg_rank", "ortg_rank"), ("drtg_rank", "drtg_rank"), ("seed", "seed"),
+                                     ("best_player", "best_player"), ("best_vorp", "best_vorp")):
                     if str(o[a]) != str(nw[b]) and not (isinstance(o[a], float) and abs(float(o[a]) - float(nw[b])) < 1e-9):
                         bad.append("%s %s %s: was %r, now %r" % (o.season, o.team, a, o[a], nw[b]))
-            r.note("G2: %d B-Ref-derived values compared with the three-season run, %d differ%s"
+            r.note("G2: %d B-Ref-derived values compared with the run at HEAD, %d differ%s"
                    % (7 * len(old[old.season.isin(STYLE_SEASONS)]), len(bad), (": " + "; ".join(bad)) if bad else ""))
             if bad:
                 raise RuntimeError("G2 failed: the html parser does not reproduce the snapshot run")
@@ -327,6 +339,23 @@ def main():
             r.note("  %-52s [%s] champs %.2f..%.2f (median %.2f) non %.2f..%.2f (median %.2f), %2d of %2d inside %s"
                    % (x.label, "11" if x.seasons.startswith("eleven") else " 3", x.champ_lo, x.champ_hi, x.champ_median,
                       x.non_lo, x.non_hi, x.non_median, x.non_inside, x.n_non, "SEPARATES" if x.separates else ""))
+        # ---- the tendency line: medians and a rank-sum test, eleven seasons ----------------
+        tend = []
+        for col, lab in TENDENCY:
+            c_, n_ = ch[col].dropna().astype(float), nc[col].dropna().astype(float)
+            u, p = mannwhitneyu(c_, n_, alternative="two-sided")
+            tend.append(dict(feature=col, label=lab, n_champ=len(c_), n_non=len(n_),
+                             champ_median=float(c_.median()), non_median=float(n_.median()),
+                             u_stat=float(u), p_value=float(p), leans=bool(p < LEAN_P),
+                             direction="champions better (lower rank)" if c_.median() < n_.median()
+                             else ("champions worse (higher rank)" if c_.median() > n_.median() else "same median")))
+        TD = pd.DataFrame(tend)
+        TD.to_csv(OUT_TD, index=False)
+        r.note("H3 tendency, eleven seasons (champions n=%d, non-champions n=%d), two-sided rank-sum; leans at p < %.2f:"
+               % (len(ch), len(nc), LEAN_P))
+        for _, x in TD.iterrows():
+            r.note("  %-26s median %4.1f vs %4.1f  U %6.1f  p %.4f  %s" % (x.label, x.champ_median, x.non_median, x.u_stat,
+                                                                          x.p_value, "LEANS" if x.leans else ""))
         r.note("H3, style features on eleven seasons, for the record:")
         for _, x in H3S.iterrows():
             r.note("  %-52s champs %.2f..%.2f non %.2f..%.2f, %2d of %2d inside %s"
@@ -397,13 +426,13 @@ def main():
             r.note("  %-52s %8.2f (%s) champions %.2f..%.2f -> %s; %s"
                    % (x.label, x.minnesota, x.basis, x.champ_lo, x.champ_hi, x.status, x.closable))
         r.note("routed to N8: %s" % ("; ".join(R.threshold) if len(R) else "none"))
-        for f in (OUT_SAMPLE, OUT_H1, OUT_H3, OUT_H3S, OUT_H5, OUT_R):
+        for f in (OUT_SAMPLE, OUT_H1, OUT_H3, OUT_H3S, OUT_TD, OUT_H5, OUT_R):
             r.output(f)
-        write_doc(r, H1, H3, H3S, H5, R, pd.DataFrame(gate_rows), len(ch), len(nc), len(ch3), len(nc3), PRE)
+        write_doc(r, H1, H3, H3S, TD, H5, R, pd.DataFrame(gate_rows), len(ch), len(nc), len(ch3), len(nc3), PRE)
         r.output(OUT_MD)
 
 
-def write_doc(r, H1, H3, H3S, H5, R, G, n_ch, n_nc, n_ch3, n_nc3, PRE):
+def write_doc(r, H1, H3, H3S, TD, H5, R, G, n_ch, n_nc, n_ch3, n_nc3, PRE):
     L = ["# H1, H3, H5: the champion profile, and Minnesota on it\n",
          "*As of %s. Eleven seasons (2015-16 to 2025-26): %d champions against %d preseason top-five teams that did not win, "
          "every team built with the champions' own machinery (`c1_champions.build`). OBSERVED throughout, except Minnesota's "
@@ -450,6 +479,17 @@ def write_doc(r, H1, H3, H3S, H5, R, G, n_ch, n_nc, n_ch3, n_nc3, PRE):
         ("On the team-level features, %s. On the style features (three seasons), %s." % (
             ", ".join(sep[sep.seasons.str.startswith("eleven")].label) or "nothing",
             ", ".join(sep[sep.seasons.str.startswith("three")].label) or "nothing"))))
+    L.append("**The tendency line.** The range rule asks whether a feature is exclusive to champions. This asks whether "
+             "champions lean somewhere the non-champions do not: the champions' median against the non-champions' median, "
+             "and a two-sided Mann-Whitney rank-sum p-value, %d champions against %d non-champions; a feature leans at p "
+             "below %.2f. A feature can lean without being exclusive.\n" % (n_ch, n_nc, LEAN_P))
+    L.append("| feature | champions' median (n) | non-champions' median (n) | U | p | leans |")
+    L.append("|---|---:|---:|---:|---:|---|")
+    for _, x in TD.iterrows():
+        L.append("| %s | %.1f (%d) | %.1f (%d) | %.1f | %.4f | %s |"
+                 % (x.label, x.champ_median, x.n_champ, x.non_median, x.n_non, x.u_stat, x.p_value,
+                    "**yes**, " + x.direction if x.leans else "no"))
+    L.append("")
     L.append("**The style features on all eleven seasons, for the record.**\n")
     L.append("| feature | champions: low / high | non-champions: low / high | inside | separates |")
     L.append("|---|---|---|---|---|")

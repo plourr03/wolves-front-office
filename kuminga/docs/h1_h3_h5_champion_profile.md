@@ -1,6 +1,6 @@
 # H1, H3, H5: the champion profile, and Minnesota on it
 
-*As of 2026-09-24. Eleven seasons (2015-16 to 2025-26): 11 champions against 48 preseason top-five teams that did not win, every team built with the champions' own machinery (`c1_champions.build`). OBSERVED throughout, except Minnesota's 2026-27 market price and rank and the continuity of its projected rotation. Run `h1_h3_h5_profile_20260924T200418Z`. Basketball-Reference pages cached in `kuminga/data/bref/` with their hashes in the manifest.*
+*As of 2026-09-24. Eleven seasons (2015-16 to 2025-26): 11 champions against 48 preseason top-five teams that did not win, every team built with the champions' own machinery (`c1_champions.build`). OBSERVED throughout, except Minnesota's 2026-27 market price and rank and the continuity of its projected rotation. Run `h1_h3_h5_profile_20260924T201908Z`. Basketball-Reference pages cached in `kuminga/data/bref/` with their hashes in the manifest.*
 
 **Two sources for the net ratings.** B-Ref's NRtg against this warehouse's game-log net rating, season by season: correlation 1.000, 0.999, 0.999, 1.000, 1.000, 0.999, 1.000, 0.999, 1.000, 1.000, 1.000; mean absolute difference 0.14, 0.16, 0.15, 0.12, 0.11, 0.15, 0.12, 0.13, 0.12, 0.11, 0.14 points; identical league rank for 80%, 80%, 77%, 80%, 77%, 73%, 73%, 80%, 57%, 73%, 87% of teams.
 
@@ -57,6 +57,16 @@ Team-level features on all eleven seasons: n = 11 champions against 48 non-champ
 | top-three minutes share (z) | three (2023-24 to 2025-26) | -0.03 / 0.16 / 1.02 | -1.43 / 0.38 / 2.69 | 5 of 14 | no | no signal (coef -0.39) |
 
 **What separates.** On the team-level features, nothing. On the style features (three seasons), nothing.
+
+**The tendency line.** The range rule asks whether a feature is exclusive to champions. This asks whether champions lean somewhere the non-champions do not: the champions' median against the non-champions' median, and a two-sided Mann-Whitney rank-sum p-value, 11 champions against 48 non-champions; a feature leans at p below 0.05. A feature can lean without being exclusive.
+
+| feature | champions' median (n) | non-champions' median (n) | U | p | leans |
+|---|---:|---:|---:|---:|---|
+| net rating rank | 4.0 (11) | 7.0 (48) | 132.5 | 0.0105 | **yes**, champions better (lower rank) |
+| post-All-Star net rank | 5.0 (11) | 10.0 (48) | 199.5 | 0.2117 | no |
+| seed | 1.0 (11) | 4.0 (48) | 107.5 | 0.0021 | **yes**, champions better (lower rank) |
+| offence rank | 3.0 (11) | 7.0 (48) | 182.5 | 0.1137 | no |
+| defence rank | 5.0 (11) | 12.0 (48) | 154.0 | 0.0326 | **yes**, champions better (lower rank) |
 
 **The style features on all eleven seasons, for the record.**
 

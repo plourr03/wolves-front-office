@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260924T200524Z`. 1664 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260924T202012Z`. 1684 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -279,170 +279,190 @@
 | `h2_hi` | champions' preseason price, high | 57.65% | OBSERVED | QUOTABLE | `champions_table_20260924T184745Z` |
 | `h2_median` | champions' preseason price, median | 12.75% | OBSERVED | QUOTABLE | `champions_table_20260924T184745Z` |
 | `h2_worst_rank` | worst preseason rank of a champion | 9 | OBSERVED | QUOTABLE | `champions_table_20260924T184745Z` |
-| `h3_n_champ` | champions in the comparison | 11 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_n_non` | preseason top-5 non-champions, eleven seasons | 48 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_n_sep` | team-level features that separate, eleven seasons | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_n_feat` | team-level features compared, eleven seasons | 19 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_sep_list` | the separating team-level features | none | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3s_n_non` | preseason top-5 non-champions, three seasons (style) | 14 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3s_n_sep` | style features that separate, three seasons | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3s_n_feat` | style features compared, three seasons | 8 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3s11_n_sep` | style features that separate, eleven seasons (for the record) | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_implied_lo` | preseason implied %, champions' low | 4.01 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_implied_hi` | preseason implied %, champions' high | 57.65 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_implied_inside` | preseason implied %, non-champions inside the range | 44 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_rank_lo` | preseason rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_rank_hi` | preseason rank, champions' high | 9.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_pre_rank_inside` | preseason rank, non-champions inside the range | 48 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_nrtg_rank_lo` | net rating rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_nrtg_rank_hi` | net rating rank, champions' high | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_nrtg_rank_inside` | net rating rank, non-champions inside the range | 21 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_ortg_rank_lo` | offence rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_ortg_rank_hi` | offence rank, champions' high | 17.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_ortg_rank_inside` | offence rank, non-champions inside the range | 43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_drtg_rank_lo` | defence rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_drtg_rank_hi` | defence rank, champions' high | 14.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_drtg_rank_inside` | defence rank, non-champions inside the range | 34 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_post_asb_rank_lo` | post-All-Star net rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_post_asb_rank_hi` | post-All-Star net rank, champions' high | 18.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_post_asb_rank_inside` | post-All-Star net rank, non-champions inside the range | 42 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_seed_lo` | seed, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_seed_hi` | seed, champions' high | 3.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_seed_inside` | seed, non-champions inside the range | 22 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_po_minus_rs_lo` | playoff minus regular-season net, champions' low | -4.13 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_po_minus_rs_hi` | playoff minus regular-season net, champions' high | 9.07 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_po_minus_rs_inside` | playoff minus regular-season net, non-champions inside the range | 17 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_best_vorp_lo` | best player VORP, champions' low | 3.30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_best_vorp_hi` | best player VORP, champions' high | 8.90 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_best_vorp_inside` | best player VORP, non-champions inside the range | 39 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_age_lo` | top-8 age, champions' low | 25.50 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_age_hi` | top-8 age, champions' high | 29.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_age_inside` | top-8 age, non-champions inside the range | 30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_appear_lo` | top-8 returning, by appearance, champions' low | 4.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_appear_hi` | top-8 returning, by appearance, champions' high | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_appear_inside` | top-8 returning, by appearance, non-champions inside the range | 42 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_contract_lo` | top-8 returning, by contract, champions' low | 4.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_contract_hi` | top-8 returning, by contract, champions' high | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_returning_contract_inside` | top-8 returning, by contract, non-champions inside the range | 43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_appear_lo` | returning share of playoff minutes, by appearance, champions' low | 0.52 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_appear_hi` | returning share of playoff minutes, by appearance, champions' high | 0.91 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_appear_inside` | returning share of playoff minutes, by appearance, non-champions inside the range | 30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_contract_lo` | returning share of playoff minutes, by contract, champions' low | 0.56 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_contract_hi` | returning share of playoff minutes, by contract, champions' high | 0.91 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_returning_share_contract_inside` | returning share of playoff minutes, by contract, non-champions inside the range | 31 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_rs_games_missed_lo` | top-8 regular-season games missed, champions' low | 54.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_rs_games_missed_hi` | top-8 regular-season games missed, champions' high | 154.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_rs_games_missed_inside` | top-8 regular-season games missed, non-champions inside the range | 38 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_po_games_missed_lo` | top-8 playoff games missed, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_po_games_missed_hi` | top-8 playoff games missed, champions' high | 15.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top8_po_games_missed_inside` | top-8 playoff games missed, non-champions inside the range | 33 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_rs_lo` | top-five minute share, regular season, champions' low | 0.51 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_rs_hi` | top-five minute share, regular season, champions' high | 0.60 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_rs_inside` | top-five minute share, regular season, non-champions inside the range | 25 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_po_lo` | top-five minute share, playoffs, champions' low | 0.63 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_po_hi` | top-five minute share, playoffs, champions' high | 0.76 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_top5_share_po_inside` | top-five minute share, playoffs, non-champions inside the range | 33 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_tighten_lo` | top-five share, playoffs minus regular season, champions' low | 0.07 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_tighten_hi` | top-five share, playoffs minus regular season, champions' high | 0.19 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h3_tighten_inside` | top-five share, playoffs minus regular season, non-champions inside the range | 32 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2015_16_best` | 2015-16 champion's best player by VORP | LeBron James | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2015_16_best_vorp` | 2015-16 champion's best player, VORP | 7.5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2015_16_ortg_rank` | 2015-16 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2015_16_drtg_rank` | 2015-16 champion's defence rank | 10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2016_17_best` | 2016-17 champion's best player by VORP | Stephen Curry | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2016_17_best_vorp` | 2016-17 champion's best player, VORP | 5.9 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2016_17_ortg_rank` | 2016-17 champion's offence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2016_17_drtg_rank` | 2016-17 champion's defence rank | 2 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2017_18_best` | 2017-18 champion's best player by VORP | Kevin Durant | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2017_18_best_vorp` | 2017-18 champion's best player, VORP | 5.5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2017_18_ortg_rank` | 2017-18 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2017_18_drtg_rank` | 2017-18 champion's defence rank | 11 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2018_19_best` | 2018-19 champion's best player by VORP | Kawhi Leonard | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2018_19_best_vorp` | 2018-19 champion's best player, VORP | 4.7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2018_19_ortg_rank` | 2018-19 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2018_19_drtg_rank` | 2018-19 champion's defence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2019_20_best` | 2019-20 champion's best player by VORP | LeBron James | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2019_20_best_vorp` | 2019-20 champion's best player, VORP | 6.1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2019_20_ortg_rank` | 2019-20 champion's offence rank | 11 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2019_20_drtg_rank` | 2019-20 champion's defence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2020_21_best` | 2020-21 champion's best player by VORP | Giannis Antetokounmpo | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2020_21_best_vorp` | 2020-21 champion's best player, VORP | 5.6 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2020_21_ortg_rank` | 2020-21 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2020_21_drtg_rank` | 2020-21 champion's defence rank | 10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2021_22_best` | 2021-22 champion's best player by VORP | Stephen Curry | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2021_22_best_vorp` | 2021-22 champion's best player, VORP | 4.4 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2021_22_ortg_rank` | 2021-22 champion's offence rank | 17 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2021_22_drtg_rank` | 2021-22 champion's defence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2022_23_best` | 2022-23 champion's best player by VORP | Nikola Jokić | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2022_23_best_vorp` | 2022-23 champion's best player, VORP | 8.8 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2022_23_ortg_rank` | 2022-23 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2022_23_drtg_rank` | 2022-23 champion's defence rank | 14 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2023_24_best` | 2023-24 champion's best player by VORP | Jayson Tatum | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2023_24_best_vorp` | 2023-24 champion's best player, VORP | 4.7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2023_24_ortg_rank` | 2023-24 champion's offence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2023_24_drtg_rank` | 2023-24 champion's defence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2024_25_best` | 2024-25 champion's best player by VORP | Shai Gilgeous-Alexander | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2024_25_best_vorp` | 2024-25 champion's best player, VORP | 8.9 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2024_25_ortg_rank` | 2024-25 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2024_25_drtg_rank` | 2024-25 champion's defence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2025_26_best` | 2025-26 champion's best player by VORP | Jalen Brunson | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2025_26_best_vorp` | 2025-26 champion's best player, VORP | 3.3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2025_26_ortg_rank` | 2025-26 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h1_2025_26_drtg_rank` | 2025-26 champion's defence rank | 7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pre_implied` | Minnesota, preseason implied % (2026-27 (known now)) | 3.16 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pre_implied_status` | Minnesota, preseason implied %: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pre_rank` | Minnesota, preseason rank (2026-27 (known now)) | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pre_rank_status` | Minnesota, preseason rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_nrtg_rank` | Minnesota, net rating rank (2025-26 actual) | 10.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_nrtg_rank_status` | Minnesota, net rating rank: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_ortg_rank` | Minnesota, offence rank (2025-26 actual) | 12.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_ortg_rank_status` | Minnesota, offence rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_drtg_rank` | Minnesota, defence rank (2025-26 actual) | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_drtg_rank_status` | Minnesota, defence rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_post_asb_rank` | Minnesota, post-All-Star net rank (2025-26 actual) | 18.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_post_asb_rank_status` | Minnesota, post-All-Star net rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_seed` | Minnesota, seed (2025-26 actual) | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_seed_status` | Minnesota, seed: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_po_minus_rs` | Minnesota, playoff minus regular-season net (2025-26 actual) | -8.96 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_po_minus_rs_status` | Minnesota, playoff minus regular-season net: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_best_vorp` | Minnesota, best player VORP (2025-26 actual) | 3.50 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_best_vorp_status` | Minnesota, best player VORP: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_age` | Minnesota, top-8 age (2025-26 actual) | 28.80 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_age_status` | Minnesota, top-8 age: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_returning_appear` | Minnesota, top-8 returning, by appearance (2026-27 (known now)) | 5.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_returning_appear_status` | Minnesota, top-8 returning, by appearance: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_returning_contract` | Minnesota, top-8 returning, by contract (2026-27 (known now)) | 5.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_returning_contract_status` | Minnesota, top-8 returning, by contract: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_returning_share_appear` | Minnesota, returning share of playoff minutes, by appearance (2026-27 (known now)) | 0.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_returning_share_appear_status` | Minnesota, returning share of playoff minutes, by appearance: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_returning_share_contract` | Minnesota, returning share of playoff minutes, by contract (2026-27 (known now)) | 0.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_returning_share_contract_status` | Minnesota, returning share of playoff minutes, by contract: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_rs_games_missed` | Minnesota, top-8 regular-season games missed (2025-26 actual) | 117.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_rs_games_missed_status` | Minnesota, top-8 regular-season games missed: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_po_games_missed` | Minnesota, top-8 playoff games missed (2025-26 actual) | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top8_po_games_missed_status` | Minnesota, top-8 playoff games missed: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top5_share_rs` | Minnesota, top-five minute share, regular season (2025-26 actual) | 0.61 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top5_share_rs_status` | Minnesota, top-five minute share, regular season: status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top5_share_po` | Minnesota, top-five minute share, playoffs (2025-26 actual) | 0.64 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top5_share_po_status` | Minnesota, top-five minute share, playoffs: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_tighten` | Minnesota, top-five share, playoffs minus regular season (2025-26 actual) | 0.03 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_tighten_status` | Minnesota, top-five share, playoffs minus regular season: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pace_z` | Minnesota, pace (z) (2025-26 actual) | 0.55 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_pace_z_status` | Minnesota, pace (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_fg3a_z` | Minnesota, three-point rate (z) (2025-26 actual) | 0.12 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_fg3a_z_status` | Minnesota, three-point rate (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_oreb_z` | Minnesota, offensive rebound rate (z) (2025-26 actual) | -0.10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_oreb_z_status` | Minnesota, offensive rebound rate (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_opp_tov_z` | Minnesota, turnovers forced (z) (2025-26 actual) | 0.24 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_opp_tov_z_status` | Minnesota, turnovers forced (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_def_share_z` | Minnesota, defence share (z) (2025-26 actual) | 0.43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_def_share_z_status` | Minnesota, defence share (z): status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_rim_rate` | Minnesota, rim rate (z) (2025-26 actual) | 0.32 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_rim_rate_status` | Minnesota, rim rate (z): status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_size` | Minnesota, size (z) (2025-26 actual) | 0.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_size_status` | Minnesota, size (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top3` | Minnesota, top-three minutes share (z) (2025-26 actual) | 0.41 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T200418Z` |
-| `h5_top3_status` | Minnesota, top-three minutes share (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T200418Z` |
+| `h3_n_champ` | champions in the comparison | 11 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_n_non` | preseason top-5 non-champions, eleven seasons | 48 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_n_sep` | team-level features that separate, eleven seasons | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_n_feat` | team-level features compared, eleven seasons | 19 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_sep_list` | the separating team-level features | none | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3s_n_non` | preseason top-5 non-champions, three seasons (style) | 14 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3s_n_sep` | style features that separate, three seasons | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3s_n_feat` | style features compared, three seasons | 8 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3s11_n_sep` | style features that separate, eleven seasons (for the record) | 0 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_implied_lo` | preseason implied %, champions' low | 4.01 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_implied_hi` | preseason implied %, champions' high | 57.65 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_implied_inside` | preseason implied %, non-champions inside the range | 44 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_rank_lo` | preseason rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_rank_hi` | preseason rank, champions' high | 9.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_pre_rank_inside` | preseason rank, non-champions inside the range | 48 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_nrtg_rank_lo` | net rating rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_nrtg_rank_hi` | net rating rank, champions' high | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_nrtg_rank_inside` | net rating rank, non-champions inside the range | 21 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_ortg_rank_lo` | offence rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_ortg_rank_hi` | offence rank, champions' high | 17.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_ortg_rank_inside` | offence rank, non-champions inside the range | 43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_drtg_rank_lo` | defence rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_drtg_rank_hi` | defence rank, champions' high | 14.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_drtg_rank_inside` | defence rank, non-champions inside the range | 34 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_post_asb_rank_lo` | post-All-Star net rank, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_post_asb_rank_hi` | post-All-Star net rank, champions' high | 18.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_post_asb_rank_inside` | post-All-Star net rank, non-champions inside the range | 42 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_seed_lo` | seed, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_seed_hi` | seed, champions' high | 3.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_seed_inside` | seed, non-champions inside the range | 22 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_po_minus_rs_lo` | playoff minus regular-season net, champions' low | -4.13 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_po_minus_rs_hi` | playoff minus regular-season net, champions' high | 9.07 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_po_minus_rs_inside` | playoff minus regular-season net, non-champions inside the range | 17 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_best_vorp_lo` | best player VORP, champions' low | 3.30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_best_vorp_hi` | best player VORP, champions' high | 8.90 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_best_vorp_inside` | best player VORP, non-champions inside the range | 39 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_age_lo` | top-8 age, champions' low | 25.50 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_age_hi` | top-8 age, champions' high | 29.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_age_inside` | top-8 age, non-champions inside the range | 30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_appear_lo` | top-8 returning, by appearance, champions' low | 4.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_appear_hi` | top-8 returning, by appearance, champions' high | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_appear_inside` | top-8 returning, by appearance, non-champions inside the range | 42 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_contract_lo` | top-8 returning, by contract, champions' low | 4.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_contract_hi` | top-8 returning, by contract, champions' high | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_returning_contract_inside` | top-8 returning, by contract, non-champions inside the range | 43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_appear_lo` | returning share of playoff minutes, by appearance, champions' low | 0.52 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_appear_hi` | returning share of playoff minutes, by appearance, champions' high | 0.91 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_appear_inside` | returning share of playoff minutes, by appearance, non-champions inside the range | 30 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_contract_lo` | returning share of playoff minutes, by contract, champions' low | 0.56 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_contract_hi` | returning share of playoff minutes, by contract, champions' high | 0.91 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_returning_share_contract_inside` | returning share of playoff minutes, by contract, non-champions inside the range | 31 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_rs_games_missed_lo` | top-8 regular-season games missed, champions' low | 54.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_rs_games_missed_hi` | top-8 regular-season games missed, champions' high | 154.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_rs_games_missed_inside` | top-8 regular-season games missed, non-champions inside the range | 38 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_po_games_missed_lo` | top-8 playoff games missed, champions' low | 1.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_po_games_missed_hi` | top-8 playoff games missed, champions' high | 15.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top8_po_games_missed_inside` | top-8 playoff games missed, non-champions inside the range | 33 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_rs_lo` | top-five minute share, regular season, champions' low | 0.51 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_rs_hi` | top-five minute share, regular season, champions' high | 0.60 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_rs_inside` | top-five minute share, regular season, non-champions inside the range | 25 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_po_lo` | top-five minute share, playoffs, champions' low | 0.63 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_po_hi` | top-five minute share, playoffs, champions' high | 0.76 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_top5_share_po_inside` | top-five minute share, playoffs, non-champions inside the range | 33 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_tighten_lo` | top-five share, playoffs minus regular season, champions' low | 0.07 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_tighten_hi` | top-five share, playoffs minus regular season, champions' high | 0.19 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3_tighten_inside` | top-five share, playoffs minus regular season, non-champions inside the range | 32 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_n_champ` | tendency test: champions | 11 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_n_non` | tendency test: non-champions | 48 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_lean_p` | tendency test: a feature leans below this two-sided p | 0.05 | ASSUMED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_n_lean` | features that lean | 3 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_lean_list` | the features that lean | net rating rank; seed; defence rank | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_nrtg_rank_champ_median` | net rating rank, champions' median | 4 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_nrtg_rank_non_median` | net rating rank, non-champions' median | 7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_nrtg_rank_p` | net rating rank, two-sided rank-sum p | 0.010 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_post_asb_rank_champ_median` | post-All-Star net rank, champions' median | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_post_asb_rank_non_median` | post-All-Star net rank, non-champions' median | 10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_post_asb_rank_p` | post-All-Star net rank, two-sided rank-sum p | 0.212 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_seed_champ_median` | seed, champions' median | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_seed_non_median` | seed, non-champions' median | 4 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_seed_p` | seed, two-sided rank-sum p | 0.002 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_ortg_rank_champ_median` | offence rank, champions' median | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_ortg_rank_non_median` | offence rank, non-champions' median | 7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_ortg_rank_p` | offence rank, two-sided rank-sum p | 0.114 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_drtg_rank_champ_median` | defence rank, champions' median | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_drtg_rank_non_median` | defence rank, non-champions' median | 12 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_drtg_rank_p` | defence rank, two-sided rank-sum p | 0.033 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2015_16_best` | 2015-16 champion's best player by VORP | LeBron James | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2015_16_best_vorp` | 2015-16 champion's best player, VORP | 7.5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2015_16_ortg_rank` | 2015-16 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2015_16_drtg_rank` | 2015-16 champion's defence rank | 10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2016_17_best` | 2016-17 champion's best player by VORP | Stephen Curry | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2016_17_best_vorp` | 2016-17 champion's best player, VORP | 5.9 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2016_17_ortg_rank` | 2016-17 champion's offence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2016_17_drtg_rank` | 2016-17 champion's defence rank | 2 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2017_18_best` | 2017-18 champion's best player by VORP | Kevin Durant | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2017_18_best_vorp` | 2017-18 champion's best player, VORP | 5.5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2017_18_ortg_rank` | 2017-18 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2017_18_drtg_rank` | 2017-18 champion's defence rank | 11 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2018_19_best` | 2018-19 champion's best player by VORP | Kawhi Leonard | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2018_19_best_vorp` | 2018-19 champion's best player, VORP | 4.7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2018_19_ortg_rank` | 2018-19 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2018_19_drtg_rank` | 2018-19 champion's defence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2019_20_best` | 2019-20 champion's best player by VORP | LeBron James | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2019_20_best_vorp` | 2019-20 champion's best player, VORP | 6.1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2019_20_ortg_rank` | 2019-20 champion's offence rank | 11 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2019_20_drtg_rank` | 2019-20 champion's defence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2020_21_best` | 2020-21 champion's best player by VORP | Giannis Antetokounmpo | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2020_21_best_vorp` | 2020-21 champion's best player, VORP | 5.6 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2020_21_ortg_rank` | 2020-21 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2020_21_drtg_rank` | 2020-21 champion's defence rank | 10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2021_22_best` | 2021-22 champion's best player by VORP | Stephen Curry | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2021_22_best_vorp` | 2021-22 champion's best player, VORP | 4.4 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2021_22_ortg_rank` | 2021-22 champion's offence rank | 17 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2021_22_drtg_rank` | 2021-22 champion's defence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2022_23_best` | 2022-23 champion's best player by VORP | Nikola Jokić | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2022_23_best_vorp` | 2022-23 champion's best player, VORP | 8.8 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2022_23_ortg_rank` | 2022-23 champion's offence rank | 5 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2022_23_drtg_rank` | 2022-23 champion's defence rank | 14 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2023_24_best` | 2023-24 champion's best player by VORP | Jayson Tatum | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2023_24_best_vorp` | 2023-24 champion's best player, VORP | 4.7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2023_24_ortg_rank` | 2023-24 champion's offence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2023_24_drtg_rank` | 2023-24 champion's defence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2024_25_best` | 2024-25 champion's best player by VORP | Shai Gilgeous-Alexander | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2024_25_best_vorp` | 2024-25 champion's best player, VORP | 8.9 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2024_25_ortg_rank` | 2024-25 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2024_25_drtg_rank` | 2024-25 champion's defence rank | 1 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2025_26_best` | 2025-26 champion's best player by VORP | Jalen Brunson | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2025_26_best_vorp` | 2025-26 champion's best player, VORP | 3.3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2025_26_ortg_rank` | 2025-26 champion's offence rank | 3 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h1_2025_26_drtg_rank` | 2025-26 champion's defence rank | 7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pre_implied` | Minnesota, preseason implied % (2026-27 (known now)) | 3.16 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pre_implied_status` | Minnesota, preseason implied %: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pre_rank` | Minnesota, preseason rank (2026-27 (known now)) | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pre_rank_status` | Minnesota, preseason rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_nrtg_rank` | Minnesota, net rating rank (2025-26 actual) | 10.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_nrtg_rank_status` | Minnesota, net rating rank: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_ortg_rank` | Minnesota, offence rank (2025-26 actual) | 12.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_ortg_rank_status` | Minnesota, offence rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_drtg_rank` | Minnesota, defence rank (2025-26 actual) | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_drtg_rank_status` | Minnesota, defence rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_post_asb_rank` | Minnesota, post-All-Star net rank (2025-26 actual) | 18.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_post_asb_rank_status` | Minnesota, post-All-Star net rank: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_seed` | Minnesota, seed (2025-26 actual) | 6.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_seed_status` | Minnesota, seed: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_po_minus_rs` | Minnesota, playoff minus regular-season net (2025-26 actual) | -8.96 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_po_minus_rs_status` | Minnesota, playoff minus regular-season net: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_best_vorp` | Minnesota, best player VORP (2025-26 actual) | 3.50 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_best_vorp_status` | Minnesota, best player VORP: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_age` | Minnesota, top-8 age (2025-26 actual) | 28.80 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_age_status` | Minnesota, top-8 age: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_returning_appear` | Minnesota, top-8 returning, by appearance (2026-27 (known now)) | 5.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_returning_appear_status` | Minnesota, top-8 returning, by appearance: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_returning_contract` | Minnesota, top-8 returning, by contract (2026-27 (known now)) | 5.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_returning_contract_status` | Minnesota, top-8 returning, by contract: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_returning_share_appear` | Minnesota, returning share of playoff minutes, by appearance (2026-27 (known now)) | 0.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_returning_share_appear_status` | Minnesota, returning share of playoff minutes, by appearance: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_returning_share_contract` | Minnesota, returning share of playoff minutes, by contract (2026-27 (known now)) | 0.70 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_returning_share_contract_status` | Minnesota, returning share of playoff minutes, by contract: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_rs_games_missed` | Minnesota, top-8 regular-season games missed (2025-26 actual) | 117.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_rs_games_missed_status` | Minnesota, top-8 regular-season games missed: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_po_games_missed` | Minnesota, top-8 playoff games missed (2025-26 actual) | 8.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top8_po_games_missed_status` | Minnesota, top-8 playoff games missed: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top5_share_rs` | Minnesota, top-five minute share, regular season (2025-26 actual) | 0.61 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top5_share_rs_status` | Minnesota, top-five minute share, regular season: status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top5_share_po` | Minnesota, top-five minute share, playoffs (2025-26 actual) | 0.64 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top5_share_po_status` | Minnesota, top-five minute share, playoffs: status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_tighten` | Minnesota, top-five share, playoffs minus regular season (2025-26 actual) | 0.03 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_tighten_status` | Minnesota, top-five share, playoffs minus regular season: status | outside, short of it | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pace_z` | Minnesota, pace (z) (2025-26 actual) | 0.55 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_pace_z_status` | Minnesota, pace (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_fg3a_z` | Minnesota, three-point rate (z) (2025-26 actual) | 0.12 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_fg3a_z_status` | Minnesota, three-point rate (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_oreb_z` | Minnesota, offensive rebound rate (z) (2025-26 actual) | -0.10 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_oreb_z_status` | Minnesota, offensive rebound rate (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_opp_tov_z` | Minnesota, turnovers forced (z) (2025-26 actual) | 0.24 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_opp_tov_z_status` | Minnesota, turnovers forced (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_def_share_z` | Minnesota, defence share (z) (2025-26 actual) | 0.43 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_def_share_z_status` | Minnesota, defence share (z): status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_rim_rate` | Minnesota, rim rate (z) (2025-26 actual) | 0.32 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_rim_rate_status` | Minnesota, rim rate (z): status | outside, above | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_size` | Minnesota, size (z) (2025-26 actual) | 0.00 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_size_status` | Minnesota, size (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top3` | Minnesota, top-three minutes share (z) (2025-26 actual) | 0.41 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h5_top3_status` | Minnesota, top-three minutes share (z): status | inside the champions' range | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
 | `nyk_mkt` | Knicks preseason market price | 8.27% | OBSERVED | QUOTABLE | `h4_knicks_case_file_20260924T192303Z` |
 | `nyk_rank` | Knicks preseason market rank | 4 | OBSERVED | QUOTABLE | `h4_knicks_case_file_20260924T192303Z` |
 | `nyk_wt` | Knicks win total | 53.5 | OBSERVED | QUOTABLE | `h4_knicks_case_file_20260924T192303Z` |

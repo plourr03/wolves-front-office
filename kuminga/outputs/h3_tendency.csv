@@ -1,0 +1,6 @@
+feature,label,n_champ,n_non,champ_median,non_median,u_stat,p_value,leans,direction
+nrtg_rank,net rating rank,11,48,4.0,7.0,132.5,0.010453474385139756,True,champions better (lower rank)
+post_asb_rank,post-All-Star net rank,11,48,5.0,10.0,199.5,0.21166604419713364,False,champions better (lower rank)
+seed,seed,11,48,1.0,4.0,107.5,0.002068247428055468,True,champions better (lower rank)
+ortg_rank,offence rank,11,48,3.0,7.0,182.5,0.11371989574945426,False,champions better (lower rank)
+drtg_rank,defence rank,11,48,5.0,12.0,154.0,0.03256579192749876,True,champions better (lower rank)
