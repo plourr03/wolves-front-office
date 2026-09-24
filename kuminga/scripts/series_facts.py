@@ -142,6 +142,14 @@ def main():
         r.note("Ball: %d games in the three seasons before 2025-26, %d in the four (mean %.1f), career mean %.1f"
                % (prior3, prior4, prior4 / 4.0, float(h.games_played.sum()) / len(h)))
 
+        # ---- Cody Williams against every rated rotation player in the league -----------
+        rot = pd.read_csv(os.path.join(REPO, "kuminga", "outputs", "_restore_unaged", "rotations_2026_27.csv"))
+        cur = rot[(rot.scenario == "current") & (rot.mpg > 0)].consensus_net.dropna()
+        w = float(rot[(rot.scenario == "current") & (rot.player_name == "Cody Williams")].consensus_net.iloc[0])
+        F("williams_rated_below", int((cur < w).sum()), "rotations_2026_27.csv, rated rotation players below Williams's consensus impact")
+        F("rotation_players_rated", int(len(cur)), "rotations_2026_27.csv, rated rotation players, current scenario")
+        r.note("Williams: %d of %d rated rotation players sit below him" % (int((cur < w).sum()), len(cur)))
+
         # ---- the Edwards games gap the supermax turns on ------------------------------
         sheet = pd.read_csv(os.path.join(REPO, "kuminga", "outputs", "final_numbers.csv"), dtype=str).set_index("key")
         gap = int(sheet.loc["c2_games_rule", "value"]) - int(sheet.loc["c2_games_2025_26", "value"])

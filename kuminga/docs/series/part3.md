@@ -18,7 +18,7 @@ Same core, a stranger year. 58-24, the No. 2 seed, 3rd in net rating at +5.9. Af
 
 ## 2018-19 Toronto
 
-The trade-built champion. 58-24, the No. 2 seed, 3rd in net rating at +5.8, 3rd after the break at +7.2, up 1.5. In the playoffs +5.6, 0.2 worse than the regular season, the only champion on this list whose playoff level was essentially its regular-season level. The eight: 1 drafted (Siakam), 6 traded for (Kawhi, Lowry, Gasol, Danny Green, Ibaka, Powell), 1 signed (VanVleet). Age 28.9. Five of eight returning, 56% of the minutes, the lowest continuity on the list until Milwaukee and Denver. They missed 93 regular-season games, 22 of them Kawhi's load management, and 1 of 24 in the playoffs. Top five 56% to 72%. One in-season move touched the eight: Marc Gasol, traded for on February 7. They beat Golden State in six.
+The trade-built champion. 58-24, the No. 2 seed, 3rd in net rating at +5.8, 3rd after the break at +7.2, up 1.5. In the playoffs +5.6, 0.2 worse than the regular season, the only champion on this list whose playoff level was essentially its regular-season level. The eight: 1 drafted (Siakam), 6 traded for (Kawhi, Lowry, Gasol, Danny Green, Ibaka, Powell), 1 signed (VanVleet). Age 28.9. Five of eight returning, 56% of the minutes, the lowest continuity on the list until Milwaukee and Denver. They missed 93 regular-season games, 22 of them Kawhi's, and 1 of 24 in the playoffs. Top five 56% to 72%. One in-season move touched the eight: Marc Gasol, traded for on February 7. They beat Golden State in six.
 
 ## 2019-20 Los Angeles
 
@@ -26,7 +26,7 @@ The bubble champion. 52-19 in the shortened season, the No. 1 seed, 5th in net r
 
 ## 2020-21 Milwaukee
 
-46-26, the No. 3 seed, 4th in net rating at +5.8, 5th after the break at +5.1, down 0.7. In the playoffs +5.3, 0.5 worse than the regular season. The eight: 1 drafted (Giannis), 3 traded for (Middleton, Holiday, Tucker), 4 signed (Lopez, Connaughton, Portis, Forbes). Age 29.6. Four of eight returning, 55% of the minutes. They missed 54 regular-season games, the fewest on the list, and 8 of 23 playoff games, Giannis's knee among them. Top five 57% to 72%. One in-season move: P.J. Tucker, traded for March 19. They lost the first two to Phoenix and won four straight.
+46-26, the No. 3 seed, 4th in net rating at +5.8, 5th after the break at +5.1, down 0.7. In the playoffs +5.3, 0.5 worse than the regular season. The eight: 1 drafted (Giannis), 3 traded for (Middleton, Holiday, Tucker), 4 signed (Lopez, Connaughton, Portis, Forbes). Age 29.6. Four of eight returning, 55% of the minutes. They missed 54 regular-season games, the fewest on the list, and 8 of 23 playoff games, Giannis among them. Top five 57% to 72%. One in-season move: P.J. Tucker, traded for March 19. They lost the first two to Phoenix and won four straight.
 
 ## 2021-22 Golden State
 
@@ -34,7 +34,7 @@ The one the numbers liked least in the spring. 53-29, the No. 3 seed, 4th in net
 
 ## 2022-23 Denver
 
-The champion the regular-season numbers underrated most. 53-29 and the No. 1 seed in the West, but only 6th in net rating at +3.3, the lowest of the eleven, and after the break 16th at +0.4, down 3.0. Then +8.0 in the playoffs, 4.7 better than the regular season, with a top five that took 76% of the minutes, up from 57%, the tightest rotation on the list. The eight: 4 drafted (Murray, Jokić, Porter, Braun), 2 traded for (Gordon, Caldwell-Pope), 2 signed (Bruce Brown, Jeff Green). Age 27.6, oldest 36.4. Four of eight returning, 52% of the minutes, the lowest continuity here, partly because Murray had missed the whole previous season and counted as new, and Brown, Caldwell-Pope and Braun were all new too. They missed 105 regular-season games and 1 of 20 playoff games. No in-season move. They beat Miami in five.
+The champion the regular-season numbers underrated most. 53-29 and the No. 1 seed in the West, but only 6th in net rating at +3.3, the lowest of the eleven, and after the break 16th at +0.4, down 3.0. Then +8.0 in the playoffs, 4.7 better than the regular season, with a top five that took 76% of the minutes, up from 57%, as tight as any rotation on the list. The eight: 4 drafted (Murray, Jokić, Porter, Braun), 2 traded for (Gordon, Caldwell-Pope), 2 signed (Bruce Brown, Jeff Green). Age 27.6, oldest 36.4. Four of eight returning, 52% of the minutes, the lowest continuity here, partly because Murray had missed the whole previous season and counted as new, and Brown, Caldwell-Pope and Braun were all new too. They missed 105 regular-season games and 1 of 20 playoff games. No in-season move. They beat Miami in five.
 
 ## 2023-24 Boston
 
@@ -48,13 +48,13 @@ The youngest champion here by a distance. 68-14, the No. 1 seed, 1st in net rati
 
 And then the Knicks, the one that was on television three months ago, and the one I keep staring at.
 
-In October the market had them fourth in the league at 8.27% to win it. The win total was 53.5. They won 53. Our model, run back on last season's rosters, had them at 4.63%, below the market, which is worth remembering the next time I tell you the model has Minnesota below the market too. They were a steady team: +6.33 a game across the season, +6.16 before the break and +6.67 after it, 5th in net rating, the No. 3 seed in the East. Nothing about the regular season said "champion." It said "good, and healthy enough."
+In October the market had them fourth in the league at 8.27% to win it. The win total was 53.5. They won 53. Our model, run back on last season's rosters, had them at 4.63%, below the market, which is worth remembering the next time I tell you the model has Minnesota below the market too. They were a steady team: +6.33 a game across the season, +6.16 before the break and +6.67 after it, 5th in net rating, the No. 3 seed in the East. Nothing about the regular season said "champion." It said "good."
 
 Then the playoffs happened. They went 16-3 at +14.89 a game. Of the sixteen teams in the field, they were the only one whose margin improved from the regular season. The top five had missed 46 games between them from October to April; in the playoffs they missed 2. The top five's share of the minutes went from 0.579 to 0.673, the same tightening every champion on this list did, but on a team that had been merely good at 0.579. The top eight: 1 drafted (Mitchell Robinson), 5 traded for (Hart, Bridges, Anunoby, Towns, McBride), 2 signed (Brunson, Shamet). Age 28.8, the oldest 30.9. All eight had been there the year before, and returning players took 91% of the playoff minutes, the highest continuity on the list. No in-season move. They beat San Antonio in five for the title.
 
 If you want the shortest version of what a champion looks like in June, it's that paragraph: the same eight guys, healthy, playing more of the minutes, better than they were in February.
 
-I keep coming back to the 4.63%, because it's the number that should make me humble. Our model, given last October's rosters, had the Knicks below the market and nowhere near the favorite, and it was wrong, and it was wrong in a way I recognize. It saw a team that was 5th in net rating and priced it as the 5th-best team, which is what a model should do. What it couldn't see was that the version of the Knicks that mattered, the one with the top five healthy and playing 0.673 of the minutes, had barely existed during the regular season, because those five had missed 46 games between them. The market couldn't see it either, at 8.27%. Nobody could. That's not an argument against models or markets. It's an argument for watching the spring instead of the winter.
+I keep coming back to the 4.63%, because it's the number that should make me humble. Our model, given last October's rosters, had the Knicks below the market and nowhere near the favorite, and it was wrong, and it was wrong in a way I recognize. It saw a team that was 5th in net rating and priced it like one, which is what a model should do. What it couldn't see was that the version of the Knicks that mattered, the one with the top five healthy and playing 0.673 of the minutes, had barely existed during the regular season, because those five had missed 46 games between them. The market couldn't see it either, at 8.27%. Nobody could. That's not an argument against models or markets. It's an argument for watching the spring instead of the winter.
 
 ## The pattern
 
@@ -68,7 +68,7 @@ What about the price? I only have clean preseason odds for three of these season
 
 ## What the list says about a 3.16% team
 
-So turn back to Minnesota, priced at 3.16% and sixth in the league, below the floor of every champion I have a price for. The list doesn't say a team like that can't win; it says what the season has to produce first. It has to become a top-five net-rating team by April, because ten of eleven were. It has to get healthy in the spring after being hurt in the winter, because all of them did. It has to be able to tighten to five players who can carry 70% of the minutes without the floor falling out, which is a very specific question about a roster whose fourth and fifth best players are a question mark and a kid. And it helps, though it doesn't decide anything, to have been together, which this group has not.
+So turn back to Minnesota, priced at 3.16% and sixth in the league, below the floor of every champion I have a price for. The list doesn't say a team like that can't win; it says what the season has to produce first. It has to become a top-five net-rating team by April, because ten of eleven were. It has to get healthy in the spring after being hurt in the winter, because all of them did. It has to be able to tighten to five players who can carry 70% of the minutes without the floor falling out, which is a very specific question about a roster whose depth chart thins out fast after the top three. And it helps, though it doesn't decide anything, to have been together, which this group has not.
 
 The market is pricing a team that might do that. The model is pricing a team that probably won't. Neither of them can see the thing the list keeps pointing at, which is that the difference between the Knicks in February and the Knicks in June wasn't the roster. It was the same eight guys, healthy, playing more.
 

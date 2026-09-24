@@ -146,6 +146,8 @@ ball_games_prior_three,105,"c3_ball_history.csv, 2022-23 to 2024-25"
 ball_games_prior_four,180,"c3_ball_history.csv, 2021-22 to 2024-25"
 ball_games_prior_four_mean,45.0,same
 ball_games_career_mean,50.5,"c3_ball_history.csv, six seasons"
+williams_rated_below,1,"rotations_2026_27.csv, rated rotation players below Williams's consensus impact"
+rotation_players_rated,300,"rotations_2026_27.csv, rated rotation players, current scenario"
 edwards_games_short,4,c2_games_rule minus c2_games_2025_26
 edwards_games_short_word,four,same
 kuminga_shave_cost,"$4,099,649",dos_stuck_over x (1 + k_y2/k_y1)
