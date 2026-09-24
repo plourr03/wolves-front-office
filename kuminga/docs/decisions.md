@@ -1962,3 +1962,19 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **One new narrative fact.** `williams_rated_below`: of the 300 rated players in the league's projected rotations, one sits below Cody Williams's consensus impact, which is how Part 2 now describes the -4.39.
 
 **Gates.** Prose gate clean on all twelve series documents; `audit_series.py` 517 checks, 0 problems; reconcile clean. Word counts: Part 1 2,027 (the Kuminga beat added about 300), Part 2 2,548, Part 3 2,507, Part 4 1,943.
+
+### D102. Part 1 restructured around its ending: open at the podium, walk the summer forward, return to the podium; two corrections found on the way
+
+**Run IDs.** `audit_series_20260924T175234Z`, `gate_prose_20260924T175248Z`. As of 2026-09-24.
+
+**What changed and why.** Bobby's idea, reading the intro: tell it the way a film does, start at the end, go back to the beginning, and arrive at the end by a road the reader wasn't expecting. Part 1 now opens on Thursday, September 10 at Target Center, at Kuminga's introductory news conference, with his line about Edwards, and says plainly that the story starts there on purpose. It then goes back to June 13 and walks forward as before (June, July, August, the ledger, what everyone said), and a new section, "September 10", returns to the podium with the whole summer known: the offers he turned down, who did the recruiting, the twenty-five-years line, the LaMelo question, and the Connelly-and-Edwards close. The "Why we're not stopping there" hand-off to Part 2 is unchanged. The bridge paragraph that used to sit at the top ("What happened next is the kind of thing that only makes sense once you've done the math") is gone; the Saturday and the arithmetic now sit in August, in order, after the chase. Every paragraph that carried a bound number was kept verbatim or rebound: four bindings changed in `audit_series.py` (the Lakers sentence left the agreement paragraph for the chase, "two years and $12.4 million" and the podium's 94-calls phrasing were added, the 49-win phrase was reworded).
+
+**Two of Bobby's inline notes acted on.** The June opener ("story good but wording bad") is reworded: the Finals, the second-round exit and the Denver series are three plain sentences now, and the "two weeks after" clause is dropped rather than verified. The in/out visual note is now a bracketed figure placeholder after the trade paragraph, `[FIGURE: what went out and what came in ...]`; the figure itself is not built.
+
+**Corrections found on the way (before, then after).**
+- *"Josh Green ($14.7M, three weeks after he arrived)"* (Part 1 ledger) and *"Green three weeks later"* (Part 1 slide, tile 2). The ledger has Green in on 2026-07-10 and out on 2026-08-29, fifty days. Now "seven weeks". A word number, which is why D100's digit checks did not catch it.
+- Part 1's pull-quotes 2 and 4 and the slide's subhead and catch still carried the pick claims D101 corrected in the article ("every first-round pick Minnesota could legally give away", "In picks: everything", "every future first spent", "every pick spent"). D101 changed the article and missed the derived files. Now the corrected wording in all four places. Pull-quote 3 is now the twenty-five-years line, keyed to the Lakers offer and the contract, in place of the roster-spot line.
+
+**Sourcing.** The introduction's date and place are on the recruitment row of `data/c4_transaction_sources.csv` with two accounts: the AP story (Dave Campbell, via Yahoo, published 2026-09-10) and the Dallas Sports Journal story via Yardbarker, both of which say Thursday at Target Center.
+
+**Gates.** Prose gate clean on all thirteen series documents (the twelve plus index.md); `audit_series.py` 519 checks, 0 problems. Part 1 is 2,319 words; the feed version 283.

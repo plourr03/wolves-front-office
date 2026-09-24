@@ -9,7 +9,7 @@
   "accent_line": 1,
   "subhead": [
     "Randle and Reid out, LaMelo and Kuminga in,",
-    "every future first spent. The summer in four numbers."
+    "the 2033 first and three swaps gone. The summer in four numbers."
   ],
   "tiles": [
     {
@@ -26,7 +26,7 @@
       "label": "SALARY OUT",
       "detail": [
         "Seven players, Randle to",
-        "Green three weeks later."
+        "Green seven weeks later."
       ],
       "key": "c4_out_total_m"
     },
@@ -51,7 +51,7 @@
   ],
   "catch": {
     "label": "THE CATCH",
-    "text": "Every dollar spoken for, every pick spent, one roster spot left."
+    "text": "Every dollar spoken for, the picks spent, one roster spot left."
   },
   "context": {
     "label": "UNDER THE HARD CAP",

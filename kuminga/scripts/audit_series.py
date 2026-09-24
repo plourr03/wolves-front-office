@@ -81,14 +81,15 @@ CONSTANTS = {"82", "48", "30", "100", "7", "4"}
 CLAIMS = {
  "part1.md": [
   ("Two years, $12.4 million", ["k_total"]),
-  ("roughly $12 million a year over three years from the Lakers", ["supp:SUPP_KUMINGA_REJECTED_LAL"]),
+  ("two years and $12.4 million", ["k_total"]),
   ("The Lakers put roughly $12 million a year over three years on the table", ["supp:SUPP_KUMINGA_REJECTED_LAL"]),
   ("the team had 94 phone calls with Kuminga's agent", ["src:Jonathan Kuminga"]),
+  ("a general manager who counted 94 phone calls with his agent", ["src:Jonathan Kuminga"]),
   ("Add his $6,064,000 to the money", ["k_y1"]),
   ("Minnesota sat $1,999,829 over the second apron", ["dos_stuck_over"]),
   ("cost him about $4.1 million over the two years", ["fact:kuminga_shave_cost_m"]),
   ("left the roster frozen at fourteen", ["fact:min_roster_count"]),
-  ("That's a 49-win team", ["fact:min_wins_2025_26"]),
+  ("A 49-win team that won a playoff series", ["fact:min_wins_2025_26"]),
   ("a five-year, $112 million deal", ["src:Ayo Dosunmu"]),
   ("Julius Randle and his $33.3 million", ["c4_randlju01_out_salary"]),
   ("the 28th pick Minnesota had just made", ["fact:draft_joshua_jefferson_pick"]),
