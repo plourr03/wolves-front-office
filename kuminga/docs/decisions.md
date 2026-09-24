@@ -2043,3 +2043,15 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **One gate adjusted.** G2 in the profile compared the html parser against the three-season snapshot run at git HEAD; HEAD now holds this script's own sheet, whose B-Ref columns are named differently, so G2 compares like with like whichever run HEAD holds. 21 values compared, 0 differ.
 
 **Gates.** Prose gate clean on fourteen documents; `audit_series.py` 558 checks, 0 problems; reconcile clean.
+
+### D106. The defence clause in Part 3's lean sentence, the two-sentence lean in the feed, and the multiple-testing note on the methods page
+
+**Run IDs.** `build_final_numbers_20260924T202727Z`, `render_piece_20260924T202729Z`, `reconcile_figures_20260924T202730Z`, `gate_prose_20260924T202731Z`, `audit_series_20260924T202732Z`. As of 2026-09-24.
+
+**Part 3.** The lean sentence now keeps net-rating rank and seed as the clean leans and qualifies defence: it leans (5th against 12th) but that is largely the net-rating lean restated, and at equal overall quality, the playoff-translation test in Part 2, a defensive lean adds nothing. Offence and the second half still named as not clearing the bar.
+
+**Feed version.** Two sentences added, defence left out: in October nothing separates, no feature is exclusive to champions; by April they lean, a median 4th in net rating against the also-rans' 7th and a median 1 seed against a 4.
+
+**Methods page.** Five features tested at 0.05 each, set before the run, no multiple-testing correction, stated. Under a Bonferroni correction (0.05 over 5 tests, 0.01) the lean that survives is seed (p 0.002); net-rating rank and defence rank do not (p 0.010 and 0.033 on the sheet). New keys `h3t_n_tests`, `h3t_bonf_p` (ASSUMED, derived from the pre-set 0.05), `h3t_bonf_list`, `h3t_bonf_fail_list`. One rounding note: the net-rating p-value is 0.0105 at four decimals; the sheet's three-decimal figure prints 0.010, and D105's report of it as 0.011 was rounded by hand. The sheet figure is the one to quote.
+
+**Gates.** Prose gate clean on Part 3, its feed and the methods page (and the rest of the series); `audit_series.py` 562 checks, 0 problems; reconcile clean.

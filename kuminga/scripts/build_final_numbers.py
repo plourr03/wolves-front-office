@@ -461,6 +461,11 @@ def main():
         F("h3t_lean_p", S, "tendency test: a feature leans below this two-sided p", "0.05", "ASSUMED", "FACT", rh3, "h1_h3_h5_profile.py LEAN_P")
         F("h3t_n_lean", S, "features that lean", int(td.leans.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
         F("h3t_lean_list", S, "the features that lean", "; ".join(td[td.leans].label) or "none", "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
+        bonf = 0.05 / len(td)
+        F("h3t_n_tests", S, "tendency test: features tested", len(td), "OBSERVED", "FACT", rh3, "h3_tendency.csv")
+        F("h3t_bonf_p", S, "tendency test: Bonferroni threshold, 0.05 over the features tested", ("%.3f" % bonf).rstrip("0"), "ASSUMED", "FACT", rh3, "h3_tendency.csv")
+        F("h3t_bonf_list", S, "leans that survive the Bonferroni threshold", "; ".join(td[td.p_value < bonf].label) or "none", "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
+        F("h3t_bonf_fail_list", S, "leans that do not survive it", "; ".join(td[td.leans & (td.p_value >= bonf)].label) or "none", "OBSERVED", "DESCRIPTIVE", rh3, "h3_tendency.csv")
         med = lambda v: ("%.1f" % v).rstrip("0").rstrip(".")  # noqa: E731
         for _, x in td.iterrows():
             F("h3t_%s_champ_median" % x.feature, S, "%s, champions' median" % x.label, med(x.champ_median), "OBSERVED", "QUOTABLE", rh3, "h3_tendency.csv")

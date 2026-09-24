@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260924T202012Z`. 1684 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260924T202727Z`. 1688 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -350,6 +350,10 @@
 | `h3t_lean_p` | tendency test: a feature leans below this two-sided p | 0.05 | ASSUMED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
 | `h3t_n_lean` | features that lean | 3 | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
 | `h3t_lean_list` | the features that lean | net rating rank; seed; defence rank | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_n_tests` | tendency test: features tested | 5 | OBSERVED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_bonf_p` | tendency test: Bonferroni threshold, 0.05 over the features tested | 0.01 | ASSUMED | FACT | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_bonf_list` | leans that survive the Bonferroni threshold | seed | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
+| `h3t_bonf_fail_list` | leans that do not survive it | net rating rank; defence rank | OBSERVED | DESCRIPTIVE | `h1_h3_h5_profile_20260924T201908Z` |
 | `h3t_nrtg_rank_champ_median` | net rating rank, champions' median | 4 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
 | `h3t_nrtg_rank_non_median` | net rating rank, non-champions' median | 7 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |
 | `h3t_nrtg_rank_p` | net rating rank, two-sided rank-sum p | 0.010 | OBSERVED | QUOTABLE | `h1_h3_h5_profile_20260924T201908Z` |

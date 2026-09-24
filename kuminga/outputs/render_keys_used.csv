@@ -121,10 +121,17 @@ h3_n_sep
 h3_sep_list
 h3s_n_feat
 h3s_n_sep
+h3t_bonf_fail_list
+h3t_bonf_list
+h3t_bonf_p
+h3t_drtg_rank_p
 h3t_lean_list
 h3t_lean_p
 h3t_n_champ
 h3t_n_non
+h3t_n_tests
+h3t_nrtg_rank_p
+h3t_seed_p
 k_cons_post
 k_cons_pre
 k_defender_n

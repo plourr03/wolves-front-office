@@ -338,6 +338,10 @@ h3t_n_non,2. What the odds get right,tendency test: non-champions,48,OBSERVED,FA
 h3t_lean_p,2. What the odds get right,tendency test: a feature leans below this two-sided p,0.05,ASSUMED,FACT,h1_h3_h5_profile_20260924T201908Z,h1_h3_h5_profile.py LEAN_P
 h3t_n_lean,2. What the odds get right,features that lean,3,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
 h3t_lean_list,2. What the odds get right,the features that lean,net rating rank; seed; defence rank,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
+h3t_n_tests,2. What the odds get right,tendency test: features tested,5,OBSERVED,FACT,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
+h3t_bonf_p,2. What the odds get right,"tendency test: Bonferroni threshold, 0.05 over the features tested",0.01,ASSUMED,FACT,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
+h3t_bonf_list,2. What the odds get right,leans that survive the Bonferroni threshold,seed,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
+h3t_bonf_fail_list,2. What the odds get right,leans that do not survive it,net rating rank; defence rank,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
 h3t_nrtg_rank_champ_median,2. What the odds get right,"net rating rank, champions' median",4,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
 h3t_nrtg_rank_non_median,2. What the odds get right,"net rating rank, non-champions' median",7,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
 h3t_nrtg_rank_p,2. What the odds get right,"net rating rank, two-sided rank-sum p",0.010,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T201908Z,h3_tendency.csv
