@@ -1,0 +1,30 @@
+{
+  "brand": "WOLVES TO A T",
+  "brand_tag": "TIMBERWOLVES ANALYTICS",
+  "dateline": "THE BET, PART 4 · 09.24.26",
+  "headline": ["THE CLOCK", "IS RUNNING."],
+  "accent_line": 1,
+  "subhead": [
+    "Why the safe summer never existed,",
+    "and what to watch by game 20."
+  ],
+  "tiles": [
+    {"num": "44%", "label": "ANT LEAVES AT THE 2028-29 CLIFF", "detail": ["On a .600 team. On a", ".450 team: 56%."], "key": "c2_haz_2029_600"},
+    {"num": "31%", "label": "WALK-YEAR STARS WHO LEFT", "detail": ["Teams at .600 or better.", "Under .500: 56%."], "key": "c2_raw_walk_600"},
+    {"num": "61", "label": "ANT'S GAMES LAST SEASON", "detail": ["All-NBA needs 65.", "Supermax waits a year."], "key": "c2_games_2025_26"},
+    {"num": "16.6", "label": "TOP-SIX ODDS LOST IF LAMELO PLAYS 50", "detail": ["Points of probability.", "Title odds: 0.12."], "key": "c3_top6_drop_50_u"}
+  ],
+  "catch": {
+    "label": "THE CATCH",
+    "text": "Every C+ grades the summer against a safe alternative with a 2029 expiration date."
+  },
+  "context": {
+    "label": "GAME 20",
+    "text": "Williams under 12.6 min  ·  MIN net over +7.5 or under -7.2  ·  BOS under -2.4"
+  },
+  "context_keys": ["w_game", "williams_threshold", "w2_flip", "w3_flip"],
+  "footer_right": [
+    "Part 1 hazard model, 2023 CBA text, contract book.",
+    "Modeled figures labeled. Part 4 of 4."
+  ]
+}

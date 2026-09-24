@@ -7,8 +7,10 @@ and percent), reduced to its digits and compared with the digits of every number
 sheet (`outputs/final_numbers.csv`, every value split into the numbers it contains). A
 token matches only if the sheet carries exactly the same digits, so "1.7%" does not pass on
 the strength of a sheet value of 1.68%; the writer quotes the sheet's precision or adds a
-rounded key. Tokens that are structure rather than findings are allowed and listed:
-seasons (2026-27), four-digit years, dates, list markers and headings, item codes, code
+rounded key. Numbers in the C1 to C4 tables (outputs and the C3/C4 source tables) count as
+on the sheet, which is the series rule. Tokens that are structure rather than findings are
+allowed and listed: seasons (2026-27), four-digit years, dates (ISO or written out, "August
+29"), list markers and headings, item codes, code
 spans, and a short list of league constants named in ALLOWED_CONSTANTS. The retracted
 phrase list from `reconcile_figures.py` is applied to the prose too.
 
@@ -37,11 +39,20 @@ from reconcile_figures import RETRACTED  # noqa: E402
 
 OUT = os.path.join(REPO, "kuminga", "outputs")
 SHEET = os.path.join(OUT, "final_numbers.csv")
+# the C1 to C4 tables count as sources too (the series rule: every number on the sheet or in c1 to c4)
+AUX = [os.path.join(OUT, f) for f in ("c1_champions.csv", "c1_champion_top8.csv", "c2_edwards_clock.csv",
+                                      "c2_stage_departures.csv", "c2_facts.csv", "c3_ball_history.csv",
+                                      "c3_ball_missed_stretches.csv", "c3_base_rate_summary.csv",
+                                      "c3_ball_availability.csv", "c3_ball_availability_AGED.csv", "c4_ledger.csv")] + \
+      [os.path.join(REPO, "kuminga", "data", f) for f in ("c4_offseason_grades.csv", "c4_transaction_sources.csv",
+                                                          "c3_ball_injury_causes.csv")]
 # league constants that are structure, not findings: games in a season, minutes in a game,
 # teams in the league, the per-100-possessions scale, playoff series length
 ALLOWED_CONSTANTS = {"82", "48", "30", "100", "7"}
 STRUCTURE = [r"\b\d{4}-\d{2}\b",                       # seasons
              r"\b(19|20)\d{2}-\d{2}-\d{2}\b",            # ISO dates
+             r"\b(January|February|March|April|May|June|July|August|September|October|November|December|"
+             r"Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\.? \d{1,2}(, (19|20)\d{2})?\b",   # written dates
              r"\b(19|20)\d{2}\b",                        # years
              r"^\s*#+.*$",                               # headings
              r"^\s*\d+\.\s",                             # list markers
@@ -57,7 +68,13 @@ def digits(tok):
 
 def sheet_numbers(sheet):
     nums = set()
-    for v in sheet.value.astype(str):
+    values = list(sheet.value.astype(str))
+    for path in AUX:
+        if os.path.exists(path):
+            aux = pd.read_csv(path, dtype=str)
+            for col in aux.columns:
+                values += [str(v) for v in aux[col].dropna()]
+    for v in values:
         for m in TOKEN.finditer(v):
             d = digits(m.group(0))
             if d:

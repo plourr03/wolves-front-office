@@ -1,0 +1,30 @@
+{
+  "brand": "WOLVES TO A T",
+  "brand_tag": "TIMBERWOLVES ANALYTICS",
+  "dateline": "THE BET, PART 3 · 09.24.26",
+  "headline": ["HOW CHAMPIONS", "ACTUALLY HAPPEN."],
+  "accent_line": 1,
+  "subhead": [
+    "Eleven champions, 2015-16 to last June,",
+    "rebuilt from the box scores."
+  ],
+  "tiles": [
+    {"num": "10 of 11", "label": "TOP FIVE IN NET RATING", "detail": ["The exception, Denver", "2023, was 6th."], "key": "c1_top5_net_n"},
+    {"num": "6 of 11", "label": "WERE THE NO. 1 SEED", "detail": ["Three won from", "the 3 seed."], "key": "c1_seed_1_n"},
+    {"num": "101", "label": "TOP-8 GAMES MISSED, REG SEASON", "detail": ["Average champion.", "In the playoffs: 6.2."], "key": "c1_mean_missed_rs"},
+    {"num": "70%", "label": "TOP-5 MINUTES SHARE, PLAYOFFS", "detail": ["Up from 56% in the", "regular season."], "key": "c1_mean_top5_po"}
+  ],
+  "catch": {
+    "label": "THE CATCH",
+    "text": "Champions get hurt in the winter and are healthy in the spring. Style never separated them."
+  },
+  "context": {
+    "label": "THE KNICKS",
+    "text": "8.27% in October  ·  16-3 at +14.89 in the playoffs  ·  top five missed 46, then 2"
+  },
+  "context_keys": ["nyk_mkt", "nyk_po_rec", "nyk_po", "nyk_top5_rs_games_missed", "nyk_top5_po_games_missed"],
+  "footer_right": [
+    "Warehouse box scores, Basketball-Reference.",
+    "Every champion cross-checked. Part 3 of 4."
+  ]
+}

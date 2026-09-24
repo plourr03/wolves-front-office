@@ -1,0 +1,30 @@
+{
+  "brand": "WOLVES TO A T",
+  "brand_tag": "TIMBERWOLVES ANALYTICS",
+  "dateline": "THE BET, PART 2 · 09.24.26",
+  "headline": ["WHAT WE", "FOUND."],
+  "accent_line": 1,
+  "subhead": [
+    "Better or worse depends on a kid's minutes.",
+    "Three things the model is sure about."
+  ],
+  "tiles": [
+    {"num": "1.68%", "label": "MODEL TITLE ODDS", "detail": ["2.39% corrected for age.", "Market says 3.16%."], "key": "title"},
+    {"num": "+0.79", "label": "LAMELO IN, POINTS OF ODDS", "detail": ["The one clearly positive", "move. Reid out: -0.33."], "key": "v_ball_in_pooled_u"},
+    {"num": "+0.44", "label": "KUMINGA VS THE FILL", "detail": ["Held under every test.", "Only Beringer flips it."], "key": "v_A_c3_default_shannon_pooled_u"},
+    {"num": "61%", "label": "ANT'S MAKES UNASSISTED", "detail": ["League median 35%.", "LaMelo: 55%."], "key": "cr_edw"}
+  ],
+  "catch": {
+    "label": "THE CATCH",
+    "text": "A defense can take Ant out of a series with one assignment. That's why LaMelo is here."
+  },
+  "context": {
+    "label": "WATCH BOSTON",
+    "text": "Model 18.33%  ·  Market 5.47%  ·  Test: net below -1.7 at game 30"
+  },
+  "context_keys": ["model_bos", "mkt_bos", "bos_dec_threshold", "bos_dec_game"],
+  "footer_right": [
+    "200,000 simulated seasons per view, four views.",
+    "Modeled figures. Part 2 of 4."
+  ]
+}
