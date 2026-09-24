@@ -8,12 +8,17 @@ market saying one-in-ten and one-in-ten happening.
 
 SOURCES, and one that was rejected.
 
-  ODDS AND RESULTS  `offseason/data/{season}-preseason-odd.csv`, three seasons, all 30
-                    teams, hand-transcribed with win totals and final records. These are
-                    the project's own files and they are the spine of the table.
-  CHAMPIONS         2023-24 Boston, 2024-25 Oklahoma City, 2025-26 New York (beat San
-                    Antonio 4-1, Brunson Finals MVP), verified at
-                    https://en.wikipedia.org/wiki/2026_NBA_Finals
+  ODDS AND RESULTS  `offseason/data/{season}-preseason-odd.csv`, eleven seasons, all 30
+                    teams, with win totals and final records. 2023-24 to 2025-26 were
+                    hand-transcribed; 2015-16 to 2022-23 were written by
+                    `c1_preseason_odds.py` from Basketball-Reference's preseason odds page
+                    for each season (courtesy sportsoddshistory.com), cached with its sha256,
+                    and the three hand-transcribed files were checked against the same pages
+                    team by team (`kuminga/data/preseason_odds_sources.csv`).
+  CHAMPIONS         one per season, 2015-16 Cleveland to 2025-26 New York (beat San
+                    Antonio 4-1, Brunson Finals MVP), each verified at the Wikipedia
+                    Finals page named in SEASONS and, in `c1_champions.py`, against the
+                    Basketball-Reference season page.
   REJECTED          sportsbettingdime.com's past-seasons table names SAN ANTONIO as the
                     2026 champion. San Antonio lost the Finals. A source that misstates
                     a champion is not usable for anything else on this page, so none of
@@ -48,6 +53,14 @@ OUT_BASE = os.path.join(REPO, "kuminga", "outputs", "champions_h2_base_rates.csv
 CUR = os.path.join(REPO, "kuminga", "outputs", "market_devig_2026_27.csv")
 
 SEASONS = {
+    "2015-16": ("Cleveland Cavaliers", "https://en.wikipedia.org/wiki/2016_NBA_Finals"),
+    "2016-17": ("Golden State Warriors", "https://en.wikipedia.org/wiki/2017_NBA_Finals"),
+    "2017-18": ("Golden State Warriors", "https://en.wikipedia.org/wiki/2018_NBA_Finals"),
+    "2018-19": ("Toronto Raptors", "https://en.wikipedia.org/wiki/2019_NBA_Finals"),
+    "2019-20": ("Los Angeles Lakers", "https://en.wikipedia.org/wiki/2020_NBA_Finals"),
+    "2020-21": ("Milwaukee Bucks", "https://en.wikipedia.org/wiki/2021_NBA_Finals"),
+    "2021-22": ("Golden State Warriors", "https://en.wikipedia.org/wiki/2022_NBA_Finals"),
+    "2022-23": ("Denver Nuggets", "https://en.wikipedia.org/wiki/2023_NBA_Finals"),
     "2023-24": ("Boston Celtics", "https://en.wikipedia.org/wiki/2024_NBA_Finals"),
     "2024-25": ("Oklahoma City Thunder",
                 "https://en.wikipedia.org/wiki/2025_NBA_Finals"),
@@ -70,7 +83,9 @@ def main():
             over = float(d.p_raw.sum())
             d["p"] = d.p_raw / over                      # proportional de-vig
             d = d.sort_values("p", ascending=False).reset_index(drop=True)
-            d["rank"] = np.arange(1, len(d) + 1)
+            # tied prices share a rank, so a co-favourite is rank 1 (2023-24: Boston and
+            # Denver both +450)
+            d["rank"] = d.p.rank(ascending=False, method="min").astype(int)
             fav = d.iloc[0]
             c = d[d.Team == champ]
             assert len(c) == 1, "champion %s not found in %s" % (champ, season)
@@ -85,7 +100,8 @@ def main():
                 champ_rank=int(c["rank"]),
                 favorite=fav.Team, favorite_odds=int(fav.Odds),
                 favorite_implied_pct=fav.p * 100,
-                favorite_won=bool(fav.Team == champ),
+                favorite_won=bool(int(c["rank"]) == 1),
+                co_favorites=int((d["rank"] == 1).sum()),
                 overround_pct=(over - 1) * 100,
                 champ_wins=wins, champ_vs_win_total=ou,
                 champ_win_total=c.get("W-L O/U"), source=src))
@@ -94,7 +110,7 @@ def main():
 
         r.note("H1. THE CHAMPIONS TABLE, n = %d seasons" % len(h1))
         for _, x in h1.iterrows():
-            r.note("  %s  champion %-22s +%-5d  %5.2f%%  rank %-2d | favourite %-22s "
+            r.note("  %s  champion %-22s %+-6d  %5.2f%%  rank %-2d | favourite %-22s "
                    "%5.2f%% | %s | %d wins, %s its total"
                    % (x.season, x.champion, x.champ_odds, x.champ_implied_pct,
                       x.champ_rank, x.favorite, x.favorite_implied_pct,
@@ -114,13 +130,14 @@ def main():
             champ_implied_min=float(h1.champ_implied_pct.min()),
             champ_implied_max=float(h1.champ_implied_pct.max()),
             champ_rank_median=float(h1.champ_rank.median()),
+            champ_rank_max=int(h1.champ_rank.max()),
             champ_beat_win_total=float((h1.champ_vs_win_total == "over").mean()),
         )
         pd.DataFrame([base]).to_csv(OUT_BASE, index=False)
 
         r.note("")
-        r.note("H2. BASE RATES. n = %d. EVERY ONE OF THESE IS A COUNT OUT OF THREE, "
-               "not a rate, and must be written that way." % n)
+        r.note("H2. BASE RATES. n = %d. Every one of these is a count out of %d and is "
+               "written as a count, not a rate." % (n, n))
         r.note("  the preseason favourite won        %d of %d" %
                (int(h1.favorite_won.sum()), n))
         r.note("  champion came from the top 3       %d of %d" %
@@ -146,9 +163,9 @@ def main():
             r.note("  model   %.2f%%, rank %d" % (mn.model_pct, int(mn.model_rank)))
             lo, hi = base["champ_implied_min"], base["champ_implied_max"]
             inside = lo <= mn.market_pct <= hi
-            r.note("  the three champions' preseason range is %.2f%% to %.2f%%. "
+            r.note("  the %d champions' preseason range is %.2f%% to %.2f%%. "
                    "Minnesota's MARKET number is %s that range."
-                   % (lo, hi, "INSIDE" if inside else "OUTSIDE"))
+                   % (n, lo, hi, "INSIDE" if inside else "OUTSIDE"))
             r.note("  Minnesota's MODEL number (%.2f%%) is %s it."
                    % (mn.model_pct,
                       "inside" if lo <= mn.model_pct <= hi else "OUTSIDE"))
@@ -157,13 +174,13 @@ def main():
                    "is market rank %d and model rank %d."
                    % (worst_rank, int(mn.market_rank), int(mn.model_rank)))
             r.note("")
-            r.note("THE HONEST READING, given n = 3. This sample cannot support a rate. "
-                   "What it can support is a RANGE: all three champions were priced "
+            r.note("THE HONEST READING, given n = %d. This sample cannot support a rate. "
+                   "What it can support is a RANGE: all %d champions were priced "
                    "between %.2f%% and %.2f%% and none started outside the top %d. "
                    "Minnesota's market price sits %s that band and its model price sits "
                    "well below it. That is a statement about where Minnesota is being "
                    "asked to come from, not a probability that it gets there."
-                   % (lo, hi, worst_rank,
+                   % (n, n, lo, hi, worst_rank,
                       "just inside" if inside else "outside"))
         r.output(OUT, rows=len(h1))
         r.output(OUT_BASE, rows=1)

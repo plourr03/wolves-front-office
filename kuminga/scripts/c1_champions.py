@@ -6,8 +6,10 @@ traded for, signed, and when), the top eight's age, continuity with the season b
 regular-season and post-All-Star net rating rank, seed, playoff net rating against the
 regular season, the top eight's games missed in the regular season and the playoffs, the
 top five's share of minutes in both, and the in-season transactions that changed the top
-eight. Preseason odds columns are left open for a pasted source. Then one paragraph per
-champion, written from the numbers.
+eight. The preseason title price (American odds, proportional de-vig implied percentage,
+rank of 30 with ties sharing a rank) from `offseason/data/{season}-preseason-odd.csv`, the
+files `c1_preseason_odds.py` builds and checks. Then one paragraph per champion, written
+from the numbers.
 
 SOURCES. Warehouse box scores (`nba_player_stats`, `nba_games`, `nba_team_advanced_stats`,
 `nba_player_bio`) for minutes, games, net ratings, standings and ages. Basketball-Reference
@@ -64,7 +66,9 @@ import bracket_sim as E               # noqa: E402
 
 OUT_DIR = os.path.join(REPO, "kuminga", "outputs")
 DOCS = os.path.join(REPO, "kuminga", "docs")
-AS_OF = "2026-09-22"
+AS_OF = "2026-09-24"
+ODDS_DIR = os.path.join(REPO, "offseason", "data")
+ODDS_SOURCES = os.path.join(REPO, "kuminga", "data", "preseason_odds_sources.csv")
 TOP = 8
 BREF_CODE = {"BKN": "BRK", "CHA": "CHO", "PHX": "PHO"}
 CONF = dict(E.TEAM_CONF)
@@ -159,6 +163,41 @@ def acquisition(events, franchise, cutoff):
 
 
 # ---------------------------------------------------------------- warehouse
+def preseason_odds(year, abbr):
+    """The champion's preseason title price from the season's odds file: American odds,
+    implied percentage after a proportional de-vig across all 30 teams, and rank of 30
+    (tied prices share a rank)."""
+    season = "%d-%s" % (year - 1, str(year)[2:])
+    f = os.path.join(ODDS_DIR, "%s-preseason-odd.csv" % season)
+    if not os.path.exists(f):
+        return dict(preseason_title_odds="", preseason_odds_source="", preseason_odds_american="",
+                    preseason_implied_pct=np.nan, preseason_rank=np.nan, preseason_rank_shared_by=np.nan,
+                    preseason_favorite="", preseason_favorite_pct=np.nan)
+    d = pd.read_csv(f)
+    d["p_raw"] = d.Odds.map(lambda o: 100.0 / (float(o) + 100.0) if float(o) > 0 else -float(o) / (-float(o) + 100.0))
+    d["p"] = d.p_raw / d.p_raw.sum()
+    d["rank"] = d.p.rank(ascending=False, method="min").astype(int)
+    d["abbr"] = d.Team.map(E.NAME_TO_ABBR)
+    if d.abbr.isna().any() or len(d) != 30:
+        raise RuntimeError("%s: odds file has %d teams, %d unmapped names" % (season, len(d), int(d.abbr.isna().sum())))
+    c = d[d.abbr == abbr]
+    if len(c) != 1:
+        raise RuntimeError("%s: champion %s not in the odds file" % (season, abbr))
+    c = c.iloc[0]
+    src = ""
+    if os.path.exists(ODDS_SOURCES):
+        s = pd.read_csv(ODDS_SOURCES)
+        s = s[s.season == season]
+        if len(s) == 1:
+            src = "%s sha256 %s" % (s.iloc[0].url, str(s.iloc[0].sha256)[:16])
+    fav = d[d["rank"] == 1]
+    return dict(preseason_title_odds="%+d (%.2f%%, rank %d of 30)" % (int(c.Odds), 100 * c.p, int(c["rank"])),
+                preseason_odds_source=src, preseason_odds_american="%+d" % int(c.Odds),
+                preseason_implied_pct=round(float(100 * c.p), 2), preseason_rank=int(c["rank"]),
+                preseason_rank_shared_by=int((d["rank"] == int(c["rank"])).sum()),
+                preseason_favorite=" / ".join(fav.Team), preseason_favorite_pct=round(float(100 * fav.p.iloc[0]), 2))
+
+
 def champion_row(year):
     sid_po, sid_rs = 40000 + year - 1, 20000 + year - 1
     last = db.query("""select g.team_id, g.team_abbreviation, g.game_date from nba.nba_games g
@@ -291,6 +330,7 @@ def build(year, r):
         top5_share_rs=round(float(top5_rs), 3), top5_share_po=round(float(top5_po), 3),
         in_season_moves="; ".join("%s (%s, %s)" % (x.player, x.acq_type, x.acq_date) for _, x in P[P.in_season_acquisition].iterrows()) or "none",
         preseason_title_odds="", preseason_odds_source="")
+    row.update(preseason_odds(year, abbr))
     if tp["finish"] is not None and tp["finish"] != row["seed_warehouse"]:
         r.note("%s: conference finish differs, Basketball-Reference %d vs warehouse standings %d (tie-break approximated)"
                % (row["season"], tp["finish"], row["seed_warehouse"]))
@@ -341,7 +381,7 @@ def write_doc(r, R, P, years):
     L = ["# C1: champions, extended\n",
          "*As of %s. Every champion from 2015-16, cross-checked against the Basketball-Reference season page before use. "
          "Warehouse box scores for minutes, games, net ratings and standings; Basketball-Reference for the roster "
-         "construction. Preseason odds columns are open for a pasted source. Run `%s`.*\n" % (AS_OF, r.run_id)]
+         "construction; Basketball-Reference's preseason odds pages (courtesy sportsoddshistory.com) for the title price. Run `%s`.*\n" % (AS_OF, r.run_id)]
     L.append("## Construction and continuity\n")
     L.append("| season | champion | seed | top 8: drafted / traded for / signed | mean age (oldest) | returning of 8 | returning share of playoff minutes | in-season moves touching the top 8 | preseason title odds |")
     L.append("|---|---|---:|---|---|---:|---:|---|---|")

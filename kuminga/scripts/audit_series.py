@@ -56,7 +56,7 @@ WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven"
          "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,
          "fourteen": 14, "fifteen": 15, "sixteen": 16, "twenty": 20, "first": 1,
          "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7,
-         "eighth": 8, "tenth": 10}
+         "eighth": 8, "ninth": 9, "tenth": 10}
 WORD_RE = re.compile(r"\b(%s)\b" % "|".join(sorted(WORDS, key=len, reverse=True)), re.I)
 # shares the prose writes as a phrase rather than a percentage
 FRACTIONS = {"one in four": 25, "one in three": 33, "one in five": 20, "half of them": 50}
@@ -274,7 +274,14 @@ CLAIMS["part3.md"] = [
    ["c1:2017-18:net_post_asb_rank", "c1:2021-22:net_post_asb_rank", "c1:2022-23:net_rs_rank",
     "c1:2022-23:net_post_asb_rank"]),
   ("play five of them 70% of the minutes", ["c1_mean_top5_po"]),
-  ("priced between 8.27% and 14.69%", ["h2_lo", "h2_hi"]),
+  ("The favorite won four of the eleven", ["h2_fav", "h2_n"]),
+  ("Eight of the eleven came from the market's top three and ten from its top five", ["h2_top3", "h2_n", "h2_top5"]),
+  ("the exception was Denver in 2023, ninth at 4.01%", ["h2_worst_rank", "h2_lo"]),
+  ("The prices ran from that 4.01% up to 57.65% for the 2018 Warriors, with the middle of the list at 12.75%",
+   ["h2_lo", "h2_hi", "h2_median"]),
+  ("a team priced at 4.01% and a team priced at 57.65% both won", ["h2_lo", "h2_hi"]),
+  ("Denver's 4.01% in 2023 is the closest", ["h2_lo"]),
+  ("sixth is inside the top nine every champion came from", ["mkt_min_rank", "h2_worst_rank"]),
   ("the fourteen teams the market had in its top five", ["h3_n_non"]),
   ("which of twenty measurable features", ["h3_n_feat"]),
   ("three did: offensive rank, defensive rank, and continuity", ["h3_n_sep"]),

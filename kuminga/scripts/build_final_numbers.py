@@ -429,10 +429,14 @@ def main():
         rh = rid("champions_table")
         F("h2_n", S, "clean seasons", int(h2.n_seasons), "FACT", "FACT", rh, "champions_h2_base_rates.csv")
         F("h2_fav", S, "favourite won", int(round(h2.p_favorite_wins * h2.n_seasons)), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
+        F("h2_top3", S, "champion from the top three", int(round(h2.p_champ_top3 * h2.n_seasons)), "OBSERVED", "QUOTABLE", rh,
+          "champions_h2_base_rates.csv")
         F("h2_top5", S, "champion from the top five", int(round(h2.p_champ_top5 * h2.n_seasons)), "OBSERVED", "QUOTABLE", rh,
           "champions_h2_base_rates.csv")
         F("h2_lo", S, "champions' preseason price, low", pct(h2.champ_implied_min), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
         F("h2_hi", S, "champions' preseason price, high", pct(h2.champ_implied_max), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
+        F("h2_median", S, "champions' preseason price, median", pct(h2.champ_implied_median), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
+        F("h2_worst_rank", S, "worst preseason rank of a champion", int(h2.champ_rank_max), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
         h3 = csv("h3_separation.csv")
         rh3 = rid("h1_h3_h5_profile")
         F("h3_n_non", S, "preseason top-5 non-champions", int(h3.n_non.iloc[0]), "OBSERVED", "FACT", rh3, "h3_separation.csv")

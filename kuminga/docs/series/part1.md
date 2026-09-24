@@ -14,7 +14,6 @@ The first move came before the draft. On the night of June 22, Ayo Dosunmu's age
 
 Three days later, on the morning of June 25, the trade broke. It took until July 10 to close, because it was a four-team deal with Charlotte, Brooklyn and Chicago in it and one of Chicago's pieces couldn't be traded until July 9, but the shape was clear from the first report. Julius Randle and his $33.3 million went to Brooklyn as a salary dump, and the rights to Joshua Jefferson, the 28th pick Minnesota had just made with a pick it got from Detroit, went with him. Naz Reid went to Charlotte. So did Minnesota's 2033 first-round pick, unprotected. So did the right to swap firsts in 2028, in 2029 (protected 6 through 30), and in 2030, on a pick San Antonio already holds a swap on. So did second-round picks in 2029, 2032 and 2033, and the rights to Matteo Spagnolo, a 2022 second-rounder. Back came LaMelo Ball, with three years and $130,746,840 left on his deal, Josh Green on a $14.68 million expiring contract, Isaiah Evans, the 33rd pick, whom Brooklyn had drafted on Minnesota's behalf, and a 2026 second.
 
-[FIGURE: what went out and what came in, by player, salary and picks. Bobby's call: this is the place for the in/out visual.]
 
 That's the trade. Two rotation bigs, an unprotected first seven years out and swap rights on three more, for a point guard, a wing on an expiring, and a second-round rookie.
 

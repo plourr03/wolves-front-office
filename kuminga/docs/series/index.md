@@ -11,4 +11,4 @@ A four-part series for Wolves to a T on Minnesota's 2026 offseason, written firs
 
 Files per part: `partN.md` (the article), `partN_short.md` (the feed version), `partN_quotes.md` (five pull-quotes with their sheet keys), `partN_slide.json` (the snapshot-slide config, four tiles keyed to the sheet).
 
-Open item: the preseason odds column for the 2015-16 through 2022-23 champions is still a paste; Part 3 carries one bracketed placeholder and its base-rate passage uses the three seasons with clean odds.
+The preseason title odds for all eleven champion seasons come from Basketball-Reference's preseason odds pages (courtesy sportsoddshistory.com), fetched, checked and written by `scripts/c1_preseason_odds.py`; Part 3's feature comparison still runs on the three most recent seasons.

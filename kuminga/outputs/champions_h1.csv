@@ -1,4 +1,12 @@
-season,champion,champ_odds,champ_implied_pct,champ_rank,favorite,favorite_odds,favorite_implied_pct,favorite_won,overround_pct,champ_wins,champ_vs_win_total,champ_win_total,source
-2023-24,Boston Celtics,450,14.689311809748046,1,Boston Celtics,450,14.689311809748046,True,23.77583386685589,64,over,54.5,https://en.wikipedia.org/wiki/2024_NBA_Finals
-2024-25,Oklahoma City Thunder,675,10.796914316480182,2,Boston Celtics,325,19.688490812405036,False,19.50845795595879,68,over,57.5,https://en.wikipedia.org/wiki/2025_NBA_Finals
-2025-26,New York Knicks,900,8.268452029999942,4,Oklahoma City Thunder,240,24.318976558823355,False,20.941622007572704,53,under,53.5,https://en.wikipedia.org/wiki/2026_NBA_Finals
+season,champion,champ_odds,champ_implied_pct,champ_rank,favorite,favorite_odds,favorite_implied_pct,favorite_won,co_favorites,overround_pct,champ_wins,champ_vs_win_total,champ_win_total,source
+2015-16,Cleveland Cavaliers,280,22.94673856171258,1,Cleveland Cavaliers,280,22.94673856171258,True,1,14.682046875249654,57,over,56.5,https://en.wikipedia.org/wiki/2016_NBA_Finals
+2016-17,Golden State Warriors,-128,50.92532029828133,1,Golden State Warriors,-128,50.92532029828133,True,1,10.24054546611788,67,over,66.5,https://en.wikipedia.org/wiki/2017_NBA_Finals
+2017-18,Golden State Warriors,-187,57.65382838425008,1,Golden State Warriors,-187,57.65382838425008,True,1,13.013821026474437,58,under,67.5,https://en.wikipedia.org/wiki/2018_NBA_Finals
+2018-19,Toronto Raptors,1850,4.543418837398831,5,Golden State Warriors,-168,55.53820937059169,False,1,12.871062777498521,58,over,55.5,https://en.wikipedia.org/wiki/2019_NBA_Finals
+2019-20,Los Angeles Lakers,450,15.406294810077096,2,Los Angeles Clippers,425,16.139927896271242,False,1,18.01551512519186,52,over,50.5,https://en.wikipedia.org/wiki/2020_NBA_Finals
+2020-21,Milwaukee Bucks,550,12.751035200517203,2,Los Angeles Lakers,275,22.10179434756315,False,1,20.65385392388659,46,under,49.5,https://en.wikipedia.org/wiki/2021_NBA_Finals
+2021-22,Golden State Warriors,900,8.19368268988785,3,Brooklyn Nets,240,24.099066734964264,False,1,22.045243616053114,53,over,48.5,https://en.wikipedia.org/wiki/2022_NBA_Finals
+2022-23,Denver Nuggets,1800,4.005553283962211,9,Boston Celtics,500,12.684252065880337,False,1,31.396526812161984,53,over,51.5,https://en.wikipedia.org/wiki/2023_NBA_Finals
+2023-24,Boston Celtics,450,14.689311809748046,1,Boston Celtics,450,14.689311809748046,True,2,23.77583386685589,64,over,54.5,https://en.wikipedia.org/wiki/2024_NBA_Finals
+2024-25,Oklahoma City Thunder,675,10.796914316480182,2,Boston Celtics,325,19.688490812405036,False,1,19.50845795595879,68,over,57.5,https://en.wikipedia.org/wiki/2025_NBA_Finals
+2025-26,New York Knicks,900,8.268452029999942,4,Oklahoma City Thunder,240,24.318976558823355,False,1,20.941622007572704,53,under,53.5,https://en.wikipedia.org/wiki/2026_NBA_Finals

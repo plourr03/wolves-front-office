@@ -1978,3 +1978,27 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **Sourcing.** The introduction's date and place are on the recruitment row of `data/c4_transaction_sources.csv` with two accounts: the AP story (Dave Campbell, via Yahoo, published 2026-09-10) and the Dallas Sports Journal story via Yardbarker, both of which say Thursday at Target Center.
 
 **Gates.** Prose gate clean on all thirteen series documents (the twelve plus index.md); `audit_series.py` 519 checks, 0 problems. Part 1 is 2,319 words; the feed version 283.
+
+### D103. The preseason odds column filled for all eleven champion seasons from Basketball-Reference, and Part 3's price passage rewritten on eleven; ESPN's trade-only grade left out of Part 1
+
+**Run IDs.** `c1_preseason_odds_20260924T184342Z`, `champions_table_20260924T184745Z`, `c1_champions_20260924T184749Z`, `build_final_numbers_20260924T184932Z`, `render_piece_20260924T185011Z`, `reconcile_figures_20260924T185027Z`, `gate_prose_20260924T184935Z`, `audit_series_20260924T185026Z`. As of 2026-09-24.
+
+**The source, and why it is not a paste.** Bobby asked for links to paste from. Basketball-Reference publishes a preseason odds page per season (courtesy sportsoddshistory.com) with all thirty teams, the title price, the win total and the result, in exactly the layout of the three hand-transcribed files, and it fetches directly with the browser user agent the project already uses. So the eight older seasons were built by a script, `scripts/c1_preseason_odds.py`, from pages cached with their sha256 in the Basketball-Reference manifest, rather than by hand. Gates, each fatal: thirty teams per page, no duplicate, no missing price, the champion on the page; and the three hand-transcribed files were compared with their own pages team by team and matched on every price and win total, which also establishes that the old files and the new ones share a source. Provenance per season is in `data/preseason_odds_sources.csv`.
+
+**What the eleven seasons say (before, then after; the three-season figures were D98's).**
+- `h2_n` clean seasons: 3, now 11.
+- `h2_fav` favourite won: 1 of 3, now 4 of 11 (Cleveland 2016, Golden State 2017 and 2018, Boston 2024, the last a co-favourite with Denver at the same price).
+- `h2_top5` champion from the market's top five: 3 of 3, now 10 of 11; the exception is Denver 2023, ninth (tied) at +1800.
+- `h2_lo` and `h2_hi`, the champions' price range: 8.27% to 14.69%, now 4.01% (Denver 2023) to 57.65% (Golden State 2018).
+- New keys: `h2_top3` 8 of 11, `h2_median` 12.75%, `h2_worst_rank` 9, and per champion `c1_<season>_pre_pct`, `_pre_rank`, `_pre_odds`, `_pre_fav`, `_pre_fav_pct`.
+- Ranks now share on ties (Boston and Denver were both +450 in 2023-24; Golden State was tied third in 2021-22; Denver tied ninth in 2022-23), so a co-favourite is rank 1 and `favorite_won` means rank 1. The three-season figures are unchanged by that rule.
+
+**What did not change.** The H3 feature comparison (`h3_n_non` 14, `h3_n_sep` 3, `h3_n_feat` 20) still runs on 2023-24 to 2025-26, because `h1_h3_h5_profile.py` reads its team features from the three seasons' Basketball-Reference league snapshots, which the older seasons do not have yet. Part 3 now says so in the sentence, and the piece templates say so beside the H3 numbers. Extending it is a separate job: eight league pages and eight advanced pages, a parser for the html cache instead of the proxy snapshots, and the H5 ranges and the N8 watch thresholds move with the champions' ranges.
+
+**Prose.** Part 3: the placeholder is gone from the intro; each champion passage opens with where the market had them in October, one price per passage, the favourite named where the champion was not it; the price paragraph is rewritten on eleven seasons and keeps the fourteen-team feature comparison scoped to three; the Minnesota turn now says 3.16% is below every champion's starting price, with Denver's 4.01% the closest, and that sixth is inside the top nine every champion came from. Feed version and index updated. Methods page: one sentence on the price source. Piece templates: the H3 sentence scoped to the three seasons.
+
+**Audit.** `audit_series.py`: eight new phrase bindings for the price paragraph and the Minnesota turn; "ninth" added to the word map, which had eighth and tenth. 534 checks, 0 problems; prose gate clean on thirteen documents; reconcile clean after one stray digit in the methods sentence ("sha256") was reworded.
+
+**ESPN's trade-only D+, decided.** Bobby's read: the grades paragraph in Part 1 is about the entire offseason, so ESPN's D+ for the trade alone stays out. The Athletic's D+ stays because the paragraph labels it a trade grade.
+
+**Part 1.** Bobby removed the in/out figure placeholder from the June section in the editor; the file is kept as he left it.

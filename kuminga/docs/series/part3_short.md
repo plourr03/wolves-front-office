@@ -6,6 +6,6 @@ Ten of the eleven were top five in regular-season net rating; the one that wasn'
 
 The Knicks are the clearest case. The market had them fourth at 8.27% in October; our model had them at 4.63%. They were steady all year, 5th in net rating, the No. 3 seed. Then they went 16-3 at +14.89 a game, the only one of sixteen playoff teams whose margin improved, with a top five that missed 46 games in the regular season and 2 in the playoffs. Same eight guys, healthy, playing more.
 
-On the three seasons with clean odds, the favorite won once and the champion came from the top five every time, priced between 8.27% and 14.69%. Three things separated the champions from the other favorites: offense, defense, continuity. No style feature did.
+Across the eleven, the favorite won four times and the champion came from the market's top five ten times, priced between 4.01% and 57.65%. On the three most recent seasons, where I have every feature, three things separated the champions from the other favorites: offense, defense, continuity. No style feature did.
 
 Minnesota is priced at 3.16%. Whether it has eight guys like that is Part 4.

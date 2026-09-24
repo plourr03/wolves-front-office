@@ -1,22 +1,22 @@
 # C1: champions, extended
 
-*As of 2026-09-22. Every champion from 2015-16, cross-checked against the Basketball-Reference season page before use. Warehouse box scores for minutes, games, net ratings and standings; Basketball-Reference for the roster construction. Preseason odds columns are open for a pasted source. Run `c1_champions_20260922T193504Z`.*
+*As of 2026-09-24. Every champion from 2015-16, cross-checked against the Basketball-Reference season page before use. Warehouse box scores for minutes, games, net ratings and standings; Basketball-Reference for the roster construction; Basketball-Reference's preseason odds pages (courtesy sportsoddshistory.com) for the title price. Run `c1_champions_20260924T184749Z`.*
 
 ## Construction and continuity
 
 | season | champion | seed | top 8: drafted / traded for / signed | mean age (oldest) | returning of 8 | returning share of playoff minutes | in-season moves touching the top 8 | preseason title odds |
 |---|---|---:|---|---|---:|---:|---|---|
-| 2015-16 | CLE | 1 | 2 / 3 / 3 | 28.0 (35.6) | 7 | 86% | none | open |
-| 2016-17 | GSW | 1 | 3 / 1 / 4 | 29.7 (36.4) | 6 | 67% | none | open |
-| 2017-18 | GSW | 2 | 4 / 1 / 3 | 29.5 (34.0) | 7 | 89% | none | open |
-| 2018-19 | TOR | 2 | 1 / 6 / 1 | 28.9 (34.0) | 5 | 56% | Marc Gasol (traded for, 2019-02-07) | open |
-| 2019-20 | LAL | 1 | 0 / 2 / 6 | 29.5 (35.1) | 5 | 58% | Markieff Morris (signed, 2020-02-23) | open |
-| 2020-21 | MIL | 3 | 1 / 3 / 4 | 29.6 (35.7) | 4 | 55% | P.J. Tucker (traded for, 2021-03-19) | open |
-| 2021-22 | GSW | 3 | 5 / 1 / 2 | 28.9 (33.9) | 6 | 70% | Gary Payton II (signed, 2021-10-19) | open |
-| 2022-23 | DEN | 1 | 4 / 2 / 2 | 27.6 (36.4) | 4 | 52% | none | open |
-| 2023-24 | BOS | 1 | 3 / 4 / 1 | 29.3 (37.7) | 6 | 76% | none | open |
-| 2024-25 | OKC | 1 | 3 / 3 / 2 | 25.5 (30.9) | 6 | 78% | none | open |
-| 2025-26 | NYK | 3 | 1 / 5 / 2 | 28.8 (30.9) | 8 | 91% | none | open |
+| 2015-16 | CLE | 1 | 2 / 3 / 3 | 28.0 (35.6) | 7 | 86% | none | +280 (22.95%, rank 1 of 30) |
+| 2016-17 | GSW | 1 | 3 / 1 / 4 | 29.7 (36.4) | 6 | 67% | none | -128 (50.93%, rank 1 of 30) |
+| 2017-18 | GSW | 2 | 4 / 1 / 3 | 29.5 (34.0) | 7 | 89% | none | -187 (57.65%, rank 1 of 30) |
+| 2018-19 | TOR | 2 | 1 / 6 / 1 | 28.9 (34.0) | 5 | 56% | Marc Gasol (traded for, 2019-02-07) | +1850 (4.54%, rank 5 of 30) |
+| 2019-20 | LAL | 1 | 0 / 2 / 6 | 29.5 (35.1) | 5 | 58% | Markieff Morris (signed, 2020-02-23) | +450 (15.41%, rank 2 of 30) |
+| 2020-21 | MIL | 3 | 1 / 3 / 4 | 29.6 (35.7) | 4 | 55% | P.J. Tucker (traded for, 2021-03-19) | +550 (12.75%, rank 2 of 30) |
+| 2021-22 | GSW | 3 | 5 / 1 / 2 | 28.9 (33.9) | 6 | 70% | Gary Payton II (signed, 2021-10-19) | +900 (8.19%, rank 3 of 30) |
+| 2022-23 | DEN | 1 | 4 / 2 / 2 | 27.6 (36.4) | 4 | 52% | none | +1800 (4.01%, rank 9 of 30) |
+| 2023-24 | BOS | 1 | 3 / 4 / 1 | 29.3 (37.7) | 6 | 76% | none | +450 (14.69%, rank 1 of 30) |
+| 2024-25 | OKC | 1 | 3 / 3 / 2 | 25.5 (30.9) | 6 | 78% | none | +675 (10.80%, rank 2 of 30) |
+| 2025-26 | NYK | 3 | 1 / 5 / 2 | 28.8 (30.9) | 8 | 91% | none | +900 (8.27%, rank 4 of 30) |
 
 ## Performance, availability and concentration
 

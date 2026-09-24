@@ -28,7 +28,7 @@ The model's biggest disagreement with the market isn't Minnesota, it's Boston: *
 
 Most of what gets argued about in September is unmeasurable, and the tests say so. A style overlay made predictions worse, not better. Of {{n3_n_features}} regular season traits tested as predictors of playoff success on {{n3_series}} series, **{{n3_n_translating}}** survive. "Defense travels" is not supported, and the estimate points the other way ({{ds_coef}} points per game per standard deviation of defensive lean, short of the bar).
 
-Base rates, as counts on {{h2_n}} clean seasons of odds: the favorite won {{h2_fav}} of {{h2_n}}, and the champion came from the market's top five {{h2_top5}} of {{h2_n}} times. No style feature separates the champions from the top-five teams that didn't win.
+Base rates, as counts on {{h2_n}} clean seasons of odds: the favorite won {{h2_fav}} of {{h2_n}}, and the champion came from the market's top five {{h2_top5}} of {{h2_n}} times. No style feature separates the champions from the top-five teams that didn't win (three most recent seasons).
 
 The Knicks are the illustration. Market {{nyk_mkt}}, {{nyk_rank}}th, steady all season, then **{{nyk_po_rec}} at {{nyk_po}}** in the playoffs, the only one of {{nyk_po_teams}} playoff teams whose margin improved. What decided the title wasn't knowable until April.
 

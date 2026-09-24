@@ -1,2 +1,2 @@
-n_seasons,p_favorite_wins,p_champ_top1,p_champ_top3,p_champ_top5,p_champ_top8,champ_implied_median,champ_implied_min,champ_implied_max,champ_rank_median,champ_beat_win_total
-3,0.3333333333333333,0.3333333333333333,0.6666666666666666,1.0,1.0,10.796914316480182,8.268452029999942,14.689311809748046,2.0,0.6666666666666666
+n_seasons,p_favorite_wins,p_champ_top1,p_champ_top3,p_champ_top5,p_champ_top8,champ_implied_median,champ_implied_min,champ_implied_max,champ_rank_median,champ_rank_max,champ_beat_win_total
+11,0.36363636363636365,0.36363636363636365,0.7272727272727273,0.9090909090909091,0.9090909090909091,12.751035200517203,4.005553283962211,57.65382838425008,2.0,9,0.7272727272727273

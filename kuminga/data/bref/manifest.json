@@ -11,11 +11,23 @@
   "sha256": "0c3c780cc046c8d4f881e2abf7e022c9284997cd616ca8f00a1b535b3386d649",
   "url": "https://www.basketball-reference.com/leagues/NBA_2016.html"
  },
+ "leagues_NBA_2016_preseason_odds": {
+  "bytes": 147263,
+  "fetched_at": "2026-09-24T18:39:25+00:00",
+  "sha256": "eeebce2090c6b609369eb87f0490774b884e04253fa86b5390f8a1fc988907d7",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2016_preseason_odds.html"
+ },
  "leagues_NBA_2017": {
   "bytes": 807139,
   "fetched_at": "2026-09-22T19:12:59+00:00",
   "sha256": "fccb8e597628ec589f57f806a7fb12137713c4db5a55210c1dd43ac0fc1049ba",
   "url": "https://www.basketball-reference.com/leagues/NBA_2017.html"
+ },
+ "leagues_NBA_2017_preseason_odds": {
+  "bytes": 147279,
+  "fetched_at": "2026-09-24T18:39:29+00:00",
+  "sha256": "5f154bf93e5a34dc1930ebfa7d29fd9d926793b8af306141e663deef0dc361fc",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2017_preseason_odds.html"
  },
  "leagues_NBA_2018": {
   "bytes": 807857,
@@ -23,11 +35,23 @@
   "sha256": "75475a05554e189a9c7afbe5e0d7cb9c0c77f426c3668d942af3bd876da3b631",
   "url": "https://www.basketball-reference.com/leagues/NBA_2018.html"
  },
+ "leagues_NBA_2018_preseason_odds": {
+  "bytes": 147277,
+  "fetched_at": "2026-09-24T18:39:33+00:00",
+  "sha256": "6ee31558df96e4cf36d12ed8d8005c96c543feb62de0dfe5c83364027c772e04",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2018_preseason_odds.html"
+ },
  "leagues_NBA_2019": {
   "bytes": 807734,
   "fetched_at": "2026-09-22T19:14:21+00:00",
   "sha256": "ef24ad605515b706f62099520d6d0944b9b4488fd5a5ca54949aa647deec30a7",
   "url": "https://www.basketball-reference.com/leagues/NBA_2019.html"
+ },
+ "leagues_NBA_2019_preseason_odds": {
+  "bytes": 147279,
+  "fetched_at": "2026-09-24T18:39:37+00:00",
+  "sha256": "54319aafea0e615ede49c15ae0a4254670f9d82c98ba0d14ad4920fd46ec7b59",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2019_preseason_odds.html"
  },
  "leagues_NBA_2020": {
   "bytes": 808851,
@@ -35,11 +59,23 @@
   "sha256": "0de9906ab6b9282e12dd51f6b14ce0e95b198f1d20ba0933109601d437980383",
   "url": "https://www.basketball-reference.com/leagues/NBA_2020.html"
  },
+ "leagues_NBA_2020_preseason_odds": {
+  "bytes": 147271,
+  "fetched_at": "2026-09-24T18:39:41+00:00",
+  "sha256": "986d29ad51cff07d133a94bcdac704b508afdc24c1ae8dc23620b6c468d685f4",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2020_preseason_odds.html"
+ },
  "leagues_NBA_2021": {
   "bytes": 807367,
   "fetched_at": "2026-09-22T19:15:49+00:00",
   "sha256": "5a1cd1a4c9e9db549aac7af9da7cd5f760a08fba9eb8413299b88cb395ade52f",
   "url": "https://www.basketball-reference.com/leagues/NBA_2021.html"
+ },
+ "leagues_NBA_2021_preseason_odds": {
+  "bytes": 147253,
+  "fetched_at": "2026-09-24T18:39:46+00:00",
+  "sha256": "799f202c55730bb7e20cced199c24f34cc57db2a17e12c73307d622629ad9c9a",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2021_preseason_odds.html"
  },
  "leagues_NBA_2022": {
   "bytes": 808836,
@@ -47,11 +83,23 @@
   "sha256": "929d6da3645b20b6669aa6d29cde6e461e0a7c9087b7a5cacf8bae0fd3d65891",
   "url": "https://www.basketball-reference.com/leagues/NBA_2022.html"
  },
+ "leagues_NBA_2022_preseason_odds": {
+  "bytes": 147252,
+  "fetched_at": "2026-09-24T18:39:50+00:00",
+  "sha256": "d69920a382f19c177f334e0b8b6364c21b32b5f510b172a8a3b4e10fdf5f3e3e",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2022_preseason_odds.html"
+ },
  "leagues_NBA_2023": {
   "bytes": 808108,
   "fetched_at": "2026-09-22T19:17:05+00:00",
   "sha256": "f250d0b38a139005183581f7fc499b03f48131eae6e26f50c1ad6c7e1825e407",
   "url": "https://www.basketball-reference.com/leagues/NBA_2023.html"
+ },
+ "leagues_NBA_2023_preseason_odds": {
+  "bytes": 147250,
+  "fetched_at": "2026-09-24T18:39:54+00:00",
+  "sha256": "fa66f7919a5dcfddf1a950543cae1db67da3146eaf2dd774afd5d3e19db759ac",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2023_preseason_odds.html"
  },
  "leagues_NBA_2024": {
   "bytes": 809918,
@@ -59,17 +107,35 @@
   "sha256": "170ad0f1d3d7339ac1977d58ed38b83d65a48c5fa0c0b8abbf2d82671630f770",
   "url": "https://www.basketball-reference.com/leagues/NBA_2024.html"
  },
+ "leagues_NBA_2024_preseason_odds": {
+  "bytes": 147264,
+  "fetched_at": "2026-09-24T18:39:58+00:00",
+  "sha256": "89960effdaf8d55cc4046378b959149c1212ad4c17963c9a79fc8dcbe5b65d06",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2024_preseason_odds.html"
+ },
  "leagues_NBA_2025": {
   "bytes": 812232,
   "fetched_at": "2026-09-22T19:18:31+00:00",
   "sha256": "4640a95367b15b0d72d4fb2a45ef08c078e640fcd8952aaca4092065f880380f",
   "url": "https://www.basketball-reference.com/leagues/NBA_2025.html"
  },
+ "leagues_NBA_2025_preseason_odds": {
+  "bytes": 147295,
+  "fetched_at": "2026-09-24T18:40:03+00:00",
+  "sha256": "bde314bdbb870ebd3477a4fb503705a7713982e7e1f88ea89057f2b04f9c1421",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2025_preseason_odds.html"
+ },
  "leagues_NBA_2026": {
   "bytes": 811755,
   "fetched_at": "2026-09-22T19:19:13+00:00",
   "sha256": "f5630fe577a290bc1f08a4d94d45eaf7e20acd4f539bee4ab918f2380cd01d70",
   "url": "https://www.basketball-reference.com/leagues/NBA_2026.html"
+ },
+ "leagues_NBA_2026_preseason_odds": {
+  "bytes": 147057,
+  "fetched_at": "2026-09-24T18:40:07+00:00",
+  "sha256": "dd391d7df2364de506d219292c4453b75a164901237508a5c1a2780f13cf4116",
+  "url": "https://www.basketball-reference.com/leagues/NBA_2026_preseason_odds.html"
  },
  "players_a_anderky01": {
   "bytes": 1179509,
