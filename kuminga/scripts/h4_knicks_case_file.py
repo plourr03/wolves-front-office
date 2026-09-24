@@ -52,6 +52,8 @@ ODDS = os.path.join(REPO, "offseason", "data", "2025-26-preseason-odd.csv")
 BACKTEST = os.path.join(REPO, "kuminga", "outputs", "backtest_calibration.csv")
 STYLE = os.path.join(REPO, "kuminga", "outputs", "m1_style_features.csv")
 OUT = os.path.join(REPO, "kuminga", "outputs", "h4_knicks_case_file.csv")
+BAND = os.path.join(REPO, "kuminga", "outputs", "champions_h2_base_rates.csv")   # the champions' price band, all seasons
+H1 = os.path.join(REPO, "kuminga", "outputs", "champions_h1.csv")
 OUT_MD = os.path.join(REPO, "kuminga", "docs", "case_file_knicks_2025_26.md")
 WIKI = "https://en.wikipedia.org/wiki/2026_NBA_playoffs"
 
@@ -79,6 +81,16 @@ def main():
         F["market_win_total"] = float(k["W-L O/U"])
         F["favourite"] = od.iloc[0].Team
         F["favourite_pct"] = float(od.iloc[0].p * 100)
+        # the champions' preseason band, from the champions table (every season with odds)
+        band = pd.read_csv(BAND).iloc[0]
+        h1 = pd.read_csv(H1)
+        F["band_n"] = int(band.n_seasons)
+        F["band_lo"] = float(band.champ_implied_min)
+        F["band_hi"] = float(band.champ_implied_max)
+        F["band_worst_rank"] = int(band.champ_rank_max)
+        F["band_top5"] = int(round(band.p_champ_top5 * band.n_seasons))
+        lo = h1.sort_values("champ_implied_pct").iloc[0]
+        F["band_floor_team"] = "%s %s" % (lo.champion, lo.season)
 
         bt = pd.read_csv(BACKTEST)
         b = bt[(bt.season == SEASON) & (bt.team_abbr == TEAM)].iloc[0]
@@ -259,8 +271,8 @@ def main():
 
 | feature | Knicks | flag? |
 |---|---|---|
-| preseason market rank | {F['market_rank']} | **yes**: every champion in this project's three-season sample started top 4 |
-| preseason implied probability | {F['market_title_pct']:.2f}% | **circular, so not counted**: the Knicks are one of the three champions that DEFINE the 8.27% to 14.69% band, and they set its floor. Being inside it is true by construction. |
+| preseason market rank | {F['market_rank']} | **yes**: {F['band_top5']} of the {F['band_n']} champions in this project's sample started in the market's top five, and none worse than {F['band_worst_rank']}th |
+| preseason implied probability | {F['market_title_pct']:.2f}% | **circular, so not counted**: the Knicks are one of the {F['band_n']} champions whose prices DEFINE the {F['band_lo']:.2f}% to {F['band_hi']:.2f}% band. Being inside it is true by construction. The floor is {F['band_floor_team']} at {F['band_lo']:.2f}%. |
 | continuity | {F['continuity']:.3f}, rank {F['continuity_rank']} | **weakly**: see the Minnesota line below |
 | regular-season margin | {F['rs_margin']:+.2f}, rank {F['rs_margin_rank']} | no: good, not elite |
 | style profile | {F['style_ranks']} | **no**, and this project's held-out test found style carries no playoff signal |
@@ -275,7 +287,7 @@ def main():
 
 **The Knicks are the template, and Minnesota does not yet fit it on the first flag.**
 
-- **Market position.** The Knicks started **inside** the champion band at rank {F['market_rank']}. Minnesota starts at **3.16% and rank 6**, outside it.
+- **Market position.** The Knicks started **inside** the champion band at rank {F['market_rank']}. Minnesota starts at **3.16% and rank 6**: inside every champion's starting rank (none worse than {F['band_worst_rank']}th) but below the band's price floor, {F['band_floor_team']} at {F['band_lo']:.2f}%, which is the closest champion to it by price.
 - **Continuity is not the story.** Minnesota's continuity in 2025-26 was **{F.get('cmp_continuity', float('nan')):.3f}, rank {F.get('cmp_continuity_rank', 0)}**, slightly higher than the Knicks', and Minnesota went out in the second round (beat Denver 4-2, lost to San Antonio 2-4).
 - **The playoff lift is the story, and it ran the other way for Minnesota.** In 2025-26 Minnesota's margin changed by **{F.get('cmp_lift', float('nan')):+.2f}** from regular season to playoffs, rank **{F.get('cmp_lift_rank', 0)}** of {F['po_teams']}. The Knicks' changed by **{F['lift']:+.2f}**, rank 1.
 

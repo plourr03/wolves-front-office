@@ -17,9 +17,11 @@ THE FIVE.
   4  EDWARDS AND BALL, THE PAIRING. M5's base rate says new high-usage pairings cost usage
      and not efficiency. Threshold: the 20-game true shooting that would fall below what the
      base rate plus 20-game noise allows, for either player.
-  5  THE CHAMPION'S PATH. Every champion since 1997-98, ranked by net rating after its first
-     20 games. Threshold: the worst rank any of them held. Minnesota's projected rank is
-     set beside it.
+  5  THE CHAMPION'S PATH. The eleven champions of the odds window, 2015-16 to 2025-26: net
+     rating rank after the first 20 games, at the end of the regular season, and after the
+     All-Star break (the C1 figures). TEST: top five at season's end, where ten of the
+     eleven finished. CHECKPOINT: the worst rank any of them held after 20 games.
+     Minnesota's projected rank is set beside both.
 
 NOISE, MEASURED. Twenty-game net rating: from every team-season 2013-14 to 2025-26, the
 spread of the first twenty games against the rest of the season, converted to the noise
@@ -60,7 +62,7 @@ N_CHECK = 20
 N_DEC = 30                # the December checkpoint: a team's thirtieth game, around 31 Dec
 Z = 1.645                 # one-sided 5%
 NOISE_SEASONS = range(2013, 2026)
-CHAMP_SEASONS = range(1997, 2026)
+CHAMP_SEASONS = range(2015, 2026)   # the eleven champions of the odds window, 2015-16 to 2025-26
 
 
 def lab(y):
@@ -299,31 +301,29 @@ def main():
             value=thr["Anthony Edwards"], value2=thr["LaMelo Ball"]))
 
         # ================= 5. the champion's path =======================================
+        # the eleven champions of the odds window: rank after 20 games from the game logs;
+        # season-end and post-All-Star ranks from the C1 champions table, the same figures
+        # Part 3 quotes
+        c1 = pd.read_csv(os.path.join(OUT_DIR, "c1_champions.csv"))
         gc = games_frame(min(CHAMP_SEASONS), max(CHAMP_SEASONS))
-        po = db.query("""
-            select game_id, season_id, game_date, team_abbreviation team, wl
-            from nba.nba_games where season_id in %(i)s
-        """, {"i": tuple(40000 + y for y in CHAMP_SEASONS)})
-        po["season"] = pd.to_numeric(po.season_id) % 10000
-        # the champion won the LAST playoff game of the season. (A first version read the
-        # round from the game id, which only encodes it from 2000-01 on, and silently
-        # dropped four champions.)
-        last = po.sort_values(["season", "game_date", "game_id"]).groupby("season").tail(2)
-        champs = last[last.wl == "W"].drop_duplicates("season").set_index("season").team
-        if len(champs) != len(CHAMP_SEASONS):
-            raise RuntimeError("champion not resolved for every season")
         ranks = []
-        for s_, d in gc[gc.k <= N_CHECK].groupby("season"):
-            nets = d.groupby("team").apply(net100, include_groups=False)
-            rk = nets.rank(ascending=False, method="min")
-            full = gc[gc.season == s_].groupby("team").apply(net100, include_groups=False) \
-                .rank(ascending=False, method="min")
-            if s_ in champs.index and champs[s_] in rk.index:
-                ranks.append(dict(season=lab(s_), champion=champs[s_],
-                                  rank20=int(rk[champs[s_]]), rank_full=int(full[champs[s_]]),
-                                  n_teams=len(rk)))
+        for _, c in c1.iterrows():
+            y = int(c.season[:4])
+            if y not in CHAMP_SEASONS:
+                continue
+            d = gc[(gc.season == y) & (gc.k <= N_CHECK)]
+            rk = d.groupby("team").apply(net100, include_groups=False).rank(ascending=False, method="min")
+            ranks.append(dict(season=c.season, champion=c.team, rank20=int(rk[c.team]),
+                              rank_full=int(c.net_rs_rank), rank_post_asb=int(c.net_post_asb_rank),
+                              n_teams=len(rk)))
         CH = pd.DataFrame(ranks)
+        if len(CH) != len(CHAMP_SEASONS):
+            raise RuntimeError("champion rows resolved for %d of %d seasons" % (len(CH), len(CHAMP_SEASONS)))
         worst20 = int(CH.rank20.max())
+        worst_full = int(CH.rank_full.max())
+        worst_post = int(CH.rank_post_asb.max())
+        K_TEST = 5                                  # the season-end test: top five in net rating
+        n_test = int((CH.rank_full <= K_TEST).sum())
         share_top = {k: float((CH.rank20 <= k).mean()) for k in (3, 5, 8, 10)}
         allnet = pd.concat([su.assign(b="u"), sa.assign(b="a")]).groupby(
             ["b", "team_abbr"]).net_current.mean().reset_index()
@@ -331,13 +331,13 @@ def main():
         for b_, d in allnet.groupby("b"):
             rk = d.set_index("team_abbr").net_current.rank(ascending=False, method="min")
             mrk.append(int(rk["MIN"]))
-        r.note("5. champions 1997-98 to 2025-26 (%d): rank after 20 games worst %d, median "
-               "%.0f; share in top 3/5/8/10: %s | MIN projected net rank un-aged %d, aged %d"
-               % (len(CH), worst20, CH.rank20.median(),
-                  ", ".join("%.0f%%" % (100 * v) for v in share_top.values()), mrk[1], mrk[0]))
+        r.note("5. champions 2015-16 to 2025-26 (%d): rank after 20 games worst %d, median %.0f; season-end rank worst %d, "
+               "%d of %d in the top %d; post-All-Star rank worst %d | MIN projected net rank un-aged %d, aged %d"
+               % (len(CH), worst20, CH.rank20.median(), worst_full, n_test, len(CH), K_TEST, worst_post, mrk[1], mrk[0]))
         worst_rows = CH[CH.rank20 == worst20]
+        worst_full_rows = CH[CH.rank_full == worst_full]
         # under the model: draw one of the eight (view x aging basis) strength sets for the
-        # whole league, add 20-game noise to every team, rank, repeat
+        # whole league, add game-count noise to every team, rank, repeat
         sets = [d.set_index("team_abbr").net_current for _, d in
                 pd.concat([su.assign(b="u"), sa.assign(b="a")]).groupby(["b", "fork"])]
         rng = np.random.default_rng(20260916)
@@ -345,38 +345,40 @@ def main():
         teams_ = list(sets[0].index)
         mats = np.array([s.reindex(teams_).to_numpy() for s in sets])
         mi = teams_.index("MIN")
-        min_rank = np.empty(NDRAW, dtype=int)
+        SIG82 = sd_game / np.sqrt(82.0)
+        min_rank20 = np.empty(NDRAW, dtype=int)
+        min_rank82 = np.empty(NDRAW, dtype=int)
         for i in range(NDRAW):
-            v = mats[rng.integers(0, len(sets))] + rng.normal(0.0, SIG, len(teams_))
-            min_rank[i] = int((v > v[mi]).sum() + 1)
-        p_path = float((min_rank <= worst20).mean())
-        # the TEST: the best rank noise alone reaches no more than 5% of the time
-        k_test = max([k for k in range(1, 31) if (min_rank <= k).mean() <= 0.05] or [0])
-        p_k = float((min_rank <= k_test).mean()) if k_test else 0.0
-        share_k = float((CH.rank20 <= k_test).mean()) if k_test else 0.0
-        r.note("   test threshold: rank %d or better, reached by noise %.3f of the time; "
-               "%.0f%% of champions were there" % (k_test, p_k, 100 * share_k))
-        r.note("   P(Minnesota ranks %d or better after 20 games | model, 20-game noise) = %.3f"
-               % (worst20, p_path))
+            base = mats[rng.integers(0, len(sets))]
+            v = base + rng.normal(0.0, SIG, len(teams_))
+            min_rank20[i] = int((v > v[mi]).sum() + 1)
+            v = base + rng.normal(0.0, SIG82, len(teams_))
+            min_rank82[i] = int((v > v[mi]).sum() + 1)
+        p_path = float((min_rank20 <= worst20).mean())
+        p_test = float((min_rank82 <= K_TEST).mean())
+        r.note("   test: top %d at season's end, where %d of %d champions finished; noise alone takes a team projected "
+               "like Minnesota there %.3f of the time (82-game noise %.2f per 100)" % (K_TEST, n_test, len(CH), p_test, SIG82))
+        r.note("   checkpoint: P(Minnesota ranks %d or better after 20 games | model, 20-game noise) = %.3f" % (worst20, p_path))
         rows.append(dict(
             n=5, claim="Minnesota is not on a champion's path",
-            metric="Minnesota's league rank in net rating after %d games" % N_CHECK,
-            current=("projected rank %d (primary basis) / %d (aged); the %d champions since 1997-98 "
-                     "ranked %d at worst after 20 games (%s), median %.0f"
+            metric="Minnesota's league rank in net rating: after %d games, and at the end of the regular season" % N_CHECK,
+            current=("projected rank %d (primary basis) / %d (aged); the %d champions since 2015-16 ranked %d at worst after "
+                     "20 games (%s), %d at worst at season's end (%s) with %d of %d in the top %d, and %d at worst after the "
+                     "All-Star break"
                      % (mrk[1], mrk[0], len(CH), worst20,
-                        " and ".join("%s %s" % (x.season, x.champion)
-                                     for _, x in worst_rows.iterrows()),
-                        CH.rank20.median())),
-            threshold="%d or better (test); %d or better (checkpoint)" % (k_test, worst20),
-            flips=("TEST: %s or better is somewhere noise alone takes a team projected like "
-                   "Minnesota only %.0f%% of the time, so the model has Minnesota's level "
-                   "wrong, and %.0f%% of champions since 1997-98 stood there after 20 games. "
-                   "CHECKPOINT: %dth or better puts Minnesota back inside every champion's "
-                   "range, but noise alone does that %.0f%% of the time, so it proves little"
-                   % (k_test, 100 * p_k, 100 * share_k, worst20, 100 * p_path)),
+                        " and ".join("%s %s" % (x.season, x.champion) for _, x in worst_rows.iterrows()),
+                        worst_full, " and ".join("%s %s" % (x.season, x.champion) for _, x in worst_full_rows.iterrows()),
+                        n_test, len(CH), K_TEST, worst_post)),
+            threshold="%d or better at season's end (test); %d or better after 20 games (checkpoint)" % (K_TEST, worst20),
+            flips=("TEST: a top-%d net rating at the end of the regular season is where %d of the %d champions finished, "
+                   "and noise alone takes a team projected like Minnesota there %.0f%% of the time, so passing it means the "
+                   "model had Minnesota's level wrong. CHECKPOINT: %dth or better after 20 games keeps Minnesota inside every "
+                   "champion's range, but noise alone does that %.0f%% of the time, so it rules out little; the post-All-Star "
+                   "rank on its own rules out nothing, a champion has been as low as %dth there"
+                   % (K_TEST, n_test, len(CH), 100 * p_test, worst20, 100 * p_path, worst_post)),
             label="observed history, modelled projection, checkpoint",
-            source="nba_games 1997-98 to 2025-26, team_strengths_2026_27.csv",
-            value=k_test, value2=worst20))
+            source="nba_games 2015-16 to 2025-26, c1_champions.csv, team_strengths_2026_27.csv",
+            value=K_TEST, value2=worst20))
         CH.to_csv(OUT.replace(".csv", "_champion_ranks.csv"), index=False)
 
         W = pd.DataFrame(rows)
@@ -405,9 +407,10 @@ def write_doc(r, W, CH, SIG, sig_ts, share_top):
         L.append("| %d | **%s** | %s | %s | **%s** | %s | %s |"
                  % (x.n, x.claim, x.metric, x.current, x.threshold, x.flips, x.label))
     L.append("")
-    L.append("**The champion's path, in full.** Net-rating rank after 20 games for every "
-             "champion since 1997-98: %s. Share of them in the top 3, 5, 8 and 10: %s.\n"
-             % ("; ".join("%s %s %d" % (x.season, x.champion, x.rank20)
+    L.append("**The champion's path, in full.** For each of the eleven champions since 2015-16, the net-rating rank "
+             "after 20 games, at the end of the regular season, and after the All-Star break: %s. Share of them in the "
+             "top 3, 5, 8 and 10 after 20 games: %s.\n"
+             % ("; ".join("%s %s %d / %d / %d" % (x.season, x.champion, x.rank20, x.rank_full, x.rank_post_asb)
                           for _, x in CH.iterrows()),
                 ", ".join("%.0f%%" % (100 * v) for v in share_top.values())))
     L.append("**What this list does not do.** It does not update the model in November; a "

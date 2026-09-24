@@ -60,7 +60,7 @@ None of the three survives the allocator cell either: under the headline's own m
 
 **Individual matchups.** A pairing of thirty possessions carries a standard error of 0.14 points per matchup possession, and a team's main defender on a star normally holds him 0.05 to 0.10 below his average. Judged against that norm, 2 of 79 observed West-field matchups beat it by two standard errors, where chance alone gives about 2.3 `[observed, m3_opponent_cards]`.
 
-**Champions, as honest counts.** Across the 11 clean seasons the preseason favourite won **4 of 11**, and the champion came from the market's top five **10 of 11**, priced between 4.01% and 57.65% `[observed, champions_table]`. Set against the 14 top-five teams that did not win in the three most recent seasons (the feature comparison still runs on 2023-24 to 2025-26), only 3 of 20 features separate the champions: offensive rank, defensive rank and continuity. No style feature does `[observed, h1_h3_h5_profile]`.
+**Champions, as honest counts.** Across the 11 clean seasons the preseason favourite won **4 of 11**, and the champion came from the market's top five **10 of 11**, priced between 4.01% and 57.65% `[observed, champions_table]`. Set against the 48 top-five teams that did not win across those seasons, 0 of 19 team-level features separate the champions under the quarter rule (separating: none). On the three seasons with style features, 0 of 8 style features do `[observed, h1_h3_h5_profile]`.
 
 **The Knicks, the last champion.** The market had them at **8.27%, 4th, 53.5 wins**; they won 53. This project's model had them at 4.63% `[observed, h4_knicks_case_file]`. The regular season was steady: +6.33 per game, +6.16 before the break and +6.67 after. Then the playoffs were a different team: **16-3 at +14.89**, and they were the only one of 16 playoff teams whose margin improved (+8.57, against an average of -7.39; Minnesota's was -9.19). What moved was not visible in September. Their top five players missed 46 regular-season games and 2 in the playoffs; the top five's share of minutes went from 0.579 to 0.673; and the bracket broke their way.
 
@@ -138,7 +138,7 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | Minnesota's level is inside the model's range | model range -1.5 to +1.8 (four views, both aging bases) | **above +7.5 or below -7.2** |
 | The model's two largest disagreements with the market | BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7 | **BOS below -2.4; SAS above +14.4** |
 | The Edwards-Ball pairing costs usage, not efficiency | 2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons) | **Edwards below 0.547, or Ball below 0.476** |
-| Minnesota is not on a champion's path | projected rank 16 (primary basis) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2 | **3 or better (test); 11 or better (checkpoint)** |
+| Minnesota is not on a champion's path | projected rank 16 (primary basis) / 13 (aged); the 11 champions since 2015-16 ranked 11 at worst after 20 games (2022-23 DEN), 6 at worst at season's end (2022-23 DEN) with 10 of 11 in the top 5, and 18 at worst after the All-Star break | **5 or better at season's end (test); 11 or better after 20 games (checkpoint)** |
 
 **The number, and the condition:** 12.6 minutes of Cody Williams is the threshold that moves the headline verdict, and it depends on a rotation decision no one has made yet.
 
@@ -160,7 +160,7 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 
 ## Appendix
 
-**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. Both grains are fixed now, the lineup one and the possession one under it, and everything built on them is recomputed: the postmortem lineup figures (D88) and the RAPM the impact views ride on (D89). The impact spine behind this piece is the refit one.
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds for the champion seasons (the preseason column is filled for all eleven), left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. Both grains are fixed now, the lineup one and the possession one under it, and everything built on them is recomputed: the postmortem lineup figures (D88) and the RAPM the impact views ride on (D89). The impact spine behind this piece is the refit one.
 
 **Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
 
@@ -226,14 +226,14 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | 3.16% | 0.86% | 1.25% | 2.03% | 2.59% | ALL-VIEWS |
-| OKC | 22.49% | 12.89% | 11.87% | 16.55% | 17.44% | ALL-VIEWS |
-| DET | 3.16% | 4.62% | 4.74% | 10.21% | 11.76% | ALL-VIEWS |
-| HOU | 1.61% | 6.73% | 7.58% | 5.90% | 7.16% | ALL-VIEWS |
-| BOS | 5.47% | 22.94% | 23.52% | 12.90% | 13.95% | ALL-VIEWS |
-| DEN | 3.16% | 6.04% | 4.57% | 8.72% | 5.40% | ALL-VIEWS |
-| NYK | 8.21% | 3.30% | 3.41% | 5.86% | 3.66% | ALL-VIEWS |
-| PHI | 8.42% | 4.02% | 3.37% | 0.75% | 3.59% | ALL-VIEWS |
 | SAS | 22.96% | 15.88% | 17.98% | 9.79% | 11.76% | ALL-VIEWS |
+| PHI | 8.42% | 4.02% | 3.37% | 0.75% | 3.59% | ALL-VIEWS |
+| HOU | 1.61% | 6.73% | 7.58% | 5.90% | 7.16% | ALL-VIEWS |
+| DET | 3.16% | 4.62% | 4.74% | 10.21% | 11.76% | ALL-VIEWS |
+| OKC | 22.49% | 12.89% | 11.87% | 16.55% | 17.44% | ALL-VIEWS |
+| DEN | 3.16% | 6.04% | 4.57% | 8.72% | 5.40% | ALL-VIEWS |
+| BOS | 5.47% | 22.94% | 23.52% | 12.90% | 13.95% | ALL-VIEWS |
+| NYK | 8.21% | 3.30% | 3.41% | 5.86% | 3.66% | ALL-VIEWS |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is -1.25 points un-aged and all-negative, but -0.54 and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is -0.753: take out the DiVincenzo injury (+1.806) and the Williams minutes (+1.048), which overlap completely (-1.048, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **+1.053**, mixed across views `[modeled, w1c_decompose]`.
 

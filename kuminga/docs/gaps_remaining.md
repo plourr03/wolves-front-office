@@ -103,8 +103,8 @@ Recorded per the autonomy rule: failures go here and the run moves on.
 
 **BLOCKED ON AN EXTERNAL SOURCE**
 
-- ~~**H1 champion feature columns.**~~ **CLOSED 2026-09-17 (R6, D83)** for the three clean seasons, via Basketball-Reference snapshots frozen in `data/bref/`; the pre-playoff odds and odds-history columns stay open for a pasted source. Original entry: Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity (returning minutes share), top-8 playoff health, ORtg and DRtg ranks. Basketball-Reference returns **403 to direct requests**, and the `r.jina.ai` proxy is **rate-limited on that entire domain until 2026-09-10 04:14 GMT** ("Anonymous access blocked ... DDoS attack suspected"). The warehouse cannot substitute: `nba_team_advanced_stats` is GAME level and has no season key, so every one of those columns needs a season aggregation that does not exist yet. **Not guessed.** Retry the B-Ref preseason-odds and team-summary pages after the block lifts.
-- **Champions table before 2023-24.** The project holds clean 30-team preseason odds for exactly three seasons. Extending back needs `basketball-reference.com/leagues/NBA_{year}_preseason_odds.html` (published, citable, courtesy sportsoddshistory.com) or a paste. **sportsbettingdime.com was found and rejected**: its past-seasons table names San Antonio as the 2026 champion when New York won 4-1. A source that misstates a champion is not usable for its odds either.
+- ~~**H1 champion feature columns.**~~ **CLOSED 2026-09-17 (R6, D83)** for the three clean seasons, via Basketball-Reference snapshots frozen in `data/bref/`; **extended to all eleven seasons 2026-09-24 (D103, D104)** from the html cache, with the preseason odds column filled from Basketball-Reference's preseason odds pages. Pre-playoff odds stay open. Original entry: Net-rating ranks, post-All-Star ranks, seeds, playoff net rating versus regular season, best-player metric, top-8 age, continuity (returning minutes share), top-8 playoff health, ORtg and DRtg ranks. Basketball-Reference returns **403 to direct requests**, and the `r.jina.ai` proxy is **rate-limited on that entire domain until 2026-09-10 04:14 GMT** ("Anonymous access blocked ... DDoS attack suspected"). The warehouse cannot substitute: `nba_team_advanced_stats` is GAME level and has no season key, so every one of those columns needs a season aggregation that does not exist yet. **Not guessed.** Retry the B-Ref preseason-odds and team-summary pages after the block lifts.
+- ~~**Champions table before 2023-24.**~~ **CLOSED 2026-09-24 (D103).** The eight older seasons' 30-team preseason odds were built by `scripts/c1_preseason_odds.py` from `basketball-reference.com/leagues/NBA_{year}_preseason_odds.html` (courtesy sportsoddshistory.com), cached with their hashes, and the three hand-transcribed files were checked against the same pages team by team. Original entry: the project held clean odds for exactly three seasons. **sportsbettingdime.com was found and rejected**: its past-seasons table names San Antonio as the 2026 champion when New York won 4-1. A source that misstates a champion is not usable for its odds either.
 
 **BLOCKED ON MISSING WAREHOUSE COLUMNS**
 
@@ -135,7 +135,7 @@ Recorded per the autonomy rule: failures go here and the run moves on.
 
 **OPEN, awaiting a source**
 
-- **Pre-playoff odds and every odds-history column before the clean seasons** (H1). Left blank in `h1_champion_sheet.csv` for a pasted source; B-Ref's preseason-odds pages are the citable route.
+- **Pre-playoff odds** (H1). Not fetched for any season; the preseason column is filled for all eleven (D103).
 
 **FLAGGED, and what is now fixed**
 

@@ -2,7 +2,7 @@
 
 **Champion.** Beat San Antonio 4-1 in the Finals. Jalen Brunson, Finals MVP. First title since 1973.
 
-**How to read this file.** The preseason market is a prior, not a prediction to be graded right or wrong. The Knicks matter to a Minnesota preview because **the market priced them well and they still outran the price**, and the useful question is what moved them inside it. Every figure below is from run `h4_knicks_case_file_20260916T190540Z`.
+**How to read this file.** The preseason market is a prior, not a prediction to be graded right or wrong. The Knicks matter to a Minnesota preview because **the market priced them well and they still outran the price**, and the useful question is what moved them inside it. Every figure below is from run `h4_knicks_case_file_20260924T192303Z`.
 
 **Sources.** Series results from the warehouse (`nba_games`, season 42025) and independently from [Wikipedia's 2026 NBA playoffs page](https://en.wikipedia.org/wiki/2026_NBA_playoffs); game counts agree exactly. Preseason price from the project's hand-transcribed odds file. Preseason model number from this project's own calibration backtest.
 
@@ -63,8 +63,8 @@
 
 | feature | Knicks | flag? |
 |---|---|---|
-| preseason market rank | 4 | **yes**: every champion in this project's three-season sample started top 4 |
-| preseason implied probability | 8.27% | **circular, so not counted**: the Knicks are one of the three champions that DEFINE the 8.27% to 14.69% band, and they set its floor. Being inside it is true by construction. |
+| preseason market rank | 4 | **yes**: 10 of the 11 champions in this project's sample started in the market's top five, and none worse than 9th |
+| preseason implied probability | 8.27% | **circular, so not counted**: the Knicks are one of the 11 champions whose prices DEFINE the 4.01% to 57.65% band. Being inside it is true by construction. The floor is Denver Nuggets 2022-23 at 4.01%. |
 | continuity | 0.821, rank 4 | **weakly**: see the Minnesota line below |
 | regular-season margin | +6.33, rank 5 | no: good, not elite |
 | style profile | rim_rate 15, fg3a_rate 12, pace 24, opp_tov_rate 13, oreb_rate 5, size 23 | **no**, and this project's held-out test found style carries no playoff signal |
@@ -79,7 +79,7 @@
 
 **The Knicks are the template, and Minnesota does not yet fit it on the first flag.**
 
-- **Market position.** The Knicks started **inside** the champion band at rank 4. Minnesota starts at **3.16% and rank 6**, outside it.
+- **Market position.** The Knicks started **inside** the champion band at rank 4. Minnesota starts at **3.16% and rank 6**: inside every champion's starting rank (none worse than 9th) but below the band's price floor, Denver Nuggets 2022-23 at 4.01%, which is the closest champion to it by price.
 - **Continuity is not the story.** Minnesota's continuity in 2025-26 was **0.829, rank 3**, slightly higher than the Knicks', and Minnesota went out in the second round (beat Denver 4-2, lost to San Antonio 2-4).
 - **The playoff lift is the story, and it ran the other way for Minnesota.** In 2025-26 Minnesota's margin changed by **-9.19** from regular season to playoffs, rank **11** of 16. The Knicks' changed by **+8.57**, rank 1.
 

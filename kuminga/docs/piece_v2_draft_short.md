@@ -28,7 +28,7 @@ The model's biggest disagreement with the market isn't Minnesota, it's Boston: *
 
 Most of what gets argued about in September is unmeasurable, and the tests say so. A style overlay made predictions worse, not better. Of 8 regular season traits tested as predictors of playoff success on 195 series, **0** survive. "Defense travels" is not supported, and the estimate points the other way (-0.85 points per game per standard deviation of defensive lean, short of the bar).
 
-Base rates, as counts on 11 clean seasons of odds: the favorite won 4 of 11, and the champion came from the market's top five 10 of 11 times. No style feature separates the champions from the top-five teams that didn't win (three most recent seasons).
+Base rates, as counts on 11 clean seasons of odds: the favorite won 4 of 11, and the champion came from the market's top five 10 of 11 times. 0 of 19 team-level features separate the champions from the 48 top-five teams that didn't win; of the style features, 0 of 8 do, on the three seasons that have them.
 
 The Knicks are the illustration. Market 8.27%, 4th, steady all season, then **16-3 at +14.89** in the playoffs, the only one of 16 playoff teams whose margin improved. What decided the title wasn't knowable until April.
 
@@ -88,4 +88,4 @@ The cap chain closes to the dollar: $217,621,829 before the summer, **$217,077,4
 
 ## 8. What to watch
 
-Five claims, thresholds set now, checked at game 20. Williams: below 12.6 a night. Minnesota's level: above +7.5 or below -7.2. The two biggest market disagreements: BOS below -2.4; SAS above +14.4, with the bigger Boston test at game 30 below -1.7. The Edwards and Ball pairing: Edwards below 0.547, or Ball below 0.476. The champion's path: 3 or better (test); 11 or better (checkpoint).
+Five claims, thresholds set now, checked at game 20. Williams: below 12.6 a night. Minnesota's level: above +7.5 or below -7.2. The two biggest market disagreements: BOS below -2.4; SAS above +14.4, with the bigger Boston test at game 30 below -1.7. The Edwards and Ball pairing: Edwards below 0.547, or Ball below 0.476. The champion's path: 5 or better at season's end (test); 11 or better after 20 games (checkpoint).

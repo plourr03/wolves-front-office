@@ -31,11 +31,11 @@ model_sas,1. The number,SAS model title odds,13.85%,MODELED,QUOTABLE AS BAND,mar
 mkt_sas,1. The number,SAS market title odds,22.96%,OBSERVED,QUOTABLE,market_devig_20260919T195044Z,market_devig_2026_27.csv
 model_cha,1. The number,CHA model title odds,3.44%,MODELED,QUOTABLE AS BAND,market_devig_20260919T195044Z,market_devig_2026_27.csv
 mkt_cha,1. The number,CHA market title odds,0.81%,OBSERVED,QUOTABLE,market_devig_20260919T195044Z,market_devig_2026_27.csv
-bos_dec_threshold,1. The number,"Boston December (game 30) threshold, net per 100",-1.7,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
-bos_dec_game,1. The number,December checkpoint game,30,ASSUMED,FACT,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
-bos_range_lo,1. The number,Boston model net range low,+3.3,MODELED,QUOTABLE AS BAND,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
-bos_range_hi,1. The number,Boston model net range high,+10.1,MODELED,QUOTABLE AS BAND,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
-dec_noise,1. The number,30-game net rating noise per 100,3.1,OBSERVED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list_december.csv
+bos_dec_threshold,1. The number,"Boston December (game 30) threshold, net per 100",-1.7,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list_december.csv
+bos_dec_game,1. The number,December checkpoint game,30,ASSUMED,FACT,n8_watch_list_20260924T200431Z,n8_watch_list_december.csv
+bos_range_lo,1. The number,Boston model net range low,+3.3,MODELED,QUOTABLE AS BAND,n8_watch_list_20260924T200431Z,n8_watch_list_december.csv
+bos_range_hi,1. The number,Boston model net range high,+10.1,MODELED,QUOTABLE AS BAND,n8_watch_list_20260924T200431Z,n8_watch_list_december.csv
+dec_noise,1. The number,30-game net rating noise per 100,3.1,OBSERVED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list_december.csv
 v_ball_in_pooled_u,1. The number,"LaMelo Ball in, pooled un-aged mean pp",+0.79,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
 v_ball_in_pooled_a,1. The number,"LaMelo Ball in, pooled aged mean pp",+0.91,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
 v_ball_in_tr_u,1. The number,"LaMelo Ball in, team-rank un-aged mean pp",+1.56,MODELED,QUOTABLE,r7_allocator_agreement_20260919T233117Z,r7_allocator_verdicts.csv
@@ -222,7 +222,7 @@ anderson_clear,1. The number,"Kyle Anderson departure, views clearing un-aged / 
 n_dep_ship,1. The number,departures that ship on their own,0,MODELED,QUOTABLE,r2_departures_20260919T232924Z,r2_departures_split_shapley_verdicts.csv
 n_departures,1. The number,players in the other-departures bundle,7,FACT,FACT,r2_departures_20260919T232924Z,r2_departures_split_shapley_verdicts.csv
 sims,1. The number,simulations per f-curve view,"200,000",ASSUMED,FACT,merge_fcurve_parts_20260919T195006Z,build_fcurve KUMINGA_FCURVE_NSIMS
-per100,1. The number,"rating basis, possessions",100,FACT,FACT,n8_watch_list_20260922T160123Z,definition
+per100,1. The number,"rating basis, possessions",100,FACT,FACT,n8_watch_list_20260924T200431Z,definition
 m1_rs_gain,2. What the odds get right,"style overlay held-out MAE gain, 2025-26 regular season",-0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
 m1_rs_worse,2. What the odds get right,"held-out MAE increase, regular season",0.0151,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
 m1_po_worse,2. What the odds get right,"held-out MAE increase, postseasons",0.0265,MODELED,QUOTABLE,m1_style_model_20260910T135427Z,m1_style_model_fit.csv
@@ -267,29 +267,190 @@ h2_lo,2. What the odds get right,"champions' preseason price, low",4.01%,OBSERVE
 h2_hi,2. What the odds get right,"champions' preseason price, high",57.65%,OBSERVED,QUOTABLE,champions_table_20260924T184745Z,champions_h2_base_rates.csv
 h2_median,2. What the odds get right,"champions' preseason price, median",12.75%,OBSERVED,QUOTABLE,champions_table_20260924T184745Z,champions_h2_base_rates.csv
 h2_worst_rank,2. What the odds get right,worst preseason rank of a champion,9,OBSERVED,QUOTABLE,champions_table_20260924T184745Z,champions_h2_base_rates.csv
-h3_n_non,2. What the odds get right,preseason top-5 non-champions,14,OBSERVED,FACT,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
-h3_n_sep,2. What the odds get right,features that separate,3,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
-h3_n_feat,2. What the odds get right,features compared,20,OBSERVED,FACT,h1_h3_h5_profile_20260917T132715Z,h3_separation.csv
-nyk_mkt,2. What the odds get right,Knicks preseason market price,8.27%,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_rank,2. What the odds get right,Knicks preseason market rank,4,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_wt,2. What the odds get right,Knicks win total,53.5,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_wins,2. What the odds get right,Knicks wins,53,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_model,2. What the odds get right,our model's Knicks price,4.63%,MODELED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_rs,2. What the odds get right,Knicks regular-season margin,+6.33,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_pre,2. What the odds get right,before the break,+6.16,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_post,2. What the odds get right,after the break,+6.67,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_po_rec,2. What the odds get right,Knicks playoff record,16-3,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_po,2. What the odds get right,Knicks playoff margin,+14.89,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_lift,2. What the odds get right,Knicks playoff lift,+8.57,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_po_teams,2. What the odds get right,playoff teams,16,OBSERVED,FACT,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_lift_mean,2. What the odds get right,Knicks lift_mean,-7.39,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_cmp_lift,2. What the odds get right,Knicks cmp_lift,-9.19,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_cmp_lift_rank,2. What the odds get right,Knicks cmp_lift_rank,11,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_n_positive_lift,2. What the odds get right,Knicks n_positive_lift,1,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_top5_rs_games_missed,2. What the odds get right,Knicks top5_rs_games_missed,46,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_top5_po_games_missed,2. What the odds get right,Knicks top5_po_games_missed,2,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_top5_share_rs,2. What the odds get right,Knicks top5_share_rs,0.579,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
-nyk_top5_share_po,2. What the odds get right,Knicks top5_share_po,0.673,OBSERVED,QUOTABLE,h4_knicks_case_file_20260916T190540Z,h4_knicks_case_file.csv
+h3_n_champ,2. What the odds get right,champions in the comparison,11,OBSERVED,FACT,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_n_non,2. What the odds get right,"preseason top-5 non-champions, eleven seasons",48,OBSERVED,FACT,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_n_sep,2. What the odds get right,"team-level features that separate, eleven seasons",0,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_n_feat,2. What the odds get right,"team-level features compared, eleven seasons",19,OBSERVED,FACT,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_sep_list,2. What the odds get right,the separating team-level features,none,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3s_n_non,2. What the odds get right,"preseason top-5 non-champions, three seasons (style)",14,OBSERVED,FACT,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3s_n_sep,2. What the odds get right,"style features that separate, three seasons",0,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3s_n_feat,2. What the odds get right,"style features compared, three seasons",8,OBSERVED,FACT,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3s11_n_sep,2. What the odds get right,"style features that separate, eleven seasons (for the record)",0,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h3_separation_style_eleven.csv
+h3_pre_implied_lo,2. What the odds get right,"preseason implied %, champions' low",4.01,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_pre_implied_hi,2. What the odds get right,"preseason implied %, champions' high",57.65,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_pre_implied_inside,2. What the odds get right,"preseason implied %, non-champions inside the range",44,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_pre_rank_lo,2. What the odds get right,"preseason rank, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_pre_rank_hi,2. What the odds get right,"preseason rank, champions' high",9.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_pre_rank_inside,2. What the odds get right,"preseason rank, non-champions inside the range",48,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_nrtg_rank_lo,2. What the odds get right,"net rating rank, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_nrtg_rank_hi,2. What the odds get right,"net rating rank, champions' high",6.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_nrtg_rank_inside,2. What the odds get right,"net rating rank, non-champions inside the range",21,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_ortg_rank_lo,2. What the odds get right,"offence rank, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_ortg_rank_hi,2. What the odds get right,"offence rank, champions' high",17.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_ortg_rank_inside,2. What the odds get right,"offence rank, non-champions inside the range",43,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_drtg_rank_lo,2. What the odds get right,"defence rank, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_drtg_rank_hi,2. What the odds get right,"defence rank, champions' high",14.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_drtg_rank_inside,2. What the odds get right,"defence rank, non-champions inside the range",34,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_post_asb_rank_lo,2. What the odds get right,"post-All-Star net rank, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_post_asb_rank_hi,2. What the odds get right,"post-All-Star net rank, champions' high",18.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_post_asb_rank_inside,2. What the odds get right,"post-All-Star net rank, non-champions inside the range",42,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_seed_lo,2. What the odds get right,"seed, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_seed_hi,2. What the odds get right,"seed, champions' high",3.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_seed_inside,2. What the odds get right,"seed, non-champions inside the range",22,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_po_minus_rs_lo,2. What the odds get right,"playoff minus regular-season net, champions' low",-4.13,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_po_minus_rs_hi,2. What the odds get right,"playoff minus regular-season net, champions' high",9.07,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_po_minus_rs_inside,2. What the odds get right,"playoff minus regular-season net, non-champions inside the range",17,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_best_vorp_lo,2. What the odds get right,"best player VORP, champions' low",3.30,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_best_vorp_hi,2. What the odds get right,"best player VORP, champions' high",8.90,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_best_vorp_inside,2. What the odds get right,"best player VORP, non-champions inside the range",39,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_age_lo,2. What the odds get right,"top-8 age, champions' low",25.50,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_age_hi,2. What the odds get right,"top-8 age, champions' high",29.70,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_age_inside,2. What the odds get right,"top-8 age, non-champions inside the range",30,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_appear_lo,2. What the odds get right,"top-8 returning, by appearance, champions' low",4.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_appear_hi,2. What the odds get right,"top-8 returning, by appearance, champions' high",8.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_appear_inside,2. What the odds get right,"top-8 returning, by appearance, non-champions inside the range",42,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_contract_lo,2. What the odds get right,"top-8 returning, by contract, champions' low",4.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_contract_hi,2. What the odds get right,"top-8 returning, by contract, champions' high",8.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_returning_contract_inside,2. What the odds get right,"top-8 returning, by contract, non-champions inside the range",43,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_appear_lo,2. What the odds get right,"returning share of playoff minutes, by appearance, champions' low",0.52,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_appear_hi,2. What the odds get right,"returning share of playoff minutes, by appearance, champions' high",0.91,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_appear_inside,2. What the odds get right,"returning share of playoff minutes, by appearance, non-champions inside the range",30,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_contract_lo,2. What the odds get right,"returning share of playoff minutes, by contract, champions' low",0.56,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_contract_hi,2. What the odds get right,"returning share of playoff minutes, by contract, champions' high",0.91,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_returning_share_contract_inside,2. What the odds get right,"returning share of playoff minutes, by contract, non-champions inside the range",31,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_rs_games_missed_lo,2. What the odds get right,"top-8 regular-season games missed, champions' low",54.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_rs_games_missed_hi,2. What the odds get right,"top-8 regular-season games missed, champions' high",154.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_rs_games_missed_inside,2. What the odds get right,"top-8 regular-season games missed, non-champions inside the range",38,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_po_games_missed_lo,2. What the odds get right,"top-8 playoff games missed, champions' low",1.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_po_games_missed_hi,2. What the odds get right,"top-8 playoff games missed, champions' high",15.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top8_po_games_missed_inside,2. What the odds get right,"top-8 playoff games missed, non-champions inside the range",33,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_rs_lo,2. What the odds get right,"top-five minute share, regular season, champions' low",0.51,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_rs_hi,2. What the odds get right,"top-five minute share, regular season, champions' high",0.60,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_rs_inside,2. What the odds get right,"top-five minute share, regular season, non-champions inside the range",25,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_po_lo,2. What the odds get right,"top-five minute share, playoffs, champions' low",0.63,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_po_hi,2. What the odds get right,"top-five minute share, playoffs, champions' high",0.76,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_top5_share_po_inside,2. What the odds get right,"top-five minute share, playoffs, non-champions inside the range",33,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_tighten_lo,2. What the odds get right,"top-five share, playoffs minus regular season, champions' low",0.07,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_tighten_hi,2. What the odds get right,"top-five share, playoffs minus regular season, champions' high",0.19,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h3_tighten_inside,2. What the odds get right,"top-five share, playoffs minus regular season, non-champions inside the range",32,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h3_separation.csv
+h1_2015_16_best,2. What the odds get right,2015-16 champion's best player by VORP,LeBron James,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2015_16_best_vorp,2. What the odds get right,"2015-16 champion's best player, VORP",7.5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2015_16_ortg_rank,2. What the odds get right,2015-16 champion's offence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2015_16_drtg_rank,2. What the odds get right,2015-16 champion's defence rank,10,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2016_17_best,2. What the odds get right,2016-17 champion's best player by VORP,Stephen Curry,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2016_17_best_vorp,2. What the odds get right,"2016-17 champion's best player, VORP",5.9,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2016_17_ortg_rank,2. What the odds get right,2016-17 champion's offence rank,1,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2016_17_drtg_rank,2. What the odds get right,2016-17 champion's defence rank,2,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2017_18_best,2. What the odds get right,2017-18 champion's best player by VORP,Kevin Durant,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2017_18_best_vorp,2. What the odds get right,"2017-18 champion's best player, VORP",5.5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2017_18_ortg_rank,2. What the odds get right,2017-18 champion's offence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2017_18_drtg_rank,2. What the odds get right,2017-18 champion's defence rank,11,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2018_19_best,2. What the odds get right,2018-19 champion's best player by VORP,Kawhi Leonard,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2018_19_best_vorp,2. What the odds get right,"2018-19 champion's best player, VORP",4.7,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2018_19_ortg_rank,2. What the odds get right,2018-19 champion's offence rank,5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2018_19_drtg_rank,2. What the odds get right,2018-19 champion's defence rank,5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2019_20_best,2. What the odds get right,2019-20 champion's best player by VORP,LeBron James,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2019_20_best_vorp,2. What the odds get right,"2019-20 champion's best player, VORP",6.1,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2019_20_ortg_rank,2. What the odds get right,2019-20 champion's offence rank,11,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2019_20_drtg_rank,2. What the odds get right,2019-20 champion's defence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2020_21_best,2. What the odds get right,2020-21 champion's best player by VORP,Giannis Antetokounmpo,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2020_21_best_vorp,2. What the odds get right,"2020-21 champion's best player, VORP",5.6,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2020_21_ortg_rank,2. What the odds get right,2020-21 champion's offence rank,5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2020_21_drtg_rank,2. What the odds get right,2020-21 champion's defence rank,10,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2021_22_best,2. What the odds get right,2021-22 champion's best player by VORP,Stephen Curry,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2021_22_best_vorp,2. What the odds get right,"2021-22 champion's best player, VORP",4.4,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2021_22_ortg_rank,2. What the odds get right,2021-22 champion's offence rank,17,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2021_22_drtg_rank,2. What the odds get right,2021-22 champion's defence rank,1,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2022_23_best,2. What the odds get right,2022-23 champion's best player by VORP,Nikola Jokić,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2022_23_best_vorp,2. What the odds get right,"2022-23 champion's best player, VORP",8.8,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2022_23_ortg_rank,2. What the odds get right,2022-23 champion's offence rank,5,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2022_23_drtg_rank,2. What the odds get right,2022-23 champion's defence rank,14,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2023_24_best,2. What the odds get right,2023-24 champion's best player by VORP,Jayson Tatum,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2023_24_best_vorp,2. What the odds get right,"2023-24 champion's best player, VORP",4.7,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2023_24_ortg_rank,2. What the odds get right,2023-24 champion's offence rank,1,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2023_24_drtg_rank,2. What the odds get right,2023-24 champion's defence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2024_25_best,2. What the odds get right,2024-25 champion's best player by VORP,Shai Gilgeous-Alexander,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2024_25_best_vorp,2. What the odds get right,"2024-25 champion's best player, VORP",8.9,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2024_25_ortg_rank,2. What the odds get right,2024-25 champion's offence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2024_25_drtg_rank,2. What the odds get right,2024-25 champion's defence rank,1,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2025_26_best,2. What the odds get right,2025-26 champion's best player by VORP,Jalen Brunson,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2025_26_best_vorp,2. What the odds get right,"2025-26 champion's best player, VORP",3.3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2025_26_ortg_rank,2. What the odds get right,2025-26 champion's offence rank,3,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h1_2025_26_drtg_rank,2. What the odds get right,2025-26 champion's defence rank,7,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h1_champion_sheet.csv
+h5_pre_implied,2. What the odds get right,"Minnesota, preseason implied % (2026-27 (known now))",3.16,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_pre_implied_status,2. What the odds get right,"Minnesota, preseason implied %: status","outside, short of it",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_pre_rank,2. What the odds get right,"Minnesota, preseason rank (2026-27 (known now))",6.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_pre_rank_status,2. What the odds get right,"Minnesota, preseason rank: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_nrtg_rank,2. What the odds get right,"Minnesota, net rating rank (2025-26 actual)",10.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_nrtg_rank_status,2. What the odds get right,"Minnesota, net rating rank: status","outside, short of it",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_ortg_rank,2. What the odds get right,"Minnesota, offence rank (2025-26 actual)",12.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_ortg_rank_status,2. What the odds get right,"Minnesota, offence rank: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_drtg_rank,2. What the odds get right,"Minnesota, defence rank (2025-26 actual)",8.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_drtg_rank_status,2. What the odds get right,"Minnesota, defence rank: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_post_asb_rank,2. What the odds get right,"Minnesota, post-All-Star net rank (2025-26 actual)",18.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_post_asb_rank_status,2. What the odds get right,"Minnesota, post-All-Star net rank: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_seed,2. What the odds get right,"Minnesota, seed (2025-26 actual)",6.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_seed_status,2. What the odds get right,"Minnesota, seed: status","outside, short of it",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_po_minus_rs,2. What the odds get right,"Minnesota, playoff minus regular-season net (2025-26 actual)",-8.96,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_po_minus_rs_status,2. What the odds get right,"Minnesota, playoff minus regular-season net: status","outside, short of it",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_best_vorp,2. What the odds get right,"Minnesota, best player VORP (2025-26 actual)",3.50,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_best_vorp_status,2. What the odds get right,"Minnesota, best player VORP: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_age,2. What the odds get right,"Minnesota, top-8 age (2025-26 actual)",28.80,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_age_status,2. What the odds get right,"Minnesota, top-8 age: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_returning_appear,2. What the odds get right,"Minnesota, top-8 returning, by appearance (2026-27 (known now))",5.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_returning_appear_status,2. What the odds get right,"Minnesota, top-8 returning, by appearance: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_returning_contract,2. What the odds get right,"Minnesota, top-8 returning, by contract (2026-27 (known now))",5.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_returning_contract_status,2. What the odds get right,"Minnesota, top-8 returning, by contract: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_returning_share_appear,2. What the odds get right,"Minnesota, returning share of playoff minutes, by appearance (2026-27 (known now))",0.70,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_returning_share_appear_status,2. What the odds get right,"Minnesota, returning share of playoff minutes, by appearance: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_returning_share_contract,2. What the odds get right,"Minnesota, returning share of playoff minutes, by contract (2026-27 (known now))",0.70,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_returning_share_contract_status,2. What the odds get right,"Minnesota, returning share of playoff minutes, by contract: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_rs_games_missed,2. What the odds get right,"Minnesota, top-8 regular-season games missed (2025-26 actual)",117.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_rs_games_missed_status,2. What the odds get right,"Minnesota, top-8 regular-season games missed: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_po_games_missed,2. What the odds get right,"Minnesota, top-8 playoff games missed (2025-26 actual)",8.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top8_po_games_missed_status,2. What the odds get right,"Minnesota, top-8 playoff games missed: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top5_share_rs,2. What the odds get right,"Minnesota, top-five minute share, regular season (2025-26 actual)",0.61,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top5_share_rs_status,2. What the odds get right,"Minnesota, top-five minute share, regular season: status","outside, above",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top5_share_po,2. What the odds get right,"Minnesota, top-five minute share, playoffs (2025-26 actual)",0.64,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top5_share_po_status,2. What the odds get right,"Minnesota, top-five minute share, playoffs: status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_tighten,2. What the odds get right,"Minnesota, top-five share, playoffs minus regular season (2025-26 actual)",0.03,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_tighten_status,2. What the odds get right,"Minnesota, top-five share, playoffs minus regular season: status","outside, short of it",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_pace_z,2. What the odds get right,"Minnesota, pace (z) (2025-26 actual)",0.55,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_pace_z_status,2. What the odds get right,"Minnesota, pace (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_fg3a_z,2. What the odds get right,"Minnesota, three-point rate (z) (2025-26 actual)",0.12,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_fg3a_z_status,2. What the odds get right,"Minnesota, three-point rate (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_oreb_z,2. What the odds get right,"Minnesota, offensive rebound rate (z) (2025-26 actual)",-0.10,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_oreb_z_status,2. What the odds get right,"Minnesota, offensive rebound rate (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_opp_tov_z,2. What the odds get right,"Minnesota, turnovers forced (z) (2025-26 actual)",0.24,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_opp_tov_z_status,2. What the odds get right,"Minnesota, turnovers forced (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_def_share_z,2. What the odds get right,"Minnesota, defence share (z) (2025-26 actual)",0.43,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_def_share_z_status,2. What the odds get right,"Minnesota, defence share (z): status","outside, above",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_rim_rate,2. What the odds get right,"Minnesota, rim rate (z) (2025-26 actual)",0.32,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_rim_rate_status,2. What the odds get right,"Minnesota, rim rate (z): status","outside, above",OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_size,2. What the odds get right,"Minnesota, size (z) (2025-26 actual)",0.00,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_size_status,2. What the odds get right,"Minnesota, size (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top3,2. What the odds get right,"Minnesota, top-three minutes share (z) (2025-26 actual)",0.41,OBSERVED,QUOTABLE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+h5_top3_status,2. What the odds get right,"Minnesota, top-three minutes share (z): status",inside the champions' range,OBSERVED,DESCRIPTIVE,h1_h3_h5_profile_20260924T200418Z,h5_minnesota_sheet.csv
+nyk_mkt,2. What the odds get right,Knicks preseason market price,8.27%,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_rank,2. What the odds get right,Knicks preseason market rank,4,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_wt,2. What the odds get right,Knicks win total,53.5,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_wins,2. What the odds get right,Knicks wins,53,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_model,2. What the odds get right,our model's Knicks price,4.63%,MODELED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_rs,2. What the odds get right,Knicks regular-season margin,+6.33,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_pre,2. What the odds get right,before the break,+6.16,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_post,2. What the odds get right,after the break,+6.67,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_po_rec,2. What the odds get right,Knicks playoff record,16-3,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_po,2. What the odds get right,Knicks playoff margin,+14.89,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_lift,2. What the odds get right,Knicks playoff lift,+8.57,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_po_teams,2. What the odds get right,playoff teams,16,OBSERVED,FACT,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_lift_mean,2. What the odds get right,Knicks lift_mean,-7.39,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_cmp_lift,2. What the odds get right,Knicks cmp_lift,-9.19,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_cmp_lift_rank,2. What the odds get right,Knicks cmp_lift_rank,11,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_n_positive_lift,2. What the odds get right,Knicks n_positive_lift,1,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_top5_rs_games_missed,2. What the odds get right,Knicks top5_rs_games_missed,46,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_top5_po_games_missed,2. What the odds get right,Knicks top5_po_games_missed,2,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_top5_share_rs,2. What the odds get right,Knicks top5_share_rs,0.579,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
+nyk_top5_share_po,2. What the odds get right,Knicks top5_share_po,0.673,OBSERVED,QUOTABLE,h4_knicks_case_file_20260924T192303Z,h4_knicks_case_file.csv
 n5_min_full,3. What the odds can't see,MIN full-roster title odds,1.60%,MODELED,QUOTABLE AS BAND,n5_fragility_20260919T233508Z,n5_fragility*.csv
 n5_min_drop,3. What the odds can't see,MIN mean drop,0.87,MODELED,QUOTABLE AS BAND,n5_fragility_20260919T233508Z,n5_fragility*.csv
 n5_min_share,3. What the odds can't see,MIN share of odds lost,54%,MODELED,QUOTABLE AS BAND,n5_fragility_20260919T233508Z,n5_fragility*.csv
@@ -333,7 +494,7 @@ williams_mpg,3. What the odds can't see,Cody Williams projected minutes,16.1,ASS
 rs_williams,3. What the odds can't see,Williams rank score,0.3041,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
 rs_clark,3. What the odds can't see,Jaylen Clark rank score,0.3333,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
 rs_gap,3. What the odds can't see,rank-score gap,0.0293,COMPOSED,DESCRIPTIVE,build_rotations_20260919T163216Z,player_pool_2026_27.csv
-williams_threshold,3. What the odds can't see,Williams minutes below which the offseason verdict turns MIXED,12.6,MODELED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
+williams_threshold,3. What the odds can't see,Williams minutes below which the offseason verdict turns MIXED,12.6,MODELED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
 w1c_offseason_delta,3. What the odds can't see,"published offseason delta, mean pp",-0.753,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
 w1c_injury_cost,3. What the odds can't see,"DiVincenzo injury cost, mean pp",+1.806,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
 w1c_williams_cost,3. What the odds can't see,"Williams minutes cost, mean pp",+1.048,MODELED,QUOTABLE AS BAND,w1c_decompose_20260919T195038Z,w1c_delta_decomposition.csv
@@ -444,22 +605,22 @@ cl_ball_fga,6. Clutch,LaMelo Ball clutch attempts,100,OBSERVED,FACT,n7_late_cloc
 cl_ball_z,6. Clutch,"LaMelo Ball beyond the drop, SEs",-0.1,OBSERVED,QUOTABLE,n7_late_clock_20260916T230449Z,n7_shots.parquet
 lc_g1,6. Clutch,"late-clock reconstruction accuracy, within 2 s",79.9%,OBSERVED,WITHHELD,n7_late_clock_20260916T230449Z,n7_gates.csv
 lc_bar,6. Clutch,bar set in advance,80%,ASSUMED,FACT,n7_late_clock_20260916T230449Z,n7_late_clock.py MIN_G1
-w1_claim,7. What to watch,claim 1,Cody Williams' minutes decide whether the offseason verdict holds,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w1_now,7. What to watch,claim 1 current value,16.1 a night (model default),ASSUMED INPUT,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w1_flip,7. What to watch,claim 1 flips if,below 12.6 a night,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w2_claim,7. What to watch,claim 2,Minnesota's level is inside the model's range,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w2_now,7. What to watch,claim 2 current value,"model range -1.5 to +1.8 (four views, both aging bases)",MODELLED RANGE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w2_flip,7. What to watch,claim 2 flips if,above +7.5 or below -7.2,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w3_claim,7. What to watch,claim 3,The model's two largest disagreements with the market,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w3_now,7. What to watch,claim 3 current value,"BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7",MODELLED RANGE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w3_flip,7. What to watch,claim 3 flips if,BOS below -2.4; SAS above +14.4,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w4_claim,7. What to watch,claim 4,"The Edwards-Ball pairing costs usage, not efficiency",COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w4_now,7. What to watch,claim 4 current value,"2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons)",OBSERVED BASE RATE,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w4_flip,7. What to watch,claim 4 flips if,"Edwards below 0.547, or Ball below 0.476",COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w5_claim,7. What to watch,claim 5,Minnesota is not on a champion's path,COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w5_now,7. What to watch,claim 5 current value,"projected rank 16 (primary basis) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2",OBSERVED HISTORY,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w5_flip,7. What to watch,claim 5 flips if,3 or better (test); 11 or better (checkpoint),COMPOSED,QUOTABLE,n8_watch_list_20260922T160123Z,n8_watch_list.csv
-w_game,7. What to watch,checkpoint game,20,ASSUMED,FACT,n8_watch_list_20260922T160123Z,n8_watch_list.py N_CHECK
+w1_claim,7. What to watch,claim 1,Cody Williams' minutes decide whether the offseason verdict holds,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w1_now,7. What to watch,claim 1 current value,16.1 a night (model default),ASSUMED INPUT,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w1_flip,7. What to watch,claim 1 flips if,below 12.6 a night,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w2_claim,7. What to watch,claim 2,Minnesota's level is inside the model's range,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w2_now,7. What to watch,claim 2 current value,"model range -1.5 to +1.8 (four views, both aging bases)",MODELLED RANGE,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w2_flip,7. What to watch,claim 2 flips if,above +7.5 or below -7.2,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w3_claim,7. What to watch,claim 3,The model's two largest disagreements with the market,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w3_now,7. What to watch,claim 3 current value,"BOS: model 18.3% title odds vs market 5.5%, model net range +3.3 to +10.1. SAS: model 13.9% vs market 23.0%, range +4.2 to +8.7",MODELLED RANGE,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w3_flip,7. What to watch,claim 3 flips if,BOS below -2.4; SAS above +14.4,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w4_claim,7. What to watch,claim 4,"The Edwards-Ball pairing costs usage, not efficiency",COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w4_now,7. What to watch,claim 4 current value,"2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons)",OBSERVED BASE RATE,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w4_flip,7. What to watch,claim 4 flips if,"Edwards below 0.547, or Ball below 0.476",COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w5_claim,7. What to watch,claim 5,Minnesota is not on a champion's path,COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w5_now,7. What to watch,claim 5 current value,"projected rank 16 (primary basis) / 13 (aged); the 11 champions since 2015-16 ranked 11 at worst after 20 games (2022-23 DEN), 6 at worst at season's end (2022-23 DEN) with 10 of 11 in the top 5, and 18 at worst after the All-Star break",OBSERVED HISTORY,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w5_flip,7. What to watch,claim 5 flips if,5 or better at season's end (test); 11 or better after 20 games (checkpoint),COMPOSED,QUOTABLE,n8_watch_list_20260924T200431Z,n8_watch_list.csv
+w_game,7. What to watch,checkpoint game,20,ASSUMED,FACT,n8_watch_list_20260924T200431Z,n8_watch_list.py N_CHECK
 chain_start,8. The bill,pre-trade Apron Team Salary (2026-08-27),"$217,621,829",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
 chain_green,8. The bill,out: Josh Green,"$14,679,012",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
 chain_williams,8. The bill,in: Cody Williams,"$6,015,600",FACT,FACT,green_resolution_20260904T014022Z,green_resolution.csv
@@ -1101,318 +1262,343 @@ c3_top6_drop_82_a,"C. The bet: additions for Parts 1, 3 and 4","P(top six) drop 
 c3_seed_82_a,"C. The bet: additions for Parts 1, 3 and 4",mean West seed,6.00,MODELED,QUOTABLE AS BAND,c3_ball_availability_20260922T190242Z,c3_ball_availability_AGED.csv
 c3_net_drop_82_a,"C. The bet: additions for Parts 1, 3 and 4","regular-season net lost, mean of views",0.00,MODELED,QUOTABLE AS BAND,c3_ball_availability_20260922T190242Z,c3_ball_availability_AGED.csv
 c3_ball_mpg_82_a,"C. The bet: additions for Parts 1, 3 and 4",Ball minutes per game in the allocation,30.6,MODELED,DESCRIPTIVE,c3_ball_availability_20260922T190242Z,c3_ball_minutes_AGED.csv
-c1_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the table,11,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_first,"C. The bet: additions for Parts 1, 3 and 4",first season,2015-16,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_last,"C. The bet: additions for Parts 1, 3 and 4",last season,2025-26,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_team,"C. The bet: additions for Parts 1, 3 and 4",2015-16 champion,CLE,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_record,"C. The bet: additions for Parts 1, 3 and 4",record,57-25,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+9.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+3.2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,86%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,88,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",59%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",71%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",22.95%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",280,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Cleveland Cavaliers,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2015_16_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",22.95%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_team,"C. The bet: additions for Parts 1, 3 and 4",2016-17 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_record,"C. The bet: additions for Parts 1, 3 and 4",record,67-15,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+11.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+9.2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+12.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+1.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,36.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,67%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,64,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,17,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",60%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",68%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",50.93%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",-128,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2016_17_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",50.93%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_team,"C. The bet: additions for Parts 1, 3 and 4",2017-18 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_record,"C. The bet: additions for Parts 1, 3 and 4",record,58-24,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+0.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,16,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+10.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+4.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,34.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,89%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,113,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,15,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",53%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",67%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",57.65%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",-187,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2017_18_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",57.65%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_team,"C. The bet: additions for Parts 1, 3 and 4",2018-19 champion,TOR,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_record,"C. The bet: additions for Parts 1, 3 and 4",record,58-24,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+7.2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+5.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,34.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,56%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,93,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,24,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",56%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",72%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Marc Gasol (traded for, 2019-02-07)",OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",4.54%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",1850,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2018_19_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",55.54%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_team,"C. The bet: additions for Parts 1, 3 and 4",2019-20 champion,LAL,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_record,"C. The bet: additions for Parts 1, 3 and 4",record,52-19,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+1.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,10,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+6.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+1.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,58%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,61,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",55%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",63%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Markieff Morris (signed, 2020-02-23)",OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",15.41%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",450,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Los Angeles Clippers,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2019_20_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",16.14%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_team,"C. The bet: additions for Parts 1, 3 and 4",2020-21 champion,MIL,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_record,"C. The bet: additions for Parts 1, 3 and 4",record,46-26,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+5.1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+5.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,55%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,54,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,23,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",57%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",72%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"P.J. Tucker (traded for, 2021-03-19)",OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",12.75%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",550,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Los Angeles Lakers,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2020_21_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",22.10%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_team,"C. The bet: additions for Parts 1, 3 and 4",2021-22 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+2.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,18,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+4.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,33.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,70%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,152,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,13,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,22,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",51%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",69%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Gary Payton II (signed, 2021-10-19)",OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",8.19%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",900,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Brooklyn Nets,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2021_22_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",24.10%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_team,"C. The bet: additions for Parts 1, 3 and 4",2022-23 champion,DEN,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+3.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+0.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,16,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+4.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,27.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,36.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,52%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,105,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,20,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",57%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",76%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",4.01%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",1800,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2022_23_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",12.68%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_team,"C. The bet: additions for Parts 1, 3 and 4",2023-24 champion,BOS,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_record,"C. The bet: additions for Parts 1, 3 and 4",record,64-18,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+11.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+14.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-3.0,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,37.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,76%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,87,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,12,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,19,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",58%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",76%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",14.69%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",450,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics / Denver Nuggets,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2023_24_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",14.69%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_team,"C. The bet: additions for Parts 1, 3 and 4",2024-25 champion,OKC,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_record,"C. The bet: additions for Parts 1, 3 and 4",record,68-14,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+12.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+12.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-4.1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,25.5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,30.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,78%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,154,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,23,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",54%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",65%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",10.80%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",675,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2024_25_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",19.69%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_team,"C. The bet: additions for Parts 1, 3 and 4",2025-26 champion,NYK,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+6.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+15.4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+9.1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,30.9,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,91%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,141,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,3,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,19,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",60%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",68%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",8.27%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",900,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Oklahoma City Thunder,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_2025_26_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",24.32%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age across champions,28.7,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_returning,"C. The bet: additions for Parts 1, 3 and 4","top-8 returning, mean across champions",5.8,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_seed_1_n,"C. The bet: additions for Parts 1, 3 and 4",champions that were the 1 seed,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_top3_net_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the top three of RS net rating,5,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_top5_net_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the top five of RS net rating,10,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_worst_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",worst RS net rating rank of a champion,6,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_worst_post_rank,"C. The bet: additions for Parts 1, 3 and 4",worst post-All-Star net rating rank of a champion,18,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_moves_n,"C. The bet: additions for Parts 1, 3 and 4",champions with an in-season move touching the top 8,4,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share RS, mean",56%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share playoffs, mean",70%,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_missed_rs,"C. The bet: additions for Parts 1, 3 and 4","top-8 RS games missed, mean",101,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
-c1_mean_missed_po,"C. The bet: additions for Parts 1, 3 and 4","top-8 playoff games missed, mean",6.2,OBSERVED,QUOTABLE,c1_champions_20260924T184749Z,c1_champions.csv
+c1_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the table,11,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_first,"C. The bet: additions for Parts 1, 3 and 4",first season,2015-16,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_last,"C. The bet: additions for Parts 1, 3 and 4",last season,2025-26,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_team,"C. The bet: additions for Parts 1, 3 and 4",2015-16 champion,CLE,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_record,"C. The bet: additions for Parts 1, 3 and 4",record,57-25,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+9.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+3.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,86%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,86%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,88,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",59%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",71%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",22.95%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",280,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Cleveland Cavaliers,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2015_16_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",22.95%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_team,"C. The bet: additions for Parts 1, 3 and 4",2016-17 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_record,"C. The bet: additions for Parts 1, 3 and 4",record,67-15,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+11.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+9.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+12.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+1.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,36.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,67%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,67%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,64,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,17,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",60%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",68%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",50.93%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",-128,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2016_17_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",50.93%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_team,"C. The bet: additions for Parts 1, 3 and 4",2017-18 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_record,"C. The bet: additions for Parts 1, 3 and 4",record,58-24,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+0.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,16,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+10.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+4.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,34.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,89%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,89%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,113,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,15,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",53%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",67%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",57.65%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",-187,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2017_18_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",57.65%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_team,"C. The bet: additions for Parts 1, 3 and 4",2018-19 champion,TOR,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_record,"C. The bet: additions for Parts 1, 3 and 4",record,58-24,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+7.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+5.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,34.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,56%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,56%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,93,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,24,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",56%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",72%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Marc Gasol (traded for, 2019-02-07)",OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",4.54%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",1850,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Golden State Warriors,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2018_19_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",55.54%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_team,"C. The bet: additions for Parts 1, 3 and 4",2019-20 champion,LAL,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_record,"C. The bet: additions for Parts 1, 3 and 4",record,52-19,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+1.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,10,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+6.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+1.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,58%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,58%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,61,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,21,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",55%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",63%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Markieff Morris (signed, 2020-02-23)",OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",15.41%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",450,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Los Angeles Clippers,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2019_20_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",16.14%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_team,"C. The bet: additions for Parts 1, 3 and 4",2020-21 champion,MIL,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_record,"C. The bet: additions for Parts 1, 3 and 4",record,46-26,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+5.1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+5.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,35.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,55%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,56%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,54,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,23,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",57%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",72%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"P.J. Tucker (traded for, 2021-03-19)",OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",12.75%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",550,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Los Angeles Lakers,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2020_21_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",22.10%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_team,"C. The bet: additions for Parts 1, 3 and 4",2021-22 champion,GSW,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+5.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+2.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,18,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+4.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-0.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,33.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,70%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,87%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,152,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,13,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,22,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",51%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",69%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,"Gary Payton II (signed, 2021-10-19)",OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",8.19%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",900,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Brooklyn Nets,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2021_22_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",24.10%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_team,"C. The bet: additions for Parts 1, 3 and 4",2022-23 champion,DEN,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+3.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+0.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,16,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+4.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,27.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,36.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,52%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,69%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,105,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,20,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",57%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",76%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",4.01%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",1800,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2022_23_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",12.68%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_team,"C. The bet: additions for Parts 1, 3 and 4",2023-24 champion,BOS,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_record,"C. The bet: additions for Parts 1, 3 and 4",record,64-18,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+11.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+14.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-3.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,29.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,37.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,76%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,76%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,87,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,12,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,19,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",58%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",76%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",14.69%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",450,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics / Denver Nuggets,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2023_24_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",14.69%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_team,"C. The bet: additions for Parts 1, 3 and 4",2024-25 champion,OKC,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_record,"C. The bet: additions for Parts 1, 3 and 4",record,68-14,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+12.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+12.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+8.6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,-4.1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,25.5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,30.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,78%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,79%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,154,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,23,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",54%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",65%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",10.80%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",675,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Boston Celtics,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2024_25_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",19.69%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_team,"C. The bet: additions for Parts 1, 3 and 4",2025-26 champion,NYK,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_record,"C. The bet: additions for Parts 1, 3 and 4",record,53-29,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_seed,"C. The bet: additions for Parts 1, 3 and 4",seed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_rs,"C. The bet: additions for Parts 1, 3 and 4",RS net rating,+6.3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",RS net rating rank,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_post,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating,+6.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_post_rank,"C. The bet: additions for Parts 1, 3 and 4",post-All-Star net rating rank,8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_po,"C. The bet: additions for Parts 1, 3 and 4",playoff net rating,+15.4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_net_po_minus,"C. The bet: additions for Parts 1, 3 and 4",playoff minus RS net rating,+9.1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age,28.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_oldest,"C. The bet: additions for Parts 1, 3 and 4",top-8 oldest,30.9,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_drafted,"C. The bet: additions for Parts 1, 3 and 4",top-8 drafted,1,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_traded,"C. The bet: additions for Parts 1, 3 and 4",top-8 traded for,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_signed,"C. The bet: additions for Parts 1, 3 and 4",top-8 signed,2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_returning,"C. The bet: additions for Parts 1, 3 and 4",top-8 returning from the season before,8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_returning_share,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to returning players,91%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 with the franchise the season before, by contract",8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4",share of playoff minutes to players returning by contract,91%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_missed_rs,"C. The bet: additions for Parts 1, 3 and 4",top-8 RS games missed,141,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_missed_po,"C. The bet: additions for Parts 1, 3 and 4",top-8 playoff games missed,3,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_po_games,"C. The bet: additions for Parts 1, 3 and 4",playoff games,19,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, RS",60%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share, playoffs",68%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_moves,"C. The bet: additions for Parts 1, 3 and 4",in-season moves touching the top 8,none,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_pre_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason title price, de-vigged",8.27%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_pre_rank,"C. The bet: additions for Parts 1, 3 and 4",preseason title rank of 30,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_pre_odds,"C. The bet: additions for Parts 1, 3 and 4","preseason title odds, American",900,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_pre_fav,"C. The bet: additions for Parts 1, 3 and 4",preseason favourite,Oklahoma City Thunder,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_2025_26_pre_fav_pct,"C. The bet: additions for Parts 1, 3 and 4","preseason favourite's price, de-vigged",24.32%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_age,"C. The bet: additions for Parts 1, 3 and 4",top-8 mean age across champions,28.7,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_returning,"C. The bet: additions for Parts 1, 3 and 4","top-8 returning, mean across champions",5.8,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_returning_contract,"C. The bet: additions for Parts 1, 3 and 4","top-8 returning by contract, mean across champions",6.0,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_returning_share,"C. The bet: additions for Parts 1, 3 and 4","share of playoff minutes to returning players, mean",71%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_returning_share_contract,"C. The bet: additions for Parts 1, 3 and 4","share of playoff minutes to players returning by contract, mean",74%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_seed_1_n,"C. The bet: additions for Parts 1, 3 and 4",champions that were the 1 seed,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_top3_net_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the top three of RS net rating,5,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_top5_net_n,"C. The bet: additions for Parts 1, 3 and 4",champions in the top five of RS net rating,10,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_worst_rs_rank,"C. The bet: additions for Parts 1, 3 and 4",worst RS net rating rank of a champion,6,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_worst_post_rank,"C. The bet: additions for Parts 1, 3 and 4",worst post-All-Star net rating rank of a champion,18,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_moves_n,"C. The bet: additions for Parts 1, 3 and 4",champions with an in-season move touching the top 8,4,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share RS, mean",56%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share playoffs, mean",70%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_missed_rs,"C. The bet: additions for Parts 1, 3 and 4","top-8 RS games missed, mean",101,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+c1_mean_missed_po,"C. The bet: additions for Parts 1, 3 and 4","top-8 playoff games missed, mean",6.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
 c4_in_n,"C. The bet: additions for Parts 1, 3 and 4",players in with a 2026-27 salary,7,OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv
 c4_in_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary in,"$75,840,737",OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv
 c4_in_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary in, rounded",$75.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv

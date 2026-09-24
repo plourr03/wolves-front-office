@@ -29,9 +29,19 @@ DEFINITIONS.
                    signed (free agency, waivers, two-way or 10-day). A re-signing or rookie
                    contract inside an unbroken stint does not restart the clock.
   age              on February 1 of the season, the Basketball-Reference convention
-  continuity       how many of the top eight appeared for the franchise in the previous
-                   regular season, and the share of ALL playoff minutes that went to such
-                   returning players
+  continuity       two definitions, both carried. BY APPEARANCE: how many of the top eight
+                   appeared for the franchise in the previous regular season, and the share of
+                   ALL playoff minutes that went to such players. BY CONTRACT: how many of the
+                   top eight were with the franchise at any point of the previous season,
+                   whether or not they played: he appeared for it, or his Basketball-Reference
+                   transaction log has him joined and not yet departed on some day between the
+                   previous season's first and last game (Jamal Murray in 2022-23 counts by
+                   contract and not by appearance; a player waived and re-signed in the
+                   offseason, like Gary Payton II in 2021-22, still counts). And the share of
+                   all playoff minutes that went to such players. Regular-season minute shares are carried
+                   for both as well, so a team without playoff games still has a value.
+  any team         `build(year, r, team=(team_id, abbr))` builds the same row for a team that
+                   did not win; `c1_contenders.py` uses it for the preseason top-five teams.
   net rating       possession-weighted mean of per-game NBA.com net rating; rank among 30
   post-All-Star    games after the longest gap in the league schedule between February 1
                    and March 15, derived from the schedule itself
@@ -105,10 +115,12 @@ def team_page(code, year):
         roster[norm(a.get_text(strip=True))] = dict(name=a.get_text(strip=True), href=a["href"],
                                                     birth_date=bd.get_text(strip=True) if bd else "")
     meta = " ".join(soup.find("div", id="meta").get_text(" ", strip=True).split())
+    title = re.search(r"<title>\d{4}-\d{2} (.+?) Roster and Stats", h)
     fin = re.search(r"Finished (\d+)(?:st|nd|rd|th) in NBA (Eastern|Western) Conference", meta)
     rec = re.search(r"Record:\s*(\d+)-(\d+)", meta)
     net = re.search(r"Net Rtg\s*:\s*([+-]?\d+\.\d+)\s*\((\d+)(?:st|nd|rd|th) of 30\)", meta)
-    return dict(roster=roster, finish=int(fin.group(1)) if fin else None, conf=fin.group(2)[0] if fin else None,
+    return dict(roster=roster, franchise=title.group(1).strip() if title else None,
+                finish=int(fin.group(1)) if fin else None, conf=fin.group(2)[0] if fin else None,
                 w=int(rec.group(1)) if rec else None, l=int(rec.group(2)) if rec else None,
                 bref_net=float(net.group(1)) if net else None, bref_net_rank=int(net.group(2)) if net else None)
 
@@ -126,10 +138,52 @@ def transactions(href):
     return sorted(out, key=lambda x: x[0])
 
 
+FRANCHISE_ALIASES = {
+    "Oklahoma City Thunder": ["Seattle SuperSonics"],
+    "Brooklyn Nets": ["New Jersey Nets"],
+    "Charlotte Hornets": ["Charlotte Bobcats"],
+    "New Orleans Pelicans": ["New Orleans Hornets", "New Orleans/Oklahoma City Hornets"],
+    "Los Angeles Clippers": ["LA Clippers"],
+}
+
+
+def franchise_pattern(franchise):
+    names = [franchise] + FRANCHISE_ALIASES.get(franchise, [])
+    return "(?:%s)" % "|".join(re.escape(n) for n in names)
+
+
+def with_franchise_between(events, franchise, start, end):
+    """True if the transaction log has the player joined to the franchise, and not yet departed,
+    on any day in [start, end]. The same joining and leaving patterns as `acquisition`."""
+    F = franchise_pattern(franchise)
+    on, since = False, None
+    for d, txt in events:
+        if d > end:
+            break
+        joined = bool(re.search(r"Drafted by the %s\b" % F, txt)) \
+            or bool(re.search(r"to the %s\b" % F, txt) and re.search(r"traded|draft rights", txt, re.I)) \
+            or bool(re.search(r"(Signed|Re-signed|Claimed)[^;]*?(with|by) the %s\b" % F, txt))
+        left = bool(re.search(r"(Traded|traded) by the %s\b" % F, txt) and not re.search(r"to the %s\b" % F, txt)) \
+            or bool(re.search(r"(Waived|Released) by the %s\b" % F, txt)) \
+            or bool(re.search(r"(Signed|Re-signed|Claimed)[^;]*?(with|by) the (?!%s\b)" % F, txt)) \
+            or bool(re.search(r"Retired", txt))
+        if joined:
+            if not on:
+                on, since = True, d
+        elif left and on:
+            if since <= end and d >= start:
+                return True
+            on, since = False, None
+    return bool(on and since is not None and since <= end)
+
+
 def acquisition(events, franchise, cutoff):
-    """The event that opened the player's current stint with the franchise, as of cutoff."""
-    F = re.escape(franchise)
-    stint = None
+    """The event that opened the player's current stint with the franchise, as of cutoff. A
+    player whose stint ended before the cutoff (traded away in-season on a team that then
+    missed the playoffs) keeps that stint, with its `left_date`, so his games are counted
+    only while he was there."""
+    F = franchise_pattern(franchise)
+    stint, ended = None, None
     for d, t in events:
         if d > cutoff:
             break
@@ -158,8 +212,12 @@ def acquisition(events, franchise, cutoff):
         elif joined and stint is not None:
             pass                                   # re-signing or rookie deal inside the stint
         elif left and stint is not None:
+            ended = dict(stint, left_date=d)
             stint = None
-    return stint or dict(acq_type="unknown", acq_date=pd.NaT, acq_text="no joining event found before the playoffs")
+    if stint is not None:
+        return dict(stint, left_date=pd.NaT)
+    return ended or dict(acq_type="unknown", acq_date=pd.NaT, left_date=pd.NaT,
+                         acq_text="no joining event found before the playoffs")
 
 
 # ---------------------------------------------------------------- warehouse
@@ -260,53 +318,118 @@ def birthdates(pids):
 
 
 # ---------------------------------------------------------------- assembly
-def build(year, r):
-    tid, abbr, sid_po, sid_rs = champion_row(year)
-    code, franchise = league_champion(year)
-    if BREF_CODE.get(abbr, abbr) != code:
-        raise RuntimeError("%d: warehouse champion %s, Basketball-Reference says %s (%s)" % (year, abbr, code, franchise))
+def roster_entry(tp, name, year, code):
+    key = norm(name)
+    entry = tp["roster"].get(key)
+    if entry is None:
+        # last-name fallback for spellings the two sources disagree on
+        cands = [v for k, v in tp["roster"].items() if k.split()[-1] == key.split()[-1]]
+        if len(cands) == 1:
+            entry = cands[0]
+    if entry is None:
+        raise RuntimeError("%d %s: %s not on the Basketball-Reference roster page" % (year, code, name))
+    return entry
+
+
+def build(year, r, team=None):
+    """One row for a team-season. Without `team`, the champion (cross-checked against the
+    Basketball-Reference season page); with `team=(team_id, abbr)`, any team, its franchise
+    name read from its own Basketball-Reference team page."""
+    if team is None:
+        tid, abbr, sid_po, sid_rs = champion_row(year)
+        code, franchise = league_champion(year)
+        if BREF_CODE.get(abbr, abbr) != code:
+            raise RuntimeError("%d: warehouse champion %s, Basketball-Reference says %s (%s)" % (year, abbr, code, franchise))
+    else:
+        tid, abbr = int(team[0]), str(team[1])
+        sid_po, sid_rs = 40000 + year - 1, 20000 + year - 1
+        code, franchise = BREF_CODE.get(abbr, abbr), None
     tp = team_page(code, year)
+    if franchise is None:
+        franchise = tp["franchise"]
+        if not franchise:
+            raise RuntimeError("%d %s: no franchise name on the team page" % (year, code))
     rs_games, po_games = team_games(sid_rs, tid), team_games(sid_po, tid)
-    rs_start, po_start = pd.Timestamp(rs_games.game_date.min()), pd.Timestamp(po_games.game_date.min())
+    made_playoffs = len(po_games) > 0
+    rs_start = pd.Timestamp(rs_games.game_date.min())
+    # the acquisition cutoff: the first playoff game, or the day after the last regular-season
+    # game for a team that did not make the playoffs
+    po_start = pd.Timestamp(po_games.game_date.min()) if made_playoffs else pd.Timestamp(rs_games.game_date.max()) + pd.Timedelta(days=1)
+    prev_games = team_games(sid_rs - 1, tid)
+    prev_po = team_games(sid_po - 1, tid)
+    prev_start = pd.Timestamp(prev_games.game_date.min())
+    prev_end = pd.Timestamp(max(prev_games.game_date.max(), prev_po.game_date.max() if len(prev_po) else prev_games.game_date.max()))
     po = player_minutes(sid_po, tid)
     rs = player_minutes(sid_rs, tid).set_index("player_id")
     prior = set(player_minutes(sid_rs - 1, tid).player_id.astype(int))
-    top = po.head(TOP).copy()
+    # the top eight: by playoff minutes, or by regular-season minutes when there were no playoffs
+    top = (po if made_playoffs else rs.reset_index()).head(TOP).copy()
     bd = birthdates(top.player_id)
     feb1 = pd.Timestamp("%d-02-01" % year)
     players = []
+    acq_cache, log_cache = {}, {}
     for _, x in top.iterrows():
         pid = int(x.player_id)
-        key = norm(x.player_name)
-        entry = tp["roster"].get(key)
-        if entry is None:
-            # last-name fallback for spellings the two sources disagree on
-            cands = [v for k, v in tp["roster"].items() if k.split()[-1] == key.split()[-1]]
-            if len(cands) == 1:
-                entry = cands[0]
-        if entry is None:
-            raise RuntimeError("%d %s: %s not on the Basketball-Reference roster page" % (year, code, x.player_name))
-        acq = acquisition(transactions(entry["href"]), franchise, po_start)
+        entry = roster_entry(tp, x.player_name, year, code)
+        log_cache[pid] = transactions(entry["href"])
+        acq = acquisition(log_cache[pid], franchise, po_start)
+        acq_cache[pid] = acq
         in_rs = rs.loc[pid] if pid in rs.index else None
         age = (feb1 - bd[pid]).days / 365.25 if pid in bd else (
             (feb1 - pd.Timestamp(entry["birth_date"])).days / 365.25 if entry["birth_date"] else np.nan)
         acq_d = acq["acq_date"]
+        left_d = acq.get("left_date", pd.NaT)
         in_season = pd.notna(acq_d) and acq_d >= rs_start
         eligible_rs = rs_games[rs_games.game_date >= (acq_d if in_season else rs_start)] if pd.notna(acq_d) else rs_games
+        if pd.notna(left_d):
+            eligible_rs = eligible_rs[eligible_rs.game_date < left_d]
+        po_min, po_gp = (float(x.mins), int(x.gp)) if made_playoffs else (0.0, 0)
         players.append(dict(
             season="%d-%s" % (year - 1, str(year)[2:]), team=abbr, player=x.player_name, player_id=pid, bref=entry["href"],
-            po_minutes=float(x.mins), po_gp=int(x.gp), rs_minutes=float(in_rs.mins) if in_rs is not None else 0.0,
+            po_minutes=po_min, po_gp=po_gp, rs_minutes=float(in_rs.mins) if in_rs is not None else 0.0,
             rs_gp=int(in_rs.gp) if in_rs is not None else 0, age_feb1=round(age, 1),
-            on_team_prior_season=pid in prior, acq_type=acq["acq_type"],
+            on_team_prior_season=pid in prior,
+            on_team_prior_season_contract=bool(pid in prior or with_franchise_between(log_cache[pid], franchise, prev_start, prev_end)),
+            acq_type=acq["acq_type"],
             acq_date=acq_d.strftime("%Y-%m-%d") if pd.notna(acq_d) else "", acq_text=acq["acq_text"],
+            left_date=left_d.strftime("%Y-%m-%d") if pd.notna(left_d) else "",
             in_season_acquisition=bool(in_season),
             rs_games_missed=int(len(eligible_rs) - (in_rs.gp if in_rs is not None else 0)),
-            po_games_missed=int(len(po_games) - x.gp)))
+            po_games_missed=int(len(po_games) - po_gp)))
     P = pd.DataFrame(players)
     rs_all, po_all = player_minutes(sid_rs, tid), po
     top5_rs = rs_all.mins.sort_values(ascending=False).head(5).sum() / rs_all.mins.sum()
-    top5_po = po_all.mins.sort_values(ascending=False).head(5).sum() / po_all.mins.sum()
-    cont_share = po_all[po_all.player_id.astype(int).isin(prior)].mins.sum() / po_all.mins.sum()
+    top5_po = po_all.mins.sort_values(ascending=False).head(5).sum() / po_all.mins.sum() if made_playoffs else np.nan
+    cont_share = po_all[po_all.player_id.astype(int).isin(prior)].mins.sum() / po_all.mins.sum() if made_playoffs else np.nan
+    cont_share_rs = rs_all[rs_all.player_id.astype(int).isin(prior)].mins.sum() / rs_all.mins.sum()
+    # by contract, for every player with minutes: he appeared for the franchise the season
+    # before, or his log has him with it on some day of that season. A player missing from
+    # the roster page falls back to the appearance definition and is counted.
+    fallbacks = 0
+
+    def by_contract(pid, name):
+        nonlocal fallbacks
+        pid = int(pid)
+        if pid in prior:
+            return True
+        if pid not in log_cache:
+            try:
+                entry = roster_entry(tp, name, year, code)
+                log_cache[pid] = transactions(entry["href"])
+            except RuntimeError as e:
+                r.note("   contract fallback: %s" % e)
+                fallbacks += 1
+                return False
+        return with_franchise_between(log_cache[pid], franchise, prev_start, prev_end)
+
+    rs_all["by_contract"] = [by_contract(p, n) for p, n in zip(rs_all.player_id, rs_all.player_name)]
+    cont_share_rs_contract = rs_all[rs_all.by_contract].mins.sum() / rs_all.mins.sum()
+    if made_playoffs:
+        po_all = po_all.copy()
+        po_all["by_contract"] = [by_contract(p, n) for p, n in zip(po_all.player_id, po_all.player_name)]
+        cont_share_contract = po_all[po_all.by_contract].mins.sum() / po_all.mins.sum()
+    else:
+        cont_share_contract = np.nan
     net_rs, net_po = net_ratings(sid_rs), net_ratings(sid_po)
     gap_a, gap_b, gap_days = all_star_break(sid_rs, year)
     net_post = net_ratings(sid_rs, gap_b.strftime("%Y-%m-%d"))
@@ -320,14 +443,20 @@ def build(year, r):
         all_star_break="%s to %s (%d days)" % (gap_a.strftime("%Y-%m-%d"), gap_b.strftime("%Y-%m-%d"), gap_days),
         net_post_asb=round(float(net_post.loc[abbr].net), 2), net_post_asb_rank=int(net_post.loc[abbr]["rank"]),
         post_asb_games=int(net_post.loc[abbr].n),
-        net_po=round(float(net_po.loc[abbr].net), 2), net_po_minus_rs=round(float(net_po.loc[abbr].net - net_rs.loc[abbr].net), 2),
-        po_games=len(po_games),
+        net_po=round(float(net_po.loc[abbr].net), 2) if made_playoffs else np.nan,
+        net_po_minus_rs=round(float(net_po.loc[abbr].net - net_rs.loc[abbr].net), 2) if made_playoffs else np.nan,
+        po_games=len(po_games), made_playoffs=bool(made_playoffs),
         top8_drafted=int((P.acq_type.str.startswith("drafted")).sum()), top8_traded=int((P.acq_type == "traded for").sum()),
         top8_signed=int((P.acq_type == "signed").sum()), top8_unknown=int((P.acq_type == "unknown").sum()),
         top8_mean_age=round(float(P.age_feb1.mean()), 1), top8_oldest=round(float(P.age_feb1.max()), 1),
         top8_returning=int(P.on_team_prior_season.sum()), returning_po_minutes_share=round(float(cont_share), 3),
+        top8_returning_contract=int(P.on_team_prior_season_contract.sum()),
+        returning_po_minutes_share_contract=round(float(cont_share_contract), 3),
+        returning_rs_minutes_share=round(float(cont_share_rs), 3),
+        returning_rs_minutes_share_contract=round(float(cont_share_rs_contract), 3),
+        contract_fallbacks=int(fallbacks),
         top8_rs_games_missed=int(P.rs_games_missed.sum()), top8_po_games_missed=int(P.po_games_missed.sum()),
-        top5_share_rs=round(float(top5_rs), 3), top5_share_po=round(float(top5_po), 3),
+        top5_share_rs=round(float(top5_rs), 3), top5_share_po=round(float(top5_po), 3) if made_playoffs else np.nan,
         in_season_moves="; ".join("%s (%s, %s)" % (x.player, x.acq_type, x.acq_date) for _, x in P[P.in_season_acquisition].iterrows()) or "none",
         preseason_title_odds="", preseason_odds_source="")
     row.update(preseason_odds(year, abbr))
@@ -366,6 +495,10 @@ def paragraph(row, P):
           "franchise the season before and returning players took %.0f%% of the playoff minutes. "
           % (", ".join(parts), row["top8_mean_age"], row["top8_oldest"], row["top8_returning"],
              100 * row["returning_po_minutes_share"]))
+    s += ("By contract, %d of the eight had been with the franchise the season before%s. "
+          % (row["top8_returning_contract"],
+             "" if row["top8_returning_contract"] == row["top8_returning"] else
+             " (%s counted by contract only)" % ", ".join(P[P.on_team_prior_season_contract & ~P.on_team_prior_season].player)))
     s += ("Those eight missed %d regular-season games between them and %d of the %d playoff games. "
           % (row["top8_rs_games_missed"], row["top8_po_games_missed"], row["po_games"]))
     s += ("The top five's share of the minutes went from %.0f%% in the regular season to %.0f%% in the playoffs. "
@@ -383,13 +516,18 @@ def write_doc(r, R, P, years):
          "Warehouse box scores for minutes, games, net ratings and standings; Basketball-Reference for the roster "
          "construction; Basketball-Reference's preseason odds pages (courtesy sportsoddshistory.com) for the title price. Run `%s`.*\n" % (AS_OF, r.run_id)]
     L.append("## Construction and continuity\n")
-    L.append("| season | champion | seed | top 8: drafted / traded for / signed | mean age (oldest) | returning of 8 | returning share of playoff minutes | in-season moves touching the top 8 | preseason title odds |")
+    L.append("| season | champion | seed | top 8: drafted / traded for / signed | mean age (oldest) | returning of 8: by appearance / by contract | returning share of playoff minutes: by appearance / by contract | in-season moves touching the top 8 | preseason title odds |")
     L.append("|---|---|---:|---|---|---:|---:|---|---|")
     for _, x in R.iterrows():
-        L.append("| %s | %s | %s | %d / %d / %d%s | %.1f (%.1f) | %d | %.0f%% | %s | %s |" % (
+        L.append("| %s | %s | %s | %d / %d / %d%s | %.1f (%.1f) | %d / %d | %.0f%% / %.0f%% | %s | %s |" % (
             x.season, x.team, x.seed_bref if pd.notna(x.seed_bref) else x.seed_warehouse, x.top8_drafted, x.top8_traded,
             x.top8_signed, (" (+%d unresolved)" % x.top8_unknown) if x.top8_unknown else "", x.top8_mean_age, x.top8_oldest,
-            x.top8_returning, 100 * x.returning_po_minutes_share, x.in_season_moves, x.preseason_title_odds or "open"))
+            x.top8_returning, x.top8_returning_contract, 100 * x.returning_po_minutes_share,
+            100 * x.returning_po_minutes_share_contract, x.in_season_moves, x.preseason_title_odds or "open"))
+    L.append("")
+    L.append("Continuity by appearance counts a player who appeared for the franchise in the previous regular season; "
+             "by contract counts a player whose stint with the franchise opened before the previous regular season ended, "
+             "whether or not he played in it. The two differ only where a returning player missed the whole previous season.")
     L.append("")
     L.append("## Performance, availability and concentration\n")
     L.append("| season | record | RS net (rank) | post-All-Star net (rank, games) | playoff net | playoff minus RS | top-8 games missed RS / playoffs | top-5 minutes share RS -> playoffs |")
@@ -402,13 +540,40 @@ def write_doc(r, R, P, years):
     L.append("## What changed between October and June\n")
     for _, x in R.iterrows():
         L.append("**%s %s.** %s\n" % (x.season, x.franchise, x.paragraph))
+    if "2022-23" in set(R.season):
+        x = R[R.season == "2022-23"].iloc[0]
+        p8 = P[P.season == "2022-23"].sort_values("po_minutes", ascending=False)
+        only_contract = p8[p8.on_team_prior_season_contract & ~p8.on_team_prior_season].player.tolist()
+
+        def nth(n):
+            n = int(n)
+            return "%d%s" % (n, "th" if 11 <= n % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th"))
+        L.append("## Sidebar: Denver 2022-23, the health discount\n")
+        L.append("The champion the regular-season numbers underrated most, and the one whose row is the health discount in one team. "
+                 "The top eight missed %d regular-season games between them and %d of the %d playoff games. The team was %s in net rating "
+                 "over the regular season (%+.1f), %s after the All-Star break (%+.1f), and %+.1f in the playoffs, %+.1f on its regular season. "
+                 "The top five's share of the minutes went from %.0f%% to %.0f%%. In-season moves touching the top eight: %s. "
+                 "The market had them at %s%s."
+                 % (x.top8_rs_games_missed, x.top8_po_games_missed, x.po_games, nth(x.net_rs_rank), x.net_rs, nth(x.net_post_asb_rank),
+                    x.net_post_asb, x.net_po, x.net_po_minus_rs, 100 * x.top5_share_rs, 100 * x.top5_share_po, x.in_season_moves,
+                    x.preseason_title_odds, (", a rank shared by %d teams" % x.preseason_rank_shared_by) if x.preseason_rank_shared_by > 1 else ""))
+        L.append("")
+        L.append("Continuity is where the two definitions part: %d of the eight had appeared for Denver the season before and %d had been "
+                 "with the franchise%s; returning players took %.0f%% of the playoff minutes by appearance and %.0f%% by contract."
+                 % (x.top8_returning, x.top8_returning_contract,
+                    (" (%s, out for all of 2021-22, counts by contract only)" % ", ".join(only_contract)) if only_contract else "",
+                    100 * x.returning_po_minutes_share, 100 * x.returning_po_minutes_share_contract))
+        L.append("")
+        L.append("The eight, by playoff minutes, and how each arrived: %s."
+                 % "; ".join("%s (%s%s)" % (y.player, y.acq_type, ", " + y.acq_date[:4] if y.acq_date else "") for _, y in p8.iterrows()))
+        L.append("")
     L.append("## The top eight, every champion\n")
-    L.append("| season | player | playoff minutes | acquired | when | age | returning | RS games missed | playoff games missed |")
+    L.append("| season | player | playoff minutes | acquired | when | age | returning: by appearance / by contract | RS games missed | playoff games missed |")
     L.append("|---|---|---:|---|---|---:|---|---:|---:|")
     for _, x in P.iterrows():
-        L.append("| %s | %s | %.0f | %s | %s | %.1f | %s | %d | %d |" % (
+        L.append("| %s | %s | %.0f | %s | %s | %.1f | %s / %s | %d | %d |" % (
             x.season, x.player, x.po_minutes, x.acq_type, x.acq_date, x.age_feb1, "yes" if x.on_team_prior_season else "no",
-            x.rs_games_missed, x.po_games_missed))
+            "yes" if x.on_team_prior_season_contract else "no", x.rs_games_missed, x.po_games_missed))
     L.append("")
     L.append("*Method.* Definitions in the script docstring. The All-Star break is the longest gap in the league schedule "
              "between February 1 and March 15 of each season, from the schedule itself. Net ratings are possession-weighted "

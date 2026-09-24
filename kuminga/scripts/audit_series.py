@@ -56,7 +56,7 @@ WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven"
          "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,
          "fourteen": 14, "fifteen": 15, "sixteen": 16, "twenty": 20, "first": 1,
          "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7,
-         "eighth": 8, "ninth": 9, "tenth": 10}
+         "eighth": 8, "ninth": 9, "tenth": 10, "seventeen": 17, "eighteen": 18, "nineteen": 19, "eleventh": 11, "twelfth": 12}
 WORD_RE = re.compile(r"\b(%s)\b" % "|".join(sorted(WORDS, key=len, reverse=True)), re.I)
 # shares the prose writes as a phrase rather than a percentage
 FRACTIONS = {"one in four": 25, "one in three": 33, "one in five": 20, "half of them": 50}
@@ -212,7 +212,8 @@ CLAIMS = {
   ("added title equity, 0.79 points of it", ["v_ball_in_pooled_u"]),
   ("by 0.44 points of title odds", ["v_A_c3_default_shannon_pooled_u"]),
   ("costs 54% of the odds", ["n5_min_share"]),
-  ("none was worse than 11th in net rating after 20 games", ["w5_flip", "w_game"]),
+  ("None of them was worse than 11th in net rating after 20 games, so 11th at game 20 is the checkpoint", ["w5_flip", "w_game"]),
+  ("Ten of the eleven finished the regular season in the top five", ["c1_top5_net_n", "c1_n"]),
   ("fewer than 12.6 minutes a night", ["williams_threshold"]),
   ("net rating is above +7.5 the model was too low; below -7.2", ["w2_flip"]),
   ("Boston below -2.4 at game 20 and below -1.7 at game 30",
@@ -221,8 +222,6 @@ CLAIMS = {
   ("true shooting below 0.547, or LaMelo's below 0.476", ["w4_flip"]),
   ("or 7.9 minutes of noise", ["beringer_prior"]),
   ("Game 20. If Cody Williams", ["w_game"]),
-  ("of the 29 champions since 1997-98, none was worse than 11th in net rating after 20 games",
-   ["w5_now", "w_game"]),
   ("See you at game 20.", ["w_game"]),
  ],
 }
@@ -261,7 +260,6 @@ CLAIMS["part3.md"] = [
    ["c1_worst_post_rank", "c1:2017-18:net_post_asb_rank"]),
   ("Age ran from 25.5 to 29.7, averaging 28.7",
    ["c1:2024-25:top8_mean_age", "c1:2016-17:top8_mean_age", "c1_mean_age"]),
-  ("On average 5.8 of the eight", ["c1_mean_returning"]),
   ("1st in net rating in October and 1st in April",
    ["c1:2016-17:net_rs_rank", "c1:2023-24:net_rs_rank", "c1:2024-25:net_rs_rank",
     "c1:2016-17:net_post_asb_rank", "c1:2023-24:net_post_asb_rank", "c1:2024-25:net_post_asb_rank"]),
@@ -282,10 +280,28 @@ CLAIMS["part3.md"] = [
   ("a team priced at 4.01% and a team priced at 57.65% both won", ["h2_lo", "h2_hi"]),
   ("Denver's 4.01% in 2023 is the closest", ["h2_lo"]),
   ("sixth is inside the top nine every champion came from", ["mkt_min_rank", "h2_worst_rank"]),
-  ("the fourteen teams the market had in its top five", ["h3_n_non"]),
-  ("which of twenty measurable features", ["h3_n_feat"]),
-  ("three did: offensive rank, defensive rank, and continuity", ["h3_n_sep"]),
   ("priced at 3.16% and sixth in the league", ["mkt_min", "mkt_min_rank"]),
+  ("On average 5.8 of the eight had played for the team the year before, and 6.0 had been under contract with it",
+   ["c1_mean_returning", "c1_mean_returning_contract"]),
+  ("took 71% of the playoff minutes by the first count and 74% by the second",
+   ["c1_mean_returning_share", "c1_mean_returning_share_contract"]),
+  ("48 of them, with exactly the machinery", ["h3_n_non"]),
+  ("which of nineteen measurable things", ["h3_n_feat"]),
+  ("Not one of the nineteen", ["h3_n_feat"]),
+  ("a champion has been 17th on offense and 14th on defense", ["h3_ortg_rank_hi", "h3_drtg_rank_hi"]),
+  ("a champion has won with only four of its eight back", ["h3_top8_returning_appear_lo"]),
+  ("Every champion was top six in net rating for the regular season, and only 21 of the 48 also-rans were",
+   ["h3_nrtg_rank_hi", "h3_nrtg_rank_inside", "h3_n_non"]),
+  ("Every champion was a top-three seed, and only 22 of the 48 were", ["h3_seed_hi", "h3_seed_inside", "h3_n_non"]),
+  ("because ten of eleven were and none was worse than sixth", ["c1_top5_net_n", "c1_n", "c1_worst_rs_rank"]),
+  ("4.01%, ninth on the board, against Minnesota's 3.16% and sixth",
+   ["c1_2022_23_pre_pct", "c1_2022_23_pre_rank", "mkt_min", "mkt_min_rank"]),
+  ("five of its eight had been Nuggets the season before and Murray had been one since 2016", ["c1_2022_23_returning_contract"]),
+  ("Minnesota's projected eight also has five holdovers", ["h5_top8_returning_contract"]),
+  ("Jokić at a VORP of 8.8", ["h1_2022_23_best_vorp"]),
+  ("Ant's last season was 3.5", ["h5_best_vorp"]),
+  ("a flat board whose favorite sat at 12.68%", ["c1_2022_23_pre_fav_pct"]),
+  ("a board whose favorites sit near 23%", ["mkt_sas"]),
   ("who can carry 70% of the minutes", ["c1_mean_top5_po"]),
 ]
 

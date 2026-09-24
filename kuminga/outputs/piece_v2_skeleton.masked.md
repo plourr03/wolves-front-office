@@ -60,7 +60,7 @@ None of the three survives the allocator cell either: under the headline's own m
 
 **Individual matchups.** A pairing of thirty possessions carries a standard error of ⟦⟧ points per matchup possession, and a team's main defender on a star normally holds him ⟦⟧ to ⟦⟧ below his average. Judged against that norm, ⟦⟧ of ⟦⟧ observed West-field matchups beat it by two standard errors, where chance alone gives about ⟦⟧ `[observed, m3_opponent_cards]`.
 
-**Champions, as honest counts.** Across the ⟦⟧ clean seasons the preseason favourite won **⟦⟧ of ⟦⟧**, and the champion came from the market's top five **⟦⟧ of ⟦⟧**, priced between ⟦⟧ and ⟦⟧ `[observed, champions_table]`. Set against the ⟦⟧ top-five teams that did not win in the three most recent seasons (the feature comparison still runs on 2023-24 to 2025-26), only ⟦⟧ of ⟦⟧ features separate the champions: offensive rank, defensive rank and continuity. No style feature does `[observed, h1_h3_h5_profile]`.
+**Champions, as honest counts.** Across the ⟦⟧ clean seasons the preseason favourite won **⟦⟧ of ⟦⟧**, and the champion came from the market's top five **⟦⟧ of ⟦⟧**, priced between ⟦⟧ and ⟦⟧ `[observed, champions_table]`. Set against the ⟦⟧ top-five teams that did not win across those seasons, ⟦⟧ of ⟦⟧ team-level features separate the champions under the quarter rule (separating: ⟦⟧). On the three seasons with style features, ⟦⟧ of ⟦⟧ style features do `[observed, h1_h3_h5_profile]`.
 
 **The Knicks, the last champion.** The market had them at **⟦⟧, ⟦⟧th, ⟦⟧ wins**; they won ⟦⟧. This project's model had them at ⟦⟧ `[observed, h4_knicks_case_file]`. The regular season was steady: ⟦⟧ per game, ⟦⟧ before the break and ⟦⟧ after. Then the playoffs were a different team: **⟦⟧ at ⟦⟧**, and they were the only one of ⟦⟧ playoff teams whose margin improved (⟦⟧, against an average of ⟦⟧; Minnesota's was ⟦⟧). What moved was not visible in September. Their top five players missed ⟦⟧ regular-season games and ⟦⟧ in the playoffs; the top five's share of minutes went from ⟦⟧ to ⟦⟧; and the bracket broke their way.
 
@@ -160,7 +160,7 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 
 ## Appendix
 
-**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds and every odds-history column before the clean seasons, left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. Both grains are fixed now, the lineup one and the possession one under it, and everything built on them is recomputed: the postmortem lineup figures (D88) and the RAPM the impact views ride on (D89). The impact spine behind this piece is the refit one.
+**What could not be estimated.** The late-clock split (withheld, section 6). A style overlay for series (section 2). Pre-playoff odds for the champion seasons (the preseason column is filled for all eleven), left open for a pasted source. Earlier lineup findings built on the shared stint pipeline's point columns, which credited part of each team's points to the other team. Both grains are fixed now, the lineup one and the possession one under it, and everything built on them is recomputed: the postmortem lineup figures (D88) and the RAPM the impact views ride on (D89). The impact spine behind this piece is the refit one.
 
 **Tail players behind the model's biggest disagreements** (impact per view, no caps, no edits) `[modeled, f4_per_view_disagreement]`:
 
@@ -226,14 +226,14 @@ Five claims, each checked at a team's ⟦⟧th game, late November `[composed, n
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| DET | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| HOU | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| BOS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| DEN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| NYK | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
-| PHI | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 | SAS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| PHI | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| HOU | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| DET | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| OKC | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| DEN | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| BOS | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
+| NYK | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ | ⟦⟧ |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is ⟦⟧ points un-aged and all-negative, but ⟦⟧ and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is ⟦⟧: take out the DiVincenzo injury (⟦⟧) and the Williams minutes (⟦⟧), which overlap completely (⟦⟧, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **⟦⟧**, mixed across views `[modeled, w1c_decompose]`.
 

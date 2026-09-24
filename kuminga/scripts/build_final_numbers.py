@@ -439,9 +439,34 @@ def main():
         F("h2_worst_rank", S, "worst preseason rank of a champion", int(h2.champ_rank_max), "OBSERVED", "QUOTABLE", rh, "champions_h2_base_rates.csv")
         h3 = csv("h3_separation.csv")
         rh3 = rid("h1_h3_h5_profile")
-        F("h3_n_non", S, "preseason top-5 non-champions", int(h3.n_non.iloc[0]), "OBSERVED", "FACT", rh3, "h3_separation.csv")
-        F("h3_n_sep", S, "features that separate", int(h3.separates.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_separation.csv")
-        F("h3_n_feat", S, "features compared", len(h3), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        h3e = h3[h3.seasons.str.startswith("eleven")]
+        h3t = h3[h3.seasons.str.startswith("three")]
+        F("h3_n_champ", S, "champions in the comparison", int(h3e.n_champ.iloc[0]), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        F("h3_n_non", S, "preseason top-5 non-champions, eleven seasons", int(h3e.n_non.iloc[0]), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        F("h3_n_sep", S, "team-level features that separate, eleven seasons", int(h3e.separates.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_separation.csv")
+        F("h3_n_feat", S, "team-level features compared, eleven seasons", len(h3e), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        F("h3_sep_list", S, "the separating team-level features", "; ".join(h3e[h3e.separates].label) or "none", "OBSERVED", "DESCRIPTIVE", rh3, "h3_separation.csv")
+        F("h3s_n_non", S, "preseason top-5 non-champions, three seasons (style)", int(h3t.n_non.iloc[0]), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        F("h3s_n_sep", S, "style features that separate, three seasons", int(h3t.separates.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_separation.csv")
+        F("h3s_n_feat", S, "style features compared, three seasons", len(h3t), "OBSERVED", "FACT", rh3, "h3_separation.csv")
+        h3s11 = csv("h3_separation_style_eleven.csv")
+        F("h3s11_n_sep", S, "style features that separate, eleven seasons (for the record)", int(h3s11.separates.sum()), "OBSERVED", "DESCRIPTIVE", rh3, "h3_separation_style_eleven.csv")
+        for _, x in h3e.iterrows():
+            F("h3_%s_lo" % x.feature, S, "%s, champions' low" % x.label, "%.2f" % x.champ_lo, "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
+            F("h3_%s_hi" % x.feature, S, "%s, champions' high" % x.label, "%.2f" % x.champ_hi, "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
+            F("h3_%s_inside" % x.feature, S, "%s, non-champions inside the range" % x.label, int(x.non_inside), "OBSERVED", "QUOTABLE", rh3, "h3_separation.csv")
+        h1s = csv("h1_champion_sheet.csv")
+        for _, x in h1s.iterrows():
+            k1 = x.season.replace("-", "_")
+            F("h1_%s_best" % k1, S, "%s champion's best player by VORP" % x.season, x.best_player, "OBSERVED", "QUOTABLE", rh3, "h1_champion_sheet.csv")
+            F("h1_%s_best_vorp" % k1, S, "%s champion's best player, VORP" % x.season, "%.1f" % x.best_vorp, "OBSERVED", "QUOTABLE", rh3, "h1_champion_sheet.csv")
+            F("h1_%s_ortg_rank" % k1, S, "%s champion's offence rank" % x.season, int(x.ortg_rank), "OBSERVED", "QUOTABLE", rh3, "h1_champion_sheet.csv")
+            F("h1_%s_drtg_rank" % k1, S, "%s champion's defence rank" % x.season, int(x.drtg_rank), "OBSERVED", "QUOTABLE", rh3, "h1_champion_sheet.csv")
+        h5 = csv("h5_minnesota_sheet.csv")
+        for _, x in h5.iterrows():
+            if pd.notna(x.minnesota):
+                F("h5_%s" % x.feature, S, "Minnesota, %s (%s)" % (x.label, x.basis), "%.2f" % x.minnesota, "OBSERVED", "QUOTABLE", rh3, "h5_minnesota_sheet.csv")
+                F("h5_%s_status" % x.feature, S, "Minnesota, %s: status" % x.label, x.status, "OBSERVED", "DESCRIPTIVE", rh3, "h5_minnesota_sheet.csv")
         kn = csv("h4_knicks_case_file.csv", index_col=0).value
         rk = rid("h4_knicks_case_file")
         F("nyk_mkt", S, "Knicks preseason market price", pct(float(kn["market_title_pct"])), "OBSERVED", "QUOTABLE", rk, "h4_knicks_case_file.csv")

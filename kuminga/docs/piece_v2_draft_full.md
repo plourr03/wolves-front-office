@@ -78,7 +78,7 @@ Versatility, the idea that some teams match up well against more of the field, t
 
 ### What champions actually looked like
 
-Base rates, as counts, on the 11 clean seasons of odds I have. The preseason favorite won 4 of 11. The champion came from the market's top five 10 of 11 times, priced between 4.01% and 57.65%. Set against the 14 top-five teams that didn't win in the three most recent seasons (the feature comparison still runs on 2023-24 to 2025-26), only 3 of 20 features separate the champions: offensive rank, defensive rank and continuity. No style feature does.
+Base rates, as counts, on the 11 clean seasons of odds I have. The preseason favorite won 4 of 11. The champion came from the market's top five 10 of 11 times, priced between 4.01% and 57.65%. Set against the 48 top-five teams that didn't win across those seasons, 0 of 19 team-level features separate the champions under the quarter rule (separating: none). On the three seasons with style features, 0 of 8 style features do.
 
 The Knicks are the file that shows why. The market had them at 8.27%, 4th, with a win total of 53.5. They won 53, right on it. This project's model had them at 4.63%, below the market, on the same side of the market where it now sits on Minnesota. The regular season was steady: +6.33 per game, +6.16 before the break and +6.67 after. Then the playoffs were a different team, **16-3 at +14.89**, and they were the only one of 16 playoff teams whose margin improved (+8.57, against an average of -7.39; Minnesota's was -9.19). What moved wasn't visible in September. Their top five players missed 46 regular season games and 2 in the playoffs, the top five's share of the minutes went from 0.579 to 0.673, and the bracket broke their way.
 
@@ -206,7 +206,7 @@ Every conclusion above is conditional on something, so here are the conditions, 
 
 **The Edwards-Ball pairing costs usage, not efficiency.** Now: 2025-26 true shooting: Edwards 0.617, Ball 0.546. Unadjusted base rate for a new high-usage pairing: -0.3 points of true shooting (34 player-seasons). Flips if: **Edwards below 0.547, or Ball below 0.476**.
 
-**Minnesota is not on a champion's path.** Now: projected rank 16 (primary basis) / 13 (aged); the 29 champions since 1997-98 ranked 11 at worst after 20 games (2005-06 MIA and 2022-23 DEN), median 2. Flips if: **3 or better (test); 11 or better (checkpoint)**.
+**Minnesota is not on a champion's path.** Now: projected rank 16 (primary basis) / 13 (aged); the 11 champions since 2015-16 ranked 11 at worst after 20 games (2022-23 DEN), 6 at worst at season's end (2022-23 DEN) with 10 of 11 in the top 5, and 18 at worst after the All-Star break. Flips if: **5 or better at season's end (test); 11 or better after 20 games (checkpoint)**.
 
 If Williams is under 12.6 minutes at game 20, the offseason verdict is officially unwritable and this piece said so in advance. If Boston is under -1.7 at game 30, come back to section 1 and discount everything in it.
 
@@ -240,8 +240,8 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 |---|---|---|---|---|---|
 | `summary` | `p3` | `- What the market says. The betting` | `mkt_min`, `mkt_min_rank` | `market_devig_20260919T195044Z` | observed |
 | `summary` | `p4` | `- What the model says. {title} on` | `title`, `title_lo`, `title_hi`, `title_aged` | `run_sim_20260919T163222Z`, `run_sim_20260919T195138Z` | modeled |
-| `summary` | `p6` | `- What the offseason verdict depends on.` | `williams_threshold` | `n8_watch_list_20260922T160123Z` | modeled |
-| `summary` | `p7` | `- What to watch. Five claims with` | `w_game`, `bos_dec_game` | `n8_watch_list_20260922T160123Z` | assumed |
+| `summary` | `p6` | `- What the offseason verdict depends on.` | `williams_threshold` | `n8_watch_list_20260924T200431Z` | modeled |
+| `summary` | `p7` | `- What to watch. Five claims with` | `w_game`, `bos_dec_game` | `n8_watch_list_20260924T200431Z` | assumed |
 | `1. The number` | `p1` | `Here's the number everything else hangs off.` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `1. The number` | `p2` | `Where each comes from, because the gap` | `overround`, `sims`, `title`, `title_lo`, `title_hi` | `market_devig_20260919T195044Z`, `merge_fcurve_parts_20260919T195006Z`, `run_sim_20260919T163222Z` | assumed, modeled, observed |
 | `1. The number` | `p3` | `That's the primary basis, every player at` | `title_aged`, `title_lo_aged`, `title_hi_aged` | `run_sim_20260919T195138Z` | modeled |
@@ -249,7 +249,7 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `Why the gap is real, and where it isn't` | `p2` | `On the primary basis all four views` | `min_view_ranks`, `mkt_min_rank` | `f4_per_view_disagreement_20260919T195046Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `Why the gap is real, and where it isn't` | `p3` | `On the aged basis the picture softens.` | `min_view_ranks_aged`, `mkt_min`, `min_darko_aged`, `min_box_aged` | `r5_honesty_rail_bases_20260919T232922Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `Why the gap is real, and where it isn't` | `p4` | `One caution before you lean on "all` | `cons_rapm_corr` | `d89_rapm_compare_20260922T010417Z` | composed |
-| `The model's biggest claim, and its expiry date` | `p1` | `If you want to know whether to` | `model_bos`, `mkt_bos`, `model_bos_aged`, `bos_dec_game`, `bos_dec_threshold`, `bos_range_lo`, `bos_range_hi`, `dec_noise` | `market_devig_20260919T195044Z`, `r5_honesty_rail_bases_20260919T232922Z`, `n8_watch_list_20260922T160123Z` | assumed, composed, modeled, observed |
+| `The model's biggest claim, and its expiry date` | `p1` | `If you want to know whether to` | `model_bos`, `mkt_bos`, `model_bos_aged`, `bos_dec_game`, `bos_dec_threshold`, `bos_range_lo`, `bos_range_hi`, `dec_noise` | `market_devig_20260919T195044Z`, `r5_honesty_rail_bases_20260919T232922Z`, `n8_watch_list_20260924T200431Z` | assumed, composed, modeled, observed |
 | `The model's biggest claim, and its expiry date` | `p3` | `Charlotte is on the list as well,` | `cha_model_pre`, `cha_gap_pre`, `mkt_cha`, `model_cha`, `cha_gap_now` | `market_devig_20260916T195853Z`, `market_devig_20260919T195044Z` | modeled, observed |
 | `What actually ships` | `p2` | `{n_ship} of {n_candidates} candidates clear that bar.` | `n_ship`, `n_candidates` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
 | `What actually ships` | `p5` | `{v_ball_in_label} {v_ball_in_pooled_u} {v_ball_in_pooled_a} {v_ball_in_signs}` | `v_ball_in_label`, `v_ball_in_pooled_u`, `v_ball_in_pooled_a`, `v_ball_in_signs` | `w2_aging_gate_20260919T232645Z`, `r7_allocator_agreement_20260919T233117Z` | fact, modeled |
@@ -265,12 +265,12 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `Nothing "translates" to the playoffs` | `p1` | `Then the translation question: is there some` | `n3_n_features`, `n3_series`, `n3_start`, `n3_n_translating`, `n3_mde_lo`, `n3_mde_hi` | `n3_playoff_translation_20260916T212714Z` | assumed, composed, fact, modeled, observed |
 | `Nothing "translates" to the playoffs` | `p2` | `"Defense travels" deserves its own line because` | `ds_coef`, `ds_se`, `ds_p`, `ds_bar`, `ds_ci_hi`, `ds_early`, `ds_late`, `ds_luck` | `n3_playoff_translation_20260916T212714Z` | assumed, modeled |
 | `Versatility and matchups are mostly noise` | `p1` | `Versatility, the idea that some teams match` | `n4_rankcorr`, `n4_sd13`, `n4_start13`, `n4_sd97`, `n4_games97`, `n4_start97`, `n4_sd97_up`, `n4_series_up`, `m3_se30`, `m3_norm_lo`, `m3_norm_hi`, `m3_edges`, `m3_rows`, `m3_chance` | `n4_versatility_index_20260919T234720Z`, `m3_opponent_cards_20260916T201505Z` | fact, modeled, observed |
-| `What champions actually looked like` | `p1` | `Base rates, as counts, on the {h2_n}` | `h2_n`, `h2_fav`, `h2_top5`, `h2_lo`, `h2_hi`, `h3_n_non`, `h3_n_sep`, `h3_n_feat` | `champions_table_20260924T184745Z`, `h1_h3_h5_profile_20260917T132715Z` | fact, observed |
-| `What champions actually looked like` | `p2` | `The Knicks are the file that shows` | `nyk_mkt`, `nyk_rank`, `nyk_wt`, `nyk_wins`, `nyk_model`, `nyk_rs`, `nyk_pre`, `nyk_post`, `nyk_po_rec`, `nyk_po`, `nyk_po_teams`, `nyk_lift`, `nyk_lift_mean`, `nyk_cmp_lift`, `nyk_top5_rs_games_missed`, `nyk_top5_po_games_missed`, `nyk_top5_share_rs`, `nyk_top5_share_po` | `h4_knicks_case_file_20260916T190540Z` | modeled, observed |
+| `What champions actually looked like` | `p1` | `Base rates, as counts, on the {h2_n}` | `h2_n`, `h2_fav`, `h2_top5`, `h2_lo`, `h2_hi`, `h3_n_non`, `h3_n_sep`, `h3_n_feat`, `h3_sep_list`, `h3s_n_sep`, `h3s_n_feat` | `champions_table_20260924T184745Z`, `h1_h3_h5_profile_20260924T200418Z` | fact, observed |
+| `What champions actually looked like` | `p2` | `The Knicks are the file that shows` | `nyk_mkt`, `nyk_rank`, `nyk_wt`, `nyk_wins`, `nyk_model`, `nyk_rs`, `nyk_pre`, `nyk_post`, `nyk_po_rec`, `nyk_po`, `nyk_po_teams`, `nyk_lift`, `nyk_lift_mean`, `nyk_cmp_lift`, `nyk_top5_rs_games_missed`, `nyk_top5_po_games_missed`, `nyk_top5_share_rs`, `nyk_top5_share_po` | `h4_knicks_case_file_20260924T192303Z` | modeled, observed |
 | `What champions actually looked like` | `p3` | `The number, and the condition: {n3_n_translating} of` | `n3_n_translating`, `n3_n_features` | `n3_playoff_translation_20260916T212714Z` | assumed, modeled |
 | `Health` | `p1` | `Take one of Minnesota's top three players` | `n5_min_drop`, `n5_min_share`, `n5_min_share_aged`, `n5_okc_drop`, `n5_okc_share`, `n5_sas_drop`, `n5_sas_share`, `n5_min_net`, `n5_okc_net`, `n5_sas_net`, `n5_okc_bigname`, `n5_okc_big`, `n5_sas_bigname`, `n5_sas_big`, `n5_min_po`, `n5_okc_po`, `n5_sas_po`, `n5_min_net_aged`, `n5_okc_net_aged`, `n5_sas_net_aged` | `n5_fragility_20260919T233508Z`, `n5_fragility_20260919T234118Z` | modeled |
 | `The rotation, and the coin flip in it` | `p1` | `The model gives Cody Williams {williams_mpg} minutes` | `williams_mpg`, `rs_gap`, `rs_williams`, `rs_clark` | `build_rotations_20260919T163216Z` | assumed, composed |
-| `The rotation, and the coin flip in it` | `p2` | `And it carries a verdict. Below {williams_threshold}` | `williams_threshold` | `n8_watch_list_20260922T160123Z` | modeled |
+| `The rotation, and the coin flip in it` | `p2` | `And it carries a verdict. Below {williams_threshold}` | `williams_threshold` | `n8_watch_list_20260924T200431Z` | modeled |
 | `The rotation, and the coin flip in it` | `p3` | `Double-big lineups can be evaluated now that` | `m4_double`, `m4_fives`, `m4_nogobert`, `m4_top10_beringer`, `beringer_prior`, `m4_observed` | `m4_lineup_study_20260919T195041Z`, `build_rotations_20260919T163216Z` | composed, observed |
 | `The rotation, and the coin flip in it` | `p4` | `One thing from last season's data that` | `reid_gobert`, `randle_gobert` | `lineup_evidence_20260917T133631Z` | observed |
 | `Usage` | `p1` | `Last season's usage doesn't fit on one` | `m5_top_pct`, `m5_league_fives`, `m5_kin_pct`, `m5_kin3_pct`, `m5_obs_pct` | `m5_usage_accounting_20260916T203535Z` | composed, observed |
@@ -300,15 +300,15 @@ Every paragraph that carries a figure, with the sheet keys it uses and the run I
 | `7. The bill` | `p3` | `And the Dosunmu arithmetic, which is only` | `dos_stuck_over`, `dos_cheapest_apron`, `dos_cheapest_tax`, `dos_happened_apron`, `dos_happened_tax`, `dos_dump_payroll`, `dos_dump_tax`, `dos_nodos_kuminga`, `dos_nodos_tax` | `dosunmu_final_states_20260904T014033Z` | fact |
 | `7. The bill` | `p4` | `The option, once more, because it's the` | `k_y1`, `k_y2`, `k_nonbird` | `green_resolution_20260904T014022Z` | fact |
 | `7. The bill` | `p5` | `The number, and the condition: {room_hard_cap} of` | `room_hard_cap` | `green_resolution_20260904T014022Z` | fact |
-| `8. What to watch` | `p1` | `Every conclusion above is conditional on something,` | `w_game` | `n8_watch_list_20260922T160123Z` | assumed |
-| `8. What to watch` | `p2` | `{w1_claim}. Now: {w1_now}. Flips if: {w1_flip}. This` | `w1_claim`, `w1_now`, `w1_flip` | `n8_watch_list_20260922T160123Z` | assumed, composed |
-| `8. What to watch` | `p3` | `{w2_claim}. Now: {w2_now}. Flips if: {w2_flip}.` | `w2_claim`, `w2_now`, `w2_flip` | `n8_watch_list_20260922T160123Z` | composed, modelled |
-| `8. What to watch` | `p4` | `{w3_claim}. Now: {w3_now}. Flips if: {w3_flip}. And` | `w3_claim`, `w3_now`, `w3_flip`, `bos_dec_game`, `bos_dec_threshold` | `n8_watch_list_20260922T160123Z` | assumed, composed, modelled |
-| `8. What to watch` | `p5` | `{w4_claim}. Now: {w4_now}. Flips if: {w4_flip}.` | `w4_claim`, `w4_now`, `w4_flip` | `n8_watch_list_20260922T160123Z` | composed, observed |
-| `8. What to watch` | `p6` | `{w5_claim}. Now: {w5_now}. Flips if: {w5_flip}.` | `w5_claim`, `w5_now`, `w5_flip` | `n8_watch_list_20260922T160123Z` | composed, observed |
-| `8. What to watch` | `p7` | `If Williams is under {williams_threshold} minutes at` | `williams_threshold`, `w_game`, `bos_dec_threshold`, `bos_dec_game` | `n8_watch_list_20260922T160123Z` | assumed, composed, modeled |
+| `8. What to watch` | `p1` | `Every conclusion above is conditional on something,` | `w_game` | `n8_watch_list_20260924T200431Z` | assumed |
+| `8. What to watch` | `p2` | `{w1_claim}. Now: {w1_now}. Flips if: {w1_flip}. This` | `w1_claim`, `w1_now`, `w1_flip` | `n8_watch_list_20260924T200431Z` | assumed, composed |
+| `8. What to watch` | `p3` | `{w2_claim}. Now: {w2_now}. Flips if: {w2_flip}.` | `w2_claim`, `w2_now`, `w2_flip` | `n8_watch_list_20260924T200431Z` | composed, modelled |
+| `8. What to watch` | `p4` | `{w3_claim}. Now: {w3_now}. Flips if: {w3_flip}. And` | `w3_claim`, `w3_now`, `w3_flip`, `bos_dec_game`, `bos_dec_threshold` | `n8_watch_list_20260924T200431Z` | assumed, composed, modelled |
+| `8. What to watch` | `p5` | `{w4_claim}. Now: {w4_now}. Flips if: {w4_flip}.` | `w4_claim`, `w4_now`, `w4_flip` | `n8_watch_list_20260924T200431Z` | composed, observed |
+| `8. What to watch` | `p6` | `{w5_claim}. Now: {w5_now}. Flips if: {w5_flip}.` | `w5_claim`, `w5_now`, `w5_flip` | `n8_watch_list_20260924T200431Z` | composed, observed |
+| `8. What to watch` | `p7` | `If Williams is under {williams_threshold} minutes at` | `williams_threshold`, `w_game`, `bos_dec_threshold`, `bos_dec_game` | `n8_watch_list_20260924T200431Z` | assumed, composed, modeled |
 | `Pull-quotes` | `p1` | `1. "The model has Minnesota at {title}` | `title`, `mkt_min` | `run_sim_20260919T163222Z`, `market_devig_20260919T195044Z` | modeled, observed |
-| `Pull-quotes` | `p2` | `2. "If you want to know whether` | `model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game` | `market_devig_20260919T195044Z`, `n8_watch_list_20260922T160123Z` | assumed, composed, modeled, observed |
-| `Pull-quotes` | `p4` | `4. "'The offseason made Minnesota worse' is` | `williams_threshold` | `n8_watch_list_20260922T160123Z` | modeled |
+| `Pull-quotes` | `p2` | `2. "If you want to know whether` | `model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game` | `market_devig_20260919T195044Z`, `n8_watch_list_20260924T200431Z` | assumed, composed, modeled, observed |
+| `Pull-quotes` | `p4` | `4. "'The offseason made Minnesota worse' is` | `williams_threshold` | `n8_watch_list_20260924T200431Z` | modeled |
 | `Pull-quotes` | `p5` | `5. "One good defender, assigned to Edwards,` | `e_pct_shipped`, `e_n_off` | `m3_primary_defender_check_20260916T201455Z` | observed |
 | `Pull-quotes` | `p6` | `6. "'Defense travels' is not supported, and` | `ds_coef` | `n3_playoff_translation_20260916T212714Z` | modeled |

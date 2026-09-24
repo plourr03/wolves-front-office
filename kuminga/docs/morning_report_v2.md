@@ -24,7 +24,7 @@
 
 **Withheld:** the late-clock split (reconstruction 79.9% against a bar of 80%).
 
-**Open:** pre-playoff odds and odds history before the clean seasons, awaiting a pasted source; and one hash-pinned fork of the old stint library in the fit engine, which is the last place the points defect lives (D89).
+**Open:** pre-playoff odds for the champion seasons (the preseason column is filled for all eleven from Basketball-Reference); and one hash-pinned fork of the old stint library in the fit engine, which is the last place the points defect lives (D89).
 
 **Settled since:** both points grains are fixed at the source, the lineup one and the possession one under it, and everything built on them is recomputed: five playoff sign changes in the postmortem lineup figures (D88), and RAPM refit across all four views with consensus re-derived (D89). Possession points now reconcile to the box score exactly. The seven shipping verdicts hold under both minutes allocators as well as both aging bases (D87). Run ids are unique by construction (D86).
 
