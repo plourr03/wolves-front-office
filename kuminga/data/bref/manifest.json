@@ -173,6 +173,12 @@
   "sha256": "73f66eba336635936ae19e362407d6b8410c180164598dff6cc752730cbb0466",
   "url": "https://www.basketball-reference.com/players/c/connapa01.html"
  },
+ "players_c_crutcja01": {
+  "bytes": 282257,
+  "fetched_at": "2026-09-24T01:09:35+00:00",
+  "sha256": "b34900cd32de151e0f35ac50499d6f14521ad6d1e713eb4eb620145a4b2fa09a",
+  "url": "https://www.basketball-reference.com/players/c/crutcja01.html"
+ },
  "players_c_curryst01": {
   "bytes": 1259102,
   "fetched_at": "2026-09-22T19:13:08+00:00",

@@ -4,6 +4,6 @@ On Saturday, August 29, the Wolves had a deal they couldn't sign. Kuminga had ag
 
 That was the end of a summer that decided. Dosunmu re-signed for five years and $112 million before the draft. Then the trade: Randle to Brooklyn, Naz Reid to Charlotte, the 2033 first unprotected, swap rights in 2028, 2029 and 2030, three seconds and two sets of draft rights out; LaMelo Ball, Green, Isaiah Evans and a second back. Conley, Anderson, Ingles and Phillips left in July. DiVincenzo's Achilles took the season before anyone signed anything.
 
-In dollars for this season, $75.8 million came in across seven players and $66.1 million went out across six. In picks, everything.
+In dollars for this season, $75.8 million came in across seven players and $80.8 million went out across seven. In picks, everything.
 
 The market priced it at 3.16% to win the title, sixth in the league. The grades ran from D+ to A-, and the disagreement was really one question: is LaMelo Ball a player you bet a franchise's picks on? Neither the price nor the grades says why. So we spent a month on it. Part 2 is what we found.

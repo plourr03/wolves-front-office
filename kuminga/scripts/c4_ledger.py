@@ -243,10 +243,17 @@ def main():
                 q = srow.iloc[0]                          # drafted and unsigned: the sources row says what happened
                 events = [(events[0][0], "drafted and unsigned, rights retained", q.direction, q.reported_terms)]
             slug = re.sub(r".*/([a-z0-9]+)\.html$", r"\1", href)
+            # a departure carries a dollar figure only for a player who was actually on
+            # Minnesota's books: last season's roster, or an arrival that was not a draft
+            # pick whose rights left again. Green arrived in July and left in August, so he
+            # counts on both sides of the ledger; Jefferson's draft rights never became a
+            # Minnesota salary, so he counts on neither.
+            on_books = was_here or any(e[2].startswith("in") and not e[1].startswith("drafted")
+                                       for e in events)
             for d, how, direction, t in events:
                 here = direction.startswith("in") or direction == "retained"
                 s = sal.get((slug, "MIN")) if here else None
-                if s is None and how != "drafted" and not (direction == "out" and not was_here):
+                if s is None and how != "drafted" and (direction != "out" or on_books):
                     others = [v for (p, tm), v in sal.items() if p == slug and tm != "MIN"]
                     s = others[0] if others else sal.get((slug, "MIN"))
                 salary = s["salary_2026_27"] if s else (v3_hit.get(key) if is_here else None)

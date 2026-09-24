@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260922T193535Z`. 1416 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260924T011052Z`. 1420 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -1407,64 +1407,68 @@
 | `c1_mean_top5_po` | top-5 minutes share playoffs, mean | 70% | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
 | `c1_mean_missed_rs` | top-8 RS games missed, mean | 101 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
 | `c1_mean_missed_po` | top-8 playoff games missed, mean | 6.2 | OBSERVED | QUOTABLE | `c1_champions_20260922T193504Z` |
-| `c4_in_n` | players in with a 2026-27 salary | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_in_total` | 2026-27 salary in | $75,840,737 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_in_total_m` | 2026-27 salary in, rounded | $75.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_out_n` | players out with a 2026-27 salary | 6 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_out_total` | 2026-27 salary out | $66,100,564 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_out_total_m` | 2026-27 salary out, rounded | $66.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_rows` | ledger rows | 37 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_single_sourced` | ledger rows with one source | 0 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_hylanbo01_retained_salary` | Bones Hyland 2026-27 salary (retained) | $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_hylanbo01_retained_salary_m` | Bones Hyland 2026-27 salary, rounded | $2.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_hylanbo01_retained_total` | Bones Hyland remaining contract: years, total | 1 years, $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_anderky01_out_salary` | Kyle Anderson 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_anderky01_out_salary_m` | Kyle Anderson 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_anderky01_out_total` | Kyle Anderson remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_conlemi01_out_salary` | Mike Conley 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_conlemi01_out_salary_m` | Mike Conley 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_conlemi01_out_total` | Mike Conley remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_evansis01_in_salary` | Isaiah Evans 2026-27 salary (in) | $1,357,763 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_evansis01_in_salary_m` | Isaiah Evans 2026-27 salary, rounded | $1.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_evansis01_in_total` | Isaiah Evans remaining contract: years, total | 4 years, $9,264,648 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_greenjo02_in_salary` | Josh Green 2026-27 salary (in) | $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_greenjo02_in_salary_m` | Josh Green 2026-27 salary, rounded | $14.7 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_greenjo02_in_total` | Josh Green remaining contract: years, total | 1 years, $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_ballla01_in_salary` | LaMelo Ball 2026-27 salary (in) | $40,770,520 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_ballla01_in_salary_m` | LaMelo Ball 2026-27 salary, rounded | $40.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_ballla01_in_total` | LaMelo Ball remaining contract: years, total | 3 years, $130,746,840 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_lylestr01_in_salary` | Trey Lyles 2026-27 salary (in) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_lylestr01_in_salary_m` | Trey Lyles 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_lylestr01_in_total` | Trey Lyles remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_randlju01_out_salary` | Julius Randle 2026-27 salary (out) | $33,333,334 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_randlju01_out_salary_m` | Julius Randle 2026-27 salary, rounded | $33.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_randlju01_out_total` | Julius Randle remaining contract: years, total | 2 years, $69,135,802 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_reidna01_out_salary` | Naz Reid 2026-27 salary (out) | $23,275,862 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_reidna01_out_salary_m` | Naz Reid 2026-27 salary, rounded | $23.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_reidna01_out_total` | Naz Reid remaining contract: years, total | 4 years, $103,448,276 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_dosunay01_retained_salary` | Ayo Dosunmu 2026-27 salary (retained) | $19,310,345 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_dosunay01_retained_salary_m` | Ayo Dosunmu 2026-27 salary, rounded | $19.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_dosunay01_retained_total` | Ayo Dosunmu remaining contract: years, total | 5 years, $112,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_clarkja02_retained_salary` | Jaylen Clark 2026-27 salary (retained) | $3,086,420 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_clarkja02_retained_salary_m` | Jaylen Clark 2026-27 salary, rounded | $3.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_clarkja02_retained_total` | Jaylen Clark remaining contract: years, total | 3 years, $10,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_phillju01_out_salary` | Julian Phillips 2026-27 salary (out) | $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_phillju01_out_salary_m` | Julian Phillips 2026-27 salary, rounded | $2.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_phillju01_out_total` | Julian Phillips remaining contract: years, total | 1 years, $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_willico04_in_salary` | Cody Williams 2026-27 salary (in) | $6,015,600 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_willico04_in_salary_m` | Cody Williams 2026-27 salary, rounded | $6.0 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_willico04_in_total` | Cody Williams remaining contract: years, total | 2 years, $13,685,490 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_konchjo01_in_salary` | John Konchar 2026-27 salary (in) | $4,504,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_konchjo01_in_salary_m` | John Konchar 2026-27 salary, rounded | $4.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_konchjo01_in_total` | John Konchar remaining contract: years, total | 3 years, $8,614,421 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_konchjo01_out_salary` | John Konchar 2026-27 salary (out) | $2,055,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_konchjo01_out_salary_m` | John Konchar 2026-27 salary, rounded | $2.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_kuminjo01_in_salary` | Jonathan Kuminga 2026-27 salary (in) | $6,064,000 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_kuminjo01_in_salary_m` | Jonathan Kuminga 2026-27 salary, rounded | $6.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_kuminjo01_in_total` | Jonathan Kuminga remaining contract: years, total | 2 years, $12,431,200 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_grades_read` | graded pieces fetched and read | 25 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_grades_whole_n` | national whole-offseason grades | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_grades_whole` | national whole-offseason grades, outlet and grade | ESPN C+; Bleacher Report D+; Bleacher Report B+; CBS Sports B; CBS Sports B; Yahoo Sports C; The Big Lead (Minute Media) A- | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_grades_trade_n` | national grades of the Ball trade alone | 8 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
-| `c4_grades_not_read` | pieces found but not read | 3 | OBSERVED | QUOTABLE | `c4_ledger_20260922T192710Z` |
+| `c4_in_n` | players in with a 2026-27 salary | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_in_total` | 2026-27 salary in | $75,840,737 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_in_total_m` | 2026-27 salary in, rounded | $75.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_out_n` | players out with a 2026-27 salary | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_out_total` | 2026-27 salary out | $80,779,576 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_out_total_m` | 2026-27 salary out, rounded | $80.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_rows` | ledger rows | 37 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_single_sourced` | ledger rows with one source | 0 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_hylanbo01_retained_salary` | Bones Hyland 2026-27 salary (retained) | $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_hylanbo01_retained_salary_m` | Bones Hyland 2026-27 salary, rounded | $2.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_hylanbo01_retained_total` | Bones Hyland remaining contract: years, total | 1 years, $2,845,883 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_anderky01_out_salary` | Kyle Anderson 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_anderky01_out_salary_m` | Kyle Anderson 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_anderky01_out_total` | Kyle Anderson remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_conlemi01_out_salary` | Mike Conley 2026-27 salary (out) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_conlemi01_out_salary_m` | Mike Conley 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_conlemi01_out_total` | Mike Conley remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_evansis01_in_salary` | Isaiah Evans 2026-27 salary (in) | $1,357,763 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_evansis01_in_salary_m` | Isaiah Evans 2026-27 salary, rounded | $1.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_evansis01_in_total` | Isaiah Evans remaining contract: years, total | 4 years, $9,264,648 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_in_salary` | Josh Green 2026-27 salary (in) | $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_in_salary_m` | Josh Green 2026-27 salary, rounded | $14.7 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_in_total` | Josh Green remaining contract: years, total | 1 years, $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_ballla01_in_salary` | LaMelo Ball 2026-27 salary (in) | $40,770,520 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_ballla01_in_salary_m` | LaMelo Ball 2026-27 salary, rounded | $40.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_ballla01_in_total` | LaMelo Ball remaining contract: years, total | 3 years, $130,746,840 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_lylestr01_in_salary` | Trey Lyles 2026-27 salary (in) | $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_lylestr01_in_salary_m` | Trey Lyles 2026-27 salary, rounded | $2.4 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_lylestr01_in_total` | Trey Lyles remaining contract: years, total | 1 years, $2,449,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_randlju01_out_salary` | Julius Randle 2026-27 salary (out) | $33,333,334 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_randlju01_out_salary_m` | Julius Randle 2026-27 salary, rounded | $33.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_randlju01_out_total` | Julius Randle remaining contract: years, total | 2 years, $69,135,802 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_reidna01_out_salary` | Naz Reid 2026-27 salary (out) | $23,275,862 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_reidna01_out_salary_m` | Naz Reid 2026-27 salary, rounded | $23.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_reidna01_out_total` | Naz Reid remaining contract: years, total | 4 years, $103,448,276 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_dosunay01_retained_salary` | Ayo Dosunmu 2026-27 salary (retained) | $19,310,345 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_dosunay01_retained_salary_m` | Ayo Dosunmu 2026-27 salary, rounded | $19.3 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_dosunay01_retained_total` | Ayo Dosunmu remaining contract: years, total | 5 years, $112,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_clarkja02_retained_salary` | Jaylen Clark 2026-27 salary (retained) | $3,086,420 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_clarkja02_retained_salary_m` | Jaylen Clark 2026-27 salary, rounded | $3.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_clarkja02_retained_total` | Jaylen Clark remaining contract: years, total | 3 years, $10,000,000 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_phillju01_out_salary` | Julian Phillips 2026-27 salary (out) | $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_phillju01_out_salary_m` | Julian Phillips 2026-27 salary, rounded | $2.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_phillju01_out_total` | Julian Phillips remaining contract: years, total | 1 years, $2,537,526 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_willico04_in_salary` | Cody Williams 2026-27 salary (in) | $6,015,600 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_willico04_in_salary_m` | Cody Williams 2026-27 salary, rounded | $6.0 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_willico04_in_total` | Cody Williams remaining contract: years, total | 2 years, $13,685,490 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_in_salary` | John Konchar 2026-27 salary (in) | $4,504,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_in_salary_m` | John Konchar 2026-27 salary, rounded | $4.5 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_in_total` | John Konchar remaining contract: years, total | 3 years, $8,614,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_out_salary` | John Konchar 2026-27 salary (out) | $2,055,000 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_out_salary_m` | John Konchar 2026-27 salary, rounded | $2.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_konchjo01_out_total` | John Konchar remaining contract: years, total | 3 years, $8,614,421 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_out_salary` | Josh Green 2026-27 salary (out) | $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_out_salary_m` | Josh Green 2026-27 salary, rounded | $14.7 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_greenjo02_out_total` | Josh Green remaining contract: years, total | 1 years, $14,679,012 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_kuminjo01_in_salary` | Jonathan Kuminga 2026-27 salary (in) | $6,064,000 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_kuminjo01_in_salary_m` | Jonathan Kuminga 2026-27 salary, rounded | $6.1 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_kuminjo01_in_total` | Jonathan Kuminga remaining contract: years, total | 2 years, $12,431,200 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_grades_read` | graded pieces fetched and read | 25 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_grades_whole_n` | national whole-offseason grades | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_grades_whole` | national whole-offseason grades, outlet and grade | ESPN C+; Bleacher Report D+; Bleacher Report B+; CBS Sports B; CBS Sports B; Yahoo Sports C; The Big Lead (Minute Media) A- | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_grades_trade_n` | national grades of the Ball trade alone | 8 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
+| `c4_grades_not_read` | pieces found but not read | 3 | OBSERVED | QUOTABLE | `c4_ledger_20260924T011012Z` |
 

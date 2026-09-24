@@ -6,6 +6,6 @@
 
 3. "One roster spot, about $4.6 million to fill it with, and no other tools." (`room_hard_cap`, `over_first`)
 
-4. "In dollars for this season: $75.8 million came in across seven players and $66.1 million went out across six. In picks: everything." (`c4_in_total_m`, `c4_out_total_m`)
+4. "In dollars for this season: $75.8 million came in across seven players and $80.8 million went out across seven. In picks: everything." (`c4_in_total_m`, `c4_out_total_m`)
 
-5. "The people who said no gave a C. The people who said yes gave a B. Nobody gave an A without an asterisk and nobody gave an F." (`c4_grades_whole`, `mkt_min`)
+5. "The people who said no gave a C. The people who said yes gave a B. Nobody with a national byline gave the whole summer a straight A and nobody gave it an F." (`c4_grades_whole`, `mkt_min`)

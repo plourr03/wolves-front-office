@@ -1355,63 +1355,67 @@ c1_mean_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes shar
 c1_mean_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share playoffs, mean",70%,OBSERVED,QUOTABLE,c1_champions_20260922T193504Z,c1_champions.csv
 c1_mean_missed_rs,"C. The bet: additions for Parts 1, 3 and 4","top-8 RS games missed, mean",101,OBSERVED,QUOTABLE,c1_champions_20260922T193504Z,c1_champions.csv
 c1_mean_missed_po,"C. The bet: additions for Parts 1, 3 and 4","top-8 playoff games missed, mean",6.2,OBSERVED,QUOTABLE,c1_champions_20260922T193504Z,c1_champions.csv
-c4_in_n,"C. The bet: additions for Parts 1, 3 and 4",players in with a 2026-27 salary,7,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_in_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary in,"$75,840,737",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_in_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary in, rounded",$75.8 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_out_n,"C. The bet: additions for Parts 1, 3 and 4",players out with a 2026-27 salary,6,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_out_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary out,"$66,100,564",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_out_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary out, rounded",$66.1 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_rows,"C. The bet: additions for Parts 1, 3 and 4",ledger rows,37,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_single_sourced,"C. The bet: additions for Parts 1, 3 and 4",ledger rows with one source,0,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_hylanbo01_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Bones Hyland 2026-27 salary (retained),"$2,845,883",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_hylanbo01_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Bones Hyland 2026-27 salary, rounded",$2.8 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_hylanbo01_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Bones Hyland remaining contract: years, total","1 years, $2,845,883",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_anderky01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Kyle Anderson 2026-27 salary (out),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_anderky01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Kyle Anderson 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_anderky01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Kyle Anderson remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_conlemi01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Mike Conley 2026-27 salary (out),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_conlemi01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Mike Conley 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_conlemi01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Mike Conley remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_evansis01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Isaiah Evans 2026-27 salary (in),"$1,357,763",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_evansis01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Isaiah Evans 2026-27 salary, rounded",$1.4 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_evansis01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Isaiah Evans remaining contract: years, total","4 years, $9,264,648",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_greenjo02_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Josh Green 2026-27 salary (in),"$14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_greenjo02_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Josh Green 2026-27 salary, rounded",$14.7 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_greenjo02_in_total,"C. The bet: additions for Parts 1, 3 and 4","Josh Green remaining contract: years, total","1 years, $14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_ballla01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",LaMelo Ball 2026-27 salary (in),"$40,770,520",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_ballla01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","LaMelo Ball 2026-27 salary, rounded",$40.8 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_ballla01_in_total,"C. The bet: additions for Parts 1, 3 and 4","LaMelo Ball remaining contract: years, total","3 years, $130,746,840",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_lylestr01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Trey Lyles 2026-27 salary (in),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_lylestr01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Trey Lyles 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_lylestr01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Trey Lyles remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_randlju01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Julius Randle 2026-27 salary (out),"$33,333,334",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_randlju01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Julius Randle 2026-27 salary, rounded",$33.3 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_randlju01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Julius Randle remaining contract: years, total","2 years, $69,135,802",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_reidna01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Naz Reid 2026-27 salary (out),"$23,275,862",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_reidna01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Naz Reid 2026-27 salary, rounded",$23.3 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_reidna01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Naz Reid remaining contract: years, total","4 years, $103,448,276",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_dosunay01_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Ayo Dosunmu 2026-27 salary (retained),"$19,310,345",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_dosunay01_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Ayo Dosunmu 2026-27 salary, rounded",$19.3 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_dosunay01_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Ayo Dosunmu remaining contract: years, total","5 years, $112,000,000",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_clarkja02_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Jaylen Clark 2026-27 salary (retained),"$3,086,420",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_clarkja02_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Jaylen Clark 2026-27 salary, rounded",$3.1 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_clarkja02_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Jaylen Clark remaining contract: years, total","3 years, $10,000,000",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_phillju01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Julian Phillips 2026-27 salary (out),"$2,537,526",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_phillju01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Julian Phillips 2026-27 salary, rounded",$2.5 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_phillju01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Julian Phillips remaining contract: years, total","1 years, $2,537,526",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_willico04_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Cody Williams 2026-27 salary (in),"$6,015,600",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_willico04_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Cody Williams 2026-27 salary, rounded",$6.0 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_willico04_in_total,"C. The bet: additions for Parts 1, 3 and 4","Cody Williams remaining contract: years, total","2 years, $13,685,490",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_konchjo01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",John Konchar 2026-27 salary (in),"$4,504,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_konchjo01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","John Konchar 2026-27 salary, rounded",$4.5 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_konchjo01_in_total,"C. The bet: additions for Parts 1, 3 and 4","John Konchar remaining contract: years, total","3 years, $8,614,421",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_konchjo01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",John Konchar 2026-27 salary (out),"$2,055,000",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_konchjo01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","John Konchar 2026-27 salary, rounded",$2.1 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_kuminjo01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Jonathan Kuminga 2026-27 salary (in),"$6,064,000",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_kuminjo01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Jonathan Kuminga 2026-27 salary, rounded",$6.1 million,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_kuminjo01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Jonathan Kuminga remaining contract: years, total","2 years, $12,431,200",OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_ledger.csv
-c4_grades_read,"C. The bet: additions for Parts 1, 3 and 4",graded pieces fetched and read,25,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_offseason_grades.csv
-c4_grades_whole_n,"C. The bet: additions for Parts 1, 3 and 4",national whole-offseason grades,7,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_offseason_grades.csv
-c4_grades_whole,"C. The bet: additions for Parts 1, 3 and 4","national whole-offseason grades, outlet and grade",ESPN C+; Bleacher Report D+; Bleacher Report B+; CBS Sports B; CBS Sports B; Yahoo Sports C; The Big Lead (Minute Media) A-,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_offseason_grades.csv
-c4_grades_trade_n,"C. The bet: additions for Parts 1, 3 and 4",national grades of the Ball trade alone,8,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_offseason_grades.csv
-c4_grades_not_read,"C. The bet: additions for Parts 1, 3 and 4",pieces found but not read,3,OBSERVED,QUOTABLE,c4_ledger_20260922T192710Z,c4_offseason_grades.csv
+c4_in_n,"C. The bet: additions for Parts 1, 3 and 4",players in with a 2026-27 salary,7,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_in_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary in,"$75,840,737",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_in_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary in, rounded",$75.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_out_n,"C. The bet: additions for Parts 1, 3 and 4",players out with a 2026-27 salary,7,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_out_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary out,"$80,779,576",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_out_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary out, rounded",$80.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_rows,"C. The bet: additions for Parts 1, 3 and 4",ledger rows,37,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_single_sourced,"C. The bet: additions for Parts 1, 3 and 4",ledger rows with one source,0,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_hylanbo01_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Bones Hyland 2026-27 salary (retained),"$2,845,883",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_hylanbo01_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Bones Hyland 2026-27 salary, rounded",$2.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_hylanbo01_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Bones Hyland remaining contract: years, total","1 years, $2,845,883",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_anderky01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Kyle Anderson 2026-27 salary (out),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_anderky01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Kyle Anderson 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_anderky01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Kyle Anderson remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_conlemi01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Mike Conley 2026-27 salary (out),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_conlemi01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Mike Conley 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_conlemi01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Mike Conley remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_evansis01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Isaiah Evans 2026-27 salary (in),"$1,357,763",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_evansis01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Isaiah Evans 2026-27 salary, rounded",$1.4 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_evansis01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Isaiah Evans remaining contract: years, total","4 years, $9,264,648",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Josh Green 2026-27 salary (in),"$14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Josh Green 2026-27 salary, rounded",$14.7 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_in_total,"C. The bet: additions for Parts 1, 3 and 4","Josh Green remaining contract: years, total","1 years, $14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_ballla01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",LaMelo Ball 2026-27 salary (in),"$40,770,520",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_ballla01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","LaMelo Ball 2026-27 salary, rounded",$40.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_ballla01_in_total,"C. The bet: additions for Parts 1, 3 and 4","LaMelo Ball remaining contract: years, total","3 years, $130,746,840",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_lylestr01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Trey Lyles 2026-27 salary (in),"$2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_lylestr01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Trey Lyles 2026-27 salary, rounded",$2.4 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_lylestr01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Trey Lyles remaining contract: years, total","1 years, $2,449,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_randlju01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Julius Randle 2026-27 salary (out),"$33,333,334",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_randlju01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Julius Randle 2026-27 salary, rounded",$33.3 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_randlju01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Julius Randle remaining contract: years, total","2 years, $69,135,802",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_reidna01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Naz Reid 2026-27 salary (out),"$23,275,862",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_reidna01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Naz Reid 2026-27 salary, rounded",$23.3 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_reidna01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Naz Reid remaining contract: years, total","4 years, $103,448,276",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_dosunay01_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Ayo Dosunmu 2026-27 salary (retained),"$19,310,345",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_dosunay01_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Ayo Dosunmu 2026-27 salary, rounded",$19.3 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_dosunay01_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Ayo Dosunmu remaining contract: years, total","5 years, $112,000,000",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_clarkja02_retained_salary,"C. The bet: additions for Parts 1, 3 and 4",Jaylen Clark 2026-27 salary (retained),"$3,086,420",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_clarkja02_retained_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Jaylen Clark 2026-27 salary, rounded",$3.1 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_clarkja02_retained_total,"C. The bet: additions for Parts 1, 3 and 4","Jaylen Clark remaining contract: years, total","3 years, $10,000,000",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_phillju01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Julian Phillips 2026-27 salary (out),"$2,537,526",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_phillju01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Julian Phillips 2026-27 salary, rounded",$2.5 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_phillju01_out_total,"C. The bet: additions for Parts 1, 3 and 4","Julian Phillips remaining contract: years, total","1 years, $2,537,526",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_willico04_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Cody Williams 2026-27 salary (in),"$6,015,600",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_willico04_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Cody Williams 2026-27 salary, rounded",$6.0 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_willico04_in_total,"C. The bet: additions for Parts 1, 3 and 4","Cody Williams remaining contract: years, total","2 years, $13,685,490",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",John Konchar 2026-27 salary (in),"$4,504,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","John Konchar 2026-27 salary, rounded",$4.5 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_in_total,"C. The bet: additions for Parts 1, 3 and 4","John Konchar remaining contract: years, total","3 years, $8,614,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_out_salary,"C. The bet: additions for Parts 1, 3 and 4",John Konchar 2026-27 salary (out),"$2,055,000",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","John Konchar 2026-27 salary, rounded",$2.1 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_konchjo01_out_total,"C. The bet: additions for Parts 1, 3 and 4","John Konchar remaining contract: years, total","3 years, $8,614,421",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_out_salary,"C. The bet: additions for Parts 1, 3 and 4",Josh Green 2026-27 salary (out),"$14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_out_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Josh Green 2026-27 salary, rounded",$14.7 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_greenjo02_out_total,"C. The bet: additions for Parts 1, 3 and 4","Josh Green remaining contract: years, total","1 years, $14,679,012",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_kuminjo01_in_salary,"C. The bet: additions for Parts 1, 3 and 4",Jonathan Kuminga 2026-27 salary (in),"$6,064,000",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_kuminjo01_in_salary_m,"C. The bet: additions for Parts 1, 3 and 4","Jonathan Kuminga 2026-27 salary, rounded",$6.1 million,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_kuminjo01_in_total,"C. The bet: additions for Parts 1, 3 and 4","Jonathan Kuminga remaining contract: years, total","2 years, $12,431,200",OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_ledger.csv
+c4_grades_read,"C. The bet: additions for Parts 1, 3 and 4",graded pieces fetched and read,25,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_offseason_grades.csv
+c4_grades_whole_n,"C. The bet: additions for Parts 1, 3 and 4",national whole-offseason grades,7,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_offseason_grades.csv
+c4_grades_whole,"C. The bet: additions for Parts 1, 3 and 4","national whole-offseason grades, outlet and grade",ESPN C+; Bleacher Report D+; Bleacher Report B+; CBS Sports B; CBS Sports B; Yahoo Sports C; The Big Lead (Minute Media) A-,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_offseason_grades.csv
+c4_grades_trade_n,"C. The bet: additions for Parts 1, 3 and 4",national grades of the Ball trade alone,8,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_offseason_grades.csv
+c4_grades_not_read,"C. The bet: additions for Parts 1, 3 and 4",pieces found but not read,3,OBSERVED,QUOTABLE,c4_ledger_20260924T011012Z,c4_offseason_grades.csv

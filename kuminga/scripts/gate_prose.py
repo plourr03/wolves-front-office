@@ -43,7 +43,8 @@ SHEET = os.path.join(OUT, "final_numbers.csv")
 AUX = [os.path.join(OUT, f) for f in ("c1_champions.csv", "c1_champion_top8.csv", "c2_edwards_clock.csv",
                                       "c2_stage_departures.csv", "c2_facts.csv", "c3_ball_history.csv",
                                       "c3_ball_missed_stretches.csv", "c3_base_rate_summary.csv",
-                                      "c3_ball_availability.csv", "c3_ball_availability_AGED.csv", "c4_ledger.csv")] + \
+                                      "c3_ball_availability.csv", "c3_ball_availability_AGED.csv", "c4_ledger.csv",
+                                      "series_facts.csv")] + \
       [os.path.join(REPO, "kuminga", "data", f) for f in ("c4_offseason_grades.csv", "c4_transaction_sources.csv",
                                                           "c3_ball_injury_causes.csv")]
 # league constants that are structure, not findings: games in a season, minutes in a game,

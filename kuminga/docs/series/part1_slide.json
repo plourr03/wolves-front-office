@@ -2,17 +2,52 @@
   "brand": "WOLVES TO A T",
   "brand_tag": "TIMBERWOLVES ANALYTICS",
   "dateline": "THE BET, PART 1 · 09.24.26",
-  "headline": ["WHAT CONNELLY", "DID."],
+  "headline": [
+    "WHAT CONNELLY",
+    "DID."
+  ],
   "accent_line": 1,
   "subhead": [
     "Randle and Reid out, LaMelo and Kuminga in,",
     "every future first spent. The summer in four numbers."
   ],
   "tiles": [
-    {"num": "$75.8M", "label": "SALARY IN, 2026-27", "detail": ["Seven players, Ball to", "Kuminga."], "key": "c4_in_total_m"},
-    {"num": "$66.1M", "label": "SALARY OUT", "detail": ["Six players, Randle to", "Konchar's dead money."], "key": "c4_out_total_m"},
-    {"num": "3.16%", "label": "MARKET TITLE ODDS", "detail": ["Sixth in the league,", "bookmakers' margin out."], "key": "mkt_min"},
-    {"num": "C+", "label": "ESPN'S GRADE", "detail": ["Grades ran D+ to A-.", "Nobody gave an F."], "key": "c4_grades_whole"}
+    {
+      "num": "$75.8M",
+      "label": "SALARY IN, 2026-27",
+      "detail": [
+        "Seven players, Ball to",
+        "Kuminga."
+      ],
+      "key": "c4_in_total_m"
+    },
+    {
+      "num": "$80.8M",
+      "label": "SALARY OUT",
+      "detail": [
+        "Seven players, Randle to",
+        "Green three weeks later."
+      ],
+      "key": "c4_out_total_m"
+    },
+    {
+      "num": "3.16%",
+      "label": "MARKET TITLE ODDS",
+      "detail": [
+        "Sixth in the league,",
+        "bookmakers' margin out."
+      ],
+      "key": "mkt_min"
+    },
+    {
+      "num": "C+",
+      "label": "ESPN'S GRADE",
+      "detail": [
+        "Grades ran D+ to A-.",
+        "Nobody gave an F."
+      ],
+      "key": "c4_grades_whole"
+    }
   ],
   "catch": {
     "label": "THE CATCH",
@@ -22,7 +57,10 @@
     "label": "UNDER THE HARD CAP",
     "text": "$4,608,584 to spare  ·  $8,062,416 over the first apron"
   },
-  "context_keys": ["room_hard_cap", "over_first"],
+  "context_keys": [
+    "room_hard_cap",
+    "over_first"
+  ],
   "footer_right": [
     "Contract book, Spotrac, NBA.com transactions.",
     "Grades as written by each outlet. Part 1 of 4."

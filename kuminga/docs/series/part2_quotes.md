@@ -4,7 +4,7 @@
 
 2. "The question isn't whether Jonathan Kuminga is a great player. The question is whether he's better than whoever else would have played the four, and the answer is yes, and it held under every test we could throw at it." (`v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_pooled_a`)
 
-3. "Of the 150 highest-volume scorers last season, the defender assigned to Edwards takes more off him than off anyone else. Percentile 1." (`e_pct_shipped`, `e_n_off`, `k_scorer_ref`)
+3. "Widen it to three seasons and 245 scorers and he is the lowest of all of them, the single most defender-suppressed scorer in the sample." (`e_scorer_pct3`, `k_scorer_ref`, `e_pct_shipped`)
 
 4. "Fewer shots, not worse ones." (`m5_star_usg`, `m5_star_ts`, `m5_star_n`)
 
