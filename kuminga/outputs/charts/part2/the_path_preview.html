@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The path, preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+
+  body { margin:0; padding:32px 16px 80px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); flex-wrap:wrap; }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is the_path_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<!-- charts_part2_20260925T135132Z; sheet keys checked: n2_modal, n2_modal_p, n2_top6, n2_sas_okc, n2_r2, n2_cond, n5_min_drop, n5_min_share, n5_min_share_aged -->
+<div id="viz-the-path">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The path</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">where April most likely starts</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  <div class="th-toggle" role="group" aria-label="Which panel"><button type="button" data-tab="seeds" class="is-on">The seed</button><button type="button" data-tab="r1">The first round</button><button type="button" data-tab="three">The three</button></div>
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="Where the season is most likely to go"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num"></span>
+      <span class="th-hero-unit"></span>
+    </div>
+    <div class="th-hero-label">the most likely seed: a play-in game, one night, everything on it</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Seeds: the share of simulated seasons ending at each seed, averaged over the four ways of scoring players, un-aged. First round: who Minnesota draws when it makes the field. The three: the points of title odds lost when each of the three most important players misses the playoffs, one mark per way of scoring players. Hover a bar.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-path, #viz-the-path * { touch-action: manipulation; }
+  #viz-the-path { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-path .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-path.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-path .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-the-path .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-path .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-path .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-path.is-compact .th-caption { font-size: 15px; }
+  #viz-the-path .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-path .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-path .th-tooltip.is-on { opacity: 1; }
+  #viz-the-path .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-path .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-path .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-path .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-path .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-path.is-landed .th-hero-num { color: var(--accent-default); }
+  #viz-the-path.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-path .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-path .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-path .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-path .th-replay.is-shown { opacity: 1; }
+  #viz-the-path .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-path .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-path .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-path .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-path .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-path .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-path .th-svg { width: 100%; height: 280px; display: block; }
+  #viz-the-path .th-hero-num { font-size: 44px; }
+  #viz-the-path .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-path .th-axis line, #viz-the-path .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-path .th-bar { cursor: pointer; opacity: 0; transition: opacity 300ms ease; }
+  #viz-the-path .th-bar.is-on { opacity: 1; }
+  #viz-the-path .th-blab { font: 700 10px var(--family-mono); fill: var(--text-secondary); text-anchor: middle; pointer-events: none; }
+  #viz-the-path .th-zone { fill: rgba(245,166,35,.08); }
+  #viz-the-path .th-zone-lab { font: 700 9.5px var(--family-mono); fill: var(--status-warning); letter-spacing: .05em; text-transform: uppercase; }
+  #viz-the-path .th-note { font: 600 10.5px var(--family-sans); fill: var(--text-secondary); }
+  #viz-the-path .th-rlab { font: 600 11px var(--family-sans); fill: var(--text-secondary); }
+  #viz-the-path .th-mean { stroke: rgba(255,255,255,.5); stroke-width: 1.5; stroke-dasharray: 4 3; }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-path");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"seeds": [{"seed": 1, "p": 4.2499999999999996e-05}, {"seed": 2, "p": 0.0009075}, {"seed": 3, "p": 0.0082025}, {"seed": 4, "p": 0.03578}, {"seed": 5, "p": 0.133975}, {"seed": 6, "p": 0.2460325}, {"seed": 7, "p": 0.30698250000000005}, {"seed": 8, "p": 0.21660000000000001}, {"seed": 9, "p": 0.0409775}, {"seed": 10, "p": 0.008522499999999999}], "miss": 0.0019775, "modal": 7, "modal_txt": "7th", "modal_p_txt": "31%", "top6_txt": "42%", "opp": [{"team": "OKC", "p": 0.2678967823271224}, {"team": "SAS", "p": 0.2615879556975815}, {"team": "HOU", "p": 0.2077030427016714}, {"team": "DEN", "p": 0.1845199965988953}, {"team": "LAL", "p": 0.0376619609961013}, {"team": "POR", "p": 0.0275925821325289}, {"team": "PHX", "p": 0.012897508362322}], "sas_okc_txt": "53%", "r2_txt": "28%", "cond_txt": "6.1%", "three": [{"player": "Anthony Edwards", "drops": {"consensus": 0.4166666666666667, "rapm": 0.5533333333333336, "box": 0.6983333333333331, "darko": 1.7233333333333336}, "mean": 0.8479166666666668, "rel": 0.5154910828884015}, {"player": "LaMelo Ball", "drops": {"consensus": 0.5333333333333333, "rapm": 0.8083333333333335, "box": 0.8049999999999999, "darko": 1.4433333333333336}, "mean": 0.8975, "rel": 0.5941181227587595}, {"player": "Rudy Gobert", "drops": {"consensus": 0.6283333333333333, "rapm": 0.9616666666666668, "box": 0.5499999999999999, "darko": 1.3233333333333337}, "mean": 0.8658333333333335, "rel": 0.6143581922195609}], "drop_txt": "0.87", "share_txt": "54%", "share_aged_txt": "43%"};
+  var CAPS = {
+    seeds: ["Run the season and ask where it ends. Each bar is the share of simulated seasons ending at that seed.", "The most likely seed is " + D.modal_txt + ", at " + D.modal_p_txt + ". A top-six seed, " + D.top6_txt + ". The most likely version of April is a play-in game."],
+    r1: ["If they make the field, who's standing there?", "San Antonio or Oklahoma City is the first-round opponent " + D.sas_okc_txt + " of the time. They reach the second round " + D.r2_txt + " of the time, and from there win it all " + D.cond_txt + " of the time. The mountain is the first round."],
+    three: ["Take any one of the three most important players out for the playoffs.", "The Wolves lose " + D.share_txt + " of their title odds, " + D.share_aged_txt + " once you correct for age, but the loss is spread across three players: " + D.drop_txt + " points each on average. Not a one-man team, whatever it used to be."]
+  };
+  var tab = "seeds";
+  var VIEWS = [["consensus", "var(--dataviz-2)"], ["rapm", "var(--dataviz-3)"], ["box", "var(--dataviz-6)"], ["darko", "var(--dataviz-4)"]];
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = 280;
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var bars = [];
+    if (tab === "seeds") {
+      var m = { t: 30, r: 14, b: 34, l: 40 };
+      var cats = D.seeds.map(function (s) { return String(s.seed); }).concat(["miss"]);
+      var x = d3.scaleBand().domain(cats).range([m.l, W - m.r]).paddingInner(0.25);
+      var y = d3.scaleLinear().domain([0, Math.max(0.4, d3.max(D.seeds, function (s) { return s.p; }) + 0.05)]).range([H - m.b, m.t]);
+      var ay = svg.append("g").attr("class", "th-axis").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).ticks(4).tickFormat(function (v) { return Math.round(v * 100) + "%"; }).tickSize(-(W - m.l - m.r)));
+      ay.select(".domain").remove();
+      var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).tickFormat(function (v) { return v === "miss" ? (compact ? "out" : "miss") : v; }));
+      ax.select(".domain").remove();
+      svg.append("text").attr("class", "th-note").attr("x", (m.l + W - m.r) / 2).attr("y", H - 4).attr("text-anchor", "middle").style("font-size", "9.5px").text("seed in the West");
+      svg.append("rect").attr("class", "th-zone").attr("x", x("7") - x.step() * 0.125).attr("width", x.step() * 4).attr("y", m.t - 4).attr("height", H - m.b - m.t + 4);
+      svg.append("text").attr("class", "th-zone-lab").attr("x", x("7") + x.step() * 1.875).attr("y", m.t - 8).attr("text-anchor", "middle").text("the play-in");
+      D.seeds.concat([{ seed: "miss", p: D.miss }]).forEach(function (s) {
+        var g = svg.append("g").attr("class", "th-bar");
+        var isModal = s.seed === D.modal;
+        g.append("rect").attr("x", x(String(s.seed))).attr("y", y(s.p)).attr("width", x.bandwidth()).attr("height", H - m.b - y(s.p)).attr("rx", 3).attr("fill", isModal ? "var(--accent-default)" : (String(s.seed) === "miss" ? "rgba(255,92,92,.5)" : "rgba(255,255,255,.22)"));
+        if (s.p >= 0.02) g.append("text").attr("class", "th-blab").attr("x", x(String(s.seed)) + x.bandwidth() / 2).attr("y", y(s.p) - 4).text(Math.round(s.p * 100) + "%");
+        var lab = s.seed === "miss" ? "Miss the play-in" : "Seed " + s.seed;
+        var desc = (100 * s.p).toFixed(1) + "% of simulated seasons, averaged over the four ways of scoring players." + (isModal ? " The modal seed." : "");
+        g.on("mouseenter", function () { tipAt(this, lab, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, lab, desc); });
+        bars.push(g);
+      });
+    } else if (tab === "r1") {
+      var m2 = { t: 16, r: 60, b: 30, l: 60 };
+      var y2 = d3.scaleBand().domain(D.opp.map(function (o) { return o.team; })).range([m2.t, H - m2.b]).paddingInner(0.3);
+      var x2 = d3.scaleLinear().domain([0, Math.max(0.35, d3.max(D.opp, function (o) { return o.p; }) + 0.03)]).range([m2.l, W - m2.r]);
+      var ax2 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m2.b) + ")").call(d3.axisBottom(x2).ticks(5).tickFormat(function (v) { return Math.round(v * 100) + "%"; }).tickSize(-(H - m2.b - m2.t)));
+      ax2.select(".domain").remove();
+      D.opp.forEach(function (o) {
+        var g = svg.append("g").attr("class", "th-bar");
+        var top = o.team === "SAS" || o.team === "OKC";
+        g.append("rect").attr("x", x2(0)).attr("y", y2(o.team)).attr("width", x2(o.p) - x2(0)).attr("height", y2.bandwidth()).attr("rx", 3).attr("fill", top ? "var(--status-error)" : "rgba(255,255,255,.22)");
+        g.append("text").attr("class", "th-rlab").attr("x", m2.l - 8).attr("y", y2(o.team) + y2.bandwidth() / 2 + 3.5).attr("text-anchor", "end").text(o.team);
+        g.append("text").attr("class", "th-blab").attr("x", x2(o.p) + 16).attr("y", y2(o.team) + y2.bandwidth() / 2 + 3.5).text(Math.round(o.p * 100) + "%");
+        var desc = "First-round opponent in " + (100 * o.p).toFixed(1) + "% of the simulated seasons in which Minnesota makes the field.";
+        g.on("mouseenter", function () { tipAt(this, o.team, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, o.team, desc); });
+        bars.push(g);
+      });
+      var gn = svg.append("g").attr("class", "th-bar");
+      gn.append("text").attr("class", "th-note").attr("x", W - m2.r).attr("y", m2.t + 12).attr("text-anchor", "end").text("SAS or OKC: " + D.sas_okc_txt);
+      bars.push(gn);
+    } else {
+      var m3 = { t: 24, r: 20, b: 34, l: compact ? 90 : 130 };
+      var y3 = d3.scaleBand().domain(D.three.map(function (t) { return t.player; })).range([m3.t, H - m3.b]).paddingInner(0.4);
+      var allv = []; D.three.forEach(function (t) { VIEWS.forEach(function (v) { allv.push(t.drops[v[0]]); }); });
+      var x3 = d3.scaleLinear().domain([0, d3.max(allv) + 0.2]).range([m3.l, W - m3.r]);
+      var ax3 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m3.b) + ")").call(d3.axisBottom(x3).ticks(5).tickFormat(function (v) { return v.toFixed(1); }).tickSize(-(H - m3.b - m3.t)));
+      ax3.select(".domain").remove();
+      svg.append("text").attr("class", "th-note").attr("x", (m3.l + W - m3.r) / 2).attr("y", H - 4).attr("text-anchor", "middle").style("font-size", "9.5px").text("points of title odds lost when he misses the playoffs");
+      var meanAll = d3.mean(D.three, function (t) { return t.mean; });
+      svg.append("line").attr("class", "th-mean").attr("x1", x3(meanAll)).attr("x2", x3(meanAll)).attr("y1", m3.t - 6).attr("y2", H - m3.b);
+      svg.append("text").attr("class", "th-zone-lab").attr("x", x3(meanAll)).attr("y", m3.t - 10).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").text("mean " + D.drop_txt);
+      D.three.forEach(function (t) {
+        var g = svg.append("g").attr("class", "th-bar");
+        var cy = y3(t.player) + y3.bandwidth() / 2;
+        g.append("text").attr("class", "th-rlab").attr("x", m3.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text(compact ? t.player.replace(/^(\w)\w+ /, "$1. ") : t.player);
+        var lo = d3.min(VIEWS, function (v) { return t.drops[v[0]]; }), hi = d3.max(VIEWS, function (v) { return t.drops[v[0]]; });
+        g.append("line").attr("x1", x3(lo)).attr("x2", x3(hi)).attr("y1", cy).attr("y2", cy).attr("stroke", "rgba(255,255,255,.25)").attr("stroke-width", 2);
+        VIEWS.forEach(function (v) { g.append("circle").attr("cx", x3(t.drops[v[0]])).attr("cy", cy).attr("r", 5).attr("fill", v[1]).attr("stroke", "#050505").attr("stroke-width", 1.2); });
+        var desc = "By view: consensus " + t.drops.consensus.toFixed(2) + ", RAPM " + t.drops.rapm.toFixed(2) + ", box score " + t.drops.box.toFixed(2) + ", DARKO " + t.drops.darko.toFixed(2) + " points of title odds; " + Math.round(100 * t.rel) + "% of the team's odds on average.";
+        g.on("mouseenter", function () { tipAt(this, t.player + " out for the playoffs", desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, t.player + " out for the playoffs", desc); });
+        bars.push(g);
+      });
+    }
+    root.selectAll(".th-toggle button").on("click", function () {
+      tab = this.getAttribute("data-tab");
+      root.selectAll(".th-toggle button").classed("is-on", function () { return this.getAttribute("data-tab") === tab; });
+      clearPlayTimers(); lastBuilt = build(); finalState(lastBuilt);
+    });
+    lastBuilt = { bars: bars, compact: compact };
+    return lastBuilt;
+  }
+  function heroFor() {
+    if (tab === "seeds") { root.select(".th-hero-num").text(D.modal_txt + ", " + D.modal_p_txt); root.select(".th-hero-unit").text(""); root.select(".th-hero-label").text("the most likely seed: a play-in game, one night, everything on it"); }
+    else if (tab === "r1") { root.select(".th-hero-num").text(D.sas_okc_txt); root.select(".th-hero-unit").text("of the time"); root.select(".th-hero-label").text("San Antonio or Oklahoma City in the first round, which is the whole problem in one sentence"); }
+    else { root.select(".th-hero-num").text(D.drop_txt); root.select(".th-hero-unit").text("points of title odds"); root.select(".th-hero-label").text("lost on average when Ant, LaMelo or Rudy misses the playoffs: spread across three players, not one"); }
+  }
+  function finalState(b) { clearPlayTimers(); b.bars.forEach(function (g) { g.classed("is-on", true); }); heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1], true); showReplay(); }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.bars.forEach(function (g) { g.classed("is-on", false); }); root.select(".th-hero-num").text(""); setCaption(CAPS[tab][0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    b.bars.forEach(function (g, i) { at(600 + i * 160, function () { g.classed("is-on", true); }); });
+    at(600 + b.bars.length * 160 + 300, function () { heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1]); });
+    at(600 + b.bars.length * 160 + 1500, showReplay);
+  }
+
+  boot();
+})();
+</script>
+</div>
+</body>
+</html>

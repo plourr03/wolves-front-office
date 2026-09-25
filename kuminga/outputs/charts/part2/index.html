@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Bet, Part 2: visuals</title>
+<style>
+  :root { --accent:#00843D; --bg-surface:#0E0E0E; --text:#fff; --text-2:rgba(255,255,255,.72); --text-3:rgba(255,255,255,.48); --border:rgba(255,255,255,.08); --sans:'Inter',system-ui,-apple-system,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace; }
+  body { margin:0; padding:48px 16px 80px; background:#000; color:var(--text); font-family:var(--sans); }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1 { font-size:24px; margin:0 0 6px; }
+  p.lead { color:var(--text-2); font-size:14px; line-height:1.6; margin:0 0 4px; }
+  p.note { color:var(--text-3); font-size:12.5px; line-height:1.55; margin:0 0 28px; }
+  a.card { display:block; text-decoration:none; background:var(--bg-surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:12px; transition:border-color .15s ease, transform .15s ease; }
+  a.card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .sec { font:700 11px var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--text-3); }
+  .title { color:var(--text); font-size:17px; font-weight:600; margin:4px 0 2px; }
+  .sub { color:var(--text-2); font-size:13px; line-height:1.45; }
+  .files { color:var(--text-3); font:11px var(--mono); margin-top:6px; }
+</style></head>
+<body><div class="wrap">
+  <h1>The Bet, Part 2: the visuals</h1>
+  <p class="lead">Six fragments, built by <code>scripts/charts_part2.py</code> from the outputs and the sheet. Click a card to open its preview harness.</p>
+  <p class="note">Each fragment is the publishable artifact (the host supplies D3 v7 and the design tokens). Every figure the visual states was checked against final_numbers.csv when the file was written; the run ID is the first line of each fragment.</p>
+  <a class="card" href="the_fork_preview.html"><div class="sec">Part 2</div><div class="title">The fork</div><div class="sub">The verdict against Cody Williams's minutes, on a slider.</div><div class="files">the_fork_fragment.html · place with {{viz:the-fork}}</div></a>
+  <a class="card" href="the_verdicts_preview.html"><div class="sec">Part 2</div><div class="title">The verdicts</div><div class="sub">Every move with its four cells; the ones that ship in green.</div><div class="files">the_verdicts_fragment.html · place with {{viz:the-verdicts}}</div></a>
+  <a class="card" href="the_second_creator_preview.html"><div class="sec">Part 2</div><div class="title">The second creator</div><div class="sub">What a defense takes off Ant, who creates his own shot, how much ball there is.</div><div class="files">the_second_creator_fragment.html · place with {{viz:the-second-creator}}</div></a>
+  <a class="card" href="the_eight_tests_preview.html"><div class="sec">Part 2</div><div class="title">The eight tests</div><div class="sub">Eight regular-season traits on 195 playoff series, all crossing zero.</div><div class="files">the_eight_tests_fragment.html · place with {{viz:the-eight-tests}}</div></a>
+  <a class="card" href="model_vs_market_preview.html"><div class="sec">Part 2</div><div class="title">Model against market</div><div class="sub">Thirty teams on a log-log scatter; Charlotte's fix, Minnesota, Boston.</div><div class="files">model_vs_market_fragment.html · place with {{viz:model-vs-market}}</div></a>
+  <a class="card" href="the_path_preview.html"><div class="sec">Part 2</div><div class="title">The path</div><div class="sub">The seed, the first-round opponent, and what losing each of the three costs.</div><div class="files">the_path_fragment.html · place with {{viz:the-path}}</div></a>
+</div></body></html>

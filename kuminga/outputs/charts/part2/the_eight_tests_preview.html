@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The eight tests, preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+
+  body { margin:0; padding:32px 16px 80px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); flex-wrap:wrap; }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is the_eight_tests_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<!-- charts_part2_20260925T135132Z; sheet keys checked: n3_series, n3_n_translating, n3_n_features, ds_coef -->
+<div id="viz-the-eight-tests">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The eight tests</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">what translates to the playoffs</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="Eight regular-season traits tested on playoff series"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num"></span>
+      <span class="th-hero-unit">of 8 traits predicted a series</span>
+    </div>
+    <div class="th-hero-label">once you knew how good the two teams were, none of the things we argue about did</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Each row is one regular-season trait, tested on 195 playoff series since 2014 for whether the team with more of it beat the series margin the two teams' quality already predicted. The mark is the estimated points per game per standard deviation of the trait; the bar is two standard errors either side; the faint dashed span is the smallest effect the sample could detect, the bar we set in advance for calling a trait real. Seven of the eight cross zero; defence share doesn't, and it points the wrong way for the cliché, but it sits inside that span, so it doesn't clear the bar either. Hover for the permutation p-value.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-eight-tests, #viz-the-eight-tests * { touch-action: manipulation; }
+  #viz-the-eight-tests { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-eight-tests .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-info); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-eight-tests.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-eight-tests .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-info); }
+  #viz-the-eight-tests .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-eight-tests .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-eight-tests .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-eight-tests.is-compact .th-caption { font-size: 15px; }
+  #viz-the-eight-tests .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-eight-tests .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-eight-tests .th-tooltip.is-on { opacity: 1; }
+  #viz-the-eight-tests .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-eight-tests .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-eight-tests .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-eight-tests .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-eight-tests .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-eight-tests.is-landed .th-hero-num { color: var(--status-info); }
+  #viz-the-eight-tests.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-eight-tests .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-eight-tests .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-eight-tests .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-eight-tests .th-replay.is-shown { opacity: 1; }
+  #viz-the-eight-tests .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-eight-tests .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-eight-tests .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-eight-tests .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-eight-tests .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-eight-tests .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-eight-tests .th-svg { width: 100%; height: 330px; display: block; }
+  #viz-the-eight-tests .th-hero-num { font-size: 48px; }
+  #viz-the-eight-tests .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-eight-tests .th-axis line, #viz-the-eight-tests .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-eight-tests .th-zero { stroke: rgba(255,255,255,.5); stroke-width: 1.2; }
+  #viz-the-eight-tests .th-row { cursor: pointer; opacity: 0; transition: opacity 320ms ease; }
+  #viz-the-eight-tests .th-row.is-on { opacity: 1; }
+  #viz-the-eight-tests .th-rlab { font: 600 11px var(--family-sans); fill: var(--text-secondary); }
+  #viz-the-eight-tests.is-compact .th-rlab { font-size: 9.5px; }
+  #viz-the-eight-tests .th-row.is-ds .th-rlab { fill: var(--text-primary); font-weight: 700; }
+  #viz-the-eight-tests .th-ci { stroke: rgba(255,255,255,.55); stroke-width: 2; }
+  #viz-the-eight-tests .th-row.is-ds .th-ci { stroke: var(--status-info); }
+  #viz-the-eight-tests .th-pt { fill: rgba(255,255,255,.85); }
+  #viz-the-eight-tests .th-row.is-ds .th-pt { fill: var(--status-info); }
+  #viz-the-eight-tests .th-mde { stroke: rgba(255,255,255,.18); stroke-width: 1; stroke-dasharray: 3 3; }
+  #viz-the-eight-tests .th-note { font: 600 10.5px var(--family-sans); fill: var(--text-secondary); }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-eight-tests");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"rows": [{"feature": "rim_rate", "label": "rim rate", "coef": 0.1664908290716586, "se": 0.3988035100085951, "mde": 1.1166498280240664, "p": 0.409295352323838, "translates": false}, {"feature": "fg3a_rate", "label": "three-point rate", "coef": 0.0499701442435464, "se": 0.3394925176420839, "mde": 0.9505790493978348, "p": 0.5332333833083458, "translates": false}, {"feature": "pace", "label": "pace", "coef": -0.0334211441784167, "se": 0.3776400569283076, "mde": 1.0573921593992617, "p": 0.9810094952523738, "translates": false}, {"feature": "opp_tov_rate", "label": "turnovers forced", "coef": -0.0902357108914293, "se": 0.3391034367138674, "mde": 0.9494896227988288, "p": 0.8930534732633684, "translates": false}, {"feature": "oreb_rate", "label": "offensive rebounding", "coef": -0.3328863346440209, "se": 0.3698800459960362, "mde": 1.0356641287889017, "p": 0.4707646176911544, "translates": false}, {"feature": "size", "label": "size", "coef": -0.0649297600479174, "se": 0.3603025822398544, "mde": 1.0088472302715925, "p": 0.6511744127936032, "translates": false}, {"feature": "top3", "label": "top-three minutes share", "coef": -0.3880281749631136, "se": 0.4118566285203964, "mde": 1.1531985598571095, "p": 0.272863568215892, "translates": false}, {"feature": "def_share", "label": "defence share (\"defense travels\")", "coef": -0.8515105967164308, "se": 0.3449254350103553, "mde": 0.9657912180289948, "p": 0.0109945027486256, "translates": false}], "n_series": 195, "n_feat": 8, "n_trans": 0, "ds_txt": "-0.85"};
+  var CAPS = [
+    "Eight regular-season traits that are supposed to translate to the playoffs, the ones you hear every May.",
+    "Tested on " + D.n_series + " playoff series since 2014, holding how good the two teams were fixed.",
+    "Zero of the eight predicted who won by the bar we set in advance. Not the three-point rate. Not the size. Not the pace.",
+    "\"Defense travels\" isn't supported, and the estimate points the other way: " + D.ds_txt + " points a game per standard deviation of defensive lean, inside the smallest effect the sample could detect, so we don't call it real."
+  ];
+  function fmt(v) { return (v > 0 ? "+" : "") + v.toFixed(2); }
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = 330;
+    var m = { t: 16, r: 16, b: 44, l: compact ? 120 : 210 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var ext = d3.max(D.rows, function (r) { return Math.max(Math.abs(r.coef) + 1.96 * r.se, r.mde); }) + 0.2;
+    var x = d3.scaleLinear().domain([-ext, ext]).range([m.l, W - m.r]);
+    var y = d3.scaleBand().domain(D.rows.map(function (r) { return r.feature; })).range([m.t, H - m.b]).paddingInner(0.4);
+    var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).ticks(compact ? 3 : 7).tickFormat(fmt).tickSize(-(H - m.b - m.t)));
+    ax.select(".domain").remove();
+    svg.append("text").attr("class", "th-note").attr("x", (m.l + W - m.r) / 2).attr("y", H - 6).attr("text-anchor", "middle").text(compact ? "points per game per SD of the trait" : "playoff points per game per standard deviation of the trait, beyond what team quality predicts");
+    svg.append("line").attr("class", "th-zero").attr("x1", x(0)).attr("x2", x(0)).attr("y1", m.t).attr("y2", H - m.b);
+    var rows = [];
+    D.rows.forEach(function (r) {
+      var g = svg.append("g").attr("class", "th-row" + (r.feature === "def_share" ? " is-ds" : ""));
+      var cy = y(r.feature) + y.bandwidth() / 2;
+      g.append("text").attr("class", "th-rlab").attr("x", m.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text(compact ? r.label.replace(" (\"defense travels\")", "").replace("top-three minutes share", "top-three share") : r.label);
+      g.append("line").attr("class", "th-mde").attr("x1", x(-r.mde)).attr("x2", x(r.mde)).attr("y1", cy).attr("y2", cy);
+      g.append("line").attr("class", "th-ci").attr("x1", x(r.coef - 1.96 * r.se)).attr("x2", x(r.coef + 1.96 * r.se)).attr("y1", cy).attr("y2", cy);
+      g.append("circle").attr("class", "th-pt").attr("cx", x(r.coef)).attr("cy", cy).attr("r", 5);
+      var desc = "Estimate " + fmt(r.coef) + " points a game per standard deviation, standard error " + r.se.toFixed(2) + ", permutation p " + r.p.toFixed(3) + ". Smallest effect this sample could detect: " + r.mde.toFixed(2) + " (the faint dashed span). " + (r.translates ? "Translates." : "Does not translate.");
+      g.on("mouseenter", function () { tipAt(this, r.label, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, r.label, desc); });
+      rows.push(g);
+    });
+    lastBuilt = { rows: rows, compact: compact };
+    return lastBuilt;
+  }
+  function finalState(b) { clearPlayTimers(); b.rows.forEach(function (g) { g.classed("is-on", true); }); root.select(".th-hero-num").text(D.n_trans); root.classed("is-landed", true); setCaption(CAPS[3], true); showReplay(); }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.rows.forEach(function (g) { g.classed("is-on", false); }); root.select(".th-hero-num").text(""); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    at(1200, function () { setCaption(CAPS[1]); });
+    b.rows.forEach(function (g, i) { at(1800 + i * 300, function () { g.classed("is-on", true); }); });
+    at(1800 + b.rows.length * 300 + 200, function () { setCaption(CAPS[2]); root.select(".th-hero-num").text(D.n_trans); root.classed("is-landed", true); });
+    at(1800 + b.rows.length * 300 + 2600, function () { setCaption(CAPS[3]); showReplay(); });
+  }
+
+  boot();
+})();
+</script>
+</div>
+</body>
+</html>

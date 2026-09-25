@@ -1,0 +1,227 @@
+<!-- charts_part2_20260925T135132Z; sheet keys checked: title, mkt_min, model_bos, mkt_bos, model_cha, mkt_cha, cha_model_pre, min_view_ranks, bos_dec_threshold, bos_dec_game -->
+<div id="viz-model-vs-market">
+  <div class="mo-chip" role="status">
+    <span class="mo-chip-dot"></span>
+    <span class="mo-chip-label">Model against market</span>
+    <span class="mo-chip-sep">·</span>
+    <span class="mo-chip-sub">thirty teams, title odds</span>
+  </div>
+  <p class="mo-caption" aria-live="polite"></p>
+  
+  <div class="mo-stage">
+    <svg class="mo-svg" role="img" aria-label="Model against market, thirty teams"></svg>
+    <div class="mo-tooltip" role="tooltip">
+      <div class="mo-tip-head"></div>
+      <div class="mo-tip-desc"></div>
+    </div>
+  </div>
+  <div class="mo-hero">
+    <div class="mo-hero-line">
+      <span class="mo-hero-num"></span>
+      <span class="mo-hero-unit"></span>
+    </div>
+    <div class="mo-hero-label">Boston: the model against the market, the biggest disagreement on the board</div>
+    <button class="mo-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="mo-foot">Each dot is a team: the market's de-vigged title odds across, our model's across four ways of scoring players up. The diagonal is agreement. Log scales, because the favorites and the field are two orders apart. The hollow Charlotte mark is where the model had the Hornets before a bug crediting baskets to the wrong team was fixed at the source and every player refit. Hover a team for the four views.</p>
+  <div class="mo-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-model-vs-market, #viz-model-vs-market * { touch-action: manipulation; }
+  #viz-model-vs-market { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-model-vs-market .mo-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-info); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-model-vs-market.is-compact .mo-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-model-vs-market .mo-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-info); }
+  #viz-model-vs-market .mo-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-model-vs-market .mo-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-model-vs-market .mo-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-model-vs-market.is-compact .mo-caption { font-size: 15px; }
+  #viz-model-vs-market .mo-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-model-vs-market .mo-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-model-vs-market .mo-tooltip.is-on { opacity: 1; }
+  #viz-model-vs-market .mo-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-model-vs-market .mo-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-model-vs-market .mo-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-model-vs-market .mo-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-model-vs-market .mo-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-model-vs-market.is-landed .mo-hero-num { color: var(--status-info); }
+  #viz-model-vs-market.is-compact .mo-hero-num { font-size: 38px; }
+  #viz-model-vs-market .mo-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-model-vs-market .mo-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-model-vs-market .mo-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-model-vs-market .mo-replay.is-shown { opacity: 1; }
+  #viz-model-vs-market .mo-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-model-vs-market .mo-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-model-vs-market .mo-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-model-vs-market .mo-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-model-vs-market .mo-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-model-vs-market .mo-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-model-vs-market .mo-svg { width: 100%; height: 360px; display: block; }
+  #viz-model-vs-market.is-compact .mo-svg { height: 340px; }
+  #viz-model-vs-market .mo-hero-num { font-size: 34px; }
+  #viz-model-vs-market.is-compact .mo-hero-num { font-size: 24px; }
+  #viz-model-vs-market .mo-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-model-vs-market .mo-axis line, #viz-model-vs-market .mo-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-model-vs-market .mo-diag { stroke: rgba(255,255,255,.4); stroke-width: 1.2; stroke-dasharray: 5 4; }
+  #viz-model-vs-market .mo-dot { cursor: pointer; opacity: 0; transition: opacity 300ms ease; }
+  #viz-model-vs-market .mo-dot.is-on { opacity: 1; }
+  #viz-model-vs-market .mo-lab { font: 700 10px var(--family-mono); pointer-events: none; opacity: 0; transition: opacity 300ms ease; }
+  #viz-model-vs-market .mo-lab.is-on { opacity: 1; }
+  #viz-model-vs-market .mo-axlab { font: 600 10px var(--family-sans); fill: var(--text-tertiary); }
+  #viz-model-vs-market .mo-ghost { fill: none; stroke: var(--status-error); stroke-width: 1.5; stroke-dasharray: 3 2; opacity: 0; transition: opacity 300ms ease; }
+  #viz-model-vs-market .mo-ghost.is-on { opacity: 1; }
+  #viz-model-vs-market .mo-drop { stroke: var(--status-error); stroke-width: 1.2; opacity: 0; transition: opacity 300ms ease; }
+  #viz-model-vs-market .mo-drop.is-on { opacity: 1; }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-model-vs-market");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "mo";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"rows": [{"abbr": "SAS", "team": "San Antonio Spurs", "market": 22.957142994974667, "model": 13.852499999999996, "mrank": 1, "rank": 3, "views": {"consensus": 15.881, "rapm": 17.97999999999999, "box": 9.788, "darko": 11.76099999999999}}, {"abbr": "OKC", "team": "Oklahoma City Thunder", "market": 22.48542087863957, "model": 14.68575, "mrank": 2, "rank": 2, "views": {"consensus": 12.888, "rapm": 11.873000000000001, "box": 16.547, "darko": 17.435000000000002}}, {"abbr": "PHI", "team": "Philadelphia 76ers", "market": 8.417619098157376, "model": 2.933, "mrank": 3, "rank": 11, "views": {"consensus": 4.024, "rapm": 3.3680000000000003, "box": 0.746, "darko": 3.594}}, {"abbr": "NYK", "team": "New York Knicks", "market": 8.207178620703443, "model": 4.0589999999999975, "mrank": 4, "rank": 9, "views": {"consensus": 3.304, "rapm": 3.412, "box": 5.864, "darko": 3.65599999999999}}, {"abbr": "BOS", "team": "Boston Celtics", "market": 5.471452413802295, "model": 18.32925, "mrank": 5, "rank": 1, "views": {"consensus": 22.94099999999999, "rapm": 23.52, "box": 12.905, "darko": 13.950999999999999}}, {"abbr": "CLE", "team": "Cleveland Cavaliers", "market": 3.156607161809016, "model": 1.5034999999999976, "mrank": 6, "rank": 16, "views": {"consensus": 0.434, "rapm": 0.297, "box": 4.22, "darko": 1.06299999999999}}, {"abbr": "DET", "team": "Detroit Pistons", "market": 3.156607161809016, "model": 7.832499999999998, "mrank": 6, "rank": 4, "views": {"consensus": 4.625, "rapm": 4.737, "box": 10.206999999999999, "darko": 11.76099999999999}}, {"abbr": "DEN", "team": "Denver Nuggets", "market": 3.156607161809016, "model": 6.1839999999999975, "mrank": 6, "rank": 6, "views": {"consensus": 6.03599999999999, "rapm": 4.572, "box": 8.724, "darko": 5.404}}, {"abbr": "MIN", "team": "Minnesota Timberwolves", "market": 3.156607161809016, "model": 1.6825, "mrank": 6, "rank": 15, "views": {"consensus": 0.865, "rapm": 1.248, "box": 2.031, "darko": 2.5860000000000003}}, {"abbr": "TOR", "team": "Toronto Raptors", "market": 3.156607161809016, "model": 5.82925, "mrank": 6, "rank": 7, "views": {"consensus": 7.091, "rapm": 6.249, "box": 3.857, "darko": 6.12}}, {"abbr": "MIA", "team": "Miami Heat", "market": 2.6474769744204654, "model": 4.60475, "mrank": 11, "rank": 8, "views": {"consensus": 4.421, "rapm": 4.218999999999999, "box": 3.788, "darko": 5.991}}, {"abbr": "LAL", "team": "Los Angeles Lakers", "market": 2.131734706676219, "model": 2.434749999999997, "mrank": 12, "rank": 12, "views": {"consensus": 1.60599999999999, "rapm": 1.073, "box": 4.829, "darko": 2.231}}, {"abbr": "IND", "team": "Indiana Pacers", "market": 2.0017508830984005, "model": 0.0, "mrank": 13, "rank": 28, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.0}}, {"abbr": "HOU", "team": "Houston Rockets", "market": 1.6092507099418514, "model": 6.8415, "mrank": 14, "rank": 5, "views": {"consensus": 6.731, "rapm": 7.582, "box": 5.898, "darko": 7.155}}, {"abbr": "GSW", "team": "Golden State Warriors", "market": 1.3454391181481054, "model": 0.06575, "mrank": 15, "rank": 19, "views": {"consensus": 0.0, "rapm": 0.001, "box": 0.106, "darko": 0.156}}, {"abbr": "ATL", "team": "Atlanta Hawks", "market": 1.1894461769135425, "model": 2.03425, "mrank": 16, "rank": 13, "views": {"consensus": 1.763, "rapm": 2.53, "box": 0.958, "darko": 2.886}}, {"abbr": "ORL", "team": "Orlando Magic", "market": 1.116622941592305, "model": 0.2857499999999975, "mrank": 17, "rank": 18, "views": {"consensus": 0.039, "rapm": 0.051000000000000004, "box": 0.551, "darko": 0.50199999999999}}, {"abbr": "POR", "team": "Portland Trail Blazers", "market": 1.0132319284819065, "model": 1.8839999999999972, "mrank": 18, "rank": 14, "views": {"consensus": 1.9539999999999997, "rapm": 2.28699999999999, "box": 2.848, "darko": 0.447}}, {"abbr": "CHA", "team": "Charlotte Hornets", "market": 0.8125919426439053, "model": 3.437749999999994, "mrank": 19, "rank": 10, "views": {"consensus": 4.367, "rapm": 4.0749999999999895, "box": 4.829999999999989, "darko": 0.479}}, {"abbr": "PHX", "team": "Phoenix Suns", "market": 0.6034690162281943, "model": 1.449999999999995, "mrank": 20, "rank": 17, "views": {"consensus": 0.9780000000000001, "rapm": 0.8619999999999999, "box": 1.25399999999999, "darko": 2.70599999999999}}, {"abbr": "WAS", "team": "Washington Wizards", "market": 0.5435217629604929, "model": 0.0, "mrank": 21, "rank": 28, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.0}}, {"abbr": "DAL", "team": "Dallas Mavericks", "market": 0.408317344313604, "model": 0.0274999999999949, "mrank": 22, "rank": 20, "views": {"consensus": 0.039, "rapm": 0.03799999999999, "box": 0.001, "darko": 0.03199999999999}}, {"abbr": "UTA", "team": "Utah Jazz", "market": 0.408317344313604, "model": 0.0, "mrank": 22, "rank": 28, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.0}}, {"abbr": "NOP", "team": "New Orleans Pelicans", "market": 0.1638159405330028, "model": 0.00725, "mrank": 24, "rank": 23, "views": {"consensus": 0.001, "rapm": 0.0, "box": 0.002, "darko": 0.026}}, {"abbr": "LAC", "team": "Los Angeles Clippers", "market": 0.1638159405330028, "model": 0.0262499999999974, "mrank": 24, "rank": 21, "views": {"consensus": 0.011000000000000001, "rapm": 0.02199999999999, "box": 0.046, "darko": 0.026}}, {"abbr": "CHI", "team": "Chicago Bulls", "market": 0.1365587124909058, "model": 0.008, "mrank": 26, "rank": 22, "views": {"consensus": 0.001, "rapm": 0.0, "box": 0.0, "darko": 0.031}}, {"abbr": "MIL", "team": "Milwaukee Bucks", "market": 0.113046537475254, "model": 0.0, "mrank": 27, "rank": 28, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.0}}, {"abbr": "MEM", "team": "Memphis Grizzlies", "market": 0.1057626110915392, "model": 0.00025, "mrank": 28, "rank": 25, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.001}}, {"abbr": "BKN", "team": "Brooklyn Nets", "market": 0.0819897964106238, "model": 0.001, "mrank": 29, "rank": 24, "views": {"consensus": 0.0, "rapm": 0.004, "box": 0.0, "darko": 0.0}}, {"abbr": "SAC", "team": "Sacramento Kings", "market": 0.0819897964106238, "model": 0.0, "mrank": 29, "rank": 28, "views": {"consensus": 0.0, "rapm": 0.0, "box": 0.0, "darko": 0.0}}], "cha_pre": 5.8557500000000005, "cha_pre_txt": "5.86%", "cha_txt": "3.44%", "mkt_cha_txt": "0.81%", "title_txt": "1.68%", "mkt_min_txt": "3.16%", "bos_txt": "18.33%", "mkt_bos_txt": "5.47%", "ranks_txt": "13 to 16", "bos_thr": "-1.7", "bos_game": "30", "mkt_rank": "6"};
+  var CAPS = [
+    "Thirty teams. The market's price across, the model's price up. On the diagonal, they agree.",
+    "Charlotte first, because it's where the model was wrong in public: " + D.cha_pre_txt + " against a market of " + D.mkt_cha_txt + ", until the bug was found.",
+    "Fixed at the source and refit, Charlotte comes down to " + D.cha_txt + ". Still above the market. An honest disagreement now.",
+    "Minnesota: " + D.title_txt + " against the market's " + D.mkt_min_txt + ", sixth in the league by the market, " + D.ranks_txt + "th by the model.",
+    "The biggest disagreement is Boston, " + D.bos_txt + " against " + D.mkt_bos_txt + ". If the Celtics are below " + D.bos_thr + " through game " + D.bos_game + ", the market was right and the model owes you an explanation."
+  ];
+  var NAMED = { MIN: "var(--accent-default)", BOS: "var(--status-info)", CHA: "var(--status-error)" };
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".mo-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 340 : 360;
+    var m = { t: 16, r: 18, b: 40, l: 46 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var FLOOR = 0.03;
+    var x = d3.scaleLog().domain([FLOOR, 40]).range([m.l, W - m.r]);
+    var y = d3.scaleLog().domain([FLOOR, 40]).range([H - m.b, m.t]);
+    var tv = [0.1, 0.3, 1, 3, 10, 30];
+    function cx(r) { return x(Math.max(FLOOR, r.market)); }
+    function cyv(v) { return y(Math.max(FLOOR, v)); }
+    var ax = svg.append("g").attr("class", "mo-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).tickValues(tv).tickFormat(function (v) { return v + "%"; }).tickSize(-(H - m.b - m.t)));
+    ax.select(".domain").remove();
+    var ay = svg.append("g").attr("class", "mo-axis").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).tickValues(tv).tickFormat(function (v) { return v + "%"; }).tickSize(-(W - m.l - m.r)));
+    ay.select(".domain").remove();
+    svg.append("text").attr("class", "mo-axlab").attr("x", (m.l + W - m.r) / 2).attr("y", H - 6).attr("text-anchor", "middle").text("market, de-vigged title odds");
+    svg.append("text").attr("class", "mo-axlab").attr("transform", "rotate(-90)").attr("x", -(m.t + H - m.b) / 2).attr("y", 12).attr("text-anchor", "middle").text("model, mean of four views");
+    svg.append("line").attr("class", "mo-diag").attr("x1", x(FLOOR)).attr("y1", y(FLOOR)).attr("x2", x(40)).attr("y2", y(40));
+    svg.append("text").attr("class", "mo-axlab").attr("x", m.l + 8).attr("y", m.t + 12).attr("text-anchor", "start").text("dots on the bottom edge: under " + FLOOR + "% in the model");
+    var dots = {};
+    D.rows.forEach(function (r) {
+      var named = NAMED[r.abbr];
+      var g = svg.append("g").attr("class", "mo-dot").attr("data-abbr", r.abbr);
+      g.append("circle").attr("cx", cx(r)).attr("cy", cyv(r.model)).attr("r", named ? 8 : 5).attr("fill", named || "rgba(255,255,255,.14)").attr("stroke", named || "rgba(255,255,255,.4)").attr("stroke-width", named ? 2 : 1);
+      var lab = svg.append("text").attr("class", "mo-lab").attr("x", cx(r) + (named ? 11 : 7)).attr("y", cyv(r.model) + 3.5).attr("fill", named || "var(--text-tertiary)").text(r.abbr).style("font-size", named ? "11px" : (compact ? "0" : "9px"));
+      if (!named && !compact) lab.style("opacity", 0);
+      var desc = "Market " + r.market.toFixed(2) + "% (rank " + r.mrank + "), model " + r.model.toFixed(2) + "% (rank " + r.rank + ")" + (r.model < FLOOR ? ", drawn at the floor" : "") + ". By view: consensus " + r.views.consensus.toFixed(2) + "%, RAPM " + r.views.rapm.toFixed(2) + "%, box score " + r.views.box.toFixed(2) + "%, DARKO " + r.views.darko.toFixed(2) + "%.";
+      g.on("mouseenter", function () { tipAt(this, r.team, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, r.team, desc); });
+      dots[r.abbr] = { g: g, lab: lab, r: r, named: !!named };
+    });
+    var cha = dots["CHA"].r;
+    var ghost = svg.append("circle").attr("class", "mo-ghost").attr("cx", cx(cha)).attr("cy", cyv(D.cha_pre)).attr("r", 8);
+    var ghostLab = svg.append("text").attr("class", "mo-lab").attr("x", cx(cha) - 11).attr("y", cyv(D.cha_pre) + 3.5).attr("text-anchor", "end").attr("fill", "var(--status-error)").text("CHA before the fix");
+    var drop = svg.append("line").attr("class", "mo-drop").attr("x1", cx(cha)).attr("x2", cx(cha)).attr("y1", cyv(D.cha_pre) + 8).attr("y2", cyv(cha.model) - 8);
+    lastBuilt = { dots: dots, ghost: ghost, ghostLab: ghostLab, drop: drop, compact: compact };
+    return lastBuilt;
+  }
+  function allOn(b, on) { Object.keys(b.dots).forEach(function (k) { b.dots[k].g.classed("is-on", on); if (b.dots[k].named || !b.compact) b.dots[k].lab.classed("is-on", on); }); }
+  function heroBos() { root.select(".mo-hero-num").text(D.bos_txt + " vs " + D.mkt_bos_txt); }
+  function finalState(b) { clearPlayTimers(); allOn(b, true); b.ghost.classed("is-on", true); b.ghostLab.classed("is-on", true); b.drop.classed("is-on", true); heroBos(); root.classed("is-landed", true); setCaption(CAPS[4], true); showReplay(); }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false); allOn(b, false); b.ghost.classed("is-on", false); b.ghostLab.classed("is-on", false); b.drop.classed("is-on", false);
+    root.select(".mo-hero-num").text(""); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    var order = D.rows.slice().sort(function (a, c) { return a.market - c.market; });
+    order.forEach(function (r, i) { if (r.abbr === "CHA") return; at(500 + i * 60, function () { b.dots[r.abbr].g.classed("is-on", true); if (b.dots[r.abbr].named || !b.compact) b.dots[r.abbr].lab.classed("is-on", true); }); });
+    at(2600, function () { setCaption(CAPS[1]); b.ghost.classed("is-on", true); b.ghostLab.classed("is-on", true); });
+    at(4600, function () { setCaption(CAPS[2]); b.drop.classed("is-on", true); b.dots["CHA"].g.classed("is-on", true); b.dots["CHA"].lab.classed("is-on", true); });
+    at(6800, function () { setCaption(CAPS[3]); });
+    at(9000, function () { setCaption(CAPS[4]); heroBos(); root.classed("is-landed", true); });
+    at(10200, showReplay);
+  }
+
+  boot();
+})();
+</script>

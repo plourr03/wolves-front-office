@@ -18,6 +18,8 @@ I'd never thought about Cody Williams for more than a minute before August 29. H
 
 And then the model gives Cody Williams 16.1 minutes a night. That's a real role for a player the numbers didn't like in Utah, and it isn't a judgment about him. It's what happens when the wing rotation has a hole in it and somebody has to fill it. Below 12.6 a night, the four ways of scoring players stop agreeing that the summer hurt. Not because Williams is secretly good, but because the minutes he doesn't play go to players the model trusts more, and once that happens the ledger is close enough to even that the four ways split on it. So the sentence "the offseason made Minnesota worse" is true only while a kid from Utah is playing a real role. Which he might. Finch has to play somebody, and after the starters and Kuminga the model's bench is Bones Hyland, Cody Williams, Jaylen Clark and Beringer, four guys competing for the minutes Donte would have had. The model's guess is that Williams wins a chunk of them. A coach's guess in October might be different, and a coach's guess in January will be different again, because it will have forty games of evidence the model doesn't. That's not a flaw in the method. It's what the method is for: telling you which fork in the road matters before you get to it.
 
+{{viz:the-fork}}
+
 ## Weather
 
 Now the Achilles, which I keep wanting to skip past and can't.
@@ -36,6 +38,8 @@ Kuminga first. The question isn't whether Jonathan Kuminga is a great player. Th
 
 Then the trade itself, which I can finally say something clean about. LaMelo Ball in is the one move on the ledger that is clearly positive: 0.79 points of title odds, 0.91 aged, and every way of scoring players agrees. Naz Reid out is clearly negative: 0.33 points the other way, 0.40 aged, and again every way of scoring players agrees. Randle out doesn't get a sign, because the four ways of scoring Julius Randle can't agree on whether he was helping. The Dosunmu re-sign doesn't get a sign for the same reason, the four ways split on Ayo, and what that contract really cost is a cap story for Part 4. So if you want the trade in one sentence: they got the point guard, and Naz, not the picks, was the real basketball price. I've made my peace with the picks. I have not made my peace with Naz, and I'm not going to pretend the numbers made me.
 
+{{viz:the-verdicts}}
+
 ## The May I keep coming back to
 
 The third thing I'm sure about is Anthony Edwards, and this one starts on a couch in May.
@@ -45,6 +49,8 @@ If you watched the San Antonio series you already know the shape of it. The Spur
 We looked at what happens to the top scorers in the league when a good defender is assigned to them. For most stars, the answer is a little. For Ant, the answer is more than for almost any of them, and over three seasons more than for any of them. Of the 150 highest-volume scorers last season, Edwards sits at the 1st percentile: almost nobody in the league loses more to his primary defender than he does. Widen it to three seasons and 245 scorers and he is the lowest of all of them, the single most defender-suppressed scorer in the sample. We counted 21 different primary defenders assigned to him last season, so this isn't one bad matchup; it's what happens whoever the assignment is. That's not a stat about Ant's talent. It's a stat about what a defense can do to a player, and the simplest reading of it is that there was nobody else on the floor who could create a shot.
 
 Which is what the rest of the numbers say too. Last season 61% of Ant's makes were unassisted. LaMelo, in Charlotte, was at 55%. The league median is 35%. Minnesota just put two of the most self-created scorers in basketball in the same backcourt, and the obvious worry is that they'll get in each other's way. I had that worry. The base rate doesn't. When a high-usage player gains a new high-usage teammate, the player who was already there loses usage and doesn't lose efficiency: at the star level, 1.5 points of usage, and true shooting actually went up 0.8 points, across nine cases. Fewer shots, not worse ones. And a starting five with Kuminga in it has a combined usage at the 96th percentile of 7,380 starting fives we could measure, which is the polite way of saying somebody is going to give up shots. The base rate says that's fine. Somebody always does.
+
+{{viz:the-second-creator}}
 
 That's why Ball is here. Not because the front office fell in love with a highlight reel. Because the single most measurable weakness on the roster was that a defense could take Anthony Edwards out of a series by assigning one good player to him, and the fix for that is a second creator. Whether LaMelo is the right second creator is a fair question. That the job needed filling isn't. If you take nothing else from this part, take that: the trade was an answer to the thing I watched happen in May.
 
@@ -66,6 +72,8 @@ And the individual matchups, the "who guards Ant" stuff, are the same story in m
 
 So when someone tells you the Wolves will be fine because they're big, or doomed because they're small, ask them which of the eight it is. I've started doing this. It has not made me more popular.
 
+{{viz:the-eight-tests}}
+
 ## The night the model was wrong in public
 
 I said a third of this piece is the model being wrong. Here's the biggest one, and I'm telling it because a model that's never been wrong in public is a model nobody has checked.
@@ -76,6 +84,8 @@ So here's the honest scoreboard, after the fix. The model has Minnesota at 1.68%
 
 The bigger disagreement isn't about Minnesota at all. It's Boston. The model has the Celtics at 18.33% to win the title against a market price of 5.47%, and it's the same story however you score the players. Somebody is wrong, and we'll know by December: if Boston's net rating is below -1.7 through game 30, the market was right and the model owes you an explanation.
 
+{{viz:model-vs-market}}
+
 If you want to know whether to trust the model, don't watch Minnesota. Watch Boston.
 
 ## Health, and the path
@@ -85,5 +95,7 @@ Two short beats before I hand off, because they're the two things people will ac
 Health. If you take any one of Minnesota's three most important players out for the playoffs, the Wolves lose 54% of their title odds, 43% once you correct for age. That sounds fragile and it is. But the loss is spread across three players rather than one: removing Ant, LaMelo or Rudy costs 0.87 points of title odds on average, and no one of them is meaningfully worse to lose than the others. And when you tighten to a playoff rotation, Minnesota loses the least of the three West contenders we ran. This is not a one-man team, whatever it used to be. After the last three Aprils, I'll take that sentence and frame it.
 
 The path. The most likely seed is 7th, at 31%, which in the current format means the most likely version of April is a play-in game, one night, everything on it. Top six, 42%. If they make the field, San Antonio or Oklahoma City is the first-round opponent 53% of the time, which is the whole problem in one sentence. They reach the second round 28% of the time, and from there, having escaped the first round, they win it all 6.1% of the time. The mountain is the first round, and it has Wembanyama or Shai standing on it.
+
+{{viz:the-path}}
 
 So I got curious. If the odds can't see what wins, what did the last eleven champions actually have? That's Part 3.

@@ -1,0 +1,226 @@
+<!-- charts_part2_20260925T135132Z; sheet keys checked: v_ball_in_pooled_u, v_reid_out_pooled_u, v_A_c3_default_shannon_pooled_u, v_ddv_injury_pooled_u, v_D_beringer_fills_pooled_u, v_randle_out_pooled_u, v_dosunmu_retained_pooled_u -->
+<div id="viz-the-verdicts">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The verdicts</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">every move, four cells each</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="Every move with its four cells"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num">0.00</span>
+      <span class="th-hero-unit">points of title odds</span>
+    </div>
+    <div class="th-hero-label">LaMelo in, the one clearly positive move; green rows ship under every cell</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Each row is a move; each mark is the change in Minnesota's title odds, in points, under one cell: a circle for the pooled allocator, a square for the team-rank allocator, filled for the un-aged basis and hollow for the aged one. A verdict ships only if all four cells agree on the sign and clear the simulation's own noise under every way of scoring players. Randle, Dosunmu and the bundles don't. Hover a row for the cells.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-verdicts, #viz-the-verdicts * { touch-action: manipulation; }
+  #viz-the-verdicts { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-verdicts .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-verdicts.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-verdicts .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-the-verdicts .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-verdicts .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-verdicts .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-verdicts.is-compact .th-caption { font-size: 15px; }
+  #viz-the-verdicts .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-verdicts .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-verdicts .th-tooltip.is-on { opacity: 1; }
+  #viz-the-verdicts .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-verdicts .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-verdicts .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-verdicts .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-verdicts .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-verdicts.is-landed .th-hero-num { color: var(--accent-default); }
+  #viz-the-verdicts.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-verdicts .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-verdicts .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-verdicts .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-verdicts .th-replay.is-shown { opacity: 1; }
+  #viz-the-verdicts .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-verdicts .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-verdicts .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-verdicts .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-verdicts .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-verdicts .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-verdicts .th-svg { width: 100%; height: 380px; display: block; }
+  #viz-the-verdicts.is-compact .th-svg { height: 430px; }
+  #viz-the-verdicts .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-verdicts .th-axis line, #viz-the-verdicts .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-verdicts .th-zero { stroke: rgba(255,255,255,.45); stroke-width: 1.2; }
+  #viz-the-verdicts .th-row { cursor: pointer; opacity: 0; transition: opacity 320ms ease; }
+  #viz-the-verdicts .th-row.is-on { opacity: 1; }
+  #viz-the-verdicts .th-rlab { font: 600 11px var(--family-sans); fill: var(--text-secondary); }
+  #viz-the-verdicts .th-row.is-ship .th-rlab { fill: var(--text-primary); font-weight: 700; }
+  #viz-the-verdicts.is-compact .th-rlab { font-size: 9.5px; }
+  #viz-the-verdicts .th-range { stroke: rgba(255,255,255,.22); stroke-width: 2; }
+  #viz-the-verdicts .th-row.is-ship .th-range { stroke: var(--accent-subtle); stroke-width: 6; }
+  #viz-the-verdicts .th-mark { stroke-width: 1.5; }
+  #viz-the-verdicts .th-ship-tag { font: 700 8.5px var(--family-mono); letter-spacing: .05em; text-transform: uppercase; fill: var(--accent-hover); }
+  #viz-the-verdicts .th-legend { font: 500 10px var(--family-sans); fill: var(--text-tertiary); }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-verdicts");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"rows": [{"key": "ball_in", "label": "LaMelo Ball in", "ships": true, "signs": "ALL POSITIVE", "family": "move", "pooled_u_sign": "ALL POSITIVE", "pooled_a_sign": "ALL POSITIVE", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": 0.7883023239642715, "pooled_a": 0.9101659730689412, "tr_u": 1.56088497890428, "tr_a": 1.579249189629088}, {"key": "reid_out", "label": "Naz Reid out", "ships": true, "signs": "ALL NEGATIVE", "family": "move", "pooled_u_sign": "ALL NEGATIVE", "pooled_a_sign": "ALL NEGATIVE", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": -0.3300835275719803, "pooled_a": -0.3972886222695546, "tr_u": -1.0343117206296415, "tr_a": -1.0459664789002334}, {"key": "A_c3_default_shannon", "label": "Kuminga, against the fill at the four", "ships": true, "signs": "ALL POSITIVE", "family": "slot", "pooled_u_sign": "ALL POSITIVE", "pooled_a_sign": "ALL POSITIVE", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": 0.438790064162374, "pooled_a": 0.562707534810082, "tr_u": 0.549168725870449, "tr_a": 0.6604653195073582}, {"key": "D_beringer_fills", "label": "Kuminga, if Beringer fills the four instead", "ships": true, "signs": "ALL NEGATIVE", "family": "slot", "pooled_u_sign": "ALL NEGATIVE", "pooled_a_sign": "ALL NEGATIVE", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": -0.7219789019136503, "pooled_a": -1.3084605593069112, "tr_u": -1.0337758026346382, "tr_a": -1.8400951209449905}, {"key": "ddv_injury", "label": "DiVincenzo's Achilles, not a transaction", "ships": true, "signs": "ALL NEGATIVE", "family": "move", "pooled_u_sign": "ALL NEGATIVE", "pooled_a_sign": "ALL NEGATIVE", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": -0.394893009729379, "pooled_a": -0.3321316265277798, "tr_u": -1.0038127630329212, "tr_a": -0.829554832344211}, {"key": "randle_out", "label": "Julius Randle out", "ships": false, "signs": "ALL NEGATIVE; MIXED", "family": "move", "pooled_u_sign": "MIXED", "pooled_a_sign": "MIXED", "pooled_u_clear": 4, "pooled_a_clear": 3, "pooled_u": -0.0429710931108897, "pooled_a": 0.189609972007023, "tr_u": -0.5255140952846331, "tr_a": -0.1105933618796095}, {"key": "dosunmu_retained", "label": "Ayo Dosunmu re-signed", "ships": false, "signs": "MIXED", "family": "move", "pooled_u_sign": "MIXED", "pooled_a_sign": "MIXED", "pooled_u_clear": 4, "pooled_a_clear": 4, "pooled_u": -0.2134495979137847, "pooled_a": -0.2924654879044447, "tr_u": -0.2856979868781398, "tr_a": -0.3587575638536563}, {"key": "other_departures", "label": "The other departures, a bundle of seven", "ships": false, "signs": "ALL POSITIVE; MIXED", "family": "move", "pooled_u_sign": "MIXED", "pooled_a_sign": "ALL POSITIVE", "pooled_u_clear": 3, "pooled_a_clear": 3, "pooled_u": 0.2871031325330196, "pooled_a": 0.610273836655652, "tr_u": -0.8657488534671053, "tr_a": -0.2222522621923727}, {"key": "depth", "label": "Depth signings and re-signings", "ships": false, "signs": "ALL POSITIVE; MIXED", "family": "move", "pooled_u_sign": "MIXED", "pooled_a_sign": "ALL POSITIVE", "pooled_u_clear": 1, "pooled_a_clear": 2, "pooled_u": 0.0630962756189765, "pooled_a": 0.1305060975795521, "tr_u": 0.5024753375732669, "tr_a": 0.5467765634277042}], "ball_txt": "+0.79", "reid_txt": "-0.33", "kum_txt": "+0.44", "ddv_txt": "-0.39"};
+  var CAPS = [
+    "Every move on the ledger, priced four ways: two aging bases, two rules for handing out minutes.",
+    "LaMelo in is the one clearly positive move, " + D.ball_txt + " points of title odds. Naz out is clearly negative, " + D.reid_txt + ".",
+    "Kuminga against whoever else would play the four: " + D.kum_txt + ", and it holds in every cell. The one thing that flips it is Beringer taking the minutes.",
+    "Randle out and the Dosunmu re-sign don't get a sign. The four ways can't agree, so neither do I."
+  ];
+  function fmt(v) { return (v > 0 ? "+" : "") + v.toFixed(2); }
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 430 : 380;
+    var m = { t: compact ? 44 : 30, r: 14, b: 30, l: compact ? 150 : 250 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var vals = []; D.rows.forEach(function (r) { vals.push(r.pooled_u, r.pooled_a, r.tr_u, r.tr_a); });
+    var x = d3.scaleLinear().domain([Math.min(-1.5, d3.min(vals) - 0.15), Math.max(1.8, d3.max(vals) + 0.15)]).range([m.l, W - m.r]);
+    var y = d3.scaleBand().domain(D.rows.map(function (r) { return r.key; })).range([m.t, H - m.b]).paddingInner(0.35);
+    var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).ticks(compact ? 5 : 7).tickFormat(fmt).tickSize(-(H - m.b - m.t)));
+    ax.select(".domain").remove();
+    svg.append("line").attr("class", "th-zero").attr("x1", x(0)).attr("x2", x(0)).attr("y1", m.t - 6).attr("y2", H - m.b);
+    // legend
+    var lg = svg.append("g").attr("class", "th-legend").attr("transform", "translate(" + m.l + "," + (m.t - (compact ? 30 : 16)) + ")");
+    var lx = 0, ly = 0;
+    [["circle", true, "pooled, un-aged"], ["circle", false, "pooled, aged"], ["rect", true, "team-rank, un-aged"], ["rect", false, "team-rank, aged"]].forEach(function (l, i) {
+      if (compact && i === 2) { lx = 0; ly = 14; }
+      if (l[0] === "circle") lg.append("circle").attr("cx", lx + 5).attr("cy", ly).attr("r", 4).attr("fill", l[1] ? "rgba(255,255,255,.8)" : "none").attr("stroke", "rgba(255,255,255,.8)").attr("stroke-width", 1.5);
+      else lg.append("rect").attr("x", lx + 1).attr("y", ly - 4).attr("width", 8).attr("height", 8).attr("fill", l[1] ? "rgba(255,255,255,.8)" : "none").attr("stroke", "rgba(255,255,255,.8)").attr("stroke-width", 1.5);
+      lg.append("text").attr("x", lx + 13).attr("y", ly + 3.5).text(compact ? l[2].replace("team-rank", "rank").replace("un-aged", "raw") : l[2]);
+      lx += (compact ? 92 : 124);
+    });
+    var rows = [];
+    D.rows.forEach(function (r) {
+      var g = svg.append("g").attr("class", "th-row" + (r.ships ? " is-ship" : "")).attr("data-key", r.key);
+      var cy = y(r.key) + y.bandwidth() / 2;
+      var lab = g.append("text").attr("class", "th-rlab").attr("x", m.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end")
+        .text(compact ? r.label.replace("Kuminga, against the fill at the four", "Kuminga vs the fill").replace("Kuminga, if Beringer fills the four instead", "Kuminga vs Beringer").replace("DiVincenzo's Achilles, not a transaction", "DiVincenzo's Achilles").replace("The other departures, a bundle of seven", "Other departures (7)").replace("Depth signings and re-signings", "Depth deals") : r.label);
+      var lo = Math.min(r.pooled_u, r.pooled_a, r.tr_u, r.tr_a), hi = Math.max(r.pooled_u, r.pooled_a, r.tr_u, r.tr_a);
+      g.append("line").attr("class", "th-range").attr("x1", x(lo)).attr("x2", x(hi)).attr("y1", cy).attr("y2", cy);
+      var col = r.ships ? (r.pooled_u < 0 ? "var(--status-error)" : "var(--accent-hover)") : "rgba(255,255,255,.7)";
+      g.append("circle").attr("class", "th-mark").attr("cx", x(r.pooled_u)).attr("cy", cy).attr("r", 5.5).attr("fill", col).attr("stroke", col);
+      g.append("circle").attr("class", "th-mark").attr("cx", x(r.pooled_a)).attr("cy", cy).attr("r", 5.5).attr("fill", "#050505").attr("stroke", col);
+      g.append("rect").attr("class", "th-mark").attr("x", x(r.tr_u) - 4.5).attr("y", cy - 4.5).attr("width", 9).attr("height", 9).attr("fill", col).attr("stroke", col);
+      g.append("rect").attr("class", "th-mark").attr("x", x(r.tr_a) - 4.5).attr("y", cy - 4.5).attr("width", 9).attr("height", 9).attr("fill", "#050505").attr("stroke", col);
+      if (r.ships && !compact) g.append("text").attr("class", "th-ship-tag").attr("x", x(hi) + 10).attr("y", cy + 3).text("ships");
+      var desc = "Pooled allocator: " + fmt(r.pooled_u) + " un-aged (" + r.pooled_u_sign.toLowerCase() + ", " + r.pooled_u_clear + " of 4 views clear the noise), " + fmt(r.pooled_a) + " aged (" + r.pooled_a_sign.toLowerCase() + ", " + r.pooled_a_clear + " of 4). Team-rank allocator: " + fmt(r.tr_u) + " un-aged, " + fmt(r.tr_a) + " aged. " + (r.ships ? "Ships: every cell agrees on the sign and clears the noise." : "Does not ship.");
+      g.on("mouseenter", function () { tipAt(this, r.label, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, r.label, desc); });
+      rows.push({ g: g, r: r });
+    });
+    lastBuilt = { rows: rows, compact: compact };
+    return lastBuilt;
+  }
+  function finalState(b) { clearPlayTimers(); b.rows.forEach(function (o) { o.g.classed("is-on", true); }); root.select(".th-hero-num").text(D.ball_txt); root.classed("is-landed", true); setCaption(CAPS[3], true); showReplay(); }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.rows.forEach(function (o) { o.g.classed("is-on", false); });
+    root.select(".th-hero-num").text("0.00"); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    b.rows.forEach(function (o, i) { at(600 + i * 380, function () { o.g.classed("is-on", true); }); });
+    at(600 + 2 * 380, function () { setCaption(CAPS[1]); tickText(root.select(".th-hero-num"), 0, parseFloat(D.ball_txt), 700, function (t) { return "+" + t.toFixed(2); }); root.classed("is-landed", true); });
+    at(600 + 4 * 380 + 400, function () { setCaption(CAPS[2]); });
+    at(600 + 9 * 380 + 400, function () { setCaption(CAPS[3]); showReplay(); });
+  }
+
+  boot();
+})();
+</script>

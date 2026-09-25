@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The fork, preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+
+  body { margin:0; padding:32px 16px 80px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); flex-wrap:wrap; }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is the_fork_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<!-- charts_part2_20260925T135132Z; sheet keys checked: williams_mpg, williams_threshold -->
+<div id="viz-the-fork">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The fork</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">the verdict against one player's minutes</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="The offseason verdict against Cody Williams minutes"></svg><div class="th-slider"><label class="th-slider-lab">Cody Williams, minutes a night: <span class="th-slider-val"></span></label><input class="th-range" type="range" min="0" max="16.1" step="0.1" value="16.1" aria-label="Cody Williams minutes a night"></div><div class="th-readout"></div>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num">0.0</span>
+      <span class="th-hero-unit">minutes a night</span>
+    </div>
+    <div class="th-hero-label">below this, the four ways of scoring players stop agreeing the summer hurt</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and the rest of his minutes going to the players the model trusts more. Un-aged basis, pooled allocator. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-fork, #viz-the-fork * { touch-action: manipulation; }
+  #viz-the-fork { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-fork .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-warning); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-fork.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-fork .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-warning); }
+  #viz-the-fork .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-fork .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-fork .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-fork.is-compact .th-caption { font-size: 15px; }
+  #viz-the-fork .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-fork .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-fork .th-tooltip.is-on { opacity: 1; }
+  #viz-the-fork .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-fork .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-fork .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-fork .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-fork .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-fork.is-landed .th-hero-num { color: var(--status-warning); }
+  #viz-the-fork.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-fork .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-fork .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-fork .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-fork .th-replay.is-shown { opacity: 1; }
+  #viz-the-fork .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-fork .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-fork .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-fork .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-fork .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-fork .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-fork .th-svg { width: 100%; height: 300px; display: block; }
+  #viz-the-fork.is-compact .th-svg { height: 280px; }
+  #viz-the-fork .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-fork .th-axis line, #viz-the-fork .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-fork .th-zero { stroke: rgba(255,255,255,.45); stroke-width: 1.2; }
+  #viz-the-fork .th-line { fill: none; stroke-width: 2; opacity: 0; transition: opacity 400ms ease; }
+  #viz-the-fork .th-line.is-on { opacity: 1; }
+  #viz-the-fork .th-line-lab { font: 700 10px var(--family-mono); opacity: 0; transition: opacity 400ms ease; }
+  #viz-the-fork .th-line-lab.is-on { opacity: 1; }
+  #viz-the-fork .th-thr { stroke: var(--status-warning); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: 0; transition: opacity 400ms ease; }
+  #viz-the-fork .th-thr.is-on { opacity: 1; }
+  #viz-the-fork .th-thr-lab { font: 700 10px var(--family-mono); fill: var(--status-warning); letter-spacing: .04em; text-transform: uppercase; opacity: 0; transition: opacity 400ms ease; }
+  #viz-the-fork .th-thr-lab.is-on { opacity: 1; }
+  #viz-the-fork .th-cursor { stroke: #fff; stroke-width: 1; opacity: .7; }
+  #viz-the-fork .th-dot { stroke: #050505; stroke-width: 1.5; }
+  #viz-the-fork .th-neg-band { fill: rgba(255,92,92,.06); }
+  #viz-the-fork .th-slider { display: flex; flex-direction: column; gap: 6px; padding: 8px 6px 2px; }
+  #viz-the-fork .th-slider-lab { font: 600 12px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-fork .th-slider-val { font: 700 12px var(--family-mono); color: var(--text-primary); }
+  #viz-the-fork .th-range { width: 100%; accent-color: var(--status-warning); cursor: pointer; }
+  #viz-the-fork .th-readout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 8px 6px 4px; }
+  #viz-the-fork.is-compact .th-readout { grid-template-columns: repeat(2, 1fr); }
+  #viz-the-fork .th-cell { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 6px 8px; }
+  #viz-the-fork .th-cell-lab { font: 600 9.5px var(--family-mono); color: var(--text-tertiary); letter-spacing: .04em; text-transform: uppercase; }
+  #viz-the-fork .th-cell-val { font: 700 15px var(--family-mono); color: var(--text-primary); }
+  #viz-the-fork .th-cell.is-neg .th-cell-val { color: var(--status-error); }
+  #viz-the-fork .th-cell.is-pos .th-cell-val { color: var(--accent-hover); }
+  #viz-the-fork .th-verdict { grid-column: 1 / -1; text-align: center; font: 700 12px var(--family-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); padding-top: 4px; }
+  #viz-the-fork .th-verdict.is-neg { color: var(--status-error); }
+  #viz-the-fork .th-verdict.is-mixed { color: var(--status-warning); }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-fork");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"grid": [{"mpg": 0.0, "consensus": -0.3978241514842016, "rapm": 0.2390543053770706, "box": 0.3764566817828769, "darko": 0.8236685936132448, "sign": "MIXED", "title": 2.669615487688098}, {"mpg": 8.0, "consensus": -0.8608482098618084, "rapm": -0.2498469766315709, "box": -0.1217711766846467, "darko": 0.2817112099455987, "sign": "MIXED", "title": 2.1715878420577432}, {"mpg": 12.0, "consensus": -1.078500454497576, "rapm": -0.5143400151313524, "box": -0.3061174008363743, "darko": 0.0560117434042779, "sign": "MIXED", "title": 1.948540098600594}, {"mpg": 16.0, "consensus": -1.3152670610230792, "rapm": -0.812010407256311, "box": -0.5168626165309855, "darko": -0.3364576778274299, "sign": "ALL NEGATIVE", "title": 1.6641271897063987}, {"mpg": 16.082849728429405, "consensus": -1.3205211910977055, "rapm": -0.8181786247134974, "box": -0.5230879383591098, "darko": -0.3486962581220729, "sign": "ALL NEGATIVE", "title": 1.6566556272927535}], "default": 16.082849728429405, "default_txt": "16.1", "threshold": 12.570864789705075, "threshold_txt": "12.6"};
+  var VIEWS = [["consensus", "consensus", "var(--dataviz-2)"], ["rapm", "RAPM", "var(--dataviz-3)"], ["box", "box score", "var(--dataviz-6)"], ["darko", "DARKO", "var(--dataviz-4)"]];
+  var CAPS = [
+    "The model gives Cody Williams " + D.default_txt + " minutes a night. Start there.",
+    "At those minutes every way of scoring players says the summer cost Minnesota something. Four lines, all below zero.",
+    "Slide his minutes down and the minutes go to players the model trusts more. The lines climb.",
+    "Below " + D.threshold_txt + " a night, one of the four crosses zero, and the four stop agreeing that the summer hurt. That's the fork."
+  ];
+  function interp(v, mpg) {
+    var pts = D.grid;
+    if (mpg <= pts[0].mpg) return pts[0][v];
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      if (mpg >= a.mpg && mpg <= b.mpg) { var t = (b.mpg === a.mpg) ? 0 : (mpg - a.mpg) / (b.mpg - a.mpg); return a[v] + t * (b[v] - a[v]); }
+    }
+    return pts[pts.length - 1][v];
+  }
+  var cur = D.default;
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 280 : 300;
+    var m = { t: 18, r: compact ? 60 : 84, b: 34, l: compact ? 38 : 44 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var x = d3.scaleLinear().domain([0, D.default]).range([m.l, W - m.r]);
+    var allv = []; D.grid.forEach(function (g) { VIEWS.forEach(function (v) { allv.push(g[v[0]]); }); });
+    var y = d3.scaleLinear().domain([Math.min(-1.5, d3.min(allv) - 0.1), Math.max(1, d3.max(allv) + 0.1)]).range([H - m.b, m.t]);
+    svg.append("rect").attr("class", "th-neg-band").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(0)).attr("height", H - m.b - y(0));
+    var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).ticks(compact ? 4 : 8).tickFormat(function (v) { return v; }));
+    ax.select(".domain").remove();
+    svg.append("text").attr("class", "th-axis").append("tspan").attr("x", (m.l + W - m.r) / 2).attr("y", H - 4).attr("text-anchor", "middle").style("font", "500 10px var(--family-mono)").style("fill", "var(--text-tertiary)").text("Williams minutes a night");
+    var ay = svg.append("g").attr("class", "th-axis").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).ticks(5).tickFormat(function (v) { return (v > 0 ? "+" : "") + v.toFixed(1); }).tickSize(-(W - m.l - m.r)));
+    ay.select(".domain").remove();
+    svg.append("line").attr("class", "th-zero").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(0)).attr("y2", y(0));
+    var lines = {};
+    VIEWS.forEach(function (v) {
+      var pts = D.grid.map(function (g) { return [x(g.mpg), y(g[v[0]])]; });
+      var path = svg.append("path").attr("class", "th-line").attr("d", d3.line()(pts)).attr("stroke", v[2]);
+      var last = D.grid[D.grid.length - 1];
+      var lab = svg.append("text").attr("class", "th-line-lab").attr("x", x(last.mpg) + 6).attr("y", y(last[v[0]]) + 3.5).attr("fill", v[2]).text(v[1]);
+      lines[v[0]] = { path: path, lab: lab };
+    });
+    var thr = svg.append("line").attr("class", "th-thr").attr("x1", x(D.threshold)).attr("x2", x(D.threshold)).attr("y1", m.t).attr("y2", H - m.b);
+    var thrLab = svg.append("text").attr("class", "th-thr-lab").attr("x", x(D.threshold) - 6).attr("y", m.t + 10).attr("text-anchor", "end").text(D.threshold_txt + " a night");
+    var cursor = svg.append("line").attr("class", "th-cursor").attr("y1", m.t).attr("y2", H - m.b);
+    var dots = {};
+    VIEWS.forEach(function (v) { dots[v[0]] = svg.append("circle").attr("class", "th-dot").attr("r", 4.5).attr("fill", v[2]); });
+    // readout
+    var ro = root.select(".th-readout"); ro.selectAll("*").remove();
+    var cells = {};
+    VIEWS.forEach(function (v) {
+      var c = ro.append("div").attr("class", "th-cell");
+      c.append("div").attr("class", "th-cell-lab").text(v[1]);
+      cells[v[0]] = c.append("div").attr("class", "th-cell-val");
+      cells[v[0] + "_el"] = c;
+    });
+    var verdict = ro.append("div").attr("class", "th-verdict");
+    var range = root.select(".th-range").attr("max", D.default.toFixed(1)).attr("value", cur.toFixed(1));
+    range.on("input", function () { cur = parseFloat(this.value); clearPlayTimers(); setAt(cur); showReplay(); });
+    function setAt(mpg) {
+      cursor.attr("x1", x(mpg)).attr("x2", x(mpg));
+      var neg = 0;
+      VIEWS.forEach(function (v) {
+        var val = interp(v[0], mpg);
+        dots[v[0]].attr("cx", x(mpg)).attr("cy", y(val));
+        cells[v[0]].text((val > 0 ? "+" : "") + val.toFixed(2));
+        cells[v[0] + "_el"].classed("is-neg", val < 0).classed("is-pos", val > 0);
+        if (val < 0) neg++;
+      });
+      var all = neg === VIEWS.length;
+      verdict.text(all ? "all four negative: the summer hurt" : "mixed: the four ways no longer agree").classed("is-neg", all).classed("is-mixed", !all);
+      root.select(".th-slider-val").text(mpg.toFixed(1));
+      root.select(".th-range").property("value", mpg.toFixed(1));
+    }
+    lastBuilt = { lines: lines, thr: thr, thrLab: thrLab, setAt: setAt, compact: compact };
+    return lastBuilt;
+  }
+  function linesOn(b, on) { Object.keys(b.lines).forEach(function (k) { b.lines[k].path.classed("is-on", on); b.lines[k].lab.classed("is-on", on); }); }
+  function finalState(b) {
+    clearPlayTimers(); linesOn(b, true); b.thr.classed("is-on", true); b.thrLab.classed("is-on", true);
+    b.setAt(cur); root.select(".th-hero-num").text(D.threshold_txt); root.classed("is-landed", true); setCaption(CAPS[3], true); showReplay();
+  }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    linesOn(b, false); b.thr.classed("is-on", false); b.thrLab.classed("is-on", false);
+    cur = D.default; b.setAt(cur); root.select(".th-hero-num").text(D.default_txt); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    at(700, function () { linesOn(b, true); setCaption(CAPS[1]); });
+    at(2600, function () { setCaption(CAPS[2]); });
+    // the slider walks down from the default to the threshold
+    var steps = 40, from = D.default, to = D.threshold;
+    for (var i = 1; i <= steps; i++) {
+      (function (i) { at(2800 + i * 45, function () { cur = from + (to - from) * i / steps; b.setAt(cur); root.select(".th-hero-num").text(cur.toFixed(1)); }); })(i);
+    }
+    at(2800 + steps * 45 + 200, function () { b.thr.classed("is-on", true); b.thrLab.classed("is-on", true); root.select(".th-hero-num").text(D.threshold_txt); root.classed("is-landed", true); setCaption(CAPS[3]); });
+    at(2800 + steps * 45 + 1400, showReplay);
+  }
+
+  boot();
+})();
+</script>
+</div>
+</body>
+</html>

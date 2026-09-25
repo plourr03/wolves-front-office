@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The second creator, preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+
+  body { margin:0; padding:32px 16px 80px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); flex-wrap:wrap; }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is the_second_creator_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<!-- charts_part2_20260925T135132Z; sheet keys checked: e_pct_shipped, e_pairings, e_n_off, e_scorer_pct3, k_scorer_ref, cr_edw, cr_ball, cr_median, m5_kin_pct, m5_league_fives -->
+<div id="viz-the-second-creator">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The second creator</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">why LaMelo is here</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  <div class="th-toggle" role="group" aria-label="Which panel"><button type="button" data-tab="suppress" class="is-on">What a defense takes</button><button type="button" data-tab="create">Who creates his own shot</button><button type="button" data-tab="usage">Ball to go around</button></div>
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="The case for a second creator"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num"></span>
+      <span class="th-hero-unit">percentile</span>
+    </div>
+    <div class="th-hero-label">of the 150 top scorers, what his primary defender takes off him: almost nobody loses more</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Panel one: each Wolf's percentile among the league's 150 highest-volume scorers for points per possession beyond the norm against his primary defender, last season, regular season and playoffs; lower is more suppressed. Panel two: the share of a player's makes that were unassisted, against the league median. Panel three: a starting five's combined usage against every starting five in the league's last three seasons. Hover a mark.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-second-creator, #viz-the-second-creator * { touch-action: manipulation; }
+  #viz-the-second-creator { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-second-creator .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-second-creator.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-second-creator .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-the-second-creator .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-second-creator .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-second-creator .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-second-creator.is-compact .th-caption { font-size: 15px; }
+  #viz-the-second-creator .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-second-creator .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-second-creator .th-tooltip.is-on { opacity: 1; }
+  #viz-the-second-creator .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-second-creator .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-second-creator .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-second-creator .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-second-creator .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-second-creator.is-landed .th-hero-num { color: var(--accent-default); }
+  #viz-the-second-creator.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-second-creator .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-second-creator .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-second-creator .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-second-creator .th-replay.is-shown { opacity: 1; }
+  #viz-the-second-creator .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-second-creator .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-second-creator .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-second-creator .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-second-creator .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-second-creator .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-second-creator .th-svg { width: 100%; height: 250px; display: block; }
+  #viz-the-second-creator.is-compact .th-svg { height: 270px; }
+  #viz-the-second-creator .th-hero-num { font-size: 44px; }
+  #viz-the-second-creator .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-second-creator .th-axis line, #viz-the-second-creator .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-second-creator .th-mark { cursor: pointer; opacity: 0; transition: opacity 320ms ease; }
+  #viz-the-second-creator .th-mark.is-on { opacity: 1; }
+  #viz-the-second-creator .th-mlab { font: 600 10.5px var(--family-sans); fill: var(--text-secondary); pointer-events: none; }
+  #viz-the-second-creator .th-mlab.is-ant { fill: var(--text-primary); font-weight: 700; }
+  #viz-the-second-creator .th-bar { cursor: pointer; }
+  #viz-the-second-creator .th-ref { stroke: rgba(255,255,255,.5); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  #viz-the-second-creator .th-ref-lab { font: 700 9.5px var(--family-mono); fill: var(--text-tertiary); letter-spacing: .04em; text-transform: uppercase; }
+  #viz-the-second-creator .th-note { font: 600 10.5px var(--family-sans); fill: var(--text-secondary); }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-second-creator");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"wolves": [{"player": "Anthony Edwards", "pct": 1.3333333333333337, "pairings": 21, "poss": 1451.4999999999998, "beyond": -0.1148393012349272, "z": -5.583802991132993}, {"player": "Rudy Gobert", "pct": 95.33333333333334, "pairings": 29, "poss": 2490.1, "beyond": 0.0369493763027718, "z": 2.353133311247986}, {"player": "LaMelo Ball", "pct": 14.000000000000002, "pairings": 16, "poss": 806.4000000000001, "beyond": -0.0420277223151019, "z": -1.5231481220089744}, {"player": "Jaden McDaniels", "pct": 57.333333333333336, "pairings": 20, "poss": 1415.8, "beyond": 0.0087286595391762, "z": 0.4191597125479144}, {"player": "Ayo Dosunmu", "pct": 63.33333333333333, "pairings": 12, "poss": 613.5000000000001, "beyond": 0.0171677923841898, "z": 0.5426911780571817}], "n_off": 150, "ed_pct_txt": "1", "ed3_pct_txt": "0", "ref3": 245, "pairings": 21, "creators": [{"player": "Anthony Edwards", "share": 0.6096345514950166, "fgm": 602, "two": 0.6977329974811083, "three": 0.4390243902439024, "pct": 94.62616822429906}, {"player": "LaMelo Ball", "share": 0.5494071146245059, "fgm": 506, "two": 0.7478632478632479, "three": 0.3786764705882353, "pct": 84.11214953271028}, {"player": "Jonathan Kuminga", "share": 0.4394904458598726, "fgm": 157, "two": 0.540983606557377, "three": 0.0857142857142857, "pct": 69.1588785046729}], "median": 0.3528797740390519, "edw_txt": "61%", "ball_txt": "55%", "median_txt": "35%", "units": [{"unit": "Projected top five by minutes", "players": "Anthony Edwards; Rudy Gobert; LaMelo Ball; Jaden McDaniels; Ayo Dosunmu", "usg": 1.120683416095963, "pct": 86.51761517615176, "kind": "projected"}, {"unit": "Kuminga in for Dosunmu", "players": "Anthony Edwards; Rudy Gobert; LaMelo Ball; Jaden McDaniels; Jonathan Kuminga", "usg": 1.1495924867568272, "pct": 95.5691056910569, "kind": "projected"}, {"unit": "Highest-usage five with a centre", "players": "Anthony Edwards; LaMelo Ball; Ayo Dosunmu; Jonathan Kuminga; Joan Beringer", "usg": 1.1932507354464517, "pct": 98.88888888888889, "kind": "projected"}, {"unit": "2025-26 most-used Minnesota starting five (54 starts)", "players": "Rudy Gobert; Julius Randle; Donte DiVincenzo; Anthony Edwards; Jaden McDaniels", "usg": 1.0406791429645466, "pct": 56.24661246612466, "kind": "observed"}], "league": {"p10": 0.9043517323528458, "median": 1.0277769179906482, "p90": 1.1274543879096657, "p99": 1.1962475671363162, "n": 7380}, "kin_pct_txt": "96", "fives_txt": "7,380"};
+  var CAPS = {
+    suppress: ["Take the league's " + D.n_off + " highest-volume scorers and ask what a primary defender takes off each of them.", "Ant sits at the " + D.ed_pct_txt + "st percentile: almost nobody in the league loses more to his primary defender. Over three seasons and " + D.ref3 + " scorers, he is the lowest of all of them."],
+    create: ["Last season " + D.edw_txt + " of Ant's makes were unassisted. LaMelo, in Charlotte, was at " + D.ball_txt + ". The league median is " + D.median_txt + ".", "Two of the most self-created scorers in basketball, in one backcourt. The base rate says the one already there gives up shots, not efficiency."],
+    usage: ["A starting five with Kuminga in it sits at the " + D.kin_pct_txt + "th percentile of " + D.fives_txt + " starting fives for combined usage.", "Somebody is going to give up shots. Somebody always does."]
+  };
+  var tab = "suppress";
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 270 : 250;
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var marks = [];
+    if (tab === "suppress") {
+      var m = { t: 56, r: 20, b: 40, l: 20 };
+      var x = d3.scaleLinear().domain([0, 100]).range([m.l, W - m.r]);
+      var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).tickValues([0, 25, 50, 75, 100]).tickFormat(function (v) { return v + "th"; }));
+      ax.select(".domain").remove();
+      svg.append("text").attr("class", "th-ref-lab").attr("x", x(0)).attr("y", m.t - 10).attr("text-anchor", "start").text("most suppressed");
+      svg.append("text").attr("class", "th-ref-lab").attr("x", x(100)).attr("y", m.t - 10).attr("text-anchor", "end").text("least");
+      svg.append("line").attr("class", "th-ref").attr("x1", m.l).attr("x2", W - m.r).attr("y1", (H - m.b + m.t) / 2).attr("y2", (H - m.b + m.t) / 2);
+      svg.append("text").attr("class", "th-ref-lab").attr("x", x(50)).attr("y", m.t - 30).attr("text-anchor", "middle").text("percentile among " + D.n_off + " top scorers, last season");
+      var cy = (H - m.b + m.t) / 2;
+      var sorted = D.wolves.slice().sort(function (a, b) { return a.pct - b.pct; });
+      sorted.forEach(function (w, i) {
+        var isAnt = w.player === "Anthony Edwards";
+        var g = svg.append("g").attr("class", "th-mark");
+        g.append("circle").attr("cx", x(w.pct)).attr("cy", cy).attr("r", isAnt ? 10 : 7).attr("fill", isAnt ? "var(--accent-default)" : "rgba(255,255,255,.14)").attr("stroke", isAnt ? "var(--accent-hover)" : "rgba(255,255,255,.45)").attr("stroke-width", isAnt ? 2 : 1);
+        var up = i % 2 === 0;
+        var anchor = w.pct < 15 ? "start" : (w.pct > 85 ? "end" : "middle");
+        g.append("text").attr("class", "th-mlab" + (isAnt ? " is-ant" : "")).attr("x", x(w.pct) + (anchor === "start" ? -8 : (anchor === "end" ? 8 : 0))).attr("y", up ? cy - 16 : cy + 24).attr("text-anchor", anchor).text((compact ? w.player.replace(/^(\w)\w+ /, "$1. ") : w.player) + (isAnt ? ", " + D.ed_pct_txt + "st" : ""));
+        var desc = w.pairings + " primary defenders, " + Math.round(w.poss) + " possessions. " + (w.beyond > 0 ? "+" : "") + w.beyond.toFixed(3) + " points per possession beyond the norm, z " + w.z.toFixed(2) + ". Percentile " + w.pct.toFixed(1) + " of " + D.n_off + ".";
+        g.on("mouseenter", function () { tipAt(this, w.player, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, w.player, desc); });
+        marks.push(g);
+      });
+      // the three-season note
+      var g3 = svg.append("g").attr("class", "th-mark");
+      g3.append("text").attr("class", "th-note").attr("x", x(50)).attr("y", H - 6).attr("text-anchor", "middle").text(compact ? "Three seasons, " + D.ref3 + " scorers: Ant is the lowest." : "Widen it to three seasons and " + D.ref3 + " scorers and Ant is the lowest of all of them (" + D.ed3_pct_txt + "th percentile).");
+      marks.push(g3);
+    } else if (tab === "create") {
+      var m2 = { t: 20, r: 70, b: 30, l: compact ? 96 : 130 };
+      var names = D.creators.map(function (c) { return c.player; }).concat(["League median"]);
+      var y = d3.scaleBand().domain(names).range([m2.t, H - m2.b]).paddingInner(0.35);
+      var x2 = d3.scaleLinear().domain([0, 0.75]).range([m2.l, W - m2.r]);
+      var ax2 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m2.b) + ")").call(d3.axisBottom(x2).ticks(5).tickFormat(function (v) { return Math.round(v * 100) + "%"; }).tickSize(-(H - m2.b - m2.t)));
+      ax2.select(".domain").remove();
+      D.creators.concat([{ player: "League median", share: D.median, median: true }]).forEach(function (c) {
+        var g = svg.append("g").attr("class", "th-mark th-bar");
+        var col = c.median ? "rgba(255,255,255,.3)" : (c.player === "Anthony Edwards" ? "var(--accent-default)" : (c.player === "LaMelo Ball" ? "var(--accent-hover)" : "rgba(255,255,255,.55)"));
+        g.append("rect").attr("x", x2(0)).attr("y", y(c.player)).attr("width", x2(c.share) - x2(0)).attr("height", y.bandwidth()).attr("rx", 3).attr("fill", col);
+        g.append("text").attr("class", "th-mlab").attr("x", m2.l - 8).attr("y", y(c.player) + y.bandwidth() / 2 + 3.5).attr("text-anchor", "end").text(compact ? c.player.replace(/^(\w)\w+ /, "$1. ") : c.player);
+        g.append("text").attr("class", "th-mlab is-ant").attr("x", x2(c.share) + 6).attr("y", y(c.player) + y.bandwidth() / 2 + 3.5).text(Math.round(c.share * 100) + "%");
+        if (!c.median) {
+          var desc = c.fgm + " makes last season, " + Math.round(c.share * 100) + "% unassisted: " + Math.round(c.two * 100) + "% of his twos and " + Math.round(c.three * 100) + "% of his threes. League percentile " + c.pct.toFixed(0) + ".";
+          g.on("mouseenter", function () { tipAt(this, c.player, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, c.player, desc); });
+        }
+        marks.push(g);
+      });
+    } else {
+      var m3 = { t: 60, r: 20, b: 40, l: 20 };
+      var x3 = d3.scaleLinear().domain([0.85, 1.25]).range([m3.l, W - m3.r]);
+      var cy3 = (H - m3.b + m3.t) / 2;
+      var ax3 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m3.b) + ")").call(d3.axisBottom(x3).ticks(5).tickFormat(function (v) { return v.toFixed(2); }));
+      ax3.select(".domain").remove();
+      svg.append("text").attr("class", "th-ref-lab").attr("x", x3(1.05)).attr("y", m3.t - 34).attr("text-anchor", "middle").text("combined usage of a starting five, " + D.fives_txt + " fives, 2023-26");
+      [["p10", "10th"], ["median", "median"], ["p90", "90th"], ["p99", "99th"]].forEach(function (r) {
+        svg.append("line").attr("class", "th-ref").attr("x1", x3(D.league[r[0]])).attr("x2", x3(D.league[r[0]])).attr("y1", m3.t - 8).attr("y2", H - m3.b);
+        svg.append("text").attr("class", "th-ref-lab").attr("x", x3(D.league[r[0]])).attr("y", m3.t - 12).attr("text-anchor", "middle").text(r[1]);
+      });
+      D.units.forEach(function (u, i) {
+        var g = svg.append("g").attr("class", "th-mark");
+        var isKin = u.unit.indexOf("Kuminga in") === 0;
+        var isObs = u.kind === "observed";
+        var yy = cy3 + (i - 1.5) * (compact ? 22 : 26);
+        g.append("circle").attr("cx", x3(u.usg)).attr("cy", yy).attr("r", isKin ? 9 : 6).attr("fill", isKin ? "var(--accent-default)" : (isObs ? "rgba(255,255,255,.35)" : "rgba(255,255,255,.14)")).attr("stroke", isKin ? "var(--accent-hover)" : "rgba(255,255,255,.45)").attr("stroke-width", isKin ? 2 : 1);
+        var lab = isKin ? "With Kuminga, " + D.kin_pct_txt + "th" : (isObs ? "Last season's five" : u.unit.replace("Projected top five by minutes", "Projected five").replace("Highest-usage five with a centre", "Highest-usage five"));
+        g.append("text").attr("class", "th-mlab" + (isKin ? " is-ant" : "")).attr("x", x3(u.usg) + (isKin ? 14 : 10)).attr("y", yy + 3.5).text(compact ? lab.replace("Last season's five", "Last season") : lab);
+        var desc = u.players + ". Usage sum " + u.usg.toFixed(3) + ", the " + u.pct.toFixed(0) + "th percentile of " + D.fives_txt + " starting fives.";
+        g.on("mouseenter", function () { tipAt(this, u.unit, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, u.unit, desc); });
+        marks.push(g);
+      });
+    }
+    root.selectAll(".th-toggle button").on("click", function () {
+      tab = this.getAttribute("data-tab");
+      root.selectAll(".th-toggle button").classed("is-on", function () { return this.getAttribute("data-tab") === tab; });
+      clearPlayTimers(); lastBuilt = build(); finalState(lastBuilt);
+    });
+    lastBuilt = { marks: marks, compact: compact };
+    return lastBuilt;
+  }
+  function heroFor() {
+    if (tab === "suppress") { root.select(".th-hero-num").text(D.ed_pct_txt + "st"); root.select(".th-hero-unit").text("percentile"); root.select(".th-hero-label").text("of the " + D.n_off + " top scorers, what his primary defender takes off him: almost nobody loses more"); }
+    else if (tab === "create") { root.select(".th-hero-num").text(D.edw_txt); root.select(".th-hero-unit").text("of Ant's makes unassisted"); root.select(".th-hero-label").text("LaMelo " + D.ball_txt + ", the league median " + D.median_txt); }
+    else { root.select(".th-hero-num").text(D.kin_pct_txt + "th"); root.select(".th-hero-unit").text("percentile"); root.select(".th-hero-label").text("the five with Kuminga, for combined usage, of " + D.fives_txt + " starting fives"); }
+  }
+  function finalState(b) { clearPlayTimers(); b.marks.forEach(function (g) { g.classed("is-on", true); }); heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1], true); showReplay(); }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.marks.forEach(function (g) { g.classed("is-on", false); });
+    root.select(".th-hero-num").text(""); setCaption(CAPS[tab][0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    b.marks.forEach(function (g, i) { at(600 + i * 260, function () { g.classed("is-on", true); }); });
+    at(600 + b.marks.length * 260 + 300, function () { heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1]); });
+    at(600 + b.marks.length * 260 + 1500, showReplay);
+  }
+
+  boot();
+})();
+</script>
+</div>
+</body>
+</html>
