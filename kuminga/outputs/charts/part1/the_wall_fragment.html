@@ -1,0 +1,255 @@
+<!-- charts_part1_20260925T132753Z; sheet keys checked: dos_stuck_over, room_hard_cap, over_first, over_tax, chain_final, chain_post, dead_year -->
+<div id="viz-the-wall">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">The Saturday</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">August 29, the arithmetic</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="The Saturday arithmetic against the second apron"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num">$0</span>
+      <span class="th-hero-unit"></span>
+    </div>
+    <div class="th-hero-label">under the second-apron hard cap</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Apron team salary from the verified contract book, before and after the Utah trade, with the second apron as the wall the taxpayer mid-level creates. Bars are the running book; the dashed bar is what signing Kuminga first would have done. Hover a bar for the step.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-wall, #viz-the-wall * { touch-action: manipulation; }
+  #viz-the-wall { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-wall .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--status-warning); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-wall.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-wall .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-warning); }
+  #viz-the-wall .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-wall .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-wall .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-wall.is-compact .th-caption { font-size: 15px; }
+  #viz-the-wall .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-wall .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-wall .th-tooltip.is-on { opacity: 1; }
+  #viz-the-wall .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-wall .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-wall .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-wall .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-wall .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-wall.is-landed .th-hero-num { color: var(--status-warning); }
+  #viz-the-wall.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-wall .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-wall .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-wall .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-wall .th-replay.is-shown { opacity: 1; }
+  #viz-the-wall .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-wall .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-wall .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-wall .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-wall .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-wall .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-wall .th-svg { width: 100%; height: 340px; display: block; }
+  #viz-the-wall.is-compact .th-svg { height: 300px; }
+  #viz-the-wall .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-wall .th-axis line, #viz-the-wall .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-wall .th-bar { opacity: 0; transition: opacity 300ms ease; cursor: pointer; }
+  #viz-the-wall .th-bar.is-on { opacity: 1; }
+  #viz-the-wall .th-lab { font: 600 10px var(--family-sans); fill: var(--text-secondary); text-anchor: middle; opacity: 0; transition: opacity 300ms ease; }
+  #viz-the-wall.is-compact .th-lab { font-size: 8.5px; }
+  #viz-the-wall .th-lab.is-on { opacity: 1; }
+  #viz-the-wall .th-val { font: 700 10px var(--family-mono); fill: var(--text-primary); text-anchor: middle; opacity: 0; transition: opacity 300ms ease; }
+  #viz-the-wall .th-val.is-on { opacity: 1; }
+  #viz-the-wall .th-line { stroke-width: 1.5; stroke-dasharray: 5 4; }
+  #viz-the-wall .th-line-lab { font: 700 10px var(--family-mono); letter-spacing: .04em; text-transform: uppercase; paint-order: stroke; stroke: #050505; stroke-width: 4px; stroke-linejoin: round; }
+  #viz-the-wall .th-wall { stroke: var(--status-warning); }
+  #viz-the-wall .th-wall-lab { fill: var(--status-warning); }
+  #viz-the-wall .th-soft { stroke: rgba(255,255,255,.25); }
+  #viz-the-wall .th-soft-lab { fill: var(--text-tertiary); }
+  #viz-the-wall .th-over { font: 700 10.5px var(--family-mono); fill: var(--status-error); text-anchor: middle; opacity: 0; transition: opacity 300ms ease; }
+  #viz-the-wall .th-over.is-on { opacity: 1; }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-wall");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"steps": [{"key": "start", "label": "Book, Aug 27", "delta": null, "level": 217621829.0, "tip": "Apron team salary before the Saturday, Dosunmu and Green on it, Kuminga not yet."}, {"key": "kuminga_try", "label": "Kuminga first?", "delta": 6064000.0, "level": 223685829.0, "ghost": true, "tip": "His first-year salary, the full taxpayer mid-level to the dollar, would land the book $1,999,829 over the second apron, which the exception turns into a hard cap."}, {"key": "green", "label": "Green out", "delta": -14679012.0, "level": 202942817.0, "tip": "Josh Green and cash to Utah, seven weeks after he arrived."}, {"key": "williams", "label": "Williams in", "delta": 6015600.0, "level": 208958417.0, "tip": "Cody Williams, the No. 10 pick in 2024, with a team option."}, {"key": "konchar", "label": "Konchar in", "delta": 6165000.0, "level": 215123417.0, "tip": "John Konchar, expiring, the other piece Utah sent."}, {"key": "stretch", "label": "Stretched", "delta": -4110001.0, "level": 211013416.0, "tip": "Waived that afternoon and stretched over three seasons: his hit drops to a third, $2,055,000 a year through 2028-29 (the extra dollar is a rounding difference between our book and Spotrac on McDaniels)."}, {"key": "post", "label": "Book, Sep 4", "delta": null, "level": 211013416.0, "tip": "After the Utah trade and the stretch."}, {"key": "kuminga", "label": "Kuminga in", "delta": 6064000.0, "level": 217077416.0, "tip": "The same $6,064,000, now with room to spare."}, {"key": "final", "label": "Final", "delta": null, "level": 217077416.0, "tip": "$4,608,584 under the hard cap, $8,062,416 over the first apron, $16,649,416 over the tax line."}], "wall": 221686000.0, "apron1": 209015000.0, "tax": 200428000.0, "room": 4608584.0, "room_txt": "$4,608,584", "over1_txt": "$8,062,416", "over_tax_txt": "$16,649,416", "stuck_txt": "$1,999,829", "kum_txt": "$6,064,000", "start": 217621829.0, "final": 217077416.0};
+  var CAPS = [
+    "Kuminga had agreed. The book hadn't.",
+    "Add his first-year salary and Minnesota is " + D.stuck_txt + " over the second apron. With that exception in use, the apron is a hard cap. A wall.",
+    "So somebody had to go, and Saturday was the last day to waive a player and stretch him. Green out, Williams and Konchar in.",
+    "Konchar waived that afternoon and stretched: his hit cut to a third.",
+    "Now Kuminga fits. " + D.room_txt + " to spare, and " + D.over1_txt + " over the first apron, which locks the rest of the year."
+  ];
+  var ORDER = ["start", "kuminga_try", "green", "williams", "konchar", "stretch", "post", "kuminga", "final"];
+  function fmtM(v) { return "$" + (v / 1e6).toFixed(1) + "M"; }
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 300 : 340;
+    var m = { t: 26, r: compact ? 8 : 14, b: compact ? 66 : 50, l: compact ? 40 : 52 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var steps = D.steps;
+    var x = d3.scaleBand().domain(steps.map(function (s) { return s.key; })).range([m.l, W - m.r]).paddingInner(0.28).paddingOuter(0.1);
+    var lo = Math.floor((D.tax - 2e6) / 5e6) * 5e6, hi = Math.ceil((D.start + D.steps[1].delta + 2e6) / 5e6) * 5e6;
+    var y = d3.scaleLinear().domain([lo, hi]).range([H - m.b, m.t]);
+    var ax = svg.append("g").attr("class", "th-axis").attr("transform", "translate(" + m.l + ",0)")
+      .call(d3.axisLeft(y).ticks(5).tickFormat(function (v) { return "$" + (v / 1e6).toFixed(0) + "M"; }).tickSize(-(W - m.l - m.r)));
+    ax.select(".domain").remove();
+    // the lines: wall, first apron, tax
+    var LINES = [[D.wall, "th-wall", "second apron, the wall"], [D.apron1, "th-soft", "first apron"], [D.tax, "th-soft", "tax line"]];
+    LINES.forEach(function (l) {
+      svg.append("line").attr("class", "th-line " + l[1]).attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(l[0])).attr("y2", y(l[0]));
+    });
+    var bars = {};
+    var prev = null;
+    steps.forEach(function (s) {
+      var g = svg.append("g").attr("class", "th-bar").attr("data-key", s.key);
+      var base, top, color;
+      if (s.delta === null) { base = lo; top = s.level; color = "rgba(255,255,255,.22)"; }
+      else if (s.ghost) { base = D.start; top = s.level; color = "none"; }
+      else { base = Math.min(prev, s.level); top = Math.max(prev, s.level); color = s.delta < 0 ? "var(--status-error)" : "var(--accent-default)"; }
+      g.append("rect").attr("x", x(s.key)).attr("width", x.bandwidth()).attr("y", y(top)).attr("height", Math.max(1, y(base) - y(top)))
+        .attr("rx", 3).attr("fill", color).attr("stroke", s.ghost ? "var(--status-error)" : "none").attr("stroke-dasharray", s.ghost ? "4 3" : null).attr("stroke-width", s.ghost ? 1.5 : 0);
+      if (s.key === "final") g.select("rect").attr("fill", "var(--status-warning)");
+      var vtxt = s.delta === null ? fmtM(s.level) : (s.delta < 0 ? "-" : "+") + fmtM(Math.abs(s.delta));
+      g.append("text").attr("class", "th-val").attr("x", x(s.key) + x.bandwidth() / 2).attr("y", y(top) - 5).text(vtxt);
+      if (s.ghost) g.append("text").attr("class", "th-over").attr("x", x(s.key) + x.bandwidth() / 2).attr("y", y(top) - 18).text(D.stuck_txt + " over");
+      var lab;
+      if (compact) {
+        var cx0 = x(s.key) + x.bandwidth() / 2;
+        lab = svg.append("text").attr("class", "th-lab").attr("x", cx0).attr("y", H - m.b + 10)
+          .attr("text-anchor", "end").attr("transform", "rotate(-38 " + cx0 + " " + (H - m.b + 10) + ")").text(s.label);
+        if (s.delta !== null && !s.ghost) g.select(".th-val").remove();
+      } else {
+        lab = svg.append("text").attr("class", "th-lab").attr("x", x(s.key) + x.bandwidth() / 2).attr("y", H - m.b + 16);
+        var words = s.label.split(" ");
+        var line1 = words.slice(0, Math.ceil(words.length / 2)).join(" "), line2 = words.slice(Math.ceil(words.length / 2)).join(" ");
+        lab.append("tspan").attr("x", x(s.key) + x.bandwidth() / 2).text(line1);
+        if (line2) lab.append("tspan").attr("x", x(s.key) + x.bandwidth() / 2).attr("dy", 12).text(line2);
+      }
+      g.on("mouseenter", function () { tipAt(this, s.label, s.tip); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, s.label, s.tip); });
+      bars[s.key] = { g: g, lab: lab, s: s };
+      if (!s.ghost) prev = s.level;
+    });
+    LINES.forEach(function (l, i) {
+      var right = i === 0;
+      svg.append("text").attr("class", "th-line-lab " + l[1] + "-lab").attr("x", right ? W - m.r : m.l + 6).attr("y", y(l[0]) - 4).attr("text-anchor", right ? "end" : "start").text(l[2]);
+    });
+    lastBuilt = { bars: bars, compact: compact };
+    return lastBuilt;
+  }
+  function heroTo(v, dur) { tickText(root.select(".th-hero-num"), 0, v, dur, function (t) { return "$" + Math.round(t).toLocaleString("en-US"); }); }
+  function finalState(b) {
+    clearPlayTimers();
+    ORDER.forEach(function (k) { b.bars[k].g.classed("is-on", true); b.bars[k].lab.classed("is-on", true); b.bars[k].g.selectAll(".th-val, .th-over").classed("is-on", true); });
+    root.select(".th-hero-num").text(D.room_txt); root.classed("is-landed", true); setCaption(CAPS[4], true); showReplay();
+  }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    ORDER.forEach(function (k) { b.bars[k].g.classed("is-on", false); b.bars[k].lab.classed("is-on", false); b.bars[k].g.selectAll(".th-val, .th-over").classed("is-on", false); });
+    root.select(".th-hero-num").text("$0"); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    var t = 600, step = 900;
+    ORDER.forEach(function (k, i) {
+      at(t + i * step, function () { b.bars[k].g.classed("is-on", true); b.bars[k].lab.classed("is-on", true); b.bars[k].g.selectAll(".th-val, .th-over").classed("is-on", true); });
+    });
+    at(t + 1 * step + 200, function () { setCaption(CAPS[1]); });
+    at(t + 2 * step + 200, function () { setCaption(CAPS[2]); });
+    at(t + 5 * step + 200, function () { setCaption(CAPS[3]); });
+    at(t + 8 * step + 300, function () { setCaption(CAPS[4]); heroTo(D.room, 900); root.classed("is-landed", true); });
+    at(t + 9 * step + 600, showReplay);
+  }
+
+  boot();
+})();
+</script>

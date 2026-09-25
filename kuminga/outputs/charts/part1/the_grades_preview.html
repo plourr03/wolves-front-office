@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What everyone said, preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+
+  :root {
+    --accent-default:#00843D; --accent-hover:#00A04A; --accent-subtle:rgba(0,132,61,.18);
+    --dataviz-1:#00C457; --dataviz-2:#FFFFFF; --dataviz-3:#4A9EFF; --dataviz-4:#F5A623;
+    --dataviz-5:#FF5C8A; --dataviz-6:#B388FF; --dataviz-7:#7CE7B8; --dataviz-8:#FFD166;
+    --text-primary:#FFFFFF; --text-secondary:rgba(255,255,255,.72); --text-tertiary:rgba(255,255,255,.48);
+    --border-subtle:rgba(255,255,255,.08); --border-default:rgba(255,255,255,.16);
+    --status-error:#FF5C5C; --status-warning:#F5A623; --status-info:#4A9EFF; --status-success:#00A04A;
+    --bg-surface:#0E0E0E; --bg-inset:#050505;
+    --family-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --family-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --radius-sm:4px; --radius-md:10px;
+  }
+
+  body { margin:0; padding:32px 16px 80px; background:#000; }
+  .harness-note { max-width:720px; margin:0 auto 16px; color:rgba(255,255,255,.4); font:12px var(--family-sans); }
+  .harness-toolbar { max-width:720px; margin:0 auto 12px; display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.6); font:11px var(--family-sans); flex-wrap:wrap; }
+  .harness-toolbar button { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.85); padding:4px 10px; border-radius:6px; font:11px var(--family-sans); cursor:pointer; }
+  .harness-toolbar button:hover { background:rgba(255,255,255,.12); }
+  .harness-stage { max-width:720px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="harness-note">Local preview harness. The publishable artifact is the_grades_fragment.html.</div>
+<div class="harness-toolbar">
+  <span>Test widths:</span>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='720px'">720</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='480px'">480</button>
+  <button onclick="document.querySelector('.harness-stage').style.maxWidth='360px'">360 (phone)</button>
+  <button onclick="window.location.reload()">Hard reload</button>
+</div>
+<div class="harness-stage">
+<!-- charts_part1_20260925T132753Z; sheet keys checked: c4_grades_whole, c4_grades_whole_n -->
+<div id="viz-the-grades">
+  <div class="th-chip" role="status">
+    <span class="th-chip-dot"></span>
+    <span class="th-chip-label">What everyone said</span>
+    <span class="th-chip-sep">·</span>
+    <span class="th-chip-sub">the grades, June 25 to August 29</span>
+  </div>
+  <p class="th-caption" aria-live="polite"></p>
+  <div class="th-toggle" role="group" aria-label="Which grades"><button type="button" data-scope="all" class="is-on">Everything</button><button type="button" data-scope="whole">Whole offseason</button><button type="button" data-scope="trade">The trade alone</button></div>
+  <div class="th-stage">
+    <svg class="th-svg" role="img" aria-label="Offseason grades by date"></svg>
+    <div class="th-tooltip" role="tooltip">
+      <div class="th-tip-head"></div>
+      <div class="th-tip-desc"></div>
+    </div>
+  </div>
+  <div class="th-hero">
+    <div class="th-hero-line">
+      <span class="th-hero-num"></span>
+      <span class="th-hero-unit"></span>
+    </div>
+    <div class="th-hero-label">whole-offseason grades ran from D+ to A-; nobody gave an A, nobody gave an F</div>
+    <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="th-foot">Every national letter grade for Minnesota, placed on the day it ran, from the pieces we fetched and read. Filled marks grade the whole offseason; the lighter filled marks are partial (NBC's grade through July 2, ESPN restating its July grade in August); hollow marks grade the LaMelo Ball trade alone on the day it broke; the two squares grade the Kuminga signing and the Green trade. The Athletic's trade grade is secondhand, via Heavy. Hover a mark for the line that came with it.</p>
+  <div class="th-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-the-grades, #viz-the-grades * { touch-action: manipulation; }
+  #viz-the-grades { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-the-grades .th-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-the-grades.is-compact .th-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-the-grades .th-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-the-grades .th-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-the-grades .th-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-the-grades .th-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-the-grades.is-compact .th-caption { font-size: 15px; }
+  #viz-the-grades .th-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-the-grades .th-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-the-grades .th-tooltip.is-on { opacity: 1; }
+  #viz-the-grades .th-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-the-grades .th-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-the-grades .th-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-the-grades .th-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-the-grades .th-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-the-grades.is-landed .th-hero-num { color: var(--accent-default); }
+  #viz-the-grades.is-compact .th-hero-num { font-size: 38px; }
+  #viz-the-grades .th-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-the-grades .th-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-the-grades .th-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-the-grades .th-replay.is-shown { opacity: 1; }
+  #viz-the-grades .th-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-the-grades .th-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-the-grades .th-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-the-grades .th-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-the-grades .th-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-the-grades .th-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-the-grades .th-svg { width: 100%; height: 330px; display: block; }
+  #viz-the-grades.is-compact .th-svg { height: 330px; }
+  #viz-the-grades .th-hero-num { font-size: 40px; }
+  #viz-the-grades .th-axis text { font: 500 10px var(--family-mono); fill: var(--text-tertiary); }
+  #viz-the-grades .th-axis line, #viz-the-grades .th-axis path { stroke: rgba(255,255,255,.12); }
+  #viz-the-grades .th-mark { cursor: pointer; opacity: 0; transition: opacity 300ms ease; }
+  #viz-the-grades .th-mark.is-on { opacity: 1; }
+  #viz-the-grades .th-mark.is-dim { opacity: .15; }
+  #viz-the-grades .th-mlab { font: 600 9.5px var(--family-sans); fill: var(--text-secondary); pointer-events: none; }
+  #viz-the-grades .th-band { fill: var(--accent-subtle); opacity: 0; transition: opacity 500ms ease; }
+  #viz-the-grades .th-band.is-on { opacity: 1; }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-the-grades");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "th";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"rows": [{"outlet": "ESPN", "author": "Zach Kram", "date": "2026-07-22", "letter": "C+", "score": 6, "scope": "whole", "what": "whole offseason (all 30 teams)", "quote": "Last season was Ball's first with more than 47 games played since 2021-22.", "secondhand": false, "restated": false}, {"outlet": "ESPN", "author": "ESPN NBA insiders (multiple bylines)", "date": "2026-08-19", "letter": "C+", "score": 6, "scope": "partial", "what": "Wolves offseason recap and early 2026-27 preview", "quote": "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball. I understand the rationale for Minnesota's big swing -- particularly the team's desire to ensure Edwards' happiness -- but I'm skeptical that it will prove successful.", "secondhand": false, "restated": true}, {"outlet": "Bleacher Report", "author": "Grant Hughes", "date": "2026-07-04", "letter": "D+", "score": 3, "scope": "whole", "what": "whole offseason so far (all 30 teams)", "quote": "If Ball isn't able to stay healthy, play a much larger role and hold up through a deep postseason run (which has never happened), this trade will be a disaster.", "secondhand": false, "restated": false}, {"outlet": "Bleacher Report", "author": "Andy Bailey", "date": "2026-07-27", "letter": "B+", "score": 9, "scope": "whole", "what": "whole offseason after the LeBron James signing (all 30 teams)", "quote": "The LaMelo Ball trade is undoubtedly a gamble for the Minnesota Timberwolves. He's barely averaged 50 appearances per season during his career, and taking the ball out of Anthony Edwards' hands might limit his production a bit.", "secondhand": false, "restated": false}, {"outlet": "CBS Sports", "author": "Sam Quinn", "date": "2026-07-21", "letter": "B", "score": 8, "scope": "whole", "what": "whole offseason (Western Conference)", "quote": "Nobody agrees on LaMelo Ball, so nobody agrees on Minnesota's offseason. Count me as an optimist.", "secondhand": false, "restated": false}, {"outlet": "CBS Sports", "author": "Sam Quinn", "date": "2026-07-27", "letter": "B", "score": 8, "scope": "whole", "what": "whole offseason (grades 2.0, all 30 teams)", "quote": "He's not perfect, but he makes it far harder to double Edwards and the two of them together give the Timberwolves two of the best pull-up 3-point shooters in basketball.", "secondhand": false, "restated": false}, {"outlet": "Yahoo Sports", "author": "Ben Rohrbach", "date": "2026-08-06", "letter": "C", "score": 5, "scope": "whole", "what": "whole offseason (West report cards)", "quote": "It is a big bet on Ball, an oft-injured, one-time All-Star whose creativity as a performer is equal parts tantalizing and infuriating.", "secondhand": false, "restated": false}, {"outlet": "NBC Sports", "author": "Kurt Helin", "date": "2026-07-02", "letter": "B", "score": 8, "scope": "partial", "what": "offseason through Jul 2 (pre-Kuminga)", "quote": "So much potential, but injury and defensive questions. He and Anthony Edwards instantly become must-watch every night.", "secondhand": false, "restated": false}, {"outlet": "The Big Lead", "author": "Nathan Zuniga", "date": "2026-07-23", "letter": "A-", "score": 10, "scope": "whole", "what": "whole offseason (all 30 teams)", "quote": "The Timberwolves finally got the elite guard they've been searching for, and their starting lineup looks like one of the best in the league.", "secondhand": false, "restated": false}, {"outlet": "ESPN", "author": "Zach Kram", "date": "2026-06-25", "letter": "D+", "score": 3, "scope": "trade", "what": "LaMelo Ball trade only (running trade-grades file; last updated 2026-08-19)", "quote": "the last big swing the team can realistically take to build around Anthony Edwards", "secondhand": false, "restated": false}, {"outlet": "CBS Sports", "author": "Sam Quinn", "date": "2026-06-25", "letter": "B+", "score": 9, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "Let's get this out of the way up front: LaMelo Ball is a risk. Though he played 72 games last season, he only suited up for 105 combined in the three seasons prior.", "secondhand": false, "restated": false}, {"outlet": "Bleacher Report", "author": "Andy Bailey", "date": "2026-06-25", "letter": "B-", "score": 7, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "The Timberwolves undoubtedly got the best player in this deal (plus Josh Green, who could be a nice addition to the depth). But there are very real risks here.", "secondhand": false, "restated": false}, {"outlet": "Sports Illustrated", "author": "Liam McKeone", "date": "2026-06-25", "letter": "B+", "score": 9, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "Edwards and Ball are part of the same draft class and so have, potentially, many years of contention together ahead of them.", "secondhand": false, "restated": false}, {"outlet": "Yahoo Sports", "author": "Morten Stig Jensen", "date": "2026-06-25", "letter": "C", "score": 5, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "Because right now, the Wolves' roster is lacking balance and logic.", "secondhand": false, "restated": false}, {"outlet": "The Sporting News", "author": "Stephen Noh", "date": "2026-06-25", "letter": "B", "score": 8, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "There's another gamble as far as Ball's health is concerned. He did play in 72 games last season. But for his career, he's missed an average of 31.5 games per year.", "secondhand": false, "restated": false}, {"outlet": "For The Win / USA TODAY", "author": "Charles Curtis", "date": "2026-06-25", "letter": "B", "score": 8, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "The Timberwolves need a point guard to take pressure off Ant, and they want to make Edwards happy. Will this move do it, though? I'm honestly not sure.", "secondhand": false, "restated": false}, {"outlet": "ClutchPoints", "author": "Bailey Bassett", "date": "2026-06-25", "letter": "A+", "score": 12, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "The Timberwolves are now a little thin in the frontcourt, but that does not prevent the team from receiving the highest trade grade possible.", "secondhand": false, "restated": false}, {"outlet": "ESPN", "author": "Zach Kram and others (Kuminga entry unattributed in the fetched text)", "date": "2026-08-26", "letter": "A-", "score": 10, "scope": "kuminga", "what": "Kuminga signing only (running free-agency grades file; last updated 2026-09-21)", "quote": "A year later, however, Kuminga's new contract actually deserves the attention -- but more for the context of his new situation than because of his own development.", "secondhand": false, "restated": false}, {"outlet": "ClutchPoints", "author": "Jedd Pagaduan", "date": "2026-08-29", "letter": "B+", "score": 9, "scope": "green", "what": "Josh Green for Cody Williams and John Konchar trade only", "quote": "The Timberwolves believe that there could very well be some untapped potential left in him.", "secondhand": false, "restated": false}, {"outlet": "The Athletic", "author": "Zach Harper", "date": "2026-06-25", "letter": "D+", "score": 3, "scope": "trade", "what": "LaMelo Ball trade only", "quote": "Someone check to see if David Kahn is wearing a Tim Connelly mask", "secondhand": true, "restated": false}], "lo": "D+", "hi": "A-", "lo_outlet": "Bleacher Report", "hi_outlet": "The Big Lead", "n_whole": 7, "n_trade": 9};
+  var LETTERS = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
+  var CAPS = [
+    "June 25: the trade breaks, and the grades come in the same day.",
+    "The trade alone drew everything from " + "a D+" + " to " + "an A+" + ", which tells you something about the summer on its own.",
+    "The whole-offseason grades, once the rest of the league moved: " + D.lo + " to " + D.hi + ". Nobody gave an A, nobody gave an F.",
+    "Read them all and the disagreement isn't about the players. It's about one question: is LaMelo Ball a player you bet a franchise's picks on?"
+  ];
+  var scope = "all";
+  function build() {
+    var compact = compactNow();
+    var svg = root.select(".th-svg"); svg.selectAll("*").remove();
+    var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = 330;
+    var m = { t: 16, r: 14, b: 30, l: 34 };
+    svg.attr("viewBox", "0 0 " + W + " " + H);
+    var x = d3.scaleTime().domain([new Date("2026-06-22"), new Date("2026-09-02")]).range([m.l, W - m.r]);
+    var y = d3.scalePoint().domain(LETTERS).range([H - m.b, m.t]);
+    var ay = svg.append("g").attr("class", "th-axis").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).tickSize(-(W - m.l - m.r)));
+    ay.select(".domain").remove();
+    var axx = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).ticks(compact ? 3 : 5).tickFormat(d3.timeFormat("%b %d")));
+    axx.select(".domain").remove();
+    // the whole-offseason band
+    var wh = D.rows.filter(function (r) { return r.scope === "whole"; });
+    var band = svg.append("rect").attr("class", "th-band").attr("x", m.l).attr("width", W - m.l - m.r)
+      .attr("y", y(D.hi) - 8).attr("height", y(D.lo) - y(D.hi) + 16);
+    // marks, with same-day jitter
+    var byDay = {};
+    var marks = [];
+    D.rows.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; }).forEach(function (r) {
+      var k = r.date + "|" + r.letter; byDay[k] = (byDay[k] || 0) + 1;
+      var jitter = (byDay[k] - 1) * (compact ? 9 : 12);
+      var cx = x(new Date(r.date)) + jitter, cy = y(r.letter);
+      var g = svg.append("g").attr("class", "th-mark").attr("data-scope", r.scope);
+      var isWhole = r.scope === "whole";
+      var sq = r.scope === "kuminga" || r.scope === "green";
+      var isPartial = r.scope === "partial";
+      if (sq) g.append("rect").attr("x", cx - 6).attr("y", cy - 6).attr("width", 12).attr("height", 12).attr("rx", 2).attr("fill", "var(--accent-default)").attr("stroke", "#fff").attr("stroke-width", 1);
+      else g.append("circle").attr("cx", cx).attr("cy", cy).attr("r", compact ? 6 : 7).attr("fill", isWhole ? "var(--accent-default)" : (isPartial ? "rgba(0,132,61,.35)" : "rgba(0,0,0,.6)")).attr("stroke", isWhole ? "var(--accent-hover)" : (r.secondhand ? "var(--status-warning)" : "rgba(255,255,255,.55)")).attr("stroke-width", 1.5).attr("stroke-dasharray", r.secondhand ? "3 2" : null);
+      var dupKey = r.outlet + "|" + r.letter + "|" + r.scope;
+      var laterTwin = D.rows.some(function (o) { return o !== r && o.outlet === r.outlet && o.letter === r.letter && o.scope === r.scope && o.date > r.date && (new Date(o.date) - new Date(r.date)) < 12 * 86400000; });
+      var flip = cx > W - 90;
+      var skipLab = compact && isPartial && r.restated;
+      if ((isWhole || sq || isPartial) && !laterTwin && !skipLab) g.append("text").attr("class", "th-mlab").attr("x", flip ? cx - 10 : cx + 10).attr("y", cy + 3.5).attr("text-anchor", flip ? "end" : "start").text((compact ? r.outlet.replace("Bleacher Report", "B/R").replace("The Big Lead", "Big Lead").replace("Yahoo Sports", "Yahoo").replace("CBS Sports", "CBS").replace("NBC Sports", "NBC") : r.outlet) + (isPartial && !compact ? (r.restated ? " (restated)" : " (to Jul 2)") : ""));
+      var desc = "<b>" + r.letter + "</b>, " + r.what + (r.author && r.author !== "nan" ? ", " + r.author : "") + ", " + r.date + (r.secondhand ? " (secondhand, via Heavy)" : "") + (r.quote ? "<br><i>“" + r.quote + "”</i>" : "");
+      g.on("mouseenter", function () { tipAt(this, r.outlet, desc); }).on("mouseleave", hideTooltip).on("click", function () { tipAt(this, r.outlet, desc); });
+      marks.push({ g: g, r: r });
+    });
+    root.selectAll(".th-toggle button").on("click", function () {
+      scope = this.getAttribute("data-scope");
+      root.selectAll(".th-toggle button").classed("is-on", function () { return this.getAttribute("data-scope") === scope; });
+      applyScope();
+    });
+    lastBuilt = { marks: marks, band: band, compact: compact };
+    return lastBuilt;
+  }
+  function applyScope() {
+    var b = lastBuilt; if (!b) return;
+    b.marks.forEach(function (o) { var dim = scope !== "all" && o.r.scope !== scope && !(scope === "whole" && (o.r.scope === "partial" || o.r.scope === "kuminga" || o.r.scope === "green")); o.g.classed("is-dim", dim); });
+  }
+  function finalState(b) {
+    clearPlayTimers(); b.marks.forEach(function (o) { o.g.classed("is-on", true); }); b.band.classed("is-on", true); applyScope();
+    root.select(".th-hero-num").text(D.lo + " to " + D.hi); root.classed("is-landed", true); setCaption(CAPS[3], true); showReplay();
+  }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.marks.forEach(function (o) { o.g.classed("is-on", false); }); b.band.classed("is-on", false);
+    root.select(".th-hero-num").text(""); setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    var t = 500;
+    b.marks.forEach(function (o, i) { at(t + i * 140, function () { o.g.classed("is-on", true); }); });
+    var n = b.marks.length;
+    at(t + 9 * 140 + 200, function () { setCaption(CAPS[1]); });
+    at(t + n * 140 + 300, function () { setCaption(CAPS[2]); b.band.classed("is-on", true); root.select(".th-hero-num").text(D.lo + " to " + D.hi); root.classed("is-landed", true); });
+    at(t + n * 140 + 2600, function () { setCaption(CAPS[3]); showReplay(); });
+  }
+
+  boot();
+})();
+</script>
+</div>
+</body>
+</html>

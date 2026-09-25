@@ -14,6 +14,8 @@ The first move came before the draft. On the night of June 22, Ayo Dosunmu's age
 
 Three days later, on the morning of June 25, the trade broke. It took until July 10 to close, because it was a four-team deal with Charlotte, Brooklyn and Chicago in it and one of Chicago's pieces couldn't be traded until July 9, but the shape was clear from the first report. Julius Randle and his $33.3 million went to Brooklyn as a salary dump, and the rights to Joshua Jefferson, the 28th pick Minnesota had just made with a pick it got from Detroit, went with him. Naz Reid went to Charlotte. So did Minnesota's 2033 first-round pick, unprotected. So did the right to swap firsts in 2028, in 2029 (protected 6 through 30), and in 2030, on a pick San Antonio already holds a swap on. So did second-round picks in 2029, 2032 and 2033, and the rights to Matteo Spagnolo, a 2022 second-rounder. Back came LaMelo Ball, with three years and $130,746,840 left on his deal, Josh Green on a $14.68 million expiring contract, Isaiah Evans, the 33rd pick, whom Brooklyn had drafted on Minnesota's behalf, and a 2026 second.
 
+{{viz:ins-and-outs}}
+
 
 That's the trade. Two rotation bigs, an unprotected first seven years out and swap rights on three more, for a point guard, a wing on an expiring, and a second-round rookie.
 
@@ -37,6 +39,8 @@ Add his $6,064,000 to the money already on the books and Minnesota sat $1,999,82
 
 Here's what they did with the $2 million problem. They traded Josh Green and cash to Utah for two players: Cody Williams, the No. 10 pick in 2024, on $6 million with a team option, and John Konchar, on $6,165,000 and expiring. Then, that same afternoon, they waived Konchar and stretched him: $2,055,000 a year against the cap for three seasons, through 2028-29. Green out at $14.68 million, Williams and Konchar in at $6,015,600 and $6,165,000, Konchar's hit cut to a third, and the book lands at $211,013,416. Add Kuminga and it's $217,077,416: $4,608,584 under the hard cap, and $8,062,416 over the first apron, which means for the rest of this league year Minnesota can't take back more salary than it sends out, can't use the bi-annual exception, and can't acquire a player by sign-and-trade. One roster spot, about $4.6 million to fill it with, and no other tools.
 
+{{viz:the-wall}}
+
 It's a clever piece of business and I'll give it its due in the pieces that follow, including what it actually cost and why they took Williams instead of just dumping Green for nothing. For now the point is the shape of the summer. Every dollar was spoken for, the picks were spent, and the last move of the offseason was a cap-mechanics scramble to fit a $6 million forward. That's not a team keeping its powder dry. That's a team that decided.
 
 ## What went out, what came in
@@ -53,9 +57,13 @@ In dollars for this season: $75.8 million came in across seven players and $80.8
 
 The market priced it first. Strip the bookmakers' margin out of the six-book median and Minnesota is 3.16% to win the title, sixth in the league, tied in a cluster with Denver, Cleveland, Detroit and Toronto, behind Oklahoma City and San Antonio as co-favorites, then the Sixers, the Knicks and Boston. Third or fourth in the West, depending how you break the Denver tie, and ahead of the Lakers. For a team that lost two of its three rotation bigs and an unprotected first seven years out, that's not a panic price.
 
+{{viz:the-market}}
+
 The grades were a different story, and they were all over the place, which tells you something about the summer on its own. ESPN gave the offseason a C+ and, in a longer preview, called the shift a big gamble while acknowledging the rationale, "particularly the team's desire to ensure Edwards' happiness." Yahoo gave it a C. Bleacher Report gave it a D+ in early July, then a B+ three weeks later after the rest of the league's moves came in, then declared in August that going all-in for Ball was a mistake Minnesota would regret. CBS gave it a B and called itself an optimist on Ball. NBC, a B. The Big Lead, an A-. The Athletic's trade grade was a D+, with a line asking whether David Kahn was wearing a Tim Connelly mask, which I'll admit is a good line. Both of those reach me secondhand: the piece is paywalled and I'm taking the grade and the quote from Heavy's account of it. The Ringer thought the roster was now too small to contend.
 
 Read them all and the disagreement isn't really about the players. It's about one question: is LaMelo Ball, who played 72 games last season and 105 in the three before that, a player you bet a franchise's future picks on? The people who said no gave a C. The people who said yes gave a B. Nobody with a national byline gave the whole summer a straight A and nobody gave it an F, because everybody could see both halves of it.
+
+{{viz:the-grades}}
 
 And two hot takes crystallized out of the noise. One: this is the best backcourt in the West, Ant finally has a point guard, and the starting five is one of the best in the league. Two: they traded a proven frontcourt and a decade of draft flexibility for an injury-prone guard and a bunch of guys who need the ball, and it was unnecessary. You've heard both. You've probably said one.
 

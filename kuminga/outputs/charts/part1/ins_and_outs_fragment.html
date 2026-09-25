@@ -1,0 +1,328 @@
+<!-- charts_part1_20260925T132753Z; sheet keys checked: c4_in_total, c4_out_total, c4_in_total_m, c4_out_total_m, c4_in_n, c4_out_n -->
+<div id="viz-ins-and-outs">
+  <div class="in-chip" role="status">
+    <span class="in-chip-dot"></span>
+    <span class="in-chip-label">In and out</span>
+    <span class="in-chip-sep">·</span>
+    <span class="in-chip-sub">June 13 to September 10</span>
+  </div>
+  <p class="in-caption" aria-live="polite"></p>
+  <div class="in-toggle" role="group" aria-label="Bar basis"><button type="button" data-basis="season" class="is-on">This season</button><button type="button" data-basis="total">Whole contract</button></div>
+  <div class="in-stage">
+    <div class="in-timeline"><div class="in-track"><div class="in-progress"></div></div><div class="in-stops"></div></div><div class="in-grid"><div class="in-col in-out"><div class="in-head"><span>Out</span><span class="in-count"></span></div><div class="in-rows in-out-rows"></div></div><div class="in-col in-in"><div class="in-head"><span>In</span><span class="in-count"></span></div><div class="in-rows in-in-rows"></div></div></div><div class="in-kept"><div class="in-head"><span>Kept</span></div><div class="in-rows in-kept-rows"></div></div>
+    <div class="in-tooltip" role="tooltip">
+      <div class="in-tip-head"></div>
+      <div class="in-tip-desc"></div>
+    </div>
+  </div>
+  <div class="in-hero">
+    <div class="in-hero-line">
+      <span class="in-hero-num">$0.0M out · $0.0M in</span>
+      <span class="in-hero-unit"></span>
+    </div>
+    <div class="in-hero-label">Salary this season, seven players each way</div>
+    <button class="in-replay" type="button" aria-label="Replay">↺ Replay</button>
+  </div>
+  <p class="in-foot">Salaries are 2026-27 cap hits from the verified contract book; the picks are the four-team trade's terms as reported by Hoops Rumors and SI. Green and Konchar appear on both sides because they came and went inside the same summer. Two-way and camp deals are left off. Hover a row for the terms; drag or click the dates to move through the summer.</p>
+  <div class="in-watermark">@WolvesToaT · Sep 2026</div>
+</div>
+<style>
+  #viz-ins-and-outs, #viz-ins-and-outs * { touch-action: manipulation; }
+  #viz-ins-and-outs { font-family: var(--family-sans); color: var(--text-primary); position: relative; }
+  #viz-ins-and-outs .in-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--accent-default); border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; font: 700 12px var(--family-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); }
+  #viz-ins-and-outs.is-compact .in-chip { font-size: 10px; padding: 5px 10px; letter-spacing: .05em; gap: 6px; }
+  #viz-ins-and-outs .in-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-default); }
+  #viz-ins-and-outs .in-chip-sep { color: var(--text-tertiary); font-weight: 400; }
+  #viz-ins-and-outs .in-chip-sub { font-weight: 500; color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em; }
+  #viz-ins-and-outs .in-caption { font: 600 17px var(--family-sans); color: var(--text-primary); margin: 0 0 14px 0; min-height: 48px; line-height: 1.4; transition: opacity 260ms ease; }
+  #viz-ins-and-outs.is-compact .in-caption { font-size: 15px; }
+  #viz-ins-and-outs .in-stage { position: relative; background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; }
+  #viz-ins-and-outs .in-tooltip { position: absolute; top: 0; left: 0; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: 10px; padding: 9px 12px 10px; pointer-events: none; opacity: 0; transition: opacity 140ms ease; z-index: 10; min-width: 170px; max-width: 290px; box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+  #viz-ins-and-outs .in-tooltip.is-on { opacity: 1; }
+  #viz-ins-and-outs .in-tip-head { font: 700 12px var(--family-sans); color: var(--text-primary); margin-bottom: 4px; }
+  #viz-ins-and-outs .in-tip-desc { font: 500 12px var(--family-sans); color: var(--text-secondary); line-height: 1.35; }
+  #viz-ins-and-outs .in-hero { display: flex; flex-direction: column; align-items: center; margin: 18px 0 4px 0; position: relative; }
+  #viz-ins-and-outs .in-hero-line { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #viz-ins-and-outs .in-hero-num { font: 800 52px var(--family-mono); color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; transition: color 320ms ease; }
+  #viz-ins-and-outs.is-landed .in-hero-num { color: var(--accent-default); }
+  #viz-ins-and-outs.is-compact .in-hero-num { font-size: 38px; }
+  #viz-ins-and-outs .in-hero-unit { font: 600 14px var(--family-sans); color: var(--text-secondary); }
+  #viz-ins-and-outs .in-hero-label { font: 500 12px var(--family-sans); color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+  #viz-ins-and-outs .in-replay { position: absolute; right: 0; top: 4px; background: rgba(255,255,255,.06); border: 1px solid var(--border-default); color: var(--text-secondary); font: 600 11px var(--family-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; opacity: 0; transition: opacity 200ms ease; }
+  #viz-ins-and-outs .in-replay.is-shown { opacity: 1; }
+  #viz-ins-and-outs .in-replay:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  #viz-ins-and-outs .in-foot { font: 400 12px var(--family-sans); color: var(--text-tertiary); line-height: 1.5; margin: 14px 0 0 0; }
+  #viz-ins-and-outs .in-watermark { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .06em; margin-top: 6px; text-align: right; }
+  #viz-ins-and-outs .in-toggle { display: inline-flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px; margin: 0 0 10px 0; }
+  #viz-ins-and-outs .in-toggle button { background: transparent; border: 0; color: var(--text-tertiary); font: 600 11px var(--family-sans); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  #viz-ins-and-outs .in-toggle button.is-on { background: rgba(255,255,255,.10); color: var(--text-primary); }
+
+  #viz-ins-and-outs .in-hero-num { font-size: 28px; }
+  #viz-ins-and-outs.is-compact .in-hero-num { font-size: 20px; }
+  #viz-ins-and-outs .in-hero { padding-right: 84px; align-items: flex-start; }
+  #viz-ins-and-outs .in-hero-line { justify-content: flex-start; }
+  #viz-ins-and-outs .in-timeline { margin: 4px 6px 14px; }
+  #viz-ins-and-outs .in-track { position: relative; height: 4px; background: rgba(255,255,255,.10); border-radius: 2px; }
+  #viz-ins-and-outs .in-progress { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--accent-default); border-radius: 2px; transition: width 500ms cubic-bezier(.22,1,.36,1); }
+  #viz-ins-and-outs .in-stops { position: relative; height: 46px; }
+  #viz-ins-and-outs .in-stop.is-low .in-stop-lab { margin-top: 12px; }
+  #viz-ins-and-outs .in-stop { position: absolute; top: -9px; transform: translateX(-50%); cursor: pointer; text-align: center; width: 64px; }
+  #viz-ins-and-outs .in-stop-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-surface); border: 2px solid rgba(255,255,255,.3); margin: 0 auto 4px; transition: background 200ms ease, border-color 200ms ease; }
+  #viz-ins-and-outs .in-stop.is-on .in-stop-dot { background: var(--accent-default); border-color: var(--accent-default); }
+  #viz-ins-and-outs .in-stop-lab { font: 600 10px var(--family-mono); color: var(--text-tertiary); letter-spacing: .02em; white-space: nowrap; }
+  #viz-ins-and-outs .in-stop.is-on .in-stop-lab { color: var(--text-primary); }
+  #viz-ins-and-outs.is-compact .in-stop-lab { font-size: 8.5px; }
+  #viz-ins-and-outs .in-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  #viz-ins-and-outs.is-compact .in-grid { grid-template-columns: 1fr; }
+  #viz-ins-and-outs .in-col { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; min-height: 120px; }
+  #viz-ins-and-outs .in-out { border-top: 2px solid var(--status-error); }
+  #viz-ins-and-outs .in-in { border-top: 2px solid var(--accent-default); }
+  #viz-ins-and-outs .in-kept { margin-top: 12px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-top: 2px solid rgba(255,255,255,.28); border-radius: 10px; padding: 10px 12px; }
+  #viz-ins-and-outs .in-head { display: flex; align-items: baseline; justify-content: space-between; font: 700 11px var(--family-mono); letter-spacing: .06em; text-transform: uppercase; margin: 0 0 8px; }
+  #viz-ins-and-outs .in-out .in-head { color: var(--status-error); }
+  #viz-ins-and-outs .in-in .in-head { color: var(--accent-hover); }
+  #viz-ins-and-outs .in-kept .in-head { color: var(--text-secondary); }
+  #viz-ins-and-outs .in-count { font-size: 10px; color: var(--text-tertiary); text-transform: none; letter-spacing: 0; }
+  #viz-ins-and-outs .in-row { display: grid; grid-template-columns: 148px 1fr 58px; gap: 8px; align-items: center; padding: 4px 4px; border-radius: 6px; opacity: 0; transform: translateY(6px); transition: opacity 360ms ease, transform 360ms ease, background 150ms ease; cursor: pointer; }
+  #viz-ins-and-outs .in-row.is-on { opacity: 1; transform: none; }
+  #viz-ins-and-outs .in-row.is-off { opacity: .28; }
+  #viz-ins-and-outs .in-row:hover { background: rgba(255,255,255,.05); }
+  #viz-ins-and-outs.is-compact .in-row { grid-template-columns: 128px 1fr 50px; }
+  #viz-ins-and-outs .in-name { font: 600 12px var(--family-sans); color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #viz-ins-and-outs .in-row.is-pick .in-name { font-weight: 500; color: var(--text-secondary); }
+  #viz-ins-and-outs .in-tag { display: inline-block; font: 700 8.5px var(--family-mono); text-transform: uppercase; letter-spacing: .05em; border: 1px solid; border-radius: 999px; padding: 1px 5px; margin-left: 5px; vertical-align: 1px; white-space: nowrap; }
+  #viz-ins-and-outs .in-tag-star { color: var(--accent-hover); border-color: var(--accent-hover); }
+  #viz-ins-and-outs .in-tag-first { color: var(--status-error); border-color: var(--status-error); }
+  #viz-ins-and-outs .in-tag-swap { color: var(--status-warning); border-color: var(--status-warning); }
+  #viz-ins-and-outs .in-tag-second, #viz-ins-and-outs .in-tag-rights, #viz-ins-and-outs .in-tag-expired, #viz-ins-and-outs .in-tag-dead { color: var(--text-tertiary); border-color: var(--border-default); }
+  #viz-ins-and-outs .in-track-bar { position: relative; height: 12px; background: rgba(255,255,255,.05); border: 1px solid var(--border-subtle); border-radius: 3px; overflow: hidden; }
+  #viz-ins-and-outs .in-row.is-pick .in-track-bar { display: none; }
+  #viz-ins-and-outs .in-row.is-pick { grid-template-columns: 1fr; }
+  #viz-ins-and-outs .in-row.is-pick .in-sal { display: none; }
+  #viz-ins-and-outs .in-row.is-pick .in-name { white-space: normal; overflow: visible; }
+  #viz-ins-and-outs .in-sub { font: 500 10px var(--family-mono); color: var(--text-tertiary); margin-left: 6px; }
+  #viz-ins-and-outs .in-fill { height: 100%; width: 0; border-radius: 3px; transition: width 600ms cubic-bezier(.22,1,.36,1); }
+  #viz-ins-and-outs .in-out .in-fill { background: var(--status-error); }
+  #viz-ins-and-outs .in-in .in-fill { background: var(--accent-default); }
+  #viz-ins-and-outs .in-kept .in-fill { background: rgba(255,255,255,.35); }
+  #viz-ins-and-outs .in-row.is-dead .in-fill { background: transparent; border: 1px dashed var(--text-tertiary); }
+  #viz-ins-and-outs .in-sal { font: 700 11.5px var(--family-mono); color: var(--text-secondary); text-align: right; white-space: nowrap; }
+  #viz-ins-and-outs .in-row.is-pick .in-sal { font: 500 10px var(--family-mono); color: var(--text-tertiary); }
+</style>
+<script>
+(function () {
+
+  var root = d3.select("#viz-ins-and-outs");
+  if (root.empty() || typeof d3 === "undefined") return;
+  var rootNode = root.node();
+  var C = "in";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.parent !== window) {
+    rootNode.addEventListener("wheel", function (e) { if (e.ctrlKey || e.metaKey) return; try { window.parent.scrollBy(e.deltaX, e.deltaY); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:e.deltaX, deltaY:e.deltaY}, "*"); } }, { passive: true });
+    var lastTouchY = null;
+    rootNode.addEventListener("touchstart", function (e) { if (e.touches.length === 1) lastTouchY = e.touches[0].clientY; }, { passive: true });
+    rootNode.addEventListener("touchmove", function (e) { if (e.touches.length !== 1 || lastTouchY === null) return; var yy = e.touches[0].clientY, dy = lastTouchY - yy; lastTouchY = yy; try { window.parent.scrollBy(0, dy); } catch (err) { window.parent.postMessage({type:"viz-scroll", deltaX:0, deltaY:dy}, "*"); } }, { passive: true });
+  }
+  var playTimers = [];
+  function clearPlayTimers() { playTimers.forEach(function (t) { clearTimeout(t); }); playTimers = []; }
+  function at(ms, fn) { playTimers.push(setTimeout(fn, ms)); }
+  var capTimer = null;
+  function setCaption(txt, instant) {
+    var c = root.select("." + C + "-caption");
+    if (capTimer) { clearTimeout(capTimer); capTimer = null; }
+    if (instant) { c.style("opacity", 1).text(txt); return; }
+    c.style("opacity", 0);
+    capTimer = setTimeout(function () { capTimer = null; c.text(txt).style("opacity", 1); }, 220);
+  }
+  function showTooltip(head, desc, x, y) {
+    var tip = root.select("." + C + "-tooltip");
+    tip.select("." + C + "-tip-head").text(head);
+    tip.select("." + C + "-tip-desc").html(desc);
+    tip.classed("is-on", true);
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var tipEl = tip.node();
+    var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    var px = x - tw / 2, py = y - th - 10;
+    if (px < 4) px = 4;
+    if (px + tw > sRect.width - 4) px = sRect.width - tw - 4;
+    if (py < 4) py = y + 16;
+    tipEl.style.left = px + "px"; tipEl.style.top = py + "px";
+  }
+  function tipAt(el, head, desc) {
+    var stageEl = root.select("." + C + "-stage").node();
+    var sRect = stageEl.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    showTooltip(head, desc, r.left - sRect.left + r.width / 2, r.top - sRect.top);
+  }
+  function hideTooltip() { root.select("." + C + "-tooltip").classed("is-on", false); }
+  function tickText(sel, from, to, duration, fmt) {
+    var node = sel.node();
+    if (reduceMotion || duration <= 0) { node.textContent = fmt(to); return; }
+    d3.select(node).transition("hero").duration(duration).ease(d3.easeCubicOut)
+      .tween("text", function () { var i = d3.interpolateNumber(from, to); return function (t) { node.textContent = fmt(i(t)); }; });
+  }
+  function showReplay() { root.select("." + C + "-replay").classed("is-shown", true); }
+  function hideReplay() { root.select("." + C + "-replay").classed("is-shown", false); }
+  var __resetOnly = false, __played = false, __lastW = rootNode.clientWidth || 0, lastBuilt = null;
+  function compactNow() { var w = rootNode.clientWidth || 640; root.classed("is-compact", w < 480); return w < 480; }
+  function __idle() { lastBuilt = build(); __resetOnly = true; play(lastBuilt); __resetOnly = false; }
+  function __startOnce() { if (__played) return; __played = true; play(lastBuilt || build()); }
+  root.select("." + C + "-replay").on("click", function () { if (lastBuilt) play(lastBuilt); });
+  function boot() {
+    if (reduceMotion) { lastBuilt = build(); finalState(lastBuilt); __played = true; }
+    else {
+      __idle();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && e.intersectionRatio >= 0.5) __startOnce(); }); }, { threshold: [0, 0.5, 1] });
+        io.observe(rootNode);
+      } else { __startOnce(); }
+    }
+    if (window.ResizeObserver) {
+      var rt = null;
+      new ResizeObserver(function () {
+        if (rt) clearTimeout(rt);
+        rt = setTimeout(function () {
+          var w = rootNode.clientWidth || 0;
+          if (Math.abs(w - __lastW) < 2) return;
+          __lastW = w;
+          lastBuilt = build();
+          if (__played) finalState(lastBuilt); else __idle();
+        }, 150);
+      }).observe(rootNode);
+    }
+  }
+
+  var D = {"rows": [{"name": "Joe Ingles", "direction": "out", "tag": "expired", "date": "2026-05-18", "sal": null, "total": null, "sub": "", "tip": "Contract expired; signed in Australia's NBL. 1 source on file."}, {"name": "Trey Kaufman-Renn, rights", "direction": "kept", "tag": "rights", "date": "2026-06-24", "sal": null, "total": null, "sub": "No. 59, unsigned", "tip": "The 59th pick chose a sixth college season and a lawsuit against the NCAA; Minnesota kept his rights."}, {"name": "Bones Hyland", "direction": "kept", "tag": "player", "date": "2026-07-03", "sal": 2845883.0, "total": 2845883.0, "sub": "$2.8M", "tip": "Re-signed, July 3. 1 year, $2,845,883. 1 source on file."}, {"name": "Kyle Anderson", "direction": "out", "tag": "player", "date": "2026-07-06", "sal": 2449421.0, "total": 2449421.0, "sub": "$2.4M", "tip": "Signed elsewhere, July 6. 1 year, $2,449,421. 1 source on file."}, {"name": "Mike Conley", "direction": "out", "tag": "player", "date": "2026-07-06", "sal": 2449421.0, "total": 2449421.0, "sub": "$2.4M", "tip": "Signed elsewhere, July 6. 1 year, $2,449,421. 1 source on file."}, {"name": "Julius Randle", "direction": "out", "tag": "player", "date": "2026-07-10", "sal": 33333334.0, "total": 69135802.0, "sub": "$33.3M", "tip": "Traded away, July 10. 2 years, $69,135,802; 2027-28 player option. 1 source on file."}, {"name": "Naz Reid", "direction": "out", "tag": "player", "date": "2026-07-10", "sal": 23275862.0, "total": 103448276.0, "sub": "$23.3M", "tip": "Traded away, July 10. 4 years, $103,448,276; 2029-30 player option. 1 source on file."}, {"name": "Matteo Spagnolo, draft rights", "direction": "out", "tag": "rights", "date": "2026-07-10", "sal": null, "total": null, "sub": "a 2022 second-rounder", "tip": "To Charlotte in the four-team trade that closed July 10. a 2022 second-rounder."}, {"name": "No. 28 pick, Joshua Jefferson", "direction": "out", "tag": "rights", "date": "2026-07-10", "sal": null, "total": null, "sub": "drafted June 23, sent with Randle", "tip": "To Charlotte in the four-team trade that closed July 10. drafted June 23, sent with Randle."}, {"name": "2028 first, swap right", "direction": "out", "tag": "swap", "date": "2026-07-10", "sal": null, "total": null, "sub": "unencumbered", "tip": "To Charlotte in the four-team trade that closed July 10. unencumbered."}, {"name": "2029 first, swap right", "direction": "out", "tag": "swap", "date": "2026-07-10", "sal": null, "total": null, "sub": "protected 6 through 30", "tip": "To Charlotte in the four-team trade that closed July 10. protected 6 through 30."}, {"name": "2029 second-round pick", "direction": "out", "tag": "second", "date": "2026-07-10", "sal": null, "total": null, "sub": "", "tip": "To Charlotte in the four-team trade that closed July 10."}, {"name": "2030 first, swap right", "direction": "out", "tag": "swap", "date": "2026-07-10", "sal": null, "total": null, "sub": "on a pick San Antonio already holds a swap on", "tip": "To Charlotte in the four-team trade that closed July 10. on a pick San Antonio already holds a swap on."}, {"name": "2032 second-round pick", "direction": "out", "tag": "second", "date": "2026-07-10", "sal": null, "total": null, "sub": "", "tip": "To Charlotte in the four-team trade that closed July 10."}, {"name": "2033 first-round pick", "direction": "out", "tag": "first", "date": "2026-07-10", "sal": null, "total": null, "sub": "unprotected", "tip": "To Charlotte in the four-team trade that closed July 10. unprotected."}, {"name": "2033 second-round pick", "direction": "out", "tag": "second", "date": "2026-07-10", "sal": null, "total": null, "sub": "", "tip": "To Charlotte in the four-team trade that closed July 10."}, {"name": "Isaiah Evans", "direction": "in", "tag": "player", "date": "2026-07-10", "sal": 1357763.0, "total": 9264648.0, "sub": "$1.4M", "tip": "Traded for, July 10. 4 years, $9,264,648; 2029-30 team option. 1 source on file."}, {"name": "Josh Green", "direction": "in", "tag": "player", "date": "2026-07-10", "sal": 14679012.0, "total": 14679012.0, "sub": "$14.7M", "tip": "Traded for, July 10. 1 year, $14,679,012. 1 source on file."}, {"name": "LaMelo Ball", "direction": "in", "tag": "star", "date": "2026-07-10", "sal": 40770520.0, "total": 130746840.0, "sub": "$40.8M", "tip": "Traded for, July 10. 3 years, $130,746,840. 1 source on file."}, {"name": "Trey Lyles", "direction": "in", "tag": "player", "date": "2026-07-10", "sal": 2449421.0, "total": 2449421.0, "sub": "$2.4M", "tip": "Signed, July 10. 1 year, $2,449,421. 1 source on file."}, {"name": "Ayo Dosunmu", "direction": "kept", "tag": "player", "date": "2026-07-10", "sal": 19310345.0, "total": 112000000.0, "sub": "$19.3M", "tip": "Re-signed, July 10. 5 years, $112,000,000; 2030-31 player option. 1 source on file."}, {"name": "Jaylen Clark", "direction": "kept", "tag": "player", "date": "2026-07-10", "sal": 3086420.0, "total": 10000000.0, "sub": "$3.1M", "tip": "Re-signed, July 10. 3 years, $10,000,000. 1 source on file."}, {"name": "Julian Phillips", "direction": "out", "tag": "player", "date": "2026-07-24", "sal": 2537526.0, "total": 2537526.0, "sub": "$2.5M", "tip": "Signed elsewhere, July 24. 1 year, $2,537,526. 1 source on file."}, {"name": "John Konchar", "direction": "out", "tag": "dead", "date": "2026-08-29", "sal": 2055000.0, "total": 8614421.0, "sub": "$2.1M", "tip": "Waived the afternoon he arrived and stretched: $2,055,000 a year against the cap through 2028-29. 1 source on file."}, {"name": "Josh Green", "direction": "out", "tag": "player", "date": "2026-08-29", "sal": 14679012.0, "total": 14679012.0, "sub": "$14.7M", "tip": "Traded to Utah with cash on August 29, seven weeks after he arrived, for Cody Williams and John Konchar. 1 source on file."}, {"name": "Cody Williams", "direction": "in", "tag": "player", "date": "2026-08-29", "sal": 6015600.0, "total": 13685490.0, "sub": "$6.0M", "tip": "Traded for, August 29. 2 years, $13,685,490; 2026-27 team option; 2027-28 team option. 1 source on file."}, {"name": "John Konchar", "direction": "in", "tag": "player", "date": "2026-08-29", "sal": 4504421.0, "total": 8614421.0, "sub": "$4.5M", "tip": "Traded for, August 29. 3 years, $8,614,421. 1 source on file."}, {"name": "Jonathan Kuminga", "direction": "in", "tag": "player", "date": "2026-09-03", "sal": 6064000.0, "total": 12431200.0, "sub": "$6.1M", "tip": "Signed, September 3. 2 years, $12,431,200; 2027-28 player option. 2 sources on file."}], "stops": [["2026-06-22", "June 22", "Dosunmu agrees: five years, $112 million, before the draft"], ["2026-06-25", "June 25", "The trade breaks: Randle and Reid out, Ball in"], ["2026-07-06", "July 6", "Conley to Boston, Anderson to Toronto, both on minimums"], ["2026-07-10", "July 10", "The four-team deal closes; the picks go to Charlotte"], ["2026-07-24", "July 24", "Phillips's option declined; he lands in Houston"], ["2026-08-29", "August 29", "The Saturday: Green out, Williams and Konchar in, Konchar waived and stretched"], ["2026-09-03", "September 3", "Kuminga signs for the taxpayer mid-level"]], "in_total": 75840737.0, "out_total": 80779576.0, "in_total_m": "$75.8M", "out_total_m": "$80.8M", "n_in": 7, "n_out": 7};
+  var basis = "season";
+  var stopIdx = D.stops.length - 1;
+  var MAX_SEASON = d3.max(D.rows, function (r) { return r.sal || 0; });
+  var MAX_TOTAL = d3.max(D.rows, function (r) { return r.total || 0; });
+  var CAPS = [
+    "The summer, in order. Watch the two columns fill.",
+    "June: Dosunmu first, then the trade that sent Randle, Reid and the picks out and brought LaMelo back.",
+    "July: the veterans leave on minimums, and the four-team deal closes with the 2033 first on it.",
+    "August 29: Green goes back out seven weeks after he arrived, so Kuminga fits under the wall.",
+    "Seven players each way. The dollars nearly wash. The picks and the bigs don't."
+  ];
+  function fmtM(v) { return "$" + (v / 1e6).toFixed(1) + "M"; }
+  function short(n, compact) {
+    if (!compact) return n;
+    return n.replace(/^(\w)\w+ (?=[A-Z])/, "$1. ").replace("Trey Kaufman-Renn, rights", "Kaufman-Renn, rights");
+  }
+  function rowEl(host, r, compact) {
+    var row = host.append("div").attr("class", "in-row" + (r.sal === null ? " is-pick" : "") + (r.tag === "dead" ? " is-dead" : ""));
+    var nm = row.append("div").attr("class", "in-name");
+    nm.append("span").text(short(r.name, compact));
+    if (r.tag !== "player") nm.append("span").attr("class", "in-tag in-tag-" + r.tag).text(r.tag === "dead" ? "stretched" : r.tag);
+    if (r.sal === null && r.sub) nm.append("span").attr("class", "in-sub").text(r.sub);
+    var fill = row.append("div").attr("class", "in-track-bar").append("div").attr("class", "in-fill");
+    row.append("div").attr("class", "in-sal").text(r.sal === null ? (r.sub || "") : "");
+    row.on("mouseenter", function () { tipAt(this, r.name, r.tip); }).on("mouseleave", hideTooltip)
+       .on("click", function () { tipAt(this, r.name, r.tip); });
+    return { r: r, el: row, fill: fill, sal: row.select(".in-sal") };
+  }
+  function build() {
+    var compact = compactNow();
+    root.select(".in-out-rows").selectAll("*").remove();
+    root.select(".in-in-rows").selectAll("*").remove();
+    root.select(".in-kept-rows").selectAll("*").remove();
+    var rows = [];
+    D.rows.forEach(function (r) {
+      var host = r.direction === "out" ? root.select(".in-out-rows") : (r.direction === "in" ? root.select(".in-in-rows") : root.select(".in-kept-rows"));
+      rows.push(rowEl(host, r, compact));
+    });
+    root.select(".in-out .in-count").text(D.n_out + " salaried, plus the picks");
+    root.select(".in-in .in-count").text(D.n_in + " salaried");
+    // the timeline
+    var stops = root.select(".in-stops"); stops.selectAll("*").remove();
+    var t0 = new Date(D.stops[0][0]), t1 = new Date(D.stops[D.stops.length - 1][0]);
+    var x = d3.scaleTime().domain([t0, t1]).range([4, 96]);
+    D.stops.forEach(function (s, i) {
+      var el = stops.append("div").attr("class", "in-stop" + (i % 2 ? " is-low" : "")).style("left", x(new Date(s[0])) + "%");
+      el.append("div").attr("class", "in-stop-dot");
+      el.append("div").attr("class", "in-stop-lab").text(compact ? s[1].replace("August", "Aug").replace("September", "Sep").replace("June", "Jun").replace("July", "Jul") : s[1]);
+      el.on("click", function () { clearPlayTimers(); hideReplay(); showStop(i, true); showReplay(); })
+        .on("mouseenter", function () { tipAt(this, s[1], s[2]); }).on("mouseleave", hideTooltip);
+    });
+    root.selectAll(".in-toggle button").on("click", function () {
+      basis = this.getAttribute("data-basis");
+      root.selectAll(".in-toggle button").classed("is-on", function () { return this.getAttribute("data-basis") === basis; });
+      root.select(".in-hero-label").text(basis === "season" ? "Salary this season, seven players each way" : "Whole remaining contracts, in dollars committed");
+      applyBars(rows);
+    });
+    lastBuilt = { rows: rows, x: x, compact: compact };
+    return lastBuilt;
+  }
+  function value(r) { return basis === "season" ? r.sal : r.total; }
+  function applyBars(rows) {
+    var mx = basis === "season" ? MAX_SEASON : MAX_TOTAL;
+    rows.forEach(function (o) {
+      if (o.r.sal === null) return;
+      var v = value(o.r) || 0;
+      o.fill.style("width", Math.round(v / mx * 100) + "%");
+      o.sal.text(fmtM(v));
+    });
+  }
+  function showStop(i, withHero, withCaption) {
+    if (withCaption === undefined) withCaption = true;
+    stopIdx = i;
+    var b = lastBuilt; if (!b) return;
+    var date = D.stops[i][0];
+    root.selectAll(".in-stop").classed("is-on", function (d, j) { return j <= i; });
+    root.select(".in-progress").style("width", (b.x(new Date(date)) - 4) / 92 * 100 + "%");
+    var outSum = 0, inSum = 0;
+    b.rows.forEach(function (o) {
+      var on = o.r.date <= date;
+      o.el.classed("is-on", on).classed("is-off", false);
+      if (on && o.r.sal !== null) { if (o.r.direction === "out") outSum += o.r.sal; if (o.r.direction === "in") inSum += o.r.sal; }
+    });
+    applyBars(b.rows);
+    if (withHero) setHero(outSum, inSum, i === D.stops.length - 1);
+    if (withCaption) setCaption(D.stops[i][2], false);
+  }
+  var heroOut = 0, heroIn = 0;
+  function setHero(outSum, inSum, landed) {
+    var node = root.select(".in-hero-num");
+    var fromO = heroOut, fromI = heroIn; heroOut = outSum; heroIn = inSum;
+    if (reduceMotion) { node.text(fmtM(outSum) + " out · " + fmtM(inSum) + " in"); }
+    else {
+      d3.select(node.node()).transition("hero").duration(500).ease(d3.easeCubicOut).tween("text", function () {
+        var io = d3.interpolateNumber(fromO, outSum), ii = d3.interpolateNumber(fromI, inSum);
+        return function (t) { node.text(fmtM(io(t)) + " out · " + fmtM(ii(t)) + " in"); };
+      });
+    }
+    root.classed("is-landed", landed);
+  }
+  function finalState(b) {
+    clearPlayTimers();
+    showStop(D.stops.length - 1, false, false);
+    heroOut = D.out_total; heroIn = D.in_total;
+    root.select(".in-hero-num").text(D.out_total_m + " out · " + D.in_total_m + " in");
+    root.classed("is-landed", true);
+    setCaption(CAPS[4], true);
+    showReplay();
+  }
+  function play(b) {
+    clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
+    b.rows.forEach(function (o) { o.el.classed("is-on", false); o.fill.style("width", "0%"); });
+    root.selectAll(".in-stop").classed("is-on", false);
+    root.select(".in-progress").style("width", "0%");
+    heroOut = 0; heroIn = 0; root.select(".in-hero-num").text("$0.0M out · $0.0M in");
+    setCaption(CAPS[0], true);
+    if (reduceMotion) { finalState(b); return; }
+    if (__resetOnly) return;
+    var t = 700, step = 1150;
+    D.stops.forEach(function (s, i) { at(t + i * step, function () { showStop(i, true); }); });
+    at(t + 1 * step + 500, function () { setCaption(CAPS[1]); });
+    at(t + 3 * step + 500, function () { setCaption(CAPS[2]); });
+    at(t + 5 * step + 500, function () { setCaption(CAPS[3]); });
+    at(t + D.stops.length * step + 700, function () {
+      root.select(".in-hero-num").text(D.out_total_m + " out · " + D.in_total_m + " in");
+      root.classed("is-landed", true); setCaption(CAPS[4], true); showReplay();
+    });
+  }
+
+  boot();
+})();
+</script>
