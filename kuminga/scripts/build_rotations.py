@@ -21,7 +21,10 @@ THE HEURISTIC, stated once and applied everywhere
 
 3. RANK SCORE. Each player is scored
        0.5 * pct_rank(prior_mpg) + 0.5 * pct_rank(consensus_net)
-   where both percentile ranks are taken league-wide across all rostered players.
+   where both percentile ranks are taken league-wide across all rostered players. A
+   TEAM-CHANGER (D111) is scored 0.2 / 0.8 instead, the W1 blend, because a role earned
+   on another team is weaker evidence of the role he will hold here; the flat score is
+   kept in `rank_score_flat` as the recorded sensitivity.
    Minutes alone would freeze every player in last season's role and would refuse to
    promote a player who changed teams into a bigger one; impact alone would hand a
    high-RAPM low-minute specialist a starter's load. The 50/50 split is a stated
@@ -385,6 +388,9 @@ def main():
         pool["curve_weight"] = np.where(pool.moved_teams,
                                         rotation.MOVER_CURVE_WEIGHT,
                                         rotation.CURVE_WEIGHT)
+        # D111: the mover discount applied to the ORDER as well as the minutes blend
+        pool["rank_score_flat"] = pool.rank_score
+        pool["rank_score"] = rotation.rank_scores(pool.pct_mpg, pool.pct_net, pool.moved_teams)
         n_moved = int(pool.moved_teams.sum())
         n_new = int(((pool.scenario == "current") & pool.team_2025_26.isna()).sum())
         r.note(f"W1 team-changer rule: curve weight {rotation.CURVE_WEIGHT} for "

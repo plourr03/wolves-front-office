@@ -170,9 +170,8 @@ def main():
             return rec
 
         r.note("2. Three orderings, team-rank allocator, priced off the f-curve with the field fixed:")
-        run_ordering("default (0.5 minutes / 0.5 impact, all)", lambda d: d.rank_score)
-        run_ordering("mover-discounted order (movers 0.2 / 0.8)",
-                     lambda d: np.where(d.moved_teams, MOVER_ORDER_MPG_WEIGHT * d.pct_mpg + (1 - MOVER_ORDER_MPG_WEIGHT) * d.pct_net, d.rank_score))
+        run_ordering("primary: mover-discounted order (movers 0.2 / 0.8)", lambda d: d.rank_score)
+        run_ordering("sensitivity: flat 0.5 / 0.5 order for all", lambda d: d.rank_score_flat)
         run_ordering("impact only (pct impact, all)", lambda d: d.pct_net)
 
         # ---- 3. the calibrated default from the mover base rate ---------------------------
@@ -186,6 +185,13 @@ def main():
             m = dict(minutes)
             freed = m.get(WILLIAMS_ID, 0.0) - target
             m[WILLIAMS_ID] = target
+            if freed < -1e-9:
+                need = -freed
+                others = {p: v for p, v in m.items() if p != WILLIAMS_ID}
+                tot = sum(others.values())
+                for pid, v in others.items():
+                    m[pid] = v - need * v / tot
+                return m, 0.0
             for pid in sorted([x for x in m if x != WILLIAMS_ID], key=lambda x: -rank.get(x, 0)):
                 if freed <= 1e-9:
                     break
@@ -204,7 +210,7 @@ def main():
                 levels.append((lab + " (n=%d)" % int(base.loc[grp, "n"]), float(base.loc[grp, "median"])))
         for label, ret in levels:
             raw_target = ret * wprior
-            target = min(raw_target, float(tr_min.get(WILLIAMS_ID, 0.0)))   # the check hands minutes DOWN only; above the default the default stands
+            target = raw_target
             m, unplaced = set_williams(tr_min, target)
             net_k, title_k, delta = price(m)
             rec = dict(ordering=label, williams_rank=int(avail.index[avail.pid == WILLIAMS_ID][0]) + 1, williams_mpg=target, in_ten=target > 0,
@@ -217,7 +223,7 @@ def main():
             rec["rotation"] = "; ".join("%s %.1f" % (name[p], v) for p, v in sorted(m.items(), key=lambda kv: -kv[1]) if v > 0)
             rows.append(rec)
             r.note("   %-52s %5.1f mpg (%.2f x %.1f%s) | delta %+.2f (%s): consensus %+.2f rapm %+.2f box %+.2f darko %+.2f%s"
-                   % (label, target, ret, wprior, (" = %.1f, above the default so the default stands" % raw_target) if raw_target > target + 1e-9 else "",
+                   % (label, target, ret, wprior, "",
                       rec["delta_mean"], rec["delta_sign"], delta["consensus"], delta["rapm"], delta["box"], delta["darko"],
                       (" | %.1f minutes unplaced" % unplaced) if unplaced > 1e-6 else ""))
         R = pd.DataFrame(rows)

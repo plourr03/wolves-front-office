@@ -57,12 +57,16 @@ VERDICTS = [("ball_in", "LaMelo Ball in"), ("reid_out", "Naz Reid out"),
             ("randle_out", "Julius Randle out"), ("dosunmu_retained", "Ayo Dosunmu re-signed"),
             ("depth", "Depth signings and re-signings"), ("kuminga_in", "Kuminga in (pooled)"),
             ("ddv_injury", "DiVincenzo's Achilles (not a transaction)"),
-            ("A_c3_default_shannon", "Kuminga slot, default allocation"),
+            ("A_c3_default_shannon", "Kuminga slot, the default fill (Cody Williams)"),
             ("C_mcdaniels_slides", "Kuminga slot, McDaniels slides"),
             ("D_beringer_fills", "Kuminga slot, Beringer fills"),
             ("E_tight_rule_F_or_FC", "Kuminga slot, tight eligibility rule"),
             ("B_lyles_fills", "Kuminga slot, Lyles fills")]
 PRE_D85 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outputs", "pre_d85")
+# D111: the sheet key for the default Kuminga slot names the player who actually fills it. The
+# variant id in the slot files keeps its historical name; `slot_robustness.csv` records the fill
+# (Cody Williams takes almost all of Kuminga's minutes under both allocators; Shannon takes none).
+KEY_ALIAS = {"A_c3_default_shannon": "A_c3_default_williams"}
 
 
 def runs():
@@ -256,6 +260,7 @@ def main():
         rr7 = rid("r7_allocator_agreement")
         n_ship = n_retired = 0
         for order, (item, lab) in enumerate(VERDICTS):
+            item_key = KEY_ALIAS.get(item, item)
             two_cell = ships(gate, nf_u, nf_a, item)
             pooled_two_cell = bool(
                 r7.loc[item, "pooled_unaged_sign"] != "MIXED"
@@ -266,40 +271,40 @@ def main():
                 raise RuntimeError("%s: the aging gate and r7 disagree on the pooled cells; one "
                                    "of the two is stale" % item)
             now, before = bool(r7.loc[item, "ships_all_four"]), ships(pre_gate, pre_u, pre_a, item)
-            F("v_%s_pooled_u" % item, S, "%s, pooled un-aged mean pp" % lab,
+            F("v_%s_pooled_u" % item_key, S, "%s, pooled un-aged mean pp" % lab,
               sgn(r7.loc[item, "pooled_unaged_mean"], 2), "MODELED", "QUOTABLE", rr7,
               "r7_allocator_verdicts.csv")
-            F("v_%s_pooled_a" % item, S, "%s, pooled aged mean pp" % lab,
+            F("v_%s_pooled_a" % item_key, S, "%s, pooled aged mean pp" % lab,
               sgn(r7.loc[item, "pooled_aged_mean"], 2), "MODELED", "QUOTABLE", rr7,
               "r7_allocator_verdicts.csv")
-            F("v_%s_tr_u" % item, S, "%s, team-rank un-aged mean pp" % lab,
+            F("v_%s_tr_u" % item_key, S, "%s, team-rank un-aged mean pp" % lab,
               sgn(r7.loc[item, "teamrank_unaged_mean"], 2), "MODELED", "QUOTABLE", rr7,
               "r7_allocator_verdicts.csv")
-            F("v_%s_tr_a" % item, S, "%s, team-rank aged mean pp" % lab,
+            F("v_%s_tr_a" % item_key, S, "%s, team-rank aged mean pp" % lab,
               sgn(r7.loc[item, "teamrank_aged_mean"], 2), "MODELED", "QUOTABLE", rr7,
               "r7_allocator_verdicts.csv")
-            F("v_%s_cells" % item, S, "%s, views clearing in the four cells" % lab,
+            F("v_%s_cells" % item_key, S, "%s, views clearing in the four cells" % lab,
               "%d/4, %d/4, %d/4, %d/4" % tuple(int(r7.loc[item, c]) for c in (
                   "pooled_unaged_clear", "pooled_aged_clear", "teamrank_unaged_clear",
                   "teamrank_aged_clear")), "MODELED", "QUOTABLE", rr7, "r7_allocator_verdicts.csv")
-            F("v_%s_two_cell" % item, S, "%s ships on the two-cell rule (pooled only)" % lab,
+            F("v_%s_two_cell" % item_key, S, "%s ships on the two-cell rule (pooled only)" % lab,
               "yes" if two_cell else "no", "MODELED", "QUOTABLE", rr7, "r7_allocator_verdicts.csv")
             n_ship += now
             n_retired += before and not now
-            F("v_%s_label" % item, S, "verdict label", lab, "FACT", "FACT", rw2, "build_final_numbers VERDICTS")
-            F("v_%s_u" % item, S, "%s, un-aged mean pp" % lab, sgn(gate.loc[item, "unaged_mean"], 2),
+            F("v_%s_label" % item_key, S, "verdict label", lab, "FACT", "FACT", rw2, "build_final_numbers VERDICTS")
+            F("v_%s_u" % item_key, S, "%s, un-aged mean pp" % lab, sgn(gate.loc[item, "unaged_mean"], 2),
               "MODELED", "QUOTABLE", rw2, "w2_aging_gate.csv")
-            F("v_%s_a" % item, S, "%s, aged mean pp" % lab, sgn(gate.loc[item, "aged_mean"], 2),
+            F("v_%s_a" % item_key, S, "%s, aged mean pp" % lab, sgn(gate.loc[item, "aged_mean"], 2),
               "MODELED", "QUOTABLE", rw2, "w2_aging_gate.csv")
-            F("v_%s_clear" % item, S, "%s, views clearing the floor un-aged / aged" % lab,
+            F("v_%s_clear" % item_key, S, "%s, views clearing the floor un-aged / aged" % lab,
               "%d/4, %d/4" % (nf_u.loc[item, "n_forks_clearing"], nf_a.loc[item, "n_forks_clearing"]),
               "MODELED", "QUOTABLE", rw2, "noise_floor*.csv")
-            F("v_%s_signs" % item, S, "%s, sign un-aged / aged" % lab,
+            F("v_%s_signs" % item_key, S, "%s, sign un-aged / aged" % lab,
               "%s / %s" % (gate.loc[item, "unaged_sign"].lower(), gate.loc[item, "aged_sign"].lower()),
               "MODELED", "QUOTABLE", rw2, "w2_aging_gate.csv")
-            F("v_%s_ships" % item, S, "%s ships" % lab, "yes" if now else "no", "MODELED", "QUOTABLE", rw2,
+            F("v_%s_ships" % item_key, S, "%s ships" % lab, "yes" if now else "no", "MODELED", "QUOTABLE", rw2,
               "w2_aging_gate.csv, noise_floor*.csv")
-            F("v_%s_preship" % item, S, "%s shipped before D85" % lab, "yes" if before else "no", "MODELED",
+            F("v_%s_preship" % item_key, S, "%s shipped before D85" % lab, "yes" if before else "no", "MODELED",
               "QUOTABLE", rw2, "pre_d85/w2_aging_gate.csv, pre_d85/noise_floor*.csv")
         F("n_ship", S, "verdicts that ship", n_ship, "MODELED", "QUOTABLE", rw2, "w2_aging_gate.csv, noise_floor*.csv")
         F("n_ship_pre", S, "verdicts that shipped before D85",

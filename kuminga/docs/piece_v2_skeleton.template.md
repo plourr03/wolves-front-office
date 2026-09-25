@@ -74,7 +74,7 @@ None of the three survives the allocator cell either: under the headline's own m
 
 **Better.**
 
-- **He beats the most likely internal fill for his minutes** `[modeled, slot_robustness]`: {{v_A_c3_default_shannon_u}} points of title odds un-aged and {{v_A_c3_default_shannon_a}} aged, positive in every view and clearing every view's floor on both bases ({{v_A_c3_default_shannon_clear}}) at {{sims}} simulations. It clears on size, not just sign.
+- **He beats the most likely internal fill for his minutes** `[modeled, slot_robustness]`: {{v_A_c3_default_williams_u}} points of title odds un-aged and {{v_A_c3_default_williams_a}} aged, positive in every view and clearing every view's floor on both bases ({{v_A_c3_default_williams_clear}}) at {{sims}} simulations. It clears on size, not just sign.
 - **As a defender assigned to a top scorer**, he held scorers slightly below the norm: percentile {{k_defender_pct}} of {{k_defender_ref}} defenders, where low is good ({{k_defender_z}} standard errors, inside the noise; {{k_defender_n}} pairings, {{k_defender_poss}} possessions) `[observed, n6_kuminga_ledger]`.
 - **He is not a primary creator competing for Edwards' and Ball's shots:** usage {{k_usg}} last season, below the high-usage line, with {{k_unast}} of his makes unassisted (percentile {{k_unast_pct}}, on {{k_makes}} makes) `[observed]`.
 
@@ -88,7 +88,7 @@ None of the three survives the allocator cell either: under the headline's own m
 
 **The contract, in one paragraph.** Two years from the taxpayer mid-level exception: **{{k_y1}}** this season and **{{k_y2}}** next, a player option on the second year, {{k_total}} in all; the team release disclosed no terms, so these are reported figures `[observed]`. If he opts out after one season, he has one season of service and Minnesota holds only Non-Bird rights, which cap a re-signing at **{{k_nonbird}}**. If he opts in and plays both, Minnesota holds Early Bird rights. The option model has him opting out with probability **{{k_optout_lo}} to {{k_optout_hi}}** across the views `[modeled, player_option]`.
 
-**The number, and the condition:** {{v_A_c3_default_shannon_u}} points of title odds against the default fill, conditional on the alternative not being Beringer and on one season that the option may make the only one.
+**The number, and the condition:** {{v_A_c3_default_williams_u}} points of title odds against the default fill, conditional on the alternative not being Beringer and on one season that the option may make the only one.
 
 ---
 

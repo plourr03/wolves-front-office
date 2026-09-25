@@ -115,7 +115,7 @@ The optimist: he's the athletic four they've been missing since Randle stopped b
 
 ### Better
 
-He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_shannon_pooled_a}} aged, or {{v_A_c3_default_shannon_tr_u}} and {{v_A_c3_default_shannon_tr_a}} under the headline's own minutes rule. It clears on size, not just sign, and it clears every view under both bases and both minutes rules, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: {{k_min_teamrank}} a night under the headline's rule, {{k_min_pooled}} under the pooled one.
+He beats the most likely internal fill for his minutes. Against the default answer to "who plays the four if not him," the model gives {{v_A_c3_default_williams_pooled_u}} points of title odds on the primary basis and {{v_A_c3_default_williams_pooled_a}} aged, or {{v_A_c3_default_williams_tr_u}} and {{v_A_c3_default_williams_tr_a}} under the headline's own minutes rule. It clears on size, not just sign, and it clears every view under both bases and both minutes rules, which is the strictest test this piece applies to anything. The two sizes differ mostly because the allocators give him different minutes: {{k_min_teamrank}} a night under the headline's rule, {{k_min_pooled}} under the pooled one.
 
 As a defender assigned to a top scorer, in last season's data pooled with the two before it, he held scorers slightly below the norm: percentile {{k_defender_pct}} of {{k_defender_ref}} defenders, where low is good ({{k_defender_z}} standard errors, inside the noise; {{k_defender_n}} pairings, {{k_defender_poss}} possessions).
 
@@ -137,7 +137,7 @@ He adds to the crunch. The projected five with him in is the {{m5_kin_pct}}th-pe
 
 Two years from the taxpayer mid-level exception: **{{k_y1}}** this season and **{{k_y2}}** next, a player option on the second year, {{k_total}} in all. The team's release disclosed no terms, so these are reported figures, corroborated by the exception amount to the dollar. If he opts out after one season, he'll have one season of service and Minnesota holds only Non-Bird rights, which cap a re-signing at **{{k_nonbird}}**. If he opts in and plays both years, Minnesota holds Early Bird rights. The option model has him opting out with a probability between {{k_optout_lo}} and {{k_optout_hi}} across the views.
 
-**The number, and the condition:** {{v_A_c3_default_shannon_pooled_u}} points of title odds against the default fill, conditional on the alternative not being Beringer and on one season that the option may make the only one.
+**The number, and the condition:** {{v_A_c3_default_williams_pooled_u}} points of title odds against the default fill, conditional on the alternative not being Beringer and on one season that the option may make the only one.
 
 ## 5. Edwards, and why Ball is here
 
@@ -212,7 +212,7 @@ The four views, the two aging bases, the quotability rule, the four cells, the a
 
 2. "If you want to know whether to trust the model, don't watch Minnesota. Watch Boston: {{model_bos}} against a market price of {{mkt_bos}}, and a net rating below {{bos_dec_threshold}} through game {{bos_dec_game}} means the market was right." (`model_bos`, `mkt_bos`, `bos_dec_threshold`, `bos_dec_game`)
 
-3. "Kuminga beats whoever else would have played his minutes, and it clears the model's own noise under every rule I can throw at it. The one thing that flips it is Joan Beringer taking those minutes instead." (`v_A_c3_default_shannon_pooled_u`, `v_A_c3_default_shannon_cells`, `v_D_beringer_fills_pooled_u`)
+3. "Kuminga beats whoever else would have played his minutes, and it clears the model's own noise under every rule I can throw at it. The one thing that flips it is Joan Beringer taking those minutes instead." (`v_A_c3_default_williams_pooled_u`, `v_A_c3_default_williams_cells`, `v_D_beringer_fills_pooled_u`)
 
 4. "'The offseason made Minnesota worse' is the sentence this piece can't write. It holds only while Cody Williams plays {{williams_threshold}} minutes a night or more, and only on one of the two aging bases." (`williams_threshold`, `off_delta_u`, `off_delta_a`)
 

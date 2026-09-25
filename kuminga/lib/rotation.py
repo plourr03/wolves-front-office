@@ -8,6 +8,11 @@ THE RULE (C2 revision)
 
 1. Rank players by a LEAGUE-WIDE score, computed once:
        0.5 * pct_rank(prior minutes per appearance) + 0.5 * pct_rank(consensus net)
+   for an incumbent, and (D111) the W1 blend for a TEAM-CHANGER:
+       0.2 * pct_rank(prior minutes per appearance) + 0.8 * pct_rank(consensus net)
+   A mover's prior minutes are a role earned somewhere else, so they count for less in
+   the order exactly as they count for less in the minutes blend (rule 2). The flat
+   0.5 / 0.5 order for everyone is kept as the recorded sensitivity (`rank_score_flat`).
    League-wide matters: a blend of two percentiles is not order-preserving under a
    change of reference set, so re-ranking inside a coalition would make a player's
    standing depend on which teammates happen to be in it.
@@ -49,6 +54,23 @@ CURVE_WEIGHT = 0.5        # weight on the team-rank curve vs the player's own lo
 # projected decline. Movers are therefore weighted toward the rank curve and away from
 # their own prior load. Incumbents keep the 50/50 blend. Applied identically to all 30.
 MOVER_CURVE_WEIGHT = 0.8
+
+# D111: the same discount on the ORDER. The Williams ordering check (D110) showed the
+# 50/50 order handing a team-changer a rotation spot on the strength of a role earned on
+# a bottom-ten team; ordering movers on the W1 blend is the consistent rule, applied
+# identically to all 30 teams. Incumbents keep 0.5 / 0.5.
+ORDER_MOVER_MPG_WEIGHT = 1.0 - MOVER_CURVE_WEIGHT
+
+
+def rank_scores(pct_mpg, pct_net, moved=None):
+    """League-wide rank score. With `moved` (a boolean per player), team-changers are
+    ordered on the W1 blend; without it, everyone is on the flat 0.5 / 0.5 blend."""
+    pct_mpg = np.asarray(pct_mpg, dtype=float)
+    pct_net = np.asarray(pct_net, dtype=float)
+    if moved is None:
+        return MPG_WEIGHT * pct_mpg + (1 - MPG_WEIGHT) * pct_net
+    w = np.where(np.asarray(moved, dtype=bool), ORDER_MOVER_MPG_WEIGHT, MPG_WEIGHT)
+    return w * pct_mpg + (1 - w) * pct_net
 
 
 def curve_weights(players, default=None):

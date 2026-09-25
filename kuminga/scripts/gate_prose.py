@@ -50,8 +50,10 @@ AUX = [os.path.join(OUT, f) for f in ("c1_champions.csv", "c1_champion_top8.csv"
 # league constants that are structure, not findings: games in a season, minutes in a game,
 # teams in the league, the per-100-possessions scale, playoff series length
 ALLOWED_CONSTANTS = {"82", "48", "30", "100", "7"}
-STRUCTURE = [r"\b\d{4}-\d{2}\b",                       # seasons
-             r"\b(19|20)\d{2}-\d{2}-\d{2}\b",            # ISO dates
+STRUCTURE = [r"\b(19|20)\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z?\b",   # ISO timestamps (the methods page records when a rule was adopted); before seasons, which would eat the year-month
+             r"\b(19|20)\d{2}-\d{2}-\d{2}\b",            # ISO dates (before seasons, same reason)
+             r"\b\d{4}-\d{2}\b",                       # seasons
+             r"\b(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\b",       # git commit hashes (at least one letter, so no bare number passes)
              r"\b(January|February|March|April|May|June|July|August|September|October|November|December|"
              r"Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\.? \d{1,2}(, (19|20)\d{2})?\b",   # written dates
              r"\b(19|20)\d{2}\b",                        # years

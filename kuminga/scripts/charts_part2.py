@@ -243,7 +243,7 @@ def viz_the_verdicts(S):
         rows.append(dict(key=key, label=lab, ships=bool(x.ships_all_four), signs=str(x.signs), family=str(x.family),
                          pooled_u_sign=str(x.pooled_unaged_sign), pooled_a_sign=str(x.pooled_aged_sign),
                          pooled_u_clear=int(x.pooled_unaged_clear), pooled_a_clear=int(x.pooled_aged_clear), **cells))
-    data = dict(rows=rows, ball_txt=S["v_ball_in_pooled_u"], reid_txt=S["v_reid_out_pooled_u"], kum_txt=S["v_A_c3_default_shannon_pooled_u"], ddv_txt=S["v_ddv_injury_pooled_u"])
+    data = dict(rows=rows, ball_txt=S["v_ball_in_pooled_u"], reid_txt=S["v_reid_out_pooled_u"], kum_txt=S["v_A_c3_default_williams_pooled_u"], ddv_txt=S["v_ddv_injury_pooled_u"])
     pid = "the-verdicts"
     p = "#viz-%s" % pid
     stage = '<svg class="th-svg" role="img" aria-label="Every move with its four cells"></svg>'
@@ -333,7 +333,7 @@ def viz_the_verdicts(S):
     at(600 + 9 * 380 + 400, function () { setCaption(CAPS[3]); showReplay(); });
   }
 """.replace("__DATA__", json.dumps(data))
-    return pid, html + "\n<style>" + css + "</style>\n" + C1.script(pid, js), ["v_ball_in_pooled_u", "v_reid_out_pooled_u", "v_A_c3_default_shannon_pooled_u", "v_ddv_injury_pooled_u", "v_D_beringer_fills_pooled_u", "v_randle_out_pooled_u", "v_dosunmu_retained_pooled_u"]
+    return pid, html + "\n<style>" + css + "</style>\n" + C1.script(pid, js), ["v_ball_in_pooled_u", "v_reid_out_pooled_u", "v_A_c3_default_williams_pooled_u", "v_ddv_injury_pooled_u", "v_D_beringer_fills_pooled_u", "v_randle_out_pooled_u", "v_dosunmu_retained_pooled_u"]
 
 
 # ================================================================== 3. the second creator

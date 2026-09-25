@@ -52,13 +52,13 @@ The path: modal seed **{{n2_modal}}**, and San Antonio or Oklahoma City in the f
 
 The optimist: an athletic four, cheap, young, an upgrade on whoever else soaks up those minutes. The pessimist: he couldn't stick in Golden State and the playoff numbers are ugly.
 
-Better: he beats the most likely fill for his minutes by {{v_A_c3_default_shannon_pooled_u}} points of title odds on the primary basis ({{v_A_c3_default_shannon_pooled_a}} aged), clearing every floor under both aging bases and both minutes rules.
+Better: he beats the most likely fill for his minutes by {{v_A_c3_default_williams_pooled_u}} points of title odds on the primary basis ({{v_A_c3_default_williams_pooled_a}} aged), clearing every floor under both aging bases and both minutes rules.
 
 Worse, or uncertain: if Beringer took the minutes instead, it flips to {{v_D_beringer_fills_pooled_u}} and clears the other way, on a rookie sample. In the playoffs, all of it pooled, {{po_games}} games and {{po_poss}} possessions, on-court net **{{po_net}}**; with garbage time removed, {{po_onoff}} worse on than off (standard error {{po_onoff_se}}). Small, and confounded by who else was on the floor, but blowouts don't explain it.
 
 The contract: {{k_y1}} now, {{k_y2}} at his option. Opt out after one season and Minnesota's Non-Bird ceiling is {{k_nonbird}}.
 
-**The number, and the condition:** {{v_A_c3_default_shannon_pooled_u}} against the default fill, conditional on the alternative not being Beringer.
+**The number, and the condition:** {{v_A_c3_default_williams_pooled_u}} against the default fill, conditional on the alternative not being Beringer.
 
 ## 5. Edwards, and why Ball is here
 

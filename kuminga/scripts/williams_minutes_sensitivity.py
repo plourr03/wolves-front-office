@@ -104,8 +104,9 @@ def main():
         p = E.load_e_params()
         wa, wb, sig = float(p["wins_a"]), float(p["wins_b"]), float(p["sigma_record"])
 
-        assert WILLIAMS_ID in rot_min, "Cody Williams is not in the rotation"
-        actual = rot_min[WILLIAMS_ID]
+        # D111: under the mover-discounted order he may be outside the ten, in which case
+        # the model default is zero and the levels above it take minutes FROM the rotation
+        actual = rot_min.get(WILLIAMS_ID, 0.0)
         wrow = mn[mn.player_id == float(WILLIAMS_ID)].iloc[0]
         r.note("Cody Williams: allocated %.2f mpg on a prior of %.2f, impact %.2f "
                "(consensus), ceiling %.2f"
@@ -162,6 +163,14 @@ def main():
             m = dict(minutes)
             freed = m.get(WILLIAMS_ID, 0.0) - target
             m[WILLIAMS_ID] = target
+            if freed < -1e-9:
+                # the minutes come FROM the others, in proportion to what each carries
+                need = -freed
+                others = {p: v for p, v in m.items() if p != WILLIAMS_ID}
+                tot = sum(others.values())
+                for pid, v in others.items():
+                    m[pid] = v - need * v / tot
+                return m, 0.0
             for pid in sorted([x for x in m if x != WILLIAMS_ID],
                               key=lambda x: -rank.get(x, 0)):
                 if freed <= 1e-9:

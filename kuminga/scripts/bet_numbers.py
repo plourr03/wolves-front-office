@@ -201,7 +201,7 @@ def add(F, rid, csv):
     F("williams_prior_mpg", S, "Cody Williams, minutes per appearance for Utah 2025-26", "%.1f" % T.loc["Cody Williams", "prior_mpg"], "OBSERVED", "FACT", rw, "williams_projected_ten.csv")
     F("w_shannon_rank", S, "Shannon's rank on Minnesota's roster by the model's score", int(T.loc["Terrence Shannon Jr.", "order_rank"]), "MODELED", "FACT", rw, "williams_projected_ten.csv")
     F("w_pool_n", S, "available players in Minnesota's pool", len(T), "OBSERVED", "FACT", rw, "williams_projected_ten.csv")
-    for key, lab, pre in (("default", "the default ordering", "default ("), ("mover_order", "the mover-discounted ordering", "mover-discounted"),
+    for key, lab, pre in (("primary", "the primary ordering (movers 0.2 / 0.8)", "primary"), ("flat", "the flat 0.5 / 0.5 ordering (sensitivity)", "sensitivity"),
                           ("impact_only", "impact-only ordering", "impact only")):
         x = W[W.ordering.str.startswith(pre)].iloc[0]
         F("w_rank_%s" % key, S, "Williams's rank under %s" % lab, int(x.williams_rank), "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")

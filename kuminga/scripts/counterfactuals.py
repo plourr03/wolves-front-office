@@ -38,7 +38,7 @@ sys.path.insert(0, REPO)
 sys.path.insert(0, os.path.join(REPO, "offseason", "scripts"))
 sys.path.insert(0, HERE)   # sibling scripts (build_strengths) regardless of how this is invoked
 
-from kuminga.lib import kfreeze, runlog  # noqa: E402
+from kuminga.lib import kfreeze, runlog, rotation
 import build_team_ratings as A           # noqa: E402
 import bracket_sim as E                  # noqa: E402
 from build_strengths import build_impacts, nkey  # noqa: E402
@@ -231,7 +231,7 @@ def main():
                     ros = pd.concat([ros, pd.DataFrame([dict(
                         player_id=rw.player_id, player_name=replacement,
                         consensus_net=rw.consensus_net, prior_mpg=prior,
-                        rank_score=0.5 * pct_m + 0.5 * pct_n,
+                        rank_score=float(rotation.rank_scores(pct_m, pct_n, True)),   # D111: an outside signing is a mover
                         rs_avail=1.0)])], ignore_index=True)
                     note = f"{replacement} signed instead of Kuminga"
                 net, title = price(ros, fork)

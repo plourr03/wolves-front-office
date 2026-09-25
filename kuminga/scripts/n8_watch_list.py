@@ -130,17 +130,37 @@ def main():
         r.note("1. Williams: model default %.1f mpg, pattern %s; first view to turn "
                "positive as his minutes fall: %s at %.1f mpg"
                % (default.williams_mpg, default.pattern, flip_view, flip_mpg))
+        # D111: under the primary (mover-discounted) ordering the model default can put
+        # Williams OUTSIDE the ten, so the default pattern is MIXED and the claim reads the
+        # other way round: the summer hurts on every view only if he plays enough.
+        flat_note = ""
+        woc = os.path.join(OUT_DIR, "williams_ordering_check.csv")
+        if os.path.exists(woc):
+            wo = pd.read_csv(woc)
+            fl = wo[wo.ordering.str.startswith("sensitivity: flat")]
+            if len(fl):
+                flat_note = "; %.1f under the flat 0.5 / 0.5 order kept as the sensitivity" % float(fl.iloc[0].williams_mpg)
+        if default.pattern == "ALL NEGATIVE":
+            w_current = "%.1f a night (model default)" % default.williams_mpg
+            w_threshold = "below %.1f a night" % flip_mpg
+            w_flips = ("the four views stop agreeing the offseason made Minnesota worse: the "
+                       "%s view turns positive, so the verdict goes from ALL NEGATIVE to MIXED "
+                       "(at %.0f minutes the %s delta is already only %+.3f points, so this "
+                       "flip sits right at the threshold)"
+                       % (VIEW[flip_view], above, VIEW[flip_view], edge))
+        else:
+            w_current = ("%.1f a night (model default: outside the ten under the primary ordering%s)"
+                         % (default.williams_mpg, flat_note))
+            w_threshold = "above %.1f a night" % flip_mpg
+            w_flips = ("the four views agree the offseason made Minnesota worse only if Williams plays a real "
+                       "role: above %.1f a night the last view to cross, %s, turns negative and the verdict "
+                       "goes from MIXED to ALL NEGATIVE; at the default the four ways split"
+                       % (flip_mpg, VIEW[flip_view]))
         rows.append(dict(
             n=1, claim="Cody Williams' minutes decide whether the offseason verdict holds",
             metric="Cody Williams minutes per Minnesota game, through game %d" % N_CHECK,
             label="assumed input, modelled consequence",
-            current="%.1f a night (model default)" % default.williams_mpg,
-            threshold="below %.1f a night" % flip_mpg,
-            flips=("the four views stop agreeing the offseason made Minnesota worse: the "
-                   "%s view turns positive, so the verdict goes from ALL NEGATIVE to MIXED "
-                   "(at %.0f minutes the %s delta is already only %+.3f points, so this "
-                   "flip sits right at the threshold)"
-                   % (VIEW[flip_view], above, VIEW[flip_view], edge)),
+            current=w_current, threshold=w_threshold, flips=w_flips,
             source="williams_minutes_sensitivity.csv", value=flip_mpg))
 
         # ================= noise: twenty-game net rating ================================

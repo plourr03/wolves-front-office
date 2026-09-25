@@ -210,7 +210,16 @@ def main():
             r.note("ids: %d from v1, %d more from the warehouse bio table"
                    % (n_v1, int(keep.nba_player_id.notna().sum()) - n_v1))
         except Exception as e:                                   # noqa: BLE001
-            r.note("warehouse id fill unavailable (%s); v1 ids only" % type(e).__name__)
+            # D111: this fallback used to be silent. A chain launched while the warehouse
+            # was offline (2026-09-25 09:23) blanked 27 ids in the frozen snapshot and sent
+            # two players to replacement level downstream. Without the warehouse the step
+            # now fails, unless the run says explicitly that it accepts v1 ids only.
+            if os.environ.get("KUMINGA_ALLOW_NO_WAREHOUSE") != "1":
+                raise RuntimeError("warehouse id fill unavailable (%s): the roster snapshot "
+                                   "would lose ids; set KUMINGA_ALLOW_NO_WAREHOUSE=1 to accept "
+                                   "v1 ids only" % type(e).__name__) from e
+            r.note("warehouse id fill unavailable (%s); v1 ids only (KUMINGA_ALLOW_NO_WAREHOUSE=1)"
+                   % type(e).__name__)
 
         unresolved = keep[keep.nba_player_id.isna()]
         r.note("UNRESOLVED ids: %d of %d rows. These are handled downstream by "
