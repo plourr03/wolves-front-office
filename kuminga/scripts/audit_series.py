@@ -135,7 +135,7 @@ CLAIMS = {
  "part2.md": [
   ("the season was run 200,000 times per way", ["sims"]),
   ("the No. 10 pick two summers ago", ["fact:draft_cody_williams_pick"]),
-  ("the model scores him at -4.39 points per hundred possessions", ["williams_bio"]),
+  ("The model scores him at -4.39 points per hundred possessions", ["williams_bio"]),
   ("only one player in the league's projected rotations is rated lower", ["fact:williams_rated_below"]),
   ("gives Cody Williams 16.1 minutes a night", ["williams_mpg"]),
   ("Below 12.6 a night", ["williams_threshold"]),

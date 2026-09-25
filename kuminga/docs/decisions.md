@@ -2072,3 +2072,15 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **Review.** Rendered headless at 720 and 360 stage widths; fixed on the way: overlapping date labels (staggered), truncated pick names (pick rows span the bar column), the hero colliding with the replay button, crowded step labels (rotated on phones), line labels hidden behind bars (drawn last, haloed), clipped and colliding outlet labels (flipped at the right edge, duplicates within twelve days labeled once, the restated ESPN mark unlabeled on phones), the tie note running off the left edge, and a caption race in the ledger's final state (a deferred caption overwriting the landed one).
 
 **Prose gate and audit** unchanged by the tags: clean.
+
+### D108. Part 2 rewritten as a story, every figure kept and bound
+
+**Run IDs.** `gate_prose_20260925T133211Z`, `audit_series_20260925T133212Z`. As of 2026-09-25.
+
+**Why.** Bobby's read of the D99 draft: barely any story, reads like a machine wrote it, no soul. Part 1's rewrite (D102) had worked because it was told as a story with a person at the end of it; Part 2 was a findings list with a bar joke on top.
+
+**What changed.** The same findings, the same figures, the same bound phrases, told in first person as a sequence of things that happened: the first run that said the summer made us worse and the choice between the evidence and the feeling; Cody Williams as a person who arrived as the throw-in in a salary dump, with the fork in the road he is; the Achilles as the thing the author keeps wanting to skip past; the three sure things with the author's own peace and lack of it (the picks, Naz); the Edwards finding told from the couch in May before the numbers; the September arguments as an attempt to prove the podcasts right that failed; the Charlotte bug as the model being wrong in public, with the admission that the first instinct was to look for a reason it might be right; health and the path as the two questions he'll get in January. Section heads changed to match: "The kid from Utah", "Weather", "What I'm sure about", "The May I keep coming back to", "The arguments we have in September", "The night the model was wrong in public", "Health, and the path". The hand-off to Part 3 is unchanged. All five pull-quotes remain verbatim in the article. The feed version was rewritten to the same frame.
+
+**Discipline.** No new figures; every bound phrase from D100 is present verbatim (one binding recapitalized where a sentence now starts with it). No sentence ends on a number and a condition. No em or en dashes. Personal moments are limited to what is on the record or is the author's own process: the runs, the bug, the May series, the bar question. Nothing is attributed to anyone who did not say it.
+
+**Gates.** Prose gate clean on Part 2, its feed and its pull-quotes; `audit_series.py` 564 checks, 0 problems. Part 2 is 2,956 words, the feed version 344, above the 2,500 target, which is a trim for Bobby's read rather than a cut made here.
