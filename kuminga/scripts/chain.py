@@ -82,7 +82,9 @@ def plan(nsims: int):
         step("compare_slot_shapley"), step("slot_robustness"), step("slot_analysis"),
         step("player_option"), step("seed_distribution"), step("counterfactuals"),
         step("eval_signing"), step("green_kept"), step("lede_loophole"),
-        step("build_outputs"), step("williams_minutes_sensitivity"), step("w1c_decompose"),
+        step("build_outputs"), step("williams_minutes_sensitivity"),
+        step("williams_ordering_check"),   # D111: the sheet reads its orderings (primary / flat / impact only)
+        step("w1c_decompose"),
         step("n2_path"), step("m4_lineup_study"),
     ]
     # un-aged, everything that READS outputs/preaging and so must run after the snapshot

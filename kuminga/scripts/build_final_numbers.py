@@ -539,7 +539,9 @@ def main():
         rot = csv("rotations_2026_27.csv")
         rrot = rid("build_rotations", "unaged")
         cur = rot[(rot.scenario == "current") & (rot.team_abbr == "MIN")].set_index("player_name")
-        F("williams_mpg", S, "Cody Williams projected minutes", "%.1f" % cur.loc["Cody Williams", "mpg"], "ASSUMED", "NOT QUOTABLE", rrot, "rotations_2026_27.csv")
+        # D111: under the primary ordering Williams can sit outside the ten, in which case the
+        # model default is 0.0 and the rotation file has no row for him
+        F("williams_mpg", S, "Cody Williams projected minutes (0.0 when outside the ten)", "%.1f" % float(cur.mpg.get("Cody Williams", 0.0)), "ASSUMED", "NOT QUOTABLE", rrot, "rotations_2026_27.csv")
         pool = csv("player_pool_2026_27.csv")
         pm = pool[(pool.scenario == "current") & (pool.team_abbr == "MIN")].set_index("player_name")
         F("rs_williams", S, "Williams rank score", "%.4f" % pm.loc["Cody Williams", "rank_score"], "COMPOSED", "DESCRIPTIVE", rrot, "player_pool_2026_27.csv")
@@ -547,7 +549,7 @@ def main():
         F("rs_gap", S, "rank-score gap", "%.4f" % (pm.loc["Jaylen Clark", "rank_score"] - pm.loc["Cody Williams", "rank_score"]),
           "COMPOSED", "DESCRIPTIVE", rrot, "player_pool_2026_27.csv")
         n8 = csv("n8_watch_list.csv").set_index("n")
-        F("williams_threshold", S, "Williams minutes below which the offseason verdict turns MIXED", "%.1f" % float(n8.loc[1, "value"]),
+        F("williams_threshold", S, "Williams minutes at which the offseason verdict changes pattern (watch-list claim 1)", "%.1f" % float(n8.loc[1, "value"]),
           "MODELED", "QUOTABLE", rn8, "n8_watch_list.csv")
         w1c = csv("w1c_delta_decomposition.csv")
         rw1c = rid("w1c_decompose")
