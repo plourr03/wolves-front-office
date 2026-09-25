@@ -193,6 +193,36 @@ def add(F, rid, csv):
     F("c1_mean_missed_rs", S, "top-8 RS games missed, mean", "%.0f" % C.top8_rs_games_missed.mean(), "OBSERVED", "QUOTABLE", r1, "c1_champions.csv")
     F("c1_mean_missed_po", S, "top-8 playoff games missed, mean", "%.1f" % C.top8_po_games_missed.mean(), "OBSERVED", "QUOTABLE", r1, "c1_champions.csv")
 
+    # ---------------- the Williams ordering check and the mover base rate (D110) ----------
+    rb, rw = rid("mover_minutes_base_rate"), rid("williams_ordering_check")
+    B = csv("mover_minutes_base_rate.csv").set_index("group")
+    W = csv("williams_ordering_check.csv")
+    T = csv("williams_projected_ten.csv").set_index("player")
+    F("williams_prior_mpg", S, "Cody Williams, minutes per appearance for Utah 2025-26", "%.1f" % T.loc["Cody Williams", "prior_mpg"], "OBSERVED", "FACT", rw, "williams_projected_ten.csv")
+    F("w_shannon_rank", S, "Shannon's rank on Minnesota's roster by the model's score", int(T.loc["Terrence Shannon Jr.", "order_rank"]), "MODELED", "FACT", rw, "williams_projected_ten.csv")
+    F("w_pool_n", S, "available players in Minnesota's pool", len(T), "OBSERVED", "FACT", rw, "williams_projected_ten.csv")
+    for key, lab, pre in (("default", "the default ordering", "default ("), ("mover_order", "the mover-discounted ordering", "mover-discounted"),
+                          ("impact_only", "impact-only ordering", "impact only")):
+        x = W[W.ordering.str.startswith(pre)].iloc[0]
+        F("w_rank_%s" % key, S, "Williams's rank under %s" % lab, int(x.williams_rank), "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+        F("w_mpg_%s" % key, S, "Williams's minutes under %s" % lab, "%.1f" % x.williams_mpg, "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+        F("w_delta_%s" % key, S, "offseason delta under %s, mean of four views" % lab, "%+.2f" % x.delta_mean, "MODELED", "QUOTABLE AS BAND", rw, "williams_ordering_check.csv")
+        F("w_sign_%s" % key, S, "offseason verdict under %s" % lab, x.delta_sign, "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+    F("w_ret_n", S, "mover cohort: players who changed teams", int(B.loc["all movers", "n"]), "OBSERVED", "FACT", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_median", S, "mover cohort: median share of prior minutes kept", "%.0f%%" % (100 * B.loc["all movers", "median"]), "OBSERVED", "QUOTABLE", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_q25", S, "mover cohort: lower quartile", "%.0f%%" % (100 * B.loc["all movers", "q25"]), "OBSERVED", "QUOTABLE", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_q75", S, "mover cohort: upper quartile", "%.0f%%" % (100 * B.loc["all movers", "q75"]), "OBSERVED", "QUOTABLE", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_top10_n", S, "movers who landed on a top-ten team by wins", int(B.loc["new team top ten by wins", "n"]), "OBSERVED", "FACT", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_top10_median", S, "their median share of prior minutes kept", "%.0f%%" % (100 * B.loc["new team top ten by wins", "median"]), "OBSERVED", "QUOTABLE", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_600_n", S, "movers who landed on a .600 team", int(B.loc["new team at or above .600", "n"]), "OBSERVED", "FACT", rb, "mover_minutes_base_rate.csv")
+    F("w_ret_600_median", S, "their median share kept", "%.0f%%" % (100 * B.loc["new team at or above .600", "median"]), "OBSERVED", "QUOTABLE", rb, "mover_minutes_base_rate.csv")
+    cal = W[W.ordering.str.startswith("calibrated: median, new team top ten")].iloc[0]
+    F("w_cal_top10_mpg", S, "Williams at the top-ten-destination retention", "%.1f" % cal.williams_mpg, "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+    F("w_cal_top10_delta", S, "offseason delta at that level, mean of four views", "%+.2f" % cal.delta_mean, "MODELED", "QUOTABLE AS BAND", rw, "williams_ordering_check.csv")
+    F("w_cal_top10_sign", S, "offseason verdict at that level", cal.delta_sign, "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+    med = W[W.ordering.str.startswith("calibrated: median retention, all movers")].iloc[0]
+    F("w_cal_all_raw_mpg", S, "Williams at the all-movers median retention, before the default cap", "%.1f" % med.retention_x_prior, "MODELED", "QUOTABLE", rw, "williams_ordering_check.csv")
+
     # ---------------- C4: the ledger ------------------------------------------------------
     r4 = rid("c4_ledger")
     L = csv("c4_ledger.csv")

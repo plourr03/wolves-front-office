@@ -1623,6 +1623,33 @@ c1_mean_top5_rs,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes shar
 c1_mean_top5_po,"C. The bet: additions for Parts 1, 3 and 4","top-5 minutes share playoffs, mean",70%,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
 c1_mean_missed_rs,"C. The bet: additions for Parts 1, 3 and 4","top-8 RS games missed, mean",101,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
 c1_mean_missed_po,"C. The bet: additions for Parts 1, 3 and 4","top-8 playoff games missed, mean",6.2,OBSERVED,QUOTABLE,c1_champions_20260924T195859Z,c1_champions.csv
+williams_prior_mpg,"C. The bet: additions for Parts 1, 3 and 4","Cody Williams, minutes per appearance for Utah 2025-26",24.3,OBSERVED,FACT,williams_ordering_check_20260925T141128Z,williams_projected_ten.csv
+w_shannon_rank,"C. The bet: additions for Parts 1, 3 and 4",Shannon's rank on Minnesota's roster by the model's score,13,MODELED,FACT,williams_ordering_check_20260925T141128Z,williams_projected_ten.csv
+w_pool_n,"C. The bet: additions for Parts 1, 3 and 4",available players in Minnesota's pool,13,OBSERVED,FACT,williams_ordering_check_20260925T141128Z,williams_projected_ten.csv
+w_rank_default,"C. The bet: additions for Parts 1, 3 and 4",Williams's rank under the default ordering,10,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_mpg_default,"C. The bet: additions for Parts 1, 3 and 4",Williams's minutes under the default ordering,16.1,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_delta_default,"C. The bet: additions for Parts 1, 3 and 4","offseason delta under the default ordering, mean of four views",-0.75,MODELED,QUOTABLE AS BAND,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_sign_default,"C. The bet: additions for Parts 1, 3 and 4",offseason verdict under the default ordering,ALL NEGATIVE,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_rank_mover_order,"C. The bet: additions for Parts 1, 3 and 4",Williams's rank under the mover-discounted ordering,12,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_mpg_mover_order,"C. The bet: additions for Parts 1, 3 and 4",Williams's minutes under the mover-discounted ordering,0.0,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_delta_mover_order,"C. The bet: additions for Parts 1, 3 and 4","offseason delta under the mover-discounted ordering, mean of four views",+0.29,MODELED,QUOTABLE AS BAND,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_sign_mover_order,"C. The bet: additions for Parts 1, 3 and 4",offseason verdict under the mover-discounted ordering,MIXED,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_rank_impact_only,"C. The bet: additions for Parts 1, 3 and 4",Williams's rank under impact-only ordering,13,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_mpg_impact_only,"C. The bet: additions for Parts 1, 3 and 4",Williams's minutes under impact-only ordering,0.0,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_delta_impact_only,"C. The bet: additions for Parts 1, 3 and 4","offseason delta under impact-only ordering, mean of four views",+0.35,MODELED,QUOTABLE AS BAND,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_sign_impact_only,"C. The bet: additions for Parts 1, 3 and 4",offseason verdict under impact-only ordering,MIXED,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_ret_n,"C. The bet: additions for Parts 1, 3 and 4",mover cohort: players who changed teams,34,OBSERVED,FACT,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_median,"C. The bet: additions for Parts 1, 3 and 4",mover cohort: median share of prior minutes kept,74%,OBSERVED,QUOTABLE,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_q25,"C. The bet: additions for Parts 1, 3 and 4",mover cohort: lower quartile,43%,OBSERVED,QUOTABLE,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_q75,"C. The bet: additions for Parts 1, 3 and 4",mover cohort: upper quartile,90%,OBSERVED,QUOTABLE,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_top10_n,"C. The bet: additions for Parts 1, 3 and 4",movers who landed on a top-ten team by wins,8,OBSERVED,FACT,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_top10_median,"C. The bet: additions for Parts 1, 3 and 4",their median share of prior minutes kept,48%,OBSERVED,QUOTABLE,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_600_n,"C. The bet: additions for Parts 1, 3 and 4",movers who landed on a .600 team,6,OBSERVED,FACT,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_ret_600_median,"C. The bet: additions for Parts 1, 3 and 4",their median share kept,48%,OBSERVED,QUOTABLE,mover_minutes_base_rate_20260925T140950Z,mover_minutes_base_rate.csv
+w_cal_top10_mpg,"C. The bet: additions for Parts 1, 3 and 4",Williams at the top-ten-destination retention,11.7,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_cal_top10_delta,"C. The bet: additions for Parts 1, 3 and 4","offseason delta at that level, mean of four views",-0.44,MODELED,QUOTABLE AS BAND,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_cal_top10_sign,"C. The bet: additions for Parts 1, 3 and 4",offseason verdict at that level,MIXED,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
+w_cal_all_raw_mpg,"C. The bet: additions for Parts 1, 3 and 4","Williams at the all-movers median retention, before the default cap",18.0,MODELED,QUOTABLE,williams_ordering_check_20260925T141128Z,williams_ordering_check.csv
 c4_in_n,"C. The bet: additions for Parts 1, 3 and 4",players in with a 2026-27 salary,7,OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv
 c4_in_total,"C. The bet: additions for Parts 1, 3 and 4",2026-27 salary in,"$75,840,737",OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv
 c4_in_total_m,"C. The bet: additions for Parts 1, 3 and 4","2026-27 salary in, rounded",$75.8 million,OBSERVED,QUOTABLE,c4_ledger_20260924T170420Z,c4_ledger.csv

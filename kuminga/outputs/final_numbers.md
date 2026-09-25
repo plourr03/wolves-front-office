@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260924T202727Z`. 1688 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260925T141357Z`. 1715 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -1675,6 +1675,33 @@
 | `c1_mean_top5_po` | top-5 minutes share playoffs, mean | 70% | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |
 | `c1_mean_missed_rs` | top-8 RS games missed, mean | 101 | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |
 | `c1_mean_missed_po` | top-8 playoff games missed, mean | 6.2 | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |
+| `williams_prior_mpg` | Cody Williams, minutes per appearance for Utah 2025-26 | 24.3 | OBSERVED | FACT | `williams_ordering_check_20260925T141128Z` |
+| `w_shannon_rank` | Shannon's rank on Minnesota's roster by the model's score | 13 | MODELED | FACT | `williams_ordering_check_20260925T141128Z` |
+| `w_pool_n` | available players in Minnesota's pool | 13 | OBSERVED | FACT | `williams_ordering_check_20260925T141128Z` |
+| `w_rank_default` | Williams's rank under the default ordering | 10 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_mpg_default` | Williams's minutes under the default ordering | 16.1 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_delta_default` | offseason delta under the default ordering, mean of four views | -0.75 | MODELED | QUOTABLE AS BAND | `williams_ordering_check_20260925T141128Z` |
+| `w_sign_default` | offseason verdict under the default ordering | ALL NEGATIVE | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_rank_mover_order` | Williams's rank under the mover-discounted ordering | 12 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_mpg_mover_order` | Williams's minutes under the mover-discounted ordering | 0.0 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_delta_mover_order` | offseason delta under the mover-discounted ordering, mean of four views | +0.29 | MODELED | QUOTABLE AS BAND | `williams_ordering_check_20260925T141128Z` |
+| `w_sign_mover_order` | offseason verdict under the mover-discounted ordering | MIXED | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_rank_impact_only` | Williams's rank under impact-only ordering | 13 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_mpg_impact_only` | Williams's minutes under impact-only ordering | 0.0 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_delta_impact_only` | offseason delta under impact-only ordering, mean of four views | +0.35 | MODELED | QUOTABLE AS BAND | `williams_ordering_check_20260925T141128Z` |
+| `w_sign_impact_only` | offseason verdict under impact-only ordering | MIXED | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_ret_n` | mover cohort: players who changed teams | 34 | OBSERVED | FACT | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_median` | mover cohort: median share of prior minutes kept | 74% | OBSERVED | QUOTABLE | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_q25` | mover cohort: lower quartile | 43% | OBSERVED | QUOTABLE | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_q75` | mover cohort: upper quartile | 90% | OBSERVED | QUOTABLE | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_top10_n` | movers who landed on a top-ten team by wins | 8 | OBSERVED | FACT | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_top10_median` | their median share of prior minutes kept | 48% | OBSERVED | QUOTABLE | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_600_n` | movers who landed on a .600 team | 6 | OBSERVED | FACT | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_ret_600_median` | their median share kept | 48% | OBSERVED | QUOTABLE | `mover_minutes_base_rate_20260925T140950Z` |
+| `w_cal_top10_mpg` | Williams at the top-ten-destination retention | 11.7 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_cal_top10_delta` | offseason delta at that level, mean of four views | -0.44 | MODELED | QUOTABLE AS BAND | `williams_ordering_check_20260925T141128Z` |
+| `w_cal_top10_sign` | offseason verdict at that level | MIXED | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
+| `w_cal_all_raw_mpg` | Williams at the all-movers median retention, before the default cap | 18.0 | MODELED | QUOTABLE | `williams_ordering_check_20260925T141128Z` |
 | `c4_in_n` | players in with a 2026-27 salary | 7 | OBSERVED | QUOTABLE | `c4_ledger_20260924T170420Z` |
 | `c4_in_total` | 2026-27 salary in | $75,840,737 | OBSERVED | QUOTABLE | `c4_ledger_20260924T170420Z` |
 | `c4_in_total_m` | 2026-27 salary in, rounded | $75.8 million | OBSERVED | QUOTABLE | `c4_ledger_20260924T170420Z` |

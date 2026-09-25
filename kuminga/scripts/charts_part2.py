@@ -72,7 +72,11 @@ def viz_the_fork(S):
                 xx = x0 + (0 - y0) * (x1 - x0) / (y1 - y0)
                 thr = xx if thr is None else max(thr, xx)
     assert thr is not None and "%.1f" % thr == S["williams_threshold"], (thr, S["williams_threshold"])
-    data = dict(grid=grid, default=default, default_txt=S["williams_mpg"], threshold=thr, threshold_txt=S["williams_threshold"])
+    W = pd.read_csv(os.path.join(OUTS, "williams_ordering_check.csv"))
+    cal = float(W[W.ordering.str.startswith("calibrated: median, new team top ten")].iloc[0].williams_mpg)
+    assert "%.1f" % cal == S["w_cal_top10_mpg"]
+    data = dict(grid=grid, default=default, default_txt=S["williams_mpg"], threshold=thr, threshold_txt=S["williams_threshold"],
+                cal=cal, cal_txt=S["w_cal_top10_mpg"], ret_txt=S["w_ret_top10_median"], rank_mover=S["w_rank_mover_order"], rank_impact=S["w_rank_impact_only"])
     pid = "the-fork"
     p = "#viz-%s" % pid
     stage = ('<svg class="th-svg" role="img" aria-label="The offseason verdict against Cody Williams minutes"></svg>'
@@ -81,7 +85,7 @@ def viz_the_fork(S):
              '<div class="th-readout"></div>')
     html = C1.chrome_html(pid, "The fork", "the verdict against one player's minutes", "minutes a night", "below this, the four ways of scoring players stop agreeing the summer hurt",
                           "Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and the rest of his minutes going to the players the model trusts more. "
-                          "Un-aged basis, pooled allocator. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.",
+                          "Un-aged basis, pooled allocator. The default of 16.1 is where the model's ordering puts him; ordered on impact he is out of the ten, so the range is the presentation. The blue line is the base rate: movers like him who landed on a top-ten team kept a median 48% of their prior minutes. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.",
                           extra_stage=stage, hero_num="0.0")
     css = C1.chrome_css(pid, "var(--status-warning)") + """
   %(p)s .th-svg { width: 100%%; height: 300px; display: block; }
@@ -97,6 +101,8 @@ def viz_the_fork(S):
   %(p)s .th-thr.is-on { opacity: 1; }
   %(p)s .th-thr-lab { font: 700 10px var(--family-mono); fill: var(--status-warning); letter-spacing: .04em; text-transform: uppercase; opacity: 0; transition: opacity 400ms ease; }
   %(p)s .th-thr-lab.is-on { opacity: 1; }
+  %(p)s .th-cal { stroke: var(--status-info); }
+  %(p)s .th-cal-lab { fill: var(--status-info); }
   %(p)s .th-cursor { stroke: #fff; stroke-width: 1; opacity: .7; }
   %(p)s .th-dot { stroke: #050505; stroke-width: 1.5; }
   %(p)s .th-neg-band { fill: rgba(255,92,92,.06); }
@@ -119,10 +125,10 @@ def viz_the_fork(S):
   var D = __DATA__;
   var VIEWS = [["consensus", "consensus", "var(--dataviz-2)"], ["rapm", "RAPM", "var(--dataviz-3)"], ["box", "box score", "var(--dataviz-6)"], ["darko", "DARKO", "var(--dataviz-4)"]];
   var CAPS = [
-    "The model gives Cody Williams " + D.default_txt + " minutes a night. Start there.",
+    "The model's default hands Cody Williams " + D.default_txt + " minutes a night. That's an ordering artifact: re-order the roster on impact and he's the " + D.rank_mover + "th or " + D.rank_impact + "th man. So start with the range.",
     "At those minutes every way of scoring players says the summer cost Minnesota something. Four lines, all below zero.",
     "Slide his minutes down and the minutes go to players the model trusts more. The lines climb.",
-    "Below " + D.threshold_txt + " a night, one of the four crosses zero, and the four stop agreeing that the summer hurt. That's the fork."
+    "Below " + D.threshold_txt + " a night, one of the four crosses zero, and the four stop agreeing that the summer hurt. Movers like him who landed on a top-ten team kept " + D.ret_txt + " of their minutes, " + D.cal_txt + " for him. That's the fork, and the base rate sits on the low side of it."
   ];
   function interp(v, mpg) {
     var pts = D.grid;
@@ -159,7 +165,9 @@ def viz_the_fork(S):
       lines[v[0]] = { path: path, lab: lab };
     });
     var thr = svg.append("line").attr("class", "th-thr").attr("x1", x(D.threshold)).attr("x2", x(D.threshold)).attr("y1", m.t).attr("y2", H - m.b);
-    var thrLab = svg.append("text").attr("class", "th-thr-lab").attr("x", x(D.threshold) - 6).attr("y", m.t + 10).attr("text-anchor", "end").text(D.threshold_txt + " a night");
+    var thrLab = svg.append("text").attr("class", "th-thr-lab").attr("x", x(D.threshold) + 6).attr("y", m.t + 10).attr("text-anchor", "start").text(D.threshold_txt + " a night");
+    var calLine = svg.append("line").attr("class", "th-thr th-cal").attr("x1", x(D.cal)).attr("x2", x(D.cal)).attr("y1", m.t).attr("y2", H - m.b);
+    var calLab = svg.append("text").attr("class", "th-thr-lab th-cal-lab").attr("x", x(D.cal) - 6).attr("y", m.t + 10).attr("text-anchor", "end").text(compact ? "base rate " + D.cal_txt : "base rate, contender destination: " + D.cal_txt);
     var cursor = svg.append("line").attr("class", "th-cursor").attr("y1", m.t).attr("y2", H - m.b);
     var dots = {};
     VIEWS.forEach(function (v) { dots[v[0]] = svg.append("circle").attr("class", "th-dot").attr("r", 4.5).attr("fill", v[2]); });
@@ -190,17 +198,17 @@ def viz_the_fork(S):
       root.select(".th-slider-val").text(mpg.toFixed(1));
       root.select(".th-range").property("value", mpg.toFixed(1));
     }
-    lastBuilt = { lines: lines, thr: thr, thrLab: thrLab, setAt: setAt, compact: compact };
+    lastBuilt = { lines: lines, thr: thr, thrLab: thrLab, calLine: calLine, calLab: calLab, setAt: setAt, compact: compact };
     return lastBuilt;
   }
   function linesOn(b, on) { Object.keys(b.lines).forEach(function (k) { b.lines[k].path.classed("is-on", on); b.lines[k].lab.classed("is-on", on); }); }
   function finalState(b) {
-    clearPlayTimers(); linesOn(b, true); b.thr.classed("is-on", true); b.thrLab.classed("is-on", true);
+    clearPlayTimers(); linesOn(b, true); b.thr.classed("is-on", true); b.thrLab.classed("is-on", true); b.calLine.classed("is-on", true); b.calLab.classed("is-on", true);
     b.setAt(cur); root.select(".th-hero-num").text(D.threshold_txt); root.classed("is-landed", true); setCaption(CAPS[3], true); showReplay();
   }
   function play(b) {
     clearPlayTimers(); hideReplay(); root.classed("is-landed", false);
-    linesOn(b, false); b.thr.classed("is-on", false); b.thrLab.classed("is-on", false);
+    linesOn(b, false); b.thr.classed("is-on", false); b.thrLab.classed("is-on", false); b.calLine.classed("is-on", false); b.calLab.classed("is-on", false);
     cur = D.default; b.setAt(cur); root.select(".th-hero-num").text(D.default_txt); setCaption(CAPS[0], true);
     if (reduceMotion) { finalState(b); return; }
     if (__resetOnly) return;
@@ -211,7 +219,7 @@ def viz_the_fork(S):
     for (var i = 1; i <= steps; i++) {
       (function (i) { at(2800 + i * 45, function () { cur = from + (to - from) * i / steps; b.setAt(cur); root.select(".th-hero-num").text(cur.toFixed(1)); }); })(i);
     }
-    at(2800 + steps * 45 + 200, function () { b.thr.classed("is-on", true); b.thrLab.classed("is-on", true); root.select(".th-hero-num").text(D.threshold_txt); root.classed("is-landed", true); setCaption(CAPS[3]); });
+    at(2800 + steps * 45 + 200, function () { b.thr.classed("is-on", true); b.thrLab.classed("is-on", true); b.calLine.classed("is-on", true); b.calLab.classed("is-on", true); root.select(".th-hero-num").text(D.threshold_txt); root.classed("is-landed", true); setCaption(CAPS[3]); });
     at(2800 + steps * 45 + 1400, showReplay);
   }
 """.replace("__DATA__", json.dumps(data))
