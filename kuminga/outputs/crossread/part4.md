@@ -1,4 +1,4 @@
-<!-- cross-read export of kuminga\docs\series\part4.md | run export_crossread_20260929T125535Z | commit 2b988ef5 | 2026-09-29T12:55:35Z | visuals replaced by [visual: id]; sentences under review bracketed [PENDING ...] -->
+<!-- cross-read export of kuminga\docs\series\part4.md | run export_crossread_20260929T183814Z | commit 749ed93a | 2026-09-29T18:38:14Z | visuals replaced by [visual: id]; N9 documents marked PENDING -->
 
 # The Bet, Part 4: Why you should watch
 
@@ -8,7 +8,9 @@ Let me start by conceding everything.
 
 ## Everything that could go wrong
 
-LaMelo's games. His six seasons in Charlotte, in games played: 51, 75, 36, 22, 47, 72. The last one is the good one, and it's the one the trade was made on. I went looking for what usually happens next to a player with a history like his, and the honest answer is that the history is thin. Twenty player-seasons since 2001-02 match it; their median was 61.4 games, and one in four reached 70. So the base rate isn't a prediction, it's a shrug with a number on it. What I can tell you is what the games cost. Run the season with LaMelo playing 50 instead of 82, playoffs at full strength, and the title odds barely move, 0.12 points. The seed moves. The chance of a top-six finish drops 16.6 points, and a top-six finish is the difference between a first-round series and a play-in game against somebody who's been there before. His games decide where they start the playoffs, not whether they can win them.
+Health. It's the biggest thing on this list, and LaMelo is in the middle of it. Take Ant, Rudy or LaMelo out for the playoffs and the Wolves lose about two thirds of their title odds, whichever one it is: 68%, 63% and 66%. Oklahoma City and San Antonio each have one player like that. Minnesota has three single points of failure where the contenders have one. The stake is smaller in absolute terms, because the Wolves have less to lose, 1.81 points of title odds for Ant against 9.83 for Shai; the share is bigger, and it gets bigger when the rotation shortens in April.
+
+LaMelo's games. His six seasons in Charlotte, in games played: 51, 75, 36, 22, 47, 72. The last one is the good one, and it's the one the trade was made on. I went looking for what usually happens next to a player with a history like his, and the honest answer is that the history is thin. Twenty player-seasons since 2001-02 match it; their median was 61.4 games, and one in four reached 70. So the base rate isn't a prediction, it's a shrug with a number on it. What I can tell you is what the games cost. Run the season with LaMelo playing 50 instead of 82, playoffs at full strength, and the title odds barely move, 0.10 points. The seed moves. The chance of a top-six finish drops 15.6 points, and a top-six finish is the difference between a first-round series and a play-in game against somebody who's been there before. His games decide where they start the playoffs, not whether they can win them. Whether he's on the floor in April does, and that's the 66% above.
 
 Cody Williams. Part 2 told you the offseason verdict turns on whether he plays more than 8.9 minutes a night. That's a question a front office chose to leave open.
 
@@ -43,8 +45,6 @@ So here's mine, using only what the work would let me say. Thirteen verdicts wen
 LaMelo is the clear win. Every way we score players says the trade for him added title equity, 0.88 points of it, and that's before you get to the part about Ant that Part 2 spent a thousand words on. The clearest measurable hole in this roster was that a defense could take Anthony Edwards out of a series with one assignment. They went and got the second creator. That's not a vibe. That's the finding.
 
 Kuminga is a real upgrade on the alternative. Not a star, not a savior, a better player than whoever else would have played the four, by 0.51 points of title odds, and it held under every test we could throw at it. The only version of the roster where he isn't the answer is the one where Joan Beringer is, and if that's the problem this team has in March, that's a problem I'll take.
-
-[PENDING, fragility under review after D111: The title equity is spread across three players now. Losing any one of the top three for the playoffs costs 55% of the odds, which sounds terrible until you look at who: Ant, LaMelo, Rudy, on a roster that a year ago had one creator. Three ways to survive an injury instead of one.]
 
 And Rudy. For the first time in his Minnesota career, Rudy Gobert is going to play with a high-usage guard who is also a high-volume passer, and the roll-man volume Rudy lost over the last two seasons is on the record. I can't model what that does. Nothing in the four ways we score players knows what happens to a rim-running center when the passer changes, because in his Minnesota years it barely has. It's the one question on this roster that's observed, not simulated, and it's the one I'm most curious about. The details of how all of this was tested are on [the methods page](../methods.md), and I'm done citing it now.
 

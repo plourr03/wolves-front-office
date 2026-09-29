@@ -226,14 +226,14 @@ Five claims, each checked at a team's 20th game, late November `[composed, n8_wa
 | team | market | consensus | RAPM | box | DARKO | views |
 |---|---:|---:|---:|---:|---:|---|
 | MIN | 3.16% | 1.83% | 2.50% | 2.81% | 3.89% | MIXED |
-| SAS | 22.96% | 15.80% | 17.95% | 9.70% | 11.77% | ALL-VIEWS |
-| PHI | 8.42% | 4.14% | 3.71% | 0.66% | 3.28% | ALL-VIEWS |
 | BOS | 5.47% | 22.60% | 22.85% | 13.02% | 14.02% | ALL-VIEWS |
 | OKC | 22.49% | 12.90% | 11.90% | 16.55% | 17.54% | ALL-VIEWS |
+| PHI | 8.42% | 4.14% | 3.71% | 0.66% | 3.28% | ALL-VIEWS |
 | DEN | 3.16% | 5.95% | 4.56% | 8.63% | 5.30% | ALL-VIEWS |
 | HOU | 1.61% | 4.97% | 5.39% | 5.18% | 6.22% | ALL-VIEWS |
 | NYK | 8.21% | 3.17% | 3.31% | 5.92% | 3.69% | ALL-VIEWS |
 | DET | 3.16% | 4.64% | 4.83% | 10.04% | 11.53% | ALL-VIEWS |
+| SAS | 22.96% | 15.80% | 17.95% | 9.70% | 11.77% | ALL-VIEWS |
 
 **Why "the offseason made Minnesota worse" does not ship.** The published offseason delta is -0.18 points un-aged and all-negative, but +0.79 and mixed on the aged basis, so it fails the rule that a verdict holds on both. It also carries two things the front office did not choose. The decomposition prices every state on the interpolation curve, where the same delta is +0.297: take out the DiVincenzo injury (+0.781) and the Williams minutes (+0.000), which overlap completely (+0.000, because a healthy DiVincenzo is what takes Williams' minutes), and the remainder is **+1.079**, mixed across views `[modeled, w1c_decompose]`.
 

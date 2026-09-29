@@ -6,6 +6,6 @@
 
 3. "The safe summer, the one the C+ is graded against, doesn't exist." (`c2_haz_2029_600`, `c2_raw_walk_600`, `c2_raw_walk_sub500`)
 
-4. "Ant, LaMelo, Rudy, on a roster that a year ago had one creator. Three ways to survive an injury instead of one." (`n5_min_share`, `n5_min_drop`)
+4. "Minnesota has three single points of failure where the contenders have one." (`n5_min_n_60`, `n5_okc_n_60`, `n5_sas_n_60`)
 
 5. "It's the first Timberwolves season in a long time where the thing at stake is the thing you actually care about." (`c2_walk_year`, `c2_free_agency`)

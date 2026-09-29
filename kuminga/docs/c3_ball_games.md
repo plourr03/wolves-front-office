@@ -1,6 +1,6 @@
 # C3: Ball's games
 
-*As of 2026-09-22. History from the warehouse box scores; causes from the sourced table in `data/c3_ball_injury_causes.csv`; base rate from every player-season since 2001-02 that matches the definition below; simulation on both aging bases. Run `c3_ball_games_20260922T191221Z`.*
+*As of 2026-09-22. History from the warehouse box scores; causes from the sourced table in `data/c3_ball_injury_causes.csv`; base rate from every player-season since 2001-02 that matches the definition below; simulation on both aging bases. Run `c3_ball_games_20260929T182638Z`.*
 
 ## His seasons
 
@@ -65,18 +65,18 @@ Ball's regular-season availability set to games/82 with the pipeline's own alloc
 
 | Ball's games | title odds | band across views | drop from 82 | P(top six) | band | drop from 82 | mean West seed | net lost |
 |---:|---:|---|---:|---:|---|---:|---:|---:|
-| 50 | 1.52% | 0.64 to 2.47 | 0.12pp | 25.8% | 7.3 to 49.0 | 16.6pp | 7.25 | 0.84 |
-| 60 | 1.57% | 0.70 to 2.50 | 0.07pp | 31.5% | 10.9 to 56.7 | 10.9pp | 7.04 | 0.53 |
-| 70 | 1.60% | 0.74 to 2.53 | 0.03pp | 37.0% | 14.9 to 63.2 | 5.4pp | 6.85 | 0.26 |
-| 82 | 1.64% | 0.78 to 2.56 | 0.00pp | 42.4% | 19.6 to 68.9 | 0.0pp | 6.68 | 0.00 |
+| 50 | 2.65% | 1.67 to 3.81 | 0.10pp | 55.0% | 36.7 to 75.7 | 15.6pp | 6.24 | 0.74 |
+| 60 | 2.68% | 1.70 to 3.86 | 0.07pp | 58.4% | 40.6 to 78.9 | 12.2pp | 6.13 | 0.58 |
+| 70 | 2.71% | 1.69 to 3.91 | 0.04pp | 64.3% | 48.3 to 83.8 | 6.3pp | 5.93 | 0.31 |
+| 82 | 2.75% | 1.74 to 3.97 | 0.00pp | 70.6% | 55.5 to 88.4 | 0.0pp | 5.69 | 0.00 |
 
 **Aged basis.**
 
 | Ball's games | title odds | band across views | drop from 82 | P(top six) | band | drop from 82 | mean West seed | net lost |
 |---:|---:|---|---:|---:|---|---:|---:|---:|
-| 50 | 2.19% | 0.90 to 3.47 | 0.16pp | 45.6% | 18.7 to 75.0 | 16.8pp | 6.62 | 0.77 |
-| 60 | 2.26% | 0.99 to 3.53 | 0.09pp | 51.7% | 24.9 to 80.6 | 10.6pp | 6.39 | 0.49 |
-| 70 | 2.32% | 1.07 to 3.59 | 0.04pp | 57.3% | 31.4 to 84.8 | 5.1pp | 6.19 | 0.24 |
-| 82 | 2.35% | 1.14 to 3.60 | 0.00pp | 62.4% | 37.9 to 88.0 | 0.0pp | 6.00 | 0.00 |
+| 50 | 3.60% | 2.28 to 5.00 | 0.15pp | 74.0% | 58.0 to 90.4 | 10.9pp | 5.47 | 0.70 |
+| 60 | 3.62% | 2.32 to 5.03 | 0.12pp | 76.6% | 61.7 to 92.1 | 8.3pp | 5.35 | 0.55 |
+| 70 | 3.67% | 2.39 to 5.07 | 0.07pp | 80.9% | 68.9 to 94.5 | 4.0pp | 5.13 | 0.29 |
+| 82 | 3.74% | 2.45 to 5.19 | 0.00pp | 84.9% | 74.7 to 96.4 | 0.0pp | 4.89 | 0.00 |
 
 *Method.* Appearances: warehouse `nba_player_stats` joined to `nba_games`, Charlotte's schedule, a game counted when he logged minutes. Stretches: runs of consecutive team games without him. Base rate: `c3_base_rate_cohort.csv` holds every player-season with the flags; the summary is `c3_base_rate_summary.csv`. Simulation: `c3_ball_availability.py`, gates G1 to G5 in its docstring; detail in `outputs/c3_ball_availability.csv` and `_AGED.csv`, minutes in `c3_ball_minutes*.csv`.

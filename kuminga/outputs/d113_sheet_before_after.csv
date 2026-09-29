@@ -1,0 +1,122 @@
+key,before,after,status
+c3_ball_mpg_50_a,18.9,19.3,changed
+c3_ball_mpg_50_u,18.9,19.3,changed
+c3_ball_mpg_82_a,30.6,31.0,changed
+c3_ball_mpg_82_u,30.6,31.0,changed
+c3_net_drop_50_a,0.77,0.70,changed
+c3_net_drop_50_u,0.84,0.74,changed
+c3_net_drop_60_a,0.49,0.55,changed
+c3_net_drop_60_u,0.53,0.58,changed
+c3_net_drop_70_a,0.24,0.29,changed
+c3_net_drop_70_u,0.26,0.31,changed
+c3_seed_50_a,6.62,5.47,changed
+c3_seed_50_u,7.25,6.24,changed
+c3_seed_60_a,6.39,5.35,changed
+c3_seed_60_u,7.04,6.13,changed
+c3_seed_70_a,6.19,5.13,changed
+c3_seed_70_u,6.85,5.93,changed
+c3_seed_82_a,6.00,4.89,changed
+c3_seed_82_u,6.68,5.69,changed
+c3_title_50_a,2.19%,3.60%,changed
+c3_title_50_a_band,0.90% to 3.47%,2.28% to 5.00%,changed
+c3_title_50_u,1.52%,2.65%,changed
+c3_title_50_u_band,0.64% to 2.47%,1.67% to 3.81%,changed
+c3_title_60_a,2.26%,3.62%,changed
+c3_title_60_a_band,0.99% to 3.53%,2.32% to 5.03%,changed
+c3_title_60_u,1.57%,2.68%,changed
+c3_title_60_u_band,0.70% to 2.50%,1.70% to 3.86%,changed
+c3_title_70_a,2.32%,3.67%,changed
+c3_title_70_a_band,1.07% to 3.59%,2.39% to 5.07%,changed
+c3_title_70_u,1.60%,2.71%,changed
+c3_title_70_u_band,0.74% to 2.53%,1.69% to 3.91%,changed
+c3_title_82_a,2.35%,3.74%,changed
+c3_title_82_a_band,1.14% to 3.60%,2.45% to 5.19%,changed
+c3_title_82_u,1.64%,2.75%,changed
+c3_title_82_u_band,0.78% to 2.56%,1.74% to 3.97%,changed
+c3_title_drop_50_a,0.16,0.15,changed
+c3_title_drop_50_u,0.12,0.10,changed
+c3_title_drop_60_a,0.09,0.12,changed
+c3_title_drop_70_a,0.04,0.07,changed
+c3_title_drop_70_u,0.03,0.04,changed
+c3_top6_50_a,45.6%,74.0%,changed
+c3_top6_50_a_band,18.7% to 75.0%,58.0% to 90.4%,changed
+c3_top6_50_u,25.8%,55.0%,changed
+c3_top6_50_u_band,7.3% to 49.0%,36.7% to 75.7%,changed
+c3_top6_60_a,51.7%,76.6%,changed
+c3_top6_60_a_band,24.9% to 80.6%,61.7% to 92.1%,changed
+c3_top6_60_u,31.5%,58.4%,changed
+c3_top6_60_u_band,10.9% to 56.7%,40.6% to 78.9%,changed
+c3_top6_70_a,57.3%,80.9%,changed
+c3_top6_70_a_band,31.4% to 84.8%,68.9% to 94.5%,changed
+c3_top6_70_u,37.0%,64.3%,changed
+c3_top6_70_u_band,14.9% to 63.2%,48.3% to 83.8%,changed
+c3_top6_82_a,62.4%,84.9%,changed
+c3_top6_82_a_band,37.9% to 88.0%,74.7% to 96.4%,changed
+c3_top6_82_u,42.4%,70.6%,changed
+c3_top6_82_u_band,19.6% to 68.9%,55.5% to 88.4%,changed
+c3_top6_drop_50_a,16.8,10.9,changed
+c3_top6_drop_50_u,16.6,15.6,changed
+c3_top6_drop_60_a,10.6,8.3,changed
+c3_top6_drop_60_u,10.9,12.2,changed
+c3_top6_drop_70_a,5.1,4.0,changed
+c3_top6_drop_70_u,5.4,6.3,changed
+n5_min_ball_drop,,1.77,added
+n5_min_ball_drop_aged,,2.21,added
+n5_min_ball_share,,66%,added
+n5_min_ball_share_aged,,60%,added
+n5_min_edwards_drop,,1.81,added
+n5_min_edwards_drop_aged,,2.23,added
+n5_min_edwards_share,,68%,added
+n5_min_edwards_share_aged,,60%,added
+n5_min_gobert_drop,,1.68,added
+n5_min_gobert_drop_aged,,1.72,added
+n5_min_gobert_share,,63%,added
+n5_min_gobert_share_aged,,46%,added
+n5_min_mcdaniels_drop,,0.94,added
+n5_min_mcdaniels_drop_aged,,1.09,added
+n5_min_mcdaniels_share,,35%,added
+n5_min_mcdaniels_share_aged,,30%,added
+n5_min_n_60,,3,added
+n5_min_n_60_aged,,1,added
+n5_min_n_half,,3,added
+n5_min_n_half_aged,,2,added
+n5_okc_gilgeousalexander_drop,,9.83,added
+n5_okc_gilgeousalexander_drop_aged,,10.83,added
+n5_okc_gilgeousalexander_share,,67%,added
+n5_okc_gilgeousalexander_share_aged,,63%,added
+n5_okc_hartenstein_drop,,3.56,added
+n5_okc_hartenstein_drop_aged,,3.27,added
+n5_okc_hartenstein_share,,24%,added
+n5_okc_hartenstein_share_aged,,19%,added
+n5_okc_holmgren_drop,,6.56,added
+n5_okc_holmgren_drop_aged,,7.13,added
+n5_okc_holmgren_share,,45%,added
+n5_okc_holmgren_share_aged,,42%,added
+n5_okc_n_60,,1,added
+n5_okc_n_60_aged,,1,added
+n5_okc_n_half,,1,added
+n5_okc_n_half_aged,,1,added
+n5_okc_williams_drop,,1.81,added
+n5_okc_williams_drop_aged,,2.19,added
+n5_okc_williams_share,,12%,added
+n5_okc_williams_share_aged,,13%,added
+n5_sas_fox_drop,,4.47,added
+n5_sas_fox_drop_aged,,4.57,added
+n5_sas_fox_share,,33%,added
+n5_sas_fox_share_aged,,28%,added
+n5_sas_harper_drop,,4.38,added
+n5_sas_harper_drop_aged,,6.09,added
+n5_sas_harper_share,,32%,added
+n5_sas_harper_share_aged,,37%,added
+n5_sas_harris_drop,,3.45,added
+n5_sas_harris_drop_aged,,2.13,added
+n5_sas_harris_share,,25%,added
+n5_sas_harris_share_aged,,13%,added
+n5_sas_n_60,,1,added
+n5_sas_n_60_aged,,1,added
+n5_sas_n_half,,1,added
+n5_sas_n_half_aged,,1,added
+n5_sas_wembanyama_drop,,10.15,added
+n5_sas_wembanyama_drop_aged,,12.17,added
+n5_sas_wembanyama_share,,74%,added
+n5_sas_wembanyama_share_aged,,74%,added

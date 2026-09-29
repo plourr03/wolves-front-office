@@ -536,6 +536,23 @@ def main():
                 if tag == "":
                     po = topn[topn.team == tm].groupby("removed").team_net_drop_playoff_rollup.mean().mean()
                     F("n5_%s_po" % tm.lower(), S, "%s mean net lost, playoff rollup" % tm, "%.2f" % po, "MODELED", "QUOTABLE", run, "n5_next_man_up.csv")
+                # D113: each removal on its own (the top three by minutes AND the impact-contribution
+                # sensitivity), share and absolute stake side by side, and how many players cost at
+                # least two thirds / at least half of the team's odds
+                shares = {}
+                for pl, dd in R_[R_.team == tm].groupby("removed"):
+                    slug = "".join(ch for ch in pl.split()[-1].lower() if ch.isalpha())
+                    dr = float(dd.drop_pp.mean())
+                    sh = dr / float(dd.title_full.mean())
+                    shares[pl] = sh
+                    F("n5_%s_%s_drop%s" % (tm.lower(), slug, tag), S, "%s without %s for the playoffs, title odds lost, points%s" % (tm, pl, tag),
+                      "%.2f" % dr, "MODELED", "QUOTABLE AS BAND", run, "n5_fragility*.csv")
+                    F("n5_%s_%s_share%s" % (tm.lower(), slug, tag), S, "%s without %s for the playoffs, share of title odds lost%s" % (tm, pl, tag),
+                      "%.0f%%" % (100 * sh), "MODELED", "QUOTABLE AS BAND", run, "n5_fragility*.csv")
+                F("n5_%s_n_60%s" % (tm.lower(), tag), S, "%s players whose playoff absence costs at least 60%% of the odds%s" % (tm, tag),
+                  int(sum(v >= 0.60 for v in shares.values())), "MODELED", "QUOTABLE", run, "n5_fragility*.csv")
+                F("n5_%s_n_half%s" % (tm.lower(), tag), S, "%s players whose playoff absence costs at least half of the odds%s" % (tm, tag),
+                  int(sum(v >= 0.50 for v in shares.values())), "MODELED", "QUOTABLE", run, "n5_fragility*.csv")
         rot = csv("rotations_2026_27.csv")
         rrot = rid("build_rotations", "unaged")
         cur = rot[(rot.scenario == "current") & (rot.team_abbr == "MIN")].set_index("player_name")

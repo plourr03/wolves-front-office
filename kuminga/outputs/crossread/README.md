@@ -1,6 +1,6 @@
 # Cross-read package
 
-Exported 2026-09-29T12:55:35Z from commit 2b988ef5 (run export_crossread_20260929T125535Z). Plain markdown: visuals appear as `[visual: id]`; the fragility sentences are bracketed `[PENDING ...]` because their figures changed under D111 and the parts are not edited until that review is read.
+Exported 2026-09-29T18:38:14Z from commit 749ed93a (run export_crossread_20260929T183814Z). Plain markdown: visuals appear as `[visual: id]`; the fragility passages were rewritten under D113 and are no longer bracketed; the N9 documents (`n9_breadth.md`, `n9_proxies.md`) are included and marked PENDING, because N9 is not in the series.
 
 - part1.md
 - part1_feed.md
@@ -10,5 +10,7 @@ Exported 2026-09-29T12:55:35Z from commit 2b988ef5 (run export_crossread_2026092
 - part3_feed.md
 - part4.md
 - part4_feed.md
+- n9_breadth.md
+- n9_proxies.md
 - index.md
 - methods.md

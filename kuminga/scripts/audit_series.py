@@ -174,9 +174,12 @@ CLAIMS = {
   ("the market prices at 0.81%", ["mkt_cha"]),
   ("3.36% of all points on the 578 team-games", ["misplaced_lineup", "val_lineup_teamgames"]),
   ("Charlotte came down to 3.60%", ["model_cha"]),
-  ("the Wolves lose 55% of their title odds, 45% once you correct for age",
-   ["n5_min_share", "n5_min_share_aged"]),
-  ("costs 1.47 points of title odds on average", ["n5_min_drop"]),
+  ("Take Ant out for the playoffs and the Wolves lose 68% of their title odds", ["n5_min_edwards_share"]),
+  ("Take out Rudy and it's 63%; LaMelo, 66%", ["n5_min_gobert_share", "n5_min_ball_share"]),
+  ("Shai at 67% and Wembanyama at 74%", ["n5_okc_gilgeousalexander_share", "n5_sas_wembanyama_share"]),
+  ("They have three single points of failure where the contenders have one", ["n5_min_n_60", "n5_okc_n_60"]),
+  ("Ant is worth 1.81 points of title odds to the Wolves, Shai is worth 9.83", ["n5_min_edwards_drop", "n5_okc_gilgeousalexander_drop"]),
+  ("Rudy's number falls to 46%", ["n5_min_gobert_share_aged"]),
   ("The most likely seed is 6th, at 26%", ["n2_modal", "n2_modal_p"]),
   ("Top six, 70%", ["n2_top6"]),
   ("is the first-round opponent 34% of the time", ["n2_sas_okc"]),
@@ -190,8 +193,12 @@ CLAIMS = {
   ("Twenty player-seasons since 2001-02 match it; their median was 61.4 games, and one in four reached 70",
    ["c3_a_n", "c3_a_median", "c3_a_p70", "def:c3_a_p70"]),
   ("playing 50 instead of 82", ["def:c3_title_drop_50_u"]),
-  ("the title odds barely move, 0.12 points", ["c3_title_drop_50_u"]),
-  ("drops 16.6 points", ["c3_top6_drop_50_u"]),
+  ("the title odds barely move, 0.10 points", ["c3_title_drop_50_u"]),
+  ("drops 15.6 points", ["c3_top6_drop_50_u"]),
+  ("whichever one it is: 68%, 63% and 66%", ["n5_min_edwards_share", "n5_min_gobert_share", "n5_min_ball_share"]),
+  ("Minnesota has three single points of failure where the contenders have one", ["n5_min_n_60", "n5_okc_n_60"]),
+  ("1.81 points of title odds for Ant against 9.83 for Shai", ["n5_min_edwards_drop", "n5_okc_gilgeousalexander_drop"]),
+  ("Whether he's on the floor in April does, and that's the 66% above", ["n5_min_ball_share"]),
   ("turns on whether he plays more than 8.9 minutes a night", ["williams_threshold"]),
   ("between a 0.53 and a 0.84 chance", ["k_optout_lo", "k_optout_hi"]),
   ("on Non-Bird rights, is $7,276,800", ["k_nonbird"]),
@@ -216,7 +223,6 @@ CLAIMS = {
   ("Thirteen verdicts went into the testing in Part 2 and seven came out", ["n_candidates", "n_ship"]),
   ("added title equity, 0.88 points of it", ["v_ball_in_pooled_u"]),
   ("by 0.51 points of title odds", ["v_A_c3_default_williams_pooled_u"]),
-  ("costs 55% of the odds", ["n5_min_share"]),
   ("None of them was worse than 11th in net rating after 20 games, so 11th at game 20 is the checkpoint", ["w5_flip", "w_game"]),
   ("Ten of the eleven finished the regular season in the top five", ["c1_top5_net_n", "c1_n"]),
   ("is playing more than 8.9 minutes a night", ["williams_threshold"]),
@@ -521,6 +527,20 @@ def main():
                 if not toks and str(val).find(tile["num"]) < 0:
                     problems.append("%s_slide.json: tile %r shows %r, not in %s (%r)"
                                     % (stem, tile["label"], tile["num"], tile["key"], str(val)[:40]))
+            # D113: the context line is checked too. Every number in it must match one of the
+            # context_keys (after D111 the Part 4 line kept "Williams under 12.6" because only
+            # the tiles were checked)
+            ctx = cfg.get("context", {}).get("text", "")
+            ckeys = cfg.get("context_keys", [])
+            ctoks = scan_tokens(ctx)
+            if ctoks and not ckeys:
+                problems.append("%s_slide.json: the context line has numbers but no context_keys" % stem)
+            cvals = [resolve(k, S) for k in ckeys]
+            for tok, tail, _ in ctoks:
+                checked += 1
+                if not any(matches(tok, tail, v) for v in cvals):
+                    problems.append("%s_slide.json: context %r matches none of %s (values %s)"
+                                    % (stem, tok, ckeys, [str(v)[:28] for v in cvals]))
 
         r.note("%d number checks across the series" % checked)
         for p in problems:

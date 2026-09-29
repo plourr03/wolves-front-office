@@ -40,7 +40,7 @@
   <button onclick="window.location.reload()">Hard reload</button>
 </div>
 <div class="harness-stage">
-<!-- charts_part2_20260929T101828Z; sheet keys checked: n2_modal, n2_modal_p, n2_top6, n2_sas_okc, n2_r2, n2_cond, n5_min_drop, n5_min_share, n5_min_share_aged -->
+<!-- charts_part2_20260929T183648Z; sheet keys checked: n2_modal, n2_modal_p, n2_top6, n2_sas_okc, n2_r2, n2_cond, n5_min_edwards_share, n5_min_gobert_share, n5_min_ball_share, n5_min_edwards_drop, n5_min_gobert_drop, n5_min_ball_drop, n5_okc_gilgeousalexander_share, n5_okc_gilgeousalexander_drop, n5_sas_wembanyama_share -->
 <div id="viz-the-path">
   <div class="th-chip" role="status">
     <span class="th-chip-dot"></span>
@@ -62,10 +62,10 @@
       <span class="th-hero-num"></span>
       <span class="th-hero-unit"></span>
     </div>
-    <div class="th-hero-label">the most likely seed: a play-in game, one night, everything on it</div>
+    <div class="th-hero-label">the most likely seed, and it skips the play-in</div>
     <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
   </div>
-  <p class="th-foot">Seeds: the share of simulated seasons ending at each seed, averaged over the four ways of scoring players, un-aged. First round: who Minnesota draws when it makes the field. The three: the points of title odds lost when each of the three most important players misses the playoffs, one mark per way of scoring players. Hover a bar.</p>
+  <p class="th-foot">Seeds: the share of simulated seasons ending at each seed, averaged over the four ways of scoring players, un-aged. First round: who Minnesota draws when it makes the field. The three: the points of title odds lost when Ant, Rudy or LaMelo misses the playoffs (seeding from the full roster), one mark per way of scoring players, with the share of the team's odds beside each name. Hover a bar.</p>
   <div class="th-watermark">@WolvesToaT · Sep 2026</div>
 </div>
 <style>
@@ -196,11 +196,11 @@
     }
   }
 
-  var D = {"seeds": [{"seed": 1, "p": 0.000655}, {"seed": 2, "p": 0.007984999999999999}, {"seed": 3, "p": 0.051795}, {"seed": 4, "p": 0.1257475}, {"seed": 5, "p": 0.25502749999999996}, {"seed": 6, "p": 0.26345999999999997}, {"seed": 7, "p": 0.20652}, {"seed": 8, "p": 0.0813825}, {"seed": 9, "p": 0.006560000000000001}, {"seed": 10, "p": 0.0008024999999999999}], "miss": 6.500000000000001e-05, "modal": 6, "modal_txt": "6th", "modal_p_txt": "26%", "top6_txt": "70%", "opp": [{"team": "DEN", "p": 0.2404703439618487}, {"team": "HOU", "p": 0.2336124701289228}, {"team": "SAS", "p": 0.1761447227776403}, {"team": "OKC", "p": 0.163741214871392}, {"team": "LAL", "p": 0.0881359667782468}, {"team": "POR", "p": 0.0674056611747841}, {"team": "PHX", "p": 0.0299244102952745}], "sas_okc_txt": "34%", "r2_txt": "38%", "cond_txt": "7.2%", "three": [{"player": "Anthony Edwards", "drops": {"consensus": 1.215, "rapm": 1.6633333333333338, "box": 1.403333333333333, "darko": 2.963333333333333}, "mean": 1.81125, "rel": 0.6769486714070013}, {"player": "LaMelo Ball", "drops": {}, "mean": NaN, "rel": NaN}, {"player": "Rudy Gobert", "drops": {"consensus": 1.4233333333333331, "rapm": 2.0783333333333336, "box": 1.0349999999999997, "darko": 2.1633333333333336}, "mean": 1.6750000000000003, "rel": 0.6659169821618108}], "drop_txt": "1.47", "share_txt": "55%", "share_aged_txt": "45%"};
+  var D = {"seeds": [{"seed": 1, "p": 0.000655}, {"seed": 2, "p": 0.007984999999999999}, {"seed": 3, "p": 0.051795}, {"seed": 4, "p": 0.1257475}, {"seed": 5, "p": 0.25502749999999996}, {"seed": 6, "p": 0.26345999999999997}, {"seed": 7, "p": 0.20652}, {"seed": 8, "p": 0.0813825}, {"seed": 9, "p": 0.006560000000000001}, {"seed": 10, "p": 0.0008024999999999999}], "miss": 6.500000000000001e-05, "modal": 6, "modal_txt": "6th", "modal_p_txt": "26%", "top6_txt": "70%", "opp": [{"team": "DEN", "p": 0.2404703439618487}, {"team": "HOU", "p": 0.2336124701289228}, {"team": "SAS", "p": 0.1761447227776403}, {"team": "OKC", "p": 0.163741214871392}, {"team": "LAL", "p": 0.0881359667782468}, {"team": "POR", "p": 0.0674056611747841}, {"team": "PHX", "p": 0.0299244102952745}], "sas_okc_txt": "34%", "r2_txt": "38%", "cond_txt": "7.2%", "three": [{"player": "Anthony Edwards", "drops": {"consensus": 1.215, "rapm": 1.6633333333333338, "box": 1.403333333333333, "darko": 2.963333333333333}, "mean": 1.81125, "rel": 0.680281690140845, "share_txt": "68%", "drop_txt": "1.81"}, {"player": "Rudy Gobert", "drops": {"consensus": 1.4233333333333331, "rapm": 2.0783333333333336, "box": 1.0349999999999997, "darko": 2.1633333333333336}, "mean": 1.6750000000000003, "rel": 0.6291079812206574, "share_txt": "63%", "drop_txt": "1.68"}, {"player": "LaMelo Ball", "drops": {"consensus": 1.285, "rapm": 1.8766666666666671, "box": 1.4516666666666669, "darko": 2.4566666666666666}, "mean": 1.7675, "rel": 0.6638497652582159, "share_txt": "66%", "drop_txt": "1.77"}], "seed_label": "the most likely seed, and it skips the play-in", "seed_line": "The most likely version of April skips the play-in.", "sga_share_txt": "67%", "sga_drop_txt": "9.83", "wemby_share_txt": "74%"};
   var CAPS = {
-    seeds: ["Run the season and ask where it ends. Each bar is the share of simulated seasons ending at that seed.", "The most likely seed is " + D.modal_txt + ", at " + D.modal_p_txt + ". A top-six seed, " + D.top6_txt + ". The most likely version of April is a play-in game."],
+    seeds: ["Run the season and ask where it ends. Each bar is the share of simulated seasons ending at that seed.", "The most likely seed is " + D.modal_txt + ", at " + D.modal_p_txt + ". A top-six seed, " + D.top6_txt + ". " + D.seed_line],
     r1: ["If they make the field, who's standing there?", "San Antonio or Oklahoma City is the first-round opponent " + D.sas_okc_txt + " of the time. They reach the second round " + D.r2_txt + " of the time, and from there win it all " + D.cond_txt + " of the time. The mountain is the first round."],
-    three: ["Take any one of the three most important players out for the playoffs.", "The Wolves lose " + D.share_txt + " of their title odds, " + D.share_aged_txt + " once you correct for age, but the loss is spread across three players: " + D.drop_txt + " points each on average. Not a one-man team, whatever it used to be."]
+    three: ["Take Ant, Rudy or LaMelo out for the playoffs.", "About two thirds of the title odds go with each of them: " + D.three[0].share_txt + ", " + D.three[1].share_txt + ", " + D.three[2].share_txt + ". Oklahoma City and San Antonio each have one player like that, Shai at " + D.sga_share_txt + " and Wembanyama at " + D.wemby_share_txt + ". Three single points of failure where the contenders have one, on a smaller stake: Ant is worth " + D.three[0].drop_txt + " points, Shai " + D.sga_drop_txt + "."]
   };
   var tab = "seeds";
   var VIEWS = [["consensus", "var(--dataviz-2)"], ["rapm", "var(--dataviz-3)"], ["box", "var(--dataviz-6)"], ["darko", "var(--dataviz-4)"]];
@@ -259,13 +259,10 @@
       var ax3 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m3.b) + ")").call(d3.axisBottom(x3).ticks(5).tickFormat(function (v) { return v.toFixed(1); }).tickSize(-(H - m3.b - m3.t)));
       ax3.select(".domain").remove();
       svg.append("text").attr("class", "th-note").attr("x", (m3.l + W - m3.r) / 2).attr("y", H - 4).attr("text-anchor", "middle").style("font-size", "9.5px").text("points of title odds lost when he misses the playoffs");
-      var meanAll = d3.mean(D.three, function (t) { return t.mean; });
-      svg.append("line").attr("class", "th-mean").attr("x1", x3(meanAll)).attr("x2", x3(meanAll)).attr("y1", m3.t - 6).attr("y2", H - m3.b);
-      svg.append("text").attr("class", "th-zone-lab").attr("x", x3(meanAll)).attr("y", m3.t - 10).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").text("mean " + D.drop_txt);
       D.three.forEach(function (t) {
         var g = svg.append("g").attr("class", "th-bar");
         var cy = y3(t.player) + y3.bandwidth() / 2;
-        g.append("text").attr("class", "th-rlab").attr("x", m3.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text(compact ? t.player.replace(/^(\w)\w+ /, "$1. ") : t.player);
+        g.append("text").attr("class", "th-rlab").attr("x", m3.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text((compact ? t.player.replace(/^(\w)\w+ /, "$1. ") : t.player) + ", " + t.share_txt);
         var lo = d3.min(VIEWS, function (v) { return t.drops[v[0]]; }), hi = d3.max(VIEWS, function (v) { return t.drops[v[0]]; });
         g.append("line").attr("x1", x3(lo)).attr("x2", x3(hi)).attr("y1", cy).attr("y2", cy).attr("stroke", "rgba(255,255,255,.25)").attr("stroke-width", 2);
         VIEWS.forEach(function (v) { g.append("circle").attr("cx", x3(t.drops[v[0]])).attr("cy", cy).attr("r", 5).attr("fill", v[1]).attr("stroke", "#050505").attr("stroke-width", 1.2); });
@@ -283,9 +280,9 @@
     return lastBuilt;
   }
   function heroFor() {
-    if (tab === "seeds") { root.select(".th-hero-num").text(D.modal_txt + ", " + D.modal_p_txt); root.select(".th-hero-unit").text(""); root.select(".th-hero-label").text("the most likely seed: a play-in game, one night, everything on it"); }
-    else if (tab === "r1") { root.select(".th-hero-num").text(D.sas_okc_txt); root.select(".th-hero-unit").text("of the time"); root.select(".th-hero-label").text("San Antonio or Oklahoma City in the first round, which is the whole problem in one sentence"); }
-    else { root.select(".th-hero-num").text(D.drop_txt); root.select(".th-hero-unit").text("points of title odds"); root.select(".th-hero-label").text("lost on average when Ant, LaMelo or Rudy misses the playoffs: spread across three players, not one"); }
+    if (tab === "seeds") { root.select(".th-hero-num").text(D.modal_txt + ", " + D.modal_p_txt); root.select(".th-hero-unit").text(""); root.select(".th-hero-label").text(D.seed_label); }
+    else if (tab === "r1") { root.select(".th-hero-num").text(D.sas_okc_txt); root.select(".th-hero-unit").text("of the time"); root.select(".th-hero-label").text("San Antonio or Oklahoma City in the first round"); }
+    else { root.select(".th-hero-num").text(D.three[0].share_txt); root.select(".th-hero-unit").text("of the title odds"); root.select(".th-hero-label").text("lost if Ant misses the playoffs, and Rudy and LaMelo cost about the same: three single points of failure where the contenders have one"); }
   }
   function finalState(b) { clearPlayTimers(); b.bars.forEach(function (g) { g.classed("is-on", true); }); heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1], true); showReplay(); }
   function play(b) {

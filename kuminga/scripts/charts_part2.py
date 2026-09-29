@@ -717,23 +717,33 @@ def viz_the_path(S):
     r2 = float(path.r2.mean()); cond = float(path.title.mean() / path.r2.mean())
     assert "%.0f%%" % (100 * r2) == S["n2_r2"] and "%.1f%%" % (100 * cond) == S["n2_cond"]
     f = pd.read_csv(os.path.join(OUTS, "n5_fragility.csv"))
-    f = f[(f.team == "MIN") & (f.basis == "unaged") & (f.why == "top three by minutes")]
-    drop = float(f.title_full.mean() - f.title_removed.mean())
-    share = drop / float(f.title_full.mean())
-    assert "%.2f" % drop == S["n5_min_drop"] and "%.0f%%" % (100 * share) == S["n5_min_share"], (drop, share)
+    f = f[(f.team == "MIN") & (f.basis == "unaged")]
+    # D113: the three by impact contribution. Since D111 LaMelo is fourth by minutes and sits in
+    # N5's sensitivity rows, so the rows are taken by player, not by the minutes set
     three = []
-    for pl in ("Anthony Edwards", "LaMelo Ball", "Rudy Gobert"):
+    for pl, slug in (("Anthony Edwards", "edwards"), ("Rudy Gobert", "gobert"), ("LaMelo Ball", "ball")):
         g = f[f.removed == pl]
-        three.append(dict(player=pl, drops={str(x.fork): float(x.drop_pp) for _, x in g.iterrows()}, mean=float(g.drop_pp.mean()), rel=float(g.drop_rel.mean())))
+        assert len(g) == 4, (pl, len(g))
+        dr, sh = float(g.drop_pp.mean()), float(g.drop_pp.mean() / g.title_full.mean())
+        assert "%.2f" % dr == S["n5_min_%s_drop" % slug] and "%.0f%%" % (100 * sh) == S["n5_min_%s_share" % slug], (pl, dr, sh)
+        three.append(dict(player=pl, drops={str(x.fork): float(x.drop_pp) for _, x in g.iterrows()}, mean=dr, rel=sh,
+                          share_txt=S["n5_min_%s_share" % slug], drop_txt=S["n5_min_%s_drop" % slug]))
+    playin = modal["seed"] >= 7
+    seed_label = ("the most likely seed: a play-in game, one night, everything on it" if playin
+                  else "the most likely seed, and it skips the play-in")
+    seed_line = ("The most likely version of April is a play-in game." if playin
+                 else "The most likely version of April skips the play-in.")
     data = dict(seeds=seeds, miss=miss, modal=modal["seed"], modal_txt=S["n2_modal"], modal_p_txt=S["n2_modal_p"], top6_txt=S["n2_top6"], opp=opp, sas_okc_txt=S["n2_sas_okc"],
-                r2_txt=S["n2_r2"], cond_txt=S["n2_cond"], three=three, drop_txt=S["n5_min_drop"], share_txt=S["n5_min_share"], share_aged_txt=S["n5_min_share_aged"])
+                r2_txt=S["n2_r2"], cond_txt=S["n2_cond"], three=three, seed_label=seed_label, seed_line=seed_line,
+                sga_share_txt=S["n5_okc_gilgeousalexander_share"], sga_drop_txt=S["n5_okc_gilgeousalexander_drop"],
+                wemby_share_txt=S["n5_sas_wembanyama_share"])
     pid = "the-path"
     p = "#viz-%s" % pid
     toolbar = ('<div class="th-toggle" role="group" aria-label="Which panel"><button type="button" data-tab="seeds" class="is-on">The seed</button>'
                '<button type="button" data-tab="r1">The first round</button><button type="button" data-tab="three">The three</button></div>')
     stage = '<svg class="th-svg" role="img" aria-label="Where the season is most likely to go"></svg>'
-    html = C1.chrome_html(pid, "The path", "where April most likely starts", "", "the most likely seed: a play-in game, one night, everything on it",
-                          "Seeds: the share of simulated seasons ending at each seed, averaged over the four ways of scoring players, un-aged. First round: who Minnesota draws when it makes the field. The three: the points of title odds lost when each of the three most important players misses the playoffs, one mark per way of scoring players. Hover a bar.",
+    html = C1.chrome_html(pid, "The path", "where April most likely starts", "", seed_label,
+                          "Seeds: the share of simulated seasons ending at each seed, averaged over the four ways of scoring players, un-aged. First round: who Minnesota draws when it makes the field. The three: the points of title odds lost when Ant, Rudy or LaMelo misses the playoffs (seeding from the full roster), one mark per way of scoring players, with the share of the team's odds beside each name. Hover a bar.",
                           extra_stage=stage, toolbar=toolbar, hero_num="")
     css = C1.chrome_css(pid, "var(--accent-default)") + """
   %(p)s .th-svg { width: 100%%; height: 280px; display: block; }
@@ -752,9 +762,9 @@ def viz_the_path(S):
     js = r"""
   var D = __DATA__;
   var CAPS = {
-    seeds: ["Run the season and ask where it ends. Each bar is the share of simulated seasons ending at that seed.", "The most likely seed is " + D.modal_txt + ", at " + D.modal_p_txt + ". A top-six seed, " + D.top6_txt + ". The most likely version of April is a play-in game."],
+    seeds: ["Run the season and ask where it ends. Each bar is the share of simulated seasons ending at that seed.", "The most likely seed is " + D.modal_txt + ", at " + D.modal_p_txt + ". A top-six seed, " + D.top6_txt + ". " + D.seed_line],
     r1: ["If they make the field, who's standing there?", "San Antonio or Oklahoma City is the first-round opponent " + D.sas_okc_txt + " of the time. They reach the second round " + D.r2_txt + " of the time, and from there win it all " + D.cond_txt + " of the time. The mountain is the first round."],
-    three: ["Take any one of the three most important players out for the playoffs.", "The Wolves lose " + D.share_txt + " of their title odds, " + D.share_aged_txt + " once you correct for age, but the loss is spread across three players: " + D.drop_txt + " points each on average. Not a one-man team, whatever it used to be."]
+    three: ["Take Ant, Rudy or LaMelo out for the playoffs.", "About two thirds of the title odds go with each of them: " + D.three[0].share_txt + ", " + D.three[1].share_txt + ", " + D.three[2].share_txt + ". Oklahoma City and San Antonio each have one player like that, Shai at " + D.sga_share_txt + " and Wembanyama at " + D.wemby_share_txt + ". Three single points of failure where the contenders have one, on a smaller stake: Ant is worth " + D.three[0].drop_txt + " points, Shai " + D.sga_drop_txt + "."]
   };
   var tab = "seeds";
   var VIEWS = [["consensus", "var(--dataviz-2)"], ["rapm", "var(--dataviz-3)"], ["box", "var(--dataviz-6)"], ["darko", "var(--dataviz-4)"]];
@@ -813,13 +823,10 @@ def viz_the_path(S):
       var ax3 = svg.append("g").attr("class", "th-axis").attr("transform", "translate(0," + (H - m3.b) + ")").call(d3.axisBottom(x3).ticks(5).tickFormat(function (v) { return v.toFixed(1); }).tickSize(-(H - m3.b - m3.t)));
       ax3.select(".domain").remove();
       svg.append("text").attr("class", "th-note").attr("x", (m3.l + W - m3.r) / 2).attr("y", H - 4).attr("text-anchor", "middle").style("font-size", "9.5px").text("points of title odds lost when he misses the playoffs");
-      var meanAll = d3.mean(D.three, function (t) { return t.mean; });
-      svg.append("line").attr("class", "th-mean").attr("x1", x3(meanAll)).attr("x2", x3(meanAll)).attr("y1", m3.t - 6).attr("y2", H - m3.b);
-      svg.append("text").attr("class", "th-zone-lab").attr("x", x3(meanAll)).attr("y", m3.t - 10).attr("text-anchor", "middle").style("fill", "var(--text-tertiary)").text("mean " + D.drop_txt);
       D.three.forEach(function (t) {
         var g = svg.append("g").attr("class", "th-bar");
         var cy = y3(t.player) + y3.bandwidth() / 2;
-        g.append("text").attr("class", "th-rlab").attr("x", m3.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text(compact ? t.player.replace(/^(\w)\w+ /, "$1. ") : t.player);
+        g.append("text").attr("class", "th-rlab").attr("x", m3.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end").text((compact ? t.player.replace(/^(\w)\w+ /, "$1. ") : t.player) + ", " + t.share_txt);
         var lo = d3.min(VIEWS, function (v) { return t.drops[v[0]]; }), hi = d3.max(VIEWS, function (v) { return t.drops[v[0]]; });
         g.append("line").attr("x1", x3(lo)).attr("x2", x3(hi)).attr("y1", cy).attr("y2", cy).attr("stroke", "rgba(255,255,255,.25)").attr("stroke-width", 2);
         VIEWS.forEach(function (v) { g.append("circle").attr("cx", x3(t.drops[v[0]])).attr("cy", cy).attr("r", 5).attr("fill", v[1]).attr("stroke", "#050505").attr("stroke-width", 1.2); });
@@ -837,9 +844,9 @@ def viz_the_path(S):
     return lastBuilt;
   }
   function heroFor() {
-    if (tab === "seeds") { root.select(".th-hero-num").text(D.modal_txt + ", " + D.modal_p_txt); root.select(".th-hero-unit").text(""); root.select(".th-hero-label").text("the most likely seed: a play-in game, one night, everything on it"); }
-    else if (tab === "r1") { root.select(".th-hero-num").text(D.sas_okc_txt); root.select(".th-hero-unit").text("of the time"); root.select(".th-hero-label").text("San Antonio or Oklahoma City in the first round, which is the whole problem in one sentence"); }
-    else { root.select(".th-hero-num").text(D.drop_txt); root.select(".th-hero-unit").text("points of title odds"); root.select(".th-hero-label").text("lost on average when Ant, LaMelo or Rudy misses the playoffs: spread across three players, not one"); }
+    if (tab === "seeds") { root.select(".th-hero-num").text(D.modal_txt + ", " + D.modal_p_txt); root.select(".th-hero-unit").text(""); root.select(".th-hero-label").text(D.seed_label); }
+    else if (tab === "r1") { root.select(".th-hero-num").text(D.sas_okc_txt); root.select(".th-hero-unit").text("of the time"); root.select(".th-hero-label").text("San Antonio or Oklahoma City in the first round"); }
+    else { root.select(".th-hero-num").text(D.three[0].share_txt); root.select(".th-hero-unit").text("of the title odds"); root.select(".th-hero-label").text("lost if Ant misses the playoffs, and Rudy and LaMelo cost about the same: three single points of failure where the contenders have one"); }
   }
   function finalState(b) { clearPlayTimers(); b.bars.forEach(function (g) { g.classed("is-on", true); }); heroFor(); root.classed("is-landed", true); setCaption(CAPS[tab][1], true); showReplay(); }
   function play(b) {
@@ -852,7 +859,7 @@ def viz_the_path(S):
     at(600 + b.bars.length * 160 + 1500, showReplay);
   }
 """.replace("__DATA__", json.dumps(data))
-    return pid, html + "\n<style>" + css + "</style>\n" + C1.script(pid, js), ["n2_modal", "n2_modal_p", "n2_top6", "n2_sas_okc", "n2_r2", "n2_cond", "n5_min_drop", "n5_min_share", "n5_min_share_aged"]
+    return pid, html + "\n<style>" + css + "</style>\n" + C1.script(pid, js), ["n2_modal", "n2_modal_p", "n2_top6", "n2_sas_okc", "n2_r2", "n2_cond", "n5_min_edwards_share", "n5_min_gobert_share", "n5_min_ball_share", "n5_min_edwards_drop", "n5_min_gobert_drop", "n5_min_ball_drop", "n5_okc_gilgeousalexander_share", "n5_okc_gilgeousalexander_drop", "n5_sas_wembanyama_share"]
 
 
 # ================================================================== main

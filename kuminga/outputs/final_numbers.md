@@ -1,6 +1,6 @@
 # Final numbers, piece 2
 
-*Run `build_final_numbers_20260929T101326Z`. 1717 figures, every one with a run ID. Anything not here does not go in the piece.*
+*Run `build_final_numbers_20260929T183504Z`. 1777 figures, every one with a run ID. Anything not here does not go in the piece.*
 
 ## 1. The number
 
@@ -256,15 +256,15 @@
 | `ds_early` | defence share 2014-23 only | -0.87 | MODELED | NOT QUOTABLE | `n3_playoff_translation_20260916T212714Z` |
 | `ds_late` | defence share 2024-26 only | -0.86 | MODELED | NOT QUOTABLE | `n3_playoff_translation_20260916T212714Z` |
 | `ds_luck` | defence share with three-point luck added | -0.77 | MODELED | NOT QUOTABLE | `n3_playoff_translation_20260916T212714Z` |
-| `n4_sd13` | true matchup effect SD, 2013-26, points per game | 0.65 | OBSERVED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_sd13_up` | upper 95%, 2013-26 | 1.77 | OBSERVED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_sd97` | true matchup effect SD, 1997-2026 | 0.00 | OBSERVED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_sd97_up` | upper 95%, 1997-2026 | 1.25 | OBSERVED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_series_up` | series points at the tighter upper bound | 9 | MODELED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_rankcorr` | spread vs own net rank correlation outside the field | 1.00 | MODELED | QUOTABLE | `n4_versatility_index_20260919T234720Z` |
-| `n4_start13` | first season, primary window | 2013-14 | FACT | FACT | `n4_versatility_index_20260919T234720Z` |
-| `n4_start97` | first season, extended window | 1997-98 | FACT | FACT | `n4_versatility_index_20260919T234720Z` |
-| `n4_games97` | regular-season games, 1997-2026 | 34,357 | OBSERVED | FACT | `n4_versatility_index_20260919T234720Z` |
+| `n4_sd13` | true matchup effect SD, 2013-26, points per game | 0.65 | OBSERVED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_sd13_up` | upper 95%, 2013-26 | 1.77 | OBSERVED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_sd97` | true matchup effect SD, 1997-2026 | 0.00 | OBSERVED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_sd97_up` | upper 95%, 1997-2026 | 1.25 | OBSERVED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_series_up` | series points at the tighter upper bound | 9 | MODELED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_rankcorr` | spread vs own net rank correlation outside the field | 1.00 | MODELED | QUOTABLE | `n4_versatility_index_20260929T181847Z` |
+| `n4_start13` | first season, primary window | 2013-14 | FACT | FACT | `n4_versatility_index_20260929T181847Z` |
+| `n4_start97` | first season, extended window | 1997-98 | FACT | FACT | `n4_versatility_index_20260929T181847Z` |
+| `n4_games97` | regular-season games, 1997-2026 | 34,357 | OBSERVED | FACT | `n4_versatility_index_20260929T181847Z` |
 | `m3_se30` | matchup SE at 30 possessions | 0.14 | OBSERVED | QUOTABLE | `m3_opponent_cards_20260929T100601Z` |
 | `m3_norm_lo` | primary-defender norm, low | 0.05 | OBSERVED | QUOTABLE | `m3_opponent_cards_20260929T100601Z` |
 | `m3_norm_hi` | primary-defender norm, high | 0.10 | OBSERVED | QUOTABLE | `m3_opponent_cards_20260929T100601Z` |
@@ -499,6 +499,16 @@
 | `n5_min_big` | MIN largest single net loss | 3.72 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_min_bigname` | MIN largest single loss, player | Rudy Gobert | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_min_po` | MIN mean net lost, playoff rollup | 3.45 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_min_edwards_drop` | MIN without Anthony Edwards for the playoffs, title odds lost, points | 1.81 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_edwards_share` | MIN without Anthony Edwards for the playoffs, share of title odds lost | 68% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_mcdaniels_drop` | MIN without Jaden McDaniels for the playoffs, title odds lost, points | 0.94 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_mcdaniels_share` | MIN without Jaden McDaniels for the playoffs, share of title odds lost | 35% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_ball_drop` | MIN without LaMelo Ball for the playoffs, title odds lost, points | 1.77 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_ball_share` | MIN without LaMelo Ball for the playoffs, share of title odds lost | 66% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_gobert_drop` | MIN without Rudy Gobert for the playoffs, title odds lost, points | 1.68 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_gobert_share` | MIN without Rudy Gobert for the playoffs, share of title odds lost | 63% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_min_n_60` | MIN players whose playoff absence costs at least 60% of the odds | 3 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_min_n_half` | MIN players whose playoff absence costs at least half of the odds | 3 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_okc_full` | OKC full-roster title odds | 14.73% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
 | `n5_okc_drop` | OKC mean drop | 6.07 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
 | `n5_okc_share` | OKC share of odds lost | 41% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
@@ -506,6 +516,16 @@
 | `n5_okc_big` | OKC largest single net loss | 4.89 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_okc_bigname` | OKC largest single loss, player | Shai Gilgeous-Alexander | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_okc_po` | OKC mean net lost, playoff rollup | 3.01 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_okc_holmgren_drop` | OKC without Chet Holmgren for the playoffs, title odds lost, points | 6.56 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_holmgren_share` | OKC without Chet Holmgren for the playoffs, share of title odds lost | 45% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_hartenstein_drop` | OKC without Isaiah Hartenstein for the playoffs, title odds lost, points | 3.56 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_hartenstein_share` | OKC without Isaiah Hartenstein for the playoffs, share of title odds lost | 24% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_williams_drop` | OKC without Jalen Williams for the playoffs, title odds lost, points | 1.81 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_williams_share` | OKC without Jalen Williams for the playoffs, share of title odds lost | 12% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_gilgeousalexander_drop` | OKC without Shai Gilgeous-Alexander for the playoffs, title odds lost, points | 9.83 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_gilgeousalexander_share` | OKC without Shai Gilgeous-Alexander for the playoffs, share of title odds lost | 67% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_okc_n_60` | OKC players whose playoff absence costs at least 60% of the odds | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_okc_n_half` | OKC players whose playoff absence costs at least half of the odds | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_sas_full` | SAS full-roster title odds | 13.68% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
 | `n5_sas_drop` | SAS mean drop | 6.03 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
 | `n5_sas_share` | SAS share of odds lost | 44% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
@@ -513,24 +533,64 @@
 | `n5_sas_big` | SAS largest single net loss | 5.26 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_sas_bigname` | SAS largest single loss, player | Victor Wembanyama | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_sas_po` | SAS mean net lost, playoff rollup | 2.83 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_sas_fox_drop` | SAS without De'Aaron Fox for the playoffs, title odds lost, points | 4.47 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_fox_share` | SAS without De'Aaron Fox for the playoffs, share of title odds lost | 33% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_harper_drop` | SAS without Dylan Harper for the playoffs, title odds lost, points | 4.38 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_harper_share` | SAS without Dylan Harper for the playoffs, share of title odds lost | 32% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_harris_drop` | SAS without Tobias Harris for the playoffs, title odds lost, points | 3.45 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_harris_share` | SAS without Tobias Harris for the playoffs, share of title odds lost | 25% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_wembanyama_drop` | SAS without Victor Wembanyama for the playoffs, title odds lost, points | 10.15 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_wembanyama_share` | SAS without Victor Wembanyama for the playoffs, share of title odds lost | 74% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095141Z` |
+| `n5_sas_n_60` | SAS players whose playoff absence costs at least 60% of the odds | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
+| `n5_sas_n_half` | SAS players whose playoff absence costs at least half of the odds | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095141Z` |
 | `n5_min_full_aged` | MIN full-roster title odds_aged | 3.71% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_min_drop_aged` | MIN mean drop_aged | 1.68 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_min_share_aged` | MIN share of odds lost_aged | 45% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_min_net_aged` | MIN mean net lost per removal_aged | 2.36 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_min_big_aged` | MIN largest single net loss_aged | 2.99 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_min_bigname_aged` | MIN largest single loss, player_aged | Anthony Edwards | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_min_edwards_drop_aged` | MIN without Anthony Edwards for the playoffs, title odds lost, points_aged | 2.23 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_edwards_share_aged` | MIN without Anthony Edwards for the playoffs, share of title odds lost_aged | 60% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_mcdaniels_drop_aged` | MIN without Jaden McDaniels for the playoffs, title odds lost, points_aged | 1.09 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_mcdaniels_share_aged` | MIN without Jaden McDaniels for the playoffs, share of title odds lost_aged | 30% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_ball_drop_aged` | MIN without LaMelo Ball for the playoffs, title odds lost, points_aged | 2.21 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_ball_share_aged` | MIN without LaMelo Ball for the playoffs, share of title odds lost_aged | 60% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_gobert_drop_aged` | MIN without Rudy Gobert for the playoffs, title odds lost, points_aged | 1.72 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_gobert_share_aged` | MIN without Rudy Gobert for the playoffs, share of title odds lost_aged | 46% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_min_n_60_aged` | MIN players whose playoff absence costs at least 60% of the odds_aged | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_min_n_half_aged` | MIN players whose playoff absence costs at least half of the odds_aged | 2 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_okc_full_aged` | OKC full-roster title odds_aged | 17.13% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_okc_drop_aged` | OKC mean drop_aged | 6.72 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_okc_share_aged` | OKC share of odds lost_aged | 39% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_okc_net_aged` | OKC mean net lost per removal_aged | 2.63 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_okc_big_aged` | OKC largest single net loss_aged | 4.66 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_okc_bigname_aged` | OKC largest single loss, player_aged | Shai Gilgeous-Alexander | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_okc_holmgren_drop_aged` | OKC without Chet Holmgren for the playoffs, title odds lost, points_aged | 7.13 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_holmgren_share_aged` | OKC without Chet Holmgren for the playoffs, share of title odds lost_aged | 42% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_hartenstein_drop_aged` | OKC without Isaiah Hartenstein for the playoffs, title odds lost, points_aged | 3.27 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_hartenstein_share_aged` | OKC without Isaiah Hartenstein for the playoffs, share of title odds lost_aged | 19% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_williams_drop_aged` | OKC without Jalen Williams for the playoffs, title odds lost, points_aged | 2.19 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_williams_share_aged` | OKC without Jalen Williams for the playoffs, share of title odds lost_aged | 13% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_gilgeousalexander_drop_aged` | OKC without Shai Gilgeous-Alexander for the playoffs, title odds lost, points_aged | 10.83 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_gilgeousalexander_share_aged` | OKC without Shai Gilgeous-Alexander for the playoffs, share of title odds lost_aged | 63% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_okc_n_60_aged` | OKC players whose playoff absence costs at least 60% of the odds_aged | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_okc_n_half_aged` | OKC players whose playoff absence costs at least half of the odds_aged | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_sas_full_aged` | SAS full-roster title odds_aged | 16.46% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_sas_drop_aged` | SAS mean drop_aged | 6.29 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_sas_share_aged` | SAS share of odds lost_aged | 38% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
 | `n5_sas_net_aged` | SAS mean net lost per removal_aged | 2.52 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_sas_big_aged` | SAS largest single net loss_aged | 5.52 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `n5_sas_bigname_aged` | SAS largest single loss, player_aged | Victor Wembanyama | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_sas_fox_drop_aged` | SAS without De'Aaron Fox for the playoffs, title odds lost, points_aged | 4.57 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_fox_share_aged` | SAS without De'Aaron Fox for the playoffs, share of title odds lost_aged | 28% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_harper_drop_aged` | SAS without Dylan Harper for the playoffs, title odds lost, points_aged | 6.09 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_harper_share_aged` | SAS without Dylan Harper for the playoffs, share of title odds lost_aged | 37% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_harris_drop_aged` | SAS without Tobias Harris for the playoffs, title odds lost, points_aged | 2.13 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_harris_share_aged` | SAS without Tobias Harris for the playoffs, share of title odds lost_aged | 13% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_wembanyama_drop_aged` | SAS without Victor Wembanyama for the playoffs, title odds lost, points_aged | 12.17 | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_wembanyama_share_aged` | SAS without Victor Wembanyama for the playoffs, share of title odds lost_aged | 74% | MODELED | QUOTABLE AS BAND | `n5_fragility_20260929T095826Z` |
+| `n5_sas_n_60_aged` | SAS players whose playoff absence costs at least 60% of the odds_aged | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
+| `n5_sas_n_half_aged` | SAS players whose playoff absence costs at least half of the odds_aged | 1 | MODELED | QUOTABLE | `n5_fragility_20260929T095826Z` |
 | `williams_mpg` | Cody Williams projected minutes (0.0 when outside the ten) | 0.0 | ASSUMED | NOT QUOTABLE | `build_rotations_20260929T024337Z` |
 | `rs_williams` | Williams rank score | 0.1284 | COMPOSED | DESCRIPTIVE | `build_rotations_20260929T024337Z` |
 | `rs_clark` | Jaylen Clark rank score | 0.3333 | COMPOSED | DESCRIPTIVE | `build_rotations_20260929T024337Z` |
@@ -1185,161 +1245,161 @@
 | `c2_dvpe_last` | last extension window before free agency (needs All-NBA 2027-28) | July 2028 | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
 | `c2_std_ext_reported` | standard extension available now, as reported | two years, about $122 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
 | `c2_supermax_reported` | designated veteran extension as reported | four years, about $300 million | OBSERVED | QUOTABLE | `c2_edwards_clock_20260922T191531Z` |
-| `c3_games_2020_21` | Ball games played 2020-21 | 51 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2020_21` | team games 2020-21 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2020_21` | share of team games 2020-21 | 71% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2020_21` | games missed 2020-21 | 21 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_2021_22` | Ball games played 2021-22 | 75 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2021_22` | team games 2021-22 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2021_22` | share of team games 2021-22 | 91% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2021_22` | games missed 2021-22 | 7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_2022_23` | Ball games played 2022-23 | 36 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2022_23` | team games 2022-23 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2022_23` | share of team games 2022-23 | 44% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2022_23` | games missed 2022-23 | 46 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_2023_24` | Ball games played 2023-24 | 22 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2023_24` | team games 2023-24 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2023_24` | share of team games 2023-24 | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2023_24` | games missed 2023-24 | 60 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_2024_25` | Ball games played 2024-25 | 47 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2024_25` | team games 2024-25 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2024_25` | share of team games 2024-25 | 57% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2024_25` | games missed 2024-25 | 35 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_2025_26` | Ball games played 2025-26 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_2025_26` | team games 2025-26 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_2025_26` | share of team games 2025-26 | 88% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_2025_26` | games missed 2025-26 | 10 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_mpa_2025_26` | Ball minutes per appearance 2025-26 | 27.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_games_total` | Ball games played, six seasons | 303 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_team_games_total` | team games, six seasons | 482 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_missed_total` | games missed, six seasons | 179 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_share_total` | share of team games, six seasons | 63% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_stretches` | missed stretches | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_stretches_sourced` | stretches with a sourced cause | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_surgeries` | stretches that ended in surgery | 3 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_n` | base rate A: injury history: player-seasons | 20 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_players` | players | 16 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_mean` | mean games | 56.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_median` | median games | 61.4 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_p50` | P(50 or more) | 75% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_p60` | P(60 or more) | 55% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_p70` | P(70 or more) | 25% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_a_p40` | P(40 or fewer) | 20% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_n` | base rate B: injury history and a healthy prior season: player-seasons | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_players` | players | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_mean` | mean games | 54.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_median` | median games | 62.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_p50` | P(50 or more) | 67% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_p60` | P(60 or more) | 50% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_p70` | P(70 or more) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_b_p40` | P(40 or fewer) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_n` | base rate C: looser history, two of five prior seasons at 60% or less: player-seasons | 85 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_players` | players | 62 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_mean` | mean games | 61.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_median` | median games | 67.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_p50` | P(50 or more) | 78% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_p60` | P(60 or more) | 69% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_p70` | P(70 or more) | 41% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_pall` | P(all games) | 5% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_c_p40` | P(40 or fewer) | 12% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_n` | base rate D: injury history, age 22 to 29: player-seasons | 41 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_players` | players | 32 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_mean` | mean games | 57.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_median` | median games | 63.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_p50` | P(50 or more) | 73% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_p60` | P(60 or more) | 61% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_p70` | P(70 or more) | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_d_p40` | P(40 or fewer) | 22% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_n` | base rate band: same age and role, no history condition: player-seasons | 617 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_players` | players | 329 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_mean` | mean games | 64.9 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_median` | median games | 70.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_p50` | P(50 or more) | 83% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_p60` | P(60 or more) | 72% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_p70` | P(70 or more) | 52% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_pall` | P(all games) | 7% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_band_p40` | P(40 or fewer) | 10% | OBSERVED | QUOTABLE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_share` | base rate definition: a bad season is at most this share of team games | 60% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_seasons` | bad seasons required of the five prior | 3 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_age` | age band | 23 to 27 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_mpa` | minutes per appearance the season before, at least | 24 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_healthy` | healthy prior season, at least this share | 80% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_def_first` | first season in the base rate | 2001-02 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260922T191221Z` |
-| `c3_title_50_u` | MIN title odds with Ball at 50 games, mean of views (unaged) | 1.52% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_50_u_band` | band across views | 0.64% to 2.47% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_drop_50_u` | drop from 82 games, points | 0.12 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_50_u` | P(top six) with Ball at 50 games (unaged) | 25.8% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_50_u_band` | band across views | 7.3% to 49.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_drop_50_u` | P(top six) drop from 82 games, points | 16.6 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_seed_50_u` | mean West seed | 7.25 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_net_drop_50_u` | regular-season net lost, mean of views | 0.84 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_ball_mpg_50_u` | Ball minutes per game in the allocation | 18.9 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_60_u` | MIN title odds with Ball at 60 games, mean of views (unaged) | 1.57% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_60_u_band` | band across views | 0.70% to 2.50% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_drop_60_u` | drop from 82 games, points | 0.07 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_60_u` | P(top six) with Ball at 60 games (unaged) | 31.5% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_60_u_band` | band across views | 10.9% to 56.7% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_drop_60_u` | P(top six) drop from 82 games, points | 10.9 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_seed_60_u` | mean West seed | 7.04 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_net_drop_60_u` | regular-season net lost, mean of views | 0.53 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_ball_mpg_60_u` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_70_u` | MIN title odds with Ball at 70 games, mean of views (unaged) | 1.60% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_70_u_band` | band across views | 0.74% to 2.53% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_drop_70_u` | drop from 82 games, points | 0.03 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_70_u` | P(top six) with Ball at 70 games (unaged) | 37.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_70_u_band` | band across views | 14.9% to 63.2% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_drop_70_u` | P(top six) drop from 82 games, points | 5.4 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_seed_70_u` | mean West seed | 6.85 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_net_drop_70_u` | regular-season net lost, mean of views | 0.26 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_ball_mpg_70_u` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_82_u` | MIN title odds with Ball at 82 games, mean of views (unaged) | 1.64% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_82_u_band` | band across views | 0.78% to 2.56% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_drop_82_u` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_82_u` | P(top six) with Ball at 82 games (unaged) | 42.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_82_u_band` | band across views | 19.6% to 68.9% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_top6_drop_82_u` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_seed_82_u` | mean West seed | 6.68 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_net_drop_82_u` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T185238Z` |
-| `c3_ball_mpg_82_u` | Ball minutes per game in the allocation | 30.6 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T185238Z` |
-| `c3_title_50_a` | MIN title odds with Ball at 50 games, mean of views (aged) | 2.19% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_50_a_band` | band across views | 0.90% to 3.47% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_drop_50_a` | drop from 82 games, points | 0.16 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_50_a` | P(top six) with Ball at 50 games (aged) | 45.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_50_a_band` | band across views | 18.7% to 75.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_drop_50_a` | P(top six) drop from 82 games, points | 16.8 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_seed_50_a` | mean West seed | 6.62 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_net_drop_50_a` | regular-season net lost, mean of views | 0.77 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_ball_mpg_50_a` | Ball minutes per game in the allocation | 18.9 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_60_a` | MIN title odds with Ball at 60 games, mean of views (aged) | 2.26% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_60_a_band` | band across views | 0.99% to 3.53% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_drop_60_a` | drop from 82 games, points | 0.09 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_60_a` | P(top six) with Ball at 60 games (aged) | 51.7% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_60_a_band` | band across views | 24.9% to 80.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_drop_60_a` | P(top six) drop from 82 games, points | 10.6 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_seed_60_a` | mean West seed | 6.39 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_net_drop_60_a` | regular-season net lost, mean of views | 0.49 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_ball_mpg_60_a` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_70_a` | MIN title odds with Ball at 70 games, mean of views (aged) | 2.32% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_70_a_band` | band across views | 1.07% to 3.59% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_drop_70_a` | drop from 82 games, points | 0.04 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_70_a` | P(top six) with Ball at 70 games (aged) | 57.3% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_70_a_band` | band across views | 31.4% to 84.8% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_drop_70_a` | P(top six) drop from 82 games, points | 5.1 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_seed_70_a` | mean West seed | 6.19 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_net_drop_70_a` | regular-season net lost, mean of views | 0.24 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_ball_mpg_70_a` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_82_a` | MIN title odds with Ball at 82 games, mean of views (aged) | 2.35% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_82_a_band` | band across views | 1.14% to 3.60% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_title_drop_82_a` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_82_a` | P(top six) with Ball at 82 games (aged) | 62.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_82_a_band` | band across views | 37.9% to 88.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_top6_drop_82_a` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_seed_82_a` | mean West seed | 6.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_net_drop_82_a` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260922T190242Z` |
-| `c3_ball_mpg_82_a` | Ball minutes per game in the allocation | 30.6 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260922T190242Z` |
+| `c3_games_2020_21` | Ball games played 2020-21 | 51 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2020_21` | team games 2020-21 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2020_21` | share of team games 2020-21 | 71% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2020_21` | games missed 2020-21 | 21 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_2021_22` | Ball games played 2021-22 | 75 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2021_22` | team games 2021-22 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2021_22` | share of team games 2021-22 | 91% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2021_22` | games missed 2021-22 | 7 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_2022_23` | Ball games played 2022-23 | 36 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2022_23` | team games 2022-23 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2022_23` | share of team games 2022-23 | 44% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2022_23` | games missed 2022-23 | 46 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_2023_24` | Ball games played 2023-24 | 22 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2023_24` | team games 2023-24 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2023_24` | share of team games 2023-24 | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2023_24` | games missed 2023-24 | 60 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_2024_25` | Ball games played 2024-25 | 47 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2024_25` | team games 2024-25 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2024_25` | share of team games 2024-25 | 57% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2024_25` | games missed 2024-25 | 35 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_2025_26` | Ball games played 2025-26 | 72 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_2025_26` | team games 2025-26 | 82 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_2025_26` | share of team games 2025-26 | 88% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_2025_26` | games missed 2025-26 | 10 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_mpa_2025_26` | Ball minutes per appearance 2025-26 | 27.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_games_total` | Ball games played, six seasons | 303 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_team_games_total` | team games, six seasons | 482 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_missed_total` | games missed, six seasons | 179 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_share_total` | share of team games, six seasons | 63% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_stretches` | missed stretches | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_stretches_sourced` | stretches with a sourced cause | 27 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_surgeries` | stretches that ended in surgery | 3 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_n` | base rate A: injury history: player-seasons | 20 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_players` | players | 16 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_mean` | mean games | 56.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_median` | median games | 61.4 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_p50` | P(50 or more) | 75% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_p60` | P(60 or more) | 55% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_p70` | P(70 or more) | 25% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_a_p40` | P(40 or fewer) | 20% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_n` | base rate B: injury history and a healthy prior season: player-seasons | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_players` | players | 6 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_mean` | mean games | 54.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_median` | median games | 62.5 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_p50` | P(50 or more) | 67% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_p60` | P(60 or more) | 50% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_p70` | P(70 or more) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_b_p40` | P(40 or fewer) | 33% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_n` | base rate C: looser history, two of five prior seasons at 60% or less: player-seasons | 85 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_players` | players | 62 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_mean` | mean games | 61.7 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_median` | median games | 67.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_p50` | P(50 or more) | 78% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_p60` | P(60 or more) | 69% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_p70` | P(70 or more) | 41% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_pall` | P(all games) | 5% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_c_p40` | P(40 or fewer) | 12% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_n` | base rate D: injury history, age 22 to 29: player-seasons | 41 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_players` | players | 32 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_mean` | mean games | 57.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_median` | median games | 63.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_p50` | P(50 or more) | 73% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_p60` | P(60 or more) | 61% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_p70` | P(70 or more) | 27% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_pall` | P(all games) | 0% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_d_p40` | P(40 or fewer) | 22% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_n` | base rate band: same age and role, no history condition: player-seasons | 617 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_players` | players | 329 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_mean` | mean games | 64.9 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_median` | median games | 70.0 | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_p50` | P(50 or more) | 83% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_p60` | P(60 or more) | 72% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_p70` | P(70 or more) | 52% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_pall` | P(all games) | 7% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_band_p40` | P(40 or fewer) | 10% | OBSERVED | QUOTABLE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_share` | base rate definition: a bad season is at most this share of team games | 60% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_seasons` | bad seasons required of the five prior | 3 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_age` | age band | 23 to 27 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_mpa` | minutes per appearance the season before, at least | 24 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_healthy` | healthy prior season, at least this share | 80% | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_def_first` | first season in the base rate | 2001-02 | OBSERVED | DESCRIPTIVE | `c3_ball_games_20260929T182638Z` |
+| `c3_title_50_u` | MIN title odds with Ball at 50 games, mean of views (unaged) | 2.65% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_50_u_band` | band across views | 1.67% to 3.81% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_drop_50_u` | drop from 82 games, points | 0.10 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_50_u` | P(top six) with Ball at 50 games (unaged) | 55.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_50_u_band` | band across views | 36.7% to 75.7% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_drop_50_u` | P(top six) drop from 82 games, points | 15.6 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_seed_50_u` | mean West seed | 6.24 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_net_drop_50_u` | regular-season net lost, mean of views | 0.74 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_ball_mpg_50_u` | Ball minutes per game in the allocation | 19.3 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_60_u` | MIN title odds with Ball at 60 games, mean of views (unaged) | 2.68% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_60_u_band` | band across views | 1.70% to 3.86% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_drop_60_u` | drop from 82 games, points | 0.07 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_60_u` | P(top six) with Ball at 60 games (unaged) | 58.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_60_u_band` | band across views | 40.6% to 78.9% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_drop_60_u` | P(top six) drop from 82 games, points | 12.2 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_seed_60_u` | mean West seed | 6.13 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_net_drop_60_u` | regular-season net lost, mean of views | 0.58 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_ball_mpg_60_u` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_70_u` | MIN title odds with Ball at 70 games, mean of views (unaged) | 2.71% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_70_u_band` | band across views | 1.69% to 3.91% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_drop_70_u` | drop from 82 games, points | 0.04 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_70_u` | P(top six) with Ball at 70 games (unaged) | 64.3% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_70_u_band` | band across views | 48.3% to 83.8% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_drop_70_u` | P(top six) drop from 82 games, points | 6.3 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_seed_70_u` | mean West seed | 5.93 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_net_drop_70_u` | regular-season net lost, mean of views | 0.31 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_ball_mpg_70_u` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_82_u` | MIN title odds with Ball at 82 games, mean of views (unaged) | 2.75% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_82_u_band` | band across views | 1.74% to 3.97% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_drop_82_u` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_82_u` | P(top six) with Ball at 82 games (unaged) | 70.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_82_u_band` | band across views | 55.5% to 88.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_top6_drop_82_u` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_seed_82_u` | mean West seed | 5.69 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_net_drop_82_u` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181127Z` |
+| `c3_ball_mpg_82_u` | Ball minutes per game in the allocation | 31.0 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181127Z` |
+| `c3_title_50_a` | MIN title odds with Ball at 50 games, mean of views (aged) | 3.60% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_50_a_band` | band across views | 2.28% to 5.00% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_drop_50_a` | drop from 82 games, points | 0.15 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_50_a` | P(top six) with Ball at 50 games (aged) | 74.0% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_50_a_band` | band across views | 58.0% to 90.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_drop_50_a` | P(top six) drop from 82 games, points | 10.9 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_seed_50_a` | mean West seed | 5.47 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_net_drop_50_a` | regular-season net lost, mean of views | 0.70 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_ball_mpg_50_a` | Ball minutes per game in the allocation | 19.3 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_60_a` | MIN title odds with Ball at 60 games, mean of views (aged) | 3.62% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_60_a_band` | band across views | 2.32% to 5.03% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_drop_60_a` | drop from 82 games, points | 0.12 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_60_a` | P(top six) with Ball at 60 games (aged) | 76.6% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_60_a_band` | band across views | 61.7% to 92.1% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_drop_60_a` | P(top six) drop from 82 games, points | 8.3 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_seed_60_a` | mean West seed | 5.35 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_net_drop_60_a` | regular-season net lost, mean of views | 0.55 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_ball_mpg_60_a` | Ball minutes per game in the allocation | 22.7 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_70_a` | MIN title odds with Ball at 70 games, mean of views (aged) | 3.67% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_70_a_band` | band across views | 2.39% to 5.07% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_drop_70_a` | drop from 82 games, points | 0.07 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_70_a` | P(top six) with Ball at 70 games (aged) | 80.9% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_70_a_band` | band across views | 68.9% to 94.5% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_drop_70_a` | P(top six) drop from 82 games, points | 4.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_seed_70_a` | mean West seed | 5.13 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_net_drop_70_a` | regular-season net lost, mean of views | 0.29 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_ball_mpg_70_a` | Ball minutes per game in the allocation | 26.5 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_82_a` | MIN title odds with Ball at 82 games, mean of views (aged) | 3.74% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_82_a_band` | band across views | 2.45% to 5.19% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_title_drop_82_a` | drop from 82 games, points | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_82_a` | P(top six) with Ball at 82 games (aged) | 84.9% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_82_a_band` | band across views | 74.7% to 96.4% | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_top6_drop_82_a` | P(top six) drop from 82 games, points | 0.0 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_seed_82_a` | mean West seed | 4.89 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_net_drop_82_a` | regular-season net lost, mean of views | 0.00 | MODELED | QUOTABLE AS BAND | `c3_ball_availability_20260929T181920Z` |
+| `c3_ball_mpg_82_a` | Ball minutes per game in the allocation | 31.0 | MODELED | DESCRIPTIVE | `c3_ball_availability_20260929T181920Z` |
 | `c1_n` | champions in the table | 11 | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |
 | `c1_first` | first season | 2015-16 | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |
 | `c1_last` | last season | 2025-26 | OBSERVED | QUOTABLE | `c1_champions_20260924T195859Z` |

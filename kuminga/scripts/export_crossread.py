@@ -5,8 +5,7 @@ The four parts, the four feeds (each part's short version, pull-quotes and slide
 file), the index and the rendered methods page are written to `outputs/crossread/` with:
 
   - every `{{viz:<id>}}` tag replaced by a bracketed placeholder naming the visual
-  - the fragility sentences bracketed as PENDING (they are under review after D111, and the
-    parts are not edited until that review is read)
+  - the N9 documents included with a PENDING banner (N9 is not in the series; D113)
   - a header line on each file with the source path, the export run ID and the git commit
 
 Nothing in `docs/series/` is modified.
@@ -35,19 +34,12 @@ OUT = os.path.join(REPO, "kuminga", "outputs", "crossread")
 
 VIZ = re.compile(r"\{\{viz:([a-z0-9-]+)\}\}")
 
-# the sentences under review (D111 changed the fragility figures and the top-three set);
-# each is bracketed in place, verbatim, so the reader sees exactly what is pending
-PENDING = {
-    "part2.md": [
-        "Health. If you take any one of Minnesota's three most important players out for the playoffs, the Wolves lose 55% of their title odds, 45% once you correct for age. That sounds fragile and it is. But the loss is spread across three players rather than one: removing Ant, Rudy or Jaden costs 1.47 points of title odds on average, and no single one of them takes the season with him. When you tighten to a playoff rotation, though, the Wolves lose more net rating per missing star than San Antonio or Oklahoma City do. This is not a one-man team, whatever it used to be, and after the last three Aprils I'll take that sentence and frame it. It is a three-man team, and the playoffs are where that shows.",
-    ],
-    "part4.md": [
-        "The title equity is spread across three players now. Losing any one of the top three for the playoffs costs 55% of the odds, which sounds terrible until you look at who: Ant, LaMelo, Rudy, on a roster that a year ago had one creator. Three ways to survive an injury instead of one.",
-    ],
-    "part4_short.md": [
-        "Losing any one of the top three costs 55% of the odds, but it's three players now, not one.",
-    ],
-}
+PENDING = {}   # D113: the fragility passages were rewritten and are no longer pending
+
+# N9 is not in any part; its documents travel with the package, marked pending (D113)
+N9_DOCS = ["n9_breadth.md", "n9_proxies.md"]
+N9_BANNER = ("> **PENDING. N9 is not in the series.** The breadth analysis and its proxies are here for the cross-read only; "
+             "nothing from them enters the parts until Bobby decides (D112, D113).\n\n")
 
 
 def git_head():
@@ -102,7 +94,7 @@ def main():
 
         def header(src):
             return ("<!-- cross-read export of %s | run %s | commit %s | %s | visuals replaced by [visual: id]; "
-                    "sentences under review bracketed [PENDING ...] -->\n\n" % (os.path.relpath(src, REPO), r.run_id, head, stamp))
+                    "N9 documents marked PENDING -->\n\n" % (os.path.relpath(src, REPO), r.run_id, head, stamp))
 
         for i in (1, 2, 3, 4):
             # the part
@@ -128,6 +120,13 @@ def main():
             written.append(dst)
             r.note("part%d_feed.md: short (%d bracketed), quotes, slide" % (i, np_))
 
+        for name in N9_DOCS:
+            src = os.path.join(DOCS, name)
+            if os.path.exists(src):
+                dst = os.path.join(OUT, name)
+                io.open(dst, "w", encoding="utf-8").write(header(src) + N9_BANNER + io.open(src, encoding="utf-8").read())
+                written.append(dst)
+                r.note("%s: included, marked PENDING" % name)
         for name, src in (("index.md", os.path.join(SERIES, "index.md")), ("methods.md", os.path.join(DOCS, "methods.md"))):
             text, nv, _ = plain(io.open(src, encoding="utf-8").read(), name, r)
             dst = os.path.join(OUT, name)
@@ -138,7 +137,7 @@ def main():
         manifest = os.path.join(OUT, "README.md")
         io.open(manifest, "w", encoding="utf-8").write(
             "# Cross-read package\n\nExported %s from commit %s (run %s). Plain markdown: visuals appear as `[visual: id]`; "
-            "the fragility sentences are bracketed `[PENDING ...]` because their figures changed under D111 and the parts are not edited until that review is read.\n\n"
+            "the fragility passages were rewritten under D113 and are no longer bracketed; the N9 documents (`n9_breadth.md`, `n9_proxies.md`) are included and marked PENDING, because N9 is not in the series.\n\n"
             % (stamp, head, r.run_id) + "\n".join("- %s" % os.path.basename(p) for p in written) + "\n")
         for p in written + [manifest]:
             r.output(p)

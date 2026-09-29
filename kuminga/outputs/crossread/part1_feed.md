@@ -1,4 +1,4 @@
-<!-- cross-read export of kuminga\docs\series\part1_short.md | run export_crossread_20260929T125535Z | commit 2b988ef5 | 2026-09-29T12:55:35Z | visuals replaced by [visual: id]; sentences under review bracketed [PENDING ...] -->
+<!-- cross-read export of kuminga\docs\series\part1_short.md | run export_crossread_20260929T183814Z | commit 749ed93a | 2026-09-29T18:38:14Z | visuals replaced by [visual: id]; N9 documents marked PENDING -->
 
 # The Bet, Part 1: feed
 

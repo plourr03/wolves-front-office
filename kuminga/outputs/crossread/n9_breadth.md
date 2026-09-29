@@ -1,3 +1,7 @@
+<!-- cross-read export of kuminga\docs\n9_breadth.md | run export_crossread_20260929T183814Z | commit 749ed93a | 2026-09-29T18:38:14Z | visuals replaced by [visual: id]; N9 documents marked PENDING -->
+
+> **PENDING. N9 is not in the series.** The breadth analysis and its proxies are here for the cross-read only; nothing from them enters the parts until Bobby decides (D112, D113).
+
 # N9: the breadth of the odds (version 2)
 
 Run `n9_breadth_20260929T183215Z`. PENDING: N9 does not enter the series while the headline gate (G5) fails or until Bobby decides. Design: D112 as revised by D113 in decisions.md.

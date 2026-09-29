@@ -1,4 +1,4 @@
-<!-- cross-read export of kuminga\docs\series\part2.md | run export_crossread_20260929T125535Z | commit 2b988ef5 | 2026-09-29T12:55:35Z | visuals replaced by [visual: id]; sentences under review bracketed [PENDING ...] -->
+<!-- cross-read export of kuminga\docs\series\part2.md | run export_crossread_20260929T183814Z | commit 749ed93a | 2026-09-29T18:38:14Z | visuals replaced by [visual: id]; N9 documents marked PENDING -->
 
 # The Bet, Part 2: What we found
 
@@ -96,7 +96,7 @@ If you want to know whether to trust the model, don't watch Minnesota. Watch Bos
 
 Two short beats before I hand off, because they're the two things people will actually ask me about in January.
 
-[PENDING, fragility under review after D111: Health. If you take any one of Minnesota's three most important players out for the playoffs, the Wolves lose 55% of their title odds, 45% once you correct for age. That sounds fragile and it is. But the loss is spread across three players rather than one: removing Ant, Rudy or Jaden costs 1.47 points of title odds on average, and no single one of them takes the season with him. When you tighten to a playoff rotation, though, the Wolves lose more net rating per missing star than San Antonio or Oklahoma City do. This is not a one-man team, whatever it used to be, and after the last three Aprils I'll take that sentence and frame it. It is a three-man team, and the playoffs are where that shows.]
+Health, and this is the one I had backwards. Take Ant out for the playoffs and the Wolves lose 68% of their title odds. Take out Rudy and it's 63%; LaMelo, 66%. About two thirds, whichever one it is. Oklahoma City and San Antonio each have one player like that, Shai at 67% and Wembanyama at 74%. So the Wolves didn't spread their risk across three stars. They have three single points of failure where the contenders have one. In absolute terms the stake is smaller, because Minnesota starts with less to lose: Ant is worth 1.81 points of title odds to the Wolves, Shai is worth 9.83 to the Thunder. As a share it's bigger, and it gets bigger when the rotation tightens for the playoffs, where the Wolves lose more net rating per missing star than either of them. Correct for age and Rudy's number falls to 46%, just under half. After the last three Aprils, the sentence I'd frame is shorter than the one I wanted: all three of them have to be there.
 
 The path. The most likely seed is 6th, at 26%, which in the current format means the most likely version of April skips the play-in. Top six, 70%. If they make the field, San Antonio or Oklahoma City is the first-round opponent 34% of the time, still the biggest single problem on the calendar. They reach the second round 38% of the time, and from there, having escaped the first round, they win it all 7.2% of the time. The mountain is still the first round, and a third of the time it has Wembanyama or Shai standing on it.
 

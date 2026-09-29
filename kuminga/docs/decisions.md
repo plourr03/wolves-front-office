@@ -2208,3 +2208,73 @@ Minnesota's top three by projected minutes are now Edwards (36.0), Gobert (34.3)
 
 **3. The cross-read package.** `scripts/export_crossread.py` writes `outputs/crossread/`: the four parts, one feed per part (short version, pull-quotes, slide copy), the index and the rendered methods page, as plain markdown with every visual tag replaced by `[visual: id]` and the three fragility sentences bracketed `[PENDING, fragility under review after D111: ...]`. Each file carries the source path, the export run ID and the commit. `docs/series/` is untouched.
 
+### D113. N9 rebuilt, the proxies with prior-season games missed, the fragility prose, and a stale-figure sweep after D111
+
+**0. A stale-figure sweep first.** Two scripts that read the model's rotations sat outside the chain and so were not re-run by D111: C3's Ball-availability simulation (last run 2026-09-22) and the N4 versatility index (2026-09-19). Every sheet figure's run ID was dated against the D111 chain start; the other pre-chain figures are observed, historical or cap facts. Both were re-run on the current pipeline (C3 on both bases; its own G5 gate matches the D111 headline, 2.75% against 2.76% and 3.74% against 3.72%). N4's figures did not move. C3 changed 61 figures, all listed in `outputs/d113_sheet_before_after.csv`; the two the series quotes: Ball at 50 games costs 0.12 points of title odds before, 0.10 after, and 16.6 points of top-six odds before, 15.6 after (aged: 0.16 to 0.15, 16.8 to 10.9). Two D111 misses were found on the way and fixed: the Part 4 slide's game-20 line still read "Williams under 12.6 min" and "+7.5 / -7.2" (now over 8.9, +8.7 / -5.5), and the Part 2 path visual still said the most likely April is a play-in game (the modal seed has been 6th since D111) and drew LaMelo from the minutes-based removal set, which has not contained him since D111, so his bar was empty. The audit checked slide tiles but not the context line; it now checks every number in the context line against the slide's context keys, and it catches the old line (three problems) and passes the new one.
+
+**1. N9 rebuilt (version 2).** Cells: view x aging x allocator, 16 per team; the flat ordering is no longer a cell. Within every cell, 2,000 joint draws per team (the same draws in all 16 cells) of three sources: availability, role for movers, role for rookies.
+
+*Availability.* Each pool player's share of regular-season games is drawn from his own cohort: historical player-seasons 2002-03 to 2025-26 matched on age (within a year), the number of his last three seasons at 60% of games or fewer, last season's share (within 0.10) and last season's role, widened in fixed steps to at least 40 (401 players, median cohort 94; rookies and players with no NBA season draw from 1,019 first seasons at 12 or more minutes per appearance). Two judgment calls, both logged here. (a) The draw enters RELATIVE to the league's typical availability for rotation minutes, 0.697 of games (minutes-weighted over the 30 projected rotations), because the model's net-to-wins and title scales are calibrated on real seasons that already carry ordinary wear; drawing raw shares would double-count it (the smoke test did exactly that). (b) It is regular-season availability with the playoffs at full strength, the convention of C3 and Part 4, priced through the seed: title = F(playoff net) - s x (F(playoff net) - F(regular-season net)), with the seeding share s calibrated per view and basis on C3's direct simulations (0.10 to 0.27; worst title gap 0.076 points, worst drop gap 0.026). Availability reaching the playoffs too is reported as a sensitivity. Known limits: games share mixes injury with a coach's decision and reads a season overseas as a season missed (Kuminga's and Lyles's 2025-26).
+
+*Role.* Movers: each is ordered on the primary or the flat score with equal probability, independently. Rookies: the draft-slot prior plus a normal draw with sd 2.05 points of net, the residual of the 2025 class around the slot line (n=44); the order score moves with it.
+
+*Gates.* G1 zero noise reproduces the published net for 30 teams on both bases (8.9e-15). G2 the proxy returns each team's simulated odds at its anchor (within the probability floor). G3 above. G4 the vectorized seed rule reproduces the published mean seed (worst 0.020). **G5, the headline gate, fails as specified**: the mean over the joint draws in the headline cells is 2.49% against 2.76% un-aged (gap -0.27) and 3.34% against 3.72% aged (-0.38), tolerance 0.15. By source, Minnesota's headline cells:
+
+| sources | basis | mean | gap | p10 | p50 | p90 |
+|---|---|---|---|---|---|---|
+| all three sources | unaged | 2.49% | -0.27 | 1.61 | 2.65 | 3.32 |
+| all three sources | aged | 3.34% | -0.38 | 2.30 | 3.52 | 4.34 |
+| availability only | unaged | 2.74% | -0.02 | 2.50 | 2.75 | 2.95 |
+| availability only | aged | 3.65% | -0.07 | 3.30 | 3.68 | 3.96 |
+| mover order only | unaged | 2.21% | -0.55 | 1.68 | 1.68 | 2.76 |
+| mover order only | aged | 3.08% | -0.64 | 2.44 | 2.44 | 3.75 |
+| rookie impact only | unaged | 2.91% | +0.15 | 2.76 | 2.76 | 3.33 |
+| rookie impact only | aged | 3.91% | +0.19 | 3.73 | 3.75 | 4.40 |
+| availability and rookies (mover order at the primary) | unaged | 2.86% | +0.10 | 2.52 | 2.80 | 3.28 |
+| availability and rookies (mover order at the primary) | aged | 3.79% | +0.07 | 3.33 | 3.73 | 4.31 |
+| sensitivity: availability reaching the playoffs too | unaged | 2.62% | -0.14 | 0.99 | 2.68 | 4.04 |
+| sensitivity: availability reaching the playoffs too | aged | 3.31% | -0.41 | 1.44 | 3.41 | 4.90 |
+
+The failure is the mover-order fork and nothing else: in half the draws Cody Williams is back in the ten at the flat order's 16.1 minutes (that branch prices Minnesota at 1.68%, the pre-adoption headline), so the fork is not mean-preserving around a headline that sits at one end of it. Availability alone is centred (-0.02 / -0.07). Rookie impact alone is slightly positive (+0.15 / +0.19), an option effect: a good draw puts Isaiah Evans into the ten, a bad one leaves him out. Availability and rookies with the order held at the primary pass (+0.10 / +0.07). The gate is not widened and the fork is not re-weighted: whether the mover fork belongs in N9 at equal weight, or at all, is Bobby's call, and N9 stays pending either way.
+
+*The seven teams, as specified (all three sources, G5 failing):*
+
+| team | market | mean | p10 | p50 | p90 | upside share | draws above market | wins p10 to p90 | seed p10 to p90 |
+|---|---|---|---|---|---|---|---|---|---|
+| MIN | 3.16% | 2.21% | 0.57 | 2.05 | 3.98 | 74% | 22% | 35.1 to 46.8 | 4.1 to 7.7 |
+| DEN | 3.16% | 4.33% | 1.46 | 4.19 | 7.45 | 71% | 65% | 38.7 to 53.9 | 2.5 to 5.9 |
+| DET | 3.16% | 6.61% | 1.79 | 5.81 | 11.99 | 74% | 77% | 43.2 to 54.3 | 1.6 to 5.1 |
+| CLE | 3.16% | 1.15% | 0.12 | 0.42 | 3.96 | 91% | 15% | 35.1 to 47.3 | 5.0 to 9.7 |
+| TOR | 3.16% | 4.94% | 2.65 | 4.27 | 7.66 | 67% | 79% | 41.6 to 53.0 | 2.2 to 6.6 |
+| BOS | 5.47% | 12.94% | 7.61 | 11.18 | 22.16 | 66% | 100% | 47.0 to 61.8 | 1.0 to 2.6 |
+| MIA | 2.65% | 3.22% | 1.29 | 2.99 | 5.54 | 71% | 57% | 35.3 to 51.5 | 3.0 to 9.4 |
+
+*The same, with the mover order held at the primary for every team (G5 passing):*
+
+| team | market | mean | p10 | p50 | p90 | upside share | draws above market | wins p10 to p90 | seed p10 to p90 |
+|---|---|---|---|---|---|---|---|---|---|
+| MIN | 3.16% | 2.45% | 0.63 | 2.37 | 4.22 | 73% | 29% | 35.5 to 47.3 | 4.0 to 7.5 |
+| DEN | 3.16% | 4.34% | 1.48 | 4.20 | 7.43 | 71% | 66% | 38.7 to 54.0 | 2.5 to 5.9 |
+| DET | 3.16% | 6.69% | 1.87 | 5.97 | 11.92 | 73% | 77% | 43.5 to 54.3 | 1.6 to 5.0 |
+| CLE | 3.16% | 1.16% | 0.12 | 0.42 | 3.97 | 91% | 15% | 35.1 to 47.3 | 5.0 to 9.7 |
+| TOR | 3.16% | 4.93% | 2.63 | 4.24 | 7.66 | 67% | 79% | 41.6 to 52.9 | 2.3 to 6.6 |
+| BOS | 5.47% | 12.92% | 7.68 | 11.10 | 22.05 | 65% | 100% | 47.0 to 61.8 | 1.0 to 2.6 |
+| MIA | 2.65% | 3.36% | 1.42 | 3.11 | 5.69 | 70% | 61% | 35.6 to 51.9 | 2.9 to 9.2 |
+
+The fork moves Minnesota and almost nobody else: every neighbour's row is within a few hundredths either way, because Williams is the one mover in the seven whose ordering decides a rotation spot. Denver at the same 3.16% price: its mean (4.33%) is about double Minnesota's (2.21%, or 2.45% without the fork), two thirds of Denver's draws beat the market against a fifth to three tenths of Minnesota's, and Denver's p50 (4.19%) is above Minnesota's p90 (3.98%, or 4.22%). Upside share is 74% for Minnesota and 64% to 74% for every neighbour but Cleveland (91%), so Minnesota's range is not unusually right-skewed; it is lower. Minnesota's variance is 22% within cells (the draws) and 78% between them (view 41%, allocator 27%, basis 8%).
+
+**2. The proxies, with prior-season games missed.** Not tested before: H3 tested the top eight's games missed in the SAME regular season and playoffs (not knowable in October); N9 version 1 tested age, continuity and in-season moves. Now: mean games missed the prior season per top-eight player with an NBA season before (82-game basis; a season missed between two played counts as 82). Every proxy is tested three ways in `scripts/n9_proxies.py`: tendency (champions against the 48, Mann-Whitney, Bonferroni for four tests 0.0125), validation against the absolute win-total error (82 x |win share - over/under / scheduled games|, the over/unders parsed from the same cached Basketball-Reference preseason pages, 72 scheduled in 2020-21), and validation against N9's breadth on the 2026-27 rotations.
+
+| proxy | champions' median | contenders' median | tendency p | vs win-total error rho (p, n) | vs model wins spread rho (p) | vs model odds ratio rho (p) |
+|---|---|---|---|---|---|---|
+| top-eight mean age | 28.90 | 29.30 | 0.419 | +0.09 (0.475, 59) | +0.13 (0.482) | -0.36 (0.152) |
+| top-eight returning share of minutes, by contract | 0.77 | 0.75 | 0.974 | -0.05 (0.695, 54) | -0.17 (0.367) | -0.24 (0.363) |
+| in-season acquisitions among the eight | 0.00 | 1.00 | 0.158 | +0.15 (0.260, 59) | n/a | n/a |
+| top-eight games missed the prior season (mean per player, 82-game basis) | 13.88 | 15.88 | 0.496 | +0.00 (0.970, 59) | +0.46 (0.011) | +0.30 (0.248) |
+
+None leans in the tendency test and none tracks the win-total error (every |rho| 0.15 or less, every p 0.26 or more). Prior-season games missed does track the model's wins spread (rho +0.46, p 0.011), but that is mechanical: N9's availability draws are built from the same games history. The historical proxies still do not validate. Minnesota: top-eight mean age 26.5, 76% of rotation minutes returning, 16.4 games missed last season per top-eight player.
+
+**3. Fragility prose.** Per-player N5 keys are on the sheet now, both bases (`n5_<team>_<player>_share`, `_drop`, and the counts `n5_<team>_n_60`, `n5_<team>_n_half`): Minnesota has three players whose playoff absence costs at least 60% of the odds (Edwards 68%, Gobert 63%, Ball 66%; aged 60%, 46%, 60%), Oklahoma City one (Gilgeous-Alexander 67%), San Antonio one (Wembanyama 74%). Part 2's health paragraph now says two thirds each, three single points of failure where the contenders have one, the stake in absolute terms beside the share (Ant 1.81 points, Shai 9.83), worse when the rotation tightens, and Rudy's 46% once aged. In Part 4 the passage moves from the case to the top of the what-could-go-wrong list, as "Health", with LaMelo in it, and the LaMelo's-games paragraph now ends on the tie (his games decide the seed; whether he's on the floor in April is the 66%). The case section's "three ways to survive an injury instead of one" paragraph is gone, as are the matching sentences in Part 4 short and pull-quote 4 (replaced by "Minnesota has three single points of failure where the contenders have one"). The Part 4 slide's LaMelo tile becomes the health tile (66%, with Ant, Rudy and the 50-game cost). The path visual's third panel shows Ant, Rudy and LaMelo with share and stake.
+
+**4. The cross-read package** is re-exported: fragility unbracketed, and the two N9 documents (`n9_breadth.md`, `n9_proxies.md`) included under a PENDING banner, because N9 is not in the series.
+
