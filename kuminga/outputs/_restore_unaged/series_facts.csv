@@ -1,0 +1,154 @@
+key,value,basis
+min_wins_2025_26,49,"nba_games, regular season 2025-26"
+min_losses_2025_26,33,"nba_games, regular season 2025-26"
+min_2026_den_games,6,"nba_games, 2026 playoffs"
+min_2026_den_games_word,six,"nba_games, 2026 playoffs"
+min_2026_den_record,4-2,"nba_games, 2026 playoffs"
+min_2026_sas_games,6,"nba_games, 2026 playoffs"
+min_2026_sas_games_word,six,"nba_games, 2026 playoffs"
+min_2026_sas_record,2-4,"nba_games, 2026 playoffs"
+season_end_2026,2026-05-15,not used; see finals_end
+ddv_injury_game,4,injuries_2026_27.csv date against the 2026 Denver series schedule
+ddv_injury_game_word,four,same
+ddv_injury_series_result,4-2,"nba_games, 2026 first round"
+finals_2015-16_champion,CLE,"nba_games, last series of the playoffs"
+finals_2015-16_runner_up,GSW,same
+finals_2015-16_games,7,same
+finals_2015-16_games_word,seven,same
+finals_2015-16_record,4-3,same
+finals_2015-16_end,2016-06-19,same
+po_record_2015-16_CLE,16-5,"nba_games, all playoff games"
+po_losses_2015-16_CLE,5,same
+po_losses_word_2015-16_CLE,five,same
+finals_2015-16_champ_trailed_3_1,yes,same
+finals_2015-16_champ_lost_first_two,yes,same
+finals_2016-17_champion,GSW,"nba_games, last series of the playoffs"
+finals_2016-17_runner_up,CLE,same
+finals_2016-17_games,5,same
+finals_2016-17_games_word,five,same
+finals_2016-17_record,4-1,same
+finals_2016-17_end,2017-06-12,same
+po_record_2016-17_GSW,16-1,"nba_games, all playoff games"
+po_losses_2016-17_GSW,1,same
+po_losses_word_2016-17_GSW,one,same
+finals_2016-17_champ_trailed_3_1,no,same
+finals_2016-17_champ_lost_first_two,no,same
+finals_2017-18_champion,GSW,"nba_games, last series of the playoffs"
+finals_2017-18_runner_up,CLE,same
+finals_2017-18_games,4,same
+finals_2017-18_games_word,four,same
+finals_2017-18_record,4-0,same
+finals_2017-18_end,2018-06-08,same
+po_record_2017-18_GSW,16-5,"nba_games, all playoff games"
+po_losses_2017-18_GSW,5,same
+po_losses_word_2017-18_GSW,five,same
+finals_2017-18_champ_trailed_3_1,no,same
+finals_2017-18_champ_lost_first_two,no,same
+finals_2018-19_champion,TOR,"nba_games, last series of the playoffs"
+finals_2018-19_runner_up,GSW,same
+finals_2018-19_games,6,same
+finals_2018-19_games_word,six,same
+finals_2018-19_record,4-2,same
+finals_2018-19_end,2019-06-13,same
+po_record_2018-19_TOR,16-8,"nba_games, all playoff games"
+po_losses_2018-19_TOR,8,same
+po_losses_word_2018-19_TOR,8,same
+finals_2018-19_champ_trailed_3_1,no,same
+finals_2018-19_champ_lost_first_two,no,same
+finals_2019-20_champion,LAL,"nba_games, last series of the playoffs"
+finals_2019-20_runner_up,MIA,same
+finals_2019-20_games,6,same
+finals_2019-20_games_word,six,same
+finals_2019-20_record,4-2,same
+finals_2019-20_end,2020-10-11,same
+po_record_2019-20_LAL,16-5,"nba_games, all playoff games"
+po_losses_2019-20_LAL,5,same
+po_losses_word_2019-20_LAL,five,same
+finals_2019-20_champ_trailed_3_1,no,same
+finals_2019-20_champ_lost_first_two,no,same
+finals_2020-21_champion,MIL,"nba_games, last series of the playoffs"
+finals_2020-21_runner_up,PHX,same
+finals_2020-21_games,6,same
+finals_2020-21_games_word,six,same
+finals_2020-21_record,4-2,same
+finals_2020-21_end,2021-07-20,same
+po_record_2020-21_MIL,16-7,"nba_games, all playoff games"
+po_losses_2020-21_MIL,7,same
+po_losses_word_2020-21_MIL,seven,same
+finals_2020-21_champ_trailed_3_1,no,same
+finals_2020-21_champ_lost_first_two,yes,same
+finals_2021-22_champion,GSW,"nba_games, last series of the playoffs"
+finals_2021-22_runner_up,BOS,same
+finals_2021-22_games,6,same
+finals_2021-22_games_word,six,same
+finals_2021-22_record,4-2,same
+finals_2021-22_end,2022-06-16,same
+po_record_2021-22_GSW,16-6,"nba_games, all playoff games"
+po_losses_2021-22_GSW,6,same
+po_losses_word_2021-22_GSW,six,same
+finals_2021-22_champ_trailed_3_1,no,same
+finals_2021-22_champ_lost_first_two,no,same
+finals_2022-23_champion,DEN,"nba_games, last series of the playoffs"
+finals_2022-23_runner_up,MIA,same
+finals_2022-23_games,5,same
+finals_2022-23_games_word,five,same
+finals_2022-23_record,4-1,same
+finals_2022-23_end,2023-06-12,same
+po_record_2022-23_DEN,16-4,"nba_games, all playoff games"
+po_losses_2022-23_DEN,4,same
+po_losses_word_2022-23_DEN,four,same
+finals_2022-23_champ_trailed_3_1,no,same
+finals_2022-23_champ_lost_first_two,no,same
+finals_2023-24_champion,BOS,"nba_games, last series of the playoffs"
+finals_2023-24_runner_up,DAL,same
+finals_2023-24_games,5,same
+finals_2023-24_games_word,five,same
+finals_2023-24_record,4-1,same
+finals_2023-24_end,2024-06-17,same
+po_record_2023-24_BOS,16-3,"nba_games, all playoff games"
+po_losses_2023-24_BOS,3,same
+po_losses_word_2023-24_BOS,three,same
+finals_2023-24_champ_trailed_3_1,no,same
+finals_2023-24_champ_lost_first_two,no,same
+finals_2024-25_champion,OKC,"nba_games, last series of the playoffs"
+finals_2024-25_runner_up,IND,same
+finals_2024-25_games,7,same
+finals_2024-25_games_word,seven,same
+finals_2024-25_record,4-3,same
+finals_2024-25_end,2025-06-22,same
+po_record_2024-25_OKC,16-7,"nba_games, all playoff games"
+po_losses_2024-25_OKC,7,same
+po_losses_word_2024-25_OKC,seven,same
+finals_2024-25_champ_trailed_3_1,no,same
+finals_2024-25_champ_lost_first_two,no,same
+finals_2025-26_champion,NYK,"nba_games, last series of the playoffs"
+finals_2025-26_runner_up,SAS,same
+finals_2025-26_games,5,same
+finals_2025-26_games_word,five,same
+finals_2025-26_record,4-1,same
+finals_2025-26_end,2026-06-13,same
+po_record_2025-26_NYK,16-3,"nba_games, all playoff games"
+po_losses_2025-26_NYK,3,same
+po_losses_word_2025-26_NYK,three,same
+finals_2025-26_champ_trailed_3_1,no,same
+finals_2025-26_champ_lost_first_two,no,same
+draft_cody_williams_pick,10,nba_player_bio
+draft_cody_williams_year,2024,nba_player_bio
+draft_joshua_jefferson_pick,28,Basketball-Reference 2026 draft page (cached)
+draft_joshua_jefferson_team,MIN,same
+draft_isaiah_evans_pick,33,Basketball-Reference 2026 draft page (cached)
+draft_isaiah_evans_team,BRK,same
+draft_trey_kaufman_renn_pick,59,Basketball-Reference 2026 draft page (cached)
+draft_trey_kaufman_renn_team,MIN,same
+min_roster_count,14,"roster_snapshot_2026_27_v3.csv, standard plus pending"
+min_roster_count_word,fourteen,same
+ball_games_prior_three,105,"c3_ball_history.csv, 2022-23 to 2024-25"
+ball_games_prior_four,180,"c3_ball_history.csv, 2021-22 to 2024-25"
+ball_games_prior_four_mean,45.0,same
+ball_games_career_mean,50.5,"c3_ball_history.csv, six seasons"
+williams_rated_below,1,"rotations_2026_27.csv, rated rotation players below Williams's consensus impact"
+rotation_players_rated,300,"rotations_2026_27.csv, rated rotation players, current scenario"
+edwards_games_short,4,c2_games_rule minus c2_games_2025_26
+edwards_games_short_word,four,same
+kuminga_shave_cost,"$4,099,649",dos_stuck_over x (1 + k_y2/k_y1)
+kuminga_shave_cost_m,$4.1 million,same

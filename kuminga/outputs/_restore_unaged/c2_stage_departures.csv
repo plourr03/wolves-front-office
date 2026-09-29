@@ -1,0 +1,17 @@
+stage,horizon,tier,n,spells,departed,rate
+two seasons left after this one,within 1 season,all,207,157,2,0.00966183574879227
+two seasons left after this one,within 1 season,.500 to .600,71,69,0,0.0
+two seasons left after this one,within 1 season,.600 or better,87,72,0,0.0
+two seasons left after this one,within 1 season,under .500,49,44,2,0.04081632653061224
+two seasons left after this one,within 2 seasons,all,194,148,5,0.02577319587628866
+two seasons left after this one,within 2 seasons,.500 to .600,68,66,0,0.0
+two seasons left after this one,within 2 seasons,.600 or better,82,67,3,0.036585365853658534
+two seasons left after this one,within 2 seasons,under .500,44,41,2,0.045454545454545456
+two seasons left after this one,within 3 seasons,all,192,148,84,0.4375
+two seasons left after this one,within 3 seasons,.500 to .600,68,66,35,0.5147058823529411
+two seasons left after this one,within 3 seasons,.600 or better,80,65,30,0.375
+two seasons left after this one,within 3 seasons,under .500,44,41,19,0.4318181818181818
+walk year,that season,all,536,272,221,0.4123134328358209
+walk year,that season,.500 to .600,170,128,77,0.45294117647058824
+walk year,that season,.600 or better,248,147,78,0.31451612903225806
+walk year,that season,under .500,118,89,66,0.559322033898305
