@@ -9,9 +9,9 @@
     "Three things the model is sure about."
   ],
   "tiles": [
-    {"num": "1.68%", "label": "MODEL TITLE ODDS", "detail": ["2.39% corrected for age.", "Market says 3.16%."], "key": "title"},
-    {"num": "+0.79", "label": "LAMELO IN, POINTS OF ODDS", "detail": ["The one clearly positive", "move. Reid out: -0.33."], "key": "v_ball_in_pooled_u"},
-    {"num": "+0.44", "label": "KUMINGA VS THE FILL", "detail": ["Held under every test.", "Only Beringer flips it."], "key": "v_A_c3_default_williams_pooled_u"},
+    {"num": "2.76%", "label": "MODEL TITLE ODDS", "detail": ["3.72% corrected for age.", "Market says 3.16%."], "key": "title"},
+    {"num": "+0.88", "label": "LAMELO IN, POINTS OF ODDS", "detail": ["The one clearly positive", "move. Reid out: -0.35."], "key": "v_ball_in_pooled_u"},
+    {"num": "+0.51", "label": "KUMINGA VS WILLIAMS", "detail": ["Held under every test.", "Only Beringer flips it."], "key": "v_A_c3_default_williams_pooled_u"},
     {"num": "61%", "label": "ANT'S MAKES UNASSISTED", "detail": ["League median 35%.", "LaMelo: 55%."], "key": "cr_edw"}
   ],
   "catch": {
@@ -20,7 +20,7 @@
   },
   "context": {
     "label": "WATCH BOSTON",
-    "text": "Model 18.33%  ·  Market 5.47%  ·  Test: net below -1.7 at game 30"
+    "text": "Model 18.12%  ·  Market 5.47%  ·  Test: net below -1.7 at game 30"
   },
   "context_keys": ["model_bos", "mkt_bos", "bos_dec_threshold", "bos_dec_game"],
   "footer_right": [

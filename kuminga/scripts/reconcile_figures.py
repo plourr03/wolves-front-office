@@ -171,7 +171,14 @@ def main():
         used = pd.read_csv(os.path.join(OUTDIR, "render_keys_used.csv")).key
         no_run = [k for k in used if not str(sheet.loc[k, "run_id"]).strip() or
                   str(sheet.loc[k, "run_id"]) in ("nan", "n/a")]
-        allow = [r"^#+\s*\d+\.", r"^\s*\d+\.\s", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
+        # D111: the structure allowlist is shared with gate_prose (ISO dates and timestamps,
+        # written dates, years, commit hashes, headings, code spans, links), so the two
+        # digit scans cannot disagree; reconcile keeps its own few extras below
+        try:
+            from gate_prose import STRUCTURE as GATE_STRUCTURE
+        except ImportError:                                      # pragma: no cover
+            GATE_STRUCTURE = []
+        allow = list(GATE_STRUCTURE) + [r"^#+\s*\d+\.", r"^\s*\d+\.\s", r"\b\d{4}-\d{2}\b", r"\b[DFHMNRWSCGUVLPTAX]\d+[a-e]?\b",
                  r"`[^`]*`", r"\u27e6\u27e7", r"\b[Pp]iece 2\b", r"\bsections? \d\b",
                  r"\bParts? \d\b"]   # a series label, like "Piece 2" (C5)
         retracted = RETRACTED

@@ -9,10 +9,10 @@ seed,seed,eleven (2015-16 to 2025-26),6.0,2025-26 actual,1.0,3.0,"outside, short
 po_minus_rs,playoff minus regular-season net,eleven (2015-16 to 2025-26),-8.96,2025-26 actual,-4.13,9.07,"outside, short of it",a season can close it,False
 best_vorp,best player VORP,eleven (2015-16 to 2025-26),3.5,2025-26 actual,3.3,8.9,inside the champions' range,set by the roster or the market,False
 top8_age,top-8 age,eleven (2015-16 to 2025-26),28.8,2025-26 actual,25.5,29.7,inside the champions' range,set by the roster or the market,False
-top8_returning_appear,"top-8 returning, by appearance",eleven (2015-16 to 2025-26),5.0,2026-27 (known now),4.0,8.0,inside the champions' range,set by the roster or the market,False
-top8_returning_contract,"top-8 returning, by contract",eleven (2015-16 to 2025-26),5.0,2026-27 (known now),4.0,8.0,inside the champions' range,set by the roster or the market,False
-returning_share_appear,"returning share of playoff minutes, by appearance",eleven (2015-16 to 2025-26),0.7002639228677144,2026-27 (known now),0.523,0.909,inside the champions' range,set by the roster or the market,False
-returning_share_contract,"returning share of playoff minutes, by contract",eleven (2015-16 to 2025-26),0.7002639228677144,2026-27 (known now),0.555,0.909,inside the champions' range,set by the roster or the market,False
+top8_returning_appear,"top-8 returning, by appearance",eleven (2015-16 to 2025-26),6.0,2026-27 (known now),4.0,8.0,inside the champions' range,set by the roster or the market,False
+top8_returning_contract,"top-8 returning, by contract",eleven (2015-16 to 2025-26),6.0,2026-27 (known now),4.0,8.0,inside the champions' range,set by the roster or the market,False
+returning_share_appear,"returning share of playoff minutes, by appearance",eleven (2015-16 to 2025-26),0.7246238425925925,2026-27 (known now),0.523,0.909,inside the champions' range,set by the roster or the market,False
+returning_share_contract,"returning share of playoff minutes, by contract",eleven (2015-16 to 2025-26),0.7246238425925925,2026-27 (known now),0.555,0.909,inside the champions' range,set by the roster or the market,False
 top8_rs_games_missed,top-8 regular-season games missed,eleven (2015-16 to 2025-26),117.0,2025-26 actual,54.0,154.0,inside the champions' range,set by the roster or the market,False
 top8_po_games_missed,top-8 playoff games missed,eleven (2015-16 to 2025-26),8.0,2025-26 actual,1.0,15.0,inside the champions' range,a season can close it,False
 top5_share_rs,"top-five minute share, regular season",eleven (2015-16 to 2025-26),0.608,2025-26 actual,0.507,0.603,"outside, above",set by the roster or the market,False

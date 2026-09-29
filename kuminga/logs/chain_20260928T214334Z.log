@@ -1,0 +1,319 @@
+chain start 2026-09-28T21:43:34Z, nsims=200000
+copied 209 files kuminga\outputs -> kuminga\outputs\.chain_snapshot: ['C2_moves_ceiling_vs_not.csv', 'C2_teams_ceiling_vs_not.csv', 'PROVENANCE.csv', 'PROVENANCE.md', 'R3_apron_failure_table.csv', 'S1_shapley_slot_comparison.csv', 'T1_all30_before_after.csv', 'T1_all30_before_after_NOCEILING.csv', 'T2_west_ranking.csv', 'T3_shapley.csv', 'T4_scenario_fan.csv', 'T5_surplus.csv', 'T6_counterfactual_fives.csv', 'T7_cap_branches.csv', 'T8_player_option.csv', 'T9_lineup_evidence.csv', 'aging_applied.csv', 'aging_curve.csv', 'aging_curve_nosurv.csv', 'apron_reconcile_all30.csv', 'audit_series.csv', 'backtest_calibration.csv', 'backtest_calibration_summary.csv', 'baseline_decomposition.csv', 'c1_champion_top8.csv', 'c1_champions.csv', 'c1_contender_top8.csv', 'c1_contenders.csv', 'c2_edwards_clock.csv', 'c2_facts.csv', 'c2_stage_departures.csv', 'c3_ball_availability.csv', 'c3_ball_availability_AGED.csv', 'c3_ball_history.csv', 'c3_ball_minutes.csv', 'c3_ball_minutes_AGED.csv', 'c3_ball_missed_stretches.csv', 'c3_base_rate_cohort.csv', 'c3_base_rate_summary.csv', 'c3_player_seasons_panel.csv', 'c4_ledger.csv', 'canonical_figures.csv', 'canonical_figures.md', 'cap_branches.csv', 'cap_branches.md', 'cap_branches_canonical.csv', 'cap_canonical.json', 'cap_reconciliation.csv', 'cap_reconciliation.md', 'champions_h1.csv', 'champions_h2_base_rates.csv', 'coherence_checks.csv', 'counterfactual_fives.csv', 'counterfactual_fives_NOCEILING.csv', 'd70_before_after.csv', 'dosunmu_cap.csv', 'dosunmu_final_states.csv', 'f1_disagreement_ranking.csv', 'f1_rollup_decomposition.csv', 'f4a_per_view_disagreement.csv', 'f4b_tail_players.csv', 'f4c_top_heaviness.csv', 'f4d_topheaviness_series.csv', 'fcurve_min.csv', 'fcurve_min.part_box.csv', 'fcurve_min.part_consensus.csv', 'fcurve_min.part_darko.csv', 'fcurve_min.part_rapm.csv', 'fcurve_min_NOCEILING.csv', 'final_numbers.csv', 'final_numbers.md', 'gate_prose_draft_full.csv', 'gate_prose_draft_short.csv', 'gate_prose_index.csv', 'gate_prose_methods.csv', 'gate_prose_part1.csv', 'gate_prose_part1_quotes.csv', 'gate_prose_part1_short.csv', 'gate_prose_part2.csv', 'gate_prose_part2_quotes.csv', 'gate_prose_part2_short.csv', 'gate_prose_part3.csv', 'gate_prose_part3_quotes.csv', 'gate_prose_part3_short.csv', 'gate_prose_part4.csv', 'gate_prose_part4_quotes.csv', 'gate_prose_part4_short.csv', 'green_asset_cost.csv', 'green_kept.csv', 'green_resolution.csv', 'green_resolution.md', 'h1_champion_sheet.csv', 'h3_sample.csv', 'h3_separation.csv', 'h3_separation_style_eleven.csv', 'h3_tendency.csv', 'h4_knicks_case_file.csv', 'h5_minnesota_sheet.csv', 'h5_watch_routes.csv', 'kuminga_cap_gate.json', 'kuminga_minutes_sensitivity.csv', 'kuminga_play_types.csv', 'kuminga_shot_profile.csv', 'kuminga_surplus_by_fork.csv', 'lede_loophole.csv', 'lede_loophole.md', 'lineup_evidence.csv', 'm1_style_features.csv', 'm1_style_model_fit.csv', 'm3_key_matchups.csv', 'm3_opponent_cards.csv', 'm3_primary_defender_check.csv', 'm4_lineups.csv', 'm5_creation_shares.csv', 'm5_pairing_base_rates.csv', 'm5_pairing_panel.csv', 'm5_unit_usage.csv', 'market_comparison.csv', 'market_devig_2026_27.csv', 'methods.masked.md', 'minutes_rank_curve.csv', 'morning_report_v2.masked.md', 'mover_minutes_base_rate.csv', 'mover_minutes_cohort.csv', 'n2_path.csv', 'n2_round1_opponents.csv', 'n3_series_frame.csv', 'n3_team_features.csv', 'n3_translation_tests.csv', 'n3_translation_tests_posthoc.csv', 'n3_translation_tests_team_level.csv', 'n4_matchup_repeatability.csv', 'n4_min_matchups.csv', 'n4_versatility_index.csv', 'n5_fragility.csv', 'n5_fragility_AGED.csv', 'n5_next_man_up.csv', 'n5_next_man_up_AGED.csv', 'n6_gsw_analog.csv', 'n6_ledger.csv', 'n6_postseason.csv', 'n6_primary_defender.csv', 'n7_gates.csv', 'n7_late_clock_splits.csv', 'n8_watch_list.csv', 'n8_watch_list_champion_ranks.csv', 'n8_watch_list_december.csv', 'named_scenarios.csv', 'named_scenarios_NOCEILING.csv', 'named_scenarios_POOLED.csv', 'noise_floor.csv', 'noise_floor_AGED.csv', 'noise_floor_slot.csv', 'noise_floor_slot_AGED.csv', 'par_curves_by_fork.csv', 'piece_v2_draft_full.masked.md', 'piece_v2_draft_short.masked.md', 'piece_v2_skeleton.masked.md', 'player_option.csv', 'player_pool_2026_27.csv', 'r2_departures_absorbers.csv', 'r2_departures_players.csv', 'r2_departures_split_shapley.csv', 'r2_departures_split_shapley_verdicts.csv', 'r5_disagreements_bases.csv', 'r5_honesty_rail_bases.csv', 'r5_shapley_williams.csv', 'r5_shapley_williams_vall.csv', 'r5_shapley_williams_verdicts.csv', 'r7_allocator_slots.csv', 'r7_allocator_verdicts.csv', 'reconcile_skeleton.csv', 'render_keys_used.csv', 'rookie_priors.csv', 'roster_v2_gates.csv', 'roster_v2_gates.json', 'roster_v2_membership_diff.csv', 'roster_v3_gates.csv', 'roster_v3_gates.json', 'rotations_2026_27.csv', 'rotations_2026_27_NOCEILING.csv', 'scenario_fan.csv', 'scenario_fan_NOCEILING.csv', 'seed_distribution.csv', 'series_facts.csv', 'shapley_min.csv', 'shapley_min_NOCEILING.csv', 'shapley_min_POOLED.csv', 'shapley_order_spread.csv', 'shapley_order_spread_POOLED.csv', 'sim_all30_2026_27.csv', 'sim_all30_2026_27_NOCEILING.csv', 'sim_matchups_2026_27.csv', 'sim_roster_diff_v1_v3.csv', 'slot_alternatives.csv', 'slot_constrained.csv', 'slot_robustness.csv', 'spacing_table.csv', 'spacing_teams.csv', 'team_pool_shares.csv', 'team_state_diff_2026_27.csv', 'team_strengths_2026_27.csv', 'team_strengths_2026_27_NOCEILING.csv', 'w1_verdict_comparison.csv', 'w1c_delta_decomposition.csv', 'w2_aging_gate.csv', 'williams_minutes_sensitivity.csv', 'williams_ordering_check.csv', 'williams_projected_ten.csv']
+[21:43:34] START adapt_roster_v3   
+[21:43:37] adapt_roster_v3 rc=0
+SAS    14
+TOR    13
+UTA    14
+WAS    14
+[21:43:37] START build_rotations   
+[21:43:39] build_rotations rc=0
+        7  Nah'Shon Hyland 18.38           0.78      16.58  player_value       1.0
+        8     Jaylen Clark 15.58           0.46      13.06  player_value       1.0
+        9    Joan Beringer 10.85           2.84       7.85  player_value       1.0
+       10       Trey Lyles  9.00           0.24       6.00  player_value       1.0
+[21:43:39] START build_strengths   
+[21:43:41] build_strengths rc=0
+GSW       -1.18      -3.80  -1.91 -4.03 -2.73
+MEM       -2.88      -3.42  -1.48 -3.32 -2.78
+LAC       -2.71      -4.15  -4.08 -3.85 -3.70
+UTA       -4.27      -5.29  -0.41 -5.31 -3.82
+[21:43:41] START run_sim   
+[21:50:03] run_sim rc=0
+CLE        0.11      -3.75  -3.12  -3.91 -2.67
+NYK       -1.49      -4.23  -3.72  -4.10 -3.38
+DET       -2.02      -7.42  -0.53  -7.23 -4.30
+OKC       -3.27      -6.91  -2.28  -7.91 -5.09
+[21:50:03] START build_fcurve[consensus]   KUMINGA_FCURVE_FORK=consensus KUMINGA_FCURVE_NSIMS=200000
+[21:50:03] START build_fcurve[rapm]   KUMINGA_FCURVE_FORK=rapm KUMINGA_FCURVE_NSIMS=200000
+[21:50:03] START build_fcurve[box]   KUMINGA_FCURVE_FORK=box KUMINGA_FCURVE_NSIMS=200000
+[21:50:03] START build_fcurve[darko]   KUMINGA_FCURVE_FORK=darko KUMINGA_FCURVE_NSIMS=200000
+[01:12:45] build_fcurve[consensus] rc=0
+     8.5 0.1506 0.4787  0.2728
+     9.0 0.1686 0.5084  0.2974
+     9.5 0.1877 0.5375  0.3227
+    10.0 0.2077 0.5655  0.3471
+[01:12:45] build_fcurve[rapm] rc=0
+[run] build_fcurve_20260929T025006Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[01:12:45] build_fcurve[box] rc=0
+[run] build_fcurve_20260929T025005Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[01:12:49] build_fcurve[darko] rc=0
+[run] build_fcurve_20260929T025007Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[01:12:49] START merge_fcurve_parts   
+[01:12:50] merge_fcurve_parts rc=0
+  [merge_fcurve_parts_20260929T061250Z]   box        29 grid rows
+  [merge_fcurve_parts_20260929T061250Z]   darko      29 grid rows
+  [merge_fcurve_parts_20260929T061250Z] merged 116 rows into kuminga\outputs\fcurve_min.csv
+[run] merge_fcurve_parts_20260929T061250Z -> ok
+[01:12:50] START shapley   
+[01:12:53] shapley rc=0
+           depth    0.535  -0.925   2.841      3.766
+      ddv_injury   -0.480  -2.607   0.501      3.107
+      kuminga_in    0.398  -0.554   2.422      2.976
+other_departures   -1.351  -3.723   0.383      4.106
+[01:12:53] START shapley  --pooled 
+[01:12:57] shapley rc=0
+           depth   -0.002  -0.420   0.321      0.741
+      ddv_injury   -0.223  -0.526   0.000      0.526
+      kuminga_in    0.155   0.000   0.453      0.453
+other_departures   -0.253  -0.678   0.341      1.019
+[01:12:57] START compare_slot_shapley   
+[01:12:57] compare_slot_shapley rc=0
+      randle_out             True frontcourt            MIXED              MIXED    False         -0.315           -0.062     False
+dosunmu_retained             True      guard            MIXED              MIXED    False         -0.396           -0.267     False
+        reid_out             True frontcourt     ALL NEGATIVE       ALL NEGATIVE    False         -0.807           -0.353      True
+      ddv_injury            False        n/a     ALL NEGATIVE       ALL NEGATIVE    False         -0.765           -0.415     False
+[01:12:57] START slot_robustness   
+[01:12:59] slot_robustness rc=0
+       B_lyles_fills                          Trey Lyles +26.1               0.0         0.509    0.674   0.135    -0.839    0.120          MIXED
+  C_mcdaniels_slides Jaden McDaniels +4.0; Cody Williams +22.1               0.0         1.403    1.811   1.144     1.019    1.344   ALL POSITIVE
+    D_beringer_fills Joan Beringer +25.1; Jaden McDaniels +0.9               0.0        -0.485   -0.967  -2.646    -1.808   -1.477   ALL NEGATIVE
+E_tight_rule_F_or_FC Jaden McDaniels +2.7; Cody Williams +23.3               0.0         1.447    1.868   1.186     1.110    1.403   ALL POSITIVE
+[01:12:59] START slot_analysis   
+[01:13:02] slot_analysis rc=0
+    Jaxson Hayes  Center-Forward        False 6000000                 True           1.85    1.83          1.82          0.09     0.05    0.19      0.84     0.29   ALL POSITIVE     False centre-first listing, not a 4
+Kenrich Williams   Guard-Forward         True 5000000                 True          -0.17    2.00          1.99         -0.63    -1.13    0.16      0.84    -0.19          MIXED     False posterior sd 1.99 exceeds 1.5
+      Al Horford  Center-Forward        False 6822000                False           3.14    1.67          1.67          0.65     0.74    0.64      0.00     0.51          MIXED     False centre-first listing, not a 4
+       Dean Wade  Forward-Center         True 9000000                False           3.45    1.73          1.73          0.82     1.56   -0.04      1.85     1.05          MIXED     False posterior sd 1.73 exceeds 1.5
+[01:13:02] START player_option   
+[01:13:03] player_option rc=0
+     rapm declines        11819820.479      0.759                    0.698                0.302            10188274.853
+      box     flat         7077068.302      0.535                    0.500                0.500            10764613.412
+      box improves        11228808.924      0.648                    0.614                0.386            15170401.181
+      box declines         3939034.480      0.418                    0.384                0.616             7186157.624
+[01:13:03] START seed_distribution   
+[01:13:06] seed_distribution rc=0
+fork           box consensus  darko   rapm           box consensus  darko   rapm            box consensus  darko   rapm    box consensus  darko   rapm
+field                                                                                                                                                 
+baseline     5.632     5.649  5.644  5.641         0.270     0.272  0.270  0.269          0.729     0.727  0.729  0.730  0.241     0.237  0.237  0.238
+current      6.181     6.223  4.916  5.461         0.448     0.431  0.117  0.186          0.552     0.569  0.883  0.814  0.109     0.073  0.364  0.198
+[01:13:06] START counterfactuals   
+[01:13:08] counterfactuals rc=0
+alt_jaxsonhayes        0.19       0.08   0.84  0.05  0.29
+actual                 0.00       0.00   0.00  0.00  0.00
+mcdaniels_4_next_wing  0.22      -0.48   0.77 -0.78 -0.07
+alt_kenrichwilliams    0.17      -0.62   0.77 -1.11 -0.20
+[01:13:08] START eval_signing   
+[01:13:09] eval_signing rc=0
+      box taxpayer_mle_2026_27  6064000          0.2         -0.0             6614092.6    550092.6          20069074.7
+      box  atl_option_declined 24300000          0.2         -0.8             6614092.6 -17685907.4          20069074.7
+    darko taxpayer_mle_2026_27  6064000         -1.0         -0.5             2760454.5  -3303545.5          16010973.3
+    darko  atl_option_declined 24300000         -1.0         -1.8             2760454.5 -21539545.5          16010973.3
+[01:13:09] START green_kept   
+[01:13:11] green_kept rc=0
+  [green_kept_20260929T061311Z]   darko      without 1.747%  with 1.778%  marginal +0.032pp
+  [green_kept_20260929T061311Z] VERDICT, keeping Green: MIXED [-0.228, +0.115]pp, mean -0.016pp
+  [green_kept_20260929T061311Z] RULING: not positive under all four, so it stays in the appendix and the piece does not attach an on-court cost to losing Green.
+[run] green_kept_20260929T061311Z -> ok
+[01:13:11] START lede_loophole   
+[01:13:12] lede_loophole rc=0
+      max first-year salary, 15-man roster   2706408.00                                            44.6% of the exception, after a rookie-minimum 15th man at $1,357,763
+       two-year value of the loophole deal   8331550.55                                                               $4,064,171 then $4,267,380 at the 5% maximum raise
+                two-year value as reported  12431200.00                                                                         $6,064,000 then $6,367,200 player option
+           what the loophole costs KUMINGA   4099649.45                                                                       the reason it is a loophole and not a plan
+[01:13:12] START build_outputs   
+[01:13:13] build_outputs rc=0
+      SAC    W                  28                 27                 1               25.81              25.67            -0.14                    0.00                0.00                0.00          MIXED
+      MEM    W                  24                 28                -4               31.81              25.60            -6.21                    0.00               -0.00               -0.00   ALL NEGATIVE
+      UTA    W                  27                 29                -2               28.37              19.81            -8.56                    0.00                0.00                0.00          MIXED
+      WAS    E                  30                 30                 0               22.46              19.77            -2.69                    0.00                0.00                0.00          MIXED
+[01:13:13] START williams_minutes_sensitivity   
+[01:13:16] williams_minutes_sensitivity rc=0
+           16          16.0       1.454      -1.007 ALL NEGATIVE      0.328           -0.111        MIXED
+           12          12.0       1.729      -0.731 ALL NEGATIVE      0.417            0.164        MIXED
+            8           8.0       2.037      -0.423        MIXED      0.513            0.472        MIXED
+            0           0.0       2.758       0.297        MIXED      0.705            1.193 ALL POSITIVE
+[01:13:16] START williams_ordering_check   
+[01:13:18] williams_ordering_check rc=0
+  [williams_ordering_check_20260929T061318Z]    calibrated: median, new team top ten by wins (n=8)    11.7 mpg (0.48 x 24.3) | delta -0.71 (ALL NEGATIVE): consensus -1.30 rapm -0.80 box -0.47 darko -0.27
+  [williams_ordering_check_20260929T061318Z]    calibrated: median, new team at or above .600 (n=6)   11.7 mpg (0.48 x 24.3) | delta -0.71 (ALL NEGATIVE): consensus -1.30 rapm -0.80 box -0.47 darko -0.27
+  [williams_ordering_check_20260929T061318Z]    calibrated: median, new team under .500 (n=16)        20.7 mpg (0.85 x 24.3) | delta -1.29 (ALL NEGATIVE): consensus -1.77 rapm -1.39 box -0.99 darko -1.00
+[run] williams_ordering_check_20260929T061318Z -> ok
+[01:13:18] START w1c_decompose   
+[01:13:21] w1c_decompose rc=0
+consensus           -0.389        0.418            0.0          0.0      0.029
+     rapm            0.339        0.288            0.0          0.0      0.627
+      box            0.314        0.664            0.0          0.0      0.978
+    darko            0.926        1.754            0.0          0.0      2.680
+[01:13:21] START n2_path   
+[01:13:21] n2_path rc=0
+consensus  0.3175  0.1244  0.0497  0.0183
+rapm       0.3935  0.1527  0.0645  0.0250
+box        0.3598  0.1519  0.0636  0.0282
+darko      0.4570  0.1956  0.0872  0.0389
+[01:13:21] START m4_lineup_study   
+[01:13:24] m4_lineup_study rc=0
+ Anthony Edwards / Jaden McDaniels / Joan Beringer / LaMelo Ball / Rudy Gobert COMPOSED     12.06    3.39
+    Anthony Edwards / Jaylen Clark / Joan Beringer / LaMelo Ball / Rudy Gobert COMPOSED     12.02    3.13
+      Anthony Edwards / Joan Beringer / LaMelo Ball / Rudy Gobert / Trey Lyles COMPOSED     11.77    2.93
+     Anthony Edwards / Ayo Dosunmu / Joan Beringer / LaMelo Ball / Rudy Gobert COMPOSED     10.94    2.25
+copied 17 files kuminga\outputs -> kuminga\outputs\preaging: ['team_strengths_2026_27.csv', 'sim_all30_2026_27.csv', 'fcurve_min.csv', 'slot_robustness.csv', 'green_kept.csv', 'seed_distribution.csv', 'slot_constrained.csv', 'player_option.csv', 'rotations_2026_27.csv', 'aging_curve_nosurv.csv', 'S1_shapley_slot_comparison.csv', 'shapley_min.csv', 'shapley_min_POOLED.csv', 'named_scenarios.csv', 'named_scenarios_POOLED.csv', 'shapley_order_spread.csv', 'shapley_order_spread_POOLED.csv']
+copied 197 files kuminga\outputs -> kuminga\outputs\_restore_unaged: ['C2_moves_ceiling_vs_not.csv', 'C2_teams_ceiling_vs_not.csv', 'PROVENANCE.csv', 'R3_apron_failure_table.csv', 'S1_shapley_slot_comparison.csv', 'T1_all30_before_after.csv', 'T1_all30_before_after_NOCEILING.csv', 'T2_west_ranking.csv', 'T3_shapley.csv', 'T4_scenario_fan.csv', 'T5_surplus.csv', 'T6_counterfactual_fives.csv', 'T7_cap_branches.csv', 'T8_player_option.csv', 'T9_lineup_evidence.csv', 'aging_applied.csv', 'aging_curve.csv', 'aging_curve_nosurv.csv', 'apron_reconcile_all30.csv', 'audit_series.csv', 'backtest_calibration.csv', 'backtest_calibration_summary.csv', 'baseline_decomposition.csv', 'c1_champion_top8.csv', 'c1_champions.csv', 'c1_contender_top8.csv', 'c1_contenders.csv', 'c2_edwards_clock.csv', 'c2_facts.csv', 'c2_stage_departures.csv', 'c3_ball_availability.csv', 'c3_ball_availability_AGED.csv', 'c3_ball_history.csv', 'c3_ball_minutes.csv', 'c3_ball_minutes_AGED.csv', 'c3_ball_missed_stretches.csv', 'c3_base_rate_cohort.csv', 'c3_base_rate_summary.csv', 'c3_player_seasons_panel.csv', 'c4_ledger.csv', 'canonical_figures.csv', 'cap_branches.csv', 'cap_branches_canonical.csv', 'cap_canonical.json', 'cap_reconciliation.csv', 'champions_h1.csv', 'champions_h2_base_rates.csv', 'coherence_checks.csv', 'counterfactual_fives.csv', 'counterfactual_fives_NOCEILING.csv', 'd70_before_after.csv', 'dosunmu_cap.csv', 'dosunmu_final_states.csv', 'f1_disagreement_ranking.csv', 'f1_rollup_decomposition.csv', 'f4a_per_view_disagreement.csv', 'f4b_tail_players.csv', 'f4c_top_heaviness.csv', 'f4d_topheaviness_series.csv', 'fcurve_min.csv', 'fcurve_min.part_box.csv', 'fcurve_min.part_consensus.csv', 'fcurve_min.part_darko.csv', 'fcurve_min.part_rapm.csv', 'fcurve_min_NOCEILING.csv', 'final_numbers.csv', 'gate_prose_draft_full.csv', 'gate_prose_draft_short.csv', 'gate_prose_index.csv', 'gate_prose_methods.csv', 'gate_prose_part1.csv', 'gate_prose_part1_quotes.csv', 'gate_prose_part1_short.csv', 'gate_prose_part2.csv', 'gate_prose_part2_quotes.csv', 'gate_prose_part2_short.csv', 'gate_prose_part3.csv', 'gate_prose_part3_quotes.csv', 'gate_prose_part3_short.csv', 'gate_prose_part4.csv', 'gate_prose_part4_quotes.csv', 'gate_prose_part4_short.csv', 'green_asset_cost.csv', 'green_kept.csv', 'green_resolution.csv', 'h1_champion_sheet.csv', 'h3_sample.csv', 'h3_separation.csv', 'h3_separation_style_eleven.csv', 'h3_tendency.csv', 'h4_knicks_case_file.csv', 'h5_minnesota_sheet.csv', 'h5_watch_routes.csv', 'kuminga_cap_gate.json', 'kuminga_minutes_sensitivity.csv', 'kuminga_play_types.csv', 'kuminga_shot_profile.csv', 'kuminga_surplus_by_fork.csv', 'lede_loophole.csv', 'lineup_evidence.csv', 'm1_style_features.csv', 'm1_style_model_fit.csv', 'm3_key_matchups.csv', 'm3_opponent_cards.csv', 'm3_primary_defender_check.csv', 'm4_lineups.csv', 'm5_creation_shares.csv', 'm5_pairing_base_rates.csv', 'm5_pairing_panel.csv', 'm5_unit_usage.csv', 'market_comparison.csv', 'market_devig_2026_27.csv', 'minutes_rank_curve.csv', 'mover_minutes_base_rate.csv', 'mover_minutes_cohort.csv', 'n2_path.csv', 'n2_round1_opponents.csv', 'n3_series_frame.csv', 'n3_team_features.csv', 'n3_translation_tests.csv', 'n3_translation_tests_posthoc.csv', 'n3_translation_tests_team_level.csv', 'n4_matchup_repeatability.csv', 'n4_min_matchups.csv', 'n4_versatility_index.csv', 'n5_fragility.csv', 'n5_fragility_AGED.csv', 'n5_next_man_up.csv', 'n5_next_man_up_AGED.csv', 'n6_gsw_analog.csv', 'n6_ledger.csv', 'n6_postseason.csv', 'n6_primary_defender.csv', 'n7_gates.csv', 'n7_late_clock_splits.csv', 'n8_watch_list.csv', 'n8_watch_list_champion_ranks.csv', 'n8_watch_list_december.csv', 'named_scenarios.csv', 'named_scenarios_NOCEILING.csv', 'named_scenarios_POOLED.csv', 'noise_floor.csv', 'noise_floor_AGED.csv', 'noise_floor_slot.csv', 'noise_floor_slot_AGED.csv', 'par_curves_by_fork.csv', 'player_option.csv', 'player_pool_2026_27.csv', 'r2_departures_absorbers.csv', 'r2_departures_players.csv', 'r2_departures_split_shapley.csv', 'r2_departures_split_shapley_verdicts.csv', 'r5_disagreements_bases.csv', 'r5_honesty_rail_bases.csv', 'r5_shapley_williams.csv', 'r5_shapley_williams_vall.csv', 'r5_shapley_williams_verdicts.csv', 'r7_allocator_slots.csv', 'r7_allocator_verdicts.csv', 'reconcile_skeleton.csv', 'render_keys_used.csv', 'rookie_priors.csv', 'roster_v2_gates.csv', 'roster_v2_gates.json', 'roster_v2_membership_diff.csv', 'roster_v3_gates.csv', 'roster_v3_gates.json', 'rotations_2026_27.csv', 'rotations_2026_27_NOCEILING.csv', 'scenario_fan.csv', 'scenario_fan_NOCEILING.csv', 'seed_distribution.csv', 'series_facts.csv', 'shapley_min.csv', 'shapley_min_NOCEILING.csv', 'shapley_min_POOLED.csv', 'shapley_order_spread.csv', 'shapley_order_spread_POOLED.csv', 'sim_all30_2026_27.csv', 'sim_all30_2026_27_NOCEILING.csv', 'sim_matchups_2026_27.csv', 'sim_roster_diff_v1_v3.csv', 'slot_alternatives.csv', 'slot_constrained.csv', 'slot_robustness.csv', 'spacing_table.csv', 'spacing_teams.csv', 'team_pool_shares.csv', 'team_state_diff_2026_27.csv', 'team_strengths_2026_27.csv', 'team_strengths_2026_27_NOCEILING.csv', 'w1_verdict_comparison.csv', 'w1c_delta_decomposition.csv', 'w2_aging_gate.csv', 'williams_minutes_sensitivity.csv', 'williams_ordering_check.csv', 'williams_projected_ten.csv']
+[01:13:24] START noise_floor   
+[01:13:25] noise_floor rc=0
+      randle_out          MIXED   -0.062       0.066                 3     False
+dosunmu_retained          MIXED   -0.267       0.085                 3     False
+        reid_out   ALL NEGATIVE   -0.353       0.268                 4      True
+      ddv_injury   ALL NEGATIVE   -0.415       0.179                 4      True
+[01:13:25] START market_devig   
+[01:13:26] market_devig rc=0
+      MIL        0.11           27       0.00          27    -0.11
+      MEM        0.11           28       0.00          27    -0.11
+      BKN        0.08           29       0.00          24    -0.08
+      SAC        0.08           29       0.00          27    -0.08
+[01:13:26] START f4_per_view_disagreement   
+[01:13:28] f4_per_view_disagreement rc=0
+POR         1.01      1.86      MIXED  model high
+PHX         0.60      1.43  ALL-VIEWS  model high
+ORL         1.12      0.30  ALL-VIEWS   model low
+WAS         0.54      0.00  ALL-VIEWS   model low
+[01:13:28] START champions_table   
+[01:13:29] champions_table rc=0
+2022-23        Denver Nuggets        1800               4.01           9        Boston Celtics         False
+2023-24        Boston Celtics         450              14.69           1        Boston Celtics          True
+2024-25 Oklahoma City Thunder         675              10.80           2        Boston Celtics         False
+2025-26       New York Knicks         900               8.27           4 Oklahoma City Thunder         False
+[01:13:29] START backtest_calibration   
+[01:14:12] backtest_calibration rc=0
+ season  n  model_wins_mae  market_wins_mae  model_wins_bias  model_vs_market_wins_corr  model_vs_actual_wins_corr  market_vs_actual_wins_corr  title_mae_pp  title_corr
+2023-24 30           9.021            6.567            0.267                      0.807                      0.588                       0.830         2.345       0.661
+2024-25 30           8.048            8.367            0.267                      0.833                      0.584                       0.615         1.441       0.902
+2025-26 30           9.322            7.467            0.267                      0.814                      0.526                       0.717         2.016       0.784
+[01:14:12] START build_strengths   KUMINGA_AGING=1
+[01:14:15] build_strengths rc=0
+NYK       -3.34      -4.07  -4.69 -3.86 -3.99
+UTA       -5.62      -6.64  -1.59 -6.66 -5.13
+GSW       -4.43      -7.05  -4.59 -7.28 -5.84
+LAC       -5.57      -7.01  -6.94 -6.71 -6.56
+[01:14:15] START run_sim   KUMINGA_AGING=1
+[01:20:32] run_sim rc=0
+OKC       -0.55      -4.45   0.18 -5.74 -2.64
+CLE       -0.20      -3.82  -3.48 -3.96 -2.86
+DET       -1.36      -6.96   0.21 -6.90 -3.75
+NYK       -3.00      -5.17  -5.13 -5.15 -4.61
+[01:20:32] START build_fcurve[consensus,aged]   KUMINGA_FCURVE_FORK=consensus KUMINGA_FCURVE_NSIMS=200000 KUMINGA_AGING=1
+[01:20:32] START build_fcurve[rapm,aged]   KUMINGA_FCURVE_FORK=rapm KUMINGA_FCURVE_NSIMS=200000 KUMINGA_AGING=1
+[01:20:32] START build_fcurve[box,aged]   KUMINGA_FCURVE_FORK=box KUMINGA_FCURVE_NSIMS=200000 KUMINGA_AGING=1
+[01:20:32] START build_fcurve[darko,aged]   KUMINGA_FCURVE_FORK=darko KUMINGA_FCURVE_NSIMS=200000 KUMINGA_AGING=1
+[04:43:11] build_fcurve[consensus,aged] rc=0
+     8.5 0.2460 0.6224  0.3789
+     9.0 0.2683 0.6497  0.4049
+     9.5 0.2914 0.6746  0.4303
+    10.0 0.3148 0.6974  0.4555
+[04:43:11] build_fcurve[rapm,aged] rc=0
+[run] build_fcurve_20260929T062036Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[04:45:44] build_fcurve[box,aged] rc=0
+[run] build_fcurve_20260929T062035Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[04:45:44] build_fcurve[darko,aged] rc=0
+[run] build_fcurve_20260929T062034Z -> ok
+Empty DataFrame
+Columns: [min_net, title, cf, finals]
+Index: []
+[04:45:44] START merge_fcurve_parts   KUMINGA_AGING=1
+[04:45:45] merge_fcurve_parts rc=0
+  [merge_fcurve_parts_20260929T094545Z]   box        29 grid rows
+  [merge_fcurve_parts_20260929T094545Z]   darko      29 grid rows
+  [merge_fcurve_parts_20260929T094545Z] merged 116 rows into kuminga\outputs\fcurve_min.csv
+[run] merge_fcurve_parts_20260929T094545Z -> ok
+copied 11 files kuminga\outputs -> kuminga\outputs\aged: ['team_strengths_2026_27.csv', 'sim_all30_2026_27.csv', 'fcurve_min.csv', 'slot_robustness.csv', 'green_kept.csv', 'seed_distribution.csv', 'slot_constrained.csv', 'player_option.csv', 'rotations_2026_27.csv', 'aging_curve_nosurv.csv', 'S1_shapley_slot_comparison.csv']
+[04:45:45] START shapley  --aged KUMINGA_AGING=1
+[04:45:48] shapley rc=0
+           depth    0.679  -1.095   3.526      4.622
+      ddv_injury   -0.333  -2.646   0.933      3.579
+      kuminga_in    0.576  -0.537   3.024      3.561
+other_departures   -0.875  -3.405   1.423      4.828
+[04:45:48] START shapley  --pooled --aged KUMINGA_AGING=1
+[04:45:52] shapley rc=0
+           depth    0.056  -0.397   0.474      0.871
+      ddv_injury   -0.183  -0.580   0.006      0.586
+      kuminga_in    0.253   0.000   0.711      0.711
+other_departures   -0.088  -0.605   0.641      1.246
+[04:45:52] START slot_robustness   KUMINGA_AGING=1
+[04:45:54] slot_robustness rc=0
+       B_lyles_fills                          Trey Lyles +26.1               0.0         0.506    0.724  -0.114    -0.945    0.043          MIXED
+  C_mcdaniels_slides Jaden McDaniels +4.0; Cody Williams +22.1               0.0         1.900    2.373   1.277     1.086    1.659   ALL POSITIVE
+    D_beringer_fills Joan Beringer +25.1; Jaden McDaniels +0.9               0.0        -1.061   -1.775  -4.124    -2.953   -2.478   ALL NEGATIVE
+E_tight_rule_F_or_FC Jaden McDaniels +2.7; Cody Williams +23.3               0.0         1.956    2.448   1.316     1.185    1.726   ALL POSITIVE
+[04:45:54] START green_kept   KUMINGA_AGING=1
+[04:45:56] green_kept rc=0
+  [green_kept_20260929T094555Z]   darko      without 2.643%  with 2.685%  marginal +0.041pp
+  [green_kept_20260929T094555Z] VERDICT, keeping Green: MIXED [-0.330, +0.166]pp, mean -0.027pp
+  [green_kept_20260929T094555Z] RULING: not positive under all four, so it stays in the appendix and the piece does not attach an on-court cost to losing Green.
+[run] green_kept_20260929T094555Z -> ok
+[04:45:56] START seed_distribution   KUMINGA_AGING=1
+[04:45:59] seed_distribution rc=0
+fork           box consensus  darko   rapm           box consensus  darko   rapm            box consensus  darko   rapm    box consensus  darko   rapm
+field                                                                                                                                                 
+baseline     5.632     5.649  5.644  5.641         0.270     0.272  0.270  0.269          0.729     0.727  0.729  0.730  0.241     0.237  0.237  0.238
+current      5.347     5.492  4.081  4.658         0.253     0.242  0.037  0.074          0.747     0.758  0.963  0.926  0.298     0.249  0.683  0.489
+copied 11 files kuminga\outputs -> kuminga\outputs\aged: ['team_strengths_2026_27.csv', 'sim_all30_2026_27.csv', 'fcurve_min.csv', 'slot_robustness.csv', 'green_kept.csv', 'seed_distribution.csv', 'slot_constrained.csv', 'player_option.csv', 'rotations_2026_27.csv', 'aging_curve_nosurv.csv', 'S1_shapley_slot_comparison.csv']
+[04:45:59] START noise_floor  --aged KUMINGA_AGING=1
+[04:46:00] noise_floor rc=0
+      kuminga_in          MIXED    0.112       0.084                 4     False
+      ddv_injury   ALL NEGATIVE   -0.353       0.104                 4      True
+dosunmu_retained          MIXED   -0.358       0.078                 4     False
+        reid_out   ALL NEGATIVE   -0.440       0.334                 4      True
+copied 11 files kuminga\outputs -> kuminga\outputs\aged: ['team_strengths_2026_27.csv', 'sim_all30_2026_27.csv', 'fcurve_min.csv', 'slot_robustness.csv', 'green_kept.csv', 'seed_distribution.csv', 'slot_constrained.csv', 'player_option.csv', 'rotations_2026_27.csv', 'aging_curve_nosurv.csv', 'S1_shapley_slot_comparison.csv']
+copied 11 files kuminga\outputs\preaging -> kuminga\outputs: ['team_strengths_2026_27.csv', 'sim_all30_2026_27.csv', 'fcurve_min.csv', 'slot_robustness.csv', 'green_kept.csv', 'seed_distribution.csv', 'slot_constrained.csv', 'player_option.csv', 'rotations_2026_27.csv', 'aging_curve_nosurv.csv', 'S1_shapley_slot_comparison.csv']
+[04:46:00] START w2_aging_gate   
+[04:46:01] w2_aging_gate rc=0
+  slot variant   C_mcdaniels_slides ALL POSITIVE ALL POSITIVE        1.344      1.659   True
+  slot variant     D_beringer_fills ALL NEGATIVE ALL NEGATIVE       -1.477     -2.478   True
+  slot variant E_tight_rule_F_or_FC ALL POSITIVE ALL POSITIVE        1.403      1.726   True
+      headline      offseason delta        MIXED        MIXED       -0.182      0.791   True
+[04:46:01] START r5_shapley_williams   
+[04:48:28] r5_shapley_williams rc=0
+  [r5_shapley_williams_20260929T094603Z]   dosunmu_retained           -0.248 / -0.336  MIXED        / MIXED         3/4, 4/4  -0.031 / +0.006  no
+  [r5_shapley_williams_20260929T094603Z]   reid_out                   -0.358 / -0.446  ALL NEGATIVE / ALL NEGATIVE  4/4, 4/4  +0.152 / +0.267  SHIPS
+  [r5_shapley_williams_20260929T094603Z]   ddv_injury                 -0.416 / -0.353  ALL NEGATIVE / ALL NEGATIVE  4/4, 4/4  +0.102 / +0.033  SHIPS
+[run] r5_shapley_williams_20260929T094603Z -> ok
+[04:48:28] START r5_honesty_rail_bases   
+[04:48:29] r5_honesty_rail_bases rc=0
+  [r5_honesty_rail_bases_20260929T094828Z]   changes between bases: ATL un-aged MIXED, aged ALL-VIEWS
+  [r5_honesty_rail_bases_20260929T094828Z]   changes between bases: ORL un-aged ALL-VIEWS, aged ALL-VIEWS (not a disagreement)
+  [r5_honesty_rail_bases_20260929T094828Z]   changes between bases: CHA un-aged MIXED, aged ALL-VIEWS
+[run] r5_honesty_rail_bases_20260929T094828Z -> ok
+[04:48:29] START r2_departures   
+[04:50:14] r2_departures rc=0
+  [r2_departures_20260929T094830Z]   Anthony Edwards         24.5 ->  30.3  (+5.8)
+  [r2_departures_20260929T094830Z]   Ayo Dosunmu             16.2 ->  22.2  (+6.0)
+  [r2_departures_20260929T094830Z]   Cody Williams            4.1 ->  10.7  (+6.6)
+[run] r2_departures_20260929T094830Z -> ok
+[04:50:14] START r7_allocator_agreement   
+[04:50:17] r7_allocator_agreement rc=0
+  [r7_allocator_agreement_20260929T095016Z]   D_beringer_fills       pooled -0.781 / -1.423 | team-rank -1.477 / -2.478 | clearing 4,4,4,4 | ALL NEGATIVE -> SHIPS
+  [r7_allocator_agreement_20260929T095016Z]   E_tight_rule_F_or_FC   pooled +0.506 / +0.669 | team-rank +1.403 / +1.726 | clearing 4,4,4,4 | ALL POSITIVE -> SHIPS
+  [r7_allocator_agreement_20260929T095016Z] ships under all four cells: 7 of 13
+[run] r7_allocator_agreement_20260929T095016Z -> ok
+[04:50:17] START build_final_numbers   
+[04:50:19] build_final_numbers rc=0
+[run] build_final_numbers_20260929T095018Z
+  [build_final_numbers_20260929T095018Z] 1715 figures on the sheet across 10 sections
+[run] build_final_numbers_20260929T095018Z -> ok
+[04:50:19] START render_piece   
+[04:50:20] render_piece rc=0
+  [render_piece_20260929T095020Z] rendered piece_v2_draft_short.template.md -> piece_v2_draft_short.md
+  [render_piece_20260929T095020Z] rendered methods.template.md -> methods.md
+  [render_piece_20260929T095020Z] 797 distinct sheet keys used
+[run] render_piece_20260929T095020Z -> ok
+[04:50:20] START reconcile_figures   
+[04:50:21] reconcile_figures rc=1
+  File "C:\Users\bobby\playground\wolves-front-office\kuminga\scripts\reconcile_figures.py", line 217, in main
+    raise RuntimeError("C2 failed: the skeleton quotes a figure that is not on the sheet, "
+                       "or carries a retracted one")
+RuntimeError: C2 failed: the skeleton quotes a figure that is not on the sheet, or carries a retracted one

@@ -1,6 +1,6 @@
 # H1, H3, H5: the champion profile, and Minnesota on it
 
-*As of 2026-09-24. Eleven seasons (2015-16 to 2025-26): 11 champions against 48 preseason top-five teams that did not win, every team built with the champions' own machinery (`c1_champions.build`). OBSERVED throughout, except Minnesota's 2026-27 market price and rank and the continuity of its projected rotation. Run `h1_h3_h5_profile_20260924T201908Z`. Basketball-Reference pages cached in `kuminga/data/bref/` with their hashes in the manifest.*
+*As of 2026-09-24. Eleven seasons (2015-16 to 2025-26): 11 champions against 48 preseason top-five teams that did not win, every team built with the champions' own machinery (`c1_champions.build`). OBSERVED throughout, except Minnesota's 2026-27 market price and rank and the continuity of its projected rotation. Run `h1_h3_h5_profile_20260929T100612Z`. Basketball-Reference pages cached in `kuminga/data/bref/` with their hashes in the manifest.*
 
 **Two sources for the net ratings.** B-Ref's NRtg against this warehouse's game-log net rating, season by season: correlation 1.000, 0.999, 0.999, 1.000, 1.000, 0.999, 1.000, 0.999, 1.000, 1.000, 1.000; mean absolute difference 0.14, 0.16, 0.15, 0.12, 0.11, 0.15, 0.12, 0.13, 0.12, 0.11, 0.14 points; identical league rank for 80%, 80%, 77%, 80%, 77%, 73%, 73%, 80%, 57%, 73%, 87% of teams.
 
@@ -83,7 +83,7 @@ Team-level features on all eleven seasons: n = 11 champions against 48 non-champ
 
 ## H5. Minnesota on the sheet
 
-2026-27 values known now: market 3.16%, rank 6; the projected rotation's continuity by contract 0.70 (5 of the top eight) and by appearance 0.70 (5 of the top eight).
+2026-27 values known now: market 3.16%, rank 6; the projected rotation's continuity by contract 0.72 (6 of the top eight) and by appearance 0.72 (6 of the top eight).
 
 | feature | seasons | Minnesota | basis | champions' range | status | closable? |
 |---|---|---:|---|---|---|---|
@@ -97,10 +97,10 @@ Team-level features on all eleven seasons: n = 11 champions against 48 non-champ
 | playoff minus regular-season net | eleven (2015-16 to 2025-26) | -8.96 | 2025-26 actual | -4.13 to 9.07 | outside, short of it | a season can close it |
 | best player VORP | eleven (2015-16 to 2025-26) | 3.50 | 2025-26 actual | 3.30 to 8.90 | inside the champions' range | set by the roster or the market |
 | top-8 age | eleven (2015-16 to 2025-26) | 28.80 | 2025-26 actual | 25.50 to 29.70 | inside the champions' range | set by the roster or the market |
-| top-8 returning, by appearance | eleven (2015-16 to 2025-26) | 5.00 | 2026-27 (known now) | 4.00 to 8.00 | inside the champions' range | set by the roster or the market |
-| top-8 returning, by contract | eleven (2015-16 to 2025-26) | 5.00 | 2026-27 (known now) | 4.00 to 8.00 | inside the champions' range | set by the roster or the market |
-| returning share of playoff minutes, by appearance | eleven (2015-16 to 2025-26) | 0.70 | 2026-27 (known now) | 0.52 to 0.91 | inside the champions' range | set by the roster or the market |
-| returning share of playoff minutes, by contract | eleven (2015-16 to 2025-26) | 0.70 | 2026-27 (known now) | 0.56 to 0.91 | inside the champions' range | set by the roster or the market |
+| top-8 returning, by appearance | eleven (2015-16 to 2025-26) | 6.00 | 2026-27 (known now) | 4.00 to 8.00 | inside the champions' range | set by the roster or the market |
+| top-8 returning, by contract | eleven (2015-16 to 2025-26) | 6.00 | 2026-27 (known now) | 4.00 to 8.00 | inside the champions' range | set by the roster or the market |
+| returning share of playoff minutes, by appearance | eleven (2015-16 to 2025-26) | 0.72 | 2026-27 (known now) | 0.52 to 0.91 | inside the champions' range | set by the roster or the market |
+| returning share of playoff minutes, by contract | eleven (2015-16 to 2025-26) | 0.72 | 2026-27 (known now) | 0.56 to 0.91 | inside the champions' range | set by the roster or the market |
 | top-8 regular-season games missed | eleven (2015-16 to 2025-26) | 117.00 | 2025-26 actual | 54.00 to 154.00 | inside the champions' range | set by the roster or the market |
 | top-8 playoff games missed | eleven (2015-16 to 2025-26) | 8.00 | 2025-26 actual | 1.00 to 15.00 | inside the champions' range | a season can close it |
 | top-five minute share, regular season | eleven (2015-16 to 2025-26) | 0.61 | 2025-26 actual | 0.51 to 0.60 | outside, above | set by the roster or the market |

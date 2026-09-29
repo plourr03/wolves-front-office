@@ -76,17 +76,19 @@ def viz_the_fork(S):
     cal = float(W[W.ordering.str.startswith("calibrated: median, new team top ten")].iloc[0].williams_mpg)
     assert "%.1f" % cal == S["w_cal_top10_mpg"]
     data = dict(grid=grid, default=default, default_txt=S["williams_mpg"], threshold=thr, threshold_txt=S["williams_threshold"],
-                cal=cal, cal_txt=S["w_cal_top10_mpg"], ret_txt=S["w_ret_top10_median"], rank_mover=S["w_rank_mover_order"], rank_impact=S["w_rank_impact_only"])
+                cal=cal, cal_txt=S["w_cal_top10_mpg"], ret_txt=S["w_ret_top10_median"], rank_primary=S["w_rank_primary"], rank_impact=S["w_rank_impact_only"],
+                flat_mpg=S["w_mpg_flat"], flat_rank=S["w_rank_flat"], xmax=float(w.williams_mpg.max()))
+    # D111: the model's default benches Williams (0.0), so the slider starts at zero and walks UP to the base rate
     pid = "the-fork"
     p = "#viz-%s" % pid
     stage = ('<svg class="th-svg" role="img" aria-label="The offseason verdict against Cody Williams minutes"></svg>'
              '<div class="th-slider"><label class="th-slider-lab">Cody Williams, minutes a night: <span class="th-slider-val"></span></label>'
-             '<input class="th-range" type="range" min="0" max="16.1" step="0.1" value="16.1" aria-label="Cody Williams minutes a night"></div>'
-             '<div class="th-readout"></div>')
-    html = C1.chrome_html(pid, "The fork", "the verdict against one player's minutes", "minutes a night", "below this, the four ways of scoring players stop agreeing the summer hurt",
-                          "Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and the rest of his minutes going to the players the model trusts more. "
-                          "Un-aged basis, pooled allocator. The default of 16.1 is where the model's ordering puts him; ordered on impact he is out of the ten, so the range is the presentation. The blue line is the base rate: movers like him who landed on a top-ten team kept a median 48% of their prior minutes. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.",
-                          extra_stage=stage, hero_num="0.0")
+             + ('<input class="th-range" type="range" min="0" max="%.1f" step="0.1" value="%.1f" aria-label="Cody Williams minutes a night"></div>' % (data["xmax"], default))
+             + '<div class="th-readout"></div>')
+    html = C1.chrome_html(pid, "The fork", "the verdict against one player's minutes", "minutes a night", "above this, every way of scoring players says the summer hurt",
+                          "Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and those minutes taken from the players the model trusts more. "
+                          "Un-aged basis, the field held fixed. The default of " + S["williams_mpg"] + " is where the model's ordering puts him: " + S["w_rank_primary"] + "th man under the rule it applies to every player who changed teams, " + S["w_rank_impact_only"] + "th on impact alone. The flat half-and-half order that handed him " + S["w_mpg_flat"] + " a night is kept as the sensitivity. The blue line is the base rate: movers like him who landed on a top-ten team kept a median " + S["w_ret_top10_median"] + " of their prior minutes. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.",
+                          extra_stage=stage, hero_num=S["williams_mpg"])
     css = C1.chrome_css(pid, "var(--status-warning)") + """
   %(p)s .th-svg { width: 100%%; height: 300px; display: block; }
   %(p)s.is-compact .th-svg { height: 280px; }
@@ -125,10 +127,10 @@ def viz_the_fork(S):
   var D = __DATA__;
   var VIEWS = [["consensus", "consensus", "var(--dataviz-2)"], ["rapm", "RAPM", "var(--dataviz-3)"], ["box", "box score", "var(--dataviz-6)"], ["darko", "DARKO", "var(--dataviz-4)"]];
   var CAPS = [
-    "The model's default hands Cody Williams " + D.default_txt + " minutes a night. That's an ordering artifact: re-order the roster on impact and he's the " + D.rank_mover + "th or " + D.rank_impact + "th man. So start with the range.",
-    "At those minutes every way of scoring players says the summer cost Minnesota something. Four lines, all below zero.",
-    "Slide his minutes down and the minutes go to players the model trusts more. The lines climb.",
-    "Below " + D.threshold_txt + " a night, one of the four crosses zero, and the four stop agreeing that the summer hurt. Movers like him who landed on a top-ten team kept " + D.ret_txt + " of their minutes, " + D.cal_txt + " for him. That's the fork, and the base rate sits on the low side of it."
+    "The model's default benches Cody Williams: " + D.rank_primary + "th man on the rule it applies to every player who changed teams, " + D.rank_impact + "th on impact alone. The flat order that handed him " + D.flat_mpg + " a night is the sensitivity now, not the answer.",
+    "At zero, three of the four ways of scoring players say the summer helped a little and one says it hurt. Mixed.",
+    "Give him minutes and they come from the players the model trusts more. The lines fall.",
+    "Above " + D.threshold_txt + " a night the last of the four crosses zero and every way of scoring players says the summer hurt. Movers like him who landed on a top-ten team kept " + D.ret_txt + " of their minutes, " + D.cal_txt + " for him. That's the fork, and the base rate sits on the wrong side of it."
   ];
   function interp(v, mpg) {
     var pts = D.grid;
@@ -146,7 +148,7 @@ def viz_the_fork(S):
     var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 280 : 300;
     var m = { t: 18, r: compact ? 60 : 84, b: 34, l: compact ? 38 : 44 };
     svg.attr("viewBox", "0 0 " + W + " " + H);
-    var x = d3.scaleLinear().domain([0, D.default]).range([m.l, W - m.r]);
+    var x = d3.scaleLinear().domain([0, D.xmax]).range([m.l, W - m.r]);
     var allv = []; D.grid.forEach(function (g) { VIEWS.forEach(function (v) { allv.push(g[v[0]]); }); });
     var y = d3.scaleLinear().domain([Math.min(-1.5, d3.min(allv) - 0.1), Math.max(1, d3.max(allv) + 0.1)]).range([H - m.b, m.t]);
     svg.append("rect").attr("class", "th-neg-band").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(0)).attr("height", H - m.b - y(0));
@@ -181,7 +183,7 @@ def viz_the_fork(S):
       cells[v[0] + "_el"] = c;
     });
     var verdict = ro.append("div").attr("class", "th-verdict");
-    var range = root.select(".th-range").attr("max", D.default.toFixed(1)).attr("value", cur.toFixed(1));
+    var range = root.select(".th-range").attr("max", D.xmax.toFixed(1)).attr("value", cur.toFixed(1));
     range.on("input", function () { cur = parseFloat(this.value); clearPlayTimers(); setAt(cur); showReplay(); });
     function setAt(mpg) {
       cursor.attr("x1", x(mpg)).attr("x2", x(mpg));
@@ -194,7 +196,7 @@ def viz_the_fork(S):
         if (val < 0) neg++;
       });
       var all = neg === VIEWS.length;
-      verdict.text(all ? "all four negative: the summer hurt" : "mixed: the four ways no longer agree").classed("is-neg", all).classed("is-mixed", !all);
+      verdict.text(all ? "all four negative: the summer hurt" : "mixed: the four ways don't agree").classed("is-neg", all).classed("is-mixed", !all);
       root.select(".th-slider-val").text(mpg.toFixed(1));
       root.select(".th-range").property("value", mpg.toFixed(1));
     }
@@ -214,8 +216,8 @@ def viz_the_fork(S):
     if (__resetOnly) return;
     at(700, function () { linesOn(b, true); setCaption(CAPS[1]); });
     at(2600, function () { setCaption(CAPS[2]); });
-    // the slider walks down from the default to the threshold
-    var steps = 40, from = D.default, to = D.threshold;
+    // the slider walks up from the default (zero) to the base rate, through the threshold
+    var steps = 40, from = D.default, to = D.cal;
     for (var i = 1; i <= steps; i++) {
       (function (i) { at(2800 + i * 45, function () { cur = from + (to - from) * i / steps; b.setAt(cur); root.select(".th-hero-num").text(cur.toFixed(1)); }); })(i);
     }
@@ -229,17 +231,20 @@ def viz_the_fork(S):
 # ================================================================== 2. the verdicts
 def viz_the_verdicts(S):
     r7 = pd.read_csv(os.path.join(OUTS, "r7_allocator_verdicts.csv")).set_index("item")
-    items = [("ball_in", "LaMelo Ball in"), ("reid_out", "Naz Reid out"), ("A_c3_default_shannon", "Kuminga, against the fill at the four"),
+    items = [("ball_in", "LaMelo Ball in"), ("reid_out", "Naz Reid out"), ("A_c3_default_shannon", "Kuminga, against the fill at the four (Cody Williams)"),
              ("D_beringer_fills", "Kuminga, if Beringer fills the four instead"), ("ddv_injury", "DiVincenzo's Achilles, not a transaction"),
              ("randle_out", "Julius Randle out"), ("dosunmu_retained", "Ayo Dosunmu re-signed"),
              ("other_departures", "The other departures, a bundle of seven"), ("depth", "Depth signings and re-signings")]
     rows = []
+    # D111: the slot file keeps the historical variant id; the sheet key names the fill
+    SHEET_KEY = {"A_c3_default_shannon": "A_c3_default_williams"}
     for key, lab in items:
         x = r7.loc[key]
+        sk = SHEET_KEY.get(key, key)
         cells = dict(pooled_u=float(x.pooled_unaged_mean), pooled_a=float(x.pooled_aged_mean),
                      tr_u=float(x.teamrank_unaged_mean), tr_a=float(x.teamrank_aged_mean))
-        assert "%+.2f" % cells["pooled_u"] == S["v_%s_pooled_u" % key], (key, cells["pooled_u"], S["v_%s_pooled_u" % key])
-        assert "%+.2f" % cells["pooled_a"] == S["v_%s_pooled_a" % key], (key, cells["pooled_a"], S["v_%s_pooled_a" % key])
+        assert "%+.2f" % cells["pooled_u"] == S["v_%s_pooled_u" % sk], (key, cells["pooled_u"], S["v_%s_pooled_u" % sk])
+        assert "%+.2f" % cells["pooled_a"] == S["v_%s_pooled_a" % sk], (key, cells["pooled_a"], S["v_%s_pooled_a" % sk])
         rows.append(dict(key=key, label=lab, ships=bool(x.ships_all_four), signs=str(x.signs), family=str(x.family),
                          pooled_u_sign=str(x.pooled_unaged_sign), pooled_a_sign=str(x.pooled_aged_sign),
                          pooled_u_clear=int(x.pooled_unaged_clear), pooled_a_clear=int(x.pooled_aged_clear), **cells))
@@ -304,7 +309,7 @@ def viz_the_verdicts(S):
       var g = svg.append("g").attr("class", "th-row" + (r.ships ? " is-ship" : "")).attr("data-key", r.key);
       var cy = y(r.key) + y.bandwidth() / 2;
       var lab = g.append("text").attr("class", "th-rlab").attr("x", m.l - 10).attr("y", cy + 3.5).attr("text-anchor", "end")
-        .text(compact ? r.label.replace("Kuminga, against the fill at the four", "Kuminga vs the fill").replace("Kuminga, if Beringer fills the four instead", "Kuminga vs Beringer").replace("DiVincenzo's Achilles, not a transaction", "DiVincenzo's Achilles").replace("The other departures, a bundle of seven", "Other departures (7)").replace("Depth signings and re-signings", "Depth deals") : r.label);
+        .text(compact ? r.label.replace("Kuminga, against the fill at the four (Cody Williams)", "Kuminga vs Williams").replace("Kuminga, if Beringer fills the four instead", "Kuminga vs Beringer").replace("DiVincenzo's Achilles, not a transaction", "DiVincenzo's Achilles").replace("The other departures, a bundle of seven", "Other departures (7)").replace("Depth signings and re-signings", "Depth deals") : r.label);
       var lo = Math.min(r.pooled_u, r.pooled_a, r.tr_u, r.tr_a), hi = Math.max(r.pooled_u, r.pooled_a, r.tr_u, r.tr_a);
       g.append("line").attr("class", "th-range").attr("x1", x(lo)).attr("x2", x(hi)).attr("y1", cy).attr("y2", cy);
       var col = r.ships ? (r.pooled_u < 0 ? "var(--status-error)" : "var(--accent-hover)") : "rgba(255,255,255,.7)";

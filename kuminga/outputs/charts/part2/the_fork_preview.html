@@ -40,7 +40,7 @@
   <button onclick="window.location.reload()">Hard reload</button>
 </div>
 <div class="harness-stage">
-<!-- charts_part2_20260925T141403Z; sheet keys checked: williams_mpg, williams_threshold -->
+<!-- charts_part2_20260929T100729Z; sheet keys checked: williams_mpg, williams_threshold -->
 <div id="viz-the-fork">
   <div class="th-chip" role="status">
     <span class="th-chip-dot"></span>
@@ -51,7 +51,7 @@
   <p class="th-caption" aria-live="polite"></p>
   
   <div class="th-stage">
-    <svg class="th-svg" role="img" aria-label="The offseason verdict against Cody Williams minutes"></svg><div class="th-slider"><label class="th-slider-lab">Cody Williams, minutes a night: <span class="th-slider-val"></span></label><input class="th-range" type="range" min="0" max="16.1" step="0.1" value="16.1" aria-label="Cody Williams minutes a night"></div><div class="th-readout"></div>
+    <svg class="th-svg" role="img" aria-label="The offseason verdict against Cody Williams minutes"></svg><div class="th-slider"><label class="th-slider-lab">Cody Williams, minutes a night: <span class="th-slider-val"></span></label><input class="th-range" type="range" min="0" max="16.0" step="0.1" value="0.0" aria-label="Cody Williams minutes a night"></div><div class="th-readout"></div>
     <div class="th-tooltip" role="tooltip">
       <div class="th-tip-head"></div>
       <div class="th-tip-desc"></div>
@@ -62,10 +62,10 @@
       <span class="th-hero-num">0.0</span>
       <span class="th-hero-unit">minutes a night</span>
     </div>
-    <div class="th-hero-label">below this, the four ways of scoring players stop agreeing the summer hurt</div>
+    <div class="th-hero-label">above this, every way of scoring players says the summer hurt</div>
     <button class="th-replay" type="button" aria-label="Replay">↺ Replay</button>
   </div>
-  <p class="th-foot">Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and the rest of his minutes going to the players the model trusts more. Un-aged basis, pooled allocator. The default of 16.1 is where the model's ordering puts him; ordered on impact he is out of the ten, so the range is the presentation. The blue line is the base rate: movers like him who landed on a top-ten team kept a median 48% of their prior minutes. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.</p>
+  <p class="th-foot">Each line is one way of scoring players: the change in Minnesota's title odds, in points, from the roster that finished last season to the one that starts this one, with Cody Williams at the minutes on the axis and those minutes taken from the players the model trusts more. Un-aged basis, the field held fixed. The default of 0.0 is where the model's ordering puts him: 12th man under the rule it applies to every player who changed teams, 13th on impact alone. The flat half-and-half order that handed him 16.1 a night is kept as the sensitivity. The blue line is the base rate: movers like him who landed on a top-ten team kept a median 48% of their prior minutes. Drag the slider; the verdict is ALL NEGATIVE only while every line is below zero.</p>
   <div class="th-watermark">@WolvesToaT · Sep 2026</div>
 </div>
 <style>
@@ -216,13 +216,13 @@
     }
   }
 
-  var D = {"grid": [{"mpg": 0.0, "consensus": -0.3978241514842016, "rapm": 0.2390543053770706, "box": 0.3764566817828769, "darko": 0.8236685936132448, "sign": "MIXED", "title": 2.669615487688098}, {"mpg": 8.0, "consensus": -0.8608482098618084, "rapm": -0.2498469766315709, "box": -0.1217711766846467, "darko": 0.2817112099455987, "sign": "MIXED", "title": 2.1715878420577432}, {"mpg": 12.0, "consensus": -1.078500454497576, "rapm": -0.5143400151313524, "box": -0.3061174008363743, "darko": 0.0560117434042779, "sign": "MIXED", "title": 1.948540098600594}, {"mpg": 16.0, "consensus": -1.3152670610230792, "rapm": -0.812010407256311, "box": -0.5168626165309855, "darko": -0.3364576778274299, "sign": "ALL NEGATIVE", "title": 1.6641271897063987}, {"mpg": 16.082849728429405, "consensus": -1.3205211910977055, "rapm": -0.8181786247134974, "box": -0.5230879383591098, "darko": -0.3486962581220729, "sign": "ALL NEGATIVE", "title": 1.6566556272927535}], "default": 16.082849728429405, "default_txt": "16.1", "threshold": 12.570864789705075, "threshold_txt": "12.6", "cal": 11.692760898450643, "cal_txt": "11.7", "ret_txt": "48%", "rank_mover": "12", "rank_impact": "13"};
+  var D = {"grid": [{"mpg": 0.0, "consensus": -0.3889179379422463, "rapm": 0.3390249921373125, "box": 0.3136115187488637, "darko": 0.9255832028678967, "sign": "MIXED", "title": 2.757507193139946}, {"mpg": 0.0, "consensus": -0.3889179379422463, "rapm": 0.3390249921373125, "box": 0.3136115187488637, "darko": 0.9255832028678967, "sign": "MIXED", "title": 2.757507193139946}, {"mpg": 8.0, "consensus": -1.0641310340416923, "rapm": -0.4786109032053056, "box": -0.2342437835109252, "darko": 0.0849190866578943, "sign": "MIXED", "title": 2.0371650906619823}, {"mpg": 12.0, "consensus": -1.31545031536033, "rapm": -0.8215097724184761, "box": -0.4893642443486423, "darko": -0.2964630829307086, "sign": "ALL NEGATIVE", "title": 1.7294848954224502}, {"mpg": 16.0, "consensus": -1.5445549228028426, "rapm": -1.108066153034699, "box": -0.7273951201996962, "darko": -0.6460905334543203, "sign": "ALL NEGATIVE", "title": 1.4536550668140995}], "default": 0.0, "default_txt": "0.0", "threshold": 8.890645587857414, "threshold_txt": "8.9", "cal": 11.692760898450643, "cal_txt": "11.7", "ret_txt": "48%", "rank_primary": "12", "rank_impact": "13", "flat_mpg": "16.1", "flat_rank": "10", "xmax": 16.0};
   var VIEWS = [["consensus", "consensus", "var(--dataviz-2)"], ["rapm", "RAPM", "var(--dataviz-3)"], ["box", "box score", "var(--dataviz-6)"], ["darko", "DARKO", "var(--dataviz-4)"]];
   var CAPS = [
-    "The model's default hands Cody Williams " + D.default_txt + " minutes a night. That's an ordering artifact: re-order the roster on impact and he's the " + D.rank_mover + "th or " + D.rank_impact + "th man. So start with the range.",
-    "At those minutes every way of scoring players says the summer cost Minnesota something. Four lines, all below zero.",
-    "Slide his minutes down and the minutes go to players the model trusts more. The lines climb.",
-    "Below " + D.threshold_txt + " a night, one of the four crosses zero, and the four stop agreeing that the summer hurt. Movers like him who landed on a top-ten team kept " + D.ret_txt + " of their minutes, " + D.cal_txt + " for him. That's the fork, and the base rate sits on the low side of it."
+    "The model's default benches Cody Williams: " + D.rank_primary + "th man on the rule it applies to every player who changed teams, " + D.rank_impact + "th on impact alone. The flat order that handed him " + D.flat_mpg + " a night is the sensitivity now, not the answer.",
+    "At zero, three of the four ways of scoring players say the summer helped a little and one says it hurt. Mixed.",
+    "Give him minutes and they come from the players the model trusts more. The lines fall.",
+    "Above " + D.threshold_txt + " a night the last of the four crosses zero and every way of scoring players says the summer hurt. Movers like him who landed on a top-ten team kept " + D.ret_txt + " of their minutes, " + D.cal_txt + " for him. That's the fork, and the base rate sits on the wrong side of it."
   ];
   function interp(v, mpg) {
     var pts = D.grid;
@@ -240,7 +240,7 @@
     var W = Math.max(320, Math.min(720, rootNode.clientWidth || 640)) - 26, H = compact ? 280 : 300;
     var m = { t: 18, r: compact ? 60 : 84, b: 34, l: compact ? 38 : 44 };
     svg.attr("viewBox", "0 0 " + W + " " + H);
-    var x = d3.scaleLinear().domain([0, D.default]).range([m.l, W - m.r]);
+    var x = d3.scaleLinear().domain([0, D.xmax]).range([m.l, W - m.r]);
     var allv = []; D.grid.forEach(function (g) { VIEWS.forEach(function (v) { allv.push(g[v[0]]); }); });
     var y = d3.scaleLinear().domain([Math.min(-1.5, d3.min(allv) - 0.1), Math.max(1, d3.max(allv) + 0.1)]).range([H - m.b, m.t]);
     svg.append("rect").attr("class", "th-neg-band").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(0)).attr("height", H - m.b - y(0));
@@ -275,7 +275,7 @@
       cells[v[0] + "_el"] = c;
     });
     var verdict = ro.append("div").attr("class", "th-verdict");
-    var range = root.select(".th-range").attr("max", D.default.toFixed(1)).attr("value", cur.toFixed(1));
+    var range = root.select(".th-range").attr("max", D.xmax.toFixed(1)).attr("value", cur.toFixed(1));
     range.on("input", function () { cur = parseFloat(this.value); clearPlayTimers(); setAt(cur); showReplay(); });
     function setAt(mpg) {
       cursor.attr("x1", x(mpg)).attr("x2", x(mpg));
@@ -288,7 +288,7 @@
         if (val < 0) neg++;
       });
       var all = neg === VIEWS.length;
-      verdict.text(all ? "all four negative: the summer hurt" : "mixed: the four ways no longer agree").classed("is-neg", all).classed("is-mixed", !all);
+      verdict.text(all ? "all four negative: the summer hurt" : "mixed: the four ways don't agree").classed("is-neg", all).classed("is-mixed", !all);
       root.select(".th-slider-val").text(mpg.toFixed(1));
       root.select(".th-range").property("value", mpg.toFixed(1));
     }
@@ -308,8 +308,8 @@
     if (__resetOnly) return;
     at(700, function () { linesOn(b, true); setCaption(CAPS[1]); });
     at(2600, function () { setCaption(CAPS[2]); });
-    // the slider walks down from the default to the threshold
-    var steps = 40, from = D.default, to = D.threshold;
+    // the slider walks up from the default (zero) to the base rate, through the threshold
+    var steps = 40, from = D.default, to = D.cal;
     for (var i = 1; i <= steps; i++) {
       (function (i) { at(2800 + i * 45, function () { cur = from + (to - from) * i / steps; b.setAt(cur); root.select(".th-hero-num").text(cur.toFixed(1)); }); })(i);
     }

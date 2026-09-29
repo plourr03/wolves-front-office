@@ -556,6 +556,11 @@ def main():
         for c, lab in (("offseason_delta", "published offseason delta"), ("injury_cost", "DiVincenzo injury cost"),
                        ("williams_cost", "Williams minutes cost"), ("interaction", "interaction"), ("remainder", "remainder")):
             F("w1c_" + c, S, lab + ", mean pp", sgn(w1c[c].mean(), 3), "MODELED", "QUOTABLE AS BAND", rw1c, "w1c_delta_decomposition.csv")
+        # D111: the sign pattern over the four views, for the published delta and for the summer with
+        # the injury counted as weather (Part 2 quotes both patterns in words)
+        _pat = lambda v: "ALL NEGATIVE" if max(v) < 0 else "ALL POSITIVE" if min(v) > 0 else "MIXED"
+        F("w1c_offseason_sign", S, "published offseason delta, sign pattern over the four views", _pat(list(w1c.offseason_delta)), "MODELED", "QUOTABLE", rw1c, "w1c_delta_decomposition.csv")
+        F("w1c_noinjury_sign", S, "the summer with the injury counted as weather, sign pattern over the four views", _pat(list(w1c.remainder)), "MODELED", "QUOTABLE", rw1c, "w1c_delta_decomposition.csv")
         m4 = csv("m4_lineups.csv")
         rm4 = rid("m4_lineup_study")
         F("m4_fives", S, "legal fives, DiVincenzo excluded", len(m4), "COMPOSED", "FACT", rm4, "m4_lineups.csv")

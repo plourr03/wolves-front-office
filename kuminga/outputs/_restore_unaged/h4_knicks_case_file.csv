@@ -5,6 +5,12 @@ market_rank,4
 market_win_total,53.5
 favourite,Oklahoma City Thunder
 favourite_pct,24.318976558823355
+band_n,11
+band_lo,4.005553283962211
+band_hi,57.65382838425008
+band_worst_rank,9
+band_top5,10
+band_floor_team,Denver Nuggets 2022-23
 model_title_pct,4.63333333333333
 model_wins,47.51614531707317
 actual_wins,53

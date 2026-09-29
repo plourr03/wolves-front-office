@@ -12,17 +12,17 @@ The primary basis takes every player at last season's measured level. The aged b
 
 ## The two minutes allocators, the four cells and the quotability rule
 
-Two rules hand out minutes. The team-rank allocator, which the headline simulation uses, ranks a roster team-wide and plays ten men. The pooled allocator, which the attribution uses, hands minutes out inside position groups. A verdict ships only if its sign holds under both aging bases and under both allocators, and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own. The shipping verdicts, in all four cells, mean points of title odds and the views clearing in each:
+A roster is ordered by a league-wide score before any minutes are handed out: half the percentile of last season's minutes per appearance and half the percentile of impact for a player who stayed, and one fifth and four fifths for a player who changed teams, the same blend the minutes rule already used for movers. That ordering was adopted on 2026-09-25, before the field was re-run under it (the check that motivated it is commits ce74a2a6 and d3a226f6; the adoption itself is commit 266a2422 at 2026-09-25T17:52:01Z), on the grounds that the mover discount had been applied to minutes but not to ordering. The field under it was first seen at 2026-09-29T09:50:41Z, once the re-run had finished (its last step ended 2026-09-29T09:50:21Z). The flat half-and-half order for everyone is kept as the recorded sensitivity. Two rules hand out minutes. The team-rank allocator, which the headline simulation uses, ranks a roster team-wide and plays ten men. The pooled allocator, which the attribution uses, hands minutes out inside position groups. A verdict ships only if its sign holds under both aging bases and under both allocators, and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own. The shipping verdicts, in all four cells, mean points of title odds and the views clearing in each:
 
 | verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | team-rank, aged | views clearing in each cell |
 |---|---:|---:|---:|---:|---|
-| LaMelo Ball in | +0.79 | +0.91 | +1.56 | +1.58 | 4/4, 4/4, 4/4, 4/4 |
-| Naz Reid out | -0.33 | -0.40 | -1.03 | -1.05 | 4/4, 4/4, 4/4, 4/4 |
-| DiVincenzo's Achilles (not a transaction) | -0.39 | -0.33 | -1.00 | -0.83 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, default allocation | +0.44 | +0.56 | +0.55 | +0.66 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, McDaniels slides | +0.42 | +0.54 | +0.53 | +0.64 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, Beringer fills | -0.72 | -1.31 | -1.03 | -1.84 | 4/4, 4/4, 4/4, 4/4 |
-| Kuminga slot, tight eligibility rule | +0.44 | +0.56 | +0.54 | +0.64 | 4/4, 4/4, 4/4, 4/4 |
+| LaMelo Ball in | +0.88 | +1.04 | +1.71 | +1.78 | 4/4, 4/4, 4/4, 4/4 |
+| Naz Reid out | -0.35 | -0.44 | -0.81 | -0.83 | 4/4, 4/4, 4/4, 4/4 |
+| DiVincenzo's Achilles (not a transaction) | -0.42 | -0.35 | -0.76 | -0.58 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, the default fill (Cody Williams) | +0.51 | +0.67 | +1.40 | +1.73 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, McDaniels slides | +0.47 | +0.63 | +1.34 | +1.66 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, Beringer fills | -0.78 | -1.42 | -1.48 | -2.48 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, tight eligibility rule | +0.51 | +0.67 | +1.40 | +1.73 | 4/4, 4/4, 4/4, 4/4 |
 
 ## The bands and the labels
 
@@ -42,7 +42,7 @@ The late-clock split. The reconstructed shot clock read within two seconds of ze
 
 ## Corrections made during the work
 
-Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, 3.36% of all points on the 578 team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced 2.84% of points across 96 team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from +1.37 to +1.82 (consensus +1.33 to +1.65) and Ball's from +1.95 to +3.86 (consensus +2.29 to +3.78); Edwards rose as well. The headline went from 1.69% to 1.68%, and from 2.55% to 2.39% on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, 3.36% of all points on the 578 team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced 2.84% of points across 96 team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from +1.37 to +1.82 (consensus +1.33 to +1.65) and Ball's from +1.95 to +3.86 (consensus +2.29 to +3.78); Edwards rose as well. The headline went from 1.69% to 2.76%, and from 2.55% to 3.72% on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
 
 ## The champions table
 
