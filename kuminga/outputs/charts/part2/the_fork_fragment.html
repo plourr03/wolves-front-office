@@ -1,4 +1,4 @@
-<!-- charts_part2_20260929T100729Z; sheet keys checked: williams_mpg, williams_threshold -->
+<!-- charts_part2_20260929T101752Z; sheet keys checked: williams_mpg, williams_threshold -->
 <div id="viz-the-fork">
   <div class="th-chip" role="status">
     <span class="th-chip-dot"></span>
@@ -217,9 +217,9 @@
       lines[v[0]] = { path: path, lab: lab };
     });
     var thr = svg.append("line").attr("class", "th-thr").attr("x1", x(D.threshold)).attr("x2", x(D.threshold)).attr("y1", m.t).attr("y2", H - m.b);
-    var thrLab = svg.append("text").attr("class", "th-thr-lab").attr("x", x(D.threshold) + 6).attr("y", m.t + 10).attr("text-anchor", "start").text(D.threshold_txt + " a night");
+    var thrLab = svg.append("text").attr("class", "th-thr-lab").attr("x", x(D.threshold) - 6).attr("y", m.t + 10).attr("text-anchor", "end").text(D.threshold_txt + " a night");   // D111: left of its line, away from the base-rate label
     var calLine = svg.append("line").attr("class", "th-thr th-cal").attr("x1", x(D.cal)).attr("x2", x(D.cal)).attr("y1", m.t).attr("y2", H - m.b);
-    var calLab = svg.append("text").attr("class", "th-thr-lab th-cal-lab").attr("x", x(D.cal) - 6).attr("y", m.t + 10).attr("text-anchor", "end").text(compact ? "base rate " + D.cal_txt : "base rate, contender destination: " + D.cal_txt);
+    var calLab = svg.append("text").attr("class", "th-thr-lab th-cal-lab").attr("x", x(D.cal) + 6).attr("y", m.t + 10).attr("text-anchor", "start").text(compact ? "base rate " + D.cal_txt : "base rate, contender destination: " + D.cal_txt);
     var cursor = svg.append("line").attr("class", "th-cursor").attr("y1", m.t).attr("y2", H - m.b);
     var dots = {};
     VIEWS.forEach(function (v) { dots[v[0]] = svg.append("circle").attr("class", "th-dot").attr("r", 4.5).attr("fill", v[2]); });
