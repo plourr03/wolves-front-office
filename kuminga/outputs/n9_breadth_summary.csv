@@ -1,0 +1,511 @@
+team,market_pct,market_rank,title_mean,title_p10,title_p25,title_p50,title_p75,title_p90,title_min,title_max,breadth_ratio,breadth_net,upside_share,cells_above_market,wins_mean,wins_p10,wins_p90,seed_mean_lo,seed_mean_hi,p_top6_lo,p_top6_hi,best_cell,worst_cell,top8_mean_age,returning_minutes_share,n_movers_in_rotation,var_net
+ATL,1.1894461769135425,16,1.705652948889061,0.7263368927247945,0.9863430701599515,1.5159039337511913,2.296126088631033,2.990556526664875,0.5482644663460634,3.528,4.117313269667527,3.9195144508918895,0.7254550171839209,0.59375,42.2547700612198,38.0741401148997,46.84993297044664,5.72503,8.19574,0.13195,0.66076,"<bound method Series.view of team               ATL
+basis             aged
+view             darko
+ordering       primary
+allocator    team-rank
+net           0.613764
+title            3.528
+wins         42.374218
+Name: 492, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               ATL
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net           0.069803
+title         0.548264
+wins          41.15629
+Name: 3, dtype: object> / unaged / flat / pooled",27.875,0.7719160691810315,3,2.0002194559904214
+BKN,0.0819897964106238,29,0.0030117130235664366,0.00020610571386576893,0.00041953671073786,0.0009809202998034023,0.0012424963497380233,0.003962670567416355,4.964478202261225e-05,0.031999999999990016,19.226398400566104,6.207445527220166,0.931189020711758,0.0,27.162087611407664,21.61377960180176,35.51225013724771,10.72043,13.54893,0.0,0.00395,"<bound method Series.view of team               BKN
+basis             aged
+view              rapm
+ordering       primary
+allocator    team-rank
+net          -2.403644
+title            0.032
+wins         35.618241
+Name: 500, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               BKN
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -7.112076
+title          0.00005
+wins         25.076063
+Name: 19, dtype: object> / unaged / flat / pooled",26.0,0.6902052776514648,3,5.575017752534115
+BOS,5.471452413802295,5,12.748221917088493,8.04904055273596,9.37715443432552,10.733667138457712,15.014032914552235,22.178897658765113,7.770583766862847,23.305981641696302,2.7554709798581216,6.769973642148596,0.6402666305957398,1.0,54.310488049309946,47.360948167725,62.518919152495705,1.0146,2.25467,0.98818,1.0,"<bound method Series.view of team               BOS
+basis           unaged
+view              rapm
+ordering          flat
+allocator    team-rank
+net          10.074176
+title        23.305982
+wins         63.556079
+Name: 38, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               BOS
+basis             aged
+view             darko
+ordering       primary
+allocator       pooled
+net           2.509872
+title         7.770584
+wins         46.619604
+Name: 525, dtype: object> / aged / primary / pooled",31.0,0.7180571766137361,3,4.8494560585035416
+CHA,0.8125919426439053,19,2.8731147771509313,0.5594455046208572,0.8264965696468335,2.0737136541840933,4.615499999999999,6.241658080718795,0.3830720793958699,6.715910836368473,11.15686519806579,5.100686548688196,0.8585853988222641,0.75,44.13725639772165,38.99809408124823,50.41853126376111,3.44463,8.83928,0.07748,0.94018,"<bound method Series.view of team               CHA
+basis             aged
+view               box
+ordering          flat
+allocator    team-rank
+net            2.35019
+title         6.715911
+wins         46.262075
+Name: 538, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               CHA
+basis           unaged
+view             darko
+ordering          flat
+allocator       pooled
+net          -0.548483
+title         0.383072
+wins         39.771947
+Name: 63, dtype: object> / unaged / flat / pooled",25.375,0.6358017687843913,4,3.708615994127383
+CHI,0.1365587124909058,26,0.028794191321166836,0.0006181996022829122,0.0009967738138373268,0.004885168631412839,0.018500000000000003,0.12385434719365328,0.0005173360307824761,0.21162949023891356,200.34685680204095,3.32094218709764,0.9788870755062226,0.09375,33.10042768805552,29.587690552461606,37.02328010937322,9.94109,11.65112,1e-05,0.03553,"<bound method Series.view of team               CHI
+basis             aged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -2.185469
+title         0.211629
+wins         36.106734
+Name: 558, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               CHI
+basis           unaged
+view               box
+ordering          flat
+allocator       pooled
+net          -4.896185
+title         0.000517
+wins         30.037441
+Name: 75, dtype: object> / unaged / flat / pooled",26.25,0.7974186465882506,2,1.699585485253025
+CLE,3.156607161809016,6,1.1044760845149473,0.11138210825726555,0.17315876440880934,0.4052941470520125,1.3668983436552495,3.821677711913419,0.10618658003031456,4.241999999999998,34.31141474792589,5.049185212555328,0.9085643721812994,0.125,40.17513851009481,34.32939840584437,45.63452409675575,5.30374,9.75265,0.02107,0.71911,"<bound method Series.view of team               CLE
+basis           unaged
+view               box
+ordering       primary
+allocator    team-rank
+net           3.516237
+title            4.242
+wins         48.872854
+Name: 88, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               CLE
+basis             aged
+view              rapm
+ordering       primary
+allocator       pooled
+net          -3.009181
+title         0.106187
+wins         34.262445
+Name: 565, dtype: object> / aged / primary / pooled",28.0,0.9033542033252508,1,3.4615357377502263
+DAL,0.408317344313604,22,0.10093328870653111,0.0012904712692582716,0.013091037821027513,0.03614145824574619,0.147252384001003,0.31350389558374275,0.0005009011220524433,0.3375520200917804,242.93752449361884,2.834368671602863,0.9357340596268977,0.0,31.894607457737294,28.37704467040961,34.72319612612842,8.55696,11.3578,4e-05,0.03511,"<bound method Series.view of team               DAL
+basis             aged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -3.448259
+title         0.337552
+wins         33.279347
+Name: 590, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               DAL
+basis           unaged
+view               box
+ordering          flat
+allocator       pooled
+net          -5.127572
+title         0.000501
+wins         29.519367
+Name: 107, dtype: object> / unaged / flat / pooled",25.142857142857142,0.8824222769059833,1,1.2617101428134667
+DEN,3.156607161809016,6,3.8679028172714474,1.4301850854132807,2.263375403114181,3.806499999999998,5.064140162200057,6.0253999999999985,1.1935815579677254,8.633999999999995,4.213021140727976,5.5189920250944535,0.7095549955392739,0.625,45.5581951656437,39.48544889130693,51.842472035493415,2.91028,5.02939,0.86433,0.99429,"<bound method Series.view of team               DEN
+basis           unaged
+view               box
+ordering       primary
+allocator    team-rank
+net           5.559454
+title            8.634
+wins         53.447618
+Name: 120, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               DEN
+basis             aged
+view              rapm
+ordering       primary
+allocator       pooled
+net          -1.456093
+title         1.193582
+wins         37.739807
+Name: 597, dtype: object> / aged / primary / pooled",29.375,0.8224392729044063,2,4.069853453692592
+DET,3.156607161809016,6,6.208106568165798,1.8102176660560976,3.956810051722483,5.783672560834013,8.300594226168489,11.447460570103933,1.5847331323635865,12.448061561981701,6.323803366168885,5.33183294522055,0.7308263119521315,0.75,48.43911953720105,42.03168232522991,53.96965628957872,1.68795,4.67366,0.81421,0.99815,"<bound method Series.view of team               DET
+basis             aged
+view             darko
+ordering          flat
+allocator    team-rank
+net           4.052812
+title        12.448062
+wins         50.074247
+Name: 622, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               DET
+basis             aged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -0.072704
+title         1.584733
+wins         40.837217
+Name: 611, dtype: object> / aged / flat / pooled",26.875,0.8251356677903569,2,3.107284497359732
+GSW,1.3454391181481054,15,0.03676918066070518,0.0005071951250835208,0.0009031737534118346,0.009499999999994992,0.06327127634825506,0.11711773387775463,0.0004728506463016119,0.15199999999999,230.91257799149514,6.6329139485086515,0.9895190804582933,0.0,29.882671134893357,22.27370110631621,37.12479543702708,9.5068,12.17172,0.0,0.00416,"<bound method Series.view of team               GSW
+basis           unaged
+view             darko
+ordering       primary
+allocator    team-rank
+net          -2.131404
+title            0.152
+wins         36.227786
+Name: 156, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               GSW
+basis           unaged
+view              rapm
+ordering       primary
+allocator       pooled
+net          -6.162231
+title         0.000473
+wins         27.202766
+Name: 149, dtype: object> / unaged / primary / pooled",31.75,0.9257371673367419,1,4.992816638466322
+HOU,1.6092507099418514,14,5.151338494581657,3.8885754369555183,4.119787751260861,4.590566515640921,5.961956455655738,7.272801809796553,3.6519877616779626,8.086527881753863,1.8702997865693063,3.369370621873678,0.6008534126492421,1.0,47.69712124060347,43.9129845087411,51.457005331116264,3.55583,4.66798,0.86696,0.9909,"<bound method Series.view of team               HOU
+basis             aged
+view              rapm
+ordering          flat
+allocator    team-rank
+net           3.803718
+title         8.086528
+wins         49.516525
+Name: 646, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               HOU
+basis           unaged
+view         consensus
+ordering       primary
+allocator       pooled
+net           3.525362
+title         3.651988
+wins         48.893286
+Name: 161, dtype: object> / unaged / primary / pooled",27.625,0.8343471860276941,2,1.877392423061465
+IND,2.0017508830984005,13,0.0006679860027760196,0.00013005314299848543,0.00044899840387241293,0.0006994905308265771,0.001,0.0010000000000000015,9.298411910479017e-05,0.0012831368482001076,7.689164421129348,5.868847261586285,0.7108830927577189,0.0,20.91880733303958,14.006453062075545,27.146802080767237,13.28081,14.64244,0.0,0.0,"<bound method Series.view of team               IND
+basis           unaged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -5.484325
+title         0.001283
+wins         28.720596
+Name: 190, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               IND
+basis           unaged
+view              rapm
+ordering          flat
+allocator       pooled
+net          -10.68241
+title         0.000093
+wins         17.082083
+Name: 183, dtype: object> / unaged / flat / pooled",29.125,0.9377901060114582,1,4.795658988746656
+LAC,0.1638159405330028,24,0.010892568531964521,0.0007773981172134931,0.001944477162767042,0.005856487971136491,0.014249999999999988,0.026859261531295198,0.00040280341207315227,0.047000000000000056,34.55020141747908,5.032505655206658,0.8853555278431051,0.0,29.45594192494398,23.109687731082804,34.37746789309051,9.91524,12.14453,0.0001,0.00145,"<bound method Series.view of team               LAC
+basis           unaged
+view               box
+ordering       primary
+allocator    team-rank
+net          -1.810175
+title            0.047
+wins         36.947019
+Name: 200, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               LAC
+basis             aged
+view              rapm
+ordering          flat
+allocator       pooled
+net          -8.096282
+title         0.000403
+wins         22.872426
+Name: 679, dtype: object> / aged / flat / pooled",30.428571428571427,0.6754095725252339,3,3.419290565062655
+LAL,2.131734706676219,12,1.762298940644165,0.34310549987540206,0.8008006711543201,1.3496838929323496,2.282010555568781,4.413694573239493,0.292531704132528,4.9529999999999985,12.863957514065834,5.231201215291632,0.7897189739336379,0.34375,40.139439226379906,33.76993631625196,45.48259583728992,4.69383,7.2683,0.21767,0.89561,"<bound method Series.view of team               LAL
+basis           unaged
+view               box
+ordering       primary
+allocator    team-rank
+net           3.852119
+title            4.953
+wins         49.624895
+Name: 216, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               LAL
+basis           unaged
+view              rapm
+ordering          flat
+allocator       pooled
+net          -2.335811
+title         0.292532
+wins         35.770118
+Name: 215, dtype: object> / unaged / flat / pooled",27.0,0.4663176504885567,6,4.431659009589798
+MEM,0.1057626110915392,28,0.0006280828733820865,8.474459745347505e-05,0.0004109202929223539,0.0006915992733085762,0.0009999999999999987,0.001,6.579981979842783e-05,0.0011912746661078592,11.800162252809118,5.811575110853701,0.7334667790907788,0.0,20.851487121781233,13.01453668619135,26.026653359392785,12.94532,13.58424,0.0,2e-05,"<bound method Series.view of team               MEM
+basis           unaged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -5.083014
+title         0.001191
+wins         29.619131
+Name: 238, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               MEM
+basis             aged
+view         consensus
+ordering          flat
+allocator       pooled
+net         -12.913101
+title         0.000066
+wins         12.087566
+Name: 707, dtype: object> / aged / flat / pooled",25.875,0.6542145602344966,4,4.944551216881121
+MIA,2.6474769744204654,11,3.0515324935479864,1.4195574138242728,1.8850967374361074,2.888996524777222,4.064779697904051,4.915098281283153,0.9847284685950759,6.0162891799385365,3.462415985023057,5.191699721624696,0.6923988825387271,0.5625,44.895346754392044,39.21043467658414,50.83465035330184,4.14854,6.9953,0.38628,0.91103,"<bound method Series.view of team               MIA
+basis           unaged
+view             darko
+ordering          flat
+allocator    team-rank
+net           4.287094
+title         6.016289
+wins         50.598804
+Name: 254, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               MIA
+basis             aged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -1.112124
+title         0.984728
+wins         38.509955
+Name: 723, dtype: object> / aged / flat / pooled",29.5,0.6951618254873373,3,3.6437296721705006
+MIL,0.113046537475254,27,0.0006601044055190719,4.4441081270543474e-05,0.00022625698448427265,0.0007941958944490741,0.001,0.0010591191074451809,2.6806899933468068e-05,0.002,23.83198331736335,6.268853298145867,0.8383209766911722,0.0,25.15957107916816,17.081748514623023,31.117711049171614,11.40558,13.10164,0.0,0.00027,"<bound method Series.view of team               MIL
+basis             aged
+view               box
+ordering       primary
+allocator    team-rank
+net          -4.369704
+title            0.002
+wins         31.216232
+Name: 744, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               MIL
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -9.646796
+title         0.000027
+wins         19.400825
+Name: 259, dtype: object> / unaged / flat / pooled",26.625,0.5577909313179784,5,5.879534547194153
+MIN,3.156607161809016,6,2.048661490476844,0.6191599732518549,1.1312756313587184,1.8563819827568333,2.7517566706287075,3.706536653005088,0.318358338074419,5.195849909932907,5.986395783206394,3.442943476194109,0.7383004935952163,0.15625,41.47904582273092,37.28975250709642,44.998502950295034,4.08145,6.22316,0.5522,0.96273,"<bound method Series.view of team               MIN
+basis             aged
+view             darko
+ordering       primary
+allocator    team-rank
+net           1.468275
+title          5.19585
+wins         44.287467
+Name: 764, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               MIN
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -1.673782
+title         0.318358
+wins         37.252402
+Name: 275, dtype: object> / unaged / flat / pooled",26.5,0.7621238425925925,2,2.010907956719406
+NOP,0.1638159405330028,24,0.01222039830194302,0.0008405190202484325,0.0016345140034517475,0.004000000000000001,0.014403282952901853,0.03599538265518016,0.00042241907874623517,0.06422516063855388,42.82518513922623,4.233707014030796,0.9022264282070107,0.0,28.59209140819889,23.229597707320817,32.70886771173578,10.22177,11.33996,2e-05,0.00205,"<bound method Series.view of team               NOP
+basis             aged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -4.353629
+title         0.064225
+wins         31.252225
+Name: 782, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               NOP
+basis             aged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -8.581998
+title         0.000422
+wins         21.784906
+Name: 771, dtype: object> / aged / flat / pooled",25.75,1.0,0,2.371619504501796
+NYK,8.207178620703443,4,2.8334807596451546,1.349981942813968,1.8595704472995718,2.2735,3.624653636711766,4.475147621539115,1.3027804699149341,5.91999999999999,3.3149685041052472,4.562940562663341,0.6807080118647535,0.0,44.45549364283757,39.362522138085964,49.57894605788919,4.0954,7.06015,0.33122,0.89068,"<bound method Series.view of team               NYK
+basis           unaged
+view               box
+ordering       primary
+allocator    team-rank
+net           4.369615
+title             5.92
+wins         50.783568
+Name: 312, dtype: object> / unaged / primary / team-rank","<bound method Series.view of team               NYK
+basis             aged
+view             darko
+ordering       primary
+allocator       pooled
+net          -1.723853
+title          1.30278
+wins         37.140294
+Name: 797, dtype: object> / aged / primary / pooled",29.25,0.9338823558528214,1,3.191549245152875
+OKC,22.48542087863957,2,10.762879818638181,2.1219087822813023,5.881351562523616,11.532627480463342,15.66074999999999,19.099600000000006,1.7694893627978863,20.002999999999982,9.00114093475106,5.358155553406013,0.7410017239242115,0.0,52.50978949331255,45.84357410277061,57.84048438684667,1.22057,1.93937,0.9999,1.0,"<bound method Series.view of team               OKC
+basis             aged
+view             darko
+ordering       primary
+allocator    team-rank
+net           5.849546
+title           20.003
+wins         54.097134
+Name: 812, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               OKC
+basis           unaged
+view         consensus
+ordering       primary
+allocator       pooled
+net            3.63442
+title         1.769489
+wins         49.137467
+Name: 321, dtype: object> / unaged / primary / pooled",26.0,1.0,0,3.2447617590086626
+ORL,1.116622941592305,17,0.39289093578975287,0.0240487879086297,0.06763525492829574,0.2687722125831494,0.5949188251337243,0.9932922680304016,0.017918110364657156,1.0929999999999902,41.30321543872767,3.622602235870353,0.8843218851551986,0.0,38.17090818956394,33.826105376627,41.93711178274072,8.2502,10.00215,0.00392,0.191,"<bound method Series.view of team               ORL
+basis             aged
+view               box
+ordering       primary
+allocator    team-rank
+net          -0.880976
+title            1.093
+wins         39.027495
+Name: 824, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               ORL
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net          -2.347226
+title         0.017918
+wins         35.744562
+Name: 339, dtype: object> / unaged / flat / pooled",26.625,0.9333418128268097,1,1.675749655775516
+PHI,8.417619098157376,3,2.2838840417505297,0.5827140337774692,1.1269801324516906,1.8941724109312457,3.729499999999998,4.131200729786003,0.3843091027930624,4.754999999999998,7.089585097179338,4.723474952616338,0.7658370082725492,0.0,43.549860920228866,38.88910235601792,49.46496277492591,4.67229,8.67081,0.07691,0.83473,"<bound method Series.view of team               PHI
+basis             aged
+view         consensus
+ordering       primary
+allocator    team-rank
+net           2.219347
+title            4.755
+wins         45.969117
+Name: 832, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               PHI
+basis           unaged
+view               box
+ordering       primary
+allocator       pooled
+net          -0.288738
+title         0.384309
+wins         40.353515
+Name: 361, dtype: object> / unaged / primary / pooled",29.625,0.5487150621260333,5,2.8696485840361388
+PHX,0.6034690162281943,20,1.1811773737656268,0.6564518132585737,0.7293426780234374,0.9134322128912082,1.3294858406231942,2.3891897113917744,0.6040694488854158,2.6877364470893292,3.6395507836775254,2.961641222275628,0.6881301656465793,1.0,39.21589784970979,35.79699555312038,42.428110249795516,6.049,8.01493,0.06801,0.61044,"<bound method Series.view of team               PHX
+basis           unaged
+view             darko
+ordering          flat
+allocator    team-rank
+net           1.911759
+title         2.687736
+wins         45.280428
+Name: 382, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               PHX
+basis             aged
+view              rapm
+ordering          flat
+allocator       pooled
+net          -2.551788
+title         0.604069
+wins         35.286547
+Name: 855, dtype: object> / aged / flat / pooled",27.125,0.8471720217089537,2,1.640001180295846
+POR,1.0132319284819065,18,1.3687060366534696,0.28856461772924163,0.4664046968806208,1.1247474935628718,2.120203964102499,2.778683806500481,0.26875249468129153,3.1167513045944673,9.629329570500921,5.693893852980888,0.8059300613662758,0.53125,39.58952394230798,33.586137169693,46.33476550651721,5.42738,8.90043,0.01843,0.8139,"<bound method Series.view of team               POR
+basis             aged
+view               box
+ordering          flat
+allocator    team-rank
+net           0.442383
+title         3.116751
+wins         41.990496
+Name: 874, dtype: object> / aged / flat / team-rank","<bound method Series.view of team              POR
+basis            aged
+view            darko
+ordering      primary
+allocator      pooled
+net         -4.313984
+title        0.268752
+wins         31.34099
+Name: 877, dtype: object> / aged / primary / pooled",27.5,0.7488861873847129,3,3.7947176804022122
+SAC,0.0819897964106238,29,0.0008763692301175823,0.0005878116230870763,0.0007632920489126464,0.0009851155794652184,0.001,0.001,0.0005713714972219806,0.0010000000000000018,1.701225291783425,4.511577016311427,0.570535777406191,0.0,22.144909663483407,17.774613351620633,27.876034291141917,13.13841,14.11942,0.0,1e-05,"<bound method Series.view of team               SAC
+basis             aged
+view             darko
+ordering       primary
+allocator    team-rank
+net          -7.720204
+title            0.001
+wins         23.714463
+Name: 892, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               SAC
+basis           unaged
+view              rapm
+ordering       primary
+allocator       pooled
+net          -8.171298
+title         0.000571
+wins         22.704463
+Name: 405, dtype: object> / unaged / primary / pooled",27.5,1.0,0,2.542137854910131
+SAS,22.957142994974667,1,10.779921009545092,5.117048712226063,6.183842674826837,9.245099747565686,14.565499999999982,18.7561,4.154757075999534,21.142999999999997,3.665413611401905,4.583257988309347,0.7031243543703717,0.0,52.82552764841671,48.50970819194317,58.77162282776779,1.21551,2.65032,0.99517,1.0,"<bound method Series.view of team               SAS
+basis             aged
+view              rapm
+ordering       primary
+allocator    team-rank
+net           7.026947
+title           21.143
+wins         56.733335
+Name: 900, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               SAS
+basis           unaged
+view         consensus
+ordering       primary
+allocator       pooled
+net           5.103579
+title         4.154757
+wins         52.426914
+Name: 417, dtype: object> / unaged / primary / pooled",26.625,0.879181341120278,1,2.560431218014295
+TOR,3.156607161809016,6,4.616384624040896,3.03646788027873,3.404613739887024,3.9235000000000024,6.203250000000002,6.9070000000000125,2.6353892676672364,7.193000000000009,2.274682385036785,4.517039471617705,0.6419591669882407,0.75,47.30626408472283,42.829724039978466,52.943375416930515,3.27888,5.61542,0.658,0.95947,"<bound method Series.view of team               TOR
+basis             aged
+view         consensus
+ordering       primary
+allocator    team-rank
+net           3.322115
+title            7.193
+wins         48.438216
+Name: 912, dtype: object> / aged / primary / team-rank","<bound method Series.view of team               TOR
+basis           unaged
+view               box
+ordering       primary
+allocator       pooled
+net           2.355481
+title         2.635389
+wins         46.273922
+Name: 441, dtype: object> / unaged / primary / pooled",27.75,0.7758736093761327,2,2.28704190257937
+UTA,0.408317344313604,22,0.0006391658250837931,4.779301941720963e-05,0.0002898329627681075,0.0008373092705467496,0.001,0.0010000000000000015,3.472094151869033e-05,0.0010076618943279333,20.923557711859377,8.945441822042952,0.7744438482480905,0.0,14.71811218066411,4.454362351169203,24.483206590723366,13.50976,14.96117,0.0,0.0,"<bound method Series.view of team               UTA
+basis             aged
+view             darko
+ordering          flat
+allocator    team-rank
+net          -7.206228
+title         0.001008
+wins         24.865255
+Name: 942, dtype: object> / aged / flat / team-rank","<bound method Series.view of team               UTA
+basis           unaged
+view         consensus
+ordering          flat
+allocator       pooled
+net         -15.778003
+title         0.000035
+wins          5.673051
+Name: 451, dtype: object> / unaged / flat / pooled",27.125,0.8269310897435898,2,9.849648780532785
+WAS,0.5435217629604929,21,0.0008495148418060901,0.0006138386798199797,0.0006560894760537765,0.000817221800758189,0.001,0.0011000971409985713,0.0005703590884877445,0.0012949263550395803,1.7921600204815968,4.849393667005835,0.6051389475073025,0.0,18.24288411452195,12.177918774933064,23.035711195359124,13.4365,14.99901,0.0,0.0,"<bound method Series.view of team               WAS
+basis           unaged
+view         consensus
+ordering          flat
+allocator    team-rank
+net          -9.786571
+title         0.001295
+wins         19.087869
+Name: 466, dtype: object> / unaged / flat / team-rank","<bound method Series.view of team               WAS
+basis             aged
+view             darko
+ordering          flat
+allocator       pooled
+net          -9.292267
+title          0.00057
+wins         20.194615
+Name: 959, dtype: object> / aged / flat / pooled",24.714285714285715,0.9263668678674425,1,3.635953913749465

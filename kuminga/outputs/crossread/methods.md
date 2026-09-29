@@ -1,0 +1,65 @@
+<!-- cross-read export of kuminga\docs\methods.md | run export_crossread_20260929T125535Z | commit 2b988ef5 | 2026-09-29T12:55:35Z | visuals replaced by [visual: id]; sentences under review bracketed [PENDING ...] -->
+
+# Methods for the series
+
+*Rendered from `methods.template.md`. Every number here comes from `outputs/final_numbers.csv` by key and carries a run ID; the reconcile gate fails if a digit appears that is not on the sheet. The articles are written prose-first and link here instead of carrying their own appendix; the prose gate (`gate_prose.py`) checks a finished draft's figures against the same sheet.*
+
+## The four views
+
+Every player gets four impact scores, each in points per hundred possessions. RAPM is a regression that credits each player for how the score moved while he was on the floor, adjusted for everyone else on it. Box is a box-score model. DARKO is a public projection built from box-score trends. Consensus blends RAPM with a public box-score metric. Consensus tracks RAPM at a correlation of 0.977 across players, which means four-way agreement is weaker than it sounds: two of the four are largely the same opinion. Every title probability in the series is the mean of the four views, and the band across the views is printed beside it.
+
+## The two aging bases
+
+The primary basis takes every player at last season's measured level. The aged basis shifts each player by the expected one-year change for his age, estimated league-wide. Aging helps Minnesota because Minnesota is young, so quoting only one basis would be a choice with a thumb on the scale, and the series quotes both everywhere. Table headers say "un-aged" for the primary basis; prose says "primary basis".
+
+## The two minutes allocators, the four cells and the quotability rule
+
+A roster is ordered by a league-wide score before any minutes are handed out: half the percentile of last season's minutes per appearance and half the percentile of impact for a player who stayed, and one fifth and four fifths for a player who changed teams, the same blend the minutes rule already used for movers. That ordering was adopted on 2026-09-25, before the field was re-run under it (the check that motivated it is commits ce74a2a6 and d3a226f6; the adoption itself is commit 266a2422 at 2026-09-25T17:52:01Z), on the grounds that the mover discount had been applied to minutes but not to ordering. The field under it was first seen at 2026-09-29T09:50:41Z, once the re-run had finished (its last step ended 2026-09-29T09:50:21Z). The flat half-and-half order for everyone is kept as the recorded sensitivity. Two rules hand out minutes. The team-rank allocator, which the headline simulation uses, ranks a roster team-wide and plays ten men. The pooled allocator, which the attribution uses, hands minutes out inside position groups. A verdict ships only if its sign holds under both aging bases and under both allocators, and only if every one of the four views clears its noise floor in all four of those cells. The noise floor is twice the size of change the simulation and its interpolation could produce on their own. The shipping verdicts, in all four cells, mean points of title odds and the views clearing in each:
+
+| verdict | pooled, un-aged | pooled, aged | team-rank, un-aged | team-rank, aged | views clearing in each cell |
+|---|---:|---:|---:|---:|---|
+| LaMelo Ball in | +0.88 | +1.04 | +1.71 | +1.78 | 4/4, 4/4, 4/4, 4/4 |
+| Naz Reid out | -0.35 | -0.44 | -0.81 | -0.83 | 4/4, 4/4, 4/4, 4/4 |
+| DiVincenzo's Achilles (not a transaction) | -0.42 | -0.35 | -0.76 | -0.58 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, the default fill (Cody Williams) | +0.51 | +0.67 | +1.40 | +1.73 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, McDaniels slides | +0.47 | +0.63 | +1.34 | +1.66 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, Beringer fills | -0.78 | -1.42 | -1.48 | -2.48 | 4/4, 4/4, 4/4, 4/4 |
+| Kuminga slot, tight eligibility rule | +0.51 | +0.67 | +1.40 | +1.73 | 4/4, 4/4, 4/4, 4/4 |
+
+## The bands and the labels
+
+Every figure on the sheet carries two labels. The first says where it came from: MODELED (a simulation or a fitted model), OBSERVED (counted from box scores, contracts, schedules or documents) or DESCRIPTIVE (a parameter or a diagnostic, not a finding). The second says how it may be quoted: QUOTABLE (the figure stands on its own), QUOTABLE AS BAND (it must be printed with its band or interval, because the views or the seeds disagree by more than the figure's own size would suggest) or DESCRIPTIVE. A modeled title probability is always QUOTABLE AS BAND; the band is the four views, low to high.
+
+## The simulation
+
+200,000 seasons per view, on both bases. Attribution prices every combination of Minnesota's offseason moves on a curve built from those simulations, and the curve is checked against the direct simulation every run. Seeding is simulated wins from net rating; the playoff draw is a series model on net rating with a noise term for what net rating cannot see.
+
+## The market
+
+Six books' title odds, de-vigged proportionally: the raw prices add to 21.8% over a hundred, and each team's price is scaled back so the league sums to one.
+
+## What was withheld
+
+The late-clock split. The reconstructed shot clock read within two seconds of zero at recorded violations 79.9% of the time against a bar of 80% fixed before the build, so no late-clock figure appears in the series.
+
+## Corrections made during the work
+
+Two bugs in my own data changed figures before publication. The lineup pipeline was crediting some baskets to the wrong team, 3.36% of all points on the 578 team-games I checked, which retracted two sentences (that Reid next to Gobert was clearly better than Randle next to Gobert, and that Kuminga's on-off flipped sign between his two teams) and moved several playoff lineup figures in the postmortem project. The same bug lived one level down, in the possession data that RAPM is fitted on, where it misplaced 2.84% of points across 96 team-games, so RAPM was refit on corrected points. Kuminga's net RAPM went from +1.37 to +1.82 (consensus +1.33 to +1.65) and Ball's from +1.95 to +3.86 (consensus +2.29 to +3.78); Edwards rose as well. The headline went from 1.69% to 2.76%, and from 2.55% to 3.72% on the aged basis, because the whole league was refit with them and it's position in the league that the simulation prices. The attribution model had also been pricing every combination of moves on a roster without Cody Williams; fixing that is what retired three of the verdicts that used to ship.
+
+## The champions table
+
+Champions against the teams priced beside them, two tests. The range rule asks whether a feature is exclusive to champions: every preseason top-five team that did not win, 48 of them over the 11 seasons, is built with the champions' own machinery, and a feature separates if no more than a quarter of those teams fall inside the champions' minimum-to-maximum range; on these seasons no team-level feature does. The tendency test asks whether champions lean somewhere the also-rans do not, without being exclusive: for net-rating rank, post-All-Star rank, seed, offence rank and defence rank, the champions' median against the non-champions' median and a two-sided Mann-Whitney rank-sum p-value, 11 against 48, and a feature leans at p below 0.05. A feature can lean without being exclusive, which is what the rank features do: net rating rank; seed; defence rank lean; the others do not clear the bar. The 5 features were each tested at 0.05, set before the run, with no correction for testing five things at once; under a Bonferroni correction, 0.05 over 5 tests or 0.01, the lean that survives is seed (p 0.002), and the leans that do not are net rating rank; defence rank (net-rating rank p 0.010, defence rank p 0.033). The defensive lean is read as the net-rating lean restated: at equal overall quality the playoff-translation test found no defensive signal.
+
+Every champion from 2015-16 to 2025-26, 11 of them, used only after the winner of the last playoff game in the warehouse matched the team Basketball-Reference names as League Champion. The top eight are the eight largest playoff minute totals. How each was acquired is read from his Basketball-Reference transaction log: drafted (draft night, including draft rights traded in that night), traded for, or signed (free agency, waivers, two-way or ten-day), taking the event that opened his current stint with the franchise; a re-signing or a rookie contract inside an unbroken stint does not restart the clock. Age is on the first of February, the Basketball-Reference convention. Continuity is carried two ways. By appearance: how many of the eight appeared for the franchise in the previous regular season, and the share of all playoff minutes that went to such players. By contract: how many of the eight were with the franchise at any point of the previous season whether or not they played, read from the Basketball-Reference transaction log (Jamal Murray in 2022-23 counts by contract and not by appearance), and the share of all playoff minutes that went to such players. The preseason title price for each champion season is Basketball-Reference's preseason odds page for that season (courtesy sportsoddshistory.com), all thirty teams, de-vigged proportionally and ranked with tied prices sharing a rank; each page is cached with its content hash in the manifest, and the three hand-transcribed seasons were checked against the pages team by team. Net rating is the possession-weighted mean of NBA.com per-game team net rating, ranked among the thirty teams; the post-All-Star split starts after the longest gap in the league schedule between the first of February and the middle of March, derived from the schedule itself. The seed is the conference finish on the Basketball-Reference team page, checked against the warehouse standings. Games missed are the team's games after the player's acquisition date minus his appearances. The top-five share is the five largest minute totals over the team's total minutes. Preseason odds columns are open for a pasted source. The paragraphs are written by the script from those fields; no number in them is typed.
+
+## The Edwards clock
+
+The departure probabilities are the Part 1 model of "Pricing the LaMelo Trade" (Model B, M2 FINAL): a league-wide discrete-time hazard on 291 star spells, 1,264 player-seasons and 228 departures since the 1990 season, with contract years remaining as a covariate, applied to Edwards's profile under two team paths, a team winning at .600 and one sagging to .450. It scored a C-index of 0.907 on the sealed holdout and a calibration slope of 1.413 against a window of 0.8 to 1.2, a red cell printed as such; nothing was refit for this series. The walk-year multiple, 66 times the odds with two seasons left, is recomputed from the fitted coefficient. The raw rates beside the model are read forward from every star-season at the same contract stage, split by the team's two-year win percentage, with the counts. The contract is from the Basketball-Reference contract book and HoopsHype, the extension date from NBA.com transactions and the Basketball-Reference player page, the rules from the 2023 CBA text (NBPA copy, quoted by page), and the 65-game consequence from two reports.
+
+## Ball's games
+
+Appearances are warehouse box scores against Charlotte's schedule, a game counted when he logged minutes. Missed stretches are runs of consecutive team games without him; every stretch carries a cause with two source URLs and a quote, and any stretch without a sourced cause would print as unsourced. The base rate takes every player-season from 2001-02 in which the player was 23 to 27 years old, played at least 24 minutes per appearance the season before, and had at least 3 of the five prior seasons at 60% or less of his team's games, with a season lost entirely counting as zero; the strict variant adds a healthy prior season at 80% or more of the team's games, which is Ball's case, and two looser variants are printed as sensitivity because the strict cohorts are small. The simulation sets Ball's regular-season availability to games over eighty-two, lets the pipeline's own allocator redistribute his minutes, re-prices the regular-season net by the pipeline's formula, keeps the playoffs at full strength, and runs the four states on common random numbers; at the full eighty-two the title odds reproduce the headline within the f-curve tolerance and P(top six) reproduces the seed distribution.
+
+## The ledger
+
+Every player and pick in and out since the season ended, read from each player's Basketball-Reference transaction log on the player's own leg of each event and from the NBA.com feed, with dollars from the contract book and Spotrac and reported terms with two URLs per move. Grades are listed exactly as written, with what each piece graded, and pieces found but not read are listed with the reason.

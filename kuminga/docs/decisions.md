@@ -2149,3 +2149,62 @@ Also tightened, each a precision rather than an error: the Athletic grade and th
 **Path and fragility.** Modal seed 7th at 31% to 6th at 26%; top six 42% to 70%; Spurs or Thunder in the first round 53% to 34%; second round 28% to 38%; title from the second round 6.1% to 7.2%. Share of title odds lost to a missing top-three player 54% / 43% to 55% / 45%; mean drop 0.87 to 1.47 points; the top three by removal are now Edwards, Gobert and McDaniels on both bases (LaMelo was in the set before). Net rating lost per removal in a playoff rotation: Minnesota 2.22 to 3.45, against Oklahoma City 3.01 and San Antonio 2.83, so Minnesota now loses the most of the three rather than the least, and the Part 2 sentence is corrected. Boston 18.33% to 18.12%; Charlotte 3.44% to 3.60%. Watch list: Minnesota's model net range -1.5 to +1.8 becomes +0.2 to +3.0, the flip lines +7.5 / -7.2 become +8.7 / -5.5; the champion-path projected rank 16 / 13 becomes 13 / 10. Champions profile: Minnesota's top-eight holdovers 5 to 6 (share 0.70 to 0.72), Part 3's Denver comparison adjusted.
 
 **Prose and visuals.** Part 2: the ledger, the ordering (the flat order is the first run; the discount is the rule), the range (it runs upward: the summer is a small plus at the default, a loss on every view above 8.9), the Achilles (with it the four split; as weather all four say helped), the Kuminga reveal names Cody Williams as the fill, the trade, the scoreboard, health, the path, Charlotte. Part 2 short, Part 4 (claim 1, the case, the game-20 lines), Part 4 short, Part 3 (holdovers), the slide and the pull-quotes. The fork visual starts at the benched default and walks up through the threshold to the base rate; the verdicts visual names the fill. Audit bindings rebound (keys w_rank_primary / w_rank_flat / w_rank_impact_only; two new sign keys w1c_offseason_sign, w1c_noinjury_sign).
+
+### D112. Post-chain: the fragility detail, N9 (the breadth of the odds), and the cross-read package
+
+**1. Fragility, the full N5 table.** Each of a team's top three players removed for the playoffs only (seeding from the full roster), on both bases, priced on the simulator with common random numbers. Title odds lost in points, the share of the team's odds, the net rating lost with the regular-season allocation, and with the playoff rotation tightened (the playoff rollup). The parts are NOT edited; the sentences under review are bracketed as pending in the cross-read export and listed below.
+
+*un-aged basis*
+
+| team | removed | set | full odds | lost, pp | share | net lost, RS rotation | net lost, playoff rotation |
+|---|---|---|---|---|---|---|---|
+| MIN | Anthony Edwards | minutes | 2.66% | 1.81 | 68% | 3.41 | 4.01 |
+| MIN | Jaden McDaniels | minutes | 2.66% | 0.94 | 35% | 1.59 | 2.03 |
+| MIN | Rudy Gobert | minutes | 2.66% | 1.67 | 63% | 3.72 | 4.31 |
+| OKC | Chet Holmgren | minutes | 14.73% | 6.56 | 45% | 2.71 | 3.14 |
+| OKC | Jalen Williams | minutes | 14.73% | 1.81 | 12% | 0.59 | 0.87 |
+| OKC | Shai Gilgeous-Alexander | minutes | 14.73% | 9.83 | 67% | 4.89 | 5.02 |
+| SAS | De'Aaron Fox | minutes | 13.68% | 4.47 | 33% | 1.65 | 1.74 |
+| SAS | Tobias Harris | minutes | 13.68% | 3.45 | 25% | 1.20 | 1.27 |
+| SAS | Victor Wembanyama | minutes | 13.68% | 10.15 | 74% | 5.26 | 5.50 |
+| MIN | LaMelo Ball | impact sensitivity | 2.66% | 1.77 | 66% | 3.47 | 4.03 |
+| OKC | Isaiah Hartenstein | impact sensitivity | 14.73% | 3.56 | 24% | 1.34 | 1.69 |
+| SAS | Dylan Harper | impact sensitivity | 13.68% | 4.38 | 32% | 1.59 | 1.60 |
+
+Team means over the three (by minutes): MIN 1.47 pp, 55%, net 2.91, playoff rotation 3.45; OKC 6.07 pp, 41%, net 2.73, playoff rotation 3.01; SAS 6.03 pp, 44%, net 2.70, playoff rotation 2.83.
+
+*aged basis*
+
+| team | removed | set | full odds | lost, pp | share | net lost, RS rotation | net lost, playoff rotation |
+|---|---|---|---|---|---|---|---|
+| MIN | Anthony Edwards | minutes | 3.71% | 2.23 | 60% | 2.99 | 3.82 |
+| MIN | Jaden McDaniels | minutes | 3.71% | 1.09 | 30% | 1.39 | 2.08 |
+| MIN | Rudy Gobert | minutes | 3.71% | 1.72 | 46% | 2.70 | 3.44 |
+| OKC | Chet Holmgren | minutes | 17.13% | 7.13 | 42% | 2.58 | 2.97 |
+| OKC | Jalen Williams | minutes | 17.13% | 2.19 | 13% | 0.65 | 0.91 |
+| OKC | Shai Gilgeous-Alexander | minutes | 17.13% | 10.83 | 63% | 4.66 | 4.77 |
+| SAS | De'Aaron Fox | minutes | 16.46% | 4.57 | 28% | 1.45 | 1.52 |
+| SAS | Tobias Harris | minutes | 16.46% | 2.13 | 13% | 0.60 | 0.64 |
+| SAS | Victor Wembanyama | minutes | 16.46% | 12.17 | 74% | 5.52 | 5.75 |
+| MIN | LaMelo Ball | impact sensitivity | 3.71% | 2.21 | 60% | 3.09 | 3.88 |
+| OKC | Isaiah Hartenstein | impact sensitivity | 17.13% | 3.27 | 19% | 1.10 | 1.40 |
+| SAS | Dylan Harper | impact sensitivity | 16.46% | 6.09 | 37% | 2.05 | 2.05 |
+
+Team means over the three (by minutes): MIN 1.68 pp, 45%, net 2.36, playoff rotation 3.11; OKC 6.72 pp, 39%, net 2.63, playoff rotation 2.88; SAS 6.29 pp, 38%, net 2.52, playoff rotation 2.64.
+
+Minnesota's top three by projected minutes are now Edwards (36.0), Gobert (34.3) and McDaniels (32.0); Ball (31.0) is fourth and enters only as the impact-contribution sensitivity. Before D111 the set was Edwards, Ball, Gobert.
+
+**What the parts say now.** Part 2 (rewritten under D111, pending): the Wolves lose 55% / 45% of their title odds to a missing top-three player, 1.47 points on average, no single one takes the season with him, and in a playoff rotation they lose more net rating per missing star than San Antonio or Oklahoma City; not a one-man team but a three-man team. Part 4: "Losing any one of the top three for the playoffs costs 55% of the odds ... Ant, LaMelo, Rudy ... Three ways to survive an injury instead of one." Part 4 short: "Losing any one of the top three costs 55% of the odds, but it's three players now, not one."
+
+**What the numbers support.** The share is the largest of the three contenders on both bases (55% and 45% against 41% / 39% for Oklahoma City and 44% / 38% for San Antonio), on a stake a quarter the size (1.47 points against about 6). Per player: Edwards 68%, Gobert 63%, Ball 66% (sensitivity), McDaniels 35%. Oklahoma City and San Antonio each have ONE player whose loss does that much damage (Shai 67%, Wembanyama 72%); Minnesota has three. The tightened playoff rotation makes it worse for Minnesota (net lost 2.91 to 3.45) and moves less for the other two (2.73 to 3.01, 2.70 to 2.83). So "the loss is spread across three players" is true as arithmetic and false as comfort: three players each cost about two thirds of the odds. The supportable sentence is closer to: health is the largest risk on the roster; take Ant, Rudy or LaMelo out for the playoffs and the Wolves lose about two thirds of their title odds, Jaden about a third; the contenders each have one such player, Minnesota has three; the stake is smaller than theirs, the share is larger, and it gets worse when the rotation shortens. Part 4's "three ways to survive an injury instead of one" reverses to "three ways to lose the season instead of one" unless the point is the absolute stake. Bobby's call, after the read.
+
+**2. N9, the breadth of the odds.** No written specification exists in the project, the memory or the session transcript (the only N9 on record was the old skeleton item), so the analysis is built from the components listed on 2026-09-29 and every interpretation is recorded here. Script `scripts/n9_breadth.py`, doc `docs/n9_breadth.md`, outputs `n9_breadth_summary.csv`, `n9_breadth_cells.csv`, `n9_breadth_sources.csv`, `n9_proxy_validation.csv`, `n9_proxy_tendency.csv`, `n9_proxies_history.csv`.
+
+*The four sources.* The model's own forks: the impact view (4), the aging basis (2), the rotation ordering (primary mover-discounted, flat sensitivity, D111) and the minutes allocator (team-rank, pooled), 32 equal-weight cells per team. Alternatives considered and rejected: drawing the simulator's season noise or its method uncertainty as sources (both already sit inside the f-curve, which is P(title | expected net) with the playoff-strength noise integrated, so drawing them again double counts); availability of the top three as a source (needs injury probabilities the project has not set). *Draws priced on the f-curve.* Minnesota's cells on its own f-curve for the cell's view and basis. Every other team on an anchored proxy: Minnesota's f-curve shifted in log-odds to pass through the team's own simulated odds at its primary cell (a multiplicative shift was rejected because it can exceed one). Gates: G1 the primary cell reproduces the published net for all 30 teams on both bases (worst gap 8.9e-15); G2 the proxy returns the simulated odds at the anchor (worst gap 0.001 pp) and Minnesota's f-curve is within 0.063 pp of its direct simulation. *Conditional title-odds percentiles, expected-wins and seed ranges, upside share.* Percentiles across the 32 cells; wins from the simulator's own wins = 41.0 + 2.239 net; seed ranges from `seed_distribution.csv` over the eight view-by-basis cells (seeding does not depend on the ordering or the allocator in the simulator); upside share = the share of the mean title odds contributed by the upper half of the cells, with the share of cells above the market price beside it. *The teams priced beside Minnesota.* The market's five-way tie at 3.16% (CLE, DET, DEN, MIN, TOR), with Boston (5.47%) above and Miami (2.65%) below.
+
+*Result.* Minnesota: market 3.16%, 32-cell mean 2.05% (the headline stays the primary cell, 2.76%), p10 0.62%, p50 1.86%, p90 3.71%; upside share 74%; 16% of cells above the market; expected wins 37.3 to 45.0 (p10 to p90); mean seed 4.1 to 6.2, P(top six) 55% to 96%. Denver at the same price: mean 3.87%, p10 1.43%, p90 6.03%, 62% of cells above the market. Detroit: 6.21%, 1.81% to 11.45%, 75% above. Toronto: 4.62%, 3.04% to 6.91%, 75% above. Cleveland: 1.10%, 0.11% to 3.82%, upside share 91%, 12% above. Boston: 12.75%, 8.05% to 22.18%, every cell above its 5.47%. Miami: 3.05%, 1.42% to 4.92%. Where the breadth comes from: for Minnesota the view (32%) and the allocator (32%) dominate, the aging basis 20%, the ordering 8% (the only team where the ordering fork moves anything among the seven); for every neighbour the aging basis dominates (Denver 61%, Toronto 52%, Miami 77%).
+
+*The eleven-season proxies.* The model cannot be run on past seasons, so breadth is bridged by correlates available for the eleven champions and the 48 top-five non-champions: top-eight mean age, returning share of playoff minutes by contract, in-season acquisitions among the eight. Validation on 2026-27 (Spearman across the 30 teams): no proxy tracks the model's breadth; the largest is age against the odds ratio, rho -0.38 on 17 teams, p 0.13; every other |rho| is 0.30 or less with p above 0.10. Tendency on the eleven seasons (Mann-Whitney, two-sided, lean at p below 0.05, Bonferroni 0.017): age p 0.42 (champions 28.9, contenders 29.3), continuity p 0.97 (0.77 against 0.75), in-season moves p 0.16 (0 against 1). **The historical proxies do not validate**: they neither track the model's breadth in the one season where both exist nor separate champions from the teams priced beside them. N9's breadth figures stand as a model property, not as a validated predictor, and nothing from N9 enters the parts until that is decided. Minnesota on the proxies: top-eight mean age 26.5, returning minutes share 76%, two movers in the ten.
+
+**3. The cross-read package.** `scripts/export_crossread.py` writes `outputs/crossread/`: the four parts, one feed per part (short version, pull-quotes, slide copy), the index and the rendered methods page, as plain markdown with every visual tag replaced by `[visual: id]` and the three fragility sentences bracketed `[PENDING, fragility under review after D111: ...]`. Each file carries the source path, the export run ID and the commit. `docs/series/` is untouched.
+

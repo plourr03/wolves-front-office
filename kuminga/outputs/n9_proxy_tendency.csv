@@ -1,0 +1,4 @@
+proxy,n_champions,n_contenders,champion_median,contender_median,u,p_value,leans,leans_bonferroni
+top-eight mean age,11,48,28.9,29.299999999999997,222.0,0.4189683088129875,False,False
+"returning playoff-minutes share, by contract",11,43,0.765,0.754,234.5,0.9742984251987945,False,False
+in-season acquisitions among the eight,11,48,0.0,1.0,197.0,0.1582404985703687,False,False
